@@ -78,7 +78,7 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 		}
 
 		public Iterable<IReferenceDescription> getReferenceDescriptions() {
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		}
 		
 	}

@@ -17,7 +17,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.MapMaker;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -41,7 +41,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 	private ConcurrentMap<URI, IDirtyResource> managedResources;
 	
 	public DirtyStateManager() {
-		managedResources = Maps.newConcurrentHashMap();
+		managedResources = new MapMaker().makeMap();
 	}
 	
 	public void announceDirtyStateChanged(IDirtyResource dirtyResource) {

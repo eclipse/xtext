@@ -21,8 +21,8 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -70,7 +70,7 @@ public abstract class AbstractBracketMatcher implements IBracketMatcher {
 	private BiMap<AbstractElement, AbstractElement> pairs = null;
 	protected BiMap<AbstractElement, AbstractElement> getPairs() {
 		if (pairs==null) {
-			pairs = Maps.newHashBiMap();
+			pairs = HashBiMap.create();
 			configure(new IBracketPairAcceptor() {
 				public void accept(AbstractElement left, AbstractElement right) {
 					pairs.put(left,right);

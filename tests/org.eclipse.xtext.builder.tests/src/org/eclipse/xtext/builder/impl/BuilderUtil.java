@@ -23,13 +23,13 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.util.EmfFormatter;
 
-import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -79,7 +79,7 @@ public class BuilderUtil {
 	}
 
 	public static int countResourcesInIndex() {
-		Collection<IResourceDescription> forIterable = Collections2.forIterable(getBuilderState().getAllResourceDescriptions());
+		Collection<IResourceDescription> forIterable = Lists.newArrayList(getBuilderState().getAllResourceDescriptions());
 		return forIterable.size();
 	}
 

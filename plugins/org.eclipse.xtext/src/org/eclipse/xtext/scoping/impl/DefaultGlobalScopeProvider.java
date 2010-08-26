@@ -20,12 +20,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event.Source;
-import org.eclipse.xtext.resource.containers.FilterUriContainer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.containers.FilterUriContainer;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -67,7 +66,7 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 			if (resourceDescriptions instanceof IResourceDescription.Event.Source) {
 				IResourceDescription.Event.Source eventSource = (Source) resourceDescriptions;
 				DelegatingEventSource delegatingEventSource = new DelegatingEventSource(eventSource);
-				delegatingEventSource.addListeners(Collections2.forIterable(Iterables.filter(result, IResourceDescription.Event.Listener.class)));
+				delegatingEventSource.addListeners(Lists.newArrayList(Iterables.filter(result, IResourceDescription.Event.Listener.class)));
 				delegatingEventSource.initialize();
 				cache.addCacheListener(delegatingEventSource);
 			}

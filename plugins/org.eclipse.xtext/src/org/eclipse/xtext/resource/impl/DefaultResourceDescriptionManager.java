@@ -27,6 +27,7 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -94,7 +95,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	}
 
 	protected Collection<String> getImportedNames(IResourceDescription candidate) {
-		return Collections2.forIterable(candidate.getImportedNames());
+		return Lists.newArrayList(candidate.getImportedNames());
 	}
 
 	protected void addExportedNames(Set<String> names, IResourceDescription resourceDescriptor) {

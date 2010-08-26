@@ -113,7 +113,7 @@ public class EPackageChooser {
 
 		public Object[] getElements(Object inputElement) {
 			if (content != null) {
-				return Iterables.newArray(content, Object.class);
+				return Iterables.toArray(content, Object.class);
 			} else {
 				return new Object[0];
 			}

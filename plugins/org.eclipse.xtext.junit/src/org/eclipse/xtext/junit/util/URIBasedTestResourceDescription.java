@@ -15,8 +15,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 
-import com.google.common.collect.Iterables;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -34,11 +32,11 @@ public class URIBasedTestResourceDescription extends AbstractResourceDescription
 	}
 	
 	public Iterable<String> getImportedNames() {
-		return Iterables.emptyIterable();
+		return Collections.emptyList();
 	}
 
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
-		return Iterables.emptyIterable();
+		return Collections.emptyList();
 	}
 
 	public URI getURI() {

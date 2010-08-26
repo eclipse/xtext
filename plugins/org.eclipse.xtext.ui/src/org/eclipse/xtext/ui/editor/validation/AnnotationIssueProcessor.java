@@ -32,11 +32,12 @@ import org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.Issue.Severity;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -63,7 +64,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 		updateMarkersOnModelChange = false;
 		List<Annotation> toBeRemoved = getAnnotationsToRemove(monitor);
-		Multimap<Position, Annotation> positionToAnnotations = Multimaps.newArrayListMultimap();
+		Multimap<Position, Annotation> positionToAnnotations = ArrayListMultimap.create();
 		Map<Annotation, Position> annotationToPosition = getAnnotationsToAdd(positionToAnnotations, issues, monitor);
 		updateMarkerAnnotations(monitor);
 		updateAnnotations(monitor, toBeRemoved, annotationToPosition);
@@ -119,7 +120,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 	protected Map<Annotation, Position> getAnnotationsToAdd(Multimap<Position, Annotation> positionToAnnotations,
 			List<Issue> issues, IProgressMonitor monitor) {
 		if (monitor.isCanceled()) {
-			return Maps.newHashBiMap();
+			return HashBiMap.create();
 		}
 		Map<Annotation, Position> annotationToPosition = Maps.newHashMapWithExpectedSize(issues.size());
 		for (Issue issue : issues) {

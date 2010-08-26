@@ -41,14 +41,14 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider;
 
 import com.google.common.base.Function;
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -260,9 +260,9 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 				case ASSIGNMENT:
 					return /*t +*/((Assignment) element).getFeature() + p + getCardinality();
 				case GROUP:
-					return /*t +*/"(" + Join.join(" ", contents) + ")" + p + getCardinality();
+					return /*t +*/"(" + Joiner.on(" ").join(contents) + ")" + p + getCardinality();
 				case ALTERNATIVE:
-					return /*t +*/"(" + Join.join("|", contents) + ")" + p + getCardinality();
+					return /*t +*/"(" + Joiner.on("|").join(contents) + ")" + p + getCardinality();
 				case ACTION:
 					return "{" + ((Action) element).getType().getClassifier().getName() + "}" + p;
 			}
@@ -387,8 +387,8 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 
 	protected List<ISyntaxConstraint> createSummarizedAssignments(CompoundElement group,
 			List<AbstractElement> candidates, EClass semanticType, boolean optional) {
-		Multimap<String, Assignment> feature2ass = Multimaps.newHashMultimap();
-		Multimap<String, AbstractElement> feature2child = Multimaps.newHashMultimap();
+		Multimap<String, Assignment> feature2ass = HashMultimap.create();
+		Multimap<String, AbstractElement> feature2child = HashMultimap.create();
 		for (AbstractElement c : candidates) {
 			TreeIterator<EObject> i = EcoreUtil2.eAll(c);
 			while (i.hasNext()) {

@@ -8,14 +8,14 @@
 package org.eclipse.xtext.xbase.typing;
 
 import com.google.common.collect.BiMap;
-import com.google.common.collect.Maps;
+import com.google.common.collect.HashBiMap;
 
 /**
  * @author Sven Efftinge
  */
 public class OperatorMapping {
 	
-	private BiMap<String, String> map = Maps.newHashBiMap();
+	private BiMap<String, String> map = HashBiMap.create();
 	
 	{
 		initializeMapping();

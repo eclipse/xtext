@@ -26,16 +26,16 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.IGrammarAccess.IEnumRuleAccess;
+import org.eclipse.xtext.IGrammarAccess.IParserRuleAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.IGrammarAccess.IEnumRuleAccess;
-import org.eclipse.xtext.IGrammarAccess.IParserRuleAccess;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -100,7 +100,7 @@ public abstract class AbstractElementFinder {
 
 	public List<CrossReference> findCrossReferences(EClassifier... targetEClassifiers) {
 		Set<EClassifier> classifiers = new HashSet<EClassifier>(Arrays.asList(targetEClassifiers));
-		Collection<EClass> classes = Collections2.forIterable(Iterables.filter(classifiers, EClass.class));
+		Collection<EClass> classes = Lists.newArrayList(Iterables.filter(classifiers, EClass.class));
 		ArrayList<CrossReference> r = new ArrayList<CrossReference>();
 		for (AbstractRule ar : getRules()) {
 			TreeIterator<EObject> i = ar.eAllContents();

@@ -27,8 +27,8 @@ import org.eclipse.xtext.ParserRule;
 
 import com.google.common.base.Function;
 import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Iterators;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
@@ -104,8 +104,9 @@ public class KeywordHelper implements Adapter {
 					return o1.compareTo(o2);
 				return new Integer(o1.length()).compareTo(new Integer(o2.length()));
 			}
-		}, transformed);
-		BiMap<CharSequence, String> result = Maps.newHashBiMap();
+		});
+		Iterators.addAll(treeSet, transformed);
+		BiMap<CharSequence, String> result = HashBiMap.create();
 		int i = 1;
 		for(String s: treeSet) {
 			CharSequence key = createKey(s);

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -23,8 +24,6 @@ import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-
-import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -223,7 +222,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjects() {
-		return Iterables.emptyIterable();
+		return Collections.emptyList();
 	}
 	
 	public Iterable<String> getImportedNames() {
@@ -237,7 +236,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	}
 
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
-		return Iterables.emptyIterable();
+		return Collections.emptyList();
 	}
 	
 }

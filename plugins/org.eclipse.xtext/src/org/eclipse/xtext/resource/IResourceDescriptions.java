@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import java.util.Collections;
+
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
-
-import com.google.common.collect.Iterables;
 
 /**
  * Represents an observable set of {@link IResourceDescription}
@@ -37,7 +37,7 @@ public interface IResourceDescriptions {
 	class NullImpl implements IResourceDescriptions {
 
 		public Iterable<IResourceDescription> getAllResourceDescriptions() {
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		}
 
 		public IResourceDescription getResourceDescription(URI uri) {

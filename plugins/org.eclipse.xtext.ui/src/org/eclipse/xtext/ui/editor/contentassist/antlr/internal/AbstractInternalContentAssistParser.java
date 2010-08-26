@@ -35,10 +35,10 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.LookaheadKeyword;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream;
 
 import com.google.common.collect.Iterators;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -133,7 +133,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			int index = grammarElements.size() - 1;
 			if (grammarElements.get(index) instanceof UnorderedGroup) {
 				if (indexToHandledElements == null) {
-					indexToHandledElements = Multimaps.newLinkedHashMultimap();
+					indexToHandledElements = LinkedHashMultimap.create();
 				}
 				indexToHandledElements.put(index, (AbstractElement) grammarElement);
 			}

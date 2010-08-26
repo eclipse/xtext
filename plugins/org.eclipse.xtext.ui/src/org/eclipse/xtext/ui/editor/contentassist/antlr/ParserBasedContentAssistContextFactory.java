@@ -14,8 +14,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
@@ -57,10 +57,10 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -203,7 +203,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 	protected Multimap<EObject, AbstractElement> computeCurrentModel(EObject currentModel, AbstractNode lastCompleteNode,
 			Collection<AbstractElement> followElements) {
-		Multimap<EObject, AbstractElement> result = Multimaps.newLinkedHashMultimap();
+		Multimap<EObject, AbstractElement> result = LinkedHashMultimap.create();
 		NodeAdapter adapter = NodeUtil.getNodeAdapter(currentModel);
 		if (adapter == null || adapter.getParserNode() == null) {
 			result.putAll(currentModel, followElements);

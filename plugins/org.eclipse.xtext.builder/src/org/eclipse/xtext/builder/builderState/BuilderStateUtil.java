@@ -14,7 +14,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
-import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -25,7 +25,7 @@ public class BuilderStateUtil {
 		if (desc instanceof ResourceDescriptionImpl)
 			return (ResourceDescriptionImpl) desc;
 		ResourceDescriptionImpl description = (ResourceDescriptionImpl) BuilderStateFactory.eINSTANCE.createResourceDescription();
-		description.getImportedNames().addAll(Collections2.forIterable(desc.getImportedNames()));
+		description.getImportedNames().addAll(Lists.newArrayList(desc.getImportedNames()));
 		description.setURI(desc.getURI());
 		for (IEObjectDescription objDesc : desc.getExportedObjects()) {
 			description.getExportedObjects().add(create(objDesc));

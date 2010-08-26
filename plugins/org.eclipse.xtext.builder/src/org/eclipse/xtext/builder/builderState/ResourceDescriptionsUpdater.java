@@ -25,8 +25,8 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -69,7 +69,7 @@ public class ResourceDescriptionsUpdater implements IResourceDescriptionsUpdater
 		subMonitor.subTask(Messages.ResourceDescriptionsUpdater_FindAffectedResources);
 			
 		Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
-		toBeDeletedAsSet.removeAll(Collections2.forIterable(toBeUpdated));
+		toBeDeletedAsSet.removeAll(Lists.newArrayList(toBeUpdated));
 		Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
 		// add deleted
 		for (URI toDelete : toBeDeletedAsSet) {

@@ -30,7 +30,6 @@ import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -118,7 +117,7 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 	}
 
 	protected HashBiMap<Position, IFoldingRegion> toPositionIndexedMap(List<IFoldingRegion> foldingRegions) {
-		HashBiMap<Position, IFoldingRegion> positionsMap = Maps.newHashBiMap();
+		HashBiMap<Position, IFoldingRegion> positionsMap = HashBiMap.create();
 		for (IFoldingRegion foldingRegion : foldingRegions) {
 			positionsMap.put(foldingRegion.getPosition(), foldingRegion);
 		}

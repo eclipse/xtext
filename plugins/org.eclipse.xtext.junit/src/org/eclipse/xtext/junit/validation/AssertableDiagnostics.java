@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit.validation;
 
-import static org.eclipse.emf.common.util.Diagnostic.ERROR;
-import static org.eclipse.emf.common.util.Diagnostic.WARNING;
+import static org.eclipse.emf.common.util.Diagnostic.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
@@ -23,7 +22,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator.DiagnosticImpl;
 
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -107,7 +106,7 @@ public class AssertableDiagnostics {
 				r.add("code=" + code);
 			if (msg != null)
 				r.add("msgFragment='" + msg + "'");
-			return "(" + Join.join(" ", r) + ")";
+			return "(" + Joiner.on(" ").join(r) + ")";
 		}
 	}
 

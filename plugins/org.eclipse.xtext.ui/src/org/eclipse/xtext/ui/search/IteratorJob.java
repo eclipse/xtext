@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.search;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -61,7 +62,8 @@ public class IteratorJob extends Job {
 	}
 	
 	private Collection<IEObjectDescription> sortedCopy(Iterable<IEObjectDescription> list) {
-		return Lists.sortedCopy(matches, new Comparator<IEObjectDescription>() {
+		List<IEObjectDescription> result = Lists.newArrayList(matches);
+		Collections.sort(result, new Comparator<IEObjectDescription>() {
 			public int compare(IEObjectDescription o1, IEObjectDescription o2) {
 				int diff = o1.getQualifiedName().compareToIgnoreCase(o2.getQualifiedName());
 				if(diff==0) {
@@ -73,6 +75,7 @@ public class IteratorJob extends Job {
 				return diff;
 			}
 		});
+		return result;
 	}
 
 }

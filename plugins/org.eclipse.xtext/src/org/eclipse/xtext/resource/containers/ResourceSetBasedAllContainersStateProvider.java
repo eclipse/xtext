@@ -20,7 +20,6 @@ import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Multimaps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -49,7 +48,7 @@ public class ResourceSetBasedAllContainersStateProvider implements IAllContainer
 			log.debug("No explicit container state set. Falling back to default.");
 		ResourceSetBasedAllContainersState containersState = new ResourceSetBasedAllContainersState();
 		String containerName = "all";
-		HashMultimap<String, URI> newHashMultimap = Multimaps.newHashMultimap();
+		HashMultimap<String, URI> newHashMultimap = HashMultimap.create();
 		newHashMultimap.putAll(containerName, Iterables.transform(resourceSet.getResources(),
 				new Function<Resource, URI>() {
 					public URI apply(Resource from) {

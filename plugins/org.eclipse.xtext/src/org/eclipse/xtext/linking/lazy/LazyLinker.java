@@ -46,9 +46,9 @@ import org.eclipse.xtext.util.SimpleCache;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -84,7 +84,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	@Override
 	protected void doLinkModel(final EObject model, IDiagnosticConsumer consumer) {
-		final Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink = Multimaps.newArrayListMultimap();
+		final Multimap<EStructuralFeature.Setting, AbstractNode> settingsToLink = ArrayListMultimap.create();
 		final LinkingDiagnosticProducer producer = new LinkingDiagnosticProducer(consumer);
 		cache.execWithoutCacheClear(model.eResource(), new IUnitOfWork.Void<Resource>() {
 			@Override

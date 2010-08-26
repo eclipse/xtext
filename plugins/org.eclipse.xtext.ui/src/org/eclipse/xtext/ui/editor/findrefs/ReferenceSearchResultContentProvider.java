@@ -56,7 +56,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof ReferenceSearchViewTreeNode) {
-			return Iterables.newArray(((ReferenceSearchViewTreeNode) parentElement).getChildren(),
+			return Iterables.toArray(((ReferenceSearchViewTreeNode) parentElement).getChildren(),
 					ReferenceSearchViewTreeNode.class);
 		}
 		return null;
@@ -80,7 +80,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		if (rootNodes == null || rootNodes.isEmpty()) {
 			return new Object[0];
 		}
-		return Iterables.newArray(rootNodes, ReferenceSearchViewTreeNode.class);
+		return Iterables.toArray(rootNodes, ReferenceSearchViewTreeNode.class);
 	}
 
 	public void dispose() {
@@ -178,7 +178,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 				} else if (event instanceof Reset) {
 					if (rootNodes != null && !rootNodes.isEmpty()) {
 						synchronized (viewer) {
-							viewer.remove(viewer.getInput(), Iterables.newArray(rootNodes,
+							viewer.remove(viewer.getInput(), Iterables.toArray(rootNodes,
 									ReferenceSearchViewTreeNode.class));
 							rootNodes = null;
 						}
@@ -227,7 +227,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 											viewer.remove(rootNode);
 											break;
 										} else {
-											viewer.remove(rootNode, Iterables.newArray(removedReferenceNodes,
+											viewer.remove(rootNode, Iterables.toArray(removedReferenceNodes,
 													ReferenceSearchViewTreeNode.class));
 										}
 									}

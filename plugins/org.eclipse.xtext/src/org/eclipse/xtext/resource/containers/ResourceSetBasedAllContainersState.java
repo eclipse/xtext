@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
@@ -28,8 +29,8 @@ public class ResourceSetBasedAllContainersState implements IAllContainersState {
 	
 	public void configure(List<String> containers, Multimap<String, URI> container2Uris) {
 		this.containers = containers;
-		this.container2URIs = Multimaps.newHashMultimap(container2Uris);
-		this.uri2container = Multimaps.inverseHashMultimap(container2Uris);
+		this.container2URIs = HashMultimap.create(container2Uris);
+		this.uri2container = Multimaps.invertFrom(HashMultimap.create(container2Uris), HashMultimap.<URI, String>create());
 	}
 
 	public List<String> getVisibleContainerHandles(String handle) {

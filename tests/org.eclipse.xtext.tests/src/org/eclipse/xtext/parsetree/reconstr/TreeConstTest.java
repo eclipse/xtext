@@ -20,7 +20,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstructionNFAProvider;
 
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
 
 /**
@@ -61,10 +61,10 @@ public class TreeConstTest extends AbstractXtextTests {
 			if (refs.contains(e))
 				refs.remove(e);
 			else
-				fail("Type '" + e + "' not found. Actual:" + actual2 + " Expected: " + Join.join(", ", expected));
+				fail("Type '" + e + "' not found. Actual:" + actual2 + " Expected: " + Joiner.on(", ").join(expected));
 		}
 		if (!refs.isEmpty())
-			fail("Types '" + refs + "' are not expected. Actual:" + actual2 + " Expected: " + Join.join(", ", expected));
+			fail("Types '" + refs + "' are not expected. Actual:" + actual2 + " Expected: " + Joiner.on(", ").join(expected));
 	}
 
 	public void testSingleAssignment() throws Exception {

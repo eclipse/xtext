@@ -7,19 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 import junit.framework.TestCase;
 
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 
 public class ChainedIteratorTest extends TestCase {
 	
 	@SuppressWarnings("unchecked")
 	public void testSimple() throws Exception {
 		Iterator<String> iter = Iterators.concat(iter("a","b"), iter("c"), iter("d"));
-		assertEquals("abcd", Join.join("", iter));
+		assertEquals("abcd", Joiner.on("").join(Lists.newArrayList(iter)));
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -42,6 +45,6 @@ public class ChainedIteratorTest extends TestCase {
 	}
 	
 	private Iterator<String> iter(String ... elements) {
-		return Iterators.forArray(elements, 0, elements.length);
+		return Arrays.asList(elements).iterator();
 	}
 }

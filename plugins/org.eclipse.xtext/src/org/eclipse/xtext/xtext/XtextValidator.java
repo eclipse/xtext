@@ -68,9 +68,10 @@ import org.eclipse.xtext.xtext.ecoreInference.SourceAdapter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -206,8 +207,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkGeneratedPackageForNameClashes(GeneratedMetamodel metamodel) {
 		EPackage pack = metamodel.getEPackage();
-		Multimap<String, ENamedElement> constantNameToElement = Multimaps.newHashMultimap();
-		Multimap<String, ENamedElement> accessorNameToElement = Multimaps.newHashMultimap();
+		Multimap<String, ENamedElement> constantNameToElement = HashMultimap.create();
+		Multimap<String, ENamedElement> accessorNameToElement = HashMultimap.create();
 		if (pack != null) {
 			for(EClassifier classifier: pack.getEClassifiers()) {
 				String accessorName = classifier.getName();
@@ -466,7 +467,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	}
 
 	private Multimap<String, AbstractRule> getAllRules(Grammar grammar, String name) {
-		final Multimap<String, AbstractRule> result = Multimaps.newArrayListMultimap();
+		final Multimap<String, AbstractRule> result = ArrayListMultimap.create();
 		final Set<Grammar> grammars = new HashSet<Grammar>();
 		final Set<String> validNames = new HashSet<String>();
 		collectRules(grammar, result, grammars, name, validNames);
