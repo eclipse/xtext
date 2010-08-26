@@ -25,8 +25,8 @@ import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.util.ReplaceRegion;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -72,7 +72,7 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		ICommentAssociater commentAssociater = getInjector().getInstance(ICommentAssociater.class);
 		Map<LeafNode, EObject> map = commentAssociater.associateCommentsWithSemanticEObjects(model, Collections
 				.singleton(rootNode));
-		Multimap<EObject, String> multimap = Multimaps.newArrayListMultimap();
+		Multimap<EObject, String> multimap = ArrayListMultimap.create();
 		for (Map.Entry<LeafNode, EObject> entry : map.entrySet()) {
 			multimap.put(entry.getValue(), entry.getKey().getText());
 		}

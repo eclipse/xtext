@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ecore;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,7 +21,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -66,11 +66,11 @@ public class EcoreResourceDescription extends AbstractResourceDescription {
 	}
 
 	public Iterable<String> getImportedNames() {
-		return Iterables.emptyIterable();
+		return Collections.emptyList();
 	}
 
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
-		return Iterables.emptyIterable();
+		return Collections.emptyList();
 	}
 
 	public URI getURI() {

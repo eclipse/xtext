@@ -21,7 +21,6 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 /**
@@ -53,7 +52,7 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		}
 
 		public Iterable<IReferenceDescription> getReferenceDescriptions() {
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		}
 		
 		@Override
