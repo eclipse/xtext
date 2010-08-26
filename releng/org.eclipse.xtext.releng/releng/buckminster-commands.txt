@@ -1,0 +1,19 @@
+setpref targetPlatformPath="${WORKSPACE}/buildroot/target.platform"
+
+import "${checkout.location}org.eclipse.xtext.releng/releng/xtext-platform.mspec"
+
+resolve "${checkout.location}org.eclipse.xtext.releng/releng/xtext.cquery"
+
+build
+
+junit --launch "org.eclipse.xtext.build.feature/org.eclipse.xtext.builder.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.builder.tests.xml"
+junit --launch "org.eclipse.xtext.build.feature/org.eclipse.xtext.common.types.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.common.types.tests.xml"
+junit --launch "org.eclipse.xtext.build.feature/org.eclipse.xtext.xbase.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xbase.tests.xml"
+junit --launch "org.eclipse.xtext.build.feature/org.eclipse.xtext.xtend.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xtend.tests.xml"
+junit --launch "org.eclipse.xtext.build.feature/org.eclipse.xtext.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.tests.xml"
+junit --launch "org.eclipse.xtext.build.feature/org.eclipse.xtext.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.ui.tests.xml"
+junit --launch "org.eclipse.xtext.build.feature/org.eclipse.xtext.xtext.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.xtext.ui.tests.xml"
+junit --launch "org.eclipse.xtext.build.feature/org.eclipse.xtext.example.domainmodel.ui.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.example.domainmodel.ui.tests.xml"
+
+perform --properties "${WORKSPACE}/buildroot/build.properties" "org.eclipse.xtext.build#build"
+perform --properties "${WORKSPACE}/buildroot/build.properties" "org.eclipse.xtext.releng#setup.promoter"

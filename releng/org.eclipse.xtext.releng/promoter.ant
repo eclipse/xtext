@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Promoter / Publisher" default="publish.build">
+	<property name="promoter.properties.file.name" value="promote.properties" />
+	<property name="publisher.properties.file.name" value="publisher.properties" />
+
+	<target name="-setup.promoter">
+		<property name="promoter.setup.directory" location="${sp:output}" />
+		<property name="promoter.properties.file" location="${promoter.setup.directory}/${promoter.properties.file.name}" />
+
+		<mkdir dir="${promoter.setup.directory}" />
+
+		<!-- supply defaults -->
+		<property name="build.id" value="" />
+		<property name="hudson.build.id" value="" />
+
+		<propertyfile file="${promoter.properties.file}" comment="Promoter script properties">
+			<entry key="java.home" value="${java.home}" />
+			<entry key="eclipse.home" value="${eclipse.home}" />
+			<entry key="build.id" value="${build.id}" />
+			<entry key="hudson.build.id" value="${hudson.build.id}" />
+		</propertyfile>
+
+		<!-- diagnostics
+		<property environment="env." />
+		<echoproperties destfile="${promoter.setup.directory}/all.properties" />
+		-->
+	</target>
+
+	<target name="-locate.launcher.jar" unless="launcher.jar">
+		<pathconvert property="launcher.jar">
+			<first count="1">
+				<sort>
+					<fileset dir="${saved.eclipse.home}/plugins" includes="**/org.eclipse.equinox.launcher_*.jar" />
+					<reverse xmlns="antlib:org.apache.tools.ant.types.resources.comparators">
+						<date />
+					</reverse>
+				</sort>
+			</first>
+		</pathconvert>
+	</target>
+
+	<target name="setup.publisher">
+		<property environment="env." />
+
+		<fail message="WORKSPACE not present in the evironment, can't continue" unless="env.WORKSPACE" />
+		<fail message="PROMOTED_URL not present in the evironment, can't continue" unless="env.PROMOTED_URL" />
+
+		<!-- default publisher root -->
+		<property name="publisher.root" location="${env.WORKSPACE}/publishroot" />
+
+		<delete dir="${publisher.root}" />
+		<mkdir dir="${publisher.root}" />
+
+		<copy tofile="${publisher.root}/publisher.ant" file="${ant.file}" />
+
+		<property name="promoter.properties.file.url" value="${env.PROMOTED_URL}/artifact/${promoter.properties.file.name}" />
+
+		<!-- load the promoter properties using the PROMOTED_URL supplied by Hudson -->
+		<property prefix="saved." url="${promoter.properties.file.url}" />
+
+		<fail message="hudson.build.id not defined in ${promoter.properties.file.url}, can't continue">
+			<condition>
+				<not>
+					<and>
+						<isset property="saved.hudson.build.id" />
+						<length string="${saved.hudson.build.id}" trim="true" when="greater" length="0" />
+					</and>
+				</not>
+			</condition>
+		</fail>
+
+		<property name="build.root" location="${env.WORKSPACE}/../builds/${saved.hudson.build.id}" />
+
+		<echoproperties destfile="${publisher.root}/${publisher.properties.file.name}">
+			<propertyset>
+				<propertyref builtin="commandline" />
+				<propertyref prefix="saved." />
+				<propertyref name="build.root" />
+			</propertyset>
+		</echoproperties>
+	</target>
+
+	<target name="publish.build">
+		<fail message="build.root property must be defined" unless="build.root" />
+
+		<property name="property.file.location" location="${build.root}/archive/${promoter.properties.file.name}" />
+		<property name="property.load.prefix" value="saved." />
+
+		<antcall target="publish.build.stage.2" inheritall="true" />
+	</target>
+
+	<target name="-setup.property.file.location" unless="property.file.location">
+		<dirname property="script.directory" file="${ant.file}" />
+		<property name="property.file.location" location="${script.directory}/${publisher.properties.file.name}" />
+	</target>
+
+	<target name="-load.properties.as.is" unless="property.load.prefix">
+		<property file="${property.file.location}" />
+	</target>
+
+	<target name="-load.properties.with.prefix" if="property.load.prefix">
+		<property prefix="${property.load.prefix}" file="${property.file.location}" />
+	</target>
+
+	<target name="-load.properties" depends="-load.properties.as.is,-load.properties.with.prefix" />
+
+	<target name="publish.build.stage.2" depends="-setup.property.file.location,-load.properties,-locate.launcher.jar">
+		<condition property="java.executable" value="${saved.java.home}/bin/java" else="java">
+			<isset property="saved.java.home" />
+		</condition>
+		<tempfile property="publisher.workspace" prefix="workspace." destdir="${java.io.tmpdir}" />
+
+		<java jvm="${java.executable}" jar="${launcher.jar}" fork="true" failonerror="true">
+			<syspropertyset>
+				<propertyref builtin="commandline" />
+				<propertyref name="property.file.location" />
+				<propertyref name="property.load.prefix" />
+			</syspropertyset>
+			<arg value="-data" />
+			<arg value="${publisher.workspace}" />
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-buildfile" />
+			<arg value="${ant.file}" />
+			<arg value="publish.build.from.framework" />
+		</java>
+
+		<!--
+			somewhat more complicated than simple <delete dir="${publisher.workspace}" />
+			but this way it does not produce the "Deleting directory" message
+		-->
+		<delete dir="${publisher.workspace}" includeemptydirs="true" quiet="true">
+			<or>
+				<type type="dir" />
+				<type type="file" />
+			</or>
+		</delete>
+	</target>
+
+	<target name="-check.property.file.location">
+		<fail message="property.file.location property must be defined" unless="property.file.location" />
+	</target>
+
+	<target name="publish.build.from.framework" depends="-check.property.file.location,-load.properties">
+		<fail message="saved.build.id property must be defined">
+			<condition>
+				<not>
+					<and>
+						<isset property="saved.build.id" />
+						<length string="${saved.build.id}" trim="true" when="greater" length="0" />
+					</and>
+				</not>
+			</condition>
+		</fail>
+		<fail message="build.root property must be defined" unless="build.root" />
+		<fail message="packages.base property must be defined" unless="packages.base" />
+		<fail message="downloads.area property must be defined" unless="downloads.area" />
+
+		<!-- defaults -->
+		<property name="version" value="2.6.0" />
+
+		<property name="packages.directory" location="${build.root}/archive/${packages.base}" />
+
+		<property name="build.drop.directory" location="${downloads.area}/downloads/drops/${version}/${saved.build.id}" />
+
+		<delete dir="${build.drop.directory}" />
+		<mkdir dir="${build.drop.directory}" />
+
+		<!-- copy zip packages -->
+		<copy todir="${build.drop.directory}">
+			<fileset dir="${packages.directory}">
+				<filename name="*.zip" />
+			</fileset>
+		</copy>
+		<!-- genereate md5 checksums -->
+		<checksum algorithm="MD5" fileext=".md5" format="MD5SUM">
+			<fileset dir="${build.drop.directory}" />
+		</checksum>
+		<!-- copy buildlog -->
+		<copy tofile="${build.drop.directory}/buildlog.txt" file="${build.root}/log" />
+
+		<fileset id="drop.resources" dir="${build.drop.directory}">
+			<or>
+				<type type="dir" />
+				<type type="file" />
+			</or>
+		</fileset>
+
+		<!-- chgrp -->
+		<antcall target="-change.group.owner" inheritall="true">
+			<reference refid="drop.resources" torefid="change.group.owner.resources" />
+		</antcall>
+
+		<!-- strip the micro version and anything following it -->
+		<buckminster.substitute value="${version}" pattern="^(\d+\.\d+)\.\d+.*$" replacement="$$1" property="base.version" />
+
+		<!-- setup composite.repository.base appropriate to the build type -->
+		<condition property="composite.repository.base" value="${base.version}-I-builds">
+			<matches pattern="^I" string="${saved.build.id}" />
+		</condition>
+		<condition property="composite.repository.base" value="${base.version}milestones">
+			<matches pattern="^[MS]" string="${saved.build.id}" />
+		</condition>
+		<condition property="composite.repository.base" value="${base.version}">
+			<matches pattern="^R" string="${saved.build.id}" />
+		</condition>
+
+		<antcall target="-publish.build.repository" inheritall="true" />
+	</target>
+
+	<target name="-publish.build.repository" if="composite.repository.base">
+		<property name="composite.repository.directory" location="${downloads.area}/updates/${composite.repository.base}" />
+		<property name="composite.repository.url" value="file:/${composite.repository.directory}" />
+		<property name="build.repository.directory" location="${composite.repository.directory}/${saved.build.id}" />
+
+		<delete dir="${build.repository.directory}" />
+		<mkdir dir="${build.repository.directory}" />
+
+		<unzip dest="${build.repository.directory}">
+			<fileset dir="${packages.directory}">
+				<filename name="emf-xsd-Update*.zip" />
+			</fileset>
+		</unzip>
+
+		<p2.composite.repository destination="${composite.repository.url}">
+			<add>
+				<repository location="${saved.build.id}" />
+			</add>
+		</p2.composite.repository>
+
+		<fileset id="repository.resources" dir="${composite.repository.directory}">
+			<or>
+				<filename name="compositeContent.*" />
+				<filename name="compositeArtifacts.*" />
+				<filename name="${saved.build.id}/**" />
+			</or>
+		</fileset>
+
+		<antcall target="-change.group.owner" inheritall="true">
+			<reference refid="repository.resources" torefid="change.group.owner.resources" />
+		</antcall>
+	</target>
+
+	<target name="-change.group.owner" if="group.owner">
+		<chgrp group="${group.owner}" type="both" verbose="true">
+			<fileset refid="change.group.owner.resources" />
+		</chgrp>
+	</target>
+</project>
