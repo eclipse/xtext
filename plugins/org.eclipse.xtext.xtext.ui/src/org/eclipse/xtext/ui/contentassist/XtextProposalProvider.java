@@ -114,25 +114,27 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		Resource resource = model.eResource();
 		URI uri = resource.getURI();
-		IPath path = new Path(uri.toPlatformString(true));
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-		IProject project = file.getProject();
-		IJavaProject javaProject = JavaCore.create(project);
-		if (javaProject != null) {
-			try {
-				for (IPackageFragmentRoot packageFragmentRoot : javaProject.getPackageFragmentRoots()) {
-					IPath packageFragmentRootPath = packageFragmentRoot.getPath();
-					if (packageFragmentRootPath.isPrefixOf(path)) {
-						IPath relativePath = path.makeRelativeTo(packageFragmentRootPath);
-						relativePath = relativePath.removeFileExtension();
-						String result = relativePath.toString();
-						result = result.replace('/', '.');
-						acceptor.accept(createCompletionProposal(result, context));
-						return;
+		if (uri.isPlatformResource()) {
+			IPath path = new Path(uri.toPlatformString(true));
+			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+			IProject project = file.getProject();
+			IJavaProject javaProject = JavaCore.create(project);
+			if (javaProject != null) {
+				try {
+					for (IPackageFragmentRoot packageFragmentRoot : javaProject.getPackageFragmentRoots()) {
+						IPath packageFragmentRootPath = packageFragmentRoot.getPath();
+						if (packageFragmentRootPath.isPrefixOf(path)) {
+							IPath relativePath = path.makeRelativeTo(packageFragmentRootPath);
+							relativePath = relativePath.removeFileExtension();
+							String result = relativePath.toString();
+							result = result.replace('/', '.');
+							acceptor.accept(createCompletionProposal(result, context));
+							return;
+						}
 					}
+				} catch (JavaModelException ex) {
+					// nothing to do
 				}
-			} catch (JavaModelException ex) {
-				// nothing to do
 			}
 		}
 	}
