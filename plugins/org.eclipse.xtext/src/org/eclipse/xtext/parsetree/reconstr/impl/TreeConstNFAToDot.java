@@ -18,7 +18,7 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstState.Status;
 
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 /**
@@ -89,10 +89,10 @@ public class TreeConstNFAToDot extends GrammarToDot {
 			types.add(typeRef == null ? "null" : typeRef.getClassifier().getName());
 		if (semanticObject.eContainer() instanceof AbstractRule) {
 			AbstractRule rule = (AbstractRule) semanticObject.eContainer();
-			String typesAsString = types.isEmpty() ? "" : " [" + Join.join(",", types) + "]";
+			String typesAsString = types.isEmpty() ? "" : " [" + Joiner.on(",").join(types) + "]";
 			return new Node(semanticObject, rule.getName() + typesAsString + ":\\n" + label, "record");
 		} else {
-			String typesAsString = types.isEmpty() ? "" : "[" + Join.join(",", types) + "]\\n";
+			String typesAsString = types.isEmpty() ? "" : "[" + Joiner.on(",").join(types) + "]\\n";
 			return new Node(semanticObject, typesAsString + label);
 		}
 	}

@@ -17,7 +17,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 import com.google.common.base.Function;
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.ImplementedBy;
@@ -83,7 +83,7 @@ public abstract class AbstractIDValueConverter extends AbstractLexerBasedConvert
 	protected ValueConverterException createTokenContentMismatchException(String value, String escapedString, Token token) {
 		Set<Character> invalidChars = collectInvalidCharacters(value);
 		if (invalidChars != null) {
-			String chars = Join.join(", ", Iterables.transform(invalidChars, new Function<Character, String>() {
+			String chars = Joiner.on(", ").join(Iterables.transform(invalidChars, new Function<Character, String>() {
 				public String apply(Character from) {
 					return "'" + from + "' (0x" + Integer.toHexString(from) + ")";
 				}

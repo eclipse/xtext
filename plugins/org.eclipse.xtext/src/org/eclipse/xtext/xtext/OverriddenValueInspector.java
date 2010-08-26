@@ -23,10 +23,9 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
-import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -53,7 +52,7 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 	}
 	
 	protected Multimap<String, AbstractElement> newMultimap() {
-		return Multimaps.newLinkedHashMultimap();
+		return LinkedHashMultimap.create();
 	}
 
 	@Override
@@ -80,7 +79,7 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 	private void checkAssignment(AbstractElement object, String feature) {
 		if (assignedFeatures.containsKey(feature)) {
 			Collection<AbstractElement> sources = Lists.newArrayList(assignedFeatures.get(feature));
-			assignedFeatures.replaceValues(feature, Iterables.<AbstractElement> emptyIterable());
+			assignedFeatures.replaceValues(feature, Collections.<AbstractElement> emptyList());
 			if (sources != null && sources.equals(Collections.singletonList(object))) {
 				if (getNestingLevel() == 0)
 					acceptWarning("The assigned value of feature '" + feature
@@ -126,7 +125,7 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 	@Override
 	public Boolean caseAlternatives(Alternatives object) {
 		Multimap<String, AbstractElement> prevAssignedFeatures = assignedFeatures;
-		Multimap<String, AbstractElement> mergedAssignedFeatures = Multimaps.newLinkedHashMultimap();
+		Multimap<String, AbstractElement> mergedAssignedFeatures = LinkedHashMultimap.create();
 		for (AbstractElement element : object.getElements()) {
 			assignedFeatures = newMultimap(prevAssignedFeatures);
 			doSwitch(element);
@@ -149,7 +148,7 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 	}
 
 	private Multimap<String, AbstractElement> newMultimap(Multimap<String, AbstractElement> from) {
-		return Multimaps.newLinkedHashMultimap(from);
+		return LinkedHashMultimap.create(from);
 	}
 
 	@Override

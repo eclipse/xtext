@@ -18,8 +18,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 
 /**
@@ -28,7 +28,7 @@ import com.google.common.collect.Sets;
 public class PathTraverser {
 
 	public Multimap<String, URI> resolvePathes(List<String> pathes, Predicate<URI> isValidPredicate) {
-		Multimap<String, URI> uris = Multimaps.newHashMultimap();
+		Multimap<String, URI> uris = HashMultimap.create();
 		for (String path : pathes) {
 			Set<URI> resourceUris = findAllResourceUris(path, isValidPredicate);
 			uris.putAll(path, resourceUris);

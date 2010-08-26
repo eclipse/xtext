@@ -26,7 +26,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
 /**
@@ -141,7 +140,7 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 	}
 
 	private void assertContains(Iterable<IEObjectDescription> exportedObjects, EObject ...expectedContents) {
-		Collection<IEObjectDescription> collection = Collections2.forIterable(exportedObjects);
+		Collection<IEObjectDescription> collection = Lists.newArrayList(exportedObjects);
 		for (EObject obj : expectedContents) {
 			boolean found = false;
 			for (IEObjectDescription ieObjectDescription : collection) {

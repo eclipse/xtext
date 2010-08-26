@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -38,7 +39,7 @@ public class EObjectDescriptionLookUp {
 	
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
 		if (allDescriptions.isEmpty())
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		String lowerCase = name.toLowerCase();
 		if (getNameToObjects().containsKey(lowerCase))
 			return Iterables.filter(getNameToObjects().get(lowerCase), new Predicate<IEObjectDescription>() {
@@ -47,12 +48,12 @@ public class EObjectDescriptionLookUp {
 				}
 			});
 		else
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(final EClass clazz, final String name) {
 		if (allDescriptions.isEmpty())
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		String lowerCase = name.toLowerCase();
 		if (getNameToObjects().containsKey(lowerCase))
 			return Iterables.filter(getNameToObjects().get(lowerCase), new Predicate<IEObjectDescription>() {
@@ -61,12 +62,12 @@ public class EObjectDescriptionLookUp {
 				}
 			});
 		else
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz) {
 		if (allDescriptions.isEmpty())
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		return Iterables.filter(allDescriptions, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				return EcoreUtil2.isAssignableFrom(clazz,input.getEClass());
@@ -76,7 +77,7 @@ public class EObjectDescriptionLookUp {
 
 	public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
 		if (allDescriptions.isEmpty())
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		final URI uri = EcoreUtil.getURI(object);
 		return Iterables.filter(allDescriptions, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
@@ -100,13 +101,11 @@ public class EObjectDescriptionLookUp {
 		if (nameToObjects == null) {
 			synchronized (this) {
 				if (nameToObjects == null) {
-					ArrayListMultimap<String, IEObjectDescription> newMap = new ArrayListMultimap<String, IEObjectDescription>(allDescriptions.size(), 1);
-					Multimaps.index(allDescriptions, new Function<IEObjectDescription, String>() {
+					this.nameToObjects  = Multimaps.index(allDescriptions, new Function<IEObjectDescription, String>() {
 								public String apply(IEObjectDescription from) {
 									return from.getName().toLowerCase();
 								}
-							}, newMap);
-					this.nameToObjects = Multimaps.unmodifiableMultimap(newMap);
+							});
 				}
 			}
 		}

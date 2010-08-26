@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.containers;
 
+import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -16,7 +17,6 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 /**
@@ -46,7 +46,7 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	@Override
 	public Iterable<IResourceDescription> getResourceDescriptions() {
 		if (state.getContents().isEmpty())
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		return getUriToDescription().values();
 	}
 
@@ -64,21 +64,21 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	@Override
 	public Iterable<IEObjectDescription> findAllEObjects(EClass type) {
 		if (state.getContents().isEmpty())
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		return super.findAllEObjects(type);
 	}
 	
 	@Override
 	public Iterable<IEObjectDescription> findAllEObjects(EClass type, String name) {
 		if (state.getContents().isEmpty())
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		return super.findAllEObjects(type, name);
 	}
 	
 	@Override
 	public Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(EClass type, String name) {
 		if (state.getContents().isEmpty())
-			return Iterables.emptyIterable();
+			return Collections.emptyList();
 		return super.findAllEObjectsIgnoreCase(type, name);
 	}
 

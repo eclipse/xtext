@@ -10,6 +10,7 @@ package org.eclipse.xtext.scoping;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -167,7 +168,7 @@ public class Scopes {
 
 			return filterDuplicates(transformed);
 		}
-		return Iterables.emptyIterable();
+		return Collections.emptyList();
 	}
 
 	public static Iterable<IEObjectDescription> filterDuplicates(Iterable<IEObjectDescription> filtered) {

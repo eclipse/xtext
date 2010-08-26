@@ -158,13 +158,13 @@ public class Validator {
 						});
 					}
 				});
-		Multimaps.index(Arrays.asList(diagnostic), new Function<MWEDiagnostic, URI>() {
+		result.putAll(Multimaps.index(Arrays.asList(diagnostic), new Function<MWEDiagnostic, URI>() {
 			public URI apply(MWEDiagnostic from) {
 				Issue issue = (Issue) from.getElement();
 				URI uriToProblem = issue.getUriToProblem();
 				return uriToProblem != null ? uriToProblem.trimFragment() : null;
 			}
-		}, result);
+		}));
 		return result;
 	}
 

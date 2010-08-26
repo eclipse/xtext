@@ -22,8 +22,9 @@ import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementPattern;
 import org.eclipse.xtext.formatting.impl.ElementMatcherProvider.TransitionMatcher;
 import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
 
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -71,7 +72,7 @@ public class ElementMatcherToDot extends GrammarToDot {
 			label.add(GrammarUtil.containingRule(e.getKey().getGrammarElement()).getName() + "-" + e.getKey() + ":{"
 					+ toStr(e.getValue()) + "}");
 		if (label.size() > 0)
-			edge.setLabel(Join.join("\\n", label));
+			edge.setLabel(Joiner.on("\\n").join(label));
 		if (isParent)
 			edge.put("arrowtail", "odot");
 		if (transition.isRuleCall())

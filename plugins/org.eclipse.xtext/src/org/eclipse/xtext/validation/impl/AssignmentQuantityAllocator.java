@@ -30,9 +30,9 @@ import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider.ISyntaxCon
 import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider;
 import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.IConcreteSyntaxDiagnostic;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -74,7 +74,7 @@ public class AssignmentQuantityAllocator implements IAssignmentQuantityAllocator
 		}
 
 		public Map<EStructuralFeature, Collection<ISyntaxConstraint>> groupByFeature() {
-			Multimap<EStructuralFeature, ISyntaxConstraint> map = Multimaps.newHashMultimap();
+			Multimap<EStructuralFeature, ISyntaxConstraint> map = HashMultimap.create();
 			for (ISyntaxConstraint e : assignmentQuants.keySet())
 				map.put(e.getAssignmentFeature(delegate.eClass()), e);
 			return map.asMap();
@@ -159,7 +159,7 @@ public class AssignmentQuantityAllocator implements IAssignmentQuantityAllocator
 
 	public IQuantities getAssignmentQuantities(EObject obj, ISyntaxConstraint rule,
 			List<IConcreteSyntaxDiagnostic> acceptor) {
-		Multimap<EStructuralFeature, ISyntaxConstraint> assignments = Multimaps.newHashMultimap();
+		Multimap<EStructuralFeature, ISyntaxConstraint> assignments = HashMultimap.create();
 		collectAssignments(rule, obj, rule, assignments, acceptor);
 		//		Map<EStructuralFeature, Integer> quantities = Maps.newHashMap();
 		Quantities quants = createQuantities(obj);
@@ -171,8 +171,8 @@ public class AssignmentQuantityAllocator implements IAssignmentQuantityAllocator
 			else
 				quants.setFeatureQuantity(f, quantity);
 		}
-		Multimap<EStructuralFeature, ISyntaxConstraint> multipleAssignments = Multimaps.newHashMultimap();
-		Multimap<EStructuralFeature, ISyntaxConstraint> allowTransients = Multimaps.newHashMultimap();
+		Multimap<EStructuralFeature, ISyntaxConstraint> multipleAssignments = HashMultimap.create();
+		Multimap<EStructuralFeature, ISyntaxConstraint> allowTransients = HashMultimap.create();
 		for (Map.Entry<EStructuralFeature, Integer> f : quants.getFeatureQuantities().entrySet()) {
 			Collection<ISyntaxConstraint> ass = assignments.get(f.getKey());
 			if (ass.isEmpty())

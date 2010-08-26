@@ -47,8 +47,7 @@ import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ReflectionUtil;
 
-import com.google.common.base.ReferenceType;
-import com.google.common.collect.ReferenceMap;
+import com.google.common.collect.MapMaker;
 
 /**
  * @author Heiko Behrens
@@ -518,7 +517,7 @@ public class EcoreUtil2 extends EcoreUtil {
 		return result;
 	}
 
-	private static Map<EReference, String> exernalFormCache = new ReferenceMap<EReference, String>(ReferenceType.WEAK, ReferenceType.STRONG);
+	private static Map<EReference, String> exernalFormCache = new MapMaker().weakKeys().makeMap();
 
 	/**
 	 * looks up the EReference in the passed registry, given the external form. if registry == null this

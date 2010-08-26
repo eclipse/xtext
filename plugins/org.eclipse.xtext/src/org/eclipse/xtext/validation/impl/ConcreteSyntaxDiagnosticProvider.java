@@ -31,7 +31,7 @@ import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider.ISyntaxCon
 import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider;
 
 import com.google.common.base.Function;
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -100,10 +100,10 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 					List<String> children1 = getChildren(element, all);
 					if (children1.size() == 1)
 						return children1.get(0) + element.getCardinality();
-					return "(" + Join.join(" ", children1) + ")" + element.getCardinality();
+					return "(" + Joiner.on(" ").join(children1) + ")" + element.getCardinality();
 				case ALTERNATIVE:
 					List<String> children2 = getChildren(element, all);
-					return "(" + Join.join("|", children2) + ")" + element.getCardinality();
+					return "(" + Joiner.on("|").join(children2) + ")" + element.getCardinality();
 				case ACTION:
 					return "{" + ((Action) element.getGrammarElement()).getType().getClassifier().getName() + "}";
 			}
@@ -146,7 +146,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			for (ISyntaxConstraint a : involved)
 				if (a.getType() == ConstraintType.ASSIGNMENT)
 					feats.add(a.getAssignmentFeature(source.eClass()));
-			return Join.join(", ", Iterables.transform(feats, new Function<EStructuralFeature, String>() {
+			return Joiner.on(", ").join(Iterables.transform(feats, new Function<EStructuralFeature, String>() {
 				public String apply(EStructuralFeature from) {
 					return from.getName() + ":" + quantityAllocator.getFeatureQuantity(source, from);
 				}
@@ -204,7 +204,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 				case ERROR_ASSIGNMENT_PROHIBITED:
 					msg.append(" is not allowed to contain non-transient values. ");
 					msg.append("The object needs to be of type ");
-					msg.append(Join.join(" or ", Iterables.transform(requiredTypes, new Function<EClass, String>() {
+					msg.append(Joiner.on(" or ").join(Iterables.transform(requiredTypes, new Function<EClass, String>() {
 						public String apply(EClass from) {
 							return from.getName();
 						}
@@ -351,7 +351,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 		public String getMessage() {
 			StringBuffer msg = new StringBuffer();
 			msg.append("An object of type ");
-			msg.append(Join.join(" or ", Iterables.transform(getSemanticTypes(), new Function<EClass, String>() {
+			msg.append(Joiner.on(" or ").join(Iterables.transform(getSemanticTypes(), new Function<EClass, String>() {
 				public String apply(EClass from) {
 					return from.getName();
 				}

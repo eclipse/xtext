@@ -18,7 +18,7 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 
-import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -30,7 +30,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		XtextResource resource = getResource("type A extends B type B", "foo.langatestlanguage");
 		IResourceDescription resDesc = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
 		Iterable<IReferenceDescription> descriptions = resDesc.getReferenceDescriptions();
-		Collection<IReferenceDescription> collection = Collections2.forIterable(descriptions);
+		Collection<IReferenceDescription> collection = Lists.newArrayList(descriptions);
 		assertEquals(1,collection.size());
 		IReferenceDescription refDesc = descriptions.iterator().next();
 		Main m = (Main) resource.getParseResult().getRootASTElement();
@@ -45,7 +45,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		XtextResource resource = getResource("type A implements B,C type B type C", "foo.langatestlanguage");
 		IResourceDescription resDesc = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
 		Iterable<IReferenceDescription> descriptions = resDesc.getReferenceDescriptions();
-		Collection<IReferenceDescription> collection = Collections2.forIterable(descriptions);
+		Collection<IReferenceDescription> collection = Lists.newArrayList(descriptions);
 		assertEquals(2,collection.size());
 		Iterator<IReferenceDescription> iterator = descriptions.iterator();
 		IReferenceDescription refDesc1 = iterator.next();

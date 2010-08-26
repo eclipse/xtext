@@ -39,7 +39,7 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextLocation;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -318,7 +318,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		b.append("<# of serialized tokens>: <EObject path> ");
 		b.append("\"<serializable fragment, starting from the end>\":\n");
 		b.append("  -> <possible reasons for not continuing>\n");
-		b.append(Join.join("\n", getDiagnostics()));
+		b.append(Joiner.on("\n").join(getDiagnostics()));
 		return b.toString();
 	}
 }

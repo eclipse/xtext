@@ -19,7 +19,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
-import com.google.common.base.Join;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -65,7 +65,7 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 				invalidChars.add(c);
 			}
 			if (invalidChars != null) {
-				String chars = Join.join(", ", Iterables.transform(invalidChars, new Function<Character, String>() {
+				String chars = Joiner.on(", ").join(Iterables.transform(invalidChars, new Function<Character, String>() {
 					public String apply(Character from) {
 						return "'" + from + "' (0x" + Integer.toHexString(from) + ")";
 					}
