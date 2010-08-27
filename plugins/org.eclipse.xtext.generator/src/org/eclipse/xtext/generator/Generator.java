@@ -33,6 +33,7 @@ import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
+import org.eclipse.xpand2.output.PostProcessor;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.EcoreUtil2;
@@ -41,6 +42,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
@@ -129,11 +131,20 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private String pathUiProject = null;
 	private String srcPath = "/src";
 	private String srcGenPath = "/src-gen";
+	private List<PostProcessor> postProcessors = Lists.newArrayList();
+	
+	public void addPostProcessor(PostProcessor postProcessor) {
+		this.postProcessors.add(postProcessor);
+	}
+	
+	public List<PostProcessor> getPostProcessors() {
+		return postProcessors;
+	}
 
 	public String getPathRtProject() {
 		return pathRtProject;
 	}
-
+	
 	public void setPathRtProject(String pathRtProject) {
 		this.pathRtProject = pathRtProject;
 	}
@@ -166,17 +177,17 @@ public class Generator extends AbstractWorkflowComponent2 {
 		// configure outlets
 		OutputImpl output = new OutputImpl();
 
-		output.addOutlet(new Outlet(false, getEncoding(), PLUGIN_RT, false, getPathRtProject()));
-		output.addOutlet(new Outlet(false, getEncoding(), SRC, false, getPathRtProject() + getSrcPath()));
-		output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN, true, getPathRtProject() + getSrcGenPath()));
+		output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_RT, false, getPathRtProject()));
+		output.addOutlet(createOutlet(false, getEncoding(), SRC, false, getPathRtProject() + getSrcPath()));
+		output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN, true, getPathRtProject() + getSrcGenPath()));
 		if (getPathUiProject() != null) {
-			output.addOutlet(new Outlet(false, getEncoding(), PLUGIN_UI, false, getPathUiProject()));
-			output.addOutlet(new Outlet(false, getEncoding(), SRC_UI, false, getPathUiProject() + getSrcPath()));
-			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathUiProject() + getSrcGenPath()));
+			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_UI, false, getPathUiProject()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_UI, false, getPathUiProject() + getSrcPath()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_UI, true, getPathUiProject() + getSrcGenPath()));
 		} else {
-			output.addOutlet(new Outlet(false, getEncoding(), PLUGIN_UI, false, getPathRtProject()));
-			output.addOutlet(new Outlet(false, getEncoding(), SRC_UI, false, getPathRtProject() + getSrcPath()));
-			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathRtProject() + getSrcGenPath()));
+			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_UI, false, getPathRtProject()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_UI, false, getPathRtProject() + getSrcPath()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_UI, true, getPathRtProject() + getSrcGenPath()));
 		}
 		// initialize global vars
 		Map<String,Variable> globalVars = Maps.newHashMap();
@@ -192,6 +203,14 @@ public class Generator extends AbstractWorkflowComponent2 {
 		// for further .edit/.editor generation
 		execCtx = (XpandExecutionContextImpl) execCtx.cloneWithVariable(new Variable("modelPluginID", getProjectNameRt()));
 		return execCtx;
+	}
+	
+	protected Outlet createOutlet(boolean append, String encoding, String name, boolean overwrite, String path) {
+		Outlet outlet = new Outlet(append,encoding,name,overwrite,path);
+		for (PostProcessor pp : getPostProcessors()) {
+			outlet.addPostprocessor(pp);
+		}
+		return outlet;
 	}
 
 	private String getEncoding() {
