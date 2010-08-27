@@ -15,7 +15,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 /**
  * 
  * A scope represents a hierarchical container containing
- * {@link IScopedElement}s.
+ * {@link IEObjectDescription}s.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Holger Schill - Contribution to Bug 309764
