@@ -1,0 +1,13 @@
+Subversive-connectors-2.2.2.I20100512-1900.zip
+Subversive-incubation-0.7.9.I20100512-1900.zip
+emf-compare-Update-1.1.1RC1.zip
+emf-xsd-Update-2.6.0.zip
+emft-mwe-2-Update-1.0.1.zip
+emft-mwe-2-lang-Update-1.0.1.zip
+emft-mwe-Update-1.0.1.zip
+equinox-SDK-3.6.zip
+m2t-xpand-Update-1.0.1.zip
+mdt-uml2-Update-3.1.0.zip
+mpc-1.0.1.86.zip
+tmf-xtext-Update-1.0.1.zip
+xtext-antlr-Update-1.0.1SR1.zip
