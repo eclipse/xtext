@@ -19,13 +19,15 @@ org.polarion.eclipse.team.svn.connector.feature.group,\
 org.polarion.eclipse.team.svn.connector.javahl16.feature.group,\
 org.polarion.eclipse.team.svn.connector.svnkit16.feature.group"
 
-INSTALL_IUS="org.eclipse.emf.mwe2.runtime.sdk.feature.group,\
+INSTALL_IUS="org.eclipse.emf.all.feature.group,\
+org.eclipse.emf.mwe2.runtime.sdk.feature.group,\
 org.eclipse.emf.mwe.sdk.feature.group,\
 org.eclipse.xpand.sdk.feature.group,\
 org.eclipse.xtext.sdk.feature.group,\
 de.itemis.xtext.antlr.sdk.feature.group,\
 org.eclipse.emf.mwe2.language.sdk.feature.group,\
-org.eclipse.emf.compare.sdk.feature.group,$STATIC_IUS"
+org.eclipse.emf.compare.sdk.feature.group,\
+org.eclipse.epp.mpc.feature.group,$STATIC_IUS"
 
 # uncompress to tmp folder
 # USAGE: uncompress file [ todir ]
