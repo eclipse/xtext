@@ -37,7 +37,7 @@ public class NodeUtil {
 			return null;
 		return (NodeAdapter) EcoreUtil.getAdapter(obj.eAdapters(), AbstractNode.class);
 	}
-	
+
 	public static CompositeNode getNode(EObject obj) {
 		NodeAdapter nodeAdapter = getNodeAdapter(obj);
 		return nodeAdapter == null ? null : nodeAdapter.getParserNode();
@@ -100,7 +100,7 @@ public class NodeUtil {
 		}
 		return null;
 	}
-	
+
 	public static EObject findASTElement(AbstractNode leaf) {
 		AbstractNode n = leaf;
 		while (n != null)
@@ -181,16 +181,16 @@ public class NodeUtil {
 		int currentOffset = rootNode.getTotalOffset();
 		for (AbstractNode child : rootNode.getChildren()) {
 			if (child.getTotalOffset() != currentOffset) {
-				throw new IllegalStateException("Invalid offset: Should be " + currentOffset + " but is " + child.getTotalOffset() + "\n"
-						+ child.serialize());
+				throw new IllegalStateException("Invalid offset: Should be " + currentOffset + " but is "
+						+ child.getTotalOffset() + "\n" + child.serialize());
 			}
 			if (child instanceof CompositeNode) {
 				checkOffsetConsistency((CompositeNode) child);
 			}
 			int serializedLength = child.serialize().length();
 			if (child.getTotalLength() != serializedLength) {
-				throw new IllegalStateException("Invalid length: Should be " + serializedLength + " but is " + child.getTotalLength()
-						+ "\n" + child.serialize());
+				throw new IllegalStateException("Invalid length: Should be " + serializedLength + " but is "
+						+ child.getTotalLength() + "\n" + child.serialize());
 			}
 			currentOffset += serializedLength;
 		}
@@ -216,17 +216,18 @@ public class NodeUtil {
 		return Collections.emptyList();
 	}
 
-	private static List<AbstractNode> findNodesForFeature(EObject ele, AbstractNode node, EStructuralFeature structuralFeature) {
+	private static List<AbstractNode> findNodesForFeature(EObject ele, AbstractNode node,
+			EStructuralFeature structuralFeature) {
 		List<AbstractNode> result = new ArrayList<AbstractNode>();
-		EObject element = NodeUtil.getNearestSemanticObject(node);
-		if (ele.equals(element)) {
-			EObject grammarElement = node.getGrammarElement();
-			if (grammarElement != null) { // error node?
-				Assignment ass = GrammarUtil.containingAssignment(grammarElement);
-				if (ass != null && ass.getFeature().equals(structuralFeature.getName())) {
-					result.add(node);
-				} else {
-					if (node instanceof CompositeNode) {
+		EObject grammarElement = node.getGrammarElement();
+		if (grammarElement != null) { // error node?
+			Assignment ass = GrammarUtil.containingAssignment(grammarElement);
+			if (ass != null && ass.getFeature().equals(structuralFeature.getName())) {
+				result.add(node);
+			} else {
+				if (node instanceof CompositeNode) {
+					EObject element = NodeUtil.getNearestSemanticObject(node);
+					if (ele.equals(element)) {
 						CompositeNode cn = (CompositeNode) node;
 						// check whether it's the same element
 						for (AbstractNode abstractNode : cn.getChildren()) {
@@ -249,7 +250,7 @@ public class NodeUtil {
 				return EcoreUtil.getAllContents(rootNode, false);
 			}
 		};
-		return Iterables.filter(iterable,AbstractNode.class);
+		return Iterables.filter(iterable, AbstractNode.class);
 	}
 
 }

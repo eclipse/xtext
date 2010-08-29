@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
@@ -54,6 +55,13 @@ public class NodeUtilTest extends AbstractXtextTests {
 		assertEquals("Foo : name=ID;", nodes.get(1).serialize().trim());
 	}
 	
+	public void testFindNodesForFeature_CallToConcreteRule() throws Exception {
+		Grammar model = (Grammar) getModel("grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model returns X: name='foo';");
+		AbstractRule rule = model.getRules().get(0);
+		List<AbstractNode> nodes = NodeUtil.findNodesForFeature(rule, XtextPackage.eINSTANCE.getAbstractRule_Type());
+		assertEquals(1, nodes.size());
+		assertEquals("X", nodes.get(0).serialize().trim());
+	}
 	
 	public void testGetAllContents() throws Exception {
 		CompositeNode rootNode = getRootNodeAndExpect("foo", 1);
