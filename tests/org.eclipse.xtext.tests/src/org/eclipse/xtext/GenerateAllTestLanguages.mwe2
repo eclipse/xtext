@@ -24,7 +24,7 @@ var supertest.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/
 
 Workflow {
 	bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/.."
+		platformUri = "${runtimeProject}/../.."
 	}
 	
 	component = DirectoryCleaner {
