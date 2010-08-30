@@ -31,7 +31,7 @@ import com.google.inject.Injector;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class AbstractQuickfixTest extends AbstractWorkbenchTest {
+public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 
 	protected XtextEditor newXtextEditor(String projectName, String modelFile, String model) throws CoreException, PartInitException {
 		IJavaProject javaProject = JavaProjectSetupUtil.createJavaProject(projectName);

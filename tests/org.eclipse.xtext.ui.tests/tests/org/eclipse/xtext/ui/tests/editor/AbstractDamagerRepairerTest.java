@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.tests.editor;
 
 import junit.framework.TestCase;
 
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -42,12 +41,16 @@ public abstract class AbstractDamagerRepairerTest extends TestCase implements ID
 		super.tearDown();
 	}
 	
-	protected IRegion check(String before, int start, int replaceLength, String text) throws BadLocationException {
-		Document doc = new Document(before);
+	protected IRegion check(String before, int start, int replaceLength, String text) throws Exception {
+		Document doc = createDocument(before);
 		damager.setDocument(doc);
 		doc.addDocumentListener(this);
 		doc.replace(start, replaceLength, text);
 		return lastRegion;
+	}
+
+	protected Document createDocument(String before) throws Exception{
+		return new Document(before);
 	}
 	
 	protected abstract IPresentationDamager createRegionDamager();
@@ -93,20 +96,29 @@ public abstract class AbstractDamagerRepairerTest extends TestCase implements ID
 		assertEquals(0,22,check("test : 'mo*/in' foo;",0,0,"/*"));
 	}
 	
+	public void testComplicatedStuff2() throws Exception {
+		assertEquals(0,8,check("foo bar",0,0,"foo bar "));
+	}
+	
+	//TODO why is expected length not 0
 	public void testBug276628() throws Exception {
 		assertEquals(7,10,check("Rule2: 'keyword';",8,9,"keyword';"));
 	}
 	
+	//TODO why is expected length not 0
 	public void testBug279061() throws Exception {
 		assertEquals(3,2, check("foo(x", 3, 2, "(x"));
 	}
 	
+	//TODO why is expected length not 0
 	public void testMlEndOfLine() throws Exception {
 		String model = "/* foo ";
 		String end = "*/";
 		
 		assertEquals(0,(model+end).length(), check(model+end,0,model.length(),model));
 	}
+	
+	//TODO why is expected length not 0
 	public void testMlEndOfLine2() throws Exception {
 		String model = "foo /* foo ";
 		String end = "*/";

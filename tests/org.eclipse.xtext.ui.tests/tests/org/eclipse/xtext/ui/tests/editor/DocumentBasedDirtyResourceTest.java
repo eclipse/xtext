@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.editor;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
+import org.eclipse.xtext.ui.editor.model.IXtextDocumentToken;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -236,6 +238,10 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	}
 
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
+		return Collections.emptyList();
+	}
+
+	public List<IXtextDocumentToken> getTokens() {
 		return Collections.emptyList();
 	}
 	

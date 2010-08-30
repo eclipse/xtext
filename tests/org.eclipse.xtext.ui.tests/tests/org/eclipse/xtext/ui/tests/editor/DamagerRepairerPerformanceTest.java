@@ -20,15 +20,15 @@ import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.xtext.parser.antlr.Lexer;
-import org.eclipse.xtext.ui.editor.FastDamagerRepairer;
-import org.eclipse.xtext.ui.editor.XtextDamagerRepairer;
+import org.eclipse.xtext.ui.editor.PresentationDamager;
+import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
 import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow
  */
-@SuppressWarnings("deprecation")
 public class DamagerRepairerPerformanceTest extends TestCase implements ITokenScanner {
 
 	private IPresentationDamager xtextDamager;
@@ -56,9 +56,22 @@ public class DamagerRepairerPerformanceTest extends TestCase implements ITokenSc
 		
 		protected Tester(IPresentationDamager damager) {
 			this.damager = damager;
-			doc = new Document("");
+			doc = createDocument("");
 			damager.setDocument(doc);
 			doc.addDocumentListener(this);
+		}
+		
+		protected Document createDocument(String before) {
+			DocumentTokenSource source = new DocumentTokenSource();
+			source.setLexer(new Provider<Lexer>() {
+				public Lexer get() {
+					return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
+				}
+			});
+			XtextDocument document = new XtextDocument();
+			document.setTokenSource(source);
+			document.set(before);
+			return document;
 		}
 		
 		protected void appendAndCheck(String text, int offsetFix) throws BadLocationException {
@@ -90,7 +103,7 @@ public class DamagerRepairerPerformanceTest extends TestCase implements ITokenSc
 	}
 	
 	public void testAppendWithXtextDamagerRepairer() throws BadLocationException {
-		doTestAppend(xtextDamager, -1);
+		doTestAppend(xtextDamager, 0);
 	}
 	
 	public void testPrependWithFastDamagerRepairer() throws BadLocationException {
@@ -98,7 +111,7 @@ public class DamagerRepairerPerformanceTest extends TestCase implements ITokenSc
 	}
 	
 	public void testPrependWithXtextDamagerRepairer() throws BadLocationException {
-		doTestPrepend(xtextDamager, 3);
+		doTestPrepend(xtextDamager, 0);
 	}
 	
 	protected void doTestAppend(IPresentationDamager damager, int offsetFix) throws BadLocationException {
@@ -116,21 +129,11 @@ public class DamagerRepairerPerformanceTest extends TestCase implements ITokenSc
 	}
 	
 	protected IPresentationDamager createXtextRegionDamager() {
-		XtextDamagerRepairer repairer = new XtextDamagerRepairer(this, new Provider<Lexer>() {
-			public Lexer get() {
-				return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
-			}
-		});
-		return repairer;
+		return new PresentationDamager();
 	}
 	
 	protected IPresentationDamager createFastRegionDamager() {
-		FastDamagerRepairer result = new FastDamagerRepairer(this, new Provider<Lexer>() {
-			public Lexer get() {
-				return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
-			}
-		});
-		return result;
+		return new PresentationDamager();
 	}
 	
 	public void setRange(IDocument document, int offset, int length) {

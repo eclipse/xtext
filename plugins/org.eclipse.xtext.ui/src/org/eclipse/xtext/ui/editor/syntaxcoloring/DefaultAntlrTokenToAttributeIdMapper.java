@@ -5,11 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.syntaxcoloring.antlr;
+package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
 import java.util.regex.Pattern;
 
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 
 import com.google.inject.Singleton;
 

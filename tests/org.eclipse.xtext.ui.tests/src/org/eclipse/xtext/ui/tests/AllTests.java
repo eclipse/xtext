@@ -21,9 +21,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.DamagerRepairerPerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.DirtyStateEditorSupportTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.DocumentBasedDirtyResourceTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.FastDamageRepairerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.PresentationDamagerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.SimpleEditorTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.XtextDamageRepairerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.autoedit.AutoEditTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.bracketmatching.BracketMatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTest.class);
@@ -79,6 +78,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.quickfix.LinkingErrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.reconciler.ReplaceRegionTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.syntaxcoloring.LightweightPositionTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.syntaxcoloring.TokenScannerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.syntaxcoloring.MergingHighlightedPositionAcceptorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.label.DefaultEObjectLabelProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.label.LabelProviderInjectionTest.class);

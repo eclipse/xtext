@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.syntaxcoloring.antlr;
+package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -13,7 +13,6 @@ import java.util.Map.Entry;
 import org.antlr.runtime.Token;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.LexerUIBindings;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;

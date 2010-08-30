@@ -13,12 +13,17 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+
+import com.google.inject.Provider;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
@@ -80,7 +85,7 @@ public class DefaultDocumentEditorTest extends AbstractXtextTests {
 	
 	private IXtextDocument createDocument(String model) throws Exception {
 		resource = getResource(new StringInputStream(model));
-		final IXtextDocument document = new XtextDocument() {
+		final XtextDocument document = new XtextDocument() {
 			@Override
 			public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 				try {
@@ -91,6 +96,12 @@ public class DefaultDocumentEditorTest extends AbstractXtextTests {
 				}
 			}
 		};
+		DocumentTokenSource tokenSource = new DocumentTokenSource();
+		tokenSource.setLexer(new Provider<Lexer>(){
+			public Lexer get() {
+				return new InternalXtextLexer();
+			}});
+		document.setTokenSource(tokenSource);
 		document.set(model);
 		return document;
 	}
