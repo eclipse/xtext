@@ -36,7 +36,7 @@ public class FowlerDslStandaloneSetupGenerated implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("fowlerdsl", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("fowlerdsl", serviceProvider);
 		
-	//TODO registration of EValidators should be added here, too
+
 
 
 

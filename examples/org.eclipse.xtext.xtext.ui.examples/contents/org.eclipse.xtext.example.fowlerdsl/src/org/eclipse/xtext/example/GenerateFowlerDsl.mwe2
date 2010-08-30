@@ -19,7 +19,7 @@ var runtimeProject = "../${projectName}"
 Workflow {
 
 	bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/.."
+		platformUri = "${runtimeProject}/../.."
 	}
 
 	component = DirectoryCleaner {
@@ -57,7 +57,7 @@ Workflow {
 			fragment = parser.antlr.XtextAntlrGeneratorFragment {}
 
 			// Check based validation 
-			fragment = validation.CheckFragment {}
+			fragment = validation.JavaValidatorFragment {}
 
 			// labeling API 
 			fragment = labeling.LabelProviderFragment {}

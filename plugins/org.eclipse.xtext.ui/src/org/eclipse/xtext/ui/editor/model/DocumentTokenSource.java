@@ -5,8 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor;
+package org.eclipse.xtext.ui.editor.model;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.antlr.runtime.ANTLRStringStream;
@@ -14,11 +15,8 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.jface.text.DocumentEvent;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Region;
-import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.ui.LexerUIBindings;
 
@@ -29,19 +27,20 @@ import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  */
-public class FastDamagerRepairer extends AbstractDamagerRepairer {
+public class DocumentTokenSource {
 
-	private static class TokenInfo {
-		
+	private static class TokenInfo implements IXtextDocumentToken {
+
 		private final int length;
 		private final int type;
-		
+
 		private TokenInfo(CommonToken token) {
 			length = token.getStopIndex() - token.getStartIndex() + 1;
 			type = token.getType();
 		}
-		
+
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -71,32 +70,48 @@ public class FastDamagerRepairer extends AbstractDamagerRepairer {
 		public String toString() {
 			return "TokenInfo [length=" + length + ", type=" + type + "]";
 		}
+
+		public int getAntlrTokenType() {
+			return this.type;
+		}
+
+		public int getLength() {
+			return this.length;
+		}
+
 	}
-	
+
 	private boolean checkInvariant = false;
-	private List<TokenInfo> tokenInfos;
+	private List<TokenInfo> internalModifyableTokenInfos = Collections.emptyList();
+	private List<? extends IXtextDocumentToken> tokenInfos = Collections.emptyList();
 	private IRegion previousRegion;
 	private DocumentEvent previousEvent;
-	
-	private final Provider<Lexer> lexer;
+
+	private Provider<Lexer> lexer;
+
+	public List<? extends IXtextDocumentToken> getTokenInfos() {
+		return tokenInfos;
+	}
+
+	public IRegion getLastDamagedRegion() {
+		return previousRegion;
+	}
 
 	@Inject
-	public FastDamagerRepairer(ITokenScanner scanner, @Named(LexerUIBindings.HIGHLIGHTING) Provider<Lexer> lexer) {
-		super(scanner);
+	public void setLexer(@Named(LexerUIBindings.HIGHLIGHTING) Provider<Lexer> lexer) {
 		this.lexer = lexer;
 	}
 
-	@Override
-	public void setDocument(IDocument document) {
-		super.setDocument(document);
-		tokenInfos = createTokenInfos(document.get());
+	protected void setTokens(List<TokenInfo> infos) {
+		this.internalModifyableTokenInfos = infos;
+		this.tokenInfos = Collections.unmodifiableList(infos);
 	}
 
-	private List<TokenInfo> createTokenInfos(String string) {
+	protected List<TokenInfo> createTokenInfos(String string) {
 		List<TokenInfo> result = Lists.newArrayListWithExpectedSize(string.length() / 3);
 		TokenSource source = createLexer(string);
 		CommonToken token = (CommonToken) source.nextToken();
-		while(token != Token.EOF_TOKEN) {
+		while (token != Token.EOF_TOKEN) {
 			TokenInfo info = createTokenInfo(token);
 			result.add(info);
 			token = (CommonToken) source.nextToken();
@@ -109,45 +124,38 @@ public class FastDamagerRepairer extends AbstractDamagerRepairer {
 		return info;
 	}
 
-	@Override
-	public IRegion getDamageRegion(ITypedRegion partition, final DocumentEvent e, boolean documentPartitioningChanged) {
-		if (documentPartitioningChanged) {
-			previousEvent = null;
-			previousRegion = null;
-			tokenInfos = Lists.newArrayList();
-			return partition;
-		}
-		if (previousEvent == e && previousRegion != null) {
+	public void updateStructure(final DocumentEvent e) {
+		try {
+			if (previousEvent == e && previousRegion != null) {
+				return;
+			}
+			previousRegion = computeDamageRegion(e);
+		} finally {
+			previousEvent = e;
 			if (isCheckInvariant()) {
 				doCheckInvariant(e);
 			}
-			return previousRegion;
 		}
-		previousEvent = e;
-		previousRegion = computeDamageRegion(e);
-		if (isCheckInvariant()) {
-			doCheckInvariant(e);
-		}
-		return previousRegion;
 	}
 
 	protected void doCheckInvariant(final DocumentEvent e) {
 		List<TokenInfo> parsedTokenInfos = createTokenInfos(e.fDocument.get());
-		if (!parsedTokenInfos.equals(tokenInfos)) {
-			throw new IllegalStateException("Expected: '" + parsedTokenInfos + "' but was: '" + tokenInfos + "'.");
+		if (!parsedTokenInfos.equals(internalModifyableTokenInfos)) {
+			throw new IllegalStateException("Expected: '" + parsedTokenInfos + "' but was: '"
+					+ internalModifyableTokenInfos + "'.");
 		}
 	}
-	
+
 	private IRegion computeDamageRegion(final DocumentEvent e) {
 		// empty document -> no dirty region
 		if (e.getDocument().getLength() == 0) {
-			tokenInfos = createTokenInfos(e.fDocument.get());
+			setTokens(createTokenInfos(e.fDocument.get()));
 			return new Region(0, 0);
 		}
 
 		// previously empty -> full document dirty
-		if (tokenInfos.isEmpty()) {
-			tokenInfos = createTokenInfos(e.fDocument.get());
+		if (internalModifyableTokenInfos.isEmpty()) {
+			setTokens(createTokenInfos(e.fDocument.get()));
 			return new Region(0, e.getDocument().getLength());
 		}
 
@@ -155,19 +163,20 @@ public class FastDamagerRepairer extends AbstractDamagerRepairer {
 		int tokenInfoIdx = 0;
 		int regionOffset = 0;
 		int regionLength = e.fDocument.getLength();
-		
+
 		TokenSource source = createLexer(e.fDocument.get());
 		CommonToken token = (CommonToken) source.nextToken();
 		// find start idx
-		while(true) {
+		while (true) {
 			if (token == Token.EOF_TOKEN) {
-				tokenInfos.subList(tokenInfoIdx, tokenInfos.size()).clear();
+				internalModifyableTokenInfos.subList(tokenInfoIdx, internalModifyableTokenInfos.size()).clear();
 				break;
 			}
-			if (tokenInfoIdx >= tokenInfos.size())
+			if (tokenInfoIdx >= internalModifyableTokenInfos.size())
 				break;
-			TokenInfo tokenInfo = tokenInfos.get(tokenInfoIdx);
-			if (tokenInfo.type != token.getType() || token.getStopIndex() - token.getStartIndex() + 1 != tokenInfo.length)
+			TokenInfo tokenInfo = internalModifyableTokenInfos.get(tokenInfoIdx);
+			if (tokenInfo.type != token.getType()
+					|| token.getStopIndex() - token.getStartIndex() + 1 != tokenInfo.length)
 				break;
 			if (tokenStartsAt + tokenInfo.length > e.fOffset)
 				break;
@@ -177,41 +186,41 @@ public class FastDamagerRepairer extends AbstractDamagerRepairer {
 		}
 		regionLength -= tokenStartsAt;
 		regionOffset = tokenStartsAt;
-		
+
 		int lengthDiff = e.fText.length() - e.fLength;
 		// compute region length
-		while(true) {
-			if (token == Token.EOF_TOKEN || tokenInfoIdx >= tokenInfos.size())
+		while (true) {
+			if (token == Token.EOF_TOKEN || tokenInfoIdx >= internalModifyableTokenInfos.size())
 				break;
-			while(true) {
-				if (tokenInfoIdx >= tokenInfos.size())
+			while (true) {
+				if (tokenInfoIdx >= internalModifyableTokenInfos.size())
 					break;
-				TokenInfo tokenInfo = tokenInfos.get(tokenInfoIdx);
+				TokenInfo tokenInfo = internalModifyableTokenInfos.get(tokenInfoIdx);
 				if (token.getStartIndex() >= e.fOffset + e.fText.length()) {
-					if (tokenStartsAt + lengthDiff == token.getStartIndex() && 
-							tokenInfo.type == token.getType() && 
-							token.getStopIndex() - token.getStartIndex() + 1 == tokenInfo.length) {
+					if (tokenStartsAt + lengthDiff == token.getStartIndex() && tokenInfo.type == token.getType()
+							&& token.getStopIndex() - token.getStartIndex() + 1 == tokenInfo.length) {
 						return new Region(regionOffset, token.getStartIndex() - regionOffset);
 					}
 				}
 				if (tokenStartsAt + lengthDiff + tokenInfo.length > token.getStopIndex() + 1)
 					break;
-				tokenInfos.remove(tokenInfoIdx);
+				internalModifyableTokenInfos.remove(tokenInfoIdx);
 				tokenStartsAt += tokenInfo.length;
 				if (tokenStartsAt + lengthDiff > token.getStartIndex())
 					break;
 			}
-			tokenInfos.add(tokenInfoIdx++, createTokenInfo(token));
+			internalModifyableTokenInfos.add(tokenInfoIdx++, createTokenInfo(token));
 			token = (CommonToken) source.nextToken();
 		}
-		tokenInfos.subList(tokenInfoIdx, tokenInfos.size()).clear();
+		internalModifyableTokenInfos.subList(tokenInfoIdx, internalModifyableTokenInfos.size()).clear();
 		// add subsequent tokens
-		if (tokenInfoIdx >= tokenInfos.size()) {
-			while(token != Token.EOF_TOKEN) {
-				tokenInfos.add(createTokenInfo(token));
+		if (tokenInfoIdx >= internalModifyableTokenInfos.size()) {
+			while (token != Token.EOF_TOKEN) {
+				internalModifyableTokenInfos.add(createTokenInfo(token));
 				token = (CommonToken) source.nextToken();
 			}
 		}
+		setTokens(internalModifyableTokenInfos);
 		return new Region(regionOffset, regionLength);
 	}
 
@@ -228,6 +237,5 @@ public class FastDamagerRepairer extends AbstractDamagerRepairer {
 	public boolean isCheckInvariant() {
 		return checkInvariant;
 	}
-
 
 }

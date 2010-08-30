@@ -20,7 +20,9 @@ import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.formatter.IContentFormatter;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
+import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
+import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.jface.text.quickassist.IQuickAssistAssistant;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.IAnnotationHover;
@@ -50,8 +52,11 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	@Inject
 	private Provider<IReconciler> reconcilerProvider;
 
-	@Inject(optional = true)
-	private Provider<IDamagerRepairer> damagerRepairerProvider;
+	@Inject
+	private Provider<IPresentationDamager> damagerProvider;
+	
+	@Inject
+	private Provider<IPresentationRepairer> repairerProvider;
 	
 	@Inject(optional=true)
 	private IContentFormatterFactory contentFormatterFactory;
@@ -91,15 +96,11 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 
 	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
-		if (damagerRepairerProvider != null) {
-			XtextPresentationReconciler reconciler = getPresentationReconcilerProvider().get();
-			reconciler.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
-			IDamagerRepairer defDR = damagerRepairerProvider.get();
-			reconciler.setRepairer(defDR.getRepairer(), IDocument.DEFAULT_CONTENT_TYPE);
-			reconciler.setDamager(defDR.getDamager(), IDocument.DEFAULT_CONTENT_TYPE);
-			return reconciler;
-		}
-		return super.getPresentationReconciler(sourceViewer);
+		XtextPresentationReconciler reconciler = getPresentationReconcilerProvider().get();
+		reconciler.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
+		reconciler.setRepairer(repairerProvider.get(), IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setDamager(damagerProvider.get(), IDocument.DEFAULT_CONTENT_TYPE);
+		return reconciler;
 	}
 
 	@Override
@@ -168,6 +169,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		return presentationReconcilerProvider;
 	}
 	
+	//TODO clean this up
 	@Inject(optional=true)
 	private IAutoEditStrategy autoEditStrategy ;
 	@Inject

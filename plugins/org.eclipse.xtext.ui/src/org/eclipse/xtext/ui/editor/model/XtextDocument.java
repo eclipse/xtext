@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ui.editor.model;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -27,6 +28,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.DocumentEvent;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
 import org.eclipse.xtext.resource.EObjectHandleImpl;
 import org.eclipse.xtext.resource.XtextResource;
@@ -35,11 +38,21 @@ import org.eclipse.xtext.util.concurrent.IEObjectHandle;
 import org.eclipse.xtext.util.concurrent.IStateAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
- * @author Michael Clay 
+ * @author Michael Clay
  */
 public class XtextDocument extends Document implements IXtextDocument {
+	
+	@Inject
+	private DocumentTokenSource tokenSource; 
+	
+	public void setTokenSource(DocumentTokenSource tokenSource) {
+		this.tokenSource = tokenSource;
+	}
+	
 	private XtextResource resource = null;
 	private final ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
 	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
@@ -48,7 +61,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		Assert.isNotNull(resource);
 		this.resource = resource;
 	}
-	
+
 	public void disposeInput() {
 		if (resource != null) {
 			ResourceSet resourceSet = resource.getResourceSet();
@@ -65,7 +78,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	protected XtextDocumentLocker createDocumentLocker() {
 		return new XtextDocumentLocker();
 	}
-	
+
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 		return stateAccess.readOnly(work);
 	}
@@ -282,6 +295,20 @@ public class XtextDocument extends Document implements IXtextDocument {
 		} finally {
 			positionsWriteLock.unlock();
 		}
+	}
+	
+	@Override
+	protected void fireDocumentChanged(DocumentEvent event) {
+		tokenSource.updateStructure(event);
+		super.fireDocumentChanged(event);
+	}
+	
+	public List<? extends IXtextDocumentToken> getTokens() {
+		return tokenSource.getTokenInfos();
+	}
+	
+	public IRegion getLastDamage() {
+		return tokenSource.getLastDamagedRegion();
 	}
 
 }

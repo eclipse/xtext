@@ -14,7 +14,10 @@ import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
+import org.eclipse.jface.text.presentation.IPresentationDamager;
+import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.jface.text.reconciler.IReconciler;
+import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -31,6 +34,7 @@ import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
+import org.eclipse.xtext.ui.editor.PresentationDamager;
 import org.eclipse.xtext.ui.editor.WorkspaceEncodingProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorErrorTickUpdater;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
@@ -59,6 +63,8 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.PresentationRepairer;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.TokenScanner;
 import org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateStore;
@@ -140,6 +146,18 @@ public class DefaultUiModule extends AbstractGenericModule {
 
 	public Class<? extends IActionBarContributor> bindIActionBarContributor() {
 		return IActionBarContributor.DefaultActionBarContributor.class;
+	}
+	
+	public Class<? extends IPresentationDamager> bindIPresentationDamager() {
+		return PresentationDamager.class;
+	}
+	
+	public Class<? extends IPresentationRepairer> bindIPresentationRepairer() {
+		return PresentationRepairer.class;
+	}
+	
+	public Class<? extends ITokenScanner> bindITokenScanner() {
+		return TokenScanner.class;
 	}
 
 	public Class<? extends IHighlightingHelper> bindIHighlightingHelper() {

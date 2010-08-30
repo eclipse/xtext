@@ -8,10 +8,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor;
 
+import java.lang.reflect.Field;
+
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.internal.ErrorEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
@@ -20,6 +24,7 @@ import org.eclipse.xtext.ui.tests.workbench.AbstractWorkbenchTest;
 /**
  * @author Peter Friese - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 
 	static final long STEP_DELAY = 0;
@@ -34,15 +39,16 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 		super(name);
 	}
 
-	@SuppressWarnings("restriction")
 	protected XtextEditor openEditor(IFile file) throws Exception {
 		IEditorPart openEditor = openEditor(file, getEditorId());
 		XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null) {
 			return xtextEditor;
 		}
-		else if (openEditor instanceof org.eclipse.ui.internal.ErrorEditorPart) {
-			fail("Could not open XtextEditor. Editor produced errors during initialization.");
+		else if (openEditor instanceof ErrorEditorPart) {
+			Field field = openEditor.getClass().getDeclaredField("error");
+			field.setAccessible(true);
+			throw new IllegalStateException("Couldn't open the editor.",((Status)field.get(openEditor)).getException());
 		}
 		else {
 			fail("Opened Editor with id:" + getEditorId() + ", is not an XtextEditor");
