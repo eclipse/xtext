@@ -12,15 +12,16 @@ import junit.framework.TestCase;
 
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.conversion.impl.INTValueConverter;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
 public class DefaultTerminalConverterTest extends TestCase {
-	@SuppressWarnings("deprecation")
+	
 	public void testINT() throws Exception {
-		IValueConverter<Integer> valueConverter = new DefaultTerminalConverters.INTValueConverter();
+		IValueConverter<Integer> valueConverter = new INTValueConverter();
 		try {
 			valueConverter.toValue("", null);
 			fail("exception epxected");
