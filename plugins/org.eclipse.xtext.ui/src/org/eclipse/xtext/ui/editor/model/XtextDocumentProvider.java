@@ -23,6 +23,7 @@ import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.IDocumentListener;
+import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
@@ -52,32 +53,46 @@ import com.google.inject.Provider;
 public class XtextDocumentProvider extends FileDocumentProvider {
 	@Inject
 	private Provider<XtextDocument> document;
-	
+
+	@Inject
+	private Provider<IDocumentPartitioner> documentPartitioner;
+
 	@Inject
 	private IResourceValidator resourceValidator;
-	
+
 	// TODO use a provider for objects that depend on issueResolitionProvider+markerUtil when guice2 is available
 	@Inject
 	private IssueResolutionProvider issueResolutionProvider;
-	
+
 	@Inject
 	private MarkerUtil markerUtil;
-	
+
 	@Inject
 	private IResourceForEditorInputFactory resourceForEditorInputFactory;
-	
-	@Inject 
+
+	@Inject
 	private IStorage2UriMapper storage2UriMapper;
-	
-	@Inject 
+
+	@Inject
 	private IEncodingProvider encodingProvider;
-	
+
 	@Override
 	protected XtextDocument createEmptyDocument() {
 		XtextDocument xtextDocument = document.get();
 		return xtextDocument;
 	}
-	
+
+	@Override
+	protected IDocument createDocument(Object element) throws CoreException {
+		IDocument document = super.createDocument(element);
+		if (document != null) {
+			IDocumentPartitioner partitioner = documentPartitioner.get();
+			partitioner.connect(document);
+			document.setDocumentPartitioner(partitioner);
+		}
+		return document;
+	}
+
 	@Override
 	public boolean isDeleted(Object element) {
 		if (element instanceof IFileEditorInput) {
@@ -105,7 +120,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		}
 		return result;
 	}
-	
+
 	@Override
 	protected void disposeElementInfo(Object element, ElementInfo info) {
 		if (info.fDocument instanceof XtextDocument) {
@@ -114,7 +129,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		}
 		super.disposeElementInfo(element, info);
 	}
-	
+
 	protected void loadResource(XtextResource resource, String document, String encoding) throws CoreException {
 		try {
 			resource.load(new ByteArrayInputStream(document.getBytes(encoding)),
@@ -125,19 +140,20 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			throw new CoreException(s);
 		}
 	}
-	
+
 	@Override
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		ElementInfo info = super.createElementInfo(element);
 		XtextDocument doc = (XtextDocument) info.fDocument;
-		AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(doc, info.fModel, issueResolutionProvider);
-		ValidationJob job = new ValidationJob(resourceValidator, doc, annotationIssueProcessor,CheckMode.FAST_ONLY);
+		AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(doc, info.fModel,
+				issueResolutionProvider);
+		ValidationJob job = new ValidationJob(resourceValidator, doc, annotationIssueProcessor, CheckMode.FAST_ONLY);
 		doc.setValidationJob(job);
 		return info;
 	}
-	
+
 	private UnchangedElementListener listener;
-	
+
 	public class UnchangedElementListener implements IDocumentListener {
 
 		private final ElementInfo element;
@@ -150,24 +166,24 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			} else {
 				modificationStamp = IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
 			}
-			
+
 		}
-		
+
 		public void documentAboutToBeChanged(DocumentEvent event) {
 		}
 
 		public void documentChanged(DocumentEvent event) {
 			if (element.fCanBeSaved && modificationStamp == event.getModificationStamp()) {
-				element.fCanBeSaved= false;
+				element.fCanBeSaved = false;
 				fireElementDirtyStateChanged(element.fElement, element.fCanBeSaved);
 			} else if (!element.fCanBeSaved) {
-				element.fCanBeSaved= true;
+				element.fCanBeSaved = true;
 				fireElementDirtyStateChanged(element.fElement, element.fCanBeSaved);
 			}
 		}
-		
+
 	}
-	
+
 	@Override
 	protected void addUnchangedElementListeners(Object element, ElementInfo info) {
 		if (info.fDocument != null) {
@@ -177,7 +193,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			info.fDocument.addDocumentListener(new UnchangedElementListener(info));
 		}
 	}
-	
+
 	@Override
 	protected void removeUnchangedElementListeners(Object element, ElementInfo info) {
 		if (listener != null) {
@@ -185,11 +201,11 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			listener = null;
 		}
 	}
-	
+
 	@Override
 	protected IAnnotationModel createAnnotationModel(Object element) throws CoreException {
 		if (element instanceof IFileEditorInput) {
-			IFileEditorInput input= (IFileEditorInput) element;
+			IFileEditorInput input = (IFileEditorInput) element;
 			return new XtextResourceMarkerAnnotationModel(input.getFile(), issueResolutionProvider, markerUtil);
 		}
 		return super.createAnnotationModel(element);
@@ -202,15 +218,15 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	public IResourceForEditorInputFactory getResourceForEditorInputFactory() {
 		return resourceForEditorInputFactory;
 	}
-	
+
 	@Override
 	public String getEncoding(Object element) {
 		String encoding = super.getEncoding(element);
-		if(encoding == null && element instanceof IStorageEditorInput) {
+		if (encoding == null && element instanceof IStorageEditorInput) {
 			try {
-				IStorage storage = ((IStorageEditorInput)element).getStorage();
+				IStorage storage = ((IStorageEditorInput) element).getStorage();
 				URI uri = storage2UriMapper.getUri(storage);
-				if(uri != null) {
+				if (uri != null) {
 					return encodingProvider.getEncoding(uri);
 				}
 			} catch (CoreException e) {

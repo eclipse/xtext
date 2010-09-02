@@ -12,11 +12,14 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.IAutoEditStrategy;
+import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.jface.text.reconciler.IReconciler;
+import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
@@ -38,6 +41,7 @@ import org.eclipse.xtext.ui.editor.PresentationDamager;
 import org.eclipse.xtext.ui.editor.WorkspaceEncodingProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorErrorTickUpdater;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
+import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategy;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultCompletionProposalPostProcessor;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalPostProcessor;
@@ -48,8 +52,10 @@ import org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.formatting.PreferenceStoreIndentationInformation;
 import org.eclipse.xtext.ui.editor.hyperlinking.DefaultHyperlinkDetector;
+import org.eclipse.xtext.ui.editor.model.DocumentPartitioner;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
+import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
 import org.eclipse.xtext.ui.editor.outline.IContentOutlineNodeComparer;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
@@ -159,9 +165,21 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public Class<? extends ITokenScanner> bindITokenScanner() {
 		return TokenScanner.class;
 	}
+	
+	public Class<? extends IPartitionTokenScanner> bindIPartitionTokenScanner() {
+		return PartitionTokenScanner.class;
+	}
+	
+	public Class<? extends IDocumentPartitioner> bindIDocumentPartitioner() {
+		return DocumentPartitioner.class;
+	}
 
 	public Class<? extends IHighlightingHelper> bindIHighlightingHelper() {
 		return HighlightingHelper.class;
+	}
+	
+	public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy() {
+		return DefaultAutoEditStrategy.class;
 	}
 
 	public Class<? extends AdapterFactory> bindAdapterFactory() {
