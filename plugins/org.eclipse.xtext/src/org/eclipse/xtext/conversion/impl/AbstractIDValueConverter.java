@@ -11,7 +11,6 @@ import java.util.Set;
 
 import org.antlr.runtime.Token;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -41,15 +40,6 @@ public abstract class AbstractIDValueConverter extends AbstractLexerBasedConvert
 	
 	private Set<String> valuesToEscape;
 
-	/**
-	 * @deprecated this implementation is {@link IValueConverter.RuleSpecific} thus {@link #setRule(AbstractRule)}
-	 * will be used to initialize this converter.
-	 */
-	@Deprecated
-	protected AbstractIDValueConverter(Grammar grammar, String ruleName) {
-		super(GrammarUtil.findRuleForName(grammar, ruleName));
-	}
-	
 	protected AbstractIDValueConverter() {
 		super();
 	}

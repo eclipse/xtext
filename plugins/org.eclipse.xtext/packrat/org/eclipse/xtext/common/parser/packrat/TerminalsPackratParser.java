@@ -3,13 +3,15 @@
 */
 package org.eclipse.xtext.common.parser.packrat;
 
-import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
-import org.eclipse.xtext.parser.packrat.IParseResultFactory;
-import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
+import java.io.Reader;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
+import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalParserConfiguration;
+import org.eclipse.xtext.parser.packrat.IParseResultFactory;
+
+import com.google.inject.Inject;
 
 public class TerminalsPackratParser extends AbstractPackratParser {
 	
@@ -27,5 +29,9 @@ public class TerminalsPackratParser extends AbstractPackratParser {
 	protected TerminalsGrammarAccess getGrammarAccess() {
 		return (TerminalsGrammarAccess)super.getGrammarAccess();
 	}
-	
+
+	public IParseResult parse(String ruleName, Reader reader) {
+		throw new UnsupportedOperationException();
+	}
+
 }

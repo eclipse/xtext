@@ -17,7 +17,7 @@ import org.eclipse.xtext.parser.ParserTestHelper;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractParserTest extends AbstractEnumRulesTest {
+public class ParserTest extends AbstractEnumRulesTest {
 
 	private ParserTestHelper helper;
 

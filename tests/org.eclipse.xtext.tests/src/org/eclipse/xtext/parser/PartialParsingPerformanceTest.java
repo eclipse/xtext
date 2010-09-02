@@ -36,7 +36,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		}
 		String model = modelBuffer.toString();
 		CompositeNode rootNode = getRootNode(model);
-		IParseResult reparse = partialParser.reparse(getAntlrParser(), rootNode, model.indexOf('c'), 1, "Hugo");
+		IParseResult reparse = partialParser.reparse(getParser(), rootNode, model.indexOf('c'), 1, "Hugo");
 		assertTrue(reparse.getParseErrors() == null || reparse.getParseErrors().isEmpty());
 	}
 	
@@ -61,7 +61,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		modelBuffer.append("}\n");
 		String model = modelBuffer.toString();
 		CompositeNode rootNode = getRootNode(model);
-		IParseResult reparse = partialParser.reparse(getAntlrParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
+		IParseResult reparse = partialParser.reparse(getParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
 		if(reparse.getParseErrors() != null && !reparse.getParseErrors().isEmpty()) {
 			fail("Unexpected parse error " + reparse.getParseErrors().get(0).getMessage()) ;
 		}
@@ -89,7 +89,7 @@ public class PartialParsingPerformanceTest extends AbstractPartialParserTest {
 		modelBuffer.append("}\n");
 		String model = modelBuffer.toString();
 		CompositeNode rootNode = getRootNodeAndExpect(model, 1);
-		IParseResult reparse = partialParser.reparse(getAntlrParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
+		IParseResult reparse = partialParser.reparse(getParser(), rootNode, model.indexOf("Sven"), 4, "Peter");
 		assertEquals(1, reparse.getParseErrors().size());
 	}
 	

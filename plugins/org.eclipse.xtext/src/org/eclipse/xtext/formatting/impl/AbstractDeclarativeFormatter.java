@@ -113,6 +113,9 @@ public abstract class AbstractDeclarativeFormatter extends BaseFormatter {
 		}
 	}
 
+	/*
+	 * TODO Why deprecated?
+	 */
 	@Deprecated
 	public void setGrammarAccess(IGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;

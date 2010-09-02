@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -27,7 +26,7 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public abstract class AbstractBug250313Test extends AbstractXtextTests {
+public class Bug250313Test extends AbstractXtextTests {
 
 	private ParserTestHelper helper;
 	private AbstractNode node;
@@ -41,10 +40,10 @@ public abstract class AbstractBug250313Test extends AbstractXtextTests {
 		with(new Bug250313StandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new MyBug250313RuntimeModule(AbstractBug250313Test.this));
+				return Guice.createInjector(new MyBug250313RuntimeModule(Bug250313Test.this));
 			}
 		});
-		helper = new ParserTestHelper(getResourceFactory(), getParserUnderTest(), get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension());
+		helper = new ParserTestHelper(getResourceFactory(), getParser(), get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension());
 	}
 
 	@Override
@@ -58,16 +57,16 @@ public abstract class AbstractBug250313Test extends AbstractXtextTests {
 
 	public static class MyBug250313RuntimeModule extends Bug250313RuntimeModule {
 
-		private final AbstractBug250313Test test;
+		private final Bug250313Test test;
 
-		public MyBug250313RuntimeModule(AbstractBug250313Test test) {
+		public MyBug250313RuntimeModule(Bug250313Test test) {
 			this.test = test;
 		}
 
 		@Override
 		public void configure(Binder binder) {
 			super.configure(binder);
-			binder.bind(AbstractBug250313Test.class).toInstance(test);
+			binder.bind(Bug250313Test.class).toInstance(test);
 		}
 
 		@Override
@@ -83,7 +82,7 @@ public abstract class AbstractBug250313Test extends AbstractXtextTests {
 		private Converters delegate;
 
 		@Inject
-		private AbstractBug250313Test test;
+		private Bug250313Test test;
 
 		public String toString(Object value, String lexerRule) {
 			return delegate.toString(value, lexerRule);
@@ -95,8 +94,6 @@ public abstract class AbstractBug250313Test extends AbstractXtextTests {
 		}
 
 	}
-
-	protected abstract IParser getParserUnderTest();
 
 	public void toValueCalled(String string, String lexerRule, AbstractNode node) {
 		this.string = string;

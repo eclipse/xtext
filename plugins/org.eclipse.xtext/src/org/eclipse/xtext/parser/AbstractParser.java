@@ -8,13 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 
@@ -26,20 +22,6 @@ public abstract class AbstractParser implements IParser {
 
 	protected boolean isReparseSupported() {
 		return false;
-	}
-	
-	@Deprecated
-	protected String getDefaultEncoding() {
-		return "ISO-8859-1";
-	}
-
-	@Deprecated
-	public final IParseResult parse(InputStream in) {
-		try {
-			return parse(new InputStreamReader(in, getDefaultEncoding()));
-		} catch (UnsupportedEncodingException e) {
-			throw new WrappedException(e);
-		}
 	}
 
 	public final IParseResult parse(Reader reader) {

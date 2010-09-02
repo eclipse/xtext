@@ -35,7 +35,6 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.ParseResult;
-import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.antlr.IPartialParsingHelper;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -59,7 +58,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	private IReferableElementsUnloader unloader;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public IParseResult reparse(IAntlrParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
+	public IParseResult reparse(IParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
 			String newText) {
 		if (offset + replacedTextLength > rootNode.getTotalLength()) {
 			log.error("Invalid replace region offset=" + offset + " length=" + replacedTextLength + " originalLength="

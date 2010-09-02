@@ -37,18 +37,6 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 
 	private AbstractRule rule;
 	
-	/**
-	 * @deprecated this implementation is {@link IValueConverter.RuleSpecific} thus {@link #setRule(AbstractRule)}
-	 * will be used to initialize this converter.
-	 */
-	@Deprecated
-	protected AbstractLexerBasedConverter(AbstractRule rule) {
-		this.rule = rule;
-	}
-	
-	protected AbstractLexerBasedConverter() {
-	}
-	
 	public String toString(T value) {
 		assertValidValue(value);
 		String result = toEscapedString(value);

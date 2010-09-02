@@ -26,6 +26,10 @@ public class LinkingHelper {
 	
 	@Inject
 	private IValueConverterService valueConverter;
+	
+	public void setValueConverter(IValueConverterService valueConverter) {
+		this.valueConverter = valueConverter;
+	}
 
 	/**
 	 * @param grammarElement
