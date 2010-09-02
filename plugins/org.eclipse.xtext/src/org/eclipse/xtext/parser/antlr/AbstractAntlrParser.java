@@ -8,8 +8,6 @@
 package org.eclipse.xtext.parser.antlr;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
 
@@ -30,7 +28,7 @@ import com.google.inject.name.Named;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein
  */
-public abstract class AbstractAntlrParser extends AbstractParser implements IAntlrParser {
+public abstract class AbstractAntlrParser extends AbstractParser {
 
 	@Inject
 	private IAstFactory elementFactory;
@@ -81,15 +79,6 @@ public abstract class AbstractAntlrParser extends AbstractParser implements IAnt
 		try {
 			IParseResult parseResult = parse(ruleName, new ANTLRReaderStream(reader));
 			return parseResult;
-		} catch (IOException e) {
-			throw new WrappedException(e);
-		}
-	}
-
-	@Deprecated
-	public IParseResult parse(String ruleName, InputStream in) {
-		try {
-			return parse(ruleName, new InputStreamReader(in, getDefaultEncoding()));
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}

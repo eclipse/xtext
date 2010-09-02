@@ -35,7 +35,7 @@ public abstract class AbstractIndexTestLanguageRuntimeModule extends DefaultRunt
 	}
 	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
+	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return org.eclipse.xtext.index.parser.antlr.IndexTestLanguageParser.class;
 	}
 

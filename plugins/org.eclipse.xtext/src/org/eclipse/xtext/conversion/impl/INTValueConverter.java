@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion.impl;
 
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
@@ -20,15 +18,6 @@ public class INTValueConverter extends AbstractLexerBasedConverter<Integer> {
 
 	public INTValueConverter() {
 		super();
-	}
-	
-	/**
-	 * @deprecated this implementation is {@link IValueConverter.RuleSpecific} thus {@link #setRule(AbstractRule)}
-	 * will be used to initialize this converter.
-	 */
-	@Deprecated
-	public INTValueConverter(Grammar grammar, String ruleName) {
-		super(GrammarUtil.findRuleForName(grammar, ruleName));
 	}
 	
 	@Override

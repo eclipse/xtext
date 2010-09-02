@@ -37,7 +37,6 @@ import org.eclipse.xtext.formatting.INodeModelFormatter;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
@@ -176,10 +175,6 @@ public abstract class AbstractXtextTests extends TestCase {
 
 	protected IParser getParser() {
 		return getInjector().getInstance(IParser.class);
-	}
-
-	protected IAntlrParser getAntlrParser() {
-		return getInjector().getInstance(IAntlrParser.class);
 	}
 
 	protected ILinkingService getLinkingService() {

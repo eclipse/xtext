@@ -45,7 +45,7 @@ public abstract class AbstractEcore2XtextTestRuntimeModule extends DefaultRuntim
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
+	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr.Ecore2XtextTestParser.class;
 	}
 

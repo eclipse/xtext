@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser.antlr;
 
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 
 /**
@@ -15,6 +16,6 @@ import org.eclipse.xtext.parsetree.CompositeNode;
  */
 public interface IPartialParsingHelper {
 
-	IParseResult reparse(IAntlrParser parser, CompositeNode rootNode, int offset, int replacedTextLength, String newText);
+	IParseResult reparse(IParser parser, CompositeNode rootNode, int offset, int replacedTextLength, String newText);
 
 }

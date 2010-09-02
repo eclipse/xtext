@@ -35,7 +35,7 @@ public abstract class AbstractBug289524ExTestLanguageRuntimeModule extends Defau
 	}
 	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
+	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return org.eclipse.xtext.parser.antlr.parser.antlr.Bug289524ExTestLanguageParser.class;
 	}
 

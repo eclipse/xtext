@@ -23,15 +23,6 @@ public class IDValueConverter extends AbstractIDValueConverter {
 		super();
 	}
 	
-	/**
-	 * @deprecated this implementation is {@link IValueConverter.RuleSpecific} thus {@link #setRule(AbstractRule)}
-	 * will be used to initialize this converter.
-	 */
-	@Deprecated
-	public IDValueConverter(Grammar grammar, String ruleName) {
-		super(grammar, ruleName);
-	}
-	
 	@Override
 	protected Set<String> computeValuesToEscape(Grammar grammar) {
 		return ImmutableSet.copyOf(GrammarUtil.getAllKeywords(grammar));

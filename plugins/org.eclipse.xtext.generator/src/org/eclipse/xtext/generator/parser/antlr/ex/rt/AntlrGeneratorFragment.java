@@ -30,10 +30,10 @@ import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.generator.parser.antlr.ex.common.AbstractAntlrGeneratorFragmentEx;
 import org.eclipse.xtext.generator.parser.antlr.ex.common.KeywordHelper;
 import org.eclipse.xtext.generator.parser.antlr.ex.common.MutableTokenDefProvider;
+import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ITokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
-import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
@@ -142,7 +142,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		BindFactory factory = new BindFactory()
-			.addTypeToType(IAntlrParser.class.getName(),getFragmentHelper().getParserClassName(grammar))
+			.addTypeToType(IParser.class.getName(),getFragmentHelper().getParserClassName(grammar))
 			.addTypeToType(ITokenToStringConverter.class.getName(),AntlrTokenToStringConverter.class.getName())
 			.addTypeToType(IAntlrTokenFileProvider.class.getName(),getFragmentHelper().getAntlrTokenFileProviderClassName(grammar))
 			.addTypeToType(Lexer.class.getName(), getFragmentHelper().getLexerClassName(grammar))

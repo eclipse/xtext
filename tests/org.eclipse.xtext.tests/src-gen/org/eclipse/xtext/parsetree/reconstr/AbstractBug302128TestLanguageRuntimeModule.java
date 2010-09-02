@@ -35,7 +35,7 @@ public abstract class AbstractBug302128TestLanguageRuntimeModule extends Default
 	}
 	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
+	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return org.eclipse.xtext.parsetree.reconstr.parser.antlr.Bug302128TestLanguageParser.class;
 	}
 

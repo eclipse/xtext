@@ -8,22 +8,39 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import java.io.InputStream;
 import java.io.Reader;
 
 import org.eclipse.xtext.parsetree.CompositeNode;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
+@ImplementedBy(IParser.NullImpl.class)
 public interface IParser {
 	
-	@Deprecated
-	IParseResult parse(InputStream in);
-
 	IParseResult parse(Reader reader);
 	
+	IParseResult parse(String ruleName, Reader reader);
+	
 	IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change);
+	
+	static class NullImpl implements IParser {
+
+		public IParseResult parse(Reader reader) {
+			return null;
+		}
+
+		public IParseResult parse(String ruleName, Reader reader) {
+			return null;
+		}
+
+		public IParseResult reparse(CompositeNode originalRootNode, int offset, int length, String change) {
+			return null;
+		}
+		
+	}
 
 }

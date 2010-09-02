@@ -45,7 +45,7 @@ public abstract class AbstractEntitiesRuntimeModule extends DefaultRuntimeModule
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
+	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return org.eclipse.xtext.example.gmf.parser.antlr.EntitiesParser.class;
 	}
 

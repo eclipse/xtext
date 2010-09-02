@@ -23,9 +23,7 @@ import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
-import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
-import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
@@ -160,10 +158,6 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return PartialParsingHelper.class;
 	}
 	
-	public Class<? extends IParser> bindIParser() {
-		return IAntlrParser.class;
-	}
-
 	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
 		return NullTokenDefProvider.class;
 	}

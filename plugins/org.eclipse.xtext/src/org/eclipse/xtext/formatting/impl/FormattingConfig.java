@@ -135,12 +135,22 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	protected int charsPerLine = 80;
 
-	protected String indentationSpace = null;
-
 	protected IIndentationInformation indentInfo;
 
+	//TODO remove deprecated code and fix usages
+	
+	@Deprecated
 	protected TerminalRule whitespaceRule = null;
 
+	@Deprecated
+	public TerminalRule getWhitespaceRule() {
+		return whitespaceRule;
+	}
+	@Deprecated
+	public void setWhitespaceRule(TerminalRule rule) {
+		whitespaceRule = rule;
+	}
+	
 	public FormattingConfig(IGrammarAccess grammarAccess, IHiddenTokenHelper hiddenTokenHelper,
 			IIndentationInformation indentInfo) {
 		super(grammarAccess, hiddenTokenHelper);
@@ -152,15 +162,9 @@ public class FormattingConfig extends AbstractFormattingConfig {
 	}
 
 	public String getIndentationSpace() {
-		if (indentationSpace != null)
-			return indentationSpace;
 		return indentInfo.getIndentString();
 	}
 
-	@Deprecated
-	public TerminalRule getWhitespaceRule() {
-		return whitespaceRule;
-	}
 
 	public void setAutoLinewrap(int charsPerLine) {
 		this.charsPerLine = charsPerLine;
@@ -179,13 +183,6 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		return new IndentationLocatorEnd();
 	}
 
-	/**
-	 * use {@link IIndentationInformation} instead
-	 */
-	@Deprecated
-	public void setIndentationSpace(String indentationSpace) {
-		this.indentationSpace = indentationSpace;
-	}
 
 	public LinewrapLocator setLinewrap() {
 		return new LinewrapLocator(1);
@@ -211,8 +208,4 @@ public class FormattingConfig extends AbstractFormattingConfig {
 		return new SpaceLocator(space);
 	}
 
-	@Deprecated
-	public void setWhitespaceRule(TerminalRule rule) {
-		whitespaceRule = rule;
-	}
 }

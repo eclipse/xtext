@@ -25,6 +25,7 @@ import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
+import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 import org.eclipse.xtext.util.Triple;
@@ -42,6 +43,12 @@ public class LazyLinkingResourceTest extends TestCase {
         final EObject referencedObject = XtextFactory.eINSTANCE.createGrammar();
 
         LazyLinkingResource res = new LazyLinkingResource();
+        res.setLinkingHelper(new LinkingHelper() {
+        	@Override
+        	public String getCrossRefNodeAsString(AbstractNode node, boolean convert) {
+        		return node.serialize();
+        	}
+        });
         res.setEncoder(new LazyURIEncoder() {
             @Override
             public boolean isCrossLinkFragment(Resource res, String s) {

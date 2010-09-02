@@ -28,7 +28,6 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
@@ -124,7 +123,7 @@ public class XtextResource extends ResourceImpl {
 	private IParseResult parseResult;
 
 	@Inject
-	protected void setInjectedParser(IAntlrParser parser) {
+	protected void setInjectedParser(IParser parser) {
 		this.parser = parser;
 	}
 

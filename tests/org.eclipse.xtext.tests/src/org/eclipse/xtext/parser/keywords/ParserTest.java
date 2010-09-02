@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParserTestHelper;
 import org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -20,7 +19,7 @@ import org.eclipse.xtext.resource.XtextResource;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractParserTest extends AbstractXtextTests {
+public class ParserTest extends AbstractXtextTests {
 
 	private ParserTestHelper helper;
 	private EStructuralFeature first;
@@ -36,7 +35,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(KeywordsTestLanguageStandaloneSetup.class);
-		helper = new ParserTestHelper(getResourceFactory(), getParserUnderTest(), get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension());
+		helper = new ParserTestHelper(getResourceFactory(), getParser(), get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension());
 		EPackage pack = KeywordsTestLanguagePackage.eINSTANCE;
 		EClass clazz = (EClass) pack.getEClassifier("Model");
 		first = clazz.getEStructuralFeature("first");
@@ -48,8 +47,6 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		seventh = clazz.getEStructuralFeature("seventh");
 		eighth = clazz.getEStructuralFeature("eighth");
 	}
-
-	protected abstract IParser getParserUnderTest();
 
 	private void checkModel(XtextResource resource, EStructuralFeature feature) {
 		EObject model = resource.getParseResult().getRootASTElement();
