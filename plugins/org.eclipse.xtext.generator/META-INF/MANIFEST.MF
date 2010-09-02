@@ -6,12 +6,7 @@ Bundle-Version: 1.0.1.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: de.itemis.xtext.antlr,
- de.itemis.xtext.antlr.ex,
- de.itemis.xtext.antlr.ex.ca,
- de.itemis.xtext.antlr.ex.rt,
- de.itemis.xtext.antlr.ex.wsAware,
- org.eclipse.xtext.generator,
+Export-Package: org.eclipse.xtext.generator,
  org.eclipse.xtext.generator.builder,
  org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.generator.ecore2xtext,
