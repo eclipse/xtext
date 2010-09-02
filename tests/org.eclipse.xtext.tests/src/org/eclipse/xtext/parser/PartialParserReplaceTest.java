@@ -66,7 +66,7 @@ public class PartialParserReplaceTest extends AbstractPartialParserTest {
 				unloaded.set(Boolean.TRUE);
 			}
 		});
-		IParseResult partiallyReparse = partialParser.reparse(getAntlrParser(), rootNode, offset, length, change);
+		IParseResult partiallyReparse = partialParser.reparse(getParser(), rootNode, offset, length, change);
 		assertTrue("unloaded", unloaded.get());
 		EList<SyntaxError> errors = partiallyReparse.getRootNode().allSyntaxErrors();
 		for (SyntaxError syntaxError : errors) {

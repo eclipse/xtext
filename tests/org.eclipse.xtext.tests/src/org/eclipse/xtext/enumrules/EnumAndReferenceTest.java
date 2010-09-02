@@ -14,7 +14,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 
-public abstract class AbstractEnumAndReferenceTest extends AbstractXtextTests {
+public class EnumAndReferenceTest extends AbstractXtextTests {
 
 	private ParserTestHelper helper;
 

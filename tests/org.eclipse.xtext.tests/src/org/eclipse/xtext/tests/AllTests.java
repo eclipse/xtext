@@ -21,8 +21,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.concurrent.StateAccessTest.class);
       suite.addTestSuite(org.eclipse.xtext.conversion.impl.DeclarativeValueConverterServiceTest.class);
       suite.addTestSuite(org.eclipse.xtext.ecore.EcoreSupportTest.class);
-      suite.addTestSuite(org.eclipse.xtext.enumrules.AntlrEnumAndReferenceTest.class);
-      suite.addTestSuite(org.eclipse.xtext.enumrules.AntlrParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.enumrules.EnumAndReferenceTest.class);
+      suite.addTestSuite(org.eclipse.xtext.enumrules.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.GrammarParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.SerializationTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.ManifestMergerTest.class);
@@ -112,7 +112,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.SerializationTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.ValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.encoding.EncodingTest.class);
-      suite.addTestSuite(org.eclipse.xtext.parser.keywords.AntlrParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.keywords.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.keywords.GrammarAccessTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.Bug292245Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.Bug297105Test.class);
@@ -224,7 +224,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.validation.NamesAreUniqueValidatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.ResourceValidatorImplTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.ValidatorTestingTest.class);
-      suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313AntlrTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313Test.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.IDValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.INTValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.IgnoreCaseIDValueConverterTest.class);
