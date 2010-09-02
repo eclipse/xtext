@@ -19,11 +19,10 @@ import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.util.IResourceScopeCache;
 
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;

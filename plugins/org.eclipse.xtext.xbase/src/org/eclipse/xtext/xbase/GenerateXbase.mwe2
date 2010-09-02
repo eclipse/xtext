@@ -15,11 +15,11 @@ import org.eclipse.xtext.generator.parser.antlr.*
 var projectName = "org.eclipse.xtext.xbase"
 var runtimeProject = "../${projectName}"
 var uiProject = "${runtimeProject}.ui"
-var backtrack = false
+var backtrack = true
 
 Workflow {
 	bean = StandaloneSetup { 
-		platformUri = "${runtimeProject}/.."
+		platformUri = "${runtimeProject}/../.."
 	}
 
 	component = DirectoryCleaner {
@@ -71,7 +71,6 @@ Workflow {
 			fragment = quickfix.QuickfixProviderFragment {}
 			fragment = labeling.LabelProviderFragment {}
 			fragment = outline.TransformerFragment {}
-			fragment = outline.OutlineNodeAdapterFactoryFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = XtextAntlrUiGeneratorFragment {
 				options = auto-inject {

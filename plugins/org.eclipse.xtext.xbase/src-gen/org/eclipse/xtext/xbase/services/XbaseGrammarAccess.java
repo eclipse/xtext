@@ -465,7 +465,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XExpression:
-	//	XAssignment;
+	//	XAssignment | XClosure | XRichString | XIfExpression | XWhileExpression | {XCastedExpression} "("
+	//	type=JvmTypeReference ")" target=XExpression;
 	public XpressionGrammarAccess.XExpressionElements getXExpressionAccess() {
 		return gaXpression.getXExpressionAccess();
 	}
@@ -639,8 +640,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XUnaryOperation returns XExpression:
-	//	{XUnaryOperation} feature=[types::JvmOperation|OpUnary] params+=XFeatureCall | {XCastedExpression} "("
-	//	type=JvmTypeReference ")" target=XExpression | XFeatureCall;
+	//	{XUnaryOperation} feature=[types::JvmOperation|OpUnary] params+=XFeatureCall | XFeatureCall;
 	public XpressionGrammarAccess.XUnaryOperationElements getXUnaryOperationAccess() {
 		return gaXpression.getXUnaryOperationAccess();
 	}
@@ -671,9 +671,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XPrimaryExpression returns XExpression:
-	//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall |
-	//	XBlockExpression | XRichString | XIfExpression | XSwitchExpression | XWhileExpression | XSimpleFeatureCall |
-	//	XParenthesizedExpression;
+	//	XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall | XBlockExpression |
+	//	XSwitchExpression | XSimpleFeatureCall | XParenthesizedExpression;
 	public XpressionGrammarAccess.XPrimaryExpressionElements getXPrimaryExpressionAccess() {
 		return gaXpression.getXPrimaryExpressionAccess();
 	}
@@ -763,7 +762,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XVariableDeclaration:
-	//	("def" | type=JvmTypeReference) name=ID "=" right=XExpression;
+	//	"def" type=JvmTypeReference? name=ID "=" right=XExpression;
 	public XpressionGrammarAccess.XVariableDeclarationElements getXVariableDeclarationAccess() {
 		return gaXpression.getXVariableDeclarationAccess();
 	}
@@ -793,8 +792,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XConstructorCall:
-	//	"new" type=JvmTypeReference ("(" (params+=XExpression ("," params+=XExpression)*)? ")")?
-	//	initializer=XBlockExpression?;
+	//	"new" type=JvmTypeReference "(" (params+=XExpression ("," params+=XExpression)*)? ")" initializer=XBlockExpression?;
 	public XpressionGrammarAccess.XConstructorCallElements getXConstructorCallAccess() {
 		return gaXpression.getXConstructorCallAccess();
 	}
@@ -854,13 +852,24 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XRichString:
-	//	expressions+=XRichStringLiteral (expressions+=XExpression expressions+=XRichStringLiteral)*;
+	//	expressions+=XRichStringLiteral (expressions+=XExpressionInRichString expressions+=XRichStringLiteral)*;
 	public XpressionGrammarAccess.XRichStringElements getXRichStringAccess() {
 		return gaXpression.getXRichStringAccess();
 	}
 	
 	public ParserRule getXRichStringRule() {
 		return getXRichStringAccess().getRule();
+	}
+
+	//XExpressionInRichString returns XExpression:
+	//	XAssignment | XClosure | XIfExpression | XWhileExpression | {XCastedExpression} "(" type=JvmTypeReference ")"
+	//	target=XExpression;
+	public XpressionGrammarAccess.XExpressionInRichStringElements getXExpressionInRichStringAccess() {
+		return gaXpression.getXExpressionInRichStringAccess();
+	}
+	
+	public ParserRule getXExpressionInRichStringRule() {
+		return getXExpressionInRichStringAccess().getRule();
 	}
 
 	//XRichStringLiteral:
@@ -874,7 +883,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal RICH_STRING:
-	//	"»" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "«"))* "«";
+	//	"»" ("\\" ("b" | "t" | "n" | "f" | "r" | "«" | "\\") | !("\\" | "«"))* "«";
 	public TerminalRule getRICH_STRINGRule() {
 		return gaXpression.getRICH_STRINGRule();
 	} 

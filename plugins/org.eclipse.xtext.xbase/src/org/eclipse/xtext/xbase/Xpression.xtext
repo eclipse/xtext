@@ -5,7 +5,6 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-
 grammar org.eclipse.xtext.xbase.Xpression with org.eclipse.xtext.xbase.Xtype
 
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xpression.ecore"
@@ -13,180 +12,167 @@ import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecor
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 XExpression returns XExpression:
-	XAssignment
-  | XClosure
-  | XRichString
-  | XIfExpression
-  | XWhileExpression
-  | {XCastedExpression} '(' type=JvmTypeReference ')' target=XExpression
-;
+	XAssignment |
+	XClosure |
+	XRichString |
+	XIfExpression |
+	XWhileExpression |
+	{XCastedExpression} '(' type=JvmTypeReference ')' target=XExpression;
 
-XAssignment returns XExpression : 
-    XOrExpression  ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAssign] params+=XOrExpression)?
-;
+XAssignment returns XExpression:
+	XOrExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAssign] params+=XOrExpression)?;
 
-OpAssign : '='|'+=';
+OpAssign:
+	'=' | '+=';
 
-XOrExpression returns XExpression : 
-	 XAndExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpOr]  params+=XAndExpression )*
-;
+XOrExpression returns XExpression:
+	XAndExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpOr] params+=XAndExpression)*;
 
-OpOr : '||';
+OpOr:
+	'||';
 
-XAndExpression returns XExpression : 
-	XEqualityExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAnd] params+=XEqualityExpression)*	    
-;
+XAndExpression returns XExpression:
+	XEqualityExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAnd] params+=XEqualityExpression)*;
 
-OpAnd : '&&';
+OpAnd:
+	'&&';
 
-XEqualityExpression returns XExpression : 
-	XRelationalExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpEquality] params+=XRelationalExpression )*
-;
+XEqualityExpression returns XExpression:
+	XRelationalExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpEquality]
+	params+=XRelationalExpression)*;
 
-OpEquality : '=='|'!=';
+OpEquality:
+	'==' | '!=';
 
-XRelationalExpression returns XExpression : 
-	XOtherOperatorExpression 
-		({XInstanceOfExpression.expression=current} 'instanceof' type=[types::JvmType|QualifiedName] |
-		 {XBinaryOperation.params+=current} feature=[ecore::EObject|OpCompare] params+=XOtherOperatorExpression )*
-;
+XRelationalExpression returns XExpression:
+	XOtherOperatorExpression
+	({XInstanceOfExpression.expression=current} 'instanceof' type=[types::JvmType|QualifiedName] |
+	{XBinaryOperation.params+=current} feature=[ecore::EObject|OpCompare] params+=XOtherOperatorExpression)*;
 
-OpCompare : '>='|'<='|'>'|'<';
+OpCompare:
+	'>=' | '<=' | '>' | '<';
 
-XOtherOperatorExpression returns XExpression: 
-	XAdditiveExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpOther] params+=XAdditiveExpression )*
-;
+XOtherOperatorExpression returns XExpression:
+	XAdditiveExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpOther]
+	params+=XAdditiveExpression)*;
 
-OpOther : '->'|'..';
+OpOther:
+	'->' | '..';
 
-XAdditiveExpression returns XExpression :
-	XMultiplicativeExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAdd] params+=XMultiplicativeExpression )*	    
-;
+XAdditiveExpression returns XExpression:
+	XMultiplicativeExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAdd]
+	params+=XMultiplicativeExpression)*;
 
-OpAdd : '+'|'-';
+OpAdd:
+	'+' | '-';
 
-XMultiplicativeExpression returns XExpression : 
-	XUnaryOperation ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpMulti] params+=XUnaryOperation )*
-;
+XMultiplicativeExpression returns XExpression:
+	XUnaryOperation ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpMulti] params+=XUnaryOperation)*;
 
-OpMulti : '*'|'**'|'/'|'%';
+OpMulti:
+	'*' | '**' | '/' | '%';
 
-
-XUnaryOperation returns XExpression :
+XUnaryOperation returns XExpression:
 	{XUnaryOperation} feature=[types::JvmOperation|OpUnary] params+=XFeatureCall
-  | XFeatureCall
-;
+	| XFeatureCall;
 
-OpUnary : "!"|"-"|"+";
+OpUnary:
+	"!" | "-" | "+";
 
-XFeatureCall returns XExpression : 
-	XPrimaryExpression 
-	  ({XMemberFeatureCall.params+=current} "." feature=[ecore::EObject] ('('(params+=XExpression (','params+=XExpression )*)?')')?)*
-;
+XFeatureCall returns XExpression:
+	XPrimaryExpression
+	({XMemberFeatureCall.params+=current} "." feature=[ecore::EObject] ('(' (params+=XExpression (','
+	params+=XExpression)*)? ')')?)*;
 
-XPrimaryExpression returns XExpression : 
-  XBooleanLiteral   |  
-  XIntLiteral   |  
-  XNullLiteral   |  
-  XStringLiteral |
-  XTypeLiteral |
-  XConstructorCall   | 
-  XBlockExpression   | 
-  XSwitchExpression |  
-  XSimpleFeatureCall   |  
-  XParenthesizedExpression;
-  
-XClosure returns XExpression :
-	{XClosure} (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? '|' expression=XExpression
-;
-  
-XParenthesizedExpression returns XExpression: 
-	'(' XExpression ')'	    
-;
+XPrimaryExpression returns XExpression:
+	XBooleanLiteral |
+	XIntLiteral |
+	XNullLiteral |
+	XStringLiteral |
+	XTypeLiteral |
+	XConstructorCall |
+	XBlockExpression |
+	XSwitchExpression |
+	XSimpleFeatureCall |
+	XParenthesizedExpression;
 
-XIfExpression :	
-	'if' '('if=XExpression')'
-		then=XExpression
-	('else' else=XExpression)?
-;
+XClosure returns XExpression:
+	{XClosure} (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? '|' expression=XExpression;
 
-XSwitchExpression :
+XParenthesizedExpression returns XExpression:
+	'(' XExpression ')';
+
+XIfExpression:
+	'if' '(' if=XExpression ')'
+	then=XExpression
+	('else' else=XExpression)?;
+
+XSwitchExpression:
 	'switch' switch=XExpression? '{'
-		(cases+=XCasePart)+
-		('default' ':' default=XExpression)?
-	'}'
-;
+	(cases+=XCasePart)+
+	('default' ':' default=XExpression)?
+	'}';
 
-XWhileExpression :
-    'while' predicate=XParenthesizedExpression 
-    	body=XExpression;
+XWhileExpression:
+	'while' predicate=XParenthesizedExpression
+	body=XExpression;
 
-XCasePart :
+XCasePart:
 	'case' case=XExpression ':' then=XExpression;
 
-XBlockExpression  : 
+XBlockExpression:
 	'{'
-		(expressions+=XExpressionInsideBlock ';')+
-	'}'	    
-;
+	(expressions+=XExpressionInsideBlock ';')+
+	'}';
 
 XExpressionInsideBlock returns XExpression:
 	XVariableDeclaration | XExpression;
 
-XVariableDeclaration :
-	('def' type=JvmTypeReference ) name=ID '=' right=XExpression;
+XVariableDeclaration:
+	'def' (type=JvmTypeReference)? name=ID '=' right=XExpression;
 
-JvmFormalParameter returns types::JvmFormalParameter :
+JvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=JvmTypeReference)? name=ID;
 
-XSimpleFeatureCall returns XFeatureCall: 
-   feature=[ecore::EObject] ('('(params+=XExpression (',' params+=XExpression )*)?')')?
-;
+XSimpleFeatureCall returns XFeatureCall:
+	feature=[ecore::EObject] ('(' (params+=XExpression (',' params+=XExpression)*)? ')')?;
 
-XConstructorCall  : 
-	'new' type=JvmTypeReference '('(params+=XExpression (','params+=XExpression)*)?')'
-	initializer=XBlockExpression?
-;
+XConstructorCall:
+	'new' type=JvmTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')'
+	initializer=XBlockExpression?;
 
-XBooleanLiteral  : 
-	{XBooleanLiteral} 'false'|isTrue?='true'
-;
+XBooleanLiteral:
+	{XBooleanLiteral} 'false' | isTrue?='true';
 
-XNullLiteral  : 
-	{XNullLiteral}'null'
-;
+XNullLiteral:
+	{XNullLiteral} 'null';
 
-XIntLiteral  : 
-	value=INT
-;
+XIntLiteral:
+	value=INT;
 
-XStringLiteral :
-	value=STRING
-;
+XStringLiteral:
+	value=STRING;
 
-XTypeLiteral :
-	type=[types::JvmType|QualifiedName]'.''class';
-	
-XRichString :	
-	expressions+=XRichStringLiteral 
+XTypeLiteral:
+	type=[types::JvmType|QualifiedName] '.' 'class';
+
+XRichString:
+	expressions+=XRichStringLiteral
 	(expressions+=XExpressionInRichString
-	expressions+=XRichStringLiteral)*
-;
+	expressions+=XRichStringLiteral)*;
 
 XExpressionInRichString returns XExpression:
 	XAssignment
-  |  XClosure
-  | XIfExpression
-  | XWhileExpression
-  | {XCastedExpression} '(' type=JvmTypeReference ')' target=XExpression
-;
+	| XClosure
+	| XIfExpression
+	| XWhileExpression
+	| {XCastedExpression} '(' type=JvmTypeReference ')' target=XExpression;
 
-XRichStringLiteral :
+XRichStringLiteral:
 	value=RICH_STRING;
 
-terminal RICH_STRING	: 
-	'»' ( '\\' ('b'|'t'|'n'|'f'|'r'|'«'|'\\') | !('\\'|'«') )* '«'
-;
+terminal RICH_STRING:
+	'»' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '«' | '\\') | !('\\' | '«'))* '«';
 
 	
 

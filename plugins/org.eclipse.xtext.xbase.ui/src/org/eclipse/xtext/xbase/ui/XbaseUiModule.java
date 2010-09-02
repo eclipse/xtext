@@ -17,6 +17,7 @@ public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXbaseUiMod
 		super(plugin);
 	}
 
+	@Override
 	public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy() {
 		return XbaseAutoEdit.class;
 	}

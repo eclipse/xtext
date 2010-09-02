@@ -773,12 +773,12 @@ ruleXExpression returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-
+(
 	{ 
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXExpressionAccess().getXAssignmentParserRuleCall(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXExpressionAccess().getXAssignmentParserRuleCall_0(), currentNode); 
     }
     this_XAssignment_0=ruleXAssignment
     { 
@@ -786,6 +786,129 @@ ruleXExpression returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getXExpressionAccess().getXClosureParserRuleCall_1(), currentNode); 
+    }
+    this_XClosure_1=ruleXClosure
+    { 
+        $current = $this_XClosure_1.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getXExpressionAccess().getXRichStringParserRuleCall_2(), currentNode); 
+    }
+    this_XRichString_2=ruleXRichString
+    { 
+        $current = $this_XRichString_2.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getXExpressionAccess().getXIfExpressionParserRuleCall_3(), currentNode); 
+    }
+    this_XIfExpression_3=ruleXIfExpression
+    { 
+        $current = $this_XIfExpression_3.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getXExpressionAccess().getXWhileExpressionParserRuleCall_4(), currentNode); 
+    }
+    this_XWhileExpression_4=ruleXWhileExpression
+    { 
+        $current = $this_XWhileExpression_4.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |((
+	{ 
+	  /* */ 
+	}
+    { 
+        temp=factory.create(grammarAccess.getXExpressionAccess().getXCastedExpressionAction_5_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getXExpressionAccess().getXCastedExpressionAction_5_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'(' 
+    {
+        createLeafNode(grammarAccess.getXExpressionAccess().getLeftParenthesisKeyword_5_1(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getXExpressionAccess().getTypeJvmTypeReferenceParserRuleCall_5_2_0(), currentNode); 
+	    }
+		lv_type_7_0=ruleJvmTypeReference		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getXExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"type",
+	        		lv_type_7_0, 
+	        		"JvmTypeReference", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)	')' 
+    {
+        createLeafNode(grammarAccess.getXExpressionAccess().getRightParenthesisKeyword_5_3(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getXExpressionAccess().getTargetXExpressionParserRuleCall_5_4_0(), currentNode); 
+	    }
+		lv_target_9_0=ruleXExpression		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getXExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"target",
+	        		lv_target_9_0, 
+	        		"XExpression", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)))
 ;
 
 
@@ -1987,87 +2110,16 @@ ruleXUnaryOperation returns [EObject current=null]
 
 )
 ))
-    |((
-	{ 
-	  /* */ 
-	}
-    { 
-        temp=factory.create(grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0().getType().getClassifier());
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getXUnaryOperationAccess().getXCastedExpressionAction_1_0(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
-    }
-)	'(' 
-    {
-        createLeafNode(grammarAccess.getXUnaryOperationAccess().getLeftParenthesisKeyword_1_1(), null); 
-    }
-(
-(
-		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXUnaryOperationAccess().getTypeJvmTypeReferenceParserRuleCall_1_2_0(), currentNode); 
-	    }
-		lv_type_5_0=ruleJvmTypeReference		{
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getXUnaryOperationRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
-	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"type",
-	        		lv_type_5_0, 
-	        		"JvmTypeReference", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
-
-)
-)	')' 
-    {
-        createLeafNode(grammarAccess.getXUnaryOperationAccess().getRightParenthesisKeyword_1_3(), null); 
-    }
-(
-(
-		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXUnaryOperationAccess().getTargetXExpressionParserRuleCall_1_4_0(), currentNode); 
-	    }
-		lv_target_7_0=ruleXExpression		{
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getXUnaryOperationRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
-	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"target",
-	        		lv_target_7_0, 
-	        		"XExpression", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
-
-)
-))
     |
 	{ 
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXUnaryOperationAccess().getXFeatureCallParserRuleCall_2(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXUnaryOperationAccess().getXFeatureCallParserRuleCall_1(), currentNode); 
     }
-    this_XFeatureCall_8=ruleXFeatureCall
+    this_XFeatureCall_3=ruleXFeatureCall
     { 
-        $current = $this_XFeatureCall_8.current; 
+        $current = $this_XFeatureCall_3.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -2276,11 +2328,11 @@ ruleXPrimaryExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXClosureParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXBooleanLiteralParserRuleCall_0(), currentNode); 
     }
-    this_XClosure_0=ruleXClosure
+    this_XBooleanLiteral_0=ruleXBooleanLiteral
     { 
-        $current = $this_XClosure_0.current; 
+        $current = $this_XBooleanLiteral_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -2289,11 +2341,11 @@ ruleXPrimaryExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXBooleanLiteralParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXIntLiteralParserRuleCall_1(), currentNode); 
     }
-    this_XBooleanLiteral_1=ruleXBooleanLiteral
+    this_XIntLiteral_1=ruleXIntLiteral
     { 
-        $current = $this_XBooleanLiteral_1.current; 
+        $current = $this_XIntLiteral_1.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -2302,11 +2354,11 @@ ruleXPrimaryExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXIntLiteralParserRuleCall_2(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXNullLiteralParserRuleCall_2(), currentNode); 
     }
-    this_XIntLiteral_2=ruleXIntLiteral
+    this_XNullLiteral_2=ruleXNullLiteral
     { 
-        $current = $this_XIntLiteral_2.current; 
+        $current = $this_XNullLiteral_2.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -2315,11 +2367,11 @@ ruleXPrimaryExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXNullLiteralParserRuleCall_3(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXStringLiteralParserRuleCall_3(), currentNode); 
     }
-    this_XNullLiteral_3=ruleXNullLiteral
+    this_XStringLiteral_3=ruleXStringLiteral
     { 
-        $current = $this_XNullLiteral_3.current; 
+        $current = $this_XStringLiteral_3.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -2328,11 +2380,11 @@ ruleXPrimaryExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXStringLiteralParserRuleCall_4(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXTypeLiteralParserRuleCall_4(), currentNode); 
     }
-    this_XStringLiteral_4=ruleXStringLiteral
+    this_XTypeLiteral_4=ruleXTypeLiteral
     { 
-        $current = $this_XStringLiteral_4.current; 
+        $current = $this_XTypeLiteral_4.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -2341,11 +2393,11 @@ ruleXPrimaryExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXTypeLiteralParserRuleCall_5(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXConstructorCallParserRuleCall_5(), currentNode); 
     }
-    this_XTypeLiteral_5=ruleXTypeLiteral
+    this_XConstructorCall_5=ruleXConstructorCall
     { 
-        $current = $this_XTypeLiteral_5.current; 
+        $current = $this_XConstructorCall_5.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -2354,11 +2406,11 @@ ruleXPrimaryExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXConstructorCallParserRuleCall_6(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXBlockExpressionParserRuleCall_6(), currentNode); 
     }
-    this_XConstructorCall_6=ruleXConstructorCall
+    this_XBlockExpression_6=ruleXBlockExpression
     { 
-        $current = $this_XConstructorCall_6.current; 
+        $current = $this_XBlockExpression_6.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -2367,11 +2419,11 @@ ruleXPrimaryExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXBlockExpressionParserRuleCall_7(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXSwitchExpressionParserRuleCall_7(), currentNode); 
     }
-    this_XBlockExpression_7=ruleXBlockExpression
+    this_XSwitchExpression_7=ruleXSwitchExpression
     { 
-        $current = $this_XBlockExpression_7.current; 
+        $current = $this_XSwitchExpression_7.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -2380,11 +2432,11 @@ ruleXPrimaryExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXRichStringParserRuleCall_8(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXSimpleFeatureCallParserRuleCall_8(), currentNode); 
     }
-    this_XRichString_8=ruleXRichString
+    this_XSimpleFeatureCall_8=ruleXSimpleFeatureCall
     { 
-        $current = $this_XRichString_8.current; 
+        $current = $this_XSimpleFeatureCall_8.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -2393,63 +2445,11 @@ ruleXPrimaryExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXIfExpressionParserRuleCall_9(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXParenthesizedExpressionParserRuleCall_9(), currentNode); 
     }
-    this_XIfExpression_9=ruleXIfExpression
+    this_XParenthesizedExpression_9=ruleXParenthesizedExpression
     { 
-        $current = $this_XIfExpression_9.current; 
-        currentNode = currentNode.getParent();
-    }
-
-    |
-	{ 
-	  /* */ 
-	}
-    { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXSwitchExpressionParserRuleCall_10(), currentNode); 
-    }
-    this_XSwitchExpression_10=ruleXSwitchExpression
-    { 
-        $current = $this_XSwitchExpression_10.current; 
-        currentNode = currentNode.getParent();
-    }
-
-    |
-	{ 
-	  /* */ 
-	}
-    { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXWhileExpressionParserRuleCall_11(), currentNode); 
-    }
-    this_XWhileExpression_11=ruleXWhileExpression
-    { 
-        $current = $this_XWhileExpression_11.current; 
-        currentNode = currentNode.getParent();
-    }
-
-    |
-	{ 
-	  /* */ 
-	}
-    { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXSimpleFeatureCallParserRuleCall_12(), currentNode); 
-    }
-    this_XSimpleFeatureCall_12=ruleXSimpleFeatureCall
-    { 
-        $current = $this_XSimpleFeatureCall_12.current; 
-        currentNode = currentNode.getParent();
-    }
-
-    |
-	{ 
-	  /* */ 
-	}
-    { 
-        currentNode=createCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXParenthesizedExpressionParserRuleCall_13(), currentNode); 
-    }
-    this_XParenthesizedExpression_13=ruleXParenthesizedExpression
-    { 
-        $current = $this_XParenthesizedExpression_13.current; 
+        $current = $this_XParenthesizedExpression_9.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -3122,15 +3122,14 @@ ruleXVariableDeclaration returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	'def' 
+(	'def' 
     {
-        createLeafNode(grammarAccess.getXVariableDeclarationAccess().getDefKeyword_0_0(), null); 
+        createLeafNode(grammarAccess.getXVariableDeclarationAccess().getDefKeyword_0(), null); 
     }
-
-    |(
+(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXVariableDeclarationAccess().getTypeJvmTypeReferenceParserRuleCall_0_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXVariableDeclarationAccess().getTypeJvmTypeReferenceParserRuleCall_1_0(), currentNode); 
 	    }
 		lv_type_1_0=ruleJvmTypeReference		{
 	        if ($current==null) {
@@ -3151,11 +3150,11 @@ ruleXVariableDeclaration returns [EObject current=null]
 	    }
 
 )
-))(
+)?(
 (
 		lv_name_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -3177,12 +3176,12 @@ ruleXVariableDeclaration returns [EObject current=null]
 )
 )	'=' 
     {
-        createLeafNode(grammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_2(), null); 
+        createLeafNode(grammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_3(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXVariableDeclarationAccess().getRightXExpressionParserRuleCall_3_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXVariableDeclarationAccess().getRightXExpressionParserRuleCall_4_0(), currentNode); 
 	    }
 		lv_right_4_0=ruleXExpression		{
 	        if ($current==null) {
@@ -3425,14 +3424,14 @@ ruleXConstructorCall returns [EObject current=null]
 	    }
 
 )
-)(	'(' 
+)	'(' 
     {
-        createLeafNode(grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_2_0(), null); 
+        createLeafNode(grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_2(), null); 
     }
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXConstructorCallAccess().getParamsXExpressionParserRuleCall_2_1_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXConstructorCallAccess().getParamsXExpressionParserRuleCall_3_0_0(), currentNode); 
 	    }
 		lv_params_3_0=ruleXExpression		{
 	        if ($current==null) {
@@ -3455,12 +3454,12 @@ ruleXConstructorCall returns [EObject current=null]
 )
 )(	',' 
     {
-        createLeafNode(grammarAccess.getXConstructorCallAccess().getCommaKeyword_2_1_1_0(), null); 
+        createLeafNode(grammarAccess.getXConstructorCallAccess().getCommaKeyword_3_1_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXConstructorCallAccess().getParamsXExpressionParserRuleCall_2_1_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXConstructorCallAccess().getParamsXExpressionParserRuleCall_3_1_1_0(), currentNode); 
 	    }
 		lv_params_5_0=ruleXExpression		{
 	        if ($current==null) {
@@ -3483,12 +3482,12 @@ ruleXConstructorCall returns [EObject current=null]
 )
 ))*)?	')' 
     {
-        createLeafNode(grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_2_2(), null); 
+        createLeafNode(grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_4(), null); 
     }
-)?(
+(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXConstructorCallAccess().getInitializerXBlockExpressionParserRuleCall_3_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXConstructorCallAccess().getInitializerXBlockExpressionParserRuleCall_5_0(), currentNode); 
 	    }
 		lv_initializer_7_0=ruleXBlockExpression		{
 	        if ($current==null) {
@@ -3807,9 +3806,9 @@ ruleXRichString returns [EObject current=null]
 )((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXRichStringAccess().getExpressionsXExpressionParserRuleCall_1_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXRichStringAccess().getExpressionsXExpressionInRichStringParserRuleCall_1_0_0(), currentNode); 
 	    }
-		lv_expressions_1_0=ruleXExpression		{
+		lv_expressions_1_0=ruleXExpressionInRichString		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXRichStringRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -3819,7 +3818,7 @@ ruleXRichString returns [EObject current=null]
 	       			$current, 
 	       			"expressions",
 	        		lv_expressions_1_0, 
-	        		"XExpression", 
+	        		"XExpressionInRichString", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3853,6 +3852,151 @@ ruleXRichString returns [EObject current=null]
 
 )
 ))*)
+;
+
+
+
+
+
+// Entry rule entryRuleXExpressionInRichString
+entryRuleXExpressionInRichString returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getXExpressionInRichStringRule(), currentNode); }
+	 iv_ruleXExpressionInRichString=ruleXExpressionInRichString 
+	 { $current=$iv_ruleXExpressionInRichString.current; } 
+	 EOF 
+;
+
+// Rule XExpressionInRichString
+ruleXExpressionInRichString returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getXExpressionInRichStringAccess().getXAssignmentParserRuleCall_0(), currentNode); 
+    }
+    this_XAssignment_0=ruleXAssignment
+    { 
+        $current = $this_XAssignment_0.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getXExpressionInRichStringAccess().getXClosureParserRuleCall_1(), currentNode); 
+    }
+    this_XClosure_1=ruleXClosure
+    { 
+        $current = $this_XClosure_1.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getXExpressionInRichStringAccess().getXIfExpressionParserRuleCall_2(), currentNode); 
+    }
+    this_XIfExpression_2=ruleXIfExpression
+    { 
+        $current = $this_XIfExpression_2.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getXExpressionInRichStringAccess().getXWhileExpressionParserRuleCall_3(), currentNode); 
+    }
+    this_XWhileExpression_3=ruleXWhileExpression
+    { 
+        $current = $this_XWhileExpression_3.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |((
+	{ 
+	  /* */ 
+	}
+    { 
+        temp=factory.create(grammarAccess.getXExpressionInRichStringAccess().getXCastedExpressionAction_4_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getXExpressionInRichStringAccess().getXCastedExpressionAction_4_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'(' 
+    {
+        createLeafNode(grammarAccess.getXExpressionInRichStringAccess().getLeftParenthesisKeyword_4_1(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getXExpressionInRichStringAccess().getTypeJvmTypeReferenceParserRuleCall_4_2_0(), currentNode); 
+	    }
+		lv_type_6_0=ruleJvmTypeReference		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getXExpressionInRichStringRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"type",
+	        		lv_type_6_0, 
+	        		"JvmTypeReference", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)	')' 
+    {
+        createLeafNode(grammarAccess.getXExpressionInRichStringAccess().getRightParenthesisKeyword_4_3(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getXExpressionInRichStringAccess().getTargetXExpressionParserRuleCall_4_4_0(), currentNode); 
+	    }
+		lv_target_8_0=ruleXExpression		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getXExpressionInRichStringRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"target",
+	        		lv_target_8_0, 
+	        		"XExpression", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)))
 ;
 
 
@@ -4668,7 +4812,7 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 
 
 
-RULE_RICH_STRING : '\u00BB' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\u00AB')))* '\u00AB';
+RULE_RICH_STRING : '\u00BB' ('\\' ('b'|'t'|'n'|'f'|'r'|'\u00AB'|'\\')|~(('\\'|'\u00AB')))* '\u00AB';
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
