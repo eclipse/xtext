@@ -22,6 +22,7 @@ public class BmTestLanguageUiModule extends AbstractBmTestLanguageUiModule {
 		return null;
 	}
 	
+	@Override
 	public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy() {
 		return AutoEditStrategy.class;
 	}
