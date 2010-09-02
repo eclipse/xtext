@@ -15,7 +15,6 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.EcoreUtil2Test.class);
       suite.addTestSuite(org.eclipse.xtext.GrammarUtilGetReferenceTest.class);
       suite.addTestSuite(org.eclipse.xtext.GrammarUtilTest.class);
-      suite.addTestSuite(org.eclipse.xtext.MweReaderTest.class);
       suite.addTestSuite(org.eclipse.xtext.XtextGrammarTest.class);
       suite.addTestSuite(org.eclipse.xtext.actions.AntlrParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.services.DefaultTerminalConverterTest.class);
@@ -226,9 +225,6 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.validation.ResourceValidatorImplTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.ValidatorTestingTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313AntlrTest.class);
-      suite.addTestSuite(org.eclipse.xtext.valueconverter.DeprecatedIdConverterTest.class);
-      suite.addTestSuite(org.eclipse.xtext.valueconverter.DeprecatedIntConverterTest.class);
-      suite.addTestSuite(org.eclipse.xtext.valueconverter.DeprecatedStringConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.IDValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.INTValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.IgnoreCaseIDValueConverterTest.class);
