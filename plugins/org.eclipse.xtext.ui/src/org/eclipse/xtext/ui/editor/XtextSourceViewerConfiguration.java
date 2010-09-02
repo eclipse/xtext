@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
 import org.eclipse.jface.text.IAutoEditStrategy;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.ITextViewer;
@@ -28,10 +27,10 @@ import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
-import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategy;
 import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.hover.ProblemHover;
+import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.quickfix.XtextQuickAssistAssistant;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
 
@@ -70,6 +69,9 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	@Inject
 	private Provider<XtextPresentationReconciler> presentationReconcilerProvider;
 	
+	@Inject
+	private ITokenTypeToPartitionTypeMapper partitionTypesMapper;
+	
 	@Override
 	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
 		return new ProblemHover(sourceViewer);
@@ -97,10 +99,19 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		XtextPresentationReconciler reconciler = getPresentationReconcilerProvider().get();
-		reconciler.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
-		reconciler.setRepairer(repairerProvider.get(), IDocument.DEFAULT_CONTENT_TYPE);
-		reconciler.setDamager(damagerProvider.get(), IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setDocumentPartitioning(getDocumentPartitioning(sourceViewer));
+		IPresentationRepairer repairer = repairerProvider.get();
+		IPresentationDamager damager = damagerProvider.get();
+		String[] types = partitionTypesMapper.getSupportedPartitionTypes();
+		for (String partitionType : types) {
+			reconciler.setRepairer(repairer, partitionType);
+			reconciler.setDamager(damager, partitionType);
+		}
 		return reconciler;
+	}
+
+	protected String getDocumentPartitioning(ISourceViewer sourceViewer) {
+		return getConfiguredDocumentPartitioning(sourceViewer);
 	}
 
 	@Override
@@ -169,16 +180,18 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		return presentationReconcilerProvider;
 	}
 	
-	//TODO clean this up
-	@Inject(optional=true)
-	private IAutoEditStrategy autoEditStrategy ;
 	@Inject
-	private DefaultAutoEditStrategy defaultEditStrategy; 
+	private IAutoEditStrategy autoEditStrategy ;
 	
 	protected IAutoEditStrategy internalGetEditStrategy() {
-		if (autoEditStrategy==null)
-			return defaultEditStrategy;
 		return autoEditStrategy;
+	}
+	
+	@Inject
+	private DefaultIndentLineAutoEditStrategy defaultIndentLineAutoEditStrategy ;
+	
+	protected DefaultIndentLineAutoEditStrategy internalGetDefaultIndentLineAutoEditStrategy() {
+		return defaultIndentLineAutoEditStrategy;
 	}
 	
 	@Override
@@ -186,7 +199,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		if (internalGetEditStrategy() instanceof ISourceViewerAware) {
 			((ISourceViewerAware) internalGetEditStrategy()).setSourceViewer(sourceViewer);
 		}
-		return new IAutoEditStrategy[]{new DefaultIndentLineAutoEditStrategy(),internalGetEditStrategy()};
+		return new IAutoEditStrategy[]{internalGetDefaultIndentLineAutoEditStrategy(),internalGetEditStrategy()};
 	}
 
 	
