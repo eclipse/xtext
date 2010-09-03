@@ -19,7 +19,7 @@ import com.google.inject.name.Named;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class CommonTerminalsTokenTypeToPartitionMapper implements ITokenTypeToPartitionTypeMapper {
+public class TerminalsTokenTypeToPartitionMapper implements ITokenTypeToPartitionTypeMapper {
 	public final static String COMMENT_PARTITION = "__comment";
 	public final static String STRING_LITERAL_PARTITION = "__string";
 	

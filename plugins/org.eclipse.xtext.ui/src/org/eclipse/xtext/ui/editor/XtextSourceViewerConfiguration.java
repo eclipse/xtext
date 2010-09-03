@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextHover;
@@ -27,6 +26,7 @@ import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.editor.hover.ProblemHover;
@@ -109,6 +109,11 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		}
 		return reconciler;
 	}
+	
+	@Override
+	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
+		return partitionTypesMapper.getSupportedPartitionTypes();
+	}
 
 	protected String getDocumentPartitioning(ISourceViewer sourceViewer) {
 		return getConfiguredDocumentPartitioning(sourceViewer);
@@ -181,25 +186,12 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	}
 	
 	@Inject
-	private IAutoEditStrategy autoEditStrategy ;
-	
-	protected IAutoEditStrategy internalGetEditStrategy() {
-		return autoEditStrategy;
-	}
-	
-	@Inject
-	private DefaultIndentLineAutoEditStrategy defaultIndentLineAutoEditStrategy ;
-	
-	protected DefaultIndentLineAutoEditStrategy internalGetDefaultIndentLineAutoEditStrategy() {
-		return defaultIndentLineAutoEditStrategy;
-	}
+	private AbstractEditStrategyProvider editStrategyProvider ;
 	
 	@Override
 	public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType) {
-		if (internalGetEditStrategy() instanceof ISourceViewerAware) {
-			((ISourceViewerAware) internalGetEditStrategy()).setSourceViewer(sourceViewer);
-		}
-		return new IAutoEditStrategy[]{internalGetDefaultIndentLineAutoEditStrategy(),internalGetEditStrategy()};
+		List<IAutoEditStrategy> strategies = editStrategyProvider.getStrategies(sourceViewer, contentType);
+		return strategies.toArray(new IAutoEditStrategy[strategies.size()]);
 	}
 
 	

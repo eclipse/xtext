@@ -3,8 +3,8 @@
  */
 package org.eclipse.xtext.xbase.ui;
 
-import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.xbase.ui.autoedit.XbaseAutoEdit;
 import org.eclipse.xtext.xbase.ui.syntaxcoloring.XbaseTokenToAttributeIdMapper;
@@ -18,7 +18,7 @@ public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXbaseUiMod
 	}
 
 	@Override
-	public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy() {
+	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return XbaseAutoEdit.class;
 	}
 	

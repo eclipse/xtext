@@ -12,7 +12,6 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
@@ -41,7 +40,8 @@ import org.eclipse.xtext.ui.editor.PresentationDamager;
 import org.eclipse.xtext.ui.editor.WorkspaceEncodingProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorErrorTickUpdater;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
-import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategy;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultCompletionProposalPostProcessor;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalPostProcessor;
@@ -153,23 +153,23 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public Class<? extends IActionBarContributor> bindIActionBarContributor() {
 		return IActionBarContributor.DefaultActionBarContributor.class;
 	}
-	
+
 	public Class<? extends IPresentationDamager> bindIPresentationDamager() {
 		return PresentationDamager.class;
 	}
-	
+
 	public Class<? extends IPresentationRepairer> bindIPresentationRepairer() {
 		return PresentationRepairer.class;
 	}
-	
+
 	public Class<? extends ITokenScanner> bindITokenScanner() {
 		return TokenScanner.class;
 	}
-	
+
 	public Class<? extends IPartitionTokenScanner> bindIPartitionTokenScanner() {
 		return PartitionTokenScanner.class;
 	}
-	
+
 	public Class<? extends IDocumentPartitioner> bindIDocumentPartitioner() {
 		return DocumentPartitioner.class;
 	}
@@ -177,9 +177,9 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public Class<? extends IHighlightingHelper> bindIHighlightingHelper() {
 		return HighlightingHelper.class;
 	}
-	
-	public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy() {
-		return DefaultAutoEditStrategy.class;
+
+	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
+		return DefaultAutoEditStrategyProvider.class;
 	}
 
 	public Class<? extends AdapterFactory> bindAdapterFactory() {
@@ -223,45 +223,54 @@ public class DefaultUiModule extends AbstractGenericModule {
 	}
 
 	public void configureXtextEditorErrorTickUpdater(com.google.inject.Binder binder) {
-		binder.bind(IXtextEditorCallback.class).annotatedWith(
-				Names.named("IXtextEditorCallBack")).to( //$NON-NLS-1$
+		binder.bind(IXtextEditorCallback.class).annotatedWith(Names.named("IXtextEditorCallBack")).to( //$NON-NLS-1$
 				XtextEditorErrorTickUpdater.class);
 	}
 
 	public Class<? extends IExternalContentSupport.IExternalContentProvider> bindIExternalContentSupport$IExternalContentProvider() {
 		return IDirtyStateManager.class;
 	}
-	
+
 	public void configureHyperlinkLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider.class).to(org.eclipse.jface.viewers.ILabelProvider.class);
+		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
+				.annotatedWith(org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider.class)
+				.to(org.eclipse.jface.viewers.ILabelProvider.class);
 	}
 
 	public void configureOutlineLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.editor.outline.OutlineLabelProvider.class).to(org.eclipse.jface.viewers.ILabelProvider.class);
+		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
+				.annotatedWith(org.eclipse.xtext.ui.editor.outline.OutlineLabelProvider.class)
+				.to(org.eclipse.jface.viewers.ILabelProvider.class);
 	}
 
 	public void configureContentProposalLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider.class).to(org.eclipse.jface.viewers.ILabelProvider.class);
+		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
+				.annotatedWith(org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider.class)
+				.to(org.eclipse.jface.viewers.ILabelProvider.class);
 	}
-	
+
 	public void configureResourceUIServiceLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(DefaultDescriptionLabelProvider.class);
+		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
+				.annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class)
+				.to(DefaultDescriptionLabelProvider.class);
 	}
-	
+
 	public Class<? extends ILabelProvider> bindILabelProvider() {
 		return DefaultEObjectLabelProvider.class;
 	}
-	
+
 	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
 		return DefaultQuickfixProvider.class;
 	}
-	
+
 	public void configureLanguageSpecificURIEditorOpener(com.google.inject.Binder binder) {
-		binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(LanguageSpecificURIEditorOpener.class);
+		binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class)
+				.to(LanguageSpecificURIEditorOpener.class);
 	}
-	
+
 	public void configureUiEncodingProvider(Binder binder) {
-		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Ui.class).to(WorkspaceEncodingProvider.class);
+		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Ui.class)
+				.to(WorkspaceEncodingProvider.class);
 	}
 
 	public Class<? extends IAllContainersState.Provider> bindIAllContainersState$Provider() {
@@ -271,12 +280,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public Class<? extends IContentOutlineNodeComparer> bindIContentOutlineNodeComparer() {
 		return IContentOutlineNodeComparer.Default.class;
 	}
-	
+
 	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
 		return JavaClassPathResourceForIEditorInputFactory.class;
 	}
-	
+
 	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
 		return XtextResourceSetProvider.class;
 	}
+
 }

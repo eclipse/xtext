@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.autoedit;
 
-import org.apache.log4j.Logger;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
@@ -15,41 +14,43 @@ import org.eclipse.jface.text.IDocument;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class SingleLineTerminalsStrategy extends AbstractEditStrategy  {
+public class SingleLineTerminalsStrategy extends AbstractEditStrategy {
 
-	private final static Logger log = Logger.getLogger(SingleLineTerminalsStrategy.class);
-	
 	private String left;
 	private String right;
 
-	public SingleLineTerminalsStrategy configure(char left, char right) {
-		this.left = String.valueOf(left);
-		this.right = String.valueOf(right);
+	public SingleLineTerminalsStrategy configure(String left, String right) {
+		this.left = left;
+		this.right = right;
 		return this;
 	}
-
-	public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
-		try {
-			handleInsertLeftTerminal(document, command);
-			handleInsertRightTerminal(document, command);
-			handleDeletion(document, command);
-		} catch (BadLocationException ex) {
-			log.error("Exception in AutoEditStrategy", ex);
-		}
+	
+	@Override
+	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
+			throws BadLocationException {
+		handleInsertLeftTerminal(document, command);
+		handleInsertRightTerminal(document, command);
+		handleDeletion(document, command);
 	}
 
 	protected void handleInsertLeftTerminal(IDocument document, DocumentCommand command) throws BadLocationException {
-		if (command.text.equals(left) && !isIdentifierPart(document, command.offset + command.length)) {
+		if (command.text.length() > 0 && (appliedText(document, command) + command.text).endsWith(left)
+				&& !isIdentifierPart(document, command.offset + command.length)) {
 			String documentContent = getDocumentContent(document, command);
 			int opening = count(left, documentContent);
 			int closing = count(right, documentContent);
 			int occurences = opening + closing;
 			if (occurences % 2 == 0) {
-				command.text = left + right;
-				command.caretOffset = command.offset + left.length();
+				command.caretOffset = command.offset + command.text.length();
+				command.text = command.text + right;
 				command.shiftsCaret = false;
 			}
 		}
+	}
+
+	protected String appliedText(IDocument document, DocumentCommand command) throws BadLocationException {
+		String string = document.get(0, command.offset);
+		return string + command.text;
 	}
 
 	protected void handleDeletion(IDocument document, DocumentCommand command) throws BadLocationException {
@@ -66,7 +67,7 @@ public class SingleLineTerminalsStrategy extends AbstractEditStrategy  {
 			}
 		}
 	}
-	
+
 	protected void handleInsertRightTerminal(IDocument document, DocumentCommand command) throws BadLocationException {
 		//closing terminal
 		if (command.text.equals(right) && command.length == 0) {
@@ -75,10 +76,10 @@ public class SingleLineTerminalsStrategy extends AbstractEditStrategy  {
 			String documentContent = getDocumentContent(document, command);
 			int opening = count(left, documentContent);
 			int closing = count(right, documentContent);
-			if (opening <= closing && 
-					right.equals(document.get(command.offset, command.text.length()))) {
-				command.length+=right.length();
+			if (opening <= closing && right.equals(document.get(command.offset, command.text.length()))) {
+				command.length += right.length();
 			}
 		}
 	}
+
 }
