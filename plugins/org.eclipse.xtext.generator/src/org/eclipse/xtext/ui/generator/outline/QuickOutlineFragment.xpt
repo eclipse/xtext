@@ -11,7 +11,6 @@
 
 «IMPORT org::eclipse::xtext»
 
-«EXTENSION org::eclipse::xtext::ui::generator::outline::OutlineNodeAdapterFactoryExtensions»
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
 «DEFINE generate FOR Grammar»

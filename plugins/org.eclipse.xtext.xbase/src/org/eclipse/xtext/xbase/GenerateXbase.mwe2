@@ -70,7 +70,7 @@ Workflow {
 			fragment = formatting.FormatterFragment {}
 			fragment = quickfix.QuickfixProviderFragment {}
 			fragment = labeling.LabelProviderFragment {}
-			fragment = outline.TransformerFragment {}
+			fragment = outline.OutlineTreeProviderFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = XtextAntlrUiGeneratorFragment {
 				options = auto-inject {

@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.ui.editor.outline.actions.AbstractFilterAction;
+import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.xtext.ui.Activator;
 
 /**
@@ -17,8 +20,8 @@ import org.eclipse.xtext.xtext.ui.Activator;
  */
 public class FilterParserRulesAction extends AbstractFilterAction {
 
-	public FilterParserRulesAction(XtextContentOutlinePage outlinePage) {
-		super(Messages.FilterParserRulesAction_title, outlinePage);
+	public FilterParserRulesAction() {
+		setText(Messages.FilterParserRulesAction_title);
 		setToolTipText(Messages.FilterParserRulesAction_tooltip);
 		setDescription(Messages.FilterParserRulesAction_description);
 		setImageDescriptor(Activator.getImageDescriptor("icons/filter_rule.gif")); //$NON-NLS-1$
@@ -26,13 +29,25 @@ public class FilterParserRulesAction extends AbstractFilterAction {
 	}
 
 	@Override
-	protected String getToggleId() {
-		return "ParserRulesFilter.isChecked"; //$NON-NLS-1$
+	protected ViewerFilter createViewerFilter() {
+		return new ViewerFilter() {
+			@Override
+			public boolean select(Viewer viewer, Object parentElement, Object element) {
+				if ((parentElement != null) && (parentElement instanceof EObjectNode)) {
+					EObjectNode parentNode = (EObjectNode) parentElement;
+					EClass eClass = parentNode.getEClass();
+					if (eClass != null && eClass.equals(XtextPackage.Literals.PARSER_RULE)) {
+						return false;
+					}
+				}
+				return true;
+			}
+		};
 	}
-	
+
 	@Override
-	protected ViewerFilter createFilter() {
-		return new ParserRulesOutlineFilter();
+	protected String getPropertyKey() {
+		return "ui.outline.parserRules";
 	}
 
 }

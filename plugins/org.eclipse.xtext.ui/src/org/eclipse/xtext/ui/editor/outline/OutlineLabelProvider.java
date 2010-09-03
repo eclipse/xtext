@@ -7,14 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline;
 
+import static java.lang.annotation.RetentionPolicy.*;
+
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 import com.google.inject.BindingAnnotation;
 
-/**
- * @author koehnlein - Initial contribution and API
- */
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RUNTIME)
+@Target( { ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD })
 @BindingAnnotation
-public @interface OutlineLabelProvider {}
+public @interface OutlineLabelProvider {
+	
+}

@@ -1,0 +1,40 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ui.editor.outline;
+
+import java.util.List;
+
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.concurrent.IStateAccess;
+
+/**
+ * A model for a node in the outline. Implementors must inherit from
+ * {@link org.eclipse.xtext.ui.editor.outline.impl.AbstractOutlineNode}.
+ * 
+ * @author koehnlein - Initial contribution and API
+ */
+public interface IOutlineNode extends IAdaptable, IStateAccess<EObject> {
+
+	Object getText();
+
+	Image getImage();
+
+	IOutlineNode getParent();
+
+	List<IOutlineNode> getChildren();
+
+	boolean hasChildren();
+
+	TextLocation getFullTextRegion();
+
+	TextLocation getShortTextRegion();
+	
+}

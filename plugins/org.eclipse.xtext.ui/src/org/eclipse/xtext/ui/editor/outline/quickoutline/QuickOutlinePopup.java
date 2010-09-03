@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor.outline.quickoutline;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.PopupDialog;
-import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -36,17 +35,21 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.outline.ContentOutlineNodeLabelProvider;
-import org.eclipse.xtext.ui.editor.outline.IContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeContentProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeLabelProvider;
 import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @author Jan Koehnlein - Adaption to new outline architecture
  */
 public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
@@ -80,10 +83,13 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	}
 
 	@Inject
-	private IOutlineTreeProvider contentProvider;
+	private IOutlineTreeProvider treeProvider;
 
 	@Inject
-	private ContentOutlineNodeLabelProvider labelProvider;
+	private OutlineNodeLabelProvider labelProvider;
+
+	@Inject
+	private OutlineNodeContentProvider contentProvider;
 
 	private int TREESTYLE = SWT.V_SCROLL | SWT.H_SCROLL;
 
@@ -149,9 +155,15 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.setLabelProvider(labelProvider);
-		treeViewer.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
-		treeViewer.setInput(document);
-
+		treeViewer.setAutoExpandLevel(2);
+		IOutlineNode rootNode = document.readOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
+			public IOutlineNode exec(XtextResource state) throws Exception {
+				IOutlineNode rootNode = treeProvider.createRoot(document, state);
+				treeProvider.createChildren(rootNode, state);
+				return rootNode;
+			}
+		});
+		treeViewer.setInput(rootNode);
 		return treeViewer;
 	}
 
@@ -269,9 +281,10 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		Object selectedElement = getSelectedElement();
 		if (selectedElement != null) {
 			dispose();
-			if (selectedElement instanceof IContentOutlineNode) {
-				final IContentOutlineNode outlineNode = (IContentOutlineNode) selectedElement;
-				xtextEditor.selectAndReveal(outlineNode.getSelectionOffset(), outlineNode.getSelectionLength());
+			if (selectedElement instanceof IOutlineNode) {
+				final IOutlineNode outlineNode = (IOutlineNode) selectedElement;
+				xtextEditor.selectAndReveal(outlineNode.getShortTextRegion().getOffset(), outlineNode
+						.getShortTextRegion().getLength());
 			}
 		}
 	}

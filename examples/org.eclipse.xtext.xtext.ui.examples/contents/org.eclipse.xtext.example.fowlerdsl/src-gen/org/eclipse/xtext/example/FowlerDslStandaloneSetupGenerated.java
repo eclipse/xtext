@@ -39,6 +39,5 @@ public class FowlerDslStandaloneSetupGenerated implements ISetup {
 
 
 
-
 	}
 }

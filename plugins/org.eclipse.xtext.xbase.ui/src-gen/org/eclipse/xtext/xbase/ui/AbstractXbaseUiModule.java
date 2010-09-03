@@ -118,9 +118,9 @@ public abstract class AbstractXbaseUiModule extends DefaultUiModule {
 		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider.class);
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.outline.TransformerFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer> bindISemanticModelTransformer() {
-		return org.eclipse.xtext.xbase.ui.outline.XbaseTransformer.class;
+	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider> bindIOutlineTreeProvider() {
+		return org.eclipse.xtext.xbase.ui.outline.XbaseOutlineTreeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
