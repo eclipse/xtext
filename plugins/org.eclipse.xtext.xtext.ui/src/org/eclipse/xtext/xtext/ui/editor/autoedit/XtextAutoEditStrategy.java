@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.autoedit;
 
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 
 /**
@@ -16,14 +17,8 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 
 	@Override
 	protected void configure(IEditStrategyAcceptor acceptor) {
-		//disabled
-//		super.configure(acceptor);
-//		acceptor.accept(newMultiLineTerminals(":", null, ";"));
-//		acceptor.accept(newSingleLineTerminals('{', '}'));
-	}
-
-	@Override
-	protected void configureCurlyBracesBlock(IEditStrategyAcceptor acceptor) {
-		// disable
+		super.configure(acceptor);
+		acceptor.accept(singleLineTerminals.get().configure(":", ";"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(multiLineTerminals.get().configure(":", null, ";"),IDocument.DEFAULT_CONTENT_TYPE);
 	}
 }
