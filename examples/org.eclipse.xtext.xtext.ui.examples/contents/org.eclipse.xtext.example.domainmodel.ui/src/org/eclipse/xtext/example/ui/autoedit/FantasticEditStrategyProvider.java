@@ -11,12 +11,12 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategy;
+import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class FantasticAutoEditStrategy extends DefaultAutoEditStrategy {
+public class FantasticEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
@@ -73,7 +73,7 @@ public class FantasticAutoEditStrategy extends DefaultAutoEditStrategy {
 	@Override
 	protected void configure(IEditStrategyAcceptor acceptor) {
 		super.configure(acceptor);
-		acceptor.accept(new Surprise());
+		acceptor.accept(new Surprise(),IDocument.DEFAULT_CONTENT_TYPE);
 	}
 
 }

@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.arithmetics.ui;
 
-import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.example.arithmetics.ui.autoedit.AutoEditStrategy;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -19,7 +19,7 @@ public class ArithmeticsUiModule extends org.eclipse.xtext.example.arithmetics.u
 		super(plugin);
 	}
 	
-	public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy() {
+	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return AutoEditStrategy.class;
 	}
 }

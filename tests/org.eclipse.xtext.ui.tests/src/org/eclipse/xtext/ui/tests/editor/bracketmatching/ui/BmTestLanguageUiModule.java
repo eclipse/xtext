@@ -3,9 +3,9 @@
  */
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.ui;
 
-import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.autoedit.AutoEditStrategy;
 
 /**
@@ -23,7 +23,7 @@ public class BmTestLanguageUiModule extends AbstractBmTestLanguageUiModule {
 	}
 	
 	@Override
-	public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy() {
+	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return AutoEditStrategy.class;
 	}
 }

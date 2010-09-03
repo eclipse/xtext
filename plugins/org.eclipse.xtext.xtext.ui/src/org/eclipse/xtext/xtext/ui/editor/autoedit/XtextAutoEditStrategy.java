@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.autoedit;
 
-import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategy;
+import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XtextAutoEditStrategy extends DefaultAutoEditStrategy {
+public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 
 	@Override
 	protected void configure(IEditStrategyAcceptor acceptor) {

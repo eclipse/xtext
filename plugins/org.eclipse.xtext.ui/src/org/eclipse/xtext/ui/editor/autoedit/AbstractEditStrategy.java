@@ -7,27 +7,36 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.autoedit;
 
+import java.util.Arrays;
+
 import org.apache.log4j.Logger;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITypedRegion;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractEditStrategy implements IAutoEditStrategy{
-	
+public abstract class AbstractEditStrategy implements IAutoEditStrategy {
+
 	private final static Logger log = Logger.getLogger(AbstractEditStrategy.class);
 
-	/**
-	 * @deprecated use {@link #count(String, String)} instead.
-	 */
-	@Deprecated
-	public int count(String toFind, StringBuilder searchMe) throws BadLocationException {
-		return count(toFind, searchMe.toString());
+	public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
+		try {
+			internalCustomizeDocumentCommand(document, command);
+		} catch (BadLocationException e) {
+			log.error(e.getMessage(), e);
+		}
 	}
-	
+
+	protected abstract void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
+			throws BadLocationException;
+
 	public int count(String toFind, String searchMe) throws BadLocationException {
 		int count = 0;
 		int index = -toFind.length();
@@ -40,33 +49,25 @@ public abstract class AbstractEditStrategy implements IAutoEditStrategy{
 			}
 		}
 	}
-	
-	/**
-	 * @deprecated use {@link #getDocumentContent(IDocument)}
-	 */
-	@Deprecated
-	protected StringBuilder getTextToScan(IDocument document) {
-		return new StringBuilder(document.get());
-	}
-	
-	protected String getDocumentContent(IDocument document, DocumentCommand command) {
-		if (command.length == 0)
-			return document.get();
-		try {
-			StringBuilder result = new StringBuilder(document.getLength() + command.length);
-			if (command.offset > 0)
-				result.append(document.get(0, command.offset));
-			if (command.offset + command.length < document.getLength())
-				result.append(document.get(command.offset + command.length, document.getLength() - command.offset + command.length));
-			return result.toString();
-		} catch(BadLocationException ex) {
-			log.error("Exception in AutoEditStrategy", ex);
-			return document.get();
+
+	protected String getDocumentContent(IDocument document, DocumentCommand command) throws BadLocationException {
+		final ITypedRegion partition = document.getPartition(command.offset);
+		ITypedRegion[] partitions = document.getDocumentPartitioner().computePartitioning(0, document.getLength());
+		Iterable<ITypedRegion> partitionsOfCurrentType = Iterables.filter(Arrays.asList(partitions),
+				new Predicate<ITypedRegion>() {
+					public boolean apply(ITypedRegion input) {
+						return input.getType().equals(partition.getType());
+					}
+				});
+		StringBuilder builder = new StringBuilder();
+		for (ITypedRegion position : partitionsOfCurrentType) {
+			builder.append(document.get(position.getOffset(), position.getLength()));
 		}
+		return builder.toString();
 	}
-	
+
 	protected boolean isIdentifierPart(IDocument doc, int offset) {
-		if (doc.getLength()<=offset) {
+		if (doc.getLength() <= offset) {
 			return false;
 		}
 		try {

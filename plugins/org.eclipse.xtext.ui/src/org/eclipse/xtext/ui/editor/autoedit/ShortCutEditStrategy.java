@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.editor.autoedit;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
-import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewer;
@@ -20,44 +19,42 @@ import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 
 /**
  * 
- * A simple {@link IAutoEditStrategy} for shortcuts.
- * Replaces the given shortcut by the given replacement. 
+ * A simple {@link IAutoEditStrategy} for shortcuts. Replaces the given shortcut by the given replacement.
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ShortCutEditStrategy implements IAutoEditStrategy, ISourceViewerAware, VerifyKeyListener {
-	
-	private String shortcut,longForm;
+public class ShortCutEditStrategy extends AbstractEditStrategy implements ISourceViewerAware, VerifyKeyListener {
+
+	private String shortcut, longForm;
 	private boolean matched = false;
 	private ISourceViewer sourceViewer;
-	
+
 	public ShortCutEditStrategy configure(String shortcut, String replacement) {
 		this.shortcut = shortcut;
 		this.longForm = replacement;
 		return this;
 	}
 
-	public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
-		try {
-			matched  = false;
-			int shortCutIndex = shortcut.length()-1;
-			boolean isLastCharacterOfShortCut = command.text.equals(shortcut.substring(shortCutIndex));
-			boolean isShortCut = document.get(command.offset-shortCutIndex, shortCutIndex).equals(shortcut.subSequence(0, shortCutIndex));
-			if (isLastCharacterOfShortCut && isShortCut) {
-				command.offset = command.offset-shortCutIndex;
-				command.length = shortCutIndex;
-				command.text = longForm;
-				matched = true;
-			}
-		} catch (BadLocationException e) {
+	@Override
+	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
+			throws BadLocationException {
+		matched = false;
+		int shortCutIndex = shortcut.length() - 1;
+		boolean isLastCharacterOfShortCut = command.text.equals(shortcut.substring(shortCutIndex));
+		int startOffset = command.offset - shortCutIndex;
+		boolean isShortCut = startOffset>=0 && document.get(startOffset, shortCutIndex).equals(shortcut.subSequence(0, shortCutIndex));
+		if (isLastCharacterOfShortCut && isShortCut) {
+			command.offset = startOffset;
+			command.length = shortCutIndex;
+			command.text = longForm;
+			matched = true;
 		}
-		
 	}
 
 	public void setSourceViewer(ISourceViewer sourceViewer) {
 		if (sourceViewer instanceof SourceViewer)
 			this.sourceViewer = sourceViewer;
-			((SourceViewer) sourceViewer).prependVerifyKeyListener(this);
+		((SourceViewer) sourceViewer).prependVerifyKeyListener(this);
 	}
 
 	public void verifyKey(VerifyEvent event) {
