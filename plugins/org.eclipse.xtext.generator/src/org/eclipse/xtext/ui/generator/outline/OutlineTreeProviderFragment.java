@@ -6,6 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+
 package org.eclipse.xtext.ui.generator.outline;
 
 import java.util.Set;
@@ -18,29 +19,27 @@ import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Naming;
 
 /**
- * An {@link IGeneratorFragment} to generate a adapter factory for outline nodes.
+ * An {@link IGeneratorFragment} to generate the configuration for a transformer for the outline view of an Xtext
+ * language.
  * 
- * @author Peter Friese - Initial contribution and API
+ * @author koehnlein
  */
-public class OutlineNodeAdapterFactoryFragment extends AbstractGeneratorFragment {
-	
+public class OutlineTreeProviderFragment extends AbstractGeneratorFragment {
+
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		return new BindFactory()
-			.addTypeToType("org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFactory",
-					getQualifiedName(grammar,getNaming()))
-			.getBindings();
+		return new BindFactory().addTypeToType(
+				"org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider",
+				getQualifiedName(grammar, getNaming())).getBindings();
 	}
 
 	public static String getQualifiedName(Grammar grammar, Naming n) {
-		return n.basePackageUi(grammar) + ".outline." + GrammarUtil.getName(grammar) + "OutlineNodeAdapterFactory";
+		return n.basePackageUi(grammar) + ".outline." + GrammarUtil.getName(grammar) + "OutlineTreeProvider";
 	}
-	
+
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
-		return new String[]{
-				"org.eclipse.xtext.ui"
-		};
+		return new String[] { "org.eclipse.xtext.ui" };
 	}
 
 }

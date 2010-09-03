@@ -21,13 +21,13 @@
 */
 package «qualifiedName().toJavaPackage()»;
 
-import org.eclipse.xtext.ui.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
+import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 
 /**
  * customization of the default outline structure
  * 
  */
-public class «qualifiedName().toSimpleName()» extends AbstractDeclarativeSemanticModelTransformer {
+public class «qualifiedName().toSimpleName()» extends DefaultOutlineTreeProvider {
 	
 }
 «ENDFILE»
