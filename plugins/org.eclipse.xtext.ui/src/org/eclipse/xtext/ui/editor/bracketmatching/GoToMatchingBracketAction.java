@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.bracketmatching;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.TextSelection;
+import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
@@ -23,7 +24,7 @@ import com.google.inject.Inject;
 public class GoToMatchingBracketAction extends Action implements IActionContributor {
 	
 	@Inject
-	private IBracketMatcher bracketMatcher;
+	private ICharacterPairMatcher matcher;
 	private XtextEditor editor;
 	
 	public GoToMatchingBracketAction() {
@@ -39,7 +40,7 @@ public class GoToMatchingBracketAction extends Action implements IActionContribu
 		if (selection instanceof TextSelection) {
 			TextSelection textSelection = (TextSelection) selection;
 			if (textSelection.getLength()==0) {
-				IRegion region = BracketMatchingUnitOfWork.match(document, bracketMatcher, textSelection.getOffset());
+				IRegion region = matcher.match(document, textSelection.getOffset());
 				if (region != null)
 					editor.selectAndReveal(region.getOffset()+region.getLength(),0);
 			}

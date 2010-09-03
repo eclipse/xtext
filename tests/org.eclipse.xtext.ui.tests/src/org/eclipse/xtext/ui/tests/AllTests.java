@@ -24,7 +24,6 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.PresentationDamagerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.SimpleEditorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.autoedit.AutoEditTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.bracketmatching.BracketMatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug281198Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug282031Test.class);

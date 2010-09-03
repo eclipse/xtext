@@ -3,17 +3,16 @@
  */
 package org.eclipse.xtext.ui;
 
-import org.eclipse.jface.text.IAutoEditStrategy;
+import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
+import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
-import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.actions.IActionBarContributor;
-import org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
@@ -23,7 +22,6 @@ import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostPr
 import org.eclipse.xtext.xtext.ui.XtextHyperlinkHelper;
 import org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider;
 import org.eclipse.xtext.xtext.ui.editor.autoedit.XtextAutoEditStrategy;
-import org.eclipse.xtext.xtext.ui.editor.bracketmatching.XtextGrammarBracketMatcher;
 import org.eclipse.xtext.xtext.ui.editor.folding.XtextGrammarFoldingRegionProvider;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextActionBarContributor;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextDeclarativeModelTransformer;
@@ -66,9 +64,10 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 	public Class<? extends IProjectCreator> bindIProjectCreator() {
 		return XtextProjectCreator.class;
 	}
-	
-	public Class<? extends IBracketMatcher> bindIBracketMatcher() {
-		return XtextGrammarBracketMatcher.class;
+
+	@Override
+	public ICharacterPairMatcher bindICharacterPairMatcher() {
+		return new DefaultCharacterPairMatcher(new char[]{':',';','{','}','(',')','[',']'});
 	}
 	
 	@Override

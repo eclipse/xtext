@@ -20,6 +20,8 @@ import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.jface.text.rules.ITokenScanner;
+import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
+import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -160,6 +162,10 @@ public class DefaultUiModule extends AbstractGenericModule {
 
 	public Class<? extends IPresentationRepairer> bindIPresentationRepairer() {
 		return PresentationRepairer.class;
+	}
+	
+	public ICharacterPairMatcher bindICharacterPairMatcher() {
+		return new DefaultCharacterPairMatcher(new char[]{'(',')','{','}','[',']'});
 	}
 
 	public Class<? extends ITokenScanner> bindITokenScanner() {
