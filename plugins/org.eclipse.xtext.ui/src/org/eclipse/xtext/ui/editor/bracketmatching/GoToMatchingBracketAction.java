@@ -41,8 +41,13 @@ public class GoToMatchingBracketAction extends Action implements IActionContribu
 			TextSelection textSelection = (TextSelection) selection;
 			if (textSelection.getLength()==0) {
 				IRegion region = matcher.match(document, textSelection.getOffset());
-				if (region != null)
-					editor.selectAndReveal(region.getOffset()+region.getLength(),0);
+				if (region != null) {
+					if (region.getOffset()+1==textSelection.getOffset()) {
+						editor.selectAndReveal(region.getOffset()+region.getLength(),0);
+					} else {
+						editor.selectAndReveal(region.getOffset()+1,0);
+					}
+				}
 			}
 		}
 	}
