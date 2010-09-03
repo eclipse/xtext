@@ -15,6 +15,8 @@ import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITypedRegion;
+import org.eclipse.swt.custom.VerifyKeyListener;
+import org.eclipse.swt.events.VerifyEvent;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -22,11 +24,19 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractEditStrategy implements IAutoEditStrategy {
+public abstract class AbstractEditStrategy implements IAutoEditStrategy, VerifyKeyListener {
+	
+	private boolean skipNext = false;
+	
+	public void verifyKey(VerifyEvent event) {
+		skipNext = event.keyCode == 4194304;
+	}
 
 	private final static Logger log = Logger.getLogger(AbstractEditStrategy.class);
 
 	public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
+		if (skipNext)
+			return;
 		try {
 			internalCustomizeDocumentCommand(document, command);
 		} catch (BadLocationException e) {
