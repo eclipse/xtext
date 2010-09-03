@@ -12,8 +12,8 @@ import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
-import org.eclipse.xtext.ui.editor.outline.actions.IActionBarContributor;
-import org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer;
+import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
@@ -23,9 +23,9 @@ import org.eclipse.xtext.xtext.ui.XtextHyperlinkHelper;
 import org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider;
 import org.eclipse.xtext.xtext.ui.editor.autoedit.XtextAutoEditStrategy;
 import org.eclipse.xtext.xtext.ui.editor.folding.XtextGrammarFoldingRegionProvider;
-import org.eclipse.xtext.xtext.ui.editor.outline.XtextActionBarContributor;
-import org.eclipse.xtext.xtext.ui.editor.outline.XtextDeclarativeModelTransformer;
 import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
+import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlinePage;
+import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineTreeProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
@@ -47,11 +47,6 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		binder.bind(String.class).annotatedWith(
 				Names.named(XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS)).toInstance("=[{");
 
-	}
-
-	@Override
-	public Class<? extends ISemanticModelTransformer> bindISemanticModelTransformer() {
-		return XtextDeclarativeModelTransformer.class;
 	}
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
@@ -84,9 +79,12 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return XtextGrammarFoldingRegionProvider.class;
 	}
 
-	@Override
-	public Class<? extends IActionBarContributor> bindIActionBarContributor() {
-		return XtextActionBarContributor.class;
+	public Class<? extends OutlinePage> bindOutlinePage() {
+		return XtextOutlinePage.class;
+	}
+	
+	public Class<? extends IOutlineTreeProvider> bindIOutlineTreeProvider() {
+		return XtextOutlineTreeProvider.class;
 	}
 
 	public Class<? extends IXtext2EcorePostProcessor> bindIXtext2EcorePostProcessor() {

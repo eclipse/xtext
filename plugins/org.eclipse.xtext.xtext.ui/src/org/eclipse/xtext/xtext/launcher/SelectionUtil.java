@@ -23,7 +23,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
@@ -58,9 +58,9 @@ public class SelectionUtil {
 			if (firstElement instanceof IAdaptable) {
 				return (IFile) ((IAdaptable) firstElement).getAdapter(IFile.class);
 			}
-			else if (firstElement instanceof ContentOutlineNode) {
-				ContentOutlineNode outlineNode = (ContentOutlineNode) firstElement;
-				return outlineNode.getEObjectHandle().readOnly(new IUnitOfWork<IFile, EObject>() {
+			else if (firstElement instanceof IOutlineNode) {
+				IOutlineNode outlineNode = (IOutlineNode) firstElement;
+				return outlineNode.readOnly(new IUnitOfWork<IFile, EObject>() {
 					public IFile exec(EObject state) throws Exception {
 						Resource resource = state.eResource();
 						URI uri = resource.getURI();

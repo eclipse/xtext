@@ -5,19 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.outline;
+package org.eclipse.xtext.ui.editor.outline.impl;
 
-import static java.lang.annotation.RetentionPolicy.*;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+/**
+ * @author koehnlein - Initial contribution and API
+ */
+public class ArtificialNode extends AbstractOutlineNode {
 
-import com.google.inject.BindingAnnotation;
+	public ArtificialNode(IOutlineNode parent, Image image, Object text, boolean hasPredictedChildren) {
+		super(parent, image, text, hasPredictedChildren);
+	}
 
-@Retention(RUNTIME)
-@Target( { ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD })
-@BindingAnnotation
-public @interface OutlineLabelProvider {
-	
 }

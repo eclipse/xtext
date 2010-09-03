@@ -15,7 +15,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
 /**
  * This property tester checks if there is a workflow file associated with the currently selected Xtext grammar file.
@@ -40,7 +40,7 @@ public class WorkflowPropertyTester extends PropertyTester {
 			return WorkflowLaunchUtils.workflowFileAvailableForGrammarFile(resource);
 		} else
 
-		if (receiver instanceof ContentOutlineNode) {
+		if (receiver instanceof IOutlineNode) {
 			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			XtextEditor activeEditor = (XtextEditor) activePage.getActiveEditor();
 			return WorkflowLaunchUtils.workflowFileAvailableFor(activeEditor);
