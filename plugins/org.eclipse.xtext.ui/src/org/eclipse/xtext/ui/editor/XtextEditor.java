@@ -28,6 +28,7 @@ import org.eclipse.jface.text.source.IAnnotationAccess;
 import org.eclipse.jface.text.source.IAnnotationAccessExtension;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModelExtension2;
+import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
@@ -59,7 +60,6 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesInitializer;
-import org.eclipse.xtext.ui.editor.bracketmatching.CharacterPairMatcher;
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
@@ -312,7 +312,7 @@ public class XtextEditor extends TextEditor {
 	}
 
 	@Inject
-	private CharacterPairMatcher characterPairMatcher;
+	private ICharacterPairMatcher characterPairMatcher;
 
 	@Override
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
