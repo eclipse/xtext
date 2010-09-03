@@ -21,7 +21,6 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.xtext.gmf.glue.Activator;
 import org.eclipse.xtext.gmf.glue.editingdomain.UpdateXtextResourceTextCommand;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.antlr.IAntlrParser;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -43,7 +42,7 @@ public class AntlrParserWrapper implements IParser {
 	private XtextContentAssistProcessor xtextContentAssistProcessor;
 
 	@Inject
-	private IAntlrParser xtextParser;
+	private org.eclipse.xtext.parser.IParser xtextParser;
 
 	private final String parserRuleName;
 
