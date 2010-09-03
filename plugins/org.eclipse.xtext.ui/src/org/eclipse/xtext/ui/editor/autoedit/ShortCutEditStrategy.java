@@ -12,7 +12,6 @@ import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewer;
-import org.eclipse.swt.custom.VerifyKeyListener;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
@@ -23,7 +22,7 @@ import org.eclipse.xtext.ui.editor.ISourceViewerAware;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ShortCutEditStrategy extends AbstractEditStrategy implements ISourceViewerAware, VerifyKeyListener {
+public class ShortCutEditStrategy extends AbstractEditStrategy implements ISourceViewerAware {
 
 	private String shortcut, longForm;
 	private boolean matched = false;
@@ -57,6 +56,7 @@ public class ShortCutEditStrategy extends AbstractEditStrategy implements ISourc
 		((SourceViewer) sourceViewer).prependVerifyKeyListener(this);
 	}
 
+	@Override
 	public void verifyKey(VerifyEvent event) {
 		if (matched && event.keyCode == 27) {
 			Point range = sourceViewer.getSelectedRange();
