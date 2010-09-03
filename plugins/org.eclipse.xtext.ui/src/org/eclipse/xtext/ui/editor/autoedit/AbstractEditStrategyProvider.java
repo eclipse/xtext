@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.swt.custom.VerifyKeyListener;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 
 import com.google.common.collect.Lists;
@@ -29,6 +30,9 @@ public abstract class AbstractEditStrategyProvider {
 				if (type == null || contentType.equals(type)) {
 					if (strategy instanceof ISourceViewerAware) {
 						((ISourceViewerAware) strategy).setSourceViewer(sourceViewer);
+					}
+					if (strategy instanceof VerifyKeyListener) {
+						sourceViewer.getTextWidget().addVerifyKeyListener((VerifyKeyListener) strategy);
 					}
 					strategies.add(strategy);
 				}
