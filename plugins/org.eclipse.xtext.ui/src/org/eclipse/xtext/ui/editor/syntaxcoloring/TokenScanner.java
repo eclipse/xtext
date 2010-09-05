@@ -7,29 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
-import java.util.List;
+import java.util.Iterator;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.xtext.ui.editor.model.IXtextDocumentToken;
+import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
+import org.eclipse.xtext.ui.editor.model.Regions;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
  * 
- * TokenScanner implmentation based on {@link XtextDocument#getTokens()}
+ * TokenScanner implementation based on {@link XtextDocument#getTokens(int)}
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
 public class TokenScanner extends AbstractTokenScanner {
 
-	private List<? extends IXtextDocumentToken> list;
-	private int currentTokenIdx;
-	private int currentOffset;
-	private int stopIndex;
-	private IXtextDocumentToken currentToken;
+	private Iterator<ILexerTokenRegion> iterator;
+	private ILexerTokenRegion currentToken;
 
 	@Inject
 	private AbstractAntlrTokenToAttributeIdMapper tokenIdMapper;
@@ -38,43 +37,31 @@ public class TokenScanner extends AbstractTokenScanner {
 		this.tokenIdMapper = tokenIdMapper;
 	}
 
-	public void setRange(IDocument document, int offset, int length) {
+	public void setRange(IDocument document, final int offset, final int length) {
 		currentToken=null;
-		list = getTokens(document);
-		currentOffset = 0;
-		stopIndex = offset+length;
-		for (currentTokenIdx = 0; currentTokenIdx < list.size(); currentTokenIdx++) {
-			IXtextDocumentToken token = list.get(currentTokenIdx);
-			if (currentOffset >= offset) {
-				return;
-			}
-			currentOffset += token.getLength();
-		}
+		iterator = Iterables.filter(getTokens(document),Regions.overlaps(offset, length)).iterator();
 	}
 
-	protected List<? extends IXtextDocumentToken> getTokens(IDocument document) {
+	protected Iterable<ILexerTokenRegion> getTokens(IDocument document) {
 		XtextDocument doc = (XtextDocument) document;
 		return doc.getTokens();
 	}
 
 	public IToken nextToken() {
-		if (currentToken != null)
-			currentOffset += currentToken.getLength();
-		if (currentTokenIdx >= list.size() || stopIndex<=currentOffset)
+		if (!iterator.hasNext())
 			return Token.EOF;
-		currentToken = list.get(currentTokenIdx++);
-		IToken token = createToken();
-		return token;
+		currentToken = iterator.next();
+		return createToken(currentToken);
 	}
 
-	protected IToken createToken() {
-		String id = tokenIdMapper.getId(currentToken.getAntlrTokenType());
+	protected IToken createToken(ILexerTokenRegion currentToken) {
+		String id = tokenIdMapper.getId(currentToken.getLexerTokenType());
 		Token token = new Token(getAttribute(id));
 		return token;
 	}
 
 	public int getTokenOffset() {
-		return currentOffset;
+		return currentToken.getOffset();
 	}
 
 	public int getTokenLength() {

@@ -34,7 +34,7 @@ import org.eclipse.xtext.ui.editor.DirtyStateManager;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.IXtextDocumentToken;
+import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.notification.StateChangeEventBroker;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -384,7 +384,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		return null;
 	}
 
-	public List<IXtextDocumentToken> getTokens() {
+	public List<ILexerTokenRegion> getTokens() {
 		return Collections.emptyList();
 	}
 

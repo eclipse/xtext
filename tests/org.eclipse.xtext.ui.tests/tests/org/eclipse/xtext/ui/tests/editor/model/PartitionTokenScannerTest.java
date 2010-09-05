@@ -7,28 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.model;
 
-import static org.eclipse.xtext.util.Tuples.*;
-
+import java.util.Arrays;
 import java.util.List;
 
 import junit.framework.TestCase;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
-import org.eclipse.xtext.ui.editor.model.IXtextDocumentToken;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
-import org.eclipse.xtext.util.Pair;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class PartitionTokenScannerTest extends TestCase {
-	@SuppressWarnings("unchecked")
+
 	public void testWholePart() throws Exception {
-		PartitionTokenScanner scanner = getPartitionTokenScanner(pair(2, 3),pair(4,3),pair(2,1),pair(34,3));
+		PartitionTokenScanner scanner = getPartitionTokenScanner(t(2, 3),t(4,3),t(2,1),t(34,3));
 		scanner.setPartialRange(null, 0, 42, "3", 0);
 		
 		assertEquals("3",scanner.nextToken().getData());
@@ -46,9 +42,8 @@ public class PartitionTokenScannerTest extends TestCase {
 		assertSame(Token.EOF, scanner.nextToken());
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void testMiddlePart() throws Exception {
-		PartitionTokenScanner scanner = getPartitionTokenScanner(pair(2, 3),pair(4,3),pair(2,1),pair(34,3));
+		PartitionTokenScanner scanner = getPartitionTokenScanner(t(2, 3),t(4,3),t(2,1),t(34,3));
 		scanner.setPartialRange(null, 6, 2, "1", 6);
 		
 		assertEquals("1",scanner.nextToken().getData());
@@ -59,23 +54,47 @@ public class PartitionTokenScannerTest extends TestCase {
 	}
 	
 	
-	public PartitionTokenScanner getPartitionTokenScanner(Pair<Integer,Integer>... tokenDescs) throws Exception {
-		final List<IXtextDocumentToken> tokens = Lists.newArrayList();
-		for (final Pair<Integer, Integer> td : tokenDescs) {
-			tokens.add(new IXtextDocumentToken() {
+	protected LexerTokenRegion t(int length, int type) {
+		return new LexerTokenRegion(length,type);
+	}
+	
+	static class LexerTokenRegion implements ILexerTokenRegion {
+		private int offset,length,type;
 
-				public int getLength() {
-					return td.getFirst();
-				}
+		public LexerTokenRegion(int length, int type) {
+			super();
+			this.length = length;
+			this.type = type;
+		}
+		
+		public void setOffset(int offset) {
+			this.offset = offset;
+		}
 
-				public int getAntlrTokenType() {
-					return td.getSecond();
-				}
-			});
+		public int getLength() {
+			return length;
+		}
+
+		public int getOffset() {
+			return offset;
+		}
+
+		public int getLexerTokenType() {
+			return type;
+		}
+		
+	}
+	
+	public PartitionTokenScanner getPartitionTokenScanner(ILexerTokenRegion... tokenDescs) throws Exception {
+		final List<ILexerTokenRegion> tokens = Arrays.asList(tokenDescs);
+		int offset = 0;
+		for (ILexerTokenRegion token : tokens) {
+			((LexerTokenRegion)token).setOffset(offset);
+			offset+=token.getLength();
 		}
 		PartitionTokenScanner tokenScanner = new PartitionTokenScanner(){
 			@Override
-			protected List<? extends IXtextDocumentToken> getTokens(IDocument document) {
+			protected Iterable<ILexerTokenRegion> getTokens(IDocument document) {
 				return tokens;
 			}
 		};

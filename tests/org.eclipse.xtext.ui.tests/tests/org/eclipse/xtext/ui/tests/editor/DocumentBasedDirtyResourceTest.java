@@ -23,7 +23,7 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
-import org.eclipse.xtext.ui.editor.model.IXtextDocumentToken;
+import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -241,7 +241,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		return Collections.emptyList();
 	}
 
-	public List<IXtextDocumentToken> getTokens() {
+	public List<ILexerTokenRegion> getTokens() {
 		return Collections.emptyList();
 	}
 	

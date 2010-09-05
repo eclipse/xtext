@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.model;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.antlr.runtime.ANTLRStringStream;
@@ -20,6 +21,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.ui.LexerUIBindings;
 
+import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -31,12 +33,12 @@ import com.google.inject.name.Named;
  */
 public class DocumentTokenSource {
 
-	private static class TokenInfo implements IXtextDocumentToken {
+	public static class TokenInfo {
 
 		private final int length;
 		private final int type;
 
-		private TokenInfo(CommonToken token) {
+		public TokenInfo(CommonToken token) {
 			length = token.getStopIndex() - token.getStartIndex() + 1;
 			type = token.getType();
 		}
@@ -78,21 +80,78 @@ public class DocumentTokenSource {
 		public int getLength() {
 			return this.length;
 		}
+	}
 
+	/**
+	 * @author Sven Efftinge - Initial contribution and API
+	 */
+	public static class TokenAdapter implements ILexerTokenRegion {
+
+		private TokenInfo token;
+		private int offset;
+
+		public TokenAdapter(TokenInfo token, int offset) {
+			this.token = token;
+			this.offset = offset;
+		}
+
+		public int getLength() {
+			return token.getLength();
+		}
+
+		public int getOffset() {
+			return offset;
+		}
+
+		public int getLexerTokenType() {
+			return token.getAntlrTokenType();
+		}
+
+	}
+
+	public static class IRegionIterable implements Iterable<ILexerTokenRegion> {
+
+		private Iterable<TokenInfo> tokens = null;
+
+		public IRegionIterable(Iterable<TokenInfo> tokens) {
+			this.tokens = tokens;
+		}
+
+		public Iterator<ILexerTokenRegion> iterator() {
+			return new AbstractIterator<ILexerTokenRegion>() {
+
+				private int offset = 0;
+				private Iterator<TokenInfo> infos = tokens.iterator();
+
+				@Override
+				protected ILexerTokenRegion computeNext() {
+					if (!infos.hasNext()) {
+						endOfData();
+						return null;
+					}
+					TokenInfo next = infos.next();
+					try {
+						return new TokenAdapter(next, offset);
+					} finally {
+						offset += next.getLength();
+					}
+				}
+			};
+		}
 	}
 
 	private boolean checkInvariant = false;
 	private List<TokenInfo> internalModifyableTokenInfos = Collections.emptyList();
-	private List<? extends IXtextDocumentToken> tokenInfos = Collections.emptyList();
+	private List<TokenInfo> tokenInfos = Collections.emptyList();
 	private IRegion previousRegion;
 	private DocumentEvent previousEvent;
 
 	private Provider<Lexer> lexer;
 
-	public List<? extends IXtextDocumentToken> getTokenInfos() {
-		return tokenInfos;
+	public Iterable<ILexerTokenRegion> getTokenInfos() {
+		return new IRegionIterable(tokenInfos);
 	}
-
+	
 	public IRegion getLastDamagedRegion() {
 		return previousRegion;
 	}
@@ -237,5 +296,6 @@ public class DocumentTokenSource {
 	public boolean isCheckInvariant() {
 		return checkInvariant;
 	}
+
 
 }

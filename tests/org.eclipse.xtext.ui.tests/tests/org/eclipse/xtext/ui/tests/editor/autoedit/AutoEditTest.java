@@ -173,11 +173,11 @@ public class AutoEditTest extends AbstractEditorTest {
 	}
 	
 	public void testStringLiteral_7() throws Exception {
-		XtextEditor editor = openEditor("'''| '");
+		XtextEditor editor = openEditor("'' '| '");
 		pressKey(editor, '\'');
-		assertState("''''| '", editor);
+		assertState("'' ''| '", editor);
 		pressKey(editor, SWT.BS);
-		assertState("'''| '", editor);
+		assertState("'' '| '", editor);
 	}
 	
 	public void testStringLiteral_8() throws Exception {

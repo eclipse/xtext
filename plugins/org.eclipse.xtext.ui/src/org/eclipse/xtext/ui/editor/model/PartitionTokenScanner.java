@@ -7,13 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
-import java.util.List;
+import java.util.Iterator;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -21,15 +22,13 @@ import com.google.inject.Inject;
  */
 public class PartitionTokenScanner implements IPartitionTokenScanner {
 
-	private List<? extends IXtextDocumentToken> tokens;
-	private int offset;
-	private int length;
-	private int currentTokenIdx;
+	private Iterator<ILexerTokenRegion> tokens;
 	private int currentPartitionOffSet = 0;
-	private int currentPartitionLength = 0;
+	private ILexerTokenRegion firstOfNext = null;
 
 	@Inject
 	private ITokenTypeToPartitionTypeMapper mapper;
+	private int currentPartitionLength;
 	
 	public void setMapper(ITokenTypeToPartitionTypeMapper mapper) {
 		this.mapper = mapper;
@@ -40,42 +39,31 @@ public class PartitionTokenScanner implements IPartitionTokenScanner {
 	}
 
 	public void setPartialRange(IDocument document, int offset, int length, String contentType, int partitionOffset) {
-		tokens = getTokens(document);
-		this.offset = offset;
-		this.length = length;
-		this.currentTokenIdx = 0;
+		tokens = Iterables.filter(getTokens(document),Regions.overlaps(offset, length)).iterator();
 		this.currentPartitionOffSet = 0;
-		this.currentPartitionLength = 0;
-		for (IXtextDocumentToken t : tokens) {
-			if (t.getLength() + currentPartitionOffSet > partitionOffset) {
-				return;
-			}
-			currentPartitionOffSet += t.getLength();
-			currentTokenIdx++;
-		}
+		this.firstOfNext = tokens.hasNext()?tokens.next():null;
 	}
 
-	protected List<? extends IXtextDocumentToken> getTokens(IDocument document) {
+	protected Iterable<ILexerTokenRegion> getTokens(IDocument document) {
 		return ((XtextDocument) document).getTokens();
 	}
 
 	public IToken nextToken() {
-		String partition = null;
-		currentPartitionOffSet+= currentPartitionLength;
-		currentPartitionLength = 0;
-		if (currentPartitionOffSet>=offset+length || currentTokenIdx==tokens.size())
+		if (firstOfNext==null)
 			return Token.EOF;
-		for (; currentTokenIdx < tokens.size(); currentTokenIdx++) {
-			IXtextDocumentToken token = tokens.get(currentTokenIdx);
-			String tokenPartition = mapper.getPartitionType(token.getAntlrTokenType());
-			if (partition==null) {
-				partition = tokenPartition;
-			} else if (!tokenPartition.equals(partition)) {
-				return new Token(partition);
+		currentPartitionOffSet = firstOfNext.getOffset();
+		currentPartitionLength = firstOfNext.getLength();
+		String tokenPartition = mapper.getPartitionType(firstOfNext.getLexerTokenType());
+		while (tokens.hasNext()) {
+			firstOfNext = tokens.next();
+			String partitionOfNext = mapper.getPartitionType(firstOfNext.getLexerTokenType());
+			currentPartitionLength = firstOfNext.getOffset()-currentPartitionOffSet;
+			if (!partitionOfNext.equals(tokenPartition)) {
+				return new Token(tokenPartition);
 			}
-			currentPartitionLength+=token.getLength();
 		}
-		return new Token(partition);
+		firstOfNext = null;
+		return new Token(tokenPartition);
 	}
 
 	public int getTokenOffset() {

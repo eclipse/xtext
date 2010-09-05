@@ -7,12 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
+import java.util.Iterator;
+
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITypedRegion;
+import org.eclipse.jface.text.Region;
+import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.presentation.IPresentationDamager;
+import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
+import org.eclipse.xtext.ui.editor.model.Regions;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
+
+import com.google.common.collect.Iterables;
 
 /**
  * 
@@ -26,9 +34,48 @@ public class PresentationDamager implements IPresentationDamager {
 	public void setDocument(IDocument document) {}
 
 	public IRegion getDamageRegion(ITypedRegion partition, DocumentEvent e, boolean documentPartitioningChanged) {
-		//TODO support partitions
 		XtextDocument document = (XtextDocument) e.getDocument();
-		return document.getLastDamage();
+		IRegion lastDamage = document.getLastDamage();
+		// check whether this is just a presentation invalidation not based on a real document change
+		if (!isEventMatchingLastDamage(e, lastDamage)) {
+			return computeInterSection(partition, e, document);
+		}
+		
+		if (!TextUtilities.overlaps(partition, lastDamage) && lastDamage.getOffset()<e.getDocument().getLength())
+			return new Region(0,0);
+		
+		int offset = Math.max(lastDamage.getOffset(),partition.getOffset());
+		int endOffset = Math.min(lastDamage.getOffset()+lastDamage.getLength(),partition.getOffset()+partition.getLength());
+			
+		return new Region(offset,endOffset-offset);
+	}
+
+	/**
+	 * @return the common region of the given partition and the changed region in the DocumentEvent based on the underlying tokens.
+	 */
+	protected IRegion computeInterSection(ITypedRegion partition, DocumentEvent e, XtextDocument document) {
+		Iterable<ILexerTokenRegion> tokensInPartition = Iterables.filter(document.getTokens(),Regions.overlaps(partition.getOffset(), partition.getLength()));
+		Iterator<ILexerTokenRegion> tokens = Iterables.filter(tokensInPartition, Regions.overlaps(e.getOffset(), e.getLength())).iterator();
+		if (tokens.hasNext()) {
+			ILexerTokenRegion first = tokens.next();
+			ILexerTokenRegion last = first;
+			while(tokens.hasNext())
+				last = tokens.next();
+			return new Region(first.getOffset(), last.getOffset()+last.getLength() -first.getOffset());
+		}
+		// this shouldn't happen, but just in case return the whole partition
+		return partition;
+	}
+
+	/**
+	 * @return <code>true</code> only if the lastDamage is encloses the affected text of the given DocumentEvent.
+	 */
+	protected boolean isEventMatchingLastDamage(DocumentEvent e, IRegion lastDamage) {
+		int eventStart = e.getOffset();
+		int eventEnd = eventStart+e.getText().length();
+		int damageStart = lastDamage.getOffset();
+		int damageEnd = damageStart+lastDamage.getLength();
+		return damageStart<=eventStart && damageEnd>=eventEnd ;
 	}
 
 }

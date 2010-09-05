@@ -16,6 +16,7 @@ import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.TypedRegion;
 import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
@@ -86,7 +87,7 @@ public class DamagerRepairerPerformanceTest extends TestCase implements ITokenSc
 		}
 		
 		public void documentChanged(DocumentEvent event) {
-			lastRegion = damager.getDamageRegion(null, event, false);
+			lastRegion = damager.getDamageRegion(new TypedRegion(0,event.getDocument().getLength(), IDocument.DEFAULT_CONTENT_TYPE), event, false);
 		}
 
 		public void documentAboutToBeChanged(DocumentEvent event) {

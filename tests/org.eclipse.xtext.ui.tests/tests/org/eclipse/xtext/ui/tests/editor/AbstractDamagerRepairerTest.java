@@ -14,6 +14,7 @@ import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.TypedRegion;
 import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
@@ -100,17 +101,14 @@ public abstract class AbstractDamagerRepairerTest extends TestCase implements ID
 		assertEquals(0,8,check("foo bar",0,0,"foo bar "));
 	}
 	
-	//TODO why is expected length not 0
 	public void testBug276628() throws Exception {
 		assertEquals(7,10,check("Rule2: 'keyword';",8,9,"keyword';"));
 	}
 	
-	//TODO why is expected length not 0
 	public void testBug279061() throws Exception {
 		assertEquals(3,2, check("foo(x", 3, 2, "(x"));
 	}
 	
-	//TODO why is expected length not 0
 	public void testMlEndOfLine() throws Exception {
 		String model = "/* foo ";
 		String end = "*/";
@@ -118,7 +116,6 @@ public abstract class AbstractDamagerRepairerTest extends TestCase implements ID
 		assertEquals(0,(model+end).length(), check(model+end,0,model.length(),model));
 	}
 	
-	//TODO why is expected length not 0
 	public void testMlEndOfLine2() throws Exception {
 		String model = "foo /* foo ";
 		String end = "*/";
@@ -127,7 +124,7 @@ public abstract class AbstractDamagerRepairerTest extends TestCase implements ID
 	}
 	
 	public void documentChanged(DocumentEvent event) {
-		lastRegion = damager.getDamageRegion(null, event, false);
+		lastRegion = damager.getDamageRegion(new TypedRegion(0,event.getDocument().getLength(), IDocument.DEFAULT_CONTENT_TYPE), event, false);
 	}
 
 	public void documentAboutToBeChanged(DocumentEvent event) {
