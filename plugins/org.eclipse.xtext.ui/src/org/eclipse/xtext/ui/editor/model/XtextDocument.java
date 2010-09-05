@@ -9,7 +9,6 @@
 package org.eclipse.xtext.ui.editor.model;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -303,12 +302,13 @@ public class XtextDocument extends Document implements IXtextDocument {
 		super.fireDocumentChanged(event);
 	}
 	
-	public List<? extends IXtextDocumentToken> getTokens() {
-		return tokenSource.getTokenInfos();
-	}
 	
 	public IRegion getLastDamage() {
 		return tokenSource.getLastDamagedRegion();
+	}
+	
+	public Iterable<ILexerTokenRegion> getTokens() {
+		return tokenSource.getTokenInfos();
 	}
 
 }

@@ -39,6 +39,6 @@ public interface IXtextDocument extends IDocument, IStateAccess<XtextResource> {
 	
 	void removeXtextDocumentContentObserver(IXtextDocumentContentObserver listener);
 	
-//	List<? extends IXtextDocumentToken> getTokens();
+//	List<? extends ILexerTokenRegion> getTokens();
 
 }

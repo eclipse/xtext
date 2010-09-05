@@ -7,13 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
+import org.eclipse.jface.text.IRegion;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public interface IXtextDocumentToken {
-	int getAntlrTokenType();
-	int getLength();
-//	String getText();
-//	public abstract int getStartIndex();
-//	public abstract int getStopIndex();
+public interface ILexerTokenRegion extends IRegion {
+	int getLexerTokenType();
+	
 }

@@ -14,7 +14,7 @@ import junit.framework.TestCase;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.xtext.ui.editor.model.IXtextDocumentToken;
+import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TokenScanner;
 
 import com.google.common.collect.Lists;
@@ -83,27 +83,34 @@ public class TokenScannerTest extends TestCase {
 	}
 
 	public TokenScanner getTokenScanner(int... lengths) throws Exception {
-		final List<IXtextDocumentToken> tokens = Lists.newArrayList();
+		final List<ILexerTokenRegion> tokens = Lists.newArrayList();
+		int offset = 0;
 		for (final int length : lengths) {
-			tokens.add(new IXtextDocumentToken() {
+			final int currentOffset = offset;
+			tokens.add(new ILexerTokenRegion() {
 
 				public int getLength() {
 					return length;
 				}
 
-				public int getAntlrTokenType() {
+				public int getLexerTokenType() {
 					return 4711;
 				}
+				
+				public int getOffset() {
+					return currentOffset;
+				}
 			});
+			offset+=length;
 		}
 		TokenScanner tokenScanner = new TokenScanner() {
 			@Override
-			protected List<? extends IXtextDocumentToken> getTokens(IDocument document) {
+			protected Iterable<ILexerTokenRegion> getTokens(IDocument document) {
 				return tokens;
 			}
 			
 			@Override
-			protected IToken createToken() {
+			protected IToken createToken(ILexerTokenRegion token) {
 				return Token.UNDEFINED;
 			}
 		};
