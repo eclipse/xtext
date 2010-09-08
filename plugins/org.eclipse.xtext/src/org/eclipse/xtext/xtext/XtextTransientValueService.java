@@ -16,11 +16,13 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.util.Strings;
 
@@ -46,6 +48,8 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 					return true;
 				else if (rule.getName().equals(returnType.getClassifier().getName())) {
 					return isTransient(returnType, XtextPackage.eINSTANCE.getTypeRef_Metamodel(), -1);
+				} else if (GrammarUtil.isDatatypeRule(rule)) {
+					return NodeUtil.getNodeAdapter(returnType) == null;
 				}
 			} else if (rule instanceof TerminalRule) {
 				final TypeRef returnType = rule.getType();
