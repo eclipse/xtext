@@ -21,7 +21,8 @@ Require-Bundle: org.eclipse.xtext.ui.junit;bundle-version="1.0.1",
  org.eclipse.ui,
  org.eclipse.emf.common,
  org.eclipse.xtext.ui.shared;bundle-version="1.0.1",
- org.eclipse.emf.mwe2.launch;bundle-version="1.0.1";resolution:=optional
+ org.eclipse.emf.mwe2.launch;bundle-version="1.0.1";resolution:=optional,
+ org.eclipse.ui.ide;bundle-version="3.5.2"
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.ui.editor.contentassist
 Bundle-Activator: org.eclipse.xtext.xtext.ui.tests.Activator
