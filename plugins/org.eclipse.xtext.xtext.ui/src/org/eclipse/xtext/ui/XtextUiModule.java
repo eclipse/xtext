@@ -25,6 +25,7 @@ import org.eclipse.xtext.xtext.ui.editor.autoedit.XtextAutoEditStrategy;
 import org.eclipse.xtext.xtext.ui.editor.folding.XtextGrammarFoldingRegionProvider;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextActionBarContributor;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextDeclarativeModelTransformer;
+import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
@@ -94,6 +95,11 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 	
 	public Class<? extends IXtextEditorCallback> bindIXtextEditorCallback() {
 		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
+	}
+	
+	@Override
+	public Class<? extends org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider> bindIssueResolutionProvider() {
+		return XtextGrammarQuickfixProvider.class;
 	}
 	
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {

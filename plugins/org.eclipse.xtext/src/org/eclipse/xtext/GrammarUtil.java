@@ -302,6 +302,10 @@ public class GrammarUtil {
 	public static boolean isDatatypeRule(ParserRule parserRule) {
 		return parserRule.getType() != null && parserRule.getType().getClassifier() instanceof EDataType;
 	}
+	
+	public static boolean isDatatypeRule(AbstractRule abstractRule) {
+		return abstractRule instanceof ParserRule && isDatatypeRule((ParserRule)abstractRule);
+	}
 
 	// TODO replace me by compiled grammar model
 	public static EReference getReference(CrossReference ref, EClass referenceOwner) {

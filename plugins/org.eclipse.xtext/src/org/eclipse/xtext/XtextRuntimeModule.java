@@ -11,6 +11,7 @@ package org.eclipse.xtext;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.naming.IQualifiedNameSupport;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.xtext.XtextCrossReferenceSerializer;
 import org.eclipse.xtext.xtext.XtextDiagnosticConverter;
 import org.eclipse.xtext.xtext.XtextFormatter;
 import org.eclipse.xtext.xtext.XtextFragmentProvider;
+import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.XtextLinkingService;
 import org.eclipse.xtext.xtext.XtextQualifiedNameSupport;
 import org.eclipse.xtext.xtext.XtextReferableElementsUnloader;
@@ -106,4 +108,9 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	public Class<? extends IResourceDescription.Manager> bindIResourceDescriptionsManager() {
 		return XtextResourceDescriptionManager.class;
 	}
+	
+	public Class<? extends ILinkingDiagnosticMessageProvider.Extended> bindILinkingDiagnosticMessageProvider() {
+		return XtextLinkingDiagnosticMessageProvider.class;
+	}
+	
 }

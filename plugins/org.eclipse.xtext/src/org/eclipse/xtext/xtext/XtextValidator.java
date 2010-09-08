@@ -80,6 +80,9 @@ import com.google.inject.Inject;
  * @author Michael Clay
  */
 public class XtextValidator extends AbstractDeclarativeValidator {
+	public static final String INVALID_METAMODEL_NAME = "org.eclipse.xtext.grammar.InvalidMetaModelName";
+	public static final String INVALID_ACTION_USAGE = "org.eclipse.xtext.grammar.InvalidActionUsage";
+	public static final String EMPTY_ENUM_LITERAL= "org.eclipse.xtext.grammar.EmptyEnumLiteral";
 
 	@Inject
 	private IValueConverterService valueConverter;
@@ -172,7 +175,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		if (metamodel.getName() != null && metamodel.getName().length() != 0)
 			if (Character.isUpperCase(metamodel.getName().charAt(0)))
 				warning("Metamodel names should start with a lower case letter.",
-						XtextPackage.GENERATED_METAMODEL__NAME);
+						XtextPackage.GENERATED_METAMODEL__NAME,INVALID_METAMODEL_NAME,metamodel.getName());
 	}
 	
 	@Check
@@ -732,7 +735,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkEnumLiteralIsValid(EnumLiteralDeclaration decl) {
 		if ("".equals(decl.getLiteral().getValue()))
-			error("Enum literal must not be an empty string.", XtextPackage.ENUM_LITERAL_DECLARATION__LITERAL);
+			error("Enum literal must not be an empty string.", XtextPackage.ENUM_LITERAL_DECLARATION__LITERAL,EMPTY_ENUM_LITERAL,decl.getEnumLiteral().getName());
 	}
 
 	@Check
@@ -769,7 +772,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkActionInUnorderedGroup(final Action action) {
 		if (EcoreUtil2.getContainerOfType(action, UnorderedGroup.class) != null)
-			error("Actions may not be used in unordered groups.", action, null);
+			error("Actions may not be used in unordered groups.", action, null,INVALID_ACTION_USAGE);
 	}
 	
 	@Check
