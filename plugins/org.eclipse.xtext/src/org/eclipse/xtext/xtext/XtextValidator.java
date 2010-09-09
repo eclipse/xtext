@@ -80,6 +80,7 @@ import com.google.inject.Inject;
  * @author Michael Clay
  */
 public class XtextValidator extends AbstractDeclarativeValidator {
+	public static final String INVALID_METAMODEL_ALIAS = "org.eclipse.xtext.grammar.InvalidMetaModelAlias";
 	public static final String INVALID_METAMODEL_NAME = "org.eclipse.xtext.grammar.InvalidMetaModelName";
 	public static final String INVALID_ACTION_USAGE = "org.eclipse.xtext.grammar.InvalidActionUsage";
 	public static final String EMPTY_ENUM_LITERAL= "org.eclipse.xtext.grammar.EmptyEnumLiteral";
@@ -396,6 +397,24 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		}));
 		assertTrue("EPackage with ns-uri '" + declaration.getEPackage().getNsURI() + "' is used twice.",
 				XtextPackage.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, count == 1);
+	}
+	
+	@Check
+	public void checkReferencedMetamodelAlias(final ReferencedMetamodel declaration) {
+		if (declaration.getAlias() != null) {
+			Grammar grammar = GrammarUtil.getGrammar(declaration);
+			Iterable<ReferencedMetamodel> result = Iterables.filter(grammar.getMetamodelDeclarations(),
+					ReferencedMetamodel.class);
+			int count = Iterables.size(Iterables.filter(result, new Predicate<ReferencedMetamodel>() {
+				public boolean apply(ReferencedMetamodel param) {
+					return param.getAlias() != null && param.getAlias().equals(declaration.getAlias());
+				}
+			}));
+			if (count != 1) {
+				error("Referenced Metamodel alias used twice.", XtextPackage.REFERENCED_METAMODEL__ALIAS,
+						INVALID_METAMODEL_ALIAS, declaration.getAlias());
+			}
+		}
 	}
 
 	@Check
