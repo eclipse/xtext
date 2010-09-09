@@ -16,12 +16,14 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
@@ -38,9 +40,9 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.XtextValidator;
 import org.eclipse.xtext.xtext.ui.Activator;
-import org.eclipse.xtext.xtext.ui.editor.linking.XtextGrammarLinkingDiagnosticMessageProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -60,6 +62,12 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
 			"generate MYDSL \"http://www.xtext.org/example/mydsl/MyDsl\"", 
 			"Model: a=ID;"));
+	private static final String GRAMMAR_WITH_INVALID_MM_ALIAS = Strings.concat("\n", Arrays.asList(
+			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
+			"import '" + EcorePackage.eINSTANCE.getNsURI() + "' as ecore\n" +
+			"import '" + XtextPackage.eINSTANCE.getNsURI() + "' as ecore\n" +
+			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", 
+			"Model: a=ID;"));
 	private static final String GRAMMAR_WITH_EMPTY_ENUM_LITERAL = Strings.concat("\n", Arrays.asList(
 			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
 			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", 
@@ -73,8 +81,14 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 	
 	public void testFixMissingRule() throws Exception {
 		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_MISSING_RULE);
-		assertAndApplySingleResolution(xtextEditor, XtextGrammarLinkingDiagnosticMessageProvider.UNRESOLVED_RULE, 1,
+		assertAndApplySingleResolution(xtextEditor, XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE, 1,
 				"Create rule 'AbstractElement'");
+	}
+	
+	public void testFixInvalidMetaModelAlias() throws Exception {
+		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_INVALID_MM_ALIAS);
+		assertAndApplySingleResolution(xtextEditor, XtextValidator.INVALID_METAMODEL_ALIAS, 1,
+				"Remove 'ecore' alias");
 	}
 
 	public void testFixInvalidMetaModelName() throws Exception {
