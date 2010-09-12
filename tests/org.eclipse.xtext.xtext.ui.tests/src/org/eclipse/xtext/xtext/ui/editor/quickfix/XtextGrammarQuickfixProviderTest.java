@@ -16,14 +16,12 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
@@ -62,12 +60,12 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
 			"generate MYDSL \"http://www.xtext.org/example/mydsl/MyDsl\"", 
 			"Model: a=ID;"));
-	private static final String GRAMMAR_WITH_INVALID_MM_ALIAS = Strings.concat("\n", Arrays.asList(
-			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
-			"import '" + EcorePackage.eINSTANCE.getNsURI() + "' as ecore\n" +
-			"import '" + XtextPackage.eINSTANCE.getNsURI() + "' as ecore\n" +
-			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", 
-			"Model: a=ID;"));
+//	private static final String GRAMMAR_WITH_INVALID_MM_ALIAS = Strings.concat("\n", Arrays.asList(
+//			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
+//			"import '" + EcorePackage.eINSTANCE.getNsURI() + "' as ecore\n" +
+//			"import '" + XtextPackage.eINSTANCE.getNsURI() + "' as ecore\n" +
+//			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", 
+//			"Model: a=ID;"));
 	private static final String GRAMMAR_WITH_EMPTY_ENUM_LITERAL = Strings.concat("\n", Arrays.asList(
 			"grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals",
 			"generate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"", 
@@ -85,11 +83,12 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 				"Create rule 'AbstractElement'");
 	}
 	
-	public void testFixInvalidMetaModelAlias() throws Exception {
-		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_INVALID_MM_ALIAS);
-		assertAndApplySingleResolution(xtextEditor, XtextValidator.INVALID_METAMODEL_ALIAS, 1,
-				"Remove 'ecore' alias");
-	}
+//	see https://bugs.eclipse.org/bugs/show_bug.cgi?id=324566
+//	public void testFixInvalidMetaModelAlias() throws Exception {
+//		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_INVALID_MM_ALIAS);
+//		assertAndApplySingleResolution(xtextEditor, XtextValidator.INVALID_METAMODEL_ALIAS, 1,
+//				"Remove 'ecore' alias");
+//	}
 
 	public void testFixInvalidMetaModelName() throws Exception {
 		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_INVALID_MM_NAME);
