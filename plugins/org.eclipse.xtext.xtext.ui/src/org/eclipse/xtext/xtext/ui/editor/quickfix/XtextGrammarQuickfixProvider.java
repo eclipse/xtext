@@ -18,7 +18,6 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
@@ -38,18 +37,20 @@ import org.eclipse.xtext.xtext.XtextValidator;
 public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	private String NULL_QUICKFIX_IMAGE = null;
 	
-	@Fix(XtextValidator.INVALID_METAMODEL_ALIAS)
-	public void fixInvalidMetaModelAlias(final Issue issue, IssueResolutionAcceptor acceptor) {
-		final String alias = issue.getData()[0];
-		acceptor.accept(issue, "Remove '" + alias + "' alias", "Remove '" + alias + "' alias", NULL_QUICKFIX_IMAGE,
-				new ISemanticModification() {
-					public void apply(final EObject element, IModificationContext context) {
-						ReferencedMetamodel referencedMetamodel = (ReferencedMetamodel) element;
-						referencedMetamodel.setAlias(null);
-					}
-				});
-		createLinkingIssueResolutions(issue, acceptor);
-	}
+//	see https://bugs.eclipse.org/bugs/show_bug.cgi?id=324566
+//	
+//	@Fix(XtextValidator.INVALID_METAMODEL_ALIAS)
+//	public void fixInvalidMetaModelAlias(final Issue issue, IssueResolutionAcceptor acceptor) {
+//		final String alias = issue.getData()[0];
+//		acceptor.accept(issue, "Remove '" + alias + "' alias", "Remove '" + alias + "' alias", NULL_QUICKFIX_IMAGE,
+//				new ISemanticModification() {
+//					public void apply(final EObject element, IModificationContext context) {
+//						ReferencedMetamodel referencedMetamodel = (ReferencedMetamodel) element;
+//						referencedMetamodel.setAlias(null);
+//					}
+//				});
+//		createLinkingIssueResolutions(issue, acceptor);
+//	}
 
 	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
 	public void fixUnresolvedRule(final Issue issue, IssueResolutionAcceptor acceptor) {
