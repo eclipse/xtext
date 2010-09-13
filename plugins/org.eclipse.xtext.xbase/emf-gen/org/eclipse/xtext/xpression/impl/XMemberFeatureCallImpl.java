@@ -21,25 +21,25 @@ import org.eclipse.xtext.xpression.XpressionPackage;
  */
 public class XMemberFeatureCallImpl extends XFeatureCallImpl implements XMemberFeatureCall
 {
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected XMemberFeatureCallImpl()
-  {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected XMemberFeatureCallImpl()
+	{
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return XpressionPackage.Literals.XMEMBER_FEATURE_CALL;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass()
+	{
+		return XpressionPackage.Literals.XMEMBER_FEATURE_CALL;
+	}
 
 } //XMemberFeatureCallImpl

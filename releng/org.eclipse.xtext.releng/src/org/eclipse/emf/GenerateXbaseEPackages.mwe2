@@ -13,11 +13,11 @@ var project = "platform:/resource/org.eclipse.xtext.xbase"
 
 Workflow {
 	bean = StandaloneSetup {
-		platformUri = ".."
+		platformUri = "../.."
 	}
 	
 	component = DirectoryCleaner {
-		directory="../org.eclipse.xtext.xbase/emf-gen"
+		directory="../../org.eclipse.xtext.xbase/emf-gen"
 	}
 		
 	component = EcoreGenerator {

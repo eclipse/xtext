@@ -6,8 +6,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="XFunctionTypeRef" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmParameterizedTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="paramTypes" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
-        changeable="false" derived="true"/>
+        changeable="false" derived="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
-        changeable="false" derived="true"/>
+        changeable="false" derived="true" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

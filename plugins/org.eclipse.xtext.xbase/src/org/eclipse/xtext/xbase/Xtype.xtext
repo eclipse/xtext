@@ -11,11 +11,11 @@ grammar org.eclipse.xtext.xbase.Xtype with org.eclipse.xtext.common.Terminals
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
 import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
 
-JvmTypeReference:
+JvmTypeReference returns JvmParameterizedTypeReference:
   JvmParameterizedTypeReference|XFunctionTypeRef;
 
 XFunctionTypeRef:
-  ('(' arguments+=JvmTypeArgument (',' arguments+=JvmTypeArgument)* ')')? '=>' arguments+=JvmTypeArgument;
+  ('(' paramTypes+=JvmTypeReference (',' paramTypes+=JvmTypeReference)* ')')? '=>' returnType=JvmTypeReference;
 
 JvmParameterizedTypeReference:
   type=[JvmType|QualifiedName] ('<' arguments+=JvmTypeArgument (',' arguments+=JvmTypeArgument)* '>')?;

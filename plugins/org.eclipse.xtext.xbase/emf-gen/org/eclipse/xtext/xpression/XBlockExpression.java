@@ -25,20 +25,20 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface XBlockExpression extends XExpression
 {
-  /**
-   * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.xpression.XExpression}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Expressions</em>' containment reference list.
-   * @see org.eclipse.xtext.xpression.XpressionPackage#getXBlockExpression_Expressions()
-   * @model containment="true"
-   * @generated
-   */
-  EList<XExpression> getExpressions();
+	/**
+	 * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.xpression.XExpression}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Expressions</em>' containment reference list.
+	 * @see org.eclipse.xtext.xpression.XpressionPackage#getXBlockExpression_Expressions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<XExpression> getExpressions();
 
 } // XBlockExpression
