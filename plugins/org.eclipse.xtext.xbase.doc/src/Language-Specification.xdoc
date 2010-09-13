@@ -1,0 +1,289 @@
+ chapter:Preface[Preface]
+
+This document specifies the programming language library Xbase. Xbase is a partial programming language implemented in Xtext and is ment to be used and extended
+ within other programming languages and domain-specific languages (DSL) which are also implemented in Xtext. Xtext is a highly extendable language development framework 
+covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse. 
+
+Xbase serves as a language library providing a common expression language bound to the Java platform (i.e. Java Virtual Machine). It ships in form of an Xtext grammar, as well as 
+reusable and adaptable implementations for the different aspects of a language infrastructure such as an AST structure, a compiler, an interpreter, a linker,  and  a static analyzer.
+In addition it comes with implementations to integrate the expression language within an Xtext-based Eclipse IDE. Default implementations for aspects like content assistance, syntax coloring, 
+hovering, folding and navigation can be easily integrated and reused within any Xtext based language. 
+
+chapter[Lexical Syntax]
+
+Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully choosen and it is recommended to stick 
+with the lexical syntax described in the following.
+
+section:Identifiers[Identifiers]
+
+Identifiers are used to name all constructs, such as types, methods and variables.
+
+e[Syntax]
+code[
+terminal ID  : 
+	'^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
+;
+]
+
+Identifiers start with any alphabetic character or an undercore followed by any number of alphabetic characters, underscores or numbers. Identifiers starting with a code[^] are
+so called escaped identifiers. Escaped identifiers are used in cases when there is a conflict with a reserved keyword. Imagine you had introduced
+a keyword 'service' in your language but want at some point call a Java property 'service'. In such cases you use an escaped identifier code[^service] to reference the Java property.
+
+e[Examples]
+ul[
+	item[Foo]
+	item[Foo42]
+	item[FOO]
+	item[_42]
+	item[_foo]
+	item[^extends]
+]
+
+section:StringLiterals[String Literals]
+
+%%TODO  
+In Xbase string literals can span multiple lines. In addition there are two different terminals you can use which allows for avoiding escape sequences as far as possible.
+Note that there are no character literals in Xbase.
+
+e[Syntax]
+code[
+terminal STRING	: 
+	'"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
+	"'" ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|"'") )* "'"
+;
+]
+
+e[Examples]
+ul[
+	item['Foo Bar Baz']
+	item["Foo Bar Baz"]
+	item[" the quick brown fox 
+		   jumps over the lazy dog."]
+	item['Escapes : \' ']
+	item["Escapes : \" "]
+]
+
+section:IntegerLiterals[Integer Literals]
+
+Integer Literals consists of one or more digits.
+
+e[Syntax]
+code[
+terminal INT returns ecore::EInt: 
+	('0'..'9')+
+;
+]
+
+section:Comments[Comments]
+
+Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
+The syntax is the same to the one from Java:
+
+e[Syntax]
+code[
+terminal ML_COMMENT	: 
+	'/*' -> '*/'
+;
+terminal SL_COMMENT : 
+	'//' !('\n'|'\r')* ('\r'? '\n')?
+;
+]
+
+section:Whitespace[White Space]
+
+Xbase ignores all white space.
+
+section:Keywords[Reserved Keywords]
+
+The following list of words are reserved keywords, that reducing the set of possible identifiers:
+ol[
+	item[extends]
+	item[instanceof]
+	item[new]
+	item[null]
+	item[false]
+	item[true]
+	item[if]
+	item[else]
+	item[switch]
+	item[case]
+	item[default]
+	item[while]
+	item[def]
+	item[class]
+]
+
+However, in case some of the keywords have to be used as identifiers at times, the escape character of ref:Identifiers[identifiers] come in handy. 
+
+chapter:Types[Types]
+
+Xbase binds to the Java Virtual Machine. This means that expressions written in Xbase refer to Java types and Java type members. Xbase itself uses only types 
+defined in the Java language, such as classes, interfaces, annotations and enums. It also resembles Java generics and shares the known syntax. In addition to Java, Xbase comes with the
+notion of function types, that is the type of a function. 
+
+section:TypeReferences[Simple Type References]
+
+A simple type reference only consists of a qualified name. A qualified name is a name made up of identifiers which are separated by a dot (like in Java).
+
+e[Syntax of qualified names] 
+code[
+QualifiedName:
+  ID ('.' ID)*
+;	
+]
+
+There's no rule for a simple type reference, as it is expressed as a parameterized type references without paramters.
+
+e[Examples]
+ul[
+	item[java.lang.String]
+	item[String]
+]
+
+section:FunctionTypes[Function Types]
+
+Xbase introduces closures, which need a special kind of type. On the Jvm-Level a closures (or more generally any function object) is just an instance of one of the 
+types in e[org.eclipse.xtext.xbase.lib.Function*], dependening on the number of arguments. However, as closures are a very important language feature, and
+it would be very inconvenient to write code[Function3<String,String,String,Boolean>] the syntax for funtcion types has been introduced. 
+So instead of writing code[Function<String,Boolean>] one can write code[(String)=>Boolean] instead.
+
+e[Syntax]
+code[
+XFunctionTypeRef:
+  ('(' parameterTypes+=JvmTypeReference (',' parameterTypes+=JvmTypeReference)* ')')? '=>' returnType+=JvmTypeReference;
+]
+
+e[Examples]
+ul[
+	item[=>Boolean // predicate without parameters]
+	item[(String)=>Boolean // One argument predicate]
+	item[(Mutable)=>Void // A method doing sideffects on an instance of Mutable and returns null]
+	item[(List<String>)=>String]
+]
+
+section:ParameterizedTypeReference[Parameterized Type References]
+
+The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is exactly the same as in Java, so please 
+refer to the third edition of the  link[http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html][Java Language Specification] which is available online for free.
+
+The only difference is, that in Xbase a type reference can also be a function type. In the following the full syntax fo type references is shown, including function types and
+type arguments.
+
+e[Syntax]
+code[
+JvmTypeReference:
+  JvmParameterizedTypeReference|XFunctionTypeRef;
+	
+XFunctionTypeRef:
+  ('(' parameterTypes+=JvmTypeReference (',' parameterTypes+=JvmTypeReference)* ')')? '=>' returnType+=JvmTypeReference;
+
+JvmParameterizedTypeReference:
+  type=\[JvmType|QualifiedName\] ('<' arguments+=JvmTypeArgument (',' arguments+=JvmTypeArgument)* '>')?;
+
+JvmTypeArgument:
+  JvmReferenceTypeArgument|JvmWildcardTypeArgument;
+  
+JvmReferenceTypeArgument :
+  typeReference=JvmTypeReference;
+
+JvmWildcardTypeArgument:
+  {JvmWildcardTypeArgument} '?' (constraints+=JvmUpperBound | constraints+=JvmLowerBound)?;
+
+JvmLowerBound :
+ 'super' typeReference=JvmTypeReference;
+
+JvmUpperBound : 
+ 'extends' typeReference=JvmTypeReference;
+
+]
+
+e[Examples]
+ul[
+	item[String]
+	item[java.lang.String]
+	item[List<?>]
+	item[List<? extends Comparable<? extends FooBar>]
+	item[List<? super MyLowerBound>]
+	item[List<? extends =>Boolean>]
+]
+
+chapter:Expressions[Expressions]
+
+Expressions are the main language constructs which are used to express behavior and computation of values. Xbase doesn't support the concept of a statement, but instead comes with powerful 
+expressions to handle situations in which the imperative nature of statements are a better fit. An expression always results in a value (might be the value 'null' though). In addition expressions can
+be statically typed. That is by default it is assumed that languages making use of Xbase provide enough static context infromation to allow for static type analysis, which is the basis of a lot of
+IDE features coming with Xbase for free. However, the static typing is not mandatory and might be completely skipped if not wished. The openess of the compiler even allows to change the generation of 
+concrete feature invocations to reflective calls, so that the language can be fully dynamically typed.
+
+section:Literals[Literals]
+
+A literal denotes a fixed unchangeable value. Xbase comes with the following literals
+
+section2:ExpressionsStringLiterals[String Literals]
+
+A string literal as defined in ref:StringLiterals is a valid expression and returns an instance of e[java.lang.String] of the given value.
+
+section2:ExpressionsIntegerLiterals[Integer Literals]
+
+An integer literal as defined in ref:IntegerLiterals creates an instance of e[int] (TODO discuss how we want to go about the built-in types of Java).
+
+section2:BooleanLiteral[Boolean Literals]
+
+There are two boolean literals, code[true] and code[false] which correspond to the respective Java values of the native type e[boolean] 
+
+e[Syntax]
+code[
+XBooleanLiteral:
+	{XBooleanLiteral} 'false' | isTrue?='true';
+]
+
+section2:NullLiteral[Null Literal]
+
+The null pointer literal again is like in Java: code[null]. 
+
+e[Syntax]
+code[
+XNullLiteral:
+	{XNullLiteral} 'null';
+]
+
+section2:TypeLiteral[Type Literals]
+
+Also type literals are written like in Java, that is it it consists of a reference to a raw type suffixed with a dot and the keyword code[class].
+
+e[Syntax]
+code[
+XTypeLiteral:
+	type=\[types::JvmType|QualifiedName\] '.' 'class';
+ ]
+
+section:Operators[Infix Operators]
+
+Xbase supports the usual infix operators as well as some additional operators known from other languages. In contrast to Java, the operators are not fixed
+to operations on certain types, but instead Xbase comes with an operator to method mapping, which allows users to redefine the operators for any type just by implementing
+the corresponding method signature. The following defines the operators and the corresponding method signatures.
+
+table[
+	tr[td[<Exp1>.someProp = <Exp2>]	td[<TypeOfExp1>.setSomeProp(<TypeOfExp2>)]]
+	tr[td[<Exp1> += <Exp2>]			td[<TypeOfExp1>.add(<TypeOfExp2>)]]
+	tr[td[<Exp1> || <Exp2>]			td[<TypeOfExp1>.or(<TypeOfExp2>)]]
+	tr[td[<Exp1> && <Exp2>]			td[<TypeOfExp1>.and(<TypeOfExp2>)]]
+	tr[td[<Exp1> == <Exp2>]			td[<TypeOfExp1>.equals(<TypeOfExp2>)]]
+	tr[td[<Exp1> != <Exp2>]			td[<TypeOfExp1>.notEquals(<TypeOfExp2>)]]
+	tr[td[<Exp1> < <Exp2>]			td[<TypeOfExp1>.lessThan(<TypeOfExp2>)]]
+	tr[td[<Exp1> > <Exp2>]			td[<TypeOfExp1>.greaterThan(<TypeOfExp2>)]]
+	tr[td[<Exp1> <= <Exp2>]			td[<TypeOfExp1>.lessEqualsThan(<TypeOfExp2>)]]
+	tr[td[<Exp1> >= <Exp2>]			td[<TypeOfExp1>.greaterEqualsThan(<TypeOfExp2>)]]
+	tr[td[<Exp1> -> <Exp2>]			td[<TypeOfExp1>.mappedTo(<TypeOfExp2>)]]
+	tr[td[<Exp1> .. <Exp2>]			td[<TypeOfExp1>.upTo(<TypeOfExp2>)]]
+	tr[td[<Exp1> + <Exp2>]			td[<TypeOfExp1>.plus(<TypeOfExp2>)]]
+	tr[td[<Exp1> - <Exp2>]			td[<TypeOfExp1>.minus(<TypeOfExp2>)]]
+	tr[td[<Exp1> * <Exp2>]			td[<TypeOfExp1>.multiply(<TypeOfExp2>)]]
+	tr[td[<Exp1> / <Exp2>]			td[<TypeOfExp1>.divide(<TypeOfExp2>)]]
+	tr[td[<Exp1> % <Exp2>]			td[<TypeOfExp1>.modulo(<TypeOfExp2>)]]
+	tr[td[<Exp1> ** <Exp2>]			td[<TypeOfExp1>.power(<TypeOfExp2>)]]
+	tr[td[! <Exp1>]					td[<TypeOfExp1>.not()]]
+	tr[td[- <Exp1>]					td[<TypeOfExp1>.minus()]]
+]
+		
+The table above also defines the operator precedence. The two assignment operators e[=] and e[+=] are right associative, that is a = b = c is executed as a = (b = c).
