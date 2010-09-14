@@ -18,7 +18,8 @@ section:Identifiers[Identifiers]
 
 Identifiers are used to name all constructs, such as types, methods and variables.
 
-e[Syntax]
+section2[Syntax]
+
 code[
 terminal ID  : 
 	'^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
@@ -29,7 +30,8 @@ Identifiers start with any alphabetic character or an undercore followed by any 
 so called escaped identifiers. Escaped identifiers are used in cases when there is a conflict with a reserved keyword. Imagine you had introduced
 a keyword 'service' in your language but want at some point call a Java property 'service'. In such cases you use an escaped identifier code[^service] to reference the Java property.
 
-e[Examples]
+section2[Examples]
+
 ul[
 	item[Foo]
 	item[Foo42]
@@ -41,11 +43,12 @@ ul[
 
 section:StringLiterals[String Literals]
 
-%%TODO  
+%%TODO unicode escape sequences
 In Xbase string literals can span multiple lines. In addition there are two different terminals you can use which allows for avoiding escape sequences as far as possible.
 Note that there are no character literals in Xbase.
 
-e[Syntax]
+section2[Syntax]
+
 code[
 terminal STRING	: 
 	'"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
@@ -53,7 +56,8 @@ terminal STRING	:
 ;
 ]
 
-e[Examples]
+section2[Examples]
+
 ul[
 	item['Foo Bar Baz']
 	item["Foo Bar Baz"]
@@ -67,7 +71,8 @@ section:IntegerLiterals[Integer Literals]
 
 Integer Literals consists of one or more digits.
 
-e[Syntax]
+section2[Syntax]
+
 code[
 terminal INT returns ecore::EInt: 
 	('0'..'9')+
@@ -79,7 +84,8 @@ section:Comments[Comments]
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
 The syntax is the same to the one from Java:
 
-e[Syntax]
+section2[Syntax]
+
 code[
 terminal ML_COMMENT	: 
 	'/*' -> '*/'
@@ -125,7 +131,8 @@ section:TypeReferences[Simple Type References]
 
 A simple type reference only consists of a qualified name. A qualified name is a name made up of identifiers which are separated by a dot (like in Java).
 
-e[Syntax of qualified names] 
+section2[Syntax]
+
 code[
 QualifiedName:
   ID ('.' ID)*
@@ -134,7 +141,8 @@ QualifiedName:
 
 There's no rule for a simple type reference, as it is expressed as a parameterized type references without paramters.
 
-e[Examples]
+section2[Examples]
+
 ul[
 	item[java.lang.String]
 	item[String]
@@ -147,13 +155,15 @@ types in e[org.eclipse.xtext.xbase.lib.Function*], dependening on the number of 
 it would be very inconvenient to write code[Function3<String,String,String,Boolean>] the syntax for funtcion types has been introduced. 
 So instead of writing code[Function<String,Boolean>] one can write code[(String)=>Boolean] instead.
 
-e[Syntax]
+section2[Syntax]
+
 code[
 XFunctionTypeRef:
   ('(' parameterTypes+=JvmTypeReference (',' parameterTypes+=JvmTypeReference)* ')')? '=>' returnType+=JvmTypeReference;
 ]
 
-e[Examples]
+section2[Examples]
+
 ul[
 	item[=>Boolean // predicate without parameters]
 	item[(String)=>Boolean // One argument predicate]
@@ -169,7 +179,8 @@ refer to the third edition of the  link[http://java.sun.com/docs/books/jls/third
 The only difference is, that in Xbase a type reference can also be a function type. In the following the full syntax fo type references is shown, including function types and
 type arguments.
 
-e[Syntax]
+section2[Syntax]
+
 code[
 JvmTypeReference:
   JvmParameterizedTypeReference|XFunctionTypeRef;
@@ -197,7 +208,8 @@ JvmUpperBound :
 
 ]
 
-e[Examples]
+section2[Examples]
+
 ul[
 	item[String]
 	item[java.lang.String]
@@ -231,7 +243,8 @@ section2:BooleanLiteral[Boolean Literals]
 
 There are two boolean literals, code[true] and code[false] which correspond to the respective Java values of the native type e[boolean] 
 
-e[Syntax]
+section2[Syntax]
+
 code[
 XBooleanLiteral:
 	{XBooleanLiteral} 'false' | isTrue?='true';
@@ -241,7 +254,8 @@ section2:NullLiteral[Null Literal]
 
 The null pointer literal again is like in Java: code[null]. 
 
-e[Syntax]
+section2[Syntax]
+
 code[
 XNullLiteral:
 	{XNullLiteral} 'null';
@@ -251,7 +265,8 @@ section2:TypeLiteral[Type Literals]
 
 Also type literals are written like in Java, that is it it consists of a reference to a raw type suffixed with a dot and the keyword code[class].
 
-e[Syntax]
+section2[Syntax]
+
 code[
 XTypeLiteral:
 	type=\[types::JvmType|QualifiedName\] '.' 'class';
@@ -264,26 +279,144 @@ to operations on certain types, but instead Xbase comes with an operator to meth
 the corresponding method signature. The following defines the operators and the corresponding method signatures.
 
 table[
-	tr[td[<Exp1>.someProp = <Exp2>]	td[<TypeOfExp1>.setSomeProp(<TypeOfExp2>)]]
-	tr[td[<Exp1> += <Exp2>]			td[<TypeOfExp1>.add(<TypeOfExp2>)]]
-	tr[td[<Exp1> || <Exp2>]			td[<TypeOfExp1>.or(<TypeOfExp2>)]]
-	tr[td[<Exp1> && <Exp2>]			td[<TypeOfExp1>.and(<TypeOfExp2>)]]
-	tr[td[<Exp1> == <Exp2>]			td[<TypeOfExp1>.equals(<TypeOfExp2>)]]
-	tr[td[<Exp1> != <Exp2>]			td[<TypeOfExp1>.notEquals(<TypeOfExp2>)]]
-	tr[td[<Exp1> < <Exp2>]			td[<TypeOfExp1>.lessThan(<TypeOfExp2>)]]
-	tr[td[<Exp1> > <Exp2>]			td[<TypeOfExp1>.greaterThan(<TypeOfExp2>)]]
-	tr[td[<Exp1> <= <Exp2>]			td[<TypeOfExp1>.lessEqualsThan(<TypeOfExp2>)]]
-	tr[td[<Exp1> >= <Exp2>]			td[<TypeOfExp1>.greaterEqualsThan(<TypeOfExp2>)]]
-	tr[td[<Exp1> -> <Exp2>]			td[<TypeOfExp1>.mappedTo(<TypeOfExp2>)]]
-	tr[td[<Exp1> .. <Exp2>]			td[<TypeOfExp1>.upTo(<TypeOfExp2>)]]
-	tr[td[<Exp1> + <Exp2>]			td[<TypeOfExp1>.plus(<TypeOfExp2>)]]
-	tr[td[<Exp1> - <Exp2>]			td[<TypeOfExp1>.minus(<TypeOfExp2>)]]
-	tr[td[<Exp1> * <Exp2>]			td[<TypeOfExp1>.multiply(<TypeOfExp2>)]]
-	tr[td[<Exp1> / <Exp2>]			td[<TypeOfExp1>.divide(<TypeOfExp2>)]]
-	tr[td[<Exp1> % <Exp2>]			td[<TypeOfExp1>.modulo(<TypeOfExp2>)]]
-	tr[td[<Exp1> ** <Exp2>]			td[<TypeOfExp1>.power(<TypeOfExp2>)]]
-	tr[td[! <Exp1>]					td[<TypeOfExp1>.not()]]
-	tr[td[- <Exp1>]					td[<TypeOfExp1>.minus()]]
+	tr[td[<Exp1>.someProp = <Exp2>]		td[<Exp1>.setSomeProp(<Exp2>)]]
+	tr[td[<Exp1> += <Exp2>]				td[<Exp1>.add(<Exp2>)]]
+	tr[td[ ]td[ ]]
+	tr[td[<Exp1> || <Exp2>]				td[<Exp1>.or(<Exp2>)]]
+	tr[td[ ]td[ ]]
+	tr[td[<Exp1> && <Exp2>]				td[<Exp1>.and(<Exp2>)]]
+	tr[td[ ]td[ ]]
+	tr[td[<Exp1> instanceof RawTypeRef]	td[<Exp1> instanceof RawTypeRef /* direct translation to Java */]]
+	tr[td[<Exp1> == <Exp2>]				td[<Exp1>.equals(<Exp2>)]]
+	tr[td[<Exp1> != <Exp2>]				td[<Exp1>.notEquals(<Exp2>)]]
+	tr[td[<Exp1> < <Exp2>]				td[<Exp1>.lessThan(<Exp2>)]]
+	tr[td[<Exp1> > <Exp2>]				td[<Exp1>.greaterThan(<Exp2>)]]
+	tr[td[<Exp1> <= <Exp2>]				td[<Exp1>.lessEqualsThan(<Exp2>)]]
+	tr[td[<Exp1> >= <Exp2>]				td[<Exp1>.greaterEqualsThan(<Exp2>)]]
+	tr[td[ ]td[ ]]
+	tr[td[<Exp1> -> <Exp2>]				td[<Exp1>.mappedTo(<Exp2>)]]
+	tr[td[<Exp1> .. <Exp2>]				td[<Exp1>.upTo(<Exp2>)]]
+	tr[td[ ]td[ ]]
+	tr[td[<Exp1> + <Exp2>]				td[<Exp1>.plus(<Exp2>)]]
+	tr[td[<Exp1> - <Exp2>]				td[<Exp1>.minus(<Exp2>)]]
+	tr[td[ ]td[ ]]
+	tr[td[<Exp1> * <Exp2>]				td[<Exp1>.multiply(<Exp2>)]]
+	tr[td[<Exp1> / <Exp2>]				td[<Exp1>.divide(<Exp2>)]]
+	tr[td[<Exp1> % <Exp2>]				td[<Exp1>.modulo(<Exp2>)]]
+	tr[td[<Exp1> ** <Exp2>]				td[<Exp1>.power(<Exp2>)]]
+	tr[td[ ]td[ ]]
+	tr[td[! <Exp1>]						td[<Exp1>.not()]]
+	tr[td[- <Exp1>]						td[<Exp1>.minus()]]
+	tr[td[ ]td[ ]]
+	tr[td[<Exp1>\[<Exp2>\]]			td[<Exp1>.apply(<Exp2)]]
 ]
 		
-The table above also defines the operator precedence. The two assignment operators e[=] and e[+=] are right associative, that is a = b = c is executed as a = (b = c).
+The table above also defines the operator precedence (fom low to high precedence). The separator lines indicate a precedence level. 
+The two assignment operators e[=] and e[+=] are right-to-left associative, that is a = b = c is executed as a = (b = c), all other
+operators are left-to-right associative. Parenthesis can be used to adjust the default precedence and associativity. 
+
+section2:propertyAssignment[Property Assignment]
+
+The translation rule for the simple assignment operator e[=] is a bit more complicated.
+Given the expression 
+
+code[
+	myObj.myProperty = "foo"
+]
+
+It first looks up whether, there is an accessible Java Field called e[myProperty] on the type of e[myObj]. If there is one it translates to
+the following Java statements :
+
+code[Java][
+	myObj.myProperty = "foo";
+]
+
+Remember in Xbase everything is an expression and has to return something. In the case of simple assignments the return value is e[null] (and the type is e[java.lang.Void]).
+
+If there is no accessible field on the left operands type, a method called e[setMyProperty] is looked up. It has to take one argument of the type (or a super type) of the right hand operand.
+The return value will be whatever the setter method returns (usually null i.e. type e[java.lang.Void]). 
+As a result the compiler translates to :
+
+code[Java][
+	myObj.setMyProperty("foo")
+]
+
+section2[Short-Circuit Boolean Operators]
+
+If the operators e[||] and e[&&] are used in a context where both operands are of type boolean, the operation supports short circuit.
+That is 
+ol[
+	item[in the case of e[||] the operand on the right hand side is not evaluated if the left operand evaluates to e[true].]
+	item[in the case of e[&&] the operand on the right hand side is not evaluated if the left operand evaluates to e[false].]
+]
+ 
+
+section2[Examples]
+
+ul[
+	item[my.foo = 23]
+	item[myList += 23]
+	item[x > 23 && y < 23]
+	item[x && y || z]
+	item[1 + 3 * 5 * (- 23)]
+	item[!(x]
+	item[my.foo = 23]
+	item[my.foo = 23]
+]
+
+section:FeatureCalls[Feature Calls]
+
+A feature call is used to invoke members of objects, such as fields and methods, but also can refer to local variables and parameters, which are made available for the current expression's scope.
+
+section2[Syntax]
+
+The following snippet is a simplification of the real Xtext rules, which cover more than the concrete syntax.
+code[
+FeatureCall :
+	ID |
+	Expression ('.' ID ('(' Expression (',' Expression)* ')')?)*
+]
+
+section2:propertyAccess[Property Access]
+
+Feature calls are directly translated to their Java equivalent with the exception, that for calls to properties an equivalent rule as described in ref:propertyAssignment applies. 
+That is, for the following expression
+
+code[
+	myObj.myProperty
+]
+
+the compiler first looks for an accessible field in the static type of myObj. If no such field exists it looks for a method called e[getMyProperty()] and binds to that if found.
+Otherwise such an expression is not bound which results in a compilation error.
+
+section2:implicitThis[Implicit e[this] variable]
+
+If the current scope contains a variable named e[this], the compiler will make all its members available to the scope. 
+That is if 
+code[
+	this.myProperty
+]
+if a valid expression
+code[
+	myProperty
+]
+is valid as well and is equivalent. 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
