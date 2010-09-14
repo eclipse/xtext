@@ -11,10 +11,10 @@ package org.eclipse.xtext.linking.lazy;
 import java.io.InputStream;
 import java.util.List;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
@@ -70,8 +70,8 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 		
 		Property property = t2.getProperties().get(0);
 		EList<Type> types = property.getType();
-		assertTrue(((InternalEObject)((BasicEList<Type>)types).basicGet(0)).eIsProxy());
-		assertTrue(((InternalEObject)((BasicEList<Type>)types).basicGet(0)).eIsProxy());
+		assertTrue(((InternalEObject)((InternalEList<Type>)types).basicGet(0)).eIsProxy());
+		assertTrue(((InternalEObject)((InternalEList<Type>)types).basicGet(0)).eIsProxy());
 		assertFalse(((InternalEObject)types.get(0)).eIsProxy());
 		assertFalse(((InternalEObject)types.get(1)).eIsProxy());
 	}

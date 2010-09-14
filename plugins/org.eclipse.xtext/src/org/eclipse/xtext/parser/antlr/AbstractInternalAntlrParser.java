@@ -25,10 +25,10 @@ import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
@@ -294,7 +294,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		compositeNode.eSetDeliver(false);
 		allParseTreeElements.add(compositeNode);
 		if (parentNode != null)
-			((BasicEList<AbstractNode>) parentNode.getChildren()).addUnique(compositeNode);
+			((InternalEList<AbstractNode>) parentNode.getChildren()).addUnique(compositeNode);
 		compositeNode.setGrammarElement(grammarElement);
 		return compositeNode;
 	}
@@ -327,7 +327,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			error.setMessage(lexerErrorMessage);
 			leafNode.setSyntaxError(error);
 		}
-		((BasicEList<AbstractNode>) currentNode.getChildren()).addUnique(leafNode);
+		((InternalEList<AbstractNode>) currentNode.getChildren()).addUnique(leafNode);
 		return leafNode;
 	}
 

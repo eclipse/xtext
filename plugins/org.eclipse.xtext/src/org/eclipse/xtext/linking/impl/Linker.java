@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
@@ -147,12 +147,12 @@ public class Linker extends AbstractCleaningLinker {
 						// eRef.getUpperBound() < links.size
 						// TODO extract and check weather equals or identity is used by list
 				final List<EObject> list = (List<EObject>) obj.eGet(eRef);
-				if (links.size() > 1 && eRef.isUnique() && (list instanceof BasicEList)) {
+				if (links.size() > 1 && eRef.isUnique() && (list instanceof InternalEList)) {
 					final Set<EObject> addUs = new LinkedHashSet<EObject>(links);
 					//addUs.removeAll(list); // removeAll calls most likely list.contains() which is rather slow
 					for (int i = 0; i < list.size(); i++)
 						addUs.remove(list.get(i));
-					if (!((BasicEList) list).addAllUnique(addUs)) {
+					if (!((InternalEList) list).addAllUnique(addUs)) {
 						ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(
 								obj, eRef, node);
 						DiagnosticMessage message = diagnosticMessageProvider.getViolatedBoundsConstraintMessage(
