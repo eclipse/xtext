@@ -8,12 +8,12 @@ import org.eclipse.xtext.ui.generator.*
 var grammarURI = "classpath:/org/eclipse/xtext/generator/parser/antlr/splitting/SimpleExpressions.xtext"
 var file.extensions = "simpleExpressions"
 var projectName = "org.eclipse.xtext.generator"
-var runtimeProject = "../${projectName}"
+var runtimeProject = "../../plugins/${projectName}"
 
 Workflow {
 	
 	bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/.."
+		platformUri = "${runtimeProject}/../.."
 	}
 	
 	component = DirectoryCleaner {

@@ -10,17 +10,16 @@ module org.eclipse.xtext.bootstrap.GenerateXtext
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
-import de.itemis.xtext.antlr.*
 
 var runtimeProjectName = "org.eclipse.xtext"
 var uiProjectName = "org.eclipse.xtext.xtext.ui"
-var runtimeProject = "../${runtimeProjectName}"
-var uiProject = "../${uiProjectName}"
+var runtimeProject = "../../plugins/${runtimeProjectName}"
+var uiProject = "../../plugins/${uiProjectName}"
 var file.extensions = "xtext,xtext2"
 
 Workflow {
 	bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/.."
+		platformUri = "${runtimeProject}/../.."
 	}
 	
 	component = DirectoryCleaner {
@@ -41,7 +40,7 @@ Workflow {
 			fileExtensions="${file.extensions}"
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
-			fragment = XtextAntlrGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {
 				options = {
 					classSplitting = true
 				} 
@@ -51,7 +50,7 @@ Workflow {
 			}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = labeling.LabelProviderFragment {}
-			fragment = XtextAntlrUiGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
 				options = {
 					classSplitting = true 
 				}
@@ -69,5 +68,4 @@ Workflow {
 		}
 	}
 	
-	component = @org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressions {}
 }
