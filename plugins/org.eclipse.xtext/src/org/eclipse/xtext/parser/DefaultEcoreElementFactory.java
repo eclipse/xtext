@@ -11,12 +11,12 @@ package org.eclipse.xtext.parser;
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -100,7 +100,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		try {
 			if (value instanceof EObject) {
 				// containment lists are unique per-se and the tokenValue was created just a sec ago
-				((BasicEList<EObject>) object.eGet(structuralFeature)).addUnique((EObject) value);
+				((InternalEList<EObject>) object.eGet(structuralFeature)).addUnique((EObject) value);
 			} else {
 				final Object tokenValue = getTokenValue(value, ruleName, node);
 				((Collection<Object>) object.eGet(structuralFeature)).add(tokenValue);
