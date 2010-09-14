@@ -21,25 +21,25 @@ import org.eclipse.xtext.xpression.XpressionPackage;
  */
 public class XBinaryOperationImpl extends XMemberFeatureCallImpl implements XBinaryOperation
 {
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected XBinaryOperationImpl()
-  {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected XBinaryOperationImpl()
+	{
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return XpressionPackage.Literals.XBINARY_OPERATION;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass()
+	{
+		return XpressionPackage.Literals.XBINARY_OPERATION;
+	}
 
 } //XBinaryOperationImpl

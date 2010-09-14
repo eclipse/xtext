@@ -21,12 +21,12 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  */
 public interface XExpression extends EObject
 {
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @model kind="operation"
-   * @generated
-   */
-  JvmTypeReference getDerivedReturnType();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	JvmTypeReference getDerivedReturnType();
 
 } // XExpression

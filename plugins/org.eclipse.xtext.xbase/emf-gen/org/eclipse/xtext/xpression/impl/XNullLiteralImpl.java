@@ -21,25 +21,25 @@ import org.eclipse.xtext.xpression.XpressionPackage;
  */
 public class XNullLiteralImpl extends XExpressionImpl implements XNullLiteral
 {
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected XNullLiteralImpl()
-  {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected XNullLiteralImpl()
+	{
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return XpressionPackage.Literals.XNULL_LITERAL;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass()
+	{
+		return XpressionPackage.Literals.XNULL_LITERAL;
+	}
 
 } //XNullLiteralImpl

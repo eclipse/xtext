@@ -21,25 +21,25 @@ import org.eclipse.xtext.xpression.XpressionPackage;
  */
 public class XUnaryOperationImpl extends XMemberFeatureCallImpl implements XUnaryOperation
 {
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected XUnaryOperationImpl()
-  {
-    super();
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected XUnaryOperationImpl()
+	{
+		super();
+	}
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EClass eStaticClass()
-  {
-    return XpressionPackage.Literals.XUNARY_OPERATION;
-  }
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass()
+	{
+		return XpressionPackage.Literals.XUNARY_OPERATION;
+	}
 
 } //XUnaryOperationImpl

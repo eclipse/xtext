@@ -11,6 +11,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapter;
+import org.eclipse.emf.codegen.merge.java.JControlModel;
 import org.eclipse.emf.codegen.util.ImportManager;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.BasicMonitor;
@@ -76,7 +77,17 @@ public class EcoreGenerator extends AbstractWorkflowComponent {
 		genModel.setCanGenerate(true);
 		genModel.reconcile();
 
-		Generator generator = new Generator();
+		Generator generator = new Generator() {
+			@Override
+			public JControlModel getJControlModel() {
+				return new JControlModel(){
+					@Override
+					public boolean canMerge() {
+						return false;
+					}
+				};
+			}
+		};
 		generator.getAdapterFactoryDescriptorRegistry().addDescriptor(GenModelPackage.eNS_URI,
 				new GeneratorAdapterDescriptor(getTypeMapper()));
 		generator.setInput(genModel);
@@ -107,11 +118,7 @@ public class EcoreGenerator extends AbstractWorkflowComponent {
 	}
 
 	
-	
-	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 */
-	private final class mapper implements Function<String, String> {
+	protected final class mapper implements Function<String, String> {
 		public String apply(String from) {
 			URI createURI = URI.createURI(srcPath+"/"+from.replace('.', '/')+"Custom.java");
 			String customClassName = from+"Custom";
