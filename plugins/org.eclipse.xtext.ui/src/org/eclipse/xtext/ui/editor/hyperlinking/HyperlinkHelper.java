@@ -34,7 +34,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 
 		private final List<IHyperlink> links;
 
-		HyperlinkAcceptor(List<IHyperlink> links) {
+		public HyperlinkAcceptor(List<IHyperlink> links) {
 			this.links = links;
 		}
 		
