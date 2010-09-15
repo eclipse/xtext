@@ -113,12 +113,12 @@ XSwitchExpression:
 	('default' ':' default=XExpression)?
 	'}';
 
+XCasePart:
+	'case' case=XExpression ':' then=XExpression;
+
 XWhileExpression:
 	'while' predicate=XParenthesizedExpression
 	body=XExpression;
-
-XCasePart:
-	'case' case=XExpression ':' then=XExpression;
 
 XBlockExpression:
 	'{'
