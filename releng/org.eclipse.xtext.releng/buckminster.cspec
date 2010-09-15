@@ -2,6 +2,7 @@
 <cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.xtext.releng" componentType="buckminster" version="1.0.0.qualifier">
     <cs:dependencies>
         <cs:dependency name="com.google.inject" componentType="osgi.bundle"/>
+        <cs:dependency name="com.google.collect" componentType="osgi.bundle"/>
         <cs:dependency name="org.aopalliance" componentType="osgi.bundle"/>
         <cs:dependency name="org.apache.commons.logging" componentType="osgi.bundle" versionDesignator="1.1.1"/>
         <cs:dependency name="org.easymock" componentType="osgi.bundle"/>

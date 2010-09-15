@@ -8,8 +8,7 @@
 	<locator pattern="^org\.eclipse\.xtext\.gmf\.glue$" searchPathRef="xtext.examples" />
 	<locator pattern="^org\.eclipse\.xtext\.xtext\.ui\.examples$" searchPathRef="xtext.examples.container" />
 	<locator pattern="^org\.eclipse\.xtext(?:\..*)?$" searchPathRef="xtext" />
-	<locator pattern="^com\.google\.collect$" searchPathRef="xtext" />
-
+	
 	<locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse.test" />
 	<locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse.test" />
 
