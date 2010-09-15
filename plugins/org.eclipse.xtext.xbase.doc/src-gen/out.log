@@ -1,0 +1,793 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.8.26)  15 SEP 2010 16:37
+entering extended mode
+ %&-line parsing enabled.
+**src-gen/out.tex
+(./src-gen/out.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+(/opt/local/share/texmf-texlive-dist/tex/latex/koma-script/scrreprt.cls
+Document Class: scrreprt 2009/07/24 v3.04a KOMA-Script document class (report)
+(/opt/local/share/texmf-texlive-dist/tex/latex/koma-script/scrkbase.sty
+Package: scrkbase 2009/07/24 v3.04a KOMA-Script package (KOMA-Script-dependent 
+basics and keyval usage)
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2009/07/24 v3.04a KOMA-Script package (KOMA-Script-independent
+ basics and keyval usage)
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/opt/local/share/texmf-texlive-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2009/03/25 v3.03 KOMA-Script package (loading files)
+
+Package scrlfile, 2009/03/25 v3.03 KOMA-Script package (loading files)
+                  Copyright (C) Markus Kohm
+
+))) (/opt/local/share/texmf-texlive-dist/tex/latex/koma-script/tocbasic.sty
+Package: tocbasic 2009/06/08 v3.03b KOMA-Script package (handling toc-files)
+)
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 117.
+Package tocbasic Info: omitting babel extension for `lof'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lof' on input line 118.
+Package tocbasic Info: omitting babel extension for `lot'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lot' on input line 119.
+Package scrreprt Info: You've used obsolete option `10pt'.
+(scrreprt)             \KOMAExecuteOptions{fontsize=10pt} will be
+(scrreprt)             used instead.
+(scrreprt)             You may simply replace `10pt'
+(scrreprt)             by `fontsize=10pt'.
+Class scrreprt Info: File `scrsize10pt.clo' used to setup font sizes on input l
+ine 1271.
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/koma-script/scrsize10pt.clo
+File: scrsize10pt.clo 2009/07/24 v3.04a KOMA-Script font size class option (10p
+t)
+)
+(/opt/local/share/texmf-texlive-dist/tex/latex/koma-script/typearea.sty
+Package: typearea 2009/07/24 v3.04a KOMA-Script package (type area)
+
+Package typearea, 2009/07/24 v3.04a KOMA-Script package (type area)
+                  Copyright (C) Frank Neukam, 1992-1994
+                  Copyright (C) Markus Kohm, 1994-
+
+\ta@bcor=\skip41
+\ta@div=\count79
+Package typearea Info: You've used standard option `a4paper'.
+(typearea)             This is correct!
+(typearea)             Internaly I'm using `paper=a4'.
+(typearea)             If you'd like to set the option with \KOMAoptions,
+(typearea)             you'd have to use `paper=a4' there
+(typearea)             instead of `a4paper', too.
+\ta@hblk=\skip42
+\ta@vblk=\skip43
+\ta@temp=\skip44
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = 8
+(typearea)             BCOR = 0.0pt
+(typearea)             \paperwidth      = 597.50793pt
+(typearea)              \textwidth      = 373.44246pt
+(typearea)              DIV departure   = -4%
+(typearea)              \evensidemargin = 39.76274pt
+(typearea)              \oddsidemargin  = 39.76274pt
+(typearea)             \paperheight     = 845.04694pt
+(typearea)              \textheight     = 538.0pt
+(typearea)              \topmargin      = 0.36087pt
+(typearea)              \headheight     = 15.0pt
+(typearea)              \headsep        = 18.0pt
+(typearea)              \topskip        = 10.0pt
+(typearea)              \footskip       = 42.0pt
+(typearea)              \baselineskip   = 12.0pt
+(typearea)              on input line 1115.
+)
+\c@part=\count80
+\c@chapter=\count81
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@subparagraph=\count86
+\abovecaptionskip=\skip45
+\belowcaptionskip=\skip46
+\c@pti@nb@sid@b@x=\box26
+\c@figure=\count87
+\c@table=\count88
+\bibindent=\dimen102
+) (/opt/local/share/texmf-texlive-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/latin1.def
+File: latin1.def 2008/03/30 v1.1d Input encoding file
+))
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+(/opt/local/share/texmf-texlive-dist/tex/latex/listings/listings.sty
+\lst@mode=\count89
+\lst@gtempboxa=\box27
+\lst@token=\toks17
+\lst@length=\count90
+\lst@currlwidth=\dimen103
+\lst@column=\count91
+\lst@pos=\count92
+\lst@lostspace=\dimen104
+\lst@width=\dimen105
+\lst@newlines=\count93
+\lst@lineno=\count94
+\lst@maxwidth=\dimen106
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+\c@lstnumber=\count95
+\lst@skipnumbers=\count96
+\lst@framebox=\box28
+)
+(/opt/local/share/texmf-texlive-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2007/02/22 1.4 listings configuration
+))
+Package: listings 2007/02/22 1.4 (Carsten Heinz)
+
+(/opt/local/share/texmf-texlive-dist/tex/generic/babel/babel.sty
+Package: babel 2008/07/06 v3.8l The Babel package
+
+(/opt/local/share/texmf-texlive-dist/tex/generic/babel/english.ldf
+Language: english 2005/03/30 v3.3o English support from the babel system
+
+(/opt/local/share/texmf-texlive-dist/tex/generic/babel/babel.def
+File: babel.def 2008/07/06 v3.8l Babel common definitions
+\babel@savecnt=\count97
+\U@D=\dimen107
+)
+\l@british = a dialect from \language\l@english 
+\l@UKenglish = a dialect from \language\l@english 
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+))
+(/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
+
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
+)
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/opt/local/share/texmf-texlive-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
+)
+(/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/hycolor.sty
+Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
+O)
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/xcolor-patch.sty
+Package: xcolor-patch 2009/10/02 xcolor patch
+))
+\@linkdim=\dimen108
+\Hy@linkcounter=\count98
+\Hy@pagecounter=\count99
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
+)
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
+
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)
+(/opt/local/share/texmf-texlive-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+(/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
+
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
+t (HO)
+))
+Package hyperref Info: Hyper figures OFF on input line 2975.
+Package hyperref Info: Link nesting OFF on input line 2980.
+Package hyperref Info: Hyper index ON on input line 2983.
+Package hyperref Info: Plain pages OFF on input line 2990.
+Package hyperref Info: Backreferencing OFF on input line 2995.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 3191.
+(/opt/local/share/texmf-texlive-dist/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip10
+Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 3428.
+
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/bitset.sty
+Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
+
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/intcalc.sty
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+)
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/bigintcalc.sty
+Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
+
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
+ (HO)
+
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
+)
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+)))
+\Fld@menulength=\count100
+\Field@Width=\dimen109
+\Fld@charsize=\dimen110
+\Field@toks=\toks18
+Package hyperref Info: Hyper figures OFF on input line 4377.
+Package hyperref Info: Link nesting OFF on input line 4382.
+Package hyperref Info: Hyper index ON on input line 4385.
+Package hyperref Info: backreferencing OFF on input line 4392.
+Package hyperref Info: Link coloring OFF on input line 4397.
+Package hyperref Info: Link coloring with OCG OFF on input line 4402.
+Package hyperref Info: PDF/A mode OFF on input line 4407.
+
+(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
+)
+\Hy@abspage=\count101
+\c@Item=\count102
+\c@Hfootnote=\count103
+)
+*hyperref using default driver hpdftex*
+(/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
+\Fld@listcount=\count104
+)
+\itemindentlen=\skip47
+
+(src-gen/out.aux)
+\openout1 = `out.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+\c@lstlisting=\count105
+Package hyperref Info: Link coloring OFF on input line 15.
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/refcount.sty
+Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+)
+\c@section@level=\count106
+)
+LaTeX Info: Redefining \ref on input line 15.
+LaTeX Info: Redefining \pageref on input line 15.
+
+(src-gen/out.out) (src-gen/out.out)
+\@outlinefile=\write3
+\openout3 = `out.out'.
+
+\AtBeginShipoutBox=\box29
+
+Chapter 1.
+
+Class scrreprt Warning: \float@addtolists detected!
+(scrreprt)              You should use the features of package `tocbasic'
+(scrreprt)              instead of \float@addtolists.
+(scrreprt)              Support for \float@addtolists may be removed from
+(scrreprt)              `scrreprt' soon .
+
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 17.
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/t1cmss.fd
+File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+) [1
+
+
+{/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+Chapter 2.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 47.
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 47.
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 75--78
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 79--82
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 83--86
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 87--90
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 91--94
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 95--98
+[][] 
+ []
+
+[2
+
+]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 137--140
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 141--144
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 145--149
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 150--153
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 154--157
+[][] 
+ []
+
+[3]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 201.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 201.
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 232--235
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 236--239
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 240--243
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 244--247
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 248--251
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 252--255
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 256--259
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 260--263
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 264--267
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 268--271
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 272--275
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 276--279
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 280--283
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 284--287
+[][] 
+ []
+
+[4]
+Chapter 3.
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 335--338
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 339--342
+[][] 
+ []
+
+[5
+
+]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 393--396
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 397--400
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 401--404
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 405--408
+[][] 
+ []
+
+[6]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 470--473
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 474--477
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 478--481
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 482--485
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 486--489
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 490--493
+[][] 
+ []
+
+[7]
+Chapter 4.
+
+Overfull \hbox (11.71239pt too wide) in paragraph at lines 521--523
+\T1/cmr/m/n/10 A string lit-eral as de-fined in []org.eclipse.xtext.xdoc.xdoc.i
+mpl.SectionImpl@41b68d (name:
+ []
+
+[8
+
+]
+Overfull \hbox (33.99754pt too wide) in paragraph at lines 628--691
+[][] 
+ []
+
+[9] (/opt/local/share/texmf-texlive-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+[10]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 749--752
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 753--756
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 772--775
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 776--779
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 780--783
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 784--787
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 788--791
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 792--795
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 796--799
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 800--803
+[][] 
+ []
+
+[11]
+Overfull \hbox (85.19554pt too wide) in paragraph at lines 837--840
+\T1/cmr/m/n/10 calls to prop-er-ties an equiv-a-lent rule as de-scribed in []or
+g.eclipse.xtext.xdoc.xdoc.impl.Section2Impl@a1d638
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 887--890
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 891--894
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 895--898
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 899--902
+[][] 
+ []
+
+[12]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 945--948
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 949--952
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 953--956
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 957--960
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 962--963
+[]\T1/cmr/m/n/10 Function6<Param1Type, Param2Type, Param3Type, Param4Type,
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 961--964
+[][] 
+ []
+
+
+Overfull \hbox (79.31613pt too wide) in paragraph at lines 969--971
+\T1/cmr/m/n/10 known as Google Col-lect) and Google Guice the \T1/cmr/m/it/10 F
+unc-tion1 \T1/cmr/m/n/10 ex-tends \T1/cmr/m/it/10 com.google.common.base.Functi
+on<F,
+ []
+
+
+Overfull \hbox (110.24995pt too wide) in paragraph at lines 969--971
+\T1/cmr/m/it/10 T> \T1/cmr/m/n/10 and the \T1/cmr/m/it/10 Func-tion0 \T1/cmr/m/
+n/10 ex-tends \T1/cmr/m/it/10 com.google.common.base.Supplier<T> \T1/cmr/m/n/10
+ as well as \T1/cmr/m/it/10 com.google.inject.Provider<T>\T1/cmr/m/n/10 . 
+ []
+
+[13]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1018--1021
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1022--1025
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1026--1029
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1082--1085
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1086--1089
+[][] 
+ []
+
+[14]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1090--1093
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1094--1097
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1112--1115
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1116--1119
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1120--1123
+[][] 
+ []
+
+[15]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1222--1225
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1226--1229
+[][] 
+ []
+
+[16]
+Overfull \hbox (113.79967pt too wide) in paragraph at lines 1256--1259
+\T1/cmr/m/n/10 pos-si-ble to use them on the left hand side of an as-sign-ment 
+[]org.eclipse.xtext.xdoc.xdoc.impl.Section2Impl@a1d638
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1330--1338
+[][] 
+ []
+
+[17]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1339--1351
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1389--1396
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1397--1402
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1443--1450
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1451--1456
+[][] 
+ []
+
+[18]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1502--1509
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1510--1516
+[][] 
+ []
+
+[19] (src-gen/out.aux) ) 
+Here is how much of TeX's memory you used:
+ 7262 strings out of 495061
+ 106005 string characters out of 3181964
+ 260417 words of memory out of 3000000
+ 10043 multiletter control sequences out of 15000+200000
+ 8926 words of font info for 21 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 43i,8n,43p,256b,1845s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfou
+r/jknappen/ec/ecti1000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/
+ljfour/jknappen/ec/ecsx1200.600pk> </Users/efftinge/.texlive2009/texmf-var/font
+s/pk/ljfour/jknappen/ec/ecsx1440.600pk> </Users/efftinge/.texlive2009/texmf-var
+/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/efftinge/.texlive2009/texm
+f-var/fonts/pk/ljfour/jknappen/ec/ecsx2074.600pk></opt/local/share/texmf-texliv
+e-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on src-gen/out.pdf (19 pages, 197675 bytes).
+PDF statistics:
+ 996 PDF objects out of 1000 (max. 8388607)
+ 334 named destinations out of 1000 (max. 500000)
+ 609 words of extra memory for PDF output out of 10000 (max. 10000000)
+
