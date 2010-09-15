@@ -286,13 +286,12 @@ public class AutoEditTest extends AbstractEditorTest {
 		assertState("   /*\n    * \n    * foo bar\n    * |\n    */", editor);
 	}
 	
-// Unrealistic scenario. Doesn'T need to be supported.
-//	public void testMLComments_03() throws Exception {
-//		XtextEditor editor = openEditor("/*\n *| */");
-//		
-//		pressKey(editor, '\n');
-//		assertState("/*\n *\n * |\n */", editor);
-//	}
+	public void testMLComments_03() throws Exception {
+		XtextEditor editor = openEditor("/*\n *| */");
+		
+		pressKey(editor, '\n');
+		assertState("/*\n *\n * | */", editor);
+	}
 
 	public void testMLComments_04() throws Exception {
 		XtextEditor editor = openEditor("\t/*\n\t *|\n\t */");
