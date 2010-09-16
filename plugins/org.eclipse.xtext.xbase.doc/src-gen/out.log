@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.8.26)  15 SEP 2010 16:37
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.8.26)  15 SEP 2010 17:13
 entering extended mode
  %&-line parsing enabled.
 **src-gen/out.tex
@@ -139,6 +139,9 @@ File: listings.cfg 2007/02/22 1.4 listings configuration
 ))
 Package: listings 2007/02/22 1.4 (Carsten Heinz)
 
+(/opt/local/share/texmf-texlive-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
 (/opt/local/share/texmf-texlive-dist/tex/generic/babel/babel.sty
 Package: babel 2008/07/06 v3.8l The Babel package
 
@@ -273,22 +276,22 @@ File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
 (src-gen/out.aux)
 \openout1 = `out.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
 \c@lstlisting=\count105
-Package hyperref Info: Link coloring OFF on input line 15.
+Package hyperref Info: Link coloring OFF on input line 18.
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
@@ -298,8 +301,8 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 \c@section@level=\count106
 )
-LaTeX Info: Redefining \ref on input line 15.
-LaTeX Info: Redefining \pageref on input line 15.
+LaTeX Info: Redefining \ref on input line 18.
+LaTeX Info: Redefining \pageref on input line 18.
 
 (src-gen/out.out) (src-gen/out.out)
 \@outlinefile=\write3
@@ -315,7 +318,7 @@ Class scrreprt Warning: \float@addtolists detected!
 (scrreprt)              Support for \float@addtolists may be removed from
 (scrreprt)              `scrreprt' soon .
 
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 17.
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 20.
 (/opt/local/share/texmf-texlive-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 ) [1
@@ -323,12 +326,35 @@ File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 
 {/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 Chapter 2.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 47.
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 42.
+
+LaTeX Font Info:    No file OMScmss.fd. on input line 42.
+
+LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textasteriskcentered' on input line 42.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 63.
 (/opt/local/share/texmf-texlive-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 47.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 63.
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 63--66
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 67--70
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 71--74
+[][] 
+ []
+
 
 Overfull \hbox (5.00491pt too wide) in paragraph at lines 75--78
 [][] 
@@ -344,53 +370,77 @@ Overfull \hbox (5.00491pt too wide) in paragraph at lines 83--86
 [][] 
  []
 
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 87--90
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 91--94
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 95--98
-[][] 
- []
-
 [2
 
 ]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 137--140
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 119--122
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 141--144
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 123--126
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 145--149
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 127--131
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 150--153
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 132--135
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 154--157
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 136--139
 [][] 
  []
 
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 173.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 173.
 [3]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 201.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 201.
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 200--203
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 204--207
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 208--211
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 212--215
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 216--219
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 220--223
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 224--227
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 228--231
+[][] 
+ []
+
 
 Overfull \hbox (5.00491pt too wide) in paragraph at lines 232--235
 [][] 
@@ -421,373 +471,305 @@ Overfull \hbox (5.00491pt too wide) in paragraph at lines 252--255
 [][] 
  []
 
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 256--259
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 260--263
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 264--267
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 268--271
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 272--275
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 276--279
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 280--283
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 284--287
-[][] 
- []
-
 [4]
 Chapter 3.
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 335--338
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 295--298
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 339--342
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 299--302
 [][] 
  []
 
 [5
 
 ]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 393--396
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 339--342
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 397--400
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 343--346
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 401--404
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 347--350
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 405--408
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 351--354
 [][] 
  []
 
 [6]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 470--473
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 410--413
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 474--477
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 414--417
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 478--481
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 418--421
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 482--485
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 422--425
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 486--489
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 426--429
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 490--493
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 430--433
 [][] 
  []
 
 [7]
 Chapter 4.
-
-Overfull \hbox (11.71239pt too wide) in paragraph at lines 521--523
-\T1/cmr/m/n/10 A string lit-eral as de-fined in []org.eclipse.xtext.xdoc.xdoc.i
-mpl.SectionImpl@41b68d (name:
- []
-
 [8
 
 ]
-Overfull \hbox (33.99754pt too wide) in paragraph at lines 628--691
+Overfull \hbox (33.99754pt too wide) in paragraph at lines 534--566
 [][] 
  []
 
-[9] (/opt/local/share/texmf-texlive-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2004/09/05 1.3 listings language file
-)
-[10]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 749--752
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 753--756
+[9] [10]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 625--630
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 772--775
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 631--636
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 776--779
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 651--654
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 780--783
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 655--658
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 784--787
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 659--662
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 788--791
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 663--666
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 792--795
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 667--670
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 796--799
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 671--674
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 800--803
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 675--678
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 679--682
 [][] 
  []
 
 [11]
-Overfull \hbox (85.19554pt too wide) in paragraph at lines 837--840
-\T1/cmr/m/n/10 calls to prop-er-ties an equiv-a-lent rule as de-scribed in []or
-g.eclipse.xtext.xdoc.xdoc.impl.Section2Impl@a1d638
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 887--890
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 752--755
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 891--894
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 756--759
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 895--898
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 760--763
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 899--902
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 764--767
 [][] 
  []
 
 [12]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 945--948
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 803--806
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 949--952
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 807--810
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 953--956
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 811--814
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 957--960
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 815--818
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 962--963
+Underfull \hbox (badness 10000) in paragraph at lines 820--821
 []\T1/cmr/m/n/10 Function6<Param1Type, Param2Type, Param3Type, Param4Type,
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 961--964
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 819--822
 [][] 
  []
 
 
-Overfull \hbox (79.31613pt too wide) in paragraph at lines 969--971
-\T1/cmr/m/n/10 known as Google Col-lect) and Google Guice the \T1/cmr/m/it/10 F
-unc-tion1 \T1/cmr/m/n/10 ex-tends \T1/cmr/m/it/10 com.google.common.base.Functi
-on<F,
- []
-
-
-Overfull \hbox (110.24995pt too wide) in paragraph at lines 969--971
-\T1/cmr/m/it/10 T> \T1/cmr/m/n/10 and the \T1/cmr/m/it/10 Func-tion0 \T1/cmr/m/
-n/10 ex-tends \T1/cmr/m/it/10 com.google.common.base.Supplier<T> \T1/cmr/m/n/10
- as well as \T1/cmr/m/it/10 com.google.inject.Provider<T>\T1/cmr/m/n/10 . 
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 871--874
+[][] 
  []
 
 [13]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1018--1021
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 875--878
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1022--1025
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 879--882
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1026--1029
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 936--939
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1082--1085
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 940--943
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1086--1089
-[][] 
- []
-
-[14]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1090--1093
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 944--947
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1094--1097
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 948--951
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1112--1115
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 965--968
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1116--1119
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 969--972
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1120--1123
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 973--976
 [][] 
  []
 
-[15]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1222--1225
+[14] [15]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1078--1084
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1226--1229
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1085--1089
 [][] 
  []
 
 [16]
-Overfull \hbox (113.79967pt too wide) in paragraph at lines 1256--1259
-\T1/cmr/m/n/10 pos-si-ble to use them on the left hand side of an as-sign-ment 
-[]org.eclipse.xtext.xdoc.xdoc.impl.Section2Impl@a1d638
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1172--1180
+[][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1330--1338
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1181--1193
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1231--1238
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1239--1244
 [][] 
  []
 
 [17]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1339--1351
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1285--1292
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1389--1396
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1293--1298
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1397--1402
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1443--1450
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1451--1456
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1343--1351
 [][] 
  []
 
 [18]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1502--1509
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1352--1362
 [][] 
  []
 
+[19] (src-gen/out.aux)
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1510--1516
-[][] 
- []
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-[19] (src-gen/out.aux) ) 
+ ) 
 Here is how much of TeX's memory you used:
- 7262 strings out of 495061
- 106005 string characters out of 3181964
- 260417 words of memory out of 3000000
- 10043 multiletter control sequences out of 15000+200000
- 8926 words of font info for 21 fonts, out of 3000000 for 9000
+ 7277 strings out of 495061
+ 106120 string characters out of 3181964
+ 283089 words of memory out of 3000000
+ 10102 multiletter control sequences out of 15000+200000
+ 9742 words of font info for 22 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 43i,8n,43p,256b,1845s stack positions out of 5000i,500n,10000p,200000b,50000s
- </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfou
-r/jknappen/ec/ecti1000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/
-ljfour/jknappen/ec/ecsx1200.600pk> </Users/efftinge/.texlive2009/texmf-var/font
-s/pk/ljfour/jknappen/ec/ecsx1440.600pk> </Users/efftinge/.texlive2009/texmf-var
-/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/efftinge/.texlive2009/texm
-f-var/fonts/pk/ljfour/jknappen/ec/ecsx2074.600pk></opt/local/share/texmf-texliv
-e-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on src-gen/out.pdf (19 pages, 197675 bytes).
+ 43i,8n,43p,256b,1765s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsi1000
+.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/ect
+i1000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/e
+c/ecsx1000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ecss1000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/
+jknappen/ec/ecsx1200.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecsx1440.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/
+pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/efftinge/.texlive2009/texmf-var/f
+onts/pk/ljfour/jknappen/ec/ecsx2074.600pk></opt/local/share/texmf-texlive-dist/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on src-gen/out.pdf (19 pages, 215287 bytes).
 PDF statistics:
- 996 PDF objects out of 1000 (max. 8388607)
- 334 named destinations out of 1000 (max. 500000)
+ 1025 PDF objects out of 1200 (max. 8388607)
+ 287 named destinations out of 1000 (max. 500000)
  609 words of extra memory for PDF output out of 10000 (max. 10000000)
 
