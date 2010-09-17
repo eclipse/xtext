@@ -5,6 +5,7 @@ package org.eclipse.xtext.example.ui.outline;
 
 import org.eclipse.xtext.example.fowlerdsl.FowlerdslPackage;
 import org.eclipse.xtext.example.fowlerdsl.Statemachine;
+import org.eclipse.xtext.example.fowlerdsl.Transition;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode;
@@ -17,11 +18,15 @@ public class FowlerDslOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
 	protected void doCreateChildren(DocumentRootNode parentNode, Statemachine statemachine) {
 		new EStructuralFeatureNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__EVENTS, parentNode,
-				labelProvider.getImage("events"), "Events", statemachine.getEvents().isEmpty());
+				labelProvider.getImage("events"), "Events", !statemachine.eIsSet(FowlerdslPackage.Literals.STATEMACHINE__EVENTS));
 		new EStructuralFeatureNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__COMMANDS, parentNode,
-				labelProvider.getImage("commands"), "Commands", statemachine.getEvents().isEmpty());
+				labelProvider.getImage("commands"), "Commands", !statemachine.eIsSet(FowlerdslPackage.Literals.STATEMACHINE__COMMANDS));
 		new EStructuralFeatureNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__STATES, parentNode,
-				labelProvider.getImage("states"), "States", statemachine.getEvents().isEmpty());
+				labelProvider.getImage("states"), "States", !statemachine.eIsSet(FowlerdslPackage.Literals.STATEMACHINE__STATES));
+	}
+	
+	protected Object text(Transition transition) {
+		return transition.getEvent().getName() + " => " + transition.getState().getName();
 	}
 	
 }

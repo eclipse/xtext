@@ -12,9 +12,11 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.util.ITextRegion;
@@ -59,7 +61,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 	protected boolean addChild(IOutlineNode outlineNode) {
 		if (children == null)
 			children = Lists.newArrayList();
-		return children.add(outlineNode); 
+		return children.add(outlineNode);
 	}
 
 	protected boolean removeChild(IOutlineNode outlineNode) {
@@ -94,7 +96,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 	public Object getText() {
 		return text;
 	}
-	
+
 	public void setText(Object text) {
 		this.text = text;
 	}
@@ -102,7 +104,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 	public Image getImage() {
 		return image;
 	}
-	
+
 	public void setImage(Image image) {
 		this.image = image;
 	}
@@ -127,7 +129,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		}
 		return null;
 	}
-	
+
 	protected void setTextRegion(ITextRegion textRegion) {
 		this.textRegion = textRegion;
 	}
@@ -150,8 +152,22 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		return Platform.getAdapterManager().getAdapter(this, adapterType);
 	}
 
-	public <T> T readOnly(IUnitOfWork<T, EObject> work) {
+	protected URI getEObjectURI() {
 		return null;
+	}
+
+	public <T> T readOnly(final IUnitOfWork<T, EObject> work) {
+		if (getEObjectURI() != null) {
+			return getDocument().readOnly(new IUnitOfWork<T, XtextResource>() {
+				public T exec(XtextResource state) throws Exception {
+					EObject eObject = state.getEObject(getEObjectURI().fragment());
+					return work.exec(eObject);
+				}
+
+			});
+		} else {
+			return null;
+		}
 	}
 
 	public <T> T modify(IUnitOfWork<T, EObject> work) {

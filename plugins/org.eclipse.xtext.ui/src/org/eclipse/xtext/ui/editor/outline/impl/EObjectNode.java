@@ -14,11 +14,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 public class EObjectNode extends AbstractOutlineNode {
 
@@ -38,6 +36,7 @@ public class EObjectNode extends AbstractOutlineNode {
 		shortTextRegion = getLocationInFileProvider().getLocation(eObject);
 	}
 
+	@Override
 	public URI getEObjectURI() {
 		return eObjectURI;
 	}
@@ -60,15 +59,6 @@ public class EObjectNode extends AbstractOutlineNode {
 		return super.getAdapter(adapterType);
 	}
 
-	@Override
-	public <T> T readOnly(final IUnitOfWork<T, EObject> work) {
-		return getDocument().readOnly(new IUnitOfWork<T, XtextResource>() {
-			public T exec(XtextResource state) throws Exception {
-				EObject eObject = state.getEObject(eObjectURI.fragment());
-				return work.exec(eObject);
-			}
-		});
-	}
 
 	@Override
 	public boolean equals(Object obj) {
