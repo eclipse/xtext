@@ -14,7 +14,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.DiagnosticConverterImpl;
@@ -32,7 +32,7 @@ public class XtextDiagnosticConverter extends DiagnosticConverterImpl{
 	@Override
 	protected Triple<Integer, Integer, Integer> getLocationData(EObject obj, EStructuralFeature structuralFeature) {
 		if (NodeUtil.getNodeAdapter(obj) == null) {
-			TextLocation location = locationInFileProvider.getLocation(obj);
+			ITextRegion location = locationInFileProvider.getLocation(obj);
 			if (location != null) {
 				AbstractNode node = NodeUtil.getNode(EcoreUtil.getRootContainer(obj));
 				AbstractNode foundNode = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(node, location.getOffset());

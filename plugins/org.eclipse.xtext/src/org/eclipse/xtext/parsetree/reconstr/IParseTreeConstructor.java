@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstructionReportImpl;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.inject.ImplementedBy;
 
@@ -35,7 +35,7 @@ public interface IParseTreeConstructor {
 
 		boolean isSuccess();
 
-		TextLocation getPreviousLocation();
+		ITextRegion getPreviousLocation();
 	}
 
 	TreeConstructionReport serializeSubtree(EObject object, ITokenStream out) throws IOException;

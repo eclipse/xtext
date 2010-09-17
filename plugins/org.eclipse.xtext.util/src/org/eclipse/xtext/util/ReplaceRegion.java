@@ -16,9 +16,9 @@ public class ReplaceRegion {
 	private int length;
 	private String text;
 
-	public ReplaceRegion(TextLocation location, String text) {
-		this.offset = location.getOffset();
-		this.length = location.getLength();
+	public ReplaceRegion(ITextRegion region, String text) {
+		this.offset = region.getOffset();
+		this.length = region.getLength();
 		this.text = text;
 	}
 

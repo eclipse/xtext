@@ -31,7 +31,8 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.util.ParsetreeSwitch;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 
 /**
  * @author Peter Friese - Implementation
@@ -39,15 +40,15 @@ import org.eclipse.xtext.util.TextLocation;
  */
 public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 
-	public TextLocation getLocation(final EObject owner, EStructuralFeature feature, final int indexInList) {
-		return new EcoreSwitch<TextLocation>() {
+	public ITextRegion getLocation(final EObject owner, EStructuralFeature feature, final int indexInList) {
+		return new EcoreSwitch<ITextRegion>() {
 			@Override
-			public TextLocation caseEAttribute(EAttribute feature) {
+			public ITextRegion caseEAttribute(EAttribute feature) {
 				return getLocationOfAttribute(owner, feature, indexInList);
 			}
 
 			@Override
-			public TextLocation caseEReference(EReference feature) {
+			public ITextRegion caseEReference(EReference feature) {
 				if (feature.isContainment() || feature.isContainer()) {
 					return getLocationOfContainmentReference(owner, feature, indexInList);
 				} else {
@@ -58,14 +59,14 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		}.doSwitch(feature);
 	}
 
-	protected TextLocation getLocationOfContainmentReference(final EObject owner, EReference feature,
+	protected ITextRegion getLocationOfContainmentReference(final EObject owner, EReference feature,
 			final int indexInList) {
 		Object referencedElement = (feature.isMany()) ? ((List<?>) owner.eGet(feature)).get(indexInList) : owner
 				.eGet(feature);
 		return getLocation((EObject) referencedElement);
 	}
 
-	protected TextLocation getLocationOfCrossReference(EObject owner, EReference reference, int indexInList) {
+	protected ITextRegion getLocationOfCrossReference(EObject owner, EReference reference, int indexInList) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(owner);
 		if (nodeAdapter != null) {
 			CompositeNode parserNode = nodeAdapter.getParserNode();
@@ -79,7 +80,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 								.eClass());
 						if (reference == crossReference2) {
 							if (currentIndex == indexInList || !reference.isMany()) {
-								return new TextLocation(ownerChildNode.getOffset(), ownerChildNode.getLength());
+								return new TextRegion(ownerChildNode.getOffset(), ownerChildNode.getLength());
 							}
 							++currentIndex;
 						}
@@ -95,23 +96,23 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		return null;
 	}
 
-	protected TextLocation getLocationOfAttribute(EObject owner, EAttribute attribute, int indexInList) {
+	protected ITextRegion getLocationOfAttribute(EObject owner, EAttribute attribute, int indexInList) {
 		if (indexInList >= 0) {
 			List<AbstractNode> findNodesForFeature = NodeUtil.findNodesForFeature(owner, attribute);
 			if (indexInList < findNodesForFeature.size()) {
 				AbstractNode node = findNodesForFeature.get(indexInList);
-				return new TextLocation(node.getOffset(), node.getLength());
+				return new TextRegion(node.getOffset(), node.getLength());
 			}
 			return getLocation(owner);
 		}
 		return null;
 	}
 
-	public TextLocation getLocation(EObject obj) {
+	public ITextRegion getLocation(EObject obj) {
 		final NodeAdapter adapter = NodeUtil.getNodeAdapter(obj);
 		if (adapter == null) {
 			if (obj.eContainer() == null)
-				return new TextLocation(0, 0);
+				return ITextRegion.EMPTY_REGION;
 			return getLocation(obj.eContainer());
 		}
 
@@ -210,13 +211,13 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		}
 	}
 
-	protected TextLocation createRegion(final List<AbstractNode> nodes) {
+	protected ITextRegion createRegion(final List<AbstractNode> nodes) {
 		// if we've got more than one ID elements, we want to select them all
 		OffsetCalculator calculator = createCalculator();
 		AbstractNode firstNode = calculator.handle(nodes, true);
 		AbstractNode lastNode = calculator.handle(nodes, false);
 		int length = (lastNode.getOffset() - firstNode.getOffset()) + lastNode.getLength();
-		return new TextLocation(firstNode.getOffset(), length);
+		return new TextRegion(firstNode.getOffset(), length);
 	}
 
 	protected OffsetCalculator createCalculator() {
