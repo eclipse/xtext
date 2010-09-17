@@ -9,44 +9,46 @@ package org.eclipse.xtext.ui.editor.outline.impl;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
 /**
+ * A node representing the value(s) of one of its owner's {@link EStructuralFeature}s.
+ * 
  * @author koehnlein - Initial contribution and API
  */
-public class EReferenceNode extends AbstractOutlineNode {
+public class EStructuralFeatureNode extends AbstractOutlineNode {
 
 	private URI ownerURI;
 
-	private EReference reference;
+	private EStructuralFeature feature;
 
-	public EReferenceNode(EObject owner, EReference reference, IOutlineNode parent, Image image, Object text,
+	public EStructuralFeatureNode(EObject owner, EStructuralFeature feature, IOutlineNode parent, Image image, Object text,
 			boolean isLeaf) {
 		super(parent, image, text, isLeaf);
 		this.ownerURI = EcoreUtil.getURI(owner);
-		this.reference = reference;
-		setTextRegion(getLocationInFileProvider().getLocation(owner, reference, 0));
+		this.feature = feature;
+		setTextRegion(getLocationInFileProvider().getLocation(owner, feature, 0));
 	}
 
 	public URI getEObjectURI() {
 		return ownerURI;
 	}
 
-	public EReference getEReference() {
-		return reference;
+	public EStructuralFeature getEStructuralFeature() {
+		return feature;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return super.equals(obj) && reference.equals(((EReferenceNode) obj).getEReference());
+		return super.equals(obj) && feature.equals(((EStructuralFeatureNode) obj).getEStructuralFeature());
 	}
 
 	@Override
 	public int hashCode() {
-		return super.hashCode() + 37 * reference.hashCode();
+		return super.hashCode() + 37 * feature.hashCode();
 	}
 
 }
