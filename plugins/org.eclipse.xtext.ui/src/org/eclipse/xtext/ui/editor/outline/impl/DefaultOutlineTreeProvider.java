@@ -18,7 +18,6 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
-import org.eclipse.xtext.ui.editor.outline.OutlineLabelProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.inject.Inject;
@@ -26,7 +25,6 @@ import com.google.inject.Inject;
 public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider {
 
 	@Inject
-	@OutlineLabelProvider
 	protected ILabelProvider labelProvider;
 
 	@Inject
