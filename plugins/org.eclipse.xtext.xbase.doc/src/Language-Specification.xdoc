@@ -736,18 +736,13 @@ section2[Syntax]
 
 code[
 XConstructorCall:
-	'new' type=JvmTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')' ('as' alias=ID)?
-		initializer=XBlockExpression?;
+	'new' type=JvmTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')';
 ]
 
 section2[Example]
 
 code[
-	new Foo() as f in {
-		f.foo += new OtherFoo() {
-			parent = f;
-		};
-	}
+	new Foo()
 ]
 
 

@@ -4,9 +4,29 @@
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 
+%%\usepackage{helvet}
+
+\lstdefinelanguage{Xtext}
+  {morekeywords={grammar, generate, import, as, terminal, hidden},
+    sensitive=true,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+    morestring=[b]',
+  }
+
+\lstdefinelanguage{Xbase}
+  {morekeywords={extends, instanceof, new, null, true, false, if, else, switch, case, default, do, while, for, def, class, as},
+    sensitive=true,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+    morestring=[b]',
+  }
+
 %\lstdefinelanguage{xtext}{keywords={terminal, grammar, import, generate, hidden, as}, sensitive=true,string={"},morestring={'},comment={//},morecomment=[s]{/*}{*/}}
 
-\lstset{breaklines=true, tabsize=4, basicstyle=\sffamily, keywordstyle=\bfseries, language=Java}
+\lstset{breaklines=true, tabsize=4, basicstyle=\sffamily\footnotesize, keywordstyle=\bfseries, language=Xbase}
 
 \usepackage[english]{babel}
 
@@ -17,7 +37,8 @@
 
 \begin{document}
 
-\chapter{Preface\label{Preface}}
+\chapter{Preface}
+\label{Preface}
 This document specifies the programming language library Xbase. Xbase is a partial programming language implemented in Xtext and is ment to be used and extended
  within other programming languages and domain-specific languages (DSL) which are also implemented in Xtext. Xtext is a highly extendable language development framework 
 covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse. 
@@ -30,13 +51,16 @@ hovering, folding and navigation can be easily integrated and reused within any 
 
 
 \chapter{Lexical Syntax}
+
 Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully choosen and it is recommended to stick 
 with the lexical syntax described in the following.
 
-\section{Identifiers\label{Identifiers}}
+\section{Identifiers}
+\label{Identifiers}
 Identifiers are used to name all constructs, such as types, methods and variables.
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 terminal ID  : 
 	'^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
@@ -55,6 +79,7 @@ a keyword 'service' in your language but want at some point call a Java property
 
 
 \subsection{Examples}
+
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
@@ -93,11 +118,13 @@ FOO
 
 
 
-\section{String Literals\label{StringLiterals}}
+\section{String Literals}
+\label{StringLiterals}
 In Xbase string literals can span multiple lines. In addition there are two different terminals you can use which allows for avoiding escape sequences as far as possible.
 Note that there are no character literals in Xbase.
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 terminal STRING	: 
 	'"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
@@ -111,6 +138,7 @@ terminal STRING	:
 
 
 \subsection{Examples}
+
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
@@ -130,11 +158,11 @@ terminal STRING	:
 \end{minipage}
 
 \item \begin{minipage}[t]{\itemindentlen}
-'Escapes : \textbackslash{}' '
+'Escapes : \textbackslash\{\}' '
 \end{minipage}
 
 \item \begin{minipage}[t]{\itemindentlen}
-"Escapes : \textbackslash{}" "
+"Escapes : \textbackslash\{\}" "
 \end{minipage}
 
 \end{itemize}
@@ -146,10 +174,12 @@ terminal STRING	:
 
 
 
-\section{Integer Literals\label{IntegerLiterals}}
+\section{Integer Literals}
+\label{IntegerLiterals}
 Integer Literals consists of one or more digits.
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 terminal INT returns ecore::EInt: 
 	('0'..'9')+
@@ -163,11 +193,13 @@ terminal INT returns ecore::EInt:
 
 
 
-\section{Comments\label{Comments}}
+\section{Comments}
+\label{Comments}
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
 The syntax is the same to the one from Java:
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 terminal ML_COMMENT	: 
 	'/*' -> '*/'
@@ -184,13 +216,15 @@ terminal SL_COMMENT :
 
 
 
-\section{White Space\label{Whitespace}}
+\section{White Space}
+\label{Whitespace}
 Xbase ignores all white space.
 
 
 
 
-\section{Reserved Keywords\label{Keywords}}
+\section{Reserved Keywords}
+\label{Keywords}
 The following list of words are reserved keywords, that reducing the set of possible identifiers:
 
 \setlength{\itemindentlen}{\textwidth}
@@ -264,15 +298,18 @@ However, in case some of the keywords have to be used as identifiers at times, t
 
 
 
-\chapter{Types\label{Types}}
+\chapter{Types}
+\label{Types}
 Xbase binds to the Java Virtual Machine. This means that expressions written in Xbase refer to Java types and Java type members. Xbase itself uses only types 
 defined in the Java language, such as classes, interfaces, annotations and enums. It also resembles Java generics and shares the known syntax. In addition to Java, Xbase comes with the
 notion of function types, that is the type of a function. 
 
-\section{Simple Type References\label{TypeReferences}}
+\section{Simple Type References}
+\label{TypeReferences}
 A simple type reference only consists of a qualified name. A qualified name is a name made up of identifiers which are separated by a dot (like in Java).
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 QualifiedName:
   ID ('.' ID)*
@@ -287,6 +324,7 @@ There's no rule for a simple type reference, as it is expressed as a parameteriz
 
 
 \subsection{Examples}
+
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
@@ -309,7 +347,8 @@ String
 
 
 
-\section{Function Types\label{FunctionTypes}}
+\section{Function Types}
+\label{FunctionTypes}
 Xbase introduces closures, which need a special kind of type. On the Jvm-Level a closures (or more generally any function object) is just an instance of one of the 
 types in \lstinline{org.eclipse.xtext.xbase.lib.Function*}
 , dependening on the number of arguments. However, as closures are a very important language feature, and
@@ -320,6 +359,7 @@ So instead of writing \lstinline{Function<String,Boolean>}
  instead.
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XFunctionTypeRef:
   ('(' parameterTypes+=JvmTypeReference (',' parameterTypes+=JvmTypeReference)* ')')? '=>' returnType+=JvmTypeReference;
@@ -331,6 +371,7 @@ XFunctionTypeRef:
 
 
 \subsection{Examples}
+
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
@@ -361,7 +402,8 @@ XFunctionTypeRef:
 
 
 
-\section{Parameterized Type References\label{ParameterizedTypeReference}}
+\section{Parameterized Type References}
+\label{ParameterizedTypeReference}
 The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is exactly the same as in Java, so please 
 refer to the third edition of the  \href{http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html}{Java Language Specification} which is available online for free.
 
@@ -369,6 +411,7 @@ The only difference is, that in Xbase a type reference can also be a function ty
 type arguments.
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 JvmTypeReference:
   JvmParameterizedTypeReference|XFunctionTypeRef;
@@ -402,6 +445,7 @@ JvmUpperBound :
 
 
 \subsection{Examples}
+
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
@@ -441,17 +485,20 @@ List<? extends =>Boolean>
 
 
 
-\chapter{Expressions\label{Expressions}}
+\chapter{Expressions}
+\label{Expressions}
 Expressions are the main language constructs which are used to express behavior and computation of values. Xbase doesn't support the concept of a statement, but instead comes with powerful 
 expressions to handle situations in which the imperative nature of statements are a better fit. An expression always results in a value (might be the value 'null' though). In addition expressions can
 be statically typed. That is by default it is assumed that languages making use of Xbase provide enough static context infromation to allow for static type analysis, which is the basis of a lot of
 IDE features coming with Xbase for free. However, the static typing is not mandatory and might be completely skipped if not wished. The openess of the compiler even allows to change the generation of 
 concrete feature invocations to reflective calls, so that the language can be fully dynamically typed.
 
-\section{Literals\label{Literals}}
+\section{Literals}
+\label{Literals}
 A literal denotes a fixed unchangeable value. Xbase comes with the following literals
 
-\subsection{String Literals\label{ExpressionsStringLiterals}}
+\subsection{String Literals}
+\label{ExpressionsStringLiterals}
 A string literal as defined in 
 \autoref{StringLiterals} is a valid expression and returns an instance of \lstinline{java.lang.String}
  of the given value.
@@ -459,7 +506,8 @@ A string literal as defined in
 
 
 
-\subsection{Integer Literals\label{ExpressionsIntegerLiterals}}
+\subsection{Integer Literals}
+\label{ExpressionsIntegerLiterals}
 An integer literal as defined in 
 \autoref{IntegerLiterals} creates an instance of \lstinline{Integer}
  (TODO discuss how we want to go about the built-in types of Java).
@@ -467,7 +515,8 @@ An integer literal as defined in
 
 
 
-\subsection{Boolean Literals\label{BooleanLiteral}}
+\subsection{Boolean Literals}
+\label{BooleanLiteral}
 There are two boolean literals, \lstinline{true}
  and \lstinline{false}
  which correspond to the respective Java values of the native type \lstinline{boolean}
@@ -477,6 +526,7 @@ There are two boolean literals, \lstinline{true}
 
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XBooleanLiteral:
 	{XBooleanLiteral} 'false' | isTrue?='true';
@@ -487,7 +537,8 @@ XBooleanLiteral:
 
 
 
-\subsection{Null Literal\label{NullLiteral}}
+\subsection{Null Literal}
+\label{NullLiteral}
 The null pointer literal again is like in Java: \lstinline{null}
 . 
 
@@ -495,6 +546,7 @@ The null pointer literal again is like in Java: \lstinline{null}
 
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XNullLiteral:
 	{XNullLiteral} 'null';
@@ -505,7 +557,8 @@ XNullLiteral:
 
 
 
-\subsection{Type Literals\label{TypeLiteral}}
+\subsection{Type Literals}
+\label{TypeLiteral}
 Also type literals are written like in Java, that is it it consists of a reference to a raw type suffixed with a dot and the keyword \lstinline{class}
 .
 
@@ -513,6 +566,7 @@ Also type literals are written like in Java, that is it it consists of a referen
 
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XTypeLiteral:
 	type=[types::JvmType|QualifiedName] '.' 'class';
@@ -525,7 +579,8 @@ XTypeLiteral:
 
 
 
-\section{Infix Operators\label{Operators}}
+\section{Infix Operators}
+\label{Operators}
 Xbase supports the usual infix operators as well as some additional operators known from other languages. In contrast to Java, the operators are not fixed
 to operations on certain types, but instead Xbase comes with an operator to method mapping, which allows users to redefine the operators for any type just by implementing
 the corresponding method signature. The following defines the operators and the corresponding method signatures.
@@ -572,13 +627,14 @@ The two assignment operators \lstinline{=}
  are right-to-left associative, that is a = b = c is executed as a = (b = c), all other
 operators are left-to-right associative. Parenthesis can be used to adjust the default precedence and associativity. 
 
-\subsection{Property Assignment\label{propertyAssignment}}
+\subsection{Property Assignment}
+\label{propertyAssignment}
 The translation rule for the simple assignment operator \lstinline{=}
  is a bit more complicated.
 Given the expression 
 
 \begin{lstlisting}
-	myObj.myProperty = "foo"
+myObj.myProperty = "foo"
 
 \end{lstlisting}
 
@@ -589,7 +645,7 @@ It first looks up whether, there is an accessible Java Field called \lstinline{m
 the following Java expression :
 
 \begin{lstlisting} [language=Java]
-	myObj.myProperty = "foo";
+myObj.myProperty = "foo";
 
 \end{lstlisting}
 
@@ -604,7 +660,7 @@ The return value will be whatever the setter method returns (usually null i.e. t
 As a result the compiler translates to :
 
 \begin{lstlisting} [language=Java]
-	myObj.setMyProperty("foo")
+myObj.setMyProperty("foo")
 
 \end{lstlisting}
 
@@ -613,6 +669,7 @@ As a result the compiler translates to :
 
 
 \subsection{Short-Circuit Boolean Operators}
+
 If the operators \lstinline{||}
  and \lstinline{&&}
  are used in a context where both operands are of type boolean, the operation supports short circuit.
@@ -643,6 +700,7 @@ in the case of \lstinline{&&}
 
 
 \subsection{Examples}
+
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
@@ -689,10 +747,12 @@ my.foo = 23
 
 
 
-\section{Feature Calls\label{FeatureCalls}}
+\section{Feature Calls}
+\label{FeatureCalls}
 A feature call is used to invoke members of objects, such as fields and methods, but also can refer to local variables and parameters, which are made available for the current expression's scope.
 
 \subsection{Syntax}
+
 The following snippet is a simplification of the real Xtext rules, which cover more than the concrete syntax.
 \begin{lstlisting}
 FeatureCall :
@@ -705,13 +765,14 @@ FeatureCall :
 
 
 
-\subsection{Property Access\label{PropertyAccess}}
+\subsection{Property Access}
+\label{PropertyAccess}
 Feature calls are directly translated to their Java equivalent with the exception, that for calls to properties an equivalent rule as described in 
 \autoref{propertyAssignment} applies. 
 That is, for the following expression
 
 \begin{lstlisting}
-	myObj.myProperty
+myObj.myProperty
 
 \end{lstlisting}
 
@@ -723,18 +784,19 @@ Otherwise such an expression is not bound which results in a compilation error.
 
 
 
-\subsection{Implicit 'this' variable\label{ImplicitThis}}
+\subsection{Implicit 'this' variable}
+\label{ImplicitThis}
 If the current scope contains a variable named \lstinline{this}
 , the compiler will make all its members available to the scope. 
 That is if 
 \begin{lstlisting}
-	this.myProperty
+this.myProperty
 
 \end{lstlisting}
 
 if a valid expression
 \begin{lstlisting}
-	myProperty
+myProperty
 
 \end{lstlisting}
 
@@ -744,6 +806,7 @@ is valid as well and is equivalent.
 
 
 \subsection{Examples}
+
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
@@ -774,11 +837,13 @@ oh.my.foo(bar)
 
 
 
-\section{Closures\label{Closures}}
+\section{Closures}
+\label{Closures}
 A closure is a literal to create anonymous functions. A closure also captures the current scope, so that variables and parameters visible at contruction time can be referred to in the
 closure's expression. 
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XClosure returns XExpression:
 	{XClosure} (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? '|' expression=XExpression;
@@ -792,7 +857,8 @@ JvmFormalParameter returns types::JvmFormalParameter:
 
 
 
-\subsection{Function Mapping\label{FunctionMapping}}
+\subsection{Function Mapping}
+\label{FunctionMapping}
 An Xbase closure is a Java object of one of the Function interfaces shipped with the runtime library of Xbase. There's an interface for ech number of parameters.
 The names of the interfaces are 
 
@@ -834,27 +900,28 @@ To be discussed: In order to allow seamless integration with Google Guava (forme
 
 
 
-\subsection{Type Inference\label{ClosuresTypeInference}}
+\subsection{Type Inference}
+\label{ClosuresTypeInference}
 Closures are expressions which produce function objects. The type is a 
 \hyperref[FunctionTypes]{function type~(\ref*{FunctionTypes})}, consisting of the types of the parameters as well as the types of the return type.
 The return type is never specified explicitly but is always inferred from the expression. The parameter types can be inferred if the closure is used in a context where this is possible.
 
 For instance, given the following Java method signature:
 \begin{lstlisting}
-	public T <T>getFirst(List<T> list, Function0<T,Boolean> predicate) 
+public T <T>getFirst(List<T> list, Function0<T,Boolean> predicate) 
 
 \end{lstlisting}
  
 
 the type of the parameter can be inferred. Which allows users to write:
 \begin{lstlisting}
-	getFirst(arrayList("Foo","Bar"), e|e=="Bar")
+getFirst(arrayList("Foo","Bar"), e|e=="Bar")
 
 \end{lstlisting}
 
 instead of 
 \begin{lstlisting}
-	getFirst(arrayList("Foo","Bar"), String e|e=="Bar")
+getFirst(arrayList("Foo","Bar"), String e|e=="Bar")
 
 \end{lstlisting}
 
@@ -863,6 +930,7 @@ instead of
 
 
 \subsection{Examples}
+
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
@@ -889,12 +957,14 @@ a,b,a | a+b+c  // inferred argument types
 
 
 
-\section{If Expression\label{IfExpression}}
+\section{If Expression}
+\label{IfExpression}
 The If expressions are used to choose two different values, based on a predicate.
 They are like if statements in java, but they are expressions. This means they always return a value and have a return type. Also this allows
 to use if clauses deeply nested within expressions. 
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XIfExpression:
 	'if' '(' p=XExpression ')'
@@ -914,7 +984,7 @@ An expression \lstinline{if (p) e1 else e2}
 The else part is optional which is a shorthand for 'else null'.
 That is 
 \begin{lstlisting}
-	if (foo) x // is the same as 'if (foo) x else null' 
+if (foo) x // is the same as 'if (foo) x else null' 
 
 \end{lstlisting}
 
@@ -922,7 +992,8 @@ That is
 
 
 
-\subsection{Type Inference\label{IfTypeInference}}
+\subsection{Type Inference}
+\label{IfTypeInference}
 The type of an if expression is calculated by the return types \lstinline{T1}
  and \lstinline{T2}
  of the two expression \lstinline{e1}
@@ -958,6 +1029,7 @@ If both T1!=T2, the expected type T3 of the current context is used and it is ch
 
 \subsection{Examples}
 
+
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
 \addtolength{\itemindentlen}{-2em}
@@ -983,10 +1055,12 @@ if (isFoo) this
 
 
 
-\section{Switch Expression\label{SwitchExpression}}
+\section{Switch Expression}
+\label{SwitchExpression}
 
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XSwitchExpression:
 	'switch' main=XExpression? '{'
@@ -1008,13 +1082,13 @@ The switch statement is a bit different then the one in Java. First there is no 
 Second the use of switch is not limited to certain values, but instead can be used for any object reference. 
 For a switch expression 
 \begin{lstlisting}
-	switch e {
-		case e1 : er1
-		case e2 : er2
-		...
-		case en : ern
-		default : er
-	}
+switch e {
+	case e1 : er1
+	case e2 : er2
+	...
+	case en : ern
+	default : er
+}
 
 \end{lstlisting}
 
@@ -1034,6 +1108,7 @@ case expressions \lstinline{e1...en}
 
 
 \subsection{Leaving out the main expression}
+
 It is possible to leave out the main expression. Then the case expressions \lstinline{e1...en}
  have to be of type Boolean. They are evaluated 
 in the specified order and as soon as one predicate \lstinline{ex}
@@ -1044,6 +1119,7 @@ in the specified order and as soon as one predicate \lstinline{ex}
 
 
 \subsection{Inline polymorphic dispatch}
+
 Xbase allows to use class clauses instead of case clauses. The effect will be an inlined polymorphic dispatch, that is a value is taken depending on the runtime type of the main 
 expression  \lstinline{e}
 . At compile time this has the effect that the type of \lstinline{e}
@@ -1054,13 +1130,13 @@ expression  \lstinline{e}
 
 Example:
 \begin{lstlisting}
-	{
-	var Object x = ...;
-	switch x {
-		instanceof String : x.length()
-		instanceof List<?> : x.size()
-		default : -1
-	}
+{
+var Object x = ...;
+switch x {
+	instanceof String : x.length()
+	instanceof List<?> : x.size()
+	default : -1
+}
 
 \end{lstlisting}
 
@@ -1069,6 +1145,7 @@ Example:
 
 
 \subsection{Type inference}
+
 The return type of a switch expression is computed similarly to how the type of an if expression is computed. 
 
 \setlength{\itemindentlen}{\textwidth}
@@ -1096,11 +1173,13 @@ if the types are different the context type is used and it is ensured at compila
 
 
 
-\section{Variable Declarations\label{VariableDeclaration}}
+\section{Variable Declarations}
+\label{VariableDeclaration}
 Variable Declarations are only allowed within a 
 \hyperref[Blocks]{Block~(\ref*{Blocks})}. 
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XVariableDeclaration:
 	nonfinal?='nonfinal'? 'var' type=JvmTypeReference? name=ID '=' right=XExpression;
@@ -1113,7 +1192,7 @@ In order to make a variable non-final, such that it is possible to use them on t
 \autoref{propertyAssignment} one has to add the keyword 'nonfinal' to the declaration.
 
 \begin{lstlisting}
-	nonfinal var i = 0;
+nonfinal var i = 0;
 
 \end{lstlisting}
 
@@ -1122,10 +1201,11 @@ In order to make a variable non-final, such that it is possible to use them on t
 
 
 \subsection{Type Inference}
+
 The type of a variable declaration would only be interesting in case the declaration is the last expression of a block, which doesn't make sense and results in a compile time error.
 However, the type of the variable can be defined in two way. It can be explicitly declared like in the following:
 \begin{lstlisting}
-	var List<String> msg = new ArrayList<String>(); 
+var List<String> msg = new ArrayList<String>(); 
 
 \end{lstlisting}
 
@@ -1133,7 +1213,7 @@ In such cases, the right hand expression's type must be assignable to the type o
 
 Alternatively the type can be left off and corresponds to the type of the initialization expression:  
 \begin{lstlisting}
-	var msg = new ArrayList<String>(); // msg will be of type ArrayList<String>  
+var msg = new ArrayList<String>(); // msg will be of type ArrayList<String>  
 
 \end{lstlisting}
 
@@ -1143,12 +1223,14 @@ Alternatively the type can be left off and corresponds to the type of the initia
 
 
 
-\section{Blocks\label{Blocks}}
+\section{Blocks}
+\label{Blocks}
 The block expression allows to simulate imperative code sequences. It conists of a sequence of expressions, and returns the value of the last expression.
 The return type of a block is also the type of the last expression. 
 Variable declarations are only possible within blocks.
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XBlockExpression:
 	'{'
@@ -1165,29 +1247,30 @@ A block expression is surrounded by curly braces and contains at least one expre
 
 \subsection{Examples}
 
+
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
 \addtolength{\itemindentlen}{-2em}
 
 \item \begin{minipage}[t]{\itemindentlen}
 
-	\textbackslash{}{
+	\{
 		doSideEffect("foo");
 		result;
-	\textbackslash{}}
+	\}
 	
 \end{minipage}
 
 \item \begin{minipage}[t]{\itemindentlen}
 
-	\textbackslash{}{
+	\{
 		var x = greeting();
-		if ((x.equals("Hello ")) \textbackslash{}{
+		if ((x.equals("Hello ")) \{
 			x+"World!"; 
-		\textbackslash{}} else \textbackslash{}{
+		\} else \{
 			x
-		\textbackslash{}};
-	\textbackslash{}}
+		\};
+	\}
 	
 \end{minipage}
 
@@ -1200,7 +1283,8 @@ A block expression is surrounded by curly braces and contains at least one expre
 
 
 
-\section{While Loop\label{WhileExpression}}
+\section{While Loop}
+\label{WhileExpression}
 A while loop \lstinline{while (p) e}
  is used to execute a certain expression \lstinline{e}
  unless a given predicate \lstinline{p}
@@ -1211,6 +1295,7 @@ The return type of a while loop is \lstinline{java.lang.Void}
 .
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XWhileExpression:
 	'while' '(' predicate=XExpression ')'
@@ -1224,15 +1309,16 @@ XWhileExpression:
 
 \subsection{Examples}
 
+
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
 \addtolength{\itemindentlen}{-2em}
 
 \item \begin{minipage}[t]{\itemindentlen}
 
-	while (true) \textbackslash{}{
+	while (true) \{
 		doSideEffect("foo");
-	\textbackslash{}}
+	\}
 	
 \end{minipage}
 
@@ -1251,7 +1337,8 @@ XWhileExpression:
 
 
 
-\section{Do-While Loop\label{DoWhileExpression}}
+\section{Do-While Loop}
+\label{DoWhileExpression}
 A do-while loop \lstinline{do e while (p)}
  is used to execute a certain expression \lstinline{e}
  unless a given predicate \lstinline{p}
@@ -1264,6 +1351,7 @@ The return type of a do-while loop is \lstinline{java.lang.Void}
 .
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XDoWhileExpression:
 	'do'
@@ -1278,15 +1366,16 @@ XDoWhileExpression:
 
 \subsection{Examples}
 
+
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
 \addtolength{\itemindentlen}{-2em}
 
 \item \begin{minipage}[t]{\itemindentlen}
 
-	do \textbackslash{}{
+	do \{
 		doSideEffect("foo");
-	\textbackslash{}} while (true)
+	\} while (true)
 	
 \end{minipage}
 
@@ -1305,7 +1394,8 @@ XDoWhileExpression:
 
 
 
-\section{For Loop\label{ForLoop}}
+\section{For Loop}
+\label{ForLoop}
 The for loop \lstinline{for (T1 var : iterableOfT1) e}
  is used to execute a certain expression \lstinline{e}
  for each element of an \lstinline{java.lang.Iterable}
@@ -1315,6 +1405,7 @@ The return type of a for loop is \lstinline{java.lang.Void}
 .
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XForExpression:
 	'for' '(' var=JvmFormalParameter ':' iterable=XExpression ')' 
@@ -1328,6 +1419,7 @@ XForExpression:
 
 
 \subsection{Type Inference}
+
 The type of the local variable can be left out. In that case it is inferred from the type of the \lstinline{java.lang.Iterable}
  returned by the iterable expression.
 
@@ -1336,11 +1428,12 @@ The type of the local variable can be left out. In that case it is inferred from
 
 \subsection{Examples}
 
+
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
 \addtolength{\itemindentlen}{-2em}
 
-\item \begin{minipage}[t]{\itemindentlen}
+\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
 \begin{lstlisting}
 for (String s : myStrings) {
 	doSideEffect(s);
@@ -1349,11 +1442,11 @@ for (String s : myStrings) {
 
 \end{minipage}
 
-\item \begin{minipage}[t]{\itemindentlen}
+\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
 
 		\begin{lstlisting}
-			for (s : myStrings)
-				doSideEffect(s)
+for (s : myStrings)
+	doSideEffect(s)
 		
 \end{lstlisting}
 
@@ -1369,10 +1462,12 @@ for (String s : myStrings) {
 
 
 
-\section{Constructor Call\label{ConstructorCall}}
+\section{Constructor Call}
+\label{ConstructorCall}
 
 
 \subsection{Syntax}
+
 \begin{lstlisting}
 XConstructorCall:
 	'new' type=JvmTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')' ('as' alias=ID)?
@@ -1385,12 +1480,13 @@ XConstructorCall:
 
 
 \subsection{Example}
+
 \begin{lstlisting}
-	new Foo() as f in {
-		f.foo += new OtherFoo() {
-			parent = f;
-		};
-	}
+new Foo() as f in {
+	f.foo += new OtherFoo() {
+		parent = f;
+	};
+}
 
 \end{lstlisting}
 
