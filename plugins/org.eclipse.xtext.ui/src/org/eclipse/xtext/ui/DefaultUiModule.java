@@ -230,10 +230,6 @@ public class DefaultUiModule extends AbstractGenericModule {
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("Outline")).to(OutlinePreferenceStoreInitializer.class);
 	}
 	
-	public void configureOutlineLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.editor.outline.OutlineLabelProvider.class).to(org.eclipse.jface.viewers.ILabelProvider.class);
-	}
-
 	public void configureContentProposalLabelProvider(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
 				.annotatedWith(org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider.class)
