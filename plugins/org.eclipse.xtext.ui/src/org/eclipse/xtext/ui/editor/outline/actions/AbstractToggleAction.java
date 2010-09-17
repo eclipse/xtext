@@ -8,12 +8,10 @@
 package org.eclipse.xtext.ui.editor.outline.actions;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -23,26 +21,19 @@ public abstract class AbstractToggleAction extends Action {
 	@Inject 
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	
-	@Inject@Named(Constants.LANGUAGE_NAME)
-	protected String languageName;
-	
 	protected AbstractToggleAction() {
 	}
 	
-	protected abstract String getPropertyKey();
-	
-	protected String getQualifiedPropertyKey() {
-		return languageName + "." + getPropertyKey();
-	}
+	public abstract String getPreferenceKey();
 	
 	protected boolean isPropertySet() {
-		return preferenceStoreAccess.getPreferenceStore().getBoolean(getQualifiedPropertyKey());
+		return preferenceStoreAccess.getPreferenceStore().getBoolean(getPreferenceKey());
 	}
 	
 	@Override
 	public void run() {
 		boolean newState = !isPropertySet();
-		preferenceStoreAccess.getWritablePreferenceStore().setValue(getQualifiedPropertyKey(), newState);
+		preferenceStoreAccess.getWritablePreferenceStore().setValue(getPreferenceKey(), newState);
 		setChecked(newState);
 		stateChanged(newState);
 	}

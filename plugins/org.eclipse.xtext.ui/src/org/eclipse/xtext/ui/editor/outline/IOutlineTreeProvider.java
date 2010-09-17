@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 
@@ -24,8 +21,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultOutlineTreeProvider.class)
 public interface IOutlineTreeProvider {
 
-	List<IOutlineNode> createChildren(IOutlineNode parent, Resource resource);
-
-	IOutlineNode createRoot(IXtextDocument document, Resource resource);
+	IOutlineNode createRoot(IXtextDocument document);
 	
 }

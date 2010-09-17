@@ -3,15 +3,10 @@
 */
 package org.eclipse.xtext.example.ui.outline;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.example.fowlerdsl.FowlerdslPackage;
 import org.eclipse.xtext.example.fowlerdsl.Statemachine;
-import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
-import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
+import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EReferenceNode;
 
 /**
@@ -20,19 +15,13 @@ import org.eclipse.xtext.ui.editor.outline.impl.EReferenceNode;
  */
 public class FowlerDslOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
-	@Override
-	protected List<IOutlineNode> createChildren(EObjectNode parentNode, Resource resource) {
-		EObject eObject = parentNode.getEObject(resource);
-		if (eObject instanceof Statemachine) {
-			Statemachine statemachine = (Statemachine) eObject;
-			new EReferenceNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__EVENTS, parentNode,
-					labelProvider.getImage("events"), "Events", !statemachine.getEvents().isEmpty());
-			new EReferenceNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__COMMANDS, parentNode,
-					labelProvider.getImage("commands"), "Commands", !statemachine.getEvents().isEmpty());
-			new EReferenceNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__STATES, parentNode,
-					labelProvider.getImage("states"), "States", !statemachine.getEvents().isEmpty());
-		}
-		return super.createChildren(parentNode, resource);
+	protected void doCreateChildren(DocumentRootNode parentNode, Statemachine statemachine) {
+		new EReferenceNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__EVENTS, parentNode,
+				labelProvider.getImage("events"), "Events", statemachine.getEvents().isEmpty());
+		new EReferenceNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__COMMANDS, parentNode,
+				labelProvider.getImage("commands"), "Commands", statemachine.getEvents().isEmpty());
+		new EReferenceNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__STATES, parentNode,
+				labelProvider.getImage("states"), "States", statemachine.getEvents().isEmpty());
 	}
-
+	
 }

@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline.quickoutline;
 
+import java.util.List;
+
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.PopupDialog;
+import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -155,12 +158,18 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.setLabelProvider(labelProvider);
-		treeViewer.setAutoExpandLevel(2);
+		treeViewer.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
 		IOutlineNode rootNode = document.readOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
 			public IOutlineNode exec(XtextResource state) throws Exception {
-				IOutlineNode rootNode = treeProvider.createRoot(document, state);
-				treeProvider.createChildren(rootNode, state);
+				IOutlineNode rootNode = treeProvider.createRoot(document);
+				createChildrenRecursively(rootNode.getChildren());
 				return rootNode;
+			}
+			
+			protected void createChildrenRecursively(List<IOutlineNode> nodes) {
+				for(IOutlineNode node:nodes) {
+					createChildrenRecursively(node.getChildren());
+				}
 			}
 		});
 		treeViewer.setInput(rootNode);
@@ -256,7 +265,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	protected Object findMatchingElement(Object[] elements) {
 		if (hasMatcher()) {
 			for (Object element : elements) {
-				String text = labelProvider.getText(element);
+				String text = labelProvider.getStyledStringProvider().getStyledText(element).getString();
 				if (getMatcher().match(text)) {
 					return element;
 				}

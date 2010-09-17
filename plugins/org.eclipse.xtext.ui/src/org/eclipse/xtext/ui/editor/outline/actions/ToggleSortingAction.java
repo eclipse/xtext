@@ -9,11 +9,13 @@ package org.eclipse.xtext.ui.editor.outline.actions;
 
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -26,6 +28,9 @@ public class ToggleSortingAction extends AbstractToggleAction {
 
 	@Inject
 	private ViewerSorter viewerSorter;
+	
+	@Inject@Named(Constants.LANGUAGE_NAME)
+	protected String languageName;
 	
 	public ToggleSortingAction() {
 		setText(XtextUIMessages.LexicalSortingAction_label);
@@ -50,7 +55,7 @@ public class ToggleSortingAction extends AbstractToggleAction {
 	}
 
 	@Override
-	protected String getPropertyKey() {
-		return PREFERENCE_KEY;
+	public String getPreferenceKey() {
+		return languageName + "." + PREFERENCE_KEY;
 	}
 }

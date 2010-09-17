@@ -3,11 +3,7 @@
 */
 package org.eclipse.xtext.example.ui.outline;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 
@@ -16,16 +12,11 @@ import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
  * 
  */
 public class DomainmodelOutlineTreeProvider extends DefaultOutlineTreeProvider {
-	
+
 	@Override
-	protected List<IOutlineNode> createChildren(DocumentRootNode parentNode, Resource resource) {
-		if(!resource.getContents().isEmpty()) {
-			// skip model node
-			EObject eObject = resource.getContents().get(0);
-			for(EObject content: eObject.eContents()) {
-				createNode(parentNode, content);
-			}
+	protected void doCreateChildren(DocumentRootNode parentNode, EObject rootElement) {
+		for (EObject content : rootElement.eContents()) {
+			createNode(parentNode, content);
 		}
-		return parentNode.getChildren();
 	}
 }

@@ -53,6 +53,11 @@ public abstract class AbstractFowlerDslUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.example.ui.outline.FowlerDslOutlineTreeProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider> bindIOutlineTreeStructureProvider() {
+		return org.eclipse.xtext.example.ui.outline.FowlerDslOutlineTreeProvider.class;
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.example.ui.contentassist.FowlerDslProposalProvider.class;

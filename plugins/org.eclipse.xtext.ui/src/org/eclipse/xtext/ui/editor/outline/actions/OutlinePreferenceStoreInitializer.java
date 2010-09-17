@@ -23,14 +23,10 @@ public class OutlinePreferenceStoreInitializer implements IPreferenceStoreInitia
 	@Named(Constants.LANGUAGE_NAME)
 	protected String languageName;
 
-	protected String getQualifiedPropertyKey(String propertyKey) {
-		return languageName + "." + propertyKey;
-	}
-
 	public void initialize(IPreferenceStoreAccess access) {
 		access.getWritablePreferenceStore().setDefault(
-				getQualifiedPropertyKey(ToggleLinkWithEditorAction.PREFERENCE_KEY), false);
-		access.getWritablePreferenceStore().setDefault(getQualifiedPropertyKey(ToggleSortingAction.PREFERENCE_KEY),
+				(languageName + "." + ToggleLinkWithEditorAction.PREFERENCE_KEY), false);
+		access.getWritablePreferenceStore().setDefault((languageName + "." + ToggleSortingAction.PREFERENCE_KEY),
 				false);
 	}
 }

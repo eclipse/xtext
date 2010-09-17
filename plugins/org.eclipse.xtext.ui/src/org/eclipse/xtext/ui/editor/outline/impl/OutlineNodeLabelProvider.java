@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline.impl;
 
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.PluginImageHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -17,44 +18,52 @@ import com.google.inject.Inject;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class OutlineNodeLabelProvider extends AbstractLabelProvider {
+public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider {
 
 	@Inject
-	private PluginImageHelper pluginImageHelper;
+	public OutlineNodeLabelProvider(Delegate delegate) {
+		super(delegate);
+	}
 
-	@Override
-	protected Object doGetText(Object element) {
-		if (element instanceof IOutlineNode) {
-			return ((IOutlineNode) element).getText();
+	public static class Delegate extends AbstractLabelProvider {
+
+		@Inject
+		private PluginImageHelper pluginImageHelper;
+
+		@Override
+		protected Object doGetText(Object element) {
+			if (element instanceof IOutlineNode) {
+				return ((IOutlineNode) element).getText();
+			}
+			return super.doGetText(element);
 		}
-		return super.doGetText(element);
-	}
 
-	@Override
-	protected Object doGetImage(Object element) {
-		if (element instanceof IOutlineNode) {
-			return ((IOutlineNode) element).getImage();
+		@Override
+		protected Object doGetImage(Object element) {
+			if (element instanceof IOutlineNode) {
+				return ((IOutlineNode) element).getImage();
+			}
+			return super.doGetImage(element);
 		}
-		return super.doGetImage(element);
-	}
 
-	@Override
-	protected Object getDefaultImage() {
-		return pluginImageHelper.getImage("defaultoutlinenode.gif");
-	}
+		@Override
+		protected Object getDefaultImage() {
+			return pluginImageHelper.getImage("defaultoutlinenode.gif");
+		}
 
-	@Override
-	protected String getDefaultText() {
-		return "<null>";
-	}
-	
-	@Override
-	public Image getImage(Object element) {
-		return super.getImage(element);
-	}
-	
-	@Override
-	public String getText(Object element) {
-		return super.getText(element);
+		@Override
+		protected String getDefaultText() {
+			return "<null>";
+		}
+
+		@Override
+		public Image getImage(Object element) {
+			return super.getImage(element);
+		}
+
+		@Override
+		public String getText(Object element) {
+			return super.getText(element);
+		}
 	}
 }

@@ -89,7 +89,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Keyword cAsteriskKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
-		//ImportName returns ecore::EString:
+		//ImportName:
 		//	ID ("." "*")?;
 		public ParserRule getRule() { return rule; }
 
@@ -548,7 +548,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		return getImportAccess().getRule();
 	}
 
-	//ImportName returns ecore::EString:
+	//ImportName:
 	//	ID ("." "*")?;
 	public ImportNameElements getImportNameAccess() {
 		return (pImportName != null) ? pImportName : (pImportName = new ImportNameElements());

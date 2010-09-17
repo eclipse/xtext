@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline.impl;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -19,12 +21,12 @@ import org.eclipse.xtext.util.TextRegion;
 public class DocumentRootNode extends AbstractOutlineNode {
 
 	private IXtextDocument document;
-	private IOutlineTreeProvider treeProvider;
+	private DefaultOutlineTreeProvider treeProvider;
 	private ILocationInFileProvider locationInFileProvider;
 
-	public DocumentRootNode(Image image, String text, boolean hasPredictedChildren, IXtextDocument document,
-			IOutlineTreeProvider treeProvider, ILocationInFileProvider locationInFileProvider) {
-		super(null, image, text, hasPredictedChildren);
+	public DocumentRootNode(Image image, String text, IXtextDocument document,
+			DefaultOutlineTreeProvider treeProvider, ILocationInFileProvider locationInFileProvider) {
+		super(null, image, text, false);
 		this.document = document;
 		this.treeProvider = treeProvider;
 		this.locationInFileProvider = locationInFileProvider;
@@ -37,7 +39,7 @@ public class DocumentRootNode extends AbstractOutlineNode {
 	}
 
 	@Override
-	public IOutlineTreeProvider getTreeProvider() {
+	public DefaultOutlineTreeProvider getTreeProvider() {
 		return treeProvider;
 	}
 
@@ -54,5 +56,17 @@ public class DocumentRootNode extends AbstractOutlineNode {
 	@Override
 	public int hashCode() {
 		return super.hashCode() + 23 * document.hashCode();
+	}
+
+	@Override
+	public <T> T readOnly(final IUnitOfWork<T, EObject> work) {
+		return document.readOnly(new IUnitOfWork<T, XtextResource>() {
+			public T exec(XtextResource resource) throws Exception {
+				if(!resource.getContents().isEmpty()) {
+					work.exec(resource.getContents().get(0));
+				}
+				return null;
+			}
+		});
 	}
 }

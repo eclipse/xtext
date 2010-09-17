@@ -28,9 +28,11 @@ public class OutlineTreeProviderFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		return new BindFactory().addTypeToType(
-				"org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider",
-				getQualifiedName(grammar, getNaming())).getBindings();
+		return new BindFactory()
+				.addTypeToType("org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider",
+						getQualifiedName(grammar, getNaming()))
+				.addTypeToType("org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider",
+						getQualifiedName(grammar, getNaming())).getBindings();
 	}
 
 	public static String getQualifiedName(Grammar grammar, Naming n) {

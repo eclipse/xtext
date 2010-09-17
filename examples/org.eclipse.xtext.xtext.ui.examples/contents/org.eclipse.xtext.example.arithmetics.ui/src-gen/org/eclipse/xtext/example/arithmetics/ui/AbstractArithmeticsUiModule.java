@@ -58,6 +58,11 @@ public abstract class AbstractArithmeticsUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.example.arithmetics.ui.outline.ArithmeticsOutlineTreeProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider> bindIOutlineTreeStructureProvider() {
+		return org.eclipse.xtext.example.arithmetics.ui.outline.ArithmeticsOutlineTreeProvider.class;
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.example.arithmetics.ui.contentassist.ArithmeticsProposalProvider.class;
