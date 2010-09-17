@@ -7,16 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline.impl;
 
-import org.eclipse.swt.graphics.Image;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class ArtificialNode extends AbstractOutlineNode {
+@ImplementedBy(DefaultOutlineTreeProvider.class)
+public interface IOutlineTreeStructureProvider  {
 
-	public ArtificialNode(IOutlineNode parent, Image image, Object text, boolean hasPredictedChildren) {
-		super(parent, image, text, hasPredictedChildren);
-	}
-
+	void createChildren(IOutlineNode parentNode, EObject modelElement);
 }

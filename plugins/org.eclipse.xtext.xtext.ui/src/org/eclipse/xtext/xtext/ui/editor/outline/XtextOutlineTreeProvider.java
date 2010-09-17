@@ -7,20 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
-import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.label.StylerFactory;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
@@ -32,50 +28,68 @@ import com.google.inject.Inject;
  * @author koehnlein - Initial contribution and API
  */
 public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
+
 	@Inject
 	private SemanticHighlightingConfiguration semanticHighlightingConfiguration;
-	private Set<AbstractRule> calledRules = Sets.newHashSet();
 
 	@Inject
 	private StylerFactory stylerFactory;
 
-	protected IOutlineNode createNode(IOutlineNode parentNode, AbstractRule rule) {
-		EObjectNode eObjectNode = (EObjectNode) super.createNode(parentNode, rule);
-		if (!calledRules.isEmpty() && !calledRules.contains(rule)) {
-			Object text = eObjectNode.getText();
-			Styler styler = stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.unusedRule());
-			if(text instanceof StyledString) { 
-				((StyledString) text).setStyle(0, ((StyledString) text).length(), styler);
+	@Inject
+	private IPreferenceStoreAccess preferenceStoreAccess;
+
+	private Set<AbstractRule> calledRules = Sets.newHashSet();
+
+	protected Object text(AbstractRule rule) {
+		StyledString ruleText = null;
+		if (!calledRules.isEmpty() && !calledRules.contains(rule))
+			ruleText = new StyledString(rule.getName(),
+					stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.unusedRule()));
+		else if (GrammarUtil.isDatatypeRule(rule))
+			ruleText = new StyledString(rule.getName(),
+					stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.dataTypeRule()));
+		else
+			ruleText = new StyledString(rule.getName());
+		if (isShowReturnTypes()) {
+			StringBuilder typeName = new StringBuilder(" - ");
+			if (rule.getType() != null) {
+				String alias = rule.getType().getMetamodel().getAlias();
+				if (alias != null) {
+					typeName.append(alias);
+					typeName.append("::");
+				}
+				typeName.append(rule.getType().getClassifier().getName());
 			} else {
-				eObjectNode.setText(new StyledString(text.toString(), styler));
+				typeName.append(rule.getName());
 			}
-		}
-		return eObjectNode;
+			StyledString styledType = new StyledString(typeName.toString(),
+					stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.typeReference()));
+			return ruleText.append(styledType);
+		} else
+			return ruleText;
 	}
 
-	
-	protected IOutlineNode createNode(IOutlineNode parentNode, Grammar grammar) {
+	protected boolean isShowReturnTypes() {
+		return preferenceStoreAccess.getPreferenceStore().getBoolean(FilterReturnTypesAction.PREFERENCE_KEY);
+	}
+
+	protected void doCreateNode(IOutlineNode parentNode, Grammar grammar) {
+		// Hack: we use this hook to calculate unused rule
 		calledRules = Sets.newHashSet();
 		if (!grammar.getRules().isEmpty()) {
 			UsedRulesFinder usedRulesFinder = new UsedRulesFinder(calledRules);
 			usedRulesFinder.compute(grammar);
 		}
-		return super.createNode(parentNode, grammar);
+		super.doCreateNode(parentNode, grammar);
 	}
 
-	@Override
-	protected List<IOutlineNode> createChildren(EObjectNode parentNode, Resource resource) {
-		EObject eObject = resource.getEObject(parentNode.getEObjectURI().fragment());
-		if (eObject instanceof Grammar) {
-			Grammar grammar = (Grammar) eObject;
-			for(AbstractMetamodelDeclaration metamodelDeclaration: grammar.getMetamodelDeclarations()) {
-				createNode(parentNode, metamodelDeclaration);
-			}
-			for(AbstractRule rule: grammar.getRules()) {
-				createNode(parentNode, rule);
-			}
-			return parentNode.getChildren();
+	protected void doCreateChildren(IOutlineNode parentNode, Grammar grammar) {
+		for (AbstractMetamodelDeclaration metamodelDeclaration : grammar.getMetamodelDeclarations()) {
+			createNode(parentNode, metamodelDeclaration);
 		}
-		return Collections.emptyList();
+		for (AbstractRule rule : grammar.getRules()) {
+			createNode(parentNode, rule);
+		}
 	}
+
 }

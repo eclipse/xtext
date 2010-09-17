@@ -28,8 +28,8 @@ public class EObjectNode extends AbstractOutlineNode {
 
 	private ITextRegion shortTextRegion;
 	
-	public EObjectNode(EObject eObject, IOutlineNode parent, Image image, Object text, boolean hasPredictedChildren) {
-		super(parent, image, text, hasPredictedChildren);
+	public EObjectNode(EObject eObject, IOutlineNode parent, Image image, Object text, boolean isLeaf) {
+		super(parent, image, text, isLeaf);
 		this.eObjectURI = EcoreUtil.getURI(eObject);
 		this.eClass = eObject.eClass();
 		CompositeNode parserNode = NodeUtil.getNode(eObject);

@@ -94,7 +94,8 @@ public class StylerFactory {
 				xtextTextStyle.setFontData(fontData);
 			}
 			textStyle.font = fontFromFontData(xtextTextStyle.getFontData());
-			textStyle.background = colorFromRGB(xtextTextStyle.getBackgroundColor());
+			if (xtextTextStyle.getBackgroundColor() != null) 
+				textStyle.background = colorFromRGB(xtextTextStyle.getBackgroundColor());
 			textStyle.foreground = colorFromRGB(xtextTextStyle.getColor());
 		}
 	}

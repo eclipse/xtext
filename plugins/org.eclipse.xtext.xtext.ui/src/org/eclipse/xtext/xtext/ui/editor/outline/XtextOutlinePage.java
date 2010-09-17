@@ -8,7 +8,10 @@
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 
 import com.google.inject.Inject;
 
@@ -18,13 +21,31 @@ import com.google.inject.Inject;
 public class XtextOutlinePage extends OutlinePage {
 
 	@Inject
-	private FilterParserRulesAction filterParserRulesAction;
+	private FilterReturnTypesAction filterReturnTypesAction;
+	
+	@Inject 
+	private IPreferenceStoreAccess preferenceStoreAccess;
+	
+	private IPropertyChangeListener propertyChangeListener;
 	
 	@Override
 	protected void configureActions() {
 		super.configureActions();
 		IToolBarManager toolBarManager = getSite().getActionBars().getToolBarManager();
-		toolBarManager.add(filterParserRulesAction);
-		filterParserRulesAction.activate(this);
+		toolBarManager.add(filterReturnTypesAction);
+		filterReturnTypesAction.activate(this);
+		propertyChangeListener = new IPropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent event) {
+				if(event.getProperty() == FilterReturnTypesAction.PREFERENCE_KEY)
+					scheduleRefresh();
+			}
+		};
+		preferenceStoreAccess.getPreferenceStore().addPropertyChangeListener(propertyChangeListener);
+	}
+	
+	@Override
+	public void dispose() {
+		preferenceStoreAccess.getPreferenceStore().removePropertyChangeListener(propertyChangeListener);
+		super.dispose();
 	}
 }

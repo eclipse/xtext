@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline.actions;
 
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -19,7 +21,10 @@ import com.google.inject.Inject;
 public class ToggleLinkWithEditorAction extends AbstractToggleAction {
 
 	public static final String PREFERENCE_KEY = "linkWithEditor";
-	
+
+	@Inject@Named(Constants.LANGUAGE_NAME)
+	protected String languageName;
+
 	@Inject 
 	private OutlineWithEditorLinker outlineWithEditorLinker; 
 	
@@ -49,8 +54,8 @@ public class ToggleLinkWithEditorAction extends AbstractToggleAction {
 	}
 
 	@Override
-	protected String getPropertyKey() {
-		return PREFERENCE_KEY;
+	public String getPreferenceKey() {
+		return languageName + "." + PREFERENCE_KEY;
 	}
 
 }

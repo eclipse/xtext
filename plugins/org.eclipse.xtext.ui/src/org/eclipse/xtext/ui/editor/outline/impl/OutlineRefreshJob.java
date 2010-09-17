@@ -52,7 +52,7 @@ public class OutlineRefreshJob extends Job {
 			final OutlineTreeState newState) {
 		IOutlineNode rootNode = outlinePage.getXtextDocument().readOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
 			public IOutlineNode exec(XtextResource resource) throws Exception {
-				IOutlineNode rootNode = outlinePage.getTreeProvider().createRoot(outlinePage.getXtextDocument(), resource);
+				IOutlineNode rootNode = outlinePage.getTreeProvider().createRoot(outlinePage.getXtextDocument());
 				restoreChildrenSelectionAndExpansion(rootNode, resource, formerState, newState);
 				return rootNode;
 			}
@@ -61,7 +61,7 @@ public class OutlineRefreshJob extends Job {
 	}
 	
 	protected void restoreChildrenSelectionAndExpansion(IOutlineNode parent, Resource resource, OutlineTreeState formerState, OutlineTreeState newState) {
-		List<IOutlineNode> children = outlinePage.getTreeProvider().createChildren(parent, resource);
+		List<IOutlineNode> children = parent.getChildren();
 		for(IOutlineNode child: children) {
 			if(formerState.getExpandedNodes().contains(child)) {
 				restoreChildrenSelectionAndExpansion(child, resource, formerState, newState);

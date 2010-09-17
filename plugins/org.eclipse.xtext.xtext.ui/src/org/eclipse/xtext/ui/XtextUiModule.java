@@ -13,7 +13,9 @@ import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
@@ -24,6 +26,7 @@ import org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider;
 import org.eclipse.xtext.xtext.ui.editor.autoedit.XtextAutoEditStrategy;
 import org.eclipse.xtext.xtext.ui.editor.folding.XtextGrammarFoldingRegionProvider;
 import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
+import org.eclipse.xtext.xtext.ui.editor.outline.FilterReturnTypesAction;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlinePage;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineTreeProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
@@ -44,8 +47,9 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-		binder.bind(String.class).annotatedWith(
-				Names.named(XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS)).toInstance("=[{");
+		binder.bind(String.class)
+				.annotatedWith(Names.named(XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS))
+				.toInstance("=[{");
 
 	}
 
@@ -63,9 +67,9 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 
 	@Override
 	public ICharacterPairMatcher bindICharacterPairMatcher() {
-		return new DefaultCharacterPairMatcher(new char[]{':',';','{','}','(',')','[',']'});
+		return new DefaultCharacterPairMatcher(new char[] { ':', ';', '{', '}', '(', ')', '[', ']' });
 	}
-	
+
 	@Override
 	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return XtextAutoEditStrategy.class;
@@ -82,26 +86,36 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 	public Class<? extends OutlinePage> bindOutlinePage() {
 		return XtextOutlinePage.class;
 	}
-	
+
 	public Class<? extends IOutlineTreeProvider> bindIOutlineTreeProvider() {
 		return XtextOutlineTreeProvider.class;
+	}
+
+	public Class<? extends IOutlineTreeStructureProvider> bindIOutlineTreeStructureProvider() {
+		return XtextOutlineTreeProvider.class;
+	}
+
+	public void configureFilterReturnTypesActionPropertyIntializer(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class)
+				.annotatedWith(Names.named(FilterReturnTypesAction.PREFERENCE_KEY))
+				.to(FilterReturnTypesAction.PropertyInitializer.class);
 	}
 
 	public Class<? extends IXtext2EcorePostProcessor> bindIXtext2EcorePostProcessor() {
 		return ProjectAwareXtendXtext2EcorePostProcessor.class;
 	}
-	
+
 	public Class<? extends IXtextEditorCallback> bindIXtextEditorCallback() {
 		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
 	}
-	
+
 	@Override
 	public Class<? extends org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider> bindIssueResolutionProvider() {
 		return XtextGrammarQuickfixProvider.class;
 	}
-	
+
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
 		return XtextHyperlinkHelper.class;
 	}
-	
+
 }

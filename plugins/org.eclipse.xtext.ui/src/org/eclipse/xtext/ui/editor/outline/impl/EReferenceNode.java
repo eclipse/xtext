@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor.outline.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -25,8 +24,8 @@ public class EReferenceNode extends AbstractOutlineNode {
 	private EReference reference;
 
 	public EReferenceNode(EObject owner, EReference reference, IOutlineNode parent, Image image, Object text,
-			boolean hasPredictedChildren) {
-		super(parent, image, text, hasPredictedChildren);
+			boolean isLeaf) {
+		super(parent, image, text, isLeaf);
 		this.ownerURI = EcoreUtil.getURI(owner);
 		this.reference = reference;
 		setTextRegion(getLocationInFileProvider().getLocation(owner, reference, 0));
@@ -50,7 +49,4 @@ public class EReferenceNode extends AbstractOutlineNode {
 		return super.hashCode() + 37 * reference.hashCode();
 	}
 
-	public Object getValue(Resource resource) {
-		return resource.getEObject(ownerURI.fragment()).eGet(reference);
-	}
 }

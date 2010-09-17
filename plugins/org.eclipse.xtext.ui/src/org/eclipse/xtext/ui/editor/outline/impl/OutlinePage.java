@@ -80,9 +80,9 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		treeViewer.setUseHashlookup(true);
 		IOutlineNode rootNode = xtextDocument.readOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
 			public IOutlineNode exec(XtextResource resource) throws Exception {
-				IOutlineNode rootNode = treeProvider.createRoot(xtextDocument, resource);
+				IOutlineNode rootNode = treeProvider.createRoot(xtextDocument);
 				// precompute visible root nodes
-				treeProvider.createChildren(rootNode, resource);
+				rootNode.getChildren();
 				return rootNode;
 			}
 		});

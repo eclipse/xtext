@@ -15,10 +15,8 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
-import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -37,14 +35,14 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 
 	private List<IOutlineNode> children;
 
-	private boolean hasPredictedChildren = false;
+	private boolean isLeaf = false;
 
 	private ITextRegion textRegion;
 
-	protected AbstractOutlineNode(IOutlineNode parent, Image image, Object text, boolean hasPredictedChildren) {
+	protected AbstractOutlineNode(IOutlineNode parent, Image image, Object text, boolean isLeaf) {
 		this.text = text == null ? "<unnamed>" : text;
 		this.image = image;
-		this.hasPredictedChildren = hasPredictedChildren;
+		this.isLeaf = isLeaf;
 		setParent(parent);
 		textRegion = ITextRegion.EMPTY_REGION;
 	}
@@ -71,14 +69,14 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 	}
 
 	public List<IOutlineNode> getChildren() {
-		if (!hasPredictedChildren)
+		if (isLeaf)
 			return Collections.emptyList();
 		if (children == null) {
 			children = Lists.newArrayList();
-			getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+			readOnly(new IUnitOfWork.Void<EObject>() {
 				@Override
-				public void process(XtextResource resource) throws Exception {
-					getTreeProvider().createChildren(AbstractOutlineNode.this, resource);
+				public void process(EObject eObject) throws Exception {
+					getTreeProvider().createChildren(AbstractOutlineNode.this, eObject);
 				}
 			});
 		}
@@ -90,7 +88,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 	}
 
 	public boolean hasChildren() {
-		return hasPredictedChildren || children != null && children.size() > 0;
+		return !isLeaf || children != null && children.size() > 0;
 	}
 
 	public Object getText() {
@@ -116,7 +114,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		return null;
 	}
 
-	public IOutlineTreeProvider getTreeProvider() {
+	public IOutlineTreeStructureProvider getTreeProvider() {
 		if (parent != null) {
 			return parent.getTreeProvider();
 		}
