@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.8.26)  15 SEP 2010 17:13
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.8.26)  16 SEP 2010 13:43
 entering extended mode
  %&-line parsing enabled.
 **src-gen/out.tex
@@ -139,9 +139,6 @@ File: listings.cfg 2007/02/22 1.4 listings configuration
 ))
 Package: listings 2007/02/22 1.4 (Carsten Heinz)
 
-(/opt/local/share/texmf-texlive-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2004/09/05 1.3 listings language file
-)
 (/opt/local/share/texmf-texlive-dist/tex/generic/babel/babel.sty
 Package: babel 2008/07/06 v3.8l The Babel package
 
@@ -276,22 +273,22 @@ File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
 (src-gen/out.aux)
 \openout1 = `out.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
 \c@lstlisting=\count105
-Package hyperref Info: Link coloring OFF on input line 18.
+Package hyperref Info: Link coloring OFF on input line 38.
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
@@ -301,8 +298,8 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 \c@section@level=\count106
 )
-LaTeX Info: Redefining \ref on input line 18.
-LaTeX Info: Redefining \pageref on input line 18.
+LaTeX Info: Redefining \ref on input line 38.
+LaTeX Info: Redefining \pageref on input line 38.
 
 (src-gen/out.out) (src-gen/out.out)
 \@outlinefile=\write3
@@ -318,7 +315,7 @@ Class scrreprt Warning: \float@addtolists detected!
 (scrreprt)              Support for \float@addtolists may be removed from
 (scrreprt)              `scrreprt' soon .
 
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 20.
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 40.
 (/opt/local/share/texmf-texlive-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 ) [1
@@ -326,317 +323,305 @@ File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 
 {/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 Chapter 2.
-LaTeX Font Info:    Try loading font information for OMS+cmss on input line 42.
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 66.
 
-LaTeX Font Info:    No file OMScmss.fd. on input line 42.
+LaTeX Font Info:    No file OMScmss.fd. on input line 66.
 
 LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textasteriskcentered' on input line 42.
+(Font)              for symbol `textasteriskcentered' on input line 66.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 63.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 88.
 (/opt/local/share/texmf-texlive-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 63.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 88.
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 63--66
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 88--91
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 67--70
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 92--95
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 71--74
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 96--99
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 75--78
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 100--103
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 79--82
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 104--107
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 83--86
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 108--111
 [][] 
  []
 
 [2
 
 ]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 119--122
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 147--150
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 123--126
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 151--154
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 127--131
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 155--159
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 132--135
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 160--163
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 136--139
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 164--167
 [][] 
  []
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 173.
+(Font)              <8> on input line 205.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 173.
+(Font)              <6> on input line 205.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 205.
 [3]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 200--203
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 234--237
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 204--207
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 238--241
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 208--211
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 242--245
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 212--215
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 246--249
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 216--219
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 250--253
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 220--223
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 254--257
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 224--227
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 258--261
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 228--231
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 262--265
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 232--235
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 266--269
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 236--239
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 270--273
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 240--243
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 274--277
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 244--247
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 278--281
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 248--251
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 282--285
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 252--255
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 286--289
 [][] 
  []
+
+
+LaTeX Warning: Hyper reference `Identifiers' on page 4 undefined on input line 
+295.
+
+
+LaTeX Warning: Reference `Identifiers' on page 4 undefined on input line 295.
 
 [4]
 Chapter 3.
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 295--298
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 333--336
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 299--302
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 337--340
 [][] 
  []
 
 [5
 
 ]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 339--342
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 380--383
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 343--346
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 384--387
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 347--350
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 388--391
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 351--354
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 392--395
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 454--457
 [][] 
  []
 
 [6]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 410--413
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 458--461
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 414--417
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 462--465
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 418--421
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 466--469
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 422--425
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 470--473
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 426--429
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 430--433
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 474--477
 [][] 
  []
 
 [7]
 Chapter 4.
+
+LaTeX Warning: Reference `StringLiterals' on page 8 undefined on input line 503
+.
+
+
+LaTeX Warning: Reference `IntegerLiterals' on page 8 undefined on input line 51
+2.
+
 [8
 
 ]
-Overfull \hbox (33.99754pt too wide) in paragraph at lines 534--566
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 589.
+
+Overfull \hbox (33.99754pt too wide) in paragraph at lines 589--621
 [][] 
  []
 
-[9] [10]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 625--630
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 631--636
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 651--654
+[9] (/opt/local/share/texmf-texlive-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+[10]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 682--687
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 655--658
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 688--693
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 659--662
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 709--712
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 663--666
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 713--716
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 667--670
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 717--720
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 671--674
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 721--724
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 675--678
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 725--728
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 679--682
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 729--732
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 733--736
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 737--740
 [][] 
  []
 
 [11]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 752--755
-[][] 
- []
 
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 756--759
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 760--763
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 764--767
-[][] 
- []
-
-[12]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 803--806
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 807--810
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 811--814
-[][] 
- []
+LaTeX Warning: Reference `propertyAssignment' on page 12 undefined on input lin
+e 771.
 
 
 Overfull \hbox (5.00491pt too wide) in paragraph at lines 815--818
 [][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 820--821
-[]\T1/cmr/m/n/10 Function6<Param1Type, Param2Type, Param3Type, Param4Type,
  []
 
 
@@ -645,131 +630,209 @@ Overfull \hbox (5.00491pt too wide) in paragraph at lines 819--822
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 871--874
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 823--826
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 827--830
+[][] 
+ []
+
+[12]
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 869--872
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 873--876
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 877--880
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 881--884
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 886--887
+[]\T1/cmr/m/n/10 Function6<Param1Type, Param2Type, Param3Type, Param4Type,
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 885--888
+[][] 
+ []
+
+
+LaTeX Warning: Hyper reference `FunctionTypes' on page 13 undefined on input li
+ne 906.
+
+
+LaTeX Warning: Reference `FunctionTypes' on page 13 undefined on input line 906
+.
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 939--942
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 943--946
+[][] 
+ []
+
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 947--950
 [][] 
  []
 
 [13]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 875--878
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1007--1010
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 879--882
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1011--1014
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 936--939
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1015--1018
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 940--943
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1019--1022
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 944--947
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1037--1040
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 948--951
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1041--1044
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 965--968
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 969--972
-[][] 
- []
-
-
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 973--976
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1045--1048
 [][] 
  []
 
 [14] [15]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1078--1084
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1155--1161
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1085--1089
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1162--1166
 [][] 
  []
+
+
+LaTeX Warning: Hyper reference `Blocks' on page 16 undefined on input line 1179
+.
+
+
+LaTeX Warning: Reference `Blocks' on page 16 undefined on input line 1179.
+
+
+LaTeX Warning: Reference `propertyAssignment' on page 16 undefined on input lin
+e 1192.
 
 [16]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1172--1180
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1255--1263
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1181--1193
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1264--1276
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1231--1238
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1317--1324
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1239--1244
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1325--1330
 [][] 
  []
+
+
+LaTeX Warning: Hyper reference `WhileExpression' on page 17 undefined on input 
+line 1348.
+
+
+LaTeX Warning: Reference `WhileExpression' on page 17 undefined on input line 1
+348.
 
 [17]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1285--1292
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1374--1381
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1293--1298
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1382--1387
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1343--1351
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1436--1444
 [][] 
  []
 
-[18]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1352--1362
+
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1445--1455
 [][] 
  []
 
-[19] (src-gen/out.aux)
+[18] [19] (src-gen/out.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 7277 strings out of 495061
- 106120 string characters out of 3181964
- 283089 words of memory out of 3000000
- 10102 multiletter control sequences out of 15000+200000
- 9742 words of font info for 22 fonts, out of 3000000 for 9000
+ 7230 strings out of 495061
+ 105174 string characters out of 3181964
+ 297047 words of memory out of 3000000
+ 10044 multiletter control sequences out of 15000+200000
+ 14637 words of font info for 32 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 43i,8n,43p,256b,1765s stack positions out of 5000i,500n,10000p,200000b,50000s
- </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsi1000
-.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/ect
-i1000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/e
-c/ecsx1000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknap
-pen/ec/ecss1000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/
-jknappen/ec/ecsx1200.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/lj
-four/jknappen/ec/ecsx1440.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/
-pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/efftinge/.texlive2009/texmf-var/f
-onts/pk/ljfour/jknappen/ec/ecsx2074.600pk></opt/local/share/texmf-texlive-dist/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on src-gen/out.pdf (19 pages, 215287 bytes).
+ 43i,8n,43p,256b,1790s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{??} has been referenced but does not exist, repla
+ced by a fixed one
+
+ </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsi0800.6
+00pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1
+000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/
+ecsx0800.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappe
+n/ec/ecbx1000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jk
+nappen/ec/ecss0800.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfo
+ur/jknappen/ec/ecsx1200.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk
+/ljfour/jknappen/ec/ecsx1440.600pk> </Users/efftinge/.texlive2009/texmf-var/fon
+ts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/efftinge/.texlive2009/texmf-va
+r/fonts/pk/ljfour/jknappen/ec/ecsx2074.600pk></opt/local/share/texmf-texlive-di
+st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/share/texmf-texlive-di
+st/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on src-gen/out.pdf (19 pages, 202037 bytes).
 PDF statistics:
- 1025 PDF objects out of 1200 (max. 8388607)
- 287 named destinations out of 1000 (max. 500000)
- 609 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 802 PDF objects out of 1000 (max. 8388607)
+ 288 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
