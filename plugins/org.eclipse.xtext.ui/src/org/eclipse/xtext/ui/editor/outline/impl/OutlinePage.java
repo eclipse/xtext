@@ -153,15 +153,12 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		DisplayRunHelper.runAsyncInDisplayThread(new Runnable() {
 			public void run() {
 				try {
-					long start = System.currentTimeMillis();
 					TreeViewer treeViewer = getTreeViewer();
 					treeViewer.setInput(rootNode);
 					treeViewer.expandToLevel(1);
 					treeViewer.setExpandedElements(Iterables.toArray(nodesToBeExpanded, IOutlineNode.class));
 					treeViewer.setSelection(new StructuredSelection(Iterables
 							.toArray(selectedNodes, IOutlineNode.class)));
-					long duration = System.currentTimeMillis() - start;
-					System.out.println("Blocked Display for " + duration + "ms.");
 				} catch (Throwable t) {
 					LOG.error("Error refreshing outline", t);
 				}
