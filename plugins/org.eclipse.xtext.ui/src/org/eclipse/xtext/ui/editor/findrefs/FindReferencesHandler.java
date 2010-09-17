@@ -48,7 +48,7 @@ public class FindReferencesHandler extends AbstractHandler {
 		}
 
 		public IEObjectDescription exec(XtextResource state) throws Exception {
-			EObject element = EObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset(), null);
+			EObject element = eObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset());
 			if (element != null) {
 				final URI eObjectURI = EcoreUtil.getURI(element);
 				IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI
@@ -77,6 +77,9 @@ public class FindReferencesHandler extends AbstractHandler {
 
 	@Inject
 	private IResourceDescriptions resourceDescriptions;
+	
+	@Inject
+	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
 	private static final Logger LOG = Logger.getLogger(FindReferencesHandler.class);
 

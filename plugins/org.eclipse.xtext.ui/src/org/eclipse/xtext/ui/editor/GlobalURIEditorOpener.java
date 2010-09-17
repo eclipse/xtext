@@ -28,7 +28,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -100,7 +100,7 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {
 							EObject object = resource.getEObject(uri.fragment());
-							TextLocation location = (crossReference != null) ? locationProvider.getLocation(object,
+							ITextRegion location = (crossReference != null) ? locationProvider.getLocation(object,
 									crossReference, indexInList) : locationProvider.getLocation(object);
 							if (select) {
 								xtextEditor.selectAndReveal(location.getOffset(), location.getLength());

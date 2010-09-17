@@ -16,7 +16,8 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 public class EObjectNode extends AbstractOutlineNode {
@@ -25,7 +26,7 @@ public class EObjectNode extends AbstractOutlineNode {
 
 	private EClass eClass;
 
-	private TextLocation shortTextRegion;
+	private ITextRegion shortTextRegion;
 	
 	public EObjectNode(EObject eObject, IOutlineNode parent, Image image, Object text, boolean hasPredictedChildren) {
 		super(parent, image, text, hasPredictedChildren);
@@ -33,7 +34,7 @@ public class EObjectNode extends AbstractOutlineNode {
 		this.eClass = eObject.eClass();
 		CompositeNode parserNode = NodeUtil.getNode(eObject);
 		if (parserNode != null)
-			setTextRegion(new TextLocation(parserNode.getOffset(), parserNode.getLength()));
+			setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
 		shortTextRegion = getLocationInFileProvider().getLocation(eObject);
 	}
 
@@ -46,7 +47,7 @@ public class EObjectNode extends AbstractOutlineNode {
 	}
 	
 	@Override
-	public TextLocation getShortTextRegion() {
+	public ITextRegion getShortTextRegion() {
 		return shortTextRegion;
 	}
 

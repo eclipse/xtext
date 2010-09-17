@@ -60,7 +60,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeProvider {
 
 	protected List<IOutlineNode> createChildren(final EObjectNode parentNode, Resource resource) {
 		EObject eObject = parentNode.getEObject(resource);
-		for (EObject childElement : eObject.eContents())
+		for (EObject childElement : eObject.eContents()) 
 			createNodeDispatcher.invoke(parentNode, childElement);
 		return parentNode.getChildren();
 	}

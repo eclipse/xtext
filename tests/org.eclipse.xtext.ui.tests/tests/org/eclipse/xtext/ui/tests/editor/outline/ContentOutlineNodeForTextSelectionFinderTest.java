@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
+//TODO: reimplement with regard to new architecture
+
 //import junit.framework.TestCase;
 //
 //import org.eclipse.jface.text.Region;

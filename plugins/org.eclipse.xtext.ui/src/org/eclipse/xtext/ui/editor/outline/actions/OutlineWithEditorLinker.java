@@ -21,7 +21,8 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -98,10 +99,10 @@ public class OutlineWithEditorLinker {
 	protected void selectInTextEditor(ISelection selection) {
 		IOutlineNode selectedOutlineNode = getSelectedOutlineNode(selection);
 		if (selectedOutlineNode != null) {
-			TextLocation textLocation = selectedOutlineNode.getShortTextRegion();
-			if (textLocation != null) {
-				int offset = textLocation.getOffset();
-				int length = textLocation.getLength();
+			ITextRegion textRegion = selectedOutlineNode.getShortTextRegion();
+			if (textRegion != null) {
+				int offset = textRegion.getOffset();
+				int length = textRegion.getLength();
 				textViewer.setRangeIndication(offset, length, true);
 				textViewer.revealRange(offset, length);
 				textViewer.setSelectedRange(offset, length);
@@ -112,7 +113,7 @@ public class OutlineWithEditorLinker {
 	protected void selectInTreeView(ISelection selection) {
 		if (selection instanceof ITextSelection) {
 			ITextSelection textSelection = (ITextSelection) selection;
-			TextLocation selectedTextRegion = new TextLocation(textSelection.getOffset(), textSelection.getLength());
+			ITextRegion selectedTextRegion = new TextRegion(textSelection.getOffset(), textSelection.getLength());
 			Object input = treeViewer.getInput();
 			if (input instanceof IOutlineNode) {
 				IOutlineNode nodeToBeSelected = findBestNode((IOutlineNode) input, selectedTextRegion);
@@ -122,9 +123,9 @@ public class OutlineWithEditorLinker {
 		}
 	}
 
-	protected IOutlineNode findBestNode(IOutlineNode input, TextLocation selectedTextRegion) {
-		TextLocation textLocation = input.getFullTextRegion();
-		if (textLocation == null || textLocation.contains(selectedTextRegion)) {
+	protected IOutlineNode findBestNode(IOutlineNode input, ITextRegion selectedTextRegion) {
+		ITextRegion textRegion = input.getFullTextRegion();
+		if (textRegion == null || textRegion.contains(selectedTextRegion)) {
 			IOutlineNode currentBestNode = input;
 			for (IOutlineNode child : input.getChildren()) {
 				IOutlineNode candidate = findBestNode(child, selectedTextRegion);

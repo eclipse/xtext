@@ -12,7 +12,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IStateAccess;
 
 /**
@@ -33,8 +33,8 @@ public interface IOutlineNode extends IAdaptable, IStateAccess<EObject> {
 
 	boolean hasChildren();
 
-	TextLocation getFullTextRegion();
+	ITextRegion getFullTextRegion();
 
-	TextLocation getShortTextRegion();
+	ITextRegion getShortTextRegion();
 	
 }
