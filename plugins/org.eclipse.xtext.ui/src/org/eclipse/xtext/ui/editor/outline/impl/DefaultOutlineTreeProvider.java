@@ -64,10 +64,10 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 			createNode(parentNode, childElement);
 	}
 
-	protected void doCreateChildren(EReferenceNode parentNode, EObject modelElement) {
-		Object values = modelElement.eGet(parentNode.getEReference());
+	protected void doCreateChildren(EStructuralFeatureNode parentNode, EObject modelElement) {
+		Object values = modelElement.eGet(parentNode.getEStructuralFeature());
 		if (values != null) {
-			if (parentNode.getEReference().isMany()) {
+			if (parentNode.getEStructuralFeature().isMany()) {
 				for (EObject value : EcoreUtil2.typeSelect((List<?>) values, EObject.class)) {
 					createNode(parentNode, value);
 				}

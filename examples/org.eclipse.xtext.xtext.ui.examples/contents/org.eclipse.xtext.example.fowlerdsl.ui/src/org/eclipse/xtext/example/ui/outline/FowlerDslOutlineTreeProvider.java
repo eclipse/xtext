@@ -7,7 +7,7 @@ import org.eclipse.xtext.example.fowlerdsl.FowlerdslPackage;
 import org.eclipse.xtext.example.fowlerdsl.Statemachine;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
-import org.eclipse.xtext.ui.editor.outline.impl.EReferenceNode;
+import org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode;
 
 /**
  * customization of the default outline structure
@@ -16,11 +16,11 @@ import org.eclipse.xtext.ui.editor.outline.impl.EReferenceNode;
 public class FowlerDslOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
 	protected void doCreateChildren(DocumentRootNode parentNode, Statemachine statemachine) {
-		new EReferenceNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__EVENTS, parentNode,
+		new EStructuralFeatureNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__EVENTS, parentNode,
 				labelProvider.getImage("events"), "Events", statemachine.getEvents().isEmpty());
-		new EReferenceNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__COMMANDS, parentNode,
+		new EStructuralFeatureNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__COMMANDS, parentNode,
 				labelProvider.getImage("commands"), "Commands", statemachine.getEvents().isEmpty());
-		new EReferenceNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__STATES, parentNode,
+		new EStructuralFeatureNode(statemachine, FowlerdslPackage.Literals.STATEMACHINE__STATES, parentNode,
 				labelProvider.getImage("states"), "States", statemachine.getEvents().isEmpty());
 	}
 	
