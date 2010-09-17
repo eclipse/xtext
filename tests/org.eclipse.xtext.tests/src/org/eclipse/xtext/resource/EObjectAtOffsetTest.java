@@ -11,17 +11,19 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.FooBar;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.Model;
-import org.eclipse.xtext.util.TextLocation;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
 public class EObjectAtOffsetTest extends AbstractXtextTests {
 
+	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(EObjectAtOffsetTestLanguageStandaloneSetup.class);
+		eObjectAtOffsetHelper = new EObjectAtOffsetHelper();
 	}
 
 	public void testElements() throws Exception {
@@ -54,13 +56,10 @@ public class EObjectAtOffsetTest extends AbstractXtextTests {
 
 	private void checkContainedElementAt(XtextResource resource, String model, String substring, EObject expectedElement) {
 		int index = model.indexOf(substring);
-		TextLocation location = new TextLocation();
 		for (int i = index; i < index + substring.length(); ++i) {
-			EObject foundElement = EObjectAtOffsetHelper.resolveContainedElementAt(resource, i, location);
+			EObject foundElement = eObjectAtOffsetHelper.resolveElementAt(resource, i);
 			assertEquals(expectedElement, foundElement);
-			foundElement = EObjectAtOffsetHelper.resolveElementAt(resource, i, null);
-			assertEquals(expectedElement, foundElement);
-			foundElement = EObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, i, null);
+			foundElement = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, i);
 			assertNotSame(expectedElement, foundElement);
 		}
 	}
@@ -68,18 +67,11 @@ public class EObjectAtOffsetTest extends AbstractXtextTests {
 	private void checkCrossReferencedElementAt(XtextResource resource, String model, String substring,
 			EObject expectedElement) {
 		int index = model.indexOf(substring);
-		TextLocation location = new TextLocation();
 		for (int i = index; i < index + substring.length(); ++i) {
-			EObject foundElement = EObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, i, location);
+			EObject foundElement = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, i);
 			assertEquals(expectedElement, foundElement);
-			assertEquals(index, location.getOffset());
-			assertEquals(substring.length(), location.getLength());
-			foundElement = EObjectAtOffsetHelper.resolveElementAt(resource, i, location);
+			foundElement = eObjectAtOffsetHelper.resolveElementAt(resource, i);
 			assertEquals(expectedElement, foundElement);
-			assertEquals(index, location.getOffset());
-			assertEquals(substring.length(), location.getLength());
-			foundElement = EObjectAtOffsetHelper.resolveContainedElementAt(resource, i, null);
-			assertNotSame(expectedElement, foundElement);
 		}
 	}
 }

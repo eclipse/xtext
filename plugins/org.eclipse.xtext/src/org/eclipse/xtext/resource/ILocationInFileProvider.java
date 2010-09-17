@@ -10,7 +10,7 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.inject.ImplementedBy;
 
@@ -21,7 +21,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultLocationInFileProvider.class)
 public interface ILocationInFileProvider {
 
-	TextLocation getLocation(EObject obj);
+	ITextRegion getLocation(EObject obj);
 
-	TextLocation getLocation(EObject owner, EStructuralFeature feature, int indexInList);
+	ITextRegion getLocation(EObject owner, EStructuralFeature feature, int indexInList);
 }

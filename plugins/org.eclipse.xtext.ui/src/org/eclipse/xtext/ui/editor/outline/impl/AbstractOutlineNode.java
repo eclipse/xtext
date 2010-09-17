@@ -19,7 +19,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Lists;
@@ -39,14 +39,14 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 
 	private boolean hasPredictedChildren = false;
 
-	private TextLocation textLocation;
+	private ITextRegion textRegion;
 
 	protected AbstractOutlineNode(IOutlineNode parent, Image image, Object text, boolean hasPredictedChildren) {
 		this.text = text == null ? "<unnamed>" : text;
 		this.image = image;
 		this.hasPredictedChildren = hasPredictedChildren;
 		setParent(parent);
-		textLocation = new TextLocation();
+		textRegion = ITextRegion.EMPTY_REGION;
 	}
 
 	protected void setParent(IOutlineNode newParent) {
@@ -74,6 +74,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		if (!hasPredictedChildren)
 			return Collections.emptyList();
 		if (children == null) {
+			children = Lists.newArrayList();
 			getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 				@Override
 				public void process(XtextResource resource) throws Exception {
@@ -81,7 +82,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 				}
 			});
 		}
-		return (children == null) ? Collections.<IOutlineNode>emptyList() : Collections.unmodifiableList(children);
+		return Collections.unmodifiableList(children);
 	}
 
 	public IOutlineNode getParent() {
@@ -129,16 +130,16 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		return null;
 	}
 	
-	protected void setTextRegion(TextLocation textLocation) {
-		this.textLocation = textLocation;
+	protected void setTextRegion(ITextRegion textRegion) {
+		this.textRegion = textRegion;
 	}
 
-	public TextLocation getFullTextRegion() {
-		return textLocation;
+	public ITextRegion getFullTextRegion() {
+		return textRegion;
 	}
 
-	public TextLocation getShortTextRegion() {
-		return textLocation;
+	public ITextRegion getShortTextRegion() {
+		return textRegion;
 	}
 
 	@Override

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
+//TODO: reimplement with regard to new architecture
+
 //import org.eclipse.xtext.ui.editor.outline.old.ContentOutlineNode;
 //import org.eclipse.xtext.ui.editor.outline.old.IContentOutlineNodeComparer;
 //

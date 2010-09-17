@@ -21,50 +21,28 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
-import org.eclipse.xtext.util.TextLocation;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
 public class EObjectAtOffsetHelper {
 
-	public static EObject resolveElementAt(XtextResource resource, int offset, TextLocation location) {
-		return internalResolveElementAt(resource, offset, true, true, location);
+	public EObject resolveElementAt(XtextResource resource, int offset) {
+		return internalResolveElementAt(resource, offset, true);
 	}
 
-	public static EObject resolveContainedElementAt(XtextResource resource, int offset, TextLocation location) {
-		return internalResolveElementAt(resource, offset, true, false, location);
+	public EObject resolveCrossReferencedElementAt(XtextResource resource, int offset) {
+		return internalResolveElementAt(resource, offset, false);
 	}
 
-	public static EObject resolveCrossReferencedElementAt(XtextResource resource, int offset, TextLocation location) {
-		return internalResolveElementAt(resource, offset, false, true, location);
-	}
-	
-	public static TextLocation getLocation(EObject sourceEObject, EReference eReference, int indexInList) {
-		List<AbstractNode> result = NodeUtil.findNodesForFeature(sourceEObject, eReference);
-		if (result.isEmpty())
-			return new TextLocation();
-		if (result.size() == 1) {
-			AbstractNode node = result.get(0);
-			return new TextLocation(node.getOffset(), node.getLength());
-		}
-		if (indexInList == -1 || indexInList > result.size())
-			return new TextLocation();
-		AbstractNode node = result.get(indexInList);
-		return new TextLocation(node.getOffset(), node.getLength());
-	}
-
-	private static EObject internalResolveElementAt(XtextResource resource, int offset, boolean isContainment,
-			boolean isCrossReference, TextLocation location) {
+	protected EObject internalResolveElementAt(XtextResource resource, int offset, boolean isContainment) {
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult != null && parseResult.getRootNode() != null) {
 			AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(parseResult.getRootNode(), offset);
 			while (node != null) {
-				if (isCrossReference && node.getGrammarElement() instanceof CrossReference) {
-					updateLocation(location, node);
+				if (node.getGrammarElement() instanceof CrossReference) {
 					return resolveCrossReferencedElement(node);
 				} else if (isContainment && node.getElement() != null) {
-					updateLocation(location, node);
 					return node.getElement();
 				} else {
 					node = node.getParent();
@@ -74,14 +52,7 @@ public class EObjectAtOffsetHelper {
 		return null;
 	}
 
-	private static void updateLocation(TextLocation location, AbstractNode node) {
-		if (location != null) {
-			location.setOffset(node.getOffset());
-			location.setLength(node.getLength());
-		}
-	}
-
-	private static EObject resolveCrossReferencedElement(AbstractNode node) {
+	protected EObject resolveCrossReferencedElement(AbstractNode node) {
 		EObject referenceOwner = NodeUtil.getNearestSemanticObject(node);
 		EReference crossReference = GrammarUtil.getReference((CrossReference) node.getGrammarElement(), referenceOwner
 				.eClass());

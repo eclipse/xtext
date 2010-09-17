@@ -11,7 +11,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.TextRegion;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -28,7 +28,7 @@ public class DocumentRootNode extends AbstractOutlineNode {
 		this.document = document;
 		this.treeProvider = treeProvider;
 		this.locationInFileProvider = locationInFileProvider;
-		setTextRegion(new TextLocation(0, document.getLength()));
+		setTextRegion(new TextRegion(0, document.getLength()));
 	}
 
 	@Override

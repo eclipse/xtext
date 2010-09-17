@@ -13,7 +13,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.locationprovidertest.Element;
 import org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPackage;
 import org.eclipse.xtext.resource.locationprovidertest.Model;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -37,7 +37,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 
 	public void testContainmentRefLocation() throws Exception {
 		assertEquals(2, elements.size());
-		TextLocation location = locationInFileProvider.getLocation(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 0);
+		ITextRegion location = locationInFileProvider.getLocation(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 0);
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
 		assertEquals(1, location.getLength());
 		location = locationInFileProvider.getLocation(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 1);
@@ -49,7 +49,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 			assertEquals(2, elements.size());
 		int indexOfFirstY = modelAsString.indexOf("y");
 		int indexOfSecondY = modelAsString.indexOf("y", indexOfFirstY + 1);
-		TextLocation location = locationInFileProvider.getLocation(elements.get(0),
+		ITextRegion location = locationInFileProvider.getLocation(elements.get(0),
 				LocationprovidertestPackage.Literals.ELEMENT__SINGLEREF, 0);
 		assertEquals(indexOfFirstY, location.getOffset());
 		assertEquals(1, location.getLength());
@@ -69,7 +69,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 
 	public void testEObjectLocation() throws Exception {
 		assertEquals(2, elements.size());
-		TextLocation location = locationInFileProvider.getLocation(elements.get(0));
+		ITextRegion location = locationInFileProvider.getLocation(elements.get(0));
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
 		assertEquals(1, location.getLength());
 		location = locationInFileProvider.getLocation(elements.get(1));
@@ -79,7 +79,7 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 
 	public void testAttributeLocation() {
 		assertEquals(2, elements.size());
-		TextLocation location = locationInFileProvider.getLocation(elements.get(0), LocationprovidertestPackage.Literals.ELEMENT__NAME, 1);
+		ITextRegion location = locationInFileProvider.getLocation(elements.get(0), LocationprovidertestPackage.Literals.ELEMENT__NAME, 1);
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
 		assertEquals(1, location.getLength());
 		location = locationInFileProvider.getLocation(elements.get(1), LocationprovidertestPackage.Literals.ELEMENT__NAME, 1);

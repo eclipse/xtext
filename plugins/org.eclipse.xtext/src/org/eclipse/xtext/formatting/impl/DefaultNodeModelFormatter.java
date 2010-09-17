@@ -23,7 +23,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.inject.Inject;
 
@@ -78,7 +78,7 @@ public class DefaultNodeModelFormatter extends AbstractNodeModelFormatter {
 		ITokenStream out = offset == 0 ? buf : new FilterFirstWhitespaceStream(buf);
 		ITokenStream fmt = formatter.createFormatterStream(indent, out, false);
 		try {
-			TextLocation range = nodeModelStreamer.feedTokenStream(fmt, root, offset, length);
+			ITextRegion range = nodeModelStreamer.feedTokenStream(fmt, root, offset, length);
 			return new FormattedRegion(range.getOffset(), range.getLength(), buf.toString());
 		} catch (IOException e) {
 			// this should never happen since TokenStringBuffer doesn't throw IOEs.

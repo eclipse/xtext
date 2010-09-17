@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.ui.query;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
@@ -19,6 +20,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaElement;
@@ -35,7 +37,8 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.search.ui.text.Match;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -47,7 +50,8 @@ import org.eclipse.xtext.ui.label.GlobalDescriptionLabelProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.shared.Access;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -162,10 +166,10 @@ public class QueryParticipant implements IQueryParticipant {
 					ResourceSet resourceSet = getResourceSet(project);
 					EObject sourceEObject = resourceSet.getEObject(referenceDescription.getSourceEObjectUri(), true);
 					if (sourceEObject != null) {
-						TextLocation location = EObjectAtOffsetHelper.getLocation(
+						ITextRegion region = getLocation(
 								sourceEObject, referenceDescription.getEReference(), 
 								referenceDescription.getIndexInList());
-						acceptMatch(storage, location);
+						acceptMatch(storage, region);
 					} else {
 						acceptMatch(referenceDescription, null);
 					}
@@ -173,6 +177,20 @@ public class QueryParticipant implements IQueryParticipant {
 			}
 		}
 
+		protected ITextRegion getLocation(EObject sourceEObject, EReference eReference, int indexInList) {
+			List<AbstractNode> result = NodeUtil.findNodesForFeature(sourceEObject, eReference);
+			if (result.isEmpty())
+				return ITextRegion.EMPTY_REGION;
+			if (result.size() == 1) {
+				AbstractNode node = result.get(0);
+				return new TextRegion(node.getOffset(), node.getLength());
+			}
+			if (indexInList == -1 || indexInList > result.size())
+				return ITextRegion.EMPTY_REGION;
+			AbstractNode node = result.get(indexInList);
+			return new TextRegion(node.getOffset(), node.getLength());
+		}
+		
 		protected ResourceSet getResourceSet(IProject project) {
 			ResourceSet resourceSet = projectToResourceSet.get(project);
 			if (resourceSet == null) {
@@ -194,9 +212,9 @@ public class QueryParticipant implements IQueryParticipant {
 			return null;
 		}
 
-		protected void acceptMatch(Object element, TextLocation location) {
-			if (location != null)
-				requestor.reportMatch(new Match(element, location.getOffset(), location.getLength()));
+		protected void acceptMatch(Object element, ITextRegion region) {
+			if (region != null)
+				requestor.reportMatch(new Match(element, region.getOffset(), region.getLength()));
 			else
 				requestor.reportMatch(new Match(element, 0, 0));
 		}
