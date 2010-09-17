@@ -36,10 +36,7 @@ public class OutlineRefreshJob extends Job {
 		try {
 			OutlineTreeState formerState = new OutlineTreeState(outlinePage.getTreeViewer());
 			OutlineTreeState newState = new OutlineTreeState();
-			long start = System.currentTimeMillis();
 			IOutlineNode rootNode = refreshOutlineModel(monitor, formerState, newState);
-			long duration = System.currentTimeMillis() - start;
-			System.out.println("Calculating tree took: " + duration + "ms.");
 			if (!monitor.isCanceled())
 				outlinePage.refreshViewer(rootNode, newState.getExpandedNodes(), newState.getSelectedNodes());
 			return Status.OK_STATUS;

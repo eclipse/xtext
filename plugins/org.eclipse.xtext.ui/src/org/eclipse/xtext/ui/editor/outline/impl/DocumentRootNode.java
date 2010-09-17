@@ -62,7 +62,7 @@ public class DocumentRootNode extends AbstractOutlineNode {
 	public <T> T readOnly(final IUnitOfWork<T, EObject> work) {
 		return document.readOnly(new IUnitOfWork<T, XtextResource>() {
 			public T exec(XtextResource resource) throws Exception {
-				if(!resource.getContents().isEmpty()) {
+				if(resource != null && !resource.getContents().isEmpty()) {
 					work.exec(resource.getContents().get(0));
 				}
 				return null;
