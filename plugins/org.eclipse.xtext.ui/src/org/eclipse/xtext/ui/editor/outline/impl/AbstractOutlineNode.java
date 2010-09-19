@@ -15,7 +15,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -119,13 +118,6 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 	public IOutlineTreeStructureProvider getTreeProvider() {
 		if (parent != null) {
 			return parent.getTreeProvider();
-		}
-		return null;
-	}
-
-	public ILocationInFileProvider getLocationInFileProvider() {
-		if (parent != null) {
-			return parent.getLocationInFileProvider();
 		}
 		return null;
 	}

@@ -30,8 +30,6 @@ public class EStructuralFeatureNode extends AbstractOutlineNode {
 		super(parent, image, text, isLeaf);
 		this.ownerURI = EcoreUtil.getURI(owner);
 		this.feature = feature;
-		if(owner.eIsSet(feature)) 
-			setTextRegion(getLocationInFileProvider().getLocation(owner, feature, 0));
 	}
 
 	@Override
