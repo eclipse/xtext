@@ -7,18 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.util.TextRegion;
 
 import com.google.inject.Inject;
 
@@ -44,7 +50,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 
 	public IOutlineNode createRoot(IXtextDocument document) {
 		DocumentRootNode documentNode = new DocumentRootNode(labelProvider.getImage(document),
-				labelProvider.getText(document), document, this, locationInFileProvider);
+				labelProvider.getText(document), document, this);
 		return documentNode;
 	}
 
@@ -91,7 +97,12 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		Object text = textDispatcher.invoke(modelElement);
 		if (text != null) {
 			Image image = imageDispatcher.invoke(modelElement);
-			new EObjectNode(modelElement, parentNode, image, text, modelElement.eContents().isEmpty());
+			EObjectNode eObjectNode = new EObjectNode(modelElement, parentNode, image, text, modelElement.eContents()
+					.isEmpty());
+			CompositeNode parserNode = NodeUtil.getNode(modelElement);
+			if (parserNode != null)
+				eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
+			eObjectNode.setShortTextRegion(locationInFileProvider.getLocation(modelElement));
 		}
 	}
 
@@ -101,6 +112,21 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	protected void doCreateNode(Object object0, EObject object1) {
 		throw new IllegalArgumentException("Could not find method createNode(" + nullSafeClassName(object0) + ","
 				+ nullSafeClassName(object1));
+	}
+
+	protected void createEStructuralFeatureNode(IOutlineNode parentNode, EObject owner, EStructuralFeature feature,
+			Image image, Object text) {
+		boolean isFeatureSet = owner.eIsSet(feature);
+		EStructuralFeatureNode eStructuralFeatureNode = new EStructuralFeatureNode(owner, feature, parentNode, image,
+				text, !isFeatureSet);
+		if (isFeatureSet) {
+			ITextRegion region = locationInFileProvider.getLocation(owner, feature, 0);
+			if (feature.isMany()) {
+				int numValues = ((Collection<?>) owner.eGet(feature)).size();
+				region.merge(locationInFileProvider.getLocation(owner, feature, numValues - 1));
+			}
+			eStructuralFeatureNode.setTextRegion(region);
+		}
 	}
 
 	/**
