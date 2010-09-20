@@ -73,7 +73,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getModelAccess().getRule();
 	}
 
-	//NL returns EString:
+	//NL:
 	//	WS* ("\r"? "\n") WS*;
 	public Bug301935TestLanguageGrammarAccess.NLElements getNLAccess() {
 		return gaBug301935TestLanguage.getNLAccess();

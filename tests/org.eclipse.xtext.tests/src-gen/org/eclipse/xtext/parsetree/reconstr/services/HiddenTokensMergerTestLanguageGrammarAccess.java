@@ -117,7 +117,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//FQN returns ecore::EString:
+		//FQN:
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -581,7 +581,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		return getDatatypeBug286557Access().getRule();
 	}
 
-	//FQN returns ecore::EString:
+	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());

@@ -73,7 +73,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cLineFeedLfKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final RuleCall cWSTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		//NL returns EString:
+		//NL:
 		//	WS* ("\r"? "\n") WS*;
 		public ParserRule getRule() { return rule; }
 
@@ -126,7 +126,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getModelAccess().getRule();
 	}
 
-	//NL returns EString:
+	//NL:
 	//	WS* ("\r"? "\n") WS*;
 	public NLElements getNLAccess() {
 		return (pNL != null) ? pNL : (pNL = new NLElements());

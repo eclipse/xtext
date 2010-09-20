@@ -18,7 +18,7 @@ public abstract class AbstractBacktrackingParserTest extends AbstractXtextTests 
 		getModel("unit { provides : unit { name : FooBar;	}; }");
 	}
 	
-	public void testNoException_02() throws Exception {
+	public void testException_01() throws Exception {
 		getModelAndExpect("unit { provides : unit { name : FooBar	}; }", 
 				/* usually expect 1 error (missing ;), but got a second due to backtracking */ 2);
 	}

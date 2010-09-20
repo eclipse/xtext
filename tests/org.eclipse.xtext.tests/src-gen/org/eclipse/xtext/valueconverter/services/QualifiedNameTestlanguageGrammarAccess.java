@@ -52,7 +52,7 @@ public class QualifiedNameTestlanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cFullStopKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Keyword cAsteriskKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		
-		//QualifiedName returns ecore::EString:
+		//QualifiedName:
 		//	ID ("." ID)* ("." "*")?;
 		public ParserRule getRule() { return rule; }
 
@@ -116,7 +116,7 @@ public class QualifiedNameTestlanguageGrammarAccess extends AbstractGrammarEleme
 		return getElementAccess().getRule();
 	}
 
-	//QualifiedName returns ecore::EString:
+	//QualifiedName:
 	//	ID ("." ID)* ("." "*")?;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());

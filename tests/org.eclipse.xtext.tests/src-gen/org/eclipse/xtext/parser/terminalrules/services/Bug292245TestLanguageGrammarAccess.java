@@ -83,7 +83,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cGraphicalParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final RuleCall cAPOSTROPHE_CHARTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		//Error returns ecore::EString hidden():
+		//Error hidden():
 		//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR;
 		public ParserRule getRule() { return rule; }
 
@@ -108,7 +108,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cAPOSTROPHE_CHARTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		private final RuleCall cRehideParserRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
-		//Fix returns ecore::EString hidden():
+		//Fix hidden():
 		//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR Rehide;
 		public ParserRule getRule() { return rule; }
 
@@ -132,7 +132,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Apostrophe");
 		private final RuleCall cAPOSTROPHE_CHARTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Apostrophe returns ecore::EString hidden(WS):
+		//Apostrophe hidden(WS):
 		//	APOSTROPHE_CHAR;
 		public ParserRule getRule() { return rule; }
 
@@ -145,7 +145,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cCircumflexAccentKeyword = (Keyword)rule.eContents().get(1);
 		
 		////some unused char
-		//Rehide returns ecore::EString hidden(WS):
+		//Rehide hidden(WS):
 		//	"^"?;
 		public ParserRule getRule() { return rule; }
 
@@ -159,7 +159,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cCHARTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cWSTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Graphical returns ecore::EString:
+		//Graphical:
 		//	CHAR | WS;
 		public ParserRule getRule() { return rule; }
 
@@ -207,7 +207,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getModelAccess().getRule();
 	}
 
-	//Error returns ecore::EString hidden():
+	//Error hidden():
 	//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR;
 	public ErrorElements getErrorAccess() {
 		return (pError != null) ? pError : (pError = new ErrorElements());
@@ -217,7 +217,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getErrorAccess().getRule();
 	}
 
-	//Fix returns ecore::EString hidden():
+	//Fix hidden():
 	//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR Rehide;
 	public FixElements getFixAccess() {
 		return (pFix != null) ? pFix : (pFix = new FixElements());
@@ -227,7 +227,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getFixAccess().getRule();
 	}
 
-	//Apostrophe returns ecore::EString hidden(WS):
+	//Apostrophe hidden(WS):
 	//	APOSTROPHE_CHAR;
 	public ApostropheElements getApostropheAccess() {
 		return (pApostrophe != null) ? pApostrophe : (pApostrophe = new ApostropheElements());
@@ -244,7 +244,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	////some unused char
-	//Rehide returns ecore::EString hidden(WS):
+	//Rehide hidden(WS):
 	//	"^"?;
 	public RehideElements getRehideAccess() {
 		return (pRehide != null) ? pRehide : (pRehide = new RehideElements());
@@ -254,7 +254,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getRehideAccess().getRule();
 	}
 
-	//Graphical returns ecore::EString:
+	//Graphical:
 	//	CHAR | WS;
 	public GraphicalElements getGraphicalAccess() {
 		return (pGraphical != null) ? pGraphical : (pGraphical = new GraphicalElements());

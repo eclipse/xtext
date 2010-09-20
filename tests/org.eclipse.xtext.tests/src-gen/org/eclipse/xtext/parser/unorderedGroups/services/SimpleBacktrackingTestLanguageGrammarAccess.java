@@ -122,7 +122,7 @@ public class SimpleBacktrackingTestLanguageGrammarAccess extends AbstractGrammar
 		return getRequiredCapabilityAccess().getRule();
 	}
 
-	//Path returns ecore::EString hidden():
+	//Path hidden():
 	//	STRING | "/"? QID ("/" QID)* "/"?;
 	public BacktrackingTestLanguageGrammarAccess.PathElements getPathAccess() {
 		return gaBacktrackingTestLanguage.getPathAccess();
@@ -205,7 +205,7 @@ public class SimpleBacktrackingTestLanguageGrammarAccess extends AbstractGrammar
 		return getGuardExpressionAccess().getRule();
 	}
 
-	//AssignmentOperator returns ecore::EString:
+	//AssignmentOperator:
 	//	"=" | "+=" | "-=" | "*=" | "/=" | "%=";
 	public BacktrackingTestLanguageGrammarAccess.AssignmentOperatorElements getAssignmentOperatorAccess() {
 		return gaBacktrackingTestLanguage.getAssignmentOperatorAccess();
@@ -215,7 +215,7 @@ public class SimpleBacktrackingTestLanguageGrammarAccess extends AbstractGrammar
 		return getAssignmentOperatorAccess().getRule();
 	}
 
-	//RelationalOperator returns ecore::EString:
+	//RelationalOperator:
 	//	"~=" | "==" | "===" | "!=" | "!==" | ">=" | "<=" | ">" | "<";
 	public BacktrackingTestLanguageGrammarAccess.RelationalOperatorElements getRelationalOperatorAccess() {
 		return gaBacktrackingTestLanguage.getRelationalOperatorAccess();
@@ -638,7 +638,7 @@ public class SimpleBacktrackingTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//// Qualified name
-	//QID returns ecore::EString hidden():
+	//QID hidden():
 	//	ID (INT | HEX | ID)* ("." ID (INT | HEX | ID)*)*;
 	public BacktrackingTestLanguageGrammarAccess.QIDElements getQIDAccess() {
 		return gaBacktrackingTestLanguage.getQIDAccess();

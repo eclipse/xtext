@@ -175,7 +175,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cDataTypePostopParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDataTypePreopParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//DataTypeExpression returns ecore::EString:
+		//DataTypeExpression:
 		//	DataTypePostop | DataTypePreop;
 		public ParserRule getRule() { return rule; }
 
@@ -195,7 +195,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cHyphenMinusHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cDataTypeVariableParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
-		//DataTypePreop returns ecore::EString:
+		//DataTypePreop:
 		//	"--" DataTypeVariable;
 		public ParserRule getRule() { return rule; }
 
@@ -215,7 +215,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cDataTypeVariableParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cHyphenMinusHyphenMinusKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		//DataTypePostop returns ecore::EString:
+		//DataTypePostop:
 		//	DataTypeVariable "--"?;
 		public ParserRule getRule() { return rule; }
 
@@ -233,7 +233,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataTypeVariable");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//DataTypeVariable returns ecore::EString:
+		//DataTypeVariable:
 		//	ID;
 		public ParserRule getRule() { return rule; }
 
@@ -323,7 +323,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getVariableAccess().getRule();
 	}
 
-	//DataTypeExpression returns ecore::EString:
+	//DataTypeExpression:
 	//	DataTypePostop | DataTypePreop;
 	public DataTypeExpressionElements getDataTypeExpressionAccess() {
 		return (pDataTypeExpression != null) ? pDataTypeExpression : (pDataTypeExpression = new DataTypeExpressionElements());
@@ -333,7 +333,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getDataTypeExpressionAccess().getRule();
 	}
 
-	//DataTypePreop returns ecore::EString:
+	//DataTypePreop:
 	//	"--" DataTypeVariable;
 	public DataTypePreopElements getDataTypePreopAccess() {
 		return (pDataTypePreop != null) ? pDataTypePreop : (pDataTypePreop = new DataTypePreopElements());
@@ -343,7 +343,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getDataTypePreopAccess().getRule();
 	}
 
-	//DataTypePostop returns ecore::EString:
+	//DataTypePostop:
 	//	DataTypeVariable "--"?;
 	public DataTypePostopElements getDataTypePostopAccess() {
 		return (pDataTypePostop != null) ? pDataTypePostop : (pDataTypePostop = new DataTypePostopElements());
@@ -353,7 +353,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getDataTypePostopAccess().getRule();
 	}
 
-	//DataTypeVariable returns ecore::EString:
+	//DataTypeVariable:
 	//	ID;
 	public DataTypeVariableElements getDataTypeVariableAccess() {
 		return (pDataTypeVariable != null) ? pDataTypeVariable : (pDataTypeVariable = new DataTypeVariableElements());

@@ -387,7 +387,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IdDatatype");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//IdDatatype returns ecore::EString:
+		//IdDatatype:
 		//	ID;
 		public ParserRule getRule() { return rule; }
 
@@ -399,7 +399,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringDatatype");
 		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//StringDatatype returns ecore::EString:
+		//StringDatatype:
 		//	STRING;
 		public ParserRule getRule() { return rule; }
 
@@ -490,7 +490,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getMultiDatatypeAccess().getRule();
 	}
 
-	//IdDatatype returns ecore::EString:
+	//IdDatatype:
 	//	ID;
 	public IdDatatypeElements getIdDatatypeAccess() {
 		return (pIdDatatype != null) ? pIdDatatype : (pIdDatatype = new IdDatatypeElements());
@@ -500,7 +500,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getIdDatatypeAccess().getRule();
 	}
 
-	//StringDatatype returns ecore::EString:
+	//StringDatatype:
 	//	STRING;
 	public StringDatatypeElements getStringDatatypeAccess() {
 		return (pStringDatatype != null) ? pStringDatatype : (pStringDatatype = new StringDatatypeElements());

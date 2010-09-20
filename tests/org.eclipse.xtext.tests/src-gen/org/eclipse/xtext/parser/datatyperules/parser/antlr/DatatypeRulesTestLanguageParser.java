@@ -7,6 +7,7 @@ import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
@@ -26,7 +27,9 @@ public class DatatypeRulesTestLanguageParser extends org.eclipse.xtext.parser.an
 		org.eclipse.xtext.parser.datatyperules.parser.antlr.internal.InternalDatatypeRulesTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
-		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
+		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
+		parser.setUnorderedGroupHelper(helper);
+		helper.initializeWith(parser);
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

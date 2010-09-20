@@ -63,7 +63,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cQualifiedNameParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cFullStopAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		//QualifiedNameWithWildCard returns ecore::EString:
+		//QualifiedNameWithWildCard:
 		//	QualifiedName ".*"?;
 		public ParserRule getRule() { return rule; }
 
@@ -85,7 +85,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//QualifiedName returns ecore::EString:
+		//QualifiedName:
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -334,7 +334,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		return getImportAccess().getRule();
 	}
 
-	//QualifiedNameWithWildCard returns ecore::EString:
+	//QualifiedNameWithWildCard:
 	//	QualifiedName ".*"?;
 	public QualifiedNameWithWildCardElements getQualifiedNameWithWildCardAccess() {
 		return (pQualifiedNameWithWildCard != null) ? pQualifiedNameWithWildCard : (pQualifiedNameWithWildCard = new QualifiedNameWithWildCardElements());
@@ -344,7 +344,7 @@ public class IndexTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		return getQualifiedNameWithWildCardAccess().getRule();
 	}
 
-	//QualifiedName returns ecore::EString:
+	//QualifiedName:
 	//	ID ("." ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());

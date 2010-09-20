@@ -262,7 +262,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cHyphenMinusKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		//Datatype returns ecore::EString:
+		//Datatype:
 		//	ID "-" ID;
 		public ParserRule getRule() { return rule; }
 
@@ -286,7 +286,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cPlusSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cDatatypeParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		//NestedDatatype returns ecore::EString:
+		//NestedDatatype:
 		//	ID "+" Datatype?;
 		public ParserRule getRule() { return rule; }
 
@@ -403,7 +403,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		return getModelAccess().getRule();
 	}
 
-	//Datatype returns ecore::EString:
+	//Datatype:
 	//	ID "-" ID;
 	public DatatypeElements getDatatypeAccess() {
 		return (pDatatype != null) ? pDatatype : (pDatatype = new DatatypeElements());
@@ -413,7 +413,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		return getDatatypeAccess().getRule();
 	}
 
-	//NestedDatatype returns ecore::EString:
+	//NestedDatatype:
 	//	ID "+" Datatype?;
 	public NestedDatatypeElements getNestedDatatypeAccess() {
 		return (pNestedDatatype != null) ? pNestedDatatype : (pNestedDatatype = new NestedDatatypeElements());

@@ -85,7 +85,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cINTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		private final RuleCall cSTRINGTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
-		//DataTypeRule returns ecore::EString:
+		//DataTypeRule:
 		//	INT "keyword" INT STRING?;
 		public ParserRule getRule() { return rule; }
 
@@ -151,7 +151,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		return getModelFeaturesAccess().getRule();
 	}
 
-	//DataTypeRule returns ecore::EString:
+	//DataTypeRule:
 	//	INT "keyword" INT STRING?;
 	public DataTypeRuleElements getDataTypeRuleAccess() {
 		return (pDataTypeRule != null) ? pDataTypeRule : (pDataTypeRule = new DataTypeRuleElements());
