@@ -516,13 +516,12 @@ section2[Syntax]
 code[
 XSwitchExpression:
 	'switch' main=XExpression? '{'
-		((cases+=XCasePart)+ |
-		 (cases+=XTypeCasePart)+)
-		('default' ':' default=XExpression)?
+		cases+=XCasePart+
+		('default' (default=XBlockExpression | ':' default=XExpression ';'))?
 	'}';
 
 XCasePart:
-	'case' case=XExpression ':' then=XExpression;	
+	type=JvmTypeReference? 'case' guard=XExpression (then=XBlockExpression | ':' then=XExpression ';');	
 
 XTypeCasePart:
 	'instanceof' type=JvmTypeReference ':' then=XExpression;	
