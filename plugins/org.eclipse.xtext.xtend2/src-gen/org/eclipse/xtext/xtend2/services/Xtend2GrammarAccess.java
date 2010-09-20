@@ -872,7 +872,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XFunctionTypeRef:
-	//	("(" paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)* ")")? "=>" returnType=JvmTypeReference;
+	//	("(" paramTypes+=JvmTypeArgument ("," paramTypes+=JvmTypeArgument)* ")")? "=>" returnType=JvmTypeArgument;
 	public XtypeGrammarAccess.XFunctionTypeRefElements getXFunctionTypeRefAccess() {
 		return gaXpression.getXFunctionTypeRefAccess();
 	}

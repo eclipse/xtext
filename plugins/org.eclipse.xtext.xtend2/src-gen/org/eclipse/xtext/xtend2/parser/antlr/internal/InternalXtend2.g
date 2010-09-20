@@ -3831,9 +3831,9 @@ ruleXFunctionTypeRef returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeArgumentParserRuleCall_0_1_0(), currentNode); 
 	    }
-		lv_paramTypes_1_0=ruleJvmTypeReference		{
+		lv_paramTypes_1_0=ruleJvmTypeArgument		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXFunctionTypeRefRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -3843,7 +3843,7 @@ ruleXFunctionTypeRef returns [EObject current=null]
 	       			$current, 
 	       			"paramTypes",
 	        		lv_paramTypes_1_0, 
-	        		"JvmTypeReference", 
+	        		"JvmTypeArgument", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3859,9 +3859,9 @@ ruleXFunctionTypeRef returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeArgumentParserRuleCall_0_2_1_0(), currentNode); 
 	    }
-		lv_paramTypes_3_0=ruleJvmTypeReference		{
+		lv_paramTypes_3_0=ruleJvmTypeArgument		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXFunctionTypeRefRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -3871,7 +3871,7 @@ ruleXFunctionTypeRef returns [EObject current=null]
 	       			$current, 
 	       			"paramTypes",
 	        		lv_paramTypes_3_0, 
-	        		"JvmTypeReference", 
+	        		"JvmTypeArgument", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3891,9 +3891,9 @@ ruleXFunctionTypeRef returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeReferenceParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeArgumentParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_returnType_6_0=ruleJvmTypeReference		{
+		lv_returnType_6_0=ruleJvmTypeArgument		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXFunctionTypeRefRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -3903,7 +3903,7 @@ ruleXFunctionTypeRef returns [EObject current=null]
 	       			$current, 
 	       			"returnType",
 	        		lv_returnType_6_0, 
-	        		"JvmTypeReference", 
+	        		"JvmTypeArgument", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
