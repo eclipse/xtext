@@ -7,20 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
-import org.eclipse.osgi.util.NLS;
+import org.eclipse.xtext.resource.IResourceDescription;
 
-/**
- * @author koehnlein - Initial contribution and API
- */
-public class Messages extends NLS {
-	private static final String BUNDLE_NAME = "org.eclipse.xtext.builder.builderState.messages"; //$NON-NLS-1$
-	public static String AbstractBuilderState_0;
-	public static String MarkerUpdaterImpl_ValidateResources;
-	static {
-		// initialize resource bundle
-		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
-	}
+import com.google.inject.ImplementedBy;
 
-	private Messages() {
-	}
+@ImplementedBy(EMFBasedPersister.class)
+public interface PersistedStateProvider {
+	
+	Iterable<IResourceDescription> load();
+	
 }

@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl.PersistedStateProvider;
+import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
 import org.eclipse.xtext.builder.tests.BuilderTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
@@ -47,7 +47,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 
 	private Map<String, String> fileSystem = Maps.newHashMap();
 	private ExtensibleURIConverterImpl uriConverter;
-	private PersistableResourceDescriptionsImpl builderState;
+	private ClusteringBuilderState builderState;
 
 	@Override
 	public void setUp() throws Exception {
@@ -55,7 +55,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		with(new BuilderTestLanguageStandaloneSetup());
 		SharedStateModule module = new SharedStateModule();
 		builderInjector = Guice.createInjector(module);
-		builderState = builderInjector.getInstance(PersistableResourceDescriptionsImpl.class);
+		builderState = builderInjector.getInstance(ClusteringBuilderState.class);
 		uriConverter = new ExtensibleURIConverterImpl() {
 			@Override
 			public InputStream createInputStream(org.eclipse.emf.common.util.URI uri, Map<?, ?> options)
