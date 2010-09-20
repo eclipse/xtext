@@ -7,26 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.outline.actions;
 
-import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
-
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
 public class OutlinePreferenceStoreInitializer implements IPreferenceStoreInitializer {
 
-	@Inject
-	@Named(Constants.LANGUAGE_NAME)
-	protected String languageName;
-
 	public void initialize(IPreferenceStoreAccess access) {
-		access.getWritablePreferenceStore().setDefault(
-				(languageName + "." + ToggleLinkWithEditorAction.PREFERENCE_KEY), false);
-		access.getWritablePreferenceStore().setDefault((languageName + "." + ToggleSortingAction.PREFERENCE_KEY),
-				false);
+		access.getWritablePreferenceStore().setDefault(ToggleLinkWithEditorAction.PREFERENCE_KEY, false);
+		access.getWritablePreferenceStore().setDefault(ToggleSortingAction.PREFERENCE_KEY, false);
 	}
 }
