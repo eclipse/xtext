@@ -16,6 +16,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Function;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -51,9 +52,9 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 		return "*";
 	}
 	
-	private SimpleAttributeResolver<EObject, String> resolver = SimpleAttributeResolver.newResolver(String.class, "name");
+	private Function<EObject, String> resolver = SimpleAttributeResolver.newResolver(String.class, "name");
 	
-	protected SimpleAttributeResolver<EObject, String> getResolver() {
+	protected Function<EObject, String> getResolver() {
 		return resolver;
 	}
 
@@ -65,7 +66,7 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 				String name = qualifiedName.invoke(temp);
 				if (name!=null)
 					return name;
-				String value = resolver.getValue(temp);
+				String value = getResolver().apply(temp);
 				if (value == null)
 					return null;
 				while (temp.eContainer() != null) {
