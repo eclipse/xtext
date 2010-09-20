@@ -104,7 +104,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		CompositeNode parserNode = NodeUtil.getNode(modelElement);
 		if (parserNode != null)
 			eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
-		eObjectNode.setShortTextRegion(locationInFileProvider.getLocation(modelElement));
+		eObjectNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
 	}
 
 	protected boolean isLeaf(final EObject modelElement) {
@@ -121,11 +121,10 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		EStructuralFeatureNode eStructuralFeatureNode = new EStructuralFeatureNode(owner, feature, parentNode, image,
 				text, !isFeatureSet);
 		if (isFeatureSet) {
-			// TODO: use full region
-			ITextRegion region = locationInFileProvider.getLocation(owner, feature, 0);
+			ITextRegion region = locationInFileProvider.getFullTextRegion(owner, feature, 0);
 			if (feature.isMany()) {
 				int numValues = ((Collection<?>) owner.eGet(feature)).size();
-				region = region.merge(locationInFileProvider.getLocation(owner, feature, numValues - 1));
+				region = region.merge(locationInFileProvider.getFullTextRegion(owner, feature, numValues - 1));
 			}
 			eStructuralFeatureNode.setTextRegion(region);
 		}

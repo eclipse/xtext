@@ -35,55 +35,121 @@ public class LocationInFileProviderTest extends AbstractXtextTests {
 		locationInFileProvider = new DefaultLocationInFileProvider();
 	}
 
-	public void testContainmentRefLocation() throws Exception {
+	public void testContainmentRefSignificantLocation() throws Exception {
 		assertEquals(2, elements.size());
-		ITextRegion location = locationInFileProvider.getLocation(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 0);
+		ITextRegion location = locationInFileProvider.getSignificantTextRegion(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 0);
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
 		assertEquals(1, location.getLength());
-		location = locationInFileProvider.getLocation(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 1);
+		location = locationInFileProvider.getSignificantTextRegion(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 1);
 		assertEquals(modelAsString.lastIndexOf("y"), location.getOffset());
 		assertEquals(1, location.getLength());		
+		// multi feature index out of bounds -> return owner's significant region 
+		location = locationInFileProvider.getFullTextRegion(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 2);
+		assertEquals(0, location.getOffset());
+		assertEquals(modelAsString.length(), location.getLength());		
 	}
 	
-	public void testCrossRefLocation() throws Exception {
+	public void testCrossRefSignificantLocation() throws Exception {
 			assertEquals(2, elements.size());
 		int indexOfFirstY = modelAsString.indexOf("y");
 		int indexOfSecondY = modelAsString.indexOf("y", indexOfFirstY + 1);
-		ITextRegion location = locationInFileProvider.getLocation(elements.get(0),
+		ITextRegion location = locationInFileProvider.getSignificantTextRegion(elements.get(0),
 				LocationprovidertestPackage.Literals.ELEMENT__SINGLEREF, 0);
 		assertEquals(indexOfFirstY, location.getOffset());
 		assertEquals(1, location.getLength());
-		location = locationInFileProvider.getLocation(elements.get(0),
+		// single feature index out of bounds -> ignore index 
+		location = locationInFileProvider.getSignificantTextRegion(elements.get(0),
 				LocationprovidertestPackage.Literals.ELEMENT__SINGLEREF, 1);
 		assertEquals(indexOfFirstY, location.getOffset());
 		assertEquals(1, location.getLength());
-		location = locationInFileProvider.getLocation(elements.get(0),
+		location = locationInFileProvider.getSignificantTextRegion(elements.get(0),
 				LocationprovidertestPackage.Literals.ELEMENT__MULTIREFS, 0);
 		assertEquals(indexOfSecondY, location.getOffset());
 		assertEquals(1, location.getLength());
-		location = locationInFileProvider.getLocation(elements.get(0),
+		// multi feature index out of bounds -> return owner's significant region 
+		location = locationInFileProvider.getSignificantTextRegion(elements.get(0),
 				LocationprovidertestPackage.Literals.ELEMENT__MULTIREFS, 1);
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
 		assertEquals(1, location.getLength());
 	}
 
-	public void testEObjectLocation() throws Exception {
+	public void testEObjectSignificantLocation() throws Exception {
 		assertEquals(2, elements.size());
-		ITextRegion location = locationInFileProvider.getLocation(elements.get(0));
+		ITextRegion location = locationInFileProvider.getSignificantTextRegion(elements.get(0));
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
 		assertEquals(1, location.getLength());
-		location = locationInFileProvider.getLocation(elements.get(1));
+		location = locationInFileProvider.getSignificantTextRegion(elements.get(1));
 		assertEquals(modelAsString.lastIndexOf("y"), location.getOffset());
 		assertEquals(1, location.getLength());
 	}
 
-	public void testAttributeLocation() {
+	public void testAttributeSignificantLocation() {
 		assertEquals(2, elements.size());
-		ITextRegion location = locationInFileProvider.getLocation(elements.get(0), LocationprovidertestPackage.Literals.ELEMENT__NAME, 1);
+		ITextRegion location = locationInFileProvider.getSignificantTextRegion(elements.get(0), LocationprovidertestPackage.Literals.ELEMENT__NAME, 0);
 		assertEquals(modelAsString.indexOf("x"), location.getOffset());
 		assertEquals(1, location.getLength());
-		location = locationInFileProvider.getLocation(elements.get(1), LocationprovidertestPackage.Literals.ELEMENT__NAME, 1);
+		// index out of bounds -> return owner's significant region 
+		location = locationInFileProvider.getSignificantTextRegion(elements.get(1), LocationprovidertestPackage.Literals.ELEMENT__NAME, 1);
 		assertEquals(modelAsString.lastIndexOf("y"), location.getOffset());
 		assertEquals(1, location.getLength());		
+	}
+
+	public void testContainmentRefFullLocation() throws Exception {
+		assertEquals(2, elements.size());
+		ITextRegion location = locationInFileProvider.getFullTextRegion(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 0);
+		assertEquals(0, location.getOffset());
+		assertEquals(modelAsString.indexOf(" element y"), location.getLength());
+		location = locationInFileProvider.getFullTextRegion(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 1);
+		assertEquals(modelAsString.lastIndexOf("element"), location.getOffset());
+		assertEquals(modelAsString.length() - modelAsString.lastIndexOf("element"), location.getLength());		
+		// multi feature index out of bounds -> return owner's full region 
+		location = locationInFileProvider.getFullTextRegion(model, LocationprovidertestPackage.Literals.MODEL__ELEMENTS, 2);
+		assertEquals(0, location.getOffset());
+		assertEquals(modelAsString.length(), location.getLength());		
+	}
+	
+	public void testCrossRefFullLocation() throws Exception {
+			assertEquals(2, elements.size());
+		int indexOfFirstY = modelAsString.indexOf("y");
+		int indexOfSecondY = modelAsString.indexOf("y", indexOfFirstY + 1);
+		ITextRegion location = locationInFileProvider.getFullTextRegion(elements.get(0),
+				LocationprovidertestPackage.Literals.ELEMENT__SINGLEREF, 0);
+		assertEquals(indexOfFirstY, location.getOffset());
+		assertEquals(1, location.getLength());
+		// single feature index out of bounds -> ignore index 
+		location = locationInFileProvider.getFullTextRegion(elements.get(0),
+				LocationprovidertestPackage.Literals.ELEMENT__SINGLEREF, 1);
+		assertEquals(indexOfFirstY, location.getOffset());
+		assertEquals(1, location.getLength());
+		location = locationInFileProvider.getFullTextRegion(elements.get(0),
+				LocationprovidertestPackage.Literals.ELEMENT__MULTIREFS, 0);
+		assertEquals(indexOfSecondY, location.getOffset());
+		assertEquals(1, location.getLength());
+		// multi feature index out of bounds -> return owner's full region 
+		location = locationInFileProvider.getFullTextRegion(elements.get(0),
+				LocationprovidertestPackage.Literals.ELEMENT__MULTIREFS, 1);
+		assertEquals(0, location.getOffset());
+		assertEquals(modelAsString.indexOf(" element y"), location.getLength());
+	}
+
+	public void testEObjectFullLocation() throws Exception {
+		assertEquals(2, elements.size());
+		ITextRegion location = locationInFileProvider.getFullTextRegion(elements.get(0));
+		assertEquals(modelAsString.indexOf("element x"), location.getOffset());
+		assertEquals(modelAsString.indexOf(" element y"), location.getLength());
+		location = locationInFileProvider.getFullTextRegion(elements.get(1));
+		assertEquals(modelAsString.indexOf("element y"), location.getOffset());
+		assertEquals("element y".length(), location.getLength());
+	}
+
+	public void testAttributeFullLocation() {
+		assertEquals(2, elements.size());
+		ITextRegion location = locationInFileProvider.getFullTextRegion(elements.get(0), LocationprovidertestPackage.Literals.ELEMENT__NAME, 0);
+		assertEquals(modelAsString.indexOf("x"), location.getOffset());
+		assertEquals(1, location.getLength());
+		// index out of bounds -> return owner's full region 
+		location = locationInFileProvider.getFullTextRegion(elements.get(1), LocationprovidertestPackage.Literals.ELEMENT__NAME, 1);
+		assertEquals(modelAsString.indexOf("element y"), location.getOffset());
+		assertEquals("element y".length(), location.getLength());		
 	}
 }

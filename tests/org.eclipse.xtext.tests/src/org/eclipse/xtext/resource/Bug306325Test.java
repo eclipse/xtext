@@ -50,15 +50,15 @@ public class Bug306325Test extends AbstractXtextTests {
 		String[] lexemes = model.split(" ");
 		
 		ILocationInFileProvider locationInFileProvider = getInjector().getInstance(ILocationInFileProvider.class);
-		ITextRegion location0 = locationInFileProvider.getLocation(words.get(0));
+		ITextRegion location0 = locationInFileProvider.getSignificantTextRegion(words.get(0));
 		assertEquals(0, location0.getOffset());
 		assertEquals(lexemes[0].length(), location0.getLength());
 		
-		ITextRegion location1 = locationInFileProvider.getLocation(words.get(1));
+		ITextRegion location1 = locationInFileProvider.getSignificantTextRegion(words.get(1));
 		assertEquals(lexemes[0].length() + 1, location1.getOffset());
 		assertEquals(lexemes[1].length(), location1.getLength());
 		
-		ITextRegion location2 = locationInFileProvider.getLocation(words.get(2));
+		ITextRegion location2 = locationInFileProvider.getSignificantTextRegion(words.get(2));
 		assertEquals(lexemes[0].length() + lexemes[1].length() + 2, location2.getOffset());
 		assertEquals(lexemes[2].length(), location2.getLength());
 	}
