@@ -19,7 +19,7 @@ var skipGenerate = false
 var backtrack = false
 
 CompositeGeneratorFragment {
-	fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+	fragment = parser.antlr.XtextAntlrGeneratorFragment {
 		options = auto-inject {}
 	}
 	fragment = resourceFactory.ResourceFactoryFragment { 
