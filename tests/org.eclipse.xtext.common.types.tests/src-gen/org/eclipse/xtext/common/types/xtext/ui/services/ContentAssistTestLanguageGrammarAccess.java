@@ -149,7 +149,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cFQNParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cFullStopAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		//ImportedFQN returns ecore::EString:
+		//ImportedFQN:
 		//	FQN ".*"?;
 		public ParserRule getRule() { return rule; }
 
@@ -171,7 +171,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//FQN returns ecore::EString:
+		//FQN:
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -250,7 +250,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return getImportAccess().getRule();
 	}
 
-	//ImportedFQN returns ecore::EString:
+	//ImportedFQN:
 	//	FQN ".*"?;
 	public ImportedFQNElements getImportedFQNAccess() {
 		return (pImportedFQN != null) ? pImportedFQN : (pImportedFQN = new ImportedFQNElements());
@@ -260,7 +260,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return getImportedFQNAccess().getRule();
 	}
 
-	//FQN returns ecore::EString:
+	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());

@@ -31,6 +31,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.internal.Nullable;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -41,6 +42,7 @@ public class EMFBasedPersister implements PersistedStateProvider {
 	private final static Logger log = Logger.getLogger(EMFBasedPersister.class);
 
 	@Inject(optional=true)
+	@Nullable
 	private IWorkbench workbench;
 
 	@Inject
