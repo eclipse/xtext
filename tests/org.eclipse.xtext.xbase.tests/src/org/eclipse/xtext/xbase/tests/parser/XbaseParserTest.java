@@ -7,11 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.parser;
 
-import org.eclipse.xtext.common.types.JvmLowerBound;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.xbase.XFunction;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xpression.XBinaryOperation;
 import org.eclipse.xtext.xpression.XBlockExpression;
@@ -24,15 +19,12 @@ import org.eclipse.xtext.xpression.XFeatureCall;
 import org.eclipse.xtext.xpression.XIfExpression;
 import org.eclipse.xtext.xpression.XInstanceOfExpression;
 import org.eclipse.xtext.xpression.XIntLiteral;
-import org.eclipse.xtext.xpression.XRichString;
-import org.eclipse.xtext.xpression.XRichStringLiteral;
 import org.eclipse.xtext.xpression.XStringLiteral;
 import org.eclipse.xtext.xpression.XSwitchExpression;
 import org.eclipse.xtext.xpression.XTypeLiteral;
 import org.eclipse.xtext.xpression.XUnaryOperation;
 import org.eclipse.xtext.xpression.XVariableDeclaration;
 import org.eclipse.xtext.xpression.XWhileExpression;
-import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 /**
  * @author Sven Efftinge
@@ -202,7 +194,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	public void testBlockExpression_withVariableDeclaration_0()
 			throws Exception {
-		XBlockExpression be = (XBlockExpression) expression("{def foo = bar;bar;}");
+		XBlockExpression be = (XBlockExpression) expression("{val foo = bar;bar;}");
 		assertEquals(2, be.getExpressions().size());
 		XVariableDeclaration vd = (XVariableDeclaration) be.getExpressions().get(
 				0);
@@ -214,7 +206,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	public void testBlockExpression_withVariableDeclaration_1()
 			throws Exception {
-		XBlockExpression be = (XBlockExpression) expression("{MyType foo = bar;bar;}");
+		XBlockExpression be = (XBlockExpression) expression("{var MyType foo = bar;bar;}");
 		assertEquals(2, be.getExpressions().size());
 		XVariableDeclaration vd = (XVariableDeclaration) be.getExpressions().get(
 				0);
@@ -227,36 +219,25 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	public void testConstructorCall_0() throws Exception {
 		XConstructorCall cc = (XConstructorCall) expression("new Foo");
 		assertNotNull(cc.getType());
-		assertNull(cc.getInitializer());
 		assertEquals(0, cc.getParams().size());
 	}
 
 	public void testConstructorCall_1() throws Exception {
 		XConstructorCall cc = (XConstructorCall) expression("new Foo(0,1,2)");
 		assertNotNull(cc.getType());
-		assertNull(cc.getInitializer());
 		assertEquals(3, cc.getParams().size());
 		for (int i = 0; i < 3; i++)
 			assertEquals(i, ((XIntLiteral) cc.getParams().get(i)).getValue());
 	}
 
 	public void testConstructorCall_2() throws Exception {
-		XConstructorCall cc = (XConstructorCall) expression("new Foo(0,1,2) { this.foo = bar;}");
+		XConstructorCall cc = (XConstructorCall) expression("new Foo<String>(0,1,2)");
 		assertNotNull(cc.getType());
-		assertNotNull(cc.getInitializer());
 		assertEquals(3, cc.getParams().size());
 		for (int i = 0; i < 3; i++)
 			assertEquals(i, ((XIntLiteral) cc.getParams().get(i)).getValue());
 	}
 
-	public void testRichString() throws Exception {
-		XRichString rs = (XRichString) expression("\u00BBHallo \u00ABfoo\u00BB Welt!\u00AB");
-		assertEquals(3, rs.getExpressions().size());
-		assertTrue(rs.getExpressions().get(0) instanceof XRichStringLiteral);
-		assertTrue(rs.getExpressions().get(1) instanceof XFeatureCall);
-		assertTrue(rs.getExpressions().get(2) instanceof XRichStringLiteral);
-	}
-	
 	public void testWhileExpression() throws Exception {
 		XWhileExpression expression = (XWhileExpression) expression("while (true) 'foo'");
 		assertTrue(expression.getPredicate() instanceof XBooleanLiteral);
@@ -274,108 +255,4 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertTrue(expression.getExpression() instanceof XBooleanLiteral);
 	}
 
-	public void testFunction_0() throws Exception {
-		XFunction func = function("foo() : bar;");
-		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
-		assertEquals(0, func.getParameters().size());
-		assertNull(func.getReturnType());
-		assertEquals(0, func.getTypeParameters().size());
-	}
-
-	public void testFunction_1() throws Exception {
-		XFunction func = function("String foo() : bar;");
-		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
-		assertEquals(0, func.getParameters().size());
-		assertNotNull(func.getReturnType());
-		assertEquals(0, func.getTypeParameters().size());
-	}
-
-	public void testFunction_2() throws Exception {
-		XFunction func = function("foo(String s) : bar;");
-		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
-		assertEquals(1, func.getParameters().size());
-		assertEquals("s", func.getParameters().get(0).getName());
-		assertNotNull(func.getParameters().get(0).getParameterType());
-		assertNull(func.getReturnType());
-		assertEquals(0, func.getTypeParameters().size());
-	}
-
-	public void testFunction_3() throws Exception {
-		XFunction func = function("foo(String s, Integer i) : bar;");
-		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
-		assertEquals(2, func.getParameters().size());
-		assertEquals("s", func.getParameters().get(0).getName());
-		assertNotNull(func.getParameters().get(0).getParameterType());
-		assertEquals("i", func.getParameters().get(1).getName());
-		assertNotNull(func.getParameters().get(1).getParameterType());
-		assertNull(func.getReturnType());
-		assertEquals(0, func.getTypeParameters().size());
-	}
-
-	public void testFunction_4() throws Exception {
-		XFunction func = function("foo() : bar;");
-		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
-		assertEquals(0, func.getParameters().size());
-		assertNull(func.getReturnType());
-//		assertTrue(func.getVisibility() == JvmVisibility.PRIVATE);
-		assertEquals(0, func.getTypeParameters().size());
-	}
-
-
-	public void testTypeParams_1() throws Exception {
-		XFunction func = function("<T> foo(T t) : bar;");
-		assertEquals(1, func.getTypeParameters().size());
-		JvmTypeParameter tp = func.getTypeParameters().get(0);
-		assertEquals("T", tp.getName());
-		assertEquals(0, tp.getConstraints().size());
-	}
-
-	public void testTypeParams_2() throws Exception {
-		XFunction func = function("<T extends Bar> foo(T t) : bar;");
-		assertEquals(1, func.getTypeParameters().size());
-		JvmTypeParameter tp = func.getTypeParameters().get(0);
-		assertEquals("T", tp.getName());
-		assertEquals(1, tp.getConstraints().size());
-		assertTrue(tp.getConstraints().get(0) instanceof JvmUpperBound);
-	}
-
-	public void testTypeParams_3() throws Exception {
-		XFunction func = function("<T extends Foo & Bar> foo(T t) : bar;");
-		assertEquals(1, func.getTypeParameters().size());
-		JvmTypeParameter tp = func.getTypeParameters().get(0);
-		assertEquals("T", tp.getName());
-		assertEquals(2, tp.getConstraints().size());
-		for (JvmTypeConstraint constraint : tp.getConstraints()) {
-			assertTrue(constraint instanceof JvmUpperBound);
-		}
-	}
-
-	public void testTypeParams_4() throws Exception {
-		XFunction func = function("<T super Foo> foo(T t) : bar;");
-		assertEquals(1, func.getTypeParameters().size());
-		JvmTypeParameter tp = func.getTypeParameters().get(0);
-		assertEquals("T", tp.getName());
-		assertEquals(1, tp.getConstraints().size());
-		assertTrue(tp.getConstraints().get(0) instanceof JvmLowerBound);
-	}
-	
-	public void testFunctionTypeRef_0() throws Exception {
-		XFunction func = function("=>Boolean foo() : |true;");
-		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
-		assertNotNull(type.getReturnType());
-		assertEquals(0,type.getParamTypes().size());
-	}
-	
-	public void testFunctionTypeRef_1() throws Exception {
-		XFunction func = function("(String)=>Boolean foo() : String s|s==null;");
-		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
-		assertNotNull(type.getReturnType());
-		assertEquals(1,type.getParamTypes().size());
-		assertNotNull(type.getParamTypes().get(0));
-	}
 }

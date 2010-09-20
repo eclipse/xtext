@@ -5,6 +5,8 @@
  */
 package org.eclipse.xtext.xtype.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -18,7 +20,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeArgument;
 
 import org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl;
 
@@ -49,7 +51,7 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<JvmTypeReference> paramTypes;
+	protected EList<JvmTypeArgument> paramTypes;
 
 	/**
 	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
@@ -59,7 +61,7 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * @generated
 	 * @ordered
 	 */
-	protected JvmTypeReference returnType;
+	protected JvmTypeArgument returnType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -87,11 +89,11 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<JvmTypeReference> getParamTypes()
+	public EList<JvmTypeArgument> getParamTypes()
 	{
 		if (paramTypes == null)
 		{
-			paramTypes = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES);
+			paramTypes = new EObjectContainmentEList<JvmTypeArgument>(JvmTypeArgument.class, this, XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES);
 		}
 		return paramTypes;
 	}
@@ -101,7 +103,7 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmTypeReference getReturnType()
+	public JvmTypeArgument getReturnType()
 	{
 		return returnType;
 	}
@@ -111,9 +113,9 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetReturnType(JvmTypeReference newReturnType, NotificationChain msgs)
+	public NotificationChain basicSetReturnType(JvmTypeArgument newReturnType, NotificationChain msgs)
 	{
-		JvmTypeReference oldReturnType = returnType;
+		JvmTypeArgument oldReturnType = returnType;
 		returnType = newReturnType;
 		if (eNotificationRequired())
 		{
@@ -121,6 +123,27 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReturnType(JvmTypeArgument newReturnType)
+	{
+		if (newReturnType != returnType)
+		{
+			NotificationChain msgs = null;
+			if (returnType != null)
+				msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE, null, msgs);
+			if (newReturnType != null)
+				msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE, null, msgs);
+			msgs = basicSetReturnType(newReturnType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE, newReturnType, newReturnType));
 	}
 
 	/**
@@ -157,6 +180,48 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 				return getReturnType();
 		}
 		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue)
+	{
+		switch (featureID)
+		{
+			case XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES:
+				getParamTypes().clear();
+				getParamTypes().addAll((Collection<? extends JvmTypeArgument>)newValue);
+				return;
+			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
+				setReturnType((JvmTypeArgument)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID)
+	{
+		switch (featureID)
+		{
+			case XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES:
+				getParamTypes().clear();
+				return;
+			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
+				setReturnType((JvmTypeArgument)null);
+				return;
+		}
+		super.eUnset(featureID);
 	}
 
 	/**

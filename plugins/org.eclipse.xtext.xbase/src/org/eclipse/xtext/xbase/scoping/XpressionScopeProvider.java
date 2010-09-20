@@ -29,7 +29,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
-import org.eclipse.xtext.xbase.XFunction;
 import org.eclipse.xtext.xbase.typing.ExpressionsTypeResolver;
 import org.eclipse.xtext.xbase.typing.OperatorMapping;
 import org.eclipse.xtext.xpression.XBlockExpression;
@@ -85,11 +84,8 @@ public class XpressionScopeProvider extends XtypeScopeProvider {
 	protected Predicate<EObject> createCallableFeaturePredicate(final XFeatureCall call) {
 		return new Predicate<EObject>() {
 			public boolean apply(EObject input) {
-				if (input instanceof JvmField && call.getParams().size() > 1)
+				if (input instanceof JvmField && call.getParams().size() > 1) {
 					return false;
-				if (input instanceof XFunction) {
-					if (call.getParams().size() != ((JvmOperation) input).getParameters().size())
-						return false;
 				} else if (input instanceof JvmOperation) {
 					if (call.getParams().size() - 1 != ((JvmOperation) input).getParameters().size())
 						return false;

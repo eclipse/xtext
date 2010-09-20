@@ -163,7 +163,7 @@ public class DocumentTokenSource {
 
 	protected void setTokens(List<TokenInfo> infos) {
 		this.internalModifyableTokenInfos = infos;
-		this.tokenInfos = Collections.unmodifiableList(infos);
+		this.tokenInfos = Collections.unmodifiableList(Lists.newArrayList(infos));
 	}
 
 	protected List<TokenInfo> createTokenInfos(String string) {

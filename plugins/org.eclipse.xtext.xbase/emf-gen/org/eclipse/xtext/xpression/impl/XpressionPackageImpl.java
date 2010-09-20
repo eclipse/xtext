@@ -14,10 +14,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.common.types.TypesPackage;
 
-import org.eclipse.xtext.xbase.XbasePackage;
-
-import org.eclipse.xtext.xbase.impl.XbasePackageImpl;
-
 import org.eclipse.xtext.xpression.XAssignment;
 import org.eclipse.xtext.xpression.XBinaryOperation;
 import org.eclipse.xtext.xpression.XBlockExpression;
@@ -33,8 +29,6 @@ import org.eclipse.xtext.xpression.XInstanceOfExpression;
 import org.eclipse.xtext.xpression.XIntLiteral;
 import org.eclipse.xtext.xpression.XMemberFeatureCall;
 import org.eclipse.xtext.xpression.XNullLiteral;
-import org.eclipse.xtext.xpression.XRichString;
-import org.eclipse.xtext.xpression.XRichStringLiteral;
 import org.eclipse.xtext.xpression.XStringLiteral;
 import org.eclipse.xtext.xpression.XSwitchExpression;
 import org.eclipse.xtext.xpression.XTypeLiteral;
@@ -152,20 +146,6 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass xRichStringEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass xRichStringLiteralEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass xClosureEClass = null;
 
 	/**
@@ -269,17 +249,14 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 		TypesPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		XbasePackageImpl theXbasePackage = (XbasePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) instanceof XbasePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) : XbasePackage.eINSTANCE);
 		XtypePackageImpl theXtypePackage = (XtypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI) instanceof XtypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI) : XtypePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theXpressionPackage.createPackageContents();
-		theXbasePackage.createPackageContents();
 		theXtypePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theXpressionPackage.initializePackageContents();
-		theXbasePackage.initializePackageContents();
 		theXtypePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
@@ -556,16 +533,6 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXConstructorCall_Initializer()
-	{
-		return (EReference)xConstructorCallEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getXBooleanLiteral()
 	{
 		return xBooleanLiteralEClass;
@@ -629,46 +596,6 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 	public EAttribute getXStringLiteral_Value()
 	{
 		return (EAttribute)xStringLiteralEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getXRichString()
-	{
-		return xRichStringEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getXRichString_Expressions()
-	{
-		return (EReference)xRichStringEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getXRichStringLiteral()
-	{
-		return xRichStringLiteralEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getXRichStringLiteral_Value()
-	{
-		return (EAttribute)xRichStringLiteralEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -925,7 +852,6 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 		xConstructorCallEClass = createEClass(XCONSTRUCTOR_CALL);
 		createEReference(xConstructorCallEClass, XCONSTRUCTOR_CALL__TYPE);
 		createEReference(xConstructorCallEClass, XCONSTRUCTOR_CALL__PARAMS);
-		createEReference(xConstructorCallEClass, XCONSTRUCTOR_CALL__INITIALIZER);
 
 		xBooleanLiteralEClass = createEClass(XBOOLEAN_LITERAL);
 		createEAttribute(xBooleanLiteralEClass, XBOOLEAN_LITERAL__IS_TRUE);
@@ -937,12 +863,6 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 
 		xStringLiteralEClass = createEClass(XSTRING_LITERAL);
 		createEAttribute(xStringLiteralEClass, XSTRING_LITERAL__VALUE);
-
-		xRichStringEClass = createEClass(XRICH_STRING);
-		createEReference(xRichStringEClass, XRICH_STRING__EXPRESSIONS);
-
-		xRichStringLiteralEClass = createEClass(XRICH_STRING_LITERAL);
-		createEAttribute(xRichStringLiteralEClass, XRICH_STRING_LITERAL__VALUE);
 
 		xClosureEClass = createEClass(XCLOSURE);
 		createEReference(xClosureEClass, XCLOSURE__PARAMS);
@@ -1015,7 +935,6 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 		xNullLiteralEClass.getESuperTypes().add(this.getXExpression());
 		xIntLiteralEClass.getESuperTypes().add(this.getXExpression());
 		xStringLiteralEClass.getESuperTypes().add(this.getXExpression());
-		xRichStringEClass.getESuperTypes().add(this.getXExpression());
 		xClosureEClass.getESuperTypes().add(this.getXExpression());
 		xCastedExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xAssignmentEClass.getESuperTypes().add(this.getXExpression());
@@ -1062,7 +981,6 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 		initEClass(xConstructorCallEClass, XConstructorCall.class, "XConstructorCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXConstructorCall_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, XConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXConstructorCall_Params(), this.getXExpression(), null, "params", null, 0, -1, XConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXConstructorCall_Initializer(), this.getXBlockExpression(), null, "initializer", null, 0, 1, XConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xBooleanLiteralEClass, XBooleanLiteral.class, "XBooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXBooleanLiteral_IsTrue(), ecorePackage.getEBoolean(), "isTrue", null, 0, 1, XBooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1074,12 +992,6 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 
 		initEClass(xStringLiteralEClass, XStringLiteral.class, "XStringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, XStringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(xRichStringEClass, XRichString.class, "XRichString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getXRichString_Expressions(), ecorePackage.getEObject(), null, "expressions", null, 0, -1, XRichString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(xRichStringLiteralEClass, XRichStringLiteral.class, "XRichStringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getXRichStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, XRichStringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xClosureEClass, XClosure.class, "XClosure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXClosure_Params(), theTypesPackage.getJvmFormalParameter(), null, "params", null, 0, -1, XClosure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

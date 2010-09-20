@@ -19,5 +19,11 @@ Require-Bundle: org.eclipse.xtext.xbase;bundle-version="1.0.1";visibility:=reexp
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.xbase.ui.internal.XtypeActivator
 Import-Package: org.apache.log4j
-Export-Package: org.eclipse.xtext.xbase.ui.contentassist.antlr
+Export-Package: org.eclipse.xtext.xbase.ui,
+ org.eclipse.xtext.xbase.ui.contentassist,
+ org.eclipse.xtext.xbase.ui.contentassist.antlr,
+ org.eclipse.xtext.xbase.ui.labeling,
+ org.eclipse.xtext.xbase.ui.outline,
+ org.eclipse.xtext.xbase.ui.quickfix,
+ org.eclipse.xtext.xbase.ui.syntaxcoloring
 Bundle-Localization: plugin

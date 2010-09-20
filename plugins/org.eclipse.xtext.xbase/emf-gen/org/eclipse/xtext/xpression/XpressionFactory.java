@@ -134,24 +134,6 @@ public interface XpressionFactory extends EFactory
 	XStringLiteral createXStringLiteral();
 
 	/**
-	 * Returns a new object of class '<em>XRich String</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>XRich String</em>'.
-	 * @generated
-	 */
-	XRichString createXRichString();
-
-	/**
-	 * Returns a new object of class '<em>XRich String Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>XRich String Literal</em>'.
-	 * @generated
-	 */
-	XRichStringLiteral createXRichStringLiteral();
-
-	/**
 	 * Returns a new object of class '<em>XClosure</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

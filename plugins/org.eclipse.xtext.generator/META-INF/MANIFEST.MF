@@ -53,7 +53,8 @@ Require-Bundle: org.eclipse.xtext.util;bundle-version="1.0.1";resolution:=option
  com.ibm.icu,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.antlr.runtime
+ org.antlr.runtime,
+ org.eclipse.emf.mwe2.lib;bundle-version="1.0.1";resolution:=optional
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Import-Package: org.apache.log4j;version="1.2.15"

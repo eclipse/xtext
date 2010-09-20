@@ -27,7 +27,6 @@ import org.eclipse.xtext.xpression.XFeatureCall;
 import org.eclipse.xtext.xpression.XInstanceOfExpression;
 import org.eclipse.xtext.xpression.XIntLiteral;
 import org.eclipse.xtext.xpression.XNullLiteral;
-import org.eclipse.xtext.xpression.XRichString;
 import org.eclipse.xtext.xpression.XStringLiteral;
 import org.eclipse.xtext.xpression.XSwitchExpression;
 import org.eclipse.xtext.xpression.XTypeLiteral;
@@ -129,12 +128,6 @@ public class ExpressionsTypeResolver {
 		return typesService.getTypeForName(STRING_TYPE_NAME, object);
 	}
 
-	
-	protected JvmTypeReference _case(XRichString object, ExpectedTypesProvider expected) {
-		return typesService.getTypeForName(STRING_TYPE_NAME, object);
-	}
-
-	
 	protected JvmTypeReference _case(XClosure object, ExpectedTypesProvider expected) {
 		JvmTypeReference returnType = doSwitch(object.getExpression(), expected);
 		List<JvmTypeReference> parameterTypes = Lists.newArrayList();

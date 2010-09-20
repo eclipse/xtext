@@ -79,8 +79,6 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 			case XpressionPackage.XNULL_LITERAL: return createXNullLiteral();
 			case XpressionPackage.XINT_LITERAL: return createXIntLiteral();
 			case XpressionPackage.XSTRING_LITERAL: return createXStringLiteral();
-			case XpressionPackage.XRICH_STRING: return createXRichString();
-			case XpressionPackage.XRICH_STRING_LITERAL: return createXRichStringLiteral();
 			case XpressionPackage.XCLOSURE: return createXClosure();
 			case XpressionPackage.XCASTED_EXPRESSION: return createXCastedExpression();
 			case XpressionPackage.XASSIGNMENT: return createXAssignment();
@@ -224,28 +222,6 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	{
 		XStringLiteralImpl xStringLiteral = new XStringLiteralImpl();
 		return xStringLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public XRichString createXRichString()
-	{
-		XRichStringImpl xRichString = new XRichStringImpl();
-		return xRichString;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public XRichStringLiteral createXRichStringLiteral()
-	{
-		XRichStringLiteralImpl xRichStringLiteral = new XRichStringLiteralImpl();
-		return xRichStringLiteral;
 	}
 
 	/**
