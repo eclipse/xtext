@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
+import org.antlr.runtime.BaseRecognizer;
 import org.eclipse.xtext.UnorderedGroup;
 
 import com.google.inject.ImplementedBy;
@@ -17,6 +18,11 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(IUnorderedGroupHelper.Null.class)
 public interface IUnorderedGroupHelper {
 
+	/**
+	 * Initializes this helper with the given recognizer.
+	 */
+	void initializeWith(BaseRecognizer recognizer);
+	
 	/**
 	 * Invoke when the group is entered in the parser. Access to any other querying 
 	 * method is answered optimistically.
@@ -63,6 +69,10 @@ public interface IUnorderedGroupHelper {
 
 	public static class Null implements IUnorderedGroupHelper, UnorderedGroupState {
 
+		public void initializeWith(BaseRecognizer recognizer) {
+			// ignore
+		}
+		
 		public void enter(UnorderedGroup group) {
 			throw new UnsupportedOperationException();
 		}
