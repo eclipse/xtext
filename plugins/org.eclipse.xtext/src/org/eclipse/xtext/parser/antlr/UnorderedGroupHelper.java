@@ -10,8 +10,10 @@ package org.eclipse.xtext.parser.antlr;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 import java.util.Stack;
 
+import org.antlr.runtime.BaseRecognizer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
@@ -61,23 +63,54 @@ public class UnorderedGroupHelper implements IUnorderedGroupHelper {
 	}
 	
 	private Map<UnorderedGroup, State> groupToState;
+	private SortedMap<Integer, UnorderedGroupState> backtrackingSnapShot;
+	private BaseRecognizer recognizer;
+	private UnorderedGroup[] allGroups;
 	
 	@Inject
 	public UnorderedGroupHelper(Collector collector) {
 		groupToState = Maps.newHashMap();
+		backtrackingSnapShot = Maps.newTreeMap();
 		for(UnorderedGroup group: collector.getGroups())
 			configure(group);
+		allGroups = collector.getGroups().toArray(new UnorderedGroup[collector.getGroups().size()]);
 	}
 	
-	private void configure(UnorderedGroup group) {
+	public void initializeWith(BaseRecognizer recognizer) {
+		this.recognizer = recognizer;
+	}
+	
+	protected void configure(UnorderedGroup group) {
 		groupToState.put(group, new State(group));
 	}
 	
-	private State get(UnorderedGroup group) {
+	protected State get(UnorderedGroup group) {
+		snapShotForBacktracking();
 		State result = groupToState.get(group);
 		if (result == null)
 			throw new IllegalArgumentException("Unexpected group: " + group);
 		return result;
+	}
+
+	protected void snapShotForBacktracking() {
+		int backtrackingLevel = recognizer.getBacktrackingLevel();
+		// recognizer is currently in backtracking mode or was previously in backtracking mode
+		if (backtrackingLevel != 0 || !backtrackingSnapShot.isEmpty()) {
+			// backtracking stack was reduced
+			if (backtrackingLevel == 0 || (!backtrackingSnapShot.isEmpty() && backtrackingLevel < backtrackingSnapShot.firstKey())) {
+				backtrackingSnapShot.values().iterator().next().restore();
+				backtrackingSnapShot.clear();
+				// still backtracking
+				if (backtrackingLevel > 0) {
+					UnorderedGroupState state = new UnorderedGroupStateImpl(allGroups);
+					backtrackingSnapShot.put(backtrackingLevel, state);
+				}
+			} else if (backtrackingSnapShot.isEmpty() || backtrackingLevel > backtrackingSnapShot.lastKey()) {
+				// backtracking stack was increased
+				UnorderedGroupState state = new UnorderedGroupStateImpl(allGroups);
+				backtrackingSnapShot.put(backtrackingLevel, state);
+			}
+		}
 	}
 	
 	public void enter(UnorderedGroup group) {
@@ -126,7 +159,7 @@ public class UnorderedGroupHelper implements IUnorderedGroupHelper {
 		
 	}
 	
-	private static class State {
+	protected static class State {
 
 		private Stack<Frame> frames;
 		private int alternatives;

@@ -215,7 +215,9 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);
 		tokens.setInitialHiddenTokens(getInitialHiddenTokens());
 		parser.setTokenStream(tokens);
-		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
+		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
+		parser.setUnorderedGroupHelper(helper);
+		helper.initializeWith(parser);
 		tokens.setListener(parser);
 		return getFollowElements(parser);
 	}

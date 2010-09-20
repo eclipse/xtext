@@ -46,7 +46,9 @@ public class «helper.getParserClassName(this).toSimpleName()» extends org.eclips
 		«helper.getInternalParserClassName(this)» parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
-		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
+		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
+		parser.setUnorderedGroupHelper(helper);
+		helper.initializeWith(parser);
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

@@ -46,7 +46,9 @@ public class «getParserClassName().toSimpleName()» extends org.eclipse.xtext.par
 		«getInternalParserClassName()» parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
-		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
+		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
+		parser.setUnorderedGroupHelper(helper);
+		helper.initializeWith(parser);
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);
