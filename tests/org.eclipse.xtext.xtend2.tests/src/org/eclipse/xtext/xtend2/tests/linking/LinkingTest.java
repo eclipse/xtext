@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtend2.tests.linking;
 
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xpression.XClosure;
@@ -29,17 +30,17 @@ public class LinkingTest extends AbstractXtend2Test {
 	public void testTypeReference_withImport() throws Exception {
 		XtendFunction func = (XtendFunction) clazz("import java.lang.* class X { (String)=>Boolean foo() : |true;}").getMembers().get(0);
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
-		JvmTypeReference returnType = type.getReturnType();
-		assertEquals("java.lang.Boolean", returnType.getType().getCanonicalName());
-		JvmTypeReference paramType = type.getParamTypes().get(0);
-		assertEquals("java.lang.String", paramType.getType().getCanonicalName());
+		JvmReferenceTypeArgument returnType = (JvmReferenceTypeArgument) type.getReturnType();
+		assertEquals("java.lang.Boolean", returnType.getTypeReference().getType().getCanonicalName());
+		JvmReferenceTypeArgument paramType = (JvmReferenceTypeArgument) type.getParamTypes().get(0);
+		assertEquals("java.lang.String", paramType.getTypeReference().getType().getCanonicalName());
 	}
 	
 	public void testTypeReference_0() throws Exception {
 		XtendFunction func = function("=>java.lang.Boolean foo() : |true;");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
-		JvmTypeReference returnType = type.getReturnType();
-		assertEquals("java.lang.Boolean", returnType.getType().getCanonicalName());
+		JvmReferenceTypeArgument returnType = (JvmReferenceTypeArgument) type.getReturnType();
+		assertEquals("java.lang.Boolean", returnType.getTypeReference().getType().getCanonicalName());
 	}
 	
 	public void testTypeParameterReference() throws Exception {

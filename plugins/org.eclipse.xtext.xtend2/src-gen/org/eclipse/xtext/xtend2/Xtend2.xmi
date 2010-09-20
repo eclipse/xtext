@@ -891,19 +891,19 @@
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="("/>
           <elements xsi:type="xtext:Assignment" feature="paramTypes" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.3"/>
           </elements>
           <elements xsi:type="xtext:Group" cardinality="*">
             <elements xsi:type="xtext:Keyword" value=","/>
             <elements xsi:type="xtext:Assignment" feature="paramTypes" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.3"/>
             </elements>
           </elements>
           <elements xsi:type="xtext:Keyword" value=")"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="=>"/>
         <elements xsi:type="xtext:Assignment" feature="returnType" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.3"/>
         </elements>
       </alternatives>
     </rules>
