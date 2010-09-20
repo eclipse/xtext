@@ -7,19 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.unorderedGroups;
 
-import org.eclipse.xtext.junit.AbstractXtextTests;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractBacktrackingParserTest extends AbstractXtextTests {
-
-	public void testNoException_01() throws Exception {
-		getModel("unit { provides : unit { name : FooBar;	}; }");
-	}
+public class BacktrackingBug325745ParserTest extends AbstractBacktrackingBug325745ParserTest {
 	
-	public void testException_01() throws Exception {
-		getModelAndExpect("unit { provides : unit { name : FooBar	}; }", 
-				/* usually expect 1 error (missing ;), but got a second due to backtracking */ 2);
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		with(SimpleBacktrackingBug325745TestLanguageStandaloneSetup.class);
 	}
+
 }

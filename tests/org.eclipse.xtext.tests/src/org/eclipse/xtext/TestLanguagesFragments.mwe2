@@ -16,7 +16,7 @@ var generateDotDiagram = false
 var graphvizCommand = ""
 
 CompositeGeneratorFragment {
-	fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+	fragment = org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment {
 		options = auto-inject {}
 	}
 	fragment = resourceFactory.ResourceFactoryFragment { 
