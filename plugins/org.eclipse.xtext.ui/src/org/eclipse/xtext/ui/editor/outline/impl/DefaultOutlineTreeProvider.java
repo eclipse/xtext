@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -26,6 +27,8 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.TextRegion;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider {
@@ -47,6 +50,9 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 
 	private PolymorphicDispatcher<Image> imageDispatcher = PolymorphicDispatcher.createForSingleTarget("image", 1, 1,
 			this);
+
+	private PolymorphicDispatcher<Boolean> isLeafDispatcher = PolymorphicDispatcher.createForSingleTarget("isLeaf", 1,
+			1, this);
 
 	public IOutlineNode createRoot(IXtextDocument document) {
 		DocumentRootNode documentNode = new DocumentRootNode(labelProvider.getImage(document),
@@ -82,36 +88,31 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		}
 	}
 
-	/**
-	 * Default for createChildrenDispatcher
-	 */
-	protected void doCreateChildren(Object parent, Object element) {
-		// do nothing
-	}
-
 	protected void createNode(IOutlineNode parent, EObject modelElement) {
 		createNodeDispatcher.invoke(parent, modelElement);
 	}
 
 	protected void doCreateNode(IOutlineNode parentNode, EObject modelElement) {
-		Object text = textDispatcher.invoke(modelElement);
-		if (text != null) {
-			Image image = imageDispatcher.invoke(modelElement);
-			EObjectNode eObjectNode = new EObjectNode(modelElement, parentNode, image, text, modelElement.eContents()
-					.isEmpty());
-			CompositeNode parserNode = NodeUtil.getNode(modelElement);
-			if (parserNode != null)
-				eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
-			eObjectNode.setShortTextRegion(locationInFileProvider.getLocation(modelElement));
-		}
+		createEObjectNode(parentNode, modelElement);
 	}
 
-	/**
-	 * Default for createNodeDispatcher
-	 */
-	protected void doCreateNode(Object object0, EObject object1) {
-		throw new IllegalArgumentException("Could not find method createNode(" + nullSafeClassName(object0) + ","
-				+ nullSafeClassName(object1));
+	protected void createEObjectNode(IOutlineNode parentNode, EObject modelElement) {
+		Object text = textDispatcher.invoke(modelElement);
+		Image image = imageDispatcher.invoke(modelElement);
+		EObjectNode eObjectNode = new EObjectNode(modelElement, parentNode, image, text,
+				isLeafDispatcher.invoke(modelElement));
+		CompositeNode parserNode = NodeUtil.getNode(modelElement);
+		if (parserNode != null)
+			eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
+		eObjectNode.setShortTextRegion(locationInFileProvider.getLocation(modelElement));
+	}
+
+	protected boolean isLeaf(final EObject modelElement) {
+		return !Iterables.any(modelElement.eClass().getEAllContainments(), new Predicate<EReference>() {
+			public boolean apply(EReference containmentRef) {
+				return modelElement.eIsSet(containmentRef);
+			}
+		});
 	}
 
 	protected void createEStructuralFeatureNode(IOutlineNode parentNode, EObject owner, EStructuralFeature feature,
@@ -120,15 +121,38 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		EStructuralFeatureNode eStructuralFeatureNode = new EStructuralFeatureNode(owner, feature, parentNode, image,
 				text, !isFeatureSet);
 		if (isFeatureSet) {
+			// TODO: use full region
 			ITextRegion region = locationInFileProvider.getLocation(owner, feature, 0);
 			if (feature.isMany()) {
 				int numValues = ((Collection<?>) owner.eGet(feature)).size();
-				region.merge(locationInFileProvider.getLocation(owner, feature, numValues - 1));
+				region = region.merge(locationInFileProvider.getLocation(owner, feature, numValues - 1));
 			}
 			eStructuralFeatureNode.setTextRegion(region);
 		}
 	}
 
+	/**
+	 * Default for createChildrenDispatcher
+	 */
+	protected void doCreateChildren(Object parent, Object element) {
+		// do nothing
+	}
+
+	/**
+	 * Default for createNodeDispatcher
+	 */
+	protected void doCreateNode(Object parentObject, EObject modelElement) {
+		throw new IllegalArgumentException("Could not find method createNode(" + nullSafeClassName(parentObject) + ","
+				+ nullSafeClassName(modelElement));
+	}
+	
+	/**
+	 * Default for isLeafDispatcher
+	 */
+	protected boolean isLeaf(Object modelElement) {
+		return true;
+	}
+	
 	/**
 	 * Default for textDispatcher
 	 */

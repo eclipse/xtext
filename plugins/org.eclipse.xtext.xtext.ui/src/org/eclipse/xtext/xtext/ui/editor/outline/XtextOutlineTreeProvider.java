@@ -91,5 +91,9 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 			createNode(parentNode, rule);
 		}
 	}
+	
+	protected boolean isLeaf(AbstractRule rule) {
+		return true;
+	}
 
 }
