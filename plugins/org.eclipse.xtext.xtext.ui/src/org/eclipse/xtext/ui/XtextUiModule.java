@@ -13,6 +13,7 @@ import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.xtext.ui.editor.autoedit.XtextAutoEditStrategy;
 import org.eclipse.xtext.xtext.ui.editor.folding.XtextGrammarFoldingRegionProvider;
 import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
 import org.eclipse.xtext.xtext.ui.editor.outline.FilterReturnTypesAction;
+import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineNodeComparer;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlinePage;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineTreeProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
@@ -93,6 +95,10 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 
 	public Class<? extends IOutlineTreeStructureProvider> bindIOutlineTreeStructureProvider() {
 		return XtextOutlineTreeProvider.class;
+	}
+	
+	public Class<? extends IOutlineNodeComparer> bindIOutlineNodeComparer() {
+		return XtextOutlineNodeComparer.class;
 	}
 
 	public void configureFilterReturnTypesActionPropertyIntializer(Binder binder) {

@@ -19,9 +19,16 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
+
 public class OutlineRefreshJob extends Job {
 	
 	private OutlinePage outlinePage;
+	
+	@Inject
+	private IOutlineNodeComparer nodeComparer;
 	
 	public OutlineRefreshJob() {
 		super("Refreshing outline");
@@ -60,13 +67,21 @@ public class OutlineRefreshJob extends Job {
 	protected void restoreChildrenSelectionAndExpansion(IOutlineNode parent, Resource resource, OutlineTreeState formerState, OutlineTreeState newState) {
 		List<IOutlineNode> children = parent.getChildren();
 		for(IOutlineNode child: children) {
-			if(formerState.getExpandedNodes().contains(child)) {
+			if(containsUsingComparer(formerState.getExpandedNodes(), child)) {
 				restoreChildrenSelectionAndExpansion(child, resource, formerState, newState);
 				newState.addExpandedNode(child);
 			}
-			if(formerState.getSelectedNodes().contains(child)) {
+			if(containsUsingComparer(formerState.getSelectedNodes(), child)) {
 				newState.addSelectedNode(child);
 			}
 		}
+	}
+	
+	protected boolean containsUsingComparer(Iterable<IOutlineNode> list, final IOutlineNode node) {
+		return Iterables.any(list, new Predicate<IOutlineNode>() {
+			public boolean apply(IOutlineNode nodeFromList) {
+				return nodeComparer.equals(node, nodeFromList);
+			}
+		});
 	}
 }

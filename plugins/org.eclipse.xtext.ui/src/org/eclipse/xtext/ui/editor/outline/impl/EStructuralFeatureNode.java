@@ -41,14 +41,4 @@ public class EStructuralFeatureNode extends AbstractOutlineNode {
 		return feature;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj) && feature.equals(((EStructuralFeatureNode) obj).getEStructuralFeature());
-	}
-
-	@Override
-	public int hashCode() {
-		return super.hashCode() + 37 * feature.hashCode();
-	}
-
 }

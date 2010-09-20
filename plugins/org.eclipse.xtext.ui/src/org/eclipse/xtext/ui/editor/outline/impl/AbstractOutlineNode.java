@@ -73,13 +73,17 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		if (isLeaf)
 			return Collections.emptyList();
 		if (children == null) {
-			children = Lists.newArrayList();
 			readOnly(new IUnitOfWork.Void<EObject>() {
 				@Override
 				public void process(EObject eObject) throws Exception {
 					getTreeProvider().createChildren(AbstractOutlineNode.this, eObject);
 				}
 			});
+			if(children == null) {
+				// tree provider did not create any child
+				isLeaf = true;
+				return Collections.emptyList();
+			}
 		}
 		return Collections.unmodifiableList(children);
 	}
@@ -89,7 +93,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 	}
 
 	public boolean hasChildren() {
-		return !isLeaf || children != null && children.size() > 0;
+		return !isLeaf;
 	}
 
 	public Object getText() {
@@ -164,24 +168,6 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 
 	public <T> T modify(IUnitOfWork<T, EObject> work) {
 		throw new UnsupportedOperationException("Elements cannot be modified in content outline");
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return obj != null && obj.getClass().equals(getClass())
-				&& equalsNullSafe(parent, ((IOutlineNode) obj).getParent())
-				&& equalsNullSafe(text, ((IOutlineNode) obj).getText())
-				&& equalsNullSafe(image, ((IOutlineNode) obj).getImage());
-	}
-
-	@Override
-	public int hashCode() {
-		return getClass().hashCode() + 11 * hashCodeNullSafe(parent) + 13 * hashCodeNullSafe(text) + 17
-				* hashCodeNullSafe(image);
-	}
-
-	protected boolean equalsNullSafe(Object o0, Object o1) {
-		return (o0 == null) ? o1 == null : o0.equals(o1);
 	}
 
 	protected int hashCodeNullSafe(Object o) {

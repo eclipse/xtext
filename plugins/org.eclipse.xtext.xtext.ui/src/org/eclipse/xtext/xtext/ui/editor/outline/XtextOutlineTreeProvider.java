@@ -29,6 +29,10 @@ import com.google.inject.Inject;
  */
 public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
+	private static final String ALIAS_TYPE_SEPARATOR = "::";
+
+	public static final String NAME_TYPE_SEPARATOR = " - ";
+
 	@Inject
 	private SemanticHighlightingConfiguration semanticHighlightingConfiguration;
 
@@ -51,12 +55,12 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		else
 			ruleText = new StyledString(rule.getName());
 		if (isShowReturnTypes()) {
-			StringBuilder typeName = new StringBuilder(" - ");
+			StringBuilder typeName = new StringBuilder(NAME_TYPE_SEPARATOR);
 			if (rule.getType() != null) {
 				String alias = rule.getType().getMetamodel().getAlias();
 				if (alias != null) {
 					typeName.append(alias);
-					typeName.append("::");
+					typeName.append(ALIAS_TYPE_SEPARATOR);
 				}
 				typeName.append(rule.getType().getClassifier().getName());
 			} else {

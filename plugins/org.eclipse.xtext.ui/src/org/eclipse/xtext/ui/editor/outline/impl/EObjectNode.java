@@ -56,18 +56,6 @@ public class EObjectNode extends AbstractOutlineNode {
 		return super.getAdapter(adapterType);
 	}
 
-
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj) 
-				&& eClass.equals(((EObjectNode) obj).getEClass());
-	}
-
-	@Override
-	public int hashCode() {
-		return super.hashCode() + 37 * eClass.hashCode();
-	}
-
 	public EObject getEObject(Resource resource) {
 		return resource.getEObject(eObjectURI.fragment());
 	}
