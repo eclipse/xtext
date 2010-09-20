@@ -41,7 +41,7 @@ public class OutlineWithEditorLinker {
 
 	protected class TreeListener implements ISelectionChangedListener, IDoubleClickListener {
 		public void selectionChanged(SelectionChangedEvent event) {
-			if (isLinkingEnabled && treeViewer.getControl().isFocusControl())
+			if (isLinkingEnabled && !textViewer.getTextWidget().isFocusControl())
 				selectInTextEditor(event.getSelection());
 		}
 
@@ -52,7 +52,7 @@ public class OutlineWithEditorLinker {
 
 	protected class TextListener implements ISelectionChangedListener {
 		public void selectionChanged(SelectionChangedEvent event) {
-			if (isLinkingEnabled)
+			if (isLinkingEnabled && !treeViewer.getControl().isFocusControl())
 				selectInTreeView(event.getSelection());
 		}
 	}
@@ -60,7 +60,7 @@ public class OutlineWithEditorLinker {
 	public OutlineWithEditorLinker() {
 	}
 
-	public void activate(OutlinePage outlinePage)  {
+	public void activate(OutlinePage outlinePage) {
 		treeViewer = outlinePage.getTreeViewer();
 		treeListener = new TreeListener();
 		treeViewer.addPostSelectionChangedListener(treeListener);
@@ -95,7 +95,7 @@ public class OutlineWithEditorLinker {
 			selectInTextEditor(selection);
 		}
 	}
-	
+
 	protected void selectInTextEditor(ISelection selection) {
 		IOutlineNode selectedOutlineNode = getSelectedOutlineNode(selection);
 		if (selectedOutlineNode != null) {
@@ -130,8 +130,8 @@ public class OutlineWithEditorLinker {
 			for (IOutlineNode child : input.getChildren()) {
 				IOutlineNode candidate = findBestNode(child, selectedTextRegion);
 				if (candidate != null
-						&& (currentBestNode.getFullTextRegion() == null || currentBestNode.getFullTextRegion().getLength() > candidate
-								.getFullTextRegion().getLength())) {
+						&& (currentBestNode.getFullTextRegion() == null || currentBestNode.getFullTextRegion()
+								.getLength() > candidate.getFullTextRegion().getLength())) {
 					currentBestNode = candidate;
 				}
 			}
