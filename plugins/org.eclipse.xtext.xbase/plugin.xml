@@ -20,14 +20,4 @@
 	
   </extension>
 
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/xtext/Xbase" 
-       class = "org.eclipse.xtext.xbase.XbasePackage"
-       genModel = "model/Xbase.genmodel" /> 
-	
-  </extension>
-
-
 </plugin>

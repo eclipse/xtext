@@ -25,7 +25,7 @@ var graphvizCommand = ""
 
 CompositeGeneratorFragment {
 	fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
-		options = auto-inject {} 
+		options = auto-inject {}
 	}
 	fragment = resourceFactory.ResourceFactoryFragment { 
 		fileExtensions = file.extensions

@@ -23,12 +23,21 @@ Workflow {
 	}
 
 	component = DirectoryCleaner {
-		directory="${runtimeProject}/src-gen"
+		directory="${runtimeProject}/emf-gen"
 	}
+	
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
+		genModel = "platform:/resource/${projectName}/model/Xbase.genmodel"
+		srcPath ="platform:/resource/${projectName}/src"
+	}
+
 	component = DirectoryCleaner {
 		directory="${uiProject}/src-gen"
 	}
-
+	component = DirectoryCleaner {
+		directory="${runtimeProject}/src-gen"
+	}
+	
 	component = Generator {
 		pathRtProject = runtimeProject
 		pathUiProject = uiProject
@@ -44,28 +53,16 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/xbase/Xpression.xtext" 	
-			fileExtensions = "___xtension"
-			fragment = grammarAccess.GrammarAccessFragment {}
-			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
-			fragment = XtextAntlrGeneratorFragment {
-				options = auto-inject {
-				}
-			}
-			fragment = contentAssist.JavaBasedContentAssistFragment {}
-		}
-		language = {
-			uri = "classpath:/org/eclipse/xtext/xbase/Xbase.xtext" 
-			fileExtensions = "xbase"
+			fileExtensions = "xpression"
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
 			fragment = XtextAntlrGeneratorFragment {
-				options = auto-inject {
-				}
+				options = auto-inject {}
 			}
 			fragment = validation.JavaValidatorFragment {}
-            fragment = types.TypesGeneratorFragment {}
 			fragment = scoping.ImportNamespacesScopingFragment {}
+			fragment = types.TypesGeneratorFragment {}
 			fragment = builder.BuilderIntegrationFragment {}
 			fragment = formatting.FormatterFragment {}
 			fragment = quickfix.QuickfixProviderFragment {}
@@ -73,8 +70,7 @@ Workflow {
 			fragment = outline.OutlineTreeProviderFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = XtextAntlrUiGeneratorFragment {
-				options = auto-inject {
-				}
+				options = auto-inject {}
 			}
 		}
 	}

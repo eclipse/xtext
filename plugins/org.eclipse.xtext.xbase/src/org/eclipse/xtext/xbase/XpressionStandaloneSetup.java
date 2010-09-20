@@ -1,6 +1,7 @@
 
 package org.eclipse.xtext.xbase;
 
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.xpression.XpressionPackage;
 
 import com.google.inject.Injector;
@@ -17,7 +18,8 @@ public class XpressionStandaloneSetup extends XpressionStandaloneSetupGenerated{
 	
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		XpressionPackage.eINSTANCE.getXAssignment();
+		new XtypeStandaloneSetup().createInjectorAndDoEMFRegistration();
+		EPackage.Registry.INSTANCE.put(XpressionPackage.eINSTANCE.getNsURI(),XpressionPackage.eINSTANCE);
 		return super.createInjectorAndDoEMFRegistration();
 	}
 }

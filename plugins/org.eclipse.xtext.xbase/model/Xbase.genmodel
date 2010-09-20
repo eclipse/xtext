@@ -6,27 +6,6 @@
     modelName="Xbase" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xbase.edit"
     editorPluginID="org.eclipse.xtext.xbase.edit" usedGenPackages="../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
-  <genPackages prefix="Xbase" basePackage="org.eclipse.xtext" disposableProviderFactory="true"
-      ecorePackage="Xbase.ecore#/">
-    <genClasses ecoreClass="Xbase.ecore#//File">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//File/imports"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//File/functions"/>
-    </genClasses>
-    <genClasses ecoreClass="Xbase.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//Import/importedNamespace"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//Import/wildcard"/>
-    </genClasses>
-    <genClasses ecoreClass="Xbase.ecore#//Function">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//Function/private"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//Function/final"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//Function/typeParams"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//Function/returnType"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//Function/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//Function/declaredParams"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//Function/guard"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//Function/expression"/>
-    </genClasses>
-  </genPackages>
   <genPackages prefix="Xtype" basePackage="org.eclipse.xtext" ecorePackage="Xtype.ecore#/">
     <genClasses ecoreClass="Xtype.ecore#//TypeRef"/>
     <genClasses ecoreClass="Xtype.ecore#//ClosureTypeRef">

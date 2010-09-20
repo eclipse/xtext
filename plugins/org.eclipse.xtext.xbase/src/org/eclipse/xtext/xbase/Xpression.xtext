@@ -12,15 +12,10 @@ import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecor
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 XExpression returns XExpression:
-	XAssignment |
-	XClosure |
-	XRichString |
-	XIfExpression |
-	XWhileExpression |
-	{XCastedExpression} '(' type=JvmTypeReference ')' target=XExpression;
+	XAssignment ;
 
 XAssignment returns XExpression:
-	XOrExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAssign] params+=XOrExpression)?;
+	XOrExpression ({XBinaryOperation.params+=current} feature=[ecore::EObject|OpAssign] params+=XAssignment)?;
 
 OpAssign:
 	'=' | '+=';
@@ -85,6 +80,7 @@ XFeatureCall returns XExpression:
 	params+=XExpression)*)? ')')?)*;
 
 XPrimaryExpression returns XExpression:
+	XClosure |
 	XBooleanLiteral |
 	XIntLiteral |
 	XNullLiteral |
@@ -94,10 +90,16 @@ XPrimaryExpression returns XExpression:
 	XBlockExpression |
 	XSwitchExpression |
 	XSimpleFeatureCall |
+	XIfExpression |
+	XWhileExpression |
+	XCastedExpression|
 	XParenthesizedExpression;
 
 XClosure returns XExpression:
 	{XClosure} (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? '|' expression=XExpression;
+
+XCastedExpression :
+	'(' type=JvmTypeReference ')' target=XExpression;
 
 XParenthesizedExpression returns XExpression:
 	'(' XExpression ')';
@@ -117,19 +119,19 @@ XCasePart:
 	'case' case=XExpression ':' then=XExpression;
 
 XWhileExpression:
-	'while' predicate=XParenthesizedExpression
+	'while' '(' predicate=XExpression ')'
 	body=XExpression;
 
 XBlockExpression:
 	'{'
-	(expressions+=XExpressionInsideBlock ';')+
+		(expressions+=XExpressionInsideBlock ';')+
 	'}';
 
 XExpressionInsideBlock returns XExpression:
 	XVariableDeclaration | XExpression;
 
 XVariableDeclaration:
-	'def' (type=JvmTypeReference)? name=ID '=' right=XExpression;
+	('var'|'val') (type=JvmTypeReference)? name=ID '=' right=XExpression;
 
 JvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=JvmTypeReference)? name=ID;
@@ -138,8 +140,7 @@ XSimpleFeatureCall returns XFeatureCall:
 	feature=[ecore::EObject] ('(' (params+=XExpression (',' params+=XExpression)*)? ')')?;
 
 XConstructorCall:
-	'new' type=JvmTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')'
-	initializer=XBlockExpression?;
+	'new' type=JvmTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')';
 
 XBooleanLiteral:
 	{XBooleanLiteral} 'false' | isTrue?='true';
@@ -156,23 +157,6 @@ XStringLiteral:
 XTypeLiteral:
 	type=[types::JvmType|QualifiedName] '.' 'class';
 
-XRichString:
-	expressions+=XRichStringLiteral
-	(expressions+=XExpressionInRichString
-	expressions+=XRichStringLiteral)*;
-
-XExpressionInRichString returns XExpression:
-	XAssignment
-	| XClosure
-	| XIfExpression
-	| XWhileExpression
-	| {XCastedExpression} '(' type=JvmTypeReference ')' target=XExpression;
-
-XRichStringLiteral:
-	value=RICH_STRING;
-
-terminal RICH_STRING:
-	'»' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '«' | '\\') | !('\\' | '«'))* '«';
 
 	
 
