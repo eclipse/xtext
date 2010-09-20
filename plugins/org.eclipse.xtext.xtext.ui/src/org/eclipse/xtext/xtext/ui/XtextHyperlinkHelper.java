@@ -48,7 +48,7 @@ public class XtextHyperlinkHelper extends HyperlinkHelper {
 		super.createHyperlinksByOffset(resource, offset, acceptor);
 		EObject objectAtOffset = eObjectAtOffsetHelper.resolveElementAt(resource, offset);
 		if (objectAtOffset instanceof AbstractRule) {
-			ITextRegion nameLocation = locationInFileProvider.getLocation(objectAtOffset, XtextPackage.Literals.ABSTRACT_RULE__NAME, 0);
+			ITextRegion nameLocation = locationInFileProvider.getSignificantTextRegion(objectAtOffset, XtextPackage.Literals.ABSTRACT_RULE__NAME, 0);
 			if (nameLocation != null && nameLocation.contains(offset)) {
 				AbstractRule rule = (AbstractRule) objectAtOffset;
 				createLinksToBase(nameLocation, rule, acceptor);

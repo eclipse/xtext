@@ -15,13 +15,21 @@ import org.eclipse.xtext.util.ITextRegion;
 import com.google.inject.ImplementedBy;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * Delivers {@link ITextRegion}s for model elements or feature settings. The significant text is the part of the text
+ * identifying the element, e.g. its name, as opposed to the full region which is the full text representing the
+ * element.
  * 
+ * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein - Distinguish significant and full region
  */
 @ImplementedBy(DefaultLocationInFileProvider.class)
 public interface ILocationInFileProvider {
 
-	ITextRegion getLocation(EObject obj);
+	ITextRegion getSignificantTextRegion(EObject obj);
 
-	ITextRegion getLocation(EObject owner, EStructuralFeature feature, int indexInList);
+	ITextRegion getSignificantTextRegion(EObject owner, EStructuralFeature feature, int indexInList);
+
+	ITextRegion getFullTextRegion(EObject obj);
+
+	ITextRegion getFullTextRegion(EObject owner, EStructuralFeature feature, int indexInList);
 }

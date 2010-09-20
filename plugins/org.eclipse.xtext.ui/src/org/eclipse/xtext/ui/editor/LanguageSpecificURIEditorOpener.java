@@ -98,8 +98,8 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {
 							EObject object = resource.getEObject(uri.fragment());
-							ITextRegion location = (crossReference != null) ? locationProvider.getLocation(object,
-									crossReference, indexInList) : locationProvider.getLocation(object);
+							ITextRegion location = (crossReference != null) ? locationProvider.getSignificantTextRegion(object,
+									crossReference, indexInList) : locationProvider.getSignificantTextRegion(object);
 							if (select) {
 								xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
 							} else {
