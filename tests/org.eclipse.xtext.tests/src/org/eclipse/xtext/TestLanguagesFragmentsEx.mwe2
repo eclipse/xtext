@@ -24,8 +24,8 @@ var generateDotDiagram = false
 var graphvizCommand = ""
 
 CompositeGeneratorFragment {
-	fragment = de.itemis.xtext.antlr.ex.rt.AntlrGeneratorFragment {
-		options = auto-inject {}
+	fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
+		options = auto-inject {} 
 	}
 	fragment = resourceFactory.ResourceFactoryFragment { 
 		fileExtensions = file.extensions
