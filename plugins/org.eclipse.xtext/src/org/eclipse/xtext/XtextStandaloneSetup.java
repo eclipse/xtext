@@ -1,6 +1,8 @@
 
 package org.eclipse.xtext;
 
+import org.eclipse.emf.ecore.EPackage;
+
 import com.google.inject.Injector;
 
 /**
@@ -15,7 +17,7 @@ public class XtextStandaloneSetup extends XtextStandaloneSetupGenerated{
 	
 	@Override
 	public void register(Injector injector) {
-		XtextPackage.eINSTANCE.getAbstractElement();
+		EPackage.Registry.INSTANCE.put(XtextPackage.eINSTANCE.getNsURI(), XtextPackage.eINSTANCE);
 		super.register(injector);
 	}
 }
