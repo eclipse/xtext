@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl;
+import org.eclipse.xtext.builder.clustering.ClusteringBuilderState;
 import org.eclipse.xtext.builder.impl.DirtyStateAwareResourceDescriptions;
 import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
@@ -44,7 +44,7 @@ public class SharedModule extends AbstractModule {
 	
 	@Override
 	protected void configure() {
-		bind(IBuilderState.class).to(PersistableResourceDescriptionsImpl.class).in(Scopes.SINGLETON);
+		bind(IBuilderState.class).to(ClusteringBuilderState.class).in(Scopes.SINGLETON);
 		bind(IResourceDescriptions.class).to(DirtyStateAwareResourceDescriptions.class).in(Scopes.SINGLETON);
 		bind(IResourceServiceProvider.Registry.class).toInstance(IResourceServiceProvider.Registry.INSTANCE);
 		bind(IResourceSetProvider.class).to(SimpleResourceSetProvider.class);
