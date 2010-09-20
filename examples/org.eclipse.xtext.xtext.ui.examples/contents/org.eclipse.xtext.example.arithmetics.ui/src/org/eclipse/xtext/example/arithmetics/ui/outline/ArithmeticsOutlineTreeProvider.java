@@ -25,8 +25,8 @@ public class ArithmeticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		}
 	}
 
-	protected void doCreateChildren(IOutlineNode parentNode, Definition definition) {
-		// do nothing
+	protected boolean isLeaf(Definition definition) {
+		return true;
 	}
 	
 }
