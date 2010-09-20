@@ -32,7 +32,7 @@ public class XtextDiagnosticConverter extends DiagnosticConverterImpl{
 	@Override
 	protected Triple<Integer, Integer, Integer> getLocationData(EObject obj, EStructuralFeature structuralFeature) {
 		if (NodeUtil.getNodeAdapter(obj) == null) {
-			ITextRegion location = locationInFileProvider.getLocation(obj);
+			ITextRegion location = locationInFileProvider.getSignificantTextRegion(obj);
 			if (location != null) {
 				AbstractNode node = NodeUtil.getNode(EcoreUtil.getRootContainer(obj));
 				AbstractNode foundNode = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(node, location.getOffset());
