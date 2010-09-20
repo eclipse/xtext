@@ -81,7 +81,7 @@ public class Activator extends Plugin {
 
 	protected boolean isJavaEnabled() {
 		try {
-			getClass().getClassLoader().loadClass(JavaCore.class.getName());
+			JavaCore.class.getName();
 			return true;
 		} catch (Throwable e) {
 			log.warn("Disabling JDT use. : "+e.getMessage());

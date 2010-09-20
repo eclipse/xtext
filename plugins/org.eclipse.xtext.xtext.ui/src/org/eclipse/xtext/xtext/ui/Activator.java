@@ -8,15 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
  */
 public class Activator extends org.eclipse.xtext.xtext.ui.internal.Activator {
 	// The plug-in ID
@@ -35,18 +31,6 @@ public class Activator extends org.eclipse.xtext.xtext.ui.internal.Activator {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		setDefault(this);
-		// make sure classpath entries are being resolved
-		initJavaCore(context);
-	}
-
-	protected void initJavaCore(BundleContext context) throws Exception {
-		String javaCorePlugin = JavaCore.PLUGIN_ID;
-		for (Bundle bundle : context.getBundles()) {
-			if (javaCorePlugin.equals(bundle.getSymbolicName())) {
-				JavaCore.initializeAfterLoad(new NullProgressMonitor());
-				return;
-			}
-		}
 	}
 
 	@Override
