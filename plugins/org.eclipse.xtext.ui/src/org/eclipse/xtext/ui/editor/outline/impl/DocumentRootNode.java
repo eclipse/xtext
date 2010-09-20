@@ -20,6 +20,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 public class DocumentRootNode extends AbstractOutlineNode {
 
 	private IXtextDocument document;
+	
 	private DefaultOutlineTreeProvider treeProvider;
 
 	public DocumentRootNode(Image image, String text, IXtextDocument document,
@@ -38,16 +39,6 @@ public class DocumentRootNode extends AbstractOutlineNode {
 	@Override
 	public DefaultOutlineTreeProvider getTreeProvider() {
 		return treeProvider;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj) && document.equals(((DocumentRootNode) obj).getDocument());
-	}
-
-	@Override
-	public int hashCode() {
-		return super.hashCode() + 23 * document.hashCode();
 	}
 
 	@Override
