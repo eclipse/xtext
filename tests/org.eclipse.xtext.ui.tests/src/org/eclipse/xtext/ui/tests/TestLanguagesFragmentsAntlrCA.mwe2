@@ -32,11 +32,11 @@ CompositeGeneratorFragment {
 	fragment = resourceFactory.ResourceFactoryFragment { 
 		fileExtensions = file.extensions
 	} 
-	fragment = XtextAntlrGeneratorFragment {
+	fragment = parser.antlr.XtextAntlrGeneratorFragment {
 		options = auto-inject {}
 	}
 	fragment = contentAssist.JavaBasedContentAssistFragment {}
-	fragment = ContentAssistParserGeneratorFragment {
+	fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {
 		options = auto-inject {}
 	}
 }

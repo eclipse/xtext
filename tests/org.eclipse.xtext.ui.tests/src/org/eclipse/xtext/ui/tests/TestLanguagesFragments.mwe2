@@ -31,11 +31,11 @@ CompositeGeneratorFragment {
 	fragment = resourceFactory.ResourceFactoryFragment { 
 		fileExtensions = file.extensions
 	}
-	fragment = XtextAntlrGeneratorFragment {
+	fragment = parser.antlr.XtextAntlrGeneratorFragment {
 		options = auto-inject {}
 	}
 	fragment = contentAssist.JavaBasedContentAssistFragment {}
-	fragment = XtextAntlrUiGeneratorFragment {
+	fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
 		options = auto-inject {}
 	}
 }
