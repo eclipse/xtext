@@ -152,7 +152,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cSTRINGTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//VALUE returns ecore::EString:
+		//VALUE:
 		//	ID | INT | STRING;
 		public ParserRule getRule() { return rule; }
 
@@ -237,7 +237,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getAtomAccess().getRule();
 	}
 
-	//VALUE returns ecore::EString:
+	//VALUE:
 	//	ID | INT | STRING;
 	public VALUEElements getVALUEAccess() {
 		return (pVALUE != null) ? pVALUE : (pVALUE = new VALUEElements());

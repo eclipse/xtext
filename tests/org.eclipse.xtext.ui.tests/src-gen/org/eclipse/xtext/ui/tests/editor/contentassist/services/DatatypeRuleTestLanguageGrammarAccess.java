@@ -173,7 +173,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cTypeIdParserRuleCall_1_2_1 = (RuleCall)cGroup_1_2.eContents().get(1);
 		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
-		//TypeId returns ecore::EString:
+		//TypeId:
 		//	ID ("<" TypeId ("," TypeId)* ">")?;
 		public ParserRule getRule() { return rule; }
 
@@ -295,7 +295,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return getCompositeTypeEntryAccess().getRule();
 	}
 
-	//TypeId returns ecore::EString:
+	//TypeId:
 	//	ID ("<" TypeId ("," TypeId)* ">")?;
 	public TypeIdElements getTypeIdAccess() {
 		return (pTypeId != null) ? pTypeId : (pTypeId = new TypeIdElements());
