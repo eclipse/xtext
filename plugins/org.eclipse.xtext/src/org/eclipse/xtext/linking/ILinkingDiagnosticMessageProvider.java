@@ -22,6 +22,9 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(ILinkingDiagnosticMessageProvider.Extended.class)
 public interface ILinkingDiagnosticMessageProvider {
 	
+	/**
+	 * @return the error message for the unresolved cross link or <code>null</code> if it is ok to have an unresolved reference.
+	 */
 	DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context);
 
 	interface ILinkingDiagnosticContext {

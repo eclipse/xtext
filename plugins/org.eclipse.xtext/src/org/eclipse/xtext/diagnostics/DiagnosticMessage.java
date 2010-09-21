@@ -18,6 +18,9 @@ public class DiagnosticMessage {
 	private final String[] issueData;
 	
 	public DiagnosticMessage(String message, Severity severity, String issueCode, String... issueData) {
+		if (Severity.INFO == severity) {
+			throw new IllegalArgumentException("Severity INFO is not supported for diagnostic messages.");
+		}
 		this.message = message;
 		this.severity = severity;
 		this.issueCode = issueCode;

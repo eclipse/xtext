@@ -12,8 +12,14 @@ package org.eclipse.xtext.diagnostics;
  */
 public interface IDiagnosticConsumer {
 
+	/**
+	 * @param severity the severity of the diagnostic. May neither be <code>null</code> or <code>Severity.INFO</code>.
+	 */
 	void consume(Diagnostic diagnostic, Severity severity);
 
+	/**
+	 * @param severity the severity of the diagnostic. May neither be <code>null</code> or <code>Severity.INFO</code>.
+	 */
 	boolean hasConsumedDiagnostics(Severity severity);
 
 }

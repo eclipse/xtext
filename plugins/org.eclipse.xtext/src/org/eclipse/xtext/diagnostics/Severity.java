@@ -14,6 +14,10 @@ public enum Severity {
 
 	ERROR,
 	WARNING,
+	
+	/**
+	 * Severity INFO is not supported for resource diagnostics.
+	 */
 	INFO
 	
 }
