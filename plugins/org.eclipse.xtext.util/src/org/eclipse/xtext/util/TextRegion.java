@@ -50,4 +50,9 @@ public class TextRegion implements ITextRegion {
 	public int hashCode() {
 		return offset - 37 * length;
 	}
+	
+	@Override
+	public String toString() {
+		return "[" + offset + ":" + length + "]";
+	}
 }

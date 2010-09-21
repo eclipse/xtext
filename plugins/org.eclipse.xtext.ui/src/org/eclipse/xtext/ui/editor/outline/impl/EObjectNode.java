@@ -43,7 +43,7 @@ public class EObjectNode extends AbstractOutlineNode {
 	}
 	
 	@Override
-	public ITextRegion getShortTextRegion() {
+	public ITextRegion getSignificantTextRegion() {
 		return shortTextRegion;
 	}
 

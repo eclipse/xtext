@@ -60,6 +60,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 	protected boolean addChild(IOutlineNode outlineNode) {
 		if (children == null)
 			children = Lists.newArrayList();
+		isLeaf = false;
 		return children.add(outlineNode);
 	}
 
@@ -134,7 +135,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		return textRegion;
 	}
 
-	public ITextRegion getShortTextRegion() {
+	public ITextRegion getSignificantTextRegion() {
 		return textRegion;
 	}
 
@@ -170,7 +171,4 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		throw new UnsupportedOperationException("Elements cannot be modified in content outline");
 	}
 
-	protected int hashCodeNullSafe(Object o) {
-		return (o == null) ? 0 : o.hashCode();
-	}
 }

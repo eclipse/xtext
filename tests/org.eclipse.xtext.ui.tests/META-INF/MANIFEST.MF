@@ -178,5 +178,14 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.util,
  org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest,
  org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl,
- org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.util
+ org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.util,
+ org.eclipse.xtext.ui.tests.editor.outline.outlineTest,
+ org.eclipse.xtext.ui.tests.editor.outline.outlineTest.impl,
+ org.eclipse.xtext.ui.tests.editor.outline.outlineTest.util,
+ org.eclipse.xtext.ui.tests.editor.outline,
+ org.eclipse.xtext.ui.tests.editor.outline.services,
+ org.eclipse.xtext.ui.tests.editor.outline.parseTreeConstruction,
+ org.eclipse.xtext.ui.tests.editor.outline.parser.antlr,
+ org.eclipse.xtext.ui.tests.editor.outline.parser.antlr.internal,
+ org.eclipse.xtext.ui.tests.editor.outline.ui.contentassist.antlr
 

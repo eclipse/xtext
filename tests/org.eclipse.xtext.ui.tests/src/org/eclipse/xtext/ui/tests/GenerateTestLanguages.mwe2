@@ -122,6 +122,10 @@ Workflow {
 			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
+			uri="classpath:/org/eclipse/xtext/ui/tests/editor/outline/OutlineTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/parser/keywords/KeywordsUiTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}

@@ -41,7 +41,7 @@ public class OutlineWithEditorLinker {
 
 	protected class TreeListener implements ISelectionChangedListener, IDoubleClickListener {
 		public void selectionChanged(SelectionChangedEvent event) {
-			if (isLinkingEnabled && !textViewer.getTextWidget().isFocusControl())
+			if (isLinkingEnabled && treeViewer.getControl().isFocusControl())
 				selectInTextEditor(event.getSelection());
 		}
 
@@ -99,7 +99,7 @@ public class OutlineWithEditorLinker {
 	protected void selectInTextEditor(ISelection selection) {
 		IOutlineNode selectedOutlineNode = getSelectedOutlineNode(selection);
 		if (selectedOutlineNode != null) {
-			ITextRegion textRegion = selectedOutlineNode.getShortTextRegion();
+			ITextRegion textRegion = selectedOutlineNode.getSignificantTextRegion();
 			if (textRegion != null) {
 				int offset = textRegion.getOffset();
 				int length = textRegion.getLength();

@@ -39,6 +39,17 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	@Inject
 	protected ILocationInFileProvider locationInFileProvider;
 
+	public DefaultOutlineTreeProvider() {
+	}
+	
+	/** 
+	 * For testing.
+	 */
+	public DefaultOutlineTreeProvider(ILabelProvider labelProvider, ILocationInFileProvider locationInFileProvider) {
+		this.labelProvider = labelProvider;
+		this.locationInFileProvider = locationInFileProvider;
+	}
+
 	private PolymorphicDispatcher<Void> createChildrenDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"doCreateChildren", 2, 2, this);
 
@@ -57,6 +68,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	public IOutlineNode createRoot(IXtextDocument document) {
 		DocumentRootNode documentNode = new DocumentRootNode(labelProvider.getImage(document),
 				labelProvider.getText(document), document, this);
+		documentNode.setTextRegion(new TextRegion(0, document.getLength()));
 		return documentNode;
 	}
 
@@ -144,14 +156,14 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		throw new IllegalArgumentException("Could not find method createNode(" + nullSafeClassName(parentObject) + ","
 				+ nullSafeClassName(modelElement));
 	}
-	
+
 	/**
 	 * Default for isLeafDispatcher
 	 */
 	protected boolean isLeaf(Object modelElement) {
 		return true;
 	}
-	
+
 	/**
 	 * Default for textDispatcher
 	 */

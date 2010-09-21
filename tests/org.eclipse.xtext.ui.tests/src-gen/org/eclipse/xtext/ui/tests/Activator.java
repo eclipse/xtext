@@ -65,7 +65,6 @@ public class Activator extends AbstractUIPlugin {
 			registerInjectorFor("org.eclipse.xtext.ui.tests.FoldingTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage");
-			
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);
 			throw e;
@@ -152,6 +151,9 @@ public class Activator extends AbstractUIPlugin {
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguageRuntimeModule();
 		}
+		if ("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguageRuntimeModule();
+		}		
 		if ("org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageRuntimeModule();
 		}
@@ -246,6 +248,9 @@ public class Activator extends AbstractUIPlugin {
 		}
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.UnorderedGroupsTestLanguageUiModule(this);
+		}
+		if ("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.outline.ui.OutlineTestLanguageUiModule(this);
 		}
 		if ("org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.parser.keywords.ui.KeywordsUiTestLanguageUiModule(this);

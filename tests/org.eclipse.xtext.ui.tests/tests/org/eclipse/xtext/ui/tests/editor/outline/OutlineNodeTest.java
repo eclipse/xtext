@@ -1,0 +1,119 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ui.tests.editor.outline;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
+import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
+import org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode;
+import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
+import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Element;
+import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Model;
+import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestPackage;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+
+/**
+ * @author koehnlein - Initial contribution and API
+ */
+public class OutlineNodeTest extends AbstractXtextTests {
+
+	private XtextResource resource;
+	private Element parentElement;
+	private Element child0Element;
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		with(OutlineTestLanguageStandaloneSetup.class);
+		resource = getResource("parent { child0 {} }", "test.outlinetestlanguage");
+		parentElement = ((Model) resource.getContents().get(0)).getElements().get(0);
+		child0Element = parentElement.getChildren().get(0);
+	}
+
+	public void testParentChildOpposites() {
+		EObjectNode parentNode = new EObjectNode(parentElement, null, null, "parent", false);
+		EObjectNode childNode = new EObjectNode(child0Element, parentNode, null, "child", false);
+		assertEquals(childNode.getParent(), parentNode);
+		assertTrue(parentNode.getChildren().contains(childNode));
+	}
+
+	public void testAddChildToLeafNode() {
+		EObjectNode parentNode = new EObjectNode(parentElement, null, null, "parent", true);
+		assertFalse(parentNode.hasChildren());
+		assertTrue(parentNode.getChildren().isEmpty());
+		EObjectNode childNode = new EObjectNode(child0Element, parentNode, null, "child", false);
+		assertTrue(parentNode.hasChildren());
+		assertTrue(parentNode.getChildren().contains(childNode));
+	}
+
+	public void testMethodsDelegateToParent() {
+		DocumentRootNode rootNode = createRootNode();
+		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, null, "parent", false);
+		assertNotNull(parentNode.getDocument());
+		assertNotNull(parentNode.getTreeProvider());
+		assertEquals(rootNode.getDocument(), parentNode.getDocument());
+		assertEquals(rootNode.getTreeProvider(), parentNode.getTreeProvider());
+	}
+
+	public void testCreateChildrenLazily() {
+		DocumentRootNode rootNode = createRootNode();
+		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, null, "parent", false);
+		assertFalse(parentNode.getChildren().isEmpty());
+	}
+
+	public void testStateAccess() {
+		DocumentRootNode rootNode = createRootNode();
+		EObjectNode parentNode = new EObjectNode(parentElement, rootNode, null, "parent", false);
+		EStructuralFeatureNode featureNode = new EStructuralFeatureNode(parentElement,
+				OutlineTestPackage.Literals.ELEMENT__XREFS, parentNode, null, "eClassifiers", true);
+		IUnitOfWork<Boolean, EObject> work = new IUnitOfWork<Boolean, EObject>() {
+			public Boolean exec(EObject state) throws Exception {
+				return state != null;
+			}
+		};
+		assertNull(rootNode.readOnly(work));
+		assertTrue(parentNode.readOnly(work));
+		assertTrue(featureNode.readOnly(work));
+		try {
+			rootNode.modify(work);
+			fail("Modify should be disabled");
+		} catch(UnsupportedOperationException exc) {}
+		try {
+			parentNode.modify(work);
+			fail("Modify should be disabled");
+		} catch(UnsupportedOperationException exc) {}
+		try {
+			featureNode.modify(work);
+			fail("Modify should be disabled");
+		} catch(UnsupportedOperationException exc) {}
+		
+	}
+	
+	public void testEqualsNotImplemented() throws Exception {
+		EObjectNode node0 = new EObjectNode(parentElement, null, null, "parent", false);
+		EObjectNode node1 = new EObjectNode(parentElement, null, null, "parent", false);
+		assertNotSame(node0, node1);
+	}
+
+	protected DocumentRootNode createRootNode() {
+		XtextDocument document = new XtextDocument();
+		document.setInput(resource);
+		IOutlineTreeStructureProvider treeStructureProvider = new IOutlineTreeStructureProvider() {
+			public void createChildren(IOutlineNode parentNode, EObject modelElement) {
+				new EObjectNode(child0Element, parentNode, null, "child", false);
+			}
+		};
+		DocumentRootNode rootNode = new DocumentRootNode(null, "root", document, treeStructureProvider);
+		return rootNode;
+	}
+
+}

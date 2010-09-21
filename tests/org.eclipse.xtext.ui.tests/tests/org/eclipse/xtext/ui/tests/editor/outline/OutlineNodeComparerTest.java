@@ -7,86 +7,72 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
-//TODO: reimplement with regard to new architecture
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
+import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
+import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
+import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestFactory;
 
-//import org.eclipse.xtext.ui.editor.outline.old.ContentOutlineNode;
-//import org.eclipse.xtext.ui.editor.outline.old.IContentOutlineNodeComparer;
-//
-//import junit.framework.TestCase;
-//
-///**
-// * @author koehnlein - Initial contribution and API
-// */
-//public class OutlineNodeComparerTest extends TestCase {
-//	
-//	private static final String PARENT = "parent";
-//	private static final String CHILD_0 = "child0";
-//	private static final String CHILD_1 = "child1";
-//	private static final String CHILD_2 = "child2";
-//	
-//	private IContentOutlineNodeComparer comparer;
-//	private ContentOutlineNode parent;
-//	private ContentOutlineNode child0;
-//	private ContentOutlineNode child1;
-//	private ContentOutlineNode newParent;
-//	private ContentOutlineNode newChild0;
-//	private ContentOutlineNode newChild1;
-//	private ContentOutlineNode newInsertedChild;
-//	
-//	@Override
-//	protected void setUp() throws Exception {
-//		super.setUp();
-//		comparer = new IContentOutlineNodeComparer.Default();
-//		parent = new ContentOutlineNode(PARENT);
-//		child0 = new ContentOutlineNode(CHILD_0);
-//		child1 = new ContentOutlineNode(CHILD_1);
-//		parent.addChildren(child0);
-//		parent.addChildren(child1);
-//
-//		newParent = new ContentOutlineNode(PARENT);
-//		newChild0 = new ContentOutlineNode(CHILD_0);
-//		newChild1 = new ContentOutlineNode(CHILD_1);
-//		newInsertedChild = new ContentOutlineNode(CHILD_2);
-//	}
-//	
-//	public void testSameStructureComparer() throws Exception {
-//		assertFalse(comparer.equals(child0, child1));
-//		assertFalse(comparer.equals(newChild0, newChild1));
-//		assertFalse(comparer.equals(newChild1, newInsertedChild));
-//		assertFalse(comparer.equals(newChild0, newInsertedChild));
-//
-//		newParent.addChildren(newChild0);
-//		newParent.addChildren(newChild1);
-//		checkEqualities();
-//	}		
-//	
-//	public void testInsertBefore() {
-//		newParent.addChildren(newInsertedChild);
-//		newParent.addChildren(newChild0);
-//		newParent.addChildren(newChild1);
-//		checkEqualities();
-//	}
-//
-//	public void testInsertBetween() {
-//		newParent.addChildren(newChild0);
-//		newParent.addChildren(newInsertedChild);
-//		newParent.addChildren(newChild1);
-//		checkEqualities();		
-//	}
-//
-//	public void testInsertAfter() {
-//		newParent.addChildren(newChild0);
-//		newParent.addChildren(newChild1);
-//		newParent.addChildren(newInsertedChild);
-//		checkEqualities();
-//	}
-//	
-//	private void checkEqualities() {
-//		assertTrue(comparer.equals(child0, newChild0));
-//		assertFalse(comparer.equals(child0, newChild1));
-//		assertFalse(comparer.equals(child0, newInsertedChild));
-//		assertFalse(comparer.equals(child1, newChild0));
-//		assertTrue(comparer.equals(child1, newChild1));
-//		assertFalse(comparer.equals(child1, newInsertedChild));
-//	}
-//}
+/**
+ * @author koehnlein - Initial contribution and API
+ */
+public class OutlineNodeComparerTest extends AbstractXtextTests {
+
+	private IOutlineNodeComparer.Default comparer;
+	private Image image;
+	private Image image2;
+	private EObject eObject;
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		with(OutlineTestLanguageStandaloneSetup.class);
+		comparer = new IOutlineNodeComparer.Default();
+		image = PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FILE);
+		image2 = PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FOLDER);
+		eObject = OutlineTestFactory.eINSTANCE.createModel();
+
+	}
+
+	public void testNull() {
+		assertTrue(comparer.equals(null, null));
+		EObjectNode node = new EObjectNode(eObject, null, null, "parent", false);
+		assertFalse(comparer.equals(null, node));
+		assertFalse(comparer.equals(node, null));
+	}
+
+	public void testPropertyEquality() {
+		EObjectNode node = new EObjectNode(eObject, null, image, new StyledString("Node"), false);
+		assertFalse(comparer.equals(node, new DocumentRootNode(image, new StyledString("Node"), null, null)));
+		assertTrue(comparer.equals(node, new EObjectNode(OutlineTestFactory.eINSTANCE.createElement(), null, image, new StyledString("Node"), false)));
+		assertFalse(comparer.equals(node, new EObjectNode(eObject, node, image, new StyledString("Node"), false)));
+		assertFalse(comparer.equals(node, new EObjectNode(eObject, null, image2, new StyledString("Node"), false)));
+		assertFalse(comparer.equals(node, new EObjectNode(eObject, null, image, new StyledString("Node2"), false)));
+		assertTrue(comparer.equals(node, new EObjectNode(eObject, null, image, "Node", false)));
+	}
+	
+	@SuppressWarnings("unused")
+	public void testEquivalentIndex() throws Exception {
+		DocumentRootNode rootNode = new DocumentRootNode(image, "Root", null, null);
+		EObjectNode node = new EObjectNode(eObject, rootNode, image, "Node", false);
+
+		DocumentRootNode rootNode2 = new DocumentRootNode(image, "Root", null, null);
+		EObjectNode node2 = new EObjectNode(eObject, rootNode2, image, "Node", false);
+		assertTrue(comparer.equals(node, node2));
+		EObjectNode node3 = new EObjectNode(eObject, rootNode2, image, "OtherNode", false);
+		assertTrue(comparer.equals(node, node2));
+		
+		DocumentRootNode rootNode3 = new DocumentRootNode(image, "Root", null, null);
+		EObjectNode node4 = new EObjectNode(eObject, rootNode3, image, "OtherNode", false);
+		EObjectNode node5 = new EObjectNode(eObject, rootNode3, image, "Node", false);
+		assertTrue(comparer.equals(node, node5));
+		EObjectNode node6 = new EObjectNode(eObject, rootNode3, image, "OtherNode", false);
+		assertFalse(comparer.equals(node, node5));
+	}
+
+}

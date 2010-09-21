@@ -1,6 +1,11 @@
 
 h2(#outline). Outline View
 
+h3. We redesigned the outline in 2.0. The following no longer reflects the current state of implementation. 
+
+TODO: 
+Rewrite this section
+
 Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical 
 view on your model and allows you to sort tree elements alphabetically. Selecting an element in the 
 outline will highlight the corresponding element in the text editor. Users can choose to synchronize 
@@ -12,6 +17,8 @@ You can customize various aspects of the outline by providing implementation for
 The following sections show how to do this.
 
 h3. Influencing the Outline Structure
+
+_outdated_ 
 
 In its default implementation, the outline view shows the containment hierarchy of your model. 
 This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., 
@@ -73,6 +80,8 @@ bc.. public class MyDslUiModule extends AbstractMyDslUiModule {
 }
 
 h3. Filtering
+
+_outdated_ 
 
 Often, you want to allow users to filter the contents of the outline to make it easier to concentrate 
 on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add 
@@ -149,6 +158,8 @@ bc.. public class FooOutlineFilter extends ViewerFilter {
 
 h3. Context menus
 
+_outdated_ 
+
 You might want to register context menu actions for specific elements in the outline, e.g. to allow 
 users of your DSL to invoke a generator or to validate the selected element. As all elements in the 
 outline are ${org.eclipse.xtext.ui/src/org.eclipse.xtext.ui.editor.outline.ContentOutlineNode}s, you 
@@ -182,6 +193,8 @@ change the declaration of _types as follows:
 bc. private static final Class<?>[] types = { Attribute.class, Entity.class };
 
 h4. Registering a Menu Contribution
+
+_outdated_ 
 
 You can now add command / handler pairs to the context menu.
 
@@ -234,6 +247,8 @@ p. Again, pay attention to the _commandId_ attribute. The connection between you
 the menu contribution is made by the part _<adapt type="org.example.mydsl.Attribute" />_. 
 
 h3(#quick_outline). Quick Outline
+
+_outdated_ 
 
 Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown 
 in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline,
