@@ -3,7 +3,7 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
 «DEFINE file(String activatorName) FOR List[Grammar]»
-«FILE activatorName.asPath()+".java" SRC_GEN_UI»
+«FILE activatorName.asPath()+".java" SRC_GEN_UI-»
 /*
  «fileHeader()»
  */
@@ -23,7 +23,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * Generated
+ * This class was generated. Customizations should only happen in a newly
+ * introduced subclass. 
  */
 public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
 
@@ -41,13 +42,20 @@ public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
 		try {
 			«FOREACH this AS grammar»
 			injectors.put("«grammar.name»", Guice.createInjector(
-				Modules.override(Modules.override(getRuntimeModule("«grammar.name»")).with(getUiModule("«grammar.name»"))).with(getSharedStateModule())
+				Modules.override(getRuntimeModule("«grammar.name»")).with(getSharedStateModule())).with(getUiModule("«grammar.name»"))
 			));
 			«ENDFOREACH»
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);
 			throw e;
 		}
+	}
+	
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		injectors.clear();
+		INSTANCE = null;
+		super.stop(context);
 	}
 	
 	public static «activatorName.toSimpleName()» getInstance() {
@@ -62,6 +70,7 @@ public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
 		«ENDFOREACH»
 		throw new IllegalArgumentException(grammar);
 	}
+	
 	protected Module getUiModule(String grammar) {
 		«FOREACH this AS grammar»
 		if ("«grammar.name»".equals(grammar)) {

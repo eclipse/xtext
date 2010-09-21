@@ -3,11 +3,10 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 	
 «DEFINE file(String activatorName) FOR Grammar»
-«FILE executableExtensionFactory().asPath()+".java" SRC_GEN_UI»
+«FILE executableExtensionFactory().asPath()+".java" SRC_GEN_UI-»
 /*
  «fileHeader()»
  */
- 
 package «executableExtensionFactory().toJavaPackage()»;
 
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
@@ -16,7 +15,8 @@ import org.osgi.framework.Bundle;
 import com.google.inject.Injector;
 
 /**
- *@generated
+ * This class was generated. Customizations should only happen in a newly
+ * introduced subclass. 
  */
 public class «executableExtensionFactory().toSimpleName()» extends AbstractGuiceAwareExecutableExtensionFactory {
 
