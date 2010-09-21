@@ -7,40 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.autoedit;
 
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
-
-import java.util.List;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 
-import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class AutoEditTest extends AbstractEditorTest {
-
-	@Override
-	protected String getEditorId() {
-		return "org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage";
-	}
-
-	private List<IFile> files = Lists.newArrayList();
-
-
-	@Override
-	protected void tearDown() throws Exception {
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
-		files.clear();
-		super.tearDown();
-	}
+public class AutoEditTest extends AbstractAutoEditTest {
 
 	public void testParenthesis_1() throws Exception {
 		XtextEditor editor = openEditor("|");
@@ -137,11 +111,6 @@ public class AutoEditTest extends AbstractEditorTest {
 		assertState("''|", editor);
 		pressKey(editor, '\'');
 		assertState("'''|'", editor);
-		
-		// This one doesn't work unless you register the PartitionDeletionEditStrategy also for STING partitions. 
-		// As it is very unsual to allow two string literals without any separating tokens, we don't need to support this
-//		pressKey(editor, SWT.BS);
-//		assertState("''|", editor);
 	}
 	
 	public void testStringLiteral_4() throws Exception {
@@ -213,7 +182,7 @@ public class AutoEditTest extends AbstractEditorTest {
 	public void testCurlyBracesBlock_4() throws Exception {
 		XtextEditor editor = openEditor("foo {|");
 		pressKey(editor, '\n');
-		assertState("foo {\n\t|\n}", editor);
+		assertState("foo {\n\t|\n}\n", editor);
 	}
 	
 	public void testCurlyBracesBlock_5() throws Exception {
@@ -231,19 +200,31 @@ public class AutoEditTest extends AbstractEditorTest {
 	public void testCurlyBracesBlock_7() throws Exception {
 		XtextEditor editor = openEditor("{ |foo }");
 		pressKey(editor, '\n');
-		assertState("{ \n\t|foo }", editor);
+		assertState("{\n\t|\n\tfoo\n}", editor);
 	}
 	
 	public void testCurlyBracesBlock_8() throws Exception {
 		XtextEditor editor = openEditor("{ foo| }");
 		pressKey(editor, '\n');
-		assertState("{ foo\n\t|\n}", editor);
+		assertState("{\n\tfoo\n\t|\n}", editor);
+	}
+	
+	public void testCurlyBracesBlock_9() throws Exception {
+		XtextEditor editor = openEditor("'{' foo| }");
+		pressKey(editor, '\n');
+		assertState("'{' foo\n| }", editor);
+	}
+	
+	public void testCurlyBracesBlock_10() throws Exception {
+		XtextEditor editor = openEditor("/*{*/ foo|");
+		pressKey(editor, '\n');
+		assertState("/*{*/ foo\n|", editor);
 	}
 	
 	public void testLongTerminalsBlock_1() throws Exception {
 		XtextEditor editor = openEditor("begin|");
 		pressKey(editor, '\n');
-		assertState("begin\n\t|\nend", editor);
+		assertState("begin\n\t|\nend\n", editor);
 	}
 
 	public void testLongTerminalsBlock_2() throws Exception {
@@ -380,42 +361,6 @@ public class AutoEditTest extends AbstractEditorTest {
 		// Don't know how to simulate the press ESC scenario. The following does not work.
 		pressKey(editor, SWT.ESC);
 		assertState("fbb|", editor);
-	}
-
-	private XtextEditor openEditor(String string) throws Exception {
-		int cursor = string.indexOf('|');
-		IFile file = createFile("foo/myfile" + files.size() + ".bmtestlanguage", string.replace("|", ""));
-		files.add(file);
-		XtextEditor editor = openEditor(file);
-		editor.getInternalSourceViewer().setSelectedRange(cursor, 0);
-		editor.getInternalSourceViewer().getTextWidget().setFocus();
-		return editor;
-	}
-
-	protected void assertState(String string, XtextEditor editor) {
-		int cursor = string.indexOf('|');
-		assertEquals(string.replace("|", ""), editor.getDocument().get());
-		ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-		assertEquals(cursor, selection.getOffset());
-	}
-
-	protected void pressKey(XtextEditor editor, char c) throws Exception {
-		StyledText textWidget = editor.getInternalSourceViewer().getTextWidget();
-		Event e = new Event();
-		e.character = c;
-		e.type = SWT.KeyDown;
-		e.doit = true;
-		//XXX Hack!
-		if (c == SWT.ESC) {
-			e.keyCode = 27;
-		}
-		textWidget.notifyListeners(SWT.KeyDown, e);
-	}
-	
-	protected void pressKeys(XtextEditor editor, String string) throws Exception {
-		for(int i = 0; i < string.length(); i++) {
-			pressKey(editor, string.charAt(i));
-		}
 	}
 
 }

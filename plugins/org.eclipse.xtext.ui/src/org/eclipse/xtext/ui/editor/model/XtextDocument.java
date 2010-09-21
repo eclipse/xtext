@@ -45,11 +45,12 @@ import com.google.inject.Inject;
  */
 public class XtextDocument extends Document implements IXtextDocument {
 	
-	@Inject
 	private DocumentTokenSource tokenSource; 
 	
+	@Inject
 	public void setTokenSource(DocumentTokenSource tokenSource) {
 		this.tokenSource = tokenSource;
+		tokenSource.computeDamageRegion(new DocumentEvent(this, 0, getLength(), this.get()));
 	}
 	
 	private XtextResource resource = null;

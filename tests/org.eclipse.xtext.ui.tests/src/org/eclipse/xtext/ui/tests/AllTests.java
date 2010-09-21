@@ -24,6 +24,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.PresentationDamagerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.SimpleEditorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.autoedit.AutoEditTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.autoedit.MultiLineTerminalsEditStrategyTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug281198Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug282031Test.class);
@@ -63,6 +64,10 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.folding.DefaultFoldingRegionProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.handler.ValidateActionHandlerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.model.edit.DefaultDocumentEditorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.model.DocumentPartitionerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.model.DocumentTokenSourceTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.model.PartitionTokenScannerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.model.DocumentUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.model.edit.DefaultTextEditComposerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.mpe.MultipageEditorTest.class);
       // TODO: reimplement with regard to new outline architecture

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import junit.framework.TestCase;
@@ -14,11 +15,13 @@ import junit.framework.TestCase;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocumentListener;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 
 import com.google.inject.Provider;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -48,6 +51,18 @@ public class DocumentTokenSourceTest extends TestCase {
 			public void documentAboutToBeChanged(DocumentEvent event) {
 			}
 		});
+	}
+	
+	
+	public void testInsertComment() throws Exception {
+		document.set("bar 345 grammar : so 'baz & so'");
+		IRegion region = tokenSource.getLastDamagedRegion();
+		ArrayList<ILexerTokenRegion> list = Lists.newArrayList(tokenSource.getTokenInfos());
+		document.replace(8, 7, "/*grammar*/");
+		IRegion region2 = tokenSource.getLastDamagedRegion();
+		assertTrue(!region.equals(region2));
+		ArrayList<ILexerTokenRegion> list2 = Lists.newArrayList(tokenSource.getTokenInfos());
+		assertTrue(!list.equals(list2));
 	}
 
 	public void testConcurrentModification() throws Exception {
