@@ -2162,6 +2162,21 @@
         </resourceServiceProvider>
     </extension>
 
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.tests.editor.outline.ui.OutlineTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="outlinetestlanguage">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.tests.editor.outline.ui.OutlineTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="outlinetestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 

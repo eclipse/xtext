@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.tests.editor.outline;
+package org.eclipse.xtext.ui.tests.editor.outline.old;
 
 //TODO: reimplement with regard to new architecture
 

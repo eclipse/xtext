@@ -35,6 +35,6 @@ public interface IOutlineNode extends IAdaptable, IStateAccess<EObject> {
 
 	ITextRegion getFullTextRegion();
 
-	ITextRegion getShortTextRegion();
+	ITextRegion getSignificantTextRegion();
 	
 }

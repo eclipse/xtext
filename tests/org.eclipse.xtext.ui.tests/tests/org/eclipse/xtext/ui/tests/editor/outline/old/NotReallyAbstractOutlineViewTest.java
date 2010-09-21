@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.tests.editor.outline;
+package org.eclipse.xtext.ui.tests.editor.outline.old;
 /// Not working!
 
 

@@ -292,8 +292,8 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 			dispose();
 			if (selectedElement instanceof IOutlineNode) {
 				final IOutlineNode outlineNode = (IOutlineNode) selectedElement;
-				xtextEditor.selectAndReveal(outlineNode.getShortTextRegion().getOffset(), outlineNode
-						.getShortTextRegion().getLength());
+				xtextEditor.selectAndReveal(outlineNode.getSignificantTextRegion().getOffset(), outlineNode
+						.getSignificantTextRegion().getLength());
 			}
 		}
 	}

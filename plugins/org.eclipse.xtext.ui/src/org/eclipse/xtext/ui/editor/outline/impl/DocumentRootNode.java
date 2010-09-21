@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
@@ -21,14 +20,13 @@ public class DocumentRootNode extends AbstractOutlineNode {
 
 	private IXtextDocument document;
 	
-	private DefaultOutlineTreeProvider treeProvider;
+	private IOutlineTreeStructureProvider treeProvider;
 
-	public DocumentRootNode(Image image, String text, IXtextDocument document,
-			DefaultOutlineTreeProvider treeProvider) {
+	public DocumentRootNode(Image image, Object text, IXtextDocument document,
+			IOutlineTreeStructureProvider treeProvider) {
 		super(null, image, text, false);
 		this.document = document;
 		this.treeProvider = treeProvider;
-		setTextRegion(new TextRegion(0, document.getLength()));
 	}
 
 	@Override
@@ -37,7 +35,7 @@ public class DocumentRootNode extends AbstractOutlineNode {
 	}
 
 	@Override
-	public DefaultOutlineTreeProvider getTreeProvider() {
+	public IOutlineTreeStructureProvider getTreeProvider() {
 		return treeProvider;
 	}
 
