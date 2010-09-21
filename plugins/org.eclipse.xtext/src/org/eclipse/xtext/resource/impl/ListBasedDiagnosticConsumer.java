@@ -63,6 +63,8 @@ public class ListBasedDiagnosticConsumer implements IDiagnosticConsumer {
 	}
 	
 	private Internal getInternal(Severity severity) {
+		if (severity == null)
+			throw new NullPointerException("Severity may not be null");
 		switch(severity) {
 			case ERROR: 
 				if (errors == null) {
@@ -74,8 +76,9 @@ public class ListBasedDiagnosticConsumer implements IDiagnosticConsumer {
 					warnings = new Internal();
 				}
 				return warnings;
+			default:
+				throw new IllegalArgumentException("Illegal severity: INFO. Diagnostics may either be warnings or errors");
 		}
-		throw new IllegalArgumentException("Unknown severity: " + severity);
 	}
 
 	public boolean hasConsumedDiagnostics(Severity severity) {

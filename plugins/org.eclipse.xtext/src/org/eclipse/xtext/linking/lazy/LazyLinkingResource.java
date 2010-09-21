@@ -166,10 +166,12 @@ public class LazyLinkingResource extends XtextResource {
 
 	protected void createAndAddDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
 		DiagnosticMessage message = createDiagnosticMessage(triple);
-		List<Diagnostic> list = getDiagnosticList(message);
-		Diagnostic diagnostic = createDiagnostic(triple, message);
-		if (!list.contains(diagnostic))
-			list.add(diagnostic);
+		if (message != null) {
+			List<Diagnostic> list = getDiagnosticList(message);
+			Diagnostic diagnostic = createDiagnostic(triple, message);
+			if (!list.contains(diagnostic))
+				list.add(diagnostic);
+		}
 	}
 
 	protected void removeDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
