@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.diagnostics.Diagnostic;
-import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -58,11 +58,11 @@ public class ListBasedDiagnosticConsumer implements IDiagnosticConsumer {
 	private Internal errors;
 	private Internal warnings;
 
-	public void consume(Diagnostic diagnostic, DiagnosticSeverity severity) {
+	public void consume(Diagnostic diagnostic, Severity severity) {
 		getInternal(severity).consume(diagnostic);
 	}
 	
-	private Internal getInternal(DiagnosticSeverity severity) {
+	private Internal getInternal(Severity severity) {
 		switch(severity) {
 			case ERROR: 
 				if (errors == null) {
@@ -78,15 +78,15 @@ public class ListBasedDiagnosticConsumer implements IDiagnosticConsumer {
 		throw new IllegalArgumentException("Unknown severity: " + severity);
 	}
 
-	public boolean hasConsumedDiagnostics(DiagnosticSeverity severity) {
-		if (severity == DiagnosticSeverity.ERROR)
+	public boolean hasConsumedDiagnostics(Severity severity) {
+		if (severity == Severity.ERROR)
 			return errors != null;
-		if (severity == DiagnosticSeverity.WARNING)
+		if (severity == Severity.WARNING)
 			return warnings != null;
 		return getInternal(severity).hasConsumedDiagnostics();
 	}
 	
-	public List<Diagnostic> getResult(DiagnosticSeverity severity) {
+	public List<Diagnostic> getResult(Severity severity) {
 		if (hasConsumedDiagnostics(severity))
 			return getInternal(severity).getResult();
 		return Collections.emptyList();

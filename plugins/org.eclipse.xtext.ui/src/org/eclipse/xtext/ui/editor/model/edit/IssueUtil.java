@@ -8,27 +8,20 @@
 package org.eclipse.xtext.ui.editor.model.edit;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.MarkerUtilities;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ui.MarkerTypes;
-import org.eclipse.xtext.ui.MarkerUtil;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
-
-import com.google.inject.Inject;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
 public class IssueUtil {
-
-	private MarkerUtil markerUtil;
-	
-	@Inject 
-	public void setMarkerUtil(MarkerUtil markerUtil) {
-		this.markerUtil = markerUtil;
-	}
 
 	public Issue createIssue(IMarker marker) {
 		Issue.IssueImpl issue = new Issue.IssueImpl();
@@ -38,10 +31,10 @@ public class IssueUtil {
 		issue.setOffset(MarkerUtilities.getCharStart(marker));
 		issue.setLength(MarkerUtilities.getCharEnd(marker)-MarkerUtilities.getCharStart(marker));
 		
-		issue.setCode(markerUtil.getCode(marker));
-		issue.setData(markerUtil.getIssueData(marker));
-		issue.setUriToProblem(markerUtil.getUriToProblem(marker));
-		issue.setSeverity(markerUtil.getSeverity(marker));
+		issue.setCode(getCode(marker));
+		issue.setData(getIssueData(marker));
+		issue.setUriToProblem(getUriToProblem(marker));
+		issue.setSeverity(getSeverity(marker));
 		
 		issue.setType(MarkerTypes.toCheckType(MarkerUtilities.getMarkerType(marker)));
 		// Note, isSyntaxError is unset, but currently the api does not allow fixing
@@ -60,5 +53,75 @@ public class IssueUtil {
 			return null;
 	}
 
+	public String getCode(Annotation annotation) {
+		if (annotation instanceof MarkerAnnotation) {
+			MarkerAnnotation ma = (MarkerAnnotation) annotation;
+			return getCode(ma.getMarker());
+		}
+		if (annotation instanceof XtextAnnotation) {
+			XtextAnnotation xa = (XtextAnnotation) annotation;
+			return xa.getIssueCode();	
+		}
+		return null;
+	}
+
+	public String getCode(IMarker marker) {
+		return marker.getAttribute(Issue.CODE_KEY, null);
+	}
+
+	public String[] getIssueData(Annotation annotation) {
+		if (annotation instanceof MarkerAnnotation) {
+			MarkerAnnotation ma = (MarkerAnnotation) annotation;
+			return getIssueData(ma.getMarker());
+		}
+		if (annotation instanceof XtextAnnotation) {
+			XtextAnnotation xa = (XtextAnnotation) annotation;
+			return xa.getIssueData();	
+		}
+		return null;
+	}
+	
+	public String[] getIssueData(IMarker marker) {
+		return Strings.unpack(marker.getAttribute(Issue.DATA_KEY, null));
+	}
+	
+	public URI getUriToProblem(IMarker marker) {
+		String uri = marker.getAttribute(Issue.URI_KEY, null);
+		return uri != null ? URI.createURI(uri) : null;
+	}
+	
+	public URI getUriToProblem(Annotation annotation) {
+		if (annotation instanceof MarkerAnnotation) {
+			MarkerAnnotation ma = (MarkerAnnotation) annotation;
+			return getUriToProblem(ma.getMarker());
+		}
+		if (annotation instanceof XtextAnnotation) {
+			XtextAnnotation xa = (XtextAnnotation) annotation;
+			return xa.getUriToProblem();
+		}
+		return null;
+	}
+	
+	public Severity getSeverity(IMarker marker) {
+		switch (marker.getAttribute(IMarker.SEVERITY, 0)) {
+			case IMarker.SEVERITY_ERROR:
+				return Severity.ERROR;
+			case IMarker.SEVERITY_WARNING:
+				return Severity.WARNING;
+			case IMarker.SEVERITY_INFO:
+				return Severity.INFO;
+			default:
+				throw new IllegalArgumentException(marker.toString());
+		}
+	}
+
+	public boolean refersToSameIssue(IMarker marker, Annotation annotation) {
+		URI markerURI = getUriToProblem(marker);
+		String markerIssue = getCode(marker);
+		if(markerURI == null || markerIssue == null)
+			return false;
+		
+		return markerURI.equals(getUriToProblem(annotation)) && markerIssue.equals(getCode(annotation));
+	}
 
 }

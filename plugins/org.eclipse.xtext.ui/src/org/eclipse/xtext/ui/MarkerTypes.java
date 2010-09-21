@@ -10,10 +10,8 @@ package org.eclipse.xtext.ui;
 
 import org.eclipse.xtext.validation.CheckType;
 
-
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
  */
 public final class MarkerTypes {
 	public final static String ANY_VALIDATION = "org.eclipse.xtext.ui.check"; //$NON-NLS-1$

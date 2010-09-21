@@ -10,9 +10,10 @@ package org.eclipse.xtext.diagnostics;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public enum DiagnosticSeverity {
+public enum Severity {
 
 	ERROR,
-	WARNING
+	WARNING,
+	INFO
 	
 }

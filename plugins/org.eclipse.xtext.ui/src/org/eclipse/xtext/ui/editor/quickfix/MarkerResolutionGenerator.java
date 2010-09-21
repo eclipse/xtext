@@ -22,7 +22,6 @@ import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.MarkerTypes;
-import org.eclipse.xtext.ui.MarkerUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
@@ -47,9 +46,6 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	private IssueUtil issueUtil;
 	
 	@Inject
-	private MarkerUtil markerUtil;
-	
-	@Inject
 	private ILanguageResourceHelper languageResourceHelper;
 
 	@Inject 
@@ -63,14 +59,6 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		this.issueUtil = issueUtil;
 	}
 
-	public void setMarkerUtil(MarkerUtil markerUtil) {
-		this.markerUtil = markerUtil;
-	}
-
-	public MarkerUtil getMarkerUtil() {
-		return markerUtil;
-	}
-
 	public void setEditorId(String editorId) {
 		this.editorId = editorId;
 	}
@@ -80,7 +68,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	}
 
 	public boolean hasResolutions(IMarker marker) {
-		return getResolutionProvider().hasResolutionFor(getMarkerUtil().getCode(marker));
+		return getResolutionProvider().hasResolutionFor(getIssueUtil().getCode(marker));
 	}
 
 	public IMarkerResolution[] getResolutions(IMarker marker) {
@@ -118,7 +106,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 			}
 
 			private boolean referringToSameIssue(Annotation annotation, IMarker marker) {
-				if(getMarkerUtil().refersToSameIssue(marker, annotation)) {
+				if(getIssueUtil().refersToSameIssue(marker, annotation)) {
 					return true;
 				}
 				return false;

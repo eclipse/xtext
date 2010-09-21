@@ -8,15 +8,12 @@
 package org.eclipse.xtext.validation;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.diagnostics.Severity;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public interface Issue {
-
-	enum Severity {
-		INFO, WARNING, ERROR
-	}
 
 	String CODE_KEY = "CODE_KEY";
 	String URI_KEY = "URI_KEY";

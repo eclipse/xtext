@@ -10,7 +10,7 @@ package org.eclipse.xtext.xtext;
 
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
-import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.util.XtextSwitch;
 
@@ -25,7 +25,7 @@ public class XtextLinkingDiagnosticMessageProvider extends LinkingDiagnosticMess
 		DiagnosticMessage diagnosticMessage = new XtextSwitch<DiagnosticMessage>() {
 			@Override
 			public DiagnosticMessage caseRuleCall(RuleCall ruleCall) {
-				return new DiagnosticMessage(context.getLinkText()+" cannot be resolved to a rule", DiagnosticSeverity.ERROR,
+				return new DiagnosticMessage(context.getLinkText()+" cannot be resolved to a rule", Severity.ERROR,
 						UNRESOLVED_RULE, context.getLinkText());
 			}
 

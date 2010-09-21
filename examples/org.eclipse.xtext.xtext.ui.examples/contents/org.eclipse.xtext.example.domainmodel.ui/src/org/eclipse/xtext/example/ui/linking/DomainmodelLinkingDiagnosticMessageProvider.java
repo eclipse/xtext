@@ -8,7 +8,7 @@
 package org.eclipse.xtext.example.ui.linking;
 
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
-import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.example.domainmodel.Attribute;
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.Entity;
@@ -31,7 +31,7 @@ public class DomainmodelLinkingDiagnosticMessageProvider extends LinkingDiagnost
 		DiagnosticMessage diagnosticMessage = new DomainmodelSwitch<DiagnosticMessage>() {
 			@Override
 			public DiagnosticMessage caseEntity(Entity entity) {
-				return new DiagnosticMessage("Missing supertype " + context.getLinkText(), DiagnosticSeverity.ERROR,
+				return new DiagnosticMessage("Missing supertype " + context.getLinkText(), Severity.ERROR,
 						MISSING_SUPERTYPE, context.getLinkText());
 			}
 
@@ -44,7 +44,7 @@ public class DomainmodelLinkingDiagnosticMessageProvider extends LinkingDiagnost
 			public DiagnosticMessage caseAttribute(Attribute object) {
 				if (context.getReference() == DomainmodelPackage.Literals.TYPE_REF__REFERENCED) {
 					return new DiagnosticMessage("Missing attribute type " + context.getLinkText(),
-							DiagnosticSeverity.ERROR, MISSING_ATTRIBUTE_TYPE, context.getLinkText());
+							Severity.ERROR, MISSING_ATTRIBUTE_TYPE, context.getLinkText());
 				}
 				return null;
 			}
@@ -53,7 +53,7 @@ public class DomainmodelLinkingDiagnosticMessageProvider extends LinkingDiagnost
 			public DiagnosticMessage caseReference(Reference object) {
 				if (context.getReference() == DomainmodelPackage.Literals.TYPE_REF__REFERENCED) {
 					return new DiagnosticMessage("Missing reference type " + context.getLinkText(),
-							DiagnosticSeverity.ERROR, MISSING_REFERENCE_TYPE, context.getLinkText());
+							Severity.ERROR, MISSING_REFERENCE_TYPE, context.getLinkText());
 				}
 				return null;
 			}

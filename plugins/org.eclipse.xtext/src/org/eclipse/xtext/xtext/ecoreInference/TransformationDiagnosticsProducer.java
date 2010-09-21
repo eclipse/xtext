@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducer;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
-import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -36,7 +36,7 @@ public class TransformationDiagnosticsProducer extends AbstractDiagnosticProduce
 	public void acceptError(TransformationErrorCode errorCode, String message, EObject element) {
 		setTarget(element, null);
 		lastError = errorCode;
-		addDiagnostic(new DiagnosticMessage(message, DiagnosticSeverity.ERROR, null));	
+		addDiagnostic(new DiagnosticMessage(message, Severity.ERROR, null));	
 		lastError = null;
 	}
 	

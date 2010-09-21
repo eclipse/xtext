@@ -24,13 +24,13 @@ import org.eclipse.jface.text.source.IAnnotationModelExtension;
 import org.eclipse.jface.text.source.IAnnotationModelListener;
 import org.eclipse.ui.texteditor.AnnotationTypeLookup;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.validation.Issue.Severity;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashBiMap;
