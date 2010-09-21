@@ -153,7 +153,7 @@ public class DocumentTokenSource {
 	public Iterable<ILexerTokenRegion> getTokenInfos() {
 		return new IRegionIterable(tokenInfos);
 	}
-	
+
 	public IRegion getLastDamagedRegion() {
 		return previousRegion;
 	}
@@ -218,70 +218,72 @@ public class DocumentTokenSource {
 			setTokens(createTokenInfos(e.fDocument.get()));
 			return new Region(0, e.getDocument().getLength());
 		}
+		try {
+			int tokenStartsAt = 0;
+			int tokenInfoIdx = 0;
+			int regionOffset = 0;
+			int regionLength = e.fDocument.getLength();
 
-		int tokenStartsAt = 0;
-		int tokenInfoIdx = 0;
-		int regionOffset = 0;
-		int regionLength = e.fDocument.getLength();
-
-		TokenSource source = createLexer(e.fDocument.get());
-		CommonToken token = (CommonToken) source.nextToken();
-		// find start idx
-		while (true) {
-			if (token == Token.EOF_TOKEN) {
-				internalModifyableTokenInfos.subList(tokenInfoIdx, internalModifyableTokenInfos.size()).clear();
-				break;
-			}
-			if (tokenInfoIdx >= internalModifyableTokenInfos.size())
-				break;
-			TokenInfo tokenInfo = internalModifyableTokenInfos.get(tokenInfoIdx);
-			if (tokenInfo.type != token.getType()
-					|| token.getStopIndex() - token.getStartIndex() + 1 != tokenInfo.length)
-				break;
-			if (tokenStartsAt + tokenInfo.length > e.fOffset)
-				break;
-			tokenStartsAt += tokenInfo.length;
-			tokenInfoIdx++;
-			token = (CommonToken) source.nextToken();
-		}
-		regionLength -= tokenStartsAt;
-		regionOffset = tokenStartsAt;
-
-		int lengthDiff = e.fText.length() - e.fLength;
-		// compute region length
-		while (true) {
-			if (token == Token.EOF_TOKEN || tokenInfoIdx >= internalModifyableTokenInfos.size())
-				break;
+			TokenSource source = createLexer(e.fDocument.get());
+			CommonToken token = (CommonToken) source.nextToken();
+			// find start idx
 			while (true) {
+				if (token == Token.EOF_TOKEN) {
+					internalModifyableTokenInfos.subList(tokenInfoIdx, internalModifyableTokenInfos.size()).clear();
+					break;
+				}
 				if (tokenInfoIdx >= internalModifyableTokenInfos.size())
 					break;
 				TokenInfo tokenInfo = internalModifyableTokenInfos.get(tokenInfoIdx);
-				if (token.getStartIndex() >= e.fOffset + e.fText.length()) {
-					if (tokenStartsAt + lengthDiff == token.getStartIndex() && tokenInfo.type == token.getType()
-							&& token.getStopIndex() - token.getStartIndex() + 1 == tokenInfo.length) {
-						return new Region(regionOffset, token.getStartIndex() - regionOffset);
-					}
-				}
-				if (tokenStartsAt + lengthDiff + tokenInfo.length > token.getStopIndex() + 1)
+				if (tokenInfo.type != token.getType()
+						|| token.getStopIndex() - token.getStartIndex() + 1 != tokenInfo.length)
 					break;
-				internalModifyableTokenInfos.remove(tokenInfoIdx);
+				if (tokenStartsAt + tokenInfo.length > e.fOffset)
+					break;
 				tokenStartsAt += tokenInfo.length;
-				if (tokenStartsAt + lengthDiff > token.getStartIndex())
-					break;
-			}
-			internalModifyableTokenInfos.add(tokenInfoIdx++, createTokenInfo(token));
-			token = (CommonToken) source.nextToken();
-		}
-		internalModifyableTokenInfos.subList(tokenInfoIdx, internalModifyableTokenInfos.size()).clear();
-		// add subsequent tokens
-		if (tokenInfoIdx >= internalModifyableTokenInfos.size()) {
-			while (token != Token.EOF_TOKEN) {
-				internalModifyableTokenInfos.add(createTokenInfo(token));
+				tokenInfoIdx++;
 				token = (CommonToken) source.nextToken();
 			}
+			regionLength -= tokenStartsAt;
+			regionOffset = tokenStartsAt;
+
+			int lengthDiff = e.fText.length() - e.fLength;
+			// compute region length
+			while (true) {
+				if (token == Token.EOF_TOKEN || tokenInfoIdx >= internalModifyableTokenInfos.size())
+					break;
+				while (true) {
+					if (tokenInfoIdx >= internalModifyableTokenInfos.size())
+						break;
+					TokenInfo tokenInfo = internalModifyableTokenInfos.get(tokenInfoIdx);
+					if (token.getStartIndex() >= e.fOffset + e.fText.length()) {
+						if (tokenStartsAt + lengthDiff == token.getStartIndex() && tokenInfo.type == token.getType()
+								&& token.getStopIndex() - token.getStartIndex() + 1 == tokenInfo.length) {
+							return new Region(regionOffset, token.getStartIndex() - regionOffset);
+						}
+					}
+					if (tokenStartsAt + lengthDiff + tokenInfo.length > token.getStopIndex() + 1)
+						break;
+					internalModifyableTokenInfos.remove(tokenInfoIdx);
+					tokenStartsAt += tokenInfo.length;
+					if (tokenStartsAt + lengthDiff > token.getStartIndex())
+						break;
+				}
+				internalModifyableTokenInfos.add(tokenInfoIdx++, createTokenInfo(token));
+				token = (CommonToken) source.nextToken();
+			}
+			internalModifyableTokenInfos.subList(tokenInfoIdx, internalModifyableTokenInfos.size()).clear();
+			// add subsequent tokens
+			if (tokenInfoIdx >= internalModifyableTokenInfos.size()) {
+				while (token != Token.EOF_TOKEN) {
+					internalModifyableTokenInfos.add(createTokenInfo(token));
+					token = (CommonToken) source.nextToken();
+				}
+			}
+			return new Region(regionOffset, regionLength);
+		} finally {
+			setTokens(internalModifyableTokenInfos);
 		}
-		setTokens(internalModifyableTokenInfos);
-		return new Region(regionOffset, regionLength);
 	}
 
 	protected Lexer createLexer(String string) {
@@ -297,6 +299,5 @@ public class DocumentTokenSource {
 	public boolean isCheckInvariant() {
 		return checkInvariant;
 	}
-
 
 }
