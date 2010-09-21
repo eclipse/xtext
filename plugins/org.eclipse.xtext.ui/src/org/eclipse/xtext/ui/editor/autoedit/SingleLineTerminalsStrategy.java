@@ -24,12 +24,14 @@ public class SingleLineTerminalsStrategy extends AbstractEditStrategy {
 		this.right = right;
 		return this;
 	}
-	
+
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
 			throws BadLocationException {
-		handleInsertLeftTerminal(document, command);
-		handleInsertRightTerminal(document, command);
+		if (command.length == 0) {
+			handleInsertLeftTerminal(document, command);
+			handleInsertRightTerminal(document, command);
+		}
 		handleDeletion(document, command);
 	}
 
