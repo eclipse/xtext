@@ -30,6 +30,24 @@ public class DocumentUtilTest extends AbstractXtextDocumentTest {
 		assertEquals(9,util.searchInSamePartition("}", document, 7).getOffset());
 	}
 	
+	public void testSearchInSamePartition_1() throws Exception {
+		String s = "              4";
+		XtextDocument document = getDocument(s);
+		assertEquals(s.length()-1,util.searchInSamePartition("4", document, 0).getOffset());
+	}
+	
+	public void testSearchInSamePartition_2() throws Exception {
+		String s = "              ";
+		XtextDocument document = getDocument(s);
+		assertNull(util.searchInSamePartition("4", document, 0));
+	}
+	public void testSearchInSamePartition_3() throws Exception {
+		String s = " /*      4      */4";
+		XtextDocument document = getDocument(s);
+		assertEquals(s.length()-1,util.searchInSamePartition("4", document, 0).getOffset());
+	}
+	
+	
 	public void testSearchBackwards_1() throws Exception {
 		assertEquals(3,util.searchBackwardsInSamePartition("foo", getDocument("   foo   /*  foo */  "), 20).getOffset());
 	}
