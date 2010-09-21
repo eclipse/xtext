@@ -7,27 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import org.eclipse.xtext.validation.Issue.Severity;
+import org.eclipse.xtext.diagnostics.Severity;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * Implement a diagnostic converter if you want to customize the region that is computed for 
  * resource diagnostics or validation diagnostics.
- * The acceptor allows more than one marker per diagnostic to be created.
+ * The acceptor allows more than one issue per diagnostic to be created.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @ImplementedBy(DiagnosticConverterImpl.class)
 public interface IDiagnosticConverter {
 
 	/**
-	 * Accepts the created markers.
+	 * Accepts the created issues.
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
 	interface Acceptor {
 		
 		/**
-		 * Accepts the create markers. Implementors should ignore any null values that are passed to this method.
+		 * Accepts the created issues. Implementors should ignore any null values that are passed to this method.
 		 * @param the issue to be accepted. May be null.
 		 */
 		void accept(Issue issue);

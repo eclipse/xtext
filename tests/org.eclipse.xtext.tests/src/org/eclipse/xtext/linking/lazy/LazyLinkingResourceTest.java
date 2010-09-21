@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
-import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
@@ -95,7 +95,7 @@ public class LazyLinkingResourceTest extends TestCase {
         res.setDiagnosticMessageProvider(new LinkingDiagnosticMessageProvider() {
         	@Override
         	public DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {
-        		return new DiagnosticMessage("myMessage", DiagnosticSeverity.WARNING, null);
+        		return new DiagnosticMessage("myMessage", Severity.WARNING, null);
         	}
         });
         assertTrue(res.getWarnings().isEmpty());

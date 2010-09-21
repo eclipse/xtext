@@ -13,11 +13,11 @@ package org.eclipse.xtext.diagnostics;
 public class DiagnosticMessage {
 
 	private final String message;
-	private final DiagnosticSeverity severity;
+	private final Severity severity;
 	private final String issueCode;
 	private final String[] issueData;
 	
-	public DiagnosticMessage(String message, DiagnosticSeverity severity, String issueCode, String... issueData) {
+	public DiagnosticMessage(String message, Severity severity, String issueCode, String... issueData) {
 		this.message = message;
 		this.severity = severity;
 		this.issueCode = issueCode;
@@ -36,7 +36,7 @@ public class DiagnosticMessage {
 		return message;
 	}
 	
-	public DiagnosticSeverity getSeverity() {
+	public Severity getSeverity() {
 		return severity;
 	}
 }

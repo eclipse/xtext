@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
@@ -244,8 +244,8 @@ public class XtextResource extends ResourceImpl {
 
 		final ListBasedDiagnosticConsumer consumer = new ListBasedDiagnosticConsumer();
 		linker.linkModel(parseResult.getRootASTElement(), consumer);
-		getErrors().addAll(consumer.getResult(DiagnosticSeverity.ERROR));
-		getWarnings().addAll(consumer.getResult(DiagnosticSeverity.WARNING));
+		getErrors().addAll(consumer.getResult(Severity.ERROR));
+		getWarnings().addAll(consumer.getResult(Severity.WARNING));
 	}
 
 	private void addAdapterIfNeccessary(CompositeNode node) {
