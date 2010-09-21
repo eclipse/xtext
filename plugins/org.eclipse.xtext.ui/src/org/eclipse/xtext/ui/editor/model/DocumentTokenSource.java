@@ -146,6 +146,8 @@ public class DocumentTokenSource {
 	private IRegion previousRegion;
 	private DocumentEvent previousEvent;
 
+	@Inject
+	@Named(LexerUIBindings.HIGHLIGHTING)
 	private Provider<Lexer> lexer;
 
 	public Iterable<ILexerTokenRegion> getTokenInfos() {
@@ -156,8 +158,7 @@ public class DocumentTokenSource {
 		return previousRegion;
 	}
 
-	@Inject
-	public void setLexer(@Named(LexerUIBindings.HIGHLIGHTING) Provider<Lexer> lexer) {
+	public void setLexer(Provider<Lexer> lexer) {
 		this.lexer = lexer;
 	}
 
@@ -205,7 +206,7 @@ public class DocumentTokenSource {
 		}
 	}
 
-	private IRegion computeDamageRegion(final DocumentEvent e) {
+	protected IRegion computeDamageRegion(final DocumentEvent e) {
 		// empty document -> no dirty region
 		if (e.getDocument().getLength() == 0) {
 			setTokens(createTokenInfos(e.fDocument.get()));
