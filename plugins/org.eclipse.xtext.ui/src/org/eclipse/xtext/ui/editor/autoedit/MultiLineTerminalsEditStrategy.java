@@ -56,7 +56,11 @@ public class MultiLineTerminalsEditStrategy extends AbstractEditStrategy {
 	private IIndentationInformation indentationInformation;
 
 	@Inject
-	private DocumentUtil util = new DocumentUtil();
+	protected DocumentUtil util = new DocumentUtil();
+	
+	public void setDocumentUtil(DocumentUtil util) {
+		this.util = util;
+	}
 
 	public MultiLineTerminalsEditStrategy configure(String leftTerminal, String indentationString, String rightTerminal) {
 		this.leftTerminal = leftTerminal;

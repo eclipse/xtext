@@ -46,14 +46,18 @@ public class DocumentUtil {
 			return null;
 		ITypedRegion partition = document.getPartition(startOffset);
 		int ignoredPrefix = startOffset;
-		int indexOf = document.get().substring(startOffset).indexOf(toFind);
+		int indexOf = document.get().substring(ignoredPrefix).indexOf(toFind);
+		if (indexOf!=-1)
+			indexOf+=ignoredPrefix;
 		while (indexOf>=0 && indexOf<document.getLength()) {
 			ITypedRegion partition2 = document.getPartition(indexOf);
 			if (partition2.getType().equals(partition.getType())) {
-				return new Region(indexOf+ignoredPrefix,toFind.length());
+				return new Region(indexOf,toFind.length());
 			}
 			ignoredPrefix = partition2.getOffset()+partition2.getLength();
 			indexOf=document.get().substring(ignoredPrefix).indexOf(toFind);
+			if (indexOf!=-1)
+				indexOf+=ignoredPrefix;
 		}
 		return null;
 	}
