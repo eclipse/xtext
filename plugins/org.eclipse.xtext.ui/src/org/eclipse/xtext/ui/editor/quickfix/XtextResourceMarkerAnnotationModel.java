@@ -12,7 +12,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
-import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
+import org.eclipse.xtext.ui.util.IssueUtil;
 
 /**
  * @author Heiko Behrens - Initial contribution and API

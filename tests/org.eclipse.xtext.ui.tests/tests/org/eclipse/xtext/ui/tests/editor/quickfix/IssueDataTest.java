@@ -17,12 +17,12 @@ import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.ui.tests.quickfix.validation.QuickfixCrossrefTestLanguageJavaValidator;
+import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
 

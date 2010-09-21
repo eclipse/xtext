@@ -26,8 +26,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ui.IImageHelper;
-import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
+import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Inject;
