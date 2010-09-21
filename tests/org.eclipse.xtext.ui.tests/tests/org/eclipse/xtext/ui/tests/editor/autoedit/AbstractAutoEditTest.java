@@ -63,7 +63,7 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 		int cursor = string.indexOf('|');
 		assertEquals(string.replace("|", ""), editor.getDocument().get());
 		ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-		assertEquals(cursor, selection.getOffset());
+		assertEquals("unexpected cursor position:",cursor, selection.getOffset());
 	}
 
 	protected void pressKey(XtextEditor editor, char c) throws Exception {
