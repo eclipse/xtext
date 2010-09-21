@@ -504,7 +504,9 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	 * Sets the URIs for the generated EMF generator models (aka genmodels).
 	 * 
 	 * @param uris
+	 * @deprecated The property 'genModels' is deprecated. Please use 'referencedGenModels' instead.
 	 */
+	@Deprecated
 	public void setGenModels(String uris) {
 		log.warn("The property 'genModels' is deprecated. Please use 'referencedGenModels' instead.");
 		setReferencedGenModels(uris);
