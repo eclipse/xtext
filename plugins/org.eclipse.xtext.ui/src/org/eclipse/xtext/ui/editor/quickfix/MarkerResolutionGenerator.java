@@ -25,7 +25,7 @@ import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
-import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
+import org.eclipse.xtext.ui.util.IssueUtil;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;

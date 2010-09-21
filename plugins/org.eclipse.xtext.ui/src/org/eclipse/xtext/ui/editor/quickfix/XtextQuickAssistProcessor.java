@@ -25,8 +25,8 @@ import org.eclipse.jface.text.source.IAnnotationModelExtension2;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
+import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.Sets;

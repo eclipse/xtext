@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.model.edit;
+package org.eclipse.xtext.ui.util;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.emf.common.util.URI;

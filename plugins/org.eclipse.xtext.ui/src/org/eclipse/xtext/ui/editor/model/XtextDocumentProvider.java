@@ -31,13 +31,13 @@ import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 
