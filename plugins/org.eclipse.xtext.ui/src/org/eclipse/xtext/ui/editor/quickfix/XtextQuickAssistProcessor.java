@@ -24,7 +24,6 @@ import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModelExtension2;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
-import org.eclipse.xtext.ui.MarkerUtil;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
@@ -39,9 +38,6 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 
 	@Inject
 	private IssueUtil issueUtil;
-
-	@Inject
-	private MarkerUtil markerUtil;
 
 	private String errorMessage;
 
@@ -64,7 +60,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 			MarkerAnnotation markerAnnotation = (MarkerAnnotation) annotation;
 			if (!markerAnnotation.isQuickFixableStateSet())
 				markerAnnotation.setQuickFixable(getResolutionProvider().hasResolutionFor(
-						markerUtil.getCode(markerAnnotation)));
+						issueUtil.getCode(markerAnnotation)));
 			return markerAnnotation.isQuickFixable();
 		}
 		return false;
@@ -190,7 +186,4 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		return issueUtil;
 	}
 	
-	public MarkerUtil getMarkerUtil() {
-		return markerUtil;
-	}
 }

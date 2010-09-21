@@ -31,7 +31,7 @@ import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.MarkerUtil;
+import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
@@ -65,7 +65,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	private IssueResolutionProvider issueResolutionProvider;
 
 	@Inject
-	private MarkerUtil markerUtil;
+	private IssueUtil issueUtil;
 
 	@Inject
 	private IResourceForEditorInputFactory resourceForEditorInputFactory;
@@ -206,7 +206,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	protected IAnnotationModel createAnnotationModel(Object element) throws CoreException {
 		if (element instanceof IFileEditorInput) {
 			IFileEditorInput input = (IFileEditorInput) element;
-			return new XtextResourceMarkerAnnotationModel(input.getFile(), issueResolutionProvider, markerUtil);
+			return new XtextResourceMarkerAnnotationModel(input.getFile(), issueResolutionProvider, issueUtil);
 		}
 		return super.createAnnotationModel(element);
 	}
