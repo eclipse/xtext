@@ -76,7 +76,7 @@ public abstract class AbstractEditStrategy implements IAutoEditStrategy, VerifyK
 		return builder.toString();
 	}
 
-	protected boolean isIdentifierPart(IDocument doc, int offset) {
+	protected boolean isIdentifierPart(IDocument doc, int offset) throws BadLocationException {
 		if (doc.getLength() <= offset) {
 			return false;
 		}
