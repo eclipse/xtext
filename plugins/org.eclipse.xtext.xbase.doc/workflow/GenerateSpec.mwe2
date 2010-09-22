@@ -1,4 +1,4 @@
-module workflow.GenerateSpec
+module GenerateSpec
 
 import org.eclipse.emf.mwe.utils.*
 
@@ -7,7 +7,7 @@ var modelPath = "src/"
 
 Workflow {
 
-	component = @XDocGenerator {
+	component = @workflow.XDocGenerator {
 		// or define search scope explicitly
 		modelPath = modelPath
 		targetDir = targetDir
