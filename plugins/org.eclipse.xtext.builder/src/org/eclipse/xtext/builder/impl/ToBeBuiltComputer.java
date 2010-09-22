@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
@@ -36,7 +37,7 @@ public class ToBeBuiltComputer {
 
 	@Inject
 	private IStorage2UriMapper mapper;
-	
+
 	@Inject
 	private UriValidator uriValidator;
 
@@ -78,25 +79,27 @@ public class ToBeBuiltComputer {
 					}
 				}
 		);
-		for(URI existingURI: existingURIs) {
+		for (URI existingURI : existingURIs) {
 			toBeBuilt.getToBeDeleted().remove(existingURI);
 			toBeBuilt.getToBeUpdated().remove(existingURI);
 		}
 		return toBeBuilt;
 	}
-	
+
 	public ToBeBuilt updateProject(IProject project, IProgressMonitor monitor) throws CoreException {
 		final SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingReosurces, 1);
 		progress.subTask(Messages.ToBeBuiltComputer_CollectingReosurces);
-		
+
 		final ToBeBuilt toBeBuilt = removeProject(project, progress.newChild(1));
-		if (!project.isAccessible() || progress.isCanceled())
+		if (!project.isAccessible())
 			return toBeBuilt;
-		
+		if (progress.isCanceled())
+			throw new OperationCanceledException();
+
 		project.accept(new IResourceVisitor() {
 			public boolean visit(IResource resource) throws CoreException {
 				if (progress.isCanceled())
-					return false;
+					throw new OperationCanceledException();
 				if (resource instanceof IStorage) {
 					return updateStorage(null, toBeBuilt, (IStorage) resource);
 				}
@@ -115,7 +118,7 @@ public class ToBeBuiltComputer {
 		}
 		return true;
 	}
-	
+
 	public boolean removeStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {
 		if (!isHandled(storage))
 			return true;
@@ -132,9 +135,9 @@ public class ToBeBuiltComputer {
 
 	protected URI getUri(IStorage file) {
 		URI uri = mapper.getUri(file);
-		return uri!=null && isValid(uri, file)?uri:null;
+		return uri != null && isValid(uri, file) ? uri : null;
 	}
-	
+
 	protected boolean isValid(URI uri, IStorage storage) {
 		return uriValidator.isValid(uri, storage);
 	}
