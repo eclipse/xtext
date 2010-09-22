@@ -25,7 +25,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -40,13 +40,15 @@ public class XtextHyperlinkHelper extends HyperlinkHelper {
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
 	
+	@Inject 
+	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
+	
 	@Override
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
 		super.createHyperlinksByOffset(resource, offset, acceptor);
-		TextLocation location = new TextLocation();
-		EObject objectAtOffset = EObjectAtOffsetHelper.resolveElementAt(resource, offset, location);
+		EObject objectAtOffset = eObjectAtOffsetHelper.resolveElementAt(resource, offset);
 		if (objectAtOffset instanceof AbstractRule) {
-			TextLocation nameLocation = locationInFileProvider.getLocation(objectAtOffset, XtextPackage.Literals.ABSTRACT_RULE__NAME, 0);
+			ITextRegion nameLocation = locationInFileProvider.getSignificantTextRegion(objectAtOffset, XtextPackage.Literals.ABSTRACT_RULE__NAME, 0);
 			if (nameLocation != null && nameLocation.contains(offset)) {
 				AbstractRule rule = (AbstractRule) objectAtOffset;
 				createLinksToBase(nameLocation, rule, acceptor);
@@ -57,7 +59,7 @@ public class XtextHyperlinkHelper extends HyperlinkHelper {
 		}
 	}
 
-	protected void createLinksToBase(TextLocation nameLocation,	AbstractRule rule, IHyperlinkAcceptor acceptor) {
+	protected void createLinksToBase(ITextRegion nameLocation,	AbstractRule rule, IHyperlinkAcceptor acceptor) {
 		Set<AbstractRule> visited = Sets.newHashSet();
 		Grammar grammar = GrammarUtil.getGrammar(rule);
 		for(Grammar used: grammar.getUsedGrammars()) {
@@ -78,7 +80,7 @@ public class XtextHyperlinkHelper extends HyperlinkHelper {
 		}
 	}
 	
-	protected Region toRegion(TextLocation location) {
+	protected Region toRegion(ITextRegion location) {
 		return new Region(location.getOffset(), location.getLength());
 	}
 	

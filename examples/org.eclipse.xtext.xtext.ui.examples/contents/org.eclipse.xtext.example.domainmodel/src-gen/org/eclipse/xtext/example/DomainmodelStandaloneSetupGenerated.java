@@ -39,6 +39,5 @@ public class DomainmodelStandaloneSetupGenerated implements ISetup {
 
 
 
-
 	}
 }

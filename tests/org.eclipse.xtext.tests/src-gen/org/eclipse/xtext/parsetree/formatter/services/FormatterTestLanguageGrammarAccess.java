@@ -461,7 +461,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//FQN returns ecore::EString:
+		//FQN:
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -669,7 +669,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype1");
 		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Datatype1 returns ecore::EString:
+		//Datatype1:
 		//	FQN;
 		public ParserRule getRule() { return rule; }
 
@@ -681,7 +681,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype2");
 		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Datatype2 returns ecore::EString:
+		//Datatype2:
 		//	FQN;
 		public ParserRule getRule() { return rule; }
 
@@ -693,7 +693,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype3");
 		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Datatype3 returns ecore::EString:
+		//Datatype3:
 		//	FQN;
 		public ParserRule getRule() { return rule; }
 
@@ -941,7 +941,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getFqnObjAccess().getRule();
 	}
 
-	//FQN returns ecore::EString:
+	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
@@ -1021,7 +1021,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getSuppressedHiddenSubIDAccess().getRule();
 	}
 
-	//Datatype1 returns ecore::EString:
+	//Datatype1:
 	//	FQN;
 	public Datatype1Elements getDatatype1Access() {
 		return (pDatatype1 != null) ? pDatatype1 : (pDatatype1 = new Datatype1Elements());
@@ -1031,7 +1031,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getDatatype1Access().getRule();
 	}
 
-	//Datatype2 returns ecore::EString:
+	//Datatype2:
 	//	FQN;
 	public Datatype2Elements getDatatype2Access() {
 		return (pDatatype2 != null) ? pDatatype2 : (pDatatype2 = new Datatype2Elements());
@@ -1041,7 +1041,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getDatatype2Access().getRule();
 	}
 
-	//Datatype3 returns ecore::EString:
+	//Datatype3:
 	//	FQN;
 	public Datatype3Elements getDatatype3Access() {
 		return (pDatatype3 != null) ? pDatatype3 : (pDatatype3 = new Datatype3Elements());

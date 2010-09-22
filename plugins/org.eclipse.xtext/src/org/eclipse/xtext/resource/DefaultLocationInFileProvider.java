@@ -30,8 +30,8 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.util.ParsetreeSwitch;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 
 /**
  * @author Peter Friese - Implementation
@@ -39,33 +39,75 @@ import org.eclipse.xtext.util.TextLocation;
  */
 public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 
-	public TextLocation getLocation(final EObject owner, EStructuralFeature feature, final int indexInList) {
-		return new EcoreSwitch<TextLocation>() {
+	public ITextRegion getSignificantTextRegion(EObject obj) {
+		return getTextRegion(obj, true);
+	}
+
+	public ITextRegion getFullTextRegion(EObject obj) {
+		return getTextRegion(obj, false);
+	}
+
+	protected ITextRegion getTextRegion(EObject obj, boolean isSignificant) {
+		final NodeAdapter adapter = NodeUtil.getNodeAdapter(obj);
+		if (adapter == null) {
+			if (obj.eContainer() == null)
+				return ITextRegion.EMPTY_REGION;
+			return getTextRegion(obj.eContainer(), isSignificant);
+		}
+		List<AbstractNode> nodes = null;
+		if (isSignificant)
+			nodes = getLocationNodes(obj);
+		if (nodes == null || nodes.isEmpty())
+			nodes = Collections.<AbstractNode> singletonList(adapter.getParserNode());
+		return createRegion(nodes);
+	}
+
+	public ITextRegion getSignificantTextRegion(final EObject owner, EStructuralFeature feature, final int indexInList) {
+		return getTextRegion(owner, feature, indexInList, true);
+	}
+
+	public ITextRegion getFullTextRegion(EObject owner, EStructuralFeature feature, int indexInList) {
+		return getTextRegion(owner, feature, indexInList, false);
+	}
+
+	private ITextRegion getTextRegion(final EObject owner, EStructuralFeature feature, final int indexInList,
+			final boolean isSignificant) {
+		return new EcoreSwitch<ITextRegion>() {
 			@Override
-			public TextLocation caseEAttribute(EAttribute feature) {
-				return getLocationOfAttribute(owner, feature, indexInList);
+			public ITextRegion caseEAttribute(EAttribute feature) {
+				return getLocationOfAttribute(owner, feature, indexInList, isSignificant);
 			}
 
 			@Override
-			public TextLocation caseEReference(EReference feature) {
+			public ITextRegion caseEReference(EReference feature) {
 				if (feature.isContainment() || feature.isContainer()) {
-					return getLocationOfContainmentReference(owner, feature, indexInList);
+					return getLocationOfContainmentReference(owner, feature, indexInList, isSignificant);
 				} else {
-					return getLocationOfCrossReference(owner, feature, indexInList);
+					return getLocationOfCrossReference(owner, feature, indexInList, isSignificant);
 				}
 			}
 
 		}.doSwitch(feature);
 	}
 
-	protected TextLocation getLocationOfContainmentReference(final EObject owner, EReference feature,
-			final int indexInList) {
-		Object referencedElement = (feature.isMany()) ? ((List<?>) owner.eGet(feature)).get(indexInList) : owner
-				.eGet(feature);
-		return getLocation((EObject) referencedElement);
+	protected ITextRegion getLocationOfContainmentReference(final EObject owner, EReference feature,
+			final int indexInList, boolean isSignificant) {
+		Object referencedElement = null;
+		if(feature.isMany()) {
+			List<?> values = (List<?>) owner.eGet(feature);
+			if(indexInList >= values.size())
+				referencedElement = owner;
+			else
+				referencedElement = values.get(indexInList);
+		}
+		else {
+			referencedElement = owner.eGet(feature);
+		}
+		return getTextRegion((EObject) referencedElement, isSignificant);
 	}
 
-	protected TextLocation getLocationOfCrossReference(EObject owner, EReference reference, int indexInList) {
+	protected ITextRegion getLocationOfCrossReference(EObject owner, EReference reference, int indexInList,
+			boolean isSignificant) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(owner);
 		if (nodeAdapter != null) {
 			CompositeNode parserNode = nodeAdapter.getParserNode();
@@ -75,11 +117,11 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 					AbstractNode ownerChildNode = (AbstractNode) childrenIterator.next();
 					EObject grammarElement = ownerChildNode.getGrammarElement();
 					if (grammarElement instanceof CrossReference) {
-						EReference crossReference2 = GrammarUtil.getReference((CrossReference) grammarElement, owner
-								.eClass());
+						EReference crossReference2 = GrammarUtil.getReference((CrossReference) grammarElement,
+								owner.eClass());
 						if (reference == crossReference2) {
 							if (currentIndex == indexInList || !reference.isMany()) {
-								return new TextLocation(ownerChildNode.getOffset(), ownerChildNode.getLength());
+								return new TextRegion(ownerChildNode.getOffset(), ownerChildNode.getLength());
 							}
 							++currentIndex;
 						}
@@ -89,37 +131,23 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 						childrenIterator.prune();
 					}
 				}
-				return getLocation(owner);
+				return getTextRegion(owner, isSignificant);
 			}
 		}
 		return null;
 	}
 
-	protected TextLocation getLocationOfAttribute(EObject owner, EAttribute attribute, int indexInList) {
+	protected ITextRegion getLocationOfAttribute(EObject owner, EAttribute attribute, int indexInList,
+			boolean isSignificant) {
 		if (indexInList >= 0) {
 			List<AbstractNode> findNodesForFeature = NodeUtil.findNodesForFeature(owner, attribute);
 			if (indexInList < findNodesForFeature.size()) {
 				AbstractNode node = findNodesForFeature.get(indexInList);
-				return new TextLocation(node.getOffset(), node.getLength());
+				return new TextRegion(node.getOffset(), node.getLength());
 			}
-			return getLocation(owner);
+			return getTextRegion(owner, isSignificant);
 		}
 		return null;
-	}
-
-	public TextLocation getLocation(EObject obj) {
-		final NodeAdapter adapter = NodeUtil.getNodeAdapter(obj);
-		if (adapter == null) {
-			if (obj.eContainer() == null)
-				return new TextLocation(0, 0);
-			return getLocation(obj.eContainer());
-		}
-
-		List<AbstractNode> nodes = getLocationNodes(obj);
-		if (nodes == null || nodes.isEmpty())
-			nodes = Collections.<AbstractNode> singletonList(adapter.getParserNode());
-
-		return createRegion(nodes);
 	}
 
 	protected List<AbstractNode> getLocationNodes(EObject obj) {
@@ -163,64 +191,17 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		return result != null ? result : eClass.getEStructuralFeature("id");
 	}
 
-	protected static class OffsetCalculator extends ParsetreeSwitch<LeafNode> {
-
-		private boolean forward = true;
-
-		public AbstractNode handle(List<AbstractNode> nodes, boolean forward) {
-			this.forward = forward;
-			AbstractNode result = handleImpl(nodes);
-			if (result == null) {
-				if (forward)
-					result = nodes.get(0);
-				else
-					result = nodes.get(nodes.size() - 1);
-			}
-			return result;
-		}
-
-		public LeafNode handleImpl(List<AbstractNode> nodes) {
-			if (forward) {
-				for (AbstractNode node : nodes) {
-					LeafNode result = doSwitch(node);
-					if (result != null)
-						return result;
-				}
-			} else {
-				for (int i = nodes.size() - 1; i >= 0; i--) {
-					AbstractNode node = nodes.get(i);
-					LeafNode result = doSwitch(node);
-					if (result != null)
-						return result;
-				}
-			}
-			return null;
-		}
-
-		@Override
-		public LeafNode caseCompositeNode(CompositeNode object) {
-			return handleImpl(object.getChildren());
-		}
-
-		@Override
-		public LeafNode caseLeafNode(LeafNode object) {
-			if (!object.isHidden())
-				return object;
-			return null;
-		}
-	}
-
-	protected TextLocation createRegion(final List<AbstractNode> nodes) {
+	protected ITextRegion createRegion(final List<AbstractNode> nodes) {
 		// if we've got more than one ID elements, we want to select them all
-		OffsetCalculator calculator = createCalculator();
-		AbstractNode firstNode = calculator.handle(nodes, true);
-		AbstractNode lastNode = calculator.handle(nodes, false);
-		int length = (lastNode.getOffset() - firstNode.getOffset()) + lastNode.getLength();
-		return new TextLocation(firstNode.getOffset(), length);
+		ITextRegion result = ITextRegion.EMPTY_REGION;
+		for (AbstractNode node : nodes) {
+			if (!isHidden(node))
+				result = result.merge(new TextRegion(node.getOffset(), node.getLength()));
+		}
+		return result;
 	}
 
-	protected OffsetCalculator createCalculator() {
-		return new OffsetCalculator();
+	protected boolean isHidden(AbstractNode node) {
+		return node instanceof LeafNode && ((LeafNode) node).isHidden();
 	}
-
 }

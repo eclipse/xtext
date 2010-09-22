@@ -126,7 +126,7 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getElementAccess().getRule();
 	}
 
-	//FQN returns ecore::EString:
+	//FQN:
 	//	ID ("." ID)*;
 	public BaseInheritanceTestLanguageGrammarAccess.FQNElements getFQNAccess() {
 		return gaBaseInheritanceTestLanguage.getFQNAccess();

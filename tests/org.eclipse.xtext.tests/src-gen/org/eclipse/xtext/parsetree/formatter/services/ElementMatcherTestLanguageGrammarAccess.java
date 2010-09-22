@@ -109,7 +109,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//FQN returns ecore::EString:
+		//FQN:
 		//	ID ("." ID);
 		public ParserRule getRule() { return rule; }
 
@@ -754,7 +754,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getSimpleAccess().getRule();
 	}
 
-	//FQN returns ecore::EString:
+	//FQN:
 	//	ID ("." ID);
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());

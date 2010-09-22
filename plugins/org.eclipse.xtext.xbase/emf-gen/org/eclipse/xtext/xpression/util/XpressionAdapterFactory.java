@@ -143,16 +143,6 @@ public class XpressionAdapterFactory extends AdapterFactoryImpl
 				return createXStringLiteralAdapter();
 			}
 			@Override
-			public Adapter caseXRichString(XRichString object)
-			{
-				return createXRichStringAdapter();
-			}
-			@Override
-			public Adapter caseXRichStringLiteral(XRichStringLiteral object)
-			{
-				return createXRichStringLiteralAdapter();
-			}
-			@Override
 			public Adapter caseXClosure(XClosure object)
 			{
 				return createXClosureAdapter();
@@ -405,36 +395,6 @@ public class XpressionAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXStringLiteralAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XRichString <em>XRich String</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.XRichString
-	 * @generated
-	 */
-	public Adapter createXRichStringAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XRichStringLiteral <em>XRich String Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.XRichStringLiteral
-	 * @generated
-	 */
-	public Adapter createXRichStringLiteralAdapter()
 	{
 		return null;
 	}

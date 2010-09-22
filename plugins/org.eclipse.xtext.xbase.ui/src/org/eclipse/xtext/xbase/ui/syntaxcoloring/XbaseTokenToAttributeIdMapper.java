@@ -8,18 +8,10 @@
 package org.eclipse.xtext.xbase.ui.syntaxcoloring;
 
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseTokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapper {
 	
-	@Override
-	protected String calculateId(String tokenName, int tokenType) {
-		if ("RULE_RICH_STRING".equals(tokenName)) {
-			return DefaultHighlightingConfiguration.STRING_ID;
-		}
-		return super.calculateId(tokenName, tokenType);
-	}
 }

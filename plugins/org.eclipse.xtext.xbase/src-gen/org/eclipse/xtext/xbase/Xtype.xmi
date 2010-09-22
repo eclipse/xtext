@@ -9,7 +9,7 @@
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="JvmTypeReference">
       <type metamodel="/0/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmTypeReference"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmParameterizedTypeReference"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
@@ -23,19 +23,19 @@
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="("/>
-          <elements xsi:type="xtext:Assignment" feature="arguments" operator="+=">
+          <elements xsi:type="xtext:Assignment" feature="paramTypes" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
           </elements>
           <elements xsi:type="xtext:Group" cardinality="*">
             <elements xsi:type="xtext:Keyword" value=","/>
-            <elements xsi:type="xtext:Assignment" feature="arguments" operator="+=">
+            <elements xsi:type="xtext:Assignment" feature="paramTypes" operator="+=">
               <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
             </elements>
           </elements>
           <elements xsi:type="xtext:Keyword" value=")"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="=>"/>
-        <elements xsi:type="xtext:Assignment" feature="arguments" operator="+=">
+        <elements xsi:type="xtext:Assignment" feature="returnType" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
         </elements>
       </alternatives>

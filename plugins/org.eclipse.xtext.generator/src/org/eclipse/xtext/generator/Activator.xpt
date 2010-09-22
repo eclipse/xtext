@@ -3,27 +3,29 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
 «DEFINE file(String activatorName) FOR List[Grammar]»
-«FILE activatorName.asPath()+".java" SRC_GEN_UI»
+«FILE activatorName.asPath()+".java" SRC_GEN_UI-»
 /*
  «fileHeader()»
  */
 package «activatorName.toJavaPackage()»;
+
+import static com.google.inject.util.Modules.override;
+import static com.google.inject.Guice.createInjector;
 
 import org.apache.log4j.Logger;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.util.Modules;
 
 import java.util.Map;
 import java.util.HashMap;
 
 /**
- * Generated
+ * This class was generated. Customizations should only happen in a newly
+ * introduced subclass. 
  */
 public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
 
@@ -39,10 +41,8 @@ public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
 		super.start(context);
 		INSTANCE = this;
 		try {
-			«FOREACH this AS grammar»
-			injectors.put("«grammar.name»", Guice.createInjector(
-				Modules.override(Modules.override(getRuntimeModule("«grammar.name»")).with(getUiModule("«grammar.name»"))).with(getSharedStateModule())
-			));
+			«FOREACH this AS grammar-»
+			registerInjectorFor("«grammar.name»");
 			«ENDFOREACH»
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);
@@ -50,20 +50,33 @@ public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
 		}
 	}
 	
+	protected void registerInjectorFor(String language) throws Exception {
+		injectors.put(language, createInjector(
+		  override(override(getRuntimeModule(language)).with(getSharedStateModule())).with(getUiModule(language))));
+	}
+	
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		injectors.clear();
+		INSTANCE = null;
+		super.stop(context);
+	}
+	
 	public static «activatorName.toSimpleName()» getInstance() {
 		return INSTANCE;
 	}
 	
 	protected Module getRuntimeModule(String grammar) {
-		«FOREACH this AS grammar»
+		«FOREACH this AS grammar-»
 		if ("«grammar.name»".equals(grammar)) {
 		  return new «guiceModuleRt(grammar)»();
 		}
 		«ENDFOREACH»
 		throw new IllegalArgumentException(grammar);
 	}
+	
 	protected Module getUiModule(String grammar) {
-		«FOREACH this AS grammar»
+		«FOREACH this AS grammar-»
 		if ("«grammar.name»".equals(grammar)) {
 		  return new «guiceModuleUi(grammar)»(this);
 		}

@@ -36,7 +36,7 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 		     .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
 			 .addTypeToType(ITypeProvider.Factory.class.getName(), ClasspathTypeProviderFactory.class.getName())
 			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), ClasspathBasedTypeScopeProvider.class.getName())
-			 .addTypeToType(IGlobalScopeProvider.class.getName(), TypesAwareDefaultGlobalScopeProvider.class.getName())
+			 .addfinalTypeToType(IGlobalScopeProvider.class.getName(), TypesAwareDefaultGlobalScopeProvider.class.getName())
 			 .getBindings();
 	}
 	

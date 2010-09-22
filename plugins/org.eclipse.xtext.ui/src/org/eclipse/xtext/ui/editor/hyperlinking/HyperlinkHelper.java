@@ -16,9 +16,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.TextLocation;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -51,6 +53,9 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 	@Inject
 	private Provider<XtextHyperlink> hyperlinkProvider;
 	
+	@Inject
+	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
+	
 	protected Provider<XtextHyperlink> getHyperlinkProvider() {
 		return hyperlinkProvider;
 	}
@@ -70,13 +75,22 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 	}
 
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
-		TextLocation textLocation = new TextLocation();
-		EObject crossLinkedEObject = EObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset,
-				textLocation);
+		EObject crossLinkedEObject = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset);
 		if (crossLinkedEObject != null && !crossLinkedEObject.eIsProxy()) {
-			Region region = new Region(textLocation.getOffset(), textLocation.getLength());
-			createHyperlinksTo(resource, region, crossLinkedEObject, acceptor);
+			AbstractNode crossRefNode = getParentNodeWithCrossReference(NodeUtil.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset));
+			if(crossRefNode!=null) {
+				Region region = new Region(crossRefNode.getOffset(), crossRefNode.getLength());
+				createHyperlinksTo(resource, region, crossLinkedEObject, acceptor);
+			}
 		}
+	}
+	
+	protected AbstractNode getParentNodeWithCrossReference(AbstractNode startNode) {
+		if(startNode == null)
+			return null;
+		if(startNode.getGrammarElement() instanceof CrossReference)
+			return startNode;
+		return getParentNodeWithCrossReference(startNode.getParent());
 	}
 	
 	public void createHyperlinksTo(XtextResource from, Region region, EObject to, IHyperlinkAcceptor acceptor) {

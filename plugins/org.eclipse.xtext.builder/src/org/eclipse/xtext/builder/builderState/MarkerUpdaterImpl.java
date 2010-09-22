@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -49,11 +50,12 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 
 	public void updateMarker(ResourceSet resourceSet, ImmutableList<Delta> resourceDescriptionDeltas,
 			IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.MarkerUpdaterImpl_ValidateResources, resourceDescriptionDeltas.size());
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.MarkerUpdaterImpl_ValidateResources,
+				resourceDescriptionDeltas.size());
 		subMonitor.subTask(Messages.MarkerUpdaterImpl_ValidateResources);
 		for (Delta delta : resourceDescriptionDeltas) {
 			if (subMonitor.isCanceled())
-				return;
+				throw new OperationCanceledException();
 			if (delta.getNew() != null) {
 				Iterable<IStorage> storages = mapper.getStorages(delta.getNew().getURI());
 				SubMonitor child = subMonitor.newChild(1);
@@ -79,7 +81,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 							try {
 								file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_ZERO);
 								file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, IResource.DEPTH_ZERO);
-							} catch(CoreException ex) {
+							} catch (CoreException ex) {
 								log.error(ex.getMessage(), ex);
 							}
 						}
@@ -101,7 +103,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 			IResourceValidator resourceValidator = provider.getResourceValidator();
 			List<Issue> list = resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, getCancelIndicator(subMonitor));
 			if (subMonitor.isCanceled())
-				return;
+				throw new OperationCanceledException();
 			subMonitor.worked(1);
 			file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, IResource.DEPTH_ZERO);
 			file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, IResource.DEPTH_ZERO);
@@ -110,7 +112,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 			}
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
-		} 
+		}
 	}
 
 	private CancelIndicator getCancelIndicator(final IProgressMonitor monitor) {

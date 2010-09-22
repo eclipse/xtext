@@ -35,8 +35,8 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AbstractToken;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor.AssignmentToken;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.TextLocation;
 import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Joiner;
@@ -145,7 +145,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 	@Inject
 	protected TreeConstructionNFAProvider nfaProvider;
 
-	private TextLocation previousLocation;
+	private ITextRegion previousLocation;
 
 	protected EObject root;
 
@@ -286,7 +286,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		return result;
 	}
 
-	public TextLocation getPreviousLocation() {
+	public ITextRegion getPreviousLocation() {
 		return previousLocation;
 	}
 
@@ -298,7 +298,7 @@ public class TreeConstructionReportImpl implements TreeConstructionReport {
 		return success != null;
 	}
 
-	public void setPreviousLocation(TextLocation previousLocation) {
+	public void setPreviousLocation(ITextRegion previousLocation) {
 		this.previousLocation = previousLocation;
 	}
 

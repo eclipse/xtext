@@ -121,7 +121,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IntValue");
 		private final RuleCall cINTTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//IntValue returns ecore::EString:
+		//IntValue:
 		//	INT;
 		public ParserRule getRule() { return rule; }
 
@@ -133,7 +133,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RealValue");
 		private final RuleCall cRealParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//RealValue returns ecore::EString:
+		//RealValue:
 		//	Real;
 		public ParserRule getRule() { return rule; }
 
@@ -150,7 +150,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cEXT_INTTerminalRuleCall_2_0 = (RuleCall)cAlternatives_2.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_2_1 = (RuleCall)cAlternatives_2.eContents().get(1);
 		
-		//Real returns ecore::EString hidden():
+		//Real hidden():
 		//	INT? "." (EXT_INT | INT);
 		public ParserRule getRule() { return rule; }
 
@@ -255,7 +255,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getRealLiteralAccess().getRule();
 	}
 
-	//IntValue returns ecore::EString:
+	//IntValue:
 	//	INT;
 	public IntValueElements getIntValueAccess() {
 		return (pIntValue != null) ? pIntValue : (pIntValue = new IntValueElements());
@@ -265,7 +265,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getIntValueAccess().getRule();
 	}
 
-	//RealValue returns ecore::EString:
+	//RealValue:
 	//	Real;
 	public RealValueElements getRealValueAccess() {
 		return (pRealValue != null) ? pRealValue : (pRealValue = new RealValueElements());
@@ -275,7 +275,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getRealValueAccess().getRule();
 	}
 
-	//Real returns ecore::EString hidden():
+	//Real hidden():
 	//	INT? "." (EXT_INT | INT);
 	public RealElements getRealAccess() {
 		return (pReal != null) ? pReal : (pReal = new RealElements());

@@ -17,7 +17,6 @@ public abstract class AbstractXtextUiModule extends DefaultUiModule {
 		super(plugin);
 	}
 	
-	
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
 		return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();

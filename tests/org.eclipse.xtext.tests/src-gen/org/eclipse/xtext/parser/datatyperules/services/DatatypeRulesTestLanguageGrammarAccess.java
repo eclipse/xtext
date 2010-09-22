@@ -152,7 +152,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cModelIdParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
-		//NestedModelId returns ecore::EString:
+		//NestedModelId:
 		//	ModelId "." ModelId;
 		public ParserRule getRule() { return rule; }
 
@@ -205,7 +205,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cINTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Vector returns ecore::EString:
+		//Vector:
 		//	"(" INT INT ")";
 		public ParserRule getRule() { return rule; }
 
@@ -358,7 +358,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return getModelIdAccess().getRule();
 	}
 
-	//NestedModelId returns ecore::EString:
+	//NestedModelId:
 	//	ModelId "." ModelId;
 	public NestedModelIdElements getNestedModelIdAccess() {
 		return (pNestedModelId != null) ? pNestedModelId : (pNestedModelId = new NestedModelIdElements());
@@ -378,7 +378,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return getFractionAccess().getRule();
 	}
 
-	//Vector returns ecore::EString:
+	//Vector:
 	//	"(" INT INT ")";
 	public VectorElements getVectorAccess() {
 		return (pVector != null) ? pVector : (pVector = new VectorElements());

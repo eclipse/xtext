@@ -13,6 +13,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.builder.clustering.ClusteringUpdater;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
@@ -22,7 +23,7 @@ import com.google.inject.ImplementedBy;
  * Strategy that implements the transitive analysis of dependencies among resources. 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@ImplementedBy(ResourceDescriptionsUpdater.class)
+@ImplementedBy(ClusteringUpdater.class)
 public interface IResourceDescriptionsUpdater {
 
 	/**

@@ -9,7 +9,7 @@ package org.eclipse.xtext.linking;
 
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
-import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -40,7 +40,7 @@ public class LinkingWarningsTest extends AbstractXtextTests implements ILinkingD
 	}
 	
 	public DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {
-		return new DiagnosticMessage(expected, DiagnosticSeverity.WARNING, Diagnostic.LINKING_DIAGNOSTIC);
+		return new DiagnosticMessage(expected, Severity.WARNING, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 
 	public void testNoErrors() throws Exception {

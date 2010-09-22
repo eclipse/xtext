@@ -12,7 +12,7 @@ import java.io.IOException;
 import org.eclipse.xtext.formatting.impl.NodeModelStreamer;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.inject.ImplementedBy;
 
@@ -21,5 +21,5 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(NodeModelStreamer.class)
 public interface INodeModelStreamer {
-	TextLocation feedTokenStream(ITokenStream out, CompositeNode in, int offset, int length) throws IOException;
+	ITextRegion feedTokenStream(ITokenStream out, CompositeNode in, int offset, int length) throws IOException;
 }

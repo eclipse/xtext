@@ -39,6 +39,5 @@ public class ArithmeticsStandaloneSetupGenerated implements ISetup {
 
 
 
-
 	}
 }

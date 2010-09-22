@@ -22,8 +22,9 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.TextRegion;
 
 import com.google.inject.Inject;
 
@@ -41,10 +42,10 @@ public class NodeModelStreamer implements INodeModelStreamer {
 	@Inject
 	protected IValueConverterService valueConverter;
 
-	public TextLocation feedTokenStream(ITokenStream out, CompositeNode in, int offset, int length) throws IOException {
+	public ITextRegion feedTokenStream(ITokenStream out, CompositeNode in, int offset, int length) throws IOException {
 		List<AbstractNode> nodes = getLeafs(in, offset, offset + length);
 		if (nodes.isEmpty())
-			return new TextLocation(in.getOffset(), 0);
+			return new TextRegion(in.getOffset(), 0);
 		boolean lastIsTokenOrComment = false;
 		for (AbstractNode node : nodes) {
 			boolean currentIsTokenOrComment = tokenUtil.isCommentNode(node) || tokenUtil.isToken(node);
@@ -63,7 +64,7 @@ public class NodeModelStreamer implements INodeModelStreamer {
 		out.flush();
 		int rStart = nodes.get(0).getOffset();
 		int rLength = (nodes.get(nodes.size() - 1).getOffset() + nodes.get(nodes.size() - 1).getLength()) - rStart;
-		return new TextLocation(rStart, rLength);
+		return new TextRegion(rStart, rLength);
 	}
 
 	protected List<AbstractNode> getLeafs(EObject root, int fromOffset, int toOffset) {

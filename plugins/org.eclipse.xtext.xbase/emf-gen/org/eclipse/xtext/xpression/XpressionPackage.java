@@ -402,22 +402,13 @@ public interface XpressionPackage extends EPackage
 	int XCONSTRUCTOR_CALL__PARAMS = XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Initializer</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XCONSTRUCTOR_CALL__INITIALIZER = XEXPRESSION_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>XConstructor Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCONSTRUCTOR_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+	int XCONSTRUCTOR_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.XBooleanLiteralImpl <em>XBoolean Literal</em>}' class.
@@ -523,62 +514,6 @@ public interface XpressionPackage extends EPackage
 	int XSTRING_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.XRichStringImpl <em>XRich String</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xpression.impl.XRichStringImpl
-	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXRichString()
-	 * @generated
-	 */
-	int XRICH_STRING = 13;
-
-	/**
-	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XRICH_STRING__EXPRESSIONS = XEXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>XRich String</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XRICH_STRING_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.XRichStringLiteralImpl <em>XRich String Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xpression.impl.XRichStringLiteralImpl
-	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXRichStringLiteral()
-	 * @generated
-	 */
-	int XRICH_STRING_LITERAL = 14;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XRICH_STRING_LITERAL__VALUE = 0;
-
-	/**
-	 * The number of structural features of the '<em>XRich String Literal</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XRICH_STRING_LITERAL_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.XClosureImpl <em>XClosure</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -586,7 +521,7 @@ public interface XpressionPackage extends EPackage
 	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXClosure()
 	 * @generated
 	 */
-	int XCLOSURE = 15;
+	int XCLOSURE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
@@ -623,7 +558,7 @@ public interface XpressionPackage extends EPackage
 	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXCastedExpression()
 	 * @generated
 	 */
-	int XCASTED_EXPRESSION = 16;
+	int XCASTED_EXPRESSION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -660,7 +595,7 @@ public interface XpressionPackage extends EPackage
 	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXAssignment()
 	 * @generated
 	 */
-	int XASSIGNMENT = 17;
+	int XASSIGNMENT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -697,7 +632,7 @@ public interface XpressionPackage extends EPackage
 	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXBinaryOperation()
 	 * @generated
 	 */
-	int XBINARY_OPERATION = 18;
+	int XBINARY_OPERATION = 16;
 
 	/**
 	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
@@ -743,7 +678,7 @@ public interface XpressionPackage extends EPackage
 	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXUnaryOperation()
 	 * @generated
 	 */
-	int XUNARY_OPERATION = 19;
+	int XUNARY_OPERATION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
@@ -789,7 +724,7 @@ public interface XpressionPackage extends EPackage
 	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXWhileExpression()
 	 * @generated
 	 */
-	int XWHILE_EXPRESSION = 20;
+	int XWHILE_EXPRESSION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -826,7 +761,7 @@ public interface XpressionPackage extends EPackage
 	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXTypeLiteral()
 	 * @generated
 	 */
-	int XTYPE_LITERAL = 21;
+	int XTYPE_LITERAL = 19;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -854,7 +789,7 @@ public interface XpressionPackage extends EPackage
 	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXInstanceOfExpression()
 	 * @generated
 	 */
-	int XINSTANCE_OF_EXPRESSION = 22;
+	int XINSTANCE_OF_EXPRESSION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1162,17 +1097,6 @@ public interface XpressionPackage extends EPackage
 	EReference getXConstructorCall_Params();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xpression.XConstructorCall#getInitializer <em>Initializer</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Initializer</em>'.
-	 * @see org.eclipse.xtext.xpression.XConstructorCall#getInitializer()
-	 * @see #getXConstructorCall()
-	 * @generated
-	 */
-	EReference getXConstructorCall_Initializer();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xpression.XBooleanLiteral <em>XBoolean Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1244,48 +1168,6 @@ public interface XpressionPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getXStringLiteral_Value();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xpression.XRichString <em>XRich String</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XRich String</em>'.
-	 * @see org.eclipse.xtext.xpression.XRichString
-	 * @generated
-	 */
-	EClass getXRichString();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xpression.XRichString#getExpressions <em>Expressions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Expressions</em>'.
-	 * @see org.eclipse.xtext.xpression.XRichString#getExpressions()
-	 * @see #getXRichString()
-	 * @generated
-	 */
-	EReference getXRichString_Expressions();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xpression.XRichStringLiteral <em>XRich String Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XRich String Literal</em>'.
-	 * @see org.eclipse.xtext.xpression.XRichStringLiteral
-	 * @generated
-	 */
-	EClass getXRichStringLiteral();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xpression.XRichStringLiteral#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.eclipse.xtext.xpression.XRichStringLiteral#getValue()
-	 * @see #getXRichStringLiteral()
-	 * @generated
-	 */
-	EAttribute getXRichStringLiteral_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xpression.XClosure <em>XClosure</em>}'.
@@ -1738,14 +1620,6 @@ public interface XpressionPackage extends EPackage
 		EReference XCONSTRUCTOR_CALL__PARAMS = eINSTANCE.getXConstructorCall_Params();
 
 		/**
-		 * The meta object literal for the '<em><b>Initializer</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XCONSTRUCTOR_CALL__INITIALIZER = eINSTANCE.getXConstructorCall_Initializer();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.XBooleanLiteralImpl <em>XBoolean Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1808,42 +1682,6 @@ public interface XpressionPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XSTRING_LITERAL__VALUE = eINSTANCE.getXStringLiteral_Value();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.XRichStringImpl <em>XRich String</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xpression.impl.XRichStringImpl
-		 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXRichString()
-		 * @generated
-		 */
-		EClass XRICH_STRING = eINSTANCE.getXRichString();
-
-		/**
-		 * The meta object literal for the '<em><b>Expressions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XRICH_STRING__EXPRESSIONS = eINSTANCE.getXRichString_Expressions();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.XRichStringLiteralImpl <em>XRich String Literal</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xpression.impl.XRichStringLiteralImpl
-		 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getXRichStringLiteral()
-		 * @generated
-		 */
-		EClass XRICH_STRING_LITERAL = eINSTANCE.getXRichStringLiteral();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XRICH_STRING_LITERAL__VALUE = eINSTANCE.getXRichStringLiteral_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.XClosureImpl <em>XClosure</em>}' class.

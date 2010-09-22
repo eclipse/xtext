@@ -43,10 +43,6 @@ public class XtypeActivator extends AbstractUIPlugin {
 				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.xbase.Xpression")).with(getUiModule("org.eclipse.xtext.xbase.Xpression"))).with(getSharedStateModule())
 			));
 			
-			injectors.put("org.eclipse.xtext.xbase.Xbase", Guice.createInjector(
-				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.xbase.Xbase")).with(getUiModule("org.eclipse.xtext.xbase.Xbase"))).with(getSharedStateModule())
-			));
-			
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);
 			throw e;
@@ -67,10 +63,6 @@ public class XtypeActivator extends AbstractUIPlugin {
 		  return new org.eclipse.xtext.xbase.XpressionRuntimeModule();
 		}
 		
-		if ("org.eclipse.xtext.xbase.Xbase".equals(grammar)) {
-		  return new org.eclipse.xtext.xbase.XbaseRuntimeModule();
-		}
-		
 		throw new IllegalArgumentException(grammar);
 	}
 	protected Module getUiModule(String grammar) {
@@ -81,10 +73,6 @@ public class XtypeActivator extends AbstractUIPlugin {
 		
 		if ("org.eclipse.xtext.xbase.Xpression".equals(grammar)) {
 		  return new org.eclipse.xtext.xbase.ui.XpressionUiModule(this);
-		}
-		
-		if ("org.eclipse.xtext.xbase.Xbase".equals(grammar)) {
-		  return new org.eclipse.xtext.xbase.ui.XbaseUiModule(this);
 		}
 		
 		throw new IllegalArgumentException(grammar);

@@ -1278,7 +1278,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cHyphenMinusKeyword_2_1_1 = (Keyword)cAlternatives_2_1.eContents().get(1);
 		private final RuleCall cINTTerminalRuleCall_2_2 = (RuleCall)cGroup_2.eContents().get(2);
 		
-		//NUMBER_LITERAL returns ecore::EString:
+		//NUMBER_LITERAL:
 		//	INT ("." INT)? (("e" | "E") ("+" | "-")? INT)?;
 		public ParserRule getRule() { return rule; }
 
@@ -1328,7 +1328,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cEKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cEKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
-		//EssentialOCLRestrictedKeywords returns ecore::EString:
+		//EssentialOCLRestrictedKeywords:
 		//	"e" | "E";
 		public ParserRule getRule() { return rule; }
 
@@ -1347,7 +1347,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cEssentialOCLRestrictedKeywordsParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//// Intended to be overridden
-		//RestrictedKeywords returns ecore::EString:
+		//RestrictedKeywords:
 		//	EssentialOCLRestrictedKeywords;
 		public ParserRule getRule() { return rule; }
 
@@ -1361,7 +1361,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRestrictedKeywordsParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Identifier returns ecore::EString:
+		//Identifier:
 		//	ID | RestrictedKeywords;
 		public ParserRule getRule() { return rule; }
 
@@ -1379,7 +1379,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringLiteral");
 		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//StringLiteral returns ecore::EString:
+		//StringLiteral:
 		//	STRING;
 		public ParserRule getRule() { return rule; }
 
@@ -1391,7 +1391,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleName");
 		private final RuleCall cIdentifierParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//SimpleName returns ecore::EString:
+		//SimpleName:
 		//	Identifier;
 		public ParserRule getRule() { return rule; }
 
@@ -1411,7 +1411,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cOclInvalidKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		private final Keyword cOclVoidKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
 		
-		//PrimitiveTypeIdentifier returns ecore::EString:
+		//PrimitiveTypeIdentifier:
 		//	"Boolean" | "Integer" | "Real" | "String" | "UnlimitedNatural" | "OclAny" | "OclInvalid" | "OclVoid";
 		public ParserRule getRule() { return rule; }
 
@@ -1468,7 +1468,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cCollectionKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		private final Keyword cOrderedSetKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		
-		//CollectionTypeIdentifier returns ecore::EString:
+		//CollectionTypeIdentifier:
 		//	"Set" | "Bag" | "Sequence" | "Collection" | "OrderedSet";
 		public ParserRule getRule() { return rule; }
 
@@ -3516,7 +3516,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getOclMessageArgAccess().getRule();
 	}
 
-	//NUMBER_LITERAL returns ecore::EString:
+	//NUMBER_LITERAL:
 	//	INT ("." INT)? (("e" | "E") ("+" | "-")? INT)?;
 	public NUMBER_LITERALElements getNUMBER_LITERALAccess() {
 		return (pNUMBER_LITERAL != null) ? pNUMBER_LITERAL : (pNUMBER_LITERAL = new NUMBER_LITERALElements());
@@ -3526,7 +3526,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getNUMBER_LITERALAccess().getRule();
 	}
 
-	//EssentialOCLRestrictedKeywords returns ecore::EString:
+	//EssentialOCLRestrictedKeywords:
 	//	"e" | "E";
 	public EssentialOCLRestrictedKeywordsElements getEssentialOCLRestrictedKeywordsAccess() {
 		return (pEssentialOCLRestrictedKeywords != null) ? pEssentialOCLRestrictedKeywords : (pEssentialOCLRestrictedKeywords = new EssentialOCLRestrictedKeywordsElements());
@@ -3537,7 +3537,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//// Intended to be overridden
-	//RestrictedKeywords returns ecore::EString:
+	//RestrictedKeywords:
 	//	EssentialOCLRestrictedKeywords;
 	public RestrictedKeywordsElements getRestrictedKeywordsAccess() {
 		return (pRestrictedKeywords != null) ? pRestrictedKeywords : (pRestrictedKeywords = new RestrictedKeywordsElements());
@@ -3547,7 +3547,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getRestrictedKeywordsAccess().getRule();
 	}
 
-	//Identifier returns ecore::EString:
+	//Identifier:
 	//	ID | RestrictedKeywords;
 	public IdentifierElements getIdentifierAccess() {
 		return (pIdentifier != null) ? pIdentifier : (pIdentifier = new IdentifierElements());
@@ -3557,7 +3557,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getIdentifierAccess().getRule();
 	}
 
-	//StringLiteral returns ecore::EString:
+	//StringLiteral:
 	//	STRING;
 	public StringLiteralElements getStringLiteralAccess() {
 		return (pStringLiteral != null) ? pStringLiteral : (pStringLiteral = new StringLiteralElements());
@@ -3567,7 +3567,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getStringLiteralAccess().getRule();
 	}
 
-	//SimpleName returns ecore::EString:
+	//SimpleName:
 	//	Identifier;
 	public SimpleNameElements getSimpleNameAccess() {
 		return (pSimpleName != null) ? pSimpleName : (pSimpleName = new SimpleNameElements());
@@ -3577,7 +3577,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getSimpleNameAccess().getRule();
 	}
 
-	//PrimitiveTypeIdentifier returns ecore::EString:
+	//PrimitiveTypeIdentifier:
 	//	"Boolean" | "Integer" | "Real" | "String" | "UnlimitedNatural" | "OclAny" | "OclInvalid" | "OclVoid";
 	public PrimitiveTypeIdentifierElements getPrimitiveTypeIdentifierAccess() {
 		return (pPrimitiveTypeIdentifier != null) ? pPrimitiveTypeIdentifier : (pPrimitiveTypeIdentifier = new PrimitiveTypeIdentifierElements());
@@ -3597,7 +3597,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getPrimitiveTypeAccess().getRule();
 	}
 
-	//CollectionTypeIdentifier returns ecore::EString:
+	//CollectionTypeIdentifier:
 	//	"Set" | "Bag" | "Sequence" | "Collection" | "OrderedSet";
 	public CollectionTypeIdentifierElements getCollectionTypeIdentifierAccess() {
 		return (pCollectionTypeIdentifier != null) ? pCollectionTypeIdentifier : (pCollectionTypeIdentifier = new CollectionTypeIdentifierElements());

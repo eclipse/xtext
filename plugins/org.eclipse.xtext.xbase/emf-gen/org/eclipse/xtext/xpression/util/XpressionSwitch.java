@@ -198,21 +198,6 @@ public class XpressionSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.XRICH_STRING:
-			{
-				XRichString xRichString = (XRichString)theEObject;
-				T result = caseXRichString(xRichString);
-				if (result == null) result = caseXExpression(xRichString);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XpressionPackage.XRICH_STRING_LITERAL:
-			{
-				XRichStringLiteral xRichStringLiteral = (XRichStringLiteral)theEObject;
-				T result = caseXRichStringLiteral(xRichStringLiteral);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case XpressionPackage.XCLOSURE:
 			{
 				XClosure xClosure = (XClosure)theEObject;
@@ -489,38 +474,6 @@ public class XpressionSwitch<T>
 	 * @generated
 	 */
 	public T caseXStringLiteral(XStringLiteral object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>XRich String</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>XRich String</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseXRichString(XRichString object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>XRich String Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>XRich String Literal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseXRichStringLiteral(XRichStringLiteral object)
 	{
 		return null;
 	}

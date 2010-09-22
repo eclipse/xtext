@@ -109,7 +109,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//NAME returns ecore::EString hidden():
+		//NAME hidden():
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -186,7 +186,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getNamedAccess().getRule();
 	}
 
-	//NAME returns ecore::EString hidden():
+	//NAME hidden():
 	//	ID ("." ID)*;
 	public NAMEElements getNAMEAccess() {
 		return (pNAME != null) ? pNAME : (pNAME = new NAMEElements());

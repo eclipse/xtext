@@ -12,7 +12,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
-import org.eclipse.xtext.ui.MarkerUtil;
+import org.eclipse.xtext.ui.util.IssueUtil;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -21,18 +21,18 @@ import org.eclipse.xtext.ui.MarkerUtil;
 public class XtextResourceMarkerAnnotationModel extends ResourceMarkerAnnotationModel {
 
 	private final IssueResolutionProvider issueResolutionProvider;
-	private final MarkerUtil markerUtil;
+	private final IssueUtil issueUtil;
 
-	public XtextResourceMarkerAnnotationModel(IFile file, IssueResolutionProvider issueResolutionProvider, MarkerUtil markerUtil) {
+	public XtextResourceMarkerAnnotationModel(IFile file, IssueResolutionProvider issueResolutionProvider, IssueUtil markerUtil) {
 		super(file);
 		this.issueResolutionProvider = issueResolutionProvider;
-		this.markerUtil = markerUtil;
+		this.issueUtil = markerUtil;
 	}
 
 	@Override
 	protected MarkerAnnotation createMarkerAnnotation(IMarker marker) {
 		MarkerAnnotation annotation = super.createMarkerAnnotation(marker);
-		String issueCode = markerUtil.getCode(annotation);
+		String issueCode = issueUtil.getCode(annotation);
 		annotation.setQuickFixable(issueResolutionProvider.hasResolutionFor(issueCode));
 		return annotation;
 	}

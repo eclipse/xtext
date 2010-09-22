@@ -8,7 +8,7 @@ package org.eclipse.xtext.xtype;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeArgument;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +31,7 @@ public interface XFunctionTypeRef extends JvmParameterizedTypeReference
 {
 	/**
 	 * Returns the value of the '<em><b>Param Types</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeArgument}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Param Types</em>' containment reference list isn't clear,
@@ -40,10 +40,10 @@ public interface XFunctionTypeRef extends JvmParameterizedTypeReference
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Param Types</em>' containment reference list.
 	 * @see org.eclipse.xtext.xtype.XtypePackage#getXFunctionTypeRef_ParamTypes()
-	 * @model containment="true" changeable="false" derived="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<JvmTypeReference> getParamTypes();
+	EList<JvmTypeArgument> getParamTypes();
 
 	/**
 	 * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
@@ -54,10 +54,21 @@ public interface XFunctionTypeRef extends JvmParameterizedTypeReference
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Return Type</em>' containment reference.
+	 * @see #setReturnType(JvmTypeArgument)
 	 * @see org.eclipse.xtext.xtype.XtypePackage#getXFunctionTypeRef_ReturnType()
-	 * @model containment="true" changeable="false" derived="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	JvmTypeReference getReturnType();
+	JvmTypeArgument getReturnType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getReturnType <em>Return Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Return Type</em>' containment reference.
+	 * @see #getReturnType()
+	 * @generated
+	 */
+	void setReturnType(JvmTypeArgument value);
 
 } // XFunctionTypeRef

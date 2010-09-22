@@ -40,8 +40,9 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.TextLocation;
+import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -717,21 +718,22 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		//				ParsetreePackage.Literals.ABSTRACT_NODE__TOTAL_LENGTH,
 		//				ParsetreePackage.Literals.ABSTRACT_NODE__TOTAL_OFFSET,
 		//				ParsetreePackage.Literals.ABSTRACT_NODE__TOTAL_LINE, ParsetreePackage.Literals.ABSTRACT_NODE__PARENT));
-		TextLocation previousLocation = new TextLocation();
-		write(root, wsout, previousLocation);
+		ITextRegion previousLocation = ITextRegion.EMPTY_REGION;
+		previousLocation = write(root, wsout, previousLocation);
 		wsout.flush();
 		report.setPreviousLocation(previousLocation);
 		return report;
 	}
 
-	protected void write(AbstractToken token, WsMergerStream out, TextLocation location) throws IOException {
+	protected ITextRegion write(AbstractToken token, WsMergerStream out, ITextRegion location) throws IOException {
+		ITextRegion currentLocation = location;
 		AbstractNode node = token.getNode();
 		if (node != null) {
-			location.merge(node.getOffset(), node.getLength());
+			currentLocation = currentLocation.merge(new TextRegion(node.getOffset(), node.getLength()));
 		}
 		if (!token.getTokensForSemanticChildren().isEmpty())
 			for (AbstractToken t : token.getTokensForSemanticChildren())
-				write(t, out, location);
+				currentLocation = write(t, out, currentLocation);
 		else {
 			if (token instanceof CommentToken)
 				out.writeComment((LeafNode) node);
@@ -745,6 +747,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				}
 			}
 		}
+		return currentLocation;
 	}
 
 	protected void writeComments(Iterable<LeafNode> comments, WsMergerStream out, Set<AbstractNode> consumedComments)

@@ -30,6 +30,12 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	@Inject
 	private ExpressionsTypeResolver typeResolver;
 	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		getInjector().injectMembers(this);
+	}
+	
 	public void testNullLiteral() throws Exception {
 		assertResolvedReturnType(ExpressionsTypeResolver.VOID_TYPE_NAME, "null");
 	}
@@ -42,11 +48,6 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	public void testStringLiteral() throws Exception {
 		assertResolvedReturnType(ExpressionsTypeResolver.STRING_TYPE_NAME, "'foo'");
 		assertResolvedReturnType(ExpressionsTypeResolver.STRING_TYPE_NAME, "\"foo\"");
-	}
-	
-	public void testRichStringLiteral() throws Exception {
-		assertResolvedReturnType(ExpressionsTypeResolver.STRING_TYPE_NAME, "»foo«");
-		assertResolvedReturnType(ExpressionsTypeResolver.STRING_TYPE_NAME, "»foo«bar»baz«");
 	}
 	
 	public void testIntLiteral() throws Exception {
@@ -77,6 +78,7 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	
 	public void assertResolvedReturnType(String type, String expression) throws Exception {
 		JvmTypeReference typeRef = typeResolver.doSwitch(expression(expression),null);
+		assertNotNull("type ref for "+expression,typeRef);
 		assertEquals(type,toString(typeRef));
 	}
 	
@@ -102,7 +104,7 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	protected String toString(JvmTypeReference typeref) {
 		if (typeref instanceof XFunctionTypeRef) {
 			XFunctionTypeRef funcType = (XFunctionTypeRef) typeref;
-			EList<JvmTypeReference> paramTypes = funcType.getParamTypes();
+			EList<JvmTypeArgument> paramTypes = funcType.getParamTypes();
 			String name = "";
 			int size = paramTypes.size();
 			for (int i=0;i<size;i++) {
@@ -133,7 +135,7 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 			}
 			return name;
 		} 
-		throw new IllegalArgumentException();
+		throw new IllegalArgumentException(typeref.toString());
 	}
 	
 	

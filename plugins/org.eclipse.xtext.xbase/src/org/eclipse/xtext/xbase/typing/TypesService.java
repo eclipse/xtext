@@ -93,9 +93,9 @@ public class TypesService {
 			JvmTypeReference returnType) {
 		XFunctionTypeRef ref = XtypeFactory.eINSTANCE.createXFunctionTypeRef();
 		for (JvmTypeReference xTypeRef : parameterTypes) {
-			ref.getArguments().add(createArgument(copy(xTypeRef)));
+			ref.getParamTypes().add(createArgument(copy(xTypeRef)));
 		}
-		ref.getArguments().add(createArgument(copy(returnType)));
+		ref.setReturnType(createArgument(copy(returnType)));
 		return ref;
 	}
 

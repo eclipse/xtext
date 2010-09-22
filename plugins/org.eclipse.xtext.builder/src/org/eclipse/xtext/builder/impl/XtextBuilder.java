@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.ProgressMonitorWrapper;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -37,9 +38,10 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
+ * @author Knut Wannheden
  */
 public class XtextBuilder extends IncrementalProjectBuilder {
-	
+
 	private static final Logger log = Logger.getLogger(XtextBuilder.class);
 
 	public static final String BUILDER_ID = XtextProjectHelper.BUILDER_ID;
@@ -87,6 +89,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
 			throw e;
+		} catch (OperationCanceledException e) {
+			forgetLastBuiltState();
+			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
@@ -104,25 +109,18 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	protected void incrementalBuild(IResourceDelta delta, final IProgressMonitor monitor) throws CoreException {
 		final SubMonitor progress = SubMonitor.convert(monitor, Messages.XtextBuilder_CollectingResources, 2);
 		progress.subTask(Messages.XtextBuilder_CollectingResources);
-		
+
 		final ToBeBuilt toBeBuilt = new ToBeBuilt();
 		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
 			public boolean visit(IResourceDelta delta) throws CoreException {
 				if (progress.isCanceled())
-					return false;
-				
+					throw new OperationCanceledException();
+
 				if (delta.getResource() instanceof IStorage) {
 					if (delta.getKind() == IResourceDelta.REMOVED) {
-						return toBeBuiltComputer.removeStorage(
-								null, 
-								toBeBuilt, 
-								(IStorage) delta.getResource());
+						return toBeBuiltComputer.removeStorage(null, toBeBuilt, (IStorage) delta.getResource());
 					} else if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.CHANGED) {
-						return toBeBuiltComputer.updateStorage(
-								null, 
-								toBeBuilt, 
-								(IStorage) 
-								delta.getResource());
+						return toBeBuiltComputer.updateStorage(null, toBeBuilt, (IStorage) delta.getResource());
 					}
 				}
 				return true;
@@ -130,10 +128,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		};
 		delta.accept(visitor);
 		if (progress.isCanceled())
-			return;
+			throw new OperationCanceledException();
 		progress.worked(1);
 		doBuild(toBeBuilt, progress.newChild(1), BuildType.INCREMENTAL);
-		
 	}
 
 	/**
@@ -143,19 +140,15 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 */
 	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor, BuildType type) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
-		
+
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 		if (resourceSet instanceof ResourceSetImpl) {
 			((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource> newHashMap());
 		}
-		ImmutableList<Delta> deltas = builderState.update(
-				resourceSet, 
-				toBeBuilt.toBeUpdated,
-				toBeBuilt.toBeDeleted, 
+		ImmutableList<Delta> deltas = builderState.update(resourceSet, toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted,
 				progress.newChild(1));
 		if (participant != null) {
-			participant.build(
-					new IXtextBuilderParticipant.BuildContext(this, resourceSet, deltas, type), 
+			participant.build(new IXtextBuilderParticipant.BuildContext(this, resourceSet, deltas, type),
 					progress.newChild(1));
 		} else {
 			progress.worked(1);
@@ -171,7 +164,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 */
 	protected void fullBuild(final IProgressMonitor monitor, boolean isRecoveryBuild) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
-		
+
 		IProject project = getProject();
 		ToBeBuilt toBeBuilt = 
 			isRecoveryBuild
@@ -205,7 +198,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 				monitor.done();
 		}
 	}
-	
+
 	/**
 	 * @param monitor the progress monitor to use for reporting progress to the user. It is the caller's responsibility
 	 *        to call done() on the given monitor. Accepts null, indicating that no progress should be

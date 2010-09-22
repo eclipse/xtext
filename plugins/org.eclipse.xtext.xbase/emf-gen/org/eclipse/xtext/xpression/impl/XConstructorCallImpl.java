@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
-import org.eclipse.xtext.xpression.XBlockExpression;
 import org.eclipse.xtext.xpression.XConstructorCall;
 import org.eclipse.xtext.xpression.XExpression;
 import org.eclipse.xtext.xpression.XpressionPackage;
@@ -36,7 +35,6 @@ import org.eclipse.xtext.xpression.XpressionPackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xpression.impl.XConstructorCallImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xpression.impl.XConstructorCallImpl#getParams <em>Params</em>}</li>
- *   <li>{@link org.eclipse.xtext.xpression.impl.XConstructorCallImpl#getInitializer <em>Initializer</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,16 +61,6 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * @ordered
 	 */
 	protected EList<XExpression> params;
-
-	/**
-	 * The cached value of the '{@link #getInitializer() <em>Initializer</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInitializer()
-	 * @generated
-	 * @ordered
-	 */
-	protected XBlockExpression initializer;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -162,54 +150,6 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XBlockExpression getInitializer()
-	{
-		return initializer;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetInitializer(XBlockExpression newInitializer, NotificationChain msgs)
-	{
-		XBlockExpression oldInitializer = initializer;
-		initializer = newInitializer;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XpressionPackage.XCONSTRUCTOR_CALL__INITIALIZER, oldInitializer, newInitializer);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInitializer(XBlockExpression newInitializer)
-	{
-		if (newInitializer != initializer)
-		{
-			NotificationChain msgs = null;
-			if (initializer != null)
-				msgs = ((InternalEObject)initializer).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XCONSTRUCTOR_CALL__INITIALIZER, null, msgs);
-			if (newInitializer != null)
-				msgs = ((InternalEObject)newInitializer).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XCONSTRUCTOR_CALL__INITIALIZER, null, msgs);
-			msgs = basicSetInitializer(newInitializer, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XpressionPackage.XCONSTRUCTOR_CALL__INITIALIZER, newInitializer, newInitializer));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -219,8 +159,6 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 				return basicSetType(null, msgs);
 			case XpressionPackage.XCONSTRUCTOR_CALL__PARAMS:
 				return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
-			case XpressionPackage.XCONSTRUCTOR_CALL__INITIALIZER:
-				return basicSetInitializer(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -239,8 +177,6 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 				return getType();
 			case XpressionPackage.XCONSTRUCTOR_CALL__PARAMS:
 				return getParams();
-			case XpressionPackage.XCONSTRUCTOR_CALL__INITIALIZER:
-				return getInitializer();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -263,9 +199,6 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 				getParams().clear();
 				getParams().addAll((Collection<? extends XExpression>)newValue);
 				return;
-			case XpressionPackage.XCONSTRUCTOR_CALL__INITIALIZER:
-				setInitializer((XBlockExpression)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -286,9 +219,6 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 			case XpressionPackage.XCONSTRUCTOR_CALL__PARAMS:
 				getParams().clear();
 				return;
-			case XpressionPackage.XCONSTRUCTOR_CALL__INITIALIZER:
-				setInitializer((XBlockExpression)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -307,8 +237,6 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 				return type != null;
 			case XpressionPackage.XCONSTRUCTOR_CALL__PARAMS:
 				return params != null && !params.isEmpty();
-			case XpressionPackage.XCONSTRUCTOR_CALL__INITIALIZER:
-				return initializer != null;
 		}
 		return super.eIsSet(featureID);
 	}

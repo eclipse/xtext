@@ -47,6 +47,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
 import org.eclipse.emf.mwe.utils.Mapping;
+import org.eclipse.emf.mwe2.ecore.CvsIdFilteringGeneratorAdapterFactoryDescriptor;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -503,7 +504,9 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	 * Sets the URIs for the generated EMF generator models (aka genmodels).
 	 * 
 	 * @param uris
+	 * @deprecated The property 'genModels' is deprecated. Please use 'referencedGenModels' instead.
 	 */
+	@Deprecated
 	public void setGenModels(String uris) {
 		log.warn("The property 'genModels' is deprecated. Please use 'referencedGenModels' instead.");
 		setReferencedGenModels(uris);

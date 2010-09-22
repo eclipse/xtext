@@ -90,7 +90,7 @@ public class SimpleUnorderedGroupsTestLanguageGrammarAccess extends AbstractGram
 		return getNestedModelAccess().getRule();
 	}
 
-	//UnorderedDatatype returns ecore::EString:
+	//UnorderedDatatype:
 	//	"1" ("a" & "b") | "2" ("a" & "b" & "c" & "d") | "3" ("a"? & "b"?) | "4" ("a" & "b"?) | "5" ("a"? & "b") | "6" ("a"+ &
 	//	"b"*) | "7" ("a"* & "b"+) | "8" ("a" "b" "c" & "a" "b" "d") | "9" ("a" & "b")+ | "10" ("a" & "b")* | "11" ("a" & "b")?
 	//	| "12" ("a" & "b") ("a" & "b") | "13" ("a" & "b")? "a" "b" | "14" (("a" & "b") & ("c" & "d"))+;

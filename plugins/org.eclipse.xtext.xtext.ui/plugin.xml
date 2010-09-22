@@ -176,40 +176,6 @@
 		</wizard>
 	</extension>
 	
-	<!-- Outline context menu actions -->
-	<!--
-	<extension
-		point="org.eclipse.ui.menus">
-		<menuContribution
-			locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
-			<command
-				commandId="org.eclipse.xtext.xtext.ui.editor.outline.SampleCommand"
-				label="Sample action registered for ParserRule">
-				<visibleWhen checkEnabled="false">
-					<iterate>
-						<adapt type="org.eclipse.xtext.ParserRule" />
-					</iterate>
-				</visibleWhen>
-			</command>
-		</menuContribution>
-	</extension>
-	<extension
-		point="org.eclipse.ui.commands">
-		<command
-			id="org.eclipse.xtext.xtext.ui.editor.outline.SampleCommand"
-			name="Sample Command"
-			description="Just a sample command">
-		</command>
-	</extension>
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.xtext.ui.editor.outline.SampleOulineNodeHandler"
-			commandId="org.eclipse.xtext.xtext.ui.editor.outline.SampleCommand">
-		</handler>
-	</extension>
-	-->
-	
 	<extension
          point="org.eclipse.xtext.xtext.ui.wizardContribution">
       <generatorConfiguration name="Standard">
@@ -282,7 +248,7 @@
 			fragment = labeling.LabelProviderFragment {}
 
 			// outline API 
-			fragment = outline.TransformerFragment {}
+			fragment = outline.OutlineTreeProviderFragment {}
 			fragment = outline.QuickOutlineFragment {}
 
 			// quickfix API 

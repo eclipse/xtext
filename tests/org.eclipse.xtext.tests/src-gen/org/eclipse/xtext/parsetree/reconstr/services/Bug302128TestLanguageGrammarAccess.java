@@ -71,7 +71,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cHyphenMinusKeyword_1_0_1 = (Keyword)cAlternatives_1_0.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//Variable returns ecore::EString:
+		//Variable:
 		//	ID (("." | "-") ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -145,7 +145,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getElementAccess().getRule();
 	}
 
-	//Variable returns ecore::EString:
+	//Variable:
 	//	ID (("." | "-") ID)*;
 	public VariableElements getVariableAccess() {
 		return (pVariable != null) ? pVariable : (pVariable = new VariableElements());

@@ -764,7 +764,7 @@ public class BacktrackingTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cQIDParserRuleCall_1_2_1 = (RuleCall)cGroup_1_2.eContents().get(1);
 		private final Keyword cSolidusKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
-		//Path returns ecore::EString hidden():
+		//Path hidden():
 		//	STRING | "/"? QID ("/" QID)* "/"?;
 		public ParserRule getRule() { return rule; }
 
@@ -1163,7 +1163,7 @@ public class BacktrackingTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cSolidusEqualsSignKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Keyword cPercentSignEqualsSignKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		
-		//AssignmentOperator returns ecore::EString:
+		//AssignmentOperator:
 		//	"=" | "+=" | "-=" | "*=" | "/=" | "%=";
 		public ParserRule getRule() { return rule; }
 
@@ -1202,7 +1202,7 @@ public class BacktrackingTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cGreaterThanSignKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
 		private final Keyword cLessThanSignKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
 		
-		//RelationalOperator returns ecore::EString:
+		//RelationalOperator:
 		//	"~=" | "==" | "===" | "!=" | "!==" | ">=" | "<=" | ">" | "<";
 		public ParserRule getRule() { return rule; }
 
@@ -3092,7 +3092,7 @@ public class BacktrackingTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cIDTerminalRuleCall_2_2_2 = (RuleCall)cAlternatives_2_2.eContents().get(2);
 		
 		//// Qualified name
-		//QID returns ecore::EString hidden():
+		//QID hidden():
 		//	ID (INT | HEX | ID)* ("." ID (INT | HEX | ID)*)*;
 		public ParserRule getRule() { return rule; }
 
@@ -3276,7 +3276,7 @@ public class BacktrackingTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return getRequiredCapabilityAccess().getRule();
 	}
 
-	//Path returns ecore::EString hidden():
+	//Path hidden():
 	//	STRING | "/"? QID ("/" QID)* "/"?;
 	public PathElements getPathAccess() {
 		return (pPath != null) ? pPath : (pPath = new PathElements());
@@ -3359,7 +3359,7 @@ public class BacktrackingTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return getGuardExpressionAccess().getRule();
 	}
 
-	//AssignmentOperator returns ecore::EString:
+	//AssignmentOperator:
 	//	"=" | "+=" | "-=" | "*=" | "/=" | "%=";
 	public AssignmentOperatorElements getAssignmentOperatorAccess() {
 		return (pAssignmentOperator != null) ? pAssignmentOperator : (pAssignmentOperator = new AssignmentOperatorElements());
@@ -3369,7 +3369,7 @@ public class BacktrackingTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return getAssignmentOperatorAccess().getRule();
 	}
 
-	//RelationalOperator returns ecore::EString:
+	//RelationalOperator:
 	//	"~=" | "==" | "===" | "!=" | "!==" | ">=" | "<=" | ">" | "<";
 	public RelationalOperatorElements getRelationalOperatorAccess() {
 		return (pRelationalOperator != null) ? pRelationalOperator : (pRelationalOperator = new RelationalOperatorElements());
@@ -3792,7 +3792,7 @@ public class BacktrackingTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//// Qualified name
-	//QID returns ecore::EString hidden():
+	//QID hidden():
 	//	ID (INT | HEX | ID)* ("." ID (INT | HEX | ID)*)*;
 	public QIDElements getQIDAccess() {
 		return (pQID != null) ? pQID : (pQID = new QIDElements());

@@ -11,7 +11,6 @@ import junit.framework.TestSuite;
 public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.xbase.tests");
-      suite.addTestSuite(org.eclipse.xtext.xbase.tests.linking.LinkingTest.class);
       suite.addTestSuite(org.eclipse.xtext.xbase.tests.parser.XbaseParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.xbase.tests.typing.ExpressionsTypeResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.xbase.tests.typing.TypesServiceTest.class);
