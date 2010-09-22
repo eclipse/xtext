@@ -24,7 +24,7 @@ Workflow {
 		
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug302128TestLanguage.xtext"
-			fragment = @StandardRuntimeFragments {}
+			fragment = @org.eclipse.xtext.TestLanguagesFragments {}
 		}
 	}
 }

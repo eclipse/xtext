@@ -316,6 +316,24 @@ Workflow {
 				backtrack = true
 			}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				backtrack = true
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleBacktrackingBug325745TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				backtrack = true
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExBacktrackingBug325745TestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				backtrack = true
+			}
+		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}

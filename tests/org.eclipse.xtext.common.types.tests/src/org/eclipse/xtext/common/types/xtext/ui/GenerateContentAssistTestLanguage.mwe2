@@ -20,7 +20,7 @@ var runtimeProject = "../${projectName}"
 
 Workflow {
 	bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/.."
+		platformUri = "${runtimeProject}/../.."
 	} 
 	
 	component = DirectoryCleaner {

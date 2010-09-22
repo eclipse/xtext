@@ -15,15 +15,14 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.xtext.ui.MarkerTypes;
-import org.eclipse.xtext.ui.MarkerUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.ui.tests.quickfix.validation.QuickfixCrossrefTestLanguageJavaValidator;
+import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
 
@@ -62,7 +61,6 @@ public class IssueDataTest extends AbstractQuickfixTest {
 		XtextAnnotation annotation = annotations.get(0);
 		assertTrue(Arrays.equals(expectedIssueData, annotation.getIssueData()));
 		IssueUtil issueUtil = new IssueUtil();
-		issueUtil.setMarkerUtil(new MarkerUtil());
 		Issue issueFromAnnotation = issueUtil.getIssueFromAnnotation(annotation);
 		assertTrue(Arrays.equals(expectedIssueData, issueFromAnnotation.getData()));
 		

@@ -26,7 +26,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
-import org.eclipse.xtext.util.TextLocation;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -44,11 +43,13 @@ public class DomainmodelHyperlinkHelper extends HyperlinkHelper {
 	@Inject
 	private Provider<JdtHyperlink> jdtHyperlinkProvider;
 	
+	@Inject
+	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
+	
 	@Override
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
 		super.createHyperlinksByOffset(resource, offset, acceptor);
-		TextLocation loc = new TextLocation();
-		EObject eObject = EObjectAtOffsetHelper.resolveElementAt(resource, offset, loc);
+		EObject eObject = eObjectAtOffsetHelper.resolveElementAt(resource, offset);
 		if (eObject instanceof Entity) {
 			List<AbstractNode> nodes = NodeUtil.findNodesForFeature(eObject, DomainmodelPackage.Literals.TYPE__NAME);
 			if (!nodes.isEmpty()) {

@@ -58,13 +58,8 @@ import org.eclipse.xtext.ui.editor.model.DocumentPartitioner;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
-import org.eclipse.xtext.ui.editor.outline.IContentOutlineNodeComparer;
-import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
-import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
-import org.eclipse.xtext.ui.editor.outline.actions.IActionBarContributor;
-import org.eclipse.xtext.ui.editor.outline.transformer.DefaultSemanticModelTransformer;
-import org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer;
-import org.eclipse.xtext.ui.editor.outline.transformer.TransformingTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.actions.OutlinePreferenceStoreInitializer;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
@@ -138,22 +133,6 @@ public class DefaultUiModule extends AbstractGenericModule {
 
 	public Class<? extends IHyperlinkDetector> bindIHyperlinkDetector() {
 		return DefaultHyperlinkDetector.class;
-	}
-
-	public Class<? extends ISemanticModelTransformer> bindISemanticModelTransformer() {
-		return DefaultSemanticModelTransformer.class;
-	}
-
-	public Class<? extends IOutlineTreeProvider> bindIOutlineTreeProvider() {
-		return TransformingTreeProvider.class;
-	}
-
-	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
-		return XtextContentOutlinePage.class;
-	}
-
-	public Class<? extends IActionBarContributor> bindIActionBarContributor() {
-		return IActionBarContributor.DefaultActionBarContributor.class;
 	}
 
 	public Class<? extends IPresentationDamager> bindIPresentationDamager() {
@@ -242,13 +221,15 @@ public class DefaultUiModule extends AbstractGenericModule {
 				.annotatedWith(org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider.class)
 				.to(org.eclipse.jface.viewers.ILabelProvider.class);
 	}
-
-	public void configureOutlineLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
-				.annotatedWith(org.eclipse.xtext.ui.editor.outline.OutlineLabelProvider.class)
-				.to(org.eclipse.jface.viewers.ILabelProvider.class);
+	
+	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
+		return OutlinePage.class;
 	}
 
+	public void configureOutlinePreferenceStoreInitializer(com.google.inject.Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("Outline")).to(OutlinePreferenceStoreInitializer.class);
+	}
+	
 	public void configureContentProposalLabelProvider(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
 				.annotatedWith(org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider.class)
@@ -283,10 +264,6 @@ public class DefaultUiModule extends AbstractGenericModule {
 		return ContainerStateProvider.class;
 	}
 
-	public Class<? extends IContentOutlineNodeComparer> bindIContentOutlineNodeComparer() {
-		return IContentOutlineNodeComparer.Default.class;
-	}
-
 	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
 		return JavaClassPathResourceForIEditorInputFactory.class;
 	}
@@ -295,4 +272,5 @@ public class DefaultUiModule extends AbstractGenericModule {
 		return XtextResourceSetProvider.class;
 	}
 
+	
 }

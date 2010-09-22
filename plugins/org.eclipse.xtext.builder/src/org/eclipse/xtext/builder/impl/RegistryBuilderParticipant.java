@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.plugin.RegistryReader;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
@@ -33,34 +34,33 @@ import com.google.inject.Singleton;
 public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 
 	private static final String PARTICIPANT = "participant"; //$NON-NLS-1$
-	
+
 	private static final String EXTENSION_POINT_ID = PARTICIPANT;
 
 	private static final String ATT_CLASS = "class"; //$NON-NLS-1$
-	
+
 	private static final Logger readerLog = Logger.getLogger(BuilderParticipantReader.class);
-	
+
 	@Inject
 	private IExtensionRegistry extensionRegistry;
-	
+
 	private volatile ImmutableList<IXtextBuilderParticipant> participants;
-	
+
 	private Map<String, IXtextBuilderParticipant> classToParticipant;
-	
-	public void build(IBuildContext buildContext, IProgressMonitor monitor)
-			throws CoreException {
+
+	public void build(IBuildContext buildContext, IProgressMonitor monitor) throws CoreException {
 		ImmutableList<IXtextBuilderParticipant> participants = getParticipants();
 		if (participants.isEmpty())
 			return;
 		SubMonitor progress = SubMonitor.convert(monitor, participants.size());
 		progress.subTask(Messages.RegistryBuilderParticipant_InvokingBuildParticipants);
-		for(IXtextBuilderParticipant participant: participants) {
+		for (IXtextBuilderParticipant participant : participants) {
 			if (progress.isCanceled())
-				return;
+				throw new OperationCanceledException();
 			participant.build(buildContext, progress.newChild(1));
 		}
 	}
-	
+
 	public ImmutableList<IXtextBuilderParticipant> getParticipants() {
 		ImmutableList<IXtextBuilderParticipant> result = participants;
 		if (participants == null) {
@@ -84,13 +84,13 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 		}
 		return result;
 	}
-	
+
 	public class BuilderParticipantReader extends RegistryReader {
 
 		public BuilderParticipantReader(IExtensionRegistry pluginRegistry, String pluginID, String extensionPointID) {
 			super(pluginRegistry, pluginID, extensionPointID);
 		}
-		
+
 		@Override
 		protected boolean readElement(IConfigurationElement element, boolean add) {
 			if (element.getName().equals(PARTICIPANT)) {
@@ -111,7 +111,7 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 									participant.getClass().getName());
 						}
 						return true;
-					} catch(CoreException e) {
+					} catch (CoreException e) {
 						logError(element, e.getMessage());
 					}
 				} else {
@@ -122,14 +122,14 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 			}
 			return false;
 		}
-		
+
 		@Override
 		protected void logError(IConfigurationElement element, String text) {
 			IExtension extension = element.getDeclaringExtension();
-		    readerLog.error("Plugin " + extension.getContributor().getName() + ", extension " + extension.getExtensionPointUniqueIdentifier()); //$NON-NLS-1$ //$NON-NLS-2$
-		    readerLog.error(text);
+			readerLog.error("Plugin " + extension.getContributor().getName() + ", extension " + extension.getExtensionPointUniqueIdentifier()); //$NON-NLS-1$ //$NON-NLS-2$
+			readerLog.error(text);
 		}
-		
+
 	}
 
 }
