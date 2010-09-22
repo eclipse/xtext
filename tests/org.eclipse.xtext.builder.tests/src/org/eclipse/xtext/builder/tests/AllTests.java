@@ -18,6 +18,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.builder.impl.BuilderParticipantTest.class);
       suite.addTestSuite(org.eclipse.xtext.builder.impl.IntegrationTest.class);
       suite.addTestSuite(org.eclipse.xtext.builder.impl.SimpleProjectsIntegrationTest.class);
+      suite.addTestSuite(org.eclipse.xtext.builder.impl.BuildCancellationTest.class);
       return suite;
    }
 }

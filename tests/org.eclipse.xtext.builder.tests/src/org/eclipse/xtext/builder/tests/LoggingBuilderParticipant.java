@@ -9,12 +9,14 @@ package org.eclipse.xtext.builder.tests;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 
 import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Knut Wannheden
  */
 @Singleton
 public class LoggingBuilderParticipant implements IXtextBuilderParticipant {
@@ -22,29 +24,37 @@ public class LoggingBuilderParticipant implements IXtextBuilderParticipant {
 	private int invocationCount = 0;
 	private IBuildContext context;
 	private boolean logging = false;
+	private OperationCanceledException cancelWith;
 
-	public void build(IXtextBuilderParticipant.IBuildContext context, IProgressMonitor monitor)
-			throws CoreException {
+	public void build(IXtextBuilderParticipant.IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		if (logging) {
-			invocationCount++;	
+			invocationCount++;
 			this.context = context;
 		}
+		if (cancelWith != null) {
+			throw cancelWith;
+		}
 	}
-	
+
+	public void cancel(OperationCanceledException cancelWith) {
+		this.cancelWith = cancelWith;
+	}
+
 	public void reset() {
 		invocationCount = 0;
 		context = null;
+		cancelWith = null;
 	}
-	
+
 	public void startLogging() {
 		logging = true;
 	}
-	
+
 	public void stopLogging() {
 		reset();
 		logging = false;
 	}
-	
+
 	public int getInvocationCount() {
 		return invocationCount;
 	}
