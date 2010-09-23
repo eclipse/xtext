@@ -26,17 +26,21 @@ public class DocumentUtil {
 		if (endOffset<0)
 			return null;
 		ITypedRegion partition = document.getPartition(endOffset);
-		int indexOf = document.get(0, endOffset).lastIndexOf(toFind);
+		int indexOf = preProcessSearchString(document.get(0, endOffset)).lastIndexOf(toFind);
 		while (indexOf>=0) {
 			ITypedRegion partition2 = document.getPartition(indexOf);
 			if (partition2.getType().equals(partition.getType())) {
 				return new Region(indexOf,toFind.length());
 			} 
-			indexOf=document.get(0, partition2.getOffset()).lastIndexOf(toFind);
+			indexOf=preProcessSearchString(document.get(0, partition2.getOffset())).lastIndexOf(toFind);
 		}
 		return null;
 	}
 	
+	protected String preProcessSearchString(String string) {
+		return string;
+	}
+
 	/**
 	 * searches for the given string within the same partition type
 	 * @return the region of the match or <code>null</code> if no match were found
@@ -46,7 +50,7 @@ public class DocumentUtil {
 			return null;
 		ITypedRegion partition = document.getPartition(startOffset);
 		int ignoredPrefix = startOffset;
-		int indexOf = document.get().substring(ignoredPrefix).indexOf(toFind);
+		int indexOf = preProcessSearchString(document.get().substring(ignoredPrefix)).indexOf(toFind);
 		if (indexOf!=-1)
 			indexOf+=ignoredPrefix;
 		while (indexOf>=0 && indexOf<document.getLength()) {
@@ -55,7 +59,7 @@ public class DocumentUtil {
 				return new Region(indexOf,toFind.length());
 			}
 			ignoredPrefix = partition2.getOffset()+partition2.getLength();
-			indexOf=document.get().substring(ignoredPrefix).indexOf(toFind);
+			indexOf=preProcessSearchString(document.get().substring(ignoredPrefix)).indexOf(toFind);
 			if (indexOf!=-1)
 				indexOf+=ignoredPrefix;
 		}
