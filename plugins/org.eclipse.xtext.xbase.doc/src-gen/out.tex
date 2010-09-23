@@ -1064,13 +1064,12 @@ if (isFoo) this
 \begin{lstlisting}
 XSwitchExpression:
 	'switch' main=XExpression? '{'
-		((cases+=XCasePart)+ |
-		 (cases+=XTypeCasePart)+)
-		('default' ':' default=XExpression)?
+		cases+=XCasePart+
+		('default' (default=XBlockExpression | ':' default=XExpression ';'))?
 	'}';
 
 XCasePart:
-	'case' case=XExpression ':' then=XExpression;	
+	type=JvmTypeReference? 'case' guard=XExpression (then=XBlockExpression | ':' then=XExpression ';');	
 
 XTypeCasePart:
 	'instanceof' type=JvmTypeReference ':' then=XExpression;	
@@ -1470,8 +1469,7 @@ for (s : myStrings)
 
 \begin{lstlisting}
 XConstructorCall:
-	'new' type=JvmTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')' ('as' alias=ID)?
-		initializer=XBlockExpression?;
+	'new' type=JvmTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')';
 
 \end{lstlisting}
 
@@ -1482,11 +1480,7 @@ XConstructorCall:
 \subsection{Example}
 
 \begin{lstlisting}
-new Foo() as f in {
-	f.foo += new OtherFoo() {
-		parent = f;
-	};
-}
+new Foo()
 
 \end{lstlisting}
 
