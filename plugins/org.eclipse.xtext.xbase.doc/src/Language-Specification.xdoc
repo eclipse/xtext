@@ -1,13 +1,33 @@
  chapter:Preface[Preface]
 
-This document specifies the programming language library Xbase. Xbase is a partial programming language implemented in Xtext and is ment to be used and extended
- within other programming languages and domain-specific languages (DSL) which are also implemented in Xtext. Xtext is a highly extendable language development framework 
-covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse. 
+This document specifies the expression language library Xbase. Xbase is a partial programming language implemented in Xtext and is ment to be embedded and extended
+ within other programming languages and domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development framework 
+covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse.  
+
+Developing DSLs has become incredibly easy with Xtext. Defining structural languages which introduce new coarse-grained concepts, such as services, entities, value objects or 
+statemachines is no problem at all and can be done in minutes. However, software systems do not consist of structures solily. At some point a system needs to do something, hence
+we want to specify some behavior which is usually done using so called expressions. Expressions are really the heart of a programming language and are not so easy to get right.
+That is why most people don't add support for expressions in their DSL, but try to solve this differently. The most often used workaround is to only define the structural information in the DSL 
+and add behavior by modifying or extending the generated code. It is not only unpleasant to write, read and maintain information which closely belongs together in two different places, abstraction levels 
+and languages. Modifying the generated source code comes with a lot of additional problems. But still as of today this is the preferred solution since adding support for expressions (and
+ a corresponding compiler) for your language is hard - even with Xtext.
 
 Xbase serves as a language library providing a common expression language bound to the Java platform (i.e. Java Virtual Machine). It ships in form of an Xtext grammar, as well as 
-reusable and adaptable implementations for the different aspects of a language infrastructure such as an AST structure, a compiler, an interpreter, a linker,  and  a static analyzer.
+reusable and adaptable implementations for the different aspects of a language infrastructure such as an AST structure, a compiler, an interpreter, a linker, and a static analyzer.
 In addition it comes with implementations to integrate the expression language within an Xtext-based Eclipse IDE. Default implementations for aspects like content assistance, syntax coloring, 
 hovering, folding and navigation can be easily integrated and reused within any Xtext based language. 
+
+Conceptually and syntactically, Xbase is like Java statements+expressions, with the following differences:
+ul[
+	item[No checked exceptions]
+	item[Pure OO, i.e. no built-in types (incl. arrays) ]
+	item[Everything is an expression (no statements)]
+	item[Closures]
+	item[Type inference]
+	item[Properties]
+	item[Simple operator overloading]
+	item[Powerful switch expression]
+]
 
 chapter[Lexical Syntax]
 
@@ -26,7 +46,7 @@ terminal ID  :
 ;
 ]
 
-Identifiers start with any alphabetic character or an undercore followed by any number of alphabetic characters, underscores or numbers. Identifiers starting with a code[^] are
+Identifiers start with any alphabetic character or an underscore followed by any number of alphabetic characters, underscores or numbers. Identifiers starting with a code[^] are
 so called escaped identifiers. Escaped identifiers are used in cases when there is a conflict with a reserved keyword. Imagine you had introduced
 a keyword 'service' in your language but want at some point call a Java property 'service'. In such cases you use an escaped identifier code[^service] to reference the Java property.
 
@@ -82,7 +102,7 @@ terminal INT returns ecore::EInt:
 section:Comments[Comments]
 
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
-The syntax is the same to the one from Java:
+The syntax is the same as the one known from Java:
 
 section2[Syntax]
 
@@ -127,6 +147,13 @@ Xbase binds to the Java Virtual Machine. This means that expressions written in 
 defined in the Java language, such as classes, interfaces, annotations and enums. It also resembles Java generics and shares the known syntax. In addition to Java, Xbase comes with the
 notion of function types, that is the type of a function. 
 
+Xbase does bind to any of the built-in types such as e[int] or e[boolean], instead any references to those built-in types will automatically use the corresponding wrapper type,
+that is e[java.lang.Boolean] instead of e[boolean]. Also Arrays are supported in Xbase but are translated to a e[java.util.List]. For example an array e[int\[\]] binds to  
+e[java.util.List<java.lang.Integer>] (in short e[List<Integer>]). 
+This means when refering to code[myList.isEmpty()] within an Xbase expression the static return type is e[java.lang.Boolean]. 
+At runtime however the compiler may be smarter and may use the native types. Especially the types e[int] and e[boolean] are most often used using there built-in operators
+and the wrapper type is only occasionally needed (for instance when putting ints in collections).
+
 section:TypeReferences[Simple Type References]
 
 A simple type reference only consists of a qualified name. A qualified name is a name made up of identifiers which are separated by a dot (like in Java).
@@ -159,7 +186,8 @@ section2[Syntax]
 
 code[
 XFunctionTypeRef:
-  ('(' parameterTypes+=JvmTypeReference (',' parameterTypes+=JvmTypeReference)* ')')? '=>' returnType+=JvmTypeReference;
+  ('('JvmTypeReference (',' JvmTypeReference)*')')? 
+  	'=>' JvmTypeReference;
 ]
 
 section2[Examples]
@@ -186,25 +214,26 @@ JvmTypeReference:
   JvmParameterizedTypeReference|XFunctionTypeRef;
 	
 XFunctionTypeRef:
-  ('(' parameterTypes+=JvmTypeReference (',' parameterTypes+=JvmTypeReference)* ')')? '=>' returnType+=JvmTypeReference;
+  ('(' JvmTypeReference (',' JvmTypeReference)* ')')? 
+  	'=>' JvmTypeReference;
 
 JvmParameterizedTypeReference:
-  type=\[JvmType|QualifiedName\] ('<' arguments+=JvmTypeArgument (',' arguments+=JvmTypeArgument)* '>')?;
+  type=QualifiedName ('<' JvmTypeArgument (',' JvmTypeArgument)* '>')?;
 
 JvmTypeArgument:
   JvmReferenceTypeArgument|JvmWildcardTypeArgument;
   
 JvmReferenceTypeArgument :
-  typeReference=JvmTypeReference;
+  JvmTypeReference;
 
 JvmWildcardTypeArgument:
-  {JvmWildcardTypeArgument} '?' (constraints+=JvmUpperBound | constraints+=JvmLowerBound)?;
+  '?' (JvmUpperBound | JvmLowerBound)?;
 
 JvmLowerBound :
- 'super' typeReference=JvmTypeReference;
+ 'super' JvmTypeReference;
 
 JvmUpperBound : 
- 'extends' typeReference=JvmTypeReference;
+ 'extends' JvmTypeReference;
 
 ]
 
@@ -218,6 +247,13 @@ ul[
 	item[List<? super MyLowerBound>]
 	item[List<? extends =>Boolean>]
 ]
+
+section:VoidType[The type java.lang.Void]
+
+The code[null] reference is the only valid value of the type Void, which gets some special treatment in Xbase. That is every Java method which is declared e[void] (i.e. without a return value)
+is translated to a method with return type e[java.lang.Void]. At runtime such method invocations will result in e[null].
+The speciality is that while it is allowed to pass code[null] everywhere (TODO discuss use of nullable annotation) instead of any other value, this does not mean that e[java.lang.Void]
+is a subtype of any other type. The code[instanceOf] operator as well as the type matchers in the ref:SwitchExpression don't match code[null]. 
 
 chapter:Expressions[Expressions]
 
@@ -237,11 +273,11 @@ A string literal as defined in ref:StringLiterals is a valid expression and retu
 
 section2:ExpressionsIntegerLiterals[Integer Literals]
 
-An integer literal as defined in ref:IntegerLiterals creates an instance of code[Integer] (TODO discuss how we want to go about the built-in types of Java).
+An integer literal as defined in ref:IntegerLiterals creates an instance of code[Integer].
 
 section2:BooleanLiteral[Boolean Literals]
 
-There are two boolean literals, code[true] and code[false] which correspond to the respective Java values of the native type code[boolean] 
+There are two boolean literals, code[true] and code[false] which each correspond to their Java counterpart of type e[java.lang.Boolean]. 
 
 section2[Syntax]
 
@@ -253,6 +289,7 @@ XBooleanLiteral:
 section2:NullLiteral[Null Literal]
 
 The null pointer literal again is like in Java: code[null]. 
+It is the only value of the type e[java.lang.Void] which has some special meaning in Xbase (see ref:VoidType).
 
 section2[Syntax]
 
@@ -279,36 +316,39 @@ to operations on certain types, but instead Xbase comes with an operator to meth
 the corresponding method signature. The following defines the operators and the corresponding method signatures.
 
 table[
-	tr[td[<Exp1>.someProp = <Exp2>]		td[<Exp1>.setSomeProp(<Exp2>)]]
-	tr[td[<Exp1> += <Exp2>]				td[<Exp1>.add(<Exp2>)]]
-	tr[td[ ]td[ ]]
-	tr[td[<Exp1> || <Exp2>]				td[<Exp1>.or(<Exp2>)]]
-	tr[td[ ]td[ ]]
-	tr[td[<Exp1> && <Exp2>]				td[<Exp1>.and(<Exp2>)]]
-	tr[td[ ]td[ ]]
-	tr[td[<Exp1> instanceof RawTypeRef]	td[<Exp1> instanceof RawTypeRef /* direct translation to Java */]]
-	tr[td[<Exp1> == <Exp2>]				td[<Exp1>.equals(<Exp2>)]]
-	tr[td[<Exp1> != <Exp2>]				td[<Exp1>.notEquals(<Exp2>)]]
-	tr[td[<Exp1> < <Exp2>]				td[<Exp1>.lessThan(<Exp2>)]]
-	tr[td[<Exp1> > <Exp2>]				td[<Exp1>.greaterThan(<Exp2>)]]
-	tr[td[<Exp1> <= <Exp2>]				td[<Exp1>.lessEqualsThan(<Exp2>)]]
-	tr[td[<Exp1> >= <Exp2>]				td[<Exp1>.greaterEqualsThan(<Exp2>)]]
-	tr[td[ ]td[ ]]
-	tr[td[<Exp1> -> <Exp2>]				td[<Exp1>.mappedTo(<Exp2>)]]
-	tr[td[<Exp1> .. <Exp2>]				td[<Exp1>.upTo(<Exp2>)]]
-	tr[td[ ]td[ ]]
-	tr[td[<Exp1> + <Exp2>]				td[<Exp1>.plus(<Exp2>)]]
-	tr[td[<Exp1> - <Exp2>]				td[<Exp1>.minus(<Exp2>)]]
-	tr[td[ ]td[ ]]
-	tr[td[<Exp1> * <Exp2>]				td[<Exp1>.multiply(<Exp2>)]]
-	tr[td[<Exp1> / <Exp2>]				td[<Exp1>.divide(<Exp2>)]]
-	tr[td[<Exp1> % <Exp2>]				td[<Exp1>.modulo(<Exp2>)]]
-	tr[td[<Exp1> ** <Exp2>]				td[<Exp1>.power(<Exp2>)]]
-	tr[td[ ]td[ ]]
-	tr[td[! <Exp1>]						td[<Exp1>.not()]]
-	tr[td[- <Exp1>]						td[<Exp1>.minus()]]
-	tr[td[ ]td[ ]]
-	tr[td[<Exp1>\[<Exp2>\]]			td[<Exp1>.apply(<Exp2)]]
+	tr[td[code[e1.someProp = e2]]		td[code[e1.someProp = e2]]]
+	tr[td[ ]								td[code[e1.someProp(e2)]]]
+	tr[td[ ]								td[code[e1.setSomeProp(e2)]]]
+	tr[td[code[e1 += e2]]				td[code[e1.add(e2)]]]
+	tr[td[code[e1.someFeature += e2]]	td[code[e1.addSomeFeature(e2)]]]
+	tr[td[code[ ]]td[code[ ]]]
+	tr[td[code[e1 || e2]]				td[code[e1.or(e2)]]]
+	tr[td[code[ ]]td[code[ ]]]
+	tr[td[code[e1 && e2]]				td[code[e1.and(e2)]]]
+	tr[td[code[ ]]td[code[ ]]]
+	tr[td[code[e1 instanceof RawTypeRef]]td[code[e1 instanceof RawTypeRef /* direct translation to Java */]]]
+	tr[td[code[e1 == e2]]				td[code[e1.equals(e2)]]]
+	tr[td[code[e1 != e2]]				td[code[e1.notEquals(e2)]]]
+	tr[td[code[e1 < e2]]				td[code[e1.lessThan(e2)]]]
+	tr[td[code[e1 > e2]]				td[code[e1.greaterThan(e2)]]]
+	tr[td[code[e1 <= e2]]				td[code[e1.lessEqualsThan(e2)]]]
+	tr[td[code[e1 >= e2]]				td[code[e1.greaterEqualsThan(e2)]]]
+	tr[td[code[ ]]td[code[ ]]]
+	tr[td[code[e1 -> e2]]				td[code[e1.mappedTo(e2)]]]
+	tr[td[code[e1 .. e2]]				td[code[e1.upTo(e2)]]]
+	tr[td[code[ ]]td[code[ ]]]
+	tr[td[code[e1 + e2]]				td[code[e1.plus(e2)]]]
+	tr[td[code[e1 - e2]]				td[code[e1.minus(e2)]]]
+	tr[td[code[ ]]td[code[ ]]]
+	tr[td[code[e1 * e2]]				td[code[e1.multiply(e2)]]]
+	tr[td[code[e1 / e2]]				td[code[e1.divide(e2)]]]
+	tr[td[code[e1 % e2]]				td[code[e1.modulo(e2)]]]
+	tr[td[code[e1 ** e2]]				td[code[e1.power(e2)]]]
+	tr[td[code[ ]]td[code[ ]]]
+	tr[td[code[! e1]]					td[code[e1.not()]]]
+	tr[td[code[- e1]]					td[code[e1.minus()]]]
+	tr[td[code[ ]]td[code[ ]]]
+	tr[td[code[e1\[e2\]]]				td[code[e1.apply(<Exp2)]]]
 ]
 		
 The table above also defines the operator precedence (fom low to high precedence). The separator lines indicate a precedence level. 
@@ -334,13 +374,31 @@ code[Java][
 Remember in Xbase everything is an expression and has to return something. In the case of simple assignments the return value is the value returned from the corresponding
 Java expression, which is the assigned value.
 
-If there is no accessible field on the left operands type, a method called code[setMyProperty] is looked up. It has to take one argument of the type (or a super type) of the right hand operand.
-The return value will be whatever the setter method returns (usually null i.e. type code[java.lang.Void]). 
+If there is no accessible field on the left operands type, first a method called code[myProperty(OneArg)] and then code[setMyProperty(OneArg)] is looked up. It has to take 
+one argument of the type (or a super type) of the right hand operand. The return value will be whatever the setter method returns (usually null i.e. type code[java.lang.Void]). 
 As a result the compiler translates to :
 
 code[Java][
 	myObj.setMyProperty("foo")
 ]
+
+section2:addAssignment[Add Assignment]
+
+The translation rule for the add assignment operator code[+=] is as follows:
+Given the expression 
+
+code[
+	myObj.myProperty += "foo"
+]
+
+It first looks up whether, the left hand side operand is of type e[java.util.Collection]. If it is the expression above translates to
+the following Java expression :
+
+code[Java][
+	myObj.myProperty.add("foo");
+]
+
+If there's no such field, the compiler looks for a method called code[addMyProperty(OneArg)].
 
 section2[Short-Circuit Boolean Operators]
 
@@ -421,10 +479,10 @@ section2[Syntax]
 
 code[
 XClosure returns XExpression:
-	{XClosure} (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? '|' expression=XExpression;
+	(JvmFormalParameter (',' JvmFormalParameter)*)? '|' XExpression;
 	
 JvmFormalParameter returns types::JvmFormalParameter:
-	nonfinal?='nonfinal'? (parameterType=JvmTypeReference)? name=ID;
+	JvmTypeReference? ID;
 ]
 
 section2:FunctionMapping[Function Mapping]
@@ -488,7 +546,7 @@ An expression code[if (p) e1 else e2] results to either the value code[e1] or co
 The else part is optional which is a shorthand for 'else null'.
 That is 
 code[
-	if (foo) x // is the same as 'if (foo) x else null' 
+	if (foo) x // is the same as 'if (foo) x else null'
 ]
 
 section2:IfTypeInference[Type Inference]
@@ -517,11 +575,13 @@ code[
 XSwitchExpression:
 	'switch' main=XExpression? '{'
 		cases+=XCasePart+
-		('default' (default=XBlockExpression | ':' default=XExpression ';'))?
+		('default' (default=XBlockExpression 
+			  | ':' default=XExpression ';'))?
 	'}';
 
 XCasePart:
-	type=JvmTypeReference? 'case' guard=XExpression (then=XBlockExpression | ':' then=XExpression ';');	
+	type=JvmTypeReference? 'case' guard=XExpression 
+	(then=XBlockExpression | ':' then=XExpression ';');
 
 XTypeCasePart:
 	'instanceof' type=JvmTypeReference ':' then=XExpression;	
@@ -581,7 +641,7 @@ section2[Syntax]
 
 code[
 XVariableDeclaration:
-	nonfinal?='nonfinal'? 'var' type=JvmTypeReference? name=ID '=' right=XExpression;
+	('val' | 'var') JvmTypeReference ID '=' XExpression;
 ]
 
 By default all local variables are considered final which is unlike as it is in Java where variables or non-final by default.
@@ -602,7 +662,7 @@ In such cases, the right hand expression's type must be assignable to the type o
 
 Alternatively the type can be left off and corresponds to the type of the initialization expression:  
 code[
-	var msg = new ArrayList<String>(); // msg will be of type ArrayList<String>  
+	var msg = new ArrayList<String>(); // -> type ArrayList<String>  
 ]
 
 section:Blocks[Blocks]
@@ -731,11 +791,13 @@ ul[
 
 section:ConstructorCall[Constructor Call]
 
+
+
 section2[Syntax]
 
 code[
 XConstructorCall:
-	'new' type=JvmTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')';
+  'new' (type=JvmTypeReference '('(XExpression (',' XExpression)*)?')')?;
 ]
 
 section2[Example]
