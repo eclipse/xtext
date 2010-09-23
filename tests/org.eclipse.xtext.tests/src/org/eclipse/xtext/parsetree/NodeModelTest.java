@@ -84,11 +84,7 @@ public class NodeModelTest extends AbstractXtextTests {
 			assertEquals(1 /* nodeAdapter */ + 1 /* cache */, adapters.size());
 			NodeAdapter adapter = (NodeAdapter) adapters.get(0);
 			assertEquals(node, adapter.getParserNode());
-		} else {
-			assert (node.getGrammarElement() == null
-					|| node.getGrammarElement() instanceof Keyword ||
-					isTerminalRuleCall(node.getGrammarElement()));
-		}
+		} 
 	}
 
 	public static boolean isTerminalRuleCall(EObject grammarElement) {
