@@ -64,4 +64,18 @@ public class StringsTest extends TestCase {
 		assertNull(Strings.unpack(null));
 		assertNull(Strings.unpack(""));
 	}
+	
+	public void testRemoveLeadingWhitespace() throws Exception {
+		assertEquals("foo ", Strings.removeLeadingWhitespace("foo "));
+		assertEquals("foo ", Strings.removeLeadingWhitespace(" foo "));
+		assertEquals("foo ", Strings.removeLeadingWhitespace("\nfoo "));
+		assertEquals("foo ", Strings.removeLeadingWhitespace("\tfoo "));
+		assertEquals("", Strings.removeLeadingWhitespace("  "));
+		try {
+			Strings.removeLeadingWhitespace(null);
+			fail();
+		} catch (NullPointerException e) {
+			// expected
+		}
+	}
 }

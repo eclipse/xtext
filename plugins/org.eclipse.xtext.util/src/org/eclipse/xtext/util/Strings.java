@@ -333,4 +333,11 @@ public class Strings {
 		}
 	}
 
+	public static String removeLeadingWhitespace(String indentationString) {
+		int i = 0;
+		while (i<indentationString.length() && Character.isWhitespace(indentationString.charAt(i)))
+			i++;
+		return indentationString.substring(i);
+	}
+
 }
