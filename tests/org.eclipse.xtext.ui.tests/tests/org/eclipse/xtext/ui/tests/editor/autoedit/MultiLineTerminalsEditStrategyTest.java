@@ -13,7 +13,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class MultiLineTerminalsEditStrategyTest extends AbstractAutoEditTest{
-
+	
 	public void testNewLine_1() throws Exception {
 		XtextEditor editor = openEditor("{|}");
 		pressKey(editor, '\n');
