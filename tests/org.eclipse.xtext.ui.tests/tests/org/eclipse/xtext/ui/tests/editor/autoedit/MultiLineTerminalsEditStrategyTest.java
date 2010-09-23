@@ -32,7 +32,7 @@ public class MultiLineTerminalsEditStrategyTest extends AbstractAutoEditTest{
 	public void testNewLine_4() throws Exception {
 		XtextEditor editor = openEditor("{\nfoo|bar}");
 		pressKey(editor, '\n');
-		assertState("{\nfoo\n\t|bar\n}", editor);
+		assertState("{\nfoo\n|bar\n}", editor);
 	}
 	public void testNewLine_5() throws Exception {
 		XtextEditor editor = openEditor("{\nfoo}|{bar}");
