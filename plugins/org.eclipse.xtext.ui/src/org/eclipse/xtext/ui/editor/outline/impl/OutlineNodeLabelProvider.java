@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.outline.impl;
 
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.PluginImageHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -18,7 +19,7 @@ import com.google.inject.Inject;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider {
+public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider implements ILabelProvider {
 
 	@Inject
 	public OutlineNodeLabelProvider(Delegate delegate) {
@@ -65,5 +66,9 @@ public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider 
 		public String getText(Object element) {
 			return super.getText(element);
 		}
+	}
+
+	public String getText(Object element) {
+		return getStyledText(element).toString();
 	}
 }
