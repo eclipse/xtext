@@ -12,11 +12,15 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
+import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestFactory;
+
+import com.google.inject.Injector;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -31,7 +35,12 @@ public class OutlineNodeComparerTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(OutlineTestLanguageStandaloneSetup.class);
+		final Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage");
+		with(new ISetup() {
+			public Injector createInjectorAndDoEMFRegistration() {
+				return injector;
+			}
+		});
 		comparer = new IOutlineNodeComparer.Default();
 		image = PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FILE);
 		image2 = PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FOLDER);

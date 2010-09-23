@@ -56,6 +56,7 @@ public class Activator extends AbstractUIPlugin {
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage");
+			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage");

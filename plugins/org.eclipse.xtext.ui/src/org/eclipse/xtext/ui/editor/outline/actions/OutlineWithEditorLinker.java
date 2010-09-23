@@ -18,7 +18,9 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.StructuredViewer;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.util.ITextRegion;
@@ -31,7 +33,7 @@ public class OutlineWithEditorLinker {
 
 	private ISourceViewer textViewer;
 
-	private StructuredViewer treeViewer;
+	private TreeViewer treeViewer;
 
 	private TreeListener treeListener;
 
@@ -39,9 +41,11 @@ public class OutlineWithEditorLinker {
 
 	private boolean isLinkingEnabled;
 
+	private OutlinePage outlinePage;
+
 	protected class TreeListener implements ISelectionChangedListener, IDoubleClickListener {
 		public void selectionChanged(SelectionChangedEvent event) {
-			if (isLinkingEnabled && treeViewer.getControl().isFocusControl())
+			if (isLinkingEnabled && isOutlineViewActive())
 				selectInTextEditor(event.getSelection());
 		}
 
@@ -52,7 +56,7 @@ public class OutlineWithEditorLinker {
 
 	protected class TextListener implements ISelectionChangedListener {
 		public void selectionChanged(SelectionChangedEvent event) {
-			if (isLinkingEnabled && !treeViewer.getControl().isFocusControl())
+			if (isLinkingEnabled && !isOutlineViewActive())
 				selectInTreeView(event.getSelection());
 		}
 	}
@@ -61,6 +65,7 @@ public class OutlineWithEditorLinker {
 	}
 
 	public void activate(OutlinePage outlinePage) {
+		this.outlinePage = outlinePage;
 		treeViewer = outlinePage.getTreeViewer();
 		treeListener = new TreeListener();
 		treeViewer.addPostSelectionChangedListener(treeListener);
@@ -131,7 +136,7 @@ public class OutlineWithEditorLinker {
 				IOutlineNode candidate = findBestNode(child, selectedTextRegion);
 				if (candidate != null
 						&& (currentBestNode.getFullTextRegion() == null || currentBestNode.getFullTextRegion()
-								.getLength() > candidate.getFullTextRegion().getLength())) {
+								.getLength() >= candidate.getFullTextRegion().getLength())) {
 					currentBestNode = candidate;
 				}
 			}
@@ -147,5 +152,10 @@ public class OutlineWithEditorLinker {
 				return (IOutlineNode) selectedElement;
 		}
 		return null;
+	}
+	
+	protected boolean isOutlineViewActive() {
+		IWorkbenchPart activePart = outlinePage.getSite().getPage().getActivePart();
+		return activePart instanceof ContentOutline;
 	}
 }
