@@ -127,7 +127,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		return null;
 	}
 
-	protected void setTextRegion(ITextRegion textRegion) {
+	public void setTextRegion(ITextRegion textRegion) {
 		this.textRegion = textRegion;
 	}
 

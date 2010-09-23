@@ -15,6 +15,7 @@ import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeLabelProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.xtext.ui.editor.folding.XtextGrammarFoldingRegionProvid
 import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
 import org.eclipse.xtext.xtext.ui.editor.outline.FilterReturnTypesAction;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineNodeComparer;
+import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineNodeLabelProvider;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlinePage;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineTreeProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
@@ -52,7 +54,6 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		binder.bind(String.class)
 				.annotatedWith(Names.named(XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS))
 				.toInstance("=[{");
-
 	}
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
@@ -101,6 +102,10 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return XtextOutlineNodeComparer.class;
 	}
 
+	public Class<? extends OutlineNodeLabelProvider> bindOutlineNodeLabelProvider() {
+		return XtextOutlineNodeLabelProvider.class;
+	}
+	
 	public void configureFilterReturnTypesActionPropertyIntializer(Binder binder) {
 		binder.bind(IPreferenceStoreInitializer.class)
 				.annotatedWith(Names.named(FilterReturnTypesAction.PREFERENCE_KEY))
