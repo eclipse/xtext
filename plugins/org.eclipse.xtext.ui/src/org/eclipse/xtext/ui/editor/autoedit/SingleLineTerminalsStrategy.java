@@ -11,23 +11,65 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
 
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ *         This strategies automatically inserts the closing terminal when the opening terminal is typed. It also
+ *         deletes both when the opening terminal is deleted. When the closing terminal is typed before the already
+ *         existing closing terminals, the cursor is just moved.
+ * 
+ *         This strategy can be used together with {@link MultiLineTerminalsEditStrategy}
  */
-public class SingleLineTerminalsStrategy extends AbstractEditStrategy {
+public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 
-	private String left;
-	private String right;
+	public static class Factory {
+		@Inject
+		private Injector injector;
+		
+		/**
+		 * 
+		 */
+		public SingleLineTerminalsStrategy newInstance(String left, String right) {
+			return newInstance(left, right, DEFAULT);
+		}
+		
+		public SingleLineTerminalsStrategy newInstance(String left, String right, StrategyPredicate predicate) {
+			SingleLineTerminalsStrategy strategy = new SingleLineTerminalsStrategy(left, right, predicate);
+			injector.injectMembers(strategy);
+			return strategy;
+		}
+	}
 
-	public SingleLineTerminalsStrategy configure(String left, String right) {
-		this.left = left;
-		this.right = right;
-		return this;
+	public static interface StrategyPredicate {
+		/**
+		 * @return whether the closing terminal should be inserted, based on the cursor position
+		 * @throws any
+		 *             thrown exceptions are catched and interpreted like return <code>true</code>
+		 */
+		boolean isInsertClosingBracket(IDocument doc, int offset) throws Exception;
+	}
+
+	public static StrategyPredicate DEFAULT = new StrategyPredicate() {
+		public boolean isInsertClosingBracket(IDocument doc, int offset) throws Exception {
+			return !Character.isJavaIdentifierStart(doc.getChar(offset));
+		}
+	};
+
+
+	private StrategyPredicate strategy;
+
+	public SingleLineTerminalsStrategy(String left, String right, StrategyPredicate strategy) {
+		super(left,right);
+		this.strategy = strategy;
 	}
 
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
 			throws BadLocationException {
+
 		if (command.length == 0) {
 			handleInsertLeftTerminal(document, command);
 			handleInsertRightTerminal(document, command);
@@ -36,17 +78,25 @@ public class SingleLineTerminalsStrategy extends AbstractEditStrategy {
 	}
 
 	protected void handleInsertLeftTerminal(IDocument document, DocumentCommand command) throws BadLocationException {
-		if (command.text.length() > 0 && (appliedText(document, command) + command.text).endsWith(left)
-				&& !isIdentifierPart(document, command.offset + command.length)) {
+		if (command.text.length() > 0 && appliedText(document, command).endsWith(getLeftTerminal())
+				&& isInsertClosingTerminal(document, command.offset + command.length)) {
 			String documentContent = getDocumentContent(document, command);
-			int opening = count(left, documentContent);
-			int closing = count(right, documentContent);
+			int opening = count(getLeftTerminal(), documentContent);
+			int closing = count(getRightTerminal(), documentContent);
 			int occurences = opening + closing;
 			if (occurences % 2 == 0) {
 				command.caretOffset = command.offset + command.text.length();
-				command.text = command.text + right;
+				command.text = command.text + getRightTerminal();
 				command.shiftsCaret = false;
 			}
+		}
+	}
+
+	protected boolean isInsertClosingTerminal(IDocument document, int i) {
+		try {
+			return strategy.isInsertClosingBracket(document, i);
+		} catch (Exception e) {
+			return true;
 		}
 	}
 
@@ -57,29 +107,29 @@ public class SingleLineTerminalsStrategy extends AbstractEditStrategy {
 
 	protected void handleDeletion(IDocument document, DocumentCommand command) throws BadLocationException {
 		if (command.text.equals("") && command.length == 1) {
-			if (command.offset + right.length() + left.length() > document.getLength())
+			if (command.offset + getRightTerminal().length() + getLeftTerminal().length() > document.getLength())
 				return;
-			if (command.offset + command.length - left.length() < 0)
+			if (command.offset + command.length - getLeftTerminal().length() < 0)
 				return;
-			if (command.length != left.length())
+			if (command.length != getLeftTerminal().length())
 				return;
-			String string = document.get(command.offset, left.length() + right.length());
-			if (string.equals(left + right)) {
-				command.length = left.length() + right.length();
+			String string = document.get(command.offset, getLeftTerminal().length() + getRightTerminal().length());
+			if (string.equals(getLeftTerminal() + getRightTerminal())) {
+				command.length = getLeftTerminal().length() + getRightTerminal().length();
 			}
 		}
 	}
 
 	protected void handleInsertRightTerminal(IDocument document, DocumentCommand command) throws BadLocationException {
 		//closing terminal
-		if (command.text.equals(right) && command.length == 0) {
-			if (command.offset + right.length() > document.getLength())
+		if (command.text.equals(getRightTerminal()) && command.length == 0) {
+			if (command.offset + getRightTerminal().length() > document.getLength())
 				return;
 			String documentContent = getDocumentContent(document, command);
-			int opening = count(left, documentContent);
-			int closing = count(right, documentContent);
-			if (opening <= closing && right.equals(document.get(command.offset, command.text.length()))) {
-				command.length += right.length();
+			int opening = count(getLeftTerminal(), documentContent);
+			int closing = count(getRightTerminal(), documentContent);
+			if (opening <= closing && getRightTerminal().equals(document.get(command.offset, command.text.length()))) {
+				command.length += getRightTerminal().length();
 			}
 		}
 	}

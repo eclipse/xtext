@@ -14,8 +14,11 @@ import org.eclipse.jface.text.ITypedRegion;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * skips inserting the closing terminal of a partition if it already exists.
+ * 
  */
-public class PartionEndTerminalSkippingEditStrategy extends AbstractEditStrategy {
+public class PartitionEndSkippingEditStrategy extends AbstractEditStrategy {
 
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)

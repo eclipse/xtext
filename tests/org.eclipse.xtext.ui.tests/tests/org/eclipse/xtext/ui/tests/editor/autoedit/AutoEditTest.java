@@ -237,7 +237,7 @@ public class AutoEditTest extends AbstractAutoEditTest {
 		XtextEditor editor = openEditor("|");
 		pressKey(editor, '/');
 		pressKey(editor, '*');
-		assertState("/*|*/", editor);
+		assertState("/*| */", editor);
 		
 		pressKey(editor, '\n');
 		assertState("/*\n * |\n */", editor);
@@ -254,7 +254,7 @@ public class AutoEditTest extends AbstractAutoEditTest {
 		XtextEditor editor = openEditor("   |");
 		pressKey(editor, '/');
 		pressKey(editor, '*');
-		assertState("   /*|*/", editor);
+		assertState("   /*| */", editor);
 		
 		pressKey(editor, '\n');
 		assertState("   /*\n    * |\n    */", editor);
@@ -271,7 +271,7 @@ public class AutoEditTest extends AbstractAutoEditTest {
 		XtextEditor editor = openEditor("/*\n *| */");
 		
 		pressKey(editor, '\n');
-		assertState("/*\n *\n * | */", editor);
+		assertState("/*\n *\n * |\n */", editor);
 	}
 
 	public void testMLComments_04() throws Exception {
@@ -296,24 +296,24 @@ public class AutoEditTest extends AbstractAutoEditTest {
 	}
 
 	public void testMLComments_08() throws Exception {
-		XtextEditor editor = openEditor("  /* foo |*/");
+		XtextEditor editor = openEditor("  /* foo | */");
 		
 		pressKey(editor, '\n');
-		assertState("  /* foo \n   * |\n   */", editor);
+		assertState("  /*\n   * foo\n   * |\n   */", editor);
 	}
 	
 	public void testMLComments_09() throws Exception {
 		XtextEditor editor = openEditor("/* foo |*/");
 		
 		pressKey(editor, '\n');
-		assertState("/* foo \n * |\n */", editor);
+		assertState("/*\n * foo\n * |*/", editor);
 	}
 	
 	public void testMLComments_10() throws Exception {
 		XtextEditor editor = openEditor("   /* foo |*/");
 		
 		pressKey(editor, '\n');
-		assertState("   /* foo \n    * |\n    */", editor);
+		assertState("   /*\n    * foo\n    * |*/", editor);
 	}
 	
 	public void testMLComments_11() throws Exception {
@@ -324,34 +324,34 @@ public class AutoEditTest extends AbstractAutoEditTest {
 	}
 	
 	public void testMLComments_12() throws Exception {
-		XtextEditor editor = openEditor("foo /*|*/");
+		XtextEditor editor = openEditor("foo /*| */");
 		
 		pressKey(editor, '\n');
-		assertState("foo /*\n     * |\n     */", editor);
+		assertState("foo /*\n * |\n */", editor);
 	}
 	
 	public void testMLComments_13() throws Exception {
 		XtextEditor editor = openEditor("/* foo| */");
 		pressKey(editor, '\n');
-		assertState("/* foo\n * |\n */", editor);
+		assertState("/*\n * foo\n * |\n */", editor);
 	}
 	
 	public void testMLComments_14() throws Exception {
 		XtextEditor editor = openEditor("/* foo|*/");
 		pressKey(editor, '\n');
-		assertState("/* foo\n * |\n */", editor);
+		assertState("/*\n * foo\n * |*/", editor);
 	}
 	
 	public void testMLComments_15() throws Exception {
 		XtextEditor editor = openEditor("  /* foo| */");
 		pressKey(editor, '\n');
-		assertState("  /* foo\n   * |\n   */", editor);
+		assertState("  /*\n   * foo\n   * |\n   */", editor);
 	}
 	
 	public void testMLComments_16() throws Exception {
 		XtextEditor editor = openEditor("  /* foo|*/");
 		pressKey(editor, '\n');
-		assertState("  /* foo\n   * |\n   */", editor);
+		assertState("  /*\n   * foo\n   * |*/", editor);
 	}
 	
 	public void testShortcut_1() throws Exception {

@@ -24,8 +24,8 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 	@Override
 	protected void configure(IEditStrategyAcceptor acceptor) {
 		super.configure(acceptor);
-		acceptor.accept(singleLineTerminals.get().configure(":", ";"),IDocument.DEFAULT_CONTENT_TYPE);
-		MultiLineTerminalsEditStrategy configure = multiLineTerminals.get().configure(":", null, ";");
+		acceptor.accept(singleLineTerminals.newInstance(":", ";"),IDocument.DEFAULT_CONTENT_TYPE);
+		MultiLineTerminalsEditStrategy configure = multiLineTerminals.newInstance(":", null, ";");
 		
 		// the following is a cheap but working hack, which replaces any double colons '::' by whitespace '  ' temporarily.
 		configure.setDocumentUtil(new DocumentUtil() {
@@ -48,15 +48,13 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 	
 	@Override
 	protected void configureParenthesis(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(new SingleLineTerminalsStrategy(){
-			@Override
-			protected boolean isIdentifierPart(IDocument doc, int offset) throws BadLocationException {
-				if (doc.getLength()>offset+1) {
-					return !Character.isWhitespace(doc.getChar(offset));
-				}
-				return super.isIdentifierPart(doc, offset);
+		acceptor.accept(singleLineTerminals.newInstance("(", ")", new SingleLineTerminalsStrategy.StrategyPredicate(){
+
+			public boolean isInsertClosingBracket(IDocument doc, int offset) throws Exception {
+				char c = doc.getChar(offset);
+				return Character.isWhitespace(c) || c==';';
 			}
 			
-		}.configure("(", ")"), IDocument.DEFAULT_CONTENT_TYPE);
+		}), IDocument.DEFAULT_CONTENT_TYPE);
 	}
 }

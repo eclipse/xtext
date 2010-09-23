@@ -9,17 +9,30 @@ package org.eclipse.xtext.ui.editor.autoedit;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
-import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * deletes the closing terminals if the opening terminals of a certain partitions are to be removed.
+ * 
  */
 public class PartitionDeletionEditStrategy extends AbstractEditStrategy {
+	
+	public static class Factory {
+		public PartitionDeletionEditStrategy newInstance(String left, String right) {
+			return new PartitionDeletionEditStrategy(left,right);
+		}
+	}
 
 	private String left;
 	private String right;
 
+	public PartitionDeletionEditStrategy(String left, String right) {
+		this.left = left;
+		this.right = right;
+	}
+	
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
 			throws BadLocationException {
@@ -37,10 +50,5 @@ public class PartitionDeletionEditStrategy extends AbstractEditStrategy {
 		}
 	}
 
-	public IAutoEditStrategy configure(String left, String right) {
-		this.left = left;
-		this.right = right;
-		return this;
-	}
 
 }

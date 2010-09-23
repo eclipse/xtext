@@ -9,18 +9,31 @@ package org.eclipse.xtext.ui.editor.autoedit;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
-import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITypedRegion;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * inserts also the closing terminal if the opening terminal is about to be added.
+ * 
  */
 public class PartitionInsertEditStrategy extends AbstractEditStrategy {
 
+	public static class Factory {
+		public PartitionInsertEditStrategy newInstance(String left, String right) {
+			return new PartitionInsertEditStrategy(left,right);
+		}
+	}
+	
 	private String left;
 	private String right;
 
+	public PartitionInsertEditStrategy(String left, String right) {
+		this.left = left;
+		this.right = right;
+	}
+	
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
 			throws BadLocationException {
@@ -38,9 +51,4 @@ public class PartitionInsertEditStrategy extends AbstractEditStrategy {
 		}
 	}
 
-	public IAutoEditStrategy configure(String left, String right) {
-		this.left = left;
-		this.right = right;
-		return this;
-	}
 }
