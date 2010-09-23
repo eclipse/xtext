@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
+import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer;
@@ -19,9 +20,11 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
@@ -34,7 +37,12 @@ public class OutlineTreeProviderTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(OutlineTestLanguageStandaloneSetup.class);
+		final Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage");
+		with(new ISetup() {
+			public Injector createInjectorAndDoEMFRegistration() {
+				return injector;
+			}
+		});
 		treeProvider = new DefaultOutlineTreeProvider(new DefaultEObjectLabelProvider(),
 				new DefaultLocationInFileProvider());
 	}

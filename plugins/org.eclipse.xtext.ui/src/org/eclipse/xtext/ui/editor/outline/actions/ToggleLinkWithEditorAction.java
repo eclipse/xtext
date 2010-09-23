@@ -40,6 +40,7 @@ public class ToggleLinkWithEditorAction extends AbstractToggleAction {
 	
 	@Override
 	public void deactivate() {
+		super.deactivate();
 		outlineWithEditorLinker.deactivate();
 	}
 	

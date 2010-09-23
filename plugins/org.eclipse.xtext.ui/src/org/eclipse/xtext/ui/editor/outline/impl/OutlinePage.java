@@ -133,6 +133,10 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	public IXtextDocument getXtextDocument() {
 		return xtextDocument;
 	}
+	
+	protected OutlineRefreshJob getRefreshJob() {
+		return refreshJob;
+	}
 
 	public void scheduleRefresh() {
 		refreshJob.cancel();
@@ -159,6 +163,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 					treeViewer.setExpandedElements(Iterables.toArray(nodesToBeExpanded, IOutlineNode.class));
 					treeViewer.setSelection(new StructuredSelection(Iterables
 							.toArray(selectedNodes, IOutlineNode.class)));
+					treeUpdated();
 				} catch (Throwable t) {
 					LOG.error("Error refreshing outline", t);
 				}
@@ -166,4 +171,10 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		});
 	}
 
+	/** 
+	 * For testing.
+	 */
+	protected void treeUpdated() {
+	}
+	
 }

@@ -210,7 +210,7 @@ public class XtextEditor extends TextEditor {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Class adapter) {
-		if (adapter.equals(IContentOutlinePage.class)) {
+		if (IContentOutlinePage.class.isAssignableFrom(adapter)) {
 			return getContentOutlinePage();
 		}
 		return super.getAdapter(adapter);
