@@ -22,18 +22,17 @@ public class DefaultAutoEditStrategyProvider extends AbstractEditStrategyProvide
 	@Inject
 	protected Provider<DefaultIndentLineAutoEditStrategy> defaultIndentLineAutoEditStrategy ;
 	@Inject
-	protected Provider<SingleLineTerminalsStrategy> singleLineTerminals;
+	protected Provider<PartitionEndSkippingEditStrategy> partitionEndSkippingEditStrategy ;
 	@Inject
-	protected Provider<MultiLineTerminalsEditStrategy> multiLineTerminals;
+	protected PartitionInsertEditStrategy.Factory partitionInsert;
 	@Inject
-	protected Provider<MultiLineNewLineEditStrategy> multiLineNewLineEditStrategy;
+	protected PartitionDeletionEditStrategy.Factory partitionDeletion;
 	@Inject
-	protected Provider<PartitionInsertEditStrategy> partitionInsertEditStrategy;
+	protected SingleLineTerminalsStrategy.Factory singleLineTerminals;
 	@Inject
-	protected Provider<PartitionDeletionEditStrategy> partitionDeletionEditStrategy;
-	@Inject
-	protected Provider<PartionEndTerminalSkippingEditStrategy> partionEndTerminalSkippingEditStrategy;
+	protected MultiLineTerminalsEditStrategy.Factory multiLineTerminals;
 
+	
 	@Override
 	protected void configure(IEditStrategyAcceptor acceptor) {
 		configureIndentationEditStrategy(acceptor);
@@ -46,39 +45,41 @@ public class DefaultAutoEditStrategyProvider extends AbstractEditStrategyProvide
 
 	protected void configureIndentationEditStrategy(IEditStrategyAcceptor acceptor) {
 		acceptor.accept(defaultIndentLineAutoEditStrategy.get(),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(defaultIndentLineAutoEditStrategy.get(),TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
 	}
 
 	protected void configureMultilineComments(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(partitionInsertEditStrategy.get().configure("/*", "*/"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineNewLineEditStrategy.get().configure(" * ", " */"),TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
+		acceptor.accept(singleLineTerminals.newInstance("/*", " */"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(multiLineTerminals.newInstance("/*"," * ", " */"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(multiLineTerminals.newInstance("/*"," * ", " */"),TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
 	}
 
 	protected void configureCurlyBracesBlock(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(singleLineTerminals.get().configure("{", "}"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineTerminals.get().configure("{", null, "}"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(singleLineTerminals.newInstance("{", "}"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(multiLineTerminals.newInstance("{", null, "}"),IDocument.DEFAULT_CONTENT_TYPE);
 	}
 
 	protected void configureSquareBrackets(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(singleLineTerminals.get().configure("[", "]"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineTerminals.get().configure("[", null, "]"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(singleLineTerminals.newInstance("[", "]"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(multiLineTerminals.newInstance("[", null, "]"),IDocument.DEFAULT_CONTENT_TYPE);
 	}
 
 	protected void configureParenthesis(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(singleLineTerminals.get().configure("(", ")"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineTerminals.get().configure("(", null, ")"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(singleLineTerminals.newInstance("(", ")"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(multiLineTerminals.newInstance("(", null, ")"),IDocument.DEFAULT_CONTENT_TYPE);
 	}
 	
 	protected void configureStringLiteral(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(partitionInsertEditStrategy.get().configure("\"","\""),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(partitionInsertEditStrategy.get().configure("'","'"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(partitionInsert.newInstance("\"","\""),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(partitionInsert.newInstance("'","'"),IDocument.DEFAULT_CONTENT_TYPE);
 		// The following two are registered for the default content type, because on deletion 
 		// the command.offset is cursor-1, which is outside the partition of terminals.length = 1.
 		// How crude is that?
-		// Note that in case you have two string literals follwiing each other directly, the deletion strategy wouldn't apply.
+		// Note that in case you have two string literals following each other directly, the deletion strategy wouldn't apply.
 		// One could add the same strategy for the STRING partition in addition to solve this
-		acceptor.accept(partitionDeletionEditStrategy.get().configure("\"","\""),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(partitionDeletionEditStrategy.get().configure("'","'"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(partionEndTerminalSkippingEditStrategy.get(),TerminalsTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION);
+		acceptor.accept(partitionDeletion.newInstance("\"","\""),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(partitionDeletion.newInstance("'","'"),IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(partitionEndSkippingEditStrategy.get(),TerminalsTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION);
 	}
 
 

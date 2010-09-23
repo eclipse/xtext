@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.8.26)  16 SEP 2010 13:43
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live/MacPorts 2009_6) (format=pdflatex 2010.8.26)  22 SEP 2010 11:33
 entering extended mode
  %&-line parsing enabled.
 **src-gen/out.tex
@@ -470,13 +470,6 @@ Overfull \hbox (5.00491pt too wide) in paragraph at lines 286--289
 [][] 
  []
 
-
-LaTeX Warning: Hyper reference `Identifiers' on page 4 undefined on input line 
-295.
-
-
-LaTeX Warning: Reference `Identifiers' on page 4 undefined on input line 295.
-
 [4]
 Chapter 3.
 
@@ -543,14 +536,6 @@ Overfull \hbox (5.00491pt too wide) in paragraph at lines 474--477
 
 [7]
 Chapter 4.
-
-LaTeX Warning: Reference `StringLiterals' on page 8 undefined on input line 503
-.
-
-
-LaTeX Warning: Reference `IntegerLiterals' on page 8 undefined on input line 51
-2.
-
 [8
 
 ]
@@ -615,11 +600,6 @@ Overfull \hbox (5.00491pt too wide) in paragraph at lines 737--740
  []
 
 [11]
-
-LaTeX Warning: Reference `propertyAssignment' on page 12 undefined on input lin
-e 771.
-
-
 Overfull \hbox (5.00491pt too wide) in paragraph at lines 815--818
 [][] 
  []
@@ -668,14 +648,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 886--887
 Overfull \hbox (5.00491pt too wide) in paragraph at lines 885--888
 [][] 
  []
-
-
-LaTeX Warning: Hyper reference `FunctionTypes' on page 13 undefined on input li
-ne 906.
-
-
-LaTeX Warning: Reference `FunctionTypes' on page 13 undefined on input line 906
-.
 
 
 Overfull \hbox (5.00491pt too wide) in paragraph at lines 939--942
@@ -728,71 +700,52 @@ Overfull \hbox (5.00491pt too wide) in paragraph at lines 1045--1048
  []
 
 [14] [15]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1155--1161
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1154--1160
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1162--1166
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1161--1165
 [][] 
  []
-
-
-LaTeX Warning: Hyper reference `Blocks' on page 16 undefined on input line 1179
-.
-
-
-LaTeX Warning: Reference `Blocks' on page 16 undefined on input line 1179.
-
-
-LaTeX Warning: Reference `propertyAssignment' on page 16 undefined on input lin
-e 1192.
 
 [16]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1255--1263
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1254--1262
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1264--1276
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1263--1275
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1317--1324
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1316--1323
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1325--1330
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1324--1329
 [][] 
  []
-
-
-LaTeX Warning: Hyper reference `WhileExpression' on page 17 undefined on input 
-line 1348.
-
-
-LaTeX Warning: Reference `WhileExpression' on page 17 undefined on input line 1
-348.
 
 [17]
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1374--1381
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1373--1380
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1382--1387
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1381--1386
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1436--1444
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1435--1443
 [][] 
  []
 
 
-Overfull \hbox (5.00491pt too wide) in paragraph at lines 1445--1455
+Overfull \hbox (5.00491pt too wide) in paragraph at lines 1444--1454
 [][] 
  []
 
@@ -800,39 +753,29 @@ Overfull \hbox (5.00491pt too wide) in paragraph at lines 1445--1455
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 7230 strings out of 495061
- 105174 string characters out of 3181964
- 297047 words of memory out of 3000000
- 10044 multiletter control sequences out of 15000+200000
- 14637 words of font info for 32 fonts, out of 3000000 for 9000
+ 7293 strings out of 495061
+ 106253 string characters out of 3181964
+ 298645 words of memory out of 3000000
+ 10115 multiletter control sequences out of 15000+200000
+ 13861 words of font info for 31 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  43i,8n,43p,256b,1790s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{??} has been referenced but does not exist, repla
-ced by a fixed one
-
- </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsi0800.6
-00pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1
-000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/
-ecsx0800.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappe
-n/ec/ecbx1000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jk
-nappen/ec/ecss0800.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfo
-ur/jknappen/ec/ecsx1200.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk
-/ljfour/jknappen/ec/ecsx1440.600pk> </Users/efftinge/.texlive2009/texmf-var/fon
-ts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/efftinge/.texlive2009/texmf-va
-r/fonts/pk/ljfour/jknappen/ec/ecsx2074.600pk></opt/local/share/texmf-texlive-di
-st/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/share/texmf-texlive-di
-st/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on src-gen/out.pdf (19 pages, 202037 bytes).
+ </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsi0800
+.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/ec/ect
+i1000.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknappen/e
+c/ecsx0800.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ecss0800.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/ljfour/
+jknappen/ec/ecsx1200.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/pk/lj
+four/jknappen/ec/ecsx1440.600pk> </Users/efftinge/.texlive2009/texmf-var/fonts/
+pk/ljfour/jknappen/ec/ecrm1000.600pk> </Users/efftinge/.texlive2009/texmf-var/f
+onts/pk/ljfour/jknappen/ec/ecsx2074.600pk></opt/local/share/texmf-texlive-dist/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/share/texmf-texlive-dist/
+fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on src-gen/out.pdf (19 pages, 219407 bytes).
 PDF statistics:
- 802 PDF objects out of 1000 (max. 8388607)
- 288 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1022 PDF objects out of 1200 (max. 8388607)
+ 281 named destinations out of 1000 (max. 500000)
+ 609 words of extra memory for PDF output out of 10000 (max. 10000000)
 

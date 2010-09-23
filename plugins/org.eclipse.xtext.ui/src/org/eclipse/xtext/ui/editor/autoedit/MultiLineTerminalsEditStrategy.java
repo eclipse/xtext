@@ -14,9 +14,10 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.xtext.formatting.IIndentationInformation;
-import org.eclipse.xtext.ui.editor.model.DocumentUtil;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -24,50 +25,32 @@ import com.google.inject.Inject;
  * This strategy applies auto edits when typing a newline character within a block (denoted by a start and end terminal).
  * 
  */
-public class MultiLineTerminalsEditStrategy extends AbstractEditStrategy {
-
-	static class CommandInfo {
-		String text = "";
-		int offset = -1;
-		int length = 0;
-		int cursorOffset = -1;
-		boolean isChange = false;
-
-		public void modifyCommand(DocumentCommand command) {
-			if (!isChange)
-				return;
-			if (cursorOffset != -1) {
-				command.caretOffset = cursorOffset;
-				command.shiftsCaret = false;
-			}
-			if (offset != -1)
-				command.offset = offset;
-			command.length = length;
-			command.text = text;
+public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrategy {
+	
+	public static class Factory {
+		@Inject
+		private Injector injector;
+		@Inject
+		private IIndentationInformation indentationInformation;
+		
+		public MultiLineTerminalsEditStrategy newInstance(String leftTerminal, String indentationString, String rightTerminal) {
+			indentationString = indentationString == null ? indentationInformation.getIndentString()
+					: indentationString;
+			MultiLineTerminalsEditStrategy strategy = new MultiLineTerminalsEditStrategy(leftTerminal, indentationString, rightTerminal);
+			injector.injectMembers(strategy);
+			return strategy;
 		}
 	}
 
 	@SuppressWarnings("unused")
 	private final static Logger log = Logger.getLogger(MultiLineTerminalsEditStrategy.class);
 
-	private String leftTerminal, rightTerminal, indentationString;
+	private String indentationString;
 
-	@Inject
-	private IIndentationInformation indentationInformation;
 
-	@Inject
-	protected DocumentUtil util = new DocumentUtil();
-	
-	public void setDocumentUtil(DocumentUtil util) {
-		this.util = util;
-	}
-
-	public MultiLineTerminalsEditStrategy configure(String leftTerminal, String indentationString, String rightTerminal) {
-		this.leftTerminal = leftTerminal;
-		this.rightTerminal = rightTerminal;
-		this.indentationString = indentationString == null ? indentationInformation.getIndentString()
-				: indentationString;
-		return this;
+	public MultiLineTerminalsEditStrategy(String leftTerminal, String indentationString, String rightTerminal) {
+		super(leftTerminal,rightTerminal);
+		this.indentationString = indentationString;
 	}
 
 	@Override
@@ -108,32 +91,6 @@ public class MultiLineTerminalsEditStrategy extends AbstractEditStrategy {
 	}
 
 	/**
-	 * finds the first start terminal which is not closed before the cursor position.
-	 */
-	protected IRegion findStopTerminal(IDocument document, int offset) throws BadLocationException {
-		IRegion stop = util.searchInSamePartition(rightTerminal, document, offset);
-		if (stop==null)
-			return null;
-		IRegion start = util.searchInSamePartition(leftTerminal, document, offset);
-		if (start != null && start.getOffset()<stop.getOffset())
-			return findStopTerminal(document, stop.getOffset()+stop.getLength());
-		return stop;
-	}
-
-	/**
-	 * finds the first stop terminal which has not been started after the cursor position.
-	 */
-	protected IRegion findStartTerminal(IDocument document, int offset) throws BadLocationException {
-		IRegion start = util.searchBackwardsInSamePartition(leftTerminal, document, offset);
-		if (start==null)
-			return null;
-		IRegion stop = util.searchBackwardsInSamePartition(rightTerminal, document, offset);
-		if (stop != null && stop.getOffset()>start.getOffset())
-			return findStartTerminal(document, start.getOffset());
-		return start;
-	}
-
-	/**
 	 * Expects the cursor to be in the same line as the start terminal
 	 * puts any text between start terminal and cursor into a separate newline before the cursor.
 	 * puts any text between cursor and end terminal into a separate newline after the cursor.
@@ -155,7 +112,7 @@ public class MultiLineTerminalsEditStrategy extends AbstractEditStrategy {
 		if (stopTerminal == null) {
 			IRegion line = document.getLineInformation(document.getLineOfOffset(command.offset));
 			if (document.get(command.offset, line.getOffset() + line.getLength() - command.offset).trim().length() == 0) {
-				newC.text += command.text + rightTerminal + command.text;
+				newC.text += command.text + getRightTerminal() + command.text;
 			}
 		}
 		if (stopTerminal != null && util.isSameLine(document, stopTerminal.getOffset(), command.offset)) {
@@ -178,8 +135,9 @@ public class MultiLineTerminalsEditStrategy extends AbstractEditStrategy {
 		if (document.get(command.offset, line.getOffset() + line.getLength() - command.offset).trim().length() == 0) {
 			CommandInfo newC = new CommandInfo();
 			newC.isChange = true;
-			newC.cursorOffset = command.offset + command.text.length();
-			newC.text += command.text + rightTerminal + command.text;
+			String textPartBeforeCursor = command.text + Strings.removeLeadingWhitespace(indentationString);
+			newC.cursorOffset = command.offset+textPartBeforeCursor.length();
+			newC.text += textPartBeforeCursor + command.text + Strings.removeLeadingWhitespace(getRightTerminal()) + command.text;
 			return newC;
 		}
 		return null;
@@ -190,6 +148,12 @@ public class MultiLineTerminalsEditStrategy extends AbstractEditStrategy {
 	 */
 	protected CommandInfo handleCursorBetweenStartAndStopLine(IDocument document, DocumentCommand command,
 			IRegion startTerminal, IRegion stopTerminal) throws BadLocationException {
+		if (indentationString.trim().length()>0) {
+			CommandInfo newC = new CommandInfo();
+			newC.isChange = true;
+			newC.text += command.text + Strings.removeLeadingWhitespace(indentationString);
+			return newC;
+		}
 		return null;
 	}
 
@@ -201,9 +165,10 @@ public class MultiLineTerminalsEditStrategy extends AbstractEditStrategy {
 			IRegion stopTerminal) throws BadLocationException {
 		CommandInfo newC = new CommandInfo();
 		newC.isChange = true;
-		newC.text += command.text + indentationString;
+		newC.text += command.text + Strings.removeLeadingWhitespace(indentationString);
 		newC.cursorOffset = command.offset+newC.text.length();
-		String string = document.get(command.offset, stopTerminal.getOffset() - command.offset);
+		String rightWOWS = Strings.removeLeadingWhitespace(getRightTerminal());
+		String string = document.get(command.offset, stopTerminal.getOffset() - command.offset + (stopTerminal.getLength()-rightWOWS.length()));
 		newC.length = string.length();
 		newC.text += string.trim()+command.text;
 		return newC;
