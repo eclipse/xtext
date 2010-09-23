@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
 import org.eclipse.xtext.ui.editor.outline.actions.AbstractToggleAction;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.xtext.ui.Activator;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.xtext.ui.Activator;
 public class FilterReturnTypesAction extends AbstractToggleAction {
 
 	public static final String PREFERENCE_KEY = "ui.outline.showReturnTypes";
+	private OutlinePage outlinePage;
 
 	public FilterReturnTypesAction() {
 		setText(Messages.FilterReturnTypesAction_title);
@@ -34,6 +36,13 @@ public class FilterReturnTypesAction extends AbstractToggleAction {
 
 	@Override
 	protected void stateChanged(boolean newState) {
+		outlinePage.getTreeViewer().refresh(true);
+	}
+	
+	@Override
+	public void activate(OutlinePage outlinePage) {
+		super.activate(outlinePage);
+		this.outlinePage = outlinePage;
 	}
 	
 	public static class PropertyInitializer implements IPreferenceStoreInitializer {

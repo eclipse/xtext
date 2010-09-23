@@ -50,19 +50,19 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		this.locationInFileProvider = locationInFileProvider;
 	}
 
-	private PolymorphicDispatcher<Void> createChildrenDispatcher = PolymorphicDispatcher.createForSingleTarget(
+	protected PolymorphicDispatcher<Void> createChildrenDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"doCreateChildren", 2, 2, this);
 
-	private PolymorphicDispatcher<Void> createNodeDispatcher = PolymorphicDispatcher.createForSingleTarget(
+	protected PolymorphicDispatcher<Void> createNodeDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"doCreateNode", 2, 2, this);
 
-	private PolymorphicDispatcher<Object> textDispatcher = PolymorphicDispatcher.createForSingleTarget("text", 1, 1,
+	protected PolymorphicDispatcher<Object> textDispatcher = PolymorphicDispatcher.createForSingleTarget("text", 1, 1,
 			this);
 
-	private PolymorphicDispatcher<Image> imageDispatcher = PolymorphicDispatcher.createForSingleTarget("image", 1, 1,
+	protected PolymorphicDispatcher<Image> imageDispatcher = PolymorphicDispatcher.createForSingleTarget("image", 1, 1,
 			this);
 
-	private PolymorphicDispatcher<Boolean> isLeafDispatcher = PolymorphicDispatcher.createForSingleTarget("isLeaf", 1,
+	protected PolymorphicDispatcher<Boolean> isLeafDispatcher = PolymorphicDispatcher.createForSingleTarget("isLeaf", 1,
 			1, this);
 
 	public IOutlineNode createRoot(IXtextDocument document) {
@@ -108,7 +108,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		createEObjectNode(parentNode, modelElement);
 	}
 
-	protected void createEObjectNode(IOutlineNode parentNode, EObject modelElement) {
+	protected EObjectNode createEObjectNode(IOutlineNode parentNode, EObject modelElement) {
 		Object text = textDispatcher.invoke(modelElement);
 		Image image = imageDispatcher.invoke(modelElement);
 		EObjectNode eObjectNode = new EObjectNode(modelElement, parentNode, image, text,
@@ -117,6 +117,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		if (parserNode != null)
 			eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
 		eObjectNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
+		return eObjectNode;
 	}
 
 	protected boolean isLeaf(final EObject modelElement) {
@@ -127,7 +128,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		});
 	}
 
-	protected void createEStructuralFeatureNode(IOutlineNode parentNode, EObject owner, EStructuralFeature feature,
+	protected EStructuralFeatureNode createEStructuralFeatureNode(IOutlineNode parentNode, EObject owner, EStructuralFeature feature,
 			Image image, Object text) {
 		boolean isFeatureSet = owner.eIsSet(feature);
 		EStructuralFeatureNode eStructuralFeatureNode = new EStructuralFeatureNode(owner, feature, parentNode, image,
@@ -140,6 +141,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 			}
 			eStructuralFeatureNode.setTextRegion(region);
 		}
+		return eStructuralFeatureNode;
 	}
 
 	/**

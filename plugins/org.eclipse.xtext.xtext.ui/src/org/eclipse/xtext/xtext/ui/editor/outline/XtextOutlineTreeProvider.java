@@ -10,14 +10,17 @@ package org.eclipse.xtext.xtext.ui.editor.outline;
 import java.util.Set;
 
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
-import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.label.StylerFactory;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 
@@ -38,10 +41,7 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
 	@Inject
 	private StylerFactory stylerFactory;
-
-	@Inject
-	private IPreferenceStoreAccess preferenceStoreAccess;
-
+	
 	private Set<AbstractRule> calledRules = Sets.newHashSet();
 
 	protected Object text(AbstractRule rule) {
@@ -54,27 +54,24 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 					stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.dataTypeRule()));
 		else
 			ruleText = new StyledString(rule.getName());
-		if (isShowReturnTypes()) {
-			StringBuilder typeName = new StringBuilder(NAME_TYPE_SEPARATOR);
-			if (rule.getType() != null) {
-				String alias = rule.getType().getMetamodel().getAlias();
-				if (alias != null) {
-					typeName.append(alias);
-					typeName.append(ALIAS_TYPE_SEPARATOR);
-				}
-				typeName.append(rule.getType().getClassifier().getName());
-			} else {
-				typeName.append(rule.getName());
-			}
-			StyledString styledType = new StyledString(typeName.toString(),
-					stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.typeReference()));
-			return ruleText.append(styledType);
-		} else
-			return ruleText;
+		return ruleText;
 	}
 
-	protected boolean isShowReturnTypes() {
-		return preferenceStoreAccess.getPreferenceStore().getBoolean(FilterReturnTypesAction.PREFERENCE_KEY);
+	protected StyledString getReturnTypeText(AbstractRule rule) {
+		StringBuilder typeName = new StringBuilder(NAME_TYPE_SEPARATOR);
+		if (rule.getType() != null) {
+			String alias = rule.getType().getMetamodel().getAlias();
+			if (alias != null) {
+				typeName.append(alias);
+				typeName.append(ALIAS_TYPE_SEPARATOR);
+			}
+			typeName.append(rule.getType().getClassifier().getName());
+		} else {
+			typeName.append(rule.getName());
+		}
+		StyledString styledType = new StyledString(typeName.toString(),
+				stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.typeReference()));
+		return styledType;
 	}
 
 	protected void doCreateNode(IOutlineNode parentNode, Grammar grammar) {
@@ -87,6 +84,17 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		super.doCreateNode(parentNode, grammar);
 	}
 
+	protected void doCreateNode(IOutlineNode parentNode, AbstractRule rule) {
+		StyledString text = (StyledString) textDispatcher.invoke(rule);
+		Image image = imageDispatcher.invoke(rule);
+		RuleNode ruleNode = new RuleNode(rule, parentNode, image, text, isLeafDispatcher.invoke(rule));
+		CompositeNode parserNode = NodeUtil.getNode(rule);
+		if (parserNode != null)
+			ruleNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
+		ruleNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(rule));
+		ruleNode.setFullText(new StyledString().append(text).append(getReturnTypeText(rule)));
+	}
+
 	protected void doCreateChildren(IOutlineNode parentNode, Grammar grammar) {
 		for (AbstractMetamodelDeclaration metamodelDeclaration : grammar.getMetamodelDeclarations()) {
 			createNode(parentNode, metamodelDeclaration);
@@ -95,7 +103,7 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 			createNode(parentNode, rule);
 		}
 	}
-	
+
 	protected boolean isLeaf(AbstractRule rule) {
 		return true;
 	}
