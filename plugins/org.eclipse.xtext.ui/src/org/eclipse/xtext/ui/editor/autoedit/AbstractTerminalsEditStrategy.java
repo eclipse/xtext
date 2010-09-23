@@ -50,26 +50,37 @@ public abstract class AbstractTerminalsEditStrategy extends AbstractEditStrategy
 	 * finds the first start terminal which is not closed before the cursor position.
 	 */
 	protected IRegion findStopTerminal(IDocument document, int offset) throws BadLocationException {
-		IRegion stop = util.searchInSamePartition(getRightTerminal(), document, offset);
-		if (stop==null)
-			return null;
-		IRegion start = util.searchInSamePartition(getLeftTerminal(), document, offset);
-		if (start != null && start.getOffset()<stop.getOffset())
-			return findStopTerminal(document, stop.getOffset()+stop.getLength());
-		return stop;
+		int stopOffset = offset;
+		int startOffset = offset;
+		while (true) {
+			IRegion stop = util.searchInSamePartition(getRightTerminal(), document, stopOffset);
+			if (stop==null)
+				return null;
+			IRegion start = util.searchInSamePartition(getLeftTerminal(), document, startOffset);
+			if (start==null || start.getOffset()>stop.getOffset()) {
+				return stop;
+			}
+			stopOffset = stop.getOffset()+stop.getLength();
+			startOffset = start.getOffset()+start.getLength();
+		}
 	}
 
 	/**
 	 * finds the first stop terminal which has not been started after the cursor position.
 	 */
 	protected IRegion findStartTerminal(IDocument document, int offset) throws BadLocationException {
-		IRegion start = util.searchBackwardsInSamePartition(getLeftTerminal(), document, offset);
-		if (start==null)
-			return null;
-		IRegion stop = util.searchBackwardsInSamePartition(getRightTerminal(), document, offset);
-		if (stop != null && stop.getOffset()>start.getOffset())
-			return findStartTerminal(document, start.getOffset());
-		return start;
+		int stopOffset = offset;
+		int startOffset = offset;
+		while(true) {
+			IRegion start = util.searchBackwardsInSamePartition(getLeftTerminal(), document, startOffset);
+			if (start==null)
+				return null;
+			IRegion stop = util.searchBackwardsInSamePartition(getRightTerminal(), document, stopOffset);
+			if (stop == null || stop.getOffset()<start.getOffset())
+				return start;
+			stopOffset = stop.getOffset();
+			startOffset = start.getOffset();
+		}
 	}
 
 }

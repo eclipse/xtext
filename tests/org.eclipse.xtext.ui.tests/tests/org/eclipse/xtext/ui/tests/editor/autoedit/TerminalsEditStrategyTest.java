@@ -1,0 +1,55 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ui.tests.editor.autoedit;
+
+import junit.framework.TestCase;
+
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.DocumentCommand;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractTerminalsEditStrategy;
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
+public class TerminalsEditStrategyTest extends TestCase {
+	
+	static class TerminalsStrategy extends AbstractTerminalsEditStrategy {
+
+		public TerminalsStrategy(String leftTerminal, String rightTerminal) {
+			super(leftTerminal, rightTerminal);
+		}
+
+		@Override
+		protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
+				throws BadLocationException {
+		}
+		@Override
+		public IRegion findStartTerminal(IDocument document, int offset) throws BadLocationException {
+			return super.findStartTerminal(document, offset);
+		}
+		@Override
+		public IRegion findStopTerminal(IDocument document, int offset) throws BadLocationException {
+			return super.findStopTerminal(document, offset);
+		}
+	}
+	
+	public void testFindStartTerminal() throws Exception {
+		TerminalsStrategy strategy = new TerminalsStrategy("(", ")");
+		assertNull(strategy.findStartTerminal(new Document("(()())"),6));
+		assertEquals(0,strategy.findStartTerminal(new Document("(()())"),5).getOffset());
+	}
+
+	public void testFindStopTerminal() throws Exception {
+		TerminalsStrategy strategy = new TerminalsStrategy("(", ")");
+		assertNull(strategy.findStopTerminal(new Document("(()())"),0));
+		assertEquals(5,strategy.findStopTerminal(new Document("(()())"),1).getOffset());
+	}
+}
