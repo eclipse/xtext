@@ -22,6 +22,10 @@ public interface IXtextEditorCallback {
 	
 	void afterCreatePartControl(XtextEditor editor);
 	
+	/**
+	 * Announce that the given editor's state is the same as the persisted state.
+	 * @param editor the editor which has not any unsaved changes
+	 */
 	void afterSave(XtextEditor editor);
 	
 	void beforeDispose(XtextEditor editor);
