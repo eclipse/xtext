@@ -4,7 +4,6 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Version: 1.0.1.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.xbase.ui; singleton:=true
-Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.xbase;bundle-version="1.0.1";visibility:=reexport,
  org.eclipse.xtext.ui;bundle-version="1.0.1",
