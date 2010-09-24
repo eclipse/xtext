@@ -9,6 +9,7 @@ package org.eclipse.xtext.scoping.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -38,7 +39,7 @@ public class FilteringScope implements IScope {
 
 			public boolean apply(IEObjectDescription input) {
 				for (EClass eClass : allowedTypes) {
-					if (eClass.isSuperTypeOf(eClass))
+					if (EcoreUtil2.isAssignableFrom(eClass, input.getEClass()))
 						return true;
 				}
 				return false;
