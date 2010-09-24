@@ -46,6 +46,7 @@ import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.TextEditor;
@@ -118,6 +119,14 @@ public class XtextEditor extends TextEditor {
 	private IPreferenceStoreAccess preferenceStoreAccess;
 
 	private ISelectionChangedListener selectionChangedListener;
+	
+	private IPropertyListener dirtyListener = new IPropertyListener() {
+		public void propertyChanged(Object source, int propId) {
+			if (propId == PROP_DIRTY && !isDirty()) {
+				callback.afterSave(XtextEditor.this);
+			}
+		}
+	};
 
 	private String languageName;
 
@@ -145,9 +154,11 @@ public class XtextEditor extends TextEditor {
 			log.debug("doSetInput:" + input);
 			log.debug("Editor instance is [" + this.toString() + "]");
 		}
+		removePropertyListener(dirtyListener);
 		callback.beforeSetInput(this);
 		super.doSetInput(input);
 		callback.afterSetInput(this);
+		addPropertyListener(dirtyListener);
 	}
 
 	@Override
@@ -190,7 +201,7 @@ public class XtextEditor extends TextEditor {
 		super.doRevertToSaved();
 		callback.afterSave(this);
 	}
-
+	
 	/**
 	 * Set key binding scope. Needed to make F3 work properly.
 	 */
