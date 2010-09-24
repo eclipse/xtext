@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.Job;
@@ -102,6 +103,8 @@ public class BuildScheduler {
 					} else {
 						progress.worked(1);
 					}
+				} catch (OperationCanceledException e) {
+					return Status.CANCEL_STATUS;
 				} catch (Exception x) {
 					log.error(x.getMessage(), x);
 					return new Status(IStatus.ERROR, Activator.getDefault().getBundle().getSymbolicName(), Messages.BuildScheduler_BuildOf
