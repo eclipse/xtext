@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.util.Arrays;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.SimpleCache;
 
@@ -439,8 +440,15 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	public static class DiagnosticImpl implements Diagnostic {
 
+		/**
+		 * @param data optional user data. May not contain <code>null</code> entries.
+		 * @throws NullPointerException if node is <code>null</code> or data contains <code>null</code>.
+		 */
 		public DiagnosticImpl(int severity, String message, EObject source, Integer feature, CheckType checkType, String issueCode, String... issueData) {
 			super();
+			if (Arrays.contains(issueData, null)) {
+				throw new NullPointerException("issueData may not contain null");
+			}
 			this.severity = severity;
 			this.message = message;
 			this.source = source;

@@ -9,6 +9,7 @@ package org.eclipse.xtext.linking.impl;
 
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.util.Arrays;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -23,9 +24,16 @@ public class XtextLinkingDiagnostic extends AbstractDiagnostic {
 	
 	private final String[] data;
 	
+	/**
+	 * @param data optional user data. May not contain <code>null</code> entries.
+	 * @throws NullPointerException if node is <code>null</code> or data contains <code>null</code>.
+	 */
 	public XtextLinkingDiagnostic(AbstractNode node, String message, String code, String... data) {
 		if (node == null)
 			throw new NullPointerException("node may not be null");
+		if (Arrays.contains(data, null)) {
+			throw new NullPointerException("data may not contain null");
+		}
 		this.node = node;
 		this.message = message;
 		this.code = code;
