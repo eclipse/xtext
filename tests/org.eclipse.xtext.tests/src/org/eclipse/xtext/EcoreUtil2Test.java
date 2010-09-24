@@ -12,8 +12,6 @@ import static org.eclipse.xtext.EcoreUtil2.*;
 import java.util.List;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -30,12 +28,14 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.junit.AbstractXtextTests;
 
 import com.google.common.collect.Sets;
+
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
-public class EcoreUtil2Test extends TestCase {
+public class EcoreUtil2Test extends AbstractXtextTests {
 	static private final EClass EOBJECT = EcorePackage.Literals.EOBJECT; 
 	
 	private EClass createEClass(String name) {
