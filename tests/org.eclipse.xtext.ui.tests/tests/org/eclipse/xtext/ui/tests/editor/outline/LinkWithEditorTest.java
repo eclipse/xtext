@@ -16,7 +16,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
-import org.eclipse.xtext.ui.editor.outline.actions.ToggleLinkWithEditorAction;
+import org.eclipse.xtext.ui.editor.outline.actions.LinkWithEditorOutlineContribution;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -28,15 +28,15 @@ public class LinkWithEditorTest extends AbstractOutlineUITest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		preferenceStore.setValue(ToggleLinkWithEditorAction.PREFERENCE_KEY, true);
+		preferenceStore.setValue(LinkWithEditorOutlineContribution.PREFERENCE_KEY, true);
 		selectionSyncer = new SyncingSelectionListener();
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		preferenceStore.setValue(ToggleLinkWithEditorAction.PREFERENCE_KEY,
-				preferenceStore.getDefaultBoolean(ToggleLinkWithEditorAction.PREFERENCE_KEY));
+		preferenceStore.setValue(LinkWithEditorOutlineContribution.PREFERENCE_KEY,
+				preferenceStore.getDefaultBoolean(LinkWithEditorOutlineContribution.PREFERENCE_KEY));
 	}
 
 	public void testTreeToText() throws Exception {
@@ -100,7 +100,7 @@ public class LinkWithEditorTest extends AbstractOutlineUITest {
 		}
 	}
 
-	private void activate(IWorkbenchPart part) {
+	protected void activate(IWorkbenchPart part) {
 		editor.getSite().getPage().activate(part);
 	}
 

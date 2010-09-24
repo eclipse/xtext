@@ -14,9 +14,12 @@ import org.eclipse.osgi.util.NLS;
  */
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.xtext.ui.editor.outline.messages"; //$NON-NLS-1$
-	public static String FilterReturnTypesAction_description;
-	public static String FilterReturnTypesAction_title;
-	public static String FilterReturnTypesAction_tooltip;
+	public static String FilterTerminalRulesContribution_description;
+	public static String FilterTerminalRulesContribution_title;
+	public static String FilterTerminalRulesContribution_tooltip;
+	public static String HideReturnTypesAction_description;
+	public static String HideReturnTypesAction_title;
+	public static String HideReturnTypesAction_tooltip;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

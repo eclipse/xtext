@@ -9,32 +9,26 @@ package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
-import org.eclipse.xtext.ui.editor.outline.actions.ToggleSortingAction;
-import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
+import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class SortOutlineTest extends AbstractOutlineUITest {
-
-	protected IOutlineNodeComparer comparer;
+public class SortContributionTest extends AbstractOutlineUITest {
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		comparer = new IOutlineNodeComparer.Default();
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		preferenceStore.setValue(ToggleSortingAction.PREFERENCE_KEY,
-				preferenceStore.getDefaultBoolean(ToggleSortingAction.PREFERENCE_KEY));
+		setSorting(preferenceStore.getDefaultBoolean(SortOutlineContribution.PREFERENCE_KEY));
 	}
 
 	public void testNoSort() throws Exception {
-		preferenceStore.setValue(ToggleSortingAction.PREFERENCE_KEY, false);
+		setSorting(false);
 		outlinePage.resetSyncer();
 		treeViewer.expandAll();
 		outlinePage.scheduleRefresh();
@@ -53,7 +47,7 @@ public class SortOutlineTest extends AbstractOutlineUITest {
 	}
 
 	public void testSort() throws Exception {
-		preferenceStore.setValue(ToggleSortingAction.PREFERENCE_KEY, true);
+		setSorting(true);
 		outlinePage.resetSyncer();
 		treeViewer.expandAll();
 		outlinePage.scheduleRefresh();
@@ -71,16 +65,16 @@ public class SortOutlineTest extends AbstractOutlineUITest {
 		assertSame(threeNode, secondLevelItems[0]);
 		assertSame(twoNode, secondLevelItems[1]);
 	}
-	
+
 	public void testSortingPreservesSelectionAndExpansion() throws Exception {
-		preferenceStore.setValue(ToggleSortingAction.PREFERENCE_KEY, false);
+		setSorting(false);
 		outlinePage.resetSyncer();
 		treeViewer.setExpandedElements(new Object[] { modelNode });
 		treeViewer.setSelection(new StructuredSelection(fourNode));
 		outlinePage.scheduleRefresh();
 		outlinePage.waitForUpdate(ERROR_TIMEOUT);
-		
-		preferenceStore.setValue(ToggleSortingAction.PREFERENCE_KEY, true);
+
+		setSorting(true);
 		outlinePage.resetSyncer();
 		outlinePage.scheduleRefresh();
 		outlinePage.waitForUpdate(ERROR_TIMEOUT);
@@ -89,8 +83,8 @@ public class SortOutlineTest extends AbstractOutlineUITest {
 		assertSelected(treeViewer, fourNode);
 	}
 
-	protected void assertSame(IOutlineNode node, TreeItem treeItem) {
-		assertTrue(treeItem.getData() instanceof IOutlineNode);
-		assertTrue(comparer.equals(node, (IOutlineNode) treeItem.getData()));
+	protected void setSorting(boolean isSorting) {
+		preferenceStore.setValue(SortOutlineContribution.PREFERENCE_KEY, isSorting);
 	}
+
 }

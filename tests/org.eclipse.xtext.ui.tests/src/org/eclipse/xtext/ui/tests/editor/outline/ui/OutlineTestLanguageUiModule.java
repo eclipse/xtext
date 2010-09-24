@@ -5,18 +5,29 @@ package org.eclipse.xtext.ui.tests.editor.outline.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
+import org.eclipse.xtext.ui.tests.editor.outline.SampleFilterContribution;
 import org.eclipse.xtext.ui.tests.editor.outline.SyncableOutlinePage;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class OutlineTestLanguageUiModule extends org.eclipse.xtext.ui.tests.editor.outline.ui.AbstractOutlineTestLanguageUiModule {
+public class OutlineTestLanguageUiModule extends
+		org.eclipse.xtext.ui.tests.editor.outline.ui.AbstractOutlineTestLanguageUiModule {
 	public OutlineTestLanguageUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
-	
+
 	@Override
 	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
 		return SyncableOutlinePage.class;
+	}
+
+	public void configureSampleFilterContribution(Binder binder) {
+		binder.bind(IOutlineContribution.class).annotatedWith(Names.named(SampleFilterContribution.PREFERENCE_KEY))
+				.to(SampleFilterContribution.class);
 	}
 }

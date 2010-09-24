@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.apache.log4j.Logger;
-import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -25,8 +24,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
-import org.eclipse.xtext.ui.editor.outline.actions.ToggleLinkWithEditorAction;
-import org.eclipse.xtext.ui.editor.outline.actions.ToggleSortingAction;
+import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
 import org.eclipse.xtext.ui.util.DisplayRunHelper;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -50,11 +48,8 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	private IOutlineTreeProvider treeProvider;
 
 	@Inject
-	private ToggleLinkWithEditorAction linkWithEditorAction;
+	private IOutlineContribution.Composite contribution;
 	
-	@Inject 
-	private ToggleSortingAction sortingAction;
-
 	private IXtextModelListener modelListener;
 
 	private IXtextDocument xtextDocument;
@@ -104,17 +99,12 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	}
 
 	protected void configureActions() {
-		IToolBarManager toolBarManager = getSite().getActionBars().getToolBarManager();
-		toolBarManager.add(linkWithEditorAction);
-		toolBarManager.add(sortingAction);
-		linkWithEditorAction.activate(this);
-		sortingAction.activate(this);
+		contribution.register(this);
 	}
 
 	@Override
 	public void dispose() {
-		sortingAction.deactivate();
-		linkWithEditorAction.deactivate();
+		contribution.deregister(this);
 		xtextDocument.removeModelListener(modelListener);
 		contentProvider.dispose();
 		super.dispose();
