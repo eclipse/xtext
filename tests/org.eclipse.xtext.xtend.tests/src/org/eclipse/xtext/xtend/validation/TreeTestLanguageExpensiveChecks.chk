@@ -1,4 +1,0 @@
-import org::eclipse::xtext::xtend::treeXtendTestLanguage;
- 
-context Node#name ERROR "invalid node name" : 
-	name != "bar";
