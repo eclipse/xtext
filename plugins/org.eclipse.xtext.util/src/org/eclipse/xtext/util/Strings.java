@@ -300,6 +300,10 @@ public class Strings {
 
 	public static char SEPARATOR = ':';
 
+	/**
+	 * @param strings array of strings, may not be <code>null</code> and may not contain any <code>null</code> values.
+	 * @throws NullPointerException if the array of strings or any element in the array is <code>null</code>
+	 */
 	public static String pack(String[] strings) {
 		if (strings != null && strings.length > 0) {
 			StringBuffer buffer = new StringBuffer();
