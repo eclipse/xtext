@@ -1,4 +1,0 @@
-import org::eclipse::xtext::xtend::treeXtendTestLanguage;
- 
-context Node#name ERROR "Name should start with a lower-case letter" : 
-	name.toFirstLower() == name;
