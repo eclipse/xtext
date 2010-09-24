@@ -58,7 +58,10 @@ import org.eclipse.xtext.ui.editor.model.DocumentPartitioner;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
-import org.eclipse.xtext.ui.editor.outline.actions.OutlinePreferenceStoreInitializer;
+import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
+import org.eclipse.xtext.ui.editor.outline.actions.LinkWithEditorOutlineContribution;
+import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
@@ -226,8 +229,20 @@ public class DefaultUiModule extends AbstractGenericModule {
 		return OutlinePage.class;
 	}
 
-	public void configureOutlinePreferenceStoreInitializer(com.google.inject.Binder binder) {
-		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("Outline")).to(OutlinePreferenceStoreInitializer.class);
+	public void configureIOutlineContribution$Composite(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(IOutlineContribution.All.class).to(IOutlineContribution.Composite.class);
+	}
+	
+	public void configureToggleSortingOutlineContribution(Binder binder) {
+		binder.bind(IOutlineContribution.class).annotatedWith(IOutlineContribution.Sort.class).to(SortOutlineContribution.class);
+	}
+
+	public void configureToggleLinkWithEditorOutlineContribution(Binder binder) {
+		binder.bind(IOutlineContribution.class).annotatedWith(IOutlineContribution.LinkWithEditor.class).to(LinkWithEditorOutlineContribution.class);
+	}
+	
+	public Class<? extends IComparator> bindOutlineFilterAndSorter$IComparator() {
+		return SortOutlineContribution.DefaultComparator.class;
 	}
 	
 	public void configureContentProposalLabelProvider(com.google.inject.Binder binder) {

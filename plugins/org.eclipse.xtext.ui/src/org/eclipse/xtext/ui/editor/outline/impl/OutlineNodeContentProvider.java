@@ -12,7 +12,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
-import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 
 /**
  * The JFace/SWT content provider. The tree of visible IOutlineNodes has already been pre-computed.
@@ -21,6 +21,10 @@ import com.google.common.collect.Iterables;
  */
 public class OutlineNodeContentProvider implements ITreeContentProvider {
 
+	@Inject
+	private OutlineFilterAndSorter filterSorter;
+
+	
 	public void dispose() {
 	}
 
@@ -33,7 +37,7 @@ public class OutlineNodeContentProvider implements ITreeContentProvider {
 	}
 
 	public Object[] getChildren(Object parentElement) {
-		return Iterables.toArray(asOutlineNode(parentElement).getChildren(), IOutlineNode.class);
+		return filterSorter.filterAndSort(asOutlineNode(parentElement).getChildren());
 	}
 
 	public Object getParent(Object element) {

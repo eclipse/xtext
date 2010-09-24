@@ -17,6 +17,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -52,11 +53,13 @@ public abstract class AbstractOutlineUITest extends AbstractEditorTest {
 	protected IOutlineNode fourNode;
 
 	protected IPreferenceStore preferenceStore;
+	protected IOutlineNodeComparer comparer;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		preferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), getEditorId());
+		comparer = new IOutlineNodeComparer.Default();
 		modelAsText = "one { two {} three {} } four {}";
 		IFile file = IResourcesSetupUtil.createFile("test/test.outlinetestlanguage", modelAsText);
 		editor = openEditor(file);
@@ -125,5 +128,11 @@ public abstract class AbstractOutlineUITest extends AbstractEditorTest {
 			fail("Unexpected selection " + selectedObject.toString());
 		}
 	}
+	
+	protected void assertSame(IOutlineNode node, TreeItem treeItem) {
+		assertTrue(treeItem.getData() instanceof IOutlineNode);
+		assertTrue(comparer.equals(node, (IOutlineNode) treeItem.getData()));
+	}
+
 
 }

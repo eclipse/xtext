@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.outline.actions;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
@@ -18,46 +19,78 @@ import com.google.inject.Inject;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public abstract class AbstractToggleAction extends Action {
+public abstract class AbstractToggleActionContribution implements IOutlineContribution {
+
+	protected static class ToggleAction extends Action {
+
+		private final AbstractToggleActionContribution contribution;
+
+		protected ToggleAction(AbstractToggleActionContribution contribution) {
+			this.contribution = contribution;
+			setId(contribution.getPreferenceKey());
+			setChecked(contribution.isPropertySet());
+		}
+
+		@Override
+		public void run() {
+			boolean newState = !contribution.isPropertySet();
+			setChecked(newState);
+			contribution.toggle();
+		}
+	}
 
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
+
 	private IPropertyChangeListener propertyChangeListener;
 
-	protected AbstractToggleAction() {
-		setId(getPreferenceKey());
-	}
+	private Action action;
 
 	public abstract String getPreferenceKey();
+
+	protected abstract void stateChanged(boolean newState);
 
 	protected boolean isPropertySet() {
 		return preferenceStoreAccess.getPreferenceStore().getBoolean(getPreferenceKey());
 	}
 
-	@Override
-	public void run() {
+	protected void toggle() {
 		boolean newState = !isPropertySet();
 		preferenceStoreAccess.getWritablePreferenceStore().setValue(getPreferenceKey(), newState);
-		setChecked(newState);
 		stateChanged(newState);
 	}
 
-	protected abstract void stateChanged(boolean newState);
+	/**
+	 * Subclasses must set text, image, description, tooltip etc. here.
+	 */
+	protected abstract void configureAction(Action action);
 
-	public void activate(OutlinePage outlinePage) {
+	protected Action getAction() {
+		if (action == null) {
+			action = new ToggleAction(this);
+			configureAction(action);
+		}
+		return action;
+	}
+
+	public void register(OutlinePage outlinePage) {
 		propertyChangeListener = new IPropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent event) {
-				if (getPreferenceKey().equals(event.getProperty())) {
+				if (getPreferenceKey().equals(event.getProperty()) && event.getOldValue() != event.getNewValue()) {
 					stateChanged(Boolean.parseBoolean(event.getNewValue().toString()));
 				}
 			}
 		};
 		preferenceStoreAccess.getPreferenceStore().addPropertyChangeListener(propertyChangeListener);
-		setChecked(isPropertySet());
+		IToolBarManager toolBarManager = outlinePage.getSite().getActionBars().getToolBarManager();
+		toolBarManager.add(getAction());
 	}
 
-	public void deactivate() {
+	public void deregister(OutlinePage outlinePage) {
 		preferenceStoreAccess.getPreferenceStore().removePropertyChangeListener(propertyChangeListener);
 	}
 
+	public void initialize(IPreferenceStoreAccess preferenceStoreAccess) {
+		preferenceStoreAccess.getWritablePreferenceStore().setDefault(getPreferenceKey(), false);
+	}
 }

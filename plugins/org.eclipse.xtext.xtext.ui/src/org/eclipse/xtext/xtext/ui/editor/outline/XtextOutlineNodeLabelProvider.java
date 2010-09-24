@@ -35,6 +35,6 @@ public class XtextOutlineNodeLabelProvider extends OutlineNodeLabelProvider {
 	}
 	
 	protected boolean isShowReturnTypes() {
-		return preferenceStoreAccess.getPreferenceStore().getBoolean(FilterReturnTypesAction.PREFERENCE_KEY);
+		return preferenceStoreAccess.getPreferenceStore().getBoolean(HideReturnTypesContribution.PREFERENCE_KEY);
 	}
 }

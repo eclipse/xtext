@@ -13,11 +13,10 @@ import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeLabelProvider;
-import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
-import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
@@ -27,12 +26,12 @@ import org.eclipse.xtext.xtext.ui.XtextHyperlinkHelper;
 import org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider;
 import org.eclipse.xtext.xtext.ui.editor.autoedit.XtextAutoEditStrategy;
 import org.eclipse.xtext.xtext.ui.editor.folding.XtextGrammarFoldingRegionProvider;
-import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
-import org.eclipse.xtext.xtext.ui.editor.outline.FilterReturnTypesAction;
+import org.eclipse.xtext.xtext.ui.editor.outline.FilterTerminalRulesContribution;
+import org.eclipse.xtext.xtext.ui.editor.outline.HideReturnTypesContribution;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineNodeComparer;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineNodeLabelProvider;
-import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlinePage;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineTreeProvider;
+import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
@@ -86,10 +85,6 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return XtextGrammarFoldingRegionProvider.class;
 	}
 
-	public Class<? extends OutlinePage> bindOutlinePage() {
-		return XtextOutlinePage.class;
-	}
-
 	public Class<? extends IOutlineTreeProvider> bindIOutlineTreeProvider() {
 		return XtextOutlineTreeProvider.class;
 	}
@@ -106,10 +101,16 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return XtextOutlineNodeLabelProvider.class;
 	}
 	
-	public void configureFilterReturnTypesActionPropertyIntializer(Binder binder) {
-		binder.bind(IPreferenceStoreInitializer.class)
-				.annotatedWith(Names.named(FilterReturnTypesAction.PREFERENCE_KEY))
-				.to(FilterReturnTypesAction.PropertyInitializer.class);
+	public void configureFilterReturnTypesContribution(Binder binder) {
+		binder.bind(IOutlineContribution.class)
+				.annotatedWith(HideReturnTypesContribution.Annotation.class)
+				.to(HideReturnTypesContribution.class);
+	}
+
+	public void configureFilterTerminalRulesContribution(Binder binder) {
+		binder.bind(IOutlineContribution.class)
+				.annotatedWith(FilterTerminalRulesContribution.Annotation.class)
+				.to(FilterTerminalRulesContribution.class);
 	}
 
 	public Class<? extends IXtext2EcorePostProcessor> bindIXtext2EcorePostProcessor() {
