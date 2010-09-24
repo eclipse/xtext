@@ -18,7 +18,9 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-   <license url="http://www.eclipse.org/legal/epl-v10.html">%license</license>
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
 
    <requires>
       <import feature="org.eclipse.xtext.runtime" version="1.0.1" match="equivalent"/>
@@ -57,13 +59,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="org.eclipse.xtext.ui.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtext.xtend.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
