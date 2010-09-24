@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.editor.contentassist;
 
 import org.eclipse.jface.dialogs.IDialogSettings;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
@@ -57,7 +56,7 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 	private void configureDefaults(ContentAssistant assistant, SourceViewerConfiguration configuration, ISourceViewer sourceViewer) {
 		setAutoInsert(assistant);
 		setAutoActivation(assistant);
-		setContentAssistProcessor(assistant);
+		setContentAssistProcessor(assistant, configuration, sourceViewer);
 		setInformationControlCreator(assistant, configuration, sourceViewer);
 		setDialogSettings(assistant);
 		setColoredLabels(assistant);
@@ -85,9 +84,11 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 		}
 	}
 	
-	protected void setContentAssistProcessor(ContentAssistant assistant) {
-		if (contentAssistProcessor != null)
-			assistant.setContentAssistProcessor(contentAssistProcessor, IDocument.DEFAULT_CONTENT_TYPE);
+	protected void setContentAssistProcessor(ContentAssistant assistant, SourceViewerConfiguration configuration, ISourceViewer sourceViewer) {
+		if (contentAssistProcessor != null) {
+			for(String contentType: configuration.getConfiguredContentTypes(sourceViewer))
+				assistant.setContentAssistProcessor(contentAssistProcessor, contentType);
+		}
 	}
 
 	public void setDialogSettings(IDialogSettings dialogSettings) {

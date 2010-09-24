@@ -57,7 +57,7 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 		XtextContentAssistProcessor processor = get(XtextContentAssistProcessor.class);
 		XtextResource resource = getResourceFromString(modelAsString);
 
-		ITextViewer viewer = builder.getTextViewer(modelAsString, builder.getDocument(resource, modelAsString));
+		ITextViewer viewer = builder.getSourceViewer(modelAsString, builder.getDocument(resource, modelAsString));
 		ContentAssistContext[] contexts = processor.getContextFactory()
 				.create(viewer, modelAsString.length(), resource);
 		assertEquals(2, contexts.length);
@@ -88,7 +88,7 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 		XtextContentAssistProcessor processor = get(XtextContentAssistProcessor.class);
 		XtextResource resource = getResourceFromString(modelAsString);
 
-		ITextViewer viewer = builder.getTextViewer(modelAsString, builder.getDocument(resource, modelAsString));
+		ITextViewer viewer = builder.getSourceViewer(modelAsString, builder.getDocument(resource, modelAsString));
 		ContentAssistContext[] contexts = processor.getContextFactory().create(viewer, 0, resource);
 		assertEquals(1, contexts.length);
 		for (ContentAssistContext context : contexts) {
