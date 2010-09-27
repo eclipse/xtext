@@ -5,10 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.xtend2.Xtend2 with org.eclipse.xtext.xbase.Xpression
+grammar org.eclipse.xtext.xtend2.Xtend2 with org.eclipse.xtext.xbase.Xbase
 
 import "platform:/resource/org.eclipse.xtext.xtend2/model/Xtend2.ecore"
-import "platform:/resource/org.eclipse.xtext.xbase/model/Xpression.ecore" as xpression
+import "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore" as xbase
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore" as xtype
 import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
 

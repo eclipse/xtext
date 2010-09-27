@@ -7,7 +7,7 @@ package org.eclipse.xtext.xtend2.xtend2;
 
 import org.eclipse.xtext.common.types.JvmOperation;
 
-import org.eclipse.xtext.xpression.XExpression;
+import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->

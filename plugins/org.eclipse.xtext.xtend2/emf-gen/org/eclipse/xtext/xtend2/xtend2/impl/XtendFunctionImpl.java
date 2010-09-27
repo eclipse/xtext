@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.common.types.impl.JvmOperationImpl;
 
-import org.eclipse.xtext.xpression.XExpression;
+import org.eclipse.xtext.xbase.XExpression;
 
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;

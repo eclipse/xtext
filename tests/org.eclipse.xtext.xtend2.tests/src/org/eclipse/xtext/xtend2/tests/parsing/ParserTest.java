@@ -4,7 +4,7 @@ import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.xpression.XFeatureCall;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2Test;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
