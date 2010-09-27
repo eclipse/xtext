@@ -10,7 +10,7 @@ grammar org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLangu
 
 generate unorderedGroupsTest "http://www.eclipse.org/xtext/ui/tests/2010/UnorderedGroupsTest"
 
-Model :
+Model : 
      '1' first=SimpleModel
    | '2' second=MandatoryModel
    | '3' thrird=LoopedModel
@@ -70,7 +70,7 @@ LoopedAlternativeModel:
 	'class' name=ID '{' '}'
 ;
 
-Bug304681Model:
+Bug304681Model: {Bug304681Model}
 	"{" (
     	("short" shortDescription=STRING ";")? &
      	("long"  longDescription=STRING ";")? &

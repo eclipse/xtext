@@ -13,6 +13,7 @@ generate datatypeRuleTest "http://www.eclipse.org/xtext/ui/common/tests/2009/dat
 Model : Types;
 
 Types:
+	{Types}
   'Types'
   (types+=Type)*;
   

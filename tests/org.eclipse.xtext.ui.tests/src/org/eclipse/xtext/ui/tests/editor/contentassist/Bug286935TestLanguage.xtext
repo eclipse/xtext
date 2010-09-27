@@ -11,6 +11,7 @@ grammar org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage
 generate bug286935TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2009/bug286935TestLanguage"
 
 State:
+	{State}
   (
     (isInitial?='init')
   | (isFinal?='final')
