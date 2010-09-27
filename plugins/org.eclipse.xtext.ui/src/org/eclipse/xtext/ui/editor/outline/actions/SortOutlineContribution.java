@@ -48,11 +48,19 @@ public class SortOutlineContribution extends AbstractToggleActionContribution {
 		private IPreferenceStoreAccess preferenceStoreAccess;
 		
 		public int compare(IOutlineNode o1, IOutlineNode o2) {
+			int category1 = getCategory(o1);
+			int category2 = getCategory(o2);
+			if(category1 != category2)
+				return category1-category2;
 			return o1.getText().toString().compareTo(o2.getText().toString());
 		}
 
 		public boolean isEnabled() {
 			return preferenceStoreAccess.getPreferenceStore().getBoolean(PREFERENCE_KEY);
+		}
+		
+		public int getCategory(IOutlineNode node) {
+			return 0;
 		}
 	}		
 
