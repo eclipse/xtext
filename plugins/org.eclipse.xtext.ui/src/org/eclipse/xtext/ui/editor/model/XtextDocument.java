@@ -44,15 +44,15 @@ import com.google.inject.Inject;
  * @author Michael Clay
  */
 public class XtextDocument extends Document implements IXtextDocument {
-	
-	private DocumentTokenSource tokenSource; 
-	
+
+	private DocumentTokenSource tokenSource;
+
 	@Inject
 	public void setTokenSource(DocumentTokenSource tokenSource) {
 		this.tokenSource = tokenSource;
 		tokenSource.computeDamageRegion(new DocumentEvent(this, 0, getLength(), this.get()));
 	}
-	
+
 	private XtextResource resource = null;
 	private final ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
 	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
@@ -147,7 +147,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 		protected void beforeReadOnly(XtextResource res, IUnitOfWork<?, XtextResource> work) {
 			if (log.isDebugEnabled())
 				log.debug("read - " + Thread.currentThread().getName());
-			updateContentBeforeRead();
+			// don't updateContent on reentrant read lock request
+			if (rwLock.getReadLockCount() == 1)
+				updateContentBeforeRead();
 		}
 
 		@Override
@@ -296,18 +298,17 @@ public class XtextDocument extends Document implements IXtextDocument {
 			positionsWriteLock.unlock();
 		}
 	}
-	
+
 	@Override
 	protected void fireDocumentChanged(DocumentEvent event) {
 		tokenSource.updateStructure(event);
 		super.fireDocumentChanged(event);
 	}
-	
-	
+
 	public IRegion getLastDamage() {
 		return tokenSource.getLastDamagedRegion();
 	}
-	
+
 	public Iterable<ILexerTokenRegion> getTokens() {
 		return tokenSource.getTokenInfos();
 	}
