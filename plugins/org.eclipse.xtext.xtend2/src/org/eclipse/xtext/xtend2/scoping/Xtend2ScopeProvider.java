@@ -13,7 +13,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
-import org.eclipse.xtext.xbase.scoping.XpressionScopeProvider;
+import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
@@ -27,7 +27,7 @@ import com.google.common.collect.Maps;
  * on how and when to use it 
  *
  */
-public class Xtend2ScopeProvider extends XpressionScopeProvider {
+public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	
 	@Override
 	protected IScope getLocalVariableScope(EObject context, EReference reference, Predicate<EObject> featurePredicate) {

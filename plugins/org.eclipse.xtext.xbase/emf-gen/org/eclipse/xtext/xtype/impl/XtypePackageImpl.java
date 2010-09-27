@@ -13,9 +13,9 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.common.types.TypesPackage;
 
-import org.eclipse.xtext.xpression.XpressionPackage;
+import org.eclipse.xtext.xbase.XbasePackage;
 
-import org.eclipse.xtext.xpression.impl.XpressionPackageImpl;
+import org.eclipse.xtext.xbase.impl.XbasePackageImpl;
 
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypeFactory;
@@ -88,15 +88,15 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
 		TypesPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		XpressionPackageImpl theXpressionPackage = (XpressionPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XpressionPackage.eNS_URI) instanceof XpressionPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XpressionPackage.eNS_URI) : XpressionPackage.eINSTANCE);
+		XbasePackageImpl theXbasePackage = (XbasePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) instanceof XbasePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI) : XbasePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theXtypePackage.createPackageContents();
-		theXpressionPackage.createPackageContents();
+		theXbasePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theXtypePackage.initializePackageContents();
-		theXpressionPackage.initializePackageContents();
+		theXbasePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theXtypePackage.freeze();

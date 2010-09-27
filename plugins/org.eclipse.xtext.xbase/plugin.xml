@@ -14,8 +14,8 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/xtext/xbase/Xpression" 
-       class = "org.eclipse.xtext.xpression.XpressionPackage"
+       uri = "http://www.eclipse.org/xtext/xbase/Xbase" 
+       class = "org.eclipse.xtext.xbase.XbasePackage"
        genModel = "model/Xbase.genmodel" /> 
 	
   </extension>

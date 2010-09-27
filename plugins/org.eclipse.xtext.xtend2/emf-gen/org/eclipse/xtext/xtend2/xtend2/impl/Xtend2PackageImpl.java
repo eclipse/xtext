@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.common.types.TypesPackage;
 
-import org.eclipse.xtext.xpression.XpressionPackage;
+import org.eclipse.xtext.xbase.XbasePackage;
 
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Factory;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -108,7 +108,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		isInited = true;
 
 		// Initialize simple dependencies
-		XpressionPackage.eINSTANCE.eClass();
+		XbasePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theXtend2Package.createPackageContents();
@@ -340,7 +340,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 
 		// Obtain other dependent packages
 		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
-		XpressionPackage theXpressionPackage = (XpressionPackage)EPackage.Registry.INSTANCE.getEPackage(XpressionPackage.eNS_URI);
+		XbasePackage theXbasePackage = (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -362,7 +362,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 
 		initEClass(xtendFunctionEClass, XtendFunction.class, "XtendFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendFunction_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendFunction_Expression(), theXpressionPackage.getXExpression(), null, "expression", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendFunction_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendClassEClass, XtendClass.class, "XtendClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendClass_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

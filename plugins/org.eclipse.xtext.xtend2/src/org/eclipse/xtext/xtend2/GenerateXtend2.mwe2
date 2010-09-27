@@ -1,4 +1,4 @@
-module org.eclipse.xtext.xtend2.Xtend2
+module org.eclipse.xtext.xtend2.GenerateXtend2
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*

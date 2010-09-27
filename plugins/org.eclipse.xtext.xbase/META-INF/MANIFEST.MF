@@ -31,8 +31,6 @@ Export-Package: org.eclipse.xtext.xbase,
  org.eclipse.xtext.xbase.services,
  org.eclipse.xtext.xbase.typing,
  org.eclipse.xtext.xbase.validation,
- org.eclipse.xtext.xpression,
- org.eclipse.xtext.xpression.util,
  org.eclipse.xtext.xtype,
  org.eclipse.xtext.xtype.util
 Import-Package: org.apache.log4j

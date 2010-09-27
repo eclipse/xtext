@@ -13,7 +13,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xpression.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

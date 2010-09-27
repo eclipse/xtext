@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.xbase.XpressionStandaloneSetup;
-import org.eclipse.xtext.xpression.XExpression;
+import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * @author Sven Efftinge
@@ -26,12 +26,12 @@ public abstract class AbstractXbaseTestCase extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(new XpressionStandaloneSetup());
+		with(new XbaseStandaloneSetup());
 	}
 
 	protected XExpression expression(String string) throws IOException {
 		XtextResourceSet set = get(XtextResourceSet.class);
-		Resource resource = set.createResource(URI.createURI("Test.xpression"));
+		Resource resource = set.createResource(URI.createURI("Test.___xbase"));
 		resource.load(new StringInputStream(string), null);
 		XExpression exp = (XExpression) resource.getContents().get(0);
 		return exp;

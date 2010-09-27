@@ -1,0 +1,1856 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ */
+package org.eclipse.xtext.xbase;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+
+/**
+ * <!-- begin-user-doc -->
+ * The <b>Package</b> for the model.
+ * It contains accessors for the meta objects to represent
+ * <ul>
+ *   <li>each class,</li>
+ *   <li>each feature of each class,</li>
+ *   <li>each enum,</li>
+ *   <li>and each data type</li>
+ * </ul>
+ * <!-- end-user-doc -->
+ * @see org.eclipse.xtext.xbase.XbaseFactory
+ * @model kind="package"
+ * @generated
+ */
+public interface XbasePackage extends EPackage
+{
+	/**
+	 * The package name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNAME = "xbase";
+
+	/**
+	 * The package namespace URI.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNS_URI = "http://www.eclipse.org/xtext/xbase/Xbase";
+
+	/**
+	 * The package namespace name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eNS_PREFIX = "xbase";
+
+	/**
+	 * The singleton instance of the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	XbasePackage eINSTANCE = org.eclipse.xtext.xbase.impl.XbasePackageImpl.init();
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XExpressionImpl <em>XExpression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXExpression()
+	 * @generated
+	 */
+	int XEXPRESSION = 0;
+
+	/**
+	 * The number of structural features of the '<em>XExpression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XEXPRESSION_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl <em>XIf Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XIfExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXIfExpression()
+	 * @generated
+	 */
+	int XIF_EXPRESSION = 1;
+
+	/**
+	 * The feature id for the '<em><b>If</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIF_EXPRESSION__IF = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Then</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIF_EXPRESSION__THEN = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Else</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIF_EXPRESSION__ELSE = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>XIf Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XIF_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl <em>XSwitch Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXSwitchExpression()
+	 * @generated
+	 */
+	int XSWITCH_EXPRESSION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Switch</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSWITCH_EXPRESSION__SWITCH = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Cases</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSWITCH_EXPRESSION__CASES = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Default</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSWITCH_EXPRESSION__DEFAULT = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>XSwitch Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSWITCH_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XCasePartImpl <em>XCase Part</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XCasePartImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCasePart()
+	 * @generated
+	 */
+	int XCASE_PART = 3;
+
+	/**
+	 * The feature id for the '<em><b>Case</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCASE_PART__CASE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Then</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCASE_PART__THEN = 1;
+
+	/**
+	 * The number of structural features of the '<em>XCase Part</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCASE_PART_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBlockExpressionImpl <em>XBlock Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XBlockExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXBlockExpression()
+	 * @generated
+	 */
+	int XBLOCK_EXPRESSION = 4;
+
+	/**
+	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBLOCK_EXPRESSION__EXPRESSIONS = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>XBlock Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBLOCK_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XVariableDeclarationImpl <em>XVariable Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XVariableDeclarationImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXVariableDeclaration()
+	 * @generated
+	 */
+	int XVARIABLE_DECLARATION = 5;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XVARIABLE_DECLARATION__TYPE = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XVARIABLE_DECLARATION__NAME = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Right</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XVARIABLE_DECLARATION__RIGHT = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>XVariable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XVARIABLE_DECLARATION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XFeatureCallImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXFeatureCall()
+	 * @generated
+	 */
+	int XFEATURE_CALL = 6;
+
+	/**
+	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__FEATURE_NAME = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__PARAMS = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__FEATURE = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>XFeature Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXMemberFeatureCall()
+	 * @generated
+	 */
+	int XMEMBER_FEATURE_CALL = 7;
+
+	/**
+	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__FEATURE_NAME = XFEATURE_CALL__FEATURE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__PARAMS = XFEATURE_CALL__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__FEATURE = XFEATURE_CALL__FEATURE;
+
+	/**
+	 * The number of structural features of the '<em>XMember Feature Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XFEATURE_CALL_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XConstructorCallImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXConstructorCall()
+	 * @generated
+	 */
+	int XCONSTRUCTOR_CALL = 8;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCONSTRUCTOR_CALL__TYPE = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCONSTRUCTOR_CALL__PARAMS = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>XConstructor Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCONSTRUCTOR_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl <em>XBoolean Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXBooleanLiteral()
+	 * @generated
+	 */
+	int XBOOLEAN_LITERAL = 9;
+
+	/**
+	 * The feature id for the '<em><b>Is True</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBOOLEAN_LITERAL__IS_TRUE = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>XBoolean Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBOOLEAN_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XNullLiteralImpl <em>XNull Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XNullLiteralImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXNullLiteral()
+	 * @generated
+	 */
+	int XNULL_LITERAL = 10;
+
+	/**
+	 * The number of structural features of the '<em>XNull Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XNULL_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XIntLiteralImpl <em>XInt Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XIntLiteralImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXIntLiteral()
+	 * @generated
+	 */
+	int XINT_LITERAL = 11;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XINT_LITERAL__VALUE = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>XInt Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XINT_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XStringLiteralImpl <em>XString Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XStringLiteralImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXStringLiteral()
+	 * @generated
+	 */
+	int XSTRING_LITERAL = 12;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSTRING_LITERAL__VALUE = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>XString Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSTRING_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XClosureImpl <em>XClosure</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XClosureImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXClosure()
+	 * @generated
+	 */
+	int XCLOSURE = 13;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCLOSURE__PARAMS = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCLOSURE__EXPRESSION = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>XClosure</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCLOSURE_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XCastedExpressionImpl <em>XCasted Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XCastedExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCastedExpression()
+	 * @generated
+	 */
+	int XCASTED_EXPRESSION = 14;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCASTED_EXPRESSION__TYPE = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCASTED_EXPRESSION__TARGET = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>XCasted Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCASTED_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl <em>XAssignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XAssignmentImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAssignment()
+	 * @generated
+	 */
+	int XASSIGNMENT = 15;
+
+	/**
+	 * The feature id for the '<em><b>Left</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__LEFT = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Right</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__RIGHT = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>XAssignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl <em>XBinary Operation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XBinaryOperationImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXBinaryOperation()
+	 * @generated
+	 */
+	int XBINARY_OPERATION = 16;
+
+	/**
+	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__FEATURE_NAME = XMEMBER_FEATURE_CALL__FEATURE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__PARAMS = XMEMBER_FEATURE_CALL__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__FEATURE = XMEMBER_FEATURE_CALL__FEATURE;
+
+	/**
+	 * The number of structural features of the '<em>XBinary Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION_FEATURE_COUNT = XMEMBER_FEATURE_CALL_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XUnaryOperationImpl <em>XUnary Operation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XUnaryOperationImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXUnaryOperation()
+	 * @generated
+	 */
+	int XUNARY_OPERATION = 17;
+
+	/**
+	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XUNARY_OPERATION__FEATURE_NAME = XMEMBER_FEATURE_CALL__FEATURE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XUNARY_OPERATION__PARAMS = XMEMBER_FEATURE_CALL__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XUNARY_OPERATION__FEATURE = XMEMBER_FEATURE_CALL__FEATURE;
+
+	/**
+	 * The number of structural features of the '<em>XUnary Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XUNARY_OPERATION_FEATURE_COUNT = XMEMBER_FEATURE_CALL_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XWhileExpressionImpl <em>XWhile Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XWhileExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXWhileExpression()
+	 * @generated
+	 */
+	int XWHILE_EXPRESSION = 18;
+
+	/**
+	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XWHILE_EXPRESSION__PREDICATE = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XWHILE_EXPRESSION__BODY = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>XWhile Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XWHILE_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XTypeLiteralImpl <em>XType Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XTypeLiteralImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXTypeLiteral()
+	 * @generated
+	 */
+	int XTYPE_LITERAL = 19;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTYPE_LITERAL__TYPE = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>XType Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTYPE_LITERAL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XInstanceOfExpressionImpl <em>XInstance Of Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XInstanceOfExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXInstanceOfExpression()
+	 * @generated
+	 */
+	int XINSTANCE_OF_EXPRESSION = 20;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XINSTANCE_OF_EXPRESSION__TYPE = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XINSTANCE_OF_EXPRESSION__EXPRESSION = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>XInstance Of Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XINSTANCE_OF_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XExpression <em>XExpression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XExpression</em>'.
+	 * @see org.eclipse.xtext.xbase.XExpression
+	 * @generated
+	 */
+	EClass getXExpression();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XIfExpression <em>XIf Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XIf Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XIfExpression
+	 * @generated
+	 */
+	EClass getXIfExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XIfExpression#getIf <em>If</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>If</em>'.
+	 * @see org.eclipse.xtext.xbase.XIfExpression#getIf()
+	 * @see #getXIfExpression()
+	 * @generated
+	 */
+	EReference getXIfExpression_If();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XIfExpression#getThen <em>Then</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Then</em>'.
+	 * @see org.eclipse.xtext.xbase.XIfExpression#getThen()
+	 * @see #getXIfExpression()
+	 * @generated
+	 */
+	EReference getXIfExpression_Then();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XIfExpression#getElse <em>Else</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Else</em>'.
+	 * @see org.eclipse.xtext.xbase.XIfExpression#getElse()
+	 * @see #getXIfExpression()
+	 * @generated
+	 */
+	EReference getXIfExpression_Else();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XSwitchExpression <em>XSwitch Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XSwitch Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XSwitchExpression
+	 * @generated
+	 */
+	EClass getXSwitchExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XSwitchExpression#getSwitch <em>Switch</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Switch</em>'.
+	 * @see org.eclipse.xtext.xbase.XSwitchExpression#getSwitch()
+	 * @see #getXSwitchExpression()
+	 * @generated
+	 */
+	EReference getXSwitchExpression_Switch();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XSwitchExpression#getCases <em>Cases</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Cases</em>'.
+	 * @see org.eclipse.xtext.xbase.XSwitchExpression#getCases()
+	 * @see #getXSwitchExpression()
+	 * @generated
+	 */
+	EReference getXSwitchExpression_Cases();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XSwitchExpression#getDefault <em>Default</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Default</em>'.
+	 * @see org.eclipse.xtext.xbase.XSwitchExpression#getDefault()
+	 * @see #getXSwitchExpression()
+	 * @generated
+	 */
+	EReference getXSwitchExpression_Default();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XCasePart <em>XCase Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XCase Part</em>'.
+	 * @see org.eclipse.xtext.xbase.XCasePart
+	 * @generated
+	 */
+	EClass getXCasePart();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XCasePart#getCase <em>Case</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Case</em>'.
+	 * @see org.eclipse.xtext.xbase.XCasePart#getCase()
+	 * @see #getXCasePart()
+	 * @generated
+	 */
+	EReference getXCasePart_Case();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XCasePart#getThen <em>Then</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Then</em>'.
+	 * @see org.eclipse.xtext.xbase.XCasePart#getThen()
+	 * @see #getXCasePart()
+	 * @generated
+	 */
+	EReference getXCasePart_Then();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XBlockExpression <em>XBlock Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XBlock Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XBlockExpression
+	 * @generated
+	 */
+	EClass getXBlockExpression();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XBlockExpression#getExpressions <em>Expressions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Expressions</em>'.
+	 * @see org.eclipse.xtext.xbase.XBlockExpression#getExpressions()
+	 * @see #getXBlockExpression()
+	 * @generated
+	 */
+	EReference getXBlockExpression_Expressions();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XVariableDeclaration <em>XVariable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XVariable Declaration</em>'.
+	 * @see org.eclipse.xtext.xbase.XVariableDeclaration
+	 * @generated
+	 */
+	EClass getXVariableDeclaration();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XVariableDeclaration#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type</em>'.
+	 * @see org.eclipse.xtext.xbase.XVariableDeclaration#getType()
+	 * @see #getXVariableDeclaration()
+	 * @generated
+	 */
+	EReference getXVariableDeclaration_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XVariableDeclaration#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.xtext.xbase.XVariableDeclaration#getName()
+	 * @see #getXVariableDeclaration()
+	 * @generated
+	 */
+	EAttribute getXVariableDeclaration_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XVariableDeclaration#getRight <em>Right</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Right</em>'.
+	 * @see org.eclipse.xtext.xbase.XVariableDeclaration#getRight()
+	 * @see #getXVariableDeclaration()
+	 * @generated
+	 */
+	EReference getXVariableDeclaration_Right();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XFeatureCall <em>XFeature Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XFeature Call</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall
+	 * @generated
+	 */
+	EClass getXFeatureCall();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFeatureCall#getFeatureName <em>Feature Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Feature Name</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall#getFeatureName()
+	 * @see #getXFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXFeatureCall_FeatureName();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XFeatureCall#getParams <em>Params</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Params</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall#getParams()
+	 * @see #getXFeatureCall()
+	 * @generated
+	 */
+	EReference getXFeatureCall_Params();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XFeatureCall#getFeature <em>Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Feature</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall#getFeature()
+	 * @see #getXFeatureCall()
+	 * @generated
+	 */
+	EReference getXFeatureCall_Feature();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XMemberFeatureCall <em>XMember Feature Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XMember Feature Call</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall
+	 * @generated
+	 */
+	EClass getXMemberFeatureCall();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XConstructorCall <em>XConstructor Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XConstructor Call</em>'.
+	 * @see org.eclipse.xtext.xbase.XConstructorCall
+	 * @generated
+	 */
+	EClass getXConstructorCall();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XConstructorCall#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type</em>'.
+	 * @see org.eclipse.xtext.xbase.XConstructorCall#getType()
+	 * @see #getXConstructorCall()
+	 * @generated
+	 */
+	EReference getXConstructorCall_Type();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XConstructorCall#getParams <em>Params</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Params</em>'.
+	 * @see org.eclipse.xtext.xbase.XConstructorCall#getParams()
+	 * @see #getXConstructorCall()
+	 * @generated
+	 */
+	EReference getXConstructorCall_Params();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XBooleanLiteral <em>XBoolean Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XBoolean Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XBooleanLiteral
+	 * @generated
+	 */
+	EClass getXBooleanLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XBooleanLiteral#isIsTrue <em>Is True</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is True</em>'.
+	 * @see org.eclipse.xtext.xbase.XBooleanLiteral#isIsTrue()
+	 * @see #getXBooleanLiteral()
+	 * @generated
+	 */
+	EAttribute getXBooleanLiteral_IsTrue();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XNullLiteral <em>XNull Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XNull Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XNullLiteral
+	 * @generated
+	 */
+	EClass getXNullLiteral();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XIntLiteral <em>XInt Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XInt Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XIntLiteral
+	 * @generated
+	 */
+	EClass getXIntLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XIntLiteral#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.eclipse.xtext.xbase.XIntLiteral#getValue()
+	 * @see #getXIntLiteral()
+	 * @generated
+	 */
+	EAttribute getXIntLiteral_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XStringLiteral <em>XString Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XString Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XStringLiteral
+	 * @generated
+	 */
+	EClass getXStringLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XStringLiteral#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.eclipse.xtext.xbase.XStringLiteral#getValue()
+	 * @see #getXStringLiteral()
+	 * @generated
+	 */
+	EAttribute getXStringLiteral_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XClosure <em>XClosure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XClosure</em>'.
+	 * @see org.eclipse.xtext.xbase.XClosure
+	 * @generated
+	 */
+	EClass getXClosure();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XClosure#getParams <em>Params</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Params</em>'.
+	 * @see org.eclipse.xtext.xbase.XClosure#getParams()
+	 * @see #getXClosure()
+	 * @generated
+	 */
+	EReference getXClosure_Params();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XClosure#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XClosure#getExpression()
+	 * @see #getXClosure()
+	 * @generated
+	 */
+	EReference getXClosure_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XCastedExpression <em>XCasted Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XCasted Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XCastedExpression
+	 * @generated
+	 */
+	EClass getXCastedExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XCastedExpression#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type</em>'.
+	 * @see org.eclipse.xtext.xbase.XCastedExpression#getType()
+	 * @see #getXCastedExpression()
+	 * @generated
+	 */
+	EReference getXCastedExpression_Type();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XCastedExpression#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Target</em>'.
+	 * @see org.eclipse.xtext.xbase.XCastedExpression#getTarget()
+	 * @see #getXCastedExpression()
+	 * @generated
+	 */
+	EReference getXCastedExpression_Target();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XAssignment <em>XAssignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XAssignment</em>'.
+	 * @see org.eclipse.xtext.xbase.XAssignment
+	 * @generated
+	 */
+	EClass getXAssignment();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XAssignment#getLeft <em>Left</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Left</em>'.
+	 * @see org.eclipse.xtext.xbase.XAssignment#getLeft()
+	 * @see #getXAssignment()
+	 * @generated
+	 */
+	EReference getXAssignment_Left();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XAssignment#getRight <em>Right</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Right</em>'.
+	 * @see org.eclipse.xtext.xbase.XAssignment#getRight()
+	 * @see #getXAssignment()
+	 * @generated
+	 */
+	EReference getXAssignment_Right();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XBinaryOperation <em>XBinary Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XBinary Operation</em>'.
+	 * @see org.eclipse.xtext.xbase.XBinaryOperation
+	 * @generated
+	 */
+	EClass getXBinaryOperation();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XUnaryOperation <em>XUnary Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XUnary Operation</em>'.
+	 * @see org.eclipse.xtext.xbase.XUnaryOperation
+	 * @generated
+	 */
+	EClass getXUnaryOperation();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XWhileExpression <em>XWhile Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XWhile Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XWhileExpression
+	 * @generated
+	 */
+	EClass getXWhileExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XWhileExpression#getPredicate <em>Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Predicate</em>'.
+	 * @see org.eclipse.xtext.xbase.XWhileExpression#getPredicate()
+	 * @see #getXWhileExpression()
+	 * @generated
+	 */
+	EReference getXWhileExpression_Predicate();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XWhileExpression#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.eclipse.xtext.xbase.XWhileExpression#getBody()
+	 * @see #getXWhileExpression()
+	 * @generated
+	 */
+	EReference getXWhileExpression_Body();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XTypeLiteral <em>XType Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XType Literal</em>'.
+	 * @see org.eclipse.xtext.xbase.XTypeLiteral
+	 * @generated
+	 */
+	EClass getXTypeLiteral();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XTypeLiteral#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.eclipse.xtext.xbase.XTypeLiteral#getType()
+	 * @see #getXTypeLiteral()
+	 * @generated
+	 */
+	EReference getXTypeLiteral_Type();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XInstanceOfExpression <em>XInstance Of Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XInstance Of Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XInstanceOfExpression
+	 * @generated
+	 */
+	EClass getXInstanceOfExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XInstanceOfExpression#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.eclipse.xtext.xbase.XInstanceOfExpression#getType()
+	 * @see #getXInstanceOfExpression()
+	 * @generated
+	 */
+	EReference getXInstanceOfExpression_Type();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XInstanceOfExpression#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XInstanceOfExpression#getExpression()
+	 * @see #getXInstanceOfExpression()
+	 * @generated
+	 */
+	EReference getXInstanceOfExpression_Expression();
+
+	/**
+	 * Returns the factory that creates the instances of the model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the factory that creates the instances of the model.
+	 * @generated
+	 */
+	XbaseFactory getXbaseFactory();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Defines literals for the meta objects that represent
+	 * <ul>
+	 *   <li>each class,</li>
+	 *   <li>each feature of each class,</li>
+	 *   <li>each enum,</li>
+	 *   <li>and each data type</li>
+	 * </ul>
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	interface Literals
+	{
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XExpressionImpl <em>XExpression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXExpression()
+		 * @generated
+		 */
+		EClass XEXPRESSION = eINSTANCE.getXExpression();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl <em>XIf Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XIfExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXIfExpression()
+		 * @generated
+		 */
+		EClass XIF_EXPRESSION = eINSTANCE.getXIfExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>If</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XIF_EXPRESSION__IF = eINSTANCE.getXIfExpression_If();
+
+		/**
+		 * The meta object literal for the '<em><b>Then</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XIF_EXPRESSION__THEN = eINSTANCE.getXIfExpression_Then();
+
+		/**
+		 * The meta object literal for the '<em><b>Else</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XIF_EXPRESSION__ELSE = eINSTANCE.getXIfExpression_Else();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl <em>XSwitch Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XSwitchExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXSwitchExpression()
+		 * @generated
+		 */
+		EClass XSWITCH_EXPRESSION = eINSTANCE.getXSwitchExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Switch</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XSWITCH_EXPRESSION__SWITCH = eINSTANCE.getXSwitchExpression_Switch();
+
+		/**
+		 * The meta object literal for the '<em><b>Cases</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XSWITCH_EXPRESSION__CASES = eINSTANCE.getXSwitchExpression_Cases();
+
+		/**
+		 * The meta object literal for the '<em><b>Default</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XSWITCH_EXPRESSION__DEFAULT = eINSTANCE.getXSwitchExpression_Default();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XCasePartImpl <em>XCase Part</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XCasePartImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCasePart()
+		 * @generated
+		 */
+		EClass XCASE_PART = eINSTANCE.getXCasePart();
+
+		/**
+		 * The meta object literal for the '<em><b>Case</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCASE_PART__CASE = eINSTANCE.getXCasePart_Case();
+
+		/**
+		 * The meta object literal for the '<em><b>Then</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCASE_PART__THEN = eINSTANCE.getXCasePart_Then();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XBlockExpressionImpl <em>XBlock Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XBlockExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXBlockExpression()
+		 * @generated
+		 */
+		EClass XBLOCK_EXPRESSION = eINSTANCE.getXBlockExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Expressions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XBLOCK_EXPRESSION__EXPRESSIONS = eINSTANCE.getXBlockExpression_Expressions();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XVariableDeclarationImpl <em>XVariable Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XVariableDeclarationImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXVariableDeclaration()
+		 * @generated
+		 */
+		EClass XVARIABLE_DECLARATION = eINSTANCE.getXVariableDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XVARIABLE_DECLARATION__TYPE = eINSTANCE.getXVariableDeclaration_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XVARIABLE_DECLARATION__NAME = eINSTANCE.getXVariableDeclaration_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XVARIABLE_DECLARATION__RIGHT = eINSTANCE.getXVariableDeclaration_Right();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XFeatureCallImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXFeatureCall()
+		 * @generated
+		 */
+		EClass XFEATURE_CALL = eINSTANCE.getXFeatureCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Feature Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XFEATURE_CALL__FEATURE_NAME = eINSTANCE.getXFeatureCall_FeatureName();
+
+		/**
+		 * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XFEATURE_CALL__PARAMS = eINSTANCE.getXFeatureCall_Params();
+
+		/**
+		 * The meta object literal for the '<em><b>Feature</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XFEATURE_CALL__FEATURE = eINSTANCE.getXFeatureCall_Feature();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXMemberFeatureCall()
+		 * @generated
+		 */
+		EClass XMEMBER_FEATURE_CALL = eINSTANCE.getXMemberFeatureCall();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XConstructorCallImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXConstructorCall()
+		 * @generated
+		 */
+		EClass XCONSTRUCTOR_CALL = eINSTANCE.getXConstructorCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCONSTRUCTOR_CALL__TYPE = eINSTANCE.getXConstructorCall_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCONSTRUCTOR_CALL__PARAMS = eINSTANCE.getXConstructorCall_Params();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl <em>XBoolean Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXBooleanLiteral()
+		 * @generated
+		 */
+		EClass XBOOLEAN_LITERAL = eINSTANCE.getXBooleanLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Is True</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XBOOLEAN_LITERAL__IS_TRUE = eINSTANCE.getXBooleanLiteral_IsTrue();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XNullLiteralImpl <em>XNull Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XNullLiteralImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXNullLiteral()
+		 * @generated
+		 */
+		EClass XNULL_LITERAL = eINSTANCE.getXNullLiteral();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XIntLiteralImpl <em>XInt Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XIntLiteralImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXIntLiteral()
+		 * @generated
+		 */
+		EClass XINT_LITERAL = eINSTANCE.getXIntLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XINT_LITERAL__VALUE = eINSTANCE.getXIntLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XStringLiteralImpl <em>XString Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XStringLiteralImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXStringLiteral()
+		 * @generated
+		 */
+		EClass XSTRING_LITERAL = eINSTANCE.getXStringLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XSTRING_LITERAL__VALUE = eINSTANCE.getXStringLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XClosureImpl <em>XClosure</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XClosureImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXClosure()
+		 * @generated
+		 */
+		EClass XCLOSURE = eINSTANCE.getXClosure();
+
+		/**
+		 * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCLOSURE__PARAMS = eINSTANCE.getXClosure_Params();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCLOSURE__EXPRESSION = eINSTANCE.getXClosure_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XCastedExpressionImpl <em>XCasted Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XCastedExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCastedExpression()
+		 * @generated
+		 */
+		EClass XCASTED_EXPRESSION = eINSTANCE.getXCastedExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCASTED_EXPRESSION__TYPE = eINSTANCE.getXCastedExpression_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCASTED_EXPRESSION__TARGET = eINSTANCE.getXCastedExpression_Target();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl <em>XAssignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XAssignmentImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAssignment()
+		 * @generated
+		 */
+		EClass XASSIGNMENT = eINSTANCE.getXAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XASSIGNMENT__LEFT = eINSTANCE.getXAssignment_Left();
+
+		/**
+		 * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XASSIGNMENT__RIGHT = eINSTANCE.getXAssignment_Right();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl <em>XBinary Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XBinaryOperationImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXBinaryOperation()
+		 * @generated
+		 */
+		EClass XBINARY_OPERATION = eINSTANCE.getXBinaryOperation();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XUnaryOperationImpl <em>XUnary Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XUnaryOperationImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXUnaryOperation()
+		 * @generated
+		 */
+		EClass XUNARY_OPERATION = eINSTANCE.getXUnaryOperation();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XWhileExpressionImpl <em>XWhile Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XWhileExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXWhileExpression()
+		 * @generated
+		 */
+		EClass XWHILE_EXPRESSION = eINSTANCE.getXWhileExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Predicate</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XWHILE_EXPRESSION__PREDICATE = eINSTANCE.getXWhileExpression_Predicate();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XWHILE_EXPRESSION__BODY = eINSTANCE.getXWhileExpression_Body();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XTypeLiteralImpl <em>XType Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XTypeLiteralImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXTypeLiteral()
+		 * @generated
+		 */
+		EClass XTYPE_LITERAL = eINSTANCE.getXTypeLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTYPE_LITERAL__TYPE = eINSTANCE.getXTypeLiteral_Type();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XInstanceOfExpressionImpl <em>XInstance Of Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XInstanceOfExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXInstanceOfExpression()
+		 * @generated
+		 */
+		EClass XINSTANCE_OF_EXPRESSION = eINSTANCE.getXInstanceOfExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XINSTANCE_OF_EXPRESSION__TYPE = eINSTANCE.getXInstanceOfExpression_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XINSTANCE_OF_EXPRESSION__EXPRESSION = eINSTANCE.getXInstanceOfExpression_Expression();
+
+	}
+
+} //XbasePackage
