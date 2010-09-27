@@ -10,7 +10,7 @@ grammar org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTe
 
 generate lookAheadContentAssistTest "http://www.eclipse.org/xtext/ui/common/tests/2009/lookAheadContentAssistTest"
 
-Model : 
+Model : {Model}
 		'(' attribute+=Attribute* attribute+=Pair* ')'
 	|	'[' attribute+=Attribute+ attribute+=Pair* ']'
 	|	'<' attribute+=Attribute* attribute+=Pair+ '>'
