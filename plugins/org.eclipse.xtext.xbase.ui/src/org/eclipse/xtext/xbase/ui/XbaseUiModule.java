@@ -10,7 +10,7 @@ import org.eclipse.xtext.xbase.ui.syntaxcoloring.XbaseTokenToAttributeIdMapper;
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXpressionUiModule {
+public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXbaseUiModule {
 
 	public XbaseUiModule(AbstractUIPlugin plugin) {
 		super(plugin);

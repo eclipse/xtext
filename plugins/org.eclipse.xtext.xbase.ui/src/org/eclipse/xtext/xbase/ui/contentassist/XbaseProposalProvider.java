@@ -3,10 +3,10 @@
 */
 package org.eclipse.xtext.xbase.ui.contentassist;
 
-import org.eclipse.xtext.xbase.ui.contentassist.AbstractXpressionProposalProvider;
+import org.eclipse.xtext.xbase.ui.contentassist.AbstractXbaseProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
-public class XpressionProposalProvider extends AbstractXpressionProposalProvider {
+public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 
 }
