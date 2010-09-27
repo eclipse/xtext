@@ -1,0 +1,118 @@
+chapter:LexicalStructure[Lexical Syntax]
+
+Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully choosen and it is recommended to stick 
+with the lexical syntax described in the following.
+
+section:Identifiers[Identifiers]
+
+Identifiers are used to name all constructs, such as types, methods and variables. They start with a "Java letter", which is a character for which the Java method 
+code[Character.isJavaIdentifierstart(char)]
+returns true. For the other characters also digits (0-9) are allowed. For those the method code[Character.isJavaIdentifierPart(char)] must be true.
+See link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.8][§ 3.8 Identifiers] for the original definition in the Java Language Specification.
+
+section2[Syntax]
+
+code[
+//TODO
+]
+
+section2[Escaped Identifiers]
+
+Identifiers may not have the same spelling than any reserved keywords. 
+However, Identifiers starting with a code[^] are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
+conflict with a reserved keyword. Imagine you had introduced a keyword 'service' in your language but want at some point call a Java property 'service'. 
+In such cases you use an escaped identifier code[^service] to reference the Java property.
+
+section2[Examples]
+
+ul[
+	item[Foo]
+	item[Foo42]
+	item[FOO]
+	item[_42]
+	item[_foo]
+	item[^extends]
+]
+
+section:StringLiterals[String Literals]
+
+String literals can either use single quotes (') or double quotes (") as their terminals. When using double quotes all literals allowed by Java string literals are
+supported. In addition new line characters are allowed, that is in Xbase all string literals can span multiple lines. When using single quotes the only difference
+is that singlequotes within the literal have to be escaped and double quotes don't.
+
+See link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5][§ 3.10.5 String Literals]
+
+In contrast to Java, equal string literals within the same class do not neccessarily refer to the same instance at runtime.
+
+section2[Syntax]
+
+code[
+//TODO
+]
+
+section2[Examples]
+
+ul[
+	item['Foo Bar Baz']
+	item["Foo Bar Baz"]
+	item[" the quick brown fox 
+		   jumps over the lazy dog."]
+	item['Escapes : \' ']
+	item["Escapes : \" "]
+]
+
+section:IntegerLiterals[Integer Literals]
+
+Integer Literals consists of one or more digits. 
+Only decimal literals are supported and they always result in a value of type java.lang.Integer 
+(it might result in native type int when transalated to Java, see ref:Types).
+
+section2[Syntax]
+
+code[
+terminal INT returns ecore::EInt: 
+	('0'..'9')+
+;
+]
+
+section:Comments[Comments]
+
+Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
+The syntax is the same as the one known from Java (see link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7][§ 3.7 Comments])
+
+section2[Syntax]
+
+code[
+terminal ML_COMMENT	: 
+	'/*' -> '*/'
+;
+terminal SL_COMMENT : 
+	'//' !('\n'|'\r')* ('\r'? '\n')?
+;
+]
+
+section:Whitespace[White Space]
+
+Xbase ignores all white space.
+
+section:Keywords[Reserved Keywords]
+
+The following list of words are reserved keywords, that reducing the set of possible identifiers:
+ol[
+	item[extends]
+	item[instanceof]
+	item[new]
+	item[null]
+	item[false]
+	item[true]
+	item[if]
+	item[else]
+	item[switch]
+	item[case]
+	item[default]
+	item[while]
+	item[def]
+	item[class]
+]
+
+However, in case some of the keywords have to be used as identifiers at times, the escape character of ref:Identifiers[identifiers] come in handy. 

@@ -379,7 +379,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 	@Check
 	public void checkMetamodelUris(final AbstractMetamodelDeclaration declaration) {
-		guard(declaration.getEPackage().getNsURI() != null);
+		guard(declaration.getEPackage()!=null && declaration.getEPackage().getNsURI() != null);
 
 		Grammar grammar = GrammarUtil.getGrammar(declaration);
 		Iterable<String> nsUris = Iterables.transform(grammar.getMetamodelDeclarations(),
