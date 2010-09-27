@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.validation;
  
 
-public class XpressionJavaValidator extends AbstractXpressionJavaValidator {
+public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 //	@Check
 //	public void checkGreetingStartsWithCapital(Greeting greeting) {

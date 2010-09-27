@@ -8,23 +8,23 @@
 package org.eclipse.xtext.xbase.tests.parser;
 
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xpression.XBinaryOperation;
-import org.eclipse.xtext.xpression.XBlockExpression;
-import org.eclipse.xtext.xpression.XBooleanLiteral;
-import org.eclipse.xtext.xpression.XCasePart;
-import org.eclipse.xtext.xpression.XCastedExpression;
-import org.eclipse.xtext.xpression.XClosure;
-import org.eclipse.xtext.xpression.XConstructorCall;
-import org.eclipse.xtext.xpression.XFeatureCall;
-import org.eclipse.xtext.xpression.XIfExpression;
-import org.eclipse.xtext.xpression.XInstanceOfExpression;
-import org.eclipse.xtext.xpression.XIntLiteral;
-import org.eclipse.xtext.xpression.XStringLiteral;
-import org.eclipse.xtext.xpression.XSwitchExpression;
-import org.eclipse.xtext.xpression.XTypeLiteral;
-import org.eclipse.xtext.xpression.XUnaryOperation;
-import org.eclipse.xtext.xpression.XVariableDeclaration;
-import org.eclipse.xtext.xpression.XWhileExpression;
+import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XBooleanLiteral;
+import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XCastedExpression;
+import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XIfExpression;
+import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XIntLiteral;
+import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XTypeLiteral;
+import org.eclipse.xtext.xbase.XUnaryOperation;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XWhileExpression;
 
 /**
  * @author Sven Efftinge

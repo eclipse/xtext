@@ -31,13 +31,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.xbase.typing.ExpressionsTypeResolver;
 import org.eclipse.xtext.xbase.typing.OperatorMapping;
-import org.eclipse.xtext.xpression.XBlockExpression;
-import org.eclipse.xtext.xpression.XClosure;
-import org.eclipse.xtext.xpression.XExpression;
-import org.eclipse.xtext.xpression.XFeatureCall;
-import org.eclipse.xtext.xpression.XMemberFeatureCall;
-import org.eclipse.xtext.xpression.XVariableDeclaration;
-import org.eclipse.xtext.xpression.XpressionPackage;
+import org.eclipse.xtext.xbase.*;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
@@ -46,7 +40,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XpressionScopeProvider extends XtypeScopeProvider {
+public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	@Inject
 	private OperatorMapping operatorMapping;
@@ -63,7 +57,7 @@ public class XpressionScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected boolean isFeatureScope(EReference reference) {
-		return reference == XpressionPackage.Literals.XFEATURE_CALL__FEATURE;
+		return reference == XbasePackage.Literals.XFEATURE_CALL__FEATURE;
 	}
 
 	protected IScope getFeatureScope(EObject context, EReference reference) {

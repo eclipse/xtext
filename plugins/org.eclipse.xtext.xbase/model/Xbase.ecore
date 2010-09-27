@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xpression"
-    nsURI="http://www.eclipse.org/xtext/xbase/Xpression" nsPrefix="xpression">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xbase"
+    nsURI="http://www.eclipse.org/xtext/xbase/Xbase" nsPrefix="xbase">
   <eClassifiers xsi:type="ecore:EClass" name="XExpression" abstract="true">
     <eOperations name="getDerivedReturnType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"/>
   </eClassifiers>

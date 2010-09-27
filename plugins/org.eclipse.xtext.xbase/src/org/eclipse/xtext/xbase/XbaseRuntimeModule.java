@@ -10,6 +10,6 @@ package org.eclipse.xtext.xbase;
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class XpressionRuntimeModule extends org.eclipse.xtext.xbase.AbstractXpressionRuntimeModule {
+public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 
 }
