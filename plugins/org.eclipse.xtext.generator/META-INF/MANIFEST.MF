@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.generator; singleton:=true
-Bundle-Version: 1.0.1.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
@@ -42,19 +42,19 @@ Export-Package: org.eclipse.xtext.generator,
  org.eclipse.xtext.ui.generator.outline,
  org.eclipse.xtext.ui.generator.projectWizard,
  org.eclipse.xtext.ui.generator.quickfix
-Require-Bundle: org.eclipse.xtext.util;bundle-version="1.0.1";resolution:=optional,
+Require-Bundle: org.eclipse.xtext.util;bundle-version="2.0.0";resolution:=optional,
  org.eclipse.xtend;bundle-version="1.0.1";visibility:=reexport,
  org.eclipse.xpand;bundle-version="1.0.1";visibility:=reexport,
  org.eclipse.xtend.typesystem.emf;bundle-version="1.0.1";visibility:=reexport,
  org.eclipse.emf.codegen.ecore;resolution:=optional;visibility:=reexport,
- org.eclipse.xtext;bundle-version="1.0.1";resolution:=optional,
- org.eclipse.xtext.common.types;bundle-version="1.0.1";resolution:=optional,
- de.itemis.xtext.antlr;bundle-version="1.0.1";resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext;bundle-version="2.0.0";resolution:=optional,
+ org.eclipse.xtext.common.types;bundle-version="2.0.0";resolution:=optional,
+ de.itemis.xtext.antlr;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
  com.ibm.icu,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- org.eclipse.emf.mwe2.lib;bundle-version="1.0.1";resolution:=optional;visibility:=reexport
+ org.eclipse.emf.mwe2.lib;bundle-version="2.0.0";resolution:=optional;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Import-Package: org.apache.log4j;version="1.2.15"
