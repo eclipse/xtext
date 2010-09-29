@@ -59,4 +59,16 @@ public class EFactoryValueConverterTest extends AbstractXtextTests{
 		}
 	}
 	
+	public void testNullString() {
+		EFactoryValueConverter eIntConverter = new EFactoryValueConverter(EcorePackage.Literals.EINT);
+		try {
+			eIntConverter.toValue(null, null);
+			fail("EInt converter should not convert empty string");
+		} catch(ValueConverterException e) {
+			// expected result
+		}
+		EFactoryValueConverter eIntegerConverter = new EFactoryValueConverter(EcorePackage.Literals.EINTEGER_OBJECT);
+		assertNull(eIntegerConverter.toValue(null, null));
+	}
+	
 }
