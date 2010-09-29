@@ -18,20 +18,20 @@ code[
 
 section2[Escaped Identifiers]
 
-Identifiers may not have the same spelling than any reserved keywords. 
-However, Identifiers starting with a code[^] are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
-conflict with a reserved keyword. Imagine you had introduced a keyword 'service' in your language but want at some point call a Java property 'service'. 
+Identifiers may not have the same spelling as any reserved keyword. 
+However, identifiers starting with a code[^] are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
+conflict with a reserved keyword. Imagine you have introduced a keyword 'service' in your language but want at some point call a Java property 'service'. 
 In such cases you use an escaped identifier code[^service] to reference the Java property.
 
 section2[Examples]
 
 ul[
-	item[Foo]
-	item[Foo42]
-	item[FOO]
-	item[_42]
-	item[_foo]
-	item[^extends]
+	item[code[Foo]]
+	item[code[Foo42]]
+	item[code[FOO]]
+	item[code[_42]]
+	item[code[_foo]]
+	item[code[^extends]]
 ]
 
 section:StringLiterals[String Literals]
@@ -53,19 +53,22 @@ code[
 section2[Examples]
 
 ul[
-	item['Foo Bar Baz']
-	item["Foo Bar Baz"]
-	item[" the quick brown fox 
-		   jumps over the lazy dog."]
-	item['Escapes : \' ']
-	item["Escapes : \" "]
+	item[code['Foo Bar Baz']]
+	item[code["Foo Bar Baz"]]
+	item[code[" the quick brown fox 
+		   jumps over the lazy dog."]]
+	item[code['Escapes : \' ']]
+	item[code["Escapes : \" "]]
 ]
 
 section:IntegerLiterals[Integer Literals]
 
 Integer Literals consists of one or more digits. 
-Only decimal literals are supported and they always result in a value of type java.lang.Integer 
-(it might result in native type int when transalated to Java, see ref:Types).
+Only decimal literals are supported and they always result in a value of type code[java.lang.Integer] 
+(it might result in native type code[int] when translated to Java, see ref:Types[Types]).
+The compiler makes sure that only numbers between 0 and Integer.MAX (0x7fffffff) are used.
+
+There's no negative integer literal, instead the expression code[-23] is parsed as the prefix operator code[-] applied on an int literal.
 
 section2[Syntax]
 
@@ -93,26 +96,34 @@ terminal SL_COMMENT :
 
 section:Whitespace[White Space]
 
-Xbase ignores all white space.
+The white space characters ' ','\t','\n' and '\r' are allowed to occure anywhere between the other syntactic elements. 
 
 section:Keywords[Reserved Keywords]
 
 The following list of words are reserved keywords, that reducing the set of possible identifiers:
 ol[
-	item[extends]
-	item[instanceof]
-	item[new]
-	item[null]
-	item[false]
-	item[true]
-	item[if]
-	item[else]
-	item[switch]
-	item[case]
-	item[default]
-	item[while]
-	item[def]
-	item[class]
+	item[code[extends]]
+	item[code[super]]
+	item[code[instanceof]]
+	item[code[new]]
+	item[code[null]]
+	item[code[false]]
+	item[code[true]]
+	item[code[val]]
+	item[code[var]]
+	item[code[if]]
+	item[code[else]]
+	item[code[switch]]
+	item[code[case]]
+	item[code[default]]
+	item[code[do]]
+	item[code[while]]
+	item[code[for]]
+	item[code[class]]
+	item[code[throw]]
+	item[code[try]]
+	item[code[catch]]
+	item[code[finally]]
 ]
 
 However, in case some of the keywords have to be used as identifiers at times, the escape character of ref:Identifiers[identifiers] come in handy. 

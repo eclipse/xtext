@@ -24,16 +24,20 @@
 \BOOKMARK [2][-]{subsection.3.3.1}{Syntax}{section.3.3}
 \BOOKMARK [2][-]{subsection.3.3.2}{Examples}{section.3.3}
 \BOOKMARK [1][-]{section.3.4}{The type java.lang.Void}{chapter.3}
+\BOOKMARK [1][-]{section.3.5}{Conformance Rules}{chapter.3}
+\BOOKMARK [2][-]{subsection.3.5.1}{Common Super Type}{section.3.5}
 \BOOKMARK [0][-]{chapter.4}{Expressions}{}
 \BOOKMARK [1][-]{section.4.1}{Literals}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.1.1}{String Literals}{section.4.1}
-\BOOKMARK [2][-]{subsection.4.1.2}{Integer Literals}{section.4.1}
-\BOOKMARK [2][-]{subsection.4.1.3}{Boolean Literals}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.2}{Syntax}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.3}{Integer Literals}{section.4.1}
 \BOOKMARK [2][-]{subsection.4.1.4}{Syntax}{section.4.1}
-\BOOKMARK [2][-]{subsection.4.1.5}{Null Literal}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.5}{Boolean Literals}{section.4.1}
 \BOOKMARK [2][-]{subsection.4.1.6}{Syntax}{section.4.1}
-\BOOKMARK [2][-]{subsection.4.1.7}{Type Literals}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.7}{Null Literal}{section.4.1}
 \BOOKMARK [2][-]{subsection.4.1.8}{Syntax}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.9}{Type Literals}{section.4.1}
+\BOOKMARK [2][-]{subsection.4.1.10}{Syntax}{section.4.1}
 \BOOKMARK [1][-]{section.4.2}{Infix Operators}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.2.1}{Property Assignment}{section.4.2}
 \BOOKMARK [2][-]{subsection.4.2.2}{Add Assignment}{section.4.2}
@@ -47,20 +51,20 @@
 \BOOKMARK [1][-]{section.4.4}{Closures}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.4.1}{Syntax}{section.4.4}
 \BOOKMARK [2][-]{subsection.4.4.2}{Function Mapping}{section.4.4}
-\BOOKMARK [2][-]{subsection.4.4.3}{Type Inference}{section.4.4}
+\BOOKMARK [2][-]{subsection.4.4.3}{Typing}{section.4.4}
 \BOOKMARK [2][-]{subsection.4.4.4}{Examples}{section.4.4}
 \BOOKMARK [1][-]{section.4.5}{If Expression}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.5.1}{Syntax}{section.4.5}
-\BOOKMARK [2][-]{subsection.4.5.2}{Type Inference}{section.4.5}
+\BOOKMARK [2][-]{subsection.4.5.2}{Typing}{section.4.5}
 \BOOKMARK [2][-]{subsection.4.5.3}{Examples}{section.4.5}
 \BOOKMARK [1][-]{section.4.6}{Switch Expression}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.6.1}{Syntax}{section.4.6}
 \BOOKMARK [2][-]{subsection.4.6.2}{Leaving out the main expression}{section.4.6}
-\BOOKMARK [2][-]{subsection.4.6.3}{Inline polymorphic dispatch}{section.4.6}
-\BOOKMARK [2][-]{subsection.4.6.4}{Type inference}{section.4.6}
+\BOOKMARK [2][-]{subsection.4.6.3}{Type guards}{section.4.6}
+\BOOKMARK [2][-]{subsection.4.6.4}{Typing}{section.4.6}
 \BOOKMARK [1][-]{section.4.7}{Variable Declarations}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.7.1}{Syntax}{section.4.7}
-\BOOKMARK [2][-]{subsection.4.7.2}{Type Inference}{section.4.7}
+\BOOKMARK [2][-]{subsection.4.7.2}{Typing}{section.4.7}
 \BOOKMARK [1][-]{section.4.8}{Blocks}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.8.1}{Syntax}{section.4.8}
 \BOOKMARK [2][-]{subsection.4.8.2}{Examples}{section.4.8}
@@ -72,8 +76,15 @@
 \BOOKMARK [2][-]{subsection.4.10.2}{Examples}{section.4.10}
 \BOOKMARK [1][-]{section.4.11}{For Loop}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.11.1}{Syntax}{section.4.11}
-\BOOKMARK [2][-]{subsection.4.11.2}{Type Inference}{section.4.11}
+\BOOKMARK [2][-]{subsection.4.11.2}{Typing}{section.4.11}
 \BOOKMARK [2][-]{subsection.4.11.3}{Examples}{section.4.11}
 \BOOKMARK [1][-]{section.4.12}{Constructor Call}{chapter.4}
 \BOOKMARK [2][-]{subsection.4.12.1}{Syntax}{section.4.12}
 \BOOKMARK [2][-]{subsection.4.12.2}{Example}{section.4.12}
+\BOOKMARK [1][-]{section.4.13}{Throwing Exceptions}{chapter.4}
+\BOOKMARK [2][-]{subsection.4.13.1}{Syntax}{section.4.13}
+\BOOKMARK [2][-]{subsection.4.13.2}{Typing}{section.4.13}
+\BOOKMARK [2][-]{subsection.4.13.3}{Example}{section.4.13}
+\BOOKMARK [1][-]{section.4.14}{Try, Catch, Finally}{chapter.4}
+\BOOKMARK [2][-]{subsection.4.14.1}{Syntax}{section.4.14}
+\BOOKMARK [2][-]{subsection.4.14.2}{Example}{section.4.14}

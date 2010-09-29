@@ -1,12 +1,12 @@
  chapter:Preface[Preface]
 
-This document specifies the expression language library Xbase. Xbase is a partial programming language implemented in Xtext and is ment to be embedded and extended
+This document specifies the expression language library Xbase. Xbase is a partial programming language implemented in Xtext and is meant to be embedded and extended
  within other programming languages and domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development framework 
 covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse.  
 
-Developing DSLs has become incredibly easy with Xtext. Defining structural languages which introduce new coarse-grained concepts, such as services, entities, value objects or 
-statemachines is no problem at all and can be done in minutes. However, software systems do not consist of structures solily. At some point a system needs to do something, hence
-we want to specify some behavior which is usually done using so called expressions. Expressions are really the heart of a programming language and are not so easy to get right.
+Developing DSLs has become incredibly easy with Xtext. Structural languages which introduce new coarse-grained concepts, such as services, entities, value objects or 
+statemachines can be developed in minutes. However, software systems do not consist of structures solely. At some point a system needs to do something, hence
+we want to specify some behavior which is usually done using so called e[expressions]. Expressions are the heart of every programming language and are not so easy to get right.
 That is why most people don't add support for expressions in their DSL, but try to solve this differently. The most often used workaround is to only define the structural information in the DSL 
 and add behavior by modifying or extending the generated code. It is not only unpleasant to write, read and maintain information which closely belongs together in two different places, abstraction levels 
 and languages. Modifying the generated source code comes with a lot of additional problems. But still as of today this is the preferred solution since adding support for expressions (and
