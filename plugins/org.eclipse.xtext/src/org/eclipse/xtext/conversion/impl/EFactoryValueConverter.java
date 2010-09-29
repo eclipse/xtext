@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * A value converter that delegates to the {@link org.eclipse.emf.ecore.EFactory} of a {@link EDataType}.
@@ -31,7 +32,12 @@ public class EFactoryValueConverter implements IValueConverter<Object> {
 
 	public Object toValue(String string, AbstractNode node) throws ValueConverterException {
 		try {
-			return dataType.getEPackage().getEFactoryInstance().createFromString(dataType, string);
+			Object value = dataType.getEPackage().getEFactoryInstance().createFromString(dataType, string);
+			if (value == null && dataType.getInstanceClass().isPrimitive()) {
+				throw new ValueConverterException("Couldn't convert '" + Strings.notNull(string) + "' to "
+						+ dataType.getName() + ".", node, null);
+			}
+			return value;
 		} catch (Exception exc) {
 			throw new ValueConverterException("Error converting string to value", node, exc);
 		}

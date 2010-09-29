@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.datatyperules;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.EFactoryValueConverter;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.CompositeModel;
@@ -38,6 +39,24 @@ public class EFactoryValueConverterTest extends AbstractXtextTests{
 		model = ((CompositeModel)model).getModel().get(0);
 		double myDouble = ((Model) model).getDouble();
 		assertEquals(-2.5E-23, myDouble);
+	}
+	
+	public void testEmptyString() {
+		EFactoryValueConverter eIntConverter = new EFactoryValueConverter(EcorePackage.Literals.EINT);
+		try {
+			eIntConverter.toValue("", null);
+			fail("EInt converter should not convert empty string");
+		} catch(ValueConverterException e) {
+			// expected result
+		}
+		try {
+			EFactoryValueConverter eIntegerConverter = new EFactoryValueConverter(EcorePackage.Literals.EINTEGER_OBJECT);
+			eIntegerConverter.toValue("", null);
+			fail("EInteger converter should not convert empty string");
+		} catch(ValueConverterException e) {
+			// expected result
+			assertTrue(e.getCause() instanceof NumberFormatException);
+		}
 	}
 	
 }
