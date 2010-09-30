@@ -1,10 +1,10 @@
 chapter:Expressions[Expressions]
 
-Expressions are the main language constructs which are used to express behavior and computation of values. Xbase doesn't support the concept of a statement, but instead comes with powerful 
+Expressions are the main language constructs which are used to express behavior and computation of values. Xbase does not support the concept of a statement, but instead comes with powerful 
 expressions to handle situations in which the imperative nature of statements are a better fit. An expression always results in a value (might be the value 'null' though). In addition expressions can
-be statically typed. That is by default it is assumed that languages making use of Xbase provide enough static context information for static type analysis, which is the basis of a lot of
+be statically typed. By default it is assumed that languages making use of Xbase provide enough static context information for static type analysis, which is the basis of a lot of
 IDE features coming with Xbase. However, the static typing is not mandatory and might be completely skipped if not wished. The openness of the compiler even allows to change the generation of 
-concrete feature invocations to reflective calls, so that the language can be fully dynamically typed.
+concrete feature invocations to reflective calls, such that the language can be fully dynamically typed.
 
 section:Literals[Literals]
 
@@ -57,7 +57,7 @@ XNullLiteral:
 
 section2:TypeLiteral[Type Literals]
 
-Also type literals are written like in Java, that is it it consists of a reference to a raw type suffixed with a dot and the keyword code[class].
+Type literals are written like in Java. They consist of a reference to a raw type suffixed with a dot and the keyword code[class].
 
 section2[Syntax]
 
@@ -69,7 +69,7 @@ XTypeLiteral:
 section:Operators[Infix Operators]
 
 Xbase supports a couple of predefined infix operators. In contrast to Java, the operators are not fixed
-to operations on certain types, but instead Xbase comes with an operator to method mapping, which allows users to redefine the 
+to operations on certain types. Instead Xbase comes with an operator to method mapping, which allows users to redefine the 
 operators for any type just by implementing the corresponding method signature.
 The following defines the operators and the corresponding Java method signatures / expressions.
 
@@ -117,7 +117,7 @@ table[
 	tr[td[code[e1\[e2\]]]				td[code[e1.apply(<Exp2)]]]
 ]
 		
-The table above also defines the operator precedence (from low to high precedence). The separator lines indicate a precedence level. 
+The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
 The two assignment operators code[=] and code[+=] are right-to-left associative, that is a = b = c is executed as a = (b = c), all other
 operators are left-to-right associative. Parenthesis can be used to adjust the default precedence and associativity. 
 
@@ -130,7 +130,7 @@ code[
 	myObj.myProperty = "foo"
 ]
 
-The compiler first looks up whether, there is an accessible Java Field called code[myProperty] on the type of code[myObj]. If there is one it translates to
+The compiler first looks up whether there is an accessible Java Field called code[myProperty] on the type of code[myObj]. If there is one it translates to
 the following Java expression :
 
 code[Java][
@@ -164,7 +164,7 @@ code[Java][
 	myObj.myProperty.add("foo");
 ]
 
-If there's no such method, the compiler looks for a method called code[addMyProperty(OneArg)] on the type of the target expression
+If there is no such method, the compiler looks for a method called code[addMyProperty(OneArg)] on the type of the target expression
 of the feature call. That is it looks whether the type of code[myObj] provides a method called code[addMyProperty(StringOrSuperType)].
 
 The return value and compile-time type will be whatever the invoked Java method returns.
@@ -172,8 +172,7 @@ The return value and compile-time type will be whatever the invoked Java method 
 section2[Short-Circuit Boolean Operators]
 
 If the operators code[||] and code[&&] are used in a context where the left hand operand is of type boolean, the operation is evaluated
-in short circuit mode, which means that the right hand operand might not be evaluated at all in certain cases.
-Such cases are: 
+in short circuit mode, which means that the right hand operand might not be evaluated at all in the following cases: 
 ol[
 	item[in the case of code[||] the operand on the right hand side is not evaluated if the left operand evaluates to code[true].]
 	item[in the case of code[&&] the operand on the right hand side is not evaluated if the left operand evaluates to code[false].]
@@ -188,7 +187,7 @@ ul[
 	item[code[x > 23 && y < 23]]
 	item[code[x && y || z]]
 	item[code[1 + 3 * 5 * (- 23)]]
-	item[code[!(x]]
+	item[code[!(x)]]
 	item[code[my.foo = 23]]
 	item[code[my.foo = 23]]
 ]
@@ -217,7 +216,7 @@ code[
 	myObj.myProperty
 ]
 
-the compiler first looks for an accessible field in the type of myObj. If no such field exists it looks for a method called code[myProperty()] before it looks 
+the compiler first looks for an accessible field in the type of code[myObj]. If no such field exists it looks for a method called code[myProperty()] before it looks 
 for the getter methods code[getMyProperty()]. If none of these members can be found the expression is unbound and a compiliation error is thrown.
 
 section2:ImplicitThis[Implicit 'this' variable]
@@ -244,7 +243,7 @@ ul[
 
 section:Closures[Closures]
 
-A closure is a literal to define anonymous functions. A closure also captures the current scope, so that any final variables and parameters visible at construction time 
+A closure is a literal that defines an anonymous function. A closure also captures the current scope, so that any final variables and parameters visible at construction time 
 can be referred to in the closure's expression. 
 
 section2[Syntax]
@@ -259,22 +258,22 @@ JvmFormalParameter:
 
 section2:FunctionMapping[Function Mapping]
 
-An Xbase closure is a Java object of one of the Function interfaces shipped with the runtime library of Xbase. There's an interface for each number of parameters.
+An Xbase closure is a Java object of one of the e[Function] interfaces shipped with the runtime library of Xbase. There is an interface for each number of parameters.
 The names of the interfaces are 
 ul[
-	item[Function0<ReturnType> for zero parameters, ]
-	item[Function1<Param1Type, ReturnType> for one parameters, ]
-	item[Function2<Param1Type, Param2Type, ReturnType> for two parameters, ]
+	item[e[Function0<ReturnType>] for zero parameters, ]
+	item[e[Function1<Param1Type, ReturnType>] for one parameters, ]
+	item[e[Function2<Param1Type, Param2Type, ReturnType>] for two parameters, ]
 	item[... ]
-	item[Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType> for seven parameters, ]
+	item[e[Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>] for six parameters, ]
 ]
 
 In order to allow seamless integration with Google Guava (formerly known as Google Collect) the type code[Function1] 
 extends code[com.google.common.base.Function<F, T>] and the type e[Function0] extends code[com.google.common.base.Supplier<T>]. 
-There's also an auto-coercion for any code[Function1<T,Boolean>] to code[com.google.common.base.Predicate<T>].
+There is also an auto-coercion for any code[Function1<T,Boolean>] to code[com.google.common.base.Predicate<T>].
 
 e[TODO: Discuss, whether we want to go a step further and do auto conversion to any type declaring only one method. That would allow to pass
-closures also to methods expecting other such types like e.g. code[Iterable]. Also this would avoid a fixed dependency to Google Guava.]
+closures also to methods expecting other such types like e.g. code[Iterable]. This would avoid a fixed dependency to Google Guava, too.]
 
 section2:ClosuresTypeInference[Typing]
 
@@ -306,10 +305,9 @@ ul[
 
 section:IfExpression[If Expression]
 
-An if expression is used to choose two different values, based on a predicate.
-They are like a combination of the if statements and the ternary operator (code[predicate ? thenPart : elsePart]) in Java. This means they use the syntax of Java's if statement,
-but are eactually expressions like Java's ternary operator, hence they always return something and have a compile-time type.
-This allows to use if clauses deeply nested within expressions.
+An if expression is used to choose two different values based on a predicate. While it has the syntax of Java's if statement it behaves  
+like Java's ternary operator (code[predicate ? thenPart : elsePart]), i.e. it is an expression that returns a value. Consequently, you can use 
+if expressions deeply nested within expressions.
 
 section2[Syntax]
 
@@ -357,8 +355,8 @@ XCasePart:
 		(XBlockExpression | XExpression ';');
 ]
 
-The switch statement is a bit different then the one in Java. First there is no fall through, which means only one case is evaluated at most.
-Second the use of switch is not limited to certain values, but instead can be used for any object reference. 
+The switch statement is a bit different from the one in Java. First, there is no fall through which means only one case is evaluated at most.
+Second, the use of switch is not limited to certain values but can be used for any object reference instead. 
 For a switch expression 
 code[
 	switch e {
@@ -370,10 +368,10 @@ code[
 	}
 ]
 
-first the main expression code[e] is evaluated and then each case sequentially. 
-If a case expression code[en] evaluates to something so that code[e == en] the result of the switch expression is code[ern]. If none of the 
-case expressions code[e1...en] was equal to the result of the main expression code[e], the result of the optional default part code[er] is returned.
-If not default is defined, the expression returns code[null].
+the main expression code[e] is evaluated first and then each case sequentially. 
+If a case expression code[en] evaluates to something such that code[e == en] the result of the switch expression is code[ern]. If none of the 
+case expressions code[e1...en] is equal to the result of the main expression code[e] the result of the optional default part code[er] is returned.
+If not default is defined the expression returns code[null].
 
 section2[Leaving out the main expression]
 
@@ -396,19 +394,19 @@ code[
 	}
 ]
 
-The expression x, will be of type code[String] in any expression within the first case and of type code[List<?>] in the second. Not that the case expression
+The expression x, will be of type code[String] in any expression within the first case and of type code[List<?>] in the second. Note that the case expression
 has to be a predicate (i.e. it has to be of type code[Boolean]). At runtime a type guard is translated to an code[instanceof] of test and subsequent casts.
-Note that the expression x is reevaluated everytime it is used. If the expression returns a different value on a subsequent evaluation, it might cause 
+The expression x is reevaluated everytime it is used. If the expression returns a different value on a subsequent evaluation, it might cause a
 code[ClassCastException] at runtime.
 
 section2[Typing]
 
 The return type of a switch expression is computed using the rules defined in ref:CommonSuperType. 
-The set of types from which the common super type is computed correpsonds to the types of each case's result expression.
+The set of types from which the common super type is computed corresponds to the types of each case's result expression.
 
 section:VariableDeclaration[Variable Declarations]
 
-Variable Declarations are only allowed within a ref:Blocks[Block]. They are visible in any subsequent expressions in
+Variable declarations are only allowed within a ref:Blocks[block]. They are visible in any subsequent expressions in
 the block.
 
 section2[Syntax]
@@ -438,8 +436,8 @@ code[
 section2[Typing]
 
 The return type of a variable declaration expression is always code[java.lang.Void]. 
-The type of the variable itself can either be explcitly declared or be inferred from the right hand side expression.
-An explicitly declared type:
+The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
+Here is an example for an explicitly declared type:
 code[
 	var List<String> msg = new ArrayList<String>(); 
 ]
@@ -452,7 +450,7 @@ code[
 
 section:Blocks[Blocks]
 
-The block expression allows to simulate imperative code sequences. It conists of a sequence of expressions, and returns the value of the last expression.
+The block expression allows to simulate imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
 The return type of a block is also the type of the last expression. 
 ref:VariableDeclaration[Variable declarations] are only allowed within blocks and cannot be used as a block's last expression.
 
@@ -466,7 +464,7 @@ XBlockExpression:
 ] 
 
 A block expression is surrounded by curly braces and contains at least one expression.
-It can optionally be terminated with a semicolon.
+It can optionally be terminated by a semicolon.
 
 section2[Examples]
 
@@ -491,7 +489,7 @@ ul[
 
 section:WhileExpression[While Loop]
 
-A while loop code[while (predicate) expression] is used to execute a certain expression unless a given predicate is evaluated to code[false].
+A while loop code[while (predicate) expression] is used to execute a certain code[expression] unless the code[predicate] is evaluated to code[false].
 The return type of a while loop is code[java.lang.Void] and the return value is code[null].
 
 section2[Syntax]
@@ -517,7 +515,7 @@ ul[
 
 section:DoWhileExpression[Do-While Loop]
 
-A do-while loop code[do e while (p)] is used to execute a certain expression code[e] unless a given predicate code[p] is evaluated to code[false].
+A do-while loop code[do expression while (predicate)] is used to execute a certain code[expression] unless the code[predicate] is evaluated to code[false].
 The difference to the ref:WhileExpression[while loop] is that the execution starts by executing the block once before evaluating the predicate for the first time.
 The return type of a do-while loop is code[java.lang.Void] and the return value is code[null].
 
@@ -545,8 +543,8 @@ ul[
 
 section:ForLoop[For Loop]
 
-The for loop code[for (T1 var : iterableOfT1) expression] is used to execute a certain expression for each element of an code[java.lang.Iterable].
-The local variable is final, hence canot be updated. 
+The for loop code[for (T1 variable : iterableOfT1) expression] is used to execute a certain code[expression] for each element of an code[java.lang.Iterable].
+The local code[variable] is final, hence canot be updated. 
 
 section2[Syntax]
 

@@ -40,17 +40,17 @@
 
 \chapter{Preface}
 
-This document specifies the expression language library Xbase. Xbase is a partial programming language implemented in Xtext and is meant to be embedded and extended
- within other programming languages and domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development framework 
+This document specifies the expression language Xbase. Xbase is a partial programming language implemented in Xtext and is meant to be embedded and extended
+within other programming languages and domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development framework 
 covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse.  
 
 Developing DSLs has become incredibly easy with Xtext. Structural languages which introduce new coarse-grained concepts, such as services, entities, value objects or 
-statemachines can be developed in minutes. However, software systems do not consist of structures solely. At some point a system needs to do something, hence
-we want to specify some behavior which is usually done using so called \textit{expressions}. Expressions are the heart of every programming language and are not so easy to get right.
-That is why most people don't add support for expressions in their DSL, but try to solve this differently. The most often used workaround is to only define the structural information in the DSL 
+statemachines can be developed in minutes. However, software systems do not consist of structures solely. At some point a system needs to show some behavior, 
+which is usually specified using so called \textit{expressions}. Expressions are the heart of every programming language and are not easy to get right.
+That is why most people do not add support for expressions in their DSL, but try to solve this differently. The most often used workaround is to define only the structural information in the DSL 
 and add behavior by modifying or extending the generated code. It is not only unpleasant to write, read and maintain information which closely belongs together in two different places, abstraction levels 
-and languages. Modifying the generated source code comes with a lot of additional problems. But still as of today this is the preferred solution since adding support for expressions (and
- a corresponding compiler) for your language is hard - even with Xtext.
+and languages. Also, modifying the generated source code comes with a lot of additional problems. But as of today this is the preferred solution since adding support for expressions (and
+a corresponding execution environment) for your language is hard - even with Xtext.
 
 Xbase serves as a language library providing a common expression language bound to the Java platform (i.e. Java Virtual Machine). It ships in form of an Xtext grammar, as well as 
 reusable and adaptable implementations for the different aspects of a language infrastructure such as an AST structure, a compiler, an interpreter, a linker, and a static analyzer.
@@ -67,10 +67,10 @@ Conceptually and syntactically, Xbase is like Java statements+expressions, with 
 No checked exceptions
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}
-Pure OO, i.e. no built-in types (incl. arrays) 
+Pure object-oriented, i.e. no built-in types and no arrays
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}
-Everything is an expression (no statements)
+Everything is an expression, there are no statements
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}
 Closures
@@ -85,7 +85,7 @@ Properties
 Simple operator overloading
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}
-Powerful switch expression
+Powerful switch expressions
 \end{minipage}
 \end{itemize}
 \addtolength{\itemindentlen}{2em}
@@ -95,14 +95,14 @@ Powerful switch expression
 
 \chapter{Lexical Syntax}
 
-Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully choosen and it is recommended to stick 
+Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully chosen and it is recommended to stick 
 with the lexical syntax described in the following.
 
 \section{Identifiers}
 \label{Identifiers}
 Identifiers are used to name all constructs, such as types, methods and variables. They start with a "Java letter", which is a character for which the Java method 
-\lstinline°Character.isJavaIdentifierstart(char)°
-returns true. For the other characters also digits (0-9) are allowed. For those the method \lstinline°Character.isJavaIdentifierPart(char)° must be true.
+\textit{Character.isJavaIdentifierstart(char)}
+returns \textit{true}. For the other characters also digits (0...9) are allowed. For those the method \textit{Character.isJavaIdentifierPart(char)} must be true.
 See \href{http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.8}{§ 3.8 Identifiers} for the original definition in the Java Language Specification.
 
 \subsection{Syntax}
@@ -120,7 +120,7 @@ See \href{http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.8
 
 Identifiers may not have the same spelling as any reserved keyword. 
 However, identifiers starting with a \lstinline°^° are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
-conflict with a reserved keyword. Imagine you have introduced a keyword 'service' in your language but want at some point call a Java property 'service'. 
+conflict with a reserved keyword. Imagine you have introduced a keyword \lstinline°service° in your language but want to call a Java property \textit{service} at some point. 
 In such cases you use an escaped identifier \lstinline°^service° to reference the Java property.
 
 
@@ -163,7 +163,7 @@ In such cases you use an escaped identifier \lstinline°^service° to reference th
 \label{StringLiterals}
 String literals can either use single quotes (') or double quotes (") as their terminals. When using double quotes all literals allowed by Java string literals are
 supported. In addition new line characters are allowed, that is in Xbase all string literals can span multiple lines. When using single quotes the only difference
-is that singlequotes within the literal have to be escaped and double quotes don't.
+is that single quotes within the literal have to be escaped and double quotes do not.
 
 See \href{http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5}{§ 3.10.5 String Literals}
 
@@ -216,13 +216,13 @@ In contrast to Java, equal string literals within the same class do not neccessa
 
 \section{Integer Literals}
 \label{IntegerLiterals}
-Integer Literals consists of one or more digits. 
+Integer literals consist of one or more digits. 
 Only decimal literals are supported and they always result in a value of type \lstinline°java.lang.Integer° 
 (it might result in native type \lstinline°int° when translated to Java, see 
 \hyperref[Types]{Types~(\ref*{Types})}).
-The compiler makes sure that only numbers between 0 and Integer.MAX (0x7fffffff) are used.
+The compiler makes sure that only numbers between 0 and \textit{Integer.MAX} (0x7fffffff) are used.
 
-There's no negative integer literal, instead the expression \lstinline°-23° is parsed as the prefix operator \lstinline°-° applied on an int literal.
+There is no negative integer literal, instead the expression \lstinline°-23° is parsed as the prefix operator \lstinline°-° applied to an integer literal.
 
 \subsection{Syntax}
 
@@ -264,14 +264,14 @@ terminal SL_COMMENT :
 
 \section{White Space}
 \label{Whitespace}
-The white space characters ' ','\textbackslash{}t','\textbackslash{}n' and '\textbackslash{}r' are allowed to occure anywhere between the other syntactic elements. 
+The white space characters \lstinline°' '°, \lstinline°'\t'°, \lstinline°'\n'°, and \lstinline°'\r° are allowed to occur anywhere between the other syntactic elements. 
 
 
 
 
 \section{Reserved Keywords}
 \label{Keywords}
-The following list of words are reserved keywords, that reducing the set of possible identifiers:
+The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{enumerate}
@@ -346,8 +346,8 @@ The following list of words are reserved keywords, that reducing the set of poss
 \end{enumerate}
 \addtolength{\itemindentlen}{2em}
 
-However, in case some of the keywords have to be used as identifiers at times, the escape character of 
-\hyperref[Identifiers]{identifiers~(\ref*{Identifiers})} come in handy. 
+However, in case some of the keywords have to be used as identifiers, the escape character for 
+\hyperref[Identifiers]{identifiers~(\ref*{Identifiers})} comes in handy. 
 
 
 
@@ -358,18 +358,18 @@ However, in case some of the keywords have to be used as identifiers at times, t
 
 Xbase binds to the Java Virtual Machine. This means that expressions written in Xbase refer to Java types and Java type members. Xbase itself uses only types 
 defined in the Java language, such as classes, interfaces, annotations and enums. It also supports Java generics and shares the known syntax. In addition to Java, 
-Xbase comes with the notion of function types, that is the type of a function. 
+Xbase comes with the notion of function types. 
 
 Xbase does not bind to any of the built-in types such as \textit{int} or \textit{boolean}, instead any references to those built-in types will automatically use the corresponding 
-wrapper type, that is \textit{java.lang.Boolean} instead of \textit{boolean}. Also Arrays are supported in Xbase but are translated to a \textit{java.util.List}. For example an 
+wrapper type, e.g. \textit{java.lang.Boolean} instead of \textit{boolean}. Arrays are supported also in Xbase but are translated to \textit{java.util.List}s: An 
 array \textit{int[]} binds to \textit{java.util.List<java.lang.Integer>} (in short \textit{List<Integer>}). 
-This means when refering to \lstinline°myList.isEmpty()° within an Xbase expression the static return type is \textit{java.lang.Boolean}. 
+This means when referring to \lstinline°myList.isEmpty()° within an Xbase expression the static return type is \textit{java.lang.Boolean}. 
 At runtime however the compiler may be smarter and use the native types. Especially the types \textit{int} and \textit{boolean} are most often used with
  built-in operators and the wrapper type is only occasionally needed (for instance when putting \lstinline°int°s into collections).
 
 \section{Simple Type References}
 \label{TypeReferences}
-A simple type reference only consists of a qualified name. A qualified name is a name made up of identifiers which are separated by a dot (like in Java).
+A simple type reference only consists of a \textit{qualified name}. A qualified name is a name made up of identifiers which are separated by a dot (like in Java).
 
 \subsection{Syntax}
 
@@ -381,7 +381,7 @@ QualifiedName:
 \end{lstlisting}
 
 
-There's no rule for a simple type reference, as it is expressed as a parameterized type references without paramters.
+There is no rule for a simple type reference, as it is expressed as a parameterized type references without paramters.
 
 
 
@@ -409,7 +409,7 @@ There's no rule for a simple type reference, as it is expressed as a parameteriz
 
 \section{Function Types}
 \label{FunctionTypes}
-Xbase introduces closures, which need a special kind of type. On the Jvm-Level a closure (or more generally any function object) is just an instance of one of the 
+Xbase introduces \textit{closures}, which require an additional kind of type. On the JVM-Level a closure (or more generally any function object) is just an instance of one of the 
 types in \lstinline°org.eclipse.xtext.xbase.lib.Function*°, dependening on the number of arguments. However, as closures are a very important language feature, a special 
 sugared syntax for function types has been introduced.  
 So instead of writing \lstinline°Function1<String,Boolean>° one can write \lstinline°(String)=>Boolean°.
@@ -457,9 +457,9 @@ XFunctionTypeRef:
 \section{Parameterized Type References}
 \label{ParameterizedTypeReference}
 The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is almost the same as in Java, so please 
-refer to the third edition of the  \href{http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html}{Java Language Specification} which is available online for free.
+refer to the third edition of the  \href{http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html}{Java Language Specification}.
 
-The only difference is, that in Xbase a type reference can also be a function type. In the following the full syntax fo type references is shown, including function types and
+The only difference is that in Xbase a type reference can also be a function type. In the following the full syntax fo type references is shown, including function types and
 type arguments.
 
 \subsection{Syntax}
@@ -534,11 +534,11 @@ JvmUpperBound :
 
 \section{The type java.lang.Void}
 \label{VoidType}
-The \lstinline°null° reference is the only valid value of the type \lstinline°Void°, which gets some special treatment in Xbase. That is every Java method which is declared \textit{void} (i.e. without a return value)
+The \lstinline°null° reference is the only valid value of the type \lstinline°Void°, which gets some special treatment in Xbase. Every Java method which is declared \textit{void} (i.e. without a return value)
 is translated to a method with return type \textit{java.lang.Void}. At runtime such method invocations will result in \textit{null}.
 The speciality is that while it is allowed to pass \lstinline°null° everywhere (TODO discuss use of nullable annotation) instead of any other value, this does not mean that \textit{java.lang.Void}
 is a subtype of any other type. The \lstinline°instanceOf° operator as well as the type matchers in the 
-\autoref{SwitchExpression} don't match \lstinline°null°.
+\autoref{SwitchExpression} do not match \lstinline°null°.
 
 
 
@@ -583,11 +583,11 @@ by their qualified name just to ensure deterministic results.
 
 \chapter{Expressions}
 
-Expressions are the main language constructs which are used to express behavior and computation of values. Xbase doesn't support the concept of a statement, but instead comes with powerful 
+Expressions are the main language constructs which are used to express behavior and computation of values. Xbase does not support the concept of a statement, but instead comes with powerful 
 expressions to handle situations in which the imperative nature of statements are a better fit. An expression always results in a value (might be the value 'null' though). In addition expressions can
-be statically typed. That is by default it is assumed that languages making use of Xbase provide enough static context information for static type analysis, which is the basis of a lot of
+be statically typed. By default it is assumed that languages making use of Xbase provide enough static context information for static type analysis, which is the basis of a lot of
 IDE features coming with Xbase. However, the static typing is not mandatory and might be completely skipped if not wished. The openness of the compiler even allows to change the generation of 
-concrete feature invocations to reflective calls, so that the language can be fully dynamically typed.
+concrete feature invocations to reflective calls, such that the language can be fully dynamically typed.
 
 \section{Literals}
 \label{Literals}
@@ -675,7 +675,7 @@ XNullLiteral:
 
 \subsection{Type Literals}
 \label{TypeLiteral}
-Also type literals are written like in Java, that is it it consists of a reference to a raw type suffixed with a dot and the keyword \lstinline°class°.
+Type literals are written like in Java. They consist of a reference to a raw type suffixed with a dot and the keyword \lstinline°class°.
 
 
 
@@ -697,7 +697,7 @@ XTypeLiteral:
 \section{Infix Operators}
 \label{Operators}
 Xbase supports a couple of predefined infix operators. In contrast to Java, the operators are not fixed
-to operations on certain types, but instead Xbase comes with an operator to method mapping, which allows users to redefine the 
+to operations on certain types. Instead Xbase comes with an operator to method mapping, which allows users to redefine the 
 operators for any type just by implementing the corresponding method signature.
 The following defines the operators and the corresponding Java method signatures / expressions.
 
@@ -739,7 +739,7 @@ The following defines the operators and the corresponding Java method signatures
 \end{tabular}
 
 		
-The table above also defines the operator precedence (from low to high precedence). The separator lines indicate a precedence level. 
+The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
 The two assignment operators \lstinline°=° and \lstinline°+=° are right-to-left associative, that is a = b = c is executed as a = (b = c), all other
 operators are left-to-right associative. Parenthesis can be used to adjust the default precedence and associativity. 
 
@@ -754,7 +754,7 @@ myObj.myProperty = "foo"
 \end{lstlisting}
 
 
-The compiler first looks up whether, there is an accessible Java Field called \lstinline°myProperty° on the type of \lstinline°myObj°. If there is one it translates to
+The compiler first looks up whether there is an accessible Java Field called \lstinline°myProperty° on the type of \lstinline°myObj°. If there is one it translates to
 the following Java expression :
 
 \begin{lstlisting} [language=Java]
@@ -799,7 +799,7 @@ myObj.myProperty.add("foo");
 \end{lstlisting}
 
 
-If there's no such method, the compiler looks for a method called \lstinline°addMyProperty(OneArg)° on the type of the target expression
+If there is no such method, the compiler looks for a method called \lstinline°addMyProperty(OneArg)° on the type of the target expression
 of the feature call. That is it looks whether the type of \lstinline°myObj° provides a method called \lstinline°addMyProperty(StringOrSuperType)°.
 
 The return value and compile-time type will be whatever the invoked Java method returns.
@@ -810,8 +810,7 @@ The return value and compile-time type will be whatever the invoked Java method 
 \subsection{Short-Circuit Boolean Operators}
 
 If the operators \lstinline°||° and \lstinline°&&° are used in a context where the left hand operand is of type boolean, the operation is evaluated
-in short circuit mode, which means that the right hand operand might not be evaluated at all in certain cases.
-Such cases are: 
+in short circuit mode, which means that the right hand operand might not be evaluated at all in the following cases: 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{enumerate}
@@ -853,7 +852,7 @@ in the case of \lstinline°&&° the operand on the right hand side is not evaluate
 \lstinline°1 + 3 * 5 * (- 23)°
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°!(x°
+\lstinline°!(x)°
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
 \lstinline°my.foo = 23°
@@ -901,7 +900,7 @@ myObj.myProperty
 \end{lstlisting}
 
 
-the compiler first looks for an accessible field in the type of myObj. If no such field exists it looks for a method called \lstinline°myProperty()° before it looks 
+the compiler first looks for an accessible field in the type of \lstinline°myObj°. If no such field exists it looks for a method called \lstinline°myProperty()° before it looks 
 for the getter methods \lstinline°getMyProperty()°. If none of these members can be found the expression is unbound and a compiliation error is thrown.
 
 
@@ -956,7 +955,7 @@ is valid as well and is equivalent.
 
 \section{Closures}
 \label{Closures}
-A closure is a literal to define anonymous functions. A closure also captures the current scope, so that any final variables and parameters visible at construction time 
+A closure is a literal that defines an anonymous function. A closure also captures the current scope, so that any final variables and parameters visible at construction time 
 can be referred to in the closure's expression. 
 
 \subsection{Syntax}
@@ -976,7 +975,7 @@ JvmFormalParameter:
 
 \subsection{Function Mapping}
 \label{FunctionMapping}
-An Xbase closure is a Java object of one of the Function interfaces shipped with the runtime library of Xbase. There's an interface for each number of parameters.
+An Xbase closure is a Java object of one of the \textit{Function} interfaces shipped with the runtime library of Xbase. There is an interface for each number of parameters.
 The names of the interfaces are 
 
 \setlength{\itemindentlen}{\textwidth}
@@ -984,29 +983,29 @@ The names of the interfaces are
 \addtolength{\itemindentlen}{-2em}
 
 \item \begin{minipage}[t]{\itemindentlen}
-Function0<ReturnType> for zero parameters, 
+\textit{Function0<ReturnType>} for zero parameters, 
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}
-Function1<Param1Type, ReturnType> for one parameters, 
+\textit{Function1<Param1Type, ReturnType>} for one parameters, 
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}
-Function2<Param1Type, Param2Type, ReturnType> for two parameters, 
+\textit{Function2<Param1Type, Param2Type, ReturnType>} for two parameters, 
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}
 ... 
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}
-Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType> for seven parameters, 
+\textit{Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>} for six parameters, 
 \end{minipage}
 \end{itemize}
 \addtolength{\itemindentlen}{2em}
 
 In order to allow seamless integration with Google Guava (formerly known as Google Collect) the type \lstinline°Function1° 
 extends \lstinline°com.google.common.base.Function<F, T>° and the type \textit{Function0} extends \lstinline°com.google.common.base.Supplier<T>°. 
-There's also an auto-coercion for any \lstinline°Function1<T,Boolean>° to \lstinline°com.google.common.base.Predicate<T>°.
+There is also an auto-coercion for any \lstinline°Function1<T,Boolean>° to \lstinline°com.google.common.base.Predicate<T>°.
 
 \textit{TODO: Discuss, whether we want to go a step further and do auto conversion to any type declaring only one method. That would allow to pass
-closures also to methods expecting other such types like e.g. \lstinline°Iterable°. Also this would avoid a fixed dependency to Google Guava.}
+closures also to methods expecting other such types like e.g. \lstinline°Iterable°. This would avoid a fixed dependency to Google Guava, too.}
 
 
 
@@ -1067,10 +1066,9 @@ getFirst(arrayList("Foo","Bar"), String e|e=="Bar")
 
 \section{If Expression}
 \label{IfExpression}
-An if expression is used to choose two different values, based on a predicate.
-They are like a combination of the if statements and the ternary operator (\lstinline°predicate ? thenPart : elsePart°) in Java. This means they use the syntax of Java's if statement,
-but are eactually expressions like Java's ternary operator, hence they always return something and have a compile-time type.
-This allows to use if clauses deeply nested within expressions.
+An if expression is used to choose two different values based on a predicate. While it has the syntax of Java's if statement it behaves  
+like Java's ternary operator (\lstinline°predicate ? thenPart : elsePart°), i.e. it is an expression that returns a value. Consequently, you can use 
+if expressions deeply nested within expressions.
 
 \subsection{Syntax}
 
@@ -1149,8 +1147,8 @@ XCasePart:
 \end{lstlisting}
 
 
-The switch statement is a bit different then the one in Java. First there is no fall through, which means only one case is evaluated at most.
-Second the use of switch is not limited to certain values, but instead can be used for any object reference. 
+The switch statement is a bit different from the one in Java. First, there is no fall through which means only one case is evaluated at most.
+Second, the use of switch is not limited to certain values but can be used for any object reference instead. 
 For a switch expression 
 \begin{lstlisting}
 switch e {
@@ -1164,10 +1162,10 @@ switch e {
 \end{lstlisting}
 
 
-first the main expression \lstinline°e° is evaluated and then each case sequentially. 
-If a case expression \lstinline°en° evaluates to something so that \lstinline°e == en° the result of the switch expression is \lstinline°ern°. If none of the 
-case expressions \lstinline°e1...en° was equal to the result of the main expression \lstinline°e°, the result of the optional default part \lstinline°er° is returned.
-If not default is defined, the expression returns \lstinline°null°.
+the main expression \lstinline°e° is evaluated first and then each case sequentially. 
+If a case expression \lstinline°en° evaluates to something such that \lstinline°e == en° the result of the switch expression is \lstinline°ern°. If none of the 
+case expressions \lstinline°e1...en° is equal to the result of the main expression \lstinline°e° the result of the optional default part \lstinline°er° is returned.
+If not default is defined the expression returns \lstinline°null°.
 
 
 
@@ -1200,9 +1198,9 @@ switch x {
 \end{lstlisting}
 
 
-The expression x, will be of type \lstinline°String° in any expression within the first case and of type \lstinline°List<?>° in the second. Not that the case expression
+The expression x, will be of type \lstinline°String° in any expression within the first case and of type \lstinline°List<?>° in the second. Note that the case expression
 has to be a predicate (i.e. it has to be of type \lstinline°Boolean°). At runtime a type guard is translated to an \lstinline°instanceof° of test and subsequent casts.
-Note that the expression x is reevaluated everytime it is used. If the expression returns a different value on a subsequent evaluation, it might cause 
+The expression x is reevaluated everytime it is used. If the expression returns a different value on a subsequent evaluation, it might cause a
 \lstinline°ClassCastException° at runtime.
 
 
@@ -1212,7 +1210,7 @@ Note that the expression x is reevaluated everytime it is used. If the expressio
 
 The return type of a switch expression is computed using the rules defined in 
 \autoref{CommonSuperType}. 
-The set of types from which the common super type is computed correpsonds to the types of each case's result expression.
+The set of types from which the common super type is computed corresponds to the types of each case's result expression.
 
 
 
@@ -1221,8 +1219,8 @@ The set of types from which the common super type is computed correpsonds to the
 
 \section{Variable Declarations}
 \label{VariableDeclaration}
-Variable Declarations are only allowed within a 
-\hyperref[Blocks]{Block~(\ref*{Blocks})}. They are visible in any subsequent expressions in
+Variable declarations are only allowed within a 
+\hyperref[Blocks]{block~(\ref*{Blocks})}. They are visible in any subsequent expressions in
 the block.
 
 \subsection{Syntax}
@@ -1259,8 +1257,8 @@ needs to update the value of a reference. In such situations the variable needs 
 \subsection{Typing}
 
 The return type of a variable declaration expression is always \lstinline°java.lang.Void°. 
-The type of the variable itself can either be explcitly declared or be inferred from the right hand side expression.
-An explicitly declared type:
+The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
+Here is an example for an explicitly declared type:
 \begin{lstlisting}
 var List<String> msg = new ArrayList<String>(); 
 
@@ -1283,7 +1281,7 @@ var msg = new ArrayList<String>(); // -> type ArrayList<String>
 
 \section{Blocks}
 \label{Blocks}
-The block expression allows to simulate imperative code sequences. It conists of a sequence of expressions, and returns the value of the last expression.
+The block expression allows to simulate imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
 The return type of a block is also the type of the last expression. 
 
 \hyperref[VariableDeclaration]{Variable declarations~(\ref*{VariableDeclaration})} are only allowed within blocks and cannot be used as a block's last expression.
@@ -1300,7 +1298,7 @@ XBlockExpression:
  
 
 A block expression is surrounded by curly braces and contains at least one expression.
-It can optionally be terminated with a semicolon.
+It can optionally be terminated by a semicolon.
 
 
 
@@ -1342,7 +1340,7 @@ It can optionally be terminated with a semicolon.
 
 \section{While Loop}
 \label{WhileExpression}
-A while loop \lstinline°while (predicate) expression° is used to execute a certain expression unless a given predicate is evaluated to \lstinline°false°.
+A while loop \lstinline°while (predicate) expression° is used to execute a certain \lstinline°expression° unless the \lstinline°predicate° is evaluated to \lstinline°false°.
 The return type of a while loop is \lstinline°java.lang.Void° and the return value is \lstinline°null°.
 
 \subsection{Syntax}
@@ -1391,7 +1389,7 @@ while ((i=i+1)<max) doSideEffect("foo")
 
 \section{Do-While Loop}
 \label{DoWhileExpression}
-A do-while loop \lstinline°do e while (p)° is used to execute a certain expression \lstinline°e° unless a given predicate \lstinline°p° is evaluated to \lstinline°false°.
+A do-while loop \lstinline°do expression while (predicate)° is used to execute a certain \lstinline°expression° unless the \lstinline°predicate° is evaluated to \lstinline°false°.
 The difference to the 
 \hyperref[WhileExpression]{while loop~(\ref*{WhileExpression})} is that the execution starts by executing the block once before evaluating the predicate for the first time.
 The return type of a do-while loop is \lstinline°java.lang.Void° and the return value is \lstinline°null°.
@@ -1443,8 +1441,8 @@ do doSideEffect("foo") while ((i=i+1)<max)
 
 \section{For Loop}
 \label{ForLoop}
-The for loop \lstinline°for (T1 var : iterableOfT1) expression° is used to execute a certain expression for each element of an \lstinline°java.lang.Iterable°.
-The local variable is final, hence canot be updated. 
+The for loop \lstinline°for (T1 variable : iterableOfT1) expression° is used to execute a certain \lstinline°expression° for each element of an \lstinline°java.lang.Iterable°.
+The local \lstinline°variable° is final, hence canot be updated. 
 
 \subsection{Syntax}
 
