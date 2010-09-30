@@ -1,13 +1,13 @@
 chapter:LexicalStructure[Lexical Syntax]
 
-Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully choosen and it is recommended to stick 
+Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully chosen and it is recommended to stick 
 with the lexical syntax described in the following.
 
 section:Identifiers[Identifiers]
 
 Identifiers are used to name all constructs, such as types, methods and variables. They start with a "Java letter", which is a character for which the Java method 
-code[Character.isJavaIdentifierstart(char)]
-returns true. For the other characters also digits (0-9) are allowed. For those the method code[Character.isJavaIdentifierPart(char)] must be true.
+e[Character.isJavaIdentifierstart(char)]
+returns e[true]. For the other characters also digits (0...9) are allowed. For those the method e[Character.isJavaIdentifierPart(char)] must be true.
 See link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.8][§ 3.8 Identifiers] for the original definition in the Java Language Specification.
 
 section2[Syntax]
@@ -20,7 +20,7 @@ section2[Escaped Identifiers]
 
 Identifiers may not have the same spelling as any reserved keyword. 
 However, identifiers starting with a code[^] are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
-conflict with a reserved keyword. Imagine you have introduced a keyword 'service' in your language but want at some point call a Java property 'service'. 
+conflict with a reserved keyword. Imagine you have introduced a keyword code[service] in your language but want to call a Java property e[service] at some point. 
 In such cases you use an escaped identifier code[^service] to reference the Java property.
 
 section2[Examples]
@@ -38,7 +38,7 @@ section:StringLiterals[String Literals]
 
 String literals can either use single quotes (') or double quotes (") as their terminals. When using double quotes all literals allowed by Java string literals are
 supported. In addition new line characters are allowed, that is in Xbase all string literals can span multiple lines. When using single quotes the only difference
-is that singlequotes within the literal have to be escaped and double quotes don't.
+is that single quotes within the literal have to be escaped and double quotes do not.
 
 See link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5][§ 3.10.5 String Literals]
 
@@ -63,12 +63,12 @@ ul[
 
 section:IntegerLiterals[Integer Literals]
 
-Integer Literals consists of one or more digits. 
+Integer literals consist of one or more digits. 
 Only decimal literals are supported and they always result in a value of type code[java.lang.Integer] 
 (it might result in native type code[int] when translated to Java, see ref:Types[Types]).
-The compiler makes sure that only numbers between 0 and Integer.MAX (0x7fffffff) are used.
+The compiler makes sure that only numbers between 0 and e[Integer.MAX] (0x7fffffff) are used.
 
-There's no negative integer literal, instead the expression code[-23] is parsed as the prefix operator code[-] applied on an int literal.
+There is no negative integer literal, instead the expression code[-23] is parsed as the prefix operator code[-] applied to an integer literal.
 
 section2[Syntax]
 
@@ -96,11 +96,11 @@ terminal SL_COMMENT :
 
 section:Whitespace[White Space]
 
-The white space characters ' ','\t','\n' and '\r' are allowed to occure anywhere between the other syntactic elements. 
+The white space characters code[' '], code['\t'], code['\n'], and code['\r] are allowed to occur anywhere between the other syntactic elements. 
 
 section:Keywords[Reserved Keywords]
 
-The following list of words are reserved keywords, that reducing the set of possible identifiers:
+The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 ol[
 	item[code[extends]]
 	item[code[super]]
@@ -126,4 +126,4 @@ ol[
 	item[code[finally]]
 ]
 
-However, in case some of the keywords have to be used as identifiers at times, the escape character of ref:Identifiers[identifiers] come in handy. 
+However, in case some of the keywords have to be used as identifiers, the escape character for ref:Identifiers[identifiers] comes in handy. 
