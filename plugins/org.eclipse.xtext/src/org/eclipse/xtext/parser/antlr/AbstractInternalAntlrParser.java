@@ -643,4 +643,14 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		return unorderedGroupHelper;
 	}
 
+	@Override
+	// This is a WORKAROUND for https://bugs.eclipse.org/bugs/show_bug.cgi?id=326509
+	protected void pushFollow(BitSet fset) {
+		if ((_fsp + 1) >= following.length) {
+			BitSet[] f = new BitSet[following.length * 2];
+			System.arraycopy(following, 0, f, 0, following.length);
+			following = f;
+		}
+		following[++_fsp] = fset;
+	}
 }
