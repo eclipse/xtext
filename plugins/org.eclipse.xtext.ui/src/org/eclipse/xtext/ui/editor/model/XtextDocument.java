@@ -211,8 +211,12 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public void setValidationJob(Job validationJob) {
 		this.validationJob = validationJob;
 	}
+	
+	public Job getValidationJob() {
+		return validationJob;
+	}
 
-	protected void checkAndUpdateAnnotations() {
+	public void checkAndUpdateAnnotations() {
 		validationJob.cancel();
 		validationJob.schedule();
 	}
