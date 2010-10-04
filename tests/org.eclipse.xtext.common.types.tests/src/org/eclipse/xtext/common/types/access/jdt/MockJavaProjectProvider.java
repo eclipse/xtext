@@ -35,8 +35,8 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.common.types.tests.AbstractActivator;
-import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.junit.util.PluginUtil;
+import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.junit.util.PluginUtil;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
