@@ -21,7 +21,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 public class SubPackageAwareGrammarAccessFragmentTest extends AbstractXtextTests {
 
 	private EPackage metamodel;
-	private SubPackageAwareGrammarAccessFragment fragment;
+	private GrammarAccessFragment fragment;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -30,7 +30,7 @@ public class SubPackageAwareGrammarAccessFragmentTest extends AbstractXtextTests
 		set.setClasspathURIContext(getClass());
 		Resource resource = set.getResource(URI.createURI("classpath:/org/eclipse/xtext/generator/grammarAccess/ametamodel.ecore"), true);
 		metamodel = (EPackage) resource.getContents().get(0);
-		fragment = new SubPackageAwareGrammarAccessFragment();
+		fragment = new GrammarAccessFragment();
 	}
 	
 	@Override
