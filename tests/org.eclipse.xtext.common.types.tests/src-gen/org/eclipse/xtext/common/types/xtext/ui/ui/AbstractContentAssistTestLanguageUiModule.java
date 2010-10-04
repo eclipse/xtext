@@ -40,11 +40,6 @@ public abstract class AbstractContentAssistTestLanguageUiModule extends DefaultU
 
 	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
 	public Class<? extends org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider> bindITypesProposalProvider() {
-		return org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider.IScopableTypesProposalProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
-	public Class<? extends org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider.IScopableTypesProposalProvider> bindITypesProposalProvider$IScopableTypesProposalProvider() {
 		return org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider.class;
 	}
 

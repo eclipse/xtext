@@ -63,7 +63,6 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	
 	public interface IReplacementTextApplier {
 		void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException;
-		String getActualReplacementString(ConfigurableCompletionProposal proposal);
 	}
 	
 	/**

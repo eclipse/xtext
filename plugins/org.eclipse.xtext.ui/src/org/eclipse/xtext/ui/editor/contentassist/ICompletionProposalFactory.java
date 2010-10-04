@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.contentassist;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -15,6 +16,6 @@ import org.eclipse.swt.graphics.Image;
  */
 public interface ICompletionProposalFactory {
 
-	ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image, ContentAssistContext contentAssistContext);
+	ICompletionProposal createCompletionProposal(String proposal, StyledString displayString, Image image, ContentAssistContext contentAssistContext);
 
 }

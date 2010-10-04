@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.xtext.ui;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.core.Flags;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -56,7 +57,11 @@ public class TypeAwareReferenceProposalCreator extends ReferenceProposalCreator 
 	
 	protected Image computeImage(boolean isInnerType, int modifiers) {
 		return JavaPlugin.getImageDescriptorRegistry().get(
-				JavaElementImageProvider.getTypeImageDescriptor(isInnerType, false, modifiers, false));
+				JavaElementImageProvider.getTypeImageDescriptor(
+						isInnerType, 
+						Flags.isAnnotation(modifiers) || Flags.isInterface(modifiers), 
+						modifiers, 
+						false /* don't use light icons */));
 	}
 	
 	protected EClass getEReferenceType(EObject context, EReference reference) {

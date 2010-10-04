@@ -53,6 +53,7 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 	private AbstractNode currentNode;
 	private AbstractNode lastCompleteNode;
 	private int offset;
+	private XtextResource resource;
 	private ITextViewer viewer;
 	private Region replaceRegion;
 	private Integer replaceContextLength;
@@ -75,6 +76,7 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 		result.currentNode = currentNode;
 		result.lastCompleteNode = lastCompleteNode;
 		result.offset = offset;
+		result.resource = resource;
 		result.viewer = viewer;
 		result.replaceRegion = replaceRegion;
 		result.replaceContextLength = replaceContextLength;
@@ -195,6 +197,14 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 			return replaceContextLength;
 		}
 		return replaceContextLength.intValue();
+	}
+
+	public void setResource(XtextResource resource) {
+		this.resource = resource;
+	}
+
+	public XtextResource getResource() {
+		return resource;
 	}
 	
 }

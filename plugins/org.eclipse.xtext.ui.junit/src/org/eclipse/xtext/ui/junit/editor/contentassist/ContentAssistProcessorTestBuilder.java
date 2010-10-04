@@ -37,6 +37,7 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.model.DocumentPartitioner;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
@@ -148,8 +149,9 @@ public class ContentAssistProcessorTestBuilder {
 			if (completionProposal instanceof ConfigurableCompletionProposal) {
 				ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) completionProposal;
 				proposedText = configurableProposal.getReplacementString();
-				if (configurableProposal.getTextApplier() != null)
-					proposedText = configurableProposal.getTextApplier().getActualReplacementString(configurableProposal);
+				if (configurableProposal.getTextApplier() instanceof ReplacementTextApplier) {
+					proposedText = ((ReplacementTextApplier) configurableProposal.getTextApplier()).getActualReplacementString(configurableProposal);
+				}
 			}
 			Assert.assertTrue("expect completionProposal text '" + expectation + "', but got " +
 					Strings.concat(", ", toString(computeCompletionProposals)),
@@ -194,8 +196,8 @@ public class ContentAssistProcessorTestBuilder {
 			if (proposal instanceof ConfigurableCompletionProposal) {
 				ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) proposal;
 				proposedText = configurableProposal.getReplacementString();
-				if (configurableProposal.getTextApplier() != null)
-					proposedText = configurableProposal.getTextApplier().getActualReplacementString(configurableProposal);
+				if (configurableProposal.getTextApplier() instanceof ReplacementTextApplier)
+					proposedText = ((ReplacementTextApplier) configurableProposal.getTextApplier()).getActualReplacementString(configurableProposal);
 			}
 			res.add(proposedText);
 		}
