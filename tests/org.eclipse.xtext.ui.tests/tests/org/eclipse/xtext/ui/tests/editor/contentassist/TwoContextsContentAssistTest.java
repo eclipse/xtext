@@ -64,7 +64,7 @@ public class TwoContextsContentAssistTest extends AbstractXtextTests {
 	public static class TwoContextsTestLanguageTestProposals extends AbstractTwoContextsTestLanguageProposalProvider {
 		@Override
 		public void completeKeyword(Keyword keyword, final ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-			super.completeKeyword(keyword, context, filter(acceptor, new Predicate<ICompletionProposal>() {
+			super.completeKeyword(keyword, context, new FilteringCompletionProposalAcceptor(acceptor, new Predicate<ICompletionProposal>() {
 				public boolean apply(ICompletionProposal input) {
 					if (!input.getDisplayString().startsWith(context.getPrefix()))
 						throw new IllegalStateException("proposed element '"+input.getDisplayString()+"' does not start with '"+ context.getPrefix()+"'");
@@ -72,5 +72,23 @@ public class TwoContextsContentAssistTest extends AbstractXtextTests {
 				}
 			}));
 		}
+	}
+	
+
+	public static class FilteringCompletionProposalAcceptor extends ICompletionProposalAcceptor.Delegate {
+
+		private final Predicate<ICompletionProposal> filter;
+
+		public FilteringCompletionProposalAcceptor(ICompletionProposalAcceptor delegate, Predicate<ICompletionProposal> filter) {
+			super(delegate);
+			this.filter = filter;
+		}
+		
+		@Override
+		public void accept(ICompletionProposal proposal) {
+			if (filter.apply(proposal))
+				super.accept(proposal);
+		}
+		
 	}
 }

@@ -25,6 +25,5 @@ public class DefaultCompletionProposalPostProcessor implements ICompletionPropos
 		}
 		return proposals;
 	}
-
 	
 }

@@ -20,9 +20,6 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameSupport;
 import org.eclipse.xtext.util.XtextSwitch;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.inject.Inject;
 
 /**
@@ -76,7 +73,8 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	@Inject
 	private IContentProposalPriorities priorities;
 
-	@Inject@ContentProposalLabelProvider
+	@Inject
+	@ContentProposalLabelProvider
 	private ILabelProvider labelProvider;
 	
 	@Inject
@@ -91,8 +89,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	public static class NullSafeCompletionProposalAcceptor extends ICompletionProposalAcceptor.Delegate {
 
 		public NullSafeCompletionProposalAcceptor(ICompletionProposalAcceptor delegate) {
-			super();
-			setDelegate(delegate);
+			super(delegate);
 		}
 
 		@Override
@@ -123,49 +120,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 			ICompletionProposalAcceptor acceptor) {
 		return new DefaultContentAssistProcessorSwitch(context, acceptor);
 	}
-
-	public static class FilteringCompletionProposalAcceptor extends ICompletionProposalAcceptor.Delegate {
-
-		private final Predicate<ICompletionProposal> filter;
-
-		public FilteringCompletionProposalAcceptor(ICompletionProposalAcceptor delegate, Predicate<ICompletionProposal> filter) {
-			super();
-			this.filter = filter;
-			setDelegate(delegate);
-		}
-		
-		@Override
-		public void accept(ICompletionProposal proposal) {
-			if (filter.apply(proposal))
-				super.accept(proposal);
-		}
-		
-	}
 	
-	public static class ModifyingCompletionProposalAcceptor extends ICompletionProposalAcceptor.Delegate {
-		private final Function<ICompletionProposal, ICompletionProposal> modifier;
-
-		public ModifyingCompletionProposalAcceptor(ICompletionProposalAcceptor delegate, Function<ICompletionProposal, ICompletionProposal> modifier) {
-			super();
-			this.modifier = modifier;
-			setDelegate(delegate);
-		}
-		
-		@Override
-		public void accept(ICompletionProposal proposal) {
-			if (proposal != null)
-				super.accept(modifier.apply(proposal));
-		}
-	}
-	
-	public ICompletionProposalAcceptor filter(ICompletionProposalAcceptor acceptor, Predicate<ICompletionProposal> filter) {
-		return new FilteringCompletionProposalAcceptor(acceptor, Predicates.and(Predicates.notNull(), filter));
-	}
-	
-	public ICompletionProposalAcceptor modify(ICompletionProposalAcceptor acceptor, Function<ICompletionProposal, ICompletionProposal> modifier) {
-		return new ModifyingCompletionProposalAcceptor(acceptor, modifier);
-	}
-
 	public ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			ContentAssistContext contentAssistContext) {
 		return createCompletionProposal(proposal, new StyledString(displayString), image, getPriorityHelper().getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);

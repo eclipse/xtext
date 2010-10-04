@@ -63,7 +63,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		}
 		
 		public ICompletionProposalAcceptor wrap(ICompletionProposalAcceptor acceptor) {
-			ICompletionProposalAcceptor.Delegate result = new ICompletionProposalAcceptor.Delegate() {
+			ICompletionProposalAcceptor.Delegate result = new ICompletionProposalAcceptor.Delegate(acceptor) {
 				@Override
 				public void accept(ICompletionProposal proposal) {
 					if (proposal instanceof ConfigurableCompletionProposal) {
@@ -72,7 +72,6 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 					super.accept(proposal);
 				}
 			};
-			result.setDelegate(acceptor);
 			return result;
 		}
 

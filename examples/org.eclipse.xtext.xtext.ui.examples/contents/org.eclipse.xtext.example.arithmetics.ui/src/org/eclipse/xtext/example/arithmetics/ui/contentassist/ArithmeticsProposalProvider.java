@@ -29,7 +29,7 @@ public class ArithmeticsProposalProvider extends AbstractArithmeticsProposalProv
 	public void completePrimaryExpression_Func(EObject model,
 			Assignment assignment, ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor) {
-		super.completePrimaryExpression_Func(model, assignment, context, new ICompletionProposalAcceptor() {
+		super.completePrimaryExpression_Func(model, assignment, context, new ICompletionProposalAcceptor.Delegate(acceptor) {
 
 			public void accept(ICompletionProposal proposal) {
 				if (proposal instanceof ConfigurableCompletionProposal) {
@@ -42,13 +42,9 @@ public class ArithmeticsProposalProvider extends AbstractArithmeticsProposalProv
 						ccp.setSelectionLength(oldSelectionStart-ccp.getSelectionStart()-1);
 					}
 				}
-				acceptor.accept(proposal);
+				super.accept(proposal);
 			}
 
-			public boolean canAcceptMoreProposals() {
-				return acceptor.canAcceptMoreProposals();
-			}
-			
 		});
 	}
 }

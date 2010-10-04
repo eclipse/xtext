@@ -18,7 +18,6 @@ import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
@@ -43,15 +42,6 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 	
 	@Inject(optional = true)
 	private IContextInformationProvider contextInformationProvider;
-	
-	@Inject
-	private Provider<ICompletionProposalAcceptor.Delegate> completionProposalAcceptorProvider;
-	
-	@Inject
-	private Provider<ITemplateAcceptor.Delegate> templateAcceptorProvider;
-	
-	@Inject
-	private Provider<IContextInformationAcceptor.Delegate> contextInformationAcceptorProvider;
 	
 	@Inject
 	private ICompletionProposalComparator completionProposalComparator;
@@ -158,22 +148,16 @@ public class XtextContentAssistProcessor implements IContentAssistProcessor, Com
 		return contextInformationProvider;
 	}
 	
-	public ICompletionProposalAcceptor createAcceptor(ICompletionProposalAcceptor delegate) {
-		ICompletionProposalAcceptor.Delegate result = completionProposalAcceptorProvider.get();
-		result.setDelegate(delegate);
-		return result;
+	public ICompletionProposalAcceptor decorateAcceptor(ICompletionProposalAcceptor acceptor) {
+		return acceptor;
 	}
 	
-	public ITemplateAcceptor createAcceptor(ITemplateAcceptor delegate) {
-		ITemplateAcceptor.Delegate result = templateAcceptorProvider.get();
-		result.setDelegate(delegate);
-		return result;
+	public ITemplateAcceptor decorateAcceptor(ITemplateAcceptor acceptor) {
+		return acceptor;
 	}
 
-	public IContextInformationAcceptor createAcceptor(IContextInformationAcceptor delegate) {
-		IContextInformationAcceptor.Delegate result = contextInformationAcceptorProvider.get();
-		result.setDelegate(delegate);
-		return result;
+	public IContextInformationAcceptor decorateAcceptor(IContextInformationAcceptor acceptor) {
+		return acceptor;
 	}
 
 	public void setCompletionProposalPostProcessor(ICompletionProposalPostProcessor completionProposalPostProcessor) {
