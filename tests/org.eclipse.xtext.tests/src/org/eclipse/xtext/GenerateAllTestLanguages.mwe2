@@ -143,7 +143,6 @@ Workflow {
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/generator/grammarAccess/GrammarAccessTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
-			fragment = grammarAccess.EmptyPackageAwareGrammarAccessFragment {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext"

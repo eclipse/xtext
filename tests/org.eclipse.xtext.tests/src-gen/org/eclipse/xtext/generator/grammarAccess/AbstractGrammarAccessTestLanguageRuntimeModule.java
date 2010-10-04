@@ -69,14 +69,14 @@ public abstract class AbstractGrammarAccessTestLanguageRuntimeModule extends Def
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
+		return org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLanguageGrammarAccess.class;
+	}
+
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.generator.grammarAccess.parseTreeConstruction.GrammarAccessTestLanguageParsetreeConstructor.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.grammarAccess.SubPackageAwareGrammarAccessFragment
-	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLanguageGrammarAccess.class;
 	}
 
 }
