@@ -14,14 +14,13 @@ import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.actions.LinkWithEditorOutlineContribution;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class LinkWithEditorTest extends AbstractOutlineUITest {
+public class LinkWithEditorTest extends AbstractOutlineWorkbenchTest {
 
 	private SyncingSelectionListener selectionSyncer;
 
@@ -98,10 +97,6 @@ public class LinkWithEditorTest extends AbstractOutlineUITest {
 		} finally {
 			outlinePage.getSite().getSelectionProvider().removeSelectionChangedListener(selectionSyncer);
 		}
-	}
-
-	protected void activate(IWorkbenchPart part) {
-		editor.getSite().getPage().activate(part);
 	}
 
 	protected IOutlineNode expectedNodeAt(int offset) {

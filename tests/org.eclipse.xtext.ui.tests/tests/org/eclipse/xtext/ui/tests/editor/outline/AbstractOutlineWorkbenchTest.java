@@ -19,6 +19,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
@@ -31,7 +32,7 @@ import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public abstract class AbstractOutlineUITest extends AbstractEditorTest {
+public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 
 	protected static final int ERROR_TIMEOUT = 2000;
 	protected static final int EXPECTED_TIMEOUT = 500;
@@ -134,5 +135,8 @@ public abstract class AbstractOutlineUITest extends AbstractEditorTest {
 		assertTrue(comparer.equals(node, (IOutlineNode) treeItem.getData()));
 	}
 
+	protected void activate(IWorkbenchPart part) {
+		editor.getSite().getPage().activate(part);
+	}
 
 }

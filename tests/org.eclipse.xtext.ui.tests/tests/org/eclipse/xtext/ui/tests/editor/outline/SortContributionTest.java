@@ -14,7 +14,7 @@ import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class SortContributionTest extends AbstractOutlineUITest {
+public class SortContributionTest extends AbstractOutlineWorkbenchTest {
 
 	@Override
 	protected void setUp() throws Exception {

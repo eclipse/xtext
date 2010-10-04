@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.editor.outline.actions;
 
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IPostSelectionProvider;
@@ -29,20 +31,20 @@ import org.eclipse.xtext.util.TextRegion;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class OutlineWithEditorLinker {
+public class OutlineWithEditorLinker implements IPropertyChangeListener {
 
-	private ISourceViewer textViewer;
+	protected ISourceViewer textViewer;
 
-	private TreeViewer treeViewer;
+	protected TreeViewer treeViewer;
 
-	private TreeListener treeListener;
+	protected TreeListener treeListener;
 
-	private TextListener textListener;
+	protected TextListener textListener;
 
-	private boolean isLinkingEnabled;
+	protected boolean isLinkingEnabled;
 
-	private OutlinePage outlinePage;
-
+	protected OutlinePage outlinePage;
+	
 	protected class TreeListener implements ISelectionChangedListener, IDoubleClickListener {
 		public void selectionChanged(SelectionChangedEvent event) {
 			if (isLinkingEnabled && isOutlineViewActive())
@@ -157,5 +159,11 @@ public class OutlineWithEditorLinker {
 	protected boolean isOutlineViewActive() {
 		IWorkbenchPart activePart = outlinePage.getSite().getPage().getActivePart();
 		return activePart instanceof ContentOutline;
+	}
+
+	public void propertyChange(PropertyChangeEvent event) {
+		if(event.getProperty() == LinkWithEditorOutlineContribution.PREFERENCE_KEY) {
+			setLinkingEnabled(Boolean.parseBoolean(event.getNewValue().toString()));
+		}
 	}
 }

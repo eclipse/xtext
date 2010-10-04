@@ -6,6 +6,8 @@ package org.eclipse.xtext.ui.tests.editor.outline.ui;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
+import org.eclipse.xtext.ui.editor.outline.actions.OutlineWithEditorLinker;
+import org.eclipse.xtext.ui.tests.editor.outline.CustomOutlineWithEditorLinker;
 import org.eclipse.xtext.ui.tests.editor.outline.SampleFilterContribution;
 import org.eclipse.xtext.ui.tests.editor.outline.SyncableOutlinePage;
 
@@ -29,5 +31,9 @@ public class OutlineTestLanguageUiModule extends
 	public void configureSampleFilterContribution(Binder binder) {
 		binder.bind(IOutlineContribution.class).annotatedWith(Names.named(SampleFilterContribution.PREFERENCE_KEY))
 				.to(SampleFilterContribution.class);
+	}
+	
+	public Class<? extends OutlineWithEditorLinker> bindOutlineWithEditorLinker() {
+		return CustomOutlineWithEditorLinker.class;
 	}
 }
