@@ -8,8 +8,8 @@
 package org.eclipse.xtext.builder.impl;
 
 import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 
 import java.util.Iterator;
 
@@ -27,9 +27,9 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage;
-import org.eclipse.xtext.junit.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**

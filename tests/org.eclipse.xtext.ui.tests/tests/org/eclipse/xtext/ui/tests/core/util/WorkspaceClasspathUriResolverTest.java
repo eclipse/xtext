@@ -3,9 +3,9 @@ package org.eclipse.xtext.ui.tests.core.util;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.junit.util.PluginUtil;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
+import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.junit.util.PluginUtil;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.util.WorkspaceClasspathUriResolver;
 

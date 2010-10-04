@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.core.resource;
 
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 
 import java.util.Iterator;
 
@@ -19,7 +19,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.junit.util.JavaProjectSetupUtil.TextFile;
+import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.util.StringInputStream;

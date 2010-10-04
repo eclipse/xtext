@@ -1,4 +1,11 @@
-package org.eclipse.xtext.junit.util;
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ui.junit.util;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -19,6 +26,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.util.StringInputStream;
 
 public class IResourcesSetupUtil {
@@ -77,7 +85,7 @@ public class IResourcesSetupUtil {
 	public static void setReference(final IProject from, final IProject to)
 			throws CoreException, InvocationTargetException,
 			InterruptedException {
-		new org.eclipse.ui.actions.WorkspaceModifyOperation() {
+		new WorkspaceModifyOperation() {
 
 			@Override
 			protected void execute(IProgressMonitor monitor)
@@ -98,7 +106,7 @@ public class IResourcesSetupUtil {
 	public static void removeReference(final IProject from, final IProject to)
 	throws CoreException, InvocationTargetException,
 	InterruptedException {
-		new org.eclipse.ui.actions.WorkspaceModifyOperation() {
+		new WorkspaceModifyOperation() {
 			
 			@Override
 			protected void execute(IProgressMonitor monitor)
@@ -133,7 +141,7 @@ public class IResourcesSetupUtil {
 			throws CoreException, InvocationTargetException,
 			InterruptedException {
 		final IFile file = root().getFile(wsRelativePath);
-		new org.eclipse.ui.actions.WorkspaceModifyOperation() {
+		new WorkspaceModifyOperation() {
 
 			@Override
 			protected void execute(IProgressMonitor monitor)
@@ -155,7 +163,7 @@ public class IResourcesSetupUtil {
 	private static void create(final IContainer container)
 			throws CoreException, InvocationTargetException,
 			InterruptedException {
-		new org.eclipse.ui.actions.WorkspaceModifyOperation() {
+		new WorkspaceModifyOperation() {
 
 			@Override
 			protected void execute(IProgressMonitor monitor)

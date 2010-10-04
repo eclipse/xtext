@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.scoping.namespaces;
 
-import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 
 import java.util.Collection;
 
@@ -18,9 +18,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.AbstractJavaProjectsState;
+import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 

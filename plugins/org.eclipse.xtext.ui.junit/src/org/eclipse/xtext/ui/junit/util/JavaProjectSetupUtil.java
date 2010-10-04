@@ -5,9 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.junit.util;
+package org.eclipse.xtext.ui.junit.util;
 
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;

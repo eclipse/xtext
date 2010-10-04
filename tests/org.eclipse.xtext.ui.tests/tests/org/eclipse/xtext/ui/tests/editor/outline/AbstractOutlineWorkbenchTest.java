@@ -22,11 +22,11 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineNodeComparer;
+import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
 
 /**
