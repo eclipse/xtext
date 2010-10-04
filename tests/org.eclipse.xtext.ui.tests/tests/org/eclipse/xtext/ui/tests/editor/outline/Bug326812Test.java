@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.outline.actions.LinkWithEditorOutlineContribution;
 
 /**

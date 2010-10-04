@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.workbench;
 
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import junit.framework.TestCase;
 
 import org.eclipse.swt.widgets.Display;

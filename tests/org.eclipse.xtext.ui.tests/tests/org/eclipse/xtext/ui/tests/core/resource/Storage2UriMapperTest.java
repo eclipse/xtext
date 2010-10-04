@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.core.resource;
 
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;

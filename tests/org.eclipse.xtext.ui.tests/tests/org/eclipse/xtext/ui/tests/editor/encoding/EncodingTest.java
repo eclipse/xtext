@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.encoding;
 
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;

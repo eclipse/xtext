@@ -15,7 +15,8 @@ import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegion;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.tests.editor.AbstractEditorTest;
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
+
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
 /**
  * @author svenefftinge - Initial contribution and API

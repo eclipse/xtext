@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.autoedit;
 
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
 import java.util.List;
 

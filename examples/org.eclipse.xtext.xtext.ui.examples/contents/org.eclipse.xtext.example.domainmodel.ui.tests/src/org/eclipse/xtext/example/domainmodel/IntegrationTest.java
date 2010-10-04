@@ -1,7 +1,7 @@
 package org.eclipse.xtext.example.domainmodel;
 
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
@@ -128,7 +128,4 @@ public class IntegrationTest extends TestCase {
 		assertEquals(0, file1.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
 		assertEquals(0, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
 	}
-
-	
-
 }

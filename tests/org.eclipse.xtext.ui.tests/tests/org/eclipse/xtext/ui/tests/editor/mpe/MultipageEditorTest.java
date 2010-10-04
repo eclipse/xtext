@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.mpe;
 
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.resources.IFile;

@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.core.builder.impl;
 
-import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
 
 /**
