@@ -150,7 +150,9 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 							currentModel, result);
 				}
 			}
-			
+			for(ContentAssistContext context: result) {
+				context.setResource(resource);
+			}
 			return result.toArray(new ContentAssistContext[result.size()]);
 		}
 		catch (BadLocationException e) {

@@ -130,7 +130,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		return createCompletionProposal(proposal, null, null, getPriorityHelper().getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
 	}
 	
-	protected ICompletionProposal createCompletionProposal(String proposal, StyledString displayString, Image image,
+	public ICompletionProposal createCompletionProposal(String proposal, StyledString displayString, Image image,
 			ContentAssistContext contentAssistContext) {
 		return createCompletionProposal(proposal, displayString, image, getPriorityHelper().getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
 	}
