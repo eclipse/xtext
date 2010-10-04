@@ -82,7 +82,7 @@
 
 	<target name="publish.build">
 		<fail message="build.root property must be defined" unless="build.root" />
-
+		<property file="${publisher.properties.file.name}" />
 		<property name="property.file.location" location="${build.root}/archive/${promoter.properties.file.name}" />
 		<property name="property.load.prefix" value="saved." />
 
@@ -152,14 +152,20 @@
 				</not>
 			</condition>
 		</fail>
+		<property file="${publisher.properties.file.name}" />
 		<fail message="build.root property must be defined" unless="build.root" />
 		<fail message="packages.base property must be defined" unless="packages.base" />
 		<fail message="downloads.area property must be defined" unless="downloads.area" />
 
+
 		<!-- defaults -->
-		<property name="version" value="1.0.1" />
+		<property name="version" value="0.7.0" />
+		<property name="packages.base" value="downloads" />
+		<property name="tests.base" value="test.results" />
 
 		<property name="packages.directory" location="${build.root}/archive/${packages.base}" />
+		<property name="testresults.directory" location="${build.root}/archive/${tests.base}" />
+
 
 		<property name="build.drop.directory" location="${downloads.area}/downloads/drops/${version}/${saved.build.id}" />
 
@@ -176,8 +182,14 @@
 		<checksum algorithm="MD5" fileext=".md5" format="MD5SUM">
 			<fileset dir="${build.drop.directory}" />
 		</checksum>
-		<!-- copy buildlog -->
-		<copy tofile="${build.drop.directory}/buildlog.txt" file="${build.root}/log" />
+		
+		<!-- copy testresults -->
+		<mkdir dir="${build.drop.directory}/testresults" />
+		<copy todir="${build.drop.directory}/testresults">
+			<fileset dir="${testresults.directory}">
+				<filename name="*.xml" />
+			</fileset>
+		</copy>
 
 		<fileset id="drop.resources" dir="${build.drop.directory}">
 			<or>
@@ -195,13 +207,16 @@
 		<buckminster.substitute value="${version}" pattern="^(\d+\.\d+)\.\d+.*$" replacement="$$1" property="base.version" />
 
 		<!-- setup composite.repository.base appropriate to the build type -->
-		<condition property="composite.repository.base" value="${base.version}-I-builds">
+		<condition property="composite.repository.base" value="nightly">
+			<matches pattern="^N" string="${saved.build.id}" />
+		</condition>
+		<condition property="composite.repository.base" value="interim">
 			<matches pattern="^I" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="${base.version}milestones">
+		<condition property="composite.repository.base" value="milestones">
 			<matches pattern="^[MS]" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="${base.version}">
+		<condition property="composite.repository.base" value="releases/${base.version}">
 			<matches pattern="^R" string="${saved.build.id}" />
 		</condition>
 
@@ -216,15 +231,14 @@
 		<delete dir="${build.repository.directory}" />
 		<mkdir dir="${build.repository.directory}" />
 
-		<unzip dest="${build.repository.directory}">
+		<unzip  dest="${build.repository.directory}">
 			<fileset dir="${packages.directory}">
-				<filename name="tmf-xtext-Update*.zip" />
+				<filename name="*-Update*.zip" />
 			</fileset>
 		</unzip>
-
 		<p2.composite.repository destination="${composite.repository.url}">
 			<add>
-				<repository location="${saved.build.id}" />
+ 				<repository location="${saved.build.id}" />
 			</add>
 		</p2.composite.repository>
 
