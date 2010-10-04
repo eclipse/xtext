@@ -23,7 +23,7 @@ public final class ContextInformationComputer implements IUnitOfWork<IContextInf
 	public interface State {
 		ContentAssistContext.Factory getContextFactory();
 		IContextInformationProvider getContextInformationProvider();
-		IContextInformationAcceptor createAcceptor(IContextInformationAcceptor delegate);
+		IContextInformationAcceptor decorateAcceptor(IContextInformationAcceptor delegate);
 	}
 
 	private final int offset;
@@ -40,7 +40,7 @@ public final class ContextInformationComputer implements IUnitOfWork<IContextInf
 	}
 
 	public IContextInformation[] exec(XtextResource resource) throws Exception {
-		IContextInformationAcceptor acceptor = state.createAcceptor(this);
+		IContextInformationAcceptor acceptor = state.decorateAcceptor(this);
 		ContentAssistContext[] contexts = state.getContextFactory().create(viewer, offset, resource);
 		for (ContentAssistContext context: contexts) {
 			if (acceptor.canAcceptMoreInformation())

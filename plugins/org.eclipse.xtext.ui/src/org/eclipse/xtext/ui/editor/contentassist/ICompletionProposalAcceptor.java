@@ -20,12 +20,12 @@ public interface ICompletionProposalAcceptor {
 	
 	class Delegate implements ICompletionProposalAcceptor {
 
-		private ICompletionProposalAcceptor delegate;
-
-		public void setDelegate(ICompletionProposalAcceptor acceptor) {
-			this.delegate = acceptor;
-		}
+		private final ICompletionProposalAcceptor delegate;
 		
+		public Delegate(ICompletionProposalAcceptor delegate) {
+			this.delegate = delegate;
+		}
+
 		public ICompletionProposalAcceptor getDelegate() {
 			return delegate;
 		}

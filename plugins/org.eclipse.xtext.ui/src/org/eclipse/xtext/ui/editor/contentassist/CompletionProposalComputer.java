@@ -25,8 +25,8 @@ public class CompletionProposalComputer implements IUnitOfWork<ICompletionPropos
 		ITemplateProposalProvider getTemplateProposalProvider();
 		IContentProposalProvider getContentProposalProvider();
 		ContentAssistContext.Factory getContextFactory();
-		ICompletionProposalAcceptor createAcceptor(ICompletionProposalAcceptor delegate);
-		ITemplateAcceptor createAcceptor(ITemplateAcceptor delegate);
+		ICompletionProposalAcceptor decorateAcceptor(ICompletionProposalAcceptor delegate);
+		ITemplateAcceptor decorateAcceptor(ITemplateAcceptor delegate);
 	}
 	
 	private final int offset;
@@ -44,13 +44,13 @@ public class CompletionProposalComputer implements IUnitOfWork<ICompletionPropos
 	}
 
 	public ICompletionProposal[] exec(XtextResource resource) throws Exception {
-		ICompletionProposalAcceptor proposalAcceptor = state.createAcceptor((ICompletionProposalAcceptor)this);
+		ICompletionProposalAcceptor proposalAcceptor = state.decorateAcceptor((ICompletionProposalAcceptor)this);
 		ContentAssistContext[] contexts = state.getContextFactory().create(viewer, offset, resource);
 		for (ContentAssistContext context: contexts) {
 			if (proposalAcceptor.canAcceptMoreProposals())
 				state.getContentProposalProvider().createProposals(context, proposalAcceptor);
 		}
-		ITemplateAcceptor templateAcceptor = state.createAcceptor((ITemplateAcceptor) this);
+		ITemplateAcceptor templateAcceptor = state.decorateAcceptor((ITemplateAcceptor) this);
 		for (ContentAssistContext context: contexts) {
 			if (templateAcceptor.canAcceptMoreTemplates())
 				state.getTemplateProposalProvider().createTemplates(context, templateAcceptor);

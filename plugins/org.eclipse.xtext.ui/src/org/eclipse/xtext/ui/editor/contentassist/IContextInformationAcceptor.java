@@ -18,26 +18,4 @@ public interface IContextInformationAcceptor {
 	
 	boolean canAcceptMoreInformation();
 	
-	class Delegate implements IContextInformationAcceptor {
-
-		private IContextInformationAcceptor delegate;
-
-		public void setDelegate(IContextInformationAcceptor acceptor) {
-			this.delegate = acceptor;
-		}
-		
-		public IContextInformationAcceptor getDelegate() {
-			return delegate;
-		}
-		
-		public void accept(IContextInformation information) {
-			delegate.accept(information);
-		}
-
-		public boolean canAcceptMoreInformation() {
-			return delegate.canAcceptMoreInformation();
-		}
-		
-	}
-	
 }
