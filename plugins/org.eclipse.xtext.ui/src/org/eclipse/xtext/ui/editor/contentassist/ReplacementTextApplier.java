@@ -18,6 +18,7 @@ public abstract class ReplacementTextApplier implements IReplacementTextApplier 
 
 	public void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException {
 		String replacementString = getActualReplacementString(proposal);
+		proposal.setCursorPosition(replacementString.length());
 		document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(), replacementString);
 	}
 

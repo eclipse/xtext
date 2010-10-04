@@ -40,6 +40,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal.
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
+import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 
 import com.google.inject.Inject;
@@ -112,7 +113,9 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		try {
 			IType type = project.findType(fqn);
 			if (type != null) {
-				IJavaSearchScope scope = SearchEngine.createHierarchyScope(type);
+				IJavaSearchScope hierarchyScope = SearchEngine.createHierarchyScope(type);
+				IJavaSearchScope projectScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { project });
+				IJavaSearchScope scope = new IntersectingJavaSearchScope(projectScope, hierarchyScope);
 				searchAndCreateProposals(scope, proposalFactory, context, typeReference, TypeMatchFilters.and(filter, new ITypesProposalProvider.Filter() {
 					public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 							char[][] enclosingTypeNames, String path) {
@@ -148,11 +151,11 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			if (Character.isUpperCase(split[split.length - 1].charAt(0))) {
 				typeName = split[split.length - 1].toCharArray();
 				if (split.length > 1)
-					packageName = prefix.substring(0, prefix.length() - (typeName.length + 1)).toCharArray();
+					packageName = ("*" + prefix.substring(0, prefix.length() - (typeName.length + 1)).replaceAll("\\.", "*.") + "*").toCharArray();
 			} else {
 				if (prefix.endsWith("."))
 					prefix = prefix.substring(0, prefix.length() - 1);
-				packageName = prefix.toCharArray();
+				packageName = ("*" + prefix.replaceAll("\\.", "*.") + "*").toCharArray();
 			}
 		}
 		IScope typeScope = null;
@@ -169,9 +172,26 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 				super.accept(proposal);
 			}
 		};
+		final PrefixMatcher original = context.getMatcher();
+		context.setMatcher(new PrefixMatcher() {
+			@Override
+			public boolean isCandidateMatchingPrefix(String name, String prefix) {
+				if (original.isCandidateMatchingPrefix(name, prefix))
+					return true;
+				String sub = name;
+				int delimiter = sub.indexOf('.');
+				while(delimiter != -1) {
+					sub = sub.substring(delimiter + 1);
+					if (original.isCandidateMatchingPrefix(sub, prefix))
+						return true;
+					delimiter = sub.indexOf('.');
+				}
+				return false;
+			}
+		});
 		SearchEngine searchEngine = new SearchEngine();
 		searchEngine.searchAllTypeNames(
-				packageName, SearchPattern.R_PREFIX_MATCH, 
+				packageName, SearchPattern.R_PATTERN_MATCH, 
 				typeName, SearchPattern.R_PREFIX_MATCH, 
 				IJavaSearchConstants.TYPE, scope, 
 				new TypeNameRequestor() {
@@ -190,7 +210,8 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 								fqName.append('$');
 							}
 							fqName.append(simpleTypeName);
-							createTypeProposal(fqName.toString(), modifiers, enclosingTypeNames.length>0, proposalFactory, context, scopeAware);
+							String fqNameAsString = fqName.toString();
+							createTypeProposal(fqNameAsString, modifiers, enclosingTypeNames.length>0, proposalFactory, context, scopeAware);
 						}
 					}
 				}, 

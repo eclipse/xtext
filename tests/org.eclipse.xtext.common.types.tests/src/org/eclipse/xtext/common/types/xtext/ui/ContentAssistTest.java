@@ -54,6 +54,10 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 		newBuilder().append("import java.util.* default BlockingQ").assertText("concurrent.BlockingQueue");
 	}
 	
+	public void testDefaultBlockingQueue_02() throws Exception {
+		newBuilder().append("import java.* default BlockingQ").assertText("util.concurrent.BlockingQueue");
+	}
+	
 	public void testCustomArrayList_01() throws Exception {
 		newBuilder().append("custom ArrayLis").assertText("java.util.ArrayList");
 	}
@@ -70,6 +74,14 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 		newBuilder().append("import java.util.* custom BlockingQ").assertText("concurrent.BlockingQueue");
 	}
 	
+	public void testCustomBlockingQueue_02() throws Exception {
+		newBuilder().append("import java.* custom BlockingQ").assertText("util.concurrent.BlockingQueue");
+	}
+	
+	public void testCustomBlockingQueue_03() throws Exception {
+		newBuilder().append("import java.* custom concurrent.BlockingQ").assertText("util.concurrent.BlockingQueue");
+	}
+	
 	public void testSubtypeArrayList_01() throws Exception {
 		newBuilder().append("subtype ArrayLis").assertText("java.util.ArrayList");
 	}
@@ -82,14 +94,22 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 		newBuilder().append("import java.util.* subtype BlockingQ").assertText("concurrent.BlockingQueue");
 	}
 	
-	public void testList_01() throws Exception {
-		newBuilder().append("import java.util.* import java.awt.* custom java.util.List").assertText(
-				"java.util.List", "ListResourceBundle", "ListIterator");
+	public void testSubtypeBlockingQueue_02() throws Exception {
+		newBuilder().append("import java.* subtype BlockingQ").assertText("util.concurrent.BlockingQueue");
 	}
 	
-	public void testList_02() throws Exception {
-		newBuilder().append("import java.awt.* import java.util.* custom java.util.List").assertText(
-				"List", "ListResourceBundle", "ListIterator");
+	public void testSubtypeBlockingQueue_03() throws Exception {
+		newBuilder().append("import java.* subtype concurrent.BlockingQ").assertText("util.concurrent.BlockingQueue");
+	}
+	
+	public void testMap_01() throws Exception {
+		newBuilder().append("import java.util.* import javax.swing.text.html.* custom java.util.Map").assertText(
+				"java.util.Map");
+	}
+	
+	public void testMap_02() throws Exception {
+		newBuilder().append("import javax.swing.text.html.* import java.util.* custom java.util.Map").assertText(
+				"Map");
 	}
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
