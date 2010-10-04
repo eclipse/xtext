@@ -53,6 +53,10 @@ public abstract class AbstractToggleActionContribution implements IOutlineContri
 	protected boolean isPropertySet() {
 		return preferenceStoreAccess.getPreferenceStore().getBoolean(getPreferenceKey());
 	}
+	
+	protected IPreferenceStoreAccess getPreferenceStoreAccess() {
+		return preferenceStoreAccess;
+	}
 
 	protected void toggle() {
 		boolean newState = !isPropertySet();

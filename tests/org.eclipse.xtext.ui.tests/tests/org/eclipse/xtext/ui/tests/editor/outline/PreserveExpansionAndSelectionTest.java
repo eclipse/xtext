@@ -12,7 +12,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class PreserveExpansionAndSelectionTest extends AbstractOutlineUITest {
+public class PreserveExpansionAndSelectionTest extends AbstractOutlineWorkbenchTest {
 
 	@Override
 	protected void setUp() throws Exception {
