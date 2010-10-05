@@ -1,6 +1,0 @@
-grammar org.eclipse.xtext.MweReaderTestResourceWithError
-	with org.eclipse.xtext.common.Terminals
-
-generate foo "http://foo/bar"
-
-InvalidMain : 
