@@ -19,7 +19,7 @@ var runtimeProject = "../${projectName}"
 Workflow {
 	
 	bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/.."
+		platformUri = "${runtimeProject}/../.."
 	}
 	
 	component = DirectoryCleaner {
@@ -55,12 +55,12 @@ Workflow {
 			}
 				
 			// the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/ -->
-			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {
 			}
 			
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment {}
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
 		}
 	}
 }
