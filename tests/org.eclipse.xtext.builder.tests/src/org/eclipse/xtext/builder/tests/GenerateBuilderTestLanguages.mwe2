@@ -20,7 +20,7 @@ var classSplitting = true
 Workflow {
 	
 	bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/.."
+		platformUri = "${runtimeProject}/../.."
 	}
 	
 	component = DirectoryCleaner {
@@ -38,12 +38,12 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = resourceFactory.ResourceFactoryFragment {}
-			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {
 				options = auto-inject {} 
 			}
 			fragment = validation.JavaValidatorFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment { 
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment { 
 				options = auto-inject {}
 			}
 			fragment = builder.BuilderIntegrationFragment {}

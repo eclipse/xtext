@@ -12,7 +12,6 @@ import org.eclipse.xtext.*
 Workflow {
 	component = @GenerateAllTestLanguages {}
 	component = @ui.tests.GenerateTestLanguages {}
-	component = @xtend.tests.GenerateTestLanguages {}
 	component = @builder.tests.GenerateBuilderTestLanguages {}
 	component = @xtext.ui.GenerateTestLanguages {}
 	
