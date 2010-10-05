@@ -19,8 +19,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.jdt.core;bundle-version="3.4.0";resolution:=optional,
  org.eclipse.core.expressions,
  com.ibm.icu,
- org.eclipse.search;bundle-version="3.5.0";resolution:=optional,
- org.apache.commons.lang
+ org.eclipse.search;bundle-version="3.5.0";resolution:=optional
 Bundle-Activator: org.eclipse.xtext.ui.internal.Activator
 Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui,
@@ -66,4 +65,5 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
-Import-Package: org.apache.log4j
+Import-Package: org.apache.commons.lang,
+ org.apache.log4j
