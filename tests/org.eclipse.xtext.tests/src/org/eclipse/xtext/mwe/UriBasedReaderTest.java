@@ -9,20 +9,55 @@ package org.eclipse.xtext.mwe;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.WorkflowContextDefaultImpl;
 import org.eclipse.emf.mwe.core.issues.IssuesImpl;
 import org.eclipse.emf.mwe.core.monitor.NullProgressMonitor;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.Type;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+
+import com.google.inject.Binder;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.name.Names;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class UriBasedReaderTest extends AbstractXtextTests {
+
+	/**
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	protected static class XtextErrorStandaloneSetup extends XtextStandaloneSetup {
+		@Override
+		public Injector createInjector() {
+			return Guice.createInjector(new org.eclipse.xtext.XtextRuntimeModule() {
+				@Override
+				public void configureFileExtensions(Binder binder) {
+					binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("xtexterror");
+				}
+			});
+		}
+
+		@Override
+		public void register(Injector injector) {
+			EPackage.Registry.INSTANCE.put(XtextPackage.eINSTANCE.getNsURI(), XtextPackage.eINSTANCE);
+			IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+			IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtexterror", resourceFactory);
+			IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("xtexterror", serviceProvider);
+		}
+	}
 
 	@SuppressWarnings("unchecked")
 	public void testTransitiveReferences() throws Exception {
@@ -64,8 +99,8 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 			}
 		};
 		reader.setClasspathURIContext(getClass());
-		reader.addRegister(new XtextStandaloneSetup());
-		reader.addUri("classpath:/" + getClass().getName().replace('.', '/') + ".xtext");
+		reader.addRegister(new XtextErrorStandaloneSetup());
+		reader.addUri("classpath:/" + getClass().getName().replace('.', '/') + ".xtexterror");
 		SlotEntry slotEntry = new SlotEntry();
 		slotEntry.setType("Grammar");
 		slotEntry.setFirstOnly(true);
@@ -81,10 +116,11 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 	}
 
 	public void testMissingRegistration() throws Exception {
+		with(new XtextErrorStandaloneSetup());
 		UriBasedReader reader = new UriBasedReader();
 		reader.setClasspathURIContext(getClass());
 		//		reader.setRegister(new XtextStandaloneSetup());
-		reader.addUri("classpath:/" + getClass().getName().replace('.', '/') + ".xtext");
+		reader.addUri("classpath:/" + getClass().getName().replace('.', '/') + ".xtexterror");
 		IssuesImpl issues = new IssuesImpl();
 		reader.checkConfiguration(issues);
 		assertTrue(issues.hasErrors());
@@ -107,11 +143,30 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 			}
 		};
 		reader.setClasspathURIContext(getClass());
-		reader.addRegister(new XtextStandaloneSetup());
+		reader.addRegister(new XtextStandaloneSetup() {
+			@Override
+			public Injector createInjector() {
+				return Guice.createInjector(new org.eclipse.xtext.XtextRuntimeModule() {
+					@Override
+					public void configureFileExtensions(Binder binder) {
+						binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("xtexterror");
+					}
+				});
+			}
+			
+			@Override
+			public void register(Injector injector) {
+				EPackage.Registry.INSTANCE.put(XtextPackage.eINSTANCE.getNsURI(), XtextPackage.eINSTANCE);
+				IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+				IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
+				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xtexterror", resourceFactory);
+				IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("xtexterror", serviceProvider);
+			}
+		});
 		final String errorURI = "classpath:/" + (getClass().getName() + "ResourceWithError").replace('.', '/')
-				+ ".xtext";
+				+ ".xtexterror";
 		final String loadingURI = "classpath:/" + (getClass().getName() + "LoadingResourceWithError").replace('.', '/')
-				+ ".xtext";
+				+ ".xtexterror";
 		reader.addUri(loadingURI);
 		SlotEntry slotEntry = new SlotEntry();
 		slotEntry.setType("Grammar");

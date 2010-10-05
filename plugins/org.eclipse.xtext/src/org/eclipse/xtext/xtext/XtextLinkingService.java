@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -42,6 +43,7 @@ import org.eclipse.xtext.scoping.IScope;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -52,11 +54,14 @@ public class XtextLinkingService extends DefaultLinkingService {
 
 	@Inject
 	private IValueConverterService valueConverterService;
+	
+	private String fileExtension = "xtext";
 
-	public XtextLinkingService() {
-		super();
+	@Inject
+	public void setFileExtension(@Named(Constants.FILE_EXTENSIONS) String fileExtension) {
+		this.fileExtension = fileExtension.split(",")[0];
 	}
-
+	
 	@Override
 	public List<EObject> getLinkedObjects(EObject context, EReference ref, AbstractNode node) throws IllegalNodeException {
 		if (ref == XtextPackage.eINSTANCE.getGrammar_UsedGrammars())
@@ -86,7 +91,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 					}
 				}
 				final Resource resource = resourceSet.getResource(URI.createURI(
-						ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + ".xtext"), true);
+						ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + grammarName.replace('.', '/') + "." + fileExtension), true);
 				final Grammar usedGrammar = (Grammar) resource.getContents().get(0);
 				if (grammarName.equals(usedGrammar.getName()))
 					return Collections.<EObject>singletonList(usedGrammar);
