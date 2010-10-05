@@ -41,13 +41,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule State ****************
  *
  * State:
- * 	(isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
+ * 	{State} (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
  * 	isInitial?="init" stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?;
  *
  **/
 
-// (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType | isInitial?="init"
-// stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?
+// {State} (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
+// isInitial?="init" stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?
 protected class State_Group extends GroupToken {
 	
 	public State_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -62,43 +62,70 @@ protected class State_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new State_LabelAssignment_3(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new State_StateNameAssignment_2(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new State_Alternatives_0(lastRuleCallOrigin, this, 2, inst);
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 3, inst);
+			case 0: return new State_LabelAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new State_StateNameAssignment_3(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new State_Alternatives_1(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new State_StateAction_0(lastRuleCallOrigin, this, 3, inst);
+			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getStateRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getStateAccess().getStateAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType | isInitial?="init"
-// stateKind=StateType isFinal?="final")?
-protected class State_Alternatives_0 extends AlternativesToken {
+// {State}
+protected class State_StateAction_0 extends ActionToken  {
 
-	public State_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_StateAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getStateAccess().getAlternatives_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getStateAccess().getStateAction_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new State_IsInitialAssignment_0_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new State_IsFinalAssignment_0_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new State_StateKindAssignment_0_2(lastRuleCallOrigin, this, 2, inst);
-			case 3: return new State_Group_0_3(lastRuleCallOrigin, this, 3, inst);
-			case 4: return new State_Group_0_4(lastRuleCallOrigin, this, 4, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType | isInitial?="init"
+// stateKind=StateType isFinal?="final")?
+protected class State_Alternatives_1 extends AlternativesToken {
+
+	public State_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getStateAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new State_IsInitialAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new State_IsFinalAssignment_1_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new State_StateKindAssignment_1_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new State_Group_1_3(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new State_Group_1_4(lastRuleCallOrigin, this, 4, inst);
 			default: return null;
 		}	
 	}
@@ -106,21 +133,22 @@ protected class State_Alternatives_0 extends AlternativesToken {
 }
 
 // isInitial?="init"
-protected class State_IsInitialAssignment_0_0 extends AssignmentToken  {
+protected class State_IsInitialAssignment_1_0 extends AssignmentToken  {
 	
-	public State_IsInitialAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_IsInitialAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateAccess().getIsInitialAssignment_0_0();
+		return grammarAccess.getStateAccess().getIsInitialAssignment_1_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+			case 0: return new State_StateAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
 		}	
 	}
 
@@ -130,7 +158,7 @@ protected class State_IsInitialAssignment_0_0 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("isInitial");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getStateAccess().getIsInitialInitKeyword_0_0_0();
+			element = grammarAccess.getStateAccess().getIsInitialInitKeyword_1_0_0();
 			return obj;
 		}
 		return null;
@@ -139,21 +167,22 @@ protected class State_IsInitialAssignment_0_0 extends AssignmentToken  {
 }
 
 // isFinal?="final"
-protected class State_IsFinalAssignment_0_1 extends AssignmentToken  {
+protected class State_IsFinalAssignment_1_1 extends AssignmentToken  {
 	
-	public State_IsFinalAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_IsFinalAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateAccess().getIsFinalAssignment_0_1();
+		return grammarAccess.getStateAccess().getIsFinalAssignment_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+			case 0: return new State_StateAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
 		}	
 	}
 
@@ -163,7 +192,7 @@ protected class State_IsFinalAssignment_0_1 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("isFinal");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_1_0();
+			element = grammarAccess.getStateAccess().getIsFinalFinalKeyword_1_1_0();
 			return obj;
 		}
 		return null;
@@ -172,21 +201,22 @@ protected class State_IsFinalAssignment_0_1 extends AssignmentToken  {
 }
 
 // stateKind=StateType
-protected class State_StateKindAssignment_0_2 extends AssignmentToken  {
+protected class State_StateKindAssignment_1_2 extends AssignmentToken  {
 	
-	public State_StateKindAssignment_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_StateKindAssignment_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateAccess().getStateKindAssignment_0_2();
+		return grammarAccess.getStateAccess().getStateKindAssignment_1_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+			case 0: return new State_StateAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
 		}	
 	}
 
@@ -194,9 +224,9 @@ protected class State_StateKindAssignment_0_2 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("stateKind",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("stateKind");
-		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_2_0(), value, null)) { 
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_2_0(), value, null)) { 
 			type = AssignmentType.ENUM_RULE_CALL;
-			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_2_0();
+			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_2_0();
 			return obj;
 		}
 		return null;
@@ -205,21 +235,21 @@ protected class State_StateKindAssignment_0_2 extends AssignmentToken  {
 }
 
 // isInitial?="init" stateKind=StateType
-protected class State_Group_0_3 extends GroupToken {
+protected class State_Group_1_3 extends GroupToken {
 	
-	public State_Group_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_Group_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getStateAccess().getGroup_0_3();
+		return grammarAccess.getStateAccess().getGroup_1_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new State_StateKindAssignment_0_3_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new State_StateKindAssignment_1_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -227,21 +257,22 @@ protected class State_Group_0_3 extends GroupToken {
 }
 
 // isInitial?="init"
-protected class State_IsInitialAssignment_0_3_0 extends AssignmentToken  {
+protected class State_IsInitialAssignment_1_3_0 extends AssignmentToken  {
 	
-	public State_IsInitialAssignment_0_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_IsInitialAssignment_1_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateAccess().getIsInitialAssignment_0_3_0();
+		return grammarAccess.getStateAccess().getIsInitialAssignment_1_3_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+			case 0: return new State_StateAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
 		}	
 	}
 
@@ -251,7 +282,7 @@ protected class State_IsInitialAssignment_0_3_0 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("isInitial");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getStateAccess().getIsInitialInitKeyword_0_3_0_0();
+			element = grammarAccess.getStateAccess().getIsInitialInitKeyword_1_3_0_0();
 			return obj;
 		}
 		return null;
@@ -260,21 +291,21 @@ protected class State_IsInitialAssignment_0_3_0 extends AssignmentToken  {
 }
 
 // stateKind=StateType
-protected class State_StateKindAssignment_0_3_1 extends AssignmentToken  {
+protected class State_StateKindAssignment_1_3_1 extends AssignmentToken  {
 	
-	public State_StateKindAssignment_0_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_StateKindAssignment_1_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateAccess().getStateKindAssignment_0_3_1();
+		return grammarAccess.getStateAccess().getStateKindAssignment_1_3_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new State_IsInitialAssignment_0_3_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new State_IsInitialAssignment_1_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -283,9 +314,9 @@ protected class State_StateKindAssignment_0_3_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("stateKind",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("stateKind");
-		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_3_1_0(), value, null)) { 
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_3_1_0(), value, null)) { 
 			type = AssignmentType.ENUM_RULE_CALL;
-			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_3_1_0();
+			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_3_1_0();
 			return obj;
 		}
 		return null;
@@ -295,21 +326,21 @@ protected class State_StateKindAssignment_0_3_1 extends AssignmentToken  {
 
 
 // isInitial?="init" stateKind=StateType isFinal?="final"
-protected class State_Group_0_4 extends GroupToken {
+protected class State_Group_1_4 extends GroupToken {
 	
-	public State_Group_0_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_Group_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getStateAccess().getGroup_0_4();
+		return grammarAccess.getStateAccess().getGroup_1_4();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new State_IsFinalAssignment_0_4_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new State_IsFinalAssignment_1_4_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -317,21 +348,22 @@ protected class State_Group_0_4 extends GroupToken {
 }
 
 // isInitial?="init"
-protected class State_IsInitialAssignment_0_4_0 extends AssignmentToken  {
+protected class State_IsInitialAssignment_1_4_0 extends AssignmentToken  {
 	
-	public State_IsInitialAssignment_0_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_IsInitialAssignment_1_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateAccess().getIsInitialAssignment_0_4_0();
+		return grammarAccess.getStateAccess().getIsInitialAssignment_1_4_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+			case 0: return new State_StateAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
 		}	
 	}
 
@@ -341,7 +373,7 @@ protected class State_IsInitialAssignment_0_4_0 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("isInitial");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getStateAccess().getIsInitialInitKeyword_0_4_0_0();
+			element = grammarAccess.getStateAccess().getIsInitialInitKeyword_1_4_0_0();
 			return obj;
 		}
 		return null;
@@ -350,21 +382,21 @@ protected class State_IsInitialAssignment_0_4_0 extends AssignmentToken  {
 }
 
 // stateKind=StateType
-protected class State_StateKindAssignment_0_4_1 extends AssignmentToken  {
+protected class State_StateKindAssignment_1_4_1 extends AssignmentToken  {
 	
-	public State_StateKindAssignment_0_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_StateKindAssignment_1_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateAccess().getStateKindAssignment_0_4_1();
+		return grammarAccess.getStateAccess().getStateKindAssignment_1_4_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new State_IsInitialAssignment_0_4_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new State_IsInitialAssignment_1_4_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -373,9 +405,9 @@ protected class State_StateKindAssignment_0_4_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("stateKind",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("stateKind");
-		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_4_1_0(), value, null)) { 
+		if(enumLitSerializer.isValid(obj.getEObject(), grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_4_1_0(), value, null)) { 
 			type = AssignmentType.ENUM_RULE_CALL;
-			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_4_1_0();
+			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_4_1_0();
 			return obj;
 		}
 		return null;
@@ -384,21 +416,21 @@ protected class State_StateKindAssignment_0_4_1 extends AssignmentToken  {
 }
 
 // isFinal?="final"
-protected class State_IsFinalAssignment_0_4_2 extends AssignmentToken  {
+protected class State_IsFinalAssignment_1_4_2 extends AssignmentToken  {
 	
-	public State_IsFinalAssignment_0_4_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_IsFinalAssignment_1_4_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateAccess().getIsFinalAssignment_0_4_2();
+		return grammarAccess.getStateAccess().getIsFinalAssignment_1_4_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new State_StateKindAssignment_0_4_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new State_StateKindAssignment_1_4_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -409,7 +441,7 @@ protected class State_IsFinalAssignment_0_4_2 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("isFinal");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_4_2_0();
+			element = grammarAccess.getStateAccess().getIsFinalFinalKeyword_1_4_2_0();
 			return obj;
 		}
 		return null;
@@ -420,22 +452,23 @@ protected class State_IsFinalAssignment_0_4_2 extends AssignmentToken  {
 
 
 // stateName=ID?
-protected class State_StateNameAssignment_2 extends AssignmentToken  {
+protected class State_StateNameAssignment_3 extends AssignmentToken  {
 	
-	public State_StateNameAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_StateNameAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateAccess().getStateNameAssignment_2();
+		return grammarAccess.getStateAccess().getStateNameAssignment_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new State_Alternatives_0(lastRuleCallOrigin, this, 0, inst);
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
+			case 0: return new State_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new State_StateAction_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
 		}	
 	}
 
@@ -443,9 +476,9 @@ protected class State_StateNameAssignment_2 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("stateName",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("stateName");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_2_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_3_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_2_0();
+			element = grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_3_0();
 			return obj;
 		}
 		return null;
@@ -454,23 +487,24 @@ protected class State_StateNameAssignment_2 extends AssignmentToken  {
 }
 
 // label=STRING?
-protected class State_LabelAssignment_3 extends AssignmentToken  {
+protected class State_LabelAssignment_4 extends AssignmentToken  {
 	
-	public State_LabelAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public State_LabelAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStateAccess().getLabelAssignment_3();
+		return grammarAccess.getStateAccess().getLabelAssignment_4();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new State_StateNameAssignment_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new State_Alternatives_0(lastRuleCallOrigin, this, 1, inst);
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 2, inst);
+			case 0: return new State_StateNameAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new State_Alternatives_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new State_StateAction_0(lastRuleCallOrigin, this, 2, inst);
+			default: return null;
 		}	
 	}
 
@@ -478,9 +512,9 @@ protected class State_LabelAssignment_3 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("label",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("label");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_3_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_4_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_3_0();
+			element = grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_4_0();
 			return obj;
 		}
 		return null;

@@ -37,21 +37,21 @@ public class Bug286935TestLanguageParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getStateAccess().getAlternatives_0(), "rule__State__Alternatives_0");
+					put(grammarAccess.getStateAccess().getAlternatives_1(), "rule__State__Alternatives_1");
 					put(grammarAccess.getStateTypeAccess().getAlternatives(), "rule__StateType__Alternatives");
 					put(grammarAccess.getStateAccess().getGroup(), "rule__State__Group__0");
-					put(grammarAccess.getStateAccess().getGroup_0_3(), "rule__State__Group_0_3__0");
-					put(grammarAccess.getStateAccess().getGroup_0_4(), "rule__State__Group_0_4__0");
-					put(grammarAccess.getStateAccess().getIsInitialAssignment_0_0(), "rule__State__IsInitialAssignment_0_0");
-					put(grammarAccess.getStateAccess().getIsFinalAssignment_0_1(), "rule__State__IsFinalAssignment_0_1");
-					put(grammarAccess.getStateAccess().getStateKindAssignment_0_2(), "rule__State__StateKindAssignment_0_2");
-					put(grammarAccess.getStateAccess().getIsInitialAssignment_0_3_0(), "rule__State__IsInitialAssignment_0_3_0");
-					put(grammarAccess.getStateAccess().getStateKindAssignment_0_3_1(), "rule__State__StateKindAssignment_0_3_1");
-					put(grammarAccess.getStateAccess().getIsInitialAssignment_0_4_0(), "rule__State__IsInitialAssignment_0_4_0");
-					put(grammarAccess.getStateAccess().getStateKindAssignment_0_4_1(), "rule__State__StateKindAssignment_0_4_1");
-					put(grammarAccess.getStateAccess().getIsFinalAssignment_0_4_2(), "rule__State__IsFinalAssignment_0_4_2");
-					put(grammarAccess.getStateAccess().getStateNameAssignment_2(), "rule__State__StateNameAssignment_2");
-					put(grammarAccess.getStateAccess().getLabelAssignment_3(), "rule__State__LabelAssignment_3");
+					put(grammarAccess.getStateAccess().getGroup_1_3(), "rule__State__Group_1_3__0");
+					put(grammarAccess.getStateAccess().getGroup_1_4(), "rule__State__Group_1_4__0");
+					put(grammarAccess.getStateAccess().getIsInitialAssignment_1_0(), "rule__State__IsInitialAssignment_1_0");
+					put(grammarAccess.getStateAccess().getIsFinalAssignment_1_1(), "rule__State__IsFinalAssignment_1_1");
+					put(grammarAccess.getStateAccess().getStateKindAssignment_1_2(), "rule__State__StateKindAssignment_1_2");
+					put(grammarAccess.getStateAccess().getIsInitialAssignment_1_3_0(), "rule__State__IsInitialAssignment_1_3_0");
+					put(grammarAccess.getStateAccess().getStateKindAssignment_1_3_1(), "rule__State__StateKindAssignment_1_3_1");
+					put(grammarAccess.getStateAccess().getIsInitialAssignment_1_4_0(), "rule__State__IsInitialAssignment_1_4_0");
+					put(grammarAccess.getStateAccess().getStateKindAssignment_1_4_1(), "rule__State__StateKindAssignment_1_4_1");
+					put(grammarAccess.getStateAccess().getIsFinalAssignment_1_4_2(), "rule__State__IsFinalAssignment_1_4_2");
+					put(grammarAccess.getStateAccess().getStateNameAssignment_3(), "rule__State__StateNameAssignment_3");
+					put(grammarAccess.getStateAccess().getLabelAssignment_4(), "rule__State__LabelAssignment_4");
 				}
 			};
 		}

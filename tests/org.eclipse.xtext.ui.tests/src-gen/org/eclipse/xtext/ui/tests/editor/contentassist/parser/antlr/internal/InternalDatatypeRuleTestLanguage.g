@@ -121,16 +121,27 @@ ruleTypes returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'Types' 
+((
+    { 
+        temp=factory.create(grammarAccess.getTypesAccess().getTypesAction_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getTypesAccess().getTypesAction_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'Types' 
     {
-        createLeafNode(grammarAccess.getTypesAccess().getTypesKeyword_0(), null); 
+        createLeafNode(grammarAccess.getTypesAccess().getTypesKeyword_1(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getTypesAccess().getTypesTypeParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getTypesAccess().getTypesTypeParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_types_1_0=ruleType		{
+		lv_types_2_0=ruleType		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getTypesRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -139,7 +150,7 @@ ruleTypes returns [EObject current=null]
 	       		add(
 	       			$current, 
 	       			"types",
-	        		lv_types_1_0, 
+	        		lv_types_2_0, 
 	        		"Type", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {

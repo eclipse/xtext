@@ -1564,7 +1564,7 @@ public class EcoreDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cDollarSignKeyword_1_0_1 = (Keyword)cAlternatives_1_0.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//QID returns ecore::EString:
+		//QID:
 		//	ID (("." | "$") ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -1596,7 +1596,7 @@ public class EcoreDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSTRINGTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cQIDParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//STRING_OR_QID returns ecore::EString:
+		//STRING_OR_QID:
 		//	STRING | QID;
 		public ParserRule getRule() { return rule; }
 
@@ -1888,7 +1888,7 @@ public class EcoreDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getMapEntryAccess().getRule();
 	}
 
-	//QID returns ecore::EString:
+	//QID:
 	//	ID (("." | "$") ID)*;
 	public QIDElements getQIDAccess() {
 		return (pQID != null) ? pQID : (pQID = new QIDElements());
@@ -1898,7 +1898,7 @@ public class EcoreDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getQIDAccess().getRule();
 	}
 
-	//STRING_OR_QID returns ecore::EString:
+	//STRING_OR_QID:
 	//	STRING | QID;
 	public STRING_OR_QIDElements getSTRING_OR_QIDAccess() {
 		return (pSTRING_OR_QID != null) ? pSTRING_OR_QID : (pSTRING_OR_QID = new STRING_OR_QIDElements());

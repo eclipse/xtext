@@ -37,20 +37,21 @@ public class LookAheadContentAssistTestLanguageParser extends AbstractContentAss
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
-					put(grammarAccess.getModelAccess().getGroup_0(), "rule__Model__Group_0__0");
-					put(grammarAccess.getModelAccess().getGroup_1(), "rule__Model__Group_1__0");
-					put(grammarAccess.getModelAccess().getGroup_2(), "rule__Model__Group_2__0");
-					put(grammarAccess.getModelAccess().getGroup_3(), "rule__Model__Group_3__0");
+					put(grammarAccess.getModelAccess().getAlternatives_1(), "rule__Model__Alternatives_1");
+					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
+					put(grammarAccess.getModelAccess().getGroup_1_0(), "rule__Model__Group_1_0__0");
+					put(grammarAccess.getModelAccess().getGroup_1_1(), "rule__Model__Group_1_1__0");
+					put(grammarAccess.getModelAccess().getGroup_1_2(), "rule__Model__Group_1_2__0");
+					put(grammarAccess.getModelAccess().getGroup_1_3(), "rule__Model__Group_1_3__0");
 					put(grammarAccess.getPairAccess().getGroup(), "rule__Pair__Group__0");
-					put(grammarAccess.getModelAccess().getAttributeAssignment_0_1(), "rule__Model__AttributeAssignment_0_1");
-					put(grammarAccess.getModelAccess().getAttributeAssignment_0_2(), "rule__Model__AttributeAssignment_0_2");
-					put(grammarAccess.getModelAccess().getAttributeAssignment_1_1(), "rule__Model__AttributeAssignment_1_1");
-					put(grammarAccess.getModelAccess().getAttributeAssignment_1_2(), "rule__Model__AttributeAssignment_1_2");
-					put(grammarAccess.getModelAccess().getAttributeAssignment_2_1(), "rule__Model__AttributeAssignment_2_1");
-					put(grammarAccess.getModelAccess().getAttributeAssignment_2_2(), "rule__Model__AttributeAssignment_2_2");
-					put(grammarAccess.getModelAccess().getAttributeAssignment_3_1(), "rule__Model__AttributeAssignment_3_1");
-					put(grammarAccess.getModelAccess().getAttributeAssignment_3_2(), "rule__Model__AttributeAssignment_3_2");
+					put(grammarAccess.getModelAccess().getAttributeAssignment_1_0_1(), "rule__Model__AttributeAssignment_1_0_1");
+					put(grammarAccess.getModelAccess().getAttributeAssignment_1_0_2(), "rule__Model__AttributeAssignment_1_0_2");
+					put(grammarAccess.getModelAccess().getAttributeAssignment_1_1_1(), "rule__Model__AttributeAssignment_1_1_1");
+					put(grammarAccess.getModelAccess().getAttributeAssignment_1_1_2(), "rule__Model__AttributeAssignment_1_1_2");
+					put(grammarAccess.getModelAccess().getAttributeAssignment_1_2_1(), "rule__Model__AttributeAssignment_1_2_1");
+					put(grammarAccess.getModelAccess().getAttributeAssignment_1_2_2(), "rule__Model__AttributeAssignment_1_2_2");
+					put(grammarAccess.getModelAccess().getAttributeAssignment_1_3_1(), "rule__Model__AttributeAssignment_1_3_1");
+					put(grammarAccess.getModelAccess().getAttributeAssignment_1_3_2(), "rule__Model__AttributeAssignment_1_3_2");
 					put(grammarAccess.getAttributeAccess().getValueAssignment(), "rule__Attribute__ValueAssignment");
 					put(grammarAccess.getPairAccess().getNameAssignment_0(), "rule__Pair__NameAssignment_0");
 					put(grammarAccess.getPairAccess().getValueAssignment_2(), "rule__Pair__ValueAssignment_2");

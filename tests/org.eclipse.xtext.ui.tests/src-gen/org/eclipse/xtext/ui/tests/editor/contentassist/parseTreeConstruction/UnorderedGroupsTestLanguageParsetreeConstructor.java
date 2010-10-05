@@ -2509,13 +2509,13 @@ protected class LoopedAlternativeModel_RightCurlyBracketKeyword_4 extends Keywor
 /************ begin Rule Bug304681Model ****************
  *
  * Bug304681Model:
- * 	"{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? &
- * 	(flag?="flag" ";")? & features+=Bug304681Feature*) "}";
+ * 	{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid"
+ * 	uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}";
  *
  **/
 
-// "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? &
-// (flag?="flag" ";")? & features+=Bug304681Feature*) "}"
+// {Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING
+// ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}"
 protected class Bug304681Model_Group extends GroupToken {
 	
 	public Bug304681Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2530,30 +2530,30 @@ protected class Bug304681Model_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_RightCurlyBracketKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_RightCurlyBracketKeyword_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getBug304681ModelRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getBug304681ModelAccess().getBug304681ModelAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// "{"
-protected class Bug304681Model_LeftCurlyBracketKeyword_0 extends KeywordToken  {
-	
-	public Bug304681Model_LeftCurlyBracketKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+// {Bug304681Model}
+protected class Bug304681Model_Bug304681ModelAction_0 extends ActionToken  {
+
+	public Bug304681Model_Bug304681ModelAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getLeftCurlyBracketKeyword_0();
+	public Action getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getBug304681ModelAction_0();
 	}
 
     @Override
@@ -2563,30 +2563,57 @@ protected class Bug304681Model_LeftCurlyBracketKeyword_0 extends KeywordToken  {
 		}	
 	}
 
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
 }
 
-// ("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? & (flag?="flag"
-// ";")? & features+=Bug304681Feature*
-protected class Bug304681Model_UnorderedGroup_1 extends UnorderedGroupToken {
+// "{"
+protected class Bug304681Model_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 	
-	public Bug304681Model_UnorderedGroup_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_LeftCurlyBracketKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public UnorderedGroup getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getLeftCurlyBracketKeyword_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_FeaturesAssignment_1_4(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Bug304681Model_Group_1_3(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new Bug304681Model_Group_1_2(lastRuleCallOrigin, this, 2, inst);
-			case 3: return new Bug304681Model_Group_1_1(lastRuleCallOrigin, this, 3, inst);
-			case 4: return new Bug304681Model_Group_1_0(lastRuleCallOrigin, this, 4, inst);
-			case 5: return new Bug304681Model_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, this, 5, inst);
+			case 0: return new Bug304681Model_Bug304681ModelAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? & (flag?="flag"
+// ";")? & features+=Bug304681Feature*
+protected class Bug304681Model_UnorderedGroup_2 extends UnorderedGroupToken {
+	
+	public Bug304681Model_UnorderedGroup_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public UnorderedGroup getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_FeaturesAssignment_2_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Bug304681Model_Group_2_3(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Bug304681Model_Group_2_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Bug304681Model_Group_2_1(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Bug304681Model_Group_2_0(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Bug304681Model_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, this, 5, inst);
 			default: return null;
 		}	
 	}
@@ -2594,21 +2621,21 @@ protected class Bug304681Model_UnorderedGroup_1 extends UnorderedGroupToken {
 }
 
 // ("short" shortDescription=STRING ";")?
-protected class Bug304681Model_Group_1_0 extends GroupToken {
+protected class Bug304681Model_Group_2_0 extends GroupToken {
 	
-	public Bug304681Model_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_Group_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getGroup_1_0();
+		return grammarAccess.getBug304681ModelAccess().getGroup_2_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_SemicolonKeyword_1_0_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_SemicolonKeyword_2_0_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2616,21 +2643,21 @@ protected class Bug304681Model_Group_1_0 extends GroupToken {
 }
 
 // "short"
-protected class Bug304681Model_ShortKeyword_1_0_0 extends KeywordToken  {
+protected class Bug304681Model_ShortKeyword_2_0_0 extends KeywordToken  {
 	
-	public Bug304681Model_ShortKeyword_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_ShortKeyword_2_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getShortKeyword_1_0_0();
+		return grammarAccess.getBug304681ModelAccess().getShortKeyword_2_0_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2638,21 +2665,21 @@ protected class Bug304681Model_ShortKeyword_1_0_0 extends KeywordToken  {
 }
 
 // shortDescription=STRING
-protected class Bug304681Model_ShortDescriptionAssignment_1_0_1 extends AssignmentToken  {
+protected class Bug304681Model_ShortDescriptionAssignment_2_0_1 extends AssignmentToken  {
 	
-	public Bug304681Model_ShortDescriptionAssignment_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_ShortDescriptionAssignment_2_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getShortDescriptionAssignment_1_0_1();
+		return grammarAccess.getBug304681ModelAccess().getShortDescriptionAssignment_2_0_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_ShortKeyword_1_0_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_ShortKeyword_2_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2661,9 +2688,9 @@ protected class Bug304681Model_ShortDescriptionAssignment_1_0_1 extends Assignme
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("shortDescription",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("shortDescription");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_1_0_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_2_0_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_1_0_1_0();
+			element = grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_2_0_1_0();
 			return obj;
 		}
 		return null;
@@ -2672,21 +2699,21 @@ protected class Bug304681Model_ShortDescriptionAssignment_1_0_1 extends Assignme
 }
 
 // ";"
-protected class Bug304681Model_SemicolonKeyword_1_0_2 extends KeywordToken  {
+protected class Bug304681Model_SemicolonKeyword_2_0_2 extends KeywordToken  {
 	
-	public Bug304681Model_SemicolonKeyword_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_SemicolonKeyword_2_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_0_2();
+		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_0_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_ShortDescriptionAssignment_1_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_ShortDescriptionAssignment_2_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2695,21 +2722,21 @@ protected class Bug304681Model_SemicolonKeyword_1_0_2 extends KeywordToken  {
 
 
 // ("long" longDescription=STRING ";")?
-protected class Bug304681Model_Group_1_1 extends GroupToken {
+protected class Bug304681Model_Group_2_1 extends GroupToken {
 	
-	public Bug304681Model_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getGroup_1_1();
+		return grammarAccess.getBug304681ModelAccess().getGroup_2_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_SemicolonKeyword_1_1_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_SemicolonKeyword_2_1_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2717,22 +2744,22 @@ protected class Bug304681Model_Group_1_1 extends GroupToken {
 }
 
 // "long"
-protected class Bug304681Model_LongKeyword_1_1_0 extends KeywordToken  {
+protected class Bug304681Model_LongKeyword_2_1_0 extends KeywordToken  {
 	
-	public Bug304681Model_LongKeyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_LongKeyword_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getLongKeyword_1_1_0();
+		return grammarAccess.getBug304681ModelAccess().getLongKeyword_2_1_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_Group_1_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Bug304681Model_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new Bug304681Model_Group_2_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Bug304681Model_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -2740,21 +2767,21 @@ protected class Bug304681Model_LongKeyword_1_1_0 extends KeywordToken  {
 }
 
 // longDescription=STRING
-protected class Bug304681Model_LongDescriptionAssignment_1_1_1 extends AssignmentToken  {
+protected class Bug304681Model_LongDescriptionAssignment_2_1_1 extends AssignmentToken  {
 	
-	public Bug304681Model_LongDescriptionAssignment_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_LongDescriptionAssignment_2_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getLongDescriptionAssignment_1_1_1();
+		return grammarAccess.getBug304681ModelAccess().getLongDescriptionAssignment_2_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_LongKeyword_1_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_LongKeyword_2_1_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2763,9 +2790,9 @@ protected class Bug304681Model_LongDescriptionAssignment_1_1_1 extends Assignmen
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("longDescription",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("longDescription");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_1_1_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_2_1_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_1_1_1_0();
+			element = grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_2_1_1_0();
 			return obj;
 		}
 		return null;
@@ -2774,21 +2801,21 @@ protected class Bug304681Model_LongDescriptionAssignment_1_1_1 extends Assignmen
 }
 
 // ";"
-protected class Bug304681Model_SemicolonKeyword_1_1_2 extends KeywordToken  {
+protected class Bug304681Model_SemicolonKeyword_2_1_2 extends KeywordToken  {
 	
-	public Bug304681Model_SemicolonKeyword_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_SemicolonKeyword_2_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_1_2();
+		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_1_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_LongDescriptionAssignment_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_LongDescriptionAssignment_2_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2797,21 +2824,21 @@ protected class Bug304681Model_SemicolonKeyword_1_1_2 extends KeywordToken  {
 
 
 // ("uid" uid=STRING ";")?
-protected class Bug304681Model_Group_1_2 extends GroupToken {
+protected class Bug304681Model_Group_2_2 extends GroupToken {
 	
-	public Bug304681Model_Group_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_Group_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getGroup_1_2();
+		return grammarAccess.getBug304681ModelAccess().getGroup_2_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_SemicolonKeyword_1_2_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_SemicolonKeyword_2_2_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2819,23 +2846,23 @@ protected class Bug304681Model_Group_1_2 extends GroupToken {
 }
 
 // "uid"
-protected class Bug304681Model_UidKeyword_1_2_0 extends KeywordToken  {
+protected class Bug304681Model_UidKeyword_2_2_0 extends KeywordToken  {
 	
-	public Bug304681Model_UidKeyword_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_UidKeyword_2_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getUidKeyword_1_2_0();
+		return grammarAccess.getBug304681ModelAccess().getUidKeyword_2_2_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_Group_1_1(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Bug304681Model_Group_1_0(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new Bug304681Model_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, this, 2, inst);
+			case 0: return new Bug304681Model_Group_2_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Bug304681Model_Group_2_0(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Bug304681Model_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
@@ -2843,21 +2870,21 @@ protected class Bug304681Model_UidKeyword_1_2_0 extends KeywordToken  {
 }
 
 // uid=STRING
-protected class Bug304681Model_UidAssignment_1_2_1 extends AssignmentToken  {
+protected class Bug304681Model_UidAssignment_2_2_1 extends AssignmentToken  {
 	
-	public Bug304681Model_UidAssignment_1_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_UidAssignment_2_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getUidAssignment_1_2_1();
+		return grammarAccess.getBug304681ModelAccess().getUidAssignment_2_2_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_UidKeyword_1_2_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_UidKeyword_2_2_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2866,9 +2893,9 @@ protected class Bug304681Model_UidAssignment_1_2_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("uid",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("uid");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_1_2_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_2_2_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_1_2_1_0();
+			element = grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_2_2_1_0();
 			return obj;
 		}
 		return null;
@@ -2877,21 +2904,21 @@ protected class Bug304681Model_UidAssignment_1_2_1 extends AssignmentToken  {
 }
 
 // ";"
-protected class Bug304681Model_SemicolonKeyword_1_2_2 extends KeywordToken  {
+protected class Bug304681Model_SemicolonKeyword_2_2_2 extends KeywordToken  {
 	
-	public Bug304681Model_SemicolonKeyword_1_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_SemicolonKeyword_2_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_2_2();
+		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_2_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_UidAssignment_1_2_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_UidAssignment_2_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2900,21 +2927,21 @@ protected class Bug304681Model_SemicolonKeyword_1_2_2 extends KeywordToken  {
 
 
 // (flag?="flag" ";")?
-protected class Bug304681Model_Group_1_3 extends GroupToken {
+protected class Bug304681Model_Group_2_3 extends GroupToken {
 	
-	public Bug304681Model_Group_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_Group_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getGroup_1_3();
+		return grammarAccess.getBug304681ModelAccess().getGroup_2_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_SemicolonKeyword_1_3_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_SemicolonKeyword_2_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2922,24 +2949,24 @@ protected class Bug304681Model_Group_1_3 extends GroupToken {
 }
 
 // flag?="flag"
-protected class Bug304681Model_FlagAssignment_1_3_0 extends AssignmentToken  {
+protected class Bug304681Model_FlagAssignment_2_3_0 extends AssignmentToken  {
 	
-	public Bug304681Model_FlagAssignment_1_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_FlagAssignment_2_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getFlagAssignment_1_3_0();
+		return grammarAccess.getBug304681ModelAccess().getFlagAssignment_2_3_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_Group_1_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Bug304681Model_Group_1_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new Bug304681Model_Group_1_0(lastRuleCallOrigin, this, 2, inst);
-			case 3: return new Bug304681Model_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, this, 3, inst);
+			case 0: return new Bug304681Model_Group_2_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Bug304681Model_Group_2_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Bug304681Model_Group_2_0(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Bug304681Model_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
@@ -2950,7 +2977,7 @@ protected class Bug304681Model_FlagAssignment_1_3_0 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("flag");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KEYWORD;
-			element = grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_1_3_0_0();
+			element = grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_2_3_0_0();
 			return obj;
 		}
 		return null;
@@ -2959,21 +2986,21 @@ protected class Bug304681Model_FlagAssignment_1_3_0 extends AssignmentToken  {
 }
 
 // ";"
-protected class Bug304681Model_SemicolonKeyword_1_3_1 extends KeywordToken  {
+protected class Bug304681Model_SemicolonKeyword_2_3_1 extends KeywordToken  {
 	
-	public Bug304681Model_SemicolonKeyword_1_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_SemicolonKeyword_2_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_3_1();
+		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_3_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_FlagAssignment_1_3_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_FlagAssignment_2_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2982,15 +3009,15 @@ protected class Bug304681Model_SemicolonKeyword_1_3_1 extends KeywordToken  {
 
 
 // features+=Bug304681Feature*
-protected class Bug304681Model_FeaturesAssignment_1_4 extends AssignmentToken  {
+protected class Bug304681Model_FeaturesAssignment_2_4 extends AssignmentToken  {
 	
-	public Bug304681Model_FeaturesAssignment_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_FeaturesAssignment_2_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_1_4();
+		return grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_2_4();
 	}
 
     @Override
@@ -3009,7 +3036,7 @@ protected class Bug304681Model_FeaturesAssignment_1_4 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getBug304681FeatureRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getBug304681ModelAccess().getFeaturesBug304681FeatureParserRuleCall_1_4_0(); 
+				element = grammarAccess.getBug304681ModelAccess().getFeaturesBug304681FeatureParserRuleCall_2_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3021,12 +3048,12 @@ protected class Bug304681Model_FeaturesAssignment_1_4 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Bug304681Model_FeaturesAssignment_1_4(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new Bug304681Model_Group_1_3(lastRuleCallOrigin, next, actIndex, consumed);
-			case 2: return new Bug304681Model_Group_1_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 3: return new Bug304681Model_Group_1_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 4: return new Bug304681Model_Group_1_0(lastRuleCallOrigin, next, actIndex, consumed);
-			case 5: return new Bug304681Model_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new Bug304681Model_FeaturesAssignment_2_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Bug304681Model_Group_2_3(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new Bug304681Model_Group_2_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 3: return new Bug304681Model_Group_2_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 4: return new Bug304681Model_Group_2_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 5: return new Bug304681Model_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3034,21 +3061,21 @@ protected class Bug304681Model_FeaturesAssignment_1_4 extends AssignmentToken  {
 
 
 // "}"
-protected class Bug304681Model_RightCurlyBracketKeyword_2 extends KeywordToken  {
+protected class Bug304681Model_RightCurlyBracketKeyword_3 extends KeywordToken  {
 	
-	public Bug304681Model_RightCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Bug304681Model_RightCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBug304681ModelAccess().getRightCurlyBracketKeyword_2();
+		return grammarAccess.getBug304681ModelAccess().getRightCurlyBracketKeyword_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Bug304681Model_UnorderedGroup_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Bug304681Model_UnorderedGroup_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

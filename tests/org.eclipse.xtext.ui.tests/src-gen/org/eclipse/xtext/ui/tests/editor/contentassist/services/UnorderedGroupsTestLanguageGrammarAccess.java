@@ -617,112 +617,116 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	public class Bug304681ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bug304681Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final UnorderedGroup cUnorderedGroup_1 = (UnorderedGroup)cGroup.eContents().get(1);
-		private final Group cGroup_1_0 = (Group)cUnorderedGroup_1.eContents().get(0);
-		private final Keyword cShortKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
-		private final Assignment cShortDescriptionAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final RuleCall cShortDescriptionSTRINGTerminalRuleCall_1_0_1_0 = (RuleCall)cShortDescriptionAssignment_1_0_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_1_0_2 = (Keyword)cGroup_1_0.eContents().get(2);
-		private final Group cGroup_1_1 = (Group)cUnorderedGroup_1.eContents().get(1);
-		private final Keyword cLongKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
-		private final Assignment cLongDescriptionAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cLongDescriptionSTRINGTerminalRuleCall_1_1_1_0 = (RuleCall)cLongDescriptionAssignment_1_1_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_1_1_2 = (Keyword)cGroup_1_1.eContents().get(2);
-		private final Group cGroup_1_2 = (Group)cUnorderedGroup_1.eContents().get(2);
-		private final Keyword cUidKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
-		private final Assignment cUidAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
-		private final RuleCall cUidSTRINGTerminalRuleCall_1_2_1_0 = (RuleCall)cUidAssignment_1_2_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_1_2_2 = (Keyword)cGroup_1_2.eContents().get(2);
-		private final Group cGroup_1_3 = (Group)cUnorderedGroup_1.eContents().get(3);
-		private final Assignment cFlagAssignment_1_3_0 = (Assignment)cGroup_1_3.eContents().get(0);
-		private final Keyword cFlagFlagKeyword_1_3_0_0 = (Keyword)cFlagAssignment_1_3_0.eContents().get(0);
-		private final Keyword cSemicolonKeyword_1_3_1 = (Keyword)cGroup_1_3.eContents().get(1);
-		private final Assignment cFeaturesAssignment_1_4 = (Assignment)cUnorderedGroup_1.eContents().get(4);
-		private final RuleCall cFeaturesBug304681FeatureParserRuleCall_1_4_0 = (RuleCall)cFeaturesAssignment_1_4.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Action cBug304681ModelAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final UnorderedGroup cUnorderedGroup_2 = (UnorderedGroup)cGroup.eContents().get(2);
+		private final Group cGroup_2_0 = (Group)cUnorderedGroup_2.eContents().get(0);
+		private final Keyword cShortKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
+		private final Assignment cShortDescriptionAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
+		private final RuleCall cShortDescriptionSTRINGTerminalRuleCall_2_0_1_0 = (RuleCall)cShortDescriptionAssignment_2_0_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2_0_2 = (Keyword)cGroup_2_0.eContents().get(2);
+		private final Group cGroup_2_1 = (Group)cUnorderedGroup_2.eContents().get(1);
+		private final Keyword cLongKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cLongDescriptionAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cLongDescriptionSTRINGTerminalRuleCall_2_1_1_0 = (RuleCall)cLongDescriptionAssignment_2_1_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2_1_2 = (Keyword)cGroup_2_1.eContents().get(2);
+		private final Group cGroup_2_2 = (Group)cUnorderedGroup_2.eContents().get(2);
+		private final Keyword cUidKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
+		private final Assignment cUidAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final RuleCall cUidSTRINGTerminalRuleCall_2_2_1_0 = (RuleCall)cUidAssignment_2_2_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2_2_2 = (Keyword)cGroup_2_2.eContents().get(2);
+		private final Group cGroup_2_3 = (Group)cUnorderedGroup_2.eContents().get(3);
+		private final Assignment cFlagAssignment_2_3_0 = (Assignment)cGroup_2_3.eContents().get(0);
+		private final Keyword cFlagFlagKeyword_2_3_0_0 = (Keyword)cFlagAssignment_2_3_0.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2_3_1 = (Keyword)cGroup_2_3.eContents().get(1);
+		private final Assignment cFeaturesAssignment_2_4 = (Assignment)cUnorderedGroup_2.eContents().get(4);
+		private final RuleCall cFeaturesBug304681FeatureParserRuleCall_2_4_0 = (RuleCall)cFeaturesAssignment_2_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Bug304681Model:
-		//	"{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? &
-		//	(flag?="flag" ";")? & features+=Bug304681Feature*) "}";
+		//	{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid"
+		//	uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}";
 		public ParserRule getRule() { return rule; }
 
-		//"{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? &
-		//(flag?="flag" ";")? & features+=Bug304681Feature*) "}"
+		//{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING
+		//";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}"
 		public Group getGroup() { return cGroup; }
 
+		//{Bug304681Model}
+		public Action getBug304681ModelAction_0() { return cBug304681ModelAction_0; }
+
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
 		//("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? & (flag?="flag"
 		//";")? & features+=Bug304681Feature*
-		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
+		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
 		//("short" shortDescription=STRING ";")?
-		public Group getGroup_1_0() { return cGroup_1_0; }
+		public Group getGroup_2_0() { return cGroup_2_0; }
 
 		//"short"
-		public Keyword getShortKeyword_1_0_0() { return cShortKeyword_1_0_0; }
+		public Keyword getShortKeyword_2_0_0() { return cShortKeyword_2_0_0; }
 
 		//shortDescription=STRING
-		public Assignment getShortDescriptionAssignment_1_0_1() { return cShortDescriptionAssignment_1_0_1; }
+		public Assignment getShortDescriptionAssignment_2_0_1() { return cShortDescriptionAssignment_2_0_1; }
 
 		//STRING
-		public RuleCall getShortDescriptionSTRINGTerminalRuleCall_1_0_1_0() { return cShortDescriptionSTRINGTerminalRuleCall_1_0_1_0; }
+		public RuleCall getShortDescriptionSTRINGTerminalRuleCall_2_0_1_0() { return cShortDescriptionSTRINGTerminalRuleCall_2_0_1_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_1_0_2() { return cSemicolonKeyword_1_0_2; }
+		public Keyword getSemicolonKeyword_2_0_2() { return cSemicolonKeyword_2_0_2; }
 
 		//("long" longDescription=STRING ";")?
-		public Group getGroup_1_1() { return cGroup_1_1; }
+		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//"long"
-		public Keyword getLongKeyword_1_1_0() { return cLongKeyword_1_1_0; }
+		public Keyword getLongKeyword_2_1_0() { return cLongKeyword_2_1_0; }
 
 		//longDescription=STRING
-		public Assignment getLongDescriptionAssignment_1_1_1() { return cLongDescriptionAssignment_1_1_1; }
+		public Assignment getLongDescriptionAssignment_2_1_1() { return cLongDescriptionAssignment_2_1_1; }
 
 		//STRING
-		public RuleCall getLongDescriptionSTRINGTerminalRuleCall_1_1_1_0() { return cLongDescriptionSTRINGTerminalRuleCall_1_1_1_0; }
+		public RuleCall getLongDescriptionSTRINGTerminalRuleCall_2_1_1_0() { return cLongDescriptionSTRINGTerminalRuleCall_2_1_1_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_1_1_2() { return cSemicolonKeyword_1_1_2; }
+		public Keyword getSemicolonKeyword_2_1_2() { return cSemicolonKeyword_2_1_2; }
 
 		//("uid" uid=STRING ";")?
-		public Group getGroup_1_2() { return cGroup_1_2; }
+		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//"uid"
-		public Keyword getUidKeyword_1_2_0() { return cUidKeyword_1_2_0; }
+		public Keyword getUidKeyword_2_2_0() { return cUidKeyword_2_2_0; }
 
 		//uid=STRING
-		public Assignment getUidAssignment_1_2_1() { return cUidAssignment_1_2_1; }
+		public Assignment getUidAssignment_2_2_1() { return cUidAssignment_2_2_1; }
 
 		//STRING
-		public RuleCall getUidSTRINGTerminalRuleCall_1_2_1_0() { return cUidSTRINGTerminalRuleCall_1_2_1_0; }
+		public RuleCall getUidSTRINGTerminalRuleCall_2_2_1_0() { return cUidSTRINGTerminalRuleCall_2_2_1_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_1_2_2() { return cSemicolonKeyword_1_2_2; }
+		public Keyword getSemicolonKeyword_2_2_2() { return cSemicolonKeyword_2_2_2; }
 
 		//(flag?="flag" ";")?
-		public Group getGroup_1_3() { return cGroup_1_3; }
+		public Group getGroup_2_3() { return cGroup_2_3; }
 
 		//flag?="flag"
-		public Assignment getFlagAssignment_1_3_0() { return cFlagAssignment_1_3_0; }
+		public Assignment getFlagAssignment_2_3_0() { return cFlagAssignment_2_3_0; }
 
 		//"flag"
-		public Keyword getFlagFlagKeyword_1_3_0_0() { return cFlagFlagKeyword_1_3_0_0; }
+		public Keyword getFlagFlagKeyword_2_3_0_0() { return cFlagFlagKeyword_2_3_0_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_1_3_1() { return cSemicolonKeyword_1_3_1; }
+		public Keyword getSemicolonKeyword_2_3_1() { return cSemicolonKeyword_2_3_1; }
 
 		//features+=Bug304681Feature*
-		public Assignment getFeaturesAssignment_1_4() { return cFeaturesAssignment_1_4; }
+		public Assignment getFeaturesAssignment_2_4() { return cFeaturesAssignment_2_4; }
 
 		//Bug304681Feature
-		public RuleCall getFeaturesBug304681FeatureParserRuleCall_1_4_0() { return cFeaturesBug304681FeatureParserRuleCall_1_4_0; }
+		public RuleCall getFeaturesBug304681FeatureParserRuleCall_2_4_0() { return cFeaturesBug304681FeatureParserRuleCall_2_4_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
 	public class Bug304681FeatureElements extends AbstractParserRuleElementFinder {
@@ -901,8 +905,8 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//Bug304681Model:
-	//	"{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? &
-	//	(flag?="flag" ";")? & features+=Bug304681Feature*) "}";
+	//	{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid"
+	//	uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}";
 	public Bug304681ModelElements getBug304681ModelAccess() {
 		return (pBug304681Model != null) ? pBug304681Model : (pBug304681Model = new Bug304681ModelElements());
 	}

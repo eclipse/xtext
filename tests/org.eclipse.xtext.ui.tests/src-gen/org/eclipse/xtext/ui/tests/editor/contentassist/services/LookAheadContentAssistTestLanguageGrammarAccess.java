@@ -19,128 +19,137 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cAttributeAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cAttributeAttributeParserRuleCall_0_1_0 = (RuleCall)cAttributeAssignment_0_1.eContents().get(0);
-		private final Assignment cAttributeAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
-		private final RuleCall cAttributePairParserRuleCall_0_2_0 = (RuleCall)cAttributeAssignment_0_2.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_0_3 = (Keyword)cGroup_0.eContents().get(3);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Keyword cLeftSquareBracketKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cAttributeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cAttributeAttributeParserRuleCall_1_1_0 = (RuleCall)cAttributeAssignment_1_1.eContents().get(0);
-		private final Assignment cAttributeAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cAttributePairParserRuleCall_1_2_0 = (RuleCall)cAttributeAssignment_1_2.eContents().get(0);
-		private final Keyword cRightSquareBracketKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
-		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
-		private final Keyword cLessThanSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cAttributeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cAttributeAttributeParserRuleCall_2_1_0 = (RuleCall)cAttributeAssignment_2_1.eContents().get(0);
-		private final Assignment cAttributeAssignment_2_2 = (Assignment)cGroup_2.eContents().get(2);
-		private final RuleCall cAttributePairParserRuleCall_2_2_0 = (RuleCall)cAttributeAssignment_2_2.eContents().get(0);
-		private final Keyword cGreaterThanSignKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
-		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
-		private final Keyword cLeftCurlyBracketKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cAttributeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cAttributeAttributeParserRuleCall_3_1_0 = (RuleCall)cAttributeAssignment_3_1.eContents().get(0);
-		private final Assignment cAttributeAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
-		private final RuleCall cAttributePairParserRuleCall_3_2_0 = (RuleCall)cAttributeAssignment_3_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cModelAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
+		private final Assignment cAttributeAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cAttributeAttributeParserRuleCall_1_0_1_0 = (RuleCall)cAttributeAssignment_1_0_1.eContents().get(0);
+		private final Assignment cAttributeAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
+		private final RuleCall cAttributePairParserRuleCall_1_0_2_0 = (RuleCall)cAttributeAssignment_1_0_2.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_0_3 = (Keyword)cGroup_1_0.eContents().get(3);
+		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
+		private final Keyword cLeftSquareBracketKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cAttributeAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cAttributeAttributeParserRuleCall_1_1_1_0 = (RuleCall)cAttributeAssignment_1_1_1.eContents().get(0);
+		private final Assignment cAttributeAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
+		private final RuleCall cAttributePairParserRuleCall_1_1_2_0 = (RuleCall)cAttributeAssignment_1_1_2.eContents().get(0);
+		private final Keyword cRightSquareBracketKeyword_1_1_3 = (Keyword)cGroup_1_1.eContents().get(3);
+		private final Group cGroup_1_2 = (Group)cAlternatives_1.eContents().get(2);
+		private final Keyword cLessThanSignKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
+		private final Assignment cAttributeAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
+		private final RuleCall cAttributeAttributeParserRuleCall_1_2_1_0 = (RuleCall)cAttributeAssignment_1_2_1.eContents().get(0);
+		private final Assignment cAttributeAssignment_1_2_2 = (Assignment)cGroup_1_2.eContents().get(2);
+		private final RuleCall cAttributePairParserRuleCall_1_2_2_0 = (RuleCall)cAttributeAssignment_1_2_2.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_1_2_3 = (Keyword)cGroup_1_2.eContents().get(3);
+		private final Group cGroup_1_3 = (Group)cAlternatives_1.eContents().get(3);
+		private final Keyword cLeftCurlyBracketKeyword_1_3_0 = (Keyword)cGroup_1_3.eContents().get(0);
+		private final Assignment cAttributeAssignment_1_3_1 = (Assignment)cGroup_1_3.eContents().get(1);
+		private final RuleCall cAttributeAttributeParserRuleCall_1_3_1_0 = (RuleCall)cAttributeAssignment_1_3_1.eContents().get(0);
+		private final Assignment cAttributeAssignment_1_3_2 = (Assignment)cGroup_1_3.eContents().get(2);
+		private final RuleCall cAttributePairParserRuleCall_1_3_2_0 = (RuleCall)cAttributeAssignment_1_3_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_1_3_3 = (Keyword)cGroup_1_3.eContents().get(3);
 		
 		//Model:
-		//	"(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
-		//	attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}";
+		//	{Model} ("(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
+		//	attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}");
 		public ParserRule getRule() { return rule; }
+
+		//{Model} ("(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
+		//attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}")
+		public Group getGroup() { return cGroup; }
+
+		//{Model}
+		public Action getModelAction_0() { return cModelAction_0; }
 
 		//"(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
 		//attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}"
-		public Alternatives getAlternatives() { return cAlternatives; }
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"(" attribute+=Attribute* attribute+=Pair* ")"
-		public Group getGroup_0() { return cGroup_0; }
+		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_0_0() { return cLeftParenthesisKeyword_0_0; }
+		public Keyword getLeftParenthesisKeyword_1_0_0() { return cLeftParenthesisKeyword_1_0_0; }
 
 		//attribute+=Attribute*
-		public Assignment getAttributeAssignment_0_1() { return cAttributeAssignment_0_1; }
+		public Assignment getAttributeAssignment_1_0_1() { return cAttributeAssignment_1_0_1; }
 
 		//Attribute
-		public RuleCall getAttributeAttributeParserRuleCall_0_1_0() { return cAttributeAttributeParserRuleCall_0_1_0; }
+		public RuleCall getAttributeAttributeParserRuleCall_1_0_1_0() { return cAttributeAttributeParserRuleCall_1_0_1_0; }
 
 		//attribute+=Pair*
-		public Assignment getAttributeAssignment_0_2() { return cAttributeAssignment_0_2; }
+		public Assignment getAttributeAssignment_1_0_2() { return cAttributeAssignment_1_0_2; }
 
 		//Pair
-		public RuleCall getAttributePairParserRuleCall_0_2_0() { return cAttributePairParserRuleCall_0_2_0; }
+		public RuleCall getAttributePairParserRuleCall_1_0_2_0() { return cAttributePairParserRuleCall_1_0_2_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_0_3() { return cRightParenthesisKeyword_0_3; }
+		public Keyword getRightParenthesisKeyword_1_0_3() { return cRightParenthesisKeyword_1_0_3; }
 
 		//"[" attribute+=Attribute+ attribute+=Pair* "]"
-		public Group getGroup_1() { return cGroup_1; }
+		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//"["
-		public Keyword getLeftSquareBracketKeyword_1_0() { return cLeftSquareBracketKeyword_1_0; }
+		public Keyword getLeftSquareBracketKeyword_1_1_0() { return cLeftSquareBracketKeyword_1_1_0; }
 
 		//attribute+=Attribute+
-		public Assignment getAttributeAssignment_1_1() { return cAttributeAssignment_1_1; }
+		public Assignment getAttributeAssignment_1_1_1() { return cAttributeAssignment_1_1_1; }
 
 		//Attribute
-		public RuleCall getAttributeAttributeParserRuleCall_1_1_0() { return cAttributeAttributeParserRuleCall_1_1_0; }
+		public RuleCall getAttributeAttributeParserRuleCall_1_1_1_0() { return cAttributeAttributeParserRuleCall_1_1_1_0; }
 
 		//attribute+=Pair*
-		public Assignment getAttributeAssignment_1_2() { return cAttributeAssignment_1_2; }
+		public Assignment getAttributeAssignment_1_1_2() { return cAttributeAssignment_1_1_2; }
 
 		//Pair
-		public RuleCall getAttributePairParserRuleCall_1_2_0() { return cAttributePairParserRuleCall_1_2_0; }
+		public RuleCall getAttributePairParserRuleCall_1_1_2_0() { return cAttributePairParserRuleCall_1_1_2_0; }
 
 		//"]"
-		public Keyword getRightSquareBracketKeyword_1_3() { return cRightSquareBracketKeyword_1_3; }
+		public Keyword getRightSquareBracketKeyword_1_1_3() { return cRightSquareBracketKeyword_1_1_3; }
 
 		//"<" attribute+=Attribute* attribute+=Pair+ ">"
-		public Group getGroup_2() { return cGroup_2; }
+		public Group getGroup_1_2() { return cGroup_1_2; }
 
 		//"<"
-		public Keyword getLessThanSignKeyword_2_0() { return cLessThanSignKeyword_2_0; }
+		public Keyword getLessThanSignKeyword_1_2_0() { return cLessThanSignKeyword_1_2_0; }
 
 		//attribute+=Attribute*
-		public Assignment getAttributeAssignment_2_1() { return cAttributeAssignment_2_1; }
+		public Assignment getAttributeAssignment_1_2_1() { return cAttributeAssignment_1_2_1; }
 
 		//Attribute
-		public RuleCall getAttributeAttributeParserRuleCall_2_1_0() { return cAttributeAttributeParserRuleCall_2_1_0; }
+		public RuleCall getAttributeAttributeParserRuleCall_1_2_1_0() { return cAttributeAttributeParserRuleCall_1_2_1_0; }
 
 		//attribute+=Pair+
-		public Assignment getAttributeAssignment_2_2() { return cAttributeAssignment_2_2; }
+		public Assignment getAttributeAssignment_1_2_2() { return cAttributeAssignment_1_2_2; }
 
 		//Pair
-		public RuleCall getAttributePairParserRuleCall_2_2_0() { return cAttributePairParserRuleCall_2_2_0; }
+		public RuleCall getAttributePairParserRuleCall_1_2_2_0() { return cAttributePairParserRuleCall_1_2_2_0; }
 
 		//">"
-		public Keyword getGreaterThanSignKeyword_2_3() { return cGreaterThanSignKeyword_2_3; }
+		public Keyword getGreaterThanSignKeyword_1_2_3() { return cGreaterThanSignKeyword_1_2_3; }
 
 		//"{" attribute+=Attribute+ attribute+=Pair+ "}"
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_1_3() { return cGroup_1_3; }
 
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
+		public Keyword getLeftCurlyBracketKeyword_1_3_0() { return cLeftCurlyBracketKeyword_1_3_0; }
 
 		//attribute+=Attribute+
-		public Assignment getAttributeAssignment_3_1() { return cAttributeAssignment_3_1; }
+		public Assignment getAttributeAssignment_1_3_1() { return cAttributeAssignment_1_3_1; }
 
 		//Attribute
-		public RuleCall getAttributeAttributeParserRuleCall_3_1_0() { return cAttributeAttributeParserRuleCall_3_1_0; }
+		public RuleCall getAttributeAttributeParserRuleCall_1_3_1_0() { return cAttributeAttributeParserRuleCall_1_3_1_0; }
 
 		//attribute+=Pair+
-		public Assignment getAttributeAssignment_3_2() { return cAttributeAssignment_3_2; }
+		public Assignment getAttributeAssignment_1_3_2() { return cAttributeAssignment_1_3_2; }
 
 		//Pair
-		public RuleCall getAttributePairParserRuleCall_3_2_0() { return cAttributePairParserRuleCall_3_2_0; }
+		public RuleCall getAttributePairParserRuleCall_1_3_2_0() { return cAttributePairParserRuleCall_1_3_2_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_3_3() { return cRightCurlyBracketKeyword_3_3; }
+		public Keyword getRightCurlyBracketKeyword_1_3_3() { return cRightCurlyBracketKeyword_1_3_3; }
 	}
 
 	public class AttributeElements extends AbstractParserRuleElementFinder {
@@ -269,8 +278,8 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 
 	
 	//Model:
-	//	"(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
-	//	attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}";
+	//	{Model} ("(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
+	//	attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}");
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}

@@ -203,7 +203,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//QualifiedName returns ecore::EString:
+		//QualifiedName:
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -292,7 +292,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getElementAccess().getRule();
 	}
 
-	//QualifiedName returns ecore::EString:
+	//QualifiedName:
 	//	ID ("." ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());

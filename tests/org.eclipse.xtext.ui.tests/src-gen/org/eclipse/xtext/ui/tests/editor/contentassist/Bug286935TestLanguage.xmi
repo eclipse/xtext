@@ -9,6 +9,11 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/bug286935TestLanguage#//State"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2009/bug286935TestLanguage#//State"/>
+          </type>
+        </elements>
         <elements xsi:type="xtext:Alternatives" cardinality="?">
           <elements xsi:type="xtext:Assignment" feature="isInitial" operator="?=">
             <terminal xsi:type="xtext:Keyword" value="init"/>

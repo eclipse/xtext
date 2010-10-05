@@ -1575,33 +1575,44 @@ ruleBug304681Model returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'{' 
+((
+    { 
+        temp=factory.create(grammarAccess.getBug304681ModelAccess().getBug304681ModelAction_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getBug304681ModelAccess().getBug304681ModelAction_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'{' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getLeftCurlyBracketKeyword_0(), null); 
+        createLeafNode(grammarAccess.getBug304681ModelAccess().getLeftCurlyBracketKeyword_1(), null); 
     }
 (
 
 (
 	{ 
-	  getUnorderedGroupHelper().enter(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
+	  getUnorderedGroupHelper().enter(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	}
 	(
 		(
 
 			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0)}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0)}?=>(
 					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0);
+	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0);
 	 				}
 					(	'short' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getShortKeyword_1_0_0(), null); 
+        createLeafNode(grammarAccess.getBug304681ModelAccess().getShortKeyword_2_0_0(), null); 
     }
 (
 (
-		lv_shortDescription_3_0=RULE_STRING
+		lv_shortDescription_4_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_1_0_1_0(), "shortDescription"); 
+			createLeafNode(grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_2_0_1_0(), "shortDescription"); 
 		}
 		{
 	        if ($current==null) {
@@ -1612,7 +1623,7 @@ ruleBug304681Model returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"shortDescription",
-	        		lv_shortDescription_3_0, 
+	        		lv_shortDescription_4_0, 
 	        		"STRING", 
 	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
@@ -1623,29 +1634,29 @@ ruleBug304681Model returns [EObject current=null]
 )
 )	';' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_0_2(), null); 
+        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_0_2(), null); 
     }
 )
 					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	 				}
  				)
 			)  |
 
 			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1)}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1)}?=>(
 					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1);
+	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1);
 	 				}
 					(	'long' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getLongKeyword_1_1_0(), null); 
+        createLeafNode(grammarAccess.getBug304681ModelAccess().getLongKeyword_2_1_0(), null); 
     }
 (
 (
-		lv_longDescription_6_0=RULE_STRING
+		lv_longDescription_7_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_1_1_1_0(), "longDescription"); 
+			createLeafNode(grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_2_1_1_0(), "longDescription"); 
 		}
 		{
 	        if ($current==null) {
@@ -1656,7 +1667,7 @@ ruleBug304681Model returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"longDescription",
-	        		lv_longDescription_6_0, 
+	        		lv_longDescription_7_0, 
 	        		"STRING", 
 	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
@@ -1667,29 +1678,29 @@ ruleBug304681Model returns [EObject current=null]
 )
 )	';' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_1_2(), null); 
+        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_1_2(), null); 
     }
 )
 					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	 				}
  				)
 			)  |
 
 			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2)}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2)}?=>(
 					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2);
+	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2);
 	 				}
 					(	'uid' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getUidKeyword_1_2_0(), null); 
+        createLeafNode(grammarAccess.getBug304681ModelAccess().getUidKeyword_2_2_0(), null); 
     }
 (
 (
-		lv_uid_9_0=RULE_STRING
+		lv_uid_10_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_1_2_1_0(), "uid"); 
+			createLeafNode(grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_2_2_1_0(), "uid"); 
 		}
 		{
 	        if ($current==null) {
@@ -1700,7 +1711,7 @@ ruleBug304681Model returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"uid",
-	        		lv_uid_9_0, 
+	        		lv_uid_10_0, 
 	        		"STRING", 
 	        		lastConsumedNode);
 	        } catch (ValueConverterException vce) {
@@ -1711,25 +1722,25 @@ ruleBug304681Model returns [EObject current=null]
 )
 )	';' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_2_2(), null); 
+        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_2_2(), null); 
     }
 )
 					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	 				}
  				)
 			)  |
 
 			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3)}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3)}?=>(
 					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3);
+	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3);
 	 				}
 					((
 (
-		lv_flag_11_0=	'flag' 
+		lv_flag_12_0=	'flag' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_1_3_0_0(), "flag"); 
+        createLeafNode(grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_2_3_0_0(), "flag"); 
     }
  
 	    {
@@ -1748,26 +1759,26 @@ ruleBug304681Model returns [EObject current=null]
 )
 )	';' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_3_1(), null); 
+        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_3_1(), null); 
     }
 )
 					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	 				}
  				)
 			)  |
 
 			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4)}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4)}?=>(
 					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4);
+	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4);
 	 				}
 					(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getBug304681ModelAccess().getFeaturesBug304681FeatureParserRuleCall_1_4_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getBug304681ModelAccess().getFeaturesBug304681FeatureParserRuleCall_2_4_0(), currentNode); 
 	    }
-		lv_features_13_0=ruleBug304681Feature		{
+		lv_features_14_0=ruleBug304681Feature		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getBug304681ModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -1776,7 +1787,7 @@ ruleBug304681Model returns [EObject current=null]
 	       		add(
 	       			$current, 
 	       			"features",
-	        		lv_features_13_0, 
+	        		lv_features_14_0, 
 	        		"Bug304681Feature", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -1788,7 +1799,7 @@ ruleBug304681Model returns [EObject current=null]
 )
 )+
 					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	 				}
  				)
 			)  
@@ -1797,12 +1808,12 @@ ruleBug304681Model returns [EObject current=null]
 	)
 )
 	{ 
-	  getUnorderedGroupHelper().leave(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
+	  getUnorderedGroupHelper().leave(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	}
 
 )	'}' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getRightCurlyBracketKeyword_2(), null); 
+        createLeafNode(grammarAccess.getBug304681ModelAccess().getRightCurlyBracketKeyword_3(), null); 
     }
 )
 ;

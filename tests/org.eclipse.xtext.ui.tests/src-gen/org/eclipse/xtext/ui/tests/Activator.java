@@ -66,6 +66,7 @@ public class Activator extends AbstractUIPlugin {
 			registerInjectorFor("org.eclipse.xtext.ui.tests.FoldingTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage");
+			
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);
 			throw e;
@@ -154,7 +155,7 @@ public class Activator extends AbstractUIPlugin {
 		}
 		if ("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguageRuntimeModule();
-		}		
+		}
 		if ("org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageRuntimeModule();
 		}

@@ -5251,31 +5251,31 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Model__Group__0__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1986:1: rule__Bug304681Model__Group__0__Impl : ( '{' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1986:1: rule__Bug304681Model__Group__0__Impl : ( () ) ;
     public final void rule__Bug304681Model__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1990:1: ( ( '{' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1991:1: ( '{' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1990:1: ( ( () ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1991:1: ( () )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1991:1: ( '{' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1992:1: '{'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1991:1: ( () )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1992:1: ()
             {
-             before(grammarAccess.getBug304681ModelAccess().getLeftCurlyBracketKeyword_0()); 
-            match(input,21,FollowSets000.FOLLOW_21_in_rule__Bug304681Model__Group__0__Impl4039); 
-             after(grammarAccess.getBug304681ModelAccess().getLeftCurlyBracketKeyword_0()); 
+             before(grammarAccess.getBug304681ModelAccess().getBug304681ModelAction_0()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1993:1: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1995:1: 
+            {
+            }
+
+             after(grammarAccess.getBug304681ModelAccess().getBug304681ModelAction_0()); 
 
             }
 
 
             }
 
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
         }
         finally {
 
@@ -5297,11 +5297,11 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2009:1: ( rule__Bug304681Model__Group__1__Impl rule__Bug304681Model__Group__2 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2010:2: rule__Bug304681Model__Group__1__Impl rule__Bug304681Model__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group__1__Impl_in_rule__Bug304681Model__Group__14070);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group__1__Impl_in_rule__Bug304681Model__Group__14069);
             rule__Bug304681Model__Group__1__Impl();
             _fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group__2_in_rule__Bug304681Model__Group__14073);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group__2_in_rule__Bug304681Model__Group__14072);
             rule__Bug304681Model__Group__2();
             _fsp--;
 
@@ -5324,30 +5324,21 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Model__Group__1__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2017:1: rule__Bug304681Model__Group__1__Impl : ( ( rule__Bug304681Model__UnorderedGroup_1 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2017:1: rule__Bug304681Model__Group__1__Impl : ( '{' ) ;
     public final void rule__Bug304681Model__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2021:1: ( ( ( rule__Bug304681Model__UnorderedGroup_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2022:1: ( ( rule__Bug304681Model__UnorderedGroup_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2021:1: ( ( '{' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2022:1: ( '{' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2022:1: ( ( rule__Bug304681Model__UnorderedGroup_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2023:1: ( rule__Bug304681Model__UnorderedGroup_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2022:1: ( '{' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2023:1: '{'
             {
-             before(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2024:1: ( rule__Bug304681Model__UnorderedGroup_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2024:2: rule__Bug304681Model__UnorderedGroup_1
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_1_in_rule__Bug304681Model__Group__1__Impl4100);
-            rule__Bug304681Model__UnorderedGroup_1();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1()); 
+             before(grammarAccess.getBug304681ModelAccess().getLeftCurlyBracketKeyword_1()); 
+            match(input,21,FollowSets000.FOLLOW_21_in_rule__Bug304681Model__Group__1__Impl4100); 
+             after(grammarAccess.getBug304681ModelAccess().getLeftCurlyBracketKeyword_1()); 
 
             }
 
@@ -5370,17 +5361,21 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Model__Group__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2034:1: rule__Bug304681Model__Group__2 : rule__Bug304681Model__Group__2__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2036:1: rule__Bug304681Model__Group__2 : rule__Bug304681Model__Group__2__Impl rule__Bug304681Model__Group__3 ;
     public final void rule__Bug304681Model__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2038:1: ( rule__Bug304681Model__Group__2__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2039:2: rule__Bug304681Model__Group__2__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2040:1: ( rule__Bug304681Model__Group__2__Impl rule__Bug304681Model__Group__3 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2041:2: rule__Bug304681Model__Group__2__Impl rule__Bug304681Model__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group__2__Impl_in_rule__Bug304681Model__Group__24130);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group__2__Impl_in_rule__Bug304681Model__Group__24131);
             rule__Bug304681Model__Group__2__Impl();
+            _fsp--;
+
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group__3_in_rule__Bug304681Model__Group__24134);
+            rule__Bug304681Model__Group__3();
             _fsp--;
 
 
@@ -5402,21 +5397,30 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Model__Group__2__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2045:1: rule__Bug304681Model__Group__2__Impl : ( '}' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2048:1: rule__Bug304681Model__Group__2__Impl : ( ( rule__Bug304681Model__UnorderedGroup_2 ) ) ;
     public final void rule__Bug304681Model__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2049:1: ( ( '}' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2050:1: ( '}' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2052:1: ( ( ( rule__Bug304681Model__UnorderedGroup_2 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2053:1: ( ( rule__Bug304681Model__UnorderedGroup_2 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2050:1: ( '}' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2051:1: '}'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2053:1: ( ( rule__Bug304681Model__UnorderedGroup_2 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2054:1: ( rule__Bug304681Model__UnorderedGroup_2 )
             {
-             before(grammarAccess.getBug304681ModelAccess().getRightCurlyBracketKeyword_2()); 
-            match(input,22,FollowSets000.FOLLOW_22_in_rule__Bug304681Model__Group__2__Impl4158); 
-             after(grammarAccess.getBug304681ModelAccess().getRightCurlyBracketKeyword_2()); 
+             before(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2055:1: ( rule__Bug304681Model__UnorderedGroup_2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2055:2: rule__Bug304681Model__UnorderedGroup_2
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_2_in_rule__Bug304681Model__Group__2__Impl4161);
+            rule__Bug304681Model__UnorderedGroup_2();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2()); 
 
             }
 
@@ -5438,22 +5442,18 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
     // $ANTLR end rule__Bug304681Model__Group__2__Impl
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_0__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2070:1: rule__Bug304681Model__Group_1_0__0 : rule__Bug304681Model__Group_1_0__0__Impl rule__Bug304681Model__Group_1_0__1 ;
-    public final void rule__Bug304681Model__Group_1_0__0() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group__3
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2065:1: rule__Bug304681Model__Group__3 : rule__Bug304681Model__Group__3__Impl ;
+    public final void rule__Bug304681Model__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2074:1: ( rule__Bug304681Model__Group_1_0__0__Impl rule__Bug304681Model__Group_1_0__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2075:2: rule__Bug304681Model__Group_1_0__0__Impl rule__Bug304681Model__Group_1_0__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2069:1: ( rule__Bug304681Model__Group__3__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2070:2: rule__Bug304681Model__Group__3__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_0__0__Impl_in_rule__Bug304681Model__Group_1_0__04195);
-            rule__Bug304681Model__Group_1_0__0__Impl();
-            _fsp--;
-
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_0__1_in_rule__Bug304681Model__Group_1_0__04198);
-            rule__Bug304681Model__Group_1_0__1();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group__3__Impl_in_rule__Bug304681Model__Group__34191);
+            rule__Bug304681Model__Group__3__Impl();
             _fsp--;
 
 
@@ -5471,107 +5471,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_0__0
+    // $ANTLR end rule__Bug304681Model__Group__3
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_0__0__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2082:1: rule__Bug304681Model__Group_1_0__0__Impl : ( 'short' ) ;
-    public final void rule__Bug304681Model__Group_1_0__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2086:1: ( ( 'short' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2087:1: ( 'short' )
-            {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2087:1: ( 'short' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2088:1: 'short'
-            {
-             before(grammarAccess.getBug304681ModelAccess().getShortKeyword_1_0_0()); 
-            match(input,25,FollowSets000.FOLLOW_25_in_rule__Bug304681Model__Group_1_0__0__Impl4226); 
-             after(grammarAccess.getBug304681ModelAccess().getShortKeyword_1_0_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Bug304681Model__Group_1_0__0__Impl
-
-
-    // $ANTLR start rule__Bug304681Model__Group_1_0__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2101:1: rule__Bug304681Model__Group_1_0__1 : rule__Bug304681Model__Group_1_0__1__Impl rule__Bug304681Model__Group_1_0__2 ;
-    public final void rule__Bug304681Model__Group_1_0__1() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group__3__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2076:1: rule__Bug304681Model__Group__3__Impl : ( '}' ) ;
+    public final void rule__Bug304681Model__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2105:1: ( rule__Bug304681Model__Group_1_0__1__Impl rule__Bug304681Model__Group_1_0__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2106:2: rule__Bug304681Model__Group_1_0__1__Impl rule__Bug304681Model__Group_1_0__2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2080:1: ( ( '}' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2081:1: ( '}' )
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_0__1__Impl_in_rule__Bug304681Model__Group_1_0__14257);
-            rule__Bug304681Model__Group_1_0__1__Impl();
-            _fsp--;
-
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_0__2_in_rule__Bug304681Model__Group_1_0__14260);
-            rule__Bug304681Model__Group_1_0__2();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Bug304681Model__Group_1_0__1
-
-
-    // $ANTLR start rule__Bug304681Model__Group_1_0__1__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2113:1: rule__Bug304681Model__Group_1_0__1__Impl : ( ( rule__Bug304681Model__ShortDescriptionAssignment_1_0_1 ) ) ;
-    public final void rule__Bug304681Model__Group_1_0__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2117:1: ( ( ( rule__Bug304681Model__ShortDescriptionAssignment_1_0_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2118:1: ( ( rule__Bug304681Model__ShortDescriptionAssignment_1_0_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2081:1: ( '}' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2082:1: '}'
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2118:1: ( ( rule__Bug304681Model__ShortDescriptionAssignment_1_0_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2119:1: ( rule__Bug304681Model__ShortDescriptionAssignment_1_0_1 )
-            {
-             before(grammarAccess.getBug304681ModelAccess().getShortDescriptionAssignment_1_0_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2120:1: ( rule__Bug304681Model__ShortDescriptionAssignment_1_0_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2120:2: rule__Bug304681Model__ShortDescriptionAssignment_1_0_1
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__ShortDescriptionAssignment_1_0_1_in_rule__Bug304681Model__Group_1_0__1__Impl4287);
-            rule__Bug304681Model__ShortDescriptionAssignment_1_0_1();
-            _fsp--;
-
-
-            }
-
-             after(grammarAccess.getBug304681ModelAccess().getShortDescriptionAssignment_1_0_1()); 
+             before(grammarAccess.getBug304681ModelAccess().getRightCurlyBracketKeyword_3()); 
+            match(input,22,FollowSets000.FOLLOW_22_in_rule__Bug304681Model__Group__3__Impl4219); 
+             after(grammarAccess.getBug304681ModelAccess().getRightCurlyBracketKeyword_3()); 
 
             }
 
@@ -5590,21 +5508,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_0__1__Impl
+    // $ANTLR end rule__Bug304681Model__Group__3__Impl
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_0__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2130:1: rule__Bug304681Model__Group_1_0__2 : rule__Bug304681Model__Group_1_0__2__Impl ;
-    public final void rule__Bug304681Model__Group_1_0__2() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group_2_0__0
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2103:1: rule__Bug304681Model__Group_2_0__0 : rule__Bug304681Model__Group_2_0__0__Impl rule__Bug304681Model__Group_2_0__1 ;
+    public final void rule__Bug304681Model__Group_2_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2134:1: ( rule__Bug304681Model__Group_1_0__2__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2135:2: rule__Bug304681Model__Group_1_0__2__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2107:1: ( rule__Bug304681Model__Group_2_0__0__Impl rule__Bug304681Model__Group_2_0__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2108:2: rule__Bug304681Model__Group_2_0__0__Impl rule__Bug304681Model__Group_2_0__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_0__2__Impl_in_rule__Bug304681Model__Group_1_0__24317);
-            rule__Bug304681Model__Group_1_0__2__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_0__0__Impl_in_rule__Bug304681Model__Group_2_0__04258);
+            rule__Bug304681Model__Group_2_0__0__Impl();
+            _fsp--;
+
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_0__1_in_rule__Bug304681Model__Group_2_0__04261);
+            rule__Bug304681Model__Group_2_0__1();
             _fsp--;
 
 
@@ -5622,25 +5544,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_0__2
+    // $ANTLR end rule__Bug304681Model__Group_2_0__0
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_0__2__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2141:1: rule__Bug304681Model__Group_1_0__2__Impl : ( ';' ) ;
-    public final void rule__Bug304681Model__Group_1_0__2__Impl() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group_2_0__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2115:1: rule__Bug304681Model__Group_2_0__0__Impl : ( 'short' ) ;
+    public final void rule__Bug304681Model__Group_2_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2145:1: ( ( ';' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2146:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2119:1: ( ( 'short' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2120:1: ( 'short' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2146:1: ( ';' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2147:1: ';'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2120:1: ( 'short' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2121:1: 'short'
             {
-             before(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_0_2()); 
-            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Model__Group_1_0__2__Impl4345); 
-             after(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_0_2()); 
+             before(grammarAccess.getBug304681ModelAccess().getShortKeyword_2_0_0()); 
+            match(input,25,FollowSets000.FOLLOW_25_in_rule__Bug304681Model__Group_2_0__0__Impl4289); 
+             after(grammarAccess.getBug304681ModelAccess().getShortKeyword_2_0_0()); 
 
             }
 
@@ -5659,98 +5581,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_0__2__Impl
+    // $ANTLR end rule__Bug304681Model__Group_2_0__0__Impl
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_1__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2166:1: rule__Bug304681Model__Group_1_1__0 : rule__Bug304681Model__Group_1_1__0__Impl rule__Bug304681Model__Group_1_1__1 ;
-    public final void rule__Bug304681Model__Group_1_1__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2170:1: ( rule__Bug304681Model__Group_1_1__0__Impl rule__Bug304681Model__Group_1_1__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2171:2: rule__Bug304681Model__Group_1_1__0__Impl rule__Bug304681Model__Group_1_1__1
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_1__0__Impl_in_rule__Bug304681Model__Group_1_1__04382);
-            rule__Bug304681Model__Group_1_1__0__Impl();
-            _fsp--;
-
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_1__1_in_rule__Bug304681Model__Group_1_1__04385);
-            rule__Bug304681Model__Group_1_1__1();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Bug304681Model__Group_1_1__0
-
-
-    // $ANTLR start rule__Bug304681Model__Group_1_1__0__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2178:1: rule__Bug304681Model__Group_1_1__0__Impl : ( 'long' ) ;
-    public final void rule__Bug304681Model__Group_1_1__0__Impl() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group_2_0__1
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2134:1: rule__Bug304681Model__Group_2_0__1 : rule__Bug304681Model__Group_2_0__1__Impl rule__Bug304681Model__Group_2_0__2 ;
+    public final void rule__Bug304681Model__Group_2_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2182:1: ( ( 'long' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2183:1: ( 'long' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2138:1: ( rule__Bug304681Model__Group_2_0__1__Impl rule__Bug304681Model__Group_2_0__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2139:2: rule__Bug304681Model__Group_2_0__1__Impl rule__Bug304681Model__Group_2_0__2
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2183:1: ( 'long' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2184:1: 'long'
-            {
-             before(grammarAccess.getBug304681ModelAccess().getLongKeyword_1_1_0()); 
-            match(input,27,FollowSets000.FOLLOW_27_in_rule__Bug304681Model__Group_1_1__0__Impl4413); 
-             after(grammarAccess.getBug304681ModelAccess().getLongKeyword_1_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Bug304681Model__Group_1_1__0__Impl
-
-
-    // $ANTLR start rule__Bug304681Model__Group_1_1__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2197:1: rule__Bug304681Model__Group_1_1__1 : rule__Bug304681Model__Group_1_1__1__Impl rule__Bug304681Model__Group_1_1__2 ;
-    public final void rule__Bug304681Model__Group_1_1__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2201:1: ( rule__Bug304681Model__Group_1_1__1__Impl rule__Bug304681Model__Group_1_1__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2202:2: rule__Bug304681Model__Group_1_1__1__Impl rule__Bug304681Model__Group_1_1__2
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_1__1__Impl_in_rule__Bug304681Model__Group_1_1__14444);
-            rule__Bug304681Model__Group_1_1__1__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_0__1__Impl_in_rule__Bug304681Model__Group_2_0__14320);
+            rule__Bug304681Model__Group_2_0__1__Impl();
             _fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_1__2_in_rule__Bug304681Model__Group_1_1__14447);
-            rule__Bug304681Model__Group_1_1__2();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_0__2_in_rule__Bug304681Model__Group_2_0__14323);
+            rule__Bug304681Model__Group_2_0__2();
             _fsp--;
 
 
@@ -5768,34 +5617,34 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_1__1
+    // $ANTLR end rule__Bug304681Model__Group_2_0__1
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_1__1__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2209:1: rule__Bug304681Model__Group_1_1__1__Impl : ( ( rule__Bug304681Model__LongDescriptionAssignment_1_1_1 ) ) ;
-    public final void rule__Bug304681Model__Group_1_1__1__Impl() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group_2_0__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2146:1: rule__Bug304681Model__Group_2_0__1__Impl : ( ( rule__Bug304681Model__ShortDescriptionAssignment_2_0_1 ) ) ;
+    public final void rule__Bug304681Model__Group_2_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2213:1: ( ( ( rule__Bug304681Model__LongDescriptionAssignment_1_1_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2214:1: ( ( rule__Bug304681Model__LongDescriptionAssignment_1_1_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2150:1: ( ( ( rule__Bug304681Model__ShortDescriptionAssignment_2_0_1 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2151:1: ( ( rule__Bug304681Model__ShortDescriptionAssignment_2_0_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2214:1: ( ( rule__Bug304681Model__LongDescriptionAssignment_1_1_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2215:1: ( rule__Bug304681Model__LongDescriptionAssignment_1_1_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2151:1: ( ( rule__Bug304681Model__ShortDescriptionAssignment_2_0_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2152:1: ( rule__Bug304681Model__ShortDescriptionAssignment_2_0_1 )
             {
-             before(grammarAccess.getBug304681ModelAccess().getLongDescriptionAssignment_1_1_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2216:1: ( rule__Bug304681Model__LongDescriptionAssignment_1_1_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2216:2: rule__Bug304681Model__LongDescriptionAssignment_1_1_1
+             before(grammarAccess.getBug304681ModelAccess().getShortDescriptionAssignment_2_0_1()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2153:1: ( rule__Bug304681Model__ShortDescriptionAssignment_2_0_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2153:2: rule__Bug304681Model__ShortDescriptionAssignment_2_0_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__LongDescriptionAssignment_1_1_1_in_rule__Bug304681Model__Group_1_1__1__Impl4474);
-            rule__Bug304681Model__LongDescriptionAssignment_1_1_1();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__ShortDescriptionAssignment_2_0_1_in_rule__Bug304681Model__Group_2_0__1__Impl4350);
+            rule__Bug304681Model__ShortDescriptionAssignment_2_0_1();
             _fsp--;
 
 
             }
 
-             after(grammarAccess.getBug304681ModelAccess().getLongDescriptionAssignment_1_1_1()); 
+             after(grammarAccess.getBug304681ModelAccess().getShortDescriptionAssignment_2_0_1()); 
 
             }
 
@@ -5814,94 +5663,21 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_1__1__Impl
+    // $ANTLR end rule__Bug304681Model__Group_2_0__1__Impl
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_1__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2226:1: rule__Bug304681Model__Group_1_1__2 : rule__Bug304681Model__Group_1_1__2__Impl ;
-    public final void rule__Bug304681Model__Group_1_1__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2230:1: ( rule__Bug304681Model__Group_1_1__2__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2231:2: rule__Bug304681Model__Group_1_1__2__Impl
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_1__2__Impl_in_rule__Bug304681Model__Group_1_1__24504);
-            rule__Bug304681Model__Group_1_1__2__Impl();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Bug304681Model__Group_1_1__2
-
-
-    // $ANTLR start rule__Bug304681Model__Group_1_1__2__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2237:1: rule__Bug304681Model__Group_1_1__2__Impl : ( ';' ) ;
-    public final void rule__Bug304681Model__Group_1_1__2__Impl() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group_2_0__2
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2163:1: rule__Bug304681Model__Group_2_0__2 : rule__Bug304681Model__Group_2_0__2__Impl ;
+    public final void rule__Bug304681Model__Group_2_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2241:1: ( ( ';' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2242:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2167:1: ( rule__Bug304681Model__Group_2_0__2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2168:2: rule__Bug304681Model__Group_2_0__2__Impl
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2242:1: ( ';' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2243:1: ';'
-            {
-             before(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_1_2()); 
-            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Model__Group_1_1__2__Impl4532); 
-             after(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_1_2()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Bug304681Model__Group_1_1__2__Impl
-
-
-    // $ANTLR start rule__Bug304681Model__Group_1_2__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2262:1: rule__Bug304681Model__Group_1_2__0 : rule__Bug304681Model__Group_1_2__0__Impl rule__Bug304681Model__Group_1_2__1 ;
-    public final void rule__Bug304681Model__Group_1_2__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2266:1: ( rule__Bug304681Model__Group_1_2__0__Impl rule__Bug304681Model__Group_1_2__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2267:2: rule__Bug304681Model__Group_1_2__0__Impl rule__Bug304681Model__Group_1_2__1
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_2__0__Impl_in_rule__Bug304681Model__Group_1_2__04569);
-            rule__Bug304681Model__Group_1_2__0__Impl();
-            _fsp--;
-
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_2__1_in_rule__Bug304681Model__Group_1_2__04572);
-            rule__Bug304681Model__Group_1_2__1();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_0__2__Impl_in_rule__Bug304681Model__Group_2_0__24380);
+            rule__Bug304681Model__Group_2_0__2__Impl();
             _fsp--;
 
 
@@ -5919,25 +5695,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_2__0
+    // $ANTLR end rule__Bug304681Model__Group_2_0__2
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_2__0__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2274:1: rule__Bug304681Model__Group_1_2__0__Impl : ( 'uid' ) ;
-    public final void rule__Bug304681Model__Group_1_2__0__Impl() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group_2_0__2__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2174:1: rule__Bug304681Model__Group_2_0__2__Impl : ( ';' ) ;
+    public final void rule__Bug304681Model__Group_2_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2278:1: ( ( 'uid' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2279:1: ( 'uid' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2178:1: ( ( ';' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2179:1: ( ';' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2279:1: ( 'uid' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2280:1: 'uid'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2179:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2180:1: ';'
             {
-             before(grammarAccess.getBug304681ModelAccess().getUidKeyword_1_2_0()); 
-            match(input,28,FollowSets000.FOLLOW_28_in_rule__Bug304681Model__Group_1_2__0__Impl4600); 
-             after(grammarAccess.getBug304681ModelAccess().getUidKeyword_1_2_0()); 
+             before(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_0_2()); 
+            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Model__Group_2_0__2__Impl4408); 
+             after(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_0_2()); 
 
             }
 
@@ -5956,103 +5732,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_2__0__Impl
+    // $ANTLR end rule__Bug304681Model__Group_2_0__2__Impl
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_2__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2293:1: rule__Bug304681Model__Group_1_2__1 : rule__Bug304681Model__Group_1_2__1__Impl rule__Bug304681Model__Group_1_2__2 ;
-    public final void rule__Bug304681Model__Group_1_2__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2297:1: ( rule__Bug304681Model__Group_1_2__1__Impl rule__Bug304681Model__Group_1_2__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2298:2: rule__Bug304681Model__Group_1_2__1__Impl rule__Bug304681Model__Group_1_2__2
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_2__1__Impl_in_rule__Bug304681Model__Group_1_2__14631);
-            rule__Bug304681Model__Group_1_2__1__Impl();
-            _fsp--;
-
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_2__2_in_rule__Bug304681Model__Group_1_2__14634);
-            rule__Bug304681Model__Group_1_2__2();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Bug304681Model__Group_1_2__1
-
-
-    // $ANTLR start rule__Bug304681Model__Group_1_2__1__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2305:1: rule__Bug304681Model__Group_1_2__1__Impl : ( ( rule__Bug304681Model__UidAssignment_1_2_1 ) ) ;
-    public final void rule__Bug304681Model__Group_1_2__1__Impl() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group_2_1__0
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2199:1: rule__Bug304681Model__Group_2_1__0 : rule__Bug304681Model__Group_2_1__0__Impl rule__Bug304681Model__Group_2_1__1 ;
+    public final void rule__Bug304681Model__Group_2_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2309:1: ( ( ( rule__Bug304681Model__UidAssignment_1_2_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2310:1: ( ( rule__Bug304681Model__UidAssignment_1_2_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2203:1: ( rule__Bug304681Model__Group_2_1__0__Impl rule__Bug304681Model__Group_2_1__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2204:2: rule__Bug304681Model__Group_2_1__0__Impl rule__Bug304681Model__Group_2_1__1
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2310:1: ( ( rule__Bug304681Model__UidAssignment_1_2_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2311:1: ( rule__Bug304681Model__UidAssignment_1_2_1 )
-            {
-             before(grammarAccess.getBug304681ModelAccess().getUidAssignment_1_2_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2312:1: ( rule__Bug304681Model__UidAssignment_1_2_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2312:2: rule__Bug304681Model__UidAssignment_1_2_1
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UidAssignment_1_2_1_in_rule__Bug304681Model__Group_1_2__1__Impl4661);
-            rule__Bug304681Model__UidAssignment_1_2_1();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_1__0__Impl_in_rule__Bug304681Model__Group_2_1__04445);
+            rule__Bug304681Model__Group_2_1__0__Impl();
             _fsp--;
 
-
-            }
-
-             after(grammarAccess.getBug304681ModelAccess().getUidAssignment_1_2_1()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Bug304681Model__Group_1_2__1__Impl
-
-
-    // $ANTLR start rule__Bug304681Model__Group_1_2__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2322:1: rule__Bug304681Model__Group_1_2__2 : rule__Bug304681Model__Group_1_2__2__Impl ;
-    public final void rule__Bug304681Model__Group_1_2__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2326:1: ( rule__Bug304681Model__Group_1_2__2__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2327:2: rule__Bug304681Model__Group_1_2__2__Impl
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_2__2__Impl_in_rule__Bug304681Model__Group_1_2__24691);
-            rule__Bug304681Model__Group_1_2__2__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_1__1_in_rule__Bug304681Model__Group_2_1__04448);
+            rule__Bug304681Model__Group_2_1__1();
             _fsp--;
 
 
@@ -6070,25 +5768,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_2__2
+    // $ANTLR end rule__Bug304681Model__Group_2_1__0
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_2__2__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2333:1: rule__Bug304681Model__Group_1_2__2__Impl : ( ';' ) ;
-    public final void rule__Bug304681Model__Group_1_2__2__Impl() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group_2_1__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2211:1: rule__Bug304681Model__Group_2_1__0__Impl : ( 'long' ) ;
+    public final void rule__Bug304681Model__Group_2_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2337:1: ( ( ';' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2338:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2215:1: ( ( 'long' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2216:1: ( 'long' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2338:1: ( ';' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2339:1: ';'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2216:1: ( 'long' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2217:1: 'long'
             {
-             before(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_2_2()); 
-            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Model__Group_1_2__2__Impl4719); 
-             after(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_2_2()); 
+             before(grammarAccess.getBug304681ModelAccess().getLongKeyword_2_1_0()); 
+            match(input,27,FollowSets000.FOLLOW_27_in_rule__Bug304681Model__Group_2_1__0__Impl4476); 
+             after(grammarAccess.getBug304681ModelAccess().getLongKeyword_2_1_0()); 
 
             }
 
@@ -6107,103 +5805,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_2__2__Impl
+    // $ANTLR end rule__Bug304681Model__Group_2_1__0__Impl
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_3__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2358:1: rule__Bug304681Model__Group_1_3__0 : rule__Bug304681Model__Group_1_3__0__Impl rule__Bug304681Model__Group_1_3__1 ;
-    public final void rule__Bug304681Model__Group_1_3__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2362:1: ( rule__Bug304681Model__Group_1_3__0__Impl rule__Bug304681Model__Group_1_3__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2363:2: rule__Bug304681Model__Group_1_3__0__Impl rule__Bug304681Model__Group_1_3__1
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_3__0__Impl_in_rule__Bug304681Model__Group_1_3__04756);
-            rule__Bug304681Model__Group_1_3__0__Impl();
-            _fsp--;
-
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_3__1_in_rule__Bug304681Model__Group_1_3__04759);
-            rule__Bug304681Model__Group_1_3__1();
-            _fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Bug304681Model__Group_1_3__0
-
-
-    // $ANTLR start rule__Bug304681Model__Group_1_3__0__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2370:1: rule__Bug304681Model__Group_1_3__0__Impl : ( ( rule__Bug304681Model__FlagAssignment_1_3_0 ) ) ;
-    public final void rule__Bug304681Model__Group_1_3__0__Impl() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group_2_1__1
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2230:1: rule__Bug304681Model__Group_2_1__1 : rule__Bug304681Model__Group_2_1__1__Impl rule__Bug304681Model__Group_2_1__2 ;
+    public final void rule__Bug304681Model__Group_2_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2374:1: ( ( ( rule__Bug304681Model__FlagAssignment_1_3_0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2375:1: ( ( rule__Bug304681Model__FlagAssignment_1_3_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2234:1: ( rule__Bug304681Model__Group_2_1__1__Impl rule__Bug304681Model__Group_2_1__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2235:2: rule__Bug304681Model__Group_2_1__1__Impl rule__Bug304681Model__Group_2_1__2
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2375:1: ( ( rule__Bug304681Model__FlagAssignment_1_3_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2376:1: ( rule__Bug304681Model__FlagAssignment_1_3_0 )
-            {
-             before(grammarAccess.getBug304681ModelAccess().getFlagAssignment_1_3_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2377:1: ( rule__Bug304681Model__FlagAssignment_1_3_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2377:2: rule__Bug304681Model__FlagAssignment_1_3_0
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__FlagAssignment_1_3_0_in_rule__Bug304681Model__Group_1_3__0__Impl4786);
-            rule__Bug304681Model__FlagAssignment_1_3_0();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_1__1__Impl_in_rule__Bug304681Model__Group_2_1__14507);
+            rule__Bug304681Model__Group_2_1__1__Impl();
             _fsp--;
 
-
-            }
-
-             after(grammarAccess.getBug304681ModelAccess().getFlagAssignment_1_3_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Bug304681Model__Group_1_3__0__Impl
-
-
-    // $ANTLR start rule__Bug304681Model__Group_1_3__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2387:1: rule__Bug304681Model__Group_1_3__1 : rule__Bug304681Model__Group_1_3__1__Impl ;
-    public final void rule__Bug304681Model__Group_1_3__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2391:1: ( rule__Bug304681Model__Group_1_3__1__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2392:2: rule__Bug304681Model__Group_1_3__1__Impl
-            {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_3__1__Impl_in_rule__Bug304681Model__Group_1_3__14816);
-            rule__Bug304681Model__Group_1_3__1__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_1__2_in_rule__Bug304681Model__Group_2_1__14510);
+            rule__Bug304681Model__Group_2_1__2();
             _fsp--;
 
 
@@ -6221,25 +5841,34 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_3__1
+    // $ANTLR end rule__Bug304681Model__Group_2_1__1
 
 
-    // $ANTLR start rule__Bug304681Model__Group_1_3__1__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2398:1: rule__Bug304681Model__Group_1_3__1__Impl : ( ';' ) ;
-    public final void rule__Bug304681Model__Group_1_3__1__Impl() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__Group_2_1__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2242:1: rule__Bug304681Model__Group_2_1__1__Impl : ( ( rule__Bug304681Model__LongDescriptionAssignment_2_1_1 ) ) ;
+    public final void rule__Bug304681Model__Group_2_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2402:1: ( ( ';' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2403:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2246:1: ( ( ( rule__Bug304681Model__LongDescriptionAssignment_2_1_1 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2247:1: ( ( rule__Bug304681Model__LongDescriptionAssignment_2_1_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2403:1: ( ';' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2404:1: ';'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2247:1: ( ( rule__Bug304681Model__LongDescriptionAssignment_2_1_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2248:1: ( rule__Bug304681Model__LongDescriptionAssignment_2_1_1 )
             {
-             before(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_3_1()); 
-            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Model__Group_1_3__1__Impl4844); 
-             after(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_3_1()); 
+             before(grammarAccess.getBug304681ModelAccess().getLongDescriptionAssignment_2_1_1()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2249:1: ( rule__Bug304681Model__LongDescriptionAssignment_2_1_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2249:2: rule__Bug304681Model__LongDescriptionAssignment_2_1_1
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__LongDescriptionAssignment_2_1_1_in_rule__Bug304681Model__Group_2_1__1__Impl4537);
+            rule__Bug304681Model__LongDescriptionAssignment_2_1_1();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getBug304681ModelAccess().getLongDescriptionAssignment_2_1_1()); 
 
             }
 
@@ -6258,24 +5887,468 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__Group_1_3__1__Impl
+    // $ANTLR end rule__Bug304681Model__Group_2_1__1__Impl
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_1__2
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2259:1: rule__Bug304681Model__Group_2_1__2 : rule__Bug304681Model__Group_2_1__2__Impl ;
+    public final void rule__Bug304681Model__Group_2_1__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2263:1: ( rule__Bug304681Model__Group_2_1__2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2264:2: rule__Bug304681Model__Group_2_1__2__Impl
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_1__2__Impl_in_rule__Bug304681Model__Group_2_1__24567);
+            rule__Bug304681Model__Group_2_1__2__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_1__2
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_1__2__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2270:1: rule__Bug304681Model__Group_2_1__2__Impl : ( ';' ) ;
+    public final void rule__Bug304681Model__Group_2_1__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2274:1: ( ( ';' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2275:1: ( ';' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2275:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2276:1: ';'
+            {
+             before(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_1_2()); 
+            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Model__Group_2_1__2__Impl4595); 
+             after(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_1_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_1__2__Impl
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_2__0
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2295:1: rule__Bug304681Model__Group_2_2__0 : rule__Bug304681Model__Group_2_2__0__Impl rule__Bug304681Model__Group_2_2__1 ;
+    public final void rule__Bug304681Model__Group_2_2__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2299:1: ( rule__Bug304681Model__Group_2_2__0__Impl rule__Bug304681Model__Group_2_2__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2300:2: rule__Bug304681Model__Group_2_2__0__Impl rule__Bug304681Model__Group_2_2__1
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_2__0__Impl_in_rule__Bug304681Model__Group_2_2__04632);
+            rule__Bug304681Model__Group_2_2__0__Impl();
+            _fsp--;
+
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_2__1_in_rule__Bug304681Model__Group_2_2__04635);
+            rule__Bug304681Model__Group_2_2__1();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_2__0
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_2__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2307:1: rule__Bug304681Model__Group_2_2__0__Impl : ( 'uid' ) ;
+    public final void rule__Bug304681Model__Group_2_2__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2311:1: ( ( 'uid' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2312:1: ( 'uid' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2312:1: ( 'uid' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2313:1: 'uid'
+            {
+             before(grammarAccess.getBug304681ModelAccess().getUidKeyword_2_2_0()); 
+            match(input,28,FollowSets000.FOLLOW_28_in_rule__Bug304681Model__Group_2_2__0__Impl4663); 
+             after(grammarAccess.getBug304681ModelAccess().getUidKeyword_2_2_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_2__0__Impl
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_2__1
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2326:1: rule__Bug304681Model__Group_2_2__1 : rule__Bug304681Model__Group_2_2__1__Impl rule__Bug304681Model__Group_2_2__2 ;
+    public final void rule__Bug304681Model__Group_2_2__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2330:1: ( rule__Bug304681Model__Group_2_2__1__Impl rule__Bug304681Model__Group_2_2__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2331:2: rule__Bug304681Model__Group_2_2__1__Impl rule__Bug304681Model__Group_2_2__2
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_2__1__Impl_in_rule__Bug304681Model__Group_2_2__14694);
+            rule__Bug304681Model__Group_2_2__1__Impl();
+            _fsp--;
+
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_2__2_in_rule__Bug304681Model__Group_2_2__14697);
+            rule__Bug304681Model__Group_2_2__2();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_2__1
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_2__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2338:1: rule__Bug304681Model__Group_2_2__1__Impl : ( ( rule__Bug304681Model__UidAssignment_2_2_1 ) ) ;
+    public final void rule__Bug304681Model__Group_2_2__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2342:1: ( ( ( rule__Bug304681Model__UidAssignment_2_2_1 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2343:1: ( ( rule__Bug304681Model__UidAssignment_2_2_1 ) )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2343:1: ( ( rule__Bug304681Model__UidAssignment_2_2_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2344:1: ( rule__Bug304681Model__UidAssignment_2_2_1 )
+            {
+             before(grammarAccess.getBug304681ModelAccess().getUidAssignment_2_2_1()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2345:1: ( rule__Bug304681Model__UidAssignment_2_2_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2345:2: rule__Bug304681Model__UidAssignment_2_2_1
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UidAssignment_2_2_1_in_rule__Bug304681Model__Group_2_2__1__Impl4724);
+            rule__Bug304681Model__UidAssignment_2_2_1();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getBug304681ModelAccess().getUidAssignment_2_2_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_2__1__Impl
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_2__2
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2355:1: rule__Bug304681Model__Group_2_2__2 : rule__Bug304681Model__Group_2_2__2__Impl ;
+    public final void rule__Bug304681Model__Group_2_2__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2359:1: ( rule__Bug304681Model__Group_2_2__2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2360:2: rule__Bug304681Model__Group_2_2__2__Impl
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_2__2__Impl_in_rule__Bug304681Model__Group_2_2__24754);
+            rule__Bug304681Model__Group_2_2__2__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_2__2
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_2__2__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2366:1: rule__Bug304681Model__Group_2_2__2__Impl : ( ';' ) ;
+    public final void rule__Bug304681Model__Group_2_2__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2370:1: ( ( ';' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2371:1: ( ';' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2371:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2372:1: ';'
+            {
+             before(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_2_2()); 
+            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Model__Group_2_2__2__Impl4782); 
+             after(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_2_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_2__2__Impl
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_3__0
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2391:1: rule__Bug304681Model__Group_2_3__0 : rule__Bug304681Model__Group_2_3__0__Impl rule__Bug304681Model__Group_2_3__1 ;
+    public final void rule__Bug304681Model__Group_2_3__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2395:1: ( rule__Bug304681Model__Group_2_3__0__Impl rule__Bug304681Model__Group_2_3__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2396:2: rule__Bug304681Model__Group_2_3__0__Impl rule__Bug304681Model__Group_2_3__1
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_3__0__Impl_in_rule__Bug304681Model__Group_2_3__04819);
+            rule__Bug304681Model__Group_2_3__0__Impl();
+            _fsp--;
+
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_3__1_in_rule__Bug304681Model__Group_2_3__04822);
+            rule__Bug304681Model__Group_2_3__1();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_3__0
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_3__0__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2403:1: rule__Bug304681Model__Group_2_3__0__Impl : ( ( rule__Bug304681Model__FlagAssignment_2_3_0 ) ) ;
+    public final void rule__Bug304681Model__Group_2_3__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2407:1: ( ( ( rule__Bug304681Model__FlagAssignment_2_3_0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2408:1: ( ( rule__Bug304681Model__FlagAssignment_2_3_0 ) )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2408:1: ( ( rule__Bug304681Model__FlagAssignment_2_3_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2409:1: ( rule__Bug304681Model__FlagAssignment_2_3_0 )
+            {
+             before(grammarAccess.getBug304681ModelAccess().getFlagAssignment_2_3_0()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2410:1: ( rule__Bug304681Model__FlagAssignment_2_3_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2410:2: rule__Bug304681Model__FlagAssignment_2_3_0
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__FlagAssignment_2_3_0_in_rule__Bug304681Model__Group_2_3__0__Impl4849);
+            rule__Bug304681Model__FlagAssignment_2_3_0();
+            _fsp--;
+
+
+            }
+
+             after(grammarAccess.getBug304681ModelAccess().getFlagAssignment_2_3_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_3__0__Impl
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_3__1
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2420:1: rule__Bug304681Model__Group_2_3__1 : rule__Bug304681Model__Group_2_3__1__Impl ;
+    public final void rule__Bug304681Model__Group_2_3__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2424:1: ( rule__Bug304681Model__Group_2_3__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2425:2: rule__Bug304681Model__Group_2_3__1__Impl
+            {
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_3__1__Impl_in_rule__Bug304681Model__Group_2_3__14879);
+            rule__Bug304681Model__Group_2_3__1__Impl();
+            _fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_3__1
+
+
+    // $ANTLR start rule__Bug304681Model__Group_2_3__1__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2431:1: rule__Bug304681Model__Group_2_3__1__Impl : ( ';' ) ;
+    public final void rule__Bug304681Model__Group_2_3__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2435:1: ( ( ';' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2436:1: ( ';' )
+            {
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2436:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2437:1: ';'
+            {
+             before(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_3_1()); 
+            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Model__Group_2_3__1__Impl4907); 
+             after(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_3_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Bug304681Model__Group_2_3__1__Impl
 
 
     // $ANTLR start rule__Bug304681Attribute__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2421:1: rule__Bug304681Attribute__Group__0 : rule__Bug304681Attribute__Group__0__Impl rule__Bug304681Attribute__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2454:1: rule__Bug304681Attribute__Group__0 : rule__Bug304681Attribute__Group__0__Impl rule__Bug304681Attribute__Group__1 ;
     public final void rule__Bug304681Attribute__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2425:1: ( rule__Bug304681Attribute__Group__0__Impl rule__Bug304681Attribute__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2426:2: rule__Bug304681Attribute__Group__0__Impl rule__Bug304681Attribute__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2458:1: ( rule__Bug304681Attribute__Group__0__Impl rule__Bug304681Attribute__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2459:2: rule__Bug304681Attribute__Group__0__Impl rule__Bug304681Attribute__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__Group__0__Impl_in_rule__Bug304681Attribute__Group__04879);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__Group__0__Impl_in_rule__Bug304681Attribute__Group__04942);
             rule__Bug304681Attribute__Group__0__Impl();
             _fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__Group__1_in_rule__Bug304681Attribute__Group__04882);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__Group__1_in_rule__Bug304681Attribute__Group__04945);
             rule__Bug304681Attribute__Group__1();
             _fsp--;
 
@@ -6298,20 +6371,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Attribute__Group__0__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2433:1: rule__Bug304681Attribute__Group__0__Impl : ( 'attr' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2466:1: rule__Bug304681Attribute__Group__0__Impl : ( 'attr' ) ;
     public final void rule__Bug304681Attribute__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2437:1: ( ( 'attr' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2438:1: ( 'attr' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2470:1: ( ( 'attr' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2471:1: ( 'attr' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2438:1: ( 'attr' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2439:1: 'attr'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2471:1: ( 'attr' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2472:1: 'attr'
             {
              before(grammarAccess.getBug304681AttributeAccess().getAttrKeyword_0()); 
-            match(input,29,FollowSets000.FOLLOW_29_in_rule__Bug304681Attribute__Group__0__Impl4910); 
+            match(input,29,FollowSets000.FOLLOW_29_in_rule__Bug304681Attribute__Group__0__Impl4973); 
              after(grammarAccess.getBug304681AttributeAccess().getAttrKeyword_0()); 
 
             }
@@ -6335,20 +6408,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Attribute__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2452:1: rule__Bug304681Attribute__Group__1 : rule__Bug304681Attribute__Group__1__Impl rule__Bug304681Attribute__Group__2 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2485:1: rule__Bug304681Attribute__Group__1 : rule__Bug304681Attribute__Group__1__Impl rule__Bug304681Attribute__Group__2 ;
     public final void rule__Bug304681Attribute__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2456:1: ( rule__Bug304681Attribute__Group__1__Impl rule__Bug304681Attribute__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2457:2: rule__Bug304681Attribute__Group__1__Impl rule__Bug304681Attribute__Group__2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2489:1: ( rule__Bug304681Attribute__Group__1__Impl rule__Bug304681Attribute__Group__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2490:2: rule__Bug304681Attribute__Group__1__Impl rule__Bug304681Attribute__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__Group__1__Impl_in_rule__Bug304681Attribute__Group__14941);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__Group__1__Impl_in_rule__Bug304681Attribute__Group__15004);
             rule__Bug304681Attribute__Group__1__Impl();
             _fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__Group__2_in_rule__Bug304681Attribute__Group__14944);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__Group__2_in_rule__Bug304681Attribute__Group__15007);
             rule__Bug304681Attribute__Group__2();
             _fsp--;
 
@@ -6371,23 +6444,23 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Attribute__Group__1__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2464:1: rule__Bug304681Attribute__Group__1__Impl : ( ( rule__Bug304681Attribute__NameAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2497:1: rule__Bug304681Attribute__Group__1__Impl : ( ( rule__Bug304681Attribute__NameAssignment_1 ) ) ;
     public final void rule__Bug304681Attribute__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2468:1: ( ( ( rule__Bug304681Attribute__NameAssignment_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2469:1: ( ( rule__Bug304681Attribute__NameAssignment_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2501:1: ( ( ( rule__Bug304681Attribute__NameAssignment_1 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2502:1: ( ( rule__Bug304681Attribute__NameAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2469:1: ( ( rule__Bug304681Attribute__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2470:1: ( rule__Bug304681Attribute__NameAssignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2502:1: ( ( rule__Bug304681Attribute__NameAssignment_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2503:1: ( rule__Bug304681Attribute__NameAssignment_1 )
             {
              before(grammarAccess.getBug304681AttributeAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2471:1: ( rule__Bug304681Attribute__NameAssignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2471:2: rule__Bug304681Attribute__NameAssignment_1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2504:1: ( rule__Bug304681Attribute__NameAssignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2504:2: rule__Bug304681Attribute__NameAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__NameAssignment_1_in_rule__Bug304681Attribute__Group__1__Impl4971);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__NameAssignment_1_in_rule__Bug304681Attribute__Group__1__Impl5034);
             rule__Bug304681Attribute__NameAssignment_1();
             _fsp--;
 
@@ -6417,16 +6490,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Attribute__Group__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2481:1: rule__Bug304681Attribute__Group__2 : rule__Bug304681Attribute__Group__2__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2514:1: rule__Bug304681Attribute__Group__2 : rule__Bug304681Attribute__Group__2__Impl ;
     public final void rule__Bug304681Attribute__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2485:1: ( rule__Bug304681Attribute__Group__2__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2486:2: rule__Bug304681Attribute__Group__2__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2518:1: ( rule__Bug304681Attribute__Group__2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2519:2: rule__Bug304681Attribute__Group__2__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__Group__2__Impl_in_rule__Bug304681Attribute__Group__25001);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Attribute__Group__2__Impl_in_rule__Bug304681Attribute__Group__25064);
             rule__Bug304681Attribute__Group__2__Impl();
             _fsp--;
 
@@ -6449,20 +6522,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Attribute__Group__2__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2492:1: rule__Bug304681Attribute__Group__2__Impl : ( ';' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2525:1: rule__Bug304681Attribute__Group__2__Impl : ( ';' ) ;
     public final void rule__Bug304681Attribute__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2496:1: ( ( ';' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2497:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2529:1: ( ( ';' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2530:1: ( ';' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2497:1: ( ';' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2498:1: ';'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2530:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2531:1: ';'
             {
              before(grammarAccess.getBug304681AttributeAccess().getSemicolonKeyword_2()); 
-            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Attribute__Group__2__Impl5029); 
+            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Attribute__Group__2__Impl5092); 
              after(grammarAccess.getBug304681AttributeAccess().getSemicolonKeyword_2()); 
 
             }
@@ -6486,20 +6559,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Reference__Group__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2517:1: rule__Bug304681Reference__Group__0 : rule__Bug304681Reference__Group__0__Impl rule__Bug304681Reference__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2550:1: rule__Bug304681Reference__Group__0 : rule__Bug304681Reference__Group__0__Impl rule__Bug304681Reference__Group__1 ;
     public final void rule__Bug304681Reference__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2521:1: ( rule__Bug304681Reference__Group__0__Impl rule__Bug304681Reference__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2522:2: rule__Bug304681Reference__Group__0__Impl rule__Bug304681Reference__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2554:1: ( rule__Bug304681Reference__Group__0__Impl rule__Bug304681Reference__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2555:2: rule__Bug304681Reference__Group__0__Impl rule__Bug304681Reference__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__Group__0__Impl_in_rule__Bug304681Reference__Group__05066);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__Group__0__Impl_in_rule__Bug304681Reference__Group__05129);
             rule__Bug304681Reference__Group__0__Impl();
             _fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__Group__1_in_rule__Bug304681Reference__Group__05069);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__Group__1_in_rule__Bug304681Reference__Group__05132);
             rule__Bug304681Reference__Group__1();
             _fsp--;
 
@@ -6522,20 +6595,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Reference__Group__0__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2529:1: rule__Bug304681Reference__Group__0__Impl : ( 'ref' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2562:1: rule__Bug304681Reference__Group__0__Impl : ( 'ref' ) ;
     public final void rule__Bug304681Reference__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2533:1: ( ( 'ref' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2534:1: ( 'ref' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2566:1: ( ( 'ref' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2567:1: ( 'ref' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2534:1: ( 'ref' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2535:1: 'ref'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2567:1: ( 'ref' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2568:1: 'ref'
             {
              before(grammarAccess.getBug304681ReferenceAccess().getRefKeyword_0()); 
-            match(input,30,FollowSets000.FOLLOW_30_in_rule__Bug304681Reference__Group__0__Impl5097); 
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__Bug304681Reference__Group__0__Impl5160); 
              after(grammarAccess.getBug304681ReferenceAccess().getRefKeyword_0()); 
 
             }
@@ -6559,20 +6632,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Reference__Group__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2548:1: rule__Bug304681Reference__Group__1 : rule__Bug304681Reference__Group__1__Impl rule__Bug304681Reference__Group__2 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2581:1: rule__Bug304681Reference__Group__1 : rule__Bug304681Reference__Group__1__Impl rule__Bug304681Reference__Group__2 ;
     public final void rule__Bug304681Reference__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2552:1: ( rule__Bug304681Reference__Group__1__Impl rule__Bug304681Reference__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2553:2: rule__Bug304681Reference__Group__1__Impl rule__Bug304681Reference__Group__2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2585:1: ( rule__Bug304681Reference__Group__1__Impl rule__Bug304681Reference__Group__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2586:2: rule__Bug304681Reference__Group__1__Impl rule__Bug304681Reference__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__Group__1__Impl_in_rule__Bug304681Reference__Group__15128);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__Group__1__Impl_in_rule__Bug304681Reference__Group__15191);
             rule__Bug304681Reference__Group__1__Impl();
             _fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__Group__2_in_rule__Bug304681Reference__Group__15131);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__Group__2_in_rule__Bug304681Reference__Group__15194);
             rule__Bug304681Reference__Group__2();
             _fsp--;
 
@@ -6595,23 +6668,23 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Reference__Group__1__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2560:1: rule__Bug304681Reference__Group__1__Impl : ( ( rule__Bug304681Reference__NameAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2593:1: rule__Bug304681Reference__Group__1__Impl : ( ( rule__Bug304681Reference__NameAssignment_1 ) ) ;
     public final void rule__Bug304681Reference__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2564:1: ( ( ( rule__Bug304681Reference__NameAssignment_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2565:1: ( ( rule__Bug304681Reference__NameAssignment_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2597:1: ( ( ( rule__Bug304681Reference__NameAssignment_1 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2598:1: ( ( rule__Bug304681Reference__NameAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2565:1: ( ( rule__Bug304681Reference__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2566:1: ( rule__Bug304681Reference__NameAssignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2598:1: ( ( rule__Bug304681Reference__NameAssignment_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2599:1: ( rule__Bug304681Reference__NameAssignment_1 )
             {
              before(grammarAccess.getBug304681ReferenceAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2567:1: ( rule__Bug304681Reference__NameAssignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2567:2: rule__Bug304681Reference__NameAssignment_1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2600:1: ( rule__Bug304681Reference__NameAssignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2600:2: rule__Bug304681Reference__NameAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__NameAssignment_1_in_rule__Bug304681Reference__Group__1__Impl5158);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__NameAssignment_1_in_rule__Bug304681Reference__Group__1__Impl5221);
             rule__Bug304681Reference__NameAssignment_1();
             _fsp--;
 
@@ -6641,16 +6714,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Reference__Group__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2577:1: rule__Bug304681Reference__Group__2 : rule__Bug304681Reference__Group__2__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2610:1: rule__Bug304681Reference__Group__2 : rule__Bug304681Reference__Group__2__Impl ;
     public final void rule__Bug304681Reference__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2581:1: ( rule__Bug304681Reference__Group__2__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2582:2: rule__Bug304681Reference__Group__2__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2614:1: ( rule__Bug304681Reference__Group__2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2615:2: rule__Bug304681Reference__Group__2__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__Group__2__Impl_in_rule__Bug304681Reference__Group__25188);
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Reference__Group__2__Impl_in_rule__Bug304681Reference__Group__25251);
             rule__Bug304681Reference__Group__2__Impl();
             _fsp--;
 
@@ -6673,20 +6746,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Reference__Group__2__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2588:1: rule__Bug304681Reference__Group__2__Impl : ( ';' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2621:1: rule__Bug304681Reference__Group__2__Impl : ( ';' ) ;
     public final void rule__Bug304681Reference__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2592:1: ( ( ';' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2593:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2625:1: ( ( ';' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2626:1: ( ';' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2593:1: ( ';' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2594:1: ';'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2626:1: ( ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2627:1: ';'
             {
              before(grammarAccess.getBug304681ReferenceAccess().getSemicolonKeyword_2()); 
-            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Reference__Group__2__Impl5216); 
+            match(input,26,FollowSets000.FOLLOW_26_in_rule__Bug304681Reference__Group__2__Impl5279); 
              after(grammarAccess.getBug304681ReferenceAccess().getSemicolonKeyword_2()); 
 
             }
@@ -6710,17 +6783,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__UnorderedGroup_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2614:1: rule__SimpleModel__UnorderedGroup_0 : ( rule__SimpleModel__UnorderedGroup_0__0 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2647:1: rule__SimpleModel__UnorderedGroup_0 : ( rule__SimpleModel__UnorderedGroup_0__0 )? ;
     public final void rule__SimpleModel__UnorderedGroup_0() throws RecognitionException {
 
             	int stackSize = keepStackSize();
         		getUnorderedGroupHelper().enter(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2619:1: ( ( rule__SimpleModel__UnorderedGroup_0__0 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2620:2: ( rule__SimpleModel__UnorderedGroup_0__0 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2652:1: ( ( rule__SimpleModel__UnorderedGroup_0__0 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2653:2: ( rule__SimpleModel__UnorderedGroup_0__0 )?
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2620:2: ( rule__SimpleModel__UnorderedGroup_0__0 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2653:2: ( rule__SimpleModel__UnorderedGroup_0__0 )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -6738,9 +6811,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt17) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2620:2: rule__SimpleModel__UnorderedGroup_0__0
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2653:2: rule__SimpleModel__UnorderedGroup_0__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__0_in_rule__SimpleModel__UnorderedGroup_05254);
+                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__0_in_rule__SimpleModel__UnorderedGroup_05317);
                     rule__SimpleModel__UnorderedGroup_0__0();
                     _fsp--;
 
@@ -6770,17 +6843,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__UnorderedGroup_0__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2630:1: rule__SimpleModel__UnorderedGroup_0__Impl : ( ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2663:1: rule__SimpleModel__UnorderedGroup_0__Impl : ( ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) ) ) ;
     public final void rule__SimpleModel__UnorderedGroup_0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2635:1: ( ( ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2636:3: ( ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2668:1: ( ( ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2669:3: ( ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2636:3: ( ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2669:3: ( ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) ) )
             int alt18=4;
             int LA18_0 = input.LA(1);
 
@@ -6798,22 +6871,22 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("2636:3: ( ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) ) )", 18, 0, input);
+                    new NoViableAltException("2669:3: ( ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) ) )", 18, 0, input);
 
                 throw nvae;
             }
             switch (alt18) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2638:4: ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2671:4: ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2638:4: ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2639:5: {...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2671:4: ({...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2672:5: {...}? => ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0) ) {
                         throw new FailedPredicateException(input, "rule__SimpleModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2639:108: ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2640:6: ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2672:108: ( ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2673:6: ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0);
@@ -6821,14 +6894,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2646:6: ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2648:7: ( rule__SimpleModel__VisibilityAssignment_0_0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2679:6: ( ( rule__SimpleModel__VisibilityAssignment_0_0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2681:7: ( rule__SimpleModel__VisibilityAssignment_0_0 )
                     {
                      before(grammarAccess.getSimpleModelAccess().getVisibilityAssignment_0_0()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2649:7: ( rule__SimpleModel__VisibilityAssignment_0_0 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2649:8: rule__SimpleModel__VisibilityAssignment_0_0
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2682:7: ( rule__SimpleModel__VisibilityAssignment_0_0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2682:8: rule__SimpleModel__VisibilityAssignment_0_0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__VisibilityAssignment_0_0_in_rule__SimpleModel__UnorderedGroup_0__Impl5341);
+                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__VisibilityAssignment_0_0_in_rule__SimpleModel__UnorderedGroup_0__Impl5404);
                     rule__SimpleModel__VisibilityAssignment_0_0();
                     _fsp--;
 
@@ -6849,16 +6922,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2655:4: ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2688:4: ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2655:4: ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2656:5: {...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2688:4: ({...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2689:5: {...}? => ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1) ) {
                         throw new FailedPredicateException(input, "rule__SimpleModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2656:108: ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2657:6: ( ( rule__SimpleModel__StaticAssignment_0_1 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2689:108: ( ( ( rule__SimpleModel__StaticAssignment_0_1 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2690:6: ( ( rule__SimpleModel__StaticAssignment_0_1 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1);
@@ -6866,14 +6939,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2663:6: ( ( rule__SimpleModel__StaticAssignment_0_1 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2665:7: ( rule__SimpleModel__StaticAssignment_0_1 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2696:6: ( ( rule__SimpleModel__StaticAssignment_0_1 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2698:7: ( rule__SimpleModel__StaticAssignment_0_1 )
                     {
                      before(grammarAccess.getSimpleModelAccess().getStaticAssignment_0_1()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2666:7: ( rule__SimpleModel__StaticAssignment_0_1 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2666:8: rule__SimpleModel__StaticAssignment_0_1
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2699:7: ( rule__SimpleModel__StaticAssignment_0_1 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2699:8: rule__SimpleModel__StaticAssignment_0_1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__StaticAssignment_0_1_in_rule__SimpleModel__UnorderedGroup_0__Impl5432);
+                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__StaticAssignment_0_1_in_rule__SimpleModel__UnorderedGroup_0__Impl5495);
                     rule__SimpleModel__StaticAssignment_0_1();
                     _fsp--;
 
@@ -6894,16 +6967,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2672:4: ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2705:4: ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2672:4: ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2673:5: {...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2705:4: ({...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2706:5: {...}? => ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2) ) {
                         throw new FailedPredicateException(input, "rule__SimpleModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2673:108: ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2674:6: ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2706:108: ( ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2707:6: ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2);
@@ -6911,14 +6984,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2680:6: ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2682:7: ( rule__SimpleModel__SynchronizedAssignment_0_2 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2713:6: ( ( rule__SimpleModel__SynchronizedAssignment_0_2 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2715:7: ( rule__SimpleModel__SynchronizedAssignment_0_2 )
                     {
                      before(grammarAccess.getSimpleModelAccess().getSynchronizedAssignment_0_2()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2683:7: ( rule__SimpleModel__SynchronizedAssignment_0_2 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2683:8: rule__SimpleModel__SynchronizedAssignment_0_2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2716:7: ( rule__SimpleModel__SynchronizedAssignment_0_2 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2716:8: rule__SimpleModel__SynchronizedAssignment_0_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__SynchronizedAssignment_0_2_in_rule__SimpleModel__UnorderedGroup_0__Impl5523);
+                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__SynchronizedAssignment_0_2_in_rule__SimpleModel__UnorderedGroup_0__Impl5586);
                     rule__SimpleModel__SynchronizedAssignment_0_2();
                     _fsp--;
 
@@ -6939,16 +7012,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2689:4: ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2722:4: ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2689:4: ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2690:5: {...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2722:4: ({...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2723:5: {...}? => ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3) ) {
                         throw new FailedPredicateException(input, "rule__SimpleModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2690:108: ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2691:6: ( ( rule__SimpleModel__Alternatives_0_3 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2723:108: ( ( ( rule__SimpleModel__Alternatives_0_3 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2724:6: ( ( rule__SimpleModel__Alternatives_0_3 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3);
@@ -6956,14 +7029,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2697:6: ( ( rule__SimpleModel__Alternatives_0_3 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2699:7: ( rule__SimpleModel__Alternatives_0_3 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2730:6: ( ( rule__SimpleModel__Alternatives_0_3 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2732:7: ( rule__SimpleModel__Alternatives_0_3 )
                     {
                      before(grammarAccess.getSimpleModelAccess().getAlternatives_0_3()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2700:7: ( rule__SimpleModel__Alternatives_0_3 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2700:8: rule__SimpleModel__Alternatives_0_3
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2733:7: ( rule__SimpleModel__Alternatives_0_3 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2733:8: rule__SimpleModel__Alternatives_0_3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__Alternatives_0_3_in_rule__SimpleModel__UnorderedGroup_0__Impl5614);
+                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__Alternatives_0_3_in_rule__SimpleModel__UnorderedGroup_0__Impl5677);
                     rule__SimpleModel__Alternatives_0_3();
                     _fsp--;
 
@@ -7007,20 +7080,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__UnorderedGroup_0__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2715:1: rule__SimpleModel__UnorderedGroup_0__0 : rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__1 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2748:1: rule__SimpleModel__UnorderedGroup_0__0 : rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__1 )? ;
     public final void rule__SimpleModel__UnorderedGroup_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2719:1: ( rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__1 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2720:2: rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__1 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2752:1: ( rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__1 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2753:2: rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__1 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__05673);
+            pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__05736);
             rule__SimpleModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2721:2: ( rule__SimpleModel__UnorderedGroup_0__1 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2754:2: ( rule__SimpleModel__UnorderedGroup_0__1 )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -7038,9 +7111,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2721:2: rule__SimpleModel__UnorderedGroup_0__1
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2754:2: rule__SimpleModel__UnorderedGroup_0__1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__1_in_rule__SimpleModel__UnorderedGroup_0__05676);
+                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__1_in_rule__SimpleModel__UnorderedGroup_0__05739);
                     rule__SimpleModel__UnorderedGroup_0__1();
                     _fsp--;
 
@@ -7069,20 +7142,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__UnorderedGroup_0__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2728:1: rule__SimpleModel__UnorderedGroup_0__1 : rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__2 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2761:1: rule__SimpleModel__UnorderedGroup_0__1 : rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__2 )? ;
     public final void rule__SimpleModel__UnorderedGroup_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2732:1: ( rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__2 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2733:2: rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2765:1: ( rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2766:2: rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__2 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__15701);
+            pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__15764);
             rule__SimpleModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2734:2: ( rule__SimpleModel__UnorderedGroup_0__2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2767:2: ( rule__SimpleModel__UnorderedGroup_0__2 )?
             int alt20=2;
             int LA20_0 = input.LA(1);
 
@@ -7100,9 +7173,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt20) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2734:2: rule__SimpleModel__UnorderedGroup_0__2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2767:2: rule__SimpleModel__UnorderedGroup_0__2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__2_in_rule__SimpleModel__UnorderedGroup_0__15704);
+                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__2_in_rule__SimpleModel__UnorderedGroup_0__15767);
                     rule__SimpleModel__UnorderedGroup_0__2();
                     _fsp--;
 
@@ -7131,20 +7204,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__UnorderedGroup_0__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2741:1: rule__SimpleModel__UnorderedGroup_0__2 : rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__3 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2774:1: rule__SimpleModel__UnorderedGroup_0__2 : rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__3 )? ;
     public final void rule__SimpleModel__UnorderedGroup_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2745:1: ( rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__3 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2746:2: rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__3 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2778:1: ( rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__3 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2779:2: rule__SimpleModel__UnorderedGroup_0__Impl ( rule__SimpleModel__UnorderedGroup_0__3 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__25729);
+            pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__25792);
             rule__SimpleModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2747:2: ( rule__SimpleModel__UnorderedGroup_0__3 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2780:2: ( rule__SimpleModel__UnorderedGroup_0__3 )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -7162,9 +7235,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt21) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2747:2: rule__SimpleModel__UnorderedGroup_0__3
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2780:2: rule__SimpleModel__UnorderedGroup_0__3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__3_in_rule__SimpleModel__UnorderedGroup_0__25732);
+                    pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__3_in_rule__SimpleModel__UnorderedGroup_0__25795);
                     rule__SimpleModel__UnorderedGroup_0__3();
                     _fsp--;
 
@@ -7193,16 +7266,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__UnorderedGroup_0__3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2754:1: rule__SimpleModel__UnorderedGroup_0__3 : rule__SimpleModel__UnorderedGroup_0__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2787:1: rule__SimpleModel__UnorderedGroup_0__3 : rule__SimpleModel__UnorderedGroup_0__Impl ;
     public final void rule__SimpleModel__UnorderedGroup_0__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2758:1: ( rule__SimpleModel__UnorderedGroup_0__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2759:2: rule__SimpleModel__UnorderedGroup_0__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2791:1: ( rule__SimpleModel__UnorderedGroup_0__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2792:2: rule__SimpleModel__UnorderedGroup_0__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__35757);
+            pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__35820);
             rule__SimpleModel__UnorderedGroup_0__Impl();
             _fsp--;
 
@@ -7225,17 +7298,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__UnorderedGroup_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2774:1: rule__MandatoryModel__UnorderedGroup_0 : rule__MandatoryModel__UnorderedGroup_0__0 {...}?;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2807:1: rule__MandatoryModel__UnorderedGroup_0 : rule__MandatoryModel__UnorderedGroup_0__0 {...}?;
     public final void rule__MandatoryModel__UnorderedGroup_0() throws RecognitionException {
 
             	int stackSize = keepStackSize();
         		getUnorderedGroupHelper().enter(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2779:1: ( rule__MandatoryModel__UnorderedGroup_0__0 {...}?)
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2780:2: rule__MandatoryModel__UnorderedGroup_0__0 {...}?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2812:1: ( rule__MandatoryModel__UnorderedGroup_0__0 {...}?)
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2813:2: rule__MandatoryModel__UnorderedGroup_0__0 {...}?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__0_in_rule__MandatoryModel__UnorderedGroup_05789);
+            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__0_in_rule__MandatoryModel__UnorderedGroup_05852);
             rule__MandatoryModel__UnorderedGroup_0__0();
             _fsp--;
 
@@ -7262,17 +7335,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__UnorderedGroup_0__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2791:1: rule__MandatoryModel__UnorderedGroup_0__Impl : ( ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2824:1: rule__MandatoryModel__UnorderedGroup_0__Impl : ( ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) ) ) ;
     public final void rule__MandatoryModel__UnorderedGroup_0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2796:1: ( ( ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2797:3: ( ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2829:1: ( ( ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2830:3: ( ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2797:3: ( ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2830:3: ( ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) ) )
             int alt22=4;
             int LA22_0 = input.LA(1);
 
@@ -7290,22 +7363,22 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("2797:3: ( ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) ) )", 22, 0, input);
+                    new NoViableAltException("2830:3: ( ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) ) )", 22, 0, input);
 
                 throw nvae;
             }
             switch (alt22) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2799:4: ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2832:4: ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2799:4: ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2800:5: {...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2832:4: ({...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2833:5: {...}? => ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0) ) {
                         throw new FailedPredicateException(input, "rule__MandatoryModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2800:111: ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2801:6: ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2833:111: ( ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2834:6: ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0);
@@ -7313,14 +7386,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2807:6: ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2809:7: ( rule__MandatoryModel__VisibilityAssignment_0_0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2840:6: ( ( rule__MandatoryModel__VisibilityAssignment_0_0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2842:7: ( rule__MandatoryModel__VisibilityAssignment_0_0 )
                     {
                      before(grammarAccess.getMandatoryModelAccess().getVisibilityAssignment_0_0()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2810:7: ( rule__MandatoryModel__VisibilityAssignment_0_0 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2810:8: rule__MandatoryModel__VisibilityAssignment_0_0
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2843:7: ( rule__MandatoryModel__VisibilityAssignment_0_0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2843:8: rule__MandatoryModel__VisibilityAssignment_0_0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__VisibilityAssignment_0_0_in_rule__MandatoryModel__UnorderedGroup_0__Impl5878);
+                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__VisibilityAssignment_0_0_in_rule__MandatoryModel__UnorderedGroup_0__Impl5941);
                     rule__MandatoryModel__VisibilityAssignment_0_0();
                     _fsp--;
 
@@ -7341,16 +7414,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2816:4: ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2849:4: ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2816:4: ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2817:5: {...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2849:4: ({...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2850:5: {...}? => ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1) ) {
                         throw new FailedPredicateException(input, "rule__MandatoryModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2817:111: ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2818:6: ( ( rule__MandatoryModel__StaticAssignment_0_1 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2850:111: ( ( ( rule__MandatoryModel__StaticAssignment_0_1 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2851:6: ( ( rule__MandatoryModel__StaticAssignment_0_1 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1);
@@ -7358,14 +7431,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2824:6: ( ( rule__MandatoryModel__StaticAssignment_0_1 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2826:7: ( rule__MandatoryModel__StaticAssignment_0_1 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2857:6: ( ( rule__MandatoryModel__StaticAssignment_0_1 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2859:7: ( rule__MandatoryModel__StaticAssignment_0_1 )
                     {
                      before(grammarAccess.getMandatoryModelAccess().getStaticAssignment_0_1()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2827:7: ( rule__MandatoryModel__StaticAssignment_0_1 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2827:8: rule__MandatoryModel__StaticAssignment_0_1
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2860:7: ( rule__MandatoryModel__StaticAssignment_0_1 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2860:8: rule__MandatoryModel__StaticAssignment_0_1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__StaticAssignment_0_1_in_rule__MandatoryModel__UnorderedGroup_0__Impl5969);
+                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__StaticAssignment_0_1_in_rule__MandatoryModel__UnorderedGroup_0__Impl6032);
                     rule__MandatoryModel__StaticAssignment_0_1();
                     _fsp--;
 
@@ -7386,16 +7459,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2833:4: ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2866:4: ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2833:4: ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2834:5: {...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2866:4: ({...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2867:5: {...}? => ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2) ) {
                         throw new FailedPredicateException(input, "rule__MandatoryModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2834:111: ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2835:6: ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2867:111: ( ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2868:6: ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2);
@@ -7403,14 +7476,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2841:6: ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2843:7: ( rule__MandatoryModel__SynchronizedAssignment_0_2 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2874:6: ( ( rule__MandatoryModel__SynchronizedAssignment_0_2 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2876:7: ( rule__MandatoryModel__SynchronizedAssignment_0_2 )
                     {
                      before(grammarAccess.getMandatoryModelAccess().getSynchronizedAssignment_0_2()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2844:7: ( rule__MandatoryModel__SynchronizedAssignment_0_2 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2844:8: rule__MandatoryModel__SynchronizedAssignment_0_2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2877:7: ( rule__MandatoryModel__SynchronizedAssignment_0_2 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2877:8: rule__MandatoryModel__SynchronizedAssignment_0_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__SynchronizedAssignment_0_2_in_rule__MandatoryModel__UnorderedGroup_0__Impl6060);
+                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__SynchronizedAssignment_0_2_in_rule__MandatoryModel__UnorderedGroup_0__Impl6123);
                     rule__MandatoryModel__SynchronizedAssignment_0_2();
                     _fsp--;
 
@@ -7431,16 +7504,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2850:4: ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2883:4: ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2850:4: ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2851:5: {...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2883:4: ({...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2884:5: {...}? => ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3) ) {
                         throw new FailedPredicateException(input, "rule__MandatoryModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2851:111: ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2852:6: ( ( rule__MandatoryModel__Alternatives_0_3 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2884:111: ( ( ( rule__MandatoryModel__Alternatives_0_3 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2885:6: ( ( rule__MandatoryModel__Alternatives_0_3 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3);
@@ -7448,14 +7521,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2858:6: ( ( rule__MandatoryModel__Alternatives_0_3 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2860:7: ( rule__MandatoryModel__Alternatives_0_3 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2891:6: ( ( rule__MandatoryModel__Alternatives_0_3 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2893:7: ( rule__MandatoryModel__Alternatives_0_3 )
                     {
                      before(grammarAccess.getMandatoryModelAccess().getAlternatives_0_3()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2861:7: ( rule__MandatoryModel__Alternatives_0_3 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2861:8: rule__MandatoryModel__Alternatives_0_3
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2894:7: ( rule__MandatoryModel__Alternatives_0_3 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2894:8: rule__MandatoryModel__Alternatives_0_3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__Alternatives_0_3_in_rule__MandatoryModel__UnorderedGroup_0__Impl6151);
+                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__Alternatives_0_3_in_rule__MandatoryModel__UnorderedGroup_0__Impl6214);
                     rule__MandatoryModel__Alternatives_0_3();
                     _fsp--;
 
@@ -7499,20 +7572,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__UnorderedGroup_0__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2876:1: rule__MandatoryModel__UnorderedGroup_0__0 : rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__1 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2909:1: rule__MandatoryModel__UnorderedGroup_0__0 : rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__1 )? ;
     public final void rule__MandatoryModel__UnorderedGroup_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2880:1: ( rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__1 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2881:2: rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__1 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2913:1: ( rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__1 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2914:2: rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__1 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__06210);
+            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__06273);
             rule__MandatoryModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2882:2: ( rule__MandatoryModel__UnorderedGroup_0__1 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2915:2: ( rule__MandatoryModel__UnorderedGroup_0__1 )?
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -7530,9 +7603,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt23) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2882:2: rule__MandatoryModel__UnorderedGroup_0__1
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2915:2: rule__MandatoryModel__UnorderedGroup_0__1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__1_in_rule__MandatoryModel__UnorderedGroup_0__06213);
+                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__1_in_rule__MandatoryModel__UnorderedGroup_0__06276);
                     rule__MandatoryModel__UnorderedGroup_0__1();
                     _fsp--;
 
@@ -7561,20 +7634,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__UnorderedGroup_0__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2889:1: rule__MandatoryModel__UnorderedGroup_0__1 : rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__2 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2922:1: rule__MandatoryModel__UnorderedGroup_0__1 : rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__2 )? ;
     public final void rule__MandatoryModel__UnorderedGroup_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2893:1: ( rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__2 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2894:2: rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2926:1: ( rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2927:2: rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__2 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__16238);
+            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__16301);
             rule__MandatoryModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2895:2: ( rule__MandatoryModel__UnorderedGroup_0__2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2928:2: ( rule__MandatoryModel__UnorderedGroup_0__2 )?
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -7592,9 +7665,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt24) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2895:2: rule__MandatoryModel__UnorderedGroup_0__2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2928:2: rule__MandatoryModel__UnorderedGroup_0__2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__2_in_rule__MandatoryModel__UnorderedGroup_0__16241);
+                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__2_in_rule__MandatoryModel__UnorderedGroup_0__16304);
                     rule__MandatoryModel__UnorderedGroup_0__2();
                     _fsp--;
 
@@ -7623,20 +7696,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__UnorderedGroup_0__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2902:1: rule__MandatoryModel__UnorderedGroup_0__2 : rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__3 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2935:1: rule__MandatoryModel__UnorderedGroup_0__2 : rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__3 )? ;
     public final void rule__MandatoryModel__UnorderedGroup_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2906:1: ( rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__3 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2907:2: rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__3 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2939:1: ( rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__3 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2940:2: rule__MandatoryModel__UnorderedGroup_0__Impl ( rule__MandatoryModel__UnorderedGroup_0__3 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__26266);
+            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__26329);
             rule__MandatoryModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2908:2: ( rule__MandatoryModel__UnorderedGroup_0__3 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2941:2: ( rule__MandatoryModel__UnorderedGroup_0__3 )?
             int alt25=2;
             int LA25_0 = input.LA(1);
 
@@ -7654,9 +7727,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt25) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2908:2: rule__MandatoryModel__UnorderedGroup_0__3
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2941:2: rule__MandatoryModel__UnorderedGroup_0__3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__3_in_rule__MandatoryModel__UnorderedGroup_0__26269);
+                    pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__3_in_rule__MandatoryModel__UnorderedGroup_0__26332);
                     rule__MandatoryModel__UnorderedGroup_0__3();
                     _fsp--;
 
@@ -7685,16 +7758,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__UnorderedGroup_0__3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2915:1: rule__MandatoryModel__UnorderedGroup_0__3 : rule__MandatoryModel__UnorderedGroup_0__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2948:1: rule__MandatoryModel__UnorderedGroup_0__3 : rule__MandatoryModel__UnorderedGroup_0__Impl ;
     public final void rule__MandatoryModel__UnorderedGroup_0__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2919:1: ( rule__MandatoryModel__UnorderedGroup_0__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2920:2: rule__MandatoryModel__UnorderedGroup_0__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2952:1: ( rule__MandatoryModel__UnorderedGroup_0__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2953:2: rule__MandatoryModel__UnorderedGroup_0__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__36294);
+            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__36357);
             rule__MandatoryModel__UnorderedGroup_0__Impl();
             _fsp--;
 
@@ -7717,17 +7790,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__UnorderedGroup_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2935:1: rule__LoopedModel__UnorderedGroup_0 : ( rule__LoopedModel__UnorderedGroup_0__0 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2968:1: rule__LoopedModel__UnorderedGroup_0 : ( rule__LoopedModel__UnorderedGroup_0__0 )? ;
     public final void rule__LoopedModel__UnorderedGroup_0() throws RecognitionException {
 
             	int stackSize = keepStackSize();
         		getUnorderedGroupHelper().enter(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2940:1: ( ( rule__LoopedModel__UnorderedGroup_0__0 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2941:2: ( rule__LoopedModel__UnorderedGroup_0__0 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2973:1: ( ( rule__LoopedModel__UnorderedGroup_0__0 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2974:2: ( rule__LoopedModel__UnorderedGroup_0__0 )?
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2941:2: ( rule__LoopedModel__UnorderedGroup_0__0 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2974:2: ( rule__LoopedModel__UnorderedGroup_0__0 )?
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -7745,9 +7818,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt26) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2941:2: rule__LoopedModel__UnorderedGroup_0__0
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2974:2: rule__LoopedModel__UnorderedGroup_0__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__0_in_rule__LoopedModel__UnorderedGroup_06326);
+                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__0_in_rule__LoopedModel__UnorderedGroup_06389);
                     rule__LoopedModel__UnorderedGroup_0__0();
                     _fsp--;
 
@@ -7777,17 +7850,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__UnorderedGroup_0__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2951:1: rule__LoopedModel__UnorderedGroup_0__Impl : ( ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2984:1: rule__LoopedModel__UnorderedGroup_0__Impl : ( ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) ) ) ;
     public final void rule__LoopedModel__UnorderedGroup_0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2956:1: ( ( ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2957:3: ( ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2989:1: ( ( ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2990:3: ( ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2957:3: ( ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2990:3: ( ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) ) )
             int alt31=4;
             int LA31_0 = input.LA(1);
 
@@ -7805,22 +7878,22 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("2957:3: ( ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) ) )", 31, 0, input);
+                    new NoViableAltException("2990:3: ( ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) ) | ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) ) )", 31, 0, input);
 
                 throw nvae;
             }
             switch (alt31) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2959:4: ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2992:4: ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2959:4: ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2960:5: {...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2992:4: ({...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2993:5: {...}? => ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0) ) {
                         throw new FailedPredicateException(input, "rule__LoopedModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2960:108: ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2961:6: ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2993:108: ( ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2994:6: ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0);
@@ -7828,17 +7901,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2967:6: ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2968:6: ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3000:6: ( ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3001:6: ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) ) ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2968:6: ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2969:7: ( rule__LoopedModel__VisibilityAssignment_0_0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3001:6: ( ( rule__LoopedModel__VisibilityAssignment_0_0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3002:7: ( rule__LoopedModel__VisibilityAssignment_0_0 )
                     {
                      before(grammarAccess.getLoopedModelAccess().getVisibilityAssignment_0_0()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2970:7: ( rule__LoopedModel__VisibilityAssignment_0_0 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2970:8: rule__LoopedModel__VisibilityAssignment_0_0
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3003:7: ( rule__LoopedModel__VisibilityAssignment_0_0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3003:8: rule__LoopedModel__VisibilityAssignment_0_0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__VisibilityAssignment_0_0_in_rule__LoopedModel__UnorderedGroup_0__Impl6414);
+                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__VisibilityAssignment_0_0_in_rule__LoopedModel__UnorderedGroup_0__Impl6477);
                     rule__LoopedModel__VisibilityAssignment_0_0();
                     _fsp--;
 
@@ -7849,11 +7922,11 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2973:6: ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2974:7: ( rule__LoopedModel__VisibilityAssignment_0_0 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3006:6: ( ( rule__LoopedModel__VisibilityAssignment_0_0 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3007:7: ( rule__LoopedModel__VisibilityAssignment_0_0 )*
                     {
                      before(grammarAccess.getLoopedModelAccess().getVisibilityAssignment_0_0()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2975:7: ( rule__LoopedModel__VisibilityAssignment_0_0 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3008:7: ( rule__LoopedModel__VisibilityAssignment_0_0 )*
                     loop27:
                     do {
                         int alt27=2;
@@ -7896,9 +7969,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                         switch (alt27) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2975:8: rule__LoopedModel__VisibilityAssignment_0_0
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3008:8: rule__LoopedModel__VisibilityAssignment_0_0
                     	    {
-                    	    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__VisibilityAssignment_0_0_in_rule__LoopedModel__UnorderedGroup_0__Impl6454);
+                    	    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__VisibilityAssignment_0_0_in_rule__LoopedModel__UnorderedGroup_0__Impl6517);
                     	    rule__LoopedModel__VisibilityAssignment_0_0();
                     	    _fsp--;
 
@@ -7928,16 +8001,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2981:4: ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3014:4: ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2981:4: ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2982:5: {...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3014:4: ({...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3015:5: {...}? => ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1) ) {
                         throw new FailedPredicateException(input, "rule__LoopedModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2982:108: ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2983:6: ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3015:108: ( ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3016:6: ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1);
@@ -7945,17 +8018,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2989:6: ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2990:6: ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3022:6: ( ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3023:6: ( ( rule__LoopedModel__StaticAssignment_0_1 ) ) ( ( rule__LoopedModel__StaticAssignment_0_1 )* )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2990:6: ( ( rule__LoopedModel__StaticAssignment_0_1 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2991:7: ( rule__LoopedModel__StaticAssignment_0_1 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3023:6: ( ( rule__LoopedModel__StaticAssignment_0_1 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3024:7: ( rule__LoopedModel__StaticAssignment_0_1 )
                     {
                      before(grammarAccess.getLoopedModelAccess().getStaticAssignment_0_1()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2992:7: ( rule__LoopedModel__StaticAssignment_0_1 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2992:8: rule__LoopedModel__StaticAssignment_0_1
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3025:7: ( rule__LoopedModel__StaticAssignment_0_1 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3025:8: rule__LoopedModel__StaticAssignment_0_1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__StaticAssignment_0_1_in_rule__LoopedModel__UnorderedGroup_0__Impl6553);
+                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__StaticAssignment_0_1_in_rule__LoopedModel__UnorderedGroup_0__Impl6616);
                     rule__LoopedModel__StaticAssignment_0_1();
                     _fsp--;
 
@@ -7966,11 +8039,11 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2995:6: ( ( rule__LoopedModel__StaticAssignment_0_1 )* )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2996:7: ( rule__LoopedModel__StaticAssignment_0_1 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3028:6: ( ( rule__LoopedModel__StaticAssignment_0_1 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3029:7: ( rule__LoopedModel__StaticAssignment_0_1 )*
                     {
                      before(grammarAccess.getLoopedModelAccess().getStaticAssignment_0_1()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2997:7: ( rule__LoopedModel__StaticAssignment_0_1 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3030:7: ( rule__LoopedModel__StaticAssignment_0_1 )*
                     loop28:
                     do {
                         int alt28=2;
@@ -7989,9 +8062,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                         switch (alt28) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:2997:8: rule__LoopedModel__StaticAssignment_0_1
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3030:8: rule__LoopedModel__StaticAssignment_0_1
                     	    {
-                    	    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__StaticAssignment_0_1_in_rule__LoopedModel__UnorderedGroup_0__Impl6593);
+                    	    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__StaticAssignment_0_1_in_rule__LoopedModel__UnorderedGroup_0__Impl6656);
                     	    rule__LoopedModel__StaticAssignment_0_1();
                     	    _fsp--;
 
@@ -8021,16 +8094,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3003:4: ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3036:4: ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3003:4: ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3004:5: {...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3036:4: ({...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3037:5: {...}? => ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2) ) {
                         throw new FailedPredicateException(input, "rule__LoopedModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3004:108: ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3005:6: ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3037:108: ( ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3038:6: ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2);
@@ -8038,17 +8111,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3011:6: ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3012:6: ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3044:6: ( ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3045:6: ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) ) ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3012:6: ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3013:7: ( rule__LoopedModel__SynchronizedAssignment_0_2 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3045:6: ( ( rule__LoopedModel__SynchronizedAssignment_0_2 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3046:7: ( rule__LoopedModel__SynchronizedAssignment_0_2 )
                     {
                      before(grammarAccess.getLoopedModelAccess().getSynchronizedAssignment_0_2()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3014:7: ( rule__LoopedModel__SynchronizedAssignment_0_2 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3014:8: rule__LoopedModel__SynchronizedAssignment_0_2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3047:7: ( rule__LoopedModel__SynchronizedAssignment_0_2 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3047:8: rule__LoopedModel__SynchronizedAssignment_0_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__SynchronizedAssignment_0_2_in_rule__LoopedModel__UnorderedGroup_0__Impl6692);
+                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__SynchronizedAssignment_0_2_in_rule__LoopedModel__UnorderedGroup_0__Impl6755);
                     rule__LoopedModel__SynchronizedAssignment_0_2();
                     _fsp--;
 
@@ -8059,11 +8132,11 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3017:6: ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3018:7: ( rule__LoopedModel__SynchronizedAssignment_0_2 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3050:6: ( ( rule__LoopedModel__SynchronizedAssignment_0_2 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3051:7: ( rule__LoopedModel__SynchronizedAssignment_0_2 )*
                     {
                      before(grammarAccess.getLoopedModelAccess().getSynchronizedAssignment_0_2()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3019:7: ( rule__LoopedModel__SynchronizedAssignment_0_2 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3052:7: ( rule__LoopedModel__SynchronizedAssignment_0_2 )*
                     loop29:
                     do {
                         int alt29=2;
@@ -8082,9 +8155,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                         switch (alt29) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3019:8: rule__LoopedModel__SynchronizedAssignment_0_2
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3052:8: rule__LoopedModel__SynchronizedAssignment_0_2
                     	    {
-                    	    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__SynchronizedAssignment_0_2_in_rule__LoopedModel__UnorderedGroup_0__Impl6732);
+                    	    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__SynchronizedAssignment_0_2_in_rule__LoopedModel__UnorderedGroup_0__Impl6795);
                     	    rule__LoopedModel__SynchronizedAssignment_0_2();
                     	    _fsp--;
 
@@ -8114,16 +8187,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3025:4: ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3058:4: ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3025:4: ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3026:5: {...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3058:4: ({...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3059:5: {...}? => ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3) ) {
                         throw new FailedPredicateException(input, "rule__LoopedModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3026:108: ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3027:6: ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3059:108: ( ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3060:6: ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3);
@@ -8131,17 +8204,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3033:6: ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3034:6: ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3066:6: ( ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3067:6: ( ( rule__LoopedModel__Alternatives_0_3 ) ) ( ( rule__LoopedModel__Alternatives_0_3 )* )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3034:6: ( ( rule__LoopedModel__Alternatives_0_3 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3035:7: ( rule__LoopedModel__Alternatives_0_3 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3067:6: ( ( rule__LoopedModel__Alternatives_0_3 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3068:7: ( rule__LoopedModel__Alternatives_0_3 )
                     {
                      before(grammarAccess.getLoopedModelAccess().getAlternatives_0_3()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3036:7: ( rule__LoopedModel__Alternatives_0_3 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3036:8: rule__LoopedModel__Alternatives_0_3
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3069:7: ( rule__LoopedModel__Alternatives_0_3 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3069:8: rule__LoopedModel__Alternatives_0_3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__Alternatives_0_3_in_rule__LoopedModel__UnorderedGroup_0__Impl6831);
+                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__Alternatives_0_3_in_rule__LoopedModel__UnorderedGroup_0__Impl6894);
                     rule__LoopedModel__Alternatives_0_3();
                     _fsp--;
 
@@ -8152,11 +8225,11 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3039:6: ( ( rule__LoopedModel__Alternatives_0_3 )* )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3040:7: ( rule__LoopedModel__Alternatives_0_3 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3072:6: ( ( rule__LoopedModel__Alternatives_0_3 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3073:7: ( rule__LoopedModel__Alternatives_0_3 )*
                     {
                      before(grammarAccess.getLoopedModelAccess().getAlternatives_0_3()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3041:7: ( rule__LoopedModel__Alternatives_0_3 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3074:7: ( rule__LoopedModel__Alternatives_0_3 )*
                     loop30:
                     do {
                         int alt30=2;
@@ -8184,9 +8257,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                         switch (alt30) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3041:8: rule__LoopedModel__Alternatives_0_3
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3074:8: rule__LoopedModel__Alternatives_0_3
                     	    {
-                    	    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__Alternatives_0_3_in_rule__LoopedModel__UnorderedGroup_0__Impl6871);
+                    	    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__Alternatives_0_3_in_rule__LoopedModel__UnorderedGroup_0__Impl6934);
                     	    rule__LoopedModel__Alternatives_0_3();
                     	    _fsp--;
 
@@ -8239,20 +8312,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__UnorderedGroup_0__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3056:1: rule__LoopedModel__UnorderedGroup_0__0 : rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__1 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3089:1: rule__LoopedModel__UnorderedGroup_0__0 : rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__1 )? ;
     public final void rule__LoopedModel__UnorderedGroup_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3060:1: ( rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__1 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3061:2: rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__1 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3093:1: ( rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__1 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3094:2: rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__1 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__06937);
+            pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__07000);
             rule__LoopedModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3062:2: ( rule__LoopedModel__UnorderedGroup_0__1 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3095:2: ( rule__LoopedModel__UnorderedGroup_0__1 )?
             int alt32=2;
             int LA32_0 = input.LA(1);
 
@@ -8270,9 +8343,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt32) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3062:2: rule__LoopedModel__UnorderedGroup_0__1
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3095:2: rule__LoopedModel__UnorderedGroup_0__1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__1_in_rule__LoopedModel__UnorderedGroup_0__06940);
+                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__1_in_rule__LoopedModel__UnorderedGroup_0__07003);
                     rule__LoopedModel__UnorderedGroup_0__1();
                     _fsp--;
 
@@ -8301,20 +8374,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__UnorderedGroup_0__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3069:1: rule__LoopedModel__UnorderedGroup_0__1 : rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__2 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3102:1: rule__LoopedModel__UnorderedGroup_0__1 : rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__2 )? ;
     public final void rule__LoopedModel__UnorderedGroup_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3073:1: ( rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__2 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3074:2: rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3106:1: ( rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3107:2: rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__2 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__16965);
+            pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__17028);
             rule__LoopedModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3075:2: ( rule__LoopedModel__UnorderedGroup_0__2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3108:2: ( rule__LoopedModel__UnorderedGroup_0__2 )?
             int alt33=2;
             int LA33_0 = input.LA(1);
 
@@ -8332,9 +8405,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt33) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3075:2: rule__LoopedModel__UnorderedGroup_0__2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3108:2: rule__LoopedModel__UnorderedGroup_0__2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__2_in_rule__LoopedModel__UnorderedGroup_0__16968);
+                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__2_in_rule__LoopedModel__UnorderedGroup_0__17031);
                     rule__LoopedModel__UnorderedGroup_0__2();
                     _fsp--;
 
@@ -8363,20 +8436,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__UnorderedGroup_0__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3082:1: rule__LoopedModel__UnorderedGroup_0__2 : rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__3 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3115:1: rule__LoopedModel__UnorderedGroup_0__2 : rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__3 )? ;
     public final void rule__LoopedModel__UnorderedGroup_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3086:1: ( rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__3 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3087:2: rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__3 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3119:1: ( rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__3 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3120:2: rule__LoopedModel__UnorderedGroup_0__Impl ( rule__LoopedModel__UnorderedGroup_0__3 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__26993);
+            pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__27056);
             rule__LoopedModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3088:2: ( rule__LoopedModel__UnorderedGroup_0__3 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3121:2: ( rule__LoopedModel__UnorderedGroup_0__3 )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -8394,9 +8467,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt34) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3088:2: rule__LoopedModel__UnorderedGroup_0__3
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3121:2: rule__LoopedModel__UnorderedGroup_0__3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__3_in_rule__LoopedModel__UnorderedGroup_0__26996);
+                    pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__3_in_rule__LoopedModel__UnorderedGroup_0__27059);
                     rule__LoopedModel__UnorderedGroup_0__3();
                     _fsp--;
 
@@ -8425,16 +8498,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__UnorderedGroup_0__3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3095:1: rule__LoopedModel__UnorderedGroup_0__3 : rule__LoopedModel__UnorderedGroup_0__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3128:1: rule__LoopedModel__UnorderedGroup_0__3 : rule__LoopedModel__UnorderedGroup_0__Impl ;
     public final void rule__LoopedModel__UnorderedGroup_0__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3099:1: ( rule__LoopedModel__UnorderedGroup_0__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3100:2: rule__LoopedModel__UnorderedGroup_0__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3132:1: ( rule__LoopedModel__UnorderedGroup_0__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3133:2: rule__LoopedModel__UnorderedGroup_0__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__37021);
+            pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__37084);
             rule__LoopedModel__UnorderedGroup_0__Impl();
             _fsp--;
 
@@ -8457,17 +8530,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__UnorderedGroup_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3115:1: rule__GroupLoopedModel__UnorderedGroup_0 : rule__GroupLoopedModel__UnorderedGroup_0__0 {...}?;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3148:1: rule__GroupLoopedModel__UnorderedGroup_0 : rule__GroupLoopedModel__UnorderedGroup_0__0 {...}?;
     public final void rule__GroupLoopedModel__UnorderedGroup_0() throws RecognitionException {
 
             	int stackSize = keepStackSize();
         		getUnorderedGroupHelper().enter(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3120:1: ( rule__GroupLoopedModel__UnorderedGroup_0__0 {...}?)
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3121:2: rule__GroupLoopedModel__UnorderedGroup_0__0 {...}?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3153:1: ( rule__GroupLoopedModel__UnorderedGroup_0__0 {...}?)
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3154:2: rule__GroupLoopedModel__UnorderedGroup_0__0 {...}?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__0_in_rule__GroupLoopedModel__UnorderedGroup_07053);
+            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__0_in_rule__GroupLoopedModel__UnorderedGroup_07116);
             rule__GroupLoopedModel__UnorderedGroup_0__0();
             _fsp--;
 
@@ -8494,17 +8567,17 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__UnorderedGroup_0__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3132:1: rule__GroupLoopedModel__UnorderedGroup_0__Impl : ( ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3165:1: rule__GroupLoopedModel__UnorderedGroup_0__Impl : ( ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) ) ) ;
     public final void rule__GroupLoopedModel__UnorderedGroup_0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3137:1: ( ( ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3138:3: ( ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3170:1: ( ( ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3171:3: ( ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3138:3: ( ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3171:3: ( ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) ) )
             int alt35=4;
             int LA35_0 = input.LA(1);
 
@@ -8522,22 +8595,22 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("3138:3: ( ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) ) )", 35, 0, input);
+                    new NoViableAltException("3171:3: ( ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) ) | ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) ) )", 35, 0, input);
 
                 throw nvae;
             }
             switch (alt35) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3140:4: ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3173:4: ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3140:4: ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3141:5: {...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3173:4: ({...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3174:5: {...}? => ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 0) ) {
                         throw new FailedPredicateException(input, "rule__GroupLoopedModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 0)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3141:113: ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3142:6: ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3174:113: ( ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3175:6: ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 0);
@@ -8545,14 +8618,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3148:6: ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3150:7: ( rule__GroupLoopedModel__VisibilityAssignment_0_0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3181:6: ( ( rule__GroupLoopedModel__VisibilityAssignment_0_0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3183:7: ( rule__GroupLoopedModel__VisibilityAssignment_0_0 )
                     {
                      before(grammarAccess.getGroupLoopedModelAccess().getVisibilityAssignment_0_0()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3151:7: ( rule__GroupLoopedModel__VisibilityAssignment_0_0 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3151:8: rule__GroupLoopedModel__VisibilityAssignment_0_0
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3184:7: ( rule__GroupLoopedModel__VisibilityAssignment_0_0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3184:8: rule__GroupLoopedModel__VisibilityAssignment_0_0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__VisibilityAssignment_0_0_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7142);
+                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__VisibilityAssignment_0_0_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7205);
                     rule__GroupLoopedModel__VisibilityAssignment_0_0();
                     _fsp--;
 
@@ -8573,16 +8646,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3157:4: ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3190:4: ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3157:4: ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3158:5: {...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3190:4: ({...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3191:5: {...}? => ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 1) ) {
                         throw new FailedPredicateException(input, "rule__GroupLoopedModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 1)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3158:113: ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3159:6: ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3191:113: ( ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3192:6: ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 1);
@@ -8590,14 +8663,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3165:6: ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3167:7: ( rule__GroupLoopedModel__StaticAssignment_0_1 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3198:6: ( ( rule__GroupLoopedModel__StaticAssignment_0_1 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3200:7: ( rule__GroupLoopedModel__StaticAssignment_0_1 )
                     {
                      before(grammarAccess.getGroupLoopedModelAccess().getStaticAssignment_0_1()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3168:7: ( rule__GroupLoopedModel__StaticAssignment_0_1 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3168:8: rule__GroupLoopedModel__StaticAssignment_0_1
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3201:7: ( rule__GroupLoopedModel__StaticAssignment_0_1 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3201:8: rule__GroupLoopedModel__StaticAssignment_0_1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__StaticAssignment_0_1_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7233);
+                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__StaticAssignment_0_1_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7296);
                     rule__GroupLoopedModel__StaticAssignment_0_1();
                     _fsp--;
 
@@ -8618,16 +8691,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3174:4: ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3207:4: ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3174:4: ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3175:5: {...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3207:4: ({...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3208:5: {...}? => ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 2) ) {
                         throw new FailedPredicateException(input, "rule__GroupLoopedModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 2)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3175:113: ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3176:6: ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3208:113: ( ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3209:6: ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 2);
@@ -8635,14 +8708,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3182:6: ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3184:7: ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3215:6: ( ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3217:7: ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 )
                     {
                      before(grammarAccess.getGroupLoopedModelAccess().getSynchronizedAssignment_0_2()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3185:7: ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3185:8: rule__GroupLoopedModel__SynchronizedAssignment_0_2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3218:7: ( rule__GroupLoopedModel__SynchronizedAssignment_0_2 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3218:8: rule__GroupLoopedModel__SynchronizedAssignment_0_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__SynchronizedAssignment_0_2_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7324);
+                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__SynchronizedAssignment_0_2_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7387);
                     rule__GroupLoopedModel__SynchronizedAssignment_0_2();
                     _fsp--;
 
@@ -8663,16 +8736,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3191:4: ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3224:4: ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3191:4: ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3192:5: {...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3224:4: ({...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3225:5: {...}? => ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 3) ) {
                         throw new FailedPredicateException(input, "rule__GroupLoopedModel__UnorderedGroup_0__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 3)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3192:113: ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3193:6: ( ( rule__GroupLoopedModel__Alternatives_0_3 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3225:113: ( ( ( rule__GroupLoopedModel__Alternatives_0_3 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3226:6: ( ( rule__GroupLoopedModel__Alternatives_0_3 ) )
                     {
                      
                     	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 3);
@@ -8680,14 +8753,14 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3199:6: ( ( rule__GroupLoopedModel__Alternatives_0_3 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3201:7: ( rule__GroupLoopedModel__Alternatives_0_3 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3232:6: ( ( rule__GroupLoopedModel__Alternatives_0_3 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3234:7: ( rule__GroupLoopedModel__Alternatives_0_3 )
                     {
                      before(grammarAccess.getGroupLoopedModelAccess().getAlternatives_0_3()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3202:7: ( rule__GroupLoopedModel__Alternatives_0_3 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3202:8: rule__GroupLoopedModel__Alternatives_0_3
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3235:7: ( rule__GroupLoopedModel__Alternatives_0_3 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3235:8: rule__GroupLoopedModel__Alternatives_0_3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__Alternatives_0_3_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7415);
+                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__Alternatives_0_3_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7478);
                     rule__GroupLoopedModel__Alternatives_0_3();
                     _fsp--;
 
@@ -8731,20 +8804,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__UnorderedGroup_0__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3217:1: rule__GroupLoopedModel__UnorderedGroup_0__0 : rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__1 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3250:1: rule__GroupLoopedModel__UnorderedGroup_0__0 : rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__1 )? ;
     public final void rule__GroupLoopedModel__UnorderedGroup_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3221:1: ( rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__1 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3222:2: rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__1 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3254:1: ( rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__1 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3255:2: rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__1 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__07474);
+            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__07537);
             rule__GroupLoopedModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3223:2: ( rule__GroupLoopedModel__UnorderedGroup_0__1 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3256:2: ( rule__GroupLoopedModel__UnorderedGroup_0__1 )?
             int alt36=2;
             int LA36_0 = input.LA(1);
 
@@ -8799,9 +8872,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt36) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3223:2: rule__GroupLoopedModel__UnorderedGroup_0__1
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3256:2: rule__GroupLoopedModel__UnorderedGroup_0__1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__1_in_rule__GroupLoopedModel__UnorderedGroup_0__07477);
+                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__1_in_rule__GroupLoopedModel__UnorderedGroup_0__07540);
                     rule__GroupLoopedModel__UnorderedGroup_0__1();
                     _fsp--;
 
@@ -8830,20 +8903,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__UnorderedGroup_0__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3230:1: rule__GroupLoopedModel__UnorderedGroup_0__1 : rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__2 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3263:1: rule__GroupLoopedModel__UnorderedGroup_0__1 : rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__2 )? ;
     public final void rule__GroupLoopedModel__UnorderedGroup_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3234:1: ( rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__2 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3235:2: rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3267:1: ( rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3268:2: rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__2 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__17502);
+            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__17565);
             rule__GroupLoopedModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3236:2: ( rule__GroupLoopedModel__UnorderedGroup_0__2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3269:2: ( rule__GroupLoopedModel__UnorderedGroup_0__2 )?
             int alt37=2;
             int LA37_0 = input.LA(1);
 
@@ -8898,9 +8971,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt37) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3236:2: rule__GroupLoopedModel__UnorderedGroup_0__2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3269:2: rule__GroupLoopedModel__UnorderedGroup_0__2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__2_in_rule__GroupLoopedModel__UnorderedGroup_0__17505);
+                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__2_in_rule__GroupLoopedModel__UnorderedGroup_0__17568);
                     rule__GroupLoopedModel__UnorderedGroup_0__2();
                     _fsp--;
 
@@ -8929,20 +9002,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__UnorderedGroup_0__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3243:1: rule__GroupLoopedModel__UnorderedGroup_0__2 : rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__3 )? ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3276:1: rule__GroupLoopedModel__UnorderedGroup_0__2 : rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__3 )? ;
     public final void rule__GroupLoopedModel__UnorderedGroup_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3247:1: ( rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__3 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3248:2: rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__3 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3280:1: ( rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__3 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3281:2: rule__GroupLoopedModel__UnorderedGroup_0__Impl ( rule__GroupLoopedModel__UnorderedGroup_0__3 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__27530);
+            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__27593);
             rule__GroupLoopedModel__UnorderedGroup_0__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3249:2: ( rule__GroupLoopedModel__UnorderedGroup_0__3 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3282:2: ( rule__GroupLoopedModel__UnorderedGroup_0__3 )?
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -8997,9 +9070,9 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
             }
             switch (alt38) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3249:2: rule__GroupLoopedModel__UnorderedGroup_0__3
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3282:2: rule__GroupLoopedModel__UnorderedGroup_0__3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__3_in_rule__GroupLoopedModel__UnorderedGroup_0__27533);
+                    pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__3_in_rule__GroupLoopedModel__UnorderedGroup_0__27596);
                     rule__GroupLoopedModel__UnorderedGroup_0__3();
                     _fsp--;
 
@@ -9028,16 +9101,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__UnorderedGroup_0__3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3256:1: rule__GroupLoopedModel__UnorderedGroup_0__3 : rule__GroupLoopedModel__UnorderedGroup_0__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3289:1: rule__GroupLoopedModel__UnorderedGroup_0__3 : rule__GroupLoopedModel__UnorderedGroup_0__Impl ;
     public final void rule__GroupLoopedModel__UnorderedGroup_0__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3260:1: ( rule__GroupLoopedModel__UnorderedGroup_0__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3261:2: rule__GroupLoopedModel__UnorderedGroup_0__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3293:1: ( rule__GroupLoopedModel__UnorderedGroup_0__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3294:2: rule__GroupLoopedModel__UnorderedGroup_0__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__37558);
+            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__37621);
             rule__GroupLoopedModel__UnorderedGroup_0__Impl();
             _fsp--;
 
@@ -9059,42 +9132,42 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
     // $ANTLR end rule__GroupLoopedModel__UnorderedGroup_0__3
 
 
-    // $ANTLR start rule__Bug304681Model__UnorderedGroup_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3276:1: rule__Bug304681Model__UnorderedGroup_1 : ( rule__Bug304681Model__UnorderedGroup_1__0 )? ;
-    public final void rule__Bug304681Model__UnorderedGroup_1() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__UnorderedGroup_2
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3309:1: rule__Bug304681Model__UnorderedGroup_2 : ( rule__Bug304681Model__UnorderedGroup_2__0 )? ;
+    public final void rule__Bug304681Model__UnorderedGroup_2() throws RecognitionException {
 
             	int stackSize = keepStackSize();
-        		getUnorderedGroupHelper().enter(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
+        		getUnorderedGroupHelper().enter(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3281:1: ( ( rule__Bug304681Model__UnorderedGroup_1__0 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3282:2: ( rule__Bug304681Model__UnorderedGroup_1__0 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3314:1: ( ( rule__Bug304681Model__UnorderedGroup_2__0 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3315:2: ( rule__Bug304681Model__UnorderedGroup_2__0 )?
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3282:2: ( rule__Bug304681Model__UnorderedGroup_1__0 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3315:2: ( rule__Bug304681Model__UnorderedGroup_2__0 )?
             int alt39=2;
             int LA39_0 = input.LA(1);
 
-            if ( LA39_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0) ) {
+            if ( LA39_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0) ) {
                 alt39=1;
             }
-            else if ( LA39_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1) ) {
+            else if ( LA39_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1) ) {
                 alt39=1;
             }
-            else if ( LA39_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2) ) {
+            else if ( LA39_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2) ) {
                 alt39=1;
             }
-            else if ( LA39_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3) ) {
+            else if ( LA39_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3) ) {
                 alt39=1;
             }
-            else if ( LA39_0 >=29 && LA39_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4) ) {
+            else if ( LA39_0 >=29 && LA39_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4) ) {
                 alt39=1;
             }
             switch (alt39) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3282:2: rule__Bug304681Model__UnorderedGroup_1__0
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3315:2: rule__Bug304681Model__UnorderedGroup_2__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_1__0_in_rule__Bug304681Model__UnorderedGroup_17590);
-                    rule__Bug304681Model__UnorderedGroup_1__0();
+                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_2__0_in_rule__Bug304681Model__UnorderedGroup_27653);
+                    rule__Bug304681Model__UnorderedGroup_2__0();
                     _fsp--;
 
 
@@ -9113,85 +9186,85 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         finally {
 
-            	getUnorderedGroupHelper().leave(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
+            	getUnorderedGroupHelper().leave(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__UnorderedGroup_1
+    // $ANTLR end rule__Bug304681Model__UnorderedGroup_2
 
 
-    // $ANTLR start rule__Bug304681Model__UnorderedGroup_1__Impl
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3292:1: rule__Bug304681Model__UnorderedGroup_1__Impl : ( ({...}? => ( ( ( rule__Bug304681Model__Group_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* ) ) ) ) ) ;
-    public final void rule__Bug304681Model__UnorderedGroup_1__Impl() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__UnorderedGroup_2__Impl
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3325:1: rule__Bug304681Model__UnorderedGroup_2__Impl : ( ({...}? => ( ( ( rule__Bug304681Model__Group_2_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* ) ) ) ) ) ;
+    public final void rule__Bug304681Model__UnorderedGroup_2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3297:1: ( ( ({...}? => ( ( ( rule__Bug304681Model__Group_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* ) ) ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3298:3: ( ({...}? => ( ( ( rule__Bug304681Model__Group_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3330:1: ( ( ({...}? => ( ( ( rule__Bug304681Model__Group_2_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* ) ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3331:3: ( ({...}? => ( ( ( rule__Bug304681Model__Group_2_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* ) ) ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3298:3: ( ({...}? => ( ( ( rule__Bug304681Model__Group_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3331:3: ( ({...}? => ( ( ( rule__Bug304681Model__Group_2_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* ) ) ) ) )
             int alt41=5;
             int LA41_0 = input.LA(1);
 
-            if ( LA41_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0) ) {
+            if ( LA41_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0) ) {
                 alt41=1;
             }
-            else if ( LA41_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1) ) {
+            else if ( LA41_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1) ) {
                 alt41=2;
             }
-            else if ( LA41_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2) ) {
+            else if ( LA41_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2) ) {
                 alt41=3;
             }
-            else if ( LA41_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3) ) {
+            else if ( LA41_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3) ) {
                 alt41=4;
             }
-            else if ( LA41_0 >=29 && LA41_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4) ) {
+            else if ( LA41_0 >=29 && LA41_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4) ) {
                 alt41=5;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("3298:3: ( ({...}? => ( ( ( rule__Bug304681Model__Group_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_1_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* ) ) ) ) )", 41, 0, input);
+                    new NoViableAltException("3331:3: ( ({...}? => ( ( ( rule__Bug304681Model__Group_2_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Bug304681Model__Group_2_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* ) ) ) ) )", 41, 0, input);
 
                 throw nvae;
             }
             switch (alt41) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3300:4: ({...}? => ( ( ( rule__Bug304681Model__Group_1_0__0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3333:4: ({...}? => ( ( ( rule__Bug304681Model__Group_2_0__0 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3300:4: ({...}? => ( ( ( rule__Bug304681Model__Group_1_0__0 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3301:5: {...}? => ( ( ( rule__Bug304681Model__Group_1_0__0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3333:4: ({...}? => ( ( ( rule__Bug304681Model__Group_2_0__0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3334:5: {...}? => ( ( ( rule__Bug304681Model__Group_2_0__0 ) ) )
                     {
-                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0) ) {
-                        throw new FailedPredicateException(input, "rule__Bug304681Model__UnorderedGroup_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0)");
+                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0) ) {
+                        throw new FailedPredicateException(input, "rule__Bug304681Model__UnorderedGroup_2__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3301:111: ( ( ( rule__Bug304681Model__Group_1_0__0 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3302:6: ( ( rule__Bug304681Model__Group_1_0__0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3334:111: ( ( ( rule__Bug304681Model__Group_2_0__0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3335:6: ( ( rule__Bug304681Model__Group_2_0__0 ) )
                     {
                      
-                    	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0);
+                    	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0);
                     	 				
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3308:6: ( ( rule__Bug304681Model__Group_1_0__0 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3310:7: ( rule__Bug304681Model__Group_1_0__0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3341:6: ( ( rule__Bug304681Model__Group_2_0__0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3343:7: ( rule__Bug304681Model__Group_2_0__0 )
                     {
-                     before(grammarAccess.getBug304681ModelAccess().getGroup_1_0()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3311:7: ( rule__Bug304681Model__Group_1_0__0 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3311:8: rule__Bug304681Model__Group_1_0__0
+                     before(grammarAccess.getBug304681ModelAccess().getGroup_2_0()); 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3344:7: ( rule__Bug304681Model__Group_2_0__0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3344:8: rule__Bug304681Model__Group_2_0__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_0__0_in_rule__Bug304681Model__UnorderedGroup_1__Impl7677);
-                    rule__Bug304681Model__Group_1_0__0();
+                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_0__0_in_rule__Bug304681Model__UnorderedGroup_2__Impl7740);
+                    rule__Bug304681Model__Group_2_0__0();
                     _fsp--;
 
 
                     }
 
-                     after(grammarAccess.getBug304681ModelAccess().getGroup_1_0()); 
+                     after(grammarAccess.getBug304681ModelAccess().getGroup_2_0()); 
 
                     }
 
@@ -9205,38 +9278,38 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3317:4: ({...}? => ( ( ( rule__Bug304681Model__Group_1_1__0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3350:4: ({...}? => ( ( ( rule__Bug304681Model__Group_2_1__0 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3317:4: ({...}? => ( ( ( rule__Bug304681Model__Group_1_1__0 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3318:5: {...}? => ( ( ( rule__Bug304681Model__Group_1_1__0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3350:4: ({...}? => ( ( ( rule__Bug304681Model__Group_2_1__0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3351:5: {...}? => ( ( ( rule__Bug304681Model__Group_2_1__0 ) ) )
                     {
-                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1) ) {
-                        throw new FailedPredicateException(input, "rule__Bug304681Model__UnorderedGroup_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1)");
+                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1) ) {
+                        throw new FailedPredicateException(input, "rule__Bug304681Model__UnorderedGroup_2__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3318:111: ( ( ( rule__Bug304681Model__Group_1_1__0 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3319:6: ( ( rule__Bug304681Model__Group_1_1__0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3351:111: ( ( ( rule__Bug304681Model__Group_2_1__0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3352:6: ( ( rule__Bug304681Model__Group_2_1__0 ) )
                     {
                      
-                    	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1);
+                    	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1);
                     	 				
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3325:6: ( ( rule__Bug304681Model__Group_1_1__0 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3327:7: ( rule__Bug304681Model__Group_1_1__0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3358:6: ( ( rule__Bug304681Model__Group_2_1__0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3360:7: ( rule__Bug304681Model__Group_2_1__0 )
                     {
-                     before(grammarAccess.getBug304681ModelAccess().getGroup_1_1()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3328:7: ( rule__Bug304681Model__Group_1_1__0 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3328:8: rule__Bug304681Model__Group_1_1__0
+                     before(grammarAccess.getBug304681ModelAccess().getGroup_2_1()); 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3361:7: ( rule__Bug304681Model__Group_2_1__0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3361:8: rule__Bug304681Model__Group_2_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_1__0_in_rule__Bug304681Model__UnorderedGroup_1__Impl7768);
-                    rule__Bug304681Model__Group_1_1__0();
+                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_1__0_in_rule__Bug304681Model__UnorderedGroup_2__Impl7831);
+                    rule__Bug304681Model__Group_2_1__0();
                     _fsp--;
 
 
                     }
 
-                     after(grammarAccess.getBug304681ModelAccess().getGroup_1_1()); 
+                     after(grammarAccess.getBug304681ModelAccess().getGroup_2_1()); 
 
                     }
 
@@ -9250,38 +9323,38 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3334:4: ({...}? => ( ( ( rule__Bug304681Model__Group_1_2__0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3367:4: ({...}? => ( ( ( rule__Bug304681Model__Group_2_2__0 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3334:4: ({...}? => ( ( ( rule__Bug304681Model__Group_1_2__0 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3335:5: {...}? => ( ( ( rule__Bug304681Model__Group_1_2__0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3367:4: ({...}? => ( ( ( rule__Bug304681Model__Group_2_2__0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3368:5: {...}? => ( ( ( rule__Bug304681Model__Group_2_2__0 ) ) )
                     {
-                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2) ) {
-                        throw new FailedPredicateException(input, "rule__Bug304681Model__UnorderedGroup_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2)");
+                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2) ) {
+                        throw new FailedPredicateException(input, "rule__Bug304681Model__UnorderedGroup_2__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3335:111: ( ( ( rule__Bug304681Model__Group_1_2__0 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3336:6: ( ( rule__Bug304681Model__Group_1_2__0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3368:111: ( ( ( rule__Bug304681Model__Group_2_2__0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3369:6: ( ( rule__Bug304681Model__Group_2_2__0 ) )
                     {
                      
-                    	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2);
+                    	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2);
                     	 				
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3342:6: ( ( rule__Bug304681Model__Group_1_2__0 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3344:7: ( rule__Bug304681Model__Group_1_2__0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3375:6: ( ( rule__Bug304681Model__Group_2_2__0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3377:7: ( rule__Bug304681Model__Group_2_2__0 )
                     {
-                     before(grammarAccess.getBug304681ModelAccess().getGroup_1_2()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3345:7: ( rule__Bug304681Model__Group_1_2__0 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3345:8: rule__Bug304681Model__Group_1_2__0
+                     before(grammarAccess.getBug304681ModelAccess().getGroup_2_2()); 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3378:7: ( rule__Bug304681Model__Group_2_2__0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3378:8: rule__Bug304681Model__Group_2_2__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_2__0_in_rule__Bug304681Model__UnorderedGroup_1__Impl7859);
-                    rule__Bug304681Model__Group_1_2__0();
+                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_2__0_in_rule__Bug304681Model__UnorderedGroup_2__Impl7922);
+                    rule__Bug304681Model__Group_2_2__0();
                     _fsp--;
 
 
                     }
 
-                     after(grammarAccess.getBug304681ModelAccess().getGroup_1_2()); 
+                     after(grammarAccess.getBug304681ModelAccess().getGroup_2_2()); 
 
                     }
 
@@ -9295,38 +9368,38 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3351:4: ({...}? => ( ( ( rule__Bug304681Model__Group_1_3__0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3384:4: ({...}? => ( ( ( rule__Bug304681Model__Group_2_3__0 ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3351:4: ({...}? => ( ( ( rule__Bug304681Model__Group_1_3__0 ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3352:5: {...}? => ( ( ( rule__Bug304681Model__Group_1_3__0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3384:4: ({...}? => ( ( ( rule__Bug304681Model__Group_2_3__0 ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3385:5: {...}? => ( ( ( rule__Bug304681Model__Group_2_3__0 ) ) )
                     {
-                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3) ) {
-                        throw new FailedPredicateException(input, "rule__Bug304681Model__UnorderedGroup_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3)");
+                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3) ) {
+                        throw new FailedPredicateException(input, "rule__Bug304681Model__UnorderedGroup_2__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3352:111: ( ( ( rule__Bug304681Model__Group_1_3__0 ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3353:6: ( ( rule__Bug304681Model__Group_1_3__0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3385:111: ( ( ( rule__Bug304681Model__Group_2_3__0 ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3386:6: ( ( rule__Bug304681Model__Group_2_3__0 ) )
                     {
                      
-                    	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3);
+                    	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3);
                     	 				
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3359:6: ( ( rule__Bug304681Model__Group_1_3__0 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3361:7: ( rule__Bug304681Model__Group_1_3__0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3392:6: ( ( rule__Bug304681Model__Group_2_3__0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3394:7: ( rule__Bug304681Model__Group_2_3__0 )
                     {
-                     before(grammarAccess.getBug304681ModelAccess().getGroup_1_3()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3362:7: ( rule__Bug304681Model__Group_1_3__0 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3362:8: rule__Bug304681Model__Group_1_3__0
+                     before(grammarAccess.getBug304681ModelAccess().getGroup_2_3()); 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3395:7: ( rule__Bug304681Model__Group_2_3__0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3395:8: rule__Bug304681Model__Group_2_3__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_1_3__0_in_rule__Bug304681Model__UnorderedGroup_1__Impl7950);
-                    rule__Bug304681Model__Group_1_3__0();
+                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__Group_2_3__0_in_rule__Bug304681Model__UnorderedGroup_2__Impl8013);
+                    rule__Bug304681Model__Group_2_3__0();
                     _fsp--;
 
 
                     }
 
-                     after(grammarAccess.getBug304681ModelAccess().getGroup_1_3()); 
+                     after(grammarAccess.getBug304681ModelAccess().getGroup_2_3()); 
 
                     }
 
@@ -9340,49 +9413,49 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3368:4: ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3401:4: ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3368:4: ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3369:5: {...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3401:4: ({...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3402:5: {...}? => ( ( ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* ) ) )
                     {
-                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4) ) {
-                        throw new FailedPredicateException(input, "rule__Bug304681Model__UnorderedGroup_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4)");
+                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4) ) {
+                        throw new FailedPredicateException(input, "rule__Bug304681Model__UnorderedGroup_2__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3369:111: ( ( ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3370:6: ( ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3402:111: ( ( ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3403:6: ( ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* ) )
                     {
                      
-                    	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4);
+                    	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4);
                     	 				
 
                     	 				  selected = true;
                     	 				
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3376:6: ( ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3377:6: ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3409:6: ( ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3410:6: ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) ) ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3377:6: ( ( rule__Bug304681Model__FeaturesAssignment_1_4 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3378:7: ( rule__Bug304681Model__FeaturesAssignment_1_4 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3410:6: ( ( rule__Bug304681Model__FeaturesAssignment_2_4 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3411:7: ( rule__Bug304681Model__FeaturesAssignment_2_4 )
                     {
-                     before(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_1_4()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3379:7: ( rule__Bug304681Model__FeaturesAssignment_1_4 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3379:8: rule__Bug304681Model__FeaturesAssignment_1_4
+                     before(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_2_4()); 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3412:7: ( rule__Bug304681Model__FeaturesAssignment_2_4 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3412:8: rule__Bug304681Model__FeaturesAssignment_2_4
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__FeaturesAssignment_1_4_in_rule__Bug304681Model__UnorderedGroup_1__Impl8042);
-                    rule__Bug304681Model__FeaturesAssignment_1_4();
+                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__FeaturesAssignment_2_4_in_rule__Bug304681Model__UnorderedGroup_2__Impl8105);
+                    rule__Bug304681Model__FeaturesAssignment_2_4();
                     _fsp--;
 
 
                     }
 
-                     after(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_1_4()); 
+                     after(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_2_4()); 
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3382:6: ( ( rule__Bug304681Model__FeaturesAssignment_1_4 )* )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3383:7: ( rule__Bug304681Model__FeaturesAssignment_1_4 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3415:6: ( ( rule__Bug304681Model__FeaturesAssignment_2_4 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3416:7: ( rule__Bug304681Model__FeaturesAssignment_2_4 )*
                     {
-                     before(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_1_4()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3384:7: ( rule__Bug304681Model__FeaturesAssignment_1_4 )*
+                     before(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_2_4()); 
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3417:7: ( rule__Bug304681Model__FeaturesAssignment_2_4 )*
                     loop40:
                     do {
                         int alt40=2;
@@ -9397,7 +9470,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                                 if ( (LA40_8==26) ) {
                                     int LA40_10 = input.LA(4);
 
-                                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4) ) {
+                                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4) ) {
                                         alt40=1;
                                     }
 
@@ -9418,7 +9491,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                                 if ( (LA40_9==26) ) {
                                     int LA40_11 = input.LA(4);
 
-                                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4) ) {
+                                    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4) ) {
                                         alt40=1;
                                     }
 
@@ -9434,10 +9507,10 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
                         switch (alt40) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3384:8: rule__Bug304681Model__FeaturesAssignment_1_4
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3417:8: rule__Bug304681Model__FeaturesAssignment_2_4
                     	    {
-                    	    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__FeaturesAssignment_1_4_in_rule__Bug304681Model__UnorderedGroup_1__Impl8082);
-                    	    rule__Bug304681Model__FeaturesAssignment_1_4();
+                    	    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__FeaturesAssignment_2_4_in_rule__Bug304681Model__UnorderedGroup_2__Impl8145);
+                    	    rule__Bug304681Model__FeaturesAssignment_2_4();
                     	    _fsp--;
 
 
@@ -9449,7 +9522,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
                         }
                     } while (true);
 
-                     after(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_1_4()); 
+                     after(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_2_4()); 
 
                     }
 
@@ -9479,54 +9552,54 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         finally {
 
             	if (selected)
-            		getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
+            		getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__UnorderedGroup_1__Impl
+    // $ANTLR end rule__Bug304681Model__UnorderedGroup_2__Impl
 
 
-    // $ANTLR start rule__Bug304681Model__UnorderedGroup_1__0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3399:1: rule__Bug304681Model__UnorderedGroup_1__0 : rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__1 )? ;
-    public final void rule__Bug304681Model__UnorderedGroup_1__0() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__UnorderedGroup_2__0
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3432:1: rule__Bug304681Model__UnorderedGroup_2__0 : rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__1 )? ;
+    public final void rule__Bug304681Model__UnorderedGroup_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3403:1: ( rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__1 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3404:2: rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__1 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3436:1: ( rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__1 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3437:2: rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__1 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_1__Impl_in_rule__Bug304681Model__UnorderedGroup_1__08148);
-            rule__Bug304681Model__UnorderedGroup_1__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_2__Impl_in_rule__Bug304681Model__UnorderedGroup_2__08211);
+            rule__Bug304681Model__UnorderedGroup_2__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3405:2: ( rule__Bug304681Model__UnorderedGroup_1__1 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3438:2: ( rule__Bug304681Model__UnorderedGroup_2__1 )?
             int alt42=2;
             int LA42_0 = input.LA(1);
 
-            if ( LA42_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0) ) {
+            if ( LA42_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0) ) {
                 alt42=1;
             }
-            else if ( LA42_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1) ) {
+            else if ( LA42_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1) ) {
                 alt42=1;
             }
-            else if ( LA42_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2) ) {
+            else if ( LA42_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2) ) {
                 alt42=1;
             }
-            else if ( LA42_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3) ) {
+            else if ( LA42_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3) ) {
                 alt42=1;
             }
-            else if ( LA42_0 >=29 && LA42_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4) ) {
+            else if ( LA42_0 >=29 && LA42_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4) ) {
                 alt42=1;
             }
             switch (alt42) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3405:2: rule__Bug304681Model__UnorderedGroup_1__1
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3438:2: rule__Bug304681Model__UnorderedGroup_2__1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_1__1_in_rule__Bug304681Model__UnorderedGroup_1__08151);
-                    rule__Bug304681Model__UnorderedGroup_1__1();
+                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_2__1_in_rule__Bug304681Model__UnorderedGroup_2__08214);
+                    rule__Bug304681Model__UnorderedGroup_2__1();
                     _fsp--;
 
 
@@ -9550,48 +9623,48 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__UnorderedGroup_1__0
+    // $ANTLR end rule__Bug304681Model__UnorderedGroup_2__0
 
 
-    // $ANTLR start rule__Bug304681Model__UnorderedGroup_1__1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3412:1: rule__Bug304681Model__UnorderedGroup_1__1 : rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__2 )? ;
-    public final void rule__Bug304681Model__UnorderedGroup_1__1() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__UnorderedGroup_2__1
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3445:1: rule__Bug304681Model__UnorderedGroup_2__1 : rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__2 )? ;
+    public final void rule__Bug304681Model__UnorderedGroup_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3416:1: ( rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__2 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3417:2: rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3449:1: ( rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__2 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3450:2: rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__2 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_1__Impl_in_rule__Bug304681Model__UnorderedGroup_1__18176);
-            rule__Bug304681Model__UnorderedGroup_1__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_2__Impl_in_rule__Bug304681Model__UnorderedGroup_2__18239);
+            rule__Bug304681Model__UnorderedGroup_2__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3418:2: ( rule__Bug304681Model__UnorderedGroup_1__2 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3451:2: ( rule__Bug304681Model__UnorderedGroup_2__2 )?
             int alt43=2;
             int LA43_0 = input.LA(1);
 
-            if ( LA43_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0) ) {
+            if ( LA43_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0) ) {
                 alt43=1;
             }
-            else if ( LA43_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1) ) {
+            else if ( LA43_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1) ) {
                 alt43=1;
             }
-            else if ( LA43_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2) ) {
+            else if ( LA43_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2) ) {
                 alt43=1;
             }
-            else if ( LA43_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3) ) {
+            else if ( LA43_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3) ) {
                 alt43=1;
             }
-            else if ( LA43_0 >=29 && LA43_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4) ) {
+            else if ( LA43_0 >=29 && LA43_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4) ) {
                 alt43=1;
             }
             switch (alt43) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3418:2: rule__Bug304681Model__UnorderedGroup_1__2
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3451:2: rule__Bug304681Model__UnorderedGroup_2__2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_1__2_in_rule__Bug304681Model__UnorderedGroup_1__18179);
-                    rule__Bug304681Model__UnorderedGroup_1__2();
+                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_2__2_in_rule__Bug304681Model__UnorderedGroup_2__18242);
+                    rule__Bug304681Model__UnorderedGroup_2__2();
                     _fsp--;
 
 
@@ -9615,48 +9688,48 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__UnorderedGroup_1__1
+    // $ANTLR end rule__Bug304681Model__UnorderedGroup_2__1
 
 
-    // $ANTLR start rule__Bug304681Model__UnorderedGroup_1__2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3425:1: rule__Bug304681Model__UnorderedGroup_1__2 : rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__3 )? ;
-    public final void rule__Bug304681Model__UnorderedGroup_1__2() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__UnorderedGroup_2__2
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3458:1: rule__Bug304681Model__UnorderedGroup_2__2 : rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__3 )? ;
+    public final void rule__Bug304681Model__UnorderedGroup_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3429:1: ( rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__3 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3430:2: rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__3 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3462:1: ( rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__3 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3463:2: rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__3 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_1__Impl_in_rule__Bug304681Model__UnorderedGroup_1__28204);
-            rule__Bug304681Model__UnorderedGroup_1__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_2__Impl_in_rule__Bug304681Model__UnorderedGroup_2__28267);
+            rule__Bug304681Model__UnorderedGroup_2__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3431:2: ( rule__Bug304681Model__UnorderedGroup_1__3 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3464:2: ( rule__Bug304681Model__UnorderedGroup_2__3 )?
             int alt44=2;
             int LA44_0 = input.LA(1);
 
-            if ( LA44_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0) ) {
+            if ( LA44_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0) ) {
                 alt44=1;
             }
-            else if ( LA44_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1) ) {
+            else if ( LA44_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1) ) {
                 alt44=1;
             }
-            else if ( LA44_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2) ) {
+            else if ( LA44_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2) ) {
                 alt44=1;
             }
-            else if ( LA44_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3) ) {
+            else if ( LA44_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3) ) {
                 alt44=1;
             }
-            else if ( LA44_0 >=29 && LA44_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4) ) {
+            else if ( LA44_0 >=29 && LA44_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4) ) {
                 alt44=1;
             }
             switch (alt44) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3431:2: rule__Bug304681Model__UnorderedGroup_1__3
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3464:2: rule__Bug304681Model__UnorderedGroup_2__3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_1__3_in_rule__Bug304681Model__UnorderedGroup_1__28207);
-                    rule__Bug304681Model__UnorderedGroup_1__3();
+                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_2__3_in_rule__Bug304681Model__UnorderedGroup_2__28270);
+                    rule__Bug304681Model__UnorderedGroup_2__3();
                     _fsp--;
 
 
@@ -9680,48 +9753,48 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__UnorderedGroup_1__2
+    // $ANTLR end rule__Bug304681Model__UnorderedGroup_2__2
 
 
-    // $ANTLR start rule__Bug304681Model__UnorderedGroup_1__3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3438:1: rule__Bug304681Model__UnorderedGroup_1__3 : rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__4 )? ;
-    public final void rule__Bug304681Model__UnorderedGroup_1__3() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__UnorderedGroup_2__3
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3471:1: rule__Bug304681Model__UnorderedGroup_2__3 : rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__4 )? ;
+    public final void rule__Bug304681Model__UnorderedGroup_2__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3442:1: ( rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__4 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3443:2: rule__Bug304681Model__UnorderedGroup_1__Impl ( rule__Bug304681Model__UnorderedGroup_1__4 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3475:1: ( rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__4 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3476:2: rule__Bug304681Model__UnorderedGroup_2__Impl ( rule__Bug304681Model__UnorderedGroup_2__4 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_1__Impl_in_rule__Bug304681Model__UnorderedGroup_1__38232);
-            rule__Bug304681Model__UnorderedGroup_1__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_2__Impl_in_rule__Bug304681Model__UnorderedGroup_2__38295);
+            rule__Bug304681Model__UnorderedGroup_2__Impl();
             _fsp--;
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3444:2: ( rule__Bug304681Model__UnorderedGroup_1__4 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3477:2: ( rule__Bug304681Model__UnorderedGroup_2__4 )?
             int alt45=2;
             int LA45_0 = input.LA(1);
 
-            if ( LA45_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0) ) {
+            if ( LA45_0 ==25 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0) ) {
                 alt45=1;
             }
-            else if ( LA45_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1) ) {
+            else if ( LA45_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1) ) {
                 alt45=1;
             }
-            else if ( LA45_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2) ) {
+            else if ( LA45_0 ==28 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2) ) {
                 alt45=1;
             }
-            else if ( LA45_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3) ) {
+            else if ( LA45_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3) ) {
                 alt45=1;
             }
-            else if ( LA45_0 >=29 && LA45_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4) ) {
+            else if ( LA45_0 >=29 && LA45_0<=30 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4) ) {
                 alt45=1;
             }
             switch (alt45) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3444:2: rule__Bug304681Model__UnorderedGroup_1__4
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3477:2: rule__Bug304681Model__UnorderedGroup_2__4
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_1__4_in_rule__Bug304681Model__UnorderedGroup_1__38235);
-                    rule__Bug304681Model__UnorderedGroup_1__4();
+                    pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_2__4_in_rule__Bug304681Model__UnorderedGroup_2__38298);
+                    rule__Bug304681Model__UnorderedGroup_2__4();
                     _fsp--;
 
 
@@ -9745,21 +9818,21 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__UnorderedGroup_1__3
+    // $ANTLR end rule__Bug304681Model__UnorderedGroup_2__3
 
 
-    // $ANTLR start rule__Bug304681Model__UnorderedGroup_1__4
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3451:1: rule__Bug304681Model__UnorderedGroup_1__4 : rule__Bug304681Model__UnorderedGroup_1__Impl ;
-    public final void rule__Bug304681Model__UnorderedGroup_1__4() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__UnorderedGroup_2__4
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3484:1: rule__Bug304681Model__UnorderedGroup_2__4 : rule__Bug304681Model__UnorderedGroup_2__Impl ;
+    public final void rule__Bug304681Model__UnorderedGroup_2__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3455:1: ( rule__Bug304681Model__UnorderedGroup_1__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3456:2: rule__Bug304681Model__UnorderedGroup_1__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3488:1: ( rule__Bug304681Model__UnorderedGroup_2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3489:2: rule__Bug304681Model__UnorderedGroup_2__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_1__Impl_in_rule__Bug304681Model__UnorderedGroup_1__48260);
-            rule__Bug304681Model__UnorderedGroup_1__Impl();
+            pushFollow(FollowSets000.FOLLOW_rule__Bug304681Model__UnorderedGroup_2__Impl_in_rule__Bug304681Model__UnorderedGroup_2__48323);
+            rule__Bug304681Model__UnorderedGroup_2__Impl();
             _fsp--;
 
 
@@ -9777,24 +9850,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__UnorderedGroup_1__4
+    // $ANTLR end rule__Bug304681Model__UnorderedGroup_2__4
 
 
     // $ANTLR start rule__Model__FirstAssignment_0_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3473:1: rule__Model__FirstAssignment_0_1 : ( ruleSimpleModel ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3506:1: rule__Model__FirstAssignment_0_1 : ( ruleSimpleModel ) ;
     public final void rule__Model__FirstAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3477:1: ( ( ruleSimpleModel ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3478:1: ( ruleSimpleModel )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3510:1: ( ( ruleSimpleModel ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3511:1: ( ruleSimpleModel )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3478:1: ( ruleSimpleModel )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3479:1: ruleSimpleModel
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3511:1: ( ruleSimpleModel )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3512:1: ruleSimpleModel
             {
              before(grammarAccess.getModelAccess().getFirstSimpleModelParserRuleCall_0_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSimpleModel_in_rule__Model__FirstAssignment_0_18298);
+            pushFollow(FollowSets000.FOLLOW_ruleSimpleModel_in_rule__Model__FirstAssignment_0_18361);
             ruleSimpleModel();
             _fsp--;
 
@@ -9821,20 +9894,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Model__SecondAssignment_1_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3488:1: rule__Model__SecondAssignment_1_1 : ( ruleMandatoryModel ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3521:1: rule__Model__SecondAssignment_1_1 : ( ruleMandatoryModel ) ;
     public final void rule__Model__SecondAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3492:1: ( ( ruleMandatoryModel ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3493:1: ( ruleMandatoryModel )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3525:1: ( ( ruleMandatoryModel ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3526:1: ( ruleMandatoryModel )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3493:1: ( ruleMandatoryModel )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3494:1: ruleMandatoryModel
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3526:1: ( ruleMandatoryModel )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3527:1: ruleMandatoryModel
             {
              before(grammarAccess.getModelAccess().getSecondMandatoryModelParserRuleCall_1_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMandatoryModel_in_rule__Model__SecondAssignment_1_18329);
+            pushFollow(FollowSets000.FOLLOW_ruleMandatoryModel_in_rule__Model__SecondAssignment_1_18392);
             ruleMandatoryModel();
             _fsp--;
 
@@ -9861,20 +9934,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Model__ThrirdAssignment_2_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3503:1: rule__Model__ThrirdAssignment_2_1 : ( ruleLoopedModel ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3536:1: rule__Model__ThrirdAssignment_2_1 : ( ruleLoopedModel ) ;
     public final void rule__Model__ThrirdAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3507:1: ( ( ruleLoopedModel ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3508:1: ( ruleLoopedModel )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3540:1: ( ( ruleLoopedModel ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3541:1: ( ruleLoopedModel )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3508:1: ( ruleLoopedModel )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3509:1: ruleLoopedModel
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3541:1: ( ruleLoopedModel )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3542:1: ruleLoopedModel
             {
              before(grammarAccess.getModelAccess().getThrirdLoopedModelParserRuleCall_2_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleLoopedModel_in_rule__Model__ThrirdAssignment_2_18360);
+            pushFollow(FollowSets000.FOLLOW_ruleLoopedModel_in_rule__Model__ThrirdAssignment_2_18423);
             ruleLoopedModel();
             _fsp--;
 
@@ -9901,20 +9974,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Model__ForthAssignment_3_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3518:1: rule__Model__ForthAssignment_3_1 : ( ruleGroupLoopedModel ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3551:1: rule__Model__ForthAssignment_3_1 : ( ruleGroupLoopedModel ) ;
     public final void rule__Model__ForthAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3522:1: ( ( ruleGroupLoopedModel ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3523:1: ( ruleGroupLoopedModel )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3555:1: ( ( ruleGroupLoopedModel ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3556:1: ( ruleGroupLoopedModel )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3523:1: ( ruleGroupLoopedModel )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3524:1: ruleGroupLoopedModel
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3556:1: ( ruleGroupLoopedModel )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3557:1: ruleGroupLoopedModel
             {
              before(grammarAccess.getModelAccess().getForthGroupLoopedModelParserRuleCall_3_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleGroupLoopedModel_in_rule__Model__ForthAssignment_3_18391);
+            pushFollow(FollowSets000.FOLLOW_ruleGroupLoopedModel_in_rule__Model__ForthAssignment_3_18454);
             ruleGroupLoopedModel();
             _fsp--;
 
@@ -9941,20 +10014,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Model__FifthAssignment_4_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3533:1: rule__Model__FifthAssignment_4_1 : ( ruleLoopedAlternativeModel ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3566:1: rule__Model__FifthAssignment_4_1 : ( ruleLoopedAlternativeModel ) ;
     public final void rule__Model__FifthAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3537:1: ( ( ruleLoopedAlternativeModel ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3538:1: ( ruleLoopedAlternativeModel )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3570:1: ( ( ruleLoopedAlternativeModel ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3571:1: ( ruleLoopedAlternativeModel )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3538:1: ( ruleLoopedAlternativeModel )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3539:1: ruleLoopedAlternativeModel
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3571:1: ( ruleLoopedAlternativeModel )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3572:1: ruleLoopedAlternativeModel
             {
              before(grammarAccess.getModelAccess().getFifthLoopedAlternativeModelParserRuleCall_4_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleLoopedAlternativeModel_in_rule__Model__FifthAssignment_4_18422);
+            pushFollow(FollowSets000.FOLLOW_ruleLoopedAlternativeModel_in_rule__Model__FifthAssignment_4_18485);
             ruleLoopedAlternativeModel();
             _fsp--;
 
@@ -9981,20 +10054,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Model__ModelAssignment_5_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3548:1: rule__Model__ModelAssignment_5_1 : ( ruleBug304681Model ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3581:1: rule__Model__ModelAssignment_5_1 : ( ruleBug304681Model ) ;
     public final void rule__Model__ModelAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3552:1: ( ( ruleBug304681Model ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3553:1: ( ruleBug304681Model )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3585:1: ( ( ruleBug304681Model ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3586:1: ( ruleBug304681Model )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3553:1: ( ruleBug304681Model )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3554:1: ruleBug304681Model
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3586:1: ( ruleBug304681Model )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3587:1: ruleBug304681Model
             {
              before(grammarAccess.getModelAccess().getModelBug304681ModelParserRuleCall_5_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleBug304681Model_in_rule__Model__ModelAssignment_5_18453);
+            pushFollow(FollowSets000.FOLLOW_ruleBug304681Model_in_rule__Model__ModelAssignment_5_18516);
             ruleBug304681Model();
             _fsp--;
 
@@ -10021,23 +10094,23 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__VisibilityAssignment_0_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3563:1: rule__SimpleModel__VisibilityAssignment_0_0 : ( ( rule__SimpleModel__VisibilityAlternatives_0_0_0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3596:1: rule__SimpleModel__VisibilityAssignment_0_0 : ( ( rule__SimpleModel__VisibilityAlternatives_0_0_0 ) ) ;
     public final void rule__SimpleModel__VisibilityAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3567:1: ( ( ( rule__SimpleModel__VisibilityAlternatives_0_0_0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3568:1: ( ( rule__SimpleModel__VisibilityAlternatives_0_0_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3600:1: ( ( ( rule__SimpleModel__VisibilityAlternatives_0_0_0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3601:1: ( ( rule__SimpleModel__VisibilityAlternatives_0_0_0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3568:1: ( ( rule__SimpleModel__VisibilityAlternatives_0_0_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3569:1: ( rule__SimpleModel__VisibilityAlternatives_0_0_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3601:1: ( ( rule__SimpleModel__VisibilityAlternatives_0_0_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3602:1: ( rule__SimpleModel__VisibilityAlternatives_0_0_0 )
             {
              before(grammarAccess.getSimpleModelAccess().getVisibilityAlternatives_0_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3570:1: ( rule__SimpleModel__VisibilityAlternatives_0_0_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3570:2: rule__SimpleModel__VisibilityAlternatives_0_0_0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3603:1: ( rule__SimpleModel__VisibilityAlternatives_0_0_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3603:2: rule__SimpleModel__VisibilityAlternatives_0_0_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__VisibilityAlternatives_0_0_0_in_rule__SimpleModel__VisibilityAssignment_0_08484);
+            pushFollow(FollowSets000.FOLLOW_rule__SimpleModel__VisibilityAlternatives_0_0_0_in_rule__SimpleModel__VisibilityAssignment_0_08547);
             rule__SimpleModel__VisibilityAlternatives_0_0_0();
             _fsp--;
 
@@ -10067,24 +10140,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__StaticAssignment_0_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3579:1: rule__SimpleModel__StaticAssignment_0_1 : ( ( 'static' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3612:1: rule__SimpleModel__StaticAssignment_0_1 : ( ( 'static' ) ) ;
     public final void rule__SimpleModel__StaticAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3583:1: ( ( ( 'static' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3584:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3616:1: ( ( ( 'static' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3617:1: ( ( 'static' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3584:1: ( ( 'static' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3585:1: ( 'static' )
-            {
-             before(grammarAccess.getSimpleModelAccess().getStaticStaticKeyword_0_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3586:1: ( 'static' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3587:1: 'static'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3617:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3618:1: ( 'static' )
             {
              before(grammarAccess.getSimpleModelAccess().getStaticStaticKeyword_0_1_0()); 
-            match(input,31,FollowSets000.FOLLOW_31_in_rule__SimpleModel__StaticAssignment_0_18522); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3619:1: ( 'static' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3620:1: 'static'
+            {
+             before(grammarAccess.getSimpleModelAccess().getStaticStaticKeyword_0_1_0()); 
+            match(input,31,FollowSets000.FOLLOW_31_in_rule__SimpleModel__StaticAssignment_0_18585); 
              after(grammarAccess.getSimpleModelAccess().getStaticStaticKeyword_0_1_0()); 
 
             }
@@ -10112,24 +10185,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__SynchronizedAssignment_0_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3602:1: rule__SimpleModel__SynchronizedAssignment_0_2 : ( ( 'synchronized' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3635:1: rule__SimpleModel__SynchronizedAssignment_0_2 : ( ( 'synchronized' ) ) ;
     public final void rule__SimpleModel__SynchronizedAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3606:1: ( ( ( 'synchronized' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3607:1: ( ( 'synchronized' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3639:1: ( ( ( 'synchronized' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3640:1: ( ( 'synchronized' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3607:1: ( ( 'synchronized' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3608:1: ( 'synchronized' )
-            {
-             before(grammarAccess.getSimpleModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3609:1: ( 'synchronized' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3610:1: 'synchronized'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3640:1: ( ( 'synchronized' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3641:1: ( 'synchronized' )
             {
              before(grammarAccess.getSimpleModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
-            match(input,32,FollowSets000.FOLLOW_32_in_rule__SimpleModel__SynchronizedAssignment_0_28566); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3642:1: ( 'synchronized' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3643:1: 'synchronized'
+            {
+             before(grammarAccess.getSimpleModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
+            match(input,32,FollowSets000.FOLLOW_32_in_rule__SimpleModel__SynchronizedAssignment_0_28629); 
              after(grammarAccess.getSimpleModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
 
             }
@@ -10157,24 +10230,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__AbstractAssignment_0_3_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3625:1: rule__SimpleModel__AbstractAssignment_0_3_0 : ( ( 'abstract' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3658:1: rule__SimpleModel__AbstractAssignment_0_3_0 : ( ( 'abstract' ) ) ;
     public final void rule__SimpleModel__AbstractAssignment_0_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3629:1: ( ( ( 'abstract' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3630:1: ( ( 'abstract' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3662:1: ( ( ( 'abstract' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3663:1: ( ( 'abstract' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3630:1: ( ( 'abstract' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3631:1: ( 'abstract' )
-            {
-             before(grammarAccess.getSimpleModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3632:1: ( 'abstract' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3633:1: 'abstract'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3663:1: ( ( 'abstract' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3664:1: ( 'abstract' )
             {
              before(grammarAccess.getSimpleModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
-            match(input,33,FollowSets000.FOLLOW_33_in_rule__SimpleModel__AbstractAssignment_0_3_08610); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3665:1: ( 'abstract' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3666:1: 'abstract'
+            {
+             before(grammarAccess.getSimpleModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
+            match(input,33,FollowSets000.FOLLOW_33_in_rule__SimpleModel__AbstractAssignment_0_3_08673); 
              after(grammarAccess.getSimpleModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
 
             }
@@ -10202,24 +10275,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__FinalAssignment_0_3_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3648:1: rule__SimpleModel__FinalAssignment_0_3_1 : ( ( 'final' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3681:1: rule__SimpleModel__FinalAssignment_0_3_1 : ( ( 'final' ) ) ;
     public final void rule__SimpleModel__FinalAssignment_0_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3652:1: ( ( ( 'final' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3653:1: ( ( 'final' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3685:1: ( ( ( 'final' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3686:1: ( ( 'final' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3653:1: ( ( 'final' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3654:1: ( 'final' )
-            {
-             before(grammarAccess.getSimpleModelAccess().getFinalFinalKeyword_0_3_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3655:1: ( 'final' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3656:1: 'final'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3686:1: ( ( 'final' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3687:1: ( 'final' )
             {
              before(grammarAccess.getSimpleModelAccess().getFinalFinalKeyword_0_3_1_0()); 
-            match(input,34,FollowSets000.FOLLOW_34_in_rule__SimpleModel__FinalAssignment_0_3_18654); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3688:1: ( 'final' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3689:1: 'final'
+            {
+             before(grammarAccess.getSimpleModelAccess().getFinalFinalKeyword_0_3_1_0()); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__SimpleModel__FinalAssignment_0_3_18717); 
              after(grammarAccess.getSimpleModelAccess().getFinalFinalKeyword_0_3_1_0()); 
 
             }
@@ -10247,20 +10320,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__SimpleModel__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3671:1: rule__SimpleModel__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3704:1: rule__SimpleModel__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__SimpleModel__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3675:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3676:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3708:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3709:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3676:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3677:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3709:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3710:1: RULE_ID
             {
              before(grammarAccess.getSimpleModelAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__SimpleModel__NameAssignment_28693); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__SimpleModel__NameAssignment_28756); 
              after(grammarAccess.getSimpleModelAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -10284,23 +10357,23 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__VisibilityAssignment_0_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3686:1: rule__MandatoryModel__VisibilityAssignment_0_0 : ( ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3719:1: rule__MandatoryModel__VisibilityAssignment_0_0 : ( ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 ) ) ;
     public final void rule__MandatoryModel__VisibilityAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3690:1: ( ( ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3691:1: ( ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3723:1: ( ( ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3724:1: ( ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3691:1: ( ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3692:1: ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3724:1: ( ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3725:1: ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 )
             {
              before(grammarAccess.getMandatoryModelAccess().getVisibilityAlternatives_0_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3693:1: ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3693:2: rule__MandatoryModel__VisibilityAlternatives_0_0_0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3726:1: ( rule__MandatoryModel__VisibilityAlternatives_0_0_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3726:2: rule__MandatoryModel__VisibilityAlternatives_0_0_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__VisibilityAlternatives_0_0_0_in_rule__MandatoryModel__VisibilityAssignment_0_08724);
+            pushFollow(FollowSets000.FOLLOW_rule__MandatoryModel__VisibilityAlternatives_0_0_0_in_rule__MandatoryModel__VisibilityAssignment_0_08787);
             rule__MandatoryModel__VisibilityAlternatives_0_0_0();
             _fsp--;
 
@@ -10330,24 +10403,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__StaticAssignment_0_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3702:1: rule__MandatoryModel__StaticAssignment_0_1 : ( ( 'static' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3735:1: rule__MandatoryModel__StaticAssignment_0_1 : ( ( 'static' ) ) ;
     public final void rule__MandatoryModel__StaticAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3706:1: ( ( ( 'static' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3707:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3739:1: ( ( ( 'static' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3740:1: ( ( 'static' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3707:1: ( ( 'static' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3708:1: ( 'static' )
-            {
-             before(grammarAccess.getMandatoryModelAccess().getStaticStaticKeyword_0_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3709:1: ( 'static' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3710:1: 'static'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3740:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3741:1: ( 'static' )
             {
              before(grammarAccess.getMandatoryModelAccess().getStaticStaticKeyword_0_1_0()); 
-            match(input,31,FollowSets000.FOLLOW_31_in_rule__MandatoryModel__StaticAssignment_0_18762); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3742:1: ( 'static' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3743:1: 'static'
+            {
+             before(grammarAccess.getMandatoryModelAccess().getStaticStaticKeyword_0_1_0()); 
+            match(input,31,FollowSets000.FOLLOW_31_in_rule__MandatoryModel__StaticAssignment_0_18825); 
              after(grammarAccess.getMandatoryModelAccess().getStaticStaticKeyword_0_1_0()); 
 
             }
@@ -10375,24 +10448,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__SynchronizedAssignment_0_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3725:1: rule__MandatoryModel__SynchronizedAssignment_0_2 : ( ( 'synchronized' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3758:1: rule__MandatoryModel__SynchronizedAssignment_0_2 : ( ( 'synchronized' ) ) ;
     public final void rule__MandatoryModel__SynchronizedAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3729:1: ( ( ( 'synchronized' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3730:1: ( ( 'synchronized' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3762:1: ( ( ( 'synchronized' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3763:1: ( ( 'synchronized' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3730:1: ( ( 'synchronized' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3731:1: ( 'synchronized' )
-            {
-             before(grammarAccess.getMandatoryModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3732:1: ( 'synchronized' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3733:1: 'synchronized'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3763:1: ( ( 'synchronized' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3764:1: ( 'synchronized' )
             {
              before(grammarAccess.getMandatoryModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
-            match(input,32,FollowSets000.FOLLOW_32_in_rule__MandatoryModel__SynchronizedAssignment_0_28806); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3765:1: ( 'synchronized' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3766:1: 'synchronized'
+            {
+             before(grammarAccess.getMandatoryModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
+            match(input,32,FollowSets000.FOLLOW_32_in_rule__MandatoryModel__SynchronizedAssignment_0_28869); 
              after(grammarAccess.getMandatoryModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
 
             }
@@ -10420,24 +10493,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__AbstractAssignment_0_3_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3748:1: rule__MandatoryModel__AbstractAssignment_0_3_0 : ( ( 'abstract' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3781:1: rule__MandatoryModel__AbstractAssignment_0_3_0 : ( ( 'abstract' ) ) ;
     public final void rule__MandatoryModel__AbstractAssignment_0_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3752:1: ( ( ( 'abstract' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3753:1: ( ( 'abstract' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3785:1: ( ( ( 'abstract' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3786:1: ( ( 'abstract' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3753:1: ( ( 'abstract' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3754:1: ( 'abstract' )
-            {
-             before(grammarAccess.getMandatoryModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3755:1: ( 'abstract' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3756:1: 'abstract'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3786:1: ( ( 'abstract' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3787:1: ( 'abstract' )
             {
              before(grammarAccess.getMandatoryModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
-            match(input,33,FollowSets000.FOLLOW_33_in_rule__MandatoryModel__AbstractAssignment_0_3_08850); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3788:1: ( 'abstract' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3789:1: 'abstract'
+            {
+             before(grammarAccess.getMandatoryModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
+            match(input,33,FollowSets000.FOLLOW_33_in_rule__MandatoryModel__AbstractAssignment_0_3_08913); 
              after(grammarAccess.getMandatoryModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
 
             }
@@ -10465,24 +10538,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__FinalAssignment_0_3_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3771:1: rule__MandatoryModel__FinalAssignment_0_3_1 : ( ( 'final' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3804:1: rule__MandatoryModel__FinalAssignment_0_3_1 : ( ( 'final' ) ) ;
     public final void rule__MandatoryModel__FinalAssignment_0_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3775:1: ( ( ( 'final' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3776:1: ( ( 'final' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3808:1: ( ( ( 'final' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3809:1: ( ( 'final' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3776:1: ( ( 'final' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3777:1: ( 'final' )
-            {
-             before(grammarAccess.getMandatoryModelAccess().getFinalFinalKeyword_0_3_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3778:1: ( 'final' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3779:1: 'final'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3809:1: ( ( 'final' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3810:1: ( 'final' )
             {
              before(grammarAccess.getMandatoryModelAccess().getFinalFinalKeyword_0_3_1_0()); 
-            match(input,34,FollowSets000.FOLLOW_34_in_rule__MandatoryModel__FinalAssignment_0_3_18894); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3811:1: ( 'final' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3812:1: 'final'
+            {
+             before(grammarAccess.getMandatoryModelAccess().getFinalFinalKeyword_0_3_1_0()); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__MandatoryModel__FinalAssignment_0_3_18957); 
              after(grammarAccess.getMandatoryModelAccess().getFinalFinalKeyword_0_3_1_0()); 
 
             }
@@ -10510,20 +10583,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__MandatoryModel__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3794:1: rule__MandatoryModel__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3827:1: rule__MandatoryModel__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__MandatoryModel__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3798:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3799:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3831:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3832:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3799:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3800:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3832:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3833:1: RULE_ID
             {
              before(grammarAccess.getMandatoryModelAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__MandatoryModel__NameAssignment_28933); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__MandatoryModel__NameAssignment_28996); 
              after(grammarAccess.getMandatoryModelAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -10547,23 +10620,23 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__VisibilityAssignment_0_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3809:1: rule__LoopedModel__VisibilityAssignment_0_0 : ( ( rule__LoopedModel__VisibilityAlternatives_0_0_0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3842:1: rule__LoopedModel__VisibilityAssignment_0_0 : ( ( rule__LoopedModel__VisibilityAlternatives_0_0_0 ) ) ;
     public final void rule__LoopedModel__VisibilityAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3813:1: ( ( ( rule__LoopedModel__VisibilityAlternatives_0_0_0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3814:1: ( ( rule__LoopedModel__VisibilityAlternatives_0_0_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3846:1: ( ( ( rule__LoopedModel__VisibilityAlternatives_0_0_0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3847:1: ( ( rule__LoopedModel__VisibilityAlternatives_0_0_0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3814:1: ( ( rule__LoopedModel__VisibilityAlternatives_0_0_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3815:1: ( rule__LoopedModel__VisibilityAlternatives_0_0_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3847:1: ( ( rule__LoopedModel__VisibilityAlternatives_0_0_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3848:1: ( rule__LoopedModel__VisibilityAlternatives_0_0_0 )
             {
              before(grammarAccess.getLoopedModelAccess().getVisibilityAlternatives_0_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3816:1: ( rule__LoopedModel__VisibilityAlternatives_0_0_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3816:2: rule__LoopedModel__VisibilityAlternatives_0_0_0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3849:1: ( rule__LoopedModel__VisibilityAlternatives_0_0_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3849:2: rule__LoopedModel__VisibilityAlternatives_0_0_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__VisibilityAlternatives_0_0_0_in_rule__LoopedModel__VisibilityAssignment_0_08964);
+            pushFollow(FollowSets000.FOLLOW_rule__LoopedModel__VisibilityAlternatives_0_0_0_in_rule__LoopedModel__VisibilityAssignment_0_09027);
             rule__LoopedModel__VisibilityAlternatives_0_0_0();
             _fsp--;
 
@@ -10593,24 +10666,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__StaticAssignment_0_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3825:1: rule__LoopedModel__StaticAssignment_0_1 : ( ( 'static' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3858:1: rule__LoopedModel__StaticAssignment_0_1 : ( ( 'static' ) ) ;
     public final void rule__LoopedModel__StaticAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3829:1: ( ( ( 'static' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3830:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3862:1: ( ( ( 'static' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3863:1: ( ( 'static' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3830:1: ( ( 'static' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3831:1: ( 'static' )
-            {
-             before(grammarAccess.getLoopedModelAccess().getStaticStaticKeyword_0_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3832:1: ( 'static' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3833:1: 'static'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3863:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3864:1: ( 'static' )
             {
              before(grammarAccess.getLoopedModelAccess().getStaticStaticKeyword_0_1_0()); 
-            match(input,31,FollowSets000.FOLLOW_31_in_rule__LoopedModel__StaticAssignment_0_19002); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3865:1: ( 'static' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3866:1: 'static'
+            {
+             before(grammarAccess.getLoopedModelAccess().getStaticStaticKeyword_0_1_0()); 
+            match(input,31,FollowSets000.FOLLOW_31_in_rule__LoopedModel__StaticAssignment_0_19065); 
              after(grammarAccess.getLoopedModelAccess().getStaticStaticKeyword_0_1_0()); 
 
             }
@@ -10638,24 +10711,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__SynchronizedAssignment_0_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3848:1: rule__LoopedModel__SynchronizedAssignment_0_2 : ( ( 'synchronized' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3881:1: rule__LoopedModel__SynchronizedAssignment_0_2 : ( ( 'synchronized' ) ) ;
     public final void rule__LoopedModel__SynchronizedAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3852:1: ( ( ( 'synchronized' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3853:1: ( ( 'synchronized' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3885:1: ( ( ( 'synchronized' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3886:1: ( ( 'synchronized' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3853:1: ( ( 'synchronized' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3854:1: ( 'synchronized' )
-            {
-             before(grammarAccess.getLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3855:1: ( 'synchronized' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3856:1: 'synchronized'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3886:1: ( ( 'synchronized' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3887:1: ( 'synchronized' )
             {
              before(grammarAccess.getLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
-            match(input,32,FollowSets000.FOLLOW_32_in_rule__LoopedModel__SynchronizedAssignment_0_29046); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3888:1: ( 'synchronized' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3889:1: 'synchronized'
+            {
+             before(grammarAccess.getLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
+            match(input,32,FollowSets000.FOLLOW_32_in_rule__LoopedModel__SynchronizedAssignment_0_29109); 
              after(grammarAccess.getLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
 
             }
@@ -10683,24 +10756,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__AbstractAssignment_0_3_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3871:1: rule__LoopedModel__AbstractAssignment_0_3_0 : ( ( 'abstract' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3904:1: rule__LoopedModel__AbstractAssignment_0_3_0 : ( ( 'abstract' ) ) ;
     public final void rule__LoopedModel__AbstractAssignment_0_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3875:1: ( ( ( 'abstract' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3876:1: ( ( 'abstract' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3908:1: ( ( ( 'abstract' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3909:1: ( ( 'abstract' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3876:1: ( ( 'abstract' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3877:1: ( 'abstract' )
-            {
-             before(grammarAccess.getLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3878:1: ( 'abstract' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3879:1: 'abstract'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3909:1: ( ( 'abstract' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3910:1: ( 'abstract' )
             {
              before(grammarAccess.getLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
-            match(input,33,FollowSets000.FOLLOW_33_in_rule__LoopedModel__AbstractAssignment_0_3_09090); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3911:1: ( 'abstract' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3912:1: 'abstract'
+            {
+             before(grammarAccess.getLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
+            match(input,33,FollowSets000.FOLLOW_33_in_rule__LoopedModel__AbstractAssignment_0_3_09153); 
              after(grammarAccess.getLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
 
             }
@@ -10728,24 +10801,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__FinalAssignment_0_3_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3894:1: rule__LoopedModel__FinalAssignment_0_3_1 : ( ( 'final' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3927:1: rule__LoopedModel__FinalAssignment_0_3_1 : ( ( 'final' ) ) ;
     public final void rule__LoopedModel__FinalAssignment_0_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3898:1: ( ( ( 'final' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3899:1: ( ( 'final' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3931:1: ( ( ( 'final' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3932:1: ( ( 'final' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3899:1: ( ( 'final' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3900:1: ( 'final' )
-            {
-             before(grammarAccess.getLoopedModelAccess().getFinalFinalKeyword_0_3_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3901:1: ( 'final' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3902:1: 'final'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3932:1: ( ( 'final' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3933:1: ( 'final' )
             {
              before(grammarAccess.getLoopedModelAccess().getFinalFinalKeyword_0_3_1_0()); 
-            match(input,34,FollowSets000.FOLLOW_34_in_rule__LoopedModel__FinalAssignment_0_3_19134); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3934:1: ( 'final' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3935:1: 'final'
+            {
+             before(grammarAccess.getLoopedModelAccess().getFinalFinalKeyword_0_3_1_0()); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__LoopedModel__FinalAssignment_0_3_19197); 
              after(grammarAccess.getLoopedModelAccess().getFinalFinalKeyword_0_3_1_0()); 
 
             }
@@ -10773,20 +10846,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedModel__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3917:1: rule__LoopedModel__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3950:1: rule__LoopedModel__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__LoopedModel__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3921:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3922:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3954:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3955:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3922:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3923:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3955:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3956:1: RULE_ID
             {
              before(grammarAccess.getLoopedModelAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__LoopedModel__NameAssignment_29173); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__LoopedModel__NameAssignment_29236); 
              after(grammarAccess.getLoopedModelAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -10810,23 +10883,23 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__VisibilityAssignment_0_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3932:1: rule__GroupLoopedModel__VisibilityAssignment_0_0 : ( ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3965:1: rule__GroupLoopedModel__VisibilityAssignment_0_0 : ( ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 ) ) ;
     public final void rule__GroupLoopedModel__VisibilityAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3936:1: ( ( ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3937:1: ( ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3969:1: ( ( ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3970:1: ( ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3937:1: ( ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3938:1: ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3970:1: ( ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3971:1: ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 )
             {
              before(grammarAccess.getGroupLoopedModelAccess().getVisibilityAlternatives_0_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3939:1: ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3939:2: rule__GroupLoopedModel__VisibilityAlternatives_0_0_0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3972:1: ( rule__GroupLoopedModel__VisibilityAlternatives_0_0_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3972:2: rule__GroupLoopedModel__VisibilityAlternatives_0_0_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__VisibilityAlternatives_0_0_0_in_rule__GroupLoopedModel__VisibilityAssignment_0_09204);
+            pushFollow(FollowSets000.FOLLOW_rule__GroupLoopedModel__VisibilityAlternatives_0_0_0_in_rule__GroupLoopedModel__VisibilityAssignment_0_09267);
             rule__GroupLoopedModel__VisibilityAlternatives_0_0_0();
             _fsp--;
 
@@ -10856,24 +10929,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__StaticAssignment_0_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3948:1: rule__GroupLoopedModel__StaticAssignment_0_1 : ( ( 'static' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3981:1: rule__GroupLoopedModel__StaticAssignment_0_1 : ( ( 'static' ) ) ;
     public final void rule__GroupLoopedModel__StaticAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3952:1: ( ( ( 'static' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3953:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3985:1: ( ( ( 'static' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3986:1: ( ( 'static' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3953:1: ( ( 'static' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3954:1: ( 'static' )
-            {
-             before(grammarAccess.getGroupLoopedModelAccess().getStaticStaticKeyword_0_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3955:1: ( 'static' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3956:1: 'static'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3986:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3987:1: ( 'static' )
             {
              before(grammarAccess.getGroupLoopedModelAccess().getStaticStaticKeyword_0_1_0()); 
-            match(input,31,FollowSets000.FOLLOW_31_in_rule__GroupLoopedModel__StaticAssignment_0_19242); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3988:1: ( 'static' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3989:1: 'static'
+            {
+             before(grammarAccess.getGroupLoopedModelAccess().getStaticStaticKeyword_0_1_0()); 
+            match(input,31,FollowSets000.FOLLOW_31_in_rule__GroupLoopedModel__StaticAssignment_0_19305); 
              after(grammarAccess.getGroupLoopedModelAccess().getStaticStaticKeyword_0_1_0()); 
 
             }
@@ -10901,24 +10974,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__SynchronizedAssignment_0_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3971:1: rule__GroupLoopedModel__SynchronizedAssignment_0_2 : ( ( 'synchronized' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4004:1: rule__GroupLoopedModel__SynchronizedAssignment_0_2 : ( ( 'synchronized' ) ) ;
     public final void rule__GroupLoopedModel__SynchronizedAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3975:1: ( ( ( 'synchronized' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3976:1: ( ( 'synchronized' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4008:1: ( ( ( 'synchronized' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4009:1: ( ( 'synchronized' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3976:1: ( ( 'synchronized' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3977:1: ( 'synchronized' )
-            {
-             before(grammarAccess.getGroupLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3978:1: ( 'synchronized' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3979:1: 'synchronized'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4009:1: ( ( 'synchronized' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4010:1: ( 'synchronized' )
             {
              before(grammarAccess.getGroupLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
-            match(input,32,FollowSets000.FOLLOW_32_in_rule__GroupLoopedModel__SynchronizedAssignment_0_29286); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4011:1: ( 'synchronized' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4012:1: 'synchronized'
+            {
+             before(grammarAccess.getGroupLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
+            match(input,32,FollowSets000.FOLLOW_32_in_rule__GroupLoopedModel__SynchronizedAssignment_0_29349); 
              after(grammarAccess.getGroupLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
 
             }
@@ -10946,24 +11019,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__AbstractAssignment_0_3_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3994:1: rule__GroupLoopedModel__AbstractAssignment_0_3_0 : ( ( 'abstract' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4027:1: rule__GroupLoopedModel__AbstractAssignment_0_3_0 : ( ( 'abstract' ) ) ;
     public final void rule__GroupLoopedModel__AbstractAssignment_0_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3998:1: ( ( ( 'abstract' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3999:1: ( ( 'abstract' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4031:1: ( ( ( 'abstract' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4032:1: ( ( 'abstract' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:3999:1: ( ( 'abstract' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4000:1: ( 'abstract' )
-            {
-             before(grammarAccess.getGroupLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4001:1: ( 'abstract' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4002:1: 'abstract'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4032:1: ( ( 'abstract' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4033:1: ( 'abstract' )
             {
              before(grammarAccess.getGroupLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
-            match(input,33,FollowSets000.FOLLOW_33_in_rule__GroupLoopedModel__AbstractAssignment_0_3_09330); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4034:1: ( 'abstract' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4035:1: 'abstract'
+            {
+             before(grammarAccess.getGroupLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
+            match(input,33,FollowSets000.FOLLOW_33_in_rule__GroupLoopedModel__AbstractAssignment_0_3_09393); 
              after(grammarAccess.getGroupLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
 
             }
@@ -10991,24 +11064,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__FinalAssignment_0_3_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4017:1: rule__GroupLoopedModel__FinalAssignment_0_3_1 : ( ( 'final' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4050:1: rule__GroupLoopedModel__FinalAssignment_0_3_1 : ( ( 'final' ) ) ;
     public final void rule__GroupLoopedModel__FinalAssignment_0_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4021:1: ( ( ( 'final' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4022:1: ( ( 'final' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4054:1: ( ( ( 'final' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4055:1: ( ( 'final' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4022:1: ( ( 'final' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4023:1: ( 'final' )
-            {
-             before(grammarAccess.getGroupLoopedModelAccess().getFinalFinalKeyword_0_3_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4024:1: ( 'final' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4025:1: 'final'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4055:1: ( ( 'final' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4056:1: ( 'final' )
             {
              before(grammarAccess.getGroupLoopedModelAccess().getFinalFinalKeyword_0_3_1_0()); 
-            match(input,34,FollowSets000.FOLLOW_34_in_rule__GroupLoopedModel__FinalAssignment_0_3_19374); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4057:1: ( 'final' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4058:1: 'final'
+            {
+             before(grammarAccess.getGroupLoopedModelAccess().getFinalFinalKeyword_0_3_1_0()); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__GroupLoopedModel__FinalAssignment_0_3_19437); 
              after(grammarAccess.getGroupLoopedModelAccess().getFinalFinalKeyword_0_3_1_0()); 
 
             }
@@ -11036,20 +11109,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__GroupLoopedModel__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4040:1: rule__GroupLoopedModel__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4073:1: rule__GroupLoopedModel__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__GroupLoopedModel__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4044:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4045:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4077:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4078:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4045:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4046:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4078:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4079:1: RULE_ID
             {
              before(grammarAccess.getGroupLoopedModelAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__GroupLoopedModel__NameAssignment_29413); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__GroupLoopedModel__NameAssignment_29476); 
              after(grammarAccess.getGroupLoopedModelAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -11073,23 +11146,23 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedAlternativeModel__VisibilityAssignment_0_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4055:1: rule__LoopedAlternativeModel__VisibilityAssignment_0_0 : ( ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4088:1: rule__LoopedAlternativeModel__VisibilityAssignment_0_0 : ( ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 ) ) ;
     public final void rule__LoopedAlternativeModel__VisibilityAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4059:1: ( ( ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4060:1: ( ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4092:1: ( ( ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4093:1: ( ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4060:1: ( ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4061:1: ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4093:1: ( ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4094:1: ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 )
             {
              before(grammarAccess.getLoopedAlternativeModelAccess().getVisibilityAlternatives_0_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4062:1: ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4062:2: rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4095:1: ( rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4095:2: rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0_in_rule__LoopedAlternativeModel__VisibilityAssignment_0_09444);
+            pushFollow(FollowSets000.FOLLOW_rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0_in_rule__LoopedAlternativeModel__VisibilityAssignment_0_09507);
             rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0();
             _fsp--;
 
@@ -11119,24 +11192,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedAlternativeModel__StaticAssignment_0_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4071:1: rule__LoopedAlternativeModel__StaticAssignment_0_1 : ( ( 'static' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4104:1: rule__LoopedAlternativeModel__StaticAssignment_0_1 : ( ( 'static' ) ) ;
     public final void rule__LoopedAlternativeModel__StaticAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4075:1: ( ( ( 'static' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4076:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4108:1: ( ( ( 'static' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4109:1: ( ( 'static' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4076:1: ( ( 'static' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4077:1: ( 'static' )
-            {
-             before(grammarAccess.getLoopedAlternativeModelAccess().getStaticStaticKeyword_0_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4078:1: ( 'static' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4079:1: 'static'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4109:1: ( ( 'static' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4110:1: ( 'static' )
             {
              before(grammarAccess.getLoopedAlternativeModelAccess().getStaticStaticKeyword_0_1_0()); 
-            match(input,31,FollowSets000.FOLLOW_31_in_rule__LoopedAlternativeModel__StaticAssignment_0_19482); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4111:1: ( 'static' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4112:1: 'static'
+            {
+             before(grammarAccess.getLoopedAlternativeModelAccess().getStaticStaticKeyword_0_1_0()); 
+            match(input,31,FollowSets000.FOLLOW_31_in_rule__LoopedAlternativeModel__StaticAssignment_0_19545); 
              after(grammarAccess.getLoopedAlternativeModelAccess().getStaticStaticKeyword_0_1_0()); 
 
             }
@@ -11164,24 +11237,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedAlternativeModel__SynchronizedAssignment_0_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4094:1: rule__LoopedAlternativeModel__SynchronizedAssignment_0_2 : ( ( 'synchronized' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4127:1: rule__LoopedAlternativeModel__SynchronizedAssignment_0_2 : ( ( 'synchronized' ) ) ;
     public final void rule__LoopedAlternativeModel__SynchronizedAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4098:1: ( ( ( 'synchronized' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4099:1: ( ( 'synchronized' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4131:1: ( ( ( 'synchronized' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4132:1: ( ( 'synchronized' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4099:1: ( ( 'synchronized' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4100:1: ( 'synchronized' )
-            {
-             before(grammarAccess.getLoopedAlternativeModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4101:1: ( 'synchronized' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4102:1: 'synchronized'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4132:1: ( ( 'synchronized' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4133:1: ( 'synchronized' )
             {
              before(grammarAccess.getLoopedAlternativeModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
-            match(input,32,FollowSets000.FOLLOW_32_in_rule__LoopedAlternativeModel__SynchronizedAssignment_0_29526); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4134:1: ( 'synchronized' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4135:1: 'synchronized'
+            {
+             before(grammarAccess.getLoopedAlternativeModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
+            match(input,32,FollowSets000.FOLLOW_32_in_rule__LoopedAlternativeModel__SynchronizedAssignment_0_29589); 
              after(grammarAccess.getLoopedAlternativeModelAccess().getSynchronizedSynchronizedKeyword_0_2_0()); 
 
             }
@@ -11209,24 +11282,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedAlternativeModel__AbstractAssignment_0_3_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4117:1: rule__LoopedAlternativeModel__AbstractAssignment_0_3_0 : ( ( 'abstract' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4150:1: rule__LoopedAlternativeModel__AbstractAssignment_0_3_0 : ( ( 'abstract' ) ) ;
     public final void rule__LoopedAlternativeModel__AbstractAssignment_0_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4121:1: ( ( ( 'abstract' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4122:1: ( ( 'abstract' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4154:1: ( ( ( 'abstract' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4155:1: ( ( 'abstract' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4122:1: ( ( 'abstract' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4123:1: ( 'abstract' )
-            {
-             before(grammarAccess.getLoopedAlternativeModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4124:1: ( 'abstract' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4125:1: 'abstract'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4155:1: ( ( 'abstract' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4156:1: ( 'abstract' )
             {
              before(grammarAccess.getLoopedAlternativeModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
-            match(input,33,FollowSets000.FOLLOW_33_in_rule__LoopedAlternativeModel__AbstractAssignment_0_3_09570); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4157:1: ( 'abstract' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4158:1: 'abstract'
+            {
+             before(grammarAccess.getLoopedAlternativeModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
+            match(input,33,FollowSets000.FOLLOW_33_in_rule__LoopedAlternativeModel__AbstractAssignment_0_3_09633); 
              after(grammarAccess.getLoopedAlternativeModelAccess().getAbstractAbstractKeyword_0_3_0_0()); 
 
             }
@@ -11254,24 +11327,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedAlternativeModel__FinalAssignment_0_3_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4140:1: rule__LoopedAlternativeModel__FinalAssignment_0_3_1 : ( ( 'final' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4173:1: rule__LoopedAlternativeModel__FinalAssignment_0_3_1 : ( ( 'final' ) ) ;
     public final void rule__LoopedAlternativeModel__FinalAssignment_0_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4144:1: ( ( ( 'final' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4145:1: ( ( 'final' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4177:1: ( ( ( 'final' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4178:1: ( ( 'final' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4145:1: ( ( 'final' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4146:1: ( 'final' )
-            {
-             before(grammarAccess.getLoopedAlternativeModelAccess().getFinalFinalKeyword_0_3_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4147:1: ( 'final' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4148:1: 'final'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4178:1: ( ( 'final' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4179:1: ( 'final' )
             {
              before(grammarAccess.getLoopedAlternativeModelAccess().getFinalFinalKeyword_0_3_1_0()); 
-            match(input,34,FollowSets000.FOLLOW_34_in_rule__LoopedAlternativeModel__FinalAssignment_0_3_19614); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4180:1: ( 'final' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4181:1: 'final'
+            {
+             before(grammarAccess.getLoopedAlternativeModelAccess().getFinalFinalKeyword_0_3_1_0()); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__LoopedAlternativeModel__FinalAssignment_0_3_19677); 
              after(grammarAccess.getLoopedAlternativeModelAccess().getFinalFinalKeyword_0_3_1_0()); 
 
             }
@@ -11299,20 +11372,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__LoopedAlternativeModel__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4163:1: rule__LoopedAlternativeModel__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4196:1: rule__LoopedAlternativeModel__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__LoopedAlternativeModel__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4167:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4168:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4200:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4201:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4168:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4169:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4201:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4202:1: RULE_ID
             {
              before(grammarAccess.getLoopedAlternativeModelAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__LoopedAlternativeModel__NameAssignment_29653); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__LoopedAlternativeModel__NameAssignment_29716); 
              after(grammarAccess.getLoopedAlternativeModelAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -11335,22 +11408,22 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
     // $ANTLR end rule__LoopedAlternativeModel__NameAssignment_2
 
 
-    // $ANTLR start rule__Bug304681Model__ShortDescriptionAssignment_1_0_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4178:1: rule__Bug304681Model__ShortDescriptionAssignment_1_0_1 : ( RULE_STRING ) ;
-    public final void rule__Bug304681Model__ShortDescriptionAssignment_1_0_1() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__ShortDescriptionAssignment_2_0_1
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4211:1: rule__Bug304681Model__ShortDescriptionAssignment_2_0_1 : ( RULE_STRING ) ;
+    public final void rule__Bug304681Model__ShortDescriptionAssignment_2_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4182:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4183:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4215:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4216:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4183:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4184:1: RULE_STRING
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4216:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4217:1: RULE_STRING
             {
-             before(grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_1_0_1_0()); 
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Bug304681Model__ShortDescriptionAssignment_1_0_19684); 
-             after(grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_1_0_1_0()); 
+             before(grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_2_0_1_0()); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Bug304681Model__ShortDescriptionAssignment_2_0_19747); 
+             after(grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_2_0_1_0()); 
 
             }
 
@@ -11369,25 +11442,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__ShortDescriptionAssignment_1_0_1
+    // $ANTLR end rule__Bug304681Model__ShortDescriptionAssignment_2_0_1
 
 
-    // $ANTLR start rule__Bug304681Model__LongDescriptionAssignment_1_1_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4193:1: rule__Bug304681Model__LongDescriptionAssignment_1_1_1 : ( RULE_STRING ) ;
-    public final void rule__Bug304681Model__LongDescriptionAssignment_1_1_1() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__LongDescriptionAssignment_2_1_1
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4226:1: rule__Bug304681Model__LongDescriptionAssignment_2_1_1 : ( RULE_STRING ) ;
+    public final void rule__Bug304681Model__LongDescriptionAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4197:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4198:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4230:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4231:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4198:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4199:1: RULE_STRING
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4231:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4232:1: RULE_STRING
             {
-             before(grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_1_1_1_0()); 
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Bug304681Model__LongDescriptionAssignment_1_1_19715); 
-             after(grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_1_1_1_0()); 
+             before(grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_2_1_1_0()); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Bug304681Model__LongDescriptionAssignment_2_1_19778); 
+             after(grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_2_1_1_0()); 
 
             }
 
@@ -11406,25 +11479,25 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__LongDescriptionAssignment_1_1_1
+    // $ANTLR end rule__Bug304681Model__LongDescriptionAssignment_2_1_1
 
 
-    // $ANTLR start rule__Bug304681Model__UidAssignment_1_2_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4208:1: rule__Bug304681Model__UidAssignment_1_2_1 : ( RULE_STRING ) ;
-    public final void rule__Bug304681Model__UidAssignment_1_2_1() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__UidAssignment_2_2_1
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4241:1: rule__Bug304681Model__UidAssignment_2_2_1 : ( RULE_STRING ) ;
+    public final void rule__Bug304681Model__UidAssignment_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4212:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4213:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4245:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4246:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4213:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4214:1: RULE_STRING
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4246:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4247:1: RULE_STRING
             {
-             before(grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_1_2_1_0()); 
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Bug304681Model__UidAssignment_1_2_19746); 
-             after(grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_1_2_1_0()); 
+             before(grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_2_2_1_0()); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Bug304681Model__UidAssignment_2_2_19809); 
+             after(grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_2_2_1_0()); 
 
             }
 
@@ -11443,33 +11516,33 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__UidAssignment_1_2_1
+    // $ANTLR end rule__Bug304681Model__UidAssignment_2_2_1
 
 
-    // $ANTLR start rule__Bug304681Model__FlagAssignment_1_3_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4223:1: rule__Bug304681Model__FlagAssignment_1_3_0 : ( ( 'flag' ) ) ;
-    public final void rule__Bug304681Model__FlagAssignment_1_3_0() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__FlagAssignment_2_3_0
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4256:1: rule__Bug304681Model__FlagAssignment_2_3_0 : ( ( 'flag' ) ) ;
+    public final void rule__Bug304681Model__FlagAssignment_2_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4227:1: ( ( ( 'flag' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4228:1: ( ( 'flag' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4260:1: ( ( ( 'flag' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4261:1: ( ( 'flag' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4228:1: ( ( 'flag' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4229:1: ( 'flag' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4261:1: ( ( 'flag' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4262:1: ( 'flag' )
             {
-             before(grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_1_3_0_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4230:1: ( 'flag' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4231:1: 'flag'
+             before(grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_2_3_0_0()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4263:1: ( 'flag' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4264:1: 'flag'
             {
-             before(grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_1_3_0_0()); 
-            match(input,35,FollowSets000.FOLLOW_35_in_rule__Bug304681Model__FlagAssignment_1_3_09782); 
-             after(grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_1_3_0_0()); 
+             before(grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_2_3_0_0()); 
+            match(input,35,FollowSets000.FOLLOW_35_in_rule__Bug304681Model__FlagAssignment_2_3_09845); 
+             after(grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_2_3_0_0()); 
 
             }
 
-             after(grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_1_3_0_0()); 
+             after(grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_2_3_0_0()); 
 
             }
 
@@ -11488,28 +11561,28 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__FlagAssignment_1_3_0
+    // $ANTLR end rule__Bug304681Model__FlagAssignment_2_3_0
 
 
-    // $ANTLR start rule__Bug304681Model__FeaturesAssignment_1_4
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4246:1: rule__Bug304681Model__FeaturesAssignment_1_4 : ( ruleBug304681Feature ) ;
-    public final void rule__Bug304681Model__FeaturesAssignment_1_4() throws RecognitionException {
+    // $ANTLR start rule__Bug304681Model__FeaturesAssignment_2_4
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4279:1: rule__Bug304681Model__FeaturesAssignment_2_4 : ( ruleBug304681Feature ) ;
+    public final void rule__Bug304681Model__FeaturesAssignment_2_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4250:1: ( ( ruleBug304681Feature ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4251:1: ( ruleBug304681Feature )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4283:1: ( ( ruleBug304681Feature ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4284:1: ( ruleBug304681Feature )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4251:1: ( ruleBug304681Feature )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4252:1: ruleBug304681Feature
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4284:1: ( ruleBug304681Feature )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4285:1: ruleBug304681Feature
             {
-             before(grammarAccess.getBug304681ModelAccess().getFeaturesBug304681FeatureParserRuleCall_1_4_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleBug304681Feature_in_rule__Bug304681Model__FeaturesAssignment_1_49821);
+             before(grammarAccess.getBug304681ModelAccess().getFeaturesBug304681FeatureParserRuleCall_2_4_0()); 
+            pushFollow(FollowSets000.FOLLOW_ruleBug304681Feature_in_rule__Bug304681Model__FeaturesAssignment_2_49884);
             ruleBug304681Feature();
             _fsp--;
 
-             after(grammarAccess.getBug304681ModelAccess().getFeaturesBug304681FeatureParserRuleCall_1_4_0()); 
+             after(grammarAccess.getBug304681ModelAccess().getFeaturesBug304681FeatureParserRuleCall_2_4_0()); 
 
             }
 
@@ -11528,24 +11601,24 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         }
         return ;
     }
-    // $ANTLR end rule__Bug304681Model__FeaturesAssignment_1_4
+    // $ANTLR end rule__Bug304681Model__FeaturesAssignment_2_4
 
 
     // $ANTLR start rule__Bug304681Attribute__NameAssignment_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4261:1: rule__Bug304681Attribute__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4294:1: rule__Bug304681Attribute__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Bug304681Attribute__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4265:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4266:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4298:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4299:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4266:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4267:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4299:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4300:1: RULE_ID
             {
              before(grammarAccess.getBug304681AttributeAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Bug304681Attribute__NameAssignment_19852); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Bug304681Attribute__NameAssignment_19915); 
              after(grammarAccess.getBug304681AttributeAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -11569,20 +11642,20 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
 
 
     // $ANTLR start rule__Bug304681Reference__NameAssignment_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4276:1: rule__Bug304681Reference__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4309:1: rule__Bug304681Reference__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Bug304681Reference__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4280:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4281:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4313:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4314:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4281:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4282:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4314:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:4315:1: RULE_ID
             {
              before(grammarAccess.getBug304681ReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Bug304681Reference__NameAssignment_19883); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Bug304681Reference__NameAssignment_19946); 
              after(grammarAccess.getBug304681ReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -11782,170 +11855,172 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalC
         public static final BitSet FOLLOW_23_in_rule__LoopedAlternativeModel__Group_0_4__0__Impl3911 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__LoopedAlternativeModel__Group_0_4__1__Impl_in_rule__LoopedAlternativeModel__Group_0_4__13942 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_24_in_rule__LoopedAlternativeModel__Group_0_4__1__Impl3971 = new BitSet(new long[]{0x0000000001000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group__0__Impl_in_rule__Bug304681Model__Group__04008 = new BitSet(new long[]{0x000000087A400000L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group__0__Impl_in_rule__Bug304681Model__Group__04008 = new BitSet(new long[]{0x0000000000200000L});
         public static final BitSet FOLLOW_rule__Bug304681Model__Group__1_in_rule__Bug304681Model__Group__04011 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_21_in_rule__Bug304681Model__Group__0__Impl4039 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group__1__Impl_in_rule__Bug304681Model__Group__14070 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group__2_in_rule__Bug304681Model__Group__14073 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_1_in_rule__Bug304681Model__Group__1__Impl4100 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group__2__Impl_in_rule__Bug304681Model__Group__24130 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_22_in_rule__Bug304681Model__Group__2__Impl4158 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_0__0__Impl_in_rule__Bug304681Model__Group_1_0__04195 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_0__1_in_rule__Bug304681Model__Group_1_0__04198 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_25_in_rule__Bug304681Model__Group_1_0__0__Impl4226 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_0__1__Impl_in_rule__Bug304681Model__Group_1_0__14257 = new BitSet(new long[]{0x0000000004000000L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_0__2_in_rule__Bug304681Model__Group_1_0__14260 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__ShortDescriptionAssignment_1_0_1_in_rule__Bug304681Model__Group_1_0__1__Impl4287 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_0__2__Impl_in_rule__Bug304681Model__Group_1_0__24317 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_rule__Bug304681Model__Group_1_0__2__Impl4345 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_1__0__Impl_in_rule__Bug304681Model__Group_1_1__04382 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_1__1_in_rule__Bug304681Model__Group_1_1__04385 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_27_in_rule__Bug304681Model__Group_1_1__0__Impl4413 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_1__1__Impl_in_rule__Bug304681Model__Group_1_1__14444 = new BitSet(new long[]{0x0000000004000000L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_1__2_in_rule__Bug304681Model__Group_1_1__14447 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__LongDescriptionAssignment_1_1_1_in_rule__Bug304681Model__Group_1_1__1__Impl4474 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_1__2__Impl_in_rule__Bug304681Model__Group_1_1__24504 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_rule__Bug304681Model__Group_1_1__2__Impl4532 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_2__0__Impl_in_rule__Bug304681Model__Group_1_2__04569 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_2__1_in_rule__Bug304681Model__Group_1_2__04572 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_28_in_rule__Bug304681Model__Group_1_2__0__Impl4600 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_2__1__Impl_in_rule__Bug304681Model__Group_1_2__14631 = new BitSet(new long[]{0x0000000004000000L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_2__2_in_rule__Bug304681Model__Group_1_2__14634 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UidAssignment_1_2_1_in_rule__Bug304681Model__Group_1_2__1__Impl4661 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_2__2__Impl_in_rule__Bug304681Model__Group_1_2__24691 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_rule__Bug304681Model__Group_1_2__2__Impl4719 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_3__0__Impl_in_rule__Bug304681Model__Group_1_3__04756 = new BitSet(new long[]{0x0000000004000000L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_3__1_in_rule__Bug304681Model__Group_1_3__04759 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__FlagAssignment_1_3_0_in_rule__Bug304681Model__Group_1_3__0__Impl4786 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_3__1__Impl_in_rule__Bug304681Model__Group_1_3__14816 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_rule__Bug304681Model__Group_1_3__1__Impl4844 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Attribute__Group__0__Impl_in_rule__Bug304681Attribute__Group__04879 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__Bug304681Attribute__Group__1_in_rule__Bug304681Attribute__Group__04882 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_29_in_rule__Bug304681Attribute__Group__0__Impl4910 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Attribute__Group__1__Impl_in_rule__Bug304681Attribute__Group__14941 = new BitSet(new long[]{0x0000000004000000L});
-        public static final BitSet FOLLOW_rule__Bug304681Attribute__Group__2_in_rule__Bug304681Attribute__Group__14944 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Attribute__NameAssignment_1_in_rule__Bug304681Attribute__Group__1__Impl4971 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Attribute__Group__2__Impl_in_rule__Bug304681Attribute__Group__25001 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_rule__Bug304681Attribute__Group__2__Impl5029 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Reference__Group__0__Impl_in_rule__Bug304681Reference__Group__05066 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__Bug304681Reference__Group__1_in_rule__Bug304681Reference__Group__05069 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_30_in_rule__Bug304681Reference__Group__0__Impl5097 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Reference__Group__1__Impl_in_rule__Bug304681Reference__Group__15128 = new BitSet(new long[]{0x0000000004000000L});
-        public static final BitSet FOLLOW_rule__Bug304681Reference__Group__2_in_rule__Bug304681Reference__Group__15131 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Reference__NameAssignment_1_in_rule__Bug304681Reference__Group__1__Impl5158 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Reference__Group__2__Impl_in_rule__Bug304681Reference__Group__25188 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_rule__Bug304681Reference__Group__2__Impl5216 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__0_in_rule__SimpleModel__UnorderedGroup_05254 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleModel__VisibilityAssignment_0_0_in_rule__SimpleModel__UnorderedGroup_0__Impl5341 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleModel__StaticAssignment_0_1_in_rule__SimpleModel__UnorderedGroup_0__Impl5432 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleModel__SynchronizedAssignment_0_2_in_rule__SimpleModel__UnorderedGroup_0__Impl5523 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleModel__Alternatives_0_3_in_rule__SimpleModel__UnorderedGroup_0__Impl5614 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__05673 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__1_in_rule__SimpleModel__UnorderedGroup_0__05676 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__15701 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__2_in_rule__SimpleModel__UnorderedGroup_0__15704 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__25729 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__3_in_rule__SimpleModel__UnorderedGroup_0__25732 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__35757 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__0_in_rule__MandatoryModel__UnorderedGroup_05789 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__VisibilityAssignment_0_0_in_rule__MandatoryModel__UnorderedGroup_0__Impl5878 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__StaticAssignment_0_1_in_rule__MandatoryModel__UnorderedGroup_0__Impl5969 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__SynchronizedAssignment_0_2_in_rule__MandatoryModel__UnorderedGroup_0__Impl6060 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__Alternatives_0_3_in_rule__MandatoryModel__UnorderedGroup_0__Impl6151 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__06210 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__1_in_rule__MandatoryModel__UnorderedGroup_0__06213 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__16238 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__2_in_rule__MandatoryModel__UnorderedGroup_0__16241 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__26266 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__3_in_rule__MandatoryModel__UnorderedGroup_0__26269 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__36294 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__0_in_rule__LoopedModel__UnorderedGroup_06326 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__VisibilityAssignment_0_0_in_rule__LoopedModel__UnorderedGroup_0__Impl6414 = new BitSet(new long[]{0x0000000000003802L});
-        public static final BitSet FOLLOW_rule__LoopedModel__VisibilityAssignment_0_0_in_rule__LoopedModel__UnorderedGroup_0__Impl6454 = new BitSet(new long[]{0x0000000000003802L});
-        public static final BitSet FOLLOW_rule__LoopedModel__StaticAssignment_0_1_in_rule__LoopedModel__UnorderedGroup_0__Impl6553 = new BitSet(new long[]{0x0000000080000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__StaticAssignment_0_1_in_rule__LoopedModel__UnorderedGroup_0__Impl6593 = new BitSet(new long[]{0x0000000080000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__SynchronizedAssignment_0_2_in_rule__LoopedModel__UnorderedGroup_0__Impl6692 = new BitSet(new long[]{0x0000000100000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__SynchronizedAssignment_0_2_in_rule__LoopedModel__UnorderedGroup_0__Impl6732 = new BitSet(new long[]{0x0000000100000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__Alternatives_0_3_in_rule__LoopedModel__UnorderedGroup_0__Impl6831 = new BitSet(new long[]{0x0000000600000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__Alternatives_0_3_in_rule__LoopedModel__UnorderedGroup_0__Impl6871 = new BitSet(new long[]{0x0000000600000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__06937 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__1_in_rule__LoopedModel__UnorderedGroup_0__06940 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__16965 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__2_in_rule__LoopedModel__UnorderedGroup_0__16968 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__26993 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__3_in_rule__LoopedModel__UnorderedGroup_0__26996 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__37021 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__0_in_rule__GroupLoopedModel__UnorderedGroup_07053 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__VisibilityAssignment_0_0_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7142 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__StaticAssignment_0_1_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7233 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__SynchronizedAssignment_0_2_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7324 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__Alternatives_0_3_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7415 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__07474 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__1_in_rule__GroupLoopedModel__UnorderedGroup_0__07477 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__17502 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__2_in_rule__GroupLoopedModel__UnorderedGroup_0__17505 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__27530 = new BitSet(new long[]{0x0000000780003802L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__3_in_rule__GroupLoopedModel__UnorderedGroup_0__27533 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__37558 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_1__0_in_rule__Bug304681Model__UnorderedGroup_17590 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_0__0_in_rule__Bug304681Model__UnorderedGroup_1__Impl7677 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_1__0_in_rule__Bug304681Model__UnorderedGroup_1__Impl7768 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_2__0_in_rule__Bug304681Model__UnorderedGroup_1__Impl7859 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__Group_1_3__0_in_rule__Bug304681Model__UnorderedGroup_1__Impl7950 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__FeaturesAssignment_1_4_in_rule__Bug304681Model__UnorderedGroup_1__Impl8042 = new BitSet(new long[]{0x0000000060000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__FeaturesAssignment_1_4_in_rule__Bug304681Model__UnorderedGroup_1__Impl8082 = new BitSet(new long[]{0x0000000060000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_1__Impl_in_rule__Bug304681Model__UnorderedGroup_1__08148 = new BitSet(new long[]{0x000000087A000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_1__1_in_rule__Bug304681Model__UnorderedGroup_1__08151 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_1__Impl_in_rule__Bug304681Model__UnorderedGroup_1__18176 = new BitSet(new long[]{0x000000087A000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_1__2_in_rule__Bug304681Model__UnorderedGroup_1__18179 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_1__Impl_in_rule__Bug304681Model__UnorderedGroup_1__28204 = new BitSet(new long[]{0x000000087A000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_1__3_in_rule__Bug304681Model__UnorderedGroup_1__28207 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_1__Impl_in_rule__Bug304681Model__UnorderedGroup_1__38232 = new BitSet(new long[]{0x000000087A000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_1__4_in_rule__Bug304681Model__UnorderedGroup_1__38235 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_1__Impl_in_rule__Bug304681Model__UnorderedGroup_1__48260 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSimpleModel_in_rule__Model__FirstAssignment_0_18298 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMandatoryModel_in_rule__Model__SecondAssignment_1_18329 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLoopedModel_in_rule__Model__ThrirdAssignment_2_18360 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleGroupLoopedModel_in_rule__Model__ForthAssignment_3_18391 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLoopedAlternativeModel_in_rule__Model__FifthAssignment_4_18422 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBug304681Model_in_rule__Model__ModelAssignment_5_18453 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleModel__VisibilityAlternatives_0_0_0_in_rule__SimpleModel__VisibilityAssignment_0_08484 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_rule__SimpleModel__StaticAssignment_0_18522 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_32_in_rule__SimpleModel__SynchronizedAssignment_0_28566 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_rule__SimpleModel__AbstractAssignment_0_3_08610 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_34_in_rule__SimpleModel__FinalAssignment_0_3_18654 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleModel__NameAssignment_28693 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__MandatoryModel__VisibilityAlternatives_0_0_0_in_rule__MandatoryModel__VisibilityAssignment_0_08724 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_rule__MandatoryModel__StaticAssignment_0_18762 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_32_in_rule__MandatoryModel__SynchronizedAssignment_0_28806 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_rule__MandatoryModel__AbstractAssignment_0_3_08850 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_34_in_rule__MandatoryModel__FinalAssignment_0_3_18894 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__MandatoryModel__NameAssignment_28933 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__LoopedModel__VisibilityAlternatives_0_0_0_in_rule__LoopedModel__VisibilityAssignment_0_08964 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_rule__LoopedModel__StaticAssignment_0_19002 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_32_in_rule__LoopedModel__SynchronizedAssignment_0_29046 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_rule__LoopedModel__AbstractAssignment_0_3_09090 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_34_in_rule__LoopedModel__FinalAssignment_0_3_19134 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__LoopedModel__NameAssignment_29173 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GroupLoopedModel__VisibilityAlternatives_0_0_0_in_rule__GroupLoopedModel__VisibilityAssignment_0_09204 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_rule__GroupLoopedModel__StaticAssignment_0_19242 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_32_in_rule__GroupLoopedModel__SynchronizedAssignment_0_29286 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_rule__GroupLoopedModel__AbstractAssignment_0_3_09330 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_34_in_rule__GroupLoopedModel__FinalAssignment_0_3_19374 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__GroupLoopedModel__NameAssignment_29413 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0_in_rule__LoopedAlternativeModel__VisibilityAssignment_0_09444 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_rule__LoopedAlternativeModel__StaticAssignment_0_19482 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_32_in_rule__LoopedAlternativeModel__SynchronizedAssignment_0_29526 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_rule__LoopedAlternativeModel__AbstractAssignment_0_3_09570 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_34_in_rule__LoopedAlternativeModel__FinalAssignment_0_3_19614 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__LoopedAlternativeModel__NameAssignment_29653 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Bug304681Model__ShortDescriptionAssignment_1_0_19684 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Bug304681Model__LongDescriptionAssignment_1_1_19715 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Bug304681Model__UidAssignment_1_2_19746 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_35_in_rule__Bug304681Model__FlagAssignment_1_3_09782 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBug304681Feature_in_rule__Bug304681Model__FeaturesAssignment_1_49821 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Bug304681Attribute__NameAssignment_19852 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Bug304681Reference__NameAssignment_19883 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group__1__Impl_in_rule__Bug304681Model__Group__14069 = new BitSet(new long[]{0x000000087A400000L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group__2_in_rule__Bug304681Model__Group__14072 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_rule__Bug304681Model__Group__1__Impl4100 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group__2__Impl_in_rule__Bug304681Model__Group__24131 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group__3_in_rule__Bug304681Model__Group__24134 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_2_in_rule__Bug304681Model__Group__2__Impl4161 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group__3__Impl_in_rule__Bug304681Model__Group__34191 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_rule__Bug304681Model__Group__3__Impl4219 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_0__0__Impl_in_rule__Bug304681Model__Group_2_0__04258 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_0__1_in_rule__Bug304681Model__Group_2_0__04261 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_25_in_rule__Bug304681Model__Group_2_0__0__Impl4289 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_0__1__Impl_in_rule__Bug304681Model__Group_2_0__14320 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_0__2_in_rule__Bug304681Model__Group_2_0__14323 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__ShortDescriptionAssignment_2_0_1_in_rule__Bug304681Model__Group_2_0__1__Impl4350 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_0__2__Impl_in_rule__Bug304681Model__Group_2_0__24380 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_rule__Bug304681Model__Group_2_0__2__Impl4408 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_1__0__Impl_in_rule__Bug304681Model__Group_2_1__04445 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_1__1_in_rule__Bug304681Model__Group_2_1__04448 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_27_in_rule__Bug304681Model__Group_2_1__0__Impl4476 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_1__1__Impl_in_rule__Bug304681Model__Group_2_1__14507 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_1__2_in_rule__Bug304681Model__Group_2_1__14510 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__LongDescriptionAssignment_2_1_1_in_rule__Bug304681Model__Group_2_1__1__Impl4537 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_1__2__Impl_in_rule__Bug304681Model__Group_2_1__24567 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_rule__Bug304681Model__Group_2_1__2__Impl4595 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_2__0__Impl_in_rule__Bug304681Model__Group_2_2__04632 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_2__1_in_rule__Bug304681Model__Group_2_2__04635 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_28_in_rule__Bug304681Model__Group_2_2__0__Impl4663 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_2__1__Impl_in_rule__Bug304681Model__Group_2_2__14694 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_2__2_in_rule__Bug304681Model__Group_2_2__14697 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UidAssignment_2_2_1_in_rule__Bug304681Model__Group_2_2__1__Impl4724 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_2__2__Impl_in_rule__Bug304681Model__Group_2_2__24754 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_rule__Bug304681Model__Group_2_2__2__Impl4782 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_3__0__Impl_in_rule__Bug304681Model__Group_2_3__04819 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_3__1_in_rule__Bug304681Model__Group_2_3__04822 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__FlagAssignment_2_3_0_in_rule__Bug304681Model__Group_2_3__0__Impl4849 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_3__1__Impl_in_rule__Bug304681Model__Group_2_3__14879 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_rule__Bug304681Model__Group_2_3__1__Impl4907 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Attribute__Group__0__Impl_in_rule__Bug304681Attribute__Group__04942 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Bug304681Attribute__Group__1_in_rule__Bug304681Attribute__Group__04945 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_29_in_rule__Bug304681Attribute__Group__0__Impl4973 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Attribute__Group__1__Impl_in_rule__Bug304681Attribute__Group__15004 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__Bug304681Attribute__Group__2_in_rule__Bug304681Attribute__Group__15007 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Attribute__NameAssignment_1_in_rule__Bug304681Attribute__Group__1__Impl5034 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Attribute__Group__2__Impl_in_rule__Bug304681Attribute__Group__25064 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_rule__Bug304681Attribute__Group__2__Impl5092 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Reference__Group__0__Impl_in_rule__Bug304681Reference__Group__05129 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Bug304681Reference__Group__1_in_rule__Bug304681Reference__Group__05132 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_rule__Bug304681Reference__Group__0__Impl5160 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Reference__Group__1__Impl_in_rule__Bug304681Reference__Group__15191 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__Bug304681Reference__Group__2_in_rule__Bug304681Reference__Group__15194 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Reference__NameAssignment_1_in_rule__Bug304681Reference__Group__1__Impl5221 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Reference__Group__2__Impl_in_rule__Bug304681Reference__Group__25251 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_rule__Bug304681Reference__Group__2__Impl5279 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__0_in_rule__SimpleModel__UnorderedGroup_05317 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleModel__VisibilityAssignment_0_0_in_rule__SimpleModel__UnorderedGroup_0__Impl5404 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleModel__StaticAssignment_0_1_in_rule__SimpleModel__UnorderedGroup_0__Impl5495 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleModel__SynchronizedAssignment_0_2_in_rule__SimpleModel__UnorderedGroup_0__Impl5586 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleModel__Alternatives_0_3_in_rule__SimpleModel__UnorderedGroup_0__Impl5677 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__05736 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__1_in_rule__SimpleModel__UnorderedGroup_0__05739 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__15764 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__2_in_rule__SimpleModel__UnorderedGroup_0__15767 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__25792 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__3_in_rule__SimpleModel__UnorderedGroup_0__25795 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleModel__UnorderedGroup_0__Impl_in_rule__SimpleModel__UnorderedGroup_0__35820 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__0_in_rule__MandatoryModel__UnorderedGroup_05852 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__VisibilityAssignment_0_0_in_rule__MandatoryModel__UnorderedGroup_0__Impl5941 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__StaticAssignment_0_1_in_rule__MandatoryModel__UnorderedGroup_0__Impl6032 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__SynchronizedAssignment_0_2_in_rule__MandatoryModel__UnorderedGroup_0__Impl6123 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__Alternatives_0_3_in_rule__MandatoryModel__UnorderedGroup_0__Impl6214 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__06273 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__1_in_rule__MandatoryModel__UnorderedGroup_0__06276 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__16301 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__2_in_rule__MandatoryModel__UnorderedGroup_0__16304 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__26329 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__3_in_rule__MandatoryModel__UnorderedGroup_0__26332 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__UnorderedGroup_0__Impl_in_rule__MandatoryModel__UnorderedGroup_0__36357 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__0_in_rule__LoopedModel__UnorderedGroup_06389 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__VisibilityAssignment_0_0_in_rule__LoopedModel__UnorderedGroup_0__Impl6477 = new BitSet(new long[]{0x0000000000003802L});
+        public static final BitSet FOLLOW_rule__LoopedModel__VisibilityAssignment_0_0_in_rule__LoopedModel__UnorderedGroup_0__Impl6517 = new BitSet(new long[]{0x0000000000003802L});
+        public static final BitSet FOLLOW_rule__LoopedModel__StaticAssignment_0_1_in_rule__LoopedModel__UnorderedGroup_0__Impl6616 = new BitSet(new long[]{0x0000000080000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__StaticAssignment_0_1_in_rule__LoopedModel__UnorderedGroup_0__Impl6656 = new BitSet(new long[]{0x0000000080000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__SynchronizedAssignment_0_2_in_rule__LoopedModel__UnorderedGroup_0__Impl6755 = new BitSet(new long[]{0x0000000100000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__SynchronizedAssignment_0_2_in_rule__LoopedModel__UnorderedGroup_0__Impl6795 = new BitSet(new long[]{0x0000000100000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__Alternatives_0_3_in_rule__LoopedModel__UnorderedGroup_0__Impl6894 = new BitSet(new long[]{0x0000000600000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__Alternatives_0_3_in_rule__LoopedModel__UnorderedGroup_0__Impl6934 = new BitSet(new long[]{0x0000000600000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__07000 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__1_in_rule__LoopedModel__UnorderedGroup_0__07003 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__17028 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__2_in_rule__LoopedModel__UnorderedGroup_0__17031 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__27056 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__3_in_rule__LoopedModel__UnorderedGroup_0__27059 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__UnorderedGroup_0__Impl_in_rule__LoopedModel__UnorderedGroup_0__37084 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__0_in_rule__GroupLoopedModel__UnorderedGroup_07116 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__VisibilityAssignment_0_0_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7205 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__StaticAssignment_0_1_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7296 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__SynchronizedAssignment_0_2_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7387 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__Alternatives_0_3_in_rule__GroupLoopedModel__UnorderedGroup_0__Impl7478 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__07537 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__1_in_rule__GroupLoopedModel__UnorderedGroup_0__07540 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__17565 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__2_in_rule__GroupLoopedModel__UnorderedGroup_0__17568 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__27593 = new BitSet(new long[]{0x0000000780003802L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__3_in_rule__GroupLoopedModel__UnorderedGroup_0__27596 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__UnorderedGroup_0__Impl_in_rule__GroupLoopedModel__UnorderedGroup_0__37621 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_2__0_in_rule__Bug304681Model__UnorderedGroup_27653 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_0__0_in_rule__Bug304681Model__UnorderedGroup_2__Impl7740 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_1__0_in_rule__Bug304681Model__UnorderedGroup_2__Impl7831 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_2__0_in_rule__Bug304681Model__UnorderedGroup_2__Impl7922 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__Group_2_3__0_in_rule__Bug304681Model__UnorderedGroup_2__Impl8013 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__FeaturesAssignment_2_4_in_rule__Bug304681Model__UnorderedGroup_2__Impl8105 = new BitSet(new long[]{0x0000000060000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__FeaturesAssignment_2_4_in_rule__Bug304681Model__UnorderedGroup_2__Impl8145 = new BitSet(new long[]{0x0000000060000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_2__Impl_in_rule__Bug304681Model__UnorderedGroup_2__08211 = new BitSet(new long[]{0x000000087A000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_2__1_in_rule__Bug304681Model__UnorderedGroup_2__08214 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_2__Impl_in_rule__Bug304681Model__UnorderedGroup_2__18239 = new BitSet(new long[]{0x000000087A000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_2__2_in_rule__Bug304681Model__UnorderedGroup_2__18242 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_2__Impl_in_rule__Bug304681Model__UnorderedGroup_2__28267 = new BitSet(new long[]{0x000000087A000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_2__3_in_rule__Bug304681Model__UnorderedGroup_2__28270 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_2__Impl_in_rule__Bug304681Model__UnorderedGroup_2__38295 = new BitSet(new long[]{0x000000087A000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_2__4_in_rule__Bug304681Model__UnorderedGroup_2__38298 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Bug304681Model__UnorderedGroup_2__Impl_in_rule__Bug304681Model__UnorderedGroup_2__48323 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSimpleModel_in_rule__Model__FirstAssignment_0_18361 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMandatoryModel_in_rule__Model__SecondAssignment_1_18392 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLoopedModel_in_rule__Model__ThrirdAssignment_2_18423 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGroupLoopedModel_in_rule__Model__ForthAssignment_3_18454 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLoopedAlternativeModel_in_rule__Model__FifthAssignment_4_18485 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBug304681Model_in_rule__Model__ModelAssignment_5_18516 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleModel__VisibilityAlternatives_0_0_0_in_rule__SimpleModel__VisibilityAssignment_0_08547 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_rule__SimpleModel__StaticAssignment_0_18585 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rule__SimpleModel__SynchronizedAssignment_0_28629 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_rule__SimpleModel__AbstractAssignment_0_3_08673 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__SimpleModel__FinalAssignment_0_3_18717 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleModel__NameAssignment_28756 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MandatoryModel__VisibilityAlternatives_0_0_0_in_rule__MandatoryModel__VisibilityAssignment_0_08787 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_rule__MandatoryModel__StaticAssignment_0_18825 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rule__MandatoryModel__SynchronizedAssignment_0_28869 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_rule__MandatoryModel__AbstractAssignment_0_3_08913 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__MandatoryModel__FinalAssignment_0_3_18957 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__MandatoryModel__NameAssignment_28996 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__LoopedModel__VisibilityAlternatives_0_0_0_in_rule__LoopedModel__VisibilityAssignment_0_09027 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_rule__LoopedModel__StaticAssignment_0_19065 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rule__LoopedModel__SynchronizedAssignment_0_29109 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_rule__LoopedModel__AbstractAssignment_0_3_09153 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__LoopedModel__FinalAssignment_0_3_19197 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__LoopedModel__NameAssignment_29236 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GroupLoopedModel__VisibilityAlternatives_0_0_0_in_rule__GroupLoopedModel__VisibilityAssignment_0_09267 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_rule__GroupLoopedModel__StaticAssignment_0_19305 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rule__GroupLoopedModel__SynchronizedAssignment_0_29349 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_rule__GroupLoopedModel__AbstractAssignment_0_3_09393 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__GroupLoopedModel__FinalAssignment_0_3_19437 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__GroupLoopedModel__NameAssignment_29476 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__LoopedAlternativeModel__VisibilityAlternatives_0_0_0_in_rule__LoopedAlternativeModel__VisibilityAssignment_0_09507 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_rule__LoopedAlternativeModel__StaticAssignment_0_19545 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rule__LoopedAlternativeModel__SynchronizedAssignment_0_29589 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_rule__LoopedAlternativeModel__AbstractAssignment_0_3_09633 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__LoopedAlternativeModel__FinalAssignment_0_3_19677 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__LoopedAlternativeModel__NameAssignment_29716 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Bug304681Model__ShortDescriptionAssignment_2_0_19747 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Bug304681Model__LongDescriptionAssignment_2_1_19778 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Bug304681Model__UidAssignment_2_2_19809 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_35_in_rule__Bug304681Model__FlagAssignment_2_3_09845 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBug304681Feature_in_rule__Bug304681Model__FeaturesAssignment_2_49884 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Bug304681Attribute__NameAssignment_19915 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Bug304681Reference__NameAssignment_19946 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

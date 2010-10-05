@@ -32,25 +32,29 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	public class TypesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Types");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cTypesKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cTypesAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTypesTypeParserRuleCall_1_0 = (RuleCall)cTypesAssignment_1.eContents().get(0);
+		private final Action cTypesAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cTypesKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cTypesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTypesTypeParserRuleCall_2_0 = (RuleCall)cTypesAssignment_2.eContents().get(0);
 		
 		//Types:
-		//	"Types" types+=Type*;
+		//	{Types} "Types" types+=Type*;
 		public ParserRule getRule() { return rule; }
 
-		//"Types" types+=Type*
+		//{Types} "Types" types+=Type*
 		public Group getGroup() { return cGroup; }
 
+		//{Types}
+		public Action getTypesAction_0() { return cTypesAction_0; }
+
 		//"Types"
-		public Keyword getTypesKeyword_0() { return cTypesKeyword_0; }
+		public Keyword getTypesKeyword_1() { return cTypesKeyword_1; }
 
 		//types+=Type*
-		public Assignment getTypesAssignment_1() { return cTypesAssignment_1; }
+		public Assignment getTypesAssignment_2() { return cTypesAssignment_2; }
 
 		//Type
-		public RuleCall getTypesTypeParserRuleCall_1_0() { return cTypesTypeParserRuleCall_1_0; }
+		public RuleCall getTypesTypeParserRuleCall_2_0() { return cTypesTypeParserRuleCall_2_0; }
 	}
 
 	public class TypeElements extends AbstractParserRuleElementFinder {
@@ -246,7 +250,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//Types:
-	//	"Types" types+=Type*;
+	//	{Types} "Types" types+=Type*;
 	public TypesElements getTypesAccess() {
 		return (pTypes != null) ? pTypes : (pTypes = new TypesElements());
 	}

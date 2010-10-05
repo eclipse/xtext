@@ -20,112 +20,116 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public class StateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "State");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Assignment cIsInitialAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
-		private final Keyword cIsInitialInitKeyword_0_0_0 = (Keyword)cIsInitialAssignment_0_0.eContents().get(0);
-		private final Assignment cIsFinalAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
-		private final Keyword cIsFinalFinalKeyword_0_1_0 = (Keyword)cIsFinalAssignment_0_1.eContents().get(0);
-		private final Assignment cStateKindAssignment_0_2 = (Assignment)cAlternatives_0.eContents().get(2);
-		private final RuleCall cStateKindStateTypeEnumRuleCall_0_2_0 = (RuleCall)cStateKindAssignment_0_2.eContents().get(0);
-		private final Group cGroup_0_3 = (Group)cAlternatives_0.eContents().get(3);
-		private final Assignment cIsInitialAssignment_0_3_0 = (Assignment)cGroup_0_3.eContents().get(0);
-		private final Keyword cIsInitialInitKeyword_0_3_0_0 = (Keyword)cIsInitialAssignment_0_3_0.eContents().get(0);
-		private final Assignment cStateKindAssignment_0_3_1 = (Assignment)cGroup_0_3.eContents().get(1);
-		private final RuleCall cStateKindStateTypeEnumRuleCall_0_3_1_0 = (RuleCall)cStateKindAssignment_0_3_1.eContents().get(0);
-		private final Group cGroup_0_4 = (Group)cAlternatives_0.eContents().get(4);
-		private final Assignment cIsInitialAssignment_0_4_0 = (Assignment)cGroup_0_4.eContents().get(0);
-		private final Keyword cIsInitialInitKeyword_0_4_0_0 = (Keyword)cIsInitialAssignment_0_4_0.eContents().get(0);
-		private final Assignment cStateKindAssignment_0_4_1 = (Assignment)cGroup_0_4.eContents().get(1);
-		private final RuleCall cStateKindStateTypeEnumRuleCall_0_4_1_0 = (RuleCall)cStateKindAssignment_0_4_1.eContents().get(0);
-		private final Assignment cIsFinalAssignment_0_4_2 = (Assignment)cGroup_0_4.eContents().get(2);
-		private final Keyword cIsFinalFinalKeyword_0_4_2_0 = (Keyword)cIsFinalAssignment_0_4_2.eContents().get(0);
-		private final Keyword cStateKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cStateNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cStateNameIDTerminalRuleCall_2_0 = (RuleCall)cStateNameAssignment_2.eContents().get(0);
-		private final Assignment cLabelAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cLabelSTRINGTerminalRuleCall_3_0 = (RuleCall)cLabelAssignment_3.eContents().get(0);
+		private final Action cStateAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cIsInitialAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final Keyword cIsInitialInitKeyword_1_0_0 = (Keyword)cIsInitialAssignment_1_0.eContents().get(0);
+		private final Assignment cIsFinalAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final Keyword cIsFinalFinalKeyword_1_1_0 = (Keyword)cIsFinalAssignment_1_1.eContents().get(0);
+		private final Assignment cStateKindAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
+		private final RuleCall cStateKindStateTypeEnumRuleCall_1_2_0 = (RuleCall)cStateKindAssignment_1_2.eContents().get(0);
+		private final Group cGroup_1_3 = (Group)cAlternatives_1.eContents().get(3);
+		private final Assignment cIsInitialAssignment_1_3_0 = (Assignment)cGroup_1_3.eContents().get(0);
+		private final Keyword cIsInitialInitKeyword_1_3_0_0 = (Keyword)cIsInitialAssignment_1_3_0.eContents().get(0);
+		private final Assignment cStateKindAssignment_1_3_1 = (Assignment)cGroup_1_3.eContents().get(1);
+		private final RuleCall cStateKindStateTypeEnumRuleCall_1_3_1_0 = (RuleCall)cStateKindAssignment_1_3_1.eContents().get(0);
+		private final Group cGroup_1_4 = (Group)cAlternatives_1.eContents().get(4);
+		private final Assignment cIsInitialAssignment_1_4_0 = (Assignment)cGroup_1_4.eContents().get(0);
+		private final Keyword cIsInitialInitKeyword_1_4_0_0 = (Keyword)cIsInitialAssignment_1_4_0.eContents().get(0);
+		private final Assignment cStateKindAssignment_1_4_1 = (Assignment)cGroup_1_4.eContents().get(1);
+		private final RuleCall cStateKindStateTypeEnumRuleCall_1_4_1_0 = (RuleCall)cStateKindAssignment_1_4_1.eContents().get(0);
+		private final Assignment cIsFinalAssignment_1_4_2 = (Assignment)cGroup_1_4.eContents().get(2);
+		private final Keyword cIsFinalFinalKeyword_1_4_2_0 = (Keyword)cIsFinalAssignment_1_4_2.eContents().get(0);
+		private final Keyword cStateKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cStateNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cStateNameIDTerminalRuleCall_3_0 = (RuleCall)cStateNameAssignment_3.eContents().get(0);
+		private final Assignment cLabelAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cLabelSTRINGTerminalRuleCall_4_0 = (RuleCall)cLabelAssignment_4.eContents().get(0);
 		
 		//State:
-		//	(isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
+		//	{State} (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
 		//	isInitial?="init" stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?;
 		public ParserRule getRule() { return rule; }
 
-		//(isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType | isInitial?="init"
-		//stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?
+		//{State} (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
+		//isInitial?="init" stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?
 		public Group getGroup() { return cGroup; }
+
+		//{State}
+		public Action getStateAction_0() { return cStateAction_0; }
 
 		//(isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType | isInitial?="init"
 		//stateKind=StateType isFinal?="final")?
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//isInitial?="init"
-		public Assignment getIsInitialAssignment_0_0() { return cIsInitialAssignment_0_0; }
+		public Assignment getIsInitialAssignment_1_0() { return cIsInitialAssignment_1_0; }
 
 		//"init"
-		public Keyword getIsInitialInitKeyword_0_0_0() { return cIsInitialInitKeyword_0_0_0; }
+		public Keyword getIsInitialInitKeyword_1_0_0() { return cIsInitialInitKeyword_1_0_0; }
 
 		//isFinal?="final"
-		public Assignment getIsFinalAssignment_0_1() { return cIsFinalAssignment_0_1; }
+		public Assignment getIsFinalAssignment_1_1() { return cIsFinalAssignment_1_1; }
 
 		//"final"
-		public Keyword getIsFinalFinalKeyword_0_1_0() { return cIsFinalFinalKeyword_0_1_0; }
+		public Keyword getIsFinalFinalKeyword_1_1_0() { return cIsFinalFinalKeyword_1_1_0; }
 
 		//stateKind=StateType
-		public Assignment getStateKindAssignment_0_2() { return cStateKindAssignment_0_2; }
+		public Assignment getStateKindAssignment_1_2() { return cStateKindAssignment_1_2; }
 
 		//StateType
-		public RuleCall getStateKindStateTypeEnumRuleCall_0_2_0() { return cStateKindStateTypeEnumRuleCall_0_2_0; }
+		public RuleCall getStateKindStateTypeEnumRuleCall_1_2_0() { return cStateKindStateTypeEnumRuleCall_1_2_0; }
 
 		//isInitial?="init" stateKind=StateType
-		public Group getGroup_0_3() { return cGroup_0_3; }
+		public Group getGroup_1_3() { return cGroup_1_3; }
 
 		//isInitial?="init"
-		public Assignment getIsInitialAssignment_0_3_0() { return cIsInitialAssignment_0_3_0; }
+		public Assignment getIsInitialAssignment_1_3_0() { return cIsInitialAssignment_1_3_0; }
 
 		//"init"
-		public Keyword getIsInitialInitKeyword_0_3_0_0() { return cIsInitialInitKeyword_0_3_0_0; }
+		public Keyword getIsInitialInitKeyword_1_3_0_0() { return cIsInitialInitKeyword_1_3_0_0; }
 
 		//stateKind=StateType
-		public Assignment getStateKindAssignment_0_3_1() { return cStateKindAssignment_0_3_1; }
+		public Assignment getStateKindAssignment_1_3_1() { return cStateKindAssignment_1_3_1; }
 
 		//StateType
-		public RuleCall getStateKindStateTypeEnumRuleCall_0_3_1_0() { return cStateKindStateTypeEnumRuleCall_0_3_1_0; }
+		public RuleCall getStateKindStateTypeEnumRuleCall_1_3_1_0() { return cStateKindStateTypeEnumRuleCall_1_3_1_0; }
 
 		//isInitial?="init" stateKind=StateType isFinal?="final"
-		public Group getGroup_0_4() { return cGroup_0_4; }
+		public Group getGroup_1_4() { return cGroup_1_4; }
 
 		//isInitial?="init"
-		public Assignment getIsInitialAssignment_0_4_0() { return cIsInitialAssignment_0_4_0; }
+		public Assignment getIsInitialAssignment_1_4_0() { return cIsInitialAssignment_1_4_0; }
 
 		//"init"
-		public Keyword getIsInitialInitKeyword_0_4_0_0() { return cIsInitialInitKeyword_0_4_0_0; }
+		public Keyword getIsInitialInitKeyword_1_4_0_0() { return cIsInitialInitKeyword_1_4_0_0; }
 
 		//stateKind=StateType
-		public Assignment getStateKindAssignment_0_4_1() { return cStateKindAssignment_0_4_1; }
+		public Assignment getStateKindAssignment_1_4_1() { return cStateKindAssignment_1_4_1; }
 
 		//StateType
-		public RuleCall getStateKindStateTypeEnumRuleCall_0_4_1_0() { return cStateKindStateTypeEnumRuleCall_0_4_1_0; }
+		public RuleCall getStateKindStateTypeEnumRuleCall_1_4_1_0() { return cStateKindStateTypeEnumRuleCall_1_4_1_0; }
 
 		//isFinal?="final"
-		public Assignment getIsFinalAssignment_0_4_2() { return cIsFinalAssignment_0_4_2; }
+		public Assignment getIsFinalAssignment_1_4_2() { return cIsFinalAssignment_1_4_2; }
 
 		//"final"
-		public Keyword getIsFinalFinalKeyword_0_4_2_0() { return cIsFinalFinalKeyword_0_4_2_0; }
+		public Keyword getIsFinalFinalKeyword_1_4_2_0() { return cIsFinalFinalKeyword_1_4_2_0; }
 
 		//"state"?
-		public Keyword getStateKeyword_1() { return cStateKeyword_1; }
+		public Keyword getStateKeyword_2() { return cStateKeyword_2; }
 
 		//stateName=ID?
-		public Assignment getStateNameAssignment_2() { return cStateNameAssignment_2; }
+		public Assignment getStateNameAssignment_3() { return cStateNameAssignment_3; }
 
 		//ID
-		public RuleCall getStateNameIDTerminalRuleCall_2_0() { return cStateNameIDTerminalRuleCall_2_0; }
+		public RuleCall getStateNameIDTerminalRuleCall_3_0() { return cStateNameIDTerminalRuleCall_3_0; }
 
 		//label=STRING?
-		public Assignment getLabelAssignment_3() { return cLabelAssignment_3; }
+		public Assignment getLabelAssignment_4() { return cLabelAssignment_4; }
 
 		//STRING
-		public RuleCall getLabelSTRINGTerminalRuleCall_3_0() { return cLabelSTRINGTerminalRuleCall_3_0; }
+		public RuleCall getLabelSTRINGTerminalRuleCall_4_0() { return cLabelSTRINGTerminalRuleCall_4_0; }
 	}
 	
 	
@@ -198,7 +202,7 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//State:
-	//	(isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
+	//	{State} (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
 	//	isInitial?="init" stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?;
 	public StateElements getStateAccess() {
 		return (pState != null) ? pState : (pState = new StateElements());
