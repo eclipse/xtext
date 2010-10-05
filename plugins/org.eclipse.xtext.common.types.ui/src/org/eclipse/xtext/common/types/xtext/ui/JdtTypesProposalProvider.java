@@ -173,55 +173,59 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			}
 		};
 		final PrefixMatcher original = context.getMatcher();
-		context.setMatcher(new PrefixMatcher() {
-			@Override
-			public boolean isCandidateMatchingPrefix(String name, String prefix) {
-				if (original.isCandidateMatchingPrefix(name, prefix))
-					return true;
-				String sub = name;
-				int delimiter = sub.indexOf('.');
-				while(delimiter != -1) {
-					sub = sub.substring(delimiter + 1);
-					if (original.isCandidateMatchingPrefix(sub, prefix))
+		try {
+			context.setMatcher(new PrefixMatcher() {
+				@Override
+				public boolean isCandidateMatchingPrefix(String name, String prefix) {
+					if (original.isCandidateMatchingPrefix(name, prefix))
 						return true;
-					delimiter = sub.indexOf('.');
+					String sub = name;
+					int delimiter = sub.indexOf('.');
+					while(delimiter != -1) {
+						sub = sub.substring(delimiter + 1);
+						if (original.isCandidateMatchingPrefix(sub, prefix))
+							return true;
+						delimiter = sub.indexOf('.');
+					}
+					return false;
 				}
-				return false;
-			}
-		});
-		SearchEngine searchEngine = new SearchEngine();
-		searchEngine.searchAllTypeNames(
-				packageName, SearchPattern.R_PATTERN_MATCH, 
-				typeName, SearchPattern.R_PREFIX_MATCH, 
-				IJavaSearchConstants.TYPE, scope, 
-				new TypeNameRequestor() {
-					@Override
-					public void acceptType(int modifiers,
-							char[] packageName, char[] simpleTypeName,
-							char[][] enclosingTypeNames, String path) {
-						if (filter.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
-							StringBuilder fqName = new StringBuilder(packageName.length + simpleTypeName.length + 1);
-							if (packageName.length != 0) {
-								fqName.append(packageName);
-								fqName.append('.');
+			});
+			SearchEngine searchEngine = new SearchEngine();
+			searchEngine.searchAllTypeNames(
+					packageName, SearchPattern.R_PATTERN_MATCH, 
+					typeName, SearchPattern.R_PREFIX_MATCH, 
+					IJavaSearchConstants.TYPE, scope, 
+					new TypeNameRequestor() {
+						@Override
+						public void acceptType(int modifiers,
+								char[] packageName, char[] simpleTypeName,
+								char[][] enclosingTypeNames, String path) {
+							if (filter.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
+								StringBuilder fqName = new StringBuilder(packageName.length + simpleTypeName.length + 1);
+								if (packageName.length != 0) {
+									fqName.append(packageName);
+									fqName.append('.');
+								}
+								for(char[] enclosingType: enclosingTypeNames) {
+									fqName.append(enclosingType);
+									fqName.append('$');
+								}
+								fqName.append(simpleTypeName);
+								String fqNameAsString = fqName.toString();
+								createTypeProposal(fqNameAsString, modifiers, enclosingTypeNames.length>0, proposalFactory, context, scopeAware);
 							}
-							for(char[] enclosingType: enclosingTypeNames) {
-								fqName.append(enclosingType);
-								fqName.append('$');
-							}
-							fqName.append(simpleTypeName);
-							String fqNameAsString = fqName.toString();
-							createTypeProposal(fqNameAsString, modifiers, enclosingTypeNames.length>0, proposalFactory, context, scopeAware);
 						}
-					}
-				}, 
-				IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, 
-				new NullProgressMonitor() {
-					@Override
-					public boolean isCanceled() {
-						return !acceptor.canAcceptMoreProposals();
-					}
-				});
+					}, 
+					IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, 
+					new NullProgressMonitor() {
+						@Override
+						public boolean isCanceled() {
+							return !acceptor.canAcceptMoreProposals();
+						}
+					});
+		} finally {
+			context.setMatcher(original);
+		}
 	}
 
 	public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context, 

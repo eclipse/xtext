@@ -61,7 +61,7 @@ public class Bug282031ParserTest extends AbstractXtextTests {
 		String input ="( value1 ";
 		Set<AbstractElement> expected = Sets.<AbstractElement>newHashSet(
 				grammarAccess.getPairAccess().getEqualsSignKeyword_1(),
-				grammarAccess.getModelAccess().getAttributeAssignment_0_1()
+				grammarAccess.getModelAccess().getAttributeAssignment_1_0_1()
 		);
 		assertFollowers(input, expected);
 	}
