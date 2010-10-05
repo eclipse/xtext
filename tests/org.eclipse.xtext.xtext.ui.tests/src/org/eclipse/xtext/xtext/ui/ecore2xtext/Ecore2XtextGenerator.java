@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -38,7 +37,7 @@ import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
  */
 public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 
-	protected final Log log = LogFactory.getLog(getClass());
+	private static final Logger log = Logger.getLogger(Ecore2XtextGenerator.class);
 
 	private ResourceSet resourceSet;
 

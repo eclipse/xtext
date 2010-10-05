@@ -320,7 +320,7 @@ public class ContentAssistProcessorTestBuilder {
 		return result;
 	}
 
-	private ContentAssistProcessorTestBuilder clone(String model, int offset) throws Exception {
+	protected ContentAssistProcessorTestBuilder clone(String model, int offset) throws Exception {
 		ContentAssistProcessorTestBuilder builder = new ContentAssistProcessorTestBuilder(setupClazz, tests);
 		builder.model = model;
 		builder.cursorPosition = offset;
@@ -331,4 +331,7 @@ public class ContentAssistProcessorTestBuilder {
 		return tests.get(clazz);
 	}
 
+	protected int getCursorPosition() {
+		return cursorPosition;
+	}
 }
