@@ -41,7 +41,7 @@ import com.google.common.collect.Sets;
  * <p>
  * A {@link SlotEntry} is responsible for selecting certain EObjects from the loaded resources.
  * It supports selecting EObjects by their name (see {@link org.eclipse.xtext.resource.IEObjectDescription}) or by an EClass.
- * In many cases such selction returns multiple EObjects, if you're only interested in one element set the firstOnly flag to <code>true</code>.
+ * In many cases such selction returns multiple EObjects, if you're only interested in one element set the <code>firstOnly</code> flag to <code>true</code>.
  * </p>
  * <p>
  * You might want to populate multiple workflow slots with model elements.
