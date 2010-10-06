@@ -92,6 +92,7 @@ XPrimaryExpression returns XExpression:
 	XSimpleFeatureCall |
 	XIfExpression |
 	XWhileExpression |
+	XDoWhileExpression |
 	XCastedExpression|
 	XParenthesizedExpression;
 
@@ -121,6 +122,11 @@ XCasePart:
 XWhileExpression:
 	'while' '(' predicate=XExpression ')'
 	body=XExpression;
+	
+XDoWhileExpression:
+   'do'
+       body=XExpression
+   'while' '(' predicate=XExpression ')';
 
 XBlockExpression:
 	'{'

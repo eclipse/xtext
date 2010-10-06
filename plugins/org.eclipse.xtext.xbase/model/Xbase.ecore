@@ -84,12 +84,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XBinaryOperation" eSuperTypes="#//XMemberFeatureCall"/>
   <eClassifiers xsi:type="ecore:EClass" name="XUnaryOperation" eSuperTypes="#//XMemberFeatureCall"/>
-  <eClassifiers xsi:type="ecore:EClass" name="XWhileExpression" eSuperTypes="#//XExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="XAbstractWhileExpression" abstract="true"
+      eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="predicate" eType="#//XExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//XExpression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XDoWhileExpression" eSuperTypes="#//XAbstractWhileExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XWhileExpression" eSuperTypes="#//XAbstractWhileExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="XTypeLiteral" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
   </eClassifiers>
