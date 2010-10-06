@@ -1,4 +1,3 @@
-
 h2(#processing_Xtext_models). Processing Xtext Models
 
 p. Now that we know how to create a language we should talk about processing the parsed models somehow. 
@@ -85,7 +84,7 @@ for (AbstractElement abstractElement : elements) {
 }
 
 p. Note that you'll find a lot of convenience API in EMF's _EcoreUtil_ and Xtext's ${org.eclipse.xtext/src/org.eclipse.xtext.EcoreUtil2}. 
-  
+
 h3(#node_model). Working with the Parse Tree (aka Node Model)
 
 p. In many situations the information from the _AST_ is sufficient, but in some situations you need additional syntactical information. In Xtext not only

@@ -17,7 +17,7 @@ Any syntax errors can be retrieved from the Resource using the common EMF API:
 
 * _org.eclipse.emf.ecore.resource.Resource.getErrors()_
 * _org.eclipse.emf.ecore.resource.Resource.getWarnings()_
- 
+
 h4(#linking_validation). Linker: Crosslink Validation
 
 Any broken crosslinks can be checked generically. As crosslink resolution is done lazily (see "linking":#linking), any broken links are resolved lazily as well.

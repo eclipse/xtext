@@ -256,6 +256,7 @@ SampleClass {
   multiValue = ArrayList {}
   child = {}
 } 
+
 bc.. package com.mycompany;
 
 import java.util.List;
@@ -265,6 +266,7 @@ public class SampleClass {
   public void addMultiValue(List<?> value) {..}
   public void addChild(SampleClass value) {..}
 }
+
 h3(#MWE2JavaReferences). Mapping to Java Classes
 
 p. The module _com.mycompany.Example_ defines a root component of 

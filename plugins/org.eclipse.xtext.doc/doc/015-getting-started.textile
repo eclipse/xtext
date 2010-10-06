@@ -192,7 +192,7 @@ side was parsed successfully. Here's the list of available assignment operators:
 || _feature=..._   | corresponds to _setFeature(...)_  ||
 || _list+=..._  | corresponds to _getList().add(...)_||
 || _condition?=..._  | corresponds to _setCondition(true)_||
-  
+
 p. The next rule on our list is the rule _Entity_. Looking at our target syntax, 
 each entity begins with the keyword _'entity'_ followed by the entity's name and an 
 opening curly brace (we will handle the _extends_ clause in a second step). Then, 
