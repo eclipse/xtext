@@ -204,12 +204,12 @@ public class Textile2xdoc {
 
 		public TransformationBuilder transformEnumerations(String textileMarker, String xdocEnvironment) {
 			return replaceAllMultiLine("((^" + textileMarker + "+ .*?$)+)(^\\s*$|\\z)",
-					xdocEnvironment + "[\n$1]\n" + todo("revise indentation levels")).replaceAllSingleLine(
+					todo("revise indentation levels") + xdocEnvironment + "[\n$1]\n" ).replaceAllSingleLine(
 					"^" + textileMarker + "+ (.*?)$", "item[$1]");
 		}
 
 		private String todo(String string) {
-			return "*TODO* " + string + "\n";
+			return "todo[" + string + "]\n";
 		}
 
 		public TransformationBuilder transformTables() {

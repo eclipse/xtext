@@ -345,7 +345,7 @@ Example:
 
 bc. terminal DOUBLE : INT '.' INT;
 
-h5. Alternatives 
+h5(#Alternatives). Alternatives 
 
 Using alternatives one can state multiple different alternatives.
 For instance, the whitespace rule uses alternatives like this:
@@ -379,10 +379,10 @@ Not all the expressions that are available in terminal rules can be used in pars
 ranges, wildcards, the until token and the negation are only available for terminal rules. 
 
 The elements that are available in parser rules as well as in terminal rules are
-# "groups":#Groups, 
+# groups, 
 # "alternatives":#Alternatives, 
 # "keywords":#Keywords and 
-# "rule calls":#RuleCalls.
+# rule calls.
 
 In addition to these elements, there are some expressions used to direct how the AST 
 is constructed, which are listed and explained in the following.

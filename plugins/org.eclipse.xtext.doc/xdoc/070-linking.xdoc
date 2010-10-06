@@ -1,0 +1,67 @@
+section:linking[Linking]
+
+The linking feature allows for specification of cross-references within an Xtext grammar.
+The following things are needed for the linking:
+
+todo[revise indentation levels]
+ol[
+item[declaration of a crosslink in the grammar (at least in the Ecore model)]
+item[specification of linking semantics (usually provided via the ref:scoping[scoping API])]
+]
+
+
+section2[Declaration of Crosslinks]
+
+In the grammar a cross-reference is specified using square brackets.
+
+code[Java][CrossReference :
+  '\[' type=ReferencedEClass ('|' terminal=CrossReferenceableTerminal)? '\]'
+;
+]
+
+Example:
+
+code[Java][ReferringType :
+  'ref' referencedObject=\[Entity|STRING\]
+;
+]
+
+The ref:metamodelInference[Ecore model inference] would create an e[EClass] e[ReferringType] with an 
+e[EReference] e[referencedObject] of type e[Entity] (_containment=false_). The referenced object would 
+be identified either by a e[STRING] and the surrounding information in the current context 
+(see ref:scoping[scoping]). If you do not use e[generate] but e[import] an existing Ecore model, 
+the class e[ReferringType] (or one of its super types) would need to have an e[EReference] of type 
+e[Entity] (or one of its super types) declared. Also the e[EReference]'s containment and container 
+properties needs to be set to e[false]. 
+
+
+section2[Default Runtime Behavior (Lazy Linking)]
+
+Xtext uses lazy linking by default and we encourage users to stick to this because it provides  
+many advantages. One of which is improved performance in all scenarios where you don't have to load 
+the whole closure of all transitively referenced resources. Furthermore it automatically solves 
+situations where one link relies on other links. Though cyclic linking dependencies are not 
+supported by Xtext at all. 
+
+When parsing a given input string, say
+
+code[Java][ref Entity01]
+
+the codeRef[org.eclipse.xtext.linking.lazy.LazyLinker] first creates an EMF proxy and 
+assigns it to the corresponding e[EReference]. In EMF a proxy is described by a URI, which points to the 
+real e[EObject]. In the case of lazy linking the stored URI comprises of the context information given 
+at parse time, which is the e[EObject] containing the cross-reference, the actual e[EReference], the 
+index (in case it's a multi-valued cross-reference) and the string which represented the crosslink 
+in the concrete syntax. The latter usually corresponds to the name of the referenced e[EObject]. 
+In EMF a URI consists of information about the resource the e[EObject] is contained in as well as a so 
+called fragment part, which is used to find the e[EObject] within that resource. When an  EMF proxy 
+is resolved, the current e[ResourceSet] is asked. The resource set uses the first part to obtain 
+(i.e. load if it is not already loaded) the resource. Then the resource is asked to return the 
+e[EObject] based on the fragment in the URI. The actual cross-reference resolution is done by 
+e[LazyLinkingResource.getEObject(String)] which receives the fragment and delegates to the implementation 
+of the e[ILinkingService]. The default implementation in turn delegates to the ref:scoping[scoping API].
+
+A simple implementation of the linking service (the 
+codeRef[org.eclipse.xtext.linking.impl.DefaultLinkingService]) is shipped with Xtext 
+and used for any grammar per default. Usually any necessary customization of the linking behavior 
+can best be described using the ref:scoping[scoping API].

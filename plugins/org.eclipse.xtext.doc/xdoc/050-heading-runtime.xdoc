@@ -1,0 +1,51 @@
+chapter[Runtime Concepts]
+
+Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using 
+ref:dependencyInjection[dependency injection]. Xtext may be used in different environments which introduce 
+different constraints. Especially important is the difference between OSGi managed containers and plain 
+vanilla Java programs. To honor these differences Xtext uses the concept of 
+codeRef[org.eclipse.xtext.ISetup]-implementations in normal mode and uses Eclipse's 
+extension mechanism when it should be configured in an OSGi environment.   
+
+
+section[Runtime Setup (ISetup)]
+
+For each language there is an implementation of codeRef[org.eclipse.xtext.ISetup] 
+generated. It implements a method called e[createInjectorAndDoEMFRegistration()], which can be called 
+to do the initialization of the language infrastructure. This class is intended to be used for 
+runtime and for unit testing, only.
+
+The setup method returns an e[Injector], which can further be used to obtain a parser, etc. It also 
+registers the ResourceFactory and generated e[EPackages] at the respective global registries provided 
+by EMF. So basically you can just run the setup and start using EMF API to load and store models of 
+your language.
+
+
+section[Setup within Eclipse-Equinox (OSGi)]
+
+Within Eclipse we have a generated e[Activator], which creates a Guice injector using the ref:guicemodules[modules].
+In addition an e[IExecutableExtensionFactory] is generated for each language, which is used to create e[ExecutableExtensions].
+This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation. 
+
+The only thing you have to do in order to use this factory is to prefix the class with the factory e[\[MyLanguageName\]ExecutableExtensionFactory] name followed by a colon.
+
+code[Java][<extension
+  point="org.eclipse.ui.editors">
+  <editor
+    class="<MyLanguageName>ExecutableExtensionFactory:
+      org.eclipse.xtext.ui.editor.XtextEditor"
+    contributorClass=
+      "org.eclipse.ui.editors.text.TextEditorActionContributor"
+    default="true"
+    extensions="ecoredsl"
+    id="org.eclipse.xtext.example.EcoreDsl"
+    name="EcoreDsl Editor">
+  </editor>
+</extension>
+]
+
+section[Logging]
+
+Xtext uses Apache's log4j for logging. It is configured using the so called e[log4j.properties], which is looked up in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a e[log4j.properties] in place and make sure that it is not overridden by other e[log4j.properties] in previous classpath entries.
+
+In OSGi you provide configuration by creating a fragment for e[org.apache.log4j]. In this case you need to make sure that there's no second fragment contributing a e[log4j.properties] file.

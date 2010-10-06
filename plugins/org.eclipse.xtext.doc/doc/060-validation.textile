@@ -142,7 +142,7 @@ Testing validators typically works as follows:
 
 To create models, you can either use EMF's _ResourceSet_ to load models from your hard disk or you can utilize the _[MyLanguage]Factory_ (which EMF generates for each _EPackage_) to construct the needed model elements manually. While the fist option has the advantages that you can edit your models in your textual concrete syntax, the second option has the advantage that you can create partial models.
 
-To run the @Check-methods and ensure they raise the intended errors and warnings, you can utilize ${org.eclipse.xtext/src/org.eclipse.xtext.validation.ValidatorTester} as shown by the following example:
+To run the @Check-methods and ensure they raise the intended errors and warnings, you can utilize ${org.eclipse.xtext/src/org.eclipse.xtext.junit.validation.ValidatorTester} as shown by the following example:
 
 p. Validator:
 
@@ -211,6 +211,6 @@ several _assert_-methods to verify whether the expected diagnostics are present:
 * _assertWarning(...)_: This method is available for the same combination of parameters as _assertError()_.
 * _assertOK()_: Expects that no diagnostics (errors, warnings etc.) have been raised.   
 * _assertDiagnostics(int severity, int code, String messageFragment)_: Verifies severity, error code and messageFragment.
-* _assertAll(DiagnosticPredicate... predicates)_: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class ${org.eclipse.xtext/src/org.eclipse.xtext.validation.AssertableDiagnostics} contains static _error()_ and _warning()_-methods which help to create the needed _DiagnosticPredicate_. Example: _assertAll(error(123), warning("some part of the message"))_. 
+* _assertAll(DiagnosticPredicate... predicates)_: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class ${org.eclipse.xtext/src/org.eclipse.xtext.junit.validation.AssertableDiagnostics} contains static _error()_ and _warning()_-methods which help to create the needed _DiagnosticPredicate_. Example: _assertAll(error(123), warning("some part of the message"))_. 
 * _assertAny(DiagnosticPredicate predicate)_: Asserts that a diagnostic exists which matches the predicate. 
 
