@@ -68,7 +68,8 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	/**
-	 * In EMF 2.5 {@return EcoreUtil.copy(EObject)} does not cast the result.
+	 * A generified facade to {@link EcoreUtil#copy(EObject)}.
+	 * Note that since EMF 2.6 {@link EcoreUtil#copy(EObject)} is already generic.
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T clone(T eObject) {

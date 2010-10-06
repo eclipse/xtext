@@ -77,7 +77,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	protected boolean isValidStorageFor(URI uri, IStorage storage) {
 		if (storage instanceof IFile) {
 			IProject project = ((IFile) storage).getProject();
-			if (!project.isAccessible() || project.isHidden())
+			if (!project.isAccessible())
 				return false;
 		}
 		return true;
