@@ -52,7 +52,7 @@ public abstract class AbstractScopingFragment extends AbstractGeneratorFragment 
 				"binder.bind(" + 
 					IScopeProvider.class.getName() + ".class" +
 					").annotatedWith(com.google.inject.name.Names.named(" +
-					"\"" + AbstractDeclarativeScopeProvider.NAMED_DELEGATE + "\"" +
+					AbstractDeclarativeScopeProvider.class.getName() + ".NAMED_DELEGATE" +
 					")).to("+ getLocalScopeProvider().getName() + ".class)")
 			.addTypeToType(IGlobalScopeProvider.class.getName(), getGlobalScopeProvider().getName());
 		if (isIgnoreCase()) {
