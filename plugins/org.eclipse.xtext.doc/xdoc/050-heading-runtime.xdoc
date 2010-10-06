@@ -1,4 +1,4 @@
-chapter[Runtime Concepts]
+chapter:runtime_concepts[Runtime Concepts]
 
 Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using 
 ref:dependencyInjection[dependency injection]. Xtext may be used in different environments which introduce 
@@ -49,3 +49,19 @@ section[Logging]
 Xtext uses Apache's log4j for logging. It is configured using the so called e[log4j.properties], which is looked up in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a e[log4j.properties] in place and make sure that it is not overridden by other e[log4j.properties] in previous classpath entries.
 
 In OSGi you provide configuration by creating a fragment for e[org.apache.log4j]. In this case you need to make sure that there's no second fragment contributing a e[log4j.properties] file.
+
+section-ref[validation]
+
+section-ref[linking]
+
+section-ref[scoping]
+
+section-ref[valueconverter]
+
+section-ref[serialization]
+
+section-ref[formatting]
+
+section-ref[fragmentProvider]
+
+section-ref[encoding]

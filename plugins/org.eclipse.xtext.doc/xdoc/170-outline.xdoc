@@ -26,7 +26,7 @@ In its default implementation, the outline view shows the containment hierarchy 
 This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., 
 by omitting a certain kind of node or by introducing additional even virtual nodes, you customize 
 the outline by implementing 
-todo[fixref org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer].
+todo[fixRef org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer].
 
 The Xtext wizard creates an empty transformer class (_MyDslTransformer_) for your convenience. To 
 transform the semantic model delivered by the Xtext parser, you need to provide transformation methods 

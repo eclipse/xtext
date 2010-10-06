@@ -1,5 +1,5 @@
 
-h1. Runtime Concepts
+h1(#runtime_concepts). Runtime Concepts
 
 Xtext itself and every language infrastructure developed with Xtext is configured and wired-up using 
 "dependency injection":#dependencyInjection. Xtext may be used in different environments which introduce 

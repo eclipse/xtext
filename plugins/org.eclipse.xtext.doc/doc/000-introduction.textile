@@ -1,4 +1,4 @@
-h1. Overview
+h1(#Overview). Overview
 
 h2. What is Xtext?
 

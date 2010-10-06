@@ -222,9 +222,11 @@ tr[td[codeRef[org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragmen
 tr[td[codeRef[org.eclipse.xtext.generator.validation.JavaValidatorFragment]]td[Model validation]td[ref:custom_validation[Model validation]]]
 tr[td[codeRef[org.eclipse.xtext.generator.formatting.FormatterFragment]]td[Code formatter]td[ref:declarativeformatter[Declarative formatter]]]
 tr[td[codeRef[org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment]]td[Label provider]td[ref:labelProvider[Label provider]]]
-tr[td[todo[ fixref org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment]]td[Outline view configuration]td[ref:outline[Outline]]]
-tr[td[todo[ fixref org.eclipse.xtext.ui.generator.outline.TransformerFragment]]td[Outline view configuration]td[ref:outline[Outline]]]
+tr[td[todo[fixRef org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment]]td[Outline view configuration]td[ref:outline[Outline]]]
+tr[td[todo[fixRef org.eclipse.xtext.ui.generator.outline.TransformerFragment]]td[Outline view configuration]td[ref:outline[Outline]]]
 tr[td[codeRef[org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment]]td[Java-based content assist]td[ref:contentAssist[Content assist]]]
 tr[td[codeRef[org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment]]td[Content assist helper based on ANTLR]td[ref:contentAssist[Content assist]]]
 tr[td[codeRef[org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment]]td[New project wizard]td[ref:projectwizard[Project wizard]]]
 ]
+
+section-ref[dependencyInjection]

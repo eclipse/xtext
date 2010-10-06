@@ -1,4 +1,4 @@
-chapter[IDE Concepts]
+chapter:ide_concepts[IDE Concepts]
 
 For the following part we will refer to a concrete example grammar in order to explain certain aspect 
 of the UI more clearly. The used example grammar is as follows:
@@ -25,3 +25,20 @@ RuleB return gen::CustomType:
    "RuleB" "(" ruleA = \[RuleA\] ")" ;
 ]
 
+
+
+section-ref[labelProvider]
+
+section-ref[contentAssist]
+
+section-ref[quickfixes]
+
+section-ref[templates]
+
+section-ref[outline]
+
+section-ref[hyperlinking]
+
+section-ref[highlighting]
+
+section-ref[projectwizard]

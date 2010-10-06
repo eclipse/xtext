@@ -1,5 +1,7 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -10,6 +12,7 @@ import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
 
 import com.google.inject.internal.Lists;
 
@@ -27,10 +30,15 @@ import com.google.inject.internal.Lists;
 public class Textile2xdoc {
 
 	public static void main(String[] args) {
-		new Textile2xdoc().transform();
+		try {
+			new XdocStandaloneSetup().doSetup();
+			new Textile2xdoc().transform();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void transform() {
+	public void transform() throws IOException {
 		File sourceDir = new File("doc");
 		File targetDir = new File("xdoc");
 		targetDir.mkdir();
@@ -39,6 +47,10 @@ public class Textile2xdoc {
 				return name.toLowerCase().endsWith(".textile");
 			}
 		};
+
+		FileWriter index = new FileWriter(targetDir + File.separator + "Xtext.xdoc");
+		index.write("document[Xtext Documentation]\n");
+		FileWriter lastChapter = index;
 		for (String sourceFileName : sourceDir.list(textileFilter)) {
 			String sourceFullName = sourceDir.getName() + File.separator + sourceFileName;
 			System.out.println(sourceFullName);
@@ -48,16 +60,27 @@ public class Textile2xdoc {
 					+ sourceFileName.replaceAll("\\.textile", ".xdoc");
 			System.out.println("-->" + targetFullName);
 			Files.writeStringIntoFile(targetFullName, target);
+			if(!Strings.isEmpty(target)) {
+				String sectionType = target.substring(0, target.indexOf(':'));
+				String sectionLabel = target.substring(target.indexOf(':') + 1 , target.indexOf("["));
+				if("chapter".equals(sectionType)) {
+					index.write("\n\n" + sectionType + "-ref[" + sectionLabel + "]");
+					if(lastChapter != index) 
+						lastChapter.close();
+					lastChapter = new FileWriter(targetFullName, true);
+				} else {
+					lastChapter.write("\n\n" + sectionType + "-ref[" + sectionLabel + "]");
+				}
+			}
 			System.out.println();
 		}
-
+		index.close();
 	}
 
 	private String transform(String source) {
 		return new TransformationBuilder(source).transformBrackets()
 
-		.transformBlocks()
-		.transformEnumerations("#", "ol").transformEnumerations("\\*", "ul")
+		.transformBlocks().transformEnumerations("#", "ol").transformEnumerations("\\*", "ul")
 
 		.transformMarkup("\\*\\*", "\\*\\*", "e").transformMarkup("__", "__", "e").transformMarkup("_", "_", "e")
 				.transformMarkup("\\*", "\\*", "e")
@@ -66,7 +89,6 @@ public class Textile2xdoc {
 
 				.transformHeading("h1", "chapter").transformHeading("h2", "section").transformHeading("h3", "section2")
 				.transformHeading("h4", "section3").transformHeading("h5", "section4")
-
 
 				.transformParagraphs()
 
@@ -123,7 +145,7 @@ public class Textile2xdoc {
 				throw new IllegalStateException();
 			return this;
 		}
-		
+
 		private List<String> findBcSections(String source, String regex, int flags) {
 			List<String> matches = Lists.newArrayList();
 			Pattern pattern = Pattern.compile(regex, flags);
@@ -204,7 +226,7 @@ public class Textile2xdoc {
 
 		public TransformationBuilder transformEnumerations(String textileMarker, String xdocEnvironment) {
 			return replaceAllMultiLine("((^" + textileMarker + "+ .*?$)+)(^\\s*$|\\z)",
-					todo("revise indentation levels") + xdocEnvironment + "[\n$1]\n" ).replaceAllSingleLine(
+					todo("revise indentation levels") + xdocEnvironment + "[\n$1]\n").replaceAllSingleLine(
 					"^" + textileMarker + "+ (.*?)$", "item[$1]");
 		}
 

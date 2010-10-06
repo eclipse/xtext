@@ -576,3 +576,7 @@ Now you should regenerate the language infrastructure as described in the
 previous section, and give the editor a try. You can even split up your model 
 into smaller parts and have cross-references across file boundaries, as long 
 as the referenced models are on the classpath.
+
+section-ref[processing_Xtext_models]
+
+section-ref[getting_started_xpand]

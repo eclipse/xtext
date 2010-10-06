@@ -1,5 +1,5 @@
 
-h1. IDE Concepts
+h1(#ide_concepts). IDE Concepts
 
 For the following part we will refer to a concrete example grammar in order to explain certain aspect 
 of the UI more clearly. The used example grammar is as follows:

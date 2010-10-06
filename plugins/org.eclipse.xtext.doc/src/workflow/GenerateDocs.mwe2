@@ -1,0 +1,16 @@
+module GenerateSpec
+
+import org.eclipse.emf.mwe.utils.*
+
+var targetDir = "xdoc-gen"
+var modelPath = "xdoc/"
+
+Workflow {
+	component = @workflow.XDocGenerator { 
+		// or define search scope explicitly
+		modelPath = modelPath
+		targetDir = targetDir
+		pdfLatex = "/usr/texbin/pdflatex"
+	}
+
+}

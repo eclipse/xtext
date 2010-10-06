@@ -105,6 +105,7 @@ item[The method-signatures of the e[IFragmentProvider] have changed. The documen
 item[Some static methods were removed from utility classes such as e[EcoreUtil2] and e[ParsetreeUtil] in favor of more sophisticated implementations.]
 ]
 
+
 section[Now Go For The New Features]
 
 After migrating, some of the new features in Xtext 1.0 will be automatically available. Others require further configuration.
