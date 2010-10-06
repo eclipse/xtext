@@ -26,7 +26,7 @@ In its default implementation, the outline view shows the containment hierarchy 
 This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., 
 by omitting a certain kind of node or by introducing additional even virtual nodes, you customize 
 the outline by implementing 
-codeRef[org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer].
+todo[fixref org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer].
 
 The Xtext wizard creates an empty transformer class (_MyDslTransformer_) for your convenience. To 
 transform the semantic model delivered by the Xtext parser, you need to provide transformation methods 
@@ -89,9 +89,9 @@ e[outdated]
 
 Often, you want to allow users to filter the contents of the outline to make it easier to concentrate 
 on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add 
-codeRef[org.eclipse.xtext.ui.editor.outline.actions.AbstractFilterAction]s to the 
+todo[fixRef org.eclipse.xtext.ui.editor.outline.actions.AbstractFilterAction]s to the 
 outline. Actions can be contributed by implementing and registering a 
-codeRef[org.eclipse.xtext.ui.editor.outline.actions.DeclarativeActionBarContributor].
+todo[fixRef org.eclipse.xtext.ui.editor.outline.actions.DeclarativeActionBarContributor].
 
 To register a e[DeclarativeActionBarContributor], add the following lines to your e[MyDslUiModule] class:
 
@@ -170,7 +170,7 @@ e[outdated]
 
 You might want to register context menu actions for specific elements in the outline, e.g. to allow 
 users of your DSL to invoke a generator or to validate the selected element. As all elements in the 
-outline are codeRef[org.eclipse.xtext.ui.editor.outline.ContentOutlineNode]s, you 
+outline are todo[fixRef org.eclipse.xtext.ui.editor.outline.ContentOutlineNode]s, you 
 cannot easily register an link[http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm.][Object contribution] 
 (Besides, using the extension point e[org.eclipse.ui.popupMenus] is regarded somewhat old school - 
 you should rather use the new command and expression framework, as depicted below).
@@ -179,7 +179,7 @@ To register context menus for specific node types of your Ecore model, we need t
 
 todo[revise indentation levels]
 ul[
-item[implement codeRef[org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFactory] which will translate codeRef[org.eclipse.xtext.ui.editor.outline.ContentOutlineNode]s to their underlying node type]
+item[implement todo[fixRef org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFactory] which will translate todo[fixRef org.eclipse.xtext.ui.editor.outline.ContentOutlineNode]s to their underlying node type]
 item[register a menu contribution to add a command / handler pair to the context menu for the specific node types you're interested in.]
 ]
 
@@ -187,7 +187,7 @@ item[register a menu contribution to add a command / handler pair to the context
 section3[Registering an e[IContentOutlineNodeAdapterFactory]]
 
 The Xtext code generator creates a subclass of 
-codeRef[org.eclipse.xtext.ui.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory]. 
+todo[fixRef org.eclipse.xtext.ui.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory]. 
 All we need to do is specify a list of types that we later want to bind context menu contributions to. 
 
 code[Java][public class MyDslContentOutlineNodeAdapterFactory extends 

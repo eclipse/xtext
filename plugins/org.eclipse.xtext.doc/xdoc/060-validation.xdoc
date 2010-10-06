@@ -123,7 +123,7 @@ You can also implement quick fixes for individual validation errors and warnings
 section2:check_based_validation[Validation with the Check Language]
 
 In addition to the Java-based validation code you can use the language Check (from M2T/Xpand) to implement constraint checks against your model. To do so, you have to configure the ref:generator[generator] with the
-codeRef[org.eclipse.xtext.generator.validation.CheckFragment].
+todo[fixRef org.eclipse.xtext.generator.validation.CheckFragment].
 Please note, that you can combine both types of validation in your project. 
 
 code[Java][fragment = org.eclipse.xtext.generator.validation.CheckFragment {}

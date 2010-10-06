@@ -105,7 +105,6 @@ item[The method-signatures of the e[IFragmentProvider] have changed. The documen
 item[Some static methods were removed from utility classes such as e[EcoreUtil2] and e[ParsetreeUtil] in favor of more sophisticated implementations.]
 ]
 
-
 section[Now Go For The New Features]
 
 After migrating, some of the new features in Xtext 1.0 will be automatically available. Others require further configuration.
@@ -119,5 +118,5 @@ item[ref:unordered_groups[unordered groups]]
 item[ref:quick_outline[quick outline]]
 item[ref:MWE2[MWE2]]
 item[ref:jvmtypes[refering to Java elements]]
-For an overview over the new features consult our link[http://www.eclipse.org/Xtext/documentation/helios/new_and_noteworthy.php][New and Noteworthy] online. 
 ]
+For an overview over the new features consult our link[http://www.eclipse.org/Xtext/documentation/helios/new_and_noteworthy.php][New and Noteworthy] online. 
