@@ -7,26 +7,26 @@ package org.eclipse.xtext.xbase.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>XWhile Expression</b></em>'.
+ * An implementation of the model object '<em><b>XDo While Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class XWhileExpressionImpl extends XAbstractWhileExpressionImpl implements XWhileExpression
+public class XDoWhileExpressionImpl extends XAbstractWhileExpressionImpl implements XDoWhileExpression
 {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected XWhileExpressionImpl()
+	protected XDoWhileExpressionImpl()
 	{
 		super();
 	}
@@ -39,7 +39,7 @@ public class XWhileExpressionImpl extends XAbstractWhileExpressionImpl implement
 	@Override
 	protected EClass eStaticClass()
 	{
-		return XbasePackage.Literals.XWHILE_EXPRESSION;
+		return XbasePackage.Literals.XDO_WHILE_EXPRESSION;
 	}
 
-} //XWhileExpressionImpl
+} //XDoWhileExpressionImpl

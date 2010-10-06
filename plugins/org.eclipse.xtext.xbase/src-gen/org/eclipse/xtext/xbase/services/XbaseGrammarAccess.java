@@ -743,18 +743,19 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cXSimpleFeatureCallParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
 		private final RuleCall cXIfExpressionParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
 		private final RuleCall cXWhileExpressionParserRuleCall_11 = (RuleCall)cAlternatives.eContents().get(11);
-		private final RuleCall cXCastedExpressionParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
-		private final RuleCall cXParenthesizedExpressionParserRuleCall_13 = (RuleCall)cAlternatives.eContents().get(13);
+		private final RuleCall cXDoWhileExpressionParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
+		private final RuleCall cXCastedExpressionParserRuleCall_13 = (RuleCall)cAlternatives.eContents().get(13);
+		private final RuleCall cXParenthesizedExpressionParserRuleCall_14 = (RuleCall)cAlternatives.eContents().get(14);
 		
 		//XPrimaryExpression returns XExpression:
 		//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall |
-		//	XBlockExpression | XSwitchExpression | XSimpleFeatureCall | XIfExpression | XWhileExpression | XCastedExpression |
-		//	XParenthesizedExpression;
+		//	XBlockExpression | XSwitchExpression | XSimpleFeatureCall | XIfExpression | XWhileExpression | XDoWhileExpression |
+		//	XCastedExpression | XParenthesizedExpression;
 		public ParserRule getRule() { return rule; }
 
 		//XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall |
-		//XBlockExpression | XSwitchExpression | XSimpleFeatureCall | XIfExpression | XWhileExpression | XCastedExpression |
-		//XParenthesizedExpression
+		//XBlockExpression | XSwitchExpression | XSimpleFeatureCall | XIfExpression | XWhileExpression | XDoWhileExpression |
+		//XCastedExpression | XParenthesizedExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//XClosure
@@ -793,11 +794,14 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//XWhileExpression
 		public RuleCall getXWhileExpressionParserRuleCall_11() { return cXWhileExpressionParserRuleCall_11; }
 
+		//XDoWhileExpression
+		public RuleCall getXDoWhileExpressionParserRuleCall_12() { return cXDoWhileExpressionParserRuleCall_12; }
+
 		//XCastedExpression
-		public RuleCall getXCastedExpressionParserRuleCall_12() { return cXCastedExpressionParserRuleCall_12; }
+		public RuleCall getXCastedExpressionParserRuleCall_13() { return cXCastedExpressionParserRuleCall_13; }
 
 		//XParenthesizedExpression
-		public RuleCall getXParenthesizedExpressionParserRuleCall_13() { return cXParenthesizedExpressionParserRuleCall_13; }
+		public RuleCall getXParenthesizedExpressionParserRuleCall_14() { return cXParenthesizedExpressionParserRuleCall_14; }
 	}
 
 	public class XClosureElements extends AbstractParserRuleElementFinder {
@@ -1106,6 +1110,50 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 		//XExpression
 		public RuleCall getBodyXExpressionParserRuleCall_4_0() { return cBodyXExpressionParserRuleCall_4_0; }
+	}
+
+	public class XDoWhileExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XDoWhileExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cDoKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cBodyAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cBodyXExpressionParserRuleCall_1_0 = (RuleCall)cBodyAssignment_1.eContents().get(0);
+		private final Keyword cWhileKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cPredicateAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cPredicateXExpressionParserRuleCall_4_0 = (RuleCall)cPredicateAssignment_4.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//XDoWhileExpression:
+		//	"do" body=XExpression "while" "(" predicate=XExpression ")";
+		public ParserRule getRule() { return rule; }
+
+		//"do" body=XExpression "while" "(" predicate=XExpression ")"
+		public Group getGroup() { return cGroup; }
+
+		//"do"
+		public Keyword getDoKeyword_0() { return cDoKeyword_0; }
+
+		//body=XExpression
+		public Assignment getBodyAssignment_1() { return cBodyAssignment_1; }
+
+		//XExpression
+		public RuleCall getBodyXExpressionParserRuleCall_1_0() { return cBodyXExpressionParserRuleCall_1_0; }
+
+		//"while"
+		public Keyword getWhileKeyword_2() { return cWhileKeyword_2; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
+
+		//predicate=XExpression
+		public Assignment getPredicateAssignment_4() { return cPredicateAssignment_4; }
+
+		//XExpression
+		public RuleCall getPredicateXExpressionParserRuleCall_4_0() { return cPredicateXExpressionParserRuleCall_4_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
 
 	public class XBlockExpressionElements extends AbstractParserRuleElementFinder {
@@ -1513,6 +1561,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	private XSwitchExpressionElements pXSwitchExpression;
 	private XCasePartElements pXCasePart;
 	private XWhileExpressionElements pXWhileExpression;
+	private XDoWhileExpressionElements pXDoWhileExpression;
 	private XBlockExpressionElements pXBlockExpression;
 	private XExpressionInsideBlockElements pXExpressionInsideBlock;
 	private XVariableDeclarationElements pXVariableDeclaration;
@@ -1753,8 +1802,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	//XPrimaryExpression returns XExpression:
 	//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall |
-	//	XBlockExpression | XSwitchExpression | XSimpleFeatureCall | XIfExpression | XWhileExpression | XCastedExpression |
-	//	XParenthesizedExpression;
+	//	XBlockExpression | XSwitchExpression | XSimpleFeatureCall | XIfExpression | XWhileExpression | XDoWhileExpression |
+	//	XCastedExpression | XParenthesizedExpression;
 	public XPrimaryExpressionElements getXPrimaryExpressionAccess() {
 		return (pXPrimaryExpression != null) ? pXPrimaryExpression : (pXPrimaryExpression = new XPrimaryExpressionElements());
 	}
@@ -1831,6 +1880,16 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getXWhileExpressionRule() {
 		return getXWhileExpressionAccess().getRule();
+	}
+
+	//XDoWhileExpression:
+	//	"do" body=XExpression "while" "(" predicate=XExpression ")";
+	public XDoWhileExpressionElements getXDoWhileExpressionAccess() {
+		return (pXDoWhileExpression != null) ? pXDoWhileExpression : (pXDoWhileExpression = new XDoWhileExpressionElements());
+	}
+	
+	public ParserRule getXDoWhileExpressionRule() {
+		return getXDoWhileExpressionAccess().getRule();
 	}
 
 	//XBlockExpression:

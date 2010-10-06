@@ -168,6 +168,16 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 				return createXUnaryOperationAdapter();
 			}
 			@Override
+			public Adapter caseXAbstractWhileExpression(XAbstractWhileExpression object)
+			{
+				return createXAbstractWhileExpressionAdapter();
+			}
+			@Override
+			public Adapter caseXDoWhileExpression(XDoWhileExpression object)
+			{
+				return createXDoWhileExpressionAdapter();
+			}
+			@Override
 			public Adapter caseXWhileExpression(XWhileExpression object)
 			{
 				return createXWhileExpressionAdapter();
@@ -470,6 +480,36 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXUnaryOperationAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XAbstractWhileExpression <em>XAbstract While Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XAbstractWhileExpression
+	 * @generated
+	 */
+	public Adapter createXAbstractWhileExpressionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XDoWhileExpression <em>XDo While Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XDoWhileExpression
+	 * @generated
+	 */
+	public Adapter createXDoWhileExpressionAdapter()
 	{
 		return null;
 	}

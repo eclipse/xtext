@@ -242,10 +242,28 @@ public class XbaseSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XbasePackage.XABSTRACT_WHILE_EXPRESSION:
+			{
+				XAbstractWhileExpression xAbstractWhileExpression = (XAbstractWhileExpression)theEObject;
+				T result = caseXAbstractWhileExpression(xAbstractWhileExpression);
+				if (result == null) result = caseXExpression(xAbstractWhileExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XbasePackage.XDO_WHILE_EXPRESSION:
+			{
+				XDoWhileExpression xDoWhileExpression = (XDoWhileExpression)theEObject;
+				T result = caseXDoWhileExpression(xDoWhileExpression);
+				if (result == null) result = caseXAbstractWhileExpression(xDoWhileExpression);
+				if (result == null) result = caseXExpression(xDoWhileExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case XbasePackage.XWHILE_EXPRESSION:
 			{
 				XWhileExpression xWhileExpression = (XWhileExpression)theEObject;
 				T result = caseXWhileExpression(xWhileExpression);
+				if (result == null) result = caseXAbstractWhileExpression(xWhileExpression);
 				if (result == null) result = caseXExpression(xWhileExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -554,6 +572,38 @@ public class XbaseSwitch<T>
 	 * @generated
 	 */
 	public T caseXUnaryOperation(XUnaryOperation object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XAbstract While Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XAbstract While Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXAbstractWhileExpression(XAbstractWhileExpression object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XDo While Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XDo While Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXDoWhileExpression(XDoWhileExpression object)
 	{
 		return null;
 	}

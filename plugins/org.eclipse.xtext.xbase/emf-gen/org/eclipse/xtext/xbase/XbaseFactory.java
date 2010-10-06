@@ -179,6 +179,15 @@ public interface XbaseFactory extends EFactory
 	XUnaryOperation createXUnaryOperation();
 
 	/**
+	 * Returns a new object of class '<em>XDo While Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XDo While Expression</em>'.
+	 * @generated
+	 */
+	XDoWhileExpression createXDoWhileExpression();
+
+	/**
 	 * Returns a new object of class '<em>XWhile Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

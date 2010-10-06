@@ -717,14 +717,14 @@ public interface XbasePackage extends EPackage
 	int XUNARY_OPERATION_FEATURE_COUNT = XMEMBER_FEATURE_CALL_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XWhileExpressionImpl <em>XWhile Expression</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XAbstractWhileExpressionImpl <em>XAbstract While Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.impl.XWhileExpressionImpl
-	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXWhileExpression()
+	 * @see org.eclipse.xtext.xbase.impl.XAbstractWhileExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAbstractWhileExpression()
 	 * @generated
 	 */
-	int XWHILE_EXPRESSION = 18;
+	int XABSTRACT_WHILE_EXPRESSION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -733,7 +733,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XWHILE_EXPRESSION__PREDICATE = XEXPRESSION_FEATURE_COUNT + 0;
+	int XABSTRACT_WHILE_EXPRESSION__PREDICATE = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -742,7 +742,81 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XWHILE_EXPRESSION__BODY = XEXPRESSION_FEATURE_COUNT + 1;
+	int XABSTRACT_WHILE_EXPRESSION__BODY = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>XAbstract While Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XABSTRACT_WHILE_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XDoWhileExpressionImpl <em>XDo While Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XDoWhileExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXDoWhileExpression()
+	 * @generated
+	 */
+	int XDO_WHILE_EXPRESSION = 19;
+
+	/**
+	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XDO_WHILE_EXPRESSION__PREDICATE = XABSTRACT_WHILE_EXPRESSION__PREDICATE;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XDO_WHILE_EXPRESSION__BODY = XABSTRACT_WHILE_EXPRESSION__BODY;
+
+	/**
+	 * The number of structural features of the '<em>XDo While Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XDO_WHILE_EXPRESSION_FEATURE_COUNT = XABSTRACT_WHILE_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XWhileExpressionImpl <em>XWhile Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XWhileExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXWhileExpression()
+	 * @generated
+	 */
+	int XWHILE_EXPRESSION = 20;
+
+	/**
+	 * The feature id for the '<em><b>Predicate</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XWHILE_EXPRESSION__PREDICATE = XABSTRACT_WHILE_EXPRESSION__PREDICATE;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XWHILE_EXPRESSION__BODY = XABSTRACT_WHILE_EXPRESSION__BODY;
 
 	/**
 	 * The number of structural features of the '<em>XWhile Expression</em>' class.
@@ -751,7 +825,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XWHILE_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+	int XWHILE_EXPRESSION_FEATURE_COUNT = XABSTRACT_WHILE_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XTypeLiteralImpl <em>XType Literal</em>}' class.
@@ -761,7 +835,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXTypeLiteral()
 	 * @generated
 	 */
-	int XTYPE_LITERAL = 19;
+	int XTYPE_LITERAL = 21;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -789,7 +863,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXInstanceOfExpression()
 	 * @generated
 	 */
-	int XINSTANCE_OF_EXPRESSION = 20;
+	int XINSTANCE_OF_EXPRESSION = 22;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1286,6 +1360,48 @@ public interface XbasePackage extends EPackage
 	EClass getXUnaryOperation();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XAbstractWhileExpression <em>XAbstract While Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XAbstract While Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XAbstractWhileExpression
+	 * @generated
+	 */
+	EClass getXAbstractWhileExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XAbstractWhileExpression#getPredicate <em>Predicate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Predicate</em>'.
+	 * @see org.eclipse.xtext.xbase.XAbstractWhileExpression#getPredicate()
+	 * @see #getXAbstractWhileExpression()
+	 * @generated
+	 */
+	EReference getXAbstractWhileExpression_Predicate();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XAbstractWhileExpression#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.eclipse.xtext.xbase.XAbstractWhileExpression#getBody()
+	 * @see #getXAbstractWhileExpression()
+	 * @generated
+	 */
+	EReference getXAbstractWhileExpression_Body();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XDoWhileExpression <em>XDo While Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XDo While Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XDoWhileExpression
+	 * @generated
+	 */
+	EClass getXDoWhileExpression();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XWhileExpression <em>XWhile Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1294,28 +1410,6 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EClass getXWhileExpression();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XWhileExpression#getPredicate <em>Predicate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Predicate</em>'.
-	 * @see org.eclipse.xtext.xbase.XWhileExpression#getPredicate()
-	 * @see #getXWhileExpression()
-	 * @generated
-	 */
-	EReference getXWhileExpression_Predicate();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XWhileExpression#getBody <em>Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Body</em>'.
-	 * @see org.eclipse.xtext.xbase.XWhileExpression#getBody()
-	 * @see #getXWhileExpression()
-	 * @generated
-	 */
-	EReference getXWhileExpression_Body();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XTypeLiteral <em>XType Literal</em>}'.
@@ -1782,6 +1876,42 @@ public interface XbasePackage extends EPackage
 		EClass XUNARY_OPERATION = eINSTANCE.getXUnaryOperation();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XAbstractWhileExpressionImpl <em>XAbstract While Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XAbstractWhileExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAbstractWhileExpression()
+		 * @generated
+		 */
+		EClass XABSTRACT_WHILE_EXPRESSION = eINSTANCE.getXAbstractWhileExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Predicate</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XABSTRACT_WHILE_EXPRESSION__PREDICATE = eINSTANCE.getXAbstractWhileExpression_Predicate();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XABSTRACT_WHILE_EXPRESSION__BODY = eINSTANCE.getXAbstractWhileExpression_Body();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XDoWhileExpressionImpl <em>XDo While Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XDoWhileExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXDoWhileExpression()
+		 * @generated
+		 */
+		EClass XDO_WHILE_EXPRESSION = eINSTANCE.getXDoWhileExpression();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XWhileExpressionImpl <em>XWhile Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1790,22 +1920,6 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EClass XWHILE_EXPRESSION = eINSTANCE.getXWhileExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Predicate</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XWHILE_EXPRESSION__PREDICATE = eINSTANCE.getXWhileExpression_Predicate();
-
-		/**
-		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XWHILE_EXPRESSION__BODY = eINSTANCE.getXWhileExpression_Body();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XTypeLiteralImpl <em>XType Literal</em>}' class.
