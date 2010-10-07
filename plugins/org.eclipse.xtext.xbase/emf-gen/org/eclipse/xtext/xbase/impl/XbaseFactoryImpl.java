@@ -84,6 +84,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 			case XbasePackage.XASSIGNMENT: return createXAssignment();
 			case XbasePackage.XBINARY_OPERATION: return createXBinaryOperation();
 			case XbasePackage.XUNARY_OPERATION: return createXUnaryOperation();
+			case XbasePackage.XFOR_LOOP_EXPRESSION: return createXForLoopExpression();
 			case XbasePackage.XDO_WHILE_EXPRESSION: return createXDoWhileExpression();
 			case XbasePackage.XWHILE_EXPRESSION: return createXWhileExpression();
 			case XbasePackage.XTYPE_LITERAL: return createXTypeLiteral();
@@ -281,6 +282,17 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	{
 		XUnaryOperationImpl xUnaryOperation = new XUnaryOperationImpl();
 		return xUnaryOperation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XForLoopExpression createXForLoopExpression()
+	{
+		XForLoopExpressionImpl xForLoopExpression = new XForLoopExpressionImpl();
+		return xForLoopExpression;
 	}
 
 	/**

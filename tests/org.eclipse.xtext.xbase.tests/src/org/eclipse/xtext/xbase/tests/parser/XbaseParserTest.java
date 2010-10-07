@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
@@ -319,6 +320,22 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals(3, cc.getParams().size());
 		for (int i = 0; i < 3; i++)
 			assertEquals(i, ((XIntLiteral) cc.getParams().get(i)).getValue());
+	}
+	
+	public void testForLoopExpression() throws Exception {
+		XForLoopExpression forExp = (XForLoopExpression) expression("for(s : foo) bar");
+		assertFeatureCall("foo",forExp.getForExpression());
+		assertEquals("s",forExp.getDeclaredParam().getName());
+		assertNull(forExp.getDeclaredParam().getParameterType());
+		assertFeatureCall("bar",forExp.getEachExpression());
+	}
+	
+	public void testForLoopExpression_1() throws Exception {
+		XForLoopExpression forExp = (XForLoopExpression) expression("for(java.lang.String s : foo) bar");
+		assertFeatureCall("foo",forExp.getForExpression());
+		assertEquals("s",forExp.getDeclaredParam().getName());
+		assertEquals("java.lang.String", forExp.getDeclaredParam().getParameterType().getCanonicalName());
+		assertFeatureCall("bar",forExp.getEachExpression());
 	}
 
 	public void testWhileExpression() throws Exception {

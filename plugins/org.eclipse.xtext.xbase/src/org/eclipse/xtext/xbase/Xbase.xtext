@@ -91,6 +91,7 @@ XPrimaryExpression returns XExpression:
 	XSwitchExpression |
 	XSimpleFeatureCall |
 	XIfExpression |
+	XForLoopExpression |
 	XWhileExpression |
 	XDoWhileExpression |
 	XCastedExpression|
@@ -124,6 +125,10 @@ XCasePart:
 	typeGuard=JvmTypeReference? ('case' case=XExpression)? ':' (
 		then=XExpression ';' |
 		then=XBlockExpression);
+
+XForLoopExpression :
+	'for' '(' declaredParam=JvmFormalParameter ':' forExpression=XExpression ')'
+		eachExpression=XExpression;
 
 XWhileExpression:
 	'while' '(' predicate=XExpression ')'

@@ -676,8 +676,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 	//XPrimaryExpression returns XExpression:
 	//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall |
-	//	XBlockExpression | XSwitchExpression | XSimpleFeatureCall | XIfExpression | XWhileExpression | XDoWhileExpression |
-	//	XCastedExpression | XThrowExpression | XTryCatchFinallyExpression | XParenthesizedExpression;
+	//	XBlockExpression | XSwitchExpression | XSimpleFeatureCall | XIfExpression | XForLoopExpression | XWhileExpression |
+	//	XDoWhileExpression | XCastedExpression | XThrowExpression | XTryCatchFinallyExpression | XParenthesizedExpression;
 	public XbaseGrammarAccess.XPrimaryExpressionElements getXPrimaryExpressionAccess() {
 		return gaXbase.getXPrimaryExpressionAccess();
 	}
@@ -745,6 +745,16 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getXCasePartRule() {
 		return getXCasePartAccess().getRule();
+	}
+
+	//XForLoopExpression:
+	//	"for" "(" declaredParam=JvmFormalParameter ":" forExpression=XExpression ")" eachExpression=XExpression;
+	public XbaseGrammarAccess.XForLoopExpressionElements getXForLoopExpressionAccess() {
+		return gaXbase.getXForLoopExpressionAccess();
+	}
+	
+	public ParserRule getXForLoopExpressionRule() {
+		return getXForLoopExpressionAccess().getRule();
 	}
 
 	//XWhileExpression:

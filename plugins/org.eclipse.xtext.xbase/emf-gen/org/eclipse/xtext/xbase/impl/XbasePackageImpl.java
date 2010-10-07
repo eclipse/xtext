@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
@@ -180,6 +181,13 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * @generated
 	 */
 	private EClass xUnaryOperationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xForLoopExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -763,6 +771,46 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getXForLoopExpression()
+	{
+		return xForLoopExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXForLoopExpression_ForExpression()
+	{
+		return (EReference)xForLoopExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXForLoopExpression_EachExpression()
+	{
+		return (EReference)xForLoopExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXForLoopExpression_DeclaredParam()
+	{
+		return (EReference)xForLoopExpressionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXAbstractWhileExpression()
 	{
 		return xAbstractWhileExpressionEClass;
@@ -1041,6 +1089,11 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 
 		xUnaryOperationEClass = createEClass(XUNARY_OPERATION);
 
+		xForLoopExpressionEClass = createEClass(XFOR_LOOP_EXPRESSION);
+		createEReference(xForLoopExpressionEClass, XFOR_LOOP_EXPRESSION__FOR_EXPRESSION);
+		createEReference(xForLoopExpressionEClass, XFOR_LOOP_EXPRESSION__EACH_EXPRESSION);
+		createEReference(xForLoopExpressionEClass, XFOR_LOOP_EXPRESSION__DECLARED_PARAM);
+
 		xAbstractWhileExpressionEClass = createEClass(XABSTRACT_WHILE_EXPRESSION);
 		createEReference(xAbstractWhileExpressionEClass, XABSTRACT_WHILE_EXPRESSION__PREDICATE);
 		createEReference(xAbstractWhileExpressionEClass, XABSTRACT_WHILE_EXPRESSION__BODY);
@@ -1117,6 +1170,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xAssignmentEClass.getESuperTypes().add(this.getXExpression());
 		xBinaryOperationEClass.getESuperTypes().add(this.getXMemberFeatureCall());
 		xUnaryOperationEClass.getESuperTypes().add(this.getXMemberFeatureCall());
+		xForLoopExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xAbstractWhileExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xDoWhileExpressionEClass.getESuperTypes().add(this.getXAbstractWhileExpression());
 		xWhileExpressionEClass.getESuperTypes().add(this.getXAbstractWhileExpression());
@@ -1190,6 +1244,11 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEClass(xBinaryOperationEClass, XBinaryOperation.class, "XBinaryOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(xUnaryOperationEClass, XUnaryOperation.class, "XUnaryOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(xForLoopExpressionEClass, XForLoopExpression.class, "XForLoopExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXForLoopExpression_ForExpression(), this.getXExpression(), null, "forExpression", null, 0, 1, XForLoopExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXForLoopExpression_EachExpression(), this.getXExpression(), null, "eachExpression", null, 0, 1, XForLoopExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXForLoopExpression_DeclaredParam(), theTypesPackage.getJvmFormalParameter(), null, "declaredParam", null, 0, 1, XForLoopExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xAbstractWhileExpressionEClass, XAbstractWhileExpression.class, "XAbstractWhileExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXAbstractWhileExpression_Predicate(), this.getXExpression(), null, "predicate", null, 0, 1, XAbstractWhileExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -92,6 +92,7 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXCasePartAccess().getGroup(), "rule__XCasePart__Group__0");
 					put(grammarAccess.getXCasePartAccess().getGroup_1(), "rule__XCasePart__Group_1__0");
 					put(grammarAccess.getXCasePartAccess().getGroup_3_0(), "rule__XCasePart__Group_3_0__0");
+					put(grammarAccess.getXForLoopExpressionAccess().getGroup(), "rule__XForLoopExpression__Group__0");
 					put(grammarAccess.getXWhileExpressionAccess().getGroup(), "rule__XWhileExpression__Group__0");
 					put(grammarAccess.getXDoWhileExpressionAccess().getGroup(), "rule__XDoWhileExpression__Group__0");
 					put(grammarAccess.getXBlockExpressionAccess().getGroup(), "rule__XBlockExpression__Group__0");
@@ -164,6 +165,9 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXCasePartAccess().getCaseAssignment_1_1(), "rule__XCasePart__CaseAssignment_1_1");
 					put(grammarAccess.getXCasePartAccess().getThenAssignment_3_0_0(), "rule__XCasePart__ThenAssignment_3_0_0");
 					put(grammarAccess.getXCasePartAccess().getThenAssignment_3_1(), "rule__XCasePart__ThenAssignment_3_1");
+					put(grammarAccess.getXForLoopExpressionAccess().getDeclaredParamAssignment_2(), "rule__XForLoopExpression__DeclaredParamAssignment_2");
+					put(grammarAccess.getXForLoopExpressionAccess().getForExpressionAssignment_4(), "rule__XForLoopExpression__ForExpressionAssignment_4");
+					put(grammarAccess.getXForLoopExpressionAccess().getEachExpressionAssignment_6(), "rule__XForLoopExpression__EachExpressionAssignment_6");
 					put(grammarAccess.getXWhileExpressionAccess().getPredicateAssignment_2(), "rule__XWhileExpression__PredicateAssignment_2");
 					put(grammarAccess.getXWhileExpressionAccess().getBodyAssignment_4(), "rule__XWhileExpression__BodyAssignment_4");
 					put(grammarAccess.getXDoWhileExpressionAccess().getBodyAssignment_1(), "rule__XDoWhileExpression__BodyAssignment_1");

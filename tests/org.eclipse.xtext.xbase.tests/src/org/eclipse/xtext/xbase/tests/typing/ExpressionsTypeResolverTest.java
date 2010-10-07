@@ -49,19 +49,21 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testConstructorCall() throws Exception {
-		assertResolvedReturnType("java.util.ArrayList", "new java.util.ArrayList");
-		assertResolvedReturnType("java.util.ArrayList<java.lang.String>", "new java.util.ArrayList<java.lang.String>");
-		assertResolvedReturnType("java.util.ArrayList<java.lang.String,java.lang.Boolean>", "new java.util.ArrayList<java.lang.String, java.lang.Boolean>");
-		assertResolvedReturnType("java.util.ArrayList<? extends java.lang.String,? super java.lang.Boolean>", "new java.util.ArrayList<? extends java.lang.String, ? super java.lang.Boolean>");
+		assertResolvedReturnType("java.util.ArrayList", "new java.util.ArrayList()");
+		assertResolvedReturnType("java.util.ArrayList<java.lang.String>", 
+								"new java.util.ArrayList<java.lang.String>()");
+		assertResolvedReturnType("java.util.HashMap<java.lang.String,java.lang.Boolean>", 
+								"new java.util.HashMap<java.lang.String, java.lang.Boolean>()");
+		assertResolvedReturnType("java.util.HashMap<? extends java.lang.String,? super java.lang.Boolean>", 
+							"new java.util.HashMap<? extends java.lang.String, ? super java.lang.Boolean>()");
 	}
-	
 	
 	public void testBlockExpression() throws Exception {
 		assertResolvedReturnType(ExpressionsTypeResolver.INTEGER_TYPE_NAME, "{true;4;}");
 	}
 	
 	public void testSwitchExpression() throws Exception {
-		assertResolvedReturnType(ExpressionsTypeResolver.STRING_TYPE_NAME,"switch { case true : 's' case false : 'foo' default: 'bar'}");
+		assertResolvedReturnType(ExpressionsTypeResolver.STRING_TYPE_NAME,"switch { case true : 's'; case false : 'foo'; default: 'bar';}");
 //		assertResolvedReturnType(ExpressionsTypeResolver.OBJECT_TYPE_NAME,"switch { case true : 's' case false : new java.lang.Object default: 'bar'}");
 	}
 	

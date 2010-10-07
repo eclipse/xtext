@@ -41,44 +41,45 @@ T41 : ':' ;
 T42 : ';' ;
 T43 : '}' ;
 T44 : 'case' ;
-T45 : 'while' ;
-T46 : 'do' ;
-T47 : 'var' ;
-T48 : 'val' ;
-T49 : 'new' ;
-T50 : 'false' ;
-T51 : 'true' ;
-T52 : 'null' ;
-T53 : 'class' ;
-T54 : 'throw' ;
-T55 : 'try' ;
-T56 : 'finally' ;
-T57 : 'catch' ;
-T58 : '=>' ;
-T59 : '?' ;
-T60 : 'extends' ;
-T61 : '&' ;
-T62 : 'super' ;
+T45 : 'for' ;
+T46 : 'while' ;
+T47 : 'do' ;
+T48 : 'var' ;
+T49 : 'val' ;
+T50 : 'new' ;
+T51 : 'false' ;
+T52 : 'true' ;
+T53 : 'null' ;
+T54 : 'class' ;
+T55 : 'throw' ;
+T56 : 'try' ;
+T57 : 'finally' ;
+T58 : 'catch' ;
+T59 : '=>' ;
+T60 : '?' ;
+T61 : 'extends' ;
+T62 : '&' ;
+T63 : 'super' ;
 
-// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4174
+// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4298
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4176
+// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4300
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4178
+// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4302
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4180
+// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4304
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4182
+// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4306
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4184
+// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4308
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4186
+// $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g" 4310
 RULE_ANY_OTHER : .;
 
 
