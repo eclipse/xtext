@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
+import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
@@ -22,6 +23,8 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XThrowExpression;
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -297,7 +300,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testConstructorCall_0() throws Exception {
-		XConstructorCall cc = (XConstructorCall) expression("new Foo");
+		XConstructorCall cc = (XConstructorCall) expression("new Foo()");
 		assertNotNull(cc.getType());
 		assertEquals(0, cc.getParams().size());
 	}
@@ -345,5 +348,42 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("java.lang.Boolean",expression.getType().getCanonicalName());
 		assertTrue(expression.getExpression() instanceof XBooleanLiteral);
 	}
+	
+	public void testThrowExpression() throws Exception {
+		XThrowExpression throwEx = (XThrowExpression) expression("throw foo");
+		assertFeatureCall("foo", throwEx.getExpression());
+	}
+	
+	public void testTryCatchExpression() throws Exception {
+		XTryCatchFinallyExpression tryEx = (XTryCatchFinallyExpression) expression(
+				"try throw foo catch (java.lang.Exception e) bar finally baz");
+		assertFeatureCall("foo", ((XThrowExpression)tryEx.getExpression()).getExpression());
+		assertFeatureCall("baz", tryEx.getFinallyExpression());
+		
+		assertEquals(1,tryEx.getCatchClauses().size());
+		XCatchClause clause = tryEx.getCatchClauses().get(0);
+		assertFeatureCall("bar", clause.getExpression());
+		assertEquals("java.lang.Exception", clause.getDeclaredParam().getParameterType().getCanonicalName());
+		assertEquals("e", clause.getDeclaredParam().getName());
+	}
+	
+	public void testTryCatchExpression_1() throws Exception {
+		XTryCatchFinallyExpression tryEx = (XTryCatchFinallyExpression) expression(
+		"try foo finally bar");
+		assertFeatureCall("foo", tryEx.getExpression());
+		assertFeatureCall("bar", tryEx.getFinallyExpression());
+	}
 
+	public void testTryCatchExpression_2() throws Exception {
+		XTryCatchFinallyExpression tryEx = (XTryCatchFinallyExpression) expression(
+		"try foo catch (java.lang.Exception e) bar");
+		assertFeatureCall("foo", tryEx.getExpression());
+		assertNull(tryEx.getFinallyExpression());
+		
+		assertEquals(1,tryEx.getCatchClauses().size());
+		XCatchClause clause = tryEx.getCatchClauses().get(0);
+		assertFeatureCall("bar", clause.getExpression());
+		assertEquals("java.lang.Exception", clause.getDeclaredParam().getParameterType().getCanonicalName());
+		assertEquals("e", clause.getDeclaredParam().getName());
+	}
 }

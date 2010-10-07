@@ -94,6 +94,8 @@ XPrimaryExpression returns XExpression:
 	XWhileExpression |
 	XDoWhileExpression |
 	XCastedExpression|
+	XThrowExpression |
+	XTryCatchFinallyExpression |
 	XParenthesizedExpression;
 
 XClosure returns XExpression:
@@ -166,6 +168,18 @@ XStringLiteral:
 
 XTypeLiteral:
 	type=[types::JvmType|QualifiedName] '.' 'class';
+	
+XThrowExpression:
+	'throw' expression=XExpression;
+	
+XTryCatchFinallyExpression:
+	'try' 
+		expression=XExpression
+	(catchClauses+=XCatchClause)*
+	('finally' finallyExpression=XExpression)?;
+	
+XCatchClause :
+	'catch' '(' declaredParam=JvmFormalParameter ')' expression=XExpression;
 
 
 	
