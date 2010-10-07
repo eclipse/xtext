@@ -113,11 +113,15 @@ XIfExpression:
 XSwitchExpression:
 	'switch' switch=XExpression? '{'
 	(cases+=XCasePart)+
-	('default' ':' default=XExpression)?
+	('default' ':' (
+		default=XExpression ';' |
+		default=XBlockExpression))?
 	'}';
 
 XCasePart:
-	'case' case=XExpression ':' then=XExpression;
+	typeGuard=JvmTypeReference? ('case' case=XExpression)? ':' (
+		then=XExpression ';' |
+		then=XBlockExpression);
 
 XWhileExpression:
 	'while' '(' predicate=XExpression ')'
