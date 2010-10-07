@@ -95,6 +95,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		editor.close(false);
+		outlineView.getSite().getPage().hideView(outlineView);
 	}
 
 	@Override

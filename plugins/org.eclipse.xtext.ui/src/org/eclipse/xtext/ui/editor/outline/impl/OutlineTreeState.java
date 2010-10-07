@@ -46,12 +46,14 @@ public class OutlineTreeState {
 		final Set<IOutlineNode> expandedNodes = Sets.newHashSet();
 		DisplayRunHelper.runSyncInDisplayThread(new Runnable() {
 			public void run() {
-				Object[] expandedElements = treeViewer.getExpandedElements();
-				for (Object expandedElement : expandedElements) {
-					if (!(expandedElement instanceof IOutlineNode))
-						LOG.error("Content outline contains illegal node " + expandedElement);
-					else
-						expandedNodes.add((IOutlineNode) expandedElement);
+				if (!treeViewer.getTree().isDisposed()) {
+					Object[] expandedElements = treeViewer.getExpandedElements();
+					for (Object expandedElement : expandedElements) {
+						if (!(expandedElement instanceof IOutlineNode))
+							LOG.error("Content outline contains illegal node " + expandedElement);
+						else
+							expandedNodes.add((IOutlineNode) expandedElement);
+					}
 				}
 			}
 		});
