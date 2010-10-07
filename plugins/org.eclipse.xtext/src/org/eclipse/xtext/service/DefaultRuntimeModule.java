@@ -106,7 +106,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return DefaultNodeModelFormatter.class;
 	}
 
-	public Class<? extends Serializer> bindSerializerUtil() {
+	public Class<? extends Serializer> bindSerializer() {
 		return Serializer.class;
 	}
 
