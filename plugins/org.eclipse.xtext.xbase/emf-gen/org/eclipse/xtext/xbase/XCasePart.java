@@ -7,6 +7,8 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>XCase Part</b></em>'.
@@ -17,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XCasePart#getCase <em>Case</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XCasePart#getThen <em>Then</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XCasePart#getTypeGuard <em>Type Guard</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +80,31 @@ public interface XCasePart extends EObject
 	 * @generated
 	 */
 	void setThen(XExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Type Guard</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Guard</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Guard</em>' containment reference.
+	 * @see #setTypeGuard(JvmTypeReference)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXCasePart_TypeGuard()
+	 * @model containment="true"
+	 * @generated
+	 */
+	JvmTypeReference getTypeGuard();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XCasePart#getTypeGuard <em>Type Guard</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type Guard</em>' containment reference.
+	 * @see #getTypeGuard()
+	 * @generated
+	 */
+	void setTypeGuard(JvmTypeReference value);
 
 } // XCasePart

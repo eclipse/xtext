@@ -219,7 +219,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testSwitch_0() throws Exception {
-		XSwitchExpression se = (XSwitchExpression) expression("switch { case 1==0 : '1' }");
+		XSwitchExpression se = (XSwitchExpression) expression("switch { case 1==0 : '1'; }");
 		assertNull(se.getDefault());
 		assertEquals(1, se.getCases().size());
 		assertNull(se.getSwitch());
@@ -229,7 +229,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testSwitch_1() throws Exception {
-		XSwitchExpression se = (XSwitchExpression) expression("switch number{case 1:'1'case 2:'2'default:'3'}");
+		XSwitchExpression se = (XSwitchExpression) expression("switch number{case 1:'1'; case 2:'2'; default:'3';}");
 		assertTrue(se.getDefault() instanceof XStringLiteral);
 		assertEquals(2, se.getCases().size());
 		assertTrue(se.getSwitch() instanceof XFeatureCall);
@@ -241,6 +241,22 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		XCasePart case2 = se.getCases().get(1);
 		assertEquals(2, ((XIntLiteral) case2.getCase()).getValue());
 		assertTrue(case2.getThen() instanceof XStringLiteral);
+	}
+	
+	public void testSwitch_2() throws Exception {
+		XSwitchExpression se = (XSwitchExpression) expression("switch foo{ java.lang.String case foo.length(): bar; java.lang.String : {baz;}}");
+		assertEquals(2,se.getCases().size());
+		assertNull(se.getDefault());
+		XCasePart c1 = se.getCases().get(0);
+		assertEquals("java.lang.String",c1.getTypeGuard().getCanonicalName());
+		assertFeatureCall("length",c1.getCase());
+		assertFeatureCall("foo",((XFeatureCall)c1.getCase()).getParams().get(0));
+		assertFeatureCall("bar",c1.getThen());
+		
+		XCasePart c2 = se.getCases().get(1);
+		assertEquals("java.lang.String",c2.getTypeGuard().getCanonicalName());
+		assertNull(c2.getCase());
+		assertFeatureCall("baz",((XBlockExpression)c2.getThen()).getExpressions().get(0));
 	}
 
 	public void testBlockExpression_0() throws Exception {

@@ -4383,11 +4383,13 @@ protected class XIfExpression_ElseAssignment_5_1 extends AssignmentToken  {
 /************ begin Rule XSwitchExpression ****************
  *
  * XSwitchExpression:
- * 	"switch" switch=XExpression? "{" cases+=XCasePart+ ("default" ":" default=XExpression)? "}";
+ * 	"switch" switch=XExpression? "{" cases+=XCasePart+ ("default" ":" (default=XExpression ";" |
+ * 	default=XBlockExpression))? "}";
  *
  **/
 
-// "switch" switch=XExpression? "{" cases+=XCasePart+ ("default" ":" default=XExpression)? "}"
+// "switch" switch=XExpression? "{" cases+=XCasePart+ ("default" ":" (default=XExpression ";" | default=XBlockExpression))?
+// "}"
 protected class XSwitchExpression_Group extends GroupToken {
 	
 	public XSwitchExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4553,7 +4555,7 @@ protected class XSwitchExpression_CasesAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// ("default" ":" default=XExpression)?
+// ("default" ":" (default=XExpression ";" | default=XBlockExpression))?
 protected class XSwitchExpression_Group_4 extends GroupToken {
 	
 	public XSwitchExpression_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4568,7 +4570,7 @@ protected class XSwitchExpression_Group_4 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XSwitchExpression_DefaultAssignment_4_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XSwitchExpression_Alternatives_4_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4619,16 +4621,61 @@ protected class XSwitchExpression_ColonKeyword_4_1 extends KeywordToken  {
 
 }
 
-// default=XExpression
-protected class XSwitchExpression_DefaultAssignment_4_2 extends AssignmentToken  {
+// default=XExpression ";" | default=XBlockExpression
+protected class XSwitchExpression_Alternatives_4_2 extends AlternativesToken {
+
+	public XSwitchExpression_Alternatives_4_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public XSwitchExpression_DefaultAssignment_4_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getXSwitchExpressionAccess().getAlternatives_4_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XSwitchExpression_Group_4_2_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XSwitchExpression_DefaultAssignment_4_2_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// default=XExpression ";"
+protected class XSwitchExpression_Group_4_2_0 extends GroupToken {
+	
+	public XSwitchExpression_Group_4_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXSwitchExpressionAccess().getGroup_4_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XSwitchExpression_SemicolonKeyword_4_2_0_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// default=XExpression
+protected class XSwitchExpression_DefaultAssignment_4_2_0_0 extends AssignmentToken  {
+	
+	public XSwitchExpression_DefaultAssignment_4_2_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_4_2();
+		return grammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_4_2_0_0();
 	}
 
     @Override
@@ -4641,13 +4688,13 @@ protected class XSwitchExpression_DefaultAssignment_4_2 extends AssignmentToken 
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("default",false)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("default",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("default");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXSwitchExpressionAccess().getDefaultXExpressionParserRuleCall_4_2_0(); 
+				element = grammarAccess.getXSwitchExpressionAccess().getDefaultXExpressionParserRuleCall_4_2_0_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4664,6 +4711,76 @@ protected class XSwitchExpression_DefaultAssignment_4_2 extends AssignmentToken 
 		}	
 	}	
 }
+
+// ";"
+protected class XSwitchExpression_SemicolonKeyword_4_2_0_1 extends KeywordToken  {
+	
+	public XSwitchExpression_SemicolonKeyword_4_2_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getXSwitchExpressionAccess().getSemicolonKeyword_4_2_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XSwitchExpression_DefaultAssignment_4_2_0_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+// default=XBlockExpression
+protected class XSwitchExpression_DefaultAssignment_4_2_1 extends AssignmentToken  {
+	
+	public XSwitchExpression_DefaultAssignment_4_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_4_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XBlockExpression_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("default",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("default");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getXBlockExpressionRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getXSwitchExpressionAccess().getDefaultXBlockExpressionParserRuleCall_4_2_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new XSwitchExpression_ColonKeyword_4_1(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
 
 
 // "}"
@@ -4696,11 +4813,11 @@ protected class XSwitchExpression_RightCurlyBracketKeyword_5 extends KeywordToke
 /************ begin Rule XCasePart ****************
  *
  * XCasePart:
- * 	"case" case=XExpression ":" then=XExpression;
+ * 	typeGuard=JvmTypeReference? ("case" case=XExpression)? ":" (then=XExpression ";" | then=XBlockExpression);
  *
  **/
 
-// "case" case=XExpression ":" then=XExpression
+// typeGuard=JvmTypeReference? ("case" case=XExpression)? ":" (then=XExpression ";" | then=XBlockExpression)
 protected class XCasePart_Group extends GroupToken {
 	
 	public XCasePart_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4715,7 +4832,7 @@ protected class XCasePart_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XCasePart_ThenAssignment_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XCasePart_Alternatives_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4729,37 +4846,105 @@ protected class XCasePart_Group extends GroupToken {
 
 }
 
-// "case"
-protected class XCasePart_CaseKeyword_0 extends KeywordToken  {
+// typeGuard=JvmTypeReference?
+protected class XCasePart_TypeGuardAssignment_0 extends AssignmentToken  {
 	
-	public XCasePart_CaseKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XCasePart_TypeGuardAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getXCasePartAccess().getCaseKeyword_0();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXCasePartAccess().getTypeGuardAssignment_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+			case 0: return new JvmTypeReference_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("typeGuard",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("typeGuard");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getXCasePartAccess().getTypeGuardJvmTypeReferenceParserRuleCall_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// ("case" case=XExpression)?
+protected class XCasePart_Group_1 extends GroupToken {
+	
+	public XCasePart_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXCasePartAccess().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XCasePart_CaseAssignment_1_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "case"
+protected class XCasePart_CaseKeyword_1_0 extends KeywordToken  {
+	
+	public XCasePart_CaseKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getXCasePartAccess().getCaseKeyword_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XCasePart_TypeGuardAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 1, inst);
 		}	
 	}
 
 }
 
 // case=XExpression
-protected class XCasePart_CaseAssignment_1 extends AssignmentToken  {
+protected class XCasePart_CaseAssignment_1_1 extends AssignmentToken  {
 	
-	public XCasePart_CaseAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XCasePart_CaseAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXCasePartAccess().getCaseAssignment_1();
+		return grammarAccess.getXCasePartAccess().getCaseAssignment_1_1();
 	}
 
     @Override
@@ -4772,13 +4957,13 @@ protected class XCasePart_CaseAssignment_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("case",true)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("case",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("case");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXCasePartAccess().getCaseXExpressionParserRuleCall_1_0(); 
+				element = grammarAccess.getXCasePartAccess().getCaseXExpressionParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4790,11 +4975,12 @@ protected class XCasePart_CaseAssignment_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new XCasePart_CaseKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new XCasePart_CaseKeyword_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
+
 
 // ":"
 protected class XCasePart_ColonKeyword_2 extends KeywordToken  {
@@ -4811,7 +4997,53 @@ protected class XCasePart_ColonKeyword_2 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XCasePart_CaseAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XCasePart_Group_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XCasePart_TypeGuardAssignment_0(lastRuleCallOrigin, this, 1, inst);
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index - 2, inst);
+		}	
+	}
+
+}
+
+// then=XExpression ";" | then=XBlockExpression
+protected class XCasePart_Alternatives_3 extends AlternativesToken {
+
+	public XCasePart_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getXCasePartAccess().getAlternatives_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XCasePart_Group_3_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XCasePart_ThenAssignment_3_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// then=XExpression ";"
+protected class XCasePart_Group_3_0 extends GroupToken {
+	
+	public XCasePart_Group_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXCasePartAccess().getGroup_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XCasePart_SemicolonKeyword_3_0_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4819,15 +5051,15 @@ protected class XCasePart_ColonKeyword_2 extends KeywordToken  {
 }
 
 // then=XExpression
-protected class XCasePart_ThenAssignment_3 extends AssignmentToken  {
+protected class XCasePart_ThenAssignment_3_0_0 extends AssignmentToken  {
 	
-	public XCasePart_ThenAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XCasePart_ThenAssignment_3_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXCasePartAccess().getThenAssignment_3();
+		return grammarAccess.getXCasePartAccess().getThenAssignment_3_0_0();
 	}
 
     @Override
@@ -4846,7 +5078,7 @@ protected class XCasePart_ThenAssignment_3 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXCasePartAccess().getThenXExpressionParserRuleCall_3_0(); 
+				element = grammarAccess.getXCasePartAccess().getThenXExpressionParserRuleCall_3_0_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4863,6 +5095,76 @@ protected class XCasePart_ThenAssignment_3 extends AssignmentToken  {
 		}	
 	}	
 }
+
+// ";"
+protected class XCasePart_SemicolonKeyword_3_0_1 extends KeywordToken  {
+	
+	public XCasePart_SemicolonKeyword_3_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getXCasePartAccess().getSemicolonKeyword_3_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XCasePart_ThenAssignment_3_0_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+// then=XBlockExpression
+protected class XCasePart_ThenAssignment_3_1 extends AssignmentToken  {
+	
+	public XCasePart_ThenAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXCasePartAccess().getThenAssignment_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XBlockExpression_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("then",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("then");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getXBlockExpressionRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getXCasePartAccess().getThenXBlockExpressionParserRuleCall_3_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new XCasePart_ColonKeyword_2(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
 
 
 /************ end Rule XCasePart ****************/

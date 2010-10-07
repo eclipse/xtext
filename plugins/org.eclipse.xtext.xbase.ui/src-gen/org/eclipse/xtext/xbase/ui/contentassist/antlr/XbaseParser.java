@@ -47,6 +47,8 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXUnaryOperationAccess().getAlternatives(), "rule__XUnaryOperation__Alternatives");
 					put(grammarAccess.getOpUnaryAccess().getAlternatives(), "rule__OpUnary__Alternatives");
 					put(grammarAccess.getXPrimaryExpressionAccess().getAlternatives(), "rule__XPrimaryExpression__Alternatives");
+					put(grammarAccess.getXSwitchExpressionAccess().getAlternatives_4_2(), "rule__XSwitchExpression__Alternatives_4_2");
+					put(grammarAccess.getXCasePartAccess().getAlternatives_3(), "rule__XCasePart__Alternatives_3");
 					put(grammarAccess.getXExpressionInsideBlockAccess().getAlternatives(), "rule__XExpressionInsideBlock__Alternatives");
 					put(grammarAccess.getXVariableDeclarationAccess().getAlternatives_0(), "rule__XVariableDeclaration__Alternatives_0");
 					put(grammarAccess.getXBooleanLiteralAccess().getAlternatives(), "rule__XBooleanLiteral__Alternatives");
@@ -86,7 +88,10 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXIfExpressionAccess().getGroup_5(), "rule__XIfExpression__Group_5__0");
 					put(grammarAccess.getXSwitchExpressionAccess().getGroup(), "rule__XSwitchExpression__Group__0");
 					put(grammarAccess.getXSwitchExpressionAccess().getGroup_4(), "rule__XSwitchExpression__Group_4__0");
+					put(grammarAccess.getXSwitchExpressionAccess().getGroup_4_2_0(), "rule__XSwitchExpression__Group_4_2_0__0");
 					put(grammarAccess.getXCasePartAccess().getGroup(), "rule__XCasePart__Group__0");
+					put(grammarAccess.getXCasePartAccess().getGroup_1(), "rule__XCasePart__Group_1__0");
+					put(grammarAccess.getXCasePartAccess().getGroup_3_0(), "rule__XCasePart__Group_3_0__0");
 					put(grammarAccess.getXWhileExpressionAccess().getGroup(), "rule__XWhileExpression__Group__0");
 					put(grammarAccess.getXDoWhileExpressionAccess().getGroup(), "rule__XDoWhileExpression__Group__0");
 					put(grammarAccess.getXBlockExpressionAccess().getGroup(), "rule__XBlockExpression__Group__0");
@@ -149,9 +154,12 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXIfExpressionAccess().getElseAssignment_5_1(), "rule__XIfExpression__ElseAssignment_5_1");
 					put(grammarAccess.getXSwitchExpressionAccess().getSwitchAssignment_1(), "rule__XSwitchExpression__SwitchAssignment_1");
 					put(grammarAccess.getXSwitchExpressionAccess().getCasesAssignment_3(), "rule__XSwitchExpression__CasesAssignment_3");
-					put(grammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_4_2(), "rule__XSwitchExpression__DefaultAssignment_4_2");
-					put(grammarAccess.getXCasePartAccess().getCaseAssignment_1(), "rule__XCasePart__CaseAssignment_1");
-					put(grammarAccess.getXCasePartAccess().getThenAssignment_3(), "rule__XCasePart__ThenAssignment_3");
+					put(grammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_4_2_0_0(), "rule__XSwitchExpression__DefaultAssignment_4_2_0_0");
+					put(grammarAccess.getXSwitchExpressionAccess().getDefaultAssignment_4_2_1(), "rule__XSwitchExpression__DefaultAssignment_4_2_1");
+					put(grammarAccess.getXCasePartAccess().getTypeGuardAssignment_0(), "rule__XCasePart__TypeGuardAssignment_0");
+					put(grammarAccess.getXCasePartAccess().getCaseAssignment_1_1(), "rule__XCasePart__CaseAssignment_1_1");
+					put(grammarAccess.getXCasePartAccess().getThenAssignment_3_0_0(), "rule__XCasePart__ThenAssignment_3_0_0");
+					put(grammarAccess.getXCasePartAccess().getThenAssignment_3_1(), "rule__XCasePart__ThenAssignment_3_1");
 					put(grammarAccess.getXWhileExpressionAccess().getPredicateAssignment_2(), "rule__XWhileExpression__PredicateAssignment_2");
 					put(grammarAccess.getXWhileExpressionAccess().getBodyAssignment_4(), "rule__XWhileExpression__BodyAssignment_4");
 					put(grammarAccess.getXDoWhileExpressionAccess().getBodyAssignment_1(), "rule__XDoWhileExpression__BodyAssignment_1");

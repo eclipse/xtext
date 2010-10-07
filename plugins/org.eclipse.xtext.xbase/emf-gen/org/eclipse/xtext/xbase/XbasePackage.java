@@ -199,13 +199,22 @@ public interface XbasePackage extends EPackage
 	int XCASE_PART__THEN = 1;
 
 	/**
+	 * The feature id for the '<em><b>Type Guard</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCASE_PART__TYPE_GUARD = 2;
+
+	/**
 	 * The number of structural features of the '<em>XCase Part</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCASE_PART_FEATURE_COUNT = 2;
+	int XCASE_PART_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBlockExpressionImpl <em>XBlock Expression</em>}' class.
@@ -1022,6 +1031,17 @@ public interface XbasePackage extends EPackage
 	EReference getXCasePart_Then();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XCasePart#getTypeGuard <em>Type Guard</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type Guard</em>'.
+	 * @see org.eclipse.xtext.xbase.XCasePart#getTypeGuard()
+	 * @see #getXCasePart()
+	 * @generated
+	 */
+	EReference getXCasePart_TypeGuard();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XBlockExpression <em>XBlock Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1590,6 +1610,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XCASE_PART__THEN = eINSTANCE.getXCasePart_Then();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Guard</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCASE_PART__TYPE_GUARD = eINSTANCE.getXCasePart_TypeGuard();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XBlockExpressionImpl <em>XBlock Expression</em>}' class.
