@@ -88,6 +88,9 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 			case XbasePackage.XWHILE_EXPRESSION: return createXWhileExpression();
 			case XbasePackage.XTYPE_LITERAL: return createXTypeLiteral();
 			case XbasePackage.XINSTANCE_OF_EXPRESSION: return createXInstanceOfExpression();
+			case XbasePackage.XTHROW_EXPRESSION: return createXThrowExpression();
+			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION: return createXTryCatchFinallyExpression();
+			case XbasePackage.XCATCH_CLAUSE: return createXCatchClause();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -322,6 +325,39 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	{
 		XInstanceOfExpressionImpl xInstanceOfExpression = new XInstanceOfExpressionImpl();
 		return xInstanceOfExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XThrowExpression createXThrowExpression()
+	{
+		XThrowExpressionImpl xThrowExpression = new XThrowExpressionImpl();
+		return xThrowExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XTryCatchFinallyExpression createXTryCatchFinallyExpression()
+	{
+		XTryCatchFinallyExpressionImpl xTryCatchFinallyExpression = new XTryCatchFinallyExpressionImpl();
+		return xTryCatchFinallyExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XCatchClause createXCatchClause()
+	{
+		XCatchClauseImpl xCatchClause = new XCatchClauseImpl();
+		return xCatchClause;
 	}
 
 	/**

@@ -901,6 +901,117 @@ public interface XbasePackage extends EPackage
 	 */
 	int XINSTANCE_OF_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
 
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XThrowExpressionImpl <em>XThrow Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XThrowExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXThrowExpression()
+	 * @generated
+	 */
+	int XTHROW_EXPRESSION = 23;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTHROW_EXPRESSION__EXPRESSION = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>XThrow Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTHROW_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XTryCatchFinallyExpressionImpl <em>XTry Catch Finally Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XTryCatchFinallyExpressionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXTryCatchFinallyExpression()
+	 * @generated
+	 */
+	int XTRY_CATCH_FINALLY_EXPRESSION = 24;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTRY_CATCH_FINALLY_EXPRESSION__EXPRESSION = XEXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Finally Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION = XEXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Catch Clauses</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>XTry Catch Finally Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTRY_CATCH_FINALLY_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XCatchClauseImpl <em>XCatch Clause</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XCatchClauseImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCatchClause()
+	 * @generated
+	 */
+	int XCATCH_CLAUSE = 25;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCATCH_CLAUSE__EXPRESSION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Declared Param</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCATCH_CLAUSE__DECLARED_PARAM = 1;
+
+	/**
+	 * The number of structural features of the '<em>XCatch Clause</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCATCH_CLAUSE_FEATURE_COUNT = 2;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XExpression <em>XExpression</em>}'.
@@ -1485,6 +1596,102 @@ public interface XbasePackage extends EPackage
 	EReference getXInstanceOfExpression_Expression();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XThrowExpression <em>XThrow Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XThrow Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XThrowExpression
+	 * @generated
+	 */
+	EClass getXThrowExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XThrowExpression#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XThrowExpression#getExpression()
+	 * @see #getXThrowExpression()
+	 * @generated
+	 */
+	EReference getXThrowExpression_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression <em>XTry Catch Finally Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XTry Catch Finally Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XTryCatchFinallyExpression
+	 * @generated
+	 */
+	EClass getXTryCatchFinallyExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getExpression()
+	 * @see #getXTryCatchFinallyExpression()
+	 * @generated
+	 */
+	EReference getXTryCatchFinallyExpression_Expression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getFinallyExpression <em>Finally Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Finally Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getFinallyExpression()
+	 * @see #getXTryCatchFinallyExpression()
+	 * @generated
+	 */
+	EReference getXTryCatchFinallyExpression_FinallyExpression();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getCatchClauses <em>Catch Clauses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Catch Clauses</em>'.
+	 * @see org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getCatchClauses()
+	 * @see #getXTryCatchFinallyExpression()
+	 * @generated
+	 */
+	EReference getXTryCatchFinallyExpression_CatchClauses();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XCatchClause <em>XCatch Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XCatch Clause</em>'.
+	 * @see org.eclipse.xtext.xbase.XCatchClause
+	 * @generated
+	 */
+	EClass getXCatchClause();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XCatchClause#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.xtext.xbase.XCatchClause#getExpression()
+	 * @see #getXCatchClause()
+	 * @generated
+	 */
+	EReference getXCatchClause_Expression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XCatchClause#getDeclaredParam <em>Declared Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Declared Param</em>'.
+	 * @see org.eclipse.xtext.xbase.XCatchClause#getDeclaredParam()
+	 * @see #getXCatchClause()
+	 * @generated
+	 */
+	EReference getXCatchClause_DeclaredParam();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1992,6 +2199,84 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XINSTANCE_OF_EXPRESSION__EXPRESSION = eINSTANCE.getXInstanceOfExpression_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XThrowExpressionImpl <em>XThrow Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XThrowExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXThrowExpression()
+		 * @generated
+		 */
+		EClass XTHROW_EXPRESSION = eINSTANCE.getXThrowExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTHROW_EXPRESSION__EXPRESSION = eINSTANCE.getXThrowExpression_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XTryCatchFinallyExpressionImpl <em>XTry Catch Finally Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XTryCatchFinallyExpressionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXTryCatchFinallyExpression()
+		 * @generated
+		 */
+		EClass XTRY_CATCH_FINALLY_EXPRESSION = eINSTANCE.getXTryCatchFinallyExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTRY_CATCH_FINALLY_EXPRESSION__EXPRESSION = eINSTANCE.getXTryCatchFinallyExpression_Expression();
+
+		/**
+		 * The meta object literal for the '<em><b>Finally Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION = eINSTANCE.getXTryCatchFinallyExpression_FinallyExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Catch Clauses</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES = eINSTANCE.getXTryCatchFinallyExpression_CatchClauses();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XCatchClauseImpl <em>XCatch Clause</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XCatchClauseImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCatchClause()
+		 * @generated
+		 */
+		EClass XCATCH_CLAUSE = eINSTANCE.getXCatchClause();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCATCH_CLAUSE__EXPRESSION = eINSTANCE.getXCatchClause_Expression();
+
+		/**
+		 * The meta object literal for the '<em><b>Declared Param</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCATCH_CLAUSE__DECLARED_PARAM = eINSTANCE.getXCatchClause_DeclaredParam();
 
 	}
 

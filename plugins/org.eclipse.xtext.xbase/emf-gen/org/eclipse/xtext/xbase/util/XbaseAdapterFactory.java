@@ -193,6 +193,21 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 				return createXInstanceOfExpressionAdapter();
 			}
 			@Override
+			public Adapter caseXThrowExpression(XThrowExpression object)
+			{
+				return createXThrowExpressionAdapter();
+			}
+			@Override
+			public Adapter caseXTryCatchFinallyExpression(XTryCatchFinallyExpression object)
+			{
+				return createXTryCatchFinallyExpressionAdapter();
+			}
+			@Override
+			public Adapter caseXCatchClause(XCatchClause object)
+			{
+				return createXCatchClauseAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object)
 			{
 				return createEObjectAdapter();
@@ -555,6 +570,51 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXInstanceOfExpressionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XThrowExpression <em>XThrow Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XThrowExpression
+	 * @generated
+	 */
+	public Adapter createXThrowExpressionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression <em>XTry Catch Finally Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XTryCatchFinallyExpression
+	 * @generated
+	 */
+	public Adapter createXTryCatchFinallyExpressionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XCatchClause <em>XCatch Clause</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XCatchClause
+	 * @generated
+	 */
+	public Adapter createXCatchClauseAdapter()
 	{
 		return null;
 	}

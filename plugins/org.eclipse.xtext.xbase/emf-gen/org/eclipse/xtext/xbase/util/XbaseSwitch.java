@@ -284,6 +284,29 @@ public class XbaseSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XbasePackage.XTHROW_EXPRESSION:
+			{
+				XThrowExpression xThrowExpression = (XThrowExpression)theEObject;
+				T result = caseXThrowExpression(xThrowExpression);
+				if (result == null) result = caseXExpression(xThrowExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XbasePackage.XTRY_CATCH_FINALLY_EXPRESSION:
+			{
+				XTryCatchFinallyExpression xTryCatchFinallyExpression = (XTryCatchFinallyExpression)theEObject;
+				T result = caseXTryCatchFinallyExpression(xTryCatchFinallyExpression);
+				if (result == null) result = caseXExpression(xTryCatchFinallyExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XbasePackage.XCATCH_CLAUSE:
+			{
+				XCatchClause xCatchClause = (XCatchClause)theEObject;
+				T result = caseXCatchClause(xCatchClause);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -652,6 +675,54 @@ public class XbaseSwitch<T>
 	 * @generated
 	 */
 	public T caseXInstanceOfExpression(XInstanceOfExpression object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XThrow Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XThrow Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXThrowExpression(XThrowExpression object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XTry Catch Finally Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XTry Catch Finally Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXTryCatchFinallyExpression(XTryCatchFinallyExpression object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XCatch Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XCatch Clause</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXCatchClause(XCatchClause object)
 	{
 		return null;
 	}

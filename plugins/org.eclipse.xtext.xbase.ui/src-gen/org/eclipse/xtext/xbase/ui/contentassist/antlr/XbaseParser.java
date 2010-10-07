@@ -108,6 +108,10 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXBooleanLiteralAccess().getGroup_0(), "rule__XBooleanLiteral__Group_0__0");
 					put(grammarAccess.getXNullLiteralAccess().getGroup(), "rule__XNullLiteral__Group__0");
 					put(grammarAccess.getXTypeLiteralAccess().getGroup(), "rule__XTypeLiteral__Group__0");
+					put(grammarAccess.getXThrowExpressionAccess().getGroup(), "rule__XThrowExpression__Group__0");
+					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup(), "rule__XTryCatchFinallyExpression__Group__0");
+					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_3(), "rule__XTryCatchFinallyExpression__Group_3__0");
+					put(grammarAccess.getXCatchClauseAccess().getGroup(), "rule__XCatchClause__Group__0");
 					put(grammarAccess.getXFunctionTypeRefAccess().getGroup(), "rule__XFunctionTypeRef__Group__0");
 					put(grammarAccess.getXFunctionTypeRefAccess().getGroup_0(), "rule__XFunctionTypeRef__Group_0__0");
 					put(grammarAccess.getXFunctionTypeRefAccess().getGroup_0_2(), "rule__XFunctionTypeRef__Group_0_2__0");
@@ -180,6 +184,12 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXIntLiteralAccess().getValueAssignment(), "rule__XIntLiteral__ValueAssignment");
 					put(grammarAccess.getXStringLiteralAccess().getValueAssignment(), "rule__XStringLiteral__ValueAssignment");
 					put(grammarAccess.getXTypeLiteralAccess().getTypeAssignment_0(), "rule__XTypeLiteral__TypeAssignment_0");
+					put(grammarAccess.getXThrowExpressionAccess().getExpressionAssignment_1(), "rule__XThrowExpression__ExpressionAssignment_1");
+					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getExpressionAssignment_1(), "rule__XTryCatchFinallyExpression__ExpressionAssignment_1");
+					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesAssignment_2(), "rule__XTryCatchFinallyExpression__CatchClausesAssignment_2");
+					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionAssignment_3_1(), "rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_3_1");
+					put(grammarAccess.getXCatchClauseAccess().getDeclaredParamAssignment_2(), "rule__XCatchClause__DeclaredParamAssignment_2");
+					put(grammarAccess.getXCatchClauseAccess().getExpressionAssignment_4(), "rule__XCatchClause__ExpressionAssignment_4");
 					put(grammarAccess.getXFunctionTypeRefAccess().getParamTypesAssignment_0_1(), "rule__XFunctionTypeRef__ParamTypesAssignment_0_1");
 					put(grammarAccess.getXFunctionTypeRefAccess().getParamTypesAssignment_0_2_1(), "rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1");
 					put(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeAssignment_2(), "rule__XFunctionTypeRef__ReturnTypeAssignment_2");

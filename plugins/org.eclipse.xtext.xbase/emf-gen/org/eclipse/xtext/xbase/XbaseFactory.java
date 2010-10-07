@@ -215,6 +215,33 @@ public interface XbaseFactory extends EFactory
 	XInstanceOfExpression createXInstanceOfExpression();
 
 	/**
+	 * Returns a new object of class '<em>XThrow Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XThrow Expression</em>'.
+	 * @generated
+	 */
+	XThrowExpression createXThrowExpression();
+
+	/**
+	 * Returns a new object of class '<em>XTry Catch Finally Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XTry Catch Finally Expression</em>'.
+	 * @generated
+	 */
+	XTryCatchFinallyExpression createXTryCatchFinallyExpression();
+
+	/**
+	 * Returns a new object of class '<em>XCatch Clause</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XCatch Clause</em>'.
+	 * @generated
+	 */
+	XCatchClause createXCatchClause();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

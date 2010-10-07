@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
+import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
@@ -33,6 +34,8 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XThrowExpression;
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -212,6 +215,27 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * @generated
 	 */
 	private EClass xInstanceOfExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xThrowExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xTryCatchFinallyExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xCatchClauseEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -839,6 +863,96 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getXThrowExpression()
+	{
+		return xThrowExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXThrowExpression_Expression()
+	{
+		return (EReference)xThrowExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getXTryCatchFinallyExpression()
+	{
+		return xTryCatchFinallyExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXTryCatchFinallyExpression_Expression()
+	{
+		return (EReference)xTryCatchFinallyExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXTryCatchFinallyExpression_FinallyExpression()
+	{
+		return (EReference)xTryCatchFinallyExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXTryCatchFinallyExpression_CatchClauses()
+	{
+		return (EReference)xTryCatchFinallyExpressionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getXCatchClause()
+	{
+		return xCatchClauseEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXCatchClause_Expression()
+	{
+		return (EReference)xCatchClauseEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXCatchClause_DeclaredParam()
+	{
+		return (EReference)xCatchClauseEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XbaseFactory getXbaseFactory()
 	{
 		return (XbaseFactory)getEFactoryInstance();
@@ -941,6 +1055,18 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xInstanceOfExpressionEClass = createEClass(XINSTANCE_OF_EXPRESSION);
 		createEReference(xInstanceOfExpressionEClass, XINSTANCE_OF_EXPRESSION__TYPE);
 		createEReference(xInstanceOfExpressionEClass, XINSTANCE_OF_EXPRESSION__EXPRESSION);
+
+		xThrowExpressionEClass = createEClass(XTHROW_EXPRESSION);
+		createEReference(xThrowExpressionEClass, XTHROW_EXPRESSION__EXPRESSION);
+
+		xTryCatchFinallyExpressionEClass = createEClass(XTRY_CATCH_FINALLY_EXPRESSION);
+		createEReference(xTryCatchFinallyExpressionEClass, XTRY_CATCH_FINALLY_EXPRESSION__EXPRESSION);
+		createEReference(xTryCatchFinallyExpressionEClass, XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION);
+		createEReference(xTryCatchFinallyExpressionEClass, XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES);
+
+		xCatchClauseEClass = createEClass(XCATCH_CLAUSE);
+		createEReference(xCatchClauseEClass, XCATCH_CLAUSE__EXPRESSION);
+		createEReference(xCatchClauseEClass, XCATCH_CLAUSE__DECLARED_PARAM);
 	}
 
 	/**
@@ -996,6 +1122,8 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xWhileExpressionEClass.getESuperTypes().add(this.getXAbstractWhileExpression());
 		xTypeLiteralEClass.getESuperTypes().add(this.getXExpression());
 		xInstanceOfExpressionEClass.getESuperTypes().add(this.getXExpression());
+		xThrowExpressionEClass.getESuperTypes().add(this.getXExpression());
+		xTryCatchFinallyExpressionEClass.getESuperTypes().add(this.getXExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xExpressionEClass, XExpression.class, "XExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1077,6 +1205,18 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEClass(xInstanceOfExpressionEClass, XInstanceOfExpression.class, "XInstanceOfExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXInstanceOfExpression_Type(), theTypesPackage.getJvmType(), null, "type", null, 1, 1, XInstanceOfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXInstanceOfExpression_Expression(), this.getXExpression(), null, "expression", null, 1, 1, XInstanceOfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xThrowExpressionEClass, XThrowExpression.class, "XThrowExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXThrowExpression_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XThrowExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xTryCatchFinallyExpressionEClass, XTryCatchFinallyExpression.class, "XTryCatchFinallyExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXTryCatchFinallyExpression_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XTryCatchFinallyExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXTryCatchFinallyExpression_FinallyExpression(), this.getXExpression(), null, "finallyExpression", null, 0, 1, XTryCatchFinallyExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXTryCatchFinallyExpression_CatchClauses(), this.getXCatchClause(), null, "catchClauses", null, 0, -1, XTryCatchFinallyExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xCatchClauseEClass, XCatchClause.class, "XCatchClause", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXCatchClause_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XCatchClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXCatchClause_DeclaredParam(), theTypesPackage.getJvmFormalParameter(), null, "declaredParam", null, 0, 1, XCatchClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -45,6 +45,7 @@ public abstract class AbstractXbaseTestCase extends TestCase {
 		XtextResourceSet set = get(XtextResourceSet.class);
 		Resource resource = set.createResource(URI.createURI("Test.___xbase"));
 		resource.load(new StringInputStream(string), null);
+		assertTrue("Errors"+resource.getErrors(), resource.getErrors().isEmpty());
 		XExpression exp = (XExpression) resource.getContents().get(0);
 		return exp;
 	}
