@@ -9,26 +9,38 @@ package org.eclipse.xtext.xbase.tests;
 
 import java.io.IOException;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+
+import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge
  *
  */
-public abstract class AbstractXbaseTestCase extends AbstractXtextTests {
+public abstract class AbstractXbaseTestCase extends TestCase {
+	
+	static Injector injector = new XbaseStandaloneSetup().createInjectorAndDoEMFRegistration();
 
 	@Override
 	protected void setUp() throws Exception {
-		super.setUp();
-		with(new XbaseStandaloneSetup());
+		getInjector().injectMembers(this);
 	}
-
+	
+	public Injector getInjector() {
+		return injector;
+	}
+	
+	public <T> T get(Class<T> clazz) {
+		return getInjector().getInstance(clazz);
+	}
+	
 	protected XExpression expression(String string) throws IOException {
 		XtextResourceSet set = get(XtextResourceSet.class);
 		Resource resource = set.createResource(URI.createURI("Test.___xbase"));
