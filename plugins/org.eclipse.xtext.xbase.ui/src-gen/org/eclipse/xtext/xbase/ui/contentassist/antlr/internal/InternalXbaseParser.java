@@ -20736,26 +20736,26 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7440:1: ( ruleOpAssign )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXAssignmentAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7441:1: ( ruleOpAssign )
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7442:1: ruleOpAssign
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXAssignmentAccess().getFeatureEObjectOpAssignParserRuleCall_1_1_0_1()); 
+               before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementOpAssignParserRuleCall_1_1_0_1()); 
             }
             pushFollow(FOLLOW_ruleOpAssign_in_rule__XAssignment__FeatureAssignment_1_114973);
             ruleOpAssign();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXAssignmentAccess().getFeatureEObjectOpAssignParserRuleCall_1_1_0_1()); 
+               after(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementOpAssignParserRuleCall_1_1_0_1()); 
             }
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getXAssignmentAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               after(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
 
             }
@@ -20836,26 +20836,26 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7474:1: ( ruleOpOr )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXOrExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               before(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7475:1: ( ruleOpOr )
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7476:1: ruleOpOr
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXOrExpressionAccess().getFeatureEObjectOpOrParserRuleCall_1_1_0_1()); 
+               before(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifyableElementOpOrParserRuleCall_1_1_0_1()); 
             }
             pushFollow(FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_115043);
             ruleOpOr();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXOrExpressionAccess().getFeatureEObjectOpOrParserRuleCall_1_1_0_1()); 
+               after(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifyableElementOpOrParserRuleCall_1_1_0_1()); 
             }
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getXOrExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               after(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
 
             }
@@ -20936,26 +20936,26 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7508:1: ( ruleOpAnd )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXAndExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               before(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7509:1: ( ruleOpAnd )
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7510:1: ruleOpAnd
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXAndExpressionAccess().getFeatureEObjectOpAndParserRuleCall_1_1_0_1()); 
+               before(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifyableElementOpAndParserRuleCall_1_1_0_1()); 
             }
             pushFollow(FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_115113);
             ruleOpAnd();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXAndExpressionAccess().getFeatureEObjectOpAndParserRuleCall_1_1_0_1()); 
+               after(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifyableElementOpAndParserRuleCall_1_1_0_1()); 
             }
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getXAndExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               after(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
 
             }
@@ -21036,26 +21036,26 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7542:1: ( ruleOpEquality )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXEqualityExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               before(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7543:1: ( ruleOpEquality )
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7544:1: ruleOpEquality
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXEqualityExpressionAccess().getFeatureEObjectOpEqualityParserRuleCall_1_1_0_1()); 
+               before(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifyableElementOpEqualityParserRuleCall_1_1_0_1()); 
             }
             pushFollow(FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_115183);
             ruleOpEquality();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXEqualityExpressionAccess().getFeatureEObjectOpEqualityParserRuleCall_1_1_0_1()); 
+               after(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifyableElementOpEqualityParserRuleCall_1_1_0_1()); 
             }
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getXEqualityExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               after(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
 
             }
@@ -21192,26 +21192,26 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7595:1: ( ruleOpCompare )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXRelationalExpressionAccess().getFeatureEObjectCrossReference_1_1_1_0()); 
+               before(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_1_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7596:1: ( ruleOpCompare )
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7597:1: ruleOpCompare
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXRelationalExpressionAccess().getFeatureEObjectOpCompareParserRuleCall_1_1_1_0_1()); 
+               before(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifyableElementOpCompareParserRuleCall_1_1_1_0_1()); 
             }
             pushFollow(FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_115292);
             ruleOpCompare();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXRelationalExpressionAccess().getFeatureEObjectOpCompareParserRuleCall_1_1_1_0_1()); 
+               after(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifyableElementOpCompareParserRuleCall_1_1_1_0_1()); 
             }
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getXRelationalExpressionAccess().getFeatureEObjectCrossReference_1_1_1_0()); 
+               after(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_1_0()); 
             }
 
             }
@@ -21292,26 +21292,26 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7629:1: ( ruleOpOther )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               before(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7630:1: ( ruleOpOther )
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7631:1: ruleOpOther
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureEObjectOpOtherParserRuleCall_1_1_0_1()); 
+               before(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifyableElementOpOtherParserRuleCall_1_1_0_1()); 
             }
             pushFollow(FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_115362);
             ruleOpOther();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureEObjectOpOtherParserRuleCall_1_1_0_1()); 
+               after(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifyableElementOpOtherParserRuleCall_1_1_0_1()); 
             }
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               after(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
 
             }
@@ -21392,26 +21392,26 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7663:1: ( ruleOpAdd )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXAdditiveExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               before(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7664:1: ( ruleOpAdd )
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7665:1: ruleOpAdd
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXAdditiveExpressionAccess().getFeatureEObjectOpAddParserRuleCall_1_1_0_1()); 
+               before(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifyableElementOpAddParserRuleCall_1_1_0_1()); 
             }
             pushFollow(FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_115432);
             ruleOpAdd();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXAdditiveExpressionAccess().getFeatureEObjectOpAddParserRuleCall_1_1_0_1()); 
+               after(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifyableElementOpAddParserRuleCall_1_1_0_1()); 
             }
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getXAdditiveExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               after(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
 
             }
@@ -21492,26 +21492,26 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7697:1: ( ruleOpMulti )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               before(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7698:1: ( ruleOpMulti )
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7699:1: ruleOpMulti
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureEObjectOpMultiParserRuleCall_1_1_0_1()); 
+               before(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifyableElementOpMultiParserRuleCall_1_1_0_1()); 
             }
             pushFollow(FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_115502);
             ruleOpMulti();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureEObjectOpMultiParserRuleCall_1_1_0_1()); 
+               after(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifyableElementOpMultiParserRuleCall_1_1_0_1()); 
             }
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureEObjectCrossReference_1_1_0()); 
+               after(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
 
             }
@@ -21592,26 +21592,26 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7731:1: ( ruleOpUnary )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXUnaryOperationAccess().getFeatureJvmOperationCrossReference_0_1_0()); 
+               before(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifyableElementCrossReference_0_1_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7732:1: ( ruleOpUnary )
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7733:1: ruleOpUnary
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXUnaryOperationAccess().getFeatureJvmOperationOpUnaryParserRuleCall_0_1_0_1()); 
+               before(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifyableElementOpUnaryParserRuleCall_0_1_0_1()); 
             }
             pushFollow(FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_115572);
             ruleOpUnary();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXUnaryOperationAccess().getFeatureJvmOperationOpUnaryParserRuleCall_0_1_0_1()); 
+               after(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifyableElementOpUnaryParserRuleCall_0_1_0_1()); 
             }
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getXUnaryOperationAccess().getFeatureJvmOperationCrossReference_0_1_0()); 
+               after(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifyableElementCrossReference_0_1_0()); 
             }
 
             }
@@ -21692,23 +21692,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7765:1: ( RULE_ID )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXFeatureCallAccess().getFeatureEObjectCrossReference_1_2_0()); 
+               before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_1_2_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7766:1: ( RULE_ID )
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7767:1: RULE_ID
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXFeatureCallAccess().getFeatureEObjectIDTerminalRuleCall_1_2_0_1()); 
+               before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_1_2_0_1()); 
             }
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XFeatureCall__FeatureAssignment_1_215642); if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXFeatureCallAccess().getFeatureEObjectIDTerminalRuleCall_1_2_0_1()); 
+               after(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_1_2_0_1()); 
             }
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getXFeatureCallAccess().getFeatureEObjectCrossReference_1_2_0()); 
+               after(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_1_2_0()); 
             }
 
             }
@@ -22839,23 +22839,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8159:1: ( RULE_ID )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXSimpleFeatureCallAccess().getFeatureEObjectCrossReference_0_0()); 
+               before(grammarAccess.getXSimpleFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_0_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8160:1: ( RULE_ID )
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8161:1: RULE_ID
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXSimpleFeatureCallAccess().getFeatureEObjectIDTerminalRuleCall_0_0_1()); 
+               before(grammarAccess.getXSimpleFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_0_0_1()); 
             }
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XSimpleFeatureCall__FeatureAssignment_016456); if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXSimpleFeatureCallAccess().getFeatureEObjectIDTerminalRuleCall_0_0_1()); 
+               after(grammarAccess.getXSimpleFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_0_0_1()); 
             }
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getXSimpleFeatureCallAccess().getFeatureEObjectCrossReference_0_0()); 
+               after(grammarAccess.getXSimpleFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_0_0()); 
             }
 
             }

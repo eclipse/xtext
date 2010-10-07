@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.parser;
 
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -25,12 +24,37 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 /**
  * @author Sven Efftinge
  *
  */
 public class XbaseParserTest extends AbstractXbaseTestCase {
+	
+	public void testAssignment_RightAssociativity() throws Exception {
+		XBinaryOperation ass = (XBinaryOperation) expression("foo = bar += baz");
+		assertEquals(2,ass.getParams().size());
+		assertEquals("=", ass.getFeatureName());
+		assertEquals("foo", ((XFeatureCall)ass.getParams().get(0)).getFeatureName());
+		ass = (XBinaryOperation) ass.getParams().get(1);
+		assertEquals(2,ass.getParams().size());
+		assertEquals("+=", ass.getFeatureName());
+		assertEquals("bar", ((XFeatureCall)ass.getParams().get(0)).getFeatureName());
+		assertEquals("baz", ((XFeatureCall)ass.getParams().get(1)).getFeatureName());
+	}
+	
+	public void testOrAndAndPrecedence() throws Exception {
+		XBinaryOperation or = (XBinaryOperation) expression("foo && bar || baz");
+		assertEquals(2,or.getParams().size());
+		assertEquals("||", or.getFeatureName());
+		assertEquals("baz", ((XFeatureCall)or.getParams().get(1)).getFeatureName());
+		XBinaryOperation and = (XBinaryOperation) or.getParams().get(0);
+		assertEquals(2,and.getParams().size());
+		assertEquals("&&", and.getFeatureName());
+		assertEquals("foo", ((XFeatureCall)and.getParams().get(0)).getFeatureName());
+		assertEquals("bar", ((XFeatureCall)and.getParams().get(1)).getFeatureName());
+	}
 
 	public void testAddition_1() throws Exception {
 		XBinaryOperation operation = (XBinaryOperation) expression("3 + 4");
@@ -40,7 +64,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 
 	public void testAddition_2() throws Exception {
 		XBinaryOperation operation = (XBinaryOperation) expression("foo + 'bar'");
-//TODO		assertEquals("foo", ((XFeatureCall) operation.getParams().get(0)).getFeatureName());
+		assertEquals("foo", ((XFeatureCall) operation.getParams().get(0)).getFeatureName());
 		assertEquals("bar", ((XStringLiteral) operation.getParams().get(1)).getValue());
 	}
 

@@ -155,7 +155,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XFeatureCall createXFeatureCall()
 	{
-		XFeatureCallImpl xFeatureCall = new XFeatureCallImpl();
+		XFeatureCallImplCustom xFeatureCall = new XFeatureCallImplCustom();
 		return xFeatureCall;
 	}
 

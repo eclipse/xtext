@@ -7,7 +7,7 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,12 +69,12 @@ public interface XFeatureCall extends XExpression
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Feature</em>' reference.
-	 * @see #setFeature(EObject)
+	 * @see #setFeature(JvmIdentifyableElement)
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXFeatureCall_Feature()
 	 * @model
 	 * @generated
 	 */
-	EObject getFeature();
+	JvmIdentifyableElement getFeature();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XFeatureCall#getFeature <em>Feature</em>}' reference.
@@ -84,6 +84,6 @@ public interface XFeatureCall extends XExpression
 	 * @see #getFeature()
 	 * @generated
 	 */
-	void setFeature(EObject value);
+	void setFeature(JvmIdentifyableElement value);
 
 } // XFeatureCall

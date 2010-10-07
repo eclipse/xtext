@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *
  * @generated
  */
-public class XMemberFeatureCallImpl extends XFeatureCallImpl implements XMemberFeatureCall
+public class XMemberFeatureCallImpl extends XFeatureCallImplCustom implements XMemberFeatureCall
 {
 	/**
 	 * <!-- begin-user-doc -->

@@ -13,13 +13,14 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -80,7 +81,7 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 	 * @generated
 	 * @ordered
 	 */
-	protected EObject feature;
+	protected JvmIdentifyableElement feature;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,12 +133,12 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject getFeature()
+	public JvmIdentifyableElement getFeature()
 	{
 		if (feature != null && feature.eIsProxy())
 		{
 			InternalEObject oldFeature = (InternalEObject)feature;
-			feature = eResolveProxy(oldFeature);
+			feature = (JvmIdentifyableElement)eResolveProxy(oldFeature);
 			if (feature != oldFeature)
 			{
 				if (eNotificationRequired())
@@ -152,7 +153,7 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject basicGetFeature()
+	public JvmIdentifyableElement basicGetFeature()
 	{
 		return feature;
 	}
@@ -162,9 +163,9 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFeature(EObject newFeature)
+	public void setFeature(JvmIdentifyableElement newFeature)
 	{
-		EObject oldFeature = feature;
+		JvmIdentifyableElement oldFeature = feature;
 		feature = newFeature;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XFEATURE_CALL__FEATURE, oldFeature, feature));
@@ -223,7 +224,7 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 				getParams().addAll((Collection<? extends XExpression>)newValue);
 				return;
 			case XbasePackage.XFEATURE_CALL__FEATURE:
-				setFeature((EObject)newValue);
+				setFeature((JvmIdentifyableElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -243,7 +244,7 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 				getParams().clear();
 				return;
 			case XbasePackage.XFEATURE_CALL__FEATURE:
-				setFeature((EObject)null);
+				setFeature((JvmIdentifyableElement)null);
 				return;
 		}
 		super.eUnset(featureID);
