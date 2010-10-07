@@ -12,7 +12,6 @@ import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
 
 import com.google.inject.internal.Lists;
 
@@ -31,7 +30,7 @@ public class Textile2xdoc {
 
 	public static void main(String[] args) {
 		try {
-			new XdocStandaloneSetup().doSetup();
+			//new XdocStandaloneSetup().doSetup();
 			new Textile2xdoc().transform();
 		} catch (IOException e) {
 			e.printStackTrace();
