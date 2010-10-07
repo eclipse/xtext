@@ -671,8 +671,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 	//XPrimaryExpression returns XExpression:
 	//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall |
-	//	XBlockExpression | XSwitchExpression | XSimpleFeatureCall | XIfExpression | XWhileExpression | XCastedExpression |
-	//	XParenthesizedExpression;
+	//	XBlockExpression | XSwitchExpression | XSimpleFeatureCall | XIfExpression | XWhileExpression | XDoWhileExpression |
+	//	XCastedExpression | XParenthesizedExpression;
 	public XbaseGrammarAccess.XPrimaryExpressionElements getXPrimaryExpressionAccess() {
 		return gaXbase.getXPrimaryExpressionAccess();
 	}
@@ -751,8 +751,18 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		return getXWhileExpressionAccess().getRule();
 	}
 
+	//XDoWhileExpression:
+	//	"do" body=XExpression "while" "(" predicate=XExpression ")";
+	public XbaseGrammarAccess.XDoWhileExpressionElements getXDoWhileExpressionAccess() {
+		return gaXbase.getXDoWhileExpressionAccess();
+	}
+	
+	public ParserRule getXDoWhileExpressionRule() {
+		return getXDoWhileExpressionAccess().getRule();
+	}
+
 	//XBlockExpression:
-	//	"{" (expressions+=XExpressionInsideBlock ";")+ "}";
+	//	"{" (expressions+=XExpressionInsideBlock ";"?)+ "}";
 	public XbaseGrammarAccess.XBlockExpressionElements getXBlockExpressionAccess() {
 		return gaXbase.getXBlockExpressionAccess();
 	}

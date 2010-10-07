@@ -105,6 +105,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getXSwitchExpressionAccess().getGroup_4(), "rule__XSwitchExpression__Group_4__0");
 					put(grammarAccess.getXCasePartAccess().getGroup(), "rule__XCasePart__Group__0");
 					put(grammarAccess.getXWhileExpressionAccess().getGroup(), "rule__XWhileExpression__Group__0");
+					put(grammarAccess.getXDoWhileExpressionAccess().getGroup(), "rule__XDoWhileExpression__Group__0");
 					put(grammarAccess.getXBlockExpressionAccess().getGroup(), "rule__XBlockExpression__Group__0");
 					put(grammarAccess.getXBlockExpressionAccess().getGroup_1(), "rule__XBlockExpression__Group_1__0");
 					put(grammarAccess.getXVariableDeclarationAccess().getGroup(), "rule__XVariableDeclaration__Group__0");
@@ -188,6 +189,8 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getXCasePartAccess().getThenAssignment_3(), "rule__XCasePart__ThenAssignment_3");
 					put(grammarAccess.getXWhileExpressionAccess().getPredicateAssignment_2(), "rule__XWhileExpression__PredicateAssignment_2");
 					put(grammarAccess.getXWhileExpressionAccess().getBodyAssignment_4(), "rule__XWhileExpression__BodyAssignment_4");
+					put(grammarAccess.getXDoWhileExpressionAccess().getBodyAssignment_1(), "rule__XDoWhileExpression__BodyAssignment_1");
+					put(grammarAccess.getXDoWhileExpressionAccess().getPredicateAssignment_4(), "rule__XDoWhileExpression__PredicateAssignment_4");
 					put(grammarAccess.getXBlockExpressionAccess().getExpressionsAssignment_1_0(), "rule__XBlockExpression__ExpressionsAssignment_1_0");
 					put(grammarAccess.getXVariableDeclarationAccess().getTypeAssignment_1(), "rule__XVariableDeclaration__TypeAssignment_1");
 					put(grammarAccess.getXVariableDeclarationAccess().getNameAssignment_2(), "rule__XVariableDeclaration__NameAssignment_2");
