@@ -184,8 +184,8 @@
           </elements>
           <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/1/@metamodelDeclarations.2">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+              <type metamodel="/1/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmIdentifyableElement"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
             </terminal>
@@ -219,8 +219,8 @@
           </elements>
           <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/1/@metamodelDeclarations.2">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+              <type metamodel="/1/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmIdentifyableElement"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.4"/>
             </terminal>
@@ -251,8 +251,8 @@
           </elements>
           <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/1/@metamodelDeclarations.2">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+              <type metamodel="/1/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmIdentifyableElement"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.6"/>
             </terminal>
@@ -283,8 +283,8 @@
           </elements>
           <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/1/@metamodelDeclarations.2">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+              <type metamodel="/1/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmIdentifyableElement"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.8"/>
             </terminal>
@@ -335,8 +335,8 @@
             </elements>
             <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
               <terminal xsi:type="xtext:CrossReference">
-                <type metamodel="/1/@metamodelDeclarations.2">
-                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+                <type metamodel="/1/@metamodelDeclarations.1">
+                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmIdentifyableElement"/>
                 </type>
                 <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.10"/>
               </terminal>
@@ -373,8 +373,8 @@
           </elements>
           <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/1/@metamodelDeclarations.2">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+              <type metamodel="/1/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmIdentifyableElement"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.12"/>
             </terminal>
@@ -408,8 +408,8 @@
           </elements>
           <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/1/@metamodelDeclarations.2">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+              <type metamodel="/1/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmIdentifyableElement"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.14"/>
             </terminal>
@@ -443,8 +443,8 @@
           </elements>
           <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/1/@metamodelDeclarations.2">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+              <type metamodel="/1/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmIdentifyableElement"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.16"/>
             </terminal>
@@ -480,7 +480,7 @@
           <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
             <terminal xsi:type="xtext:CrossReference">
               <type metamodel="/1/@metamodelDeclarations.1">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmOperation"/>
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmIdentifyableElement"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.18"/>
             </terminal>
@@ -517,8 +517,8 @@
           <elements xsi:type="xtext:Keyword" value="."/>
           <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
             <terminal xsi:type="xtext:CrossReference">
-              <type metamodel="/1/@metamodelDeclarations.2">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+              <type metamodel="/1/@metamodelDeclarations.1">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmIdentifyableElement"/>
               </type>
               <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
             </terminal>
@@ -560,6 +560,8 @@
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.27"/>
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.28"/>
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.22"/>
+        <elements xsi:type="xtext:RuleCall" rule="/1/@rules.40"/>
+        <elements xsi:type="xtext:RuleCall" rule="/1/@rules.41"/>
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.23"/>
       </alternatives>
     </rules>
@@ -653,8 +655,16 @@
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="default"/>
           <elements xsi:type="xtext:Keyword" value=":"/>
-          <elements xsi:type="xtext:Assignment" feature="default" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          <elements xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Assignment" feature="default" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+              </elements>
+              <elements xsi:type="xtext:Keyword" value=";"/>
+            </elements>
+            <elements xsi:type="xtext:Assignment" feature="default" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.29"/>
+            </elements>
           </elements>
         </elements>
         <elements xsi:type="xtext:Keyword" value="}"/>
@@ -665,13 +675,26 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XCasePart"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="case"/>
-        <elements xsi:type="xtext:Assignment" feature="case" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="typeGuard" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="case"/>
+          <elements xsi:type="xtext:Assignment" feature="case" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
         </elements>
         <elements xsi:type="xtext:Keyword" value=":"/>
-        <elements xsi:type="xtext:Assignment" feature="then" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Assignment" feature="then" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="then" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.29"/>
+          </elements>
         </elements>
       </alternatives>
     </rules>
@@ -718,7 +741,7 @@
           <elements xsi:type="xtext:Assignment" feature="expressions" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.30"/>
           </elements>
-          <elements xsi:type="xtext:Keyword" cardinality="?" value=";"/>
+          <elements xsi:type="xtext:Keyword" value=";"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
@@ -773,8 +796,8 @@
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/1/@metamodelDeclarations.2">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+            <type metamodel="/1/@metamodelDeclarations.1">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmIdentifyableElement"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
           </terminal>
@@ -882,6 +905,53 @@
         </elements>
         <elements xsi:type="xtext:Keyword" value="."/>
         <elements xsi:type="xtext:Keyword" value="class"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="XThrowExpression">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XThrowExpression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="throw"/>
+        <elements xsi:type="xtext:Assignment" feature="expression" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="XTryCatchFinallyExpression">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XTryCatchFinallyExpression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="try"/>
+        <elements xsi:type="xtext:Assignment" feature="expression" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="catchClauses" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.42"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="finally"/>
+          <elements xsi:type="xtext:Assignment" feature="finallyExpression" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="XCatchClause">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XCatchClause"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="catch"/>
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:Assignment" feature="declaredParam" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.32"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=")"/>
+        <elements xsi:type="xtext:Assignment" feature="expression" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
       </alternatives>
     </rules>
   </xtext:Grammar>
