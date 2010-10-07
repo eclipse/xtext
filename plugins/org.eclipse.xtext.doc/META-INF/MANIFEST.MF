@@ -20,7 +20,5 @@ Require-Bundle: org.eclipse.help,
  org.eclipse.xtext.common.types.ui;bundle-version="2.0.0";resolution:=optional,
  org.eclipse.xtext.junit;bundle-version="2.0.0";resolution:=optional,
  org.eclipse.emf.mwe2.launch;bundle-version="2.0.0";resolution:=optional,
- org.eclipse.xtext.xdoc.generator;bundle-version="1.0.0";resolution:=optional,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
- org.eclipse.ui.ide;bundle-version="3.6.0";resolution:=optional,
- org.eclipse.core.filesystem;bundle-version="1.3.0";resolution:=optional
+ org.eclipse.xtext.xdoc.generator;bundle-version="1.0.0";resolution:=optional
+ 
