@@ -49,7 +49,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 
 	@Inject
 	private IOutlineContribution.Composite contribution;
-	
+
 	private IXtextModelListener modelListener;
 
 	private IXtextDocument xtextDocument;
@@ -115,7 +115,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		IDocument document = sourceViewer.getDocument();
 		xtextDocument = XtextDocumentUtil.get(document);
 	}
-	
+
 	public ISourceViewer getSourceViewer() {
 		return sourceViewer;
 	}
@@ -123,7 +123,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	public IXtextDocument getXtextDocument() {
 		return xtextDocument;
 	}
-	
+
 	protected OutlineRefreshJob getRefreshJob() {
 		return refreshJob;
 	}
@@ -148,12 +148,14 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 			public void run() {
 				try {
 					TreeViewer treeViewer = getTreeViewer();
-					treeViewer.setInput(rootNode);
-					treeViewer.expandToLevel(1);
-					treeViewer.setExpandedElements(Iterables.toArray(nodesToBeExpanded, IOutlineNode.class));
-					treeViewer.setSelection(new StructuredSelection(Iterables
-							.toArray(selectedNodes, IOutlineNode.class)));
-					treeUpdated();
+					if (!treeViewer.getTree().isDisposed()) {
+						treeViewer.setInput(rootNode);
+						treeViewer.expandToLevel(1);
+						treeViewer.setExpandedElements(Iterables.toArray(nodesToBeExpanded, IOutlineNode.class));
+						treeViewer.setSelection(new StructuredSelection(Iterables.toArray(selectedNodes,
+								IOutlineNode.class)));
+						treeUpdated();
+					}
 				} catch (Throwable t) {
 					LOG.error("Error refreshing outline", t);
 				}
@@ -161,10 +163,10 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		});
 	}
 
-	/** 
+	/**
 	 * For testing.
 	 */
 	protected void treeUpdated() {
 	}
-	
+
 }

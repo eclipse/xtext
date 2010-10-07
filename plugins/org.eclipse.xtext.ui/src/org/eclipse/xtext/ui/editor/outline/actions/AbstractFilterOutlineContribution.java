@@ -46,7 +46,8 @@ public abstract class AbstractFilterOutlineContribution extends AbstractToggleAc
 	
 	@Override
 	protected void stateChanged(boolean newState) {
-		treeViewer.refresh();
+		if(!treeViewer.getTree().isDisposed()) 
+			treeViewer.refresh();
 	}
 
 	@Override

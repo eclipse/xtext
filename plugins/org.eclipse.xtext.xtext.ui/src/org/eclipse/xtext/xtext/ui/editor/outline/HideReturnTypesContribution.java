@@ -51,7 +51,8 @@ public class HideReturnTypesContribution extends AbstractToggleActionContributio
 
 	@Override
 	protected void stateChanged(boolean newState) {
-		treeViewer.refresh(true);
+		if(!treeViewer.getTree().isDisposed())
+			treeViewer.refresh(true);
 	}
 	
 	@Override

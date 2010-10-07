@@ -97,7 +97,7 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 
 	public void setLinkingEnabled(boolean enabled) {
 		isLinkingEnabled = enabled;
-		if (enabled) {
+		if (enabled && !treeViewer.getTree().isDisposed()) {
 			ISelection selection = treeViewer.getSelection();
 			selectInTextEditor(selection);
 		}
@@ -118,7 +118,7 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 	}
 
 	protected void selectInTreeView(ISelection selection) {
-		if (selection instanceof ITextSelection) {
+		if (selection instanceof ITextSelection && !treeViewer.getTree().isDisposed()) {
 			ITextSelection textSelection = (ITextSelection) selection;
 			ITextRegion selectedTextRegion = new TextRegion(textSelection.getOffset(), textSelection.getLength());
 			Object input = treeViewer.getInput();
