@@ -30,12 +30,6 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	@Inject
 	private ExpressionsTypeResolver typeResolver;
 	
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		getInjector().injectMembers(this);
-	}
-	
 	public void testNullLiteral() throws Exception {
 		assertResolvedReturnType(ExpressionsTypeResolver.VOID_TYPE_NAME, "null");
 	}
