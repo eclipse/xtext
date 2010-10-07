@@ -187,7 +187,7 @@ code[Java][«IMPORT org::eclipse::xtext::example::domainmodel»
 «FILE qualifiedName().replaceAll("\\.","/")+".java"-»
 package «packageName()»;
 
-public class «name» {
+public class «name» «IF superType != null» extends «superType.name»«ENDIF»{
   «EXPAND property FOREACH features»
 }
 «ENDFILE»

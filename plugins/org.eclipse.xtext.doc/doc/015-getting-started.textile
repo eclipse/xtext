@@ -295,7 +295,7 @@ bc.. grammar org.eclipse.xtext.example.Domainmodel
 generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"  
 
 DomainModel :
-  (elements+=Entity)*;
+  (elements+=Type)*;
   
 Type:
   DataType | Entity;
@@ -366,7 +366,7 @@ comes with exactly such a default semantic for namespaces, which feels very
 natural in practice. Although all aspects of this semantic are adaptable, we 
 will stick to the defaults within this tutorial.
 
-Before we extend the grammar, let's have a look at how a the example model would
+Before we extend the grammar, let's have a look how an example model would
 look like when using the newly introduced concepts:
 
 bc.. package my.types {

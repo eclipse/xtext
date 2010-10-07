@@ -99,8 +99,8 @@
 <topic href="help/dependencyInjection.html#ObtaininganInjector" label="Obtaining an Injector"></topic>
 </topic>
 </topic>
-<topic href="help/RuntimeConcepts.html" label="Runtime Concepts">
-<topic href="help/RuntimeConcepts.html#RuntimeSetupISetup" label="Runtime Setup (ISetup)"></topic>
+<topic href="help/runtime_concepts.html" label="Runtime Concepts">
+<topic href="help/runtime_concepts.html#RuntimeSetupISetup" label="Runtime Setup (ISetup)"></topic>
 <topic href="help/SetupwithinEclipseEquinoxOSGi.html" label="Setup within Eclipse-Equinox (OSGi)"></topic>
 <topic href="help/Logging.html" label="Logging"></topic>
 <topic href="help/validation.html" label="Validation">
@@ -133,7 +133,7 @@
 <topic href="help/scoping.html#DeclarativeScoping" label="Declarative Scoping"></topic>
 </topic>
 <topic href="help/scoping.html#ImportedNamespaceAwareScoping" label="Imported Namespace-Aware Scoping">
-<topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.scoping.IQualifiedNameProvider" label="IQualifiedNameProvider"></topic>
+<topic href="help/scoping.html#org.eclipse.xtextsrcorg.eclipse.xtext.naming.IQualifiedNameProvider" label="IQualifiedNameProvider"></topic>
 <topic href="help/scoping.html#ImportingNamespaces" label="Importing Namespaces"></topic>
 </topic>
 </topic>
@@ -191,12 +191,12 @@
 <topic href="help/MWE2SyntaxReference.html#MWE2References" label="References"></topic>
 </topic>
 </topic>
-<topic href="help/IDEConcepts.html" label="IDE Concepts">
-<topic href="help/IDEConcepts.html#labelProvider" label="Label Provider">
-<topic href="help/IDEConcepts.html#EObjectLabelProvider" label="Label Providers For EObjects">
-<topic href="help/IDEConcepts.html#DefaultEObjectLabelProvider" label="DefaultEObjectLabelProvider"></topic>
+<topic href="help/ide_concepts.html" label="IDE Concepts">
+<topic href="help/ide_concepts.html#labelProvider" label="Label Provider">
+<topic href="help/ide_concepts.html#EObjectLabelProvider" label="Label Providers For EObjects">
+<topic href="help/ide_concepts.html#DefaultEObjectLabelProvider" label="DefaultEObjectLabelProvider"></topic>
 </topic>
-<topic href="help/IDEConcepts.html#DescriptionLabelProvider" label="Label Providers For Index Entries"></topic>
+<topic href="help/ide_concepts.html#DescriptionLabelProvider" label="Label Providers For Index Entries"></topic>
 </topic>
 <topic href="help/contentAssist.html" label="Content Assist">
 <topic href="help/contentAssist.html#ProposalProvider" label="ProposalProvider"></topic>
@@ -210,6 +210,7 @@
 <topic href="help/templates.html#EnumerationTemplateVariableResolver" label="Enumeration TemplateVariableResolver"></topic>
 </topic>
 <topic href="help/outline.html" label="Outline View">
+<topic href="help/outline.html#Weredesignedtheoutlinein2.0.Thefollowingnolongerreflectsthecurrentstateofimplementation." label="We redesigned the outline in 2.0. The following no longer reflects the current state of implementation."></topic>
 <topic href="help/outline.html#InfluencingtheOutlineStructure" label="Influencing the Outline Structure"></topic>
 <topic href="help/outline.html#Filtering" label="Filtering"></topic>
 <topic href="help/outline.html#Contextmenus" label="Context menus">

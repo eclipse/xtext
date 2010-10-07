@@ -5,28 +5,40 @@
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
-<link rel="up" href="IDEConcepts.html" title="IDE Concepts">
+<link rel="up" href="ide_concepts.html" title="IDE Concepts">
 <link rel="prev" href="templates.html" title="Template Proposals">
 <link rel="next" href="hyperlinking.html" title="Hyperlinking">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Outline View</h1>
+<div class="section" title="We redesigned the outline in 2.0. The following no longer reflects the current state of implementation.">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a name="Weredesignedtheoutlinein2.0.Thefollowingnolongerreflectsthecurrentstateofimplementation."></a>We redesigned the outline in 2.0. The following no longer reflects the current state of implementation. </h3>
+</div>
+</div>
+</div>
+<p>TODO: 
+					Rewrite this section</p>
 <p>Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical 
-				view on your model and allows you to sort tree elements alphabetically. Selecting an element in the 
-				outline will highlight the corresponding element in the text editor. Users can choose to synchronize 
-				the outline with the editor selection by clicking the 
-				<span class="emphasis"><em>Link with Editor</em></span> button.
-			</p>
+					view on your model and allows you to sort tree elements alphabetically. Selecting an element in the 
+					outline will highlight the corresponding element in the text editor. Users can choose to synchronize 
+					the outline with the editor selection by clicking the 
+					<span class="emphasis"><em>Link with Editor</em></span> button.
+				</p>
 <p>
-				
+					
 </p>
 <div class="mediaobject">
 <img src="images/sample_outline.png"></div>
 <p>
-			
+				
 </p>
 <p>You can customize various aspects of the outline by providing implementation for its various interfaces. 
-				The following sections show how to do this.</p>
+					The following sections show how to do this.</p>
+</div>
 <div class="section" title="Influencing the Outline Structure">
 <div class="titlepage">
 <div>
@@ -36,6 +48,11 @@
 </div>
 </div>
 </div>
+<p>
+					
+<span class="emphasis"><em>outdated</em></span> 
+				
+</p>
 <p>In its default implementation, the outline view shows the containment hierarchy of your model. 
 					This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., 
 					by omitting a certain kind of node or by introducing additional even virtual nodes, you customize 
@@ -123,6 +140,11 @@
 </div>
 </div>
 </div>
+<p>
+					
+<span class="emphasis"><em>outdated</em></span> 
+				
+</p>
 <p>Often, you want to allow users to filter the contents of the outline to make it easier to concentrate 
 					on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add 
 
@@ -246,6 +268,11 @@
 </div>
 </div>
 </div>
+<p>
+					
+<span class="emphasis"><em>outdated</em></span> 
+				
+</p>
 <p>You might want to register context menu actions for specific elements in the outline, e.g. to allow 
 					users of your DSL to invoke a generator or to validate the selected element. As all elements in the 
 					outline are 
@@ -326,6 +353,11 @@
 </div>
 </div>
 </div>
+<p>
+						
+<span class="emphasis"><em>outdated</em></span> 
+					
+</p>
 <p>You can now add command / handler pairs to the context menu.</p>
 <p>First, you need to define a command &ndash; it will serve as a handle to glue together the handler 
 						and the menu contribution:</p>
@@ -408,6 +440,11 @@
 </div>
 </div>
 </div>
+<p>
+					
+<span class="emphasis"><em>outdated</em></span> 
+				
+</p>
 <p>Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown 
 					in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline,
 					you have to put the 

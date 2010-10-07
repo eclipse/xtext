@@ -48,7 +48,7 @@
 <p>Previously when we created the projects to develop the domain model language, we had checked the option 
 					<span class="emphasis"><em>Create a generator project</em></span> in the wizard, which as 
 					a result created a third project for us in the workspace. If you&rsquo;ve followed along you should have a project called 
-					&lsquo;org.eclipse.xtext.example.domainmodel.generator&rsquo; in your workspace. It should look like shown in the following screenshot:
+&sbquo;					org.eclipse.xtext.example.domainmodel.generator&rsquo; in your workspace. It should look like shown in the following screenshot:
 				</p>
 <p>
 					
@@ -68,7 +68,7 @@
 </div>
 </div>
 </div>
-<p>The four files shown in the image above are very simple stubs generated for the &lsquo;Hello World&rsquo;-language the wizard creates as a starting point. 
+<p>The four files shown in the image above are very simple stubs generated for the &sbquo;Hello World&rsquo;-language the wizard creates as a starting point. 
 					We&rsquo;ll have to adapt them to match the domain model language we have developed in the 
 					<a class="link" href="getting-started.html#getting-started-xtext" title="Creating a DSL">getting started section</a>. The first 
 					thing we should do is open up the example model file (1) and replace its contents with an instance of the domain model language. To do so 
@@ -303,7 +303,8 @@ Workflow&nbsp;{<br>
 package&nbsp;&laquo;packageName()&raquo;;<br>
 
 <br>
-public&nbsp;class&nbsp;&laquo;name&raquo;&nbsp;{<br>
+public&nbsp;class&nbsp;&laquo;name&raquo;&nbsp;&laquo;IF&nbsp;superType&nbsp;!=&nbsp;null&raquo;&nbsp;extends&nbsp;&laquo;superType.name&raquo;&laquo;ENDIF&raquo;{<br>
+{<br>
 &nbsp;&nbsp;&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;features&raquo;<br>
 }<br>
 &laquo;ENDFILE&raquo;<br>

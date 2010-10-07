@@ -5,7 +5,7 @@
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
-<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts">
+<link rel="up" href="runtime_concepts.html" title="Runtime Concepts">
 <link rel="prev" href="Logging.html" title="Logging">
 <link rel="next" href="linking.html" title="Linking">
 </head>
@@ -150,7 +150,7 @@
 </ol>
 </div>
 <p>The typical use cases for the concrete syntax validator are validation in non-Xtext-editors that, however, use an 
-						<span class="emphasis"><em>XtextResource</em></span>. This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified &ldquo;manually&rdquo; (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide 
+						<span class="emphasis"><em>XtextResource</em></span>. This is, for example, the case when combining GMF and Xtext. Another use case is when the semantic model is modified &bdquo;manually&rdquo; (not by the parser) and then serialized again. Since it is very difficult for the serializer to provide 
 						<a class="link" href="serialization.html#parsetreeconstructor" title="Parse Tree Constructor">meaningful error messages</a>, the concrete syntax validator is executed by default before serialization. A textual Xtext editor itself, however, is 
 						<span class="emphasis"><em>not</em></span> a valid use case. Here, the parser ensures that all syntactical constraints are met. Therefore, there is no value in additionally running the concrete syntax validator.  
 					</p>
@@ -296,7 +296,7 @@ public&nbsp;Class&lt;?&nbsp;extends&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;<br>
 </code>
 </p>
 </div>
-<p>After regenerating your language artifacts you will find three new files &ldquo;YourLanguageChecks.chk&rdquo;, &ldquo;YourLanguageFastChecks.chk&rdquo; and &ldquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
+<p>After regenerating your language artifacts you will find three new files &bdquo;YourLanguageChecks.chk&rdquo;, &bdquo;YourLanguageFastChecks.chk&rdquo; and &bdquo;YourLanguageExpensiveChecks.chk&rdquo; in the 
 					<span class="emphasis"><em>src/</em></span> folder in the sub-package 
 					<span class="emphasis"><em>validation</em></span>.  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the example of the previous chapter could be written like this.
 				</p>
@@ -380,7 +380,7 @@ switch&nbsp;(diagnostic.getSeverity())&nbsp;{<br>
 					<span class="emphasis"><em>EPackage</em></span>) to construct the needed model elements manually. While the fist option has the advantages that you can edit your models in your textual concrete syntax, the second option has the advantage that you can create partial models.
 				</p>
 <p>To run the @Check-methods and ensure they raise the intended errors and warnings, you can utilize 
-					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/ValidatorTester.java?root=Modeling_Project&view=co" target="_new">ValidatorTester</a> as shown by the following example:
+					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/junit/validation/ValidatorTester.java?root=Modeling_Project&view=co" target="_new">ValidatorTester</a> as shown by the following example:
 				</p>
 <p>Validator:</p>
 <div class="literallayout">
@@ -519,11 +519,11 @@ switch&nbsp;(diagnostic.getSeverity())&nbsp;{<br>
 <p>
 							
 <span class="emphasis"><em>assertAll(DiagnosticPredicate... predicates)</em></span>: Allows to describe multiple diagnostics at the same time and verifies that all of them are present. Class 
-							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AssertableDiagnostics.java?root=Modeling_Project&view=co" target="_new">AssertableDiagnostics</a> contains static 
+							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/junit/validation/AssertableDiagnostics.java?root=Modeling_Project&view=co" target="_new">AssertableDiagnostics</a> contains static 
 							<span class="emphasis"><em>error()</em></span> and 
 							<span class="emphasis"><em>warning()</em></span>-methods which help to create the needed 
 							<span class="emphasis"><em>DiagnosticPredicate</em></span>. Example: 
-							<span class="emphasis"><em>assertAll(error(123), warning(&ldquo;some part of the message&rdquo;))</em></span>. 
+							<span class="emphasis"><em>assertAll(error(123), warning(&bdquo;some part of the message&rdquo;))</em></span>. 
 						</p>
 </li>
 <li class="listitem">

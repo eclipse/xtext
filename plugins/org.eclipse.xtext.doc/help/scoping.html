@@ -5,7 +5,7 @@
 <link href="book.css" rel="stylesheet" type="text/css">
 <meta content="DocBook XSL Stylesheets V1.75.1" name="generator">
 <link rel="home" href="index.html" title="Xtext User Guide">
-<link rel="up" href="RuntimeConcepts.html" title="Runtime Concepts">
+<link rel="up" href="runtime_concepts.html" title="Runtime Concepts">
 <link rel="prev" href="linking.html" title="Linking">
 <link rel="next" href="valueconverter.html" title="Value Converter">
 </head>
@@ -187,7 +187,7 @@ end<br>
 <p>There are also two different default implementations of 
 						<span class="emphasis"><em>IQualifiedNameProvider</em></span>. Both work by looking 
 						up an 
-						<span class="emphasis"><em>EAttribute</em></span> &lsquo;name&rsquo;. The 
+						<span class="emphasis"><em>EAttribute</em></span> &sbquo;name&rsquo;. The 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java?root=Modeling_Project&view=co" target="_new">SimpleNameProvider</a> 
 						simply returns the plain value, while the 
 
@@ -319,7 +319,7 @@ Import&nbsp;:&nbsp;<br>
 						<span class="emphasis"><em>IGlobalScopeProvider</em></span> by the means of 
 						<a class="link" href="dependencyInjection.html" title="Dependency Injection in Xtext with Google Guice">Guice</a>. That implementation looks up any 
 
-						<span class="emphasis"><em>EAttributes</em></span> named &lsquo;importURI&rsquo; in your model and interprets their values as URIs that point to imported
+						<span class="emphasis"><em>EAttributes</em></span> named &sbquo;importURI&rsquo; in your model and interprets their values as URIs that point to imported
 						resources. That is it adds the corresponding resources to the current resource&rsquo;s resource set. In 
 						addition the scope provider uses the 
 						<a class="link" href="scoping.html#resourcedescriptions" title="Resource and EObject Descriptions ( IResourceDescription, IEObjectDescription)">
@@ -367,7 +367,7 @@ Import&nbsp;:&nbsp;<br>
 						by most of our users. The available tooling provided by JDT and PDE to configure the classpath adds 
 						even more value. However, it is just a default: You can reuse the infrastructure without using Java 
 						and independent from the JDT.</p>
-<p>In order to know what is available in the &ldquo;world&rdquo; a global scope provider which relies on external 
+<p>In order to know what is available in the &bdquo;world&rdquo; a global scope provider which relies on external 
 						configuration needs to read that configuration in and be able to find all candidates for a certain 
 
 						<span class="emphasis"><em>EReference</em></span>. If you don&rsquo;t want to force users to have a folder and file name structure reflecting 
@@ -821,8 +821,8 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 <div>
 <div>
 <h4 class="title">
-<a name="org.eclipse.xtextsrcorg.eclipse.xtext.scoping.IQualifiedNameProvider"></a>
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">IQualifiedNameProvider</a>
+<a name="org.eclipse.xtextsrcorg.eclipse.xtext.naming.IQualifiedNameProvider"></a>
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">IQualifiedNameProvider</a>
 					
 </h4>
 </div>
@@ -831,10 +831,10 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 <p>The 
 						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java?root=Modeling_Project&view=co" target="_new">ImportedNamespaceAwareLocalScopeProvider</a> 
 						makes use of the so called 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">IQualifiedNameProvider</a> 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">IQualifiedNameProvider</a> 
 						service. It computes qualified names for EObjects. The default implementation 
 						(
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultDeclarativeQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDeclarativeQualifiedNameProvider</a>) uses 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java?root=Modeling_Project&view=co" target="_new">DefaultDeclarativeQualifiedNameProvider</a>) uses 
 						a simple name look up and concatenates the result to the qualified name of its parent object using a dot 
 						as separator. 
 					</p>
@@ -872,7 +872,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 </div>
 <p>The 
 						<span class="emphasis"><em>ImportedNamespaceAwareLocalScopeProvider</em></span> looks up 
-						<span class="emphasis"><em>EAttributes</em></span> with name &lsquo;importedNamespace&rsquo; and 
+						<span class="emphasis"><em>EAttributes</em></span> with name &sbquo;importedNamespace&rsquo; and 
 						interprets them as import statements. By default qualified names with or without a wildcard at the end 
 						are supported. For an import of a qualified name the simple name is made available as we know from e.g. 
 						Java, where
@@ -884,7 +884,7 @@ IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;ERefer
 </code>
 </p>
 </div>
-<p>makes it possible to refer to &lsquo;java.util.Set&rsquo; by its simple name &lsquo;Set&rsquo;.
+<p>makes it possible to refer to &sbquo;java.util.Set&rsquo; by its simple name &sbquo;Set&rsquo;.
 						Contrary to Java the import is not active for the whole file but only for the namespace it is declared 
 						in and its child namespaces. That is why you can write the following in the example DSL:</p>
 <div class="literallayout">

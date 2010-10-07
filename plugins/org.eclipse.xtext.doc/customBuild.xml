@@ -88,8 +88,8 @@
 	<property name="docbook.version" value="1.75.1" />
 	<property name="docbook.dir" value="${download.dir}${file.separator}docbook-xsl-${docbook.version}"/>
 	<property name="docbookxsl.url" value="http://downloads.sourceforge.net/project/docbook/docbook-xsl/1.75.1/docbook-xsl-${docbook.version}.zip"/>
-	<property name="fop.dir" value="${download.dir}${file.separator}fop-0.95"/>
-	<property name="fop.url" value="http://mirrorspace.org/apache/xmlgraphics/fop/binaries/fop-0.95-bin.zip"/>
+	<property name="fop.dir" value="${download.dir}${file.separator}fop-1.0"/>
+	<property name="fop.url" value="http://apache.linux-mirror.org/xmlgraphics/fop/binaries/fop-1.0-bin.zip"/>
 	<property name="jai.dir" value="ENTER_JAI_DIRECTORY"/>
 	
     <macrodef name="docbook2pdf">
@@ -103,7 +103,7 @@
         			<pathelement location="${fop.dir}${file.separator}lib${file.separator}commons-logging-1.0.4.jar" />
         			<pathelement location="${fop.dir}${file.separator}lib${file.separator}commons-io-1.3.1.jar" />
         			<pathelement location="${fop.dir}${file.separator}lib${file.separator}batik-all-1.7.jar" />
-        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}xmlgraphics-commons-1.3.1.jar" />
+        			<pathelement location="${fop.dir}${file.separator}lib${file.separator}xmlgraphics-commons-1.4.jar" />
         			<pathelement location="${jai.dir}${file.separator}lib${file.separator}jai_core.jar" />
         			<pathelement location="${jai.dir}${file.separator}lib${file.separator}jai_codec.jar" />
         		</classpath>
