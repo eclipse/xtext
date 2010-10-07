@@ -8,10 +8,8 @@
 package org.eclipse.xtext.gmf.glue.editingdomain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
@@ -19,7 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.xtext.resource.XtextResource;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
@@ -27,8 +25,8 @@ import com.google.common.collect.Lists;
  */
 public class ChangeAggregatorAdapter extends EContentAdapter {
 
-	private Map<Resource, List<EObject>> resource2modificationRootMap = new HashMap<Resource, List<EObject>>();
-
+	private Set<XtextResource> changedResources = Sets.newHashSet();
+	
 	private boolean isRecording = false;
 
 	private boolean isSuspended = false;
@@ -48,20 +46,7 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 	protected void recordObjectModification(EObject obj) {
 		Resource resource = obj.eResource();
 		if (resource instanceof XtextResource) {
-			List<EObject> allContainers = allContainers(obj);
-			if (!resource2modificationRootMap.containsKey(resource)) {
-				resource2modificationRootMap.put(resource, allContainers);
-			} else {
-				List<EObject> existingContainers = resource2modificationRootMap.get(resource);
-				int i = 0;
-				while (i < Math.min(allContainers.size(), existingContainers.size())
-						&& allContainers.get(i) == existingContainers.get(i) && !existingContainers.get(i).eIsProxy()) {
-					++i;
-				}
-				while (i < existingContainers.size()) {
-					existingContainers.remove(i++);
-				}
-			}
+			changedResources.add((XtextResource) resource);
 		}
 	}
 
@@ -84,7 +69,7 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 	}
 
 	private void reset() {
-		resource2modificationRootMap.clear();
+		changedResources.clear();
 	}
 
 	public void beginRecording() {
@@ -101,31 +86,12 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 	}
 
 	public List<EObject> getModificationRoots() {
-		List<EObject> modificationRoots = new ArrayList<EObject>(resource2modificationRootMap.size());
-		for (List<EObject> changePath : resource2modificationRootMap.values()) {
-			if (!changePath.isEmpty()) {
-				for (int i = changePath.size() - 1; i >= 0; --i) {
-					EObject modificationRoot = changePath.get(i);
-					if (!modificationRoot.eIsProxy()) {
-						modificationRoots.add(modificationRoot);
-						break;
-					}
-				}
-			}
+		List<EObject> modificationRoots = new ArrayList<EObject>();
+		for(XtextResource resource : changedResources) {
+			if(!resource.getContents().isEmpty())
+				modificationRoots.add(resource.getContents().get(0));
 		}
 		return modificationRoots;
-	}
-
-	private LinkedList<EObject> allContainers(EObject eObject) {
-		final LinkedList<EObject> allContainers = Lists.newLinkedList();
-		allContainers.add(eObject);
-		EObject currentContainer = eObject.eContainer();
-		final Resource resource = eObject.eResource();
-		while (currentContainer != null && resource == currentContainer.eResource()) {
-			allContainers.addFirst(currentContainer);
-			currentContainer = currentContainer.eContainer();
-		}
-		return allContainers;
 	}
 
 	/**
