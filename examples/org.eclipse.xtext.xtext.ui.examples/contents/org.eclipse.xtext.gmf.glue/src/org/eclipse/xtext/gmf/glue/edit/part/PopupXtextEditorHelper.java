@@ -44,6 +44,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.info.ResourceWorkingCopyFileEditorInput;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Binder;
@@ -190,8 +191,8 @@ public class PopupXtextEditorHelper {
 	}
 
 	private void setEditorRegion() throws BadLocationException {
-		final IXtextDocument xtextDocument = xtextEditor.getDocument();
-		boolean success = xtextEditor.getDocument().modify(new IUnitOfWork<Boolean, XtextResource>() {
+		final XtextDocument xtextDocument = (XtextDocument) xtextEditor.getDocument();
+		boolean success = xtextDocument.internalModify(new IUnitOfWork<Boolean, XtextResource>() {
 
 			public Boolean exec(XtextResource state) throws Exception {
 				EObject semanticElementInDocument = state.getEObject(semanticElementFragment);

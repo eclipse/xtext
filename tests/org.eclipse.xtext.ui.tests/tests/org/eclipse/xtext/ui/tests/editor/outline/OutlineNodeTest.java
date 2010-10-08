@@ -92,19 +92,6 @@ public class OutlineNodeTest extends AbstractXtextTests {
 		assertNull(rootNode.readOnly(work));
 		assertTrue(parentNode.readOnly(work));
 		assertTrue(featureNode.readOnly(work));
-		try {
-			rootNode.modify(work);
-			fail("Modify should be disabled");
-		} catch(UnsupportedOperationException exc) {}
-		try {
-			parentNode.modify(work);
-			fail("Modify should be disabled");
-		} catch(UnsupportedOperationException exc) {}
-		try {
-			featureNode.modify(work);
-			fail("Modify should be disabled");
-		} catch(UnsupportedOperationException exc) {}
-		
 	}
 	
 	public void testEqualsNotImplemented() throws Exception {
@@ -114,7 +101,7 @@ public class OutlineNodeTest extends AbstractXtextTests {
 	}
 
 	protected DocumentRootNode createRootNode() {
-		XtextDocument document = new XtextDocument();
+		XtextDocument document = get(XtextDocument.class);
 		document.setInput(resource);
 		IOutlineTreeStructureProvider treeStructureProvider = new IOutlineTreeStructureProvider() {
 			public void createChildren(IOutlineNode parentNode, EObject modelElement) {

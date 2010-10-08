@@ -63,7 +63,7 @@ public class DeclarativeQuickfixProviderTest extends TestCase {
 					public IModificationContext createModificationContext(Issue issue) {
 						return null;
 					}
-				}, null);
+				});
 			}
 		});
 		Iterable<IssueResolution> resolutionsIterable = provider.getResolutions(

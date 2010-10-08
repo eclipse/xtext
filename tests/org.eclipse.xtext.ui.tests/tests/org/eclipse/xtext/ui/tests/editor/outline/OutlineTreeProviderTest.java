@@ -92,13 +92,12 @@ public class OutlineTreeProviderTest extends AbstractXtextTests {
 	
 	protected XtextDocument createXtextDocument(String modelAsText) throws Exception {
 		final XtextResource resource = getResource(modelAsText, "test.outlinetestlanguage");
-		XtextDocument xtextDocument = new XtextDocument();
 		DocumentTokenSource tokenSource = new DocumentTokenSource();
 		tokenSource.setLexer(new Provider<Lexer>(){
 			public Lexer get() {
 				return new InternalXtextLexer();
 			}});
-		xtextDocument.setTokenSource(tokenSource);
+		XtextDocument xtextDocument = new XtextDocument(tokenSource, null);
 		xtextDocument.setInput(resource);
 		xtextDocument.set(modelAsText);
 		return xtextDocument;	

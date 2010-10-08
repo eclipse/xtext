@@ -69,8 +69,7 @@ public class DamagerRepairerPerformanceTest extends TestCase implements ITokenSc
 					return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
 				}
 			});
-			XtextDocument document = new XtextDocument();
-			document.setTokenSource(source);
+			XtextDocument document = new XtextDocument(source, null);
 			document.set(before);
 			return document;
 		}

@@ -12,7 +12,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.xtext.util.concurrent.IStateAccess;
+import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import junit.framework.TestCase;
@@ -21,7 +21,7 @@ import junit.framework.TestCase;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class StateAccessTest extends TestCase {
+public class ReadWriteAccessTest extends TestCase {
 
 	public static class Foo {
 		public String val = "foo";
@@ -29,7 +29,7 @@ public class StateAccessTest extends TestCase {
 
 	public void testModifyAndRead() throws Exception {
 		final Foo foo = new Foo();
-		final IStateAccess.AbstractImpl<Foo> access = new IStateAccess.AbstractImpl<Foo>() {
+		final AbstractReadWriteAcces<Foo> access = new AbstractReadWriteAcces<Foo>() {
 			@Override
 			protected Foo getState() {
 				return foo;
@@ -62,7 +62,7 @@ public class StateAccessTest extends TestCase {
 		assertTrue(exceptions.toString(),exceptions.isEmpty());
 	}
 
-	private Runnable changer(final IStateAccess<Foo> access, final int n) {
+	private Runnable changer(final AbstractReadWriteAcces<Foo> access, final int n) {
 		return new Runnable() {
 			public void run() {
 				access.modify(new IUnitOfWork<Object, Foo>() {
@@ -75,7 +75,7 @@ public class StateAccessTest extends TestCase {
 		};
 	}
 
-	private Runnable reader(final IStateAccess<Foo> access) {
+	private Runnable reader(final AbstractReadWriteAcces<Foo> access) {
 		return new Runnable() {
 			public void run() {
 				access.readOnly(new IUnitOfWork<Object, Foo>() {

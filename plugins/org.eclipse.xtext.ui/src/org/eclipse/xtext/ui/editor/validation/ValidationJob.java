@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.concurrent.IStateAccess;
+import org.eclipse.xtext.util.concurrent.IReadAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -38,11 +38,11 @@ public class ValidationJob extends Job {
 	public static final Object XTEXT_VALIDATION_FAMILY = new Object();
 	protected static final Map<?, ?> DEFAULT_VALIDATION_CONTEXT = ImmutableMap.of(CheckMode.KEY, CheckMode.FAST_ONLY);
 	private final IResourceValidator resourceValidator;
-	private final IStateAccess<XtextResource> xtextDocument;
+	private final IReadAccess<XtextResource> xtextDocument;
 	private final IValidationIssueProcessor validationIssueProcessor;
 	private final CheckMode checkMode;
 
-	public ValidationJob(IResourceValidator xtextResourceChecker, IStateAccess<XtextResource> xtextDocument,
+	public ValidationJob(IResourceValidator xtextResourceChecker, IReadAccess<XtextResource> xtextDocument,
 			IValidationIssueProcessor validationIssueProcessor,CheckMode checkMode) {
 		super(Messages.ValidationJob_0);
 		this.xtextDocument = xtextDocument;
@@ -90,7 +90,7 @@ public class ValidationJob extends Job {
 		return resourceValidator;
 	}
 
-	protected IStateAccess<XtextResource> getXtextDocument() {
+	protected IReadAccess<XtextResource> getXtextDocument() {
 		return xtextDocument;
 	}
 	
