@@ -52,7 +52,7 @@ import com.google.inject.Provider;
  */
 public class XtextDocumentProvider extends FileDocumentProvider {
 	@Inject
-	private Provider<XtextDocument> document;
+	private Provider<XtextDocument> documentProvider;
 
 	@Inject
 	private Provider<IDocumentPartitioner> documentPartitioner;
@@ -78,7 +78,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 	@Override
 	protected XtextDocument createEmptyDocument() {
-		XtextDocument xtextDocument = document.get();
+		XtextDocument xtextDocument = documentProvider.get();
 		return xtextDocument;
 	}
 

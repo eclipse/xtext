@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +27,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
-import org.eclipse.xtext.ui.editor.model.XtextDocument;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
@@ -67,7 +70,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	public void testConnect_02() {
 		dirtyResource.connect(this);
 		try {
-			dirtyResource.connect(new XtextDocument());
+			dirtyResource.connect(getDummyDocument());
 			fail("Expected IllegalStateException");
 		} catch(IllegalStateException e) {
 			// expected
@@ -243,6 +246,14 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 
 	public List<ILexerTokenRegion> getTokens() {
 		return Collections.emptyList();
+	}
+
+	protected IXtextDocument getDummyDocument() {
+		return (IXtextDocument) Proxy.newProxyInstance(getClass().getClassLoader(), new Class<?>[]{IXtextDocument.class}, new InvocationHandler() {
+			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+				return null;
+			}
+		});
 	}
 	
 }

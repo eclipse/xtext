@@ -9,11 +9,14 @@ package org.eclipse.xtext.ui.tests.editor.model;
 
 import java.util.List;
 
+import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -22,8 +25,13 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
 	
 	public void testNoUpdateContentProcessOnReentrant() throws Exception {
 		final List<String> s = Lists.newArrayList();
-
-		final XtextDocument document = new XtextDocument() {
+		DocumentTokenSource tokenSource = new DocumentTokenSource();
+		tokenSource.setLexer(new Provider<Lexer>() {
+			public Lexer get() {
+				return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
+			}
+		});
+		final XtextDocument document = new XtextDocument(tokenSource, null) {
 			@Override
 			protected <T> void updateContentBeforeRead() {
 				s.add("x");

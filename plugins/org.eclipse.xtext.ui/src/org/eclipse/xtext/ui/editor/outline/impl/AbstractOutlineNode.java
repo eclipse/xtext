@@ -167,8 +167,4 @@ public abstract class AbstractOutlineNode implements IOutlineNode {
 		}
 	}
 
-	public <T> T modify(IUnitOfWork<T, EObject> work) {
-		throw new UnsupportedOperationException("Elements cannot be modified in content outline");
-	}
-
 }

@@ -22,7 +22,6 @@ import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPositionCategoryException;
@@ -30,11 +29,11 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
-import org.eclipse.xtext.resource.EObjectHandleImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver.Processor;
-import org.eclipse.xtext.util.concurrent.IEObjectHandle;
-import org.eclipse.xtext.util.concurrent.IStateAccess;
+import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
+import org.eclipse.xtext.ui.editor.model.edit.ReconcilingUnitOfWork;
+import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -42,15 +41,19 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
+ * @author Jan Koehnlein
  */
 public class XtextDocument extends Document implements IXtextDocument {
 
 	private DocumentTokenSource tokenSource;
 
+	private ITextEditComposer composer;
+
 	@Inject
-	public void setTokenSource(DocumentTokenSource tokenSource) {
+	public XtextDocument(DocumentTokenSource tokenSource, ITextEditComposer composer) {
 		this.tokenSource = tokenSource;
 		tokenSource.computeDamageRegion(new DocumentEvent(this, 0, getLength(), this.get()));
+		this.composer = composer;
 	}
 
 	private XtextResource resource = null;
@@ -84,6 +87,14 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
+		IUnitOfWork<T, XtextResource> reconcilingUnitOfWork = new ReconcilingUnitOfWork<T>(work, this, composer);
+		return internalModify(reconcilingUnitOfWork);
+	}
+
+	/**
+	 * Modifies the document's semantic model without reconciling the text nor the node model. For internal use only.
+	 */
+	public <T> T internalModify(IUnitOfWork<T, XtextResource> work) {
 		return stateAccess.modify(work);
 	}
 
@@ -137,7 +148,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @author Sven Efftinge - Initial contribution and API
 	 * 
 	 */
-	protected class XtextDocumentLocker extends IStateAccess.AbstractImpl<XtextResource> implements Processor {
+	protected class XtextDocumentLocker extends AbstractReadWriteAcces<XtextResource> implements Processor {
 		@Override
 		protected XtextResource getState() {
 			return resource;
@@ -211,7 +222,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public void setValidationJob(Job validationJob) {
 		this.validationJob = validationJob;
 	}
-	
+
 	public Job getValidationJob() {
 		return validationJob;
 	}
@@ -228,10 +239,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 			return (T) ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
 		}
 		return null;
-	}
-
-	public <T extends EObject> IEObjectHandle<T> createHandle(T obj) {
-		return new EObjectHandleImpl<T>(obj, this);
 	}
 
 	/*

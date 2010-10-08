@@ -19,7 +19,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
-import org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor;
+import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -29,16 +29,14 @@ import com.google.inject.Provider;
  * @author Knut Wannheden - Initial contribution and API
  * @author Jan Koehnlein
  */
-public class DefaultDocumentEditorTest extends AbstractXtextTests {
+public class XtextDocumentModifyTest extends AbstractXtextTests {
 
-	private IDocumentEditor editor;
 	private Resource resource;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
-		editor = get(IDocumentEditor.class);
 	}
 
 	public void testProcess() throws Exception {
@@ -47,14 +45,14 @@ public class DefaultDocumentEditorTest extends AbstractXtextTests {
 		IXtextDocument document = createDocument(grammar);
 		
 		final Object expected = resource.getContents().get(0);
-		Object result = editor.process(new IUnitOfWork<Object, XtextResource>() {
+		Object result = document.modify(new IUnitOfWork<Object, XtextResource>() {
 			public Object exec(XtextResource state) throws Exception {
 				assertEquals(resource, state);
 				Grammar grammar = (Grammar) state.getContents().get(0);
 				grammar.setName("foo.Bar");
 				return grammar;
 			}
-		}, document);
+		});
 
 		assertEquals(expected, result);
 		assertEquals(grammar.replaceFirst("foo\\.Foo", "foo.Bar"), document.get());
@@ -70,7 +68,7 @@ public class DefaultDocumentEditorTest extends AbstractXtextTests {
 			+ "'foo';\n" 
 			+ "Bar: 'bar';";
 		IXtextDocument document = createDocument(grammar);
-		editor.process(new IUnitOfWork<Object, XtextResource>() {
+		document.modify(new IUnitOfWork<Object, XtextResource>() {
 			public Object exec(XtextResource state) throws Exception {
 				assertEquals(resource, state);
 				Grammar grammar = (Grammar) state.getContents().get(0);
@@ -79,15 +77,21 @@ public class DefaultDocumentEditorTest extends AbstractXtextTests {
 				assignment.setFeature("foobars");
 				return grammar;
 			}
-		}, document);
+		});
 		assertEquals(grammar.replace("bars", "foobars"), document.get());
 	}
 	
 	private IXtextDocument createDocument(String model) throws Exception {
 		resource = getResource(new StringInputStream(model));
-		final XtextDocument document = new XtextDocument() {
+		DocumentTokenSource tokenSource = new DocumentTokenSource();
+		tokenSource.setLexer(new Provider<Lexer>(){
+			public Lexer get() {
+				return new InternalXtextLexer();
+			}});
+		
+		final XtextDocument document = new XtextDocument(tokenSource, get(ITextEditComposer.class)) {
 			@Override
-			public <T> T modify(IUnitOfWork<T, XtextResource> work) {
+			public <T> T internalModify(IUnitOfWork<T, XtextResource> work) {
 				try {
 					return work.exec((XtextResource) resource);
 				}
@@ -96,12 +100,6 @@ public class DefaultDocumentEditorTest extends AbstractXtextTests {
 				}
 			}
 		};
-		DocumentTokenSource tokenSource = new DocumentTokenSource();
-		tokenSource.setLexer(new Provider<Lexer>(){
-			public Lexer get() {
-				return new InternalXtextLexer();
-			}});
-		document.setTokenSource(tokenSource);
 		document.set(model);
 		return document;
 	}

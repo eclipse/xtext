@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.IDocumentListener;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
-import org.eclipse.xtext.util.concurrent.IEObjectHandle;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
@@ -242,11 +240,6 @@ public abstract class AbstractDocumentSimulatingTest extends AbstractXtextTests 
 
 	public void addXtextDocumentContentObserver(IXtextDocumentContentObserver listener) {
 		fail("Unexpected call");
-	}
-
-	public <T extends EObject> IEObjectHandle<T> createHandle(T obj) {
-		fail("Unexpected call");
-		return null;
 	}
 
 	public <T> T getAdapter(Class<T> adapterType) {

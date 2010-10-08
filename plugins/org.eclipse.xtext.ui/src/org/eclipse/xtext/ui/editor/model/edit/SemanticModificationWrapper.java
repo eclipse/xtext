@@ -21,22 +21,20 @@ public class SemanticModificationWrapper implements IModification {
 
 	private ISemanticModification semanticModification;
 	
-	private IDocumentEditor documentEditor;
 	
-	public SemanticModificationWrapper(URI uriToProblem, ISemanticModification semanticModification, IDocumentEditor documentEditor) {
+	public SemanticModificationWrapper(URI uriToProblem, ISemanticModification semanticModification) {
 		this.semanticModification = semanticModification;
 		this.uriToProblem = uriToProblem;
-		this.documentEditor = documentEditor;
 	}
 
 	public void apply(final IModificationContext context) {
-		documentEditor.process(new IUnitOfWork.Void<XtextResource>() {
+		context.getXtextDocument().modify(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource state) throws Exception {
 				EObject eObject = state.getEObject(uriToProblem.fragment());
 				semanticModification.apply(eObject, context);
 			}
-		}, context.getXtextDocument());
+		});
 	}
 
 }

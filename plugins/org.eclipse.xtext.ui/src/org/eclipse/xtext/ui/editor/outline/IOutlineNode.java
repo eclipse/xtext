@@ -13,7 +13,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.concurrent.IStateAccess;
+import org.eclipse.xtext.util.concurrent.IReadAccess;
 
 /**
  * A model for a node in the outline. Implementors must inherit from
@@ -21,7 +21,7 @@ import org.eclipse.xtext.util.concurrent.IStateAccess;
  * 
  * @author koehnlein - Initial contribution and API
  */
-public interface IOutlineNode extends IAdaptable, IStateAccess<EObject> {
+public interface IOutlineNode extends IAdaptable, IReadAccess<EObject> {
 
 	Object getText();
 

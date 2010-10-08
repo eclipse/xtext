@@ -66,14 +66,13 @@ public class DocumentPartitionerTest extends TestCase {
 		PartitionTokenScanner scanner = new PartitionTokenScanner();
 		scanner.setMapper(mapper);
 		DocumentPartitioner partitioner = new DocumentPartitioner(scanner, mapper);
-		XtextDocument document = new XtextDocument();
 		DocumentTokenSource tokenSource = new DocumentTokenSource();
 		tokenSource.setLexer(new Provider<Lexer>() {
 			public Lexer get() {
 				return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
 			}
 		});
-		document.setTokenSource(tokenSource);
+		XtextDocument document = new XtextDocument(tokenSource, null);
 		document.setDocumentPartitioner(partitioner);
 		partitioner.connect(document);
 		document.set(s);
