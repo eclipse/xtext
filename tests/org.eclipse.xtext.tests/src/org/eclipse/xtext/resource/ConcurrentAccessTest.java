@@ -24,7 +24,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
-import org.eclipse.xtext.util.concurrent.IStateAccess;
+import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
+import org.eclipse.xtext.util.concurrent.IReadAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Lists;
@@ -168,7 +169,7 @@ public class ConcurrentAccessTest extends TestCase {
 	 * @return <code>true</code> if everything was ok.
 	 */
 	protected boolean resolveAllSupertypesStateAccess(final EPackage pack) throws InterruptedException {
-		final IStateAccess<EPackage> stateAccess = new IStateAccess.AbstractImpl<EPackage>() {
+		final IReadAccess<EPackage> stateAccess = new AbstractReadWriteAcces<EPackage>() {
 			@Override
 			protected EPackage getState() {
 				return pack;
