@@ -38,6 +38,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal.IReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Builder;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
@@ -142,7 +143,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	}
 
 	protected void searchAndCreateProposals(IJavaSearchScope scope, final ICompletionProposalFactory proposalFactory,
-			final ContentAssistContext context, EReference typeReference, final Filter filter, final ICompletionProposalAcceptor acceptor) throws JavaModelException {
+			ContentAssistContext context, EReference typeReference, final Filter filter, final ICompletionProposalAcceptor acceptor) throws JavaModelException {
 		String prefix = context.getPrefix();
 		String[] split = prefix.split("\\.");
 		char[] typeName = null;
@@ -172,60 +173,58 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 				super.accept(proposal);
 			}
 		};
+		Builder contextBuilder = context.copy();
 		final PrefixMatcher original = context.getMatcher();
-		try {
-			context.setMatcher(new PrefixMatcher() {
-				@Override
-				public boolean isCandidateMatchingPrefix(String name, String prefix) {
-					if (original.isCandidateMatchingPrefix(name, prefix))
+		contextBuilder.setMatcher(new PrefixMatcher() {
+			@Override
+			public boolean isCandidateMatchingPrefix(String name, String prefix) {
+				if (original.isCandidateMatchingPrefix(name, prefix))
+					return true;
+				String sub = name;
+				int delimiter = sub.indexOf('.');
+				while(delimiter != -1) {
+					sub = sub.substring(delimiter + 1);
+					if (original.isCandidateMatchingPrefix(sub, prefix))
 						return true;
-					String sub = name;
-					int delimiter = sub.indexOf('.');
-					while(delimiter != -1) {
-						sub = sub.substring(delimiter + 1);
-						if (original.isCandidateMatchingPrefix(sub, prefix))
-							return true;
-						delimiter = sub.indexOf('.');
-					}
-					return false;
+					delimiter = sub.indexOf('.');
 				}
-			});
-			SearchEngine searchEngine = new SearchEngine();
-			searchEngine.searchAllTypeNames(
-					packageName, SearchPattern.R_PATTERN_MATCH, 
-					typeName, SearchPattern.R_PREFIX_MATCH, 
-					IJavaSearchConstants.TYPE, scope, 
-					new TypeNameRequestor() {
-						@Override
-						public void acceptType(int modifiers,
-								char[] packageName, char[] simpleTypeName,
-								char[][] enclosingTypeNames, String path) {
-							if (filter.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
-								StringBuilder fqName = new StringBuilder(packageName.length + simpleTypeName.length + 1);
-								if (packageName.length != 0) {
-									fqName.append(packageName);
-									fqName.append('.');
-								}
-								for(char[] enclosingType: enclosingTypeNames) {
-									fqName.append(enclosingType);
-									fqName.append('$');
-								}
-								fqName.append(simpleTypeName);
-								String fqNameAsString = fqName.toString();
-								createTypeProposal(fqNameAsString, modifiers, enclosingTypeNames.length>0, proposalFactory, context, scopeAware);
+				return false;
+			}
+		});
+		final ContentAssistContext myContext = contextBuilder.toContext();
+		SearchEngine searchEngine = new SearchEngine();
+		searchEngine.searchAllTypeNames(
+				packageName, SearchPattern.R_PATTERN_MATCH, 
+				typeName, SearchPattern.R_PREFIX_MATCH, 
+				IJavaSearchConstants.TYPE, scope, 
+				new TypeNameRequestor() {
+					@Override
+					public void acceptType(int modifiers,
+							char[] packageName, char[] simpleTypeName,
+							char[][] enclosingTypeNames, String path) {
+						if (filter.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
+							StringBuilder fqName = new StringBuilder(packageName.length + simpleTypeName.length + 1);
+							if (packageName.length != 0) {
+								fqName.append(packageName);
+								fqName.append('.');
 							}
+							for(char[] enclosingType: enclosingTypeNames) {
+								fqName.append(enclosingType);
+								fqName.append('$');
+							}
+							fqName.append(simpleTypeName);
+							String fqNameAsString = fqName.toString();
+							createTypeProposal(fqNameAsString, modifiers, enclosingTypeNames.length>0, proposalFactory, myContext, scopeAware);
 						}
-					}, 
-					IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, 
-					new NullProgressMonitor() {
-						@Override
-						public boolean isCanceled() {
-							return !acceptor.canAcceptMoreProposals();
-						}
-					});
-		} finally {
-			context.setMatcher(original);
-		}
+					}
+				}, 
+				IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, 
+				new NullProgressMonitor() {
+					@Override
+					public boolean isCanceled() {
+						return !acceptor.canAcceptMoreProposals();
+					}
+				});
 	}
 
 	public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context, 

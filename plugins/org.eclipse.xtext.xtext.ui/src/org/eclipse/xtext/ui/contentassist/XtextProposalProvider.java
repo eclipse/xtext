@@ -251,15 +251,15 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	public void completeTypeRef_Classifier(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		Grammar grammar = GrammarUtil.getGrammar(model);
-		ContentAssistContext myContext = context.copy();
-		myContext.setMatcher(new ClassifierPrefixMatcher(context.getMatcher(), getQualifiedNameSupport()));
+		ContentAssistContext.Builder myContextBuilder = context.copy();
+		myContextBuilder.setMatcher(new ClassifierPrefixMatcher(context.getMatcher(), getQualifiedNameSupport()));
 		if (model instanceof TypeRef) {
 			CompositeNode node = NodeUtil.getNodeAdapter(model).getParserNode();
 			int offset = node.getOffset();
-			Region replaceRegion = new Region(offset, myContext.getReplaceRegion().getLength()
-					+ myContext.getReplaceRegion().getOffset() - offset);
-			myContext.setReplaceRegion(replaceRegion);
-			myContext.setLastCompleteNode(node);
+			Region replaceRegion = new Region(offset, context.getReplaceRegion().getLength()
+					+ context.getReplaceRegion().getOffset() - offset);
+			myContextBuilder.setReplaceRegion(replaceRegion);
+			myContextBuilder.setLastCompleteNode(node);
 			StringBuilder availablePrefix = new StringBuilder(4);
 			for (LeafNode leaf : node.getLeafNodes()) {
 				if (leaf.getGrammarElement() != null && !leaf.isHidden()) {
@@ -272,8 +272,9 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 				if (leaf.getTotalOffset() >= context.getOffset())
 					break;
 			}
-			myContext.setPrefix(availablePrefix.toString());
+			myContextBuilder.setPrefix(availablePrefix.toString());
 		}
+		ContentAssistContext myContext = myContextBuilder.toContext();
 		for (AbstractMetamodelDeclaration declaration : grammar.getMetamodelDeclarations()) {
 			if (declaration.getEPackage() != null) {
 				createClassifierProposals(declaration, model, myContext, acceptor);
