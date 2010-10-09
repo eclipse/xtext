@@ -195,65 +195,123 @@ public class ContentAssistContext {
 	@Inject
 	private Provider<Builder> builderProvider;
 	
+	/**
+	 * Protected contructor to allow subclassing.
+	 */
 	protected ContentAssistContext() {
 		super();
 		mutableFirstSetGrammarElements = Lists.newArrayList();
 	}
-	
+
+	/**
+	 * Use this context as prototype for a new mutable builder. The new builder is
+	 * pre-populated with the current settings of this context instance.
+	 */
 	public ContentAssistContext.Builder copy() {
 		Builder result = builderProvider.get();
 		result.copyFrom(this);
 		return result;
 	}
 
+	/**
+	 * The prefix string that is used to match the validity of proposals. By default, the 
+	 * complete prefix will be overridden in the document when a proposal is applied.
+	 * The prefix may be empty but is never <code>null</code>.  
+	 */
 	public String getPrefix() {
 		return prefix;
 	}
 
+	/**
+	 * The root model in the resource. May be <code>null</code>.
+	 */
 	public EObject getRootModel() {
 		return rootModel;
 	}
 
+	/**
+	 * The root node in the resource. May be <code>null</code>.
+	 */
 	public CompositeNode getRootNode() {
 		return rootNode;
 	}
 	
+	/**
+	 * The current node which is part of the current completion offset. The total offset of the 
+	 * current node may be equal to the completion offset.  
+	 */
 	public AbstractNode getCurrentNode() {
 		return currentNode;
 	}
 
+	/**
+	 * The completion offset in the text viewer. If the text viewer has a non-empty text selection, the offset
+	 * will be the beginning of the selection.
+	 */
 	public int getOffset() {
 		return offset;
 	}
 	
+	/**
+	 * The actual text viewer.
+	 */
 	public ITextViewer getViewer() {
 		return viewer;
 	}
 	
+	/**
+	 * The actual document.
+	 */
 	public IXtextDocument getDocument() {
 		return (IXtextDocument) viewer.getDocument();
 	}
 	
+	/**
+	 * The last non-hidden node before the offset that is considered to be complete.
+	 */
 	public AbstractNode getLastCompleteNode() {
 		return lastCompleteNode;
 	}
-	
+
+	/**
+	 * The model that covers the completion offset and has a grammar element assigned
+	 * that has the expected grammar element at the given offset in its call hierarchy.
+	 * Thereby it may be a parent of the actual model element at the given offset due to
+	 * alternative decisions of the parser or actions.
+	 * @see #getPreviousModel()
+	 */
 	public EObject getCurrentModel() {
 		return currentModel;
 	}
 	
+	/**
+	 * The model element that is valid for the position left of the completion offset. 
+	 * It is likely to be the same as the current model. However, as the call hierarchy of
+	 * the grammar elements is ignored (in contrast to {@link #getCurrentModel()}, 
+	 * it may provide addition information.
+	 * @see #getCurrentModel()
+	 */
 	public EObject getPreviousModel() {
 		return previousModel;
 	}
 
+	/**
+	 * The region in the document that will be replaced by a new completion proposal.
+	 */
 	public Region getReplaceRegion() {
 		return replaceRegion;
 	}
 
+	/**
+	 * The currently selected text.
+	 */
 	public String getSelectedText() {
 		return selectedText;
 	}
 
+	/**
+	 * The grammar elements that may occur at the given offset.
+	 */
 	public ImmutableList<AbstractElement> getFirstSetGrammarElements() {
 		if (firstSetGrammarElements == null) {
 			firstSetGrammarElements = ImmutableList.copyOf(mutableFirstSetGrammarElements);
@@ -261,10 +319,18 @@ public class ContentAssistContext {
 		return firstSetGrammarElements;
 	}
 
+	/**
+	 * The matching algorithm to choose proposals according to the completion prefix.
+	 * @see FQNPrefixMatcher
+	 */
 	public PrefixMatcher getMatcher() {
 		return matcher;
 	}
 
+	/**
+	 * The length of the region left to the completion offset that is part of the 
+	 * replace region.
+	 */
 	public int getReplaceContextLength() {
 		if (replaceContextLength == null) {
 			int replacementOffset = getReplaceRegion().getOffset();
@@ -275,6 +341,9 @@ public class ContentAssistContext {
 		return replaceContextLength.intValue();
 	}
 
+	/**
+	 * The resource. Is never <code>null</code>.
+	 */
 	public XtextResource getResource() {
 		return resource;
 	}
