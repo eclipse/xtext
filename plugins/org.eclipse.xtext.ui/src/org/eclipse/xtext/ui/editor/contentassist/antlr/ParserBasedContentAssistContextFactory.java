@@ -181,7 +181,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		protected void handleLastCompleteNodeIsPartOfLookahead() throws BadLocationException {
 			// do not calculate twice for the same input
 			if (!(lastCompleteNode instanceof LeafNode && ((LeafNode) lastCompleteNode).isHidden())) {
-				createContextsForLastCompleteNode();
+				createContextsForLastCompleteNode(currentModel);
 			}
 		}
 
@@ -196,15 +196,15 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			doCreateContexts(previousNode, currentDatatypeNode, prefix, previousModel, followElements);
 			
 			if (lastCompleteNode instanceof LeafNode && lastCompleteNode.getGrammarElement() == null && contextBuilders.size() != prevSize) {
-				handleLastCompleteNodeHasNoGrammarElement(contextBuilders.subList(prevSize, contextBuilders.size()));
+				handleLastCompleteNodeHasNoGrammarElement(contextBuilders.subList(prevSize, contextBuilders.size()), previousModel);
 			}
 		}
 
-		protected void handleLastCompleteNodeHasNoGrammarElement(List<Builder> contextBuilderToCheck) throws BadLocationException {
+		protected void handleLastCompleteNodeHasNoGrammarElement(List<Builder> contextBuilderToCheck, EObject previousModel) throws BadLocationException {
 			List<ContentAssistContext> newContexts = Lists.transform(contextBuilderToCheck, this);
 			boolean wasValid = isLikelyToBeValidProposal(lastCompleteNode, newContexts);
 			if (wasValid && !(lastCompleteNode instanceof LeafNode && ((LeafNode) lastCompleteNode).isHidden())) {
-				createContextsForLastCompleteNode();
+				createContextsForLastCompleteNode(previousModel);
 			}
 		}
 
@@ -230,11 +230,11 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			return false;
 		}
 
-		protected void createContextsForLastCompleteNode() throws BadLocationException {
+		protected void createContextsForLastCompleteNode(EObject previousModel) throws BadLocationException {
 			String prefix = "";
 			String completeInput = viewer.getDocument().get(0, completionOffset);
 			Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
-			doCreateContexts(lastCompleteNode, currentNode, prefix, currentModel, followElements);
+			doCreateContexts(lastCompleteNode, currentNode, prefix, previousModel, followElements);
 		}
 
 		protected void doCreateContexts(
@@ -246,7 +246,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			Multimap<EObject, AbstractElement> contextMap = computeCurrentModel(previousModel, lastCompleteNode, followElementAsAbstractElements);
 			currentNode = getContainingDatatypeRuleNode(currentNode);
 			for (Entry<EObject, Collection<AbstractElement>> entry : contextMap.asMap().entrySet()) {
-				ContentAssistContext.Builder contextBuilder = doCreateContext(lastCompleteNode, entry.getKey(), currentNode, prefix);
+				ContentAssistContext.Builder contextBuilder = doCreateContext(lastCompleteNode, entry.getKey(), previousModel, currentNode, prefix);
 				for(AbstractElement element: entry.getValue()) {
 					contextBuilder.accept(element);
 				}
@@ -355,7 +355,8 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 
 		public ContentAssistContext.Builder doCreateContext(
-				AbstractNode lastCompleteNode, EObject currentModel, 
+				AbstractNode lastCompleteNode, 
+				EObject currentModel, EObject previousModel,
 				AbstractNode currentNode, String prefix) {
 			ContentAssistContext.Builder context = contentAssistContextProvider.get();
 
@@ -365,6 +366,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 			context.setRootModel(parseResult.getRootASTElement());
 			context.setCurrentModel(currentModel);
+			context.setPreviousModel(previousModel);
 			context.setOffset(completionOffset);
 			context.setViewer(viewer);
 			context.setPrefix(prefix);

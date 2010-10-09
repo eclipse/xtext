@@ -124,6 +124,12 @@ public class ContentAssistContext {
 			context.currentModel = currentModel;
 			return this;
 		}
+		
+		public Builder setPreviousModel(EObject previousModel) {
+			assertCanModify();
+			context.previousModel = previousModel;
+			return this;
+		}
 
 		public Builder setReplaceRegion(Region replaceRegion) {
 			assertCanModify();
@@ -156,6 +162,7 @@ public class ContentAssistContext {
 			context.rootModel = original.rootModel;
 			context.rootNode = original.rootNode;
 			context.currentModel = original.currentModel;
+			context.previousModel = original.previousModel;
 			context.currentNode = original.currentNode;
 			context.lastCompleteNode = original.lastCompleteNode;
 			context.offset = original.offset;
@@ -173,6 +180,7 @@ public class ContentAssistContext {
 	private EObject rootModel;
 	private CompositeNode rootNode;
 	private EObject currentModel;
+	private EObject previousModel;
 	private AbstractNode currentNode;
 	private AbstractNode lastCompleteNode;
 	private int offset;
@@ -232,6 +240,10 @@ public class ContentAssistContext {
 	
 	public EObject getCurrentModel() {
 		return currentModel;
+	}
+	
+	public EObject getPreviousModel() {
+		return previousModel;
 	}
 
 	public Region getReplaceRegion() {
