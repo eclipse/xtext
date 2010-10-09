@@ -17,40 +17,35 @@ import org.eclipse.xtext.util.Strings;
  */
 public class TerminalsProposalProvider extends AbstractJavaBasedContentProposalProvider {
 	
-	public void complete_ID(EObject model, RuleCall ruleCall, ContentAssistContext context,
+	public void complete_ID(EObject model, RuleCall ruleCall, final ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (doCreateIdProposals()) {
-			final PrefixMatcher oldMatcher = context.getMatcher();
-			try {
-				PrefixMatcher newMatcher = new PrefixMatcher() {
-					@Override
-					public boolean isCandidateMatchingPrefix(String name, String prefix) {
-						String strippedName = name;
-						if (name.startsWith("^") && !prefix.startsWith("^")) {
-							strippedName = name.substring(1);
-						}
-						return oldMatcher.isCandidateMatchingPrefix(strippedName, prefix);
+			PrefixMatcher newMatcher = new PrefixMatcher() {
+				@Override
+				public boolean isCandidateMatchingPrefix(String name, String prefix) {
+					String strippedName = name;
+					if (name.startsWith("^") && !prefix.startsWith("^")) {
+						strippedName = name.substring(1);
 					}
-				};
-				context.setMatcher(newMatcher);
-				String feature = getAssignedFeature(ruleCall);
-				String proposalText = feature != null ? feature : Strings.toFirstUpper(ruleCall.getRule().getName().toLowerCase());
-				String displayText = proposalText;
-				if (feature != null)
-					displayText = proposalText + " - " + ruleCall.getRule().getName();
-				proposalText = getValueConverter().toString(proposalText, ruleCall.getRule().getName());
-				ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
-				if (proposal instanceof ConfigurableCompletionProposal) {
-					ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
-					configurable.setSelectionStart(configurable.getReplacementOffset());
-					configurable.setSelectionLength(proposalText.length());
-					configurable.setAutoInsertable(false);
-					configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
+					return context.getMatcher().isCandidateMatchingPrefix(strippedName, prefix);
 				}
-				acceptor.accept(proposal);
-			} finally {
-				context.setMatcher(oldMatcher);
+			};
+			ContentAssistContext myContext = context.copy().setMatcher(newMatcher).toContext();
+			String feature = getAssignedFeature(ruleCall);
+			String proposalText = feature != null ? feature : Strings.toFirstUpper(ruleCall.getRule().getName().toLowerCase());
+			String displayText = proposalText;
+			if (feature != null)
+				displayText = proposalText + " - " + ruleCall.getRule().getName();
+			proposalText = getValueConverter().toString(proposalText, ruleCall.getRule().getName());
+			ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, myContext);
+			if (proposal instanceof ConfigurableCompletionProposal) {
+				ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
+				configurable.setSelectionStart(configurable.getReplacementOffset());
+				configurable.setSelectionLength(proposalText.length());
+				configurable.setAutoInsertable(false);
+				configurable.setSimpleLinkedMode(myContext.getViewer(), '\t', ' ');
 			}
+			acceptor.accept(proposal);
 		}
 	}
 	

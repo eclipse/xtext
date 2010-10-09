@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.contentassist;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -19,8 +18,11 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Abstraction of a commonly used set of attributes related to the current content assist request.
@@ -28,7 +30,7 @@ import com.google.inject.Inject;
  * @author Michael Clay - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public class ContentAssistContext implements IFollowElementAcceptor {
+public class ContentAssistContext {
 
 	private static final ContentAssistContext[] EMPTY_ARRAY = new ContentAssistContext[0];
 	
@@ -45,6 +47,127 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 		}
 	}
 	
+	public static class Builder implements IFollowElementAcceptor {
+		
+		@Inject
+		private ContentAssistContext context;
+		
+		private boolean contextQueried = false;
+
+		protected void assertCanModify() {
+			if (contextQueried)
+				throw new IllegalStateException("Cannot modify externally visible context. Use this.toContext().copy() instead.");
+		}
+		
+		protected ContentAssistContext get() {
+			return context;
+		}
+		
+		public ContentAssistContext toContext() {
+			contextQueried = true;
+			return context;
+		}
+		
+		public Builder setPrefix(String prefix) {
+			assertCanModify();
+			context.prefix = prefix;
+			return this;
+		}
+		
+		public Builder setRootModel(EObject rootModel) {
+			assertCanModify();
+			context.rootModel = rootModel;
+			return this;
+		}
+
+		public Builder setRootNode(CompositeNode rootNode) {
+			assertCanModify();
+			context.rootNode = rootNode;
+			return this;
+		}
+		
+		public Builder setCurrentNode(AbstractNode currentNode) {
+			assertCanModify();
+			context.currentNode = currentNode;
+			context.replaceContextLength = null;
+			return this;
+		}
+
+		public Builder setOffset(int offset) {
+			assertCanModify();
+			context.offset = offset;
+			return this;
+		}
+
+		public Builder setViewer(ITextViewer viewer) {
+			assertCanModify();
+			context.viewer = viewer;
+			return this;
+		}
+		
+		public void accept(AbstractElement element) {
+			if (element == null)
+				throw new NullPointerException("element may not be null");
+			assertCanModify();
+			context.firstSetGrammarElements = null;
+			context.mutableFirstSetGrammarElements.add(element);
+		}
+
+		public Builder setLastCompleteNode(AbstractNode lastCompleteNode) {
+			assertCanModify();
+			context.lastCompleteNode = lastCompleteNode;
+			return this;
+		}
+
+		public Builder setCurrentModel(EObject currentModel) {
+			assertCanModify();
+			context.currentModel = currentModel;
+			return this;
+		}
+
+		public Builder setReplaceRegion(Region replaceRegion) {
+			assertCanModify();
+			context.replaceRegion = replaceRegion;
+			context.replaceContextLength = null;
+			return this;
+		}
+		
+		public Builder setSelectedText(String selectedText) {
+			assertCanModify();
+			context.selectedText = selectedText;
+			return this;
+		}
+		
+		public Builder setMatcher(PrefixMatcher matcher) {
+			assertCanModify();
+			context.matcher = matcher;
+			return this;
+		}
+		
+		public Builder setResource(XtextResource resource) {
+			assertCanModify();
+			context.resource = resource;
+			return this;
+		}
+
+		protected void copyFrom(ContentAssistContext original) {
+			context.prefix = original.prefix;
+			context.selectedText = original.selectedText;
+			context.rootModel = original.rootModel;
+			context.rootNode = original.rootNode;
+			context.currentModel = original.currentModel;
+			context.currentNode = original.currentNode;
+			context.lastCompleteNode = original.lastCompleteNode;
+			context.offset = original.offset;
+			context.resource = original.resource;
+			context.viewer = original.viewer;
+			context.replaceRegion = original.replaceRegion;
+			context.replaceContextLength = original.replaceContextLength;
+			context.matcher = original.matcher;
+			context.mutableFirstSetGrammarElements.addAll(original.mutableFirstSetGrammarElements);	
+		}
+	}
+	
 	private String prefix;
 	private String selectedText;
 	private EObject rootModel;
@@ -58,30 +181,20 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 	private Region replaceRegion;
 	private Integer replaceContextLength;
 	private PrefixMatcher matcher;
-	private final List<AbstractElement> firstSetGrammarElements;
+	private ImmutableList<AbstractElement> firstSetGrammarElements;
+	private List<AbstractElement> mutableFirstSetGrammarElements;
 	
 	@Inject
-	public ContentAssistContext() {
+	private Provider<Builder> builderProvider;
+	
+	protected ContentAssistContext() {
 		super();
-		firstSetGrammarElements = new ArrayList<AbstractElement>();
+		mutableFirstSetGrammarElements = Lists.newArrayList();
 	}
 	
-	public ContentAssistContext copy() {
-		ContentAssistContext result = new ContentAssistContext();
-		result.prefix = prefix;
-		result.selectedText = selectedText;
-		result.rootModel = rootModel;
-		result.rootNode = rootNode;
-		result.currentModel = currentModel;
-		result.currentNode = currentNode;
-		result.lastCompleteNode = lastCompleteNode;
-		result.offset = offset;
-		result.resource = resource;
-		result.viewer = viewer;
-		result.replaceRegion = replaceRegion;
-		result.replaceContextLength = replaceContextLength;
-		result.matcher = matcher;
-		result.firstSetGrammarElements.addAll(firstSetGrammarElements);
+	public ContentAssistContext.Builder copy() {
+		Builder result = builderProvider.get();
+		result.copyFrom(this);
 		return result;
 	}
 
@@ -89,47 +202,22 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 		return prefix;
 	}
 
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
-
 	public EObject getRootModel() {
 		return rootModel;
-	}
-
-	public void setRootModel(EObject rootModel) {
-		this.rootModel = rootModel;
 	}
 
 	public CompositeNode getRootNode() {
 		return rootNode;
 	}
-
-	public void setRootNode(CompositeNode rootNode) {
-		this.rootNode = rootNode;
-	}
-
+	
 	public AbstractNode getCurrentNode() {
 		return currentNode;
-	}
-
-	public void setCurrentNode(AbstractNode currentNode) {
-		this.currentNode = currentNode;
-		this.replaceContextLength = null;
 	}
 
 	public int getOffset() {
 		return offset;
 	}
-
-	public void setOffset(int offset) {
-		this.offset = offset;
-	}
-
-	public void setViewer(ITextViewer viewer) {
-		this.viewer = viewer;
-	}
-
+	
 	public ITextViewer getViewer() {
 		return viewer;
 	}
@@ -138,51 +226,27 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 		return (IXtextDocument) viewer.getDocument();
 	}
 	
-	public void accept(AbstractElement element) {
-		if (element == null)
-			throw new NullPointerException("element may not be null");
-		getFirstSetGrammarElements().add(element);
-	}
-
-	public void setLastCompleteNode(AbstractNode lastCompleteNode) {
-		this.lastCompleteNode = lastCompleteNode;
-	}
-
 	public AbstractNode getLastCompleteNode() {
 		return lastCompleteNode;
 	}
-
-	public void setCurrentModel(EObject currentModel) {
-		this.currentModel = currentModel;
-	}
-
+	
 	public EObject getCurrentModel() {
 		return currentModel;
-	}
-
-	public void setReplaceRegion(Region replaceRegion) {
-		this.replaceRegion = replaceRegion;
-		this.replaceContextLength = null;
 	}
 
 	public Region getReplaceRegion() {
 		return replaceRegion;
 	}
 
-	public void setSelectedText(String selectedText) {
-		this.selectedText = selectedText;
-	}
-
 	public String getSelectedText() {
 		return selectedText;
 	}
 
-	public List<AbstractElement> getFirstSetGrammarElements() {
+	public ImmutableList<AbstractElement> getFirstSetGrammarElements() {
+		if (firstSetGrammarElements == null) {
+			firstSetGrammarElements = ImmutableList.copyOf(mutableFirstSetGrammarElements);
+		}
 		return firstSetGrammarElements;
-	}
-
-	public void setMatcher(PrefixMatcher matcher) {
-		this.matcher = matcher;
 	}
 
 	public PrefixMatcher getMatcher() {
@@ -197,10 +261,6 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 			return replaceContextLength;
 		}
 		return replaceContextLength.intValue();
-	}
-
-	public void setResource(XtextResource resource) {
-		this.resource = resource;
 	}
 
 	public XtextResource getResource() {
