@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -53,12 +52,10 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Builder;
 import org.eclipse.xtext.ui.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -299,16 +296,16 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 
 		protected void computeFollowElements(FollowElementCalculator calculator, FollowElement element) {
-			computeFollowElements(calculator, element, Sets.<Pair<Integer, AbstractElement>>newHashSet());
+			Multimap<Integer, List<AbstractElement>> visited = HashMultimap.create();
+			computeFollowElements(calculator, element, visited);
 		}
 		
-		protected void computeFollowElements(FollowElementCalculator calculator, FollowElement element, Set<Pair<Integer, AbstractElement>> handled) {
-			if (!handled.add(Tuples.create(element.getLookAhead(), element.getGrammarElement())))
+		protected void computeFollowElements(FollowElementCalculator calculator, FollowElement element, Multimap<Integer, List<AbstractElement>> visited) {
+			List<AbstractElement> currentState = Lists.newArrayList(element.getLocalTrace());
+			currentState.add(element.getGrammarElement());
+			if (!visited.put(element.getLookAhead(), currentState))
 				return;
 			if (element.getLookAhead() <= 1) {
-				Iterable<AbstractElement> currentState = Iterables.concat(
-						element.getLocalTrace(), 
-						Collections.singleton(element.getGrammarElement()));
 				for(AbstractElement abstractElement: currentState) {
 					Assignment ass = EcoreUtil2.getContainerOfType(abstractElement, Assignment.class);
 					if (ass != null)
@@ -336,7 +333,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			Collection<FollowElement> followElements = parser.getFollowElements(element);
 			for(FollowElement newElement: followElements) {
 				if (newElement.getLookAhead() != element.getLookAhead() || newElement.getGrammarElement() != element.getGrammarElement())
-					computeFollowElements(calculator, newElement, handled);
+					computeFollowElements(calculator, newElement, visited);
 			}
 		}
 
