@@ -236,7 +236,7 @@
 				<filename name="*-Update*.zip" />
 			</fileset>
 		</unzip>
-		<p2.composite.repository destination="${composite.repository.url}">
+		<p2.composite.repository name="TMF Xtext Update Site (${composite.repository.base})" destination="${composite.repository.url}">
 			<add>
  				<repository location="${saved.build.id}" />
 			</add>
