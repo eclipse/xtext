@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2010/tmf/xtext/beeLangTestLanguage" 
+       class = "org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage"
+       genModel = "org/eclipse/xtext/testlanguages/backtracking/BeeLangTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+
+
+
+
+
+
+
+
+</plugin>

@@ -4,16 +4,16 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
-grammar org.eclipse.xtext.parser.unorderedGroups.BacktrackingTestLanguage with org.eclipse.xtext.common.Terminals
+grammar org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage with org.eclipse.xtext.common.Terminals
 
-generate backtrackingTestLanguage "http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage"
+generate beeLangTestLanguage "http://www.eclipse.org/2010/tmf/xtext/beeLangTestLanguage"
 
-// Initially copied from B3.xtext rev 1029
+// Initially copied from BeeLang.xtext rev 1029
  
 Model:
-	(units += Unit)*
+	  (units += Unit)*
+	| (functions += Function)*
 	;
 
 Unit : {Unit}
@@ -260,8 +260,9 @@ KeywordVariables returns  Expression : {VariableExpression}
 
 FeatureCall returns Expression :
 	OperationCall
-	| ({CallFeature} "." name=ID  "(" (parameterList = ParameterList)? ")")
-	| ({FeatureExpression} "." featureName=ID)
+// Removed (see BeeLang rev 1333)
+//	| ({CallFeature} "." name=ID  "(" (parameterList = ParameterList)? ")")
+//	| ({FeatureExpression} "." featureName=ID)
 	;
 	
 OperationCall returns CallExpression : {CallNamedFunction}

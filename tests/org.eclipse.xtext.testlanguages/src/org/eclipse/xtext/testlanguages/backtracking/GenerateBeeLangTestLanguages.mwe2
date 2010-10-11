@@ -1,0 +1,5 @@
+module org.eclipse.xtext.testlanguages.backtracking.GenerateBacktrackingTestLanguages
+
+org.eclipse.xtext.generator.CompositeGeneratorFragment {
+	
+}
