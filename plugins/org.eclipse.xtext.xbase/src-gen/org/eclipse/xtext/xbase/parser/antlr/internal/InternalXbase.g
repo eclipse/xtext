@@ -3509,10 +3509,10 @@ ruleXTryCatchFinallyExpression returns [EObject current=null]
 	    }
 
 )
-)(
+)(((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesXCatchClauseParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesXCatchClauseParserRuleCall_2_0_0_0(), currentNode); 
 	    }
 		lv_catchClauses_2_0=ruleXCatchClause		{
 	        if ($current==null) {
@@ -3533,14 +3533,14 @@ ruleXTryCatchFinallyExpression returns [EObject current=null]
 	    }
 
 )
-)*(	'finally' 
+)+(	'finally' 
     {
-        createLeafNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_3_0(), null); 
+        createLeafNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_0_1_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_3_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_2_0_1_1_0(), currentNode); 
 	    }
 		lv_finallyExpression_4_0=ruleXExpression		{
 	        if ($current==null) {
@@ -3562,6 +3562,35 @@ ruleXTryCatchFinallyExpression returns [EObject current=null]
 
 )
 ))?)
+    |(	'finally' 
+    {
+        createLeafNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_1_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_2_1_1_0(), currentNode); 
+	    }
+		lv_finallyExpression_6_0=ruleXExpression		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getXTryCatchFinallyExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"finallyExpression",
+	        		lv_finallyExpression_6_0, 
+	        		"XExpression", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))))
 ;
 
 

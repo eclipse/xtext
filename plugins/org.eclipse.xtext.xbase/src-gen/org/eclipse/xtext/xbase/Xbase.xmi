@@ -794,13 +794,23 @@
         <elements xsi:type="xtext:Assignment" feature="expression" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
         </elements>
-        <elements xsi:type="xtext:Assignment" cardinality="*" feature="catchClauses" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.43"/>
-        </elements>
-        <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="finally"/>
-          <elements xsi:type="xtext:Assignment" feature="finallyExpression" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Assignment" cardinality="+" feature="catchClauses" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.43"/>
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="?">
+              <elements xsi:type="xtext:Keyword" value="finally"/>
+              <elements xsi:type="xtext:Assignment" feature="finallyExpression" operator="=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+              </elements>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="finally"/>
+            <elements xsi:type="xtext:Assignment" feature="finallyExpression" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+            </elements>
           </elements>
         </elements>
       </alternatives>

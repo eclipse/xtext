@@ -180,8 +180,11 @@ XThrowExpression:
 XTryCatchFinallyExpression:
 	'try' 
 		expression=XExpression
-	(catchClauses+=XCatchClause)*
-	('finally' finallyExpression=XExpression)?;
+	(
+		(catchClauses+=XCatchClause)+
+		('finally' finallyExpression=XExpression)?
+	|	'finally' finallyExpression=XExpression
+	);
 	
 XCatchClause :
 	'catch' '(' declaredParam=JvmFormalParameter ')' expression=XExpression;

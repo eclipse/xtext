@@ -898,7 +898,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XTryCatchFinallyExpression:
-	//	"try" expression=XExpression catchClauses+=XCatchClause* ("finally" finallyExpression=XExpression)?;
+	//	"try" expression=XExpression (catchClauses+=XCatchClause+ ("finally" finallyExpression=XExpression)? | "finally"
+	//	finallyExpression=XExpression);
 	public XbaseGrammarAccess.XTryCatchFinallyExpressionElements getXTryCatchFinallyExpressionAccess() {
 		return gaXbase.getXTryCatchFinallyExpressionAccess();
 	}

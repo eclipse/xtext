@@ -9522,11 +9522,13 @@ protected class XThrowExpression_ExpressionAssignment_1 extends AssignmentToken 
 /************ begin Rule XTryCatchFinallyExpression ****************
  *
  * XTryCatchFinallyExpression:
- * 	"try" expression=XExpression catchClauses+=XCatchClause* ("finally" finallyExpression=XExpression)?;
+ * 	"try" expression=XExpression (catchClauses+=XCatchClause+ ("finally" finallyExpression=XExpression)? | "finally"
+ * 	finallyExpression=XExpression);
  *
  **/
 
-// "try" expression=XExpression catchClauses+=XCatchClause* ("finally" finallyExpression=XExpression)?
+// "try" expression=XExpression (catchClauses+=XCatchClause+ ("finally" finallyExpression=XExpression)? | "finally"
+// finallyExpression=XExpression)
 protected class XTryCatchFinallyExpression_Group extends GroupToken {
 	
 	public XTryCatchFinallyExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9541,9 +9543,7 @@ protected class XTryCatchFinallyExpression_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XTryCatchFinallyExpression_Group_3(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XTryCatchFinallyExpression_CatchClausesAssignment_2(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new XTryCatchFinallyExpression_ExpressionAssignment_1(lastRuleCallOrigin, this, 2, inst);
+			case 0: return new XTryCatchFinallyExpression_Alternatives_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -9624,16 +9624,62 @@ protected class XTryCatchFinallyExpression_ExpressionAssignment_1 extends Assign
 	}	
 }
 
-// catchClauses+=XCatchClause*
-protected class XTryCatchFinallyExpression_CatchClausesAssignment_2 extends AssignmentToken  {
+// catchClauses+=XCatchClause+ ("finally" finallyExpression=XExpression)? | "finally" finallyExpression=XExpression
+protected class XTryCatchFinallyExpression_Alternatives_2 extends AlternativesToken {
+
+	public XTryCatchFinallyExpression_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public XTryCatchFinallyExpression_CatchClausesAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getXTryCatchFinallyExpressionAccess().getAlternatives_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XTryCatchFinallyExpression_Group_2_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XTryCatchFinallyExpression_Group_2_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// catchClauses+=XCatchClause+ ("finally" finallyExpression=XExpression)?
+protected class XTryCatchFinallyExpression_Group_2_0 extends GroupToken {
+	
+	public XTryCatchFinallyExpression_Group_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XTryCatchFinallyExpression_Group_2_0_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new XTryCatchFinallyExpression_CatchClausesAssignment_2_0_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// catchClauses+=XCatchClause+
+protected class XTryCatchFinallyExpression_CatchClausesAssignment_2_0_0 extends AssignmentToken  {
+	
+	public XTryCatchFinallyExpression_CatchClausesAssignment_2_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesAssignment_2();
+		return grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesAssignment_2_0_0();
 	}
 
     @Override
@@ -9646,13 +9692,13 @@ protected class XTryCatchFinallyExpression_CatchClausesAssignment_2 extends Assi
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("catchClauses",false)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("catchClauses",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("catchClauses");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXCatchClauseRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesXCatchClauseParserRuleCall_2_0(); 
+				element = grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesXCatchClauseParserRuleCall_2_0_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -9664,7 +9710,7 @@ protected class XTryCatchFinallyExpression_CatchClausesAssignment_2 extends Assi
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new XTryCatchFinallyExpression_CatchClausesAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new XTryCatchFinallyExpression_CatchClausesAssignment_2_0_0(lastRuleCallOrigin, next, actIndex, consumed);
 			case 1: return new XTryCatchFinallyExpression_ExpressionAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
@@ -9672,21 +9718,21 @@ protected class XTryCatchFinallyExpression_CatchClausesAssignment_2 extends Assi
 }
 
 // ("finally" finallyExpression=XExpression)?
-protected class XTryCatchFinallyExpression_Group_3 extends GroupToken {
+protected class XTryCatchFinallyExpression_Group_2_0_1 extends GroupToken {
 	
-	public XTryCatchFinallyExpression_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XTryCatchFinallyExpression_Group_2_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_3();
+		return grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_2_0_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XTryCatchFinallyExpression_FinallyExpressionAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XTryCatchFinallyExpression_FinallyExpressionAssignment_2_0_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -9694,22 +9740,21 @@ protected class XTryCatchFinallyExpression_Group_3 extends GroupToken {
 }
 
 // "finally"
-protected class XTryCatchFinallyExpression_FinallyKeyword_3_0 extends KeywordToken  {
+protected class XTryCatchFinallyExpression_FinallyKeyword_2_0_1_0 extends KeywordToken  {
 	
-	public XTryCatchFinallyExpression_FinallyKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XTryCatchFinallyExpression_FinallyKeyword_2_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_3_0();
+		return grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_0_1_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XTryCatchFinallyExpression_CatchClausesAssignment_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XTryCatchFinallyExpression_ExpressionAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new XTryCatchFinallyExpression_CatchClausesAssignment_2_0_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -9717,15 +9762,15 @@ protected class XTryCatchFinallyExpression_FinallyKeyword_3_0 extends KeywordTok
 }
 
 // finallyExpression=XExpression
-protected class XTryCatchFinallyExpression_FinallyExpressionAssignment_3_1 extends AssignmentToken  {
+protected class XTryCatchFinallyExpression_FinallyExpressionAssignment_2_0_1_1 extends AssignmentToken  {
 	
-	public XTryCatchFinallyExpression_FinallyExpressionAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XTryCatchFinallyExpression_FinallyExpressionAssignment_2_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionAssignment_3_1();
+		return grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionAssignment_2_0_1_1();
 	}
 
     @Override
@@ -9744,7 +9789,7 @@ protected class XTryCatchFinallyExpression_FinallyExpressionAssignment_3_1 exten
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_3_1_0(); 
+				element = grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_2_0_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -9756,11 +9801,104 @@ protected class XTryCatchFinallyExpression_FinallyExpressionAssignment_3_1 exten
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new XTryCatchFinallyExpression_FinallyKeyword_3_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new XTryCatchFinallyExpression_FinallyKeyword_2_0_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
+
+
+
+// "finally" finallyExpression=XExpression
+protected class XTryCatchFinallyExpression_Group_2_1 extends GroupToken {
+	
+	public XTryCatchFinallyExpression_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XTryCatchFinallyExpression_FinallyExpressionAssignment_2_1_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "finally"
+protected class XTryCatchFinallyExpression_FinallyKeyword_2_1_0 extends KeywordToken  {
+	
+	public XTryCatchFinallyExpression_FinallyKeyword_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XTryCatchFinallyExpression_ExpressionAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// finallyExpression=XExpression
+protected class XTryCatchFinallyExpression_FinallyExpressionAssignment_2_1_1 extends AssignmentToken  {
+	
+	public XTryCatchFinallyExpression_FinallyExpressionAssignment_2_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionAssignment_2_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XExpression_XAssignmentParserRuleCall(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("finallyExpression",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("finallyExpression");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_2_1_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new XTryCatchFinallyExpression_FinallyKeyword_2_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
 
 
 

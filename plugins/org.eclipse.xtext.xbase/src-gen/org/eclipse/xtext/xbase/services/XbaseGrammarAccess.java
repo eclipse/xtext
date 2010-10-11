@@ -1688,18 +1688,26 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cTryKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cExpressionXExpressionParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
-		private final Assignment cCatchClausesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cCatchClausesXCatchClauseParserRuleCall_2_0 = (RuleCall)cCatchClausesAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cFinallyKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cFinallyExpressionAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cFinallyExpressionXExpressionParserRuleCall_3_1_0 = (RuleCall)cFinallyExpressionAssignment_3_1.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
+		private final Assignment cCatchClausesAssignment_2_0_0 = (Assignment)cGroup_2_0.eContents().get(0);
+		private final RuleCall cCatchClausesXCatchClauseParserRuleCall_2_0_0_0 = (RuleCall)cCatchClausesAssignment_2_0_0.eContents().get(0);
+		private final Group cGroup_2_0_1 = (Group)cGroup_2_0.eContents().get(1);
+		private final Keyword cFinallyKeyword_2_0_1_0 = (Keyword)cGroup_2_0_1.eContents().get(0);
+		private final Assignment cFinallyExpressionAssignment_2_0_1_1 = (Assignment)cGroup_2_0_1.eContents().get(1);
+		private final RuleCall cFinallyExpressionXExpressionParserRuleCall_2_0_1_1_0 = (RuleCall)cFinallyExpressionAssignment_2_0_1_1.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
+		private final Keyword cFinallyKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cFinallyExpressionAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cFinallyExpressionXExpressionParserRuleCall_2_1_1_0 = (RuleCall)cFinallyExpressionAssignment_2_1_1.eContents().get(0);
 		
 		//XTryCatchFinallyExpression:
-		//	"try" expression=XExpression catchClauses+=XCatchClause* ("finally" finallyExpression=XExpression)?;
+		//	"try" expression=XExpression (catchClauses+=XCatchClause+ ("finally" finallyExpression=XExpression)? | "finally"
+		//	finallyExpression=XExpression);
 		public ParserRule getRule() { return rule; }
 
-		//"try" expression=XExpression catchClauses+=XCatchClause* ("finally" finallyExpression=XExpression)?
+		//"try" expression=XExpression (catchClauses+=XCatchClause+ ("finally" finallyExpression=XExpression)? | "finally"
+		//finallyExpression=XExpression)
 		public Group getGroup() { return cGroup; }
 
 		//"try"
@@ -1711,23 +1719,41 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//XExpression
 		public RuleCall getExpressionXExpressionParserRuleCall_1_0() { return cExpressionXExpressionParserRuleCall_1_0; }
 
-		//catchClauses+=XCatchClause*
-		public Assignment getCatchClausesAssignment_2() { return cCatchClausesAssignment_2; }
+		//catchClauses+=XCatchClause+ ("finally" finallyExpression=XExpression)? | "finally" finallyExpression=XExpression
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+
+		//catchClauses+=XCatchClause+ ("finally" finallyExpression=XExpression)?
+		public Group getGroup_2_0() { return cGroup_2_0; }
+
+		//catchClauses+=XCatchClause+
+		public Assignment getCatchClausesAssignment_2_0_0() { return cCatchClausesAssignment_2_0_0; }
 
 		//XCatchClause
-		public RuleCall getCatchClausesXCatchClauseParserRuleCall_2_0() { return cCatchClausesXCatchClauseParserRuleCall_2_0; }
+		public RuleCall getCatchClausesXCatchClauseParserRuleCall_2_0_0_0() { return cCatchClausesXCatchClauseParserRuleCall_2_0_0_0; }
 
 		//("finally" finallyExpression=XExpression)?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_2_0_1() { return cGroup_2_0_1; }
 
 		//"finally"
-		public Keyword getFinallyKeyword_3_0() { return cFinallyKeyword_3_0; }
+		public Keyword getFinallyKeyword_2_0_1_0() { return cFinallyKeyword_2_0_1_0; }
 
 		//finallyExpression=XExpression
-		public Assignment getFinallyExpressionAssignment_3_1() { return cFinallyExpressionAssignment_3_1; }
+		public Assignment getFinallyExpressionAssignment_2_0_1_1() { return cFinallyExpressionAssignment_2_0_1_1; }
 
 		//XExpression
-		public RuleCall getFinallyExpressionXExpressionParserRuleCall_3_1_0() { return cFinallyExpressionXExpressionParserRuleCall_3_1_0; }
+		public RuleCall getFinallyExpressionXExpressionParserRuleCall_2_0_1_1_0() { return cFinallyExpressionXExpressionParserRuleCall_2_0_1_1_0; }
+
+		//"finally" finallyExpression=XExpression
+		public Group getGroup_2_1() { return cGroup_2_1; }
+
+		//"finally"
+		public Keyword getFinallyKeyword_2_1_0() { return cFinallyKeyword_2_1_0; }
+
+		//finallyExpression=XExpression
+		public Assignment getFinallyExpressionAssignment_2_1_1() { return cFinallyExpressionAssignment_2_1_1; }
+
+		//XExpression
+		public RuleCall getFinallyExpressionXExpressionParserRuleCall_2_1_1_0() { return cFinallyExpressionXExpressionParserRuleCall_2_1_1_0; }
 	}
 
 	public class XCatchClauseElements extends AbstractParserRuleElementFinder {
@@ -2271,7 +2297,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XTryCatchFinallyExpression:
-	//	"try" expression=XExpression catchClauses+=XCatchClause* ("finally" finallyExpression=XExpression)?;
+	//	"try" expression=XExpression (catchClauses+=XCatchClause+ ("finally" finallyExpression=XExpression)? | "finally"
+	//	finallyExpression=XExpression);
 	public XTryCatchFinallyExpressionElements getXTryCatchFinallyExpressionAccess() {
 		return (pXTryCatchFinallyExpression != null) ? pXTryCatchFinallyExpression : (pXTryCatchFinallyExpression = new XTryCatchFinallyExpressionElements());
 	}
