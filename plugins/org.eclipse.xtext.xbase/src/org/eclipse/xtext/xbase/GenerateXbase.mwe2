@@ -16,6 +16,7 @@ var projectName = "org.eclipse.xtext.xbase"
 var runtimeProject = "../${projectName}"
 var uiProject = "${runtimeProject}.ui"
 var backtrack = true
+var memoize = true
 
 Workflow {
 	bean = StandaloneSetup { 
