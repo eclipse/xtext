@@ -306,7 +306,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		return new StreamAdapter() {
 
 			public void announceEof(int lookAhead) {
-				if (!errorRecovery && !mismatch) {
+				if (!errorRecovery && !mismatch && (backtracking == 0 || marked)) {
 					AbstractElement current = getCurrentGrammarElement();
 					if (current != null) {
 						if (marked)
