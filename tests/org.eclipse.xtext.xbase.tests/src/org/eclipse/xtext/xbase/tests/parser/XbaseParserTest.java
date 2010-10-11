@@ -275,6 +275,11 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertTrue(be.getExpressions().get(0) instanceof XFeatureCall);
 		assertTrue(be.getExpressions().get(1) instanceof XFeatureCall);
 	}
+	
+	public void testBlockExpression_2() throws Exception {
+		XBlockExpression be = (XBlockExpression) expression("{}");
+		assertTrue(be.getExpressions().isEmpty());
+	}
 
 	public void testBlockExpression_withVariableDeclaration_0()
 			throws Exception {
