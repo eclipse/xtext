@@ -221,6 +221,22 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		XFeatureCall cpa = (XFeatureCall) secondNested.getElse();
 		assertEquals("cpa",cpa.getFeatureName());
 	}
+	
+	public void testIfWithClosure() throws Exception {
+		XIfExpression ie = (XIfExpression) expression("if (foo) | if (bar) zonk else bar");
+		assertNull(ie.getElse());
+	}
+	
+	public void testIfWithAdd() throws Exception {
+		XBinaryOperation bo = (XBinaryOperation) expression("1 + if (foo) bar + 2");
+		assertTrue(bo.getParams().get(1) instanceof XIfExpression);
+	}
+	
+	public void testIfWithAdd_2() throws Exception {
+		XBinaryOperation bo = (XBinaryOperation) expression("1 + (if (foo) bar) + 2");
+		assertTrue(bo.getParams().get(0) instanceof XBinaryOperation);
+		assertTrue(bo.getParams().get(1) instanceof XIntLiteral);
+	}
 
 	public void testSwitch_0() throws Exception {
 		XSwitchExpression se = (XSwitchExpression) expression("switch { case 1==0 : '1'; }");
