@@ -778,7 +778,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XBlockExpression:
-	//	"{" (expressions+=XExpressionInsideBlock ";")+ "}";
+	//	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";")* "}";
 	public XbaseGrammarAccess.XBlockExpressionElements getXBlockExpressionAccess() {
 		return gaXbase.getXBlockExpressionAccess();
 	}

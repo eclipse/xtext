@@ -5935,11 +5935,11 @@ rule__XBlockExpression__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getXBlockExpressionAccess().getLeftCurlyBracketKeyword_0()); }
+{ before(grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0()); }
+(
 
-	'{' 
-
-{ after(grammarAccess.getXBlockExpressionAccess().getLeftCurlyBracketKeyword_0()); }
+)
+{ after(grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0()); }
 )
 
 ;
@@ -5966,16 +5966,11 @@ rule__XBlockExpression__Group__1__Impl
     }
 :
 (
-(
-{ before(grammarAccess.getXBlockExpressionAccess().getGroup_1()); }
-(rule__XBlockExpression__Group_1__0)
-{ after(grammarAccess.getXBlockExpressionAccess().getGroup_1()); }
-)
-(
-{ before(grammarAccess.getXBlockExpressionAccess().getGroup_1()); }
-(rule__XBlockExpression__Group_1__0)*
-{ after(grammarAccess.getXBlockExpressionAccess().getGroup_1()); }
-)
+{ before(grammarAccess.getXBlockExpressionAccess().getLeftCurlyBracketKeyword_1()); }
+
+	'{' 
+
+{ after(grammarAccess.getXBlockExpressionAccess().getLeftCurlyBracketKeyword_1()); }
 )
 
 ;
@@ -5990,6 +5985,7 @@ rule__XBlockExpression__Group__2
     }
 :
 	rule__XBlockExpression__Group__2__Impl
+	rule__XBlockExpression__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -6001,11 +5997,39 @@ rule__XBlockExpression__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getXBlockExpressionAccess().getRightCurlyBracketKeyword_2()); }
+{ before(grammarAccess.getXBlockExpressionAccess().getGroup_2()); }
+(rule__XBlockExpression__Group_2__0)*
+{ after(grammarAccess.getXBlockExpressionAccess().getGroup_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__XBlockExpression__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__XBlockExpression__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__XBlockExpression__Group__3__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getXBlockExpressionAccess().getRightCurlyBracketKeyword_3()); }
 
 	'}' 
 
-{ after(grammarAccess.getXBlockExpressionAccess().getRightCurlyBracketKeyword_2()); }
+{ after(grammarAccess.getXBlockExpressionAccess().getRightCurlyBracketKeyword_3()); }
 )
 
 ;
@@ -6020,27 +6044,29 @@ finally {
 
 
 
-rule__XBlockExpression__Group_1__0
+
+
+rule__XBlockExpression__Group_2__0
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__XBlockExpression__Group_1__0__Impl
-	rule__XBlockExpression__Group_1__1
+	rule__XBlockExpression__Group_2__0__Impl
+	rule__XBlockExpression__Group_2__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__XBlockExpression__Group_1__0__Impl
+rule__XBlockExpression__Group_2__0__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getXBlockExpressionAccess().getExpressionsAssignment_1_0()); }
-(rule__XBlockExpression__ExpressionsAssignment_1_0)
-{ after(grammarAccess.getXBlockExpressionAccess().getExpressionsAssignment_1_0()); }
+{ before(grammarAccess.getXBlockExpressionAccess().getExpressionsAssignment_2_0()); }
+(rule__XBlockExpression__ExpressionsAssignment_2_0)
+{ after(grammarAccess.getXBlockExpressionAccess().getExpressionsAssignment_2_0()); }
 )
 
 ;
@@ -6049,28 +6075,28 @@ finally {
 }
 
 
-rule__XBlockExpression__Group_1__1
+rule__XBlockExpression__Group_2__1
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__XBlockExpression__Group_1__1__Impl
+	rule__XBlockExpression__Group_2__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__XBlockExpression__Group_1__1__Impl
+rule__XBlockExpression__Group_2__1__Impl
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_1_1()); }
+{ before(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1()); }
 
 	';' 
 
-{ after(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_1_1()); }
+{ after(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1()); }
 )
 
 ;
@@ -9268,14 +9294,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__XBlockExpression__ExpressionsAssignment_1_0
+rule__XBlockExpression__ExpressionsAssignment_2_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_1_0_0()); }
-	ruleXExpressionInsideBlock{ after(grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_1_0_0()); }
+{ before(grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0()); }
+	ruleXExpressionInsideBlock{ after(grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0()); }
 )
 
 ;

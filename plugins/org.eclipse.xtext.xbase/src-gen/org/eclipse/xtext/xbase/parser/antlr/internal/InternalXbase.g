@@ -2685,16 +2685,30 @@ ruleXBlockExpression returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'{' 
+((
+	{ 
+	  /* */ 
+	}
+    { 
+        temp=factory.create(grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getXBlockExpressionAccess().getXBlockExpressionAction_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'{' 
     {
-        createLeafNode(grammarAccess.getXBlockExpressionAccess().getLeftCurlyBracketKeyword_0(), null); 
+        createLeafNode(grammarAccess.getXBlockExpressionAccess().getLeftCurlyBracketKeyword_1(), null); 
     }
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_1_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0(), currentNode); 
 	    }
-		lv_expressions_1_0=ruleXExpressionInsideBlock		{
+		lv_expressions_2_0=ruleXExpressionInsideBlock		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXBlockExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2703,7 +2717,7 @@ ruleXBlockExpression returns [EObject current=null]
 	       		add(
 	       			$current, 
 	       			"expressions",
-	        		lv_expressions_1_0, 
+	        		lv_expressions_2_0, 
 	        		"XExpressionInsideBlock", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2715,11 +2729,11 @@ ruleXBlockExpression returns [EObject current=null]
 )
 )	';' 
     {
-        createLeafNode(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_1_1(), null); 
+        createLeafNode(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1(), null); 
     }
-)+	'}' 
+)*	'}' 
     {
-        createLeafNode(grammarAccess.getXBlockExpressionAccess().getRightCurlyBracketKeyword_2(), null); 
+        createLeafNode(grammarAccess.getXBlockExpressionAccess().getRightCurlyBracketKeyword_3(), null); 
     }
 )
 ;

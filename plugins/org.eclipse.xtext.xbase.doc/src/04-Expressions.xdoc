@@ -451,7 +451,7 @@ code[
 section:Blocks[Blocks]
 
 The block expression allows to simulate imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
-The return type of a block is also the type of the last expression. 
+The return type of a block is also the type of the last expression. Empty blocks return code[null]. 
 ref:VariableDeclaration[Variable declarations] are only allowed within blocks and cannot be used as a block's last expression.
 
 section2[Syntax]

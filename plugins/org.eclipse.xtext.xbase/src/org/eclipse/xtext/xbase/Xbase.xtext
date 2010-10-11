@@ -139,9 +139,9 @@ XDoWhileExpression:
        body=XExpression
    'while' '(' predicate=XExpression ')';
 
-XBlockExpression:
+XBlockExpression: {XBlockExpression}
 	'{'
-		(expressions+=XExpressionInsideBlock ';')+
+		(expressions+=XExpressionInsideBlock ';')*
 	'}';
 
 XExpressionInsideBlock returns XExpression:

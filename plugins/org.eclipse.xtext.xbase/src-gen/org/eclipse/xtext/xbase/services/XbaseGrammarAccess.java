@@ -1285,37 +1285,41 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	public class XBlockExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XBlockExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Assignment cExpressionsAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final RuleCall cExpressionsXExpressionInsideBlockParserRuleCall_1_0_0 = (RuleCall)cExpressionsAssignment_1_0.eContents().get(0);
-		private final Keyword cSemicolonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Action cXBlockExpressionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cExpressionsAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cExpressionsXExpressionInsideBlockParserRuleCall_2_0_0 = (RuleCall)cExpressionsAssignment_2_0.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//XBlockExpression:
-		//	"{" (expressions+=XExpressionInsideBlock ";")+ "}";
+		//	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";")* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"{" (expressions+=XExpressionInsideBlock ";")+ "}"
+		//{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";")* "}"
 		public Group getGroup() { return cGroup; }
 
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
+		//{XBlockExpression}
+		public Action getXBlockExpressionAction_0() { return cXBlockExpressionAction_0; }
 
-		//(expressions+=XExpressionInsideBlock ";")+
-		public Group getGroup_1() { return cGroup_1; }
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+
+		//(expressions+=XExpressionInsideBlock ";")*
+		public Group getGroup_2() { return cGroup_2; }
 
 		//expressions+=XExpressionInsideBlock
-		public Assignment getExpressionsAssignment_1_0() { return cExpressionsAssignment_1_0; }
+		public Assignment getExpressionsAssignment_2_0() { return cExpressionsAssignment_2_0; }
 
 		//XExpressionInsideBlock
-		public RuleCall getExpressionsXExpressionInsideBlockParserRuleCall_1_0_0() { return cExpressionsXExpressionInsideBlockParserRuleCall_1_0_0; }
+		public RuleCall getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0() { return cExpressionsXExpressionInsideBlockParserRuleCall_2_0_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_1_1() { return cSemicolonKeyword_1_1; }
+		public Keyword getSemicolonKeyword_2_1() { return cSemicolonKeyword_2_1; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
 	public class XExpressionInsideBlockElements extends AbstractParserRuleElementFinder {
@@ -2177,7 +2181,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XBlockExpression:
-	//	"{" (expressions+=XExpressionInsideBlock ";")+ "}";
+	//	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";")* "}";
 	public XBlockExpressionElements getXBlockExpressionAccess() {
 		return (pXBlockExpression != null) ? pXBlockExpression : (pXBlockExpression = new XBlockExpressionElements());
 	}
