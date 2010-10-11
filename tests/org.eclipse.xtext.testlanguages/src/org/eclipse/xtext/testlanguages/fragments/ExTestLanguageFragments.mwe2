@@ -1,0 +1,19 @@
+module org.eclipse.xtext.testlanguages.fragments.ExTestLanguageFragments
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+
+var grammarURI
+var backtrack = false
+var memoize = false
+var classSplitting = true
+var parser = parser.antlr.ex.rt.AntlrGeneratorFragment {
+  	options = auto-inject {}
+}
+var contentAssist.parser = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {
+	options = auto-inject {}
+}
+
+@SimpleTestLanguageFragments auto-inject {
+}

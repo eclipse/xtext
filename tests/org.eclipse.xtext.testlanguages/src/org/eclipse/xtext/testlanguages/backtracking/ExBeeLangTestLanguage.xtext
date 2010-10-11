@@ -6,9 +6,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-grammar org.eclipse.xtext.parser.unorderedGroups.ExBacktrackingTestLanguage with org.eclipse.xtext.parser.unorderedGroups.BacktrackingTestLanguage
+grammar org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage with org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage
 
-import "http://www.eclipse.org/2010/tmf/xtext/backtrackingTestLanguage"
+import "http://www.eclipse.org/2010/tmf/xtext/beeLangTestLanguage"
  
 DelegateModel returns Model:
 	Model
