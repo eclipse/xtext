@@ -6,6 +6,7 @@ grammar InternalXtend2;
 options {
 	superClass=AbstractInternalAntlrParser;
 	backtrack=true;
+	 memoize=true;
 	
 }
 
