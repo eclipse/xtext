@@ -57,7 +57,8 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		model = "grammar org.eclipse.xtext.ui.HyperlinkTest with org.eclipse.xtext.common.Terminals\n" +
 				"generate hyperlinkTest 'http://www.eclipse.org/Xtext/2008/HyperlinkTest'\n" +
 				"import '" + EcorePackage.eINSTANCE.getNsURI() + "' as ecore\n" +
-				"Model: name=STRING;" +
+				"Model: name=STRING elementRefs+=[Element]* objectRefs+=[ecore::EObject]* elements+=Element*;" +
+				"Element: 'element' name=ID;"+
 				"terminal ID: 'foo';" +
 				"terminal STRING returns ecore::EString: 'bar';";
 		resource = getResourceFromString(model);
@@ -95,13 +96,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 	
 	public void testCreateHyperlinksByOffset_02() {
 		IHyperlink[] links = helper.createHyperlinksByOffset(resource, model.indexOf("Model") + 1, true);
-		assertNotNull(links);
-		assertEquals(1, links.length);
-		assertTrue(links[0] instanceof XtextHyperlink);
-		XtextHyperlink hyperLink = (XtextHyperlink) links[0];
-		assertEquals(model.indexOf("Model"), hyperLink.getHyperlinkRegion().getOffset());
-		assertEquals("Model".length(), hyperLink.getHyperlinkRegion().getLength());
-		assertEquals(URI.createURI(grammar.getMetamodelDeclarations().get(0).getEPackage().getNsURI()).appendFragment("//Model"), hyperLink.getURI());
+		assertNull(links);
 	}
 	
 	public void testCreateHyperlinksByOffset_03() {
@@ -133,6 +128,53 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		assertEquals(
 				grammar.eResource().getResourceSet().getURIConverter().normalize(
 				EcoreUtil.getURI(GrammarUtil.findRuleForName(grammar.getUsedGrammars().get(0), "STRING"))), hyperLink.getURI());
+	}
+
+	public void testCreateHyperlinksByOffset_05() {
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("[ecore::EObject]"), true));
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("ecore::EObject]"), true));
+		IHyperlink[] hyperlinks = helper.createHyperlinksByOffset(resource, model.indexOf("core::EObject]"), true);
+		assertNotNull(hyperlinks);
+		assertEquals(1, hyperlinks.length);
+		assertTrue(hyperlinks[0] instanceof XtextHyperlink);
+		XtextHyperlink hyperLink = (XtextHyperlink) hyperlinks[0];
+		assertEquals("ecore".length(), hyperLink.getHyperlinkRegion().getLength());
+	}
+
+	public void testCreateHyperlinksByOffset_06() {
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("::EObject]"), true));
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf(":EObject]"), true));
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("EObject]"), true));
+		IHyperlink[] hyperlinks = helper.createHyperlinksByOffset(resource, model.indexOf("Object]"), true);
+		assertNotNull(hyperlinks);
+		assertEquals(1, hyperlinks.length);
+		assertTrue(hyperlinks[0] instanceof XtextHyperlink);
+		XtextHyperlink hyperLink = (XtextHyperlink) hyperlinks[0];
+		assertEquals("EObject".length(), hyperLink.getHyperlinkRegion().getLength());
+		assertEquals(
+				grammar.eResource().getResourceSet().getURIConverter().normalize(
+				EcoreUtil.getURI(EcorePackage.eINSTANCE.getEObject())), hyperLink.getURI());
+
+	}
+
+	public void testCreateHyperlinksByOffset_07() {
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("Element*"), true));
+		IHyperlink[] hyperlinks = helper.createHyperlinksByOffset(resource, model.indexOf("lement*"), true);
+		assertNotNull(hyperlinks);
+		assertEquals(1, hyperlinks.length);
+		assertTrue(hyperlinks[0] instanceof XtextHyperlink);
+		XtextHyperlink hyperLink = (XtextHyperlink) hyperlinks[0];
+		assertEquals(model.indexOf("Element*"), hyperLink.getHyperlinkRegion().getOffset());
+		assertEquals("Element".length(), hyperLink.getHyperlinkRegion().getLength());
+		assertEquals(
+				grammar.eResource().getResourceSet().getURIConverter().normalize(
+				EcoreUtil.getURI(GrammarUtil.findRuleForName(grammar, "Element"))), hyperLink.getURI());
+	}
+
+	public void test_Bug281652_should_not_create_links_to_genpackage_classes() {
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("[Element]"), true));
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("Element]"), true));
+		assertNull(helper.createHyperlinksByOffset(resource, model.indexOf("lement]"), true));
 	}
 
 	private void checkHyperlink(XtextHyperlink action) {

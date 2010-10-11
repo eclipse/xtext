@@ -7,14 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.Region;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextPackage;
@@ -27,6 +31,7 @@ import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
 import org.eclipse.xtext.util.ITextRegion;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -84,4 +89,26 @@ public class XtextHyperlinkHelper extends HyperlinkHelper {
 		return new Region(location.getOffset(), location.getLength());
 	}
 	
+	@Override
+	public void createHyperlinksTo(XtextResource from, Region region, EObject to, IHyperlinkAcceptor acceptor) {
+		if (acceptHyperLink(from, to)) {
+			super.createHyperlinksTo(from, region, to, acceptor);
+		}
+	}
+
+	protected boolean acceptHyperLink(XtextResource resource, EObject objectAtOffset) {
+		if (objectAtOffset instanceof EClass) {
+			EClass eClass = (EClass) objectAtOffset;
+			Grammar grammar = GrammarUtil.getGrammar(resource.getEObject("/"));
+			List<AbstractMetamodelDeclaration> allMetamodelDeclarations = GrammarUtil.allMetamodelDeclarations(grammar);
+			for (GeneratedMetamodel generatedMetamodel : Iterables.filter(allMetamodelDeclarations,
+					GeneratedMetamodel.class)) {
+				if (eClass.getEPackage().equals(generatedMetamodel.getEPackage())) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 }
