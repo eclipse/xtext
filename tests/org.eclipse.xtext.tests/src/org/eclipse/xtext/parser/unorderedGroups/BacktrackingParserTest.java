@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.unorderedGroups;
 
+import org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguageStandaloneSetup;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -15,7 +17,7 @@ public class BacktrackingParserTest extends AbstractBacktrackingParserTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(SimpleBacktrackingTestLanguageStandaloneSetup.class);
+		with(SimpleBeeLangTestLanguageStandaloneSetup.class);
 	}
 
 }

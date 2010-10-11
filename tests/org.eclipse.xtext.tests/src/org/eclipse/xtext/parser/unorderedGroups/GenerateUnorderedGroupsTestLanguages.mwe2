@@ -41,24 +41,6 @@ Workflow {
 			fragment = @TestLanguagesFragmentsEx {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/BacktrackingTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-				backtrack = true
-			}
-		}
-		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleBacktrackingTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-				backtrack = true
-			}
-		}
-		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExBacktrackingTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
-				backtrack = true
-			}
-		}
-		language = {
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 				backtrack = true

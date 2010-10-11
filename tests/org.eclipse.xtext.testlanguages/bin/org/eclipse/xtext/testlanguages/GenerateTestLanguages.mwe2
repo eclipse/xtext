@@ -1,0 +1,31 @@
+module org.eclipse.xtext.testlanguages.GenerateTestLanguages
+
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.testlanguages"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+    bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen"
+	}
+
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}.ui/src-gen"
+	}
+
+	component = Generator {
+		pathRtProject = runtimeProject
+		pathUiProject = "${runtimeProject}.ui"
+		projectNameRt = projectName
+		projectNameUi = "${projectName}.ui"
+		language = @backtracking.BeeLangTestLanguage {}
+		language = @backtracking.SimpleBeeLangTestLanguage {}
+		language = @backtracking.ExBeeLangTestLanguage {}
+	}
+}

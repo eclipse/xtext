@@ -58,6 +58,20 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          fragment="true"/>
 
    <plugin
+         id="org.eclipse.xtext.testlanguages"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.eclipse.xtext.testlanguages.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
          id="org.eclipse.xtext.ui.tests"
          download-size="0"
          install-size="0"
