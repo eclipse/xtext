@@ -6,6 +6,7 @@ grammar InternalXbase;
 options {
 	superClass=AbstractInternalAntlrParser;
 	backtrack=true;
+	 memoize=true;
 	
 }
 
