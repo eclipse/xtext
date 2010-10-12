@@ -34,7 +34,6 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
 /**
  * @author Sven Efftinge
- *
  */
 public class XbaseParserTest extends AbstractXbaseTestCase {
 	
@@ -131,6 +130,12 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertNotNull(call);
 	}
 
+	public void testCastedExpression_2() throws Exception {
+		XBinaryOperation binary = (XBinaryOperation) expression("(Foo)bar.baz + zonk");
+		assertTrue(binary.getParams().get(0) instanceof XCastedExpression);
+		assertTrue(binary.getParams().get(1) instanceof XFeatureCall);
+	}
+	
 	public void testUnaryOperation() throws Exception {
 		XUnaryOperation call = (XUnaryOperation) expression("-(Foo)");
 		assertNotNull(call);
@@ -387,6 +392,13 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertTrue(expression.getExpression() instanceof XBooleanLiteral);
 	}
 	
+	public void testInstanceOf_1() throws Exception {
+		XClosure closure = (XClosure) expression("|true instanceof java.lang.Boolean");
+		XInstanceOfExpression expression = (XInstanceOfExpression) closure.getExpression();
+		assertEquals("java.lang.Boolean",expression.getType().getCanonicalName());
+		assertTrue(expression.getExpression() instanceof XBooleanLiteral);
+	}
+	
 	public void testThrowExpression() throws Exception {
 		XThrowExpression throwEx = (XThrowExpression) expression("throw foo");
 		assertFeatureCall("foo", throwEx.getExpression());
@@ -424,4 +436,5 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("java.lang.Exception", clause.getDeclaredParam().getParameterType().getCanonicalName());
 		assertEquals("e", clause.getDeclaredParam().getName());
 	}
+	
 }

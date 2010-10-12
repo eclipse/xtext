@@ -94,9 +94,9 @@ public class TypesService implements ITypeConformanceComputer<JvmTypeReference>{
 			JvmTypeReference returnType) {
 		XFunctionTypeRef ref = XtypeFactory.eINSTANCE.createXFunctionTypeRef();
 		for (JvmTypeReference xTypeRef : parameterTypes) {
-			ref.getParamTypes().add(createArgument(copy(xTypeRef)));
+			ref.getParamTypes().add(copy(xTypeRef));
 		}
-		ref.setReturnType(createArgument(copy(returnType)));
+		ref.setReturnType(copy(returnType));
 		return ref;
 	}
 
