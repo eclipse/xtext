@@ -26,7 +26,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
 
@@ -35,7 +35,7 @@ import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
  */
 public abstract class AbstractAssignabilityComputerTest extends TestCase {
 
-	private AssignabilityComputer computer;
+	private JvmTypeConformanceComputer computer;
 	private DeclaredTypeFactory factory = new DeclaredTypeFactory(new ClassURIHelper());
 
 	protected JvmTypeReference ref(java.lang.reflect.Type type, JvmTypeArgument... arguments) {
@@ -94,14 +94,14 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 		return result;
 	}
 
-	protected abstract ITypeProvider getTypeProvider();
+	protected abstract IJvmTypeProvider getTypeProvider();
 
 	protected abstract Resource getSyntheticResource();
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		computer = new AssignabilityComputer(new SuperTypeCollector());
+		computer = new JvmTypeConformanceComputer(new SuperTypeCollector());
 	}
 
 	@Override
@@ -122,8 +122,8 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 //		zonk = foo; // ok
 		JvmTypeReference rawList = ref(List.class);
 		JvmTypeReference List_of_super_String = ref(List.class, wc_super(ref(String.class)));
-		assertTrue(computer.isAssignableFrom(rawList, List_of_super_String));
-		assertTrue(computer.isAssignableFrom(List_of_super_String, rawList));
+		assertTrue(computer.isConformant(rawList, List_of_super_String));
+		assertTrue(computer.isConformant(List_of_super_String, rawList));
 	}
 	
 	/**
@@ -138,8 +138,8 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 //		zonk = foo; // ok
 		JvmTypeReference List_String = ref(List.class, arg(String.class));
 		JvmTypeReference List_rawtype = ref(List.class);
-		assertTrue(computer.isAssignableFrom(List_String, List_rawtype));
-		assertTrue(computer.isAssignableFrom(List_rawtype, List_String));
+		assertTrue(computer.isConformant(List_String, List_rawtype));
+		assertTrue(computer.isConformant(List_rawtype, List_String));
 	}
 	
 	/**
@@ -154,8 +154,8 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 //		zonk = foo; // ok
 		JvmTypeReference List_String = ref(List.class, wc_extends(ref(String.class)));
 		JvmTypeReference List_rawtype = ref(List.class);
-		assertTrue(computer.isAssignableFrom(List_String, List_rawtype));
-		assertTrue(computer.isAssignableFrom(List_rawtype, List_String));
+		assertTrue(computer.isConformant(List_String, List_rawtype));
+		assertTrue(computer.isConformant(List_rawtype, List_String));
 	}
 	
 	/**
@@ -164,8 +164,8 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	public void testGenerics_super_1() throws Exception {
 		JvmTypeReference List_of_super_CharSequence = ref(List.class, wc_super(ref(CharSequence.class)));
 		JvmTypeReference List_of_super_String = ref(List.class, wc_super(ref(String.class)));
-		assertTrue(computer.isAssignableFrom(List_of_super_String, List_of_super_CharSequence));
-		assertFalse(computer.isAssignableFrom(List_of_super_CharSequence, List_of_super_String));
+		assertTrue(computer.isConformant(List_of_super_String, List_of_super_CharSequence));
+		assertFalse(computer.isConformant(List_of_super_CharSequence, List_of_super_String));
 	}
 
 	/**
@@ -174,8 +174,8 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	public void testGenerics_UnconstraintWildcard_1() throws Exception {
 		JvmTypeReference List_CharSequence = ref(List.class, arg(CharSequence.class));
 		JvmTypeReference List_of_wildcard = ref(List.class, wc());
-		assertTrue(computer.isAssignableFrom(List_of_wildcard, List_CharSequence));
-		assertFalse(computer.isAssignableFrom(List_CharSequence, List_of_wildcard));
+		assertTrue(computer.isConformant(List_of_wildcard, List_CharSequence));
+		assertFalse(computer.isConformant(List_CharSequence, List_of_wildcard));
 	}
 	
 	/**
@@ -184,8 +184,8 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	public void testGenerics_UnconstraintWildcard_2() throws Exception {
 		JvmTypeReference List_of_super_CharSequence = ref(List.class, wc_super(ref(CharSequence.class)));
 		JvmTypeReference List_of_wildcard = ref(List.class, wc());
-		assertTrue(computer.isAssignableFrom(List_of_wildcard, List_of_super_CharSequence));
-		assertFalse(computer.isAssignableFrom(List_of_super_CharSequence, List_of_wildcard));
+		assertTrue(computer.isConformant(List_of_wildcard, List_of_super_CharSequence));
+		assertFalse(computer.isConformant(List_of_super_CharSequence, List_of_wildcard));
 	}
 	/**
 	 * List<?> <= List<? extends CharSequence> 
@@ -193,82 +193,82 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	public void testGenerics_UnconstraintWildcard_3() throws Exception {
 		JvmTypeReference List_of_extends_CharSequence = ref(List.class, wc_extends(ref(CharSequence.class)));
 		JvmTypeReference List_of_wildcard = ref(List.class, wc());
-		assertTrue(computer.isAssignableFrom(List_of_wildcard, List_of_extends_CharSequence));
-		assertFalse(computer.isAssignableFrom(List_of_extends_CharSequence, List_of_wildcard));
+		assertTrue(computer.isConformant(List_of_wildcard, List_of_extends_CharSequence));
+		assertFalse(computer.isConformant(List_of_extends_CharSequence, List_of_wildcard));
 	}
 
 	public void testGenerics_1() throws Exception {
 		JvmTypeReference List_of_String = ref(List.class, arg(String.class));
 		JvmTypeReference List_of_extends_String = ref(List.class, wc_extends(ref(String.class)));
-		assertTrue(computer.isAssignableFrom(List_of_extends_String, List_of_String));
-		assertFalse(computer.isAssignableFrom(List_of_String, List_of_extends_String));
+		assertTrue(computer.isConformant(List_of_extends_String, List_of_String));
+		assertFalse(computer.isConformant(List_of_String, List_of_extends_String));
 	}
 
 	public void testGenerics_2() throws Exception {
 		JvmTypeReference List_of_String = ref(List.class, arg(String.class));
 		JvmTypeReference Collection_of_String = ref(Collection.class, arg(String.class));
-		assertTrue(computer.isAssignableFrom(Collection_of_String, List_of_String));
-		assertFalse(computer.isAssignableFrom(List_of_String, Collection_of_String));
+		assertTrue(computer.isConformant(Collection_of_String, List_of_String));
+		assertFalse(computer.isConformant(List_of_String, Collection_of_String));
 	}
 
 	public void testGenerics_3() throws Exception {
 		JvmTypeReference Func_of_String_String = ref(Map.class, arg(String.class), arg(String.class));
 		JvmTypeReference Func_of_extends_String_String = ref(Map.class, wc_extends(ref(String.class)), arg(String.class));
-		assertTrue(computer.isAssignableFrom(Func_of_extends_String_String, Func_of_String_String));
-		assertFalse(computer.isAssignableFrom(Func_of_String_String, Func_of_extends_String_String));
+		assertTrue(computer.isConformant(Func_of_extends_String_String, Func_of_String_String));
+		assertFalse(computer.isConformant(Func_of_String_String, Func_of_extends_String_String));
 	}
 
 	public void testGenerics_4() throws Exception {
 		JvmTypeReference Func_of_String_String = ref(Map.class, arg(String.class), arg(String.class));
 		JvmTypeReference Func_of_extends_String_String = ref(Map.class, arg(String.class), arg(String.class));
-		assertTrue(computer.isAssignableFrom(Func_of_extends_String_String, Func_of_String_String));
-		assertTrue(computer.isAssignableFrom(Func_of_String_String, Func_of_extends_String_String));
+		assertTrue(computer.isConformant(Func_of_extends_String_String, Func_of_String_String));
+		assertTrue(computer.isConformant(Func_of_String_String, Func_of_extends_String_String));
 	}
 
 	public void testSameType() throws Exception {
-		assertTrue(computer.isAssignableFrom(ref(String.class), ref(String.class)));
+		assertTrue(computer.isConformant(ref(String.class), ref(String.class)));
 	}
 
 	public void testInheritanceCompatibility() throws Exception {
-		assertTrue(computer.isAssignableFrom(ref(CharSequence.class), ref(String.class)));
-		assertFalse(computer.isAssignableFrom(ref(String.class), ref(CharSequence.class)));
+		assertTrue(computer.isConformant(ref(CharSequence.class), ref(String.class)));
+		assertFalse(computer.isConformant(ref(String.class), ref(CharSequence.class)));
 	}
 
 	public void testAutoBoxingInteger() throws Exception {
-		assertTrue(computer.isAssignableFrom(ref(Integer.TYPE), ref(Integer.class)));
-		assertTrue(computer.isAssignableFrom(ref(Integer.class), ref(Integer.TYPE)));
+		assertTrue(computer.isConformant(ref(Integer.TYPE), ref(Integer.class)));
+		assertTrue(computer.isConformant(ref(Integer.class), ref(Integer.TYPE)));
 	}
 
 	public void testAutoBoxingBoolean() throws Exception {
-		assertTrue(computer.isAssignableFrom(ref(Boolean.TYPE), ref(Boolean.class)));
-		assertTrue(computer.isAssignableFrom(ref(Boolean.class), ref(Boolean.TYPE)));
+		assertTrue(computer.isConformant(ref(Boolean.TYPE), ref(Boolean.class)));
+		assertTrue(computer.isConformant(ref(Boolean.class), ref(Boolean.TYPE)));
 	}
 
 	public void testAutoBoxingLong() throws Exception {
-		assertTrue(computer.isAssignableFrom(ref(Long.TYPE), ref(Long.class)));
-		assertTrue(computer.isAssignableFrom(ref(Long.class), ref(Long.TYPE)));
+		assertTrue(computer.isConformant(ref(Long.TYPE), ref(Long.class)));
+		assertTrue(computer.isConformant(ref(Long.class), ref(Long.TYPE)));
 	}
 
 	public void testAutoBoxingFloat() throws Exception {
-		assertTrue(computer.isAssignableFrom(ref(Float.TYPE), ref(Float.class)));
-		assertTrue(computer.isAssignableFrom(ref(Float.class), ref(Float.TYPE)));
+		assertTrue(computer.isConformant(ref(Float.TYPE), ref(Float.class)));
+		assertTrue(computer.isConformant(ref(Float.class), ref(Float.TYPE)));
 	}
 
 	public void testAutoBoxingDouble() throws Exception {
-		assertTrue(computer.isAssignableFrom(ref(Double.TYPE), ref(Double.class)));
-		assertTrue(computer.isAssignableFrom(ref(Double.class), ref(Double.TYPE)));
+		assertTrue(computer.isConformant(ref(Double.TYPE), ref(Double.class)));
+		assertTrue(computer.isConformant(ref(Double.class), ref(Double.TYPE)));
 	}
 
 	public void testAutoBoxingByte() throws Exception {
-		assertTrue(computer.isAssignableFrom(ref(Byte.TYPE), ref(Byte.class)));
-		assertTrue(computer.isAssignableFrom(ref(Byte.class), ref(Byte.TYPE)));
+		assertTrue(computer.isConformant(ref(Byte.TYPE), ref(Byte.class)));
+		assertTrue(computer.isConformant(ref(Byte.class), ref(Byte.TYPE)));
 	}
 
 	public void testArrayType() throws Exception {
-		assertTrue(computer.isAssignableFrom(array(ref(String.class), 1), array(ref(String.class), 1)));
-		assertFalse(computer.isAssignableFrom(array(ref(String.class), 1), array(ref(CharSequence.class), 1)));
-		assertFalse(computer.isAssignableFrom(array(ref(String.class), 2), array(ref(String.class), 1)));
-		assertFalse(computer.isAssignableFrom(array(ref(String.class), 1), array(ref(String.class), 2)));
+		assertTrue(computer.isConformant(array(ref(String.class), 1), array(ref(String.class), 1)));
+		assertFalse(computer.isConformant(array(ref(String.class), 1), array(ref(CharSequence.class), 1)));
+		assertFalse(computer.isConformant(array(ref(String.class), 2), array(ref(String.class), 1)));
+		assertFalse(computer.isConformant(array(ref(String.class), 1), array(ref(String.class), 2)));
 	}
 
 }

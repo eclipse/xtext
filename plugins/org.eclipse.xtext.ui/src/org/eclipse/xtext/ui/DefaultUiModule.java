@@ -25,6 +25,7 @@ import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
@@ -145,9 +146,9 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public Class<? extends IPresentationRepairer> bindIPresentationRepairer() {
 		return PresentationRepairer.class;
 	}
-	
+
 	public ICharacterPairMatcher bindICharacterPairMatcher() {
-		return new DefaultCharacterPairMatcher(new char[]{'(',')','{','}','[',']'});
+		return new DefaultCharacterPairMatcher(new char[] { '(', ')', '{', '}', '[', ']' });
 	}
 
 	public Class<? extends ITokenScanner> bindITokenScanner() {
@@ -224,27 +225,30 @@ public class DefaultUiModule extends AbstractGenericModule {
 				.annotatedWith(org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider.class)
 				.to(org.eclipse.jface.viewers.ILabelProvider.class);
 	}
-	
+
 	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
 		return OutlinePage.class;
 	}
 
 	public void configureIOutlineContribution$Composite(Binder binder) {
-		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(IOutlineContribution.All.class).to(IOutlineContribution.Composite.class);
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(IOutlineContribution.All.class)
+				.to(IOutlineContribution.Composite.class);
 	}
-	
+
 	public void configureToggleSortingOutlineContribution(Binder binder) {
-		binder.bind(IOutlineContribution.class).annotatedWith(IOutlineContribution.Sort.class).to(SortOutlineContribution.class);
+		binder.bind(IOutlineContribution.class).annotatedWith(IOutlineContribution.Sort.class)
+				.to(SortOutlineContribution.class);
 	}
 
 	public void configureToggleLinkWithEditorOutlineContribution(Binder binder) {
-		binder.bind(IOutlineContribution.class).annotatedWith(IOutlineContribution.LinkWithEditor.class).to(LinkWithEditorOutlineContribution.class);
+		binder.bind(IOutlineContribution.class).annotatedWith(IOutlineContribution.LinkWithEditor.class)
+				.to(LinkWithEditorOutlineContribution.class);
 	}
-	
+
 	public Class<? extends IComparator> bindOutlineFilterAndSorter$IComparator() {
 		return SortOutlineContribution.DefaultComparator.class;
 	}
-	
+
 	public void configureContentProposalLabelProvider(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
 				.annotatedWith(org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider.class)
@@ -266,8 +270,9 @@ public class DefaultUiModule extends AbstractGenericModule {
 	}
 
 	public void configureLanguageSpecificURIEditorOpener(com.google.inject.Binder binder) {
-		binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class)
-				.to(LanguageSpecificURIEditorOpener.class);
+		if (PlatformUI.isWorkbenchRunning())
+			binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class)
+					.to(LanguageSpecificURIEditorOpener.class);
 	}
 
 	public void configureUiEncodingProvider(Binder binder) {
@@ -287,5 +292,4 @@ public class DefaultUiModule extends AbstractGenericModule {
 		return XtextResourceSetProvider.class;
 	}
 
-	
 }

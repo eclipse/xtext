@@ -17,13 +17,13 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
-import org.eclipse.xtext.common.types.access.impl.AbstractTypeProvider;
+import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JdtTypeProvider extends AbstractTypeProvider implements IJdtTypeProvider {
+public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtTypeProvider {
 
 	private final IJavaProject javaProject;
 

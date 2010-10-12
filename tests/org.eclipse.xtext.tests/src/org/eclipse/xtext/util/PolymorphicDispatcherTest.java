@@ -31,7 +31,7 @@ public class PolymorphicDispatcherTest extends TestCase {
 			return "Number_from_superclass_" + i;
 		}
 	}
-	
+
 	public void testPerformance() throws Exception {
 		Object first = new SuperClass() {
 			String label(Integer i) {
@@ -55,14 +55,15 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return "Object_" + i;
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(first, second));
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(first,
+				second));
 		long before = System.currentTimeMillis();
-		for (int i=0;i<30000;i++) {
+		for (int i = 0; i < 30000; i++) {
 			String string = dispatcher.invoke(34);
 			assertNotNull(string);
 		}
 		long after = System.currentTimeMillis();
-		assertTrue((after-before) < 1000);
+		assertTrue((after - before) < 1000);
 	}
 
 	public void testSimple() throws Exception {
@@ -88,7 +89,8 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return "Object_" + i;
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(first, second));
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(first,
+				second));
 
 		assertEquals("Integer_first_3", dispatcher.invoke(new Integer(3)));
 		assertEquals("Number_from_superclass_3", dispatcher.invoke(new Long(3)));
@@ -131,12 +133,12 @@ public class PolymorphicDispatcherTest extends TestCase {
 				return "Object_" + i;
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 1, 2, Lists.newArrayList(o1),
-			new PolymorphicDispatcher.ErrorHandler<String>(){
-				public String handle(Object[] params, Throwable throwable) {
-					return null;
-				}
-			});
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 1, 2,
+				Lists.newArrayList(o1), new PolymorphicDispatcher.ErrorHandler<String>() {
+					public String handle(Object[] params, Throwable throwable) {
+						return null;
+					}
+				});
 		assertEquals("Object_3", dispatcher.invoke(new Integer(3)));
 		assertNull("Integer_3_4", dispatcher.invoke(new Long(3), 4));
 		assertEquals("Integer_3_4", dispatcher.invoke(new Integer(3), 4));
@@ -163,13 +165,32 @@ public class PolymorphicDispatcherTest extends TestCase {
 			// ignore
 		}
 	}
-	
+
+	public void testNullParams() throws Exception {
+		Object o1 = new Object() {
+
+			String label(String i, CharSequence y) {
+				return CharSequence.class.getSimpleName();
+			}
+
+			String label(String c, String s) {
+				return String.class.getSimpleName();
+			}
+		};
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 2, 2,
+				Lists.newArrayList(o1));
+		assertEquals(String.class.getSimpleName(), dispatcher.invoke(null, "Foo"));
+		assertEquals(String.class.getSimpleName(), dispatcher.invoke("Foo", null));
+		assertEquals(CharSequence.class.getSimpleName(), dispatcher.invoke(null, new StringBuilder()));
+
+	}
+
 	public void testPrivateMethodAccess() {
 		Object o1 = new Object() {
 			private String label(Integer i) {
 				return "Integer_" + i;
 			}
-			
+
 			private String label(Number n) {
 				return "Number_" + n;
 			}
@@ -178,27 +199,29 @@ public class PolymorphicDispatcherTest extends TestCase {
 		assertEquals("Integer_17", dispatcher.invoke(new Integer(17)));
 		assertEquals("Number_42", dispatcher.invoke(BigInteger.valueOf(42)));
 	}
-	
+
 	@Retention(RetentionPolicy.RUNTIME)
-	@Target({ ElementType.METHOD})
+	@Target({ ElementType.METHOD })
 	private @interface TestLabelAnnotation {
 	}
-	
+
 	public void testCustomFilter() {
 		Object o1 = new Object() {
 			@TestLabelAnnotation
 			private String sillyMethodName(Integer i) {
 				return "Integer_" + i;
 			}
+
 			private String label(Number n) {
 				return "Number_" + n;
 			}
 		};
-		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>(Lists.newArrayList(o1), new Predicate<Method>() {
-			public boolean apply(Method param) {
-				return ( (param.getName().equals("label")) || (param.getAnnotation(TestLabelAnnotation.class) != null));
-			}
-		});
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>(Lists.newArrayList(o1),
+				new Predicate<Method>() {
+					public boolean apply(Method param) {
+						return ((param.getName().equals("label")) || (param.getAnnotation(TestLabelAnnotation.class) != null));
+					}
+				});
 
 		assertEquals("Integer_17", dispatcher.invoke(new Integer(17)));
 		assertEquals("Number_42", dispatcher.invoke(BigInteger.valueOf(42)));

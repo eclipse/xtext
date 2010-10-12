@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IMirror;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
@@ -50,7 +50,7 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 	}
 
 	@Override
-	protected ITypeProvider getTypeProvider() {
+	protected IJvmTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 

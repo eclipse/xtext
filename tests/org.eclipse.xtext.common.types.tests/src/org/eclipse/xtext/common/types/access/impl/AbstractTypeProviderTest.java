@@ -64,7 +64,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.testSetups.Fields;
 import org.eclipse.xtext.common.types.testSetups.InitializerWithConstructor;
@@ -89,7 +89,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 
 	private Diagnostician diagnostician;
 
-	protected abstract ITypeProvider getTypeProvider();
+	protected abstract IJvmTypeProvider getTypeProvider();
 
 	@Override
 	protected void setUp() throws Exception {

@@ -8,12 +8,12 @@
 package org.eclipse.xtext.common.types.access.jdt;
 
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IJdtTypeProvider extends ITypeProvider {
+public interface IJdtTypeProvider extends IJvmTypeProvider {
 
 	TypeURIHelper getTypeUriHelper();
 
