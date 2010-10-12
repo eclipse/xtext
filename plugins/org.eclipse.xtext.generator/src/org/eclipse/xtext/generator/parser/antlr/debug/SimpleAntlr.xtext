@@ -1,0 +1,77 @@
+grammar org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlr with org.eclipse.xtext.common.Terminals 
+
+generate simpleAntlr "http://www.eclipse.org/xtext/generator/parser/antlr/simpleAntlr"
+
+AntlrGrammar:
+  'grammar' name=ID ';'
+  options = Options?
+  rules+=Rule*;
+  
+Options: {Options}
+  'options' '{'
+     optionValues+=OptionValue*
+  '}'
+;
+
+OptionValue:
+  key=ID '=' value=IdOrInt ';'
+;
+
+IdOrInt:
+  ID | INT
+;
+
+Rule:
+  name = ID ':'
+    body=Alternatives
+  ';'
+;
+
+Alternatives returns RuleElement:
+  Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
+;
+
+Group returns RuleElement:
+  Atom ({Group.elements+=current} elements+=Atom+)?
+;
+
+Atom returns RuleElement:
+    (OtherElement ({ElementWithCardinality.element=current} cardinality=('+'|'*'|'?'))?)
+  | RuleOptions
+;
+
+OtherElement returns RuleElement:
+  {NegatedElement} '~' element=(Parenthesized | Literal)
+  | Parenthesized 
+  | Literal ({UntilElement.left=current} '..' right=Literal)?
+;
+
+EmptyParenthesis:
+  '(' ')'
+;
+
+Parenthesized returns RuleElement:
+  '(' EmptyParenthesis* Alternatives ')' EmptyParenthesis*
+;
+
+RuleOptions:
+  options=Options ':' element=Atom
+;
+
+Literal returns RuleElement:
+    RuleCall
+  | Keyword
+  | Wildcard
+;
+
+RuleCall:
+  rule=ID EmptyParenthesis*
+;
+
+Keyword:
+  value=STRING EmptyParenthesis*
+;
+
+Wildcard:
+  {Wildcard} '.' EmptyParenthesis*
+;

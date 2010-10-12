@@ -1,14 +1,14 @@
-module org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressions
+module org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlr
 
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "classpath:/org/eclipse/xtext/generator/parser/antlr/splitting/SimpleExpressions.xtext"
-var file.extensions = "simpleExpressions"
+var grammarURI = "classpath:/org/eclipse/xtext/generator/parser/antlr/debug/SimpleAntlr.xtext"
+var file.extensions = "simpleAntlr"
 var projectName = "org.eclipse.xtext.generator"
-var runtimeProject = "../../plugins/${projectName}"
+var runtimeProject = "../${projectName}"
 
 Workflow {
 	
@@ -17,7 +17,7 @@ Workflow {
 	}
 	
 	component = DirectoryCleaner {
-		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting"
+		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/generator/parser/antlr/debug"
 	}
 	
 	component = Generator {
@@ -44,7 +44,7 @@ Workflow {
 			}
 				
 			// the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/ -->
-			fragment = AntlrDelegatingFragment {}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {}
 			
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
