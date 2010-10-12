@@ -817,7 +817,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		return getJvmFormalParameterAccess().getRule();
 	}
 
-	//XSimpleFeatureCall returns XFeatureCall:
+	//XSimpleFeatureCall:
 	//	feature=[types::JvmIdentifyableElement] ("(" (params+=XExpression ("," params+=XExpression)*)? ")")?;
 	public XbaseGrammarAccess.XSimpleFeatureCallElements getXSimpleFeatureCallAccess() {
 		return gaXbase.getXSimpleFeatureCallAccess();
