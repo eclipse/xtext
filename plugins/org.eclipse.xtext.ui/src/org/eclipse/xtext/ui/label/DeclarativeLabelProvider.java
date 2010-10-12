@@ -70,6 +70,14 @@ public class DeclarativeLabelProvider extends AbstractLabelProvider {
 		return null;
 	}
 	
+	public Object image(Void element) {
+		return null;
+	}
+	
+	public Object text(Void element) {
+		return null;
+	}
+	
 	protected Object handleTextError(Object[] params, Throwable e) {
 		if(e instanceof NullPointerException) {
 			return getDefaultText();
