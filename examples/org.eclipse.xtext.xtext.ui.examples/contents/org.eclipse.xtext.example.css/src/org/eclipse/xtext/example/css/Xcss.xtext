@@ -9,14 +9,18 @@ StyleSheet:
 
 StyleRule:
 	selectors+=Selector+ '{'
-	settings+=Setting+
+		settings+=Setting+
 	'}';
 
 Selector:
 	(TypeSelector | WildcardSelector) filter=Filter?;
 
+_JvmTypeReference returns JvmTypeReference:
+  TypeSelector
+;
+
 TypeSelector:
-	type=JvmTypeReference;
+	type=[JvmType|QualifiedName];
 
 WildcardSelector:
 	{WildcardSelector} '*';

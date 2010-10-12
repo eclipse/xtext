@@ -68,6 +68,7 @@ Workflow {
 
 			// scoping and exporting API 
 			fragment = scoping.ImportNamespacesScopingFragment {}
+			fragment = types.TypesGeneratorFragment {}
 			fragment = exporting.QualifiedNamesFragment {}
 			fragment = builder.BuilderIntegrationFragment {}
 
