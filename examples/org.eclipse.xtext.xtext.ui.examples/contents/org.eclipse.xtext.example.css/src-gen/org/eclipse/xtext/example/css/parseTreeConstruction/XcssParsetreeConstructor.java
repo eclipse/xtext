@@ -34,62 +34,63 @@ protected class ThisRootNode extends RootToken {
 			case 0: return new StyleSheet_RulesAssignment(this, this, 0, inst);
 			case 1: return new StyleRule_Group(this, this, 1, inst);
 			case 2: return new Selector_Group(this, this, 2, inst);
-			case 3: return new TypeSelector_TypeAssignment(this, this, 3, inst);
-			case 4: return new WildcardSelector_Group(this, this, 4, inst);
-			case 5: return new Filter_Group(this, this, 5, inst);
-			case 6: return new Setting_Group(this, this, 6, inst);
-			case 7: return new FeatureReference_FeatureAssignment(this, this, 7, inst);
-			case 8: return new CssLiterals_Alternatives(this, this, 8, inst);
-			case 9: return new FontLiteral_Group(this, this, 9, inst);
-			case 10: return new ColorLiteral_Alternatives(this, this, 10, inst);
-			case 11: return new ColorConstant_NameAssignment(this, this, 11, inst);
-			case 12: return new RGB_Group(this, this, 12, inst);
-			case 13: return new SizeLiteral_Group(this, this, 13, inst);
-			case 14: return new XPrimaryExpression_Alternatives(this, this, 14, inst);
-			case 15: return new XExpression_XAssignmentParserRuleCall(this, this, 15, inst);
-			case 16: return new XAssignment_Group(this, this, 16, inst);
-			case 17: return new XOrExpression_Group(this, this, 17, inst);
-			case 18: return new XAndExpression_Group(this, this, 18, inst);
-			case 19: return new XEqualityExpression_Group(this, this, 19, inst);
-			case 20: return new XRelationalExpression_Group(this, this, 20, inst);
-			case 21: return new XOtherOperatorExpression_Group(this, this, 21, inst);
-			case 22: return new XAdditiveExpression_Group(this, this, 22, inst);
-			case 23: return new XMultiplicativeExpression_Group(this, this, 23, inst);
-			case 24: return new XUnaryOperation_Alternatives(this, this, 24, inst);
-			case 25: return new XFeatureCall_Group(this, this, 25, inst);
-			case 26: return new XClosure_Group(this, this, 26, inst);
-			case 27: return new XCastedExpression_Group(this, this, 27, inst);
-			case 28: return new XParenthesizedExpression_Group(this, this, 28, inst);
-			case 29: return new XIfExpression_Group(this, this, 29, inst);
-			case 30: return new XSwitchExpression_Group(this, this, 30, inst);
-			case 31: return new XCasePart_Group(this, this, 31, inst);
-			case 32: return new XForLoopExpression_Group(this, this, 32, inst);
-			case 33: return new XWhileExpression_Group(this, this, 33, inst);
-			case 34: return new XDoWhileExpression_Group(this, this, 34, inst);
-			case 35: return new XBlockExpression_Group(this, this, 35, inst);
-			case 36: return new XExpressionInsideBlock_Alternatives(this, this, 36, inst);
-			case 37: return new XVariableDeclaration_Group(this, this, 37, inst);
-			case 38: return new JvmFormalParameter_Group(this, this, 38, inst);
-			case 39: return new XSimpleFeatureCall_Group(this, this, 39, inst);
-			case 40: return new XConstructorCall_Group(this, this, 40, inst);
-			case 41: return new XBooleanLiteral_Alternatives(this, this, 41, inst);
-			case 42: return new XNullLiteral_Group(this, this, 42, inst);
-			case 43: return new XIntLiteral_ValueAssignment(this, this, 43, inst);
-			case 44: return new XStringLiteral_ValueAssignment(this, this, 44, inst);
-			case 45: return new XTypeLiteral_Group(this, this, 45, inst);
-			case 46: return new XThrowExpression_Group(this, this, 46, inst);
-			case 47: return new XTryCatchFinallyExpression_Group(this, this, 47, inst);
-			case 48: return new XCatchClause_Group(this, this, 48, inst);
-			case 49: return new JvmTypeReference_Alternatives(this, this, 49, inst);
-			case 50: return new XFunctionTypeRef_Group(this, this, 50, inst);
-			case 51: return new JvmParameterizedTypeReference_Group(this, this, 51, inst);
-			case 52: return new JvmTypeArgument_Alternatives(this, this, 52, inst);
-			case 53: return new JvmReferenceTypeArgument_TypeReferenceAssignment(this, this, 53, inst);
-			case 54: return new JvmWildcardTypeArgument_Group(this, this, 54, inst);
-			case 55: return new JvmUpperBound_Group(this, this, 55, inst);
-			case 56: return new JvmUpperBoundAnded_Group(this, this, 56, inst);
-			case 57: return new JvmLowerBound_Group(this, this, 57, inst);
-			case 58: return new JvmTypeParameter_Group(this, this, 58, inst);
+			case 3: return new _JvmTypeReference_TypeSelectorParserRuleCall(this, this, 3, inst);
+			case 4: return new TypeSelector_TypeAssignment(this, this, 4, inst);
+			case 5: return new WildcardSelector_Group(this, this, 5, inst);
+			case 6: return new Filter_Group(this, this, 6, inst);
+			case 7: return new Setting_Group(this, this, 7, inst);
+			case 8: return new FeatureReference_FeatureAssignment(this, this, 8, inst);
+			case 9: return new CssLiterals_Alternatives(this, this, 9, inst);
+			case 10: return new FontLiteral_Group(this, this, 10, inst);
+			case 11: return new ColorLiteral_Alternatives(this, this, 11, inst);
+			case 12: return new ColorConstant_NameAssignment(this, this, 12, inst);
+			case 13: return new RGB_Group(this, this, 13, inst);
+			case 14: return new SizeLiteral_Group(this, this, 14, inst);
+			case 15: return new XPrimaryExpression_Alternatives(this, this, 15, inst);
+			case 16: return new XExpression_XAssignmentParserRuleCall(this, this, 16, inst);
+			case 17: return new XAssignment_Group(this, this, 17, inst);
+			case 18: return new XOrExpression_Group(this, this, 18, inst);
+			case 19: return new XAndExpression_Group(this, this, 19, inst);
+			case 20: return new XEqualityExpression_Group(this, this, 20, inst);
+			case 21: return new XRelationalExpression_Group(this, this, 21, inst);
+			case 22: return new XOtherOperatorExpression_Group(this, this, 22, inst);
+			case 23: return new XAdditiveExpression_Group(this, this, 23, inst);
+			case 24: return new XMultiplicativeExpression_Group(this, this, 24, inst);
+			case 25: return new XUnaryOperation_Alternatives(this, this, 25, inst);
+			case 26: return new XFeatureCall_Group(this, this, 26, inst);
+			case 27: return new XClosure_Group(this, this, 27, inst);
+			case 28: return new XCastedExpression_Group(this, this, 28, inst);
+			case 29: return new XParenthesizedExpression_Group(this, this, 29, inst);
+			case 30: return new XIfExpression_Group(this, this, 30, inst);
+			case 31: return new XSwitchExpression_Group(this, this, 31, inst);
+			case 32: return new XCasePart_Group(this, this, 32, inst);
+			case 33: return new XForLoopExpression_Group(this, this, 33, inst);
+			case 34: return new XWhileExpression_Group(this, this, 34, inst);
+			case 35: return new XDoWhileExpression_Group(this, this, 35, inst);
+			case 36: return new XBlockExpression_Group(this, this, 36, inst);
+			case 37: return new XExpressionInsideBlock_Alternatives(this, this, 37, inst);
+			case 38: return new XVariableDeclaration_Group(this, this, 38, inst);
+			case 39: return new JvmFormalParameter_Group(this, this, 39, inst);
+			case 40: return new XSimpleFeatureCall_Group(this, this, 40, inst);
+			case 41: return new XConstructorCall_Group(this, this, 41, inst);
+			case 42: return new XBooleanLiteral_Alternatives(this, this, 42, inst);
+			case 43: return new XNullLiteral_Group(this, this, 43, inst);
+			case 44: return new XIntLiteral_ValueAssignment(this, this, 44, inst);
+			case 45: return new XStringLiteral_ValueAssignment(this, this, 45, inst);
+			case 46: return new XTypeLiteral_Group(this, this, 46, inst);
+			case 47: return new XThrowExpression_Group(this, this, 47, inst);
+			case 48: return new XTryCatchFinallyExpression_Group(this, this, 48, inst);
+			case 49: return new XCatchClause_Group(this, this, 49, inst);
+			case 50: return new JvmTypeReference_Alternatives(this, this, 50, inst);
+			case 51: return new XFunctionTypeRef_Group(this, this, 51, inst);
+			case 52: return new JvmParameterizedTypeReference_Group(this, this, 52, inst);
+			case 53: return new JvmTypeArgument_Alternatives(this, this, 53, inst);
+			case 54: return new JvmReferenceTypeArgument_TypeReferenceAssignment(this, this, 54, inst);
+			case 55: return new JvmWildcardTypeArgument_Group(this, this, 55, inst);
+			case 56: return new JvmUpperBound_Group(this, this, 56, inst);
+			case 57: return new JvmUpperBoundAnded_Group(this, this, 57, inst);
+			case 58: return new JvmLowerBound_Group(this, this, 58, inst);
+			case 59: return new JvmTypeParameter_Group(this, this, 59, inst);
 			default: return null;
 		}	
 	}	
@@ -513,14 +514,60 @@ protected class Selector_FilterAssignment_1 extends AssignmentToken  {
 /************ end Rule Selector ****************/
 
 
-/************ begin Rule TypeSelector ****************
+/************ begin Rule _JvmTypeReference ****************
  *
- * TypeSelector:
- * 	type=JvmTypeReference;
+ * _JvmTypeReference returns JvmTypeReference:
+ * 	TypeSelector;
  *
  **/
 
-// type=JvmTypeReference
+// TypeSelector
+protected class _JvmTypeReference_TypeSelectorParserRuleCall extends RuleCallToken {
+	
+	public _JvmTypeReference_TypeSelectorParserRuleCall(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.get_JvmTypeReferenceAccess().getTypeSelectorParserRuleCall();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TypeSelector_TypeAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getTypeSelectorRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(TypeSelector_TypeAssignment.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+/************ end Rule _JvmTypeReference ****************/
+
+
+/************ begin Rule TypeSelector ****************
+ *
+ * TypeSelector:
+ * 	type=[JvmType|QualifiedName];
+ *
+ **/
+
+// type=[JvmType|QualifiedName]
 protected class TypeSelector_TypeAssignment extends AssignmentToken  {
 	
 	public TypeSelector_TypeAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -535,8 +582,7 @@ protected class TypeSelector_TypeAssignment extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new JvmTypeReference_Alternatives(this, this, 0, inst);
-			default: return null;
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
 		}	
 	}
 
@@ -546,25 +592,17 @@ protected class TypeSelector_TypeAssignment extends AssignmentToken  {
 			return null;
 		if((value = eObjectConsumer.getConsumable("type",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
-				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getTypeSelectorAccess().getTypeJvmTypeReferenceParserRuleCall_0(); 
-				consumed = obj;
-				return param;
+			if(param.isInstanceOf(grammarAccess.getTypeSelectorAccess().getTypeJvmTypeCrossReference_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getTypeSelectorAccess().getTypeJvmTypeCrossReference_0(); 
+				return obj;
 			}
 		}
 		return null;
 	}
 
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		if(value == inst.getEObject() && !inst.isConsumed()) return null;
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
-		}	
-	}	
 }
 
 /************ end Rule TypeSelector ****************/

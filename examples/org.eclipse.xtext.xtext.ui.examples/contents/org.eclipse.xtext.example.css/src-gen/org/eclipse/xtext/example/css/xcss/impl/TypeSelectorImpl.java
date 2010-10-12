@@ -6,14 +6,13 @@
 package org.eclipse.xtext.example.css.xcss.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 
 import org.eclipse.xtext.example.css.xcss.TypeSelector;
 import org.eclipse.xtext.example.css.xcss.XcssPackage;
@@ -34,14 +33,14 @@ import org.eclipse.xtext.example.css.xcss.XcssPackage;
 public class TypeSelectorImpl extends SelectorImpl implements TypeSelector
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getType()
    * @generated
    * @ordered
    */
-  protected JvmParameterizedTypeReference type;
+  protected JvmType type;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,7 +68,27 @@ public class TypeSelectorImpl extends SelectorImpl implements TypeSelector
    * <!-- end-user-doc -->
    * @generated
    */
-  public JvmParameterizedTypeReference getType()
+  public JvmType getType()
+  {
+    if (type != null && type.eIsProxy())
+    {
+      InternalEObject oldType = (InternalEObject)type;
+      type = (JvmType)eResolveProxy(oldType);
+      if (type != oldType)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, XcssPackage.TYPE_SELECTOR__TYPE, oldType, type));
+      }
+    }
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public JvmType basicGetType()
   {
     return type;
   }
@@ -79,16 +98,12 @@ public class TypeSelectorImpl extends SelectorImpl implements TypeSelector
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetType(JvmParameterizedTypeReference newType, NotificationChain msgs)
+  public void setType(JvmType newType)
   {
-    JvmParameterizedTypeReference oldType = type;
+    JvmType oldType = type;
     type = newType;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XcssPackage.TYPE_SELECTOR__TYPE, oldType, newType);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+      eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.TYPE_SELECTOR__TYPE, oldType, type));
   }
 
   /**
@@ -96,36 +111,11 @@ public class TypeSelectorImpl extends SelectorImpl implements TypeSelector
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(JvmParameterizedTypeReference newType)
+  public String getCanonicalName()
   {
-    if (newType != type)
-    {
-      NotificationChain msgs = null;
-      if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XcssPackage.TYPE_SELECTOR__TYPE, null, msgs);
-      if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XcssPackage.TYPE_SELECTOR__TYPE, null, msgs);
-      msgs = basicSetType(newType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.TYPE_SELECTOR__TYPE, newType, newType));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case XcssPackage.TYPE_SELECTOR__TYPE:
-        return basicSetType(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    // TODO: implement this method
+    // Ensure that you remove @generated or mark it @generated NOT
+    throw new UnsupportedOperationException();
   }
 
   /**
@@ -139,7 +129,8 @@ public class TypeSelectorImpl extends SelectorImpl implements TypeSelector
     switch (featureID)
     {
       case XcssPackage.TYPE_SELECTOR__TYPE:
-        return getType();
+        if (resolve) return getType();
+        return basicGetType();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -155,7 +146,7 @@ public class TypeSelectorImpl extends SelectorImpl implements TypeSelector
     switch (featureID)
     {
       case XcssPackage.TYPE_SELECTOR__TYPE:
-        setType((JvmParameterizedTypeReference)newValue);
+        setType((JvmType)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -172,7 +163,7 @@ public class TypeSelectorImpl extends SelectorImpl implements TypeSelector
     switch (featureID)
     {
       case XcssPackage.TYPE_SELECTOR__TYPE:
-        setType((JvmParameterizedTypeReference)null);
+        setType((JvmType)null);
         return;
     }
     super.eUnset(featureID);

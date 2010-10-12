@@ -175,7 +175,7 @@ public interface XcssPackage extends EPackage
   int TYPE_SELECTOR__FILTER = SELECTOR__FILTER;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * The feature id for the '<em><b>Type</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -557,10 +557,10 @@ public interface XcssPackage extends EPackage
   EClass getTypeSelector();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.example.css.xcss.TypeSelector#getType <em>Type</em>}'.
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.example.css.xcss.TypeSelector#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @return the meta object for the reference '<em>Type</em>'.
    * @see org.eclipse.xtext.example.css.xcss.TypeSelector#getType()
    * @see #getTypeSelector()
    * @generated
@@ -852,7 +852,7 @@ public interface XcssPackage extends EPackage
     EClass TYPE_SELECTOR = eINSTANCE.getTypeSelector();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated

@@ -26,7 +26,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//Selector/filter"/>
     </genClasses>
     <genClasses ecoreClass="Xcss.ecore#//TypeSelector">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//TypeSelector/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xcss.ecore#//TypeSelector/type"/>
     </genClasses>
     <genClasses ecoreClass="Xcss.ecore#//WildcardSelector"/>
     <genClasses ecoreClass="Xcss.ecore#//Filter">

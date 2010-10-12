@@ -3,7 +3,7 @@
  */
 package org.eclipse.xtext.example.css.scoping;
 
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 
 /**
  * This class contains custom scoping description.
@@ -12,6 +12,7 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
  * on how and when to use it 
  *
  */
-public class XcssScopeProvider extends AbstractDeclarativeScopeProvider {
+public class XcssScopeProvider extends XbaseScopeProvider {
 
+	
 }

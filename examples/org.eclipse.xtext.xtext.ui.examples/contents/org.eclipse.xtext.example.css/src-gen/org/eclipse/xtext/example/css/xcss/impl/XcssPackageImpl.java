@@ -576,6 +576,7 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
 
     // Add supertypes to classes
     typeSelectorEClass.getESuperTypes().add(this.getSelector());
+    typeSelectorEClass.getESuperTypes().add(theTypesPackage.getJvmTypeReference());
     wildcardSelectorEClass.getESuperTypes().add(this.getSelector());
     fontLiteralEClass.getESuperTypes().add(theXbasePackage.getXExpression());
     colorLiteralEClass.getESuperTypes().add(theXbasePackage.getXExpression());
@@ -596,7 +597,7 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     initEReference(getSelector_Filter(), this.getFilter(), null, "filter", null, 0, 1, Selector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeSelectorEClass, TypeSelector.class, "TypeSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTypeSelector_Type(), theTypesPackage.getJvmParameterizedTypeReference(), null, "type", null, 0, 1, TypeSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTypeSelector_Type(), theTypesPackage.getJvmType(), null, "type", null, 0, 1, TypeSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(wildcardSelectorEClass, WildcardSelector.class, "WildcardSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

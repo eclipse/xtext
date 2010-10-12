@@ -102,20 +102,36 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getFilterFilterParserRuleCall_1_0() { return cFilterFilterParserRuleCall_1_0; }
 	}
 
+	public class _JvmTypeReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "_JvmTypeReference");
+		private final RuleCall cTypeSelectorParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//_JvmTypeReference returns JvmTypeReference:
+		//	TypeSelector;
+		public ParserRule getRule() { return rule; }
+
+		//TypeSelector
+		public RuleCall getTypeSelectorParserRuleCall() { return cTypeSelectorParserRuleCall; }
+	}
+
 	public class TypeSelectorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeSelector");
 		private final Assignment cTypeAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_0 = (RuleCall)cTypeAssignment.eContents().get(0);
+		private final CrossReference cTypeJvmTypeCrossReference_0 = (CrossReference)cTypeAssignment.eContents().get(0);
+		private final RuleCall cTypeJvmTypeQualifiedNameParserRuleCall_0_1 = (RuleCall)cTypeJvmTypeCrossReference_0.eContents().get(1);
 		
 		//TypeSelector:
-		//	type=JvmTypeReference;
+		//	type=[JvmType|QualifiedName];
 		public ParserRule getRule() { return rule; }
 
-		//type=JvmTypeReference
+		//type=[JvmType|QualifiedName]
 		public Assignment getTypeAssignment() { return cTypeAssignment; }
 
-		//JvmTypeReference
-		public RuleCall getTypeJvmTypeReferenceParserRuleCall_0() { return cTypeJvmTypeReferenceParserRuleCall_0; }
+		//[JvmType|QualifiedName]
+		public CrossReference getTypeJvmTypeCrossReference_0() { return cTypeJvmTypeCrossReference_0; }
+
+		//QualifiedName
+		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_0_1; }
 	}
 
 	public class WildcardSelectorElements extends AbstractParserRuleElementFinder {
@@ -587,6 +603,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	private StyleSheetElements pStyleSheet;
 	private StyleRuleElements pStyleRule;
 	private SelectorElements pSelector;
+	private _JvmTypeReferenceElements p_JvmTypeReference;
 	private TypeSelectorElements pTypeSelector;
 	private WildcardSelectorElements pWildcardSelector;
 	private FilterElements pFilter;
@@ -654,8 +671,18 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getSelectorAccess().getRule();
 	}
 
+	//_JvmTypeReference returns JvmTypeReference:
+	//	TypeSelector;
+	public _JvmTypeReferenceElements get_JvmTypeReferenceAccess() {
+		return (p_JvmTypeReference != null) ? p_JvmTypeReference : (p_JvmTypeReference = new _JvmTypeReferenceElements());
+	}
+	
+	public ParserRule get_JvmTypeReferenceRule() {
+		return get_JvmTypeReferenceAccess().getRule();
+	}
+
 	//TypeSelector:
-	//	type=JvmTypeReference;
+	//	type=[JvmType|QualifiedName];
 	public TypeSelectorElements getTypeSelectorAccess() {
 		return (pTypeSelector != null) ? pTypeSelector : (pTypeSelector = new TypeSelectorElements());
 	}

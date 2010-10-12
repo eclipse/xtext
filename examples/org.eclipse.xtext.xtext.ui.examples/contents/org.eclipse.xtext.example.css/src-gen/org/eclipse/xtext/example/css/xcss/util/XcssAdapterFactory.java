@@ -12,6 +12,9 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+
 import org.eclipse.xtext.example.css.xcss.*;
 
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -141,6 +144,16 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
       public Adapter caseSetting(Setting object)
       {
         return createSettingAdapter();
+      }
+      @Override
+      public Adapter caseJvmIdentifyableElement(JvmIdentifyableElement object)
+      {
+        return createJvmIdentifyableElementAdapter();
+      }
+      @Override
+      public Adapter caseJvmTypeReference(JvmTypeReference object)
+      {
+        return createJvmTypeReferenceAdapter();
       }
       @Override
       public Adapter caseXExpression(XExpression object)
@@ -360,6 +373,36 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSettingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmIdentifyableElement <em>Jvm Identifyable Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.common.types.JvmIdentifyableElement
+   * @generated
+   */
+  public Adapter createJvmIdentifyableElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmTypeReference <em>Jvm Type Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.common.types.JvmTypeReference
+   * @generated
+   */
+  public Adapter createJvmTypeReferenceAdapter()
   {
     return null;
   }

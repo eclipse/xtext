@@ -18,9 +18,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="#//Filter"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeSelector" eSuperTypes="#//Selector">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmParameterizedTypeReference"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeSelector" eSuperTypes="#//Selector ../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WildcardSelector" eSuperTypes="#//Selector"/>
   <eClassifiers xsi:type="ecore:EClass" name="Filter">

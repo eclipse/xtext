@@ -142,6 +142,8 @@ finally {
 
 
 
+
+
 // Entry rule entryRuleTypeSelector
 entryRuleTypeSelector 
 :
@@ -10148,8 +10150,12 @@ rule__TypeSelector__TypeAssignment
     }
 :
 (
-{ before(grammarAccess.getTypeSelectorAccess().getTypeJvmTypeReferenceParserRuleCall_0()); }
-	ruleJvmTypeReference{ after(grammarAccess.getTypeSelectorAccess().getTypeJvmTypeReferenceParserRuleCall_0()); }
+{ before(grammarAccess.getTypeSelectorAccess().getTypeJvmTypeCrossReference_0()); }
+(
+{ before(grammarAccess.getTypeSelectorAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_1()); }
+	ruleQualifiedName{ after(grammarAccess.getTypeSelectorAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_1()); }
+)
+{ after(grammarAccess.getTypeSelectorAccess().getTypeJvmTypeCrossReference_0()); }
 )
 
 ;

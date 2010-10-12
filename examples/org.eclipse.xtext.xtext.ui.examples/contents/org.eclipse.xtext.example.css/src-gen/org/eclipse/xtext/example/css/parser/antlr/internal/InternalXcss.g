@@ -279,6 +279,8 @@ ruleSelector returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleTypeSelector
 entryRuleTypeSelector returns [EObject current=null] 
 	:
@@ -298,23 +300,18 @@ ruleTypeSelector returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getTypeSelectorAccess().getTypeJvmTypeReferenceParserRuleCall_0(), currentNode); 
-	    }
-		lv_type_0_0=ruleJvmTypeReference		{
-	        if ($current==null) {
+		  /* */ 
+		}
+		{
+			if ($current==null) {
 	            $current = factory.create(grammarAccess.getTypeSelectorRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            associateNodeWithAstElement(currentNode, $current);
 	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"type",
-	        		lv_type_0_0, 
-	        		"JvmTypeReference", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+        }
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getTypeSelectorAccess().getTypeJvmTypeCrossReference_0(), currentNode); 
+	    }
+		ruleQualifiedName		{ 
 	        currentNode = currentNode.getParent();
 	    }
 
