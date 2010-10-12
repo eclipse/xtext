@@ -18,4 +18,10 @@ public interface ValidationMessageAcceptor {
 	
 	void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData);
 	
+	public static ValidationMessageAcceptor NULL = new ValidationMessageAcceptor() {
+		public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
+		}
+		public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
+		}
+	};
 }

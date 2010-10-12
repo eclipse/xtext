@@ -1,25 +1,19 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.service;
+package org.eclipse.xtext.typing;
 
-import java.lang.reflect.Method;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
-import com.google.inject.Binder;
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
+public interface ITypeProvider<T> {
 
-public class FreeModule extends MethodBasedModule {
-
-	public FreeModule(Method method, Object owner) {
-		super(method, owner);
-	}
-
-	@Override
-	public void configure(Binder binder) {
-		invokeMethod(binder);
-	}
-	
+	public T getType(EObject astNode, T expectedType, ValidationMessageAcceptor issueAcceptor);
 }

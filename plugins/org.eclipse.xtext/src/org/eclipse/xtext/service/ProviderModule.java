@@ -8,85 +8,40 @@
 package org.eclipse.xtext.service;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import org.apache.log4j.Logger;
-
-import com.google.inject.Binder;
 import com.google.inject.Provider;
-import com.google.inject.Scopes;
-import com.google.inject.binder.AnnotatedBindingBuilder;
+import com.google.inject.binder.LinkedBindingBuilder;
+import com.google.inject.internal.MoreTypes;
 
 public class ProviderModule extends MethodBasedModule {
 
-	private static Logger LOGGER = Logger.getLogger(BindModule.class);
-	
 	public ProviderModule(Method method, Object owner) {
 		super(method, owner);
 	}
-
+	
 	@SuppressWarnings("unchecked")
-	public void configure(Binder binder) {
-		Type providerType = getReturnTypeGenericParamAsType(Class.class, getMethod());
-		if (providerType != null) {
-			Class<?> key = getReturnTypeGenericParam(Provider.class, providerType);
-			if (key != null) {
-				Class<? extends Provider<?>> providerClass = (Class<? extends Provider<?>>) invokeMethod();
-				if (LOGGER.isTraceEnabled())
-					LOGGER.trace("Adding binding from " + key.getName() + " to " + providerClass.getName()
-							+ ". Declaring Method was '" + getMethod().toGenericString() + "' in Module "
-							+ this.getClass().getName());
-				if (providerClass != null && !Void.class.equals(providerClass)) {
-					AnnotatedBindingBuilder<Object> bind = binder.bind((Class<Object>) key);
-					if (!key.equals(providerClass)) {
-						bind.toProvider(providerClass);
-					}
-					if (isEager(getMethod())) {
-						bind.asEagerSingleton();
-					} else if (isSingleton(getMethod())) {
-						bind.in(Scopes.SINGLETON);
-					}
-				}
-			}
-		} else {
-			Class<?> key = getReturnTypeGenericParam(Provider.class, getMethod());
-			if (key != null) {
-				Object object = invokeMethod();
-				if (object instanceof Provider<?>) {
-					binder.bind((Class<Object>)key).toProvider((Provider<? extends Object>)object);
-				}
-			}
-		}
-	}
-	
-	protected boolean isConfigured(Class<?> from, Object to) {
-		Type providerType = getReturnTypeGenericParamAsType(Class.class, getMethod());
-		if (providerType != null) {
-			Class<?> key = getReturnTypeGenericParam(Provider.class, providerType);
-			if (key != null) {
-				Object value = invokeMethod();
-				return from.equals(key) && ((to == null && value == null) || to != null && to.equals(value));
-			}
-		} else {
-			Class<?> key = (Class<?>) getReturnTypeGenericParamAsType(Provider.class, getMethod());
-			if (key != null) {
-				Object value = invokeMethod();
-				return from.equals(key) && ((to == null && value == null) || to != null && to.equals(value));
-			}
-		}
-		return false;
-	}
-	
 	@Override
-	protected boolean isConfigured(Class<?> from, Object to, boolean singleton, boolean eagerSingleton,
-			boolean provider) {
-		if (!provider)
-			return false;
-		if (isEager(getMethod()) != eagerSingleton)
-			return false;
-		if (isSingleton(getMethod()) != singleton)
-			return false;
-		return isConfigured(from, to);
+	protected void bindToInstance(LinkedBindingBuilder<Object> bind, Object instance) {
+		bind.toProvider((Provider<? extends Object>) instance);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void bindToClass(LinkedBindingBuilder<Object> bind, Class<?> value) {
+		bind.toProvider((Class<? extends Provider<?>>)value);
 	}
 
+	@Override
+	public Type getKeyType() {
+		Type keyType = super.getKeyType();
+		if (!(isInstanceOf(keyType, Provider.class)))
+			throw new IllegalStateException("The method "+getMethod().getName()+" is expected to return a Class<? extends Provider<Something>> or directly Provider<Something>.");
+		return ((ParameterizedType)keyType).getActualTypeArguments()[0];
+	}
+
+	protected boolean isInstanceOf(Type keyType, Class<?> class1) {
+		return class1.isAssignableFrom(MoreTypes.getRawType(keyType));
+	}
 }

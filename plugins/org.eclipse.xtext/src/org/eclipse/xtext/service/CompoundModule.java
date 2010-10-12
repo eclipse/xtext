@@ -33,7 +33,7 @@ public class CompoundModule implements Module {
 			try {
 				module.configure(binder);
 			} catch(Exception e) {
-				LOGGER.warn(e.getMessage(), e);
+				LOGGER.error(e.getMessage(), e);
 			}
 		}
 	}
@@ -46,16 +46,10 @@ public class CompoundModule implements Module {
 		modules.remove(module);
 	}
 	
-	public boolean isConfigured(Class<?> from, Object to, boolean singleton, boolean eagerSingleton, boolean provider) {
-		for(Module module: modules) {
-			if (module instanceof MethodBasedModule) {
-				if (((MethodBasedModule) module).isConfigured(from, to, singleton, eagerSingleton, provider))
-					return true;
-			}
-		}
-		return false;
+	public List<Module> getModules() {
+		return modules;
 	}
-	
+
 	public int size() {
 		return modules.size();
 	}
