@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.parser;
 
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
+import org.eclipse.xtext.xbase.XSimpleFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -31,6 +33,7 @@ import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 /**
  * @author Sven Efftinge
@@ -117,6 +120,22 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals(2, closure.getParams().size());
 		assertNull(closure.getParams().get(0).getParameterType());
 		assertNotNull(closure.getParams().get(1).getParameterType());
+	}
+	
+	public void testClosure_5() throws Exception {
+		XClosure closure = (XClosure) expression("(java.lang.String) => java.lang.String mapper|mapper('something')");
+		assertTrue(closure.getExpression() instanceof XSimpleFeatureCall);
+		JvmFormalParameter formalParameter = closure.getParams().get(0);
+		assertEquals("mapper", formalParameter.getName());
+		assertTrue(formalParameter.getParameterType() instanceof XFunctionTypeRef);
+	}
+	
+	public void testClosure_6() throws Exception {
+		XClosure closure = (XClosure) expression("((java.lang.String) => java.lang.String mapper|mapper('something'))");
+		assertTrue(closure.getExpression() instanceof XSimpleFeatureCall);
+		JvmFormalParameter formalParameter = closure.getParams().get(0);
+		assertEquals("mapper", formalParameter.getName());
+		assertTrue(formalParameter.getParameterType() instanceof XFunctionTypeRef);
 	}
 
 	public void testCastedExpression() throws Exception {

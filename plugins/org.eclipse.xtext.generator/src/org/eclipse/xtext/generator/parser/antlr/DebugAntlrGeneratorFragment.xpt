@@ -15,9 +15,7 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
 «DEFINE generate(AntlrOptions options) FOR Grammar»
-	«EXPAND IParser::parser»
-	«EXPAND AntlrGrammar::grammar(options)»
-	«EXPAND AntlrTokenFileProvider::file FOR this»
+	«EXPAND AntlrGrammar::grammar(options, true)»
 «ENDDEFINE»
 
 «DEFINE addToPluginXmlRt(AntlrOptions options) FOR Grammar»«ENDDEFINE»
