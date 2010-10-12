@@ -148,6 +148,11 @@ public class SimpleAntlrAdapterFactory extends AdapterFactoryImpl
         return createUntilElementAdapter();
       }
       @Override
+      public Adapter caseSkip(Skip object)
+      {
+        return createSkipAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -375,6 +380,21 @@ public class SimpleAntlrAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createUntilElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Skip <em>Skip</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Skip
+   * @generated
+   */
+  public Adapter createSkipAdapter()
   {
     return null;
   }

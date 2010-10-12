@@ -2728,11 +2728,11 @@ ruleXBlockExpression returns [EObject current=null]
 	    }
 
 )
-)	';' 
+)(	';' 
     {
         createLeafNode(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1(), null); 
     }
-)*	'}' 
+)?)*	'}' 
     {
         createLeafNode(grammarAccess.getXBlockExpressionAccess().getRightCurlyBracketKeyword_3(), null); 
     }

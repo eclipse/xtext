@@ -26,6 +26,7 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleOptions;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrFactory;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Skip;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.UntilElement;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Wildcard;
 
@@ -134,6 +135,13 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * @generated
    */
   private EClass untilElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass skipEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -533,6 +541,16 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getSkip()
+  {
+    return skipEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public SimpleAntlrFactory getSimpleAntlrFactory()
   {
     return (SimpleAntlrFactory)getEFactoryInstance();
@@ -604,6 +622,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
     untilElementEClass = createEClass(UNTIL_ELEMENT);
     createEReference(untilElementEClass, UNTIL_ELEMENT__LEFT);
     createEReference(untilElementEClass, UNTIL_ELEMENT__RIGHT);
+
+    skipEClass = createEClass(SKIP);
   }
 
   /**
@@ -644,6 +664,7 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
     elementWithCardinalityEClass.getESuperTypes().add(this.getRuleElement());
     negatedElementEClass.getESuperTypes().add(this.getRuleElement());
     untilElementEClass.getESuperTypes().add(this.getRuleElement());
+    skipEClass.getESuperTypes().add(this.getRuleOptions());
 
     // Initialize classes and features; add operations and parameters
     initEClass(antlrGrammarEClass, AntlrGrammar.class, "AntlrGrammar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -692,6 +713,8 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
     initEClass(untilElementEClass, UntilElement.class, "UntilElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getUntilElement_Left(), this.getRuleElement(), null, "left", null, 0, 1, UntilElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getUntilElement_Right(), this.getRuleElement(), null, "right", null, 0, 1, UntilElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(skipEClass, Skip.class, "Skip", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);

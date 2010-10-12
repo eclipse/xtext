@@ -54,5 +54,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//UntilElement/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleAntlr.ecore#//UntilElement/right"/>
     </genClasses>
+    <genClasses ecoreClass="SimpleAntlr.ecore#//Skip"/>
   </genPackages>
 </genmodel:GenModel>

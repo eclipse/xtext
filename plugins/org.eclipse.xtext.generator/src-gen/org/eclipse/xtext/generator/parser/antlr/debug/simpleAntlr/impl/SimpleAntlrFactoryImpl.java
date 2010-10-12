@@ -81,6 +81,7 @@ public class SimpleAntlrFactoryImpl extends EFactoryImpl implements SimpleAntlrF
       case SimpleAntlrPackage.ELEMENT_WITH_CARDINALITY: return createElementWithCardinality();
       case SimpleAntlrPackage.NEGATED_ELEMENT: return createNegatedElement();
       case SimpleAntlrPackage.UNTIL_ELEMENT: return createUntilElement();
+      case SimpleAntlrPackage.SKIP: return createSkip();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -238,6 +239,17 @@ public class SimpleAntlrFactoryImpl extends EFactoryImpl implements SimpleAntlrF
   {
     UntilElementImpl untilElement = new UntilElementImpl();
     return untilElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Skip createSkip()
+  {
+    SkipImpl skip = new SkipImpl();
+    return skip;
   }
 
   /**

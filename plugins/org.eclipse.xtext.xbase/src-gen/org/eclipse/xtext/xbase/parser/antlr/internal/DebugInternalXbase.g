@@ -227,7 +227,7 @@ ruleXDoWhileExpression :
 // Rule XBlockExpression
 ruleXBlockExpression :
 	'{' (
-		ruleXExpressionInsideBlock ';'
+		ruleXExpressionInsideBlock ';'?
 	)* '}'
 ;
 
@@ -436,7 +436,7 @@ RULE_STRING :
 RULE_ML_COMMENT :
 	'/*' (
 		options { greedy = false ; } : .
-	)* '*/'
+	)* '*/' {skip();}
 ;
 
 RULE_SL_COMMENT :
@@ -445,7 +445,7 @@ RULE_SL_COMMENT :
 		'\r'
 	)* (
 		'\r'? '\n'
-	)?
+	)? {skip();}
 ;
 
 RULE_WS :
@@ -454,7 +454,7 @@ RULE_WS :
 		'\t' |
 		'\r' |
 		'\n'
-	)+
+	)+ {skip();}
 ;
 
 RULE_ANY_OTHER :

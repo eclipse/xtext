@@ -152,6 +152,15 @@ public interface SimpleAntlrFactory extends EFactory
   UntilElement createUntilElement();
 
   /**
+   * Returns a new object of class '<em>Skip</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Skip</em>'.
+   * @generated
+   */
+  Skip createSkip();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

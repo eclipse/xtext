@@ -202,6 +202,15 @@ public class SimpleAntlrSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SimpleAntlrPackage.SKIP:
+      {
+        Skip skip = (Skip)theEObject;
+        T result = caseSkip(skip);
+        if (result == null) result = caseRuleOptions(skip);
+        if (result == null) result = caseRuleElement(skip);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -426,6 +435,22 @@ public class SimpleAntlrSwitch<T>
    * @generated
    */
   public T caseUntilElement(UntilElement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Skip</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Skip</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSkip(Skip object)
   {
     return null;
   }

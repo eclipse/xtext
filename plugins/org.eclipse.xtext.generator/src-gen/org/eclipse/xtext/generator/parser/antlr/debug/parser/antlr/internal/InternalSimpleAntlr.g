@@ -965,10 +965,10 @@ ruleRuleOptions returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((
+(((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getRuleOptionsAccess().getOptionsOptionsParserRuleCall_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getRuleOptionsAccess().getOptionsOptionsParserRuleCall_0_0_0(), currentNode); 
 	    }
 		lv_options_0_0=ruleOptions		{
 	        if ($current==null) {
@@ -991,12 +991,12 @@ ruleRuleOptions returns [EObject current=null]
 )
 )	':' 
     {
-        createLeafNode(grammarAccess.getRuleOptionsAccess().getColonKeyword_1(), null); 
+        createLeafNode(grammarAccess.getRuleOptionsAccess().getColonKeyword_0_1(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getRuleOptionsAccess().getElementAtomParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getRuleOptionsAccess().getElementAtomParserRuleCall_0_2_0(), currentNode); 
 	    }
 		lv_element_2_0=ruleAtom		{
 	        if ($current==null) {
@@ -1017,6 +1017,22 @@ ruleRuleOptions returns [EObject current=null]
 	    }
 
 )
+))
+    |((
+    { 
+        temp=factory.create(grammarAccess.getRuleOptionsAccess().getSkipAction_1_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getRuleOptionsAccess().getSkipAction_1_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'{skip();}' 
+    {
+        createLeafNode(grammarAccess.getRuleOptionsAccess().getSkipKeyword_1_1(), null); 
+    }
 ))
 ;
 

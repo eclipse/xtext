@@ -441,34 +441,50 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class RuleOptionsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleOptions");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cOptionsAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cOptionsOptionsParserRuleCall_0_0 = (RuleCall)cOptionsAssignment_0.eContents().get(0);
-		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cElementAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cElementAtomParserRuleCall_2_0 = (RuleCall)cElementAssignment_2.eContents().get(0);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Assignment cOptionsAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cOptionsOptionsParserRuleCall_0_0_0 = (RuleCall)cOptionsAssignment_0_0.eContents().get(0);
+		private final Keyword cColonKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Assignment cElementAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
+		private final RuleCall cElementAtomParserRuleCall_0_2_0 = (RuleCall)cElementAssignment_0_2.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cSkipAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cSkipKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
 		//RuleOptions:
-		//	options=Options ":" element=Atom;
+		//	options=Options ":" element=Atom | {Skip} "{skip();}";
 		public ParserRule getRule() { return rule; }
 
+		//options=Options ":" element=Atom | {Skip} "{skip();}"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
 		//options=Options ":" element=Atom
-		public Group getGroup() { return cGroup; }
+		public Group getGroup_0() { return cGroup_0; }
 
 		//options=Options
-		public Assignment getOptionsAssignment_0() { return cOptionsAssignment_0; }
+		public Assignment getOptionsAssignment_0_0() { return cOptionsAssignment_0_0; }
 
 		//Options
-		public RuleCall getOptionsOptionsParserRuleCall_0_0() { return cOptionsOptionsParserRuleCall_0_0; }
+		public RuleCall getOptionsOptionsParserRuleCall_0_0_0() { return cOptionsOptionsParserRuleCall_0_0_0; }
 
 		//":"
-		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
+		public Keyword getColonKeyword_0_1() { return cColonKeyword_0_1; }
 
 		//element=Atom
-		public Assignment getElementAssignment_2() { return cElementAssignment_2; }
+		public Assignment getElementAssignment_0_2() { return cElementAssignment_0_2; }
 
 		//Atom
-		public RuleCall getElementAtomParserRuleCall_2_0() { return cElementAtomParserRuleCall_2_0; }
+		public RuleCall getElementAtomParserRuleCall_0_2_0() { return cElementAtomParserRuleCall_0_2_0; }
+
+		//{Skip} "{skip();}"
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{Skip}
+		public Action getSkipAction_1_0() { return cSkipAction_1_0; }
+
+		//"{skip();}"
+		public Keyword getSkipKeyword_1_1() { return cSkipKeyword_1_1; }
 	}
 
 	public class LiteralElements extends AbstractParserRuleElementFinder {
@@ -718,7 +734,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RuleOptions:
-	//	options=Options ":" element=Atom;
+	//	options=Options ":" element=Atom | {Skip} "{skip();}";
 	public RuleOptionsElements getRuleOptionsAccess() {
 		return (pRuleOptions != null) ? pRuleOptions : (pRuleOptions = new RuleOptionsElements());
 	}

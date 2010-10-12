@@ -60,4 +60,5 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//RuleElement"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Skip" eSuperTypes="#//RuleOptions"/>
 </ecore:EPackage>

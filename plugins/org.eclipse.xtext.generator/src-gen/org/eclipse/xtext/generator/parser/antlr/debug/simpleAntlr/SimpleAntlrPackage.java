@@ -496,6 +496,43 @@ public interface SimpleAntlrPackage extends EPackage
    */
   int UNTIL_ELEMENT_FEATURE_COUNT = RULE_ELEMENT_FEATURE_COUNT + 2;
 
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SkipImpl <em>Skip</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SkipImpl
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getSkip()
+   * @generated
+   */
+  int SKIP = 14;
+
+  /**
+   * The feature id for the '<em><b>Options</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SKIP__OPTIONS = RULE_OPTIONS__OPTIONS;
+
+  /**
+   * The feature id for the '<em><b>Element</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SKIP__ELEMENT = RULE_OPTIONS__ELEMENT;
+
+  /**
+   * The number of structural features of the '<em>Skip</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SKIP_FEATURE_COUNT = RULE_OPTIONS_FEATURE_COUNT + 0;
+
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AntlrGrammar <em>Antlr Grammar</em>}'.
@@ -847,6 +884,16 @@ public interface SimpleAntlrPackage extends EPackage
   EReference getUntilElement_Right();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Skip <em>Skip</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Skip</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Skip
+   * @generated
+   */
+  EClass getSkip();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1160,6 +1207,16 @@ public interface SimpleAntlrPackage extends EPackage
      * @generated
      */
     EReference UNTIL_ELEMENT__RIGHT = eINSTANCE.getUntilElement_Right();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SkipImpl <em>Skip</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SkipImpl
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getSkip()
+     * @generated
+     */
+    EClass SKIP = eINSTANCE.getSkip();
 
   }
 

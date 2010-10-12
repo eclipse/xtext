@@ -6094,9 +6094,9 @@ rule__XBlockExpression__Group_2__1__Impl
 :
 (
 { before(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1()); }
-
+(
 	';' 
-
+)?
 { after(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1()); }
 )
 
