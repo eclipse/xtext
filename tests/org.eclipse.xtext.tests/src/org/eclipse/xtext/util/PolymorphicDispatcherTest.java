@@ -176,13 +176,32 @@ public class PolymorphicDispatcherTest extends TestCase {
 			String label(String c, String s) {
 				return String.class.getSimpleName();
 			}
+			
 		};
 		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 2, 2,
 				Lists.newArrayList(o1));
 		assertEquals(String.class.getSimpleName(), dispatcher.invoke(null, "Foo"));
 		assertEquals(String.class.getSimpleName(), dispatcher.invoke("Foo", null));
 		assertEquals(CharSequence.class.getSimpleName(), dispatcher.invoke(null, new StringBuilder()));
-
+	}
+	
+	public void testNullParams_1() throws Exception {
+		Object o1 = new Object() {
+			
+			String label(Void x, CharSequence y) {
+				return CharSequence.class.getSimpleName();
+			}
+			
+			String label(String c, Void s) {
+				return String.class.getSimpleName();
+			}
+			
+		};
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 2, 2,
+				Lists.newArrayList(o1));
+		assertEquals(CharSequence.class.getSimpleName(), dispatcher.invoke(null, "Foo"));
+		assertEquals(String.class.getSimpleName(), dispatcher.invoke("Foo", null));
+		assertEquals(CharSequence.class.getSimpleName(), dispatcher.invoke(null, null));
 	}
 
 	public void testPrivateMethodAccess() {

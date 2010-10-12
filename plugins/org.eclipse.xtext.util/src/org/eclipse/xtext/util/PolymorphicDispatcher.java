@@ -181,7 +181,7 @@ public class PolymorphicDispatcher<RT> {
 				return false;
 			for (int i = 0; i < paramTypes.size(); i++) {
 				Class<?> paramClass = paramTypes.get(i);
-				if (paramClass!=null && !(getObjectType(getParameterTypes()[i]).isAssignableFrom(getObjectType(paramClass))))
+				if (paramClass!=null && !Void.class.equals(paramClass) && !(getObjectType(getParameterTypes()[i]).isAssignableFrom(getObjectType(paramClass))))
 					return false;
 			}
 			return true;
@@ -193,7 +193,7 @@ public class PolymorphicDispatcher<RT> {
 		}
 	}
 
-	private int compare(MethodDesc o1, MethodDesc o2) {
+	protected int compare(MethodDesc o1, MethodDesc o2) {
 		final List<Class<?>> paramTypes1 = Arrays.asList(o1.getParameterTypes());
 		final List<Class<?>> paramTypes2 = Arrays.asList(o2.getParameterTypes());
 
@@ -210,9 +210,9 @@ public class PolymorphicDispatcher<RT> {
 
 			if (class1.equals(class2))
 				continue;
-			if (class1.isAssignableFrom(class2))
+			if (class1.isAssignableFrom(class2) || Void.class.equals(class2))
 				return -1;
-			if (class2.isAssignableFrom(class1))
+			if (class2.isAssignableFrom(class1) || Void.class.equals(class1))
 				return 1;
 		}
 
@@ -309,7 +309,7 @@ public class PolymorphicDispatcher<RT> {
 	 * @return
 	 */
 	protected Class<?> getDefaultClass(int paramIndex) {
-		return null;
+		return Void.class;
 	}
 
 	private List<MethodDesc> cachedDescriptors;
