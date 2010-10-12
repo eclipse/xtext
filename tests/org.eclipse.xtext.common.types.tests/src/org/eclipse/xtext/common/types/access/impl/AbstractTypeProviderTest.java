@@ -310,6 +310,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertFalse(parameterType.eIsProxy());
 		assertSame(parameterType, type.getTypeParameters().get(0));
 	}
+	
+	public void testSuperTypeOfInterface() {
+		String typeName = Serializable.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		assertEquals(Object.class.getName(),type.getSuperTypes().get(0).getCanonicalName());
+	}
 
 	private JvmOperation getMethodFromParameterizedMethods(String method) {
 		String typeName = ParameterizedMethods.class.getName();

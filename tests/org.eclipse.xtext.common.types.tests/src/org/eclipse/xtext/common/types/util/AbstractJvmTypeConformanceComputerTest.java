@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
@@ -23,17 +24,19 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
 
+import com.google.inject.internal.Lists;
+
 /**
  * @author svenefftinge - Initial contribution and API
  */
-public abstract class AbstractAssignabilityComputerTest extends TestCase {
+public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 
 	private JvmTypeConformanceComputer computer;
 	private DeclaredTypeFactory factory = new DeclaredTypeFactory(new ClassURIHelper());
@@ -101,7 +104,7 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		computer = new JvmTypeConformanceComputer(new SuperTypeCollector());
+		computer = new JvmTypeConformanceComputer(new SuperTypeCollector(new JvmTypes()));
 	}
 
 	@Override
@@ -156,6 +159,13 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 		JvmTypeReference List_rawtype = ref(List.class);
 		assertTrue(computer.isConformant(List_String, List_rawtype));
 		assertTrue(computer.isConformant(List_rawtype, List_String));
+	}
+	
+	
+	public void testInterfacesConformToObject() throws Exception {
+		JvmTypeReference interfaceType = ref(CharSequence.class);
+		JvmTypeReference objectType = ref(Object.class);
+		assertTrue(computer.isConformant(objectType, interfaceType));
 	}
 	
 	/**
@@ -269,6 +279,55 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 		assertFalse(computer.isConformant(array(ref(String.class), 1), array(ref(CharSequence.class), 1)));
 		assertFalse(computer.isConformant(array(ref(String.class), 2), array(ref(String.class), 1)));
 		assertFalse(computer.isConformant(array(ref(String.class), 1), array(ref(String.class), 2)));
+	}
+	
+	protected void assertCommonSuperType(Class<?> expected, Class<?> ...types) {
+		List<JvmTypeReference> refs = Lists.newArrayList();
+		for (int i = 0; i < types.length; i++) {
+			Class<?> class1 = types[i];
+			refs.add(ref(class1));
+		}
+		JvmTypeReference type = computer.getCommonSuperType(refs);
+		assertEquals(expected.getCanonicalName(), type.getCanonicalName());
+	}
+	
+	public void testCommonSuperType_0() throws Exception {
+		assertCommonSuperType(
+				Serializable.class,
+				String.class,
+				StringBuilder.class);
+	}
+	
+
+	public void testCommonSuperType_1() throws Exception {
+		assertCommonSuperType(
+				CharSequence.class,
+				String.class,
+				StringBuilder.class,
+				CharSequence.class
+				);
+	}
+	
+	public void testCommonSuperType_2() throws Exception {
+		assertCommonSuperType(Object.class,
+				String.class,
+				StringBuilder.class,
+				CharSequence.class,
+				Object.class
+		);
+	}
+	
+	public void testCommonSuperType_3() throws Exception {
+		assertCommonSuperType(String.class,
+				String.class,
+				String.class
+		);
+	}
+	
+	public void testCommonSuperType_4() throws Exception {
+		assertCommonSuperType(String.class,
+				String.class
+		);
 	}
 
 }

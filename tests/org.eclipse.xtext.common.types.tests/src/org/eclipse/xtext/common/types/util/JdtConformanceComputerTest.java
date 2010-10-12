@@ -12,16 +12,18 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
-import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.JdtTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ClasspathAssignabilityComputerTest extends AbstractAssignabilityComputerTest {
+public class JdtConformanceComputerTest extends AbstractJvmTypeConformanceComputerTest {
 
 	private ResourceSet resourceSet;
-	private ClasspathTypeProvider typeProvider;
+	private JdtTypeProvider typeProvider;
 	private Resource syntheticResource;
+	private MockJavaProjectProvider projectProvider;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -29,7 +31,8 @@ public class ClasspathAssignabilityComputerTest extends AbstractAssignabilityCom
 		resourceSet = new ResourceSetImpl();
 		syntheticResource = new XMLResourceImpl(URI.createURI("http://synthetic.resource"));
 		resourceSet.getResources().add(syntheticResource);
-		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet);
+		projectProvider = new MockJavaProjectProvider();
+		typeProvider = new JdtTypeProvider(projectProvider.getJavaProject(resourceSet), resourceSet);
 	}
 	
 	@Override
@@ -41,7 +44,7 @@ public class ClasspathAssignabilityComputerTest extends AbstractAssignabilityCom
 	}
 	
 	@Override
-	protected ClasspathTypeProvider getTypeProvider() {
+	protected JdtTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 
