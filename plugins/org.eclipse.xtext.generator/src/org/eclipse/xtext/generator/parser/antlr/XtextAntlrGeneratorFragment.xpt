@@ -16,7 +16,7 @@
 
 «DEFINE generate(AntlrOptions options) FOR Grammar»
 	«EXPAND IParser::parser»
-	«EXPAND AntlrGrammar::grammar(options)»
+	«EXPAND AntlrGrammar::grammar(options, false)»
 	«EXPAND AntlrTokenFileProvider::file FOR this»
 «ENDDEFINE»
 
