@@ -141,7 +141,7 @@ XDoWhileExpression:
 
 XBlockExpression: {XBlockExpression}
 	'{'
-		(expressions+=XExpressionInsideBlock ';'?)*
+		(expressions+=XExpressionInsideBlock ';')*
 	'}';
 
 XExpressionInsideBlock returns XExpression:

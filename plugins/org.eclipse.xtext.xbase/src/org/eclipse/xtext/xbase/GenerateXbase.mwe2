@@ -62,6 +62,7 @@ Workflow {
 			}
 			fragment = XtextAntlrGeneratorFragment {
 				options = auto-inject {}
+				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}
 			fragment = DebugAntlrGeneratorFragment {
 				options = auto-inject {}
@@ -77,6 +78,7 @@ Workflow {
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = XtextAntlrUiGeneratorFragment {
 				options = auto-inject {}
+				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}
 		}
 	}
