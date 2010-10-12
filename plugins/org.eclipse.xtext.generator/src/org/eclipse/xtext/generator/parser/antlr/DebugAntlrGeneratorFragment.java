@@ -7,7 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr;
 
+import static org.eclipse.xtext.util.Files.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 import org.eclipse.emf.mwe.core.issues.Issues;
+import org.eclipse.xpand2.XpandExecutionContext;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlrStandaloneSetup;
+import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.StringInputStream;
+
+import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -20,4 +36,32 @@ public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 		issues.addInfo("Generate debugging grammar file");
 	}
 	
+	@Override
+	public void generate(Grammar grammar, XpandExecutionContext ctx) {
+		super.generate(grammar, ctx);
+		String srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath();
+		String absoluteGrammarFileName = srcGenPath+"/"+getGrammarFileName(grammar, getNaming()).replace('.', '/')+".g";
+		prettyPrint(absoluteGrammarFileName);
+	}
+	
+	protected void prettyPrint(String absoluteGrammarFileName) {
+		try {
+			String content = readFileIntoString(absoluteGrammarFileName);
+			Injector injector = new SimpleAntlrStandaloneSetup().createInjectorAndDoEMFRegistration();
+			XtextResource resource = injector.getInstance(XtextResource.class);
+			resource.load(new StringInputStream(content), null);
+			if (!resource.getErrors().isEmpty()) {
+				throw new RuntimeException(resource.getErrors().toString());
+			}
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream(content.length());
+			resource.save(outputStream, SaveOptions.newBuilder().format().getOptions().toOptionsMap());
+			writeStringIntoFile(absoluteGrammarFileName, outputStream.toString());
+		} catch(IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public String getGrammarFileName(Grammar g, Naming naming) {
+		return naming.basePackageRuntime(g) + ".parser.antlr.internal.DebugInternal" + GrammarUtil.getName(g);
+	}
 }
