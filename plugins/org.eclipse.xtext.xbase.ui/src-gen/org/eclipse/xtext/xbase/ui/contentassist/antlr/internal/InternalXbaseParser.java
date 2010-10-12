@@ -26872,7 +26872,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__XCastedExpression__TargetAssignment_3
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9013:1: rule__XCastedExpression__TargetAssignment_3 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9013:1: rule__XCastedExpression__TargetAssignment_3 : ( ruleXFeatureCall ) ;
     public final void rule__XCastedExpression__TargetAssignment_3() throws RecognitionException {
         int rule__XCastedExpression__TargetAssignment_3_StartIndex = input.index();
 
@@ -26880,21 +26880,21 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 560) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9017:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9018:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9017:1: ( ( ruleXFeatureCall ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9018:1: ( ruleXFeatureCall )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9018:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9019:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9018:1: ( ruleXFeatureCall )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9019:1: ruleXFeatureCall
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXCastedExpressionAccess().getTargetXExpressionParserRuleCall_3_0()); 
+               before(grammarAccess.getXCastedExpressionAccess().getTargetXFeatureCallParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCastedExpression__TargetAssignment_318175);
-            ruleXExpression();
+            pushFollow(FOLLOW_ruleXFeatureCall_in_rule__XCastedExpression__TargetAssignment_318175);
+            ruleXFeatureCall();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXCastedExpressionAccess().getTargetXExpressionParserRuleCall_3_0()); 
+               after(grammarAccess.getXCastedExpressionAccess().getTargetXFeatureCallParserRuleCall_3_0()); 
             }
 
             }
@@ -28191,7 +28191,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__XConstructorCall__TypeAssignment_1
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9437:1: rule__XConstructorCall__TypeAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9437:1: rule__XConstructorCall__TypeAssignment_1 : ( ruleJvmParameterizedTypeReference ) ;
     public final void rule__XConstructorCall__TypeAssignment_1() throws RecognitionException {
         int rule__XConstructorCall__TypeAssignment_1_StartIndex = input.index();
 
@@ -28199,21 +28199,21 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 588) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9441:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9442:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9441:1: ( ( ruleJvmParameterizedTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9442:1: ( ruleJvmParameterizedTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9442:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9443:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9442:1: ( ruleJvmParameterizedTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9443:1: ruleJvmParameterizedTypeReference
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getTypeJvmTypeReferenceParserRuleCall_1_0()); 
+               before(grammarAccess.getXConstructorCallAccess().getTypeJvmParameterizedTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XConstructorCall__TypeAssignment_119051);
-            ruleJvmTypeReference();
+            pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_rule__XConstructorCall__TypeAssignment_119051);
+            ruleJvmParameterizedTypeReference();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getTypeJvmTypeReferenceParserRuleCall_1_0()); 
+               after(grammarAccess.getXConstructorCallAccess().getTypeJvmParameterizedTypeReferenceParserRuleCall_1_0()); 
             }
 
             }
@@ -28864,7 +28864,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__XFunctionTypeRef__ParamTypesAssignment_0_1
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9659:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1 : ( ruleJvmTypeArgument ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9659:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ParamTypesAssignment_0_1() throws RecognitionException {
         int rule__XFunctionTypeRef__ParamTypesAssignment_0_1_StartIndex = input.index();
 
@@ -28872,21 +28872,21 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 602) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9663:1: ( ( ruleJvmTypeArgument ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9664:1: ( ruleJvmTypeArgument )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9663:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9664:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9664:1: ( ruleJvmTypeArgument )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9665:1: ruleJvmTypeArgument
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9664:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9665:1: ruleJvmTypeReference
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeArgumentParserRuleCall_0_1_0()); 
+               before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeArgument_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_119506);
-            ruleJvmTypeArgument();
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_119506);
+            ruleJvmTypeReference();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeArgumentParserRuleCall_0_1_0()); 
+               after(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_0()); 
             }
 
             }
@@ -28911,7 +28911,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9674:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 : ( ruleJvmTypeArgument ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9674:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1() throws RecognitionException {
         int rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_StartIndex = input.index();
 
@@ -28919,21 +28919,21 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 603) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9678:1: ( ( ruleJvmTypeArgument ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9679:1: ( ruleJvmTypeArgument )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9678:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9679:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9679:1: ( ruleJvmTypeArgument )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9680:1: ruleJvmTypeArgument
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9679:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9680:1: ruleJvmTypeReference
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeArgumentParserRuleCall_0_2_1_0()); 
+               before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeArgument_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_119537);
-            ruleJvmTypeArgument();
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_119537);
+            ruleJvmTypeReference();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeArgumentParserRuleCall_0_2_1_0()); 
+               after(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_2_1_0()); 
             }
 
             }
@@ -28958,7 +28958,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__XFunctionTypeRef__ReturnTypeAssignment_2
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9689:1: rule__XFunctionTypeRef__ReturnTypeAssignment_2 : ( ruleJvmTypeArgument ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9689:1: rule__XFunctionTypeRef__ReturnTypeAssignment_2 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ReturnTypeAssignment_2() throws RecognitionException {
         int rule__XFunctionTypeRef__ReturnTypeAssignment_2_StartIndex = input.index();
 
@@ -28966,21 +28966,21 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 604) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9693:1: ( ( ruleJvmTypeArgument ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9694:1: ( ruleJvmTypeArgument )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9693:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9694:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9694:1: ( ruleJvmTypeArgument )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9695:1: ruleJvmTypeArgument
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9694:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9695:1: ruleJvmTypeReference
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeArgumentParserRuleCall_2_0()); 
+               before(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeReferenceParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeArgument_in_rule__XFunctionTypeRef__ReturnTypeAssignment_219568);
-            ruleJvmTypeArgument();
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_219568);
+            ruleJvmTypeReference();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeArgumentParserRuleCall_2_0()); 
+               after(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeReferenceParserRuleCall_2_0()); 
             }
 
             }
@@ -30078,7 +30078,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     static final String DFA35_acceptS =
         "\1\uffff\1\1\4\uffff\1\2\4\uffff";
     static final String DFA35_specialS =
-        "\4\uffff\1\3\1\1\2\uffff\1\2\1\uffff\1\0}>";
+        "\4\uffff\1\1\1\3\2\uffff\1\2\1\uffff\1\0}>";
     static final String[] DFA35_transitionS = {
             "\3\1\20\uffff\2\1\4\uffff\1\1\4\uffff\1\1\2\uffff\2\1\1\uffff"+
             "\1\1\1\2\5\uffff\6\1\1\uffff\2\1\2\uffff\1\1\4\uffff\1\1",
@@ -30149,10 +30149,10 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA35_5 = input.LA(1);
+                        int LA35_4 = input.LA(1);
 
                          
-                        int index35_5 = input.index();
+                        int index35_4 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred56()) ) {s = 1;}
@@ -30160,7 +30160,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
                         else if ( (true) ) {s = 6;}
 
                          
-                        input.seek(index35_5);
+                        input.seek(index35_4);
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
@@ -30179,10 +30179,10 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
-                        int LA35_4 = input.LA(1);
+                        int LA35_5 = input.LA(1);
 
                          
-                        int index35_4 = input.index();
+                        int index35_5 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred56()) ) {s = 1;}
@@ -30190,7 +30190,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
                         else if ( (true) ) {s = 6;}
 
                          
-                        input.seek(index35_4);
+                        input.seek(index35_5);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -30593,7 +30593,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XCastedExpression__Group__1__Impl_in_rule__XCastedExpression__Group__18860 = new BitSet(new long[]{0x0000000800000000L});
     public static final BitSet FOLLOW_rule__XCastedExpression__Group__2_in_rule__XCastedExpression__Group__18863 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XCastedExpression__TypeAssignment_1_in_rule__XCastedExpression__Group__1__Impl8890 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCastedExpression__Group__2__Impl_in_rule__XCastedExpression__Group__28920 = new BitSet(new long[]{0x84DF836421800070L});
+    public static final BitSet FOLLOW_rule__XCastedExpression__Group__2__Impl_in_rule__XCastedExpression__Group__28920 = new BitSet(new long[]{0x84DF836400000070L});
     public static final BitSet FOLLOW_rule__XCastedExpression__Group__3_in_rule__XCastedExpression__Group__28923 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_35_in_rule__XCastedExpression__Group__2__Impl8951 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XCastedExpression__Group__3__Impl_in_rule__XCastedExpression__Group__38982 = new BitSet(new long[]{0x0000000000000002L});
@@ -30788,7 +30788,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_36_in_rule__XSimpleFeatureCall__Group_1_1_1__0__Impl13329 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSimpleFeatureCall__Group_1_1_1__1__Impl_in_rule__XSimpleFeatureCall__Group_1_1_1__113360 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSimpleFeatureCall__ParamsAssignment_1_1_1_1_in_rule__XSimpleFeatureCall__Group_1_1_1__1__Impl13387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__0__Impl_in_rule__XConstructorCall__Group__013421 = new BitSet(new long[]{0x0400000400000010L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__0__Impl_in_rule__XConstructorCall__Group__013421 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group__1_in_rule__XConstructorCall__Group__013424 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_50_in_rule__XConstructorCall__Group__0__Impl13452 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group__1__Impl_in_rule__XConstructorCall__Group__113483 = new BitSet(new long[]{0x0000000400000000L});
@@ -30874,12 +30874,12 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__0__Impl_in_rule__XFunctionTypeRef__Group__015421 = new BitSet(new long[]{0x0400000000000000L});
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__1_in_rule__XFunctionTypeRef__Group__015424 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__0_in_rule__XFunctionTypeRef__Group__0__Impl15451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__1__Impl_in_rule__XFunctionTypeRef__Group__115482 = new BitSet(new long[]{0x0C00000400000010L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__1__Impl_in_rule__XFunctionTypeRef__Group__115482 = new BitSet(new long[]{0x0400000400000010L});
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__2_in_rule__XFunctionTypeRef__Group__115485 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_58_in_rule__XFunctionTypeRef__Group__1__Impl15513 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__2__Impl_in_rule__XFunctionTypeRef__Group__215544 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__ReturnTypeAssignment_2_in_rule__XFunctionTypeRef__Group__2__Impl15571 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__0__Impl_in_rule__XFunctionTypeRef__Group_0__015607 = new BitSet(new long[]{0x0C00000400000010L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__0__Impl_in_rule__XFunctionTypeRef__Group_0__015607 = new BitSet(new long[]{0x0400000400000010L});
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__1_in_rule__XFunctionTypeRef__Group_0__015610 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_34_in_rule__XFunctionTypeRef__Group_0__0__Impl15638 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__1__Impl_in_rule__XFunctionTypeRef__Group_0__115669 = new BitSet(new long[]{0x0000001800000000L});
@@ -30890,7 +30890,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__0_in_rule__XFunctionTypeRef__Group_0__2__Impl15759 = new BitSet(new long[]{0x0000001000000002L});
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__3__Impl_in_rule__XFunctionTypeRef__Group_0__315790 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_35_in_rule__XFunctionTypeRef__Group_0__3__Impl15818 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__0__Impl_in_rule__XFunctionTypeRef__Group_0_2__015857 = new BitSet(new long[]{0x0C00000400000010L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__0__Impl_in_rule__XFunctionTypeRef__Group_0_2__015857 = new BitSet(new long[]{0x0400000400000010L});
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__1_in_rule__XFunctionTypeRef__Group_0_2__015860 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_36_in_rule__XFunctionTypeRef__Group_0_2__0__Impl15888 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__1__Impl_in_rule__XFunctionTypeRef__Group_0_2__115919 = new BitSet(new long[]{0x0000000000000002L});
@@ -30974,7 +30974,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__ParamsAssignment_1_1_118082 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XClosure__ExpressionAssignment_318113 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_118144 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCastedExpression__TargetAssignment_318175 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXFeatureCall_in_rule__XCastedExpression__TargetAssignment_318175 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_218206 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_418237 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_5_118268 = new BitSet(new long[]{0x0000000000000002L});
@@ -31002,7 +31002,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_RULE_ID_in_rule__XSimpleFeatureCall__FeatureAssignment_018954 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XSimpleFeatureCall__ParamsAssignment_1_1_018989 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XSimpleFeatureCall__ParamsAssignment_1_1_1_119020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XConstructorCall__TypeAssignment_119051 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_rule__XConstructorCall__TypeAssignment_119051 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ParamsAssignment_3_019082 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ParamsAssignment_3_1_119113 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_63_in_rule__XBooleanLiteral__IsTrueAssignment_119149 = new BitSet(new long[]{0x0000000000000002L});
@@ -31016,9 +31016,9 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_119413 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_219444 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_419475 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeArgument_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_119506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeArgument_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_119537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeArgument_in_rule__XFunctionTypeRef__ReturnTypeAssignment_219568 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_119506 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_119537 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_219568 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_019603 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeArgument_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_119638 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeArgument_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_119669 = new BitSet(new long[]{0x0000000000000002L});

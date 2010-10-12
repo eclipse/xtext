@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.JvmTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl;
 
@@ -51,7 +51,7 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<JvmTypeArgument> paramTypes;
+	protected EList<JvmTypeReference> paramTypes;
 
 	/**
 	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
@@ -61,7 +61,7 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * @generated
 	 * @ordered
 	 */
-	protected JvmTypeArgument returnType;
+	protected JvmTypeReference returnType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -89,11 +89,11 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<JvmTypeArgument> getParamTypes()
+	public EList<JvmTypeReference> getParamTypes()
 	{
 		if (paramTypes == null)
 		{
-			paramTypes = new EObjectContainmentEList<JvmTypeArgument>(JvmTypeArgument.class, this, XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES);
+			paramTypes = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES);
 		}
 		return paramTypes;
 	}
@@ -103,7 +103,7 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmTypeArgument getReturnType()
+	public JvmTypeReference getReturnType()
 	{
 		return returnType;
 	}
@@ -113,9 +113,9 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetReturnType(JvmTypeArgument newReturnType, NotificationChain msgs)
+	public NotificationChain basicSetReturnType(JvmTypeReference newReturnType, NotificationChain msgs)
 	{
-		JvmTypeArgument oldReturnType = returnType;
+		JvmTypeReference oldReturnType = returnType;
 		returnType = newReturnType;
 		if (eNotificationRequired())
 		{
@@ -130,7 +130,7 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReturnType(JvmTypeArgument newReturnType)
+	public void setReturnType(JvmTypeReference newReturnType)
 	{
 		if (newReturnType != returnType)
 		{
@@ -195,10 +195,10 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 		{
 			case XtypePackage.XFUNCTION_TYPE_REF__PARAM_TYPES:
 				getParamTypes().clear();
-				getParamTypes().addAll((Collection<? extends JvmTypeArgument>)newValue);
+				getParamTypes().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
 			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
-				setReturnType((JvmTypeArgument)newValue);
+				setReturnType((JvmTypeReference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -218,7 +218,7 @@ public class XFunctionTypeRefImpl extends JvmParameterizedTypeReferenceImpl impl
 				getParamTypes().clear();
 				return;
 			case XtypePackage.XFUNCTION_TYPE_REF__RETURN_TYPE:
-				setReturnType((JvmTypeArgument)null);
+				setReturnType((JvmTypeReference)null);
 				return;
 		}
 		super.eUnset(featureID);

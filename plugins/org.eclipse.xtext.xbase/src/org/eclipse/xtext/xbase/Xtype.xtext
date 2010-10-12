@@ -15,7 +15,7 @@ JvmTypeReference returns JvmParameterizedTypeReference:
   JvmParameterizedTypeReference|XFunctionTypeRef;
 
 XFunctionTypeRef:
-  ('(' paramTypes+=JvmTypeArgument (',' paramTypes+=JvmTypeArgument)* ')')? '=>' returnType=JvmTypeArgument;
+  ('(' paramTypes+=JvmTypeReference (',' paramTypes+=JvmTypeReference)* ')')? '=>' returnType=JvmTypeReference;
 
 JvmParameterizedTypeReference:
   type=[JvmType|QualifiedName] ('<' arguments+=JvmTypeArgument (',' arguments+=JvmTypeArgument)* '>')?;

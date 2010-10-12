@@ -5598,11 +5598,11 @@ protected class XClosure_ExpressionAssignment_3 extends AssignmentToken  {
 /************ begin Rule XCastedExpression ****************
  *
  * XCastedExpression:
- * 	"(" type=JvmTypeReference ")" target=XExpression;
+ * 	"(" type=JvmTypeReference ")" target=XFeatureCall;
  *
  **/
 
-// "(" type=JvmTypeReference ")" target=XExpression
+// "(" type=JvmTypeReference ")" target=XFeatureCall
 protected class XCastedExpression_Group extends GroupToken {
 	
 	public XCastedExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5720,7 +5720,7 @@ protected class XCastedExpression_RightParenthesisKeyword_2 extends KeywordToken
 
 }
 
-// target=XExpression
+// target=XFeatureCall
 protected class XCastedExpression_TargetAssignment_3 extends AssignmentToken  {
 	
 	public XCastedExpression_TargetAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5735,7 +5735,7 @@ protected class XCastedExpression_TargetAssignment_3 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XExpression_XAssignmentParserRuleCall(this, this, 0, inst);
+			case 0: return new XFeatureCall_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -5746,9 +5746,9 @@ protected class XCastedExpression_TargetAssignment_3 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("target");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getXFeatureCallRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXCastedExpressionAccess().getTargetXExpressionParserRuleCall_3_0(); 
+				element = grammarAccess.getXCastedExpressionAccess().getTargetXFeatureCallParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -8686,11 +8686,11 @@ protected class XSimpleFeatureCall_RightParenthesisKeyword_1_2 extends KeywordTo
 /************ begin Rule XConstructorCall ****************
  *
  * XConstructorCall:
- * 	"new" type=JvmTypeReference "(" (params+=XExpression ("," params+=XExpression)*)? ")";
+ * 	"new" type=JvmParameterizedTypeReference "(" (params+=XExpression ("," params+=XExpression)*)? ")";
  *
  **/
 
-// "new" type=JvmTypeReference "(" (params+=XExpression ("," params+=XExpression)*)? ")"
+// "new" type=JvmParameterizedTypeReference "(" (params+=XExpression ("," params+=XExpression)*)? ")"
 protected class XConstructorCall_Group extends GroupToken {
 	
 	public XConstructorCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8740,7 +8740,7 @@ protected class XConstructorCall_NewKeyword_0 extends KeywordToken  {
 
 }
 
-// type=JvmTypeReference
+// type=JvmParameterizedTypeReference
 protected class XConstructorCall_TypeAssignment_1 extends AssignmentToken  {
 	
 	public XConstructorCall_TypeAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8755,7 +8755,7 @@ protected class XConstructorCall_TypeAssignment_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new JvmTypeReference_Alternatives(this, this, 0, inst);
+			case 0: return new JvmParameterizedTypeReference_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -8766,9 +8766,9 @@ protected class XConstructorCall_TypeAssignment_1 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("type");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXConstructorCallAccess().getTypeJvmTypeReferenceParserRuleCall_1_0(); 
+				element = grammarAccess.getXConstructorCallAccess().getTypeJvmParameterizedTypeReferenceParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -10247,11 +10247,11 @@ protected class JvmTypeReference_XFunctionTypeRefParserRuleCall_1 extends RuleCa
 /************ begin Rule XFunctionTypeRef ****************
  *
  * XFunctionTypeRef:
- * 	("(" paramTypes+=JvmTypeArgument ("," paramTypes+=JvmTypeArgument)* ")")? "=>" returnType=JvmTypeArgument;
+ * 	("(" paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)* ")")? "=>" returnType=JvmTypeReference;
  *
  **/
 
-// ("(" paramTypes+=JvmTypeArgument ("," paramTypes+=JvmTypeArgument)* ")")? "=>" returnType=JvmTypeArgument
+// ("(" paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)* ")")? "=>" returnType=JvmTypeReference
 protected class XFunctionTypeRef_Group extends GroupToken {
 	
 	public XFunctionTypeRef_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10280,7 +10280,7 @@ protected class XFunctionTypeRef_Group extends GroupToken {
 
 }
 
-// ("(" paramTypes+=JvmTypeArgument ("," paramTypes+=JvmTypeArgument)* ")")?
+// ("(" paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)* ")")?
 protected class XFunctionTypeRef_Group_0 extends GroupToken {
 	
 	public XFunctionTypeRef_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10323,7 +10323,7 @@ protected class XFunctionTypeRef_LeftParenthesisKeyword_0_0 extends KeywordToken
 
 }
 
-// paramTypes+=JvmTypeArgument
+// paramTypes+=JvmTypeReference
 protected class XFunctionTypeRef_ParamTypesAssignment_0_1 extends AssignmentToken  {
 	
 	public XFunctionTypeRef_ParamTypesAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10338,7 +10338,7 @@ protected class XFunctionTypeRef_ParamTypesAssignment_0_1 extends AssignmentToke
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new JvmTypeArgument_Alternatives(this, this, 0, inst);
+			case 0: return new JvmTypeReference_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -10349,9 +10349,9 @@ protected class XFunctionTypeRef_ParamTypesAssignment_0_1 extends AssignmentToke
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("paramTypes");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getJvmTypeArgumentRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeArgumentParserRuleCall_0_1_0(); 
+				element = grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -10369,7 +10369,7 @@ protected class XFunctionTypeRef_ParamTypesAssignment_0_1 extends AssignmentToke
 	}	
 }
 
-// ("," paramTypes+=JvmTypeArgument)*
+// ("," paramTypes+=JvmTypeReference)*
 protected class XFunctionTypeRef_Group_0_2 extends GroupToken {
 	
 	public XFunctionTypeRef_Group_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10414,7 +10414,7 @@ protected class XFunctionTypeRef_CommaKeyword_0_2_0 extends KeywordToken  {
 
 }
 
-// paramTypes+=JvmTypeArgument
+// paramTypes+=JvmTypeReference
 protected class XFunctionTypeRef_ParamTypesAssignment_0_2_1 extends AssignmentToken  {
 	
 	public XFunctionTypeRef_ParamTypesAssignment_0_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10429,7 +10429,7 @@ protected class XFunctionTypeRef_ParamTypesAssignment_0_2_1 extends AssignmentTo
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new JvmTypeArgument_Alternatives(this, this, 0, inst);
+			case 0: return new JvmTypeReference_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -10440,9 +10440,9 @@ protected class XFunctionTypeRef_ParamTypesAssignment_0_2_1 extends AssignmentTo
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("paramTypes");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getJvmTypeArgumentRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeArgumentParserRuleCall_0_2_1_0(); 
+				element = grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -10507,7 +10507,7 @@ protected class XFunctionTypeRef_EqualsSignGreaterThanSignKeyword_1 extends Keyw
 
 }
 
-// returnType=JvmTypeArgument
+// returnType=JvmTypeReference
 protected class XFunctionTypeRef_ReturnTypeAssignment_2 extends AssignmentToken  {
 	
 	public XFunctionTypeRef_ReturnTypeAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10522,7 +10522,7 @@ protected class XFunctionTypeRef_ReturnTypeAssignment_2 extends AssignmentToken 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new JvmTypeArgument_Alternatives(this, this, 0, inst);
+			case 0: return new JvmTypeReference_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -10533,9 +10533,9 @@ protected class XFunctionTypeRef_ReturnTypeAssignment_2 extends AssignmentToken 
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("returnType");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getJvmTypeArgumentRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeArgumentParserRuleCall_2_0(); 
+				element = grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeReferenceParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}

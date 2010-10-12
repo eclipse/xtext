@@ -104,7 +104,7 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	protected String toString(JvmTypeReference typeref) {
 		if (typeref instanceof XFunctionTypeRef) {
 			XFunctionTypeRef funcType = (XFunctionTypeRef) typeref;
-			EList<JvmTypeArgument> paramTypes = funcType.getParamTypes();
+			EList<JvmTypeReference> paramTypes = funcType.getParamTypes();
 			String name = "";
 			int size = paramTypes.size();
 			for (int i=0;i<size;i++) {

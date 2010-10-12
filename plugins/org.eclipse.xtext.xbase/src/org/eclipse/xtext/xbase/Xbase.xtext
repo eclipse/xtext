@@ -103,7 +103,7 @@ XClosure returns XExpression:
 	{XClosure} (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? '|' expression=XExpression;
 
 XCastedExpression :
-	'(' type=JvmTypeReference ')' target=XExpression;
+	'(' type=JvmTypeReference ')' target=XFeatureCall;
 
 XParenthesizedExpression returns XExpression:
 	'(' XExpression ')';
@@ -157,7 +157,7 @@ XSimpleFeatureCall returns XSimpleFeatureCall:
 	feature=[types::JvmIdentifyableElement] ('(' (params+=XExpression (',' params+=XExpression)*)? ')')?;
 
 XConstructorCall:
-	'new' type=JvmTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')';
+	'new' type=JvmParameterizedTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')';
 
 XBooleanLiteral:
 	{XBooleanLiteral} 'false' | isTrue?='true';

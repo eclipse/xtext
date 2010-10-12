@@ -697,7 +697,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XCastedExpression:
-	//	"(" type=JvmTypeReference ")" target=XExpression;
+	//	"(" type=JvmTypeReference ")" target=XFeatureCall;
 	public XbaseGrammarAccess.XCastedExpressionElements getXCastedExpressionAccess() {
 		return gaXbase.getXCastedExpressionAccess();
 	}
@@ -828,7 +828,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XConstructorCall:
-	//	"new" type=JvmTypeReference "(" (params+=XExpression ("," params+=XExpression)*)? ")";
+	//	"new" type=JvmParameterizedTypeReference "(" (params+=XExpression ("," params+=XExpression)*)? ")";
 	public XbaseGrammarAccess.XConstructorCallElements getXConstructorCallAccess() {
 		return gaXbase.getXConstructorCallAccess();
 	}
@@ -929,7 +929,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XFunctionTypeRef:
-	//	("(" paramTypes+=JvmTypeArgument ("," paramTypes+=JvmTypeArgument)* ")")? "=>" returnType=JvmTypeArgument;
+	//	("(" paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)* ")")? "=>" returnType=JvmTypeReference;
 	public XtypeGrammarAccess.XFunctionTypeRefElements getXFunctionTypeRefAccess() {
 		return gaXbase.getXFunctionTypeRefAccess();
 	}
