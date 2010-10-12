@@ -38,7 +38,7 @@ public class ProviderModule extends MethodBasedModule {
 		Type keyType = super.getKeyType();
 		if (!(isInstanceOf(keyType, Provider.class)))
 			throw new IllegalStateException("The method "+getMethod().getName()+" is expected to return a Class<? extends Provider<Something>> or directly Provider<Something>.");
-		return ((ParameterizedType)keyType).getActualTypeArguments()[0];
+		return getFirstTypeParameter((ParameterizedType) keyType);
 	}
 
 	protected boolean isInstanceOf(Type keyType, Class<?> class1) {

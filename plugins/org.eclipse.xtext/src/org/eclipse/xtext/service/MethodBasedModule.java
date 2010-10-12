@@ -45,7 +45,6 @@ public abstract class MethodBasedModule implements Module {
 	@SuppressWarnings("unchecked")
 	public void configure(Binder binder) {
 		Type key = getKeyType();
-		LinkedBindingBuilder<Object> bind = binder.bind((Key<Object>)Key.get(key));
 		if (isClassBinding()) {
 			Class<?> value = (Class<?>) invokeMethod();
 			if (LOGGER.isTraceEnabled())
@@ -53,6 +52,7 @@ public abstract class MethodBasedModule implements Module {
 						+ ". Declaring Method was '" + getMethod().toGenericString() + "' in Module "
 						+ this.getClass().getName());
 			if (value != null && !Void.class.equals(value)) {
+				LinkedBindingBuilder<Object> bind = binder.bind((Key<Object>)Key.get(key));
 				if (!key.equals(value)) {
 					bindToClass(bind, value);
 				}
@@ -70,6 +70,7 @@ public abstract class MethodBasedModule implements Module {
 						" to instance " + instance.toString()
 						+ ". Declaring Method was '" + getMethod().toGenericString() + "' in Module "
 						+ this.getClass().getName());
+			LinkedBindingBuilder<Object> bind = binder.bind((Key<Object>)Key.get(key));
 			bindToInstance(bind, instance);
 		}
 	}
@@ -87,14 +88,15 @@ public abstract class MethodBasedModule implements Module {
 	}
 	
 	public Type getKeyType() {
+		Type genericReturnType = getMethod().getGenericReturnType();
 		if (isClassBinding()) {
-			Type type = getMethod().getGenericReturnType();
+			Type type = genericReturnType;
 			if (!(type instanceof ParameterizedType)) {
 				throw throwIllegalReturnTypeDeclaration(getMethod());
 			}
 			return getFirstTypeParameter((ParameterizedType) type);
 		} else {
-			return getMethod().getGenericReturnType();
+			return genericReturnType;
 		}
 	}
 

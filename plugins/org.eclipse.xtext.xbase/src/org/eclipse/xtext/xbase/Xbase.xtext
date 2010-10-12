@@ -132,7 +132,7 @@ XForLoopExpression :
 
 XWhileExpression:
 	'while' '(' predicate=XExpression ')'
-	body=XExpression;
+		body=XExpression;
 	
 XDoWhileExpression:
    'do'
