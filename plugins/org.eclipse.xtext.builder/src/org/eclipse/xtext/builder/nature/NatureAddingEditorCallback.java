@@ -28,7 +28,7 @@ public class NatureAddingEditorCallback extends AbstractDirtyStateAwareEditorCal
 	public void afterCreatePartControl(XtextEditor editor) {
 		super.afterCreatePartControl(editor);
 		IResource resource = editor.getResource();
-		if (resource!=null && !toggleNature.hasNature(resource.getProject()) && resource.getProject().isAccessible()) {
+		if (resource!=null && !toggleNature.hasNature(resource.getProject()) && resource.getProject().isAccessible() && !resource.getProject().isHidden()) {
 			String title = Messages.NatureAddingEditorCallback_MessageDialog_Title;
 			String message = Messages.NatureAddingEditorCallback_MessageDialog_Msg0 + resource.getProject().getName() + Messages.NatureAddingEditorCallback_MessageDialog_Msg1;
 			Image image = null;
