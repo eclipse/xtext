@@ -93,3 +93,4 @@ List[String] initialHiddenTokens(Grammar this):
   else if (usedGrammars.size == 1) then 
   	initialHiddenTokens(usedGrammars.first()) 
   else {};
+  

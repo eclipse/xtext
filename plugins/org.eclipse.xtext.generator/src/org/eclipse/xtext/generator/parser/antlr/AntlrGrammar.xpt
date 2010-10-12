@@ -122,7 +122,7 @@ import «gaFQName()»;
 «DEFINE antlrRules(AntlrOptions options, boolean debugGrammar) FOR Grammar»
 «EXPAND rule(this, options, debugGrammar) FOREACH allParserRules()»
 «EXPAND rule(this, options, debugGrammar) FOREACH allEnumRules()»
-«EXPAND rule FOREACH allTerminalRules()»
+«EXPAND rule(this, debugGrammar) FOREACH allTerminalRules()»
 «ENDDEFINE»
 
 
@@ -288,8 +288,8 @@ finally {
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE rule FOR TerminalRule»
-«ruleName()» : «toLexerBody()»;
+«DEFINE rule(Grammar original, boolean debugGrammar) FOR TerminalRule»
+«ruleName()» : «toLexerBody()»«IF debugGrammar && original.initialHiddenTokens().contains(ruleName())» {skip();}«ENDIF»;
 «ENDDEFINE»
 
 «DEFINE ebnf(AntlrOptions options, boolean debugGrammar) FOR AbstractElement-»

@@ -55,7 +55,8 @@ Parenthesized returns RuleElement:
 ;
 
 RuleOptions:
-  options=Options ':' element=Atom
+    options=Options ':' element=Atom
+  | {Skip} '{skip();}' 
 ;
 
 Literal returns RuleElement:
