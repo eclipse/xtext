@@ -24,7 +24,8 @@ public class ProviderModule extends MethodBasedModule {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void bindToInstance(LinkedBindingBuilder<Object> bind, Object instance) {
-		bind.toProvider((Provider<? extends Object>) instance);
+		if (instance != null) // provider may not be null
+			bind.toProvider((Provider<? extends Object>) instance);
 	}
 	
 	@SuppressWarnings("unchecked")
