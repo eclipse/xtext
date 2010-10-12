@@ -259,10 +259,14 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	protected void setSuperTypes(Class<?> clazz, JvmDeclaredType result) {
-		if (clazz.getGenericSuperclass() != null)
+		if (clazz.getGenericSuperclass() != null) {
 			result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass()));
+		}
 		for (Type type : clazz.getGenericInterfaces()) {
 			result.getSuperTypes().add(createTypeReference(type));
+		}
+		if (result.getSuperTypes().isEmpty() && !Object.class.equals(clazz)) {
+			result.getSuperTypes().add(createTypeReference(Object.class));
 		}
 	}
 	

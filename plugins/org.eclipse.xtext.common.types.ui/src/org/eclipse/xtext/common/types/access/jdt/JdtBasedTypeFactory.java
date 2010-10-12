@@ -293,15 +293,14 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	}
 
 	public void setSuperTypes(ITypeBinding binding, JvmDeclaredType result) {
-		if (!binding.isInterface()) {
-			if (binding.getSuperclass() != null) {
-				result.getSuperTypes().add(createTypeReference(binding.getSuperclass()));
-			} else if (!Object.class.getName().equals(binding.getQualifiedName())) {
-				result.getSuperTypes().add(createTypeReference(Object.class.getName()));
-			}
-		}
+		if (binding.getSuperclass() != null) {
+			result.getSuperTypes().add(createTypeReference(binding.getSuperclass()));
+		} 
 		for (ITypeBinding intf : binding.getInterfaces()) {
 			result.getSuperTypes().add(createTypeReference(intf));
+		}
+		if (result.getSuperTypes().isEmpty() && !Object.class.getName().equals(binding.getQualifiedName())) {
+			result.getSuperTypes().add(createTypeReference(Object.class.getName()));
 		}
 	}
 

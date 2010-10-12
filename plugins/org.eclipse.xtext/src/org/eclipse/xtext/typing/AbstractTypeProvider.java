@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 public class AbstractTypeProvider<T> implements ITypeProvider<T> {
 
 	private final PolymorphicDispatcher<T> dispatcher = PolymorphicDispatcher
-			.createForSingleTarget("_case", 2, 2, this);
+			.createForSingleTarget("_type", 2, 2, this);
 	private ValidationMessageAcceptor issueAcceptor;
 	
 	@Inject
@@ -43,6 +43,17 @@ public class AbstractTypeProvider<T> implements ITypeProvider<T> {
 		} finally {
 			this.issueAcceptor = oldAcceptor;
 		}
+	}
+	
+	/**
+	 * Is used to allow invocation of type provider on root element
+	 * and override for certain expression containing AST nodes.
+	 */
+	public T _type(EObject stNode,T expectedType) {
+		for (EObject child : stNode.eContents()) {
+			internalGetType(child, expectedType);
+		}
+		return null;
 	}
 
 	protected T internalGetType(EObject expression, T expected) {

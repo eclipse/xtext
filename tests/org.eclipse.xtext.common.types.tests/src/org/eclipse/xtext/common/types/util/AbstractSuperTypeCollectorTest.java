@@ -31,7 +31,7 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		collector = new SuperTypeCollector();
+		collector = new SuperTypeCollector(new JvmTypes());
 	}
 	
 	@Override
@@ -50,8 +50,8 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 	public void testSerializable() {
 		JvmType objectType = getTypeProvider().findTypeByName(Serializable.class.getName());
 		Collection<String> collected = collector.collectSuperTypeNames(objectType);
-		assertNotNull(collected);
-		assertTrue(collected.isEmpty());
+		assertEquals(1,collected.size());
+		assertEquals(Object.class.getCanonicalName(),collected.iterator().next());
 	}
 	
 	public void testString() {
@@ -78,7 +78,7 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 		Collection<String> collected = collector.collectSuperTypeNames(objectType);
 		assertNotNull(collected);
 		assertEquals(collected.toString(), ImmutableSet.of(
-				Iterable.class.getName()), collected);
+				Iterable.class.getName(),Object.class.getName()), collected);
 	}
 	
 	public void testList() {
@@ -87,11 +87,11 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 		assertNotNull(collected);
 		assertEquals(collected.toString(), ImmutableSet.of(
 				Iterable.class.getName(),
-				Collection.class.getName()), collected);
+				Collection.class.getName(),Object.class.getName()), collected);
 	}
 	
 	public void testArgIsNull() {
-		Collection<String> collected = collector.collectSuperTypeNames(null);
+		Collection<String> collected = collector.collectSuperTypeNames((JvmType)null);
 		assertNotNull(collected);
 		assertTrue(collected.isEmpty());
 	}

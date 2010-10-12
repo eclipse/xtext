@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.util.List;
+
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.typing.ITypeConformanceComputer;
 
@@ -18,4 +20,8 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(JvmTypeConformanceComputer.class)
 public interface IJvmTypeConformanceComputer extends ITypeConformanceComputer<JvmTypeReference> {
 
+	/**
+	 * @return the common super type of the passed {@link JvmTypeReference}s
+	 */
+	public JvmTypeReference getCommonSuperType(final List<JvmTypeReference> types);
 }

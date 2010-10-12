@@ -13,15 +13,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.JvmTypes;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -40,7 +38,10 @@ public class TypesService implements ITypeConformanceComputer<JvmTypeReference>{
 	private IScopeProvider scopeProvider;
 	
 	@Inject
-	private IJvmTypeConformanceComputer assignabilityComputer;
+	private IJvmTypeConformanceComputer conformanceComputer;
+	
+	@Inject
+	private JvmTypes jvmTypes;
 	
 	private final EReference syntheticReference;
 	
@@ -57,57 +58,36 @@ public class TypesService implements ITypeConformanceComputer<JvmTypeReference>{
 		IScope scope = scopeProvider.getScope(context, syntheticReference);
 		IEObjectDescription contentByName = scope.getContentByName(name);
 		if (contentByName!=null) {
-			JvmParameterizedTypeReference simpleType = createJvmTypeReference((JvmType) contentByName.getEObjectOrProxy());
+			JvmParameterizedTypeReference simpleType = jvmTypes.createJvmTypeReference((JvmType) contentByName.getEObjectOrProxy());
 			for (JvmTypeReference xTypeRef : params) {
-				simpleType.getArguments().add(createArgument(copy(xTypeRef)));
+				simpleType.getArguments().add(jvmTypes.createArgument(EcoreUtil2.clone(xTypeRef)));
 			}
 			return simpleType;
 		}
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	protected <T extends EObject> T copy(T xTypeRef) {
-		return (T) EcoreUtil.copy(xTypeRef);
-	}
-
-	public JvmParameterizedTypeReference createJvmTypeReference(JvmType eObjectOrProxy) {
-		JvmParameterizedTypeReference typeRef = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-		typeRef.setType(eObjectOrProxy);
-		return typeRef;
-	}
 
 	public JvmTypeReference getCommonType(List<JvmTypeReference> returnTypes) {
-		for (JvmTypeReference xTypeRef : returnTypes) {
-			for (JvmTypeReference xTypeRef1 : returnTypes) {
-				isConformant(xTypeRef,xTypeRef1);
-			}
-		}
-		return returnTypes.get(0);
+		return conformanceComputer.getCommonSuperType(returnTypes);
 	}
 
 	public boolean isConformant(JvmTypeReference xTypeRef, JvmTypeReference xTypeRef1) {
-		return assignabilityComputer.isConformant(xTypeRef, xTypeRef1);
+		return conformanceComputer.isConformant(xTypeRef, xTypeRef1);
 	}
 
 	public XFunctionTypeRef createFunctionTypeRef(List<JvmTypeReference> parameterTypes,
 			JvmTypeReference returnType) {
 		XFunctionTypeRef ref = XtypeFactory.eINSTANCE.createXFunctionTypeRef();
 		for (JvmTypeReference xTypeRef : parameterTypes) {
-			ref.getParamTypes().add(copy(xTypeRef));
+			ref.getParamTypes().add(EcoreUtil2.clone(xTypeRef));
 		}
-		ref.setReturnType(copy(returnType));
+		ref.setReturnType(EcoreUtil2.clone(returnType));
 		return ref;
 	}
 
-	protected JvmTypeArgument createArgument(JvmTypeReference typeRef) {
-		JvmReferenceTypeArgument argument = TypesFactory.eINSTANCE.createJvmReferenceTypeArgument();
-		argument.setTypeReference(typeRef);
-		return argument;
-	}
-
 	public String getName(JvmTypeReference actual) {
-		return assignabilityComputer.getName(actual);
+		return conformanceComputer.getName(actual);
 	}
 
 }
