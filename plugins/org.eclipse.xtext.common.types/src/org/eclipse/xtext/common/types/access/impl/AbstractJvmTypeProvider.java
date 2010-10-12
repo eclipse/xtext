@@ -12,20 +12,20 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractTypeProvider implements ITypeProvider, Resource.Factory {
+public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resource.Factory {
 
 	private final ResourceSet resourceSet;
 	
 	private final PrimitiveTypeFactory primitiveTypeFactory;
 	
-	protected AbstractTypeProvider(ResourceSet resourceSet) {
+	protected AbstractJvmTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null");
 		this.resourceSet = resourceSet;

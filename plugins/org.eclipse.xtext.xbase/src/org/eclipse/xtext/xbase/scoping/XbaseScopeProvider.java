@@ -29,9 +29,15 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
-import org.eclipse.xtext.xbase.typing.ExpressionsTypeResolver;
+import org.eclipse.xtext.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typing.OperatorMapping;
-import org.eclipse.xtext.xbase.*;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
@@ -46,7 +52,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	private OperatorMapping operatorMapping;
 
 	@Inject
-	private ExpressionsTypeResolver typeResolver;
+	private ITypeProvider<JvmTypeReference> typeResolver;
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -64,7 +70,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (context instanceof XMemberFeatureCall) {
 			final XMemberFeatureCall call = (XMemberFeatureCall) context;
 			XExpression target = call.getParams().get(0);
-			JvmTypeReference jvmTypeReference = typeResolver.doSwitch(target, null);
+			JvmTypeReference jvmTypeReference = typeResolver.getType(target, null, null);
 			IScope parent = getAllFeatures(jvmTypeReference.getType(), IScope.NULLSCOPE, createCallableFeaturePredicate(call));
 			return parent;
 		}

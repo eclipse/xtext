@@ -15,7 +15,7 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 
 import com.google.common.collect.ImmutableSet;
 
@@ -26,7 +26,7 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 
 	private SuperTypeCollector collector;
 
-	protected abstract ITypeProvider getTypeProvider();
+	protected abstract IJvmTypeProvider getTypeProvider();
 	
 	@Override
 	protected void setUp() throws Exception {

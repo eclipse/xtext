@@ -27,24 +27,24 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-public class AssignabilityComputer implements IAssignabilityComputer{
+public class JvmTypeConformanceComputer implements IJvmTypeConformanceComputer{
 
 	private SuperTypeCollector superTypeCollector;
 
 	@Inject
-	public AssignabilityComputer(SuperTypeCollector superTypeCollector) {
+	public JvmTypeConformanceComputer(SuperTypeCollector superTypeCollector) {
 		super();
 		this.superTypeCollector = superTypeCollector;
 	}
 
-	public boolean isAssignableFrom(JvmTypeReference left, JvmTypeReference right) {
+	public boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
 		JvmType typeA = left.getType();
 		JvmType typeB = right.getType();
 		if (typeA instanceof JvmArrayType) {
 			if (typeB instanceof JvmArrayType) {
 				JvmTypeReference componentTypeA = ((JvmArrayType) typeA).getComponentType();
 				JvmTypeReference componentTypeB = ((JvmArrayType) typeB).getComponentType();
-				return isAssignableFrom(componentTypeA, componentTypeB);
+				return isConformant(componentTypeA, componentTypeB);
 			}
 			return false;
 		} else if (right instanceof JvmParameterizedTypeReference) {
@@ -98,16 +98,16 @@ public class AssignabilityComputer implements IAssignabilityComputer{
 		}
 		if (upperA != null) {
 			if (upperB != null) {
-				return isAssignableFrom(upperA, upperB);
+				return isConformant(upperA, upperB);
 			} else if (refB != null) {
-				return isAssignableFrom(upperA, refB);
+				return isConformant(upperA, refB);
 			}
 		} else if (refA != null) {
 			if (refB != null) {
-				return isAssignableFrom(refA, refB);
+				return isConformant(refA, refB);
 			}
 		} else if (lowerA != null) {
-			if (lowerB != null && isAssignableFrom(lowerB, lowerA)) {
+			if (lowerB != null && isConformant(lowerB, lowerA)) {
 				return true;
 			}
 		}
@@ -166,6 +166,10 @@ public class AssignabilityComputer implements IAssignabilityComputer{
 
 	protected boolean is(JvmType typeA, Class<?> class1) {
 		return typeA.getCanonicalName().equals(class1.getCanonicalName());
+	}
+
+	public String getName(JvmTypeReference actual) {
+		return actual.getCanonicalName();
 	}
 
 }

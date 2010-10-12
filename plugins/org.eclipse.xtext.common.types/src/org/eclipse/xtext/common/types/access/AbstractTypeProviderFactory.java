@@ -14,15 +14,15 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractTypeProviderFactory implements ITypeProvider.Factory {
+public abstract class AbstractTypeProviderFactory implements IJvmTypeProvider.Factory {
 
-	public ITypeProvider findTypeProvider(ResourceSet resourceSet) {
+	public IJvmTypeProvider findTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");
-		return (ITypeProvider) resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get(URIHelperConstants.PROTOCOL);
+		return (IJvmTypeProvider) resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get(URIHelperConstants.PROTOCOL);
 	}
 
-	public ITypeProvider createTypeProvider() {
+	public IJvmTypeProvider createTypeProvider() {
 		return createTypeProvider(new ResourceSetImpl());
 	}
 

@@ -12,7 +12,7 @@ import java.util.Set;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScopeProvider;
 import org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider;
@@ -34,7 +34,7 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
 		     .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
-			 .addTypeToType(ITypeProvider.Factory.class.getName(), ClasspathTypeProviderFactory.class.getName())
+			 .addTypeToType(IJvmTypeProvider.Factory.class.getName(), ClasspathTypeProviderFactory.class.getName())
 			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), ClasspathBasedTypeScopeProvider.class.getName())
 			 .addfinalTypeToType(IGlobalScopeProvider.class.getName(), TypesAwareDefaultGlobalScopeProvider.class.getName())
 			 .getBindings();
@@ -44,7 +44,7 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
 			 .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
-			 .addTypeToType(ITypeProvider.Factory.class.getName(), "org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory")
+			 .addTypeToType(IJvmTypeProvider.Factory.class.getName(), "org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory")
 			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), "org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider")
 			 .addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", 
 					 	"org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider")		 	

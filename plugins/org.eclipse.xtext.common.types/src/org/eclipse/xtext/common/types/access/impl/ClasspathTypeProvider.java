@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClasspathTypeProvider extends AbstractTypeProvider {
+public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 
 	private final ClassFinder classFinder;
 	

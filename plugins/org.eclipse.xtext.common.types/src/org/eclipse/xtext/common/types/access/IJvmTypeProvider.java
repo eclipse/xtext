@@ -13,7 +13,7 @@ import org.eclipse.xtext.common.types.JvmType;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface ITypeProvider {
+public interface IJvmTypeProvider {
 
 	/**
 	 * Find a type by its fully qualified name, e.g. java.util.Map$Entry, int[], void or 
@@ -29,11 +29,11 @@ public interface ITypeProvider {
 	
 	interface Factory {
 		
-		ITypeProvider createTypeProvider(ResourceSet resourceSet);
+		IJvmTypeProvider createTypeProvider(ResourceSet resourceSet);
 		
-		ITypeProvider findTypeProvider(ResourceSet resourceSet);
+		IJvmTypeProvider findTypeProvider(ResourceSet resourceSet);
 		
-		ITypeProvider createTypeProvider() throws UnsupportedOperationException;
+		IJvmTypeProvider createTypeProvider() throws UnsupportedOperationException;
 		
 	}
 	

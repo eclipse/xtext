@@ -153,7 +153,7 @@ XVariableDeclaration:
 JvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=JvmTypeReference)? name=ID;
 
-XSimpleFeatureCall returns XFeatureCall:
+XSimpleFeatureCall returns XSimpleFeatureCall:
 	feature=[types::JvmIdentifyableElement] ('(' (params+=XExpression (',' params+=XExpression)*)? ')')?;
 
 XConstructorCall:

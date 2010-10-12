@@ -10,7 +10,7 @@ package org.eclipse.xtext.common.types.xtext;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -23,9 +23,9 @@ import org.eclipse.xtext.util.Strings;
  */
 public abstract class AbstractTypeScope extends AbstractScope {
 
-	private final ITypeProvider typeProvider;
+	private final IJvmTypeProvider typeProvider;
 
-	public AbstractTypeScope(ITypeProvider typeProvider) {
+	public AbstractTypeScope(IJvmTypeProvider typeProvider) {
 		this.typeProvider = typeProvider;
 	}
 
@@ -60,7 +60,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 		return IScope.NULLSCOPE;
 	}
 	
-	public ITypeProvider getTypeProvider() {
+	public IJvmTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 

@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguagePackage;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -25,7 +25,7 @@ public class ContentAssistTestLanguageProposalProvider extends AbstractContentAs
 	private ITypesProposalProvider typesProposalProvider;
 	
 	@Inject
-	private ITypeProvider.Factory typeProviderFactory;
+	private IJvmTypeProvider.Factory typeProviderFactory;
 	
 	@Override
 	public void completeReferenceHolder_CustomizedReference(EObject model, Assignment assignment,
@@ -37,7 +37,7 @@ public class ContentAssistTestLanguageProposalProvider extends AbstractContentAs
 	public void completeReferenceHolder_SubtypeReference(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		ResourceSet resourceSet = model.eResource().getResourceSet();
-		ITypeProvider typeProvider = typeProviderFactory.findTypeProvider(resourceSet);
+		IJvmTypeProvider typeProvider = typeProviderFactory.findTypeProvider(resourceSet);
 		if (typeProvider == null)
 			typeProvider = typeProviderFactory.createTypeProvider(resourceSet);
 		JvmType superType = typeProvider.findTypeByName(Collection.class.getName());

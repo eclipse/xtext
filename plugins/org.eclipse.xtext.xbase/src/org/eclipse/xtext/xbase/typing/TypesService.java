@@ -21,10 +21,11 @@ import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.util.IAssignabilityComputer;
+import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.typing.ITypeConformanceComputer;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
@@ -33,13 +34,13 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge
  */
-public class TypesService {
+public class TypesService implements ITypeConformanceComputer<JvmTypeReference>{
 	
 	@Inject
 	private IScopeProvider scopeProvider;
 	
 	@Inject
-	private IAssignabilityComputer assignabilityComputer;
+	private IJvmTypeConformanceComputer assignabilityComputer;
 	
 	private final EReference syntheticReference;
 	
@@ -79,14 +80,14 @@ public class TypesService {
 	public JvmTypeReference getCommonType(List<JvmTypeReference> returnTypes) {
 		for (JvmTypeReference xTypeRef : returnTypes) {
 			for (JvmTypeReference xTypeRef1 : returnTypes) {
-				isAssignableFrom(xTypeRef,xTypeRef1);
+				isConformant(xTypeRef,xTypeRef1);
 			}
 		}
 		return returnTypes.get(0);
 	}
 
-	public boolean isAssignableFrom(JvmTypeReference xTypeRef, JvmTypeReference xTypeRef1) {
-		return assignabilityComputer.isAssignableFrom(xTypeRef, xTypeRef1);
+	public boolean isConformant(JvmTypeReference xTypeRef, JvmTypeReference xTypeRef1) {
+		return assignabilityComputer.isConformant(xTypeRef, xTypeRef1);
 	}
 
 	public XFunctionTypeRef createFunctionTypeRef(List<JvmTypeReference> parameterTypes,
@@ -103,6 +104,10 @@ public class TypesService {
 		JvmReferenceTypeArgument argument = TypesFactory.eINSTANCE.createJvmReferenceTypeArgument();
 		argument.setTypeReference(typeRef);
 		return argument;
+	}
+
+	public String getName(JvmTypeReference actual) {
+		return assignabilityComputer.getName(actual);
 	}
 
 }

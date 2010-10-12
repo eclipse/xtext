@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
+import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ExpressionsTypeResolver;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -28,7 +29,7 @@ import com.google.inject.Inject;
 public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	
 	@Inject
-	private ExpressionsTypeResolver typeResolver;
+	private ITypeProvider<JvmTypeReference> typeResolver;
 	
 	public void testNullLiteral() throws Exception {
 		assertResolvedReturnType(ExpressionsTypeResolver.VOID_TYPE_NAME, "null");
@@ -60,6 +61,8 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	
 	public void testBlockExpression() throws Exception {
 		assertResolvedReturnType(ExpressionsTypeResolver.INTEGER_TYPE_NAME, "{true;4;}");
+		assertResolvedReturnType(ExpressionsTypeResolver.BOOLEAN_TYPE_NAME, "{4;true;}");
+		assertResolvedReturnType(ExpressionsTypeResolver.VOID_TYPE_NAME, "{null;}");
 	}
 	
 	public void testSwitchExpression() throws Exception {
@@ -73,7 +76,7 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	
 	
 	public void assertResolvedReturnType(String type, String expression) throws Exception {
-		JvmTypeReference typeRef = typeResolver.doSwitch(expression(expression),null);
+		JvmTypeReference typeRef = typeResolver.getType(expression(expression),null,null);
 		assertNotNull("type ref for "+expression,typeRef);
 		assertEquals(type,toString(typeRef));
 	}
@@ -97,6 +100,7 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 		}
 		throw new IllegalArgumentException();
 	}
+	
 	protected String toString(JvmTypeReference typeref) {
 		if (typeref instanceof XFunctionTypeRef) {
 			XFunctionTypeRef funcType = (XFunctionTypeRef) typeref;

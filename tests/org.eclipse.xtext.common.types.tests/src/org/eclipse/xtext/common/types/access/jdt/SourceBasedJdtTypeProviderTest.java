@@ -9,7 +9,7 @@ package org.eclipse.xtext.common.types.access.jdt;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
 
 /**
@@ -38,7 +38,7 @@ public class SourceBasedJdtTypeProviderTest extends AbstractTypeProviderTest {
 	}
 	
 	@Override
-	protected ITypeProvider getTypeProvider() {
+	protected IJvmTypeProvider getTypeProvider() {
 		return typeProvider;
 	}
 	
