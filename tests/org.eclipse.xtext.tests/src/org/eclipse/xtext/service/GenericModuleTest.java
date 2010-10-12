@@ -130,6 +130,12 @@ public class GenericModuleTest extends TestCase {
 		assertEquals(1, bindings.size());
 		assertConfigures(bindings, Date.class, null, false, false, true);
 	}
+	
+	static class FooProvider implements Provider<String> {
+		public String get() {
+			 return "foo";
+		}
+	}
 
 	public void testProviderInstanceBinding() throws Exception {
 		final Provider<Date> provider = new Provider<Date>() {
@@ -142,11 +148,17 @@ public class GenericModuleTest extends TestCase {
 			public Provider<Date> provideDate() {
 				return provider;
 			}
+			
+			@SuppressWarnings("unused")
+			public Class<? extends Provider<? extends String>> provideFoo() {
+				return FooProvider.class;
+			}
 		};
 
 		CompoundModule bindings = m.getBindings();
-		assertEquals(1, bindings.size());
+		assertEquals(2, bindings.size());
 		assertConfigures(bindings, Date.class, provider, false, false, true);
+		assertConfigures(bindings, String.class, FooProvider.class,false,false,true);
 	}
 
 	public void testDeactivation() throws Exception {
@@ -231,4 +243,5 @@ public class GenericModuleTest extends TestCase {
 			instantiations++;
 		}
 	}
+	
 }
