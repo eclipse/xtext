@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.example.css/src-gen"
+    editDirectory="/org.eclipse.xtext.example.css.edit/src" editorDirectory="/org.eclipse.xtext.example.css.editor/src"
+    modelPluginID="org.eclipse.xtext.example.css" forceOverwrite="true" modelName="Xcss"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.css.edit"
+    editorPluginID="org.eclipse.xtext.example.css.editor" usedGenPackages="../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype ../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+  <genPackages prefix="Xcss" basePackage="org.eclipse.xtext.example.css" disposableProviderFactory="true"
+      ecorePackage="Xcss.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Xcss.ecore#//SizeUnit">
+      <genEnumLiterals ecoreEnumLiteral="Xcss.ecore#//SizeUnit/em"/>
+      <genEnumLiterals ecoreEnumLiteral="Xcss.ecore#//SizeUnit/pt"/>
+      <genEnumLiterals ecoreEnumLiteral="Xcss.ecore#//SizeUnit/px"/>
+      <genEnumLiterals ecoreEnumLiteral="Xcss.ecore#//SizeUnit/percent"/>
+    </genEnums>
+    <genClasses ecoreClass="Xcss.ecore#//StyleSheet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//StyleSheet/rules"/>
+    </genClasses>
+    <genClasses ecoreClass="Xcss.ecore#//StyleRule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//StyleRule/selectors"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//StyleRule/settings"/>
+    </genClasses>
+    <genClasses ecoreClass="Xcss.ecore#//Selector">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//Selector/filter"/>
+    </genClasses>
+    <genClasses ecoreClass="Xcss.ecore#//TypeSelector">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//TypeSelector/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Xcss.ecore#//WildcardSelector"/>
+    <genClasses ecoreClass="Xcss.ecore#//Filter">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//Filter/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="Xcss.ecore#//FontLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//FontLiteral/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//FontLiteral/italic"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//FontLiteral/bold"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//FontLiteral/size"/>
+    </genClasses>
+    <genClasses ecoreClass="Xcss.ecore#//ColorLiteral"/>
+    <genClasses ecoreClass="Xcss.ecore#//ColorConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//ColorConstant/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Xcss.ecore#//RGB">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//RGB/color"/>
+    </genClasses>
+    <genClasses ecoreClass="Xcss.ecore#//SizeLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//SizeLiteral/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//SizeLiteral/unit"/>
+    </genClasses>
+    <genClasses ecoreClass="Xcss.ecore#//Setting"/>
+  </genPackages>
+</genmodel:GenModel>

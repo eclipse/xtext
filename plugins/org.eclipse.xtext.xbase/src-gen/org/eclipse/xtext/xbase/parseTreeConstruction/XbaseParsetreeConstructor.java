@@ -6008,11 +6008,11 @@ protected class XDoWhileExpression_RightParenthesisKeyword_5 extends KeywordToke
 /************ begin Rule XBlockExpression ****************
  *
  * XBlockExpression:
- * 	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";"?)* "}";
+ * 	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";")* "}";
  *
  **/
 
-// {XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";"?)* "}"
+// {XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";")* "}"
 protected class XBlockExpression_Group extends GroupToken {
 	
 	public XBlockExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6089,7 +6089,7 @@ protected class XBlockExpression_LeftCurlyBracketKeyword_1 extends KeywordToken 
 
 }
 
-// (expressions+=XExpressionInsideBlock ";"?)*
+// (expressions+=XExpressionInsideBlock ";")*
 protected class XBlockExpression_Group_2 extends GroupToken {
 	
 	public XBlockExpression_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6104,7 +6104,7 @@ protected class XBlockExpression_Group_2 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XBlockExpression_ExpressionsAssignment_2_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XBlockExpression_SemicolonKeyword_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -6156,6 +6156,28 @@ protected class XBlockExpression_ExpressionsAssignment_2_0 extends AssignmentTok
 			default: return null;
 		}	
 	}	
+}
+
+// ";"
+protected class XBlockExpression_SemicolonKeyword_2_1 extends KeywordToken  {
+	
+	public XBlockExpression_SemicolonKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XBlockExpression_ExpressionsAssignment_2_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
 }
 
 

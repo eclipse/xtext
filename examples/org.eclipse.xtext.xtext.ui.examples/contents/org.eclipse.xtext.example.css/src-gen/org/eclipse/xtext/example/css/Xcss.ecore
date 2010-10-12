@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xcss"
+    nsURI="http://www.eclipse.org/xtext/example/css/Xcss" nsPrefix="xcss">
+  <eClassifiers xsi:type="ecore:EClass" name="StyleSheet">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
+        eType="#//StyleRule" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StyleRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selectors" upperBound="-1"
+        eType="#//Selector" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="settings" upperBound="-1"
+        eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XBinaryOperation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Selector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="#//Filter"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeSelector" eSuperTypes="#//Selector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmParameterizedTypeReference"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WildcardSelector" eSuperTypes="#//Selector"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Filter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FontLiteral" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bold" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorLiteral" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorConstant" eSuperTypes="#//ColorLiteral">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RGB" eSuperTypes="#//ColorLiteral">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SizeLiteral" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//SizeUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SizeUnit">
+    <eLiterals name="em" literal="em"/>
+    <eLiterals name="pt" value="1" literal="pt"/>
+    <eLiterals name="px" value="2" literal="px"/>
+    <eLiterals name="percent" value="3" literal="%"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Setting" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XBinaryOperation"/>
+</ecore:EPackage>

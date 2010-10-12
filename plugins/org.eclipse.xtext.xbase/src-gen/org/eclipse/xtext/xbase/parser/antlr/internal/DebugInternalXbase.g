@@ -227,7 +227,7 @@ ruleXDoWhileExpression :
 // Rule XBlockExpression
 ruleXBlockExpression :
 	'{' (
-		ruleXExpressionInsideBlock ';'?
+		ruleXExpressionInsideBlock ';'
 	)* '}'
 ;
 
