@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -22,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 
 import com.google.inject.Inject;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -56,7 +61,7 @@ public class JvmTypeConformanceComputer implements IJvmTypeConformanceComputer{
 			if (typeA instanceof JvmPrimitiveType) {
 				return isUnBoxing(typeA, typeB);
 			} else if (typeA instanceof JvmDeclaredType) {
-				if (superTypeCollector.collectSuperTypes(typeB).contains(typeA)) {
+				if (superTypeCollector.collectSuperTypesAsRawTypes(right).contains(typeA)) {
 					return areArgumentsAssignableFrom(refA, refB);
 				}
 				return isBoxing(typeA, typeB);
@@ -170,6 +175,37 @@ public class JvmTypeConformanceComputer implements IJvmTypeConformanceComputer{
 
 	public String getName(JvmTypeReference actual) {
 		return actual.getCanonicalName();
+	}
+	
+	public JvmTypeReference getCommonSuperType(final List<JvmTypeReference> types) {
+		if (types==null || types.isEmpty())
+			throw new IllegalArgumentException("Types can't be null or empty "+types);
+		
+		JvmTypeReference firstType = types.get(0);
+		if (conformsToAll(firstType, types))
+			return firstType;
+		
+		List<JvmTypeReference> refs = Lists.newArrayList(this.superTypeCollector.collectSuperTypes(firstType));
+		Collections.sort(refs,new Comparator<JvmTypeReference>() {
+			public int compare(JvmTypeReference o1, JvmTypeReference o2) {
+				if (isConformant(o1, o2))
+					return -1;
+				return o1.getCanonicalName().compareTo(o2.getCanonicalName());
+			}
+		});
+		for (JvmTypeReference jvmTypeReference : refs) {
+			if (conformsToAll(jvmTypeReference, types))
+				return jvmTypeReference;
+		}
+		throw new IllegalStateException("There should always be one common super type (i.e. java.lang.Object)");
+	}
+
+	protected boolean conformsToAll(JvmTypeReference type, final List<JvmTypeReference> types) {
+		boolean conform = true;
+		for (int i = 1; conform && i < types.size(); i++) {
+			conform = isConformant(type, types.get(i));
+		}
+		return conform;
 	}
 
 }

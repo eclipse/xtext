@@ -48,5 +48,5 @@ public abstract class JvmTypeReferenceImpl extends JvmIdentifyableElementImpl im
 	 * @generated NOT
 	 */
 	public abstract JvmType getType();
-
+	
 } //TypeReferenceImpl

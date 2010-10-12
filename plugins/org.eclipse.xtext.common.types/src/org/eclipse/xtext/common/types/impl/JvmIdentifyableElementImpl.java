@@ -49,5 +49,13 @@ public abstract class JvmIdentifyableElementImpl extends MinimalEObjectImpl.Cont
 	 * @generated NOT
 	 */
 	public abstract String getCanonicalName();
+	
+	/**
+	* @generated NOT
+	*/
+	@Override
+	public String toString() {
+		return getCanonicalName();
+	}
 
 } //StringRepresentableImpl

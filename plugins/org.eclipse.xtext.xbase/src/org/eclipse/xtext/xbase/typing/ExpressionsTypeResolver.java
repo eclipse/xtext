@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.JvmTypes;
 import org.eclipse.xtext.typing.AbstractTypeProvider;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -44,25 +45,24 @@ public class ExpressionsTypeResolver extends AbstractTypeProvider<JvmTypeReferen
 	public static final String STRING_TYPE_NAME = String.class.getName();
 	public static final String OBJECT_TYPE_NAME = Object.class.getName();
 
+	@Inject
 	private TypesService typesService;
-
-	private ICallableFeatureFacade callableFeatureFacade;
+	
+	@Inject
+	private JvmTypes jvmTypes;
 
 	@Inject
-	public ExpressionsTypeResolver(TypesService typesService, ICallableFeatureFacade callableFeatureFacade) {
-		this.typesService = typesService;
-		this.callableFeatureFacade = callableFeatureFacade;
-	}
-
-	protected JvmTypeReference _case(XIntLiteral object, JvmTypeReference expected) {
+	private ICallableFeatureFacade callableFeatureFacade;
+	
+	protected JvmTypeReference _type(XIntLiteral object, JvmTypeReference expected) {
 		return typesService.getTypeForName(INTEGER_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _case(XBlockExpression object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XBlockExpression object, JvmTypeReference expected) {
 		return internalGetType(object.getExpressions().get(object.getExpressions().size() - 1), expected);
 	}
 
-	protected JvmTypeReference _case(XSwitchExpression object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XSwitchExpression object, JvmTypeReference expected) {
 		List<JvmTypeReference> returnTypes = Lists.newArrayList();
 		EList<XCasePart> cases = object.getCases();
 		for (XCasePart xCasePart : cases) {
@@ -73,35 +73,35 @@ public class ExpressionsTypeResolver extends AbstractTypeProvider<JvmTypeReferen
 		return typesService.getCommonType(returnTypes);
 	}
 
-	protected JvmTypeReference _case(XCasePart object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XCasePart object, JvmTypeReference expected) {
 		return internalGetType(object.getThen(), expected);
 	}
 
-	protected JvmTypeReference _case(XVariableDeclaration object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XVariableDeclaration object, JvmTypeReference expected) {
 		return typesService.getTypeForName(VOID_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _case(XFeatureCall object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XFeatureCall object, JvmTypeReference expected) {
 		return callableFeatureFacade.getReturnType(object.getFeature());
 	}
 
-	protected JvmTypeReference _case(XConstructorCall object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XConstructorCall object, JvmTypeReference expected) {
 		return object.getType();
 	}
 
-	protected JvmTypeReference _case(XBooleanLiteral object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XBooleanLiteral object, JvmTypeReference expected) {
 		return typesService.getTypeForName(BOOLEAN_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _case(XNullLiteral object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XNullLiteral object, JvmTypeReference expected) {
 		return typesService.getTypeForName(VOID_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _case(XStringLiteral object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XStringLiteral object, JvmTypeReference expected) {
 		return typesService.getTypeForName(STRING_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _case(XClosure object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XClosure object, JvmTypeReference expected) {
 		JvmTypeReference returnType = internalGetType(object.getExpression(), expected);
 		List<JvmTypeReference> parameterTypes = Lists.newArrayList();
 		EList<JvmFormalParameter> params = object.getParams();
@@ -115,20 +115,20 @@ public class ExpressionsTypeResolver extends AbstractTypeProvider<JvmTypeReferen
 		return typesService.createFunctionTypeRef(parameterTypes, returnType);
 	}
 
-	protected JvmTypeReference _case(XCastedExpression object) {
+	protected JvmTypeReference _type(XCastedExpression object) {
 		return object.getType();
 	}
 
-	protected JvmTypeReference _case(XAbstractWhileExpression object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XAbstractWhileExpression object, JvmTypeReference expected) {
 		return typesService.getTypeForName(VOID_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _case(XTypeLiteral object, JvmTypeReference expected) {
-		JvmTypeReference paramType = typesService.createJvmTypeReference(object.getType());
+	protected JvmTypeReference _type(XTypeLiteral object, JvmTypeReference expected) {
+		JvmTypeReference paramType = jvmTypes.createJvmTypeReference(object.getType());
 		return typesService.getTypeForName(JAVA_LANG_CLASS, object, paramType);
 	}
 
-	protected JvmTypeReference _case(XInstanceOfExpression object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XInstanceOfExpression object, JvmTypeReference expected) {
 		return typesService.getTypeForName(BOOLEAN_TYPE_NAME, object);
 	}
 

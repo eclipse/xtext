@@ -67,7 +67,7 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	
 	public void testSwitchExpression() throws Exception {
 		assertResolvedReturnType(ExpressionsTypeResolver.STRING_TYPE_NAME,"switch { case true : 's'; case false : 'foo'; default: 'bar';}");
-//		assertResolvedReturnType(ExpressionsTypeResolver.OBJECT_TYPE_NAME,"switch { case true : 's' case false : new java.lang.Object default: 'bar'}");
+		assertResolvedReturnType(ExpressionsTypeResolver.OBJECT_TYPE_NAME,"switch { case true : 's'; case false : new java.lang.Object(); default: 'bar';}");
 	}
 	
 	public void testClosure() throws Exception {
