@@ -12,13 +12,20 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.WildcardType;
 
+import org.apache.log4j.Logger;
+
+import com.google.inject.Binder;
+import com.google.inject.Key;
 import com.google.inject.Module;
+import com.google.inject.Scopes;
+import com.google.inject.binder.LinkedBindingBuilder;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  */
 public abstract class MethodBasedModule implements Module {
-
+	private static Logger LOGGER = Logger.getLogger(BindModule.class);
 	private final Method method;
 	private final Object owner;
 
@@ -35,82 +42,94 @@ public abstract class MethodBasedModule implements Module {
 		return owner;
 	}
 	
-	protected boolean isConfigured(Class<?> from, Object to, boolean singleton, boolean eagerSingleton, boolean provider) {
-		return false;
-	}
-	
-	protected final Class<?> getReturnTypeGenericParam(Class<?> expectedRawType, Method method) {
-		Type type = getReturnTypeGenericParamAsType(expectedRawType, method);
-		if (type != null)
-			return getClassType(type);
-		return null;
-	}
-	
-	protected final Class<?> getReturnTypeGenericParam(Class<?> expectedRawType, Type type) {
-		Class<?> providerClass = getClassType(type);
-		if (expectedRawType.isAssignableFrom(providerClass)) {
-			Type actualType = null;
-			if (type instanceof WildcardType) {
-				Type upperBound = ((WildcardType) type).getUpperBounds()[0];
-				if (upperBound instanceof ParameterizedType) {
-					Type[] typeArguments = ((ParameterizedType) upperBound).getActualTypeArguments();
-					actualType = typeArguments[0];
-				} else {
- 					actualType = upperBound;
+	@SuppressWarnings("unchecked")
+	public void configure(Binder binder) {
+		Type key = getKeyType();
+		LinkedBindingBuilder<Object> bind = binder.bind((Key<Object>)Key.get(key));
+		if (isClassBinding()) {
+			Class<?> value = (Class<?>) invokeMethod();
+			if (LOGGER.isTraceEnabled())
+				LOGGER.trace("Adding binding from " + key + " to " + value.getName()
+						+ ". Declaring Method was '" + getMethod().toGenericString() + "' in Module "
+						+ this.getClass().getName());
+			if (value != null && !Void.class.equals(value)) {
+				if (!key.equals(value)) {
+					bindToClass(bind, value);
 				}
-			} else {
-				Type[] typeArguments = ((ParameterizedType) type).getActualTypeArguments();
-				actualType = typeArguments[0];
+				if (isEager()) {
+					bind.asEagerSingleton();
+				} else if (isSingleton()) {
+					bind.in(Scopes.SINGLETON);
+				}
 			}
-			Class<?> key = getClassType(actualType);
-			return key;
+		} else {
+			Object instance = invokeMethod();
+			if (LOGGER.isTraceEnabled())
+				LOGGER.trace(
+						"Adding binding from " + getMethod().getReturnType().getName() + 
+						" to instance " + instance.toString()
+						+ ". Declaring Method was '" + getMethod().toGenericString() + "' in Module "
+						+ this.getClass().getName());
+			bindToInstance(bind, instance);
 		}
-		return null;
+	}
+
+	protected void bindToClass(LinkedBindingBuilder<Object> bind, Class<?> value) {
+		bind.to(value);
+	}
+
+	protected void bindToInstance(LinkedBindingBuilder<Object> bind, Object instance) {
+		bind.toInstance(instance);
 	}
 	
-	protected final Type getReturnTypeGenericParamAsType(Class<?> expectedRawType, Method method) {
-		if (method.getReturnType().equals(expectedRawType)) {
-			Type returnType = method.getGenericReturnType();
-			if (returnType instanceof ParameterizedType) {
-				Type[] arguments = ((ParameterizedType) returnType).getActualTypeArguments();
-				return arguments[0];
+	protected boolean isSame(Type typeA, Type typeB) {
+		return typeA.equals(typeB);
+	}
+	
+	public Type getKeyType() {
+		if (isClassBinding()) {
+			Type type = getMethod().getGenericReturnType();
+			if (!(type instanceof ParameterizedType)) {
+				throw throwIllegalReturnTypeDeclaration(getMethod());
 			}
-			return null;
+			return getFirstTypeParameter((ParameterizedType) type);
+		} else {
+			return getMethod().getGenericReturnType();
 		}
-		return null;
+	}
+
+	protected Type getFirstTypeParameter(ParameterizedType type) {
+		Type firstParam = type.getActualTypeArguments()[0];
+		if (firstParam instanceof WildcardType) {
+			return ((WildcardType)firstParam).getUpperBounds()[0];
+		}
+		return firstParam;
+	}
+
+	protected IllegalStateException throwIllegalReturnTypeDeclaration(Method method) {
+		return new IllegalStateException("return type of "+method.getName()+" should be declared with wildcard and upperbound (i.e. Class<? extends IScopeProvider>)");
 	}
 	
-	protected Class<?> getClassType(Type type) {
-		if (type instanceof WildcardType) {
-			Type upperBound = ((WildcardType) type).getUpperBounds()[0];
-			if (upperBound instanceof Class<?>)
-				return (Class<?>) upperBound;
-			if (upperBound instanceof ParameterizedType) {
-				Type rawType = ((ParameterizedType) upperBound).getRawType();
-				if (rawType instanceof Class<?>)
-					return (Class<?>) rawType;
-			}
-		} else if (type instanceof Class<?>)
-			return (Class<?>) type;
-		return null;
+	public boolean isClassBinding() {
+		return Class.class.equals(getMethod().getReturnType());
 	}
-	
-	protected boolean isEager(Method method) {
-		SingletonBinding binding = method.getAnnotation(SingletonBinding.class);
+
+	public boolean isEager() {
+		SingletonBinding binding = getMethod().getAnnotation(SingletonBinding.class);
 		if (binding != null) {
 			return binding.eager();
 		}
 		return false;
 	}
 
-	protected boolean isSingleton(Method method) {
-		return method.getAnnotation(SingletonBinding.class) != null;
+	public boolean isSingleton() {
+		return getMethod().getAnnotation(SingletonBinding.class) != null;
 	}
 	
 	public Object invokeMethod(Object... parameters) {
 		try {
-			method.setAccessible(true);
-			return method.invoke(owner, parameters);
+			getMethod().setAccessible(true);
+			return getMethod().invoke(owner, parameters);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

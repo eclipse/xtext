@@ -74,6 +74,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 			case XbasePackage.XVARIABLE_DECLARATION: return createXVariableDeclaration();
 			case XbasePackage.XFEATURE_CALL: return createXFeatureCall();
 			case XbasePackage.XMEMBER_FEATURE_CALL: return createXMemberFeatureCall();
+			case XbasePackage.XSIMPLE_FEATURE_CALL: return createXSimpleFeatureCall();
 			case XbasePackage.XCONSTRUCTOR_CALL: return createXConstructorCall();
 			case XbasePackage.XBOOLEAN_LITERAL: return createXBooleanLiteral();
 			case XbasePackage.XNULL_LITERAL: return createXNullLiteral();
@@ -81,7 +82,6 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 			case XbasePackage.XSTRING_LITERAL: return createXStringLiteral();
 			case XbasePackage.XCLOSURE: return createXClosure();
 			case XbasePackage.XCASTED_EXPRESSION: return createXCastedExpression();
-			case XbasePackage.XASSIGNMENT: return createXAssignment();
 			case XbasePackage.XBINARY_OPERATION: return createXBinaryOperation();
 			case XbasePackage.XUNARY_OPERATION: return createXUnaryOperation();
 			case XbasePackage.XFOR_LOOP_EXPRESSION: return createXForLoopExpression();
@@ -179,6 +179,17 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public XSimpleFeatureCall createXSimpleFeatureCall()
+	{
+		XSimpleFeatureCallImpl xSimpleFeatureCall = new XSimpleFeatureCallImpl();
+		return xSimpleFeatureCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XConstructorCall createXConstructorCall()
 	{
 		XConstructorCallImpl xConstructorCall = new XConstructorCallImpl();
@@ -249,17 +260,6 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	{
 		XCastedExpressionImpl xCastedExpression = new XCastedExpressionImpl();
 		return xCastedExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public XAssignment createXAssignment()
-	{
-		XAssignmentImpl xAssignment = new XAssignmentImpl();
-		return xAssignment;
 	}
 
 	/**

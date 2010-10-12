@@ -181,7 +181,7 @@ public class PolymorphicDispatcher<RT> {
 				return false;
 			for (int i = 0; i < paramTypes.size(); i++) {
 				Class<?> paramClass = paramTypes.get(i);
-				if (!(getObjectType(getParameterTypes()[i]).isAssignableFrom(getObjectType(paramClass))))
+				if (paramClass!=null && !(getObjectType(getParameterTypes()[i]).isAssignableFrom(getObjectType(paramClass))))
 					return false;
 			}
 			return true;
@@ -309,7 +309,7 @@ public class PolymorphicDispatcher<RT> {
 	 * @return
 	 */
 	protected Class<?> getDefaultClass(int paramIndex) {
-		return Object.class;
+		return null;
 	}
 
 	private List<MethodDesc> cachedDescriptors;

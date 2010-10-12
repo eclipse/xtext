@@ -19,7 +19,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
@@ -43,23 +43,23 @@ public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 			throw new IllegalStateException("context must be contained in a resource set");
 		EClass referenceType = reference.getEReferenceType();
 		if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_TYPE, referenceType)) {
-			ITypeProvider typeProvider = getTypeProvider(resourceSet);
+			IJvmTypeProvider typeProvider = getTypeProvider(resourceSet);
 			return createTypeScope(typeProvider);
 		} else {
 			return IScope.NULLSCOPE;
 		}
 	}
 
-	public ITypeProvider getTypeProvider(ResourceSet resourceSet) {
-		ITypeProvider typeProvider = getTypeProviderFactory().findTypeProvider(resourceSet);
+	public IJvmTypeProvider getTypeProvider(ResourceSet resourceSet) {
+		IJvmTypeProvider typeProvider = getTypeProviderFactory().findTypeProvider(resourceSet);
 		if (typeProvider == null)
 			typeProvider = getTypeProviderFactory().createTypeProvider(resourceSet);
 		return typeProvider;
 	}
 
-	public abstract AbstractTypeScope createTypeScope(ITypeProvider typeProvider);
+	public abstract AbstractTypeScope createTypeScope(IJvmTypeProvider typeProvider);
 
-	public abstract ITypeProvider.Factory getTypeProviderFactory();
+	public abstract IJvmTypeProvider.Factory getTypeProviderFactory();
 	
 	public IScope createMemberScope(JvmType containerType, Predicate<JvmMember> filter, Function<JvmMember, String> names, IScope outer) {
 		if (containerType == null || containerType.eIsProxy())

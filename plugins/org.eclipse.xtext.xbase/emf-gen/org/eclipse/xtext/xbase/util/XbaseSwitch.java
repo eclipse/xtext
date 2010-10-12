@@ -158,6 +158,15 @@ public class XbaseSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XbasePackage.XSIMPLE_FEATURE_CALL:
+			{
+				XSimpleFeatureCall xSimpleFeatureCall = (XSimpleFeatureCall)theEObject;
+				T result = caseXSimpleFeatureCall(xSimpleFeatureCall);
+				if (result == null) result = caseXFeatureCall(xSimpleFeatureCall);
+				if (result == null) result = caseXExpression(xSimpleFeatureCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case XbasePackage.XCONSTRUCTOR_CALL:
 			{
 				XConstructorCall xConstructorCall = (XConstructorCall)theEObject;
@@ -211,14 +220,6 @@ public class XbaseSwitch<T>
 				XCastedExpression xCastedExpression = (XCastedExpression)theEObject;
 				T result = caseXCastedExpression(xCastedExpression);
 				if (result == null) result = caseXExpression(xCastedExpression);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XbasePackage.XASSIGNMENT:
-			{
-				XAssignment xAssignment = (XAssignment)theEObject;
-				T result = caseXAssignment(xAssignment);
-				if (result == null) result = caseXExpression(xAssignment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -448,6 +449,22 @@ public class XbaseSwitch<T>
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XSimple Feature Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XSimple Feature Call</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXSimpleFeatureCall(XSimpleFeatureCall object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>XConstructor Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -555,22 +572,6 @@ public class XbaseSwitch<T>
 	 * @generated
 	 */
 	public T caseXCastedExpression(XCastedExpression object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>XAssignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>XAssignment</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseXAssignment(XAssignment object)
 	{
 		return null;
 	}

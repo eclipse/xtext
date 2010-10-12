@@ -118,13 +118,13 @@ protected class XExpression_XAssignmentParserRuleCall extends RuleCallToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -186,13 +186,13 @@ protected class XAssignment_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -425,13 +425,13 @@ protected class XOrExpression_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -666,13 +666,13 @@ protected class XAndExpression_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -907,13 +907,13 @@ protected class XEqualityExpression_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -1149,13 +1149,13 @@ protected class XRelationalExpression_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -1542,13 +1542,13 @@ protected class XOtherOperatorExpression_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -1783,13 +1783,13 @@ protected class XAdditiveExpression_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -2024,13 +2024,13 @@ protected class XMultiplicativeExpression_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -2263,13 +2263,13 @@ protected class XUnaryOperation_Alternatives extends AlternativesToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -2500,13 +2500,13 @@ protected class XFeatureCall_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -2965,13 +2965,13 @@ protected class XPrimaryExpression_Alternatives extends AlternativesToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -4143,13 +4143,13 @@ protected class XParenthesizedExpression_Group extends GroupToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -6245,13 +6245,13 @@ protected class XExpressionInsideBlock_Alternatives extends AlternativesToken {
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -6331,13 +6331,13 @@ protected class XExpressionInsideBlock_XExpressionParserRuleCall_1 extends RuleC
 		   getEObject().eClass() != grammarAccess.getXClosureAccess().getXClosureAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXConstructorCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXDoWhileExpressionRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXForLoopExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIfExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXRelationalExpressionAccess().getXInstanceOfExpressionExpressionAction_1_0_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXIntLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXFeatureCallAccess().getXMemberFeatureCallParamsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXSimpleFeatureCallRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXStringLiteralRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXSwitchExpressionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXThrowExpressionRule().getType().getClassifier() && 
@@ -6716,7 +6716,7 @@ protected class JvmFormalParameter_NameAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule XSimpleFeatureCall ****************
  *
- * XSimpleFeatureCall returns XFeatureCall:
+ * XSimpleFeatureCall:
  * 	feature=[types::JvmIdentifyableElement] ("(" (params+=XExpression ("," params+=XExpression)*)? ")")?;
  *
  **/

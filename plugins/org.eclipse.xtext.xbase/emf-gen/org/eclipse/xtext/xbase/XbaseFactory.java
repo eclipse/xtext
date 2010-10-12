@@ -89,6 +89,15 @@ public interface XbaseFactory extends EFactory
 	XMemberFeatureCall createXMemberFeatureCall();
 
 	/**
+	 * Returns a new object of class '<em>XSimple Feature Call</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XSimple Feature Call</em>'.
+	 * @generated
+	 */
+	XSimpleFeatureCall createXSimpleFeatureCall();
+
+	/**
 	 * Returns a new object of class '<em>XConstructor Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -150,15 +159,6 @@ public interface XbaseFactory extends EFactory
 	 * @generated
 	 */
 	XCastedExpression createXCastedExpression();
-
-	/**
-	 * Returns a new object of class '<em>XAssignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>XAssignment</em>'.
-	 * @generated
-	 */
-	XAssignment createXAssignment();
 
 	/**
 	 * Returns a new object of class '<em>XBinary Operation</em>'.

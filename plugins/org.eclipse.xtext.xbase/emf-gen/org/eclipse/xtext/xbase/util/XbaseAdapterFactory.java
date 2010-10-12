@@ -118,6 +118,11 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 				return createXMemberFeatureCallAdapter();
 			}
 			@Override
+			public Adapter caseXSimpleFeatureCall(XSimpleFeatureCall object)
+			{
+				return createXSimpleFeatureCallAdapter();
+			}
+			@Override
 			public Adapter caseXConstructorCall(XConstructorCall object)
 			{
 				return createXConstructorCallAdapter();
@@ -151,11 +156,6 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 			public Adapter caseXCastedExpression(XCastedExpression object)
 			{
 				return createXCastedExpressionAdapter();
-			}
-			@Override
-			public Adapter caseXAssignment(XAssignment object)
-			{
-				return createXAssignmentAdapter();
 			}
 			@Override
 			public Adapter caseXBinaryOperation(XBinaryOperation object)
@@ -355,6 +355,21 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XSimpleFeatureCall <em>XSimple Feature Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XSimpleFeatureCall
+	 * @generated
+	 */
+	public Adapter createXSimpleFeatureCallAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XConstructorCall <em>XConstructor Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -455,21 +470,6 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXCastedExpressionAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XAssignment <em>XAssignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xbase.XAssignment
-	 * @generated
-	 */
-	public Adapter createXAssignmentAdapter()
 	{
 		return null;
 	}

@@ -8,7 +8,7 @@
 package org.eclipse.xtext.common.types.xtext;
 
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
-import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 
 import com.google.inject.Inject;
@@ -24,7 +24,7 @@ public class ClasspathBasedTypeScopeProvider extends AbstractTypeScopeProvider {
 	private ClasspathTypeProviderFactory typeProviderFactory;
 
 	@Override
-	public ClasspathBasedTypeScope createTypeScope(ITypeProvider typeProvider) {
+	public ClasspathBasedTypeScope createTypeScope(IJvmTypeProvider typeProvider) {
 		return new ClasspathBasedTypeScope((ClasspathTypeProvider) typeProvider);
 	}
 

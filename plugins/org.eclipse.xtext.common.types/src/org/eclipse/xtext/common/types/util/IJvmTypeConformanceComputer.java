@@ -5,13 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase;
+package org.eclipse.xtext.common.types.util;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.typing.ITypeConformanceComputer;
 
+import com.google.inject.ImplementedBy;
 
 /**
- * Use this class to register components to be used within the IDE.
+ * @author Sven Efftinge - Initial contribution and API
  */
-public class XtypeRuntimeModule extends org.eclipse.xtext.xbase.AbstractXtypeRuntimeModule {
-	
+@ImplementedBy(JvmTypeConformanceComputer.class)
+public interface IJvmTypeConformanceComputer extends ITypeConformanceComputer<JvmTypeReference> {
+
 }

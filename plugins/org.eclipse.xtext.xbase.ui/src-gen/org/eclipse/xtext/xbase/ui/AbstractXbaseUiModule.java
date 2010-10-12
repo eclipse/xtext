@@ -44,7 +44,7 @@ public abstract class AbstractXbaseUiModule extends DefaultUiModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
-	public Class<? extends org.eclipse.xtext.common.types.access.ITypeProvider.Factory> bindITypeProvider$Factory() {
+	public Class<? extends org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory> bindITypeProvider$Factory() {
 		return org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory.class;
 	}
 

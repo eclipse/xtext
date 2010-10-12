@@ -383,6 +383,52 @@ public interface XbasePackage extends EPackage
 	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XFEATURE_CALL_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XSimpleFeatureCallImpl <em>XSimple Feature Call</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XSimpleFeatureCallImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXSimpleFeatureCall()
+	 * @generated
+	 */
+	int XSIMPLE_FEATURE_CALL = 8;
+
+	/**
+	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSIMPLE_FEATURE_CALL__FEATURE_NAME = XFEATURE_CALL__FEATURE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSIMPLE_FEATURE_CALL__PARAMS = XFEATURE_CALL__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSIMPLE_FEATURE_CALL__FEATURE = XFEATURE_CALL__FEATURE;
+
+	/**
+	 * The number of structural features of the '<em>XSimple Feature Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XSIMPLE_FEATURE_CALL_FEATURE_COUNT = XFEATURE_CALL_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -390,7 +436,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXConstructorCall()
 	 * @generated
 	 */
-	int XCONSTRUCTOR_CALL = 8;
+	int XCONSTRUCTOR_CALL = 9;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -427,7 +473,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXBooleanLiteral()
 	 * @generated
 	 */
-	int XBOOLEAN_LITERAL = 9;
+	int XBOOLEAN_LITERAL = 10;
 
 	/**
 	 * The feature id for the '<em><b>Is True</b></em>' attribute.
@@ -455,7 +501,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXNullLiteral()
 	 * @generated
 	 */
-	int XNULL_LITERAL = 10;
+	int XNULL_LITERAL = 11;
 
 	/**
 	 * The number of structural features of the '<em>XNull Literal</em>' class.
@@ -474,7 +520,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXIntLiteral()
 	 * @generated
 	 */
-	int XINT_LITERAL = 11;
+	int XINT_LITERAL = 12;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -502,7 +548,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXStringLiteral()
 	 * @generated
 	 */
-	int XSTRING_LITERAL = 12;
+	int XSTRING_LITERAL = 13;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -530,7 +576,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXClosure()
 	 * @generated
 	 */
-	int XCLOSURE = 13;
+	int XCLOSURE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
@@ -567,7 +613,7 @@ public interface XbasePackage extends EPackage
 	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXCastedExpression()
 	 * @generated
 	 */
-	int XCASTED_EXPRESSION = 14;
+	int XCASTED_EXPRESSION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -595,43 +641,6 @@ public interface XbasePackage extends EPackage
 	 * @ordered
 	 */
 	int XCASTED_EXPRESSION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl <em>XAssignment</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.impl.XAssignmentImpl
-	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAssignment()
-	 * @generated
-	 */
-	int XASSIGNMENT = 15;
-
-	/**
-	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XASSIGNMENT__LEFT = XEXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XASSIGNMENT__RIGHT = XEXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>XAssignment</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XASSIGNMENT_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl <em>XBinary Operation</em>}' class.
@@ -1316,6 +1325,16 @@ public interface XbasePackage extends EPackage
 	EClass getXMemberFeatureCall();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XSimpleFeatureCall <em>XSimple Feature Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XSimple Feature Call</em>'.
+	 * @see org.eclipse.xtext.xbase.XSimpleFeatureCall
+	 * @generated
+	 */
+	EClass getXSimpleFeatureCall();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XConstructorCall <em>XConstructor Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1483,38 +1502,6 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXCastedExpression_Target();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XAssignment <em>XAssignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XAssignment</em>'.
-	 * @see org.eclipse.xtext.xbase.XAssignment
-	 * @generated
-	 */
-	EClass getXAssignment();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XAssignment#getLeft <em>Left</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left</em>'.
-	 * @see org.eclipse.xtext.xbase.XAssignment#getLeft()
-	 * @see #getXAssignment()
-	 * @generated
-	 */
-	EReference getXAssignment_Left();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XAssignment#getRight <em>Right</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right</em>'.
-	 * @see org.eclipse.xtext.xbase.XAssignment#getRight()
-	 * @see #getXAssignment()
-	 * @generated
-	 */
-	EReference getXAssignment_Right();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XBinaryOperation <em>XBinary Operation</em>}'.
@@ -2012,6 +1999,16 @@ public interface XbasePackage extends EPackage
 		EClass XMEMBER_FEATURE_CALL = eINSTANCE.getXMemberFeatureCall();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XSimpleFeatureCallImpl <em>XSimple Feature Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XSimpleFeatureCallImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXSimpleFeatureCall()
+		 * @generated
+		 */
+		EClass XSIMPLE_FEATURE_CALL = eINSTANCE.getXSimpleFeatureCall();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2152,32 +2149,6 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XCASTED_EXPRESSION__TARGET = eINSTANCE.getXCastedExpression_Target();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl <em>XAssignment</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.impl.XAssignmentImpl
-		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAssignment()
-		 * @generated
-		 */
-		EClass XASSIGNMENT = eINSTANCE.getXAssignment();
-
-		/**
-		 * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XASSIGNMENT__LEFT = eINSTANCE.getXAssignment_Left();
-
-		/**
-		 * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XASSIGNMENT__RIGHT = eINSTANCE.getXAssignment_Right();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XBinaryOperationImpl <em>XBinary Operation</em>}' class.

@@ -663,7 +663,7 @@
     </rules>
     <rules xsi:type="xtext:ParserRule" name="XSimpleFeatureCall">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XFeatureCall"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XSimpleFeatureCall"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Assignment" feature="feature" operator="=">

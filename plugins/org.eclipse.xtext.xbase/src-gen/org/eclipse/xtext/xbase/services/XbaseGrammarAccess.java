@@ -1439,7 +1439,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cParamsXExpressionParserRuleCall_1_1_1_1_0 = (RuleCall)cParamsAssignment_1_1_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
-		//XSimpleFeatureCall returns XFeatureCall:
+		//XSimpleFeatureCall:
 		//	feature=[types::JvmIdentifyableElement] ("(" (params+=XExpression ("," params+=XExpression)*)? ")")?;
 		public ParserRule getRule() { return rule; }
 
@@ -2220,7 +2220,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getJvmFormalParameterAccess().getRule();
 	}
 
-	//XSimpleFeatureCall returns XFeatureCall:
+	//XSimpleFeatureCall:
 	//	feature=[types::JvmIdentifyableElement] ("(" (params+=XExpression ("," params+=XExpression)*)? ")")?;
 	public XSimpleFeatureCallElements getXSimpleFeatureCallAccess() {
 		return (pXSimpleFeatureCall != null) ? pXSimpleFeatureCall : (pXSimpleFeatureCall = new XSimpleFeatureCallElements());

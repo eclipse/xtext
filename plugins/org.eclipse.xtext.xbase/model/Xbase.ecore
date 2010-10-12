@@ -49,6 +49,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifyableElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XMemberFeatureCall" eSuperTypes="#//XFeatureCall"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XSimpleFeatureCall" eSuperTypes="#//XFeatureCall"/>
   <eClassifiers xsi:type="ecore:EClass" name="XConstructorCall" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
@@ -76,12 +77,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//XExpression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XAssignment" eSuperTypes="#//XExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//XExpression"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//XExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XBinaryOperation" eSuperTypes="#//XMemberFeatureCall"/>

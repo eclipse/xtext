@@ -29,7 +29,7 @@ public abstract class AbstractContentAssistTestLanguageUiModule extends DefaultU
 	}
 
 	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
-	public Class<? extends org.eclipse.xtext.common.types.access.ITypeProvider.Factory> bindITypeProvider$Factory() {
+	public Class<? extends org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory> bindITypeProvider$Factory() {
 		return org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory.class;
 	}
 

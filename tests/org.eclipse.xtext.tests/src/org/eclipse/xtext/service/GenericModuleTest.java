@@ -9,23 +9,49 @@ package org.eclipse.xtext.service;
 
 import java.lang.reflect.Type;
 import java.util.Date;
+import java.util.Iterator;
 
 import junit.framework.TestCase;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.Module;
 import com.google.inject.Provider;
+import com.google.inject.internal.MoreTypes;
+import com.google.inject.util.Types;
 
 public class GenericModuleTest extends TestCase {
 
 	public void assertConfigures(CompoundModule module, Class<?> from, Object to, boolean singleton,
 			boolean eagerSingleton, boolean provider) {
-		assertTrue(module.isConfigured(from, to, singleton, eagerSingleton, provider));
+		assertTrue(isConfigured(module,from, to, singleton, eagerSingleton, provider));
 	}
-
-	public void assertConfiguresNot(CompoundModule module, Class<?> from, Class<?> to, boolean singleton,
+	
+	public void assertConfiguresNot(CompoundModule module, Class<?> from, Object to, boolean singleton,
 			boolean eagerSingleton, boolean provider) {
-		assertFalse(module.isConfigured(from, to, singleton, eagerSingleton, provider));
+		assertFalse(isConfigured(module,from, to, singleton, eagerSingleton, provider));
+	}
+	
+	protected boolean isConfigured(CompoundModule module, Class<?> from, Object to, boolean singleton,
+			boolean eagerSingleton, boolean provider) {
+		for(Module m: module.getModules()) {
+			if (m instanceof MethodBasedModule) {
+				MethodBasedModule mod = (MethodBasedModule) m;
+				if (mod.isSingleton()!=singleton)
+					continue;
+				if (mod.isEager()!=eagerSingleton)
+					continue;
+				if (provider != m instanceof ProviderModule)
+					continue;
+				if (!MoreTypes.getRawType(mod.getKeyType()).equals(from))
+					continue;
+				Object object = mod.invokeMethod();
+				if (object==null && to==null || object!=null && object.equals(to))
+					return true;
+			}
+		}
+		return false;
 	}
 
 	public void testSimple() throws Exception {
@@ -35,6 +61,17 @@ public class GenericModuleTest extends TestCase {
 		assertConfigures(bindings, CharSequence.class, String.class, false, false, false);
 		assertConfigures(bindings, Type.class, Class.class, false, false, false);
 		assertConfigures(bindings, TestCase.class, GenericModuleTest.class, false, false, false);
+	}
+	
+	public void testParameterizedTypes() throws Exception {
+		ParameterizedTypeModule module = new ParameterizedTypeModule();
+		Injector createInjector = Guice.createInjector(module);
+		Object bindToType = createInjector.getInstance(Key.get(Types.newParameterizedType(Comparable.class, ParameterizedTypeModule.X.class)));
+		assertTrue(bindToType instanceof ParameterizedTypeModule.X);
+		Object bindToInstance = createInjector.getInstance(Key.get(Types.newParameterizedType(Iterator.class, ParameterizedTypeModule.X.class)));
+		assertSame(module.BIND_X,bindToInstance);
+		Object provide = createInjector.getInstance(Key.get(Types.newParameterizedType(Iterable.class, ParameterizedTypeModule.X.class)));
+		assertSame(module.PROVIDE_X,provide );
 	}
 
 	public void testOverride() throws Exception {
