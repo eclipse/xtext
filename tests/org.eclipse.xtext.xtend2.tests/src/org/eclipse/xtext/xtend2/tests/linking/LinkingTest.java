@@ -11,8 +11,9 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XClosure;
-import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2Test;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -30,17 +31,17 @@ public class LinkingTest extends AbstractXtend2Test {
 	public void testTypeReference_withImport() throws Exception {
 		XtendFunction func = (XtendFunction) clazz("import java.lang.* class X { (String)=>Boolean foo() : |true;}").getMembers().get(0);
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
-		JvmReferenceTypeArgument returnType = (JvmReferenceTypeArgument) type.getReturnType();
-		assertEquals("java.lang.Boolean", returnType.getTypeReference().getType().getCanonicalName());
-		JvmReferenceTypeArgument paramType = (JvmReferenceTypeArgument) type.getParamTypes().get(0);
-		assertEquals("java.lang.String", paramType.getTypeReference().getType().getCanonicalName());
+		JvmTypeReference returnType = (JvmTypeReference) type.getReturnType();
+		assertEquals("java.lang.Boolean", returnType.getCanonicalName());
+		JvmTypeReference paramType = (JvmTypeReference) type.getParamTypes().get(0);
+		assertEquals("java.lang.String", paramType.getCanonicalName());
 	}
 	
 	public void testTypeReference_0() throws Exception {
 		XtendFunction func = function("=>java.lang.Boolean foo() : |true;");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
-		JvmReferenceTypeArgument returnType = (JvmReferenceTypeArgument) type.getReturnType();
-		assertEquals("java.lang.Boolean", returnType.getTypeReference().getType().getCanonicalName());
+		JvmTypeReference returnType = (JvmTypeReference) type.getReturnType();
+		assertEquals("java.lang.Boolean", returnType.getCanonicalName());
 	}
 	
 	public void testTypeParameterReference() throws Exception {
@@ -83,8 +84,8 @@ public class LinkingTest extends AbstractXtend2Test {
 //		XtendFunction func  = (XtendFunction) xClass.getMembers().get(1);
 //		XBinaryOperation expression = (XBinaryOperation) func.getExpression();
 //		EList<XExpression> list = expression.getParams();
-//		XFeatureCall featureCall1 = (XFeatureCall) list.get(0);
-//		XFeatureCall featureCall2 = (XFeatureCall) list.get(1);
+//		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) list.get(0);
+//		XAbstractFeatureCall featureCall2 = (XAbstractFeatureCall) list.get(1);
 //		assertEquals(featureCall1.getFeatureName(), xClass.getMembers().get(0), featureCall1.getFeature());
 //		assertEquals(func.getParameters().get(0), featureCall2.getFeature());
 //	}
@@ -93,7 +94,7 @@ public class LinkingTest extends AbstractXtend2Test {
 		XtendFile file = file ("import java.lang.String class X { String foo() : 'hello world'; String bar(String foo) : foo;}");
 		XtendClass xClass = file.getClasses().get(0);
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(1);
-		XFeatureCall featureCall1 = (XFeatureCall) func.getExpression();
+		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) func.getExpression();
 		assertEquals(func.getParameters().get(0), featureCall1.getFeature());
 	}
 //TODO	
@@ -102,7 +103,7 @@ public class LinkingTest extends AbstractXtend2Test {
 //		XtendClass xClass = file.getClasses().get(0);
 //		XtendFunction func  = (XtendFunction) xClass.getMembers().get(1);
 //		XBlockExpression block = (XBlockExpression) func.getExpression();
-//		XFeatureCall featureCall1 = (XFeatureCall) block.getExpressions().get(1);
+//		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) block.getExpressions().get(1);
 //		assertEquals(block.getExpressions().get(0), featureCall1.getFeature());
 //	}
 	
@@ -111,8 +112,8 @@ public class LinkingTest extends AbstractXtend2Test {
 		XtendClass xClass = file.getClasses().get(0);
 		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
 		XClosure closure = (XClosure) func.getExpression();
-		XFeatureCall featureCall1 = (XFeatureCall) closure.getExpression();
-		assertEquals(closure.getParams().get(0), featureCall1.getFeature());
+		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) closure.getExpression();
+		assertEquals(closure.getFormalParameters().get(0), featureCall1.getFeature());
 	}
 	
 	public void testMemberFeatureScope_0() throws Exception {
@@ -123,12 +124,13 @@ public class LinkingTest extends AbstractXtend2Test {
 		assertEquals("length", ((JvmOperation)call.getFeature()).getSimpleName());
 	}
 	
-	public void testOperatorOverloading_1() throws Exception {
-		XtendFile file = file ("import java.util.List class X { foo(List<String> foo) : foo += 'bar';}");
-		XtendClass xClass = file.getClasses().get(0);
-		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
-		XMemberFeatureCall call = (XMemberFeatureCall) func.getExpression();
-		assertEquals("add", ((JvmOperation)call.getFeature()).getSimpleName());
-	}
+//TODO should be tested in Xbase
+//	public void testOperatorOverloading_1() throws Exception {
+//		XtendFile file = file ("import java.util.List class X { foo(List<String> foo) : foo += 'bar';}");
+//		XtendClass xClass = file.getClasses().get(0);
+//		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
+//		XBinaryOperation call = (XBinaryOperation) func.getExpression();
+//		assertEquals("add", ((JvmOperation)call.getFeature()).getSimpleName());
+//	}
 	
 }
