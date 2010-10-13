@@ -64,6 +64,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		
 		try {
 			final Object tokenValue = getTokenValue(value, ruleName, node);
+			checkNullForPrimitiveFeatures(structuralFeature, tokenValue, node);
 			object.eSet(structuralFeature, tokenValue);
 		} catch(ValueConverterException e) {
 			throw e;
@@ -98,6 +99,7 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 			throw new IllegalArgumentException(object.eClass().getName() + "." + feature + " does not exist");
 		
 		try {
+			checkNullForPrimitiveFeatures(structuralFeature, value, node);
 			if (value instanceof EObject) {
 				// containment lists are unique per-se and the tokenValue was created just a sec ago
 				((InternalEList<EObject>) object.eGet(structuralFeature)).addUnique((EObject) value);
@@ -115,4 +117,9 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 		}
 	}
 
+	private void checkNullForPrimitiveFeatures(EStructuralFeature structuralFeature, Object tokenValue, AbstractNode node) {
+		if(tokenValue == null && structuralFeature.getEType().getInstanceClass().isPrimitive()) {
+			throw new ValueConverterException("ValueConverter returned null for primitive feature " + structuralFeature.getName(), node, null);
+		}
+	}
 }

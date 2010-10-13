@@ -53,8 +53,8 @@ public class DefaultEcoreElementFactoryTest extends TestCase {
         	factory.set(eClass, "abstract", null, "foo", node);
         	fail("Expected ValueConverterException");
         } catch(ValueConverterException ex) {
-        	assertTrue(ex.getCause() instanceof NullPointerException);
-        	assertTrue(ex.getMessage().indexOf("NullPointerException") >= 0);
+        	assertNull(ex.getCause());
+        	assertTrue(ex.getMessage().indexOf("ValueConverter returned null for") >= 0);
         	assertSame(node, ex.getNode());
         }
         EasyMock.verify(converter);
