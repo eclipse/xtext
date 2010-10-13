@@ -43,7 +43,7 @@ public class ProjectFactory {
 
 	private static final Logger logger = Logger.getLogger(ProjectFactory.class);
 	
-	@Inject
+	@Inject(optional=true)
 	protected IWorkbench workbench;
 	
 	@Inject
@@ -147,15 +147,19 @@ public class ProjectFactory {
 		// Clean up any old project information.
 		if (project.exists()) {
 			final boolean[] result = new boolean[1];
-			workbench.getDisplay().syncExec(new Runnable() {
-				public void run() {
-					result[0] = MessageDialog.openQuestion(theShell, Messages.ProjectFactory_1
-							+ projectName,
-							Messages.ProjectFactory_2
-									+ projectName
-									+ Messages.ProjectFactory_3);
-				}
-			});
+			if (workbench!=null) {
+				workbench.getDisplay().syncExec(new Runnable() {
+					public void run() {
+						result[0] = MessageDialog.openQuestion(theShell, Messages.ProjectFactory_1
+								+ projectName,
+								Messages.ProjectFactory_2
+										+ projectName
+										+ Messages.ProjectFactory_3);
+					}
+				});
+			} else {
+				result[0] = true;
+			}
 			if (result[0]) {
 				project.delete(true, true, subMonitor.newChild(1));
 			} else {

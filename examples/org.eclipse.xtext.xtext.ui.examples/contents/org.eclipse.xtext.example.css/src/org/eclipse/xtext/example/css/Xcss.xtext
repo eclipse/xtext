@@ -79,7 +79,7 @@ XPrimaryExpression returns XExpression:
 	XConstructorCall |
 	XBlockExpression |
 	XSwitchExpression |
-	XSimpleFeatureCall |
+	XFeatureCall |
 	XIfExpression |
 	XForLoopExpression |
 	XWhileExpression |
