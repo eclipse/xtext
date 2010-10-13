@@ -56,7 +56,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 	private IDiagnosticConverter converter;
 
 	public List<Issue> validate(Resource resource, final CheckMode mode, CancelIndicator mon) {
-		final CancelIndicator monitor = mon == null ? new CancelIndicator.NullImpl() : mon;
+		final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;
 		resolveProxies(resource, monitor);
 		if (monitor.isCanceled())
 			return null;
