@@ -9,6 +9,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.util.JvmTypes;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 
 /**
  * This class contains custom scoping description.
@@ -28,12 +30,15 @@ import com.google.common.collect.Maps;
  *
  */
 public class Xtend2ScopeProvider extends XbaseScopeProvider {
+
+	@Inject
+	private JvmTypes jvmTypes;
 	
 	@Override
-	protected IScope getLocalVariableScope(EObject context, EReference reference, Predicate<EObject> featurePredicate) {
+	protected IScope createLocalVarScope(EObject context, EReference reference, Predicate<EObject> featurePredicate, IScope parent) {
 		if (context instanceof XtendClass) {
 			XtendClass clazz = (XtendClass) context;
-			return getAllFeatures(clazz, IScope.NULLSCOPE, featurePredicate);
+			return createFeatureScopeForTypeRef(jvmTypes.createJvmTypeReference(clazz), featurePredicate, IScope.NULLSCOPE);
 		} else if  (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
 			EList<JvmFormalParameter> list = func.getParameters();
@@ -42,9 +47,9 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 				IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);
 				map.put(desc.getName(),desc);
 			}
-			return new MapBasedScope(super.getLocalVariableScope(context, reference,featurePredicate), map);
+			return new MapBasedScope(super.createLocalVarScope(context, reference,featurePredicate, parent), map);
 		}
-		return super.getLocalVariableScope(context, reference,featurePredicate);
+		return super.createLocalVarScope(context, reference,featurePredicate, parent);
 	}
 
 	protected IEObjectDescription createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {
