@@ -80,11 +80,12 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	
 	public void testFeatureCall_1() throws Exception {
 		assertResolvedReturnType("java.util.List<java.lang.Byte>", "'foo'.getBytes()");
+//		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<java.lang.String>().get(23)");
 	}
 	
 	
 	public void assertResolvedReturnType(String type, String expression) throws Exception {
-		JvmTypeReference typeRef = typeResolver.getType(expression(expression),null,null);
+		JvmTypeReference typeRef = typeResolver.getType(expression(expression,true),null,null);
 		assertNotNull("type ref for "+expression,typeRef);
 		assertEquals(type,toString(typeRef));
 	}
