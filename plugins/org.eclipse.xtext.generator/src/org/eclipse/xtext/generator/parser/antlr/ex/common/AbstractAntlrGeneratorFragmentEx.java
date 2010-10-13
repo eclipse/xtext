@@ -36,4 +36,14 @@ public abstract class AbstractAntlrGeneratorFragmentEx extends AbstractAntlrGene
 	protected List<Object> getParameters(Grammar grammar) {
 		return ImmutableList.of(getOptions(), getFragmentHelper());
 	}
+	
+	@Override
+	protected String getParserFileNameSuffix() {
+		return ".java";
+	}
+	
+	@Override
+	protected String getLexerFileNameSuffix() {
+		return ".java";
+	}
 }

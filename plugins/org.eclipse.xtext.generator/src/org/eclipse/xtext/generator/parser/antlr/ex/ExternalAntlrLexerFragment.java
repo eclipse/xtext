@@ -82,7 +82,7 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 		addAntlrParam(generateTo);
 		getAntlrTool().runWithParams(grammarFile, getAntlrParams());
 		
-		String javaFile = srcGenPath+"/"+getLexerGrammar().replace('.', '/')+"Lexer.java";
+		String javaFile = srcGenPath+"/"+getLexerGrammar().replace('.', '/')+".java";
 		suppressWarningsImpl(javaFile);
 	}
 	
@@ -107,7 +107,7 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 						"binder.bind(" + Lexer.class.getName() + ".class)"+
 						".annotatedWith(com.google.inject.name.Names.named(" +
 						"org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME" +
-						")).to(" + lexerGrammar +"Lexer.class)")
+						")).to(" + lexerGrammar +".class)")
 				.getBindings();
 		return Collections.emptySet();
 	}
@@ -120,7 +120,7 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 						"binder.bind(" + Lexer.class.getName() + ".class)"+
 						".annotatedWith(com.google.inject.name.Names.named(" +
 						"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
-						")).to(" + lexerGrammar +"Lexer.class)")
+						")).to(" + lexerGrammar +".class)")
 				.getBindings();
 		if (contentAssist)
 			return new BindFactory()
@@ -128,7 +128,7 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 						"binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class)"+
 						".annotatedWith(com.google.inject.name.Names.named(" +
 						"org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST" +
-						")).to(" + lexerGrammar +"Lexer.class)")
+						")).to(" + lexerGrammar +".class)")
 				.getBindings();
 		return Collections.emptySet();
 		

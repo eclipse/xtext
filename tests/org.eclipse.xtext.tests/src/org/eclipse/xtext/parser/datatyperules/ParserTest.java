@@ -249,7 +249,7 @@ public class ParserTest extends AbstractXtextTests {
 		assertNotNull(firstModel);
 		String id = (String) firstModel.eGet(idFeature);
 		assertNotNull(id);
-		assertEquals("a.b.c. ;", id);
+		assertEquals("a.b.c.", id);
 	}
 
 	@SuppressWarnings("unchecked")

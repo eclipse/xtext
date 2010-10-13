@@ -77,4 +77,8 @@ public class XtextTokenStreamTest extends TestCase implements TokenSource {
 		return new CommonToken(tokenCount--, "Text");
 	}
 	
+	public String getSourceName() {
+		return null;
+	}
+	
 }

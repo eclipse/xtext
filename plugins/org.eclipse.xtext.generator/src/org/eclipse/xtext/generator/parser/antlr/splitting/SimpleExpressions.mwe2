@@ -8,7 +8,7 @@ import org.eclipse.xtext.ui.generator.*
 var grammarURI = "classpath:/org/eclipse/xtext/generator/parser/antlr/splitting/SimpleExpressions.xtext"
 var file.extensions = "simpleExpressions"
 var projectName = "org.eclipse.xtext.generator"
-var runtimeProject = "../../plugins/${projectName}"
+var runtimeProject = "../${projectName}"
 
 Workflow {
 	
@@ -43,12 +43,10 @@ Workflow {
 				fileExtensions = file.extensions
 			}
 				
-			// the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/ -->
-			fragment = AntlrDelegatingFragment {}
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {}
 			
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
-                composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
             }
             
 			// formatter API 

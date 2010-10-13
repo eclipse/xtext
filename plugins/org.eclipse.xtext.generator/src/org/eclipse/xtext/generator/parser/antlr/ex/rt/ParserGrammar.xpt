@@ -84,12 +84,6 @@ import «gaFQName()»;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("«helper.getParserGrammarFileName(this).asPath()».tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "«allParserRules().first().name»";	
    	} 
@@ -261,10 +255,10 @@ finally {
 «ENDDEFINE»
 
 «DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR EnumLiteralDeclaration-»
-    «grammar.getKeywordRuleName(literal.value)»
+    «localVar()»=«grammar.getKeywordRuleName(literal.value)»
 	{
         $current = grammarAccess.«grammarElementAccess(this)».getEnumLiteral().getInstance();
-        «EXPAND createLeafNode» 
+        «EXPAND createLeafNode(localVar())» 
     }
 «ENDDEFINE»
 
@@ -317,7 +311,7 @@ finally {
 	kw=«grammar.getKeywordRuleName(value)» 
     {
         $current.merge(kw);
-        «EXPAND createLeafNode» 
+        «EXPAND createLeafNode("kw")» 
     }
 «ENDDEFINE»
 
@@ -338,7 +332,7 @@ finally {
 «ENDIF-»
 «IF TerminalRule.isInstance(rule)»
     { 
-    «EXPAND createLeafNode» 
+    «EXPAND createLeafNode(localVar())» 
     }
 «ENDIF-»
 «ENDDEFINE»
@@ -421,9 +415,9 @@ finally {
 «ENDDEFINE»
 
 «DEFINE crossrefEbnf(Grammar grammar, CrossReference ref) FOR TerminalRule-»
-	«ruleName()»
+	«ref.containingAssignment().localVar()»=«ruleName()»
 	{
-		«EXPAND createLeafNode FOR ref» 
+		«EXPAND createLeafNode(ref.containingAssignment().localVar()) FOR ref» 
 	}
 «ENDDEFINE»
 
@@ -523,7 +517,7 @@ finally {
 «DEFINE assignmentEbnf(Assignment assignment, RuleCall call) FOR TerminalRule-»
 		«assignment.localVar(call)»=«ruleName()»
 		{
-			«EXPAND createLeafNode FOR call» 
+			«EXPAND createLeafNode(assignment.localVar(call)) FOR call» 
 		}
 		{
 	        if ($current==null) {
@@ -591,9 +585,13 @@ finally {
 «ENDDEFINE»
 
 «DEFINE ebnf2(Grammar grammar, AntlrOptions options) FOR Keyword»
-	«grammar.getKeywordRuleName(value)» 
+	«IF !isAssigned()»«localVar()»=«ENDIF»«grammar.getKeywordRuleName(value)» 
     {
-        «EXPAND createLeafNode» 
+    	«IF !isAssigned()-»
+    	«EXPAND createLeafNode(localVar())»
+    	«ELSE-»
+        «EXPAND createLeafNode(containingAssignment().localVar(this))»
+        «ENDIF-»  
     }
 «ENDDEFINE»
 
@@ -608,7 +606,7 @@ finally {
         currentNode=«EXPAND createCompositeNode» 
     }
 «IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)rule) && !EnumRule.isInstance(rule))-»
-    «localVar()»=«ENDIF-»«ENDIF-»
+    «localVar()»=«ENDIF-»«ENDIF-»«IF TerminalRule.isInstance(rule)-»«localVar()»=«ENDIF-»
 «rule.ruleName()-»
 «IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
     {
@@ -620,7 +618,7 @@ finally {
 «ENDIF-»
 «IF TerminalRule.isInstance(rule)»
     { 
-    «EXPAND createLeafNode» 
+    «EXPAND createLeafNode(localVar())» 
     }
 «ENDIF-»
 «ENDDEFINE»
@@ -640,8 +638,8 @@ ENDDEFINE»
     currentNode = newNode;«
 ENDDEFINE»
 
-«DEFINE createLeafNode FOR EObject
-    »createLeafNode(grammarAccess.«
+«DEFINE createLeafNode(String token) FOR EObject
+    »createLeafNode(«token», grammarAccess.«
     grammarElementAccess(this)
     », «
     IF isAssigned()
