@@ -67,7 +67,6 @@ public class TypesService implements ITypeConformanceComputer<JvmTypeReference>{
 		return null;
 	}
 
-
 	public JvmTypeReference getCommonType(List<JvmTypeReference> returnTypes) {
 		return conformanceComputer.getCommonSuperType(returnTypes);
 	}
