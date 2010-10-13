@@ -11,6 +11,7 @@ package org.eclipse.xtext.scoping;
 import static com.google.common.collect.Iterables.*;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -29,6 +30,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 
 /**
  * This class contains static utility functions to create and work on {@link IScope} and {@link IScopedElement}
@@ -182,5 +184,13 @@ public class Scopes {
 			}
 		}
 		return Iterables.filter(result.values(), Predicates.notNull());
+	}
+
+	public static Map<String,IEObjectDescription> scopeToMap(IScope scope) {
+		return Maps.uniqueIndex(scope.getAllContents(),new Function<IEObjectDescription, String>() {
+			public String apply(IEObjectDescription from) {
+				return from.getName();
+			}
+		});
 	}
 }
