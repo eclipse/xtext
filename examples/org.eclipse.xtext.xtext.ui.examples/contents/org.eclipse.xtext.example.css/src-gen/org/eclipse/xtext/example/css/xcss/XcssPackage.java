@@ -249,6 +249,34 @@ public interface XcssPackage extends EPackage
   int FILTER_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.XSimpleFeatureCallImpl <em>XSimple Feature Call</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.example.css.xcss.impl.XSimpleFeatureCallImpl
+   * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getXSimpleFeatureCall()
+   * @generated
+   */
+  int XSIMPLE_FEATURE_CALL = 6;
+
+  /**
+   * The feature id for the '<em><b>Feature</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XSIMPLE_FEATURE_CALL__FEATURE = 0;
+
+  /**
+   * The number of structural features of the '<em>XSimple Feature Call</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XSIMPLE_FEATURE_CALL_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.FontLiteralImpl <em>Font Literal</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -256,7 +284,7 @@ public interface XcssPackage extends EPackage
    * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getFontLiteral()
    * @generated
    */
-  int FONT_LITERAL = 6;
+  int FONT_LITERAL = 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -311,7 +339,7 @@ public interface XcssPackage extends EPackage
    * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getColorLiteral()
    * @generated
    */
-  int COLOR_LITERAL = 7;
+  int COLOR_LITERAL = 8;
 
   /**
    * The number of structural features of the '<em>Color Literal</em>' class.
@@ -330,7 +358,7 @@ public interface XcssPackage extends EPackage
    * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getColorConstant()
    * @generated
    */
-  int COLOR_CONSTANT = 8;
+  int COLOR_CONSTANT = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -358,7 +386,7 @@ public interface XcssPackage extends EPackage
    * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getRGB()
    * @generated
    */
-  int RGB = 9;
+  int RGB = 10;
 
   /**
    * The feature id for the '<em><b>Color</b></em>' attribute.
@@ -386,7 +414,7 @@ public interface XcssPackage extends EPackage
    * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getSizeLiteral()
    * @generated
    */
-  int SIZE_LITERAL = 10;
+  int SIZE_LITERAL = 11;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -423,7 +451,7 @@ public interface XcssPackage extends EPackage
    * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getSetting()
    * @generated
    */
-  int SETTING = 11;
+  int SETTING = 12;
 
   /**
    * The feature id for the '<em><b>Feature Name</b></em>' attribute.
@@ -435,13 +463,13 @@ public interface XcssPackage extends EPackage
   int SETTING__FEATURE_NAME = XbasePackage.XBINARY_OPERATION__FEATURE_NAME;
 
   /**
-   * The feature id for the '<em><b>Params</b></em>' containment reference list.
+   * The feature id for the '<em><b>Arguments</b></em>' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SETTING__PARAMS = XbasePackage.XBINARY_OPERATION__PARAMS;
+  int SETTING__ARGUMENTS = XbasePackage.XBINARY_OPERATION__ARGUMENTS;
 
   /**
    * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -453,13 +481,49 @@ public interface XcssPackage extends EPackage
   int SETTING__FEATURE = XbasePackage.XBINARY_OPERATION__FEATURE;
 
   /**
+   * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SETTING__TYPE_ARGUMENTS = XbasePackage.XBINARY_OPERATION__TYPE_ARGUMENTS;
+
+  /**
+   * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SETTING__LEFT_OPERAND = XbasePackage.XBINARY_OPERATION__LEFT_OPERAND;
+
+  /**
+   * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SETTING__RIGHT_OPERAND = XbasePackage.XBINARY_OPERATION__RIGHT_OPERAND;
+
+  /**
+   * The feature id for the '<em><b>Params</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SETTING__PARAMS = XbasePackage.XBINARY_OPERATION_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Setting</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SETTING_FEATURE_COUNT = XbasePackage.XBINARY_OPERATION_FEATURE_COUNT + 0;
+  int SETTING_FEATURE_COUNT = XbasePackage.XBINARY_OPERATION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.SizeUnit <em>Size Unit</em>}' enum.
@@ -469,7 +533,7 @@ public interface XcssPackage extends EPackage
    * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getSizeUnit()
    * @generated
    */
-  int SIZE_UNIT = 12;
+  int SIZE_UNIT = 13;
 
 
   /**
@@ -597,6 +661,27 @@ public interface XcssPackage extends EPackage
    * @generated
    */
   EReference getFilter_Condition();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.XSimpleFeatureCall <em>XSimple Feature Call</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>XSimple Feature Call</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.XSimpleFeatureCall
+   * @generated
+   */
+  EClass getXSimpleFeatureCall();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.example.css.xcss.XSimpleFeatureCall#getFeature <em>Feature</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Feature</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.XSimpleFeatureCall#getFeature()
+   * @see #getXSimpleFeatureCall()
+   * @generated
+   */
+  EReference getXSimpleFeatureCall_Feature();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.FontLiteral <em>Font Literal</em>}'.
@@ -747,6 +832,17 @@ public interface XcssPackage extends EPackage
   EClass getSetting();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.css.xcss.Setting#getParams <em>Params</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Params</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.Setting#getParams()
+   * @see #getSetting()
+   * @generated
+   */
+  EReference getSetting_Params();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.example.css.xcss.SizeUnit <em>Size Unit</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -888,6 +984,24 @@ public interface XcssPackage extends EPackage
     EReference FILTER__CONDITION = eINSTANCE.getFilter_Condition();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.XSimpleFeatureCallImpl <em>XSimple Feature Call</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.example.css.xcss.impl.XSimpleFeatureCallImpl
+     * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getXSimpleFeatureCall()
+     * @generated
+     */
+    EClass XSIMPLE_FEATURE_CALL = eINSTANCE.getXSimpleFeatureCall();
+
+    /**
+     * The meta object literal for the '<em><b>Feature</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference XSIMPLE_FEATURE_CALL__FEATURE = eINSTANCE.getXSimpleFeatureCall_Feature();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.FontLiteralImpl <em>Font Literal</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1010,6 +1124,14 @@ public interface XcssPackage extends EPackage
      * @generated
      */
     EClass SETTING = eINSTANCE.getSetting();
+
+    /**
+     * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SETTING__PARAMS = eINSTANCE.getSetting_Params();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.SizeUnit <em>Size Unit</em>}' enum.

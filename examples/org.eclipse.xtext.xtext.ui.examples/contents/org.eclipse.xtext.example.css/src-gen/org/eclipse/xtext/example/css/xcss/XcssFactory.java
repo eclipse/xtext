@@ -80,6 +80,15 @@ public interface XcssFactory extends EFactory
   Filter createFilter();
 
   /**
+   * Returns a new object of class '<em>XSimple Feature Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>XSimple Feature Call</em>'.
+   * @generated
+   */
+  XSimpleFeatureCall createXSimpleFeatureCall();
+
+  /**
    * Returns a new object of class '<em>Font Literal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

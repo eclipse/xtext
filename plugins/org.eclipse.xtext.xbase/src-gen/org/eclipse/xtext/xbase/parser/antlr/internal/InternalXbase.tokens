@@ -41,7 +41,7 @@ RULE_SL_COMMENT=8
 'true'=52
 'false'=51
 '&'=62
-','=33
+','=32
 '&&'=14
 'while'=46
 '/'=28
@@ -52,7 +52,7 @@ RULE_SL_COMMENT=8
 '!'=30
 'if'=36
 '+='=12
-'('=32
+'('=33
 'switch'=38
 'extends'=61
 'class'=54

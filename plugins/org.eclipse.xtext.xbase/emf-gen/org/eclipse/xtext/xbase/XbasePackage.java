@@ -291,14 +291,14 @@ public interface XbasePackage extends EPackage
 	int XVARIABLE_DECLARATION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl <em>XAbstract Feature Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.impl.XFeatureCallImpl
-	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXFeatureCall()
+	 * @see org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAbstractFeatureCall()
 	 * @generated
 	 */
-	int XFEATURE_CALL = 6;
+	int XABSTRACT_FEATURE_CALL = 6;
 
 	/**
 	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
@@ -307,16 +307,16 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL__FEATURE_NAME = XEXPRESSION_FEATURE_COUNT + 0;
+	int XABSTRACT_FEATURE_CALL__FEATURE_NAME = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL__PARAMS = XEXPRESSION_FEATURE_COUNT + 1;
+	int XABSTRACT_FEATURE_CALL__ARGUMENTS = XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -325,16 +325,25 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL__FEATURE = XEXPRESSION_FEATURE_COUNT + 2;
+	int XABSTRACT_FEATURE_CALL__FEATURE = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>XFeature Call</em>' class.
+	 * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+	int XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>XAbstract Feature Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XABSTRACT_FEATURE_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
@@ -353,16 +362,16 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XMEMBER_FEATURE_CALL__FEATURE_NAME = XFEATURE_CALL__FEATURE_NAME;
+	int XMEMBER_FEATURE_CALL__FEATURE_NAME = XABSTRACT_FEATURE_CALL__FEATURE_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XMEMBER_FEATURE_CALL__PARAMS = XFEATURE_CALL__PARAMS;
+	int XMEMBER_FEATURE_CALL__ARGUMENTS = XABSTRACT_FEATURE_CALL__ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -371,7 +380,34 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XMEMBER_FEATURE_CALL__FEATURE = XFEATURE_CALL__FEATURE;
+	int XMEMBER_FEATURE_CALL__FEATURE = XABSTRACT_FEATURE_CALL__FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Member Call Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Member Call Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>XMember Feature Call</em>' class.
@@ -380,17 +416,17 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XFEATURE_CALL_FEATURE_COUNT + 0;
+	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XSimpleFeatureCallImpl <em>XSimple Feature Call</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.impl.XSimpleFeatureCallImpl
-	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXSimpleFeatureCall()
+	 * @see org.eclipse.xtext.xbase.impl.XFeatureCallImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXFeatureCall()
 	 * @generated
 	 */
-	int XSIMPLE_FEATURE_CALL = 8;
+	int XFEATURE_CALL = 8;
 
 	/**
 	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
@@ -399,16 +435,16 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XSIMPLE_FEATURE_CALL__FEATURE_NAME = XFEATURE_CALL__FEATURE_NAME;
+	int XFEATURE_CALL__FEATURE_NAME = XABSTRACT_FEATURE_CALL__FEATURE_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XSIMPLE_FEATURE_CALL__PARAMS = XFEATURE_CALL__PARAMS;
+	int XFEATURE_CALL__ARGUMENTS = XABSTRACT_FEATURE_CALL__ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -417,16 +453,34 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XSIMPLE_FEATURE_CALL__FEATURE = XFEATURE_CALL__FEATURE;
+	int XFEATURE_CALL__FEATURE = XABSTRACT_FEATURE_CALL__FEATURE;
 
 	/**
-	 * The number of structural features of the '<em>XSimple Feature Call</em>' class.
+	 * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XSIMPLE_FEATURE_CALL_FEATURE_COUNT = XFEATURE_CALL_FEATURE_COUNT + 0;
+	int XFEATURE_CALL__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Feature Call Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__FEATURE_CALL_ARGUMENTS = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>XFeature Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -448,13 +502,13 @@ public interface XbasePackage extends EPackage
 	int XCONSTRUCTOR_CALL__TYPE = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCONSTRUCTOR_CALL__PARAMS = XEXPRESSION_FEATURE_COUNT + 1;
+	int XCONSTRUCTOR_CALL__ARGUMENTS = XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>XConstructor Call</em>' class.
@@ -579,13 +633,13 @@ public interface XbasePackage extends EPackage
 	int XCLOSURE = 14;
 
 	/**
-	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Formal Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCLOSURE__PARAMS = XEXPRESSION_FEATURE_COUNT + 0;
+	int XCLOSURE__FORMAL_PARAMETERS = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -659,16 +713,16 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XBINARY_OPERATION__FEATURE_NAME = XMEMBER_FEATURE_CALL__FEATURE_NAME;
+	int XBINARY_OPERATION__FEATURE_NAME = XABSTRACT_FEATURE_CALL__FEATURE_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XBINARY_OPERATION__PARAMS = XMEMBER_FEATURE_CALL__PARAMS;
+	int XBINARY_OPERATION__ARGUMENTS = XABSTRACT_FEATURE_CALL__ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -677,7 +731,34 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XBINARY_OPERATION__FEATURE = XMEMBER_FEATURE_CALL__FEATURE;
+	int XBINARY_OPERATION__FEATURE = XABSTRACT_FEATURE_CALL__FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__LEFT_OPERAND = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Right Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XBINARY_OPERATION__RIGHT_OPERAND = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>XBinary Operation</em>' class.
@@ -686,7 +767,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XBINARY_OPERATION_FEATURE_COUNT = XMEMBER_FEATURE_CALL_FEATURE_COUNT + 0;
+	int XBINARY_OPERATION_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XUnaryOperationImpl <em>XUnary Operation</em>}' class.
@@ -705,16 +786,16 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XUNARY_OPERATION__FEATURE_NAME = XMEMBER_FEATURE_CALL__FEATURE_NAME;
+	int XUNARY_OPERATION__FEATURE_NAME = XABSTRACT_FEATURE_CALL__FEATURE_NAME;
 
 	/**
-	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XUNARY_OPERATION__PARAMS = XMEMBER_FEATURE_CALL__PARAMS;
+	int XUNARY_OPERATION__ARGUMENTS = XABSTRACT_FEATURE_CALL__ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Feature</b></em>' reference.
@@ -723,7 +804,25 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XUNARY_OPERATION__FEATURE = XMEMBER_FEATURE_CALL__FEATURE;
+	int XUNARY_OPERATION__FEATURE = XABSTRACT_FEATURE_CALL__FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XUNARY_OPERATION__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XUNARY_OPERATION__OPERAND = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>XUnary Operation</em>' class.
@@ -732,7 +831,7 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XUNARY_OPERATION_FEATURE_COUNT = XMEMBER_FEATURE_CALL_FEATURE_COUNT + 0;
+	int XUNARY_OPERATION_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XForLoopExpressionImpl <em>XFor Loop Expression</em>}' class.
@@ -1272,47 +1371,58 @@ public interface XbasePackage extends EPackage
 	EReference getXVariableDeclaration_Right();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XFeatureCall <em>XFeature Call</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall <em>XAbstract Feature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XFeature Call</em>'.
-	 * @see org.eclipse.xtext.xbase.XFeatureCall
+	 * @return the meta object for class '<em>XAbstract Feature Call</em>'.
+	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall
 	 * @generated
 	 */
-	EClass getXFeatureCall();
+	EClass getXAbstractFeatureCall();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFeatureCall#getFeatureName <em>Feature Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getFeatureName <em>Feature Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Feature Name</em>'.
-	 * @see org.eclipse.xtext.xbase.XFeatureCall#getFeatureName()
-	 * @see #getXFeatureCall()
+	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#getFeatureName()
+	 * @see #getXAbstractFeatureCall()
 	 * @generated
 	 */
-	EAttribute getXFeatureCall_FeatureName();
+	EAttribute getXAbstractFeatureCall_FeatureName();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XFeatureCall#getParams <em>Params</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getArguments <em>Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Params</em>'.
-	 * @see org.eclipse.xtext.xbase.XFeatureCall#getParams()
-	 * @see #getXFeatureCall()
+	 * @return the meta object for the reference list '<em>Arguments</em>'.
+	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#getArguments()
+	 * @see #getXAbstractFeatureCall()
 	 * @generated
 	 */
-	EReference getXFeatureCall_Params();
+	EReference getXAbstractFeatureCall_Arguments();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XFeatureCall#getFeature <em>Feature</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getFeature <em>Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Feature</em>'.
-	 * @see org.eclipse.xtext.xbase.XFeatureCall#getFeature()
-	 * @see #getXFeatureCall()
+	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#getFeature()
+	 * @see #getXAbstractFeatureCall()
 	 * @generated
 	 */
-	EReference getXFeatureCall_Feature();
+	EReference getXAbstractFeatureCall_Feature();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getTypeArguments <em>Type Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Type Arguments</em>'.
+	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall#getTypeArguments()
+	 * @see #getXAbstractFeatureCall()
+	 * @generated
+	 */
+	EReference getXAbstractFeatureCall_TypeArguments();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XMemberFeatureCall <em>XMember Feature Call</em>}'.
@@ -1325,14 +1435,47 @@ public interface XbasePackage extends EPackage
 	EClass getXMemberFeatureCall();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XSimpleFeatureCall <em>XSimple Feature Call</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallTarget <em>Member Call Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XSimple Feature Call</em>'.
-	 * @see org.eclipse.xtext.xbase.XSimpleFeatureCall
+	 * @return the meta object for the containment reference '<em>Member Call Target</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallTarget()
+	 * @see #getXMemberFeatureCall()
 	 * @generated
 	 */
-	EClass getXSimpleFeatureCall();
+	EReference getXMemberFeatureCall_MemberCallTarget();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallArguments <em>Member Call Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Member Call Arguments</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallArguments()
+	 * @see #getXMemberFeatureCall()
+	 * @generated
+	 */
+	EReference getXMemberFeatureCall_MemberCallArguments();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XFeatureCall <em>XFeature Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XFeature Call</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall
+	 * @generated
+	 */
+	EClass getXFeatureCall();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XFeatureCall#getFeatureCallArguments <em>Feature Call Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Feature Call Arguments</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall#getFeatureCallArguments()
+	 * @see #getXFeatureCall()
+	 * @generated
+	 */
+	EReference getXFeatureCall_FeatureCallArguments();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XConstructorCall <em>XConstructor Call</em>}'.
@@ -1356,15 +1499,15 @@ public interface XbasePackage extends EPackage
 	EReference getXConstructorCall_Type();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XConstructorCall#getParams <em>Params</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XConstructorCall#getArguments <em>Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Params</em>'.
-	 * @see org.eclipse.xtext.xbase.XConstructorCall#getParams()
+	 * @return the meta object for the containment reference list '<em>Arguments</em>'.
+	 * @see org.eclipse.xtext.xbase.XConstructorCall#getArguments()
 	 * @see #getXConstructorCall()
 	 * @generated
 	 */
-	EReference getXConstructorCall_Params();
+	EReference getXConstructorCall_Arguments();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XBooleanLiteral <em>XBoolean Literal</em>}'.
@@ -1450,15 +1593,15 @@ public interface XbasePackage extends EPackage
 	EClass getXClosure();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XClosure#getParams <em>Params</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XClosure#getFormalParameters <em>Formal Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Params</em>'.
-	 * @see org.eclipse.xtext.xbase.XClosure#getParams()
+	 * @return the meta object for the containment reference list '<em>Formal Parameters</em>'.
+	 * @see org.eclipse.xtext.xbase.XClosure#getFormalParameters()
 	 * @see #getXClosure()
 	 * @generated
 	 */
-	EReference getXClosure_Params();
+	EReference getXClosure_FormalParameters();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XClosure#getExpression <em>Expression</em>}'.
@@ -1514,6 +1657,28 @@ public interface XbasePackage extends EPackage
 	EClass getXBinaryOperation();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XBinaryOperation#getLeftOperand <em>Left Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Left Operand</em>'.
+	 * @see org.eclipse.xtext.xbase.XBinaryOperation#getLeftOperand()
+	 * @see #getXBinaryOperation()
+	 * @generated
+	 */
+	EReference getXBinaryOperation_LeftOperand();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XBinaryOperation#getRightOperand <em>Right Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Right Operand</em>'.
+	 * @see org.eclipse.xtext.xbase.XBinaryOperation#getRightOperand()
+	 * @see #getXBinaryOperation()
+	 * @generated
+	 */
+	EReference getXBinaryOperation_RightOperand();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XUnaryOperation <em>XUnary Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1522,6 +1687,17 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EClass getXUnaryOperation();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XUnaryOperation#getOperand <em>Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Operand</em>'.
+	 * @see org.eclipse.xtext.xbase.XUnaryOperation#getOperand()
+	 * @see #getXUnaryOperation()
+	 * @generated
+	 */
+	EReference getXUnaryOperation_Operand();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XForLoopExpression <em>XFor Loop Expression</em>}'.
@@ -1955,14 +2131,14 @@ public interface XbasePackage extends EPackage
 		EReference XVARIABLE_DECLARATION__RIGHT = eINSTANCE.getXVariableDeclaration_Right();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl <em>XAbstract Feature Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.impl.XFeatureCallImpl
-		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXFeatureCall()
+		 * @see org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAbstractFeatureCall()
 		 * @generated
 		 */
-		EClass XFEATURE_CALL = eINSTANCE.getXFeatureCall();
+		EClass XABSTRACT_FEATURE_CALL = eINSTANCE.getXAbstractFeatureCall();
 
 		/**
 		 * The meta object literal for the '<em><b>Feature Name</b></em>' attribute feature.
@@ -1970,15 +2146,15 @@ public interface XbasePackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute XFEATURE_CALL__FEATURE_NAME = eINSTANCE.getXFeatureCall_FeatureName();
+		EAttribute XABSTRACT_FEATURE_CALL__FEATURE_NAME = eINSTANCE.getXAbstractFeatureCall_FeatureName();
 
 		/**
-		 * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Arguments</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XFEATURE_CALL__PARAMS = eINSTANCE.getXFeatureCall_Params();
+		EReference XABSTRACT_FEATURE_CALL__ARGUMENTS = eINSTANCE.getXAbstractFeatureCall_Arguments();
 
 		/**
 		 * The meta object literal for the '<em><b>Feature</b></em>' reference feature.
@@ -1986,7 +2162,15 @@ public interface XbasePackage extends EPackage
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XFEATURE_CALL__FEATURE = eINSTANCE.getXFeatureCall_Feature();
+		EReference XABSTRACT_FEATURE_CALL__FEATURE = eINSTANCE.getXAbstractFeatureCall_Feature();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS = eINSTANCE.getXAbstractFeatureCall_TypeArguments();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl <em>XMember Feature Call</em>}' class.
@@ -1999,14 +2183,38 @@ public interface XbasePackage extends EPackage
 		EClass XMEMBER_FEATURE_CALL = eINSTANCE.getXMemberFeatureCall();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XSimpleFeatureCallImpl <em>XSimple Feature Call</em>}' class.
+		 * The meta object literal for the '<em><b>Member Call Target</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.impl.XSimpleFeatureCallImpl
-		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXSimpleFeatureCall()
 		 * @generated
 		 */
-		EClass XSIMPLE_FEATURE_CALL = eINSTANCE.getXSimpleFeatureCall();
+		EReference XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET = eINSTANCE.getXMemberFeatureCall_MemberCallTarget();
+
+		/**
+		 * The meta object literal for the '<em><b>Member Call Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS = eINSTANCE.getXMemberFeatureCall_MemberCallArguments();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XFeatureCallImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXFeatureCall()
+		 * @generated
+		 */
+		EClass XFEATURE_CALL = eINSTANCE.getXFeatureCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Feature Call Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XFEATURE_CALL__FEATURE_CALL_ARGUMENTS = eINSTANCE.getXFeatureCall_FeatureCallArguments();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -2027,12 +2235,12 @@ public interface XbasePackage extends EPackage
 		EReference XCONSTRUCTOR_CALL__TYPE = eINSTANCE.getXConstructorCall_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XCONSTRUCTOR_CALL__PARAMS = eINSTANCE.getXConstructorCall_Params();
+		EReference XCONSTRUCTOR_CALL__ARGUMENTS = eINSTANCE.getXConstructorCall_Arguments();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl <em>XBoolean Literal</em>}' class.
@@ -2109,12 +2317,12 @@ public interface XbasePackage extends EPackage
 		EClass XCLOSURE = eINSTANCE.getXClosure();
 
 		/**
-		 * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Formal Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XCLOSURE__PARAMS = eINSTANCE.getXClosure_Params();
+		EReference XCLOSURE__FORMAL_PARAMETERS = eINSTANCE.getXClosure_FormalParameters();
 
 		/**
 		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
@@ -2161,6 +2369,22 @@ public interface XbasePackage extends EPackage
 		EClass XBINARY_OPERATION = eINSTANCE.getXBinaryOperation();
 
 		/**
+		 * The meta object literal for the '<em><b>Left Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XBINARY_OPERATION__LEFT_OPERAND = eINSTANCE.getXBinaryOperation_LeftOperand();
+
+		/**
+		 * The meta object literal for the '<em><b>Right Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XBINARY_OPERATION__RIGHT_OPERAND = eINSTANCE.getXBinaryOperation_RightOperand();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XUnaryOperationImpl <em>XUnary Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2169,6 +2393,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EClass XUNARY_OPERATION = eINSTANCE.getXUnaryOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XUNARY_OPERATION__OPERAND = eINSTANCE.getXUnaryOperation_Operand();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XForLoopExpressionImpl <em>XFor Loop Expression</em>}' class.

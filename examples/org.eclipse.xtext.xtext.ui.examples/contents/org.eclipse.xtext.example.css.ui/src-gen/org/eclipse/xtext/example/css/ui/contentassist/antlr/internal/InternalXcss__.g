@@ -39,9 +39,9 @@ T39 : ';' ;
 T40 : '#' ;
 T41 : 'instanceof' ;
 T42 : '.' ;
-T43 : '(' ;
-T44 : ')' ;
-T45 : ',' ;
+T43 : ',' ;
+T44 : '(' ;
+T45 : ')' ;
 T46 : '|' ;
 T47 : 'if' ;
 T48 : 'else' ;
@@ -69,25 +69,25 @@ T69 : 'I' ;
 T70 : 'B' ;
 T71 : 'true' ;
 
-// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 11654
+// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 12156
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 11656
+// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 12158
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 11658
+// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 12160
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 11660
+// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 12162
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 11662
+// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 12164
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 11664
+// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 12166
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 11666
+// $ANTLR src "../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g" 12168
 RULE_ANY_OTHER : .;
 
 

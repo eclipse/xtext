@@ -33,7 +33,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#getParams <em>Params</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#getFormalParameters <em>Formal Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XClosureImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -43,14 +43,14 @@ import org.eclipse.xtext.xbase.XbasePackage;
 public class XClosureImpl extends XExpressionImpl implements XClosure
 {
 	/**
-	 * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
+	 * The cached value of the '{@link #getFormalParameters() <em>Formal Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParams()
+	 * @see #getFormalParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<JvmFormalParameter> params;
+	protected EList<JvmFormalParameter> formalParameters;
 
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -88,13 +88,13 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<JvmFormalParameter> getParams()
+	public EList<JvmFormalParameter> getFormalParameters()
 	{
-		if (params == null)
+		if (formalParameters == null)
 		{
-			params = new EObjectContainmentEList<JvmFormalParameter>(JvmFormalParameter.class, this, XbasePackage.XCLOSURE__PARAMS);
+			formalParameters = new EObjectContainmentEList<JvmFormalParameter>(JvmFormalParameter.class, this, XbasePackage.XCLOSURE__FORMAL_PARAMETERS);
 		}
-		return params;
+		return formalParameters;
 	}
 
 	/**
@@ -155,8 +155,8 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XCLOSURE__PARAMS:
-				return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
+			case XbasePackage.XCLOSURE__FORMAL_PARAMETERS:
+				return ((InternalEList<?>)getFormalParameters()).basicRemove(otherEnd, msgs);
 			case XbasePackage.XCLOSURE__EXPRESSION:
 				return basicSetExpression(null, msgs);
 		}
@@ -173,8 +173,8 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XCLOSURE__PARAMS:
-				return getParams();
+			case XbasePackage.XCLOSURE__FORMAL_PARAMETERS:
+				return getFormalParameters();
 			case XbasePackage.XCLOSURE__EXPRESSION:
 				return getExpression();
 		}
@@ -192,9 +192,9 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XCLOSURE__PARAMS:
-				getParams().clear();
-				getParams().addAll((Collection<? extends JvmFormalParameter>)newValue);
+			case XbasePackage.XCLOSURE__FORMAL_PARAMETERS:
+				getFormalParameters().clear();
+				getFormalParameters().addAll((Collection<? extends JvmFormalParameter>)newValue);
 				return;
 			case XbasePackage.XCLOSURE__EXPRESSION:
 				setExpression((XExpression)newValue);
@@ -213,8 +213,8 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XCLOSURE__PARAMS:
-				getParams().clear();
+			case XbasePackage.XCLOSURE__FORMAL_PARAMETERS:
+				getFormalParameters().clear();
 				return;
 			case XbasePackage.XCLOSURE__EXPRESSION:
 				setExpression((XExpression)null);
@@ -233,8 +233,8 @@ public class XClosureImpl extends XExpressionImpl implements XClosure
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XCLOSURE__PARAMS:
-				return params != null && !params.isEmpty();
+			case XbasePackage.XCLOSURE__FORMAL_PARAMETERS:
+				return formalParameters != null && !formalParameters.isEmpty();
 			case XbasePackage.XCLOSURE__EXPRESSION:
 				return expression != null;
 		}

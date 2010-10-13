@@ -108,9 +108,9 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 				return createXVariableDeclarationAdapter();
 			}
 			@Override
-			public Adapter caseXFeatureCall(XFeatureCall object)
+			public Adapter caseXAbstractFeatureCall(XAbstractFeatureCall object)
 			{
-				return createXFeatureCallAdapter();
+				return createXAbstractFeatureCallAdapter();
 			}
 			@Override
 			public Adapter caseXMemberFeatureCall(XMemberFeatureCall object)
@@ -118,9 +118,9 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 				return createXMemberFeatureCallAdapter();
 			}
 			@Override
-			public Adapter caseXSimpleFeatureCall(XSimpleFeatureCall object)
+			public Adapter caseXFeatureCall(XFeatureCall object)
 			{
-				return createXSimpleFeatureCallAdapter();
+				return createXFeatureCallAdapter();
 			}
 			@Override
 			public Adapter caseXConstructorCall(XConstructorCall object)
@@ -325,16 +325,16 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XFeatureCall <em>XFeature Call</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall <em>XAbstract Feature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xbase.XFeatureCall
+	 * @see org.eclipse.xtext.xbase.XAbstractFeatureCall
 	 * @generated
 	 */
-	public Adapter createXFeatureCallAdapter()
+	public Adapter createXAbstractFeatureCallAdapter()
 	{
 		return null;
 	}
@@ -355,16 +355,16 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XSimpleFeatureCall <em>XSimple Feature Call</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XFeatureCall <em>XFeature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xbase.XSimpleFeatureCall
+	 * @see org.eclipse.xtext.xbase.XFeatureCall
 	 * @generated
 	 */
-	public Adapter createXSimpleFeatureCallAdapter()
+	public Adapter createXFeatureCallAdapter()
 	{
 		return null;
 	}

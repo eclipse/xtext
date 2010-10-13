@@ -17,7 +17,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xbase.XClosure#getParams <em>Params</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XClosure#getFormalParameters <em>Formal Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XClosure#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -29,20 +29,20 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 public interface XClosure extends XExpression
 {
 	/**
-	 * Returns the value of the '<em><b>Params</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Formal Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmFormalParameter}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Params</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Formal Parameters</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Params</em>' containment reference list.
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getXClosure_Params()
+	 * @return the value of the '<em>Formal Parameters</em>' containment reference list.
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXClosure_FormalParameters()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<JvmFormalParameter> getParams();
+	EList<JvmFormalParameter> getFormalParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.

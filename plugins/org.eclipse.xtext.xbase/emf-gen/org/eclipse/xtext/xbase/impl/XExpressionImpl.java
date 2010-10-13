@@ -9,8 +9,6 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.xtext.common.types.JvmTypeReference;
-
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 
@@ -44,18 +42,6 @@ public abstract class XExpressionImpl extends MinimalEObjectImpl.Container imple
 	protected EClass eStaticClass()
 	{
 		return XbasePackage.Literals.XEXPRESSION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmTypeReference getDerivedReturnType()
-	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 } //XExpressionImpl

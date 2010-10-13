@@ -12,9 +12,11 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.JvmTypes;
-import org.eclipse.xtext.typing.AbstractTypeProvider;
+import org.eclipse.xtext.common.types.util.JvmTypesTypeProvider;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -22,7 +24,6 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XNullLiteral;
@@ -37,7 +38,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge
  */
-public class ExpressionsTypeResolver extends AbstractTypeProvider<JvmTypeReference> {
+public class XbaseTypeProvider extends JvmTypesTypeProvider {
 
 	public static final String JAVA_LANG_CLASS = Class.class.getName();
 	public static final String INTEGER_TYPE_NAME = Long.class.getName();
@@ -48,23 +49,19 @@ public class ExpressionsTypeResolver extends AbstractTypeProvider<JvmTypeReferen
 
 	@Inject
 	private TypesService typesService;
-	
+
 	@Inject
 	private JvmTypes jvmTypes;
 
 	@Inject
-	private ICallableFeatureFacade callableFeatureFacade;
-	
-	@Inject
 	private TypeConverter typeConverter;
-	
-	
+
 	@Override
 	protected JvmTypeReference dispatch_type(EObject expression, JvmTypeReference expected) {
 		JvmTypeReference dispatch_type = super.dispatch_type(expression, expected);
-		return typeConverter.convert(dispatch_type,expected, expression);
+		return typeConverter.convert(dispatch_type, expected, expression);
 	}
-	
+
 	protected JvmTypeReference _type(XIntLiteral object, JvmTypeReference expected) {
 		return typesService.getTypeForName(INTEGER_TYPE_NAME, object);
 	}
@@ -92,8 +89,9 @@ public class ExpressionsTypeResolver extends AbstractTypeProvider<JvmTypeReferen
 		return typesService.getTypeForName(VOID_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _type(XFeatureCall object, JvmTypeReference expected) {
-		return callableFeatureFacade.getReturnType(object.getFeature());
+	protected JvmTypeReference _type(XAbstractFeatureCall object, JvmTypeReference expected) {
+		JvmIdentifyableElement eobject = object.getFeature();
+		return internalGetType(eobject, expected);
 	}
 
 	protected JvmTypeReference _type(XConstructorCall object, JvmTypeReference expected) {
@@ -115,7 +113,7 @@ public class ExpressionsTypeResolver extends AbstractTypeProvider<JvmTypeReferen
 	protected JvmTypeReference _type(XClosure object, JvmTypeReference expected) {
 		JvmTypeReference returnType = internalGetType(object.getExpression(), expected);
 		List<JvmTypeReference> parameterTypes = Lists.newArrayList();
-		EList<JvmFormalParameter> params = object.getParams();
+		EList<JvmFormalParameter> params = object.getFormalParameters();
 		for (JvmFormalParameter param : params) {
 			if (param.getParameterType() != null) {
 				parameterTypes.add(param.getParameterType());

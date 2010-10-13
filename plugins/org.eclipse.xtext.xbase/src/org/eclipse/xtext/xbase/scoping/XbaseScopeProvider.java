@@ -30,6 +30,7 @@ import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
@@ -63,13 +64,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected boolean isFeatureScope(EReference reference) {
-		return reference == XbasePackage.Literals.XFEATURE_CALL__FEATURE;
+		return reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}
 
 	protected IScope getFeatureScope(EObject context, EReference reference) {
 		if (context instanceof XMemberFeatureCall) {
 			final XMemberFeatureCall call = (XMemberFeatureCall) context;
-			XExpression target = call.getParams().get(0);
+			XExpression target = call.getArguments().get(0);
 			JvmTypeReference jvmTypeReference = typeResolver.getType(target, null, null);
 			IScope parent = getAllFeatures(jvmTypeReference.getType(), IScope.NULLSCOPE, createCallableFeaturePredicate(call));
 			return parent;
@@ -81,13 +82,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return IScope.NULLSCOPE;
 	}
 
-	protected Predicate<EObject> createCallableFeaturePredicate(final XFeatureCall call) {
+	protected Predicate<EObject> createCallableFeaturePredicate(final XAbstractFeatureCall call) {
 		return new Predicate<EObject>() {
 			public boolean apply(EObject input) {
-				if (input instanceof JvmField && call.getParams().size() > 1) {
+				if (input instanceof JvmField && call.getArguments().size() > 1) {
 					return false;
 				} else if (input instanceof JvmOperation) {
-					if (call.getParams().size() - 1 != ((JvmOperation) input).getParameters().size())
+					if (call.getArguments().size() - 1 != ((JvmOperation) input).getParameters().size())
 						return false;
 				}
 				return true;
@@ -133,7 +134,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected IScope localVarScopeForClosure(IScope parentScope, XClosure closure, Predicate<EObject> featurePredicate) {
-		EList<JvmFormalParameter> params = closure.getParams();
+		EList<JvmFormalParameter> params = closure.getFormalParameters();
 		Map<String, IEObjectDescription> descriptions = Maps.newHashMap();
 		for (JvmFormalParameter p : params) {
 			if (featurePredicate.apply(p)) {

@@ -34,7 +34,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getParams <em>Params</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getArguments <em>Arguments</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,14 +53,14 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	protected JvmTypeReference type;
 
 	/**
-	 * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
+	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParams()
+	 * @see #getArguments()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<XExpression> params;
+	protected EList<XExpression> arguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -136,13 +136,13 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<XExpression> getParams()
+	public EList<XExpression> getArguments()
 	{
-		if (params == null)
+		if (arguments == null)
 		{
-			params = new EObjectContainmentEList<XExpression>(XExpression.class, this, XbasePackage.XCONSTRUCTOR_CALL__PARAMS);
+			arguments = new EObjectContainmentEList<XExpression>(XExpression.class, this, XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS);
 		}
-		return params;
+		return arguments;
 	}
 
 	/**
@@ -157,8 +157,8 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 		{
 			case XbasePackage.XCONSTRUCTOR_CALL__TYPE:
 				return basicSetType(null, msgs);
-			case XbasePackage.XCONSTRUCTOR_CALL__PARAMS:
-				return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
+			case XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS:
+				return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -175,8 +175,8 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 		{
 			case XbasePackage.XCONSTRUCTOR_CALL__TYPE:
 				return getType();
-			case XbasePackage.XCONSTRUCTOR_CALL__PARAMS:
-				return getParams();
+			case XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS:
+				return getArguments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -195,9 +195,9 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 			case XbasePackage.XCONSTRUCTOR_CALL__TYPE:
 				setType((JvmTypeReference)newValue);
 				return;
-			case XbasePackage.XCONSTRUCTOR_CALL__PARAMS:
-				getParams().clear();
-				getParams().addAll((Collection<? extends XExpression>)newValue);
+			case XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS:
+				getArguments().clear();
+				getArguments().addAll((Collection<? extends XExpression>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -216,8 +216,8 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 			case XbasePackage.XCONSTRUCTOR_CALL__TYPE:
 				setType((JvmTypeReference)null);
 				return;
-			case XbasePackage.XCONSTRUCTOR_CALL__PARAMS:
-				getParams().clear();
+			case XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS:
+				getArguments().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -235,8 +235,8 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 		{
 			case XbasePackage.XCONSTRUCTOR_CALL__TYPE:
 				return type != null;
-			case XbasePackage.XCONSTRUCTOR_CALL__PARAMS:
-				return params != null && !params.isEmpty();
+			case XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS:
+				return arguments != null && !arguments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

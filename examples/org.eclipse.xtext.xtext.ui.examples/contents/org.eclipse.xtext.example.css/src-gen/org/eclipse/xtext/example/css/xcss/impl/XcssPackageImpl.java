@@ -27,6 +27,7 @@ import org.eclipse.xtext.example.css.xcss.StyleRule;
 import org.eclipse.xtext.example.css.xcss.StyleSheet;
 import org.eclipse.xtext.example.css.xcss.TypeSelector;
 import org.eclipse.xtext.example.css.xcss.WildcardSelector;
+import org.eclipse.xtext.example.css.xcss.XSimpleFeatureCall;
 import org.eclipse.xtext.example.css.xcss.XcssFactory;
 import org.eclipse.xtext.example.css.xcss.XcssPackage;
 
@@ -83,6 +84,13 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * @generated
    */
   private EClass filterEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass xSimpleFeatureCallEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -325,6 +333,26 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getXSimpleFeatureCall()
+  {
+    return xSimpleFeatureCallEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getXSimpleFeatureCall_Feature()
+  {
+    return (EReference)xSimpleFeatureCallEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getFontLiteral()
   {
     return fontLiteralEClass;
@@ -465,6 +493,16 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getSetting_Params()
+  {
+    return (EReference)settingEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getSizeUnit()
   {
     return sizeUnitEEnum;
@@ -518,6 +556,9 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     filterEClass = createEClass(FILTER);
     createEReference(filterEClass, FILTER__CONDITION);
 
+    xSimpleFeatureCallEClass = createEClass(XSIMPLE_FEATURE_CALL);
+    createEReference(xSimpleFeatureCallEClass, XSIMPLE_FEATURE_CALL__FEATURE);
+
     fontLiteralEClass = createEClass(FONT_LITERAL);
     createEAttribute(fontLiteralEClass, FONT_LITERAL__NAME);
     createEAttribute(fontLiteralEClass, FONT_LITERAL__ITALIC);
@@ -537,6 +578,7 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     createEAttribute(sizeLiteralEClass, SIZE_LITERAL__UNIT);
 
     settingEClass = createEClass(SETTING);
+    createEReference(settingEClass, SETTING__PARAMS);
 
     // Create enums
     sizeUnitEEnum = createEEnum(SIZE_UNIT);
@@ -604,6 +646,9 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     initEClass(filterEClass, Filter.class, "Filter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getFilter_Condition(), theXbasePackage.getXExpression(), null, "condition", null, 0, 1, Filter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(xSimpleFeatureCallEClass, XSimpleFeatureCall.class, "XSimpleFeatureCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getXSimpleFeatureCall_Feature(), theTypesPackage.getJvmIdentifyableElement(), null, "feature", null, 0, 1, XSimpleFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(fontLiteralEClass, FontLiteral.class, "FontLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getFontLiteral_Name(), ecorePackage.getEString(), "name", null, 0, 1, FontLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getFontLiteral_Italic(), ecorePackage.getEBoolean(), "italic", null, 0, 1, FontLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -623,6 +668,7 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     initEAttribute(getSizeLiteral_Unit(), this.getSizeUnit(), "unit", null, 0, 1, SizeLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(settingEClass, Setting.class, "Setting", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSetting_Params(), ecorePackage.getEObject(), null, "params", null, 0, -1, Setting.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(sizeUnitEEnum, SizeUnit.class, "SizeUnit");

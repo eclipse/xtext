@@ -5,17 +5,67 @@
  */
 package org.eclipse.xtext.xbase;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>XMember Feature Call</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallTarget <em>Member Call Target</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallArguments <em>Member Call Arguments</em>}</li>
+ * </ul>
+ * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall()
  * @model
  * @generated
  */
-public interface XMemberFeatureCall extends XFeatureCall
+public interface XMemberFeatureCall extends XAbstractFeatureCall
 {
+	/**
+	 * Returns the value of the '<em><b>Member Call Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Member Call Target</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Member Call Target</em>' containment reference.
+	 * @see #setMemberCallTarget(XExpression)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_MemberCallTarget()
+	 * @model containment="true"
+	 * @generated
+	 */
+	XExpression getMemberCallTarget();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallTarget <em>Member Call Target</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Member Call Target</em>' containment reference.
+	 * @see #getMemberCallTarget()
+	 * @generated
+	 */
+	void setMemberCallTarget(XExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Member Call Arguments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.xbase.XExpression}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Member Call Arguments</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Member Call Arguments</em>' containment reference list.
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_MemberCallArguments()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<XExpression> getMemberCallArguments();
+
 } // XMemberFeatureCall

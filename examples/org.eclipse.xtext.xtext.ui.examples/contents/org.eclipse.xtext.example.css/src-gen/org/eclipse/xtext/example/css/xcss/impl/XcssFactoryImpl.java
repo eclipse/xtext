@@ -74,6 +74,7 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
       case XcssPackage.TYPE_SELECTOR: return createTypeSelector();
       case XcssPackage.WILDCARD_SELECTOR: return createWildcardSelector();
       case XcssPackage.FILTER: return createFilter();
+      case XcssPackage.XSIMPLE_FEATURE_CALL: return createXSimpleFeatureCall();
       case XcssPackage.FONT_LITERAL: return createFontLiteral();
       case XcssPackage.COLOR_LITERAL: return createColorLiteral();
       case XcssPackage.COLOR_CONSTANT: return createColorConstant();
@@ -183,6 +184,17 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
   {
     FilterImpl filter = new FilterImpl();
     return filter;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public XSimpleFeatureCall createXSimpleFeatureCall()
+  {
+    XSimpleFeatureCallImpl xSimpleFeatureCall = new XSimpleFeatureCallImpl();
+    return xSimpleFeatureCall;
   }
 
   /**

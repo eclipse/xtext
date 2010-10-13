@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getParams <em>Params</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getArguments <em>Arguments</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,19 +55,19 @@ public interface XConstructorCall extends XExpression
 	void setType(JvmTypeReference value);
 
 	/**
-	 * Returns the value of the '<em><b>Params</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xbase.XExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Params</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Params</em>' containment reference list.
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_Params()
+	 * @return the value of the '<em>Arguments</em>' containment reference list.
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_Arguments()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<XExpression> getParams();
+	EList<XExpression> getArguments();
 
 } // XConstructorCall

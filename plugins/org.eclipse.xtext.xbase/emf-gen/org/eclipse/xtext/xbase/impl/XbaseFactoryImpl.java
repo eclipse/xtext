@@ -72,9 +72,8 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 			case XbasePackage.XCASE_PART: return createXCasePart();
 			case XbasePackage.XBLOCK_EXPRESSION: return createXBlockExpression();
 			case XbasePackage.XVARIABLE_DECLARATION: return createXVariableDeclaration();
-			case XbasePackage.XFEATURE_CALL: return createXFeatureCall();
 			case XbasePackage.XMEMBER_FEATURE_CALL: return createXMemberFeatureCall();
-			case XbasePackage.XSIMPLE_FEATURE_CALL: return createXSimpleFeatureCall();
+			case XbasePackage.XFEATURE_CALL: return createXFeatureCall();
 			case XbasePackage.XCONSTRUCTOR_CALL: return createXConstructorCall();
 			case XbasePackage.XBOOLEAN_LITERAL: return createXBooleanLiteral();
 			case XbasePackage.XNULL_LITERAL: return createXNullLiteral();
@@ -157,20 +156,9 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XFeatureCall createXFeatureCall()
-	{
-		XFeatureCallImplCustom xFeatureCall = new XFeatureCallImplCustom();
-		return xFeatureCall;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public XMemberFeatureCall createXMemberFeatureCall()
 	{
-		XMemberFeatureCallImpl xMemberFeatureCall = new XMemberFeatureCallImpl();
+		XMemberFeatureCallImplCustom xMemberFeatureCall = new XMemberFeatureCallImplCustom();
 		return xMemberFeatureCall;
 	}
 
@@ -179,10 +167,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XSimpleFeatureCall createXSimpleFeatureCall()
+	public XFeatureCall createXFeatureCall()
 	{
-		XSimpleFeatureCallImpl xSimpleFeatureCall = new XSimpleFeatureCallImpl();
-		return xSimpleFeatureCall;
+		XFeatureCallImplCustom xFeatureCall = new XFeatureCallImplCustom();
+		return xFeatureCall;
 	}
 
 	/**
@@ -269,7 +257,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XBinaryOperation createXBinaryOperation()
 	{
-		XBinaryOperationImpl xBinaryOperation = new XBinaryOperationImpl();
+		XBinaryOperationImplCustom xBinaryOperation = new XBinaryOperationImplCustom();
 		return xBinaryOperation;
 	}
 
@@ -280,7 +268,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XUnaryOperation createXUnaryOperation()
 	{
-		XUnaryOperationImpl xUnaryOperation = new XUnaryOperationImpl();
+		XUnaryOperationImplCustom xUnaryOperation = new XUnaryOperationImplCustom();
 		return xUnaryOperation;
 	}
 

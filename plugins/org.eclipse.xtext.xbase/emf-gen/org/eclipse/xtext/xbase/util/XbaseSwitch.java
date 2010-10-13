@@ -141,11 +141,11 @@ public class XbaseSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XbasePackage.XFEATURE_CALL:
+			case XbasePackage.XABSTRACT_FEATURE_CALL:
 			{
-				XFeatureCall xFeatureCall = (XFeatureCall)theEObject;
-				T result = caseXFeatureCall(xFeatureCall);
-				if (result == null) result = caseXExpression(xFeatureCall);
+				XAbstractFeatureCall xAbstractFeatureCall = (XAbstractFeatureCall)theEObject;
+				T result = caseXAbstractFeatureCall(xAbstractFeatureCall);
+				if (result == null) result = caseXExpression(xAbstractFeatureCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -153,17 +153,17 @@ public class XbaseSwitch<T>
 			{
 				XMemberFeatureCall xMemberFeatureCall = (XMemberFeatureCall)theEObject;
 				T result = caseXMemberFeatureCall(xMemberFeatureCall);
-				if (result == null) result = caseXFeatureCall(xMemberFeatureCall);
+				if (result == null) result = caseXAbstractFeatureCall(xMemberFeatureCall);
 				if (result == null) result = caseXExpression(xMemberFeatureCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XbasePackage.XSIMPLE_FEATURE_CALL:
+			case XbasePackage.XFEATURE_CALL:
 			{
-				XSimpleFeatureCall xSimpleFeatureCall = (XSimpleFeatureCall)theEObject;
-				T result = caseXSimpleFeatureCall(xSimpleFeatureCall);
-				if (result == null) result = caseXFeatureCall(xSimpleFeatureCall);
-				if (result == null) result = caseXExpression(xSimpleFeatureCall);
+				XFeatureCall xFeatureCall = (XFeatureCall)theEObject;
+				T result = caseXFeatureCall(xFeatureCall);
+				if (result == null) result = caseXAbstractFeatureCall(xFeatureCall);
+				if (result == null) result = caseXExpression(xFeatureCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -227,8 +227,7 @@ public class XbaseSwitch<T>
 			{
 				XBinaryOperation xBinaryOperation = (XBinaryOperation)theEObject;
 				T result = caseXBinaryOperation(xBinaryOperation);
-				if (result == null) result = caseXMemberFeatureCall(xBinaryOperation);
-				if (result == null) result = caseXFeatureCall(xBinaryOperation);
+				if (result == null) result = caseXAbstractFeatureCall(xBinaryOperation);
 				if (result == null) result = caseXExpression(xBinaryOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -237,8 +236,7 @@ public class XbaseSwitch<T>
 			{
 				XUnaryOperation xUnaryOperation = (XUnaryOperation)theEObject;
 				T result = caseXUnaryOperation(xUnaryOperation);
-				if (result == null) result = caseXMemberFeatureCall(xUnaryOperation);
-				if (result == null) result = caseXFeatureCall(xUnaryOperation);
+				if (result == null) result = caseXAbstractFeatureCall(xUnaryOperation);
 				if (result == null) result = caseXExpression(xUnaryOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -417,17 +415,17 @@ public class XbaseSwitch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>XFeature Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XAbstract Feature Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>XFeature Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XAbstract Feature Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseXFeatureCall(XFeatureCall object)
+	public T caseXAbstractFeatureCall(XAbstractFeatureCall object)
 	{
 		return null;
 	}
@@ -449,17 +447,17 @@ public class XbaseSwitch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>XSimple Feature Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XFeature Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>XSimple Feature Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XFeature Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseXSimpleFeatureCall(XSimpleFeatureCall object)
+	public T caseXFeatureCall(XFeatureCall object)
 	{
 		return null;
 	}

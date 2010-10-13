@@ -7,7 +7,6 @@ package org.eclipse.xtext.xbase.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,12 +14,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -33,55 +28,23 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getFeatureName <em>Feature Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getParams <em>Params</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getFeature <em>Feature</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getFeatureCallArguments <em>Feature Call Arguments</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
+public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements XFeatureCall
 {
 	/**
-	 * The default value of the '{@link #getFeatureName() <em>Feature Name</em>}' attribute.
+	 * The cached value of the '{@link #getFeatureCallArguments() <em>Feature Call Arguments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFeatureName()
+	 * @see #getFeatureCallArguments()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String FEATURE_NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getFeatureName() <em>Feature Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFeatureName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String featureName = FEATURE_NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParams()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<XExpression> params;
-
-	/**
-	 * The cached value of the '{@link #getFeature() <em>Feature</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFeature()
-	 * @generated
-	 * @ordered
-	 */
-	protected JvmIdentifyableElement feature;
+	protected EList<XExpression> featureCallArguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -109,66 +72,13 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getFeatureName()
+	public EList<XExpression> getFeatureCallArguments()
 	{
-		return featureName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<XExpression> getParams()
-	{
-		if (params == null)
+		if (featureCallArguments == null)
 		{
-			params = new EObjectContainmentEList<XExpression>(XExpression.class, this, XbasePackage.XFEATURE_CALL__PARAMS);
+			featureCallArguments = new EObjectContainmentEList<XExpression>(XExpression.class, this, XbasePackage.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS);
 		}
-		return params;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmIdentifyableElement getFeature()
-	{
-		if (feature != null && feature.eIsProxy())
-		{
-			InternalEObject oldFeature = (InternalEObject)feature;
-			feature = (JvmIdentifyableElement)eResolveProxy(oldFeature);
-			if (feature != oldFeature)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XbasePackage.XFEATURE_CALL__FEATURE, oldFeature, feature));
-			}
-		}
-		return feature;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmIdentifyableElement basicGetFeature()
-	{
-		return feature;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFeature(JvmIdentifyableElement newFeature)
-	{
-		JvmIdentifyableElement oldFeature = feature;
-		feature = newFeature;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XFEATURE_CALL__FEATURE, oldFeature, feature));
+		return featureCallArguments;
 	}
 
 	/**
@@ -181,8 +91,8 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XFEATURE_CALL__PARAMS:
-				return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
+			case XbasePackage.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS:
+				return ((InternalEList<?>)getFeatureCallArguments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -197,13 +107,8 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XFEATURE_CALL__FEATURE_NAME:
-				return getFeatureName();
-			case XbasePackage.XFEATURE_CALL__PARAMS:
-				return getParams();
-			case XbasePackage.XFEATURE_CALL__FEATURE:
-				if (resolve) return getFeature();
-				return basicGetFeature();
+			case XbasePackage.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS:
+				return getFeatureCallArguments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -219,12 +124,9 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XFEATURE_CALL__PARAMS:
-				getParams().clear();
-				getParams().addAll((Collection<? extends XExpression>)newValue);
-				return;
-			case XbasePackage.XFEATURE_CALL__FEATURE:
-				setFeature((JvmIdentifyableElement)newValue);
+			case XbasePackage.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS:
+				getFeatureCallArguments().clear();
+				getFeatureCallArguments().addAll((Collection<? extends XExpression>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -240,11 +142,8 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XFEATURE_CALL__PARAMS:
-				getParams().clear();
-				return;
-			case XbasePackage.XFEATURE_CALL__FEATURE:
-				setFeature((JvmIdentifyableElement)null);
+			case XbasePackage.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS:
+				getFeatureCallArguments().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -260,31 +159,10 @@ public class XFeatureCallImpl extends XExpressionImpl implements XFeatureCall
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XFEATURE_CALL__FEATURE_NAME:
-				return FEATURE_NAME_EDEFAULT == null ? featureName != null : !FEATURE_NAME_EDEFAULT.equals(featureName);
-			case XbasePackage.XFEATURE_CALL__PARAMS:
-				return params != null && !params.isEmpty();
-			case XbasePackage.XFEATURE_CALL__FEATURE:
-				return feature != null;
+			case XbasePackage.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS:
+				return featureCallArguments != null && !featureCallArguments.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString()
-	{
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (featureName: ");
-		result.append(featureName);
-		result.append(')');
-		return result.toString();
 	}
 
 } //XFeatureCallImpl

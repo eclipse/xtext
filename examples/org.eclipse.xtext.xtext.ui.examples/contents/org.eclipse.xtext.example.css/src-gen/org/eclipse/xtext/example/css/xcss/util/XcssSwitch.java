@@ -15,10 +15,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.example.css.xcss.*;
 
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XMemberFeatureCall;
 
 /**
  * <!-- begin-user-doc -->
@@ -149,6 +148,13 @@ public class XcssSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case XcssPackage.XSIMPLE_FEATURE_CALL:
+      {
+        XSimpleFeatureCall xSimpleFeatureCall = (XSimpleFeatureCall)theEObject;
+        T result = caseXSimpleFeatureCall(xSimpleFeatureCall);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case XcssPackage.FONT_LITERAL:
       {
         FontLiteral fontLiteral = (FontLiteral)theEObject;
@@ -196,8 +202,7 @@ public class XcssSwitch<T>
         Setting setting = (Setting)theEObject;
         T result = caseSetting(setting);
         if (result == null) result = caseXBinaryOperation(setting);
-        if (result == null) result = caseXMemberFeatureCall(setting);
-        if (result == null) result = caseXFeatureCall(setting);
+        if (result == null) result = caseXAbstractFeatureCall(setting);
         if (result == null) result = caseXExpression(setting);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -298,6 +303,22 @@ public class XcssSwitch<T>
    * @generated
    */
   public T caseFilter(Filter object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>XSimple Feature Call</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>XSimple Feature Call</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseXSimpleFeatureCall(XSimpleFeatureCall object)
   {
     return null;
   }
@@ -447,33 +468,17 @@ public class XcssSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>XFeature Call</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>XAbstract Feature Call</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>XFeature Call</em>'.
+   * @return the result of interpreting the object as an instance of '<em>XAbstract Feature Call</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseXFeatureCall(XFeatureCall object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>XMember Feature Call</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>XMember Feature Call</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseXMemberFeatureCall(XMemberFeatureCall object)
+  public T caseXAbstractFeatureCall(XAbstractFeatureCall object)
   {
     return null;
   }

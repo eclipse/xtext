@@ -71,15 +71,6 @@ public interface XbaseFactory extends EFactory
 	XVariableDeclaration createXVariableDeclaration();
 
 	/**
-	 * Returns a new object of class '<em>XFeature Call</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>XFeature Call</em>'.
-	 * @generated
-	 */
-	XFeatureCall createXFeatureCall();
-
-	/**
 	 * Returns a new object of class '<em>XMember Feature Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,13 +80,13 @@ public interface XbaseFactory extends EFactory
 	XMemberFeatureCall createXMemberFeatureCall();
 
 	/**
-	 * Returns a new object of class '<em>XSimple Feature Call</em>'.
+	 * Returns a new object of class '<em>XFeature Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>XSimple Feature Call</em>'.
+	 * @return a new object of class '<em>XFeature Call</em>'.
 	 * @generated
 	 */
-	XSimpleFeatureCall createXSimpleFeatureCall();
+	XFeatureCall createXFeatureCall();
 
 	/**
 	 * Returns a new object of class '<em>XConstructor Call</em>'.

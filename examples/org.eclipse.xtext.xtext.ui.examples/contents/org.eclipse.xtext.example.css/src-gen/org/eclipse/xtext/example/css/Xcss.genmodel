@@ -32,6 +32,9 @@
     <genClasses ecoreClass="Xcss.ecore#//Filter">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//Filter/condition"/>
     </genClasses>
+    <genClasses ecoreClass="Xcss.ecore#//XSimpleFeatureCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xcss.ecore#//XSimpleFeatureCall/feature"/>
+    </genClasses>
     <genClasses ecoreClass="Xcss.ecore#//FontLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//FontLiteral/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//FontLiteral/italic"/>
@@ -49,6 +52,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//SizeLiteral/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//SizeLiteral/unit"/>
     </genClasses>
-    <genClasses ecoreClass="Xcss.ecore#//Setting"/>
+    <genClasses ecoreClass="Xcss.ecore#//Setting">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//Setting/params"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

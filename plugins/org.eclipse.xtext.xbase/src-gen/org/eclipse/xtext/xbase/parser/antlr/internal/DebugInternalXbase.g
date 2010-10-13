@@ -117,8 +117,8 @@ ruleOpMulti :
 
 // Rule XUnaryOperation
 ruleXUnaryOperation :
-	ruleOpUnary ruleXFeatureCall |
-	ruleXFeatureCall
+	ruleOpUnary ruleXMemberFeatureCall |
+	ruleXMemberFeatureCall
 ;
 
 // Rule OpUnary
@@ -128,10 +128,14 @@ ruleOpUnary :
 	'+'
 ;
 
-// Rule XFeatureCall
-ruleXFeatureCall :
+// Rule XMemberFeatureCall
+ruleXMemberFeatureCall :
 	ruleXPrimaryExpression (
-		'.' RULE_ID (
+		'.' (
+			'<' ruleJvmTypeArgument (
+				',' ruleJvmTypeArgument
+			)* '>'
+		)? RULE_ID (
 			'(' (
 				ruleXExpression (
 					',' ruleXExpression
@@ -152,7 +156,7 @@ ruleXPrimaryExpression :
 	ruleXConstructorCall |
 	ruleXBlockExpression |
 	ruleXSwitchExpression |
-	ruleXSimpleFeatureCall |
+	ruleXFeatureCall |
 	ruleXIfExpression |
 	ruleXForLoopExpression |
 	ruleXWhileExpression |
@@ -174,7 +178,7 @@ ruleXClosure :
 
 // Rule XCastedExpression
 ruleXCastedExpression :
-	'(' ruleJvmTypeReference ')' ruleXFeatureCall
+	'(' ruleJvmTypeReference ')' ruleXMemberFeatureCall
 ;
 
 // Rule XParenthesizedExpression
@@ -250,9 +254,13 @@ ruleJvmFormalParameter :
 	ruleJvmTypeReference? RULE_ID
 ;
 
-// Rule XSimpleFeatureCall
-ruleXSimpleFeatureCall :
-	RULE_ID (
+// Rule XFeatureCall
+ruleXFeatureCall :
+	(
+		'<' ruleJvmTypeArgument (
+			',' ruleJvmTypeArgument
+		)* '>'
+	)? RULE_ID (
 		'(' (
 			ruleXExpression (
 				',' ruleXExpression

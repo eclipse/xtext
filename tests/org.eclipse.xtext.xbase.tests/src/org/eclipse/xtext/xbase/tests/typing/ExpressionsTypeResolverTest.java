@@ -17,7 +17,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.ExpressionsTypeResolver;
+import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
@@ -32,21 +32,21 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	private ITypeProvider<JvmTypeReference> typeResolver;
 	
 	public void testNullLiteral() throws Exception {
-		assertResolvedReturnType(ExpressionsTypeResolver.VOID_TYPE_NAME, "null");
+		assertResolvedReturnType(XbaseTypeProvider.VOID_TYPE_NAME, "null");
 	}
 	
 	public void testBooleanLiteral() throws Exception {
-		assertResolvedReturnType(ExpressionsTypeResolver.BOOLEAN_TYPE_NAME, "true");
-		assertResolvedReturnType(ExpressionsTypeResolver.BOOLEAN_TYPE_NAME, "false");
+		assertResolvedReturnType(XbaseTypeProvider.BOOLEAN_TYPE_NAME, "true");
+		assertResolvedReturnType(XbaseTypeProvider.BOOLEAN_TYPE_NAME, "false");
 	}
 	
 	public void testStringLiteral() throws Exception {
-		assertResolvedReturnType(ExpressionsTypeResolver.STRING_TYPE_NAME, "'foo'");
-		assertResolvedReturnType(ExpressionsTypeResolver.STRING_TYPE_NAME, "\"foo\"");
+		assertResolvedReturnType(XbaseTypeProvider.STRING_TYPE_NAME, "'foo'");
+		assertResolvedReturnType(XbaseTypeProvider.STRING_TYPE_NAME, "\"foo\"");
 	}
 	
 	public void testIntLiteral() throws Exception {
-		assertResolvedReturnType(ExpressionsTypeResolver.INTEGER_TYPE_NAME, "3");
+		assertResolvedReturnType(XbaseTypeProvider.INTEGER_TYPE_NAME, "3");
 	}
 	
 	public void testConstructorCall() throws Exception {
@@ -60,14 +60,14 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testBlockExpression() throws Exception {
-		assertResolvedReturnType(ExpressionsTypeResolver.INTEGER_TYPE_NAME, "{true;4;}");
-		assertResolvedReturnType(ExpressionsTypeResolver.BOOLEAN_TYPE_NAME, "{4;true;}");
-		assertResolvedReturnType(ExpressionsTypeResolver.VOID_TYPE_NAME, "{null;}");
+		assertResolvedReturnType(XbaseTypeProvider.INTEGER_TYPE_NAME, "{true;4;}");
+		assertResolvedReturnType(XbaseTypeProvider.BOOLEAN_TYPE_NAME, "{4;true;}");
+		assertResolvedReturnType(XbaseTypeProvider.VOID_TYPE_NAME, "{null;}");
 	}
 	
 	public void testSwitchExpression() throws Exception {
-		assertResolvedReturnType(ExpressionsTypeResolver.STRING_TYPE_NAME,"switch { case true : 's'; case false : 'foo'; default: 'bar';}");
-		assertResolvedReturnType(ExpressionsTypeResolver.OBJECT_TYPE_NAME,"switch { case true : 's'; case false : new java.lang.Object(); default: 'bar';}");
+		assertResolvedReturnType(XbaseTypeProvider.STRING_TYPE_NAME,"switch { case true : 's'; case false : 'foo'; default: 'bar';}");
+		assertResolvedReturnType(XbaseTypeProvider.OBJECT_TYPE_NAME,"switch { case true : 's'; case false : new java.lang.Object(); default: 'bar';}");
 	}
 	
 	public void testClosure() throws Exception {
@@ -86,7 +86,7 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	
 	public void assertResolvedReturnType(String type, String expression) throws Exception {
 		JvmTypeReference typeRef = typeResolver.getType(expression(expression,true),null,null);
-		assertNotNull("type ref for "+expression,typeRef);
+		assertNotNull("type ref was null for "+expression,typeRef);
 		assertEquals(type,toString(typeRef));
 	}
 	
