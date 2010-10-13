@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
-import java.io.InputStream;
-
 import org.antlr.runtime.BitSet;
 import org.eclipse.xtext.IGrammarAccess;
 
@@ -31,17 +29,12 @@ public class Bug326509Test extends TestCase {
 		}
 
 		@Override
-		protected InputStream getTokenFile() {
-			return null;
-		}
-
-		@Override
 		protected String getFirstRuleName() {
 			return null;
 		}
 		
 		public BitSet[] getFollowing() {
-			return following;
+			return state.following;
 		}
 		
 		@Override

@@ -11,12 +11,11 @@ package org.eclipse.xtext.parser.antlr;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.antlr.runtime.BitSet;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonToken;
-import org.antlr.runtime.IntStream;
 import org.antlr.runtime.NoViableAltException;
 import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.Token;
 import org.apache.log4j.Logger;
 
@@ -39,30 +38,34 @@ public abstract class Lexer extends org.antlr.runtime.Lexer {
 	public Lexer(CharStream input) {
 		super(input);
 	}
+	
+	public Lexer(CharStream input, RecognizerSharedState state) {
+        super(input,state);
+    }
 
 	private final Map<Token, String> tokenErrorMap = new HashMap<Token, String>();
 
 	@Override
 	public Token nextToken() {
 		while (true) {
-			this.token = null;
-			this.channel = Token.DEFAULT_CHANNEL;
-			this.tokenStartCharIndex = input.index();
-			this.tokenStartCharPositionInLine = input.getCharPositionInLine();
-			this.tokenStartLine = input.getLine();
-			this.text = null;
+			this.state.token = null;
+			this.state.channel = Token.DEFAULT_CHANNEL;
+			this.state.tokenStartCharIndex = input.index();
+			this.state.tokenStartCharPositionInLine = input.getCharPositionInLine();
+			this.state.tokenStartLine = input.getLine();
+			this.state.text = null;
 			if (input.LA(1) == CharStream.EOF) {
 				return Token.EOF_TOKEN;
 			}
 			try {
 				mTokens();
-				if (this.token == null) {
+				if (this.state.token == null) {
 					emit();
 				}
-				else if (this.token == Token.SKIP_TOKEN) {
+				else if (this.state.token == Token.SKIP_TOKEN) {
 					continue;
 				}
-				return this.token;
+				return this.state.token;
 			}
 			catch (RecognitionException re) {
 				reportError(re);
@@ -71,12 +74,12 @@ public abstract class Lexer extends org.antlr.runtime.Lexer {
 				}
 				// create token that holds mismatched char
 				Token t = new CommonToken(input, Token.INVALID_TOKEN_TYPE, Token.HIDDEN_CHANNEL,
-						this.tokenStartCharIndex, getCharIndex() - 1);
-				t.setLine(this.tokenStartLine);
-				t.setCharPositionInLine(this.tokenStartCharPositionInLine);
+						this.state.tokenStartCharIndex, getCharIndex() - 1);
+				t.setLine(this.state.tokenStartLine);
+				t.setCharPositionInLine(this.state.tokenStartCharPositionInLine);
 				tokenErrorMap.put(t, getErrorMessage(re, this.getTokenNames()));
 				emit(t);
-				return this.token;
+				return this.state.token;
 			}
 		}
 	}
@@ -93,26 +96,4 @@ public abstract class Lexer extends org.antlr.runtime.Lexer {
 			logger.trace(msg);
 	}
 	
-	@Override
-	public void recoverFromMismatchedToken(IntStream in, RecognitionException re, int ttype, BitSet follow)
-			throws RecognitionException {
-		// inlined super call because we want to get rid of the System.err.println(..)
-		// System.err.println("BR.recoverFromMismatchedToken");
-		// if next token is what we are looking for then "delete" this token
-		if ( input.LA(2)==ttype ) {
-			reportError(re);
-			/*
-			System.err.println("recoverFromMismatchedToken deleting "+input.LT(1)+
-							   " since "+input.LT(2)+" is what we want");
-			*/
-			beginResync();
-			input.consume(); // simply delete extra token
-			endResync();
-			input.consume(); // move past ttype token as if all were ok
-			return;
-		}
-		if ( !recoverFromMismatchedElement(input, re,follow) ) {
-			throw re;
-		}
-	}
 }

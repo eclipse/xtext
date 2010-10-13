@@ -47,7 +47,10 @@ Assignment containingAssignment(org::eclipse::emf::ecore::EObject e) :
 
 Group containingGroup(org::eclipse::emf::ecore::EObject e) :
 	JAVA org.eclipse.xtext.GrammarUtil.containingGroup(org.eclipse.emf.ecore.EObject);
-	
+
+UnorderedGroup containingUnorderedGroup(org::eclipse::emf::ecore::EObject e) :
+	JAVA org.eclipse.xtext.GrammarUtil.containingUnorderedGroup(org.eclipse.emf.ecore.EObject);
+		
 List[AbstractElement] elementsBeforeThisInContainingGroup(AbstractElement e) :
 	JAVA org.eclipse.xtext.GrammarUtil.elementsBeforeThisInContainingGroup(org.eclipse.xtext.AbstractElement);
 

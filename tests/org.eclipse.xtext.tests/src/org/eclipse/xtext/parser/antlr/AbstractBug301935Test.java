@@ -26,19 +26,19 @@ public abstract class AbstractBug301935Test extends AbstractXtextTests {
 	public void testGetTokenDefMap_01() {
 		ITokenDefProvider tokenDefProvider = get(ITokenDefProvider.class);
 		Map<Integer, String> map = tokenDefProvider.getTokenDefMap();
-		assertNotNull(map);
-		assertEquals(5, map.size());
+		assertNotNull(String.valueOf(map), map);
+		assertEquals(String.valueOf(map), 5, map.size());
 	}
 	
 	public void testGetTokenDefMap_02() {
 		ITokenDefProvider tokenDefProvider = get(ITokenDefProvider.class);
 		ImmutableBiMap<Integer, String> tokens = ImmutableBiMap.copyOf(tokenDefProvider.getTokenDefMap());
 		ImmutableBiMap<String,Integer> inverseTokens = tokens.inverse();
-		assertTrue(inverseTokens.containsKey("'\n'"));
-		assertTrue(inverseTokens.containsKey("'\r'"));
-		assertTrue(inverseTokens.containsKey("RULE_ID"));
-		assertTrue(inverseTokens.containsKey("RULE_ANY_OTHER"));
-		assertTrue(inverseTokens.containsKey("RULE_WS"));
+		assertTrue("'\n'", inverseTokens.containsKey("'\n'"));
+		assertTrue("'\r'", inverseTokens.containsKey("'\r'"));
+		assertTrue("RULE_ID", inverseTokens.containsKey("RULE_ID"));
+		assertTrue("RULE_ANY_OTHER", inverseTokens.containsKey("RULE_ANY_OTHER"));
+		assertTrue("RULE_WS", inverseTokens.containsKey("RULE_WS"));
 	}
 	
 }
