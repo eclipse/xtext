@@ -15,26 +15,26 @@ XExpression returns XExpression :
 	XAssignment;
 
 XAssignment returns XExpression :	
-	XOrExpression ({XBinaryOperation.params+=current} feature=[types::JvmIdentifyableElement|OpAssign] params+=XAssignment)?;
+	XOrExpression ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAssign] rightOperand=XAssignment)?;
 
 OpAssign:
 	'=' | '+=';
 
 XOrExpression returns XExpression:
-	XAndExpression ({XBinaryOperation.params+=current} feature=[types::JvmIdentifyableElement|OpOr] params+=XAndExpression)*;
+	XAndExpression ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOr] rightOperand=XAndExpression)*;
 
 OpOr:
 	'||';
 
 XAndExpression returns XExpression:
-	XEqualityExpression ({XBinaryOperation.params+=current} feature=[types::JvmIdentifyableElement|OpAnd] params+=XEqualityExpression)*;
+	XEqualityExpression ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAnd] rightOperand=XEqualityExpression)*;
 
 OpAnd:
 	'&&';
 
 XEqualityExpression returns XExpression:
-	XRelationalExpression ({XBinaryOperation.params+=current} feature=[types::JvmIdentifyableElement|OpEquality]
-	params+=XRelationalExpression)*;
+	XRelationalExpression ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpEquality]
+	rightOperand=XRelationalExpression)*;
 
 OpEquality:
 	'==' | '!=';
@@ -42,42 +42,43 @@ OpEquality:
 XRelationalExpression returns XExpression:
 	XOtherOperatorExpression
 	({XInstanceOfExpression.expression=current} 'instanceof' type=[types::JvmType|QualifiedName] |
-	{XBinaryOperation.params+=current} feature=[types::JvmIdentifyableElement|OpCompare] params+=XOtherOperatorExpression)*;
+	{XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpCompare] rightOperand=XOtherOperatorExpression)*;
 
 OpCompare:
 	'>=' | '<=' | '>' | '<';
 
 XOtherOperatorExpression returns XExpression:
-	XAdditiveExpression ({XBinaryOperation.params+=current} feature=[types::JvmIdentifyableElement|OpOther]
-	params+=XAdditiveExpression)*;
+	XAdditiveExpression ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpOther]
+	rightOperand=XAdditiveExpression)*;
 
 OpOther:
 	'->' | '..';
 
 XAdditiveExpression returns XExpression:
-	XMultiplicativeExpression ({XBinaryOperation.params+=current} feature=[types::JvmIdentifyableElement|OpAdd]
-	params+=XMultiplicativeExpression)*;
+	XMultiplicativeExpression ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAdd]
+	rightOperand=XMultiplicativeExpression)*;
 
 OpAdd:
 	'+' | '-';
 
 XMultiplicativeExpression returns XExpression:
-	XUnaryOperation ({XBinaryOperation.params+=current} feature=[types::JvmIdentifyableElement|OpMulti] params+=XUnaryOperation)*;
+	XUnaryOperation ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpMulti] rightOperand=XUnaryOperation)*;
 
 OpMulti:
 	'*' | '**' | '/' | '%';
 
 XUnaryOperation returns XExpression:
-	{XUnaryOperation} feature=[types::JvmIdentifyableElement|OpUnary] params+=XFeatureCall
-	| XFeatureCall;
+	{XUnaryOperation} feature=[types::JvmIdentifyableElement|OpUnary] operand=XMemberFeatureCall
+	| XMemberFeatureCall;
 
 OpUnary:
 	"!" | "-" | "+";
 
-XFeatureCall returns XExpression:
+XMemberFeatureCall returns XExpression:
 	XPrimaryExpression
-	({XMemberFeatureCall.params+=current} "." feature=[types::JvmIdentifyableElement] ('(' (params+=XExpression (','
-	params+=XExpression)*)? ')')?)*;
+	({XMemberFeatureCall.memberCallTarget=current} "." 
+		('<' typeArguments+=JvmTypeArgument (',' typeArguments+=JvmTypeArgument)* '>')?  
+		feature=[types::JvmIdentifyableElement] ('(' (memberCallArguments+=XExpression (','	memberCallArguments+=XExpression)*)? ')')?)*;
 
 XPrimaryExpression returns XExpression:
 	XClosure |
@@ -89,7 +90,7 @@ XPrimaryExpression returns XExpression:
 	XConstructorCall |
 	XBlockExpression |
 	XSwitchExpression |
-	XSimpleFeatureCall |
+	XFeatureCall |
 	XIfExpression |
 	XForLoopExpression |
 	XWhileExpression |
@@ -100,10 +101,10 @@ XPrimaryExpression returns XExpression:
 	XParenthesizedExpression;
 
 XClosure returns XExpression:
-	{XClosure} (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? '|' expression=XExpression;
+	{XClosure} (formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? '|' expression=XExpression;
 
 XCastedExpression :
-	'(' type=JvmTypeReference ')' target=XFeatureCall;
+	'(' type=JvmTypeReference ')' target=XMemberFeatureCall;
 
 XParenthesizedExpression returns XExpression:
 	'(' XExpression ')';
@@ -153,11 +154,12 @@ XVariableDeclaration:
 JvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=JvmTypeReference)? name=ID;
 
-XSimpleFeatureCall returns XSimpleFeatureCall:
-	feature=[types::JvmIdentifyableElement] ('(' (params+=XExpression (',' params+=XExpression)*)? ')')?;
+XFeatureCall returns XFeatureCall:
+	('<' typeArguments+=JvmTypeArgument (',' typeArguments+=JvmTypeArgument)* '>')? 
+	feature=[types::JvmIdentifyableElement] ('(' (featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*)? ')')?;
 
 XConstructorCall:
-	'new' type=JvmParameterizedTypeReference '(' (params+=XExpression (',' params+=XExpression)*)? ')';
+	'new' type=JvmParameterizedTypeReference '(' (arguments+=XExpression (',' arguments+=XExpression)*)? ')';
 
 XBooleanLiteral:
 	{XBooleanLiteral} 'false' | isTrue?='true';

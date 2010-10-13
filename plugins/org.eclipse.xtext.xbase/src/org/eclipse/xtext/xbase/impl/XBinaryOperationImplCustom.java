@@ -7,15 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.impl;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XFeatureCallImplCustom extends XFeatureCallImpl {
+public class XBinaryOperationImplCustom extends XBinaryOperationImpl {
+	
 	@Override
 	public EList<XExpression> getArguments() {
-		return getFeatureCallArguments();
+		BasicEList<XExpression> result = new BasicEList<XExpression>(2);
+		result.add(getLeftOperand());
+		result.add(getRightOperand());
+		return result;
 	}
+	
 }

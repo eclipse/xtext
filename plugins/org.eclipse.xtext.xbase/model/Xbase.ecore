@@ -3,9 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xbase"
     nsURI="http://www.eclipse.org/xtext/xbase/Xbase" nsPrefix="xbase">
-  <eClassifiers xsi:type="ecore:EClass" name="XExpression" abstract="true">
-    <eOperations name="getDerivedReturnType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XExpression" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="XIfExpression" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="if" eType="#//XExpression"
         containment="true"/>
@@ -41,19 +39,31 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//XExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XFeatureCall" eSuperTypes="#//XExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="XAbstractFeatureCall" abstract="true"
+      eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
-        eType="#//XExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//XExpression" changeable="false" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifyableElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeArgument"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XMemberFeatureCall" eSuperTypes="#//XFeatureCall"/>
-  <eClassifiers xsi:type="ecore:EClass" name="XSimpleFeatureCall" eSuperTypes="#//XFeatureCall"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XMemberFeatureCall" eSuperTypes="#//XAbstractFeatureCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memberCallTarget" eType="#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memberCallArguments" upperBound="-1"
+        eType="#//XExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XFeatureCall" eSuperTypes="#//XAbstractFeatureCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureCallArguments" upperBound="-1"
+        eType="#//XExpression" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XConstructorCall" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
         eType="#//XExpression" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XBooleanLiteral" eSuperTypes="#//XExpression">
@@ -67,7 +77,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XClosure" eSuperTypes="#//XExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formalParameters" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmFormalParameter"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//XExpression"
@@ -79,8 +89,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//XExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XBinaryOperation" eSuperTypes="#//XMemberFeatureCall"/>
-  <eClassifiers xsi:type="ecore:EClass" name="XUnaryOperation" eSuperTypes="#//XMemberFeatureCall"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XBinaryOperation" eSuperTypes="#//XAbstractFeatureCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" eType="#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//XExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XUnaryOperation" eSuperTypes="#//XAbstractFeatureCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//XExpression"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XForLoopExpression" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="forExpression" eType="#//XExpression"
         containment="true"/>
