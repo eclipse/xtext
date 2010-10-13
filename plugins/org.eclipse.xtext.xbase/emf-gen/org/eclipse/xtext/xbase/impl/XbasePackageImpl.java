@@ -1213,6 +1213,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xSwitchExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xBlockExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xVariableDeclarationEClass.getESuperTypes().add(this.getXExpression());
+		xVariableDeclarationEClass.getESuperTypes().add(theTypesPackage.getJvmIdentifyableElement());
 		xAbstractFeatureCallEClass.getESuperTypes().add(this.getXExpression());
 		xMemberFeatureCallEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
 		xFeatureCallEClass.getESuperTypes().add(this.getXAbstractFeatureCall());

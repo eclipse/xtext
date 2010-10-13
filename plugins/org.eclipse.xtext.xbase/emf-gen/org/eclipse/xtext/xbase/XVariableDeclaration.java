@@ -5,6 +5,7 @@
  */
 package org.eclipse.xtext.xbase;
 
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -25,7 +26,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * @model
  * @generated
  */
-public interface XVariableDeclaration extends XExpression
+public interface XVariableDeclaration extends XExpression, JvmIdentifyableElement
 {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' containment reference.

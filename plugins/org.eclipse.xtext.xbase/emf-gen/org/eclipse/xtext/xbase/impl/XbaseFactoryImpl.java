@@ -147,7 +147,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	 */
 	public XVariableDeclaration createXVariableDeclaration()
 	{
-		XVariableDeclarationImpl xVariableDeclaration = new XVariableDeclarationImpl();
+		XVariableDeclarationImplCustom xVariableDeclaration = new XVariableDeclarationImplCustom();
 		return xVariableDeclaration;
 	}
 

@@ -18,4 +18,9 @@ public class XFeatureCallImplCustom extends XFeatureCallImpl {
 	public EList<XExpression> getArguments() {
 		return getFeatureCallArguments();
 	}
+	
+	@Override
+	public String toString() {
+		return getFeatureName()+getExpressionsAsString(getFeatureCallArguments());
+	}
 }

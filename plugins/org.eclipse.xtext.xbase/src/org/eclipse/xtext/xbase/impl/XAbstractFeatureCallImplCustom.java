@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -37,5 +39,24 @@ public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 				result.append(leafNode.getText());
 		}
 		return result.toString();
+	}
+	
+	protected String getExpressionsAsString(List<XExpression> expressions) {
+		if (expressions.isEmpty())
+			return "";
+		String s = "(";
+		for (Iterator<XExpression> iterator = expressions.iterator(); iterator.hasNext();) {
+			XExpression type = iterator.next();
+			s+=getExpressionAsString(type);
+			if (iterator.hasNext())
+				s+=",";
+		}
+		return s+")";
+	}
+	
+	protected String getExpressionAsString(XExpression x) {
+		if (x == null)
+			return "<null>";
+		return "<"+x.getClass().getSimpleName()+">";
 	}
 }

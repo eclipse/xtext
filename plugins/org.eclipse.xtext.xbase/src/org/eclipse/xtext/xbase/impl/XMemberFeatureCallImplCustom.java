@@ -22,4 +22,9 @@ public class XMemberFeatureCallImplCustom extends XMemberFeatureCallImpl {
 		result.addAll(getMemberCallArguments());
 		return result;
 	}
+	
+	@Override
+	public String toString() {
+		return getExpressionAsString(getMemberCallTarget())+"."+getFeatureName()+getExpressionsAsString(getMemberCallArguments());
+	}
 }

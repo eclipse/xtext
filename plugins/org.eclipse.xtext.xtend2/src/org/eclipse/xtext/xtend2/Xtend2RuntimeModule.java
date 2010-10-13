@@ -5,7 +5,7 @@ package org.eclipse.xtext.xtend2;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
+import org.eclipse.xtext.xbase.scoping.XbaseTypeProvider;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.

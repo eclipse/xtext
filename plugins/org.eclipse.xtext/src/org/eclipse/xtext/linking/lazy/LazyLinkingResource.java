@@ -102,6 +102,7 @@ public class LazyLinkingResource extends XtextResource {
 								+ uriFragment);
 					EObject result = linkedObjects.get(0);
 					if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
+						log.error("An element of type "+result.getClass().getName()+" is not assignable to the reference "+reference.getEContainingClass().getName()+"."+reference.getName());
 						unresolveableProxies.add(uriFragment);
 						createAndAddDiagnostic(triple);
 						return null;

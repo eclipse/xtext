@@ -24,4 +24,8 @@ public class XBinaryOperationImplCustom extends XBinaryOperationImpl {
 		return result;
 	}
 	
+	@Override
+	public String toString() {
+		return getExpressionAsString(getLeftOperand())+" "+getFeatureName()+" "+getExpressionAsString(getLeftOperand());
+	}
 }

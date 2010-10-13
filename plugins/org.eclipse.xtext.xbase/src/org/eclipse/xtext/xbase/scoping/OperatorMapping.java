@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.typing;
+package org.eclipse.xtext.xbase.scoping;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
