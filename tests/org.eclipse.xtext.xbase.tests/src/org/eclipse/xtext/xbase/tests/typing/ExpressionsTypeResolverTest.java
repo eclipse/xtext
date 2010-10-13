@@ -16,8 +16,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 import org.eclipse.xtext.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.scoping.XbaseTypeProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
-import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
@@ -80,9 +80,19 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	
 	public void testFeatureCall_1() throws Exception {
 		assertResolvedReturnType("java.util.List<java.lang.Byte>", "'foo'.getBytes()");
+		assertResolvedReturnType("java.lang.Boolean", "'foo'.getBytes().add(null)");
 //		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<java.lang.String>().get(23)");
 	}
 	
+	public void testFeatureCallWithOperatorOverloading2() throws Exception {
+		assertResolvedReturnType("java.lang.Boolean", "'foo'.getBytes() += null");
+		assertResolvedReturnType("java.lang.Boolean", "'foo'.getBytes() += 'x'.getBytes().get(0)");
+	}
+	
+	public void testFeatureCallOnThis() throws Exception {
+		assertResolvedReturnType("java.lang.Boolean", "{ val this = 'foo'; getBytes() += null;}");
+		assertResolvedReturnType("java.lang.Boolean", "{ var this = 'foo'; this.getBytes() += getBytes().get(0);}");
+	}
 	
 	public void assertResolvedReturnType(String type, String expression) throws Exception {
 		JvmTypeReference typeRef = typeResolver.getType(expression(expression,true),null,null);

@@ -7,23 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.impl;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.xbase.XExpression;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XUnaryOperationImplCustom extends XUnaryOperationImpl {
+public class XVariableDeclarationImplCustom extends XVariableDeclarationImpl {
 	@Override
-	public EList<XExpression> getArguments() {
-		BasicEList<XExpression> result = new BasicEList<XExpression>(1);
-		result.add(getOperand());
-		return result;
-	}
-	
-	@Override
-	public String toString() {
-		return getFeatureName()+" "+getExpressionAsString(getOperand());
+	public String getCanonicalName() {
+		return getName();
 	}
 }
