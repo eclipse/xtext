@@ -25,6 +25,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -45,38 +46,6 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseScopeProvider extends XtypeScopeProvider {
-
-	protected class DelegatingScope implements IScope {
-		private IScope scope = IScope.NULLSCOPE;
-
-		public void setScope(IScope scope) {
-			this.scope = scope;
-		}
-
-		public IScope getOuterScope() {
-			return scope.getOuterScope();
-		}
-
-		public Iterable<IEObjectDescription> getContents() {
-			return scope.getContents();
-		}
-
-		public Iterable<IEObjectDescription> getAllContents() {
-			return scope.getAllContents();
-		}
-
-		public IEObjectDescription getContentByName(String name) {
-			return scope.getContentByName(name);
-		}
-
-		public IEObjectDescription getContentByEObject(EObject object) {
-			return scope.getContentByEObject(object);
-		}
-
-		public Iterable<IEObjectDescription> getAllContentsByEObject(EObject object) {
-			return scope.getAllContentsByEObject(object);
-		}
-	}
 
 	public static final String THIS = "this";
 
@@ -114,17 +83,21 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 		if (context instanceof XAbstractFeatureCall) {
 			final XAbstractFeatureCall call = (XAbstractFeatureCall) context;
-			DelegatingScope delegatingScope = new DelegatingScope();
-			IScope localVariableScope = createLocalVarScope(context, reference,
-					createCallableFeaturePredicate(call, null), delegatingScope);
+			
+			Predicate<EObject> featurePredicate = createCallableFeaturePredicate(call, null);
+			IScope parentScope = createLocalVarScope(context.eContainer(), reference, featurePredicate);
+			Map<String, IEObjectDescription> implicitThisScope = Maps.newHashMap();
+			IScope localVariableScope = createLocalVarScope(context, reference, featurePredicate, new MapBasedScope(
+					parentScope, implicitThisScope));
 			IEObjectDescription thisVariable = localVariableScope.getContentByName(THIS);
+
 			if (thisVariable != null) {
 				EObject thisVal = thisVariable.getEObjectOrProxy();
 				JvmTypeReference type = typeResolver.getType(thisVal, null, ValidationMessageAcceptor.NULL);
 				if (type != null) {
 					IScope allFeatures = createFeatureScopeForTypeRef(type, createCallableFeaturePredicate(call, type),
 							IScope.NULLSCOPE);
-					delegatingScope.setScope(allFeatures);
+					implicitThisScope.putAll(Scopes.scopeToMap(allFeatures));
 				}
 			}
 			return localVariableScope;
@@ -141,11 +114,16 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		};
 	}
 
+	protected IScope createLocalVarScope(EObject context, EReference reference, Predicate<EObject> featurePredicate) {
+		if (context.eContainer()==null)
+			return createLocalVarScope(context, reference, featurePredicate, IScope.NULLSCOPE);
+		return createLocalVarScope(context, reference, featurePredicate, createLocalVarScope(context.eContainer(), reference, featurePredicate));
+	}
+		
 	protected IScope createLocalVarScope(EObject context, EReference reference, Predicate<EObject> featurePredicate,
-			IScope parentScope) {
+				IScope parentScope) {
 		if (context == null)
 			return parentScope;
-		parentScope = createLocalVarScope(context.eContainer(), reference, featurePredicate, parentScope);
 		if (context.eContainer() instanceof XBlockExpression) {
 			XBlockExpression block = (XBlockExpression) context.eContainer();
 			parentScope = createLocalVarScopeForBlock(block, block.getExpressions().indexOf(context), featurePredicate,
