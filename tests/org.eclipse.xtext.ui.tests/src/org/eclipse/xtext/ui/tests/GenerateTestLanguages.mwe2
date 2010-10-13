@@ -75,7 +75,9 @@ Workflow {
 		}
 		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug304681TestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragments {
+				backtrack = true
+			}
 		}
 		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug307519TestLanguage.xtext"
@@ -117,7 +119,9 @@ Workflow {
 		}
 		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragments {
+				backtrack = true
+			}
 		}
 		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/editor/outline/OutlineTestLanguage.xtext"

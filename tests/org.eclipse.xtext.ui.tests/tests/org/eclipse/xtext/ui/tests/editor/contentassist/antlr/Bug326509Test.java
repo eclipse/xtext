@@ -25,7 +25,7 @@ public class Bug326509Test extends TestCase {
 		}
 		
 		public BitSet[] getFollowing() {
-			return following;
+			return state.following;
 		}
 		
 		@Override

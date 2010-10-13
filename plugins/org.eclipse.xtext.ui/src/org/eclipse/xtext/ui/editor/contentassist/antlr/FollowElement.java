@@ -130,5 +130,10 @@ public class FollowElement {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "FollowElement: " + getGrammarElement() + " LA: " + getLookAhead();
+	}
 
 }
