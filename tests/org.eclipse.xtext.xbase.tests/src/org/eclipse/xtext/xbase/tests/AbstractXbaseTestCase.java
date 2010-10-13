@@ -13,7 +13,9 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
@@ -22,30 +24,36 @@ import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge
- *
+ * 
  */
 public abstract class AbstractXbaseTestCase extends TestCase {
-	
+
 	static Injector injector = new XbaseStandaloneSetup().createInjectorAndDoEMFRegistration();
 
 	@Override
 	protected void setUp() throws Exception {
 		getInjector().injectMembers(this);
 	}
-	
+
 	public Injector getInjector() {
 		return injector;
 	}
-	
+
 	public <T> T get(Class<T> clazz) {
 		return getInjector().getInstance(clazz);
 	}
-	
+
 	protected XExpression expression(String string) throws IOException {
+		return expression(string, false);
+	}
+
+	protected XExpression expression(String string, boolean resolve) throws IOException {
 		XtextResourceSet set = get(XtextResourceSet.class);
 		Resource resource = set.createResource(URI.createURI("Test.___xbase"));
 		resource.load(new StringInputStream(string), null);
-		assertTrue("Errors"+resource.getErrors(), resource.getErrors().isEmpty());
+		if (resolve)
+			EcoreUtil2.resolveAll(resource, CancelIndicator.NullImpl);
+		assertTrue("Errors" + resource.getErrors(), resource.getErrors().isEmpty());
 		XExpression exp = (XExpression) resource.getContents().get(0);
 		return exp;
 	}

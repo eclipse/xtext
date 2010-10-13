@@ -14,9 +14,9 @@ public interface CancelIndicator {
 
 	boolean isCanceled();
 	
-	class NullImpl implements CancelIndicator {
+	public final static CancelIndicator NullImpl = new CancelIndicator() {
 		public boolean isCanceled() {
 			return false;
 		}
-	}
+	};
 }

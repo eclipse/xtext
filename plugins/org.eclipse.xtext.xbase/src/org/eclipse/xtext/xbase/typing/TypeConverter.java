@@ -29,6 +29,8 @@ public class TypeConverter {
 	 * and any arrays X[]to corresponding java.util.List<X> types.
 	 */
 	public JvmTypeReference convert(JvmTypeReference toBeConverted, JvmTypeReference expected, EObject context) {
+		if (toBeConverted==null)
+			return null;
 		if (toBeConverted.getType() instanceof JvmPrimitiveType) {
 			return convertPrimitiveToWrapper((JvmPrimitiveType)toBeConverted.getType(), context);
 		} 

@@ -32,7 +32,7 @@ public class ReconcilingUnitOfWork<T> implements IUnitOfWork<T, XtextResource> {
 
 	public T exec(XtextResource state) throws Exception {
 		// lazy linking URIs might change, so resolve everything before applying any changes
-		EcoreUtil2.resolveAll(state, new CancelIndicator.NullImpl());
+		EcoreUtil2.resolveAll(state, CancelIndicator.NullImpl);
 		composer.beginRecording(state);
 		T result = work.exec(state);
 		final TextEdit edit = composer.endRecording();
