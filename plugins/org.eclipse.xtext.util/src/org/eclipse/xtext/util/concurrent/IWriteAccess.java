@@ -8,7 +8,8 @@
 package org.eclipse.xtext.util.concurrent;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein - Separated read and write access
  */
 public interface IWriteAccess<P> {
 
