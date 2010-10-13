@@ -15,15 +15,20 @@ import java.util.regex.Pattern;
  */
 public class BacktrackingGuardForUnorderedGroupsRemover {
 
-//	if ( backtracking==0 ) {
+//	if ( state.backtracking==0 ) {
 //  	getUnorderedGroupHelper().enter(grammarAccess.getModelAccess().getUnorderedGroup_1_0_1());
 //      -(1)--------------------------------------------------------------------------------------
 //	}
-	public static final Pattern GUARDED_GROUP_PATTERN = Pattern.compile(
-			"if\\s*\\(\\s*backtracking\\s*==\\s*0\\s*\\)\\s*\\{\\s*(getUnorderedGroupHelper().\\S+(,\\s*\\S+)?)\\s*\\}");
+	public static final Pattern GUARDED_GROUP_PATTERN_01 = Pattern.compile(
+		"if\\s*\\(\\s*state\\.backtracking\\s*==\\s*0\\s*\\)\\s*\\{\\s*(getUnorderedGroupHelper().\\S+(,\\s*\\S+)?)\\s*\\}");
+
+//	if ( state.backtracking==0 ) {
+//		selected = true;
+//  	-(1)--------------------------------------------------------------------------------------
+//	}
+	public static final Pattern GUARDED_GROUP_PATTERN_02 = Pattern.compile(
+		"if\\s*\\(\\s*state\\.backtracking\\s*==\\s*0\\s*\\)\\s*\\{\\s*(selected\\s*=\\strue;?)\\s*\\}");
 	
-
-
 	private final String content;
 	
 	public BacktrackingGuardForUnorderedGroupsRemover(String content) {
@@ -31,10 +36,11 @@ public class BacktrackingGuardForUnorderedGroupsRemover {
 	}
 	
 	public String transform() {
-		Matcher m = GUARDED_GROUP_PATTERN.matcher(content);
+		Matcher m = GUARDED_GROUP_PATTERN_01.matcher(content);
 		String result = m.replaceAll("$1");
+		m = GUARDED_GROUP_PATTERN_02.matcher(result);
+		result = m.replaceAll("$1");
 		return result;
 	}
-	
 	
 }

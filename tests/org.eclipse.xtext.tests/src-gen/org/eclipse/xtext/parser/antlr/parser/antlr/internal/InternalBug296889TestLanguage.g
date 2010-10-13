@@ -53,12 +53,6 @@ import org.eclipse.xtext.parser.antlr.services.Bug296889TestLanguageGrammarAcces
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -95,9 +89,9 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	'Model' 
+((	otherlv_0='Model' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getModelKeyword_0_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0_0(), null);
     }
 (
 (
@@ -124,9 +118,9 @@ ruleModel returns [EObject current=null]
 
 )
 )*)
-    |(	'DataType' 
+    |(	otherlv_2='DataType' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDataTypeKeyword_1_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getDataTypeKeyword_1_0(), null);
     }
 (
 (
@@ -241,7 +235,7 @@ rulePreop returns [EObject current=null]
 (
 		lv_functionName_1_0=	'--' 
     {
-        createLeafNode(grammarAccess.getPreopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0(), "functionName"); 
+        createLeafNode(lv_functionName_1_0, grammarAccess.getPreopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0(), "functionName");
     }
  
 	    {
@@ -340,7 +334,7 @@ rulePostop returns [EObject current=null]
 (
 		lv_functionName_2_0=	'--' 
     {
-        createLeafNode(grammarAccess.getPostopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0(), "functionName"); 
+        createLeafNode(lv_functionName_2_0, grammarAccess.getPostopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0(), "functionName");
     }
  
 	    {
@@ -398,7 +392,7 @@ ruleVariable returns [EObject current=null]
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -491,7 +485,7 @@ ruleDataTypePreop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 	kw='--' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDataTypePreopAccess().getHyphenMinusHyphenMinusKeyword_0(), null); 
+        createLeafNode(kw, grammarAccess.getDataTypePreopAccess().getHyphenMinusHyphenMinusKeyword_0(), null); 
     }
 
     { 
@@ -542,7 +536,7 @@ ruleDataTypePostop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRule
 	kw='--' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDataTypePostopAccess().getHyphenMinusHyphenMinusKeyword_1(), null); 
+        createLeafNode(kw, grammarAccess.getDataTypePostopAccess().getHyphenMinusHyphenMinusKeyword_1(), null); 
     }
 )?)
     ;
@@ -572,7 +566,7 @@ ruleDataTypeVariable returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRu
     }
 
     { 
-    createLeafNode(grammarAccess.getDataTypeVariableAccess().getIDTerminalRuleCall(), null); 
+    createLeafNode(this_ID_0, grammarAccess.getDataTypeVariableAccess().getIDTerminalRuleCall(), null); 
     }
 
     ;

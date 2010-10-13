@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.CrossReferencePr
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalCrossReferenceProposalTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -144,21 +138,21 @@ ruleClass returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_0=RULE_ID
 	{
-		createLeafNode(grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0(), "superClass"); 
+		createLeafNode(otherlv_0, grammarAccess.getClassAccess().getSuperClassClassCrossReference_0_0_0(), "superClass"); 
 	}
 
 )
-)	'<-' 
+)	otherlv_1='<-' 
     {
-        createLeafNode(grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1(), null);
     }
 )?(
 (
 		lv_name_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_2_0, grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -178,13 +172,13 @@ ruleClass returns [EObject current=null]
 	    }
 
 )
-)	'{' 
+)	otherlv_3='{' 
     {
-        createLeafNode(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2(), null);
     }
-	'}' 
+	otherlv_4='}' 
     {
-        createLeafNode(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3(), null);
     }
 )
 ;

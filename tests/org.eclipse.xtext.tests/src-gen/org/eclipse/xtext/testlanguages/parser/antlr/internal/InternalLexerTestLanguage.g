@@ -47,12 +47,6 @@ import org.eclipse.xtext.testlanguages.services.LexerTestLanguageGrammarAccess;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLexerTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -140,7 +134,7 @@ ruleElement returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -164,7 +158,7 @@ ruleElement returns [EObject current=null]
 (
 		lv_h_1_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getElementAccess().getHSTRINGTerminalRuleCall_1_0(), "h"); 
+			createLeafNode(lv_h_1_0, grammarAccess.getElementAccess().getHSTRINGTerminalRuleCall_1_0(), "h"); 
 		}
 		{
 	        if ($current==null) {

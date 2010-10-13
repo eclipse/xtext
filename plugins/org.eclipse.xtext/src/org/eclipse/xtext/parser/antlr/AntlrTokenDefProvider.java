@@ -38,7 +38,7 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 	
 	protected volatile Map<Integer, String> tokenDefMap;
 	
-	private static final String TOKEN_COUNT = "Tokens";
+//	private static final String TOKEN_COUNT = "Tokens";
 	
 	public Map<Integer, String> getTokenDefMap() {
 		if (antlrTokenFileProvider == null)
@@ -58,12 +58,12 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 
 					int antlrTokenType = Integer.parseInt(m.group(2));
 					String antlrTokenDef = m.group(1);
-					if (!TOKEN_COUNT.equals(antlrTokenDef)) {
-						if (antlrTokenDef.startsWith("'")) {
-							antlrTokenDef = antlrTokenDef.substring(1, antlrTokenDef.length() - 1);
-							antlrTokenDef = Strings.convertFromJavaString(antlrTokenDef, true);
-							antlrTokenDef = "'" + antlrTokenDef + "'";
-						}
+					if (antlrTokenDef.startsWith("'")) {
+						antlrTokenDef = antlrTokenDef.substring(1, antlrTokenDef.length() - 1);
+						antlrTokenDef = Strings.convertFromJavaString(antlrTokenDef, true);
+						antlrTokenDef = "'" + antlrTokenDef + "'";
+						tokenDefMap.put(antlrTokenType, antlrTokenDef);
+					} else if (antlrTokenDef.startsWith("RULE_") || antlrTokenDef.startsWith("KEYWORD_")) {
 						tokenDefMap.put(antlrTokenType, antlrTokenDef);
 					}
 					line = br.readLine();

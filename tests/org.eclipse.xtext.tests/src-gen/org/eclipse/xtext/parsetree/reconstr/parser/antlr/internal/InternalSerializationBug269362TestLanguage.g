@@ -47,12 +47,6 @@ import org.eclipse.xtext.parsetree.reconstr.services.SerializationBug269362TestL
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationBug269362TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -89,15 +83,15 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	'foo' 
+((	otherlv_0='foo' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getFooKeyword_0_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getFooKeyword_0_0(), null);
     }
 (
 (
 		lv_foo_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getModelAccess().getFooIDTerminalRuleCall_0_1_0(), "foo"); 
+			createLeafNode(lv_foo_1_0, grammarAccess.getModelAccess().getFooIDTerminalRuleCall_0_1_0(), "foo"); 
 		}
 		{
 	        if ($current==null) {
@@ -117,15 +111,15 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)(	'bar' 
+)(	otherlv_2='bar' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getBarKeyword_0_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getBarKeyword_0_2_0(), null);
     }
 (
 (
 		lv_bar_3_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getModelAccess().getBarIDTerminalRuleCall_0_2_1_0(), "bar"); 
+			createLeafNode(lv_bar_3_0, grammarAccess.getModelAccess().getBarIDTerminalRuleCall_0_2_1_0(), "bar"); 
 		}
 		{
 	        if ($current==null) {
@@ -146,15 +140,15 @@ ruleModel returns [EObject current=null]
 
 )
 ))?)
-    |(	'bar' 
+    |(	otherlv_4='bar' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getBarKeyword_1_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getBarKeyword_1_0(), null);
     }
 (
 (
 		lv_bar_5_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getModelAccess().getBarIDTerminalRuleCall_1_1_0(), "bar"); 
+			createLeafNode(lv_bar_5_0, grammarAccess.getModelAccess().getBarIDTerminalRuleCall_1_1_0(), "bar"); 
 		}
 		{
 	        if ($current==null) {

@@ -47,12 +47,6 @@ import org.eclipse.xtext.linking.services.IgnoreCaseImportsTestLanguageGrammarAc
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -164,7 +158,7 @@ ruleImport returns [EObject current=null]
 (
 		lv_importURI_0_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_0(), "importURI"); 
+			createLeafNode(lv_importURI_0_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_0(), "importURI"); 
 		}
 		{
 	        if ($current==null) {
@@ -211,7 +205,7 @@ ruleElement returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -239,15 +233,15 @@ ruleElement returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_1=RULE_ID
 	{
-		createLeafNode(grammarAccess.getElementAccess().getReferenceElementCrossReference_1_0(), "reference"); 
+		createLeafNode(otherlv_1, grammarAccess.getElementAccess().getReferenceElementCrossReference_1_0(), "reference"); 
 	}
 
 )
-)?	'{' 
+)?	otherlv_2='{' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2(), null);
     }
 (
 (
@@ -273,9 +267,9 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)*	'}' 
+)*	otherlv_4='}' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4(), null);
     }
 )
 ;

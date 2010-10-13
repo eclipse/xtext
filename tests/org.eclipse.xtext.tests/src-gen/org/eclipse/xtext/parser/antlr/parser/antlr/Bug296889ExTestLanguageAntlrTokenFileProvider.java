@@ -10,6 +10,6 @@ public class Bug296889ExTestLanguageAntlrTokenFileProvider implements IAntlrToke
 	
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguage.tokens");
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug296889ExTestLanguageParser.tokens");
 	}
 }

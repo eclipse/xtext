@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.testlanguages.services.ContentAssistTestLangua
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/testlanguages/parser/antlr/internal/InternalContentAssistTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Start";	
    	}
@@ -89,9 +83,9 @@ ruleStart returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'abstract rules' 
+(	otherlv_0='abstract rules' 
     {
-        createLeafNode(grammarAccess.getStartAccess().getAbstractRulesKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getStartAccess().getAbstractRulesKeyword_0(), null);
     }
 (
 (
@@ -117,9 +111,9 @@ ruleStart returns [EObject current=null]
 	    }
 
 )
-)+	'end' 
+)+	otherlv_2='end' 
     {
-        createLeafNode(grammarAccess.getStartAccess().getEndKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getStartAccess().getEndKeyword_2(), null);
     }
 )
 ;
@@ -190,7 +184,7 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getFirstAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -210,9 +204,9 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	    }
 
 )
-)	'(' 
+)	otherlv_1='(' 
     {
-        createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getLeftParenthesisKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getFirstAbstractRuleChildAccess().getLeftParenthesisKeyword_1(), null);
     }
 (
 (
@@ -238,13 +232,13 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
 	    }
 
 )
-)+	')' 
+)+	otherlv_3=')' 
     {
-        createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getRightParenthesisKeyword_3(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getFirstAbstractRuleChildAccess().getRightParenthesisKeyword_3(), null);
     }
-	';' 
+	otherlv_4=';' 
     {
-        createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getSemicolonKeyword_4(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getFirstAbstractRuleChildAccess().getSemicolonKeyword_4(), null);
     }
 )
 ;
@@ -273,7 +267,7 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getSecondAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -293,13 +287,13 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	    }
 
 )
-)	'rule' 
+)	otherlv_1='rule' 
     {
-        createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getRuleKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getSecondAbstractRuleChildAccess().getRuleKeyword_1(), null);
     }
-	':' 
+	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getColonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getSecondAbstractRuleChildAccess().getColonKeyword_2(), null);
     }
 (
 (
@@ -325,9 +319,9 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
 	    }
 
 )
-)	';' 
+)	otherlv_4=';' 
     {
-        createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getSemicolonKeyword_4(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getSecondAbstractRuleChildAccess().getSemicolonKeyword_4(), null);
     }
 )
 ;
@@ -360,9 +354,9 @@ ruleAbstractRuleCall returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_0=RULE_ID
 	{
-		createLeafNode(grammarAccess.getAbstractRuleCallAccess().getRuleAbstractRuleCrossReference_0(), "rule"); 
+		createLeafNode(otherlv_0, grammarAccess.getAbstractRuleCallAccess().getRuleAbstractRuleCrossReference_0(), "rule"); 
 	}
 
 )

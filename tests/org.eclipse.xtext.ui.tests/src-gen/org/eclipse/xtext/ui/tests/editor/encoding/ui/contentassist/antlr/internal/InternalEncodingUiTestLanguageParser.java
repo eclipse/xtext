@@ -30,12 +30,20 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
     public static final int RULE_LEXEME=4;
     public static final int EOF=-1;
 
+    // delegates
+    // delegators
+
+
         public InternalEncodingUiTestLanguageParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalEncodingUiTestLanguageParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalEncodingUiTestLanguageParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g"; }
 
 
@@ -59,7 +67,7 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
 
-    // $ANTLR start entryRuleModel
+    // $ANTLR start "entryRuleModel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:61:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
@@ -69,7 +77,8 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
              before(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel61);
             ruleModel();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getModelRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel68); 
@@ -85,10 +94,10 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end entryRuleModel
+    // $ANTLR end "entryRuleModel"
 
 
-    // $ANTLR start ruleModel
+    // $ANTLR start "ruleModel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:70:1: ruleModel : ( ( rule__Model__WordsAssignment )* ) ;
     public final void ruleModel() throws RecognitionException {
 
@@ -119,7 +128,8 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Model__WordsAssignment_in_ruleModel94);
             	    rule__Model__WordsAssignment();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -149,10 +159,10 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end ruleModel
+    // $ANTLR end "ruleModel"
 
 
-    // $ANTLR start entryRuleWord
+    // $ANTLR start "entryRuleWord"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:89:1: entryRuleWord : ruleWord EOF ;
     public final void entryRuleWord() throws RecognitionException {
         try {
@@ -162,7 +172,8 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
              before(grammarAccess.getWordRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleWord_in_entryRuleWord122);
             ruleWord();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getWordRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWord129); 
@@ -178,10 +189,10 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end entryRuleWord
+    // $ANTLR end "entryRuleWord"
 
 
-    // $ANTLR start ruleWord
+    // $ANTLR start "ruleWord"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:98:1: ruleWord : ( ( rule__Word__ValueAssignment ) ) ;
     public final void ruleWord() throws RecognitionException {
 
@@ -200,7 +211,8 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
             {
             pushFollow(FollowSets000.FOLLOW_rule__Word__ValueAssignment_in_ruleWord155);
             rule__Word__ValueAssignment();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -224,10 +236,10 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end ruleWord
+    // $ANTLR end "ruleWord"
 
 
-    // $ANTLR start rule__Model__WordsAssignment
+    // $ANTLR start "rule__Model__WordsAssignment"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:120:1: rule__Model__WordsAssignment : ( ruleWord ) ;
     public final void rule__Model__WordsAssignment() throws RecognitionException {
 
@@ -243,7 +255,8 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
              before(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleWord_in_rule__Model__WordsAssignment194);
             ruleWord();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0()); 
 
@@ -264,10 +277,10 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end rule__Model__WordsAssignment
+    // $ANTLR end "rule__Model__WordsAssignment"
 
 
-    // $ANTLR start rule__Word__ValueAssignment
+    // $ANTLR start "rule__Word__ValueAssignment"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:135:1: rule__Word__ValueAssignment : ( RULE_LEXEME ) ;
     public final void rule__Word__ValueAssignment() throws RecognitionException {
 
@@ -301,7 +314,9 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end rule__Word__ValueAssignment
+    // $ANTLR end "rule__Word__ValueAssignment"
+
+    // Delegated rules
 
 
  

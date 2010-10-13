@@ -47,12 +47,6 @@ import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLangua
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -161,15 +155,15 @@ ruleWithoutHiddens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'without' 
+(	otherlv_0='without' 
     {
-        createLeafNode(grammarAccess.getWithoutHiddensAccess().getWithoutKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getWithoutHiddensAccess().getWithoutKeyword_0(), null);
     }
 (
 (
 		lv_spaces_1_0=RULE_WS
 		{
-			createLeafNode(grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
+			createLeafNode(lv_spaces_1_0, grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
 		}
 		{
 	        if ($current==null) {
@@ -189,15 +183,15 @@ ruleWithoutHiddens returns [EObject current=null]
 	    }
 
 )
-)	'hiddens' 
+)	otherlv_2='hiddens' 
     {
-        createLeafNode(grammarAccess.getWithoutHiddensAccess().getHiddensKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getWithoutHiddensAccess().getHiddensKeyword_2(), null);
     }
 (
 (
 		lv_spaces_3_0=RULE_WS
 		{
-			createLeafNode(grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0(), "spaces"); 
+			createLeafNode(lv_spaces_3_0, grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0(), "spaces"); 
 		}
 		{
 	        if ($current==null) {
@@ -221,7 +215,7 @@ ruleWithoutHiddens returns [EObject current=null]
 (
 		lv_valid_4_0=	';' 
     {
-        createLeafNode(grammarAccess.getWithoutHiddensAccess().getValidSemicolonKeyword_4_0(), "valid"); 
+        createLeafNode(lv_valid_4_0, grammarAccess.getWithoutHiddensAccess().getValidSemicolonKeyword_4_0(), "valid");
     }
  
 	    {
@@ -268,19 +262,19 @@ ruleWithHiddens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'with' 
+(	otherlv_0='with' 
     {
-        createLeafNode(grammarAccess.getWithHiddensAccess().getWithKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getWithHiddensAccess().getWithKeyword_0(), null);
     }
-	'hiddens' 
+	otherlv_1='hiddens' 
     {
-        createLeafNode(grammarAccess.getWithHiddensAccess().getHiddensKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getWithHiddensAccess().getHiddensKeyword_1(), null);
     }
 (
 (
 		lv_valid_2_0=	';' 
     {
-        createLeafNode(grammarAccess.getWithHiddensAccess().getValidSemicolonKeyword_2_0(), "valid"); 
+        createLeafNode(lv_valid_2_0, grammarAccess.getWithHiddensAccess().getValidSemicolonKeyword_2_0(), "valid");
     }
  
 	    {
@@ -330,17 +324,17 @@ ruleOverridingHiddens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'overriding' 
+(	otherlv_0='overriding' 
     {
-        createLeafNode(grammarAccess.getOverridingHiddensAccess().getOverridingKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getOverridingHiddensAccess().getOverridingKeyword_0(), null);
     }
-	'hiddens' 
+	otherlv_1='hiddens' 
     {
-        createLeafNode(grammarAccess.getOverridingHiddensAccess().getHiddensKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getOverridingHiddensAccess().getHiddensKeyword_1(), null);
     }
-	'(' 
+	otherlv_2='(' 
     {
-        createLeafNode(grammarAccess.getOverridingHiddensAccess().getLeftParenthesisKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getOverridingHiddensAccess().getLeftParenthesisKeyword_2(), null);
     }
 (
 (
@@ -366,15 +360,15 @@ ruleOverridingHiddens returns [EObject current=null]
 	    }
 
 )
-)	')' 
+)	otherlv_4=')' 
     {
-        createLeafNode(grammarAccess.getOverridingHiddensAccess().getRightParenthesisKeyword_4(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getOverridingHiddensAccess().getRightParenthesisKeyword_4(), null);
     }
 (
 (
 		lv_valid_5_0=	';' 
     {
-        createLeafNode(grammarAccess.getOverridingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid"); 
+        createLeafNode(lv_valid_5_0, grammarAccess.getOverridingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid");
     }
  
 	    {
@@ -424,15 +418,15 @@ ruleOverridingHiddensCall returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'call' 
+(	otherlv_0='call' 
     {
-        createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getCallKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getOverridingHiddensCallAccess().getCallKeyword_0(), null);
     }
 (
 (
 		lv_spaces_1_0=RULE_WS
 		{
-			createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
+			createLeafNode(lv_spaces_1_0, grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0(), "spaces"); 
 		}
 		{
 	        if ($current==null) {
@@ -456,7 +450,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
 (
 		lv_valid_2_0=	';' 
     {
-        createLeafNode(grammarAccess.getOverridingHiddensCallAccess().getValidSemicolonKeyword_2_0(), "valid"); 
+        createLeafNode(lv_valid_2_0, grammarAccess.getOverridingHiddensCallAccess().getValidSemicolonKeyword_2_0(), "valid");
     }
  
 	    {
@@ -506,17 +500,17 @@ ruleInheritingHiddens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'inheriting' 
+(	otherlv_0='inheriting' 
     {
-        createLeafNode(grammarAccess.getInheritingHiddensAccess().getInheritingKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getInheritingHiddensAccess().getInheritingKeyword_0(), null);
     }
-	'hiddens' 
+	otherlv_1='hiddens' 
     {
-        createLeafNode(grammarAccess.getInheritingHiddensAccess().getHiddensKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getInheritingHiddensAccess().getHiddensKeyword_1(), null);
     }
-	'(' 
+	otherlv_2='(' 
     {
-        createLeafNode(grammarAccess.getInheritingHiddensAccess().getLeftParenthesisKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getInheritingHiddensAccess().getLeftParenthesisKeyword_2(), null);
     }
 ((
 (
@@ -567,15 +561,15 @@ ruleInheritingHiddens returns [EObject current=null]
 	    }
 
 )
-))	')' 
+))	otherlv_5=')' 
     {
-        createLeafNode(grammarAccess.getInheritingHiddensAccess().getRightParenthesisKeyword_4(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getInheritingHiddensAccess().getRightParenthesisKeyword_4(), null);
     }
 (
 (
 		lv_valid_6_0=	';' 
     {
-        createLeafNode(grammarAccess.getInheritingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid"); 
+        createLeafNode(lv_valid_6_0, grammarAccess.getInheritingHiddensAccess().getValidSemicolonKeyword_5_0(), "valid");
     }
  
 	    {
@@ -618,9 +612,9 @@ ruleDatatypeHiddens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'datatype' 
+(	otherlv_0='datatype' 
     {
-        createLeafNode(grammarAccess.getDatatypeHiddensAccess().getDatatypeKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getDatatypeHiddensAccess().getDatatypeKeyword_0(), null);
     }
 (
 (
@@ -680,13 +674,13 @@ ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
 	kw='rule' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDatatypeRuleAccess().getRuleKeyword_0(), null); 
+        createLeafNode(kw, grammarAccess.getDatatypeRuleAccess().getRuleKeyword_0(), null); 
     }
 
 	kw=';' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDatatypeRuleAccess().getSemicolonKeyword_1(), null); 
+        createLeafNode(kw, grammarAccess.getDatatypeRuleAccess().getSemicolonKeyword_1(), null); 
     }
 )
     ;
@@ -721,15 +715,15 @@ ruleHidingHiddens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'hiding' 
+(	otherlv_0='hiding' 
     {
-        createLeafNode(grammarAccess.getHidingHiddensAccess().getHidingKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getHidingHiddensAccess().getHidingKeyword_0(), null);
     }
 (
 (
 		lv_space_1_0=RULE_WS
 		{
-			createLeafNode(grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0(), "space"); 
+			createLeafNode(lv_space_1_0, grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0(), "space"); 
 		}
 		{
 	        if ($current==null) {
@@ -799,15 +793,15 @@ ruleInheritingHiddensCall returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'call' 
+(	otherlv_0='call' 
     {
-        createLeafNode(grammarAccess.getInheritingHiddensCallAccess().getCallKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getInheritingHiddensCallAccess().getCallKeyword_0(), null);
     }
 (
 (
 		lv_valid_1_0=	';' 
     {
-        createLeafNode(grammarAccess.getInheritingHiddensCallAccess().getValidSemicolonKeyword_1_0(), "valid"); 
+        createLeafNode(lv_valid_1_0, grammarAccess.getInheritingHiddensCallAccess().getValidSemicolonKeyword_1_0(), "valid");
     }
  
 	    {

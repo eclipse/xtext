@@ -26,6 +26,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "';'", "'refersTo'"
     };
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
     public static final int RULE_ID=4;
     public static final int RULE_WS=9;
     public static final int EOF=-1;
@@ -33,13 +34,22 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__11=11;
+
+    // delegates
+    // delegators
+
 
         public InternalTwoContextsTestLanguageParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalTwoContextsTestLanguageParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalTwoContextsTestLanguageParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g"; }
 
 
@@ -63,7 +73,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
 
 
 
-    // $ANTLR start entryRuleMainModel
+    // $ANTLR start "entryRuleMainModel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:61:1: entryRuleMainModel : ruleMainModel EOF ;
     public final void entryRuleMainModel() throws RecognitionException {
         try {
@@ -73,7 +83,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
              before(grammarAccess.getMainModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleMainModel_in_entryRuleMainModel61);
             ruleMainModel();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getMainModelRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMainModel68); 
@@ -89,10 +100,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end entryRuleMainModel
+    // $ANTLR end "entryRuleMainModel"
 
 
-    // $ANTLR start ruleMainModel
+    // $ANTLR start "ruleMainModel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:70:1: ruleMainModel : ( ( rule__MainModel__ElementsAssignment )* ) ;
     public final void ruleMainModel() throws RecognitionException {
 
@@ -123,7 +134,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__MainModel__ElementsAssignment_in_ruleMainModel94);
             	    rule__MainModel__ElementsAssignment();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -153,10 +165,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end ruleMainModel
+    // $ANTLR end "ruleMainModel"
 
 
-    // $ANTLR start entryRuleAnElement
+    // $ANTLR start "entryRuleAnElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:89:1: entryRuleAnElement : ruleAnElement EOF ;
     public final void entryRuleAnElement() throws RecognitionException {
         try {
@@ -166,7 +178,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
              before(grammarAccess.getAnElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAnElement_in_entryRuleAnElement122);
             ruleAnElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAnElementRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAnElement129); 
@@ -182,10 +195,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end entryRuleAnElement
+    // $ANTLR end "entryRuleAnElement"
 
 
-    // $ANTLR start ruleAnElement
+    // $ANTLR start "ruleAnElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:98:1: ruleAnElement : ( ( rule__AnElement__Group__0 ) ) ;
     public final void ruleAnElement() throws RecognitionException {
 
@@ -204,7 +217,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
             {
             pushFollow(FollowSets000.FOLLOW_rule__AnElement__Group__0_in_ruleAnElement155);
             rule__AnElement__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -228,10 +242,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end ruleAnElement
+    // $ANTLR end "ruleAnElement"
 
 
-    // $ANTLR start rule__AnElement__Group__0
+    // $ANTLR start "rule__AnElement__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:119:1: rule__AnElement__Group__0 : rule__AnElement__Group__0__Impl rule__AnElement__Group__1 ;
     public final void rule__AnElement__Group__0() throws RecognitionException {
 
@@ -243,11 +257,13 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
             {
             pushFollow(FollowSets000.FOLLOW_rule__AnElement__Group__0__Impl_in_rule__AnElement__Group__0189);
             rule__AnElement__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__AnElement__Group__1_in_rule__AnElement__Group__0192);
             rule__AnElement__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -264,10 +280,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__Group__0
+    // $ANTLR end "rule__AnElement__Group__0"
 
 
-    // $ANTLR start rule__AnElement__Group__0__Impl
+    // $ANTLR start "rule__AnElement__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:131:1: rule__AnElement__Group__0__Impl : ( ( rule__AnElement__NameAssignment_0 ) ) ;
     public final void rule__AnElement__Group__0__Impl() throws RecognitionException {
 
@@ -286,7 +302,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
             {
             pushFollow(FollowSets000.FOLLOW_rule__AnElement__NameAssignment_0_in_rule__AnElement__Group__0__Impl219);
             rule__AnElement__NameAssignment_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -310,10 +327,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__Group__0__Impl
+    // $ANTLR end "rule__AnElement__Group__0__Impl"
 
 
-    // $ANTLR start rule__AnElement__Group__1
+    // $ANTLR start "rule__AnElement__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:148:1: rule__AnElement__Group__1 : rule__AnElement__Group__1__Impl rule__AnElement__Group__2 ;
     public final void rule__AnElement__Group__1() throws RecognitionException {
 
@@ -325,11 +342,13 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
             {
             pushFollow(FollowSets000.FOLLOW_rule__AnElement__Group__1__Impl_in_rule__AnElement__Group__1249);
             rule__AnElement__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__AnElement__Group__2_in_rule__AnElement__Group__1252);
             rule__AnElement__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -346,10 +365,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__Group__1
+    // $ANTLR end "rule__AnElement__Group__1"
 
 
-    // $ANTLR start rule__AnElement__Group__1__Impl
+    // $ANTLR start "rule__AnElement__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:160:1: rule__AnElement__Group__1__Impl : ( ( rule__AnElement__Group_1__0 )? ) ;
     public final void rule__AnElement__Group__1__Impl() throws RecognitionException {
 
@@ -376,7 +395,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__AnElement__Group_1__0_in_rule__AnElement__Group__1__Impl279);
                     rule__AnElement__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -403,10 +423,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__Group__1__Impl
+    // $ANTLR end "rule__AnElement__Group__1__Impl"
 
 
-    // $ANTLR start rule__AnElement__Group__2
+    // $ANTLR start "rule__AnElement__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:177:1: rule__AnElement__Group__2 : rule__AnElement__Group__2__Impl ;
     public final void rule__AnElement__Group__2() throws RecognitionException {
 
@@ -418,7 +438,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
             {
             pushFollow(FollowSets000.FOLLOW_rule__AnElement__Group__2__Impl_in_rule__AnElement__Group__2310);
             rule__AnElement__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -435,10 +456,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__Group__2
+    // $ANTLR end "rule__AnElement__Group__2"
 
 
-    // $ANTLR start rule__AnElement__Group__2__Impl
+    // $ANTLR start "rule__AnElement__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:188:1: rule__AnElement__Group__2__Impl : ( ';' ) ;
     public final void rule__AnElement__Group__2__Impl() throws RecognitionException {
 
@@ -472,10 +493,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__Group__2__Impl
+    // $ANTLR end "rule__AnElement__Group__2__Impl"
 
 
-    // $ANTLR start rule__AnElement__Group_1__0
+    // $ANTLR start "rule__AnElement__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:213:1: rule__AnElement__Group_1__0 : rule__AnElement__Group_1__0__Impl rule__AnElement__Group_1__1 ;
     public final void rule__AnElement__Group_1__0() throws RecognitionException {
 
@@ -487,11 +508,13 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
             {
             pushFollow(FollowSets000.FOLLOW_rule__AnElement__Group_1__0__Impl_in_rule__AnElement__Group_1__0375);
             rule__AnElement__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__AnElement__Group_1__1_in_rule__AnElement__Group_1__0378);
             rule__AnElement__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -508,10 +531,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__Group_1__0
+    // $ANTLR end "rule__AnElement__Group_1__0"
 
 
-    // $ANTLR start rule__AnElement__Group_1__0__Impl
+    // $ANTLR start "rule__AnElement__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:225:1: rule__AnElement__Group_1__0__Impl : ( 'refersTo' ) ;
     public final void rule__AnElement__Group_1__0__Impl() throws RecognitionException {
 
@@ -545,10 +568,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__Group_1__0__Impl
+    // $ANTLR end "rule__AnElement__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__AnElement__Group_1__1
+    // $ANTLR start "rule__AnElement__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:244:1: rule__AnElement__Group_1__1 : rule__AnElement__Group_1__1__Impl ;
     public final void rule__AnElement__Group_1__1() throws RecognitionException {
 
@@ -560,7 +583,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
             {
             pushFollow(FollowSets000.FOLLOW_rule__AnElement__Group_1__1__Impl_in_rule__AnElement__Group_1__1437);
             rule__AnElement__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -577,10 +601,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__Group_1__1
+    // $ANTLR end "rule__AnElement__Group_1__1"
 
 
-    // $ANTLR start rule__AnElement__Group_1__1__Impl
+    // $ANTLR start "rule__AnElement__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:255:1: rule__AnElement__Group_1__1__Impl : ( ( rule__AnElement__ReferredAssignment_1_1 ) ) ;
     public final void rule__AnElement__Group_1__1__Impl() throws RecognitionException {
 
@@ -599,7 +623,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
             {
             pushFollow(FollowSets000.FOLLOW_rule__AnElement__ReferredAssignment_1_1_in_rule__AnElement__Group_1__1__Impl464);
             rule__AnElement__ReferredAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -623,10 +648,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__Group_1__1__Impl
+    // $ANTLR end "rule__AnElement__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__MainModel__ElementsAssignment
+    // $ANTLR start "rule__MainModel__ElementsAssignment"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:277:1: rule__MainModel__ElementsAssignment : ( ruleAnElement ) ;
     public final void rule__MainModel__ElementsAssignment() throws RecognitionException {
 
@@ -642,7 +667,8 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
              before(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAnElement_in_rule__MainModel__ElementsAssignment503);
             ruleAnElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0()); 
 
@@ -663,10 +689,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__MainModel__ElementsAssignment
+    // $ANTLR end "rule__MainModel__ElementsAssignment"
 
 
-    // $ANTLR start rule__AnElement__NameAssignment_0
+    // $ANTLR start "rule__AnElement__NameAssignment_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:292:1: rule__AnElement__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__AnElement__NameAssignment_0() throws RecognitionException {
 
@@ -700,10 +726,10 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__NameAssignment_0
+    // $ANTLR end "rule__AnElement__NameAssignment_0"
 
 
-    // $ANTLR start rule__AnElement__ReferredAssignment_1_1
+    // $ANTLR start "rule__AnElement__ReferredAssignment_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalTwoContextsTestLanguage.g:307:1: rule__AnElement__ReferredAssignment_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__AnElement__ReferredAssignment_1_1() throws RecognitionException {
 
@@ -745,7 +771,9 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         }
         return ;
     }
-    // $ANTLR end rule__AnElement__ReferredAssignment_1_1
+    // $ANTLR end "rule__AnElement__ReferredAssignment_1_1"
+
+    // Delegated rules
 
 
  
@@ -761,7 +789,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalConte
         public static final BitSet FOLLOW_rule__AnElement__Group__0__Impl_in_rule__AnElement__Group__0189 = new BitSet(new long[]{0x0000000000001800L});
         public static final BitSet FOLLOW_rule__AnElement__Group__1_in_rule__AnElement__Group__0192 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AnElement__NameAssignment_0_in_rule__AnElement__Group__0__Impl219 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__AnElement__Group__1__Impl_in_rule__AnElement__Group__1249 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_rule__AnElement__Group__1__Impl_in_rule__AnElement__Group__1249 = new BitSet(new long[]{0x0000000000001800L});
         public static final BitSet FOLLOW_rule__AnElement__Group__2_in_rule__AnElement__Group__1252 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AnElement__Group_1__0_in_rule__AnElement__Group__1__Impl279 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AnElement__Group__2__Impl_in_rule__AnElement__Group__2310 = new BitSet(new long[]{0x0000000000000002L});

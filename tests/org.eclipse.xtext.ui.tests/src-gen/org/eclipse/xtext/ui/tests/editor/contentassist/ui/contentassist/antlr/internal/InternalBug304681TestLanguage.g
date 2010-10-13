@@ -5,6 +5,7 @@ grammar InternalBug304681TestLanguage;
 
 options {
 	superClass=AbstractInternalContentAssistParser;
+	backtrack=true;
 	
 }
 

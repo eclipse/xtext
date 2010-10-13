@@ -5,6 +5,7 @@ grammar InternalUnorderedGroupsTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	backtrack=true;
 	
 }
 
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.UnorderedGroupsTestLanguageGrammarAccess;
@@ -37,6 +39,11 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.UnorderedGroupsT
 
 @parser::members {
 
+/*
+  This grammar contains a lot of empty actions to work around a bug in ANTLR.
+  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
+*/
+ 
  	private UnorderedGroupsTestLanguageGrammarAccess grammarAccess;
  	
     public InternalUnorderedGroupsTestLanguageParser(TokenStream input, IAstFactory factory, UnorderedGroupsTestLanguageGrammarAccess grammarAccess) {
@@ -44,12 +51,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.UnorderedGroupsT
         this.factory = factory;
         registerRules(grammarAccess.getGrammar());
         this.grammarAccess = grammarAccess;
-    }
-    
-    @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalUnorderedGroupsTestLanguage.tokens");
     }
     
     @Override
@@ -89,9 +90,9 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	'1' 
+((	otherlv_0='1' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDigitOneKeyword_0_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getDigitOneKeyword_0_0(), null);
     }
 (
 (
@@ -118,9 +119,9 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'2' 
+    |(	otherlv_2='2' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDigitTwoKeyword_1_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getDigitTwoKeyword_1_0(), null);
     }
 (
 (
@@ -147,9 +148,9 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'3' 
+    |(	otherlv_4='3' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDigitThreeKeyword_2_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getDigitThreeKeyword_2_0(), null);
     }
 (
 (
@@ -176,9 +177,9 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'4' 
+    |(	otherlv_6='4' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDigitFourKeyword_3_0(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getModelAccess().getDigitFourKeyword_3_0(), null);
     }
 (
 (
@@ -205,9 +206,9 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'5' 
+    |(	otherlv_8='5' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDigitFiveKeyword_4_0(), null); 
+    	createLeafNode(otherlv_8, grammarAccess.getModelAccess().getDigitFiveKeyword_4_0(), null);
     }
 (
 (
@@ -234,9 +235,9 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'bug304681' 
+    |(	otherlv_10='bug304681' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getBug304681Keyword_5_0(), null); 
+    	createLeafNode(otherlv_10, grammarAccess.getModelAccess().getBug304681Keyword_5_0(), null);
     }
 (
 (
@@ -271,16 +272,27 @@ ruleModel returns [EObject current=null]
 
 // Entry rule entryRuleSimpleModel
 entryRuleSimpleModel returns [EObject current=null] 
+	@init { 
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+			grammarAccess.getSimpleModelAccess().getUnorderedGroup_0()
+		);
+	}
 	:
 	{ currentNode = createCompositeNode(grammarAccess.getSimpleModelRule(), currentNode); }
 	 iv_ruleSimpleModel=ruleSimpleModel 
 	 { $current=$iv_ruleSimpleModel.current; } 
 	 EOF 
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 // Rule SimpleModel
 ruleSimpleModel returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+			grammarAccess.getSimpleModelAccess().getUnorderedGroup_0()
+		);
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -304,7 +316,7 @@ ruleSimpleModel returns [EObject current=null]
 (
 		lv_visibility_1_1=	'public' 
     {
-        createLeafNode(grammarAccess.getSimpleModelAccess().getVisibilityPublicKeyword_0_0_0_0(), "visibility"); 
+        createLeafNode(lv_visibility_1_1, grammarAccess.getSimpleModelAccess().getVisibilityPublicKeyword_0_0_0_0(), "visibility");
     }
  
 	    {
@@ -322,7 +334,7 @@ ruleSimpleModel returns [EObject current=null]
 
     |		lv_visibility_1_2=	'private' 
     {
-        createLeafNode(grammarAccess.getSimpleModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), "visibility"); 
+        createLeafNode(lv_visibility_1_2, grammarAccess.getSimpleModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), "visibility");
     }
  
 	    {
@@ -340,7 +352,7 @@ ruleSimpleModel returns [EObject current=null]
 
     |		lv_visibility_1_3=	'protected' 
     {
-        createLeafNode(grammarAccess.getSimpleModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), "visibility"); 
+        createLeafNode(lv_visibility_1_3, grammarAccess.getSimpleModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), "visibility");
     }
  
 	    {
@@ -375,7 +387,7 @@ ruleSimpleModel returns [EObject current=null]
 (
 		lv_static_2_0=	'static' 
     {
-        createLeafNode(grammarAccess.getSimpleModelAccess().getStaticStaticKeyword_0_1_0(), "static"); 
+        createLeafNode(lv_static_2_0, grammarAccess.getSimpleModelAccess().getStaticStaticKeyword_0_1_0(), "static");
     }
  
 	    {
@@ -408,7 +420,7 @@ ruleSimpleModel returns [EObject current=null]
 (
 		lv_synchronized_3_0=	'synchronized' 
     {
-        createLeafNode(grammarAccess.getSimpleModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), "synchronized"); 
+        createLeafNode(lv_synchronized_3_0, grammarAccess.getSimpleModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), "synchronized");
     }
  
 	    {
@@ -441,7 +453,7 @@ ruleSimpleModel returns [EObject current=null]
 (
 		lv_abstract_4_0=	'abstract' 
     {
-        createLeafNode(grammarAccess.getSimpleModelAccess().getAbstractAbstractKeyword_0_3_0_0(), "abstract"); 
+        createLeafNode(lv_abstract_4_0, grammarAccess.getSimpleModelAccess().getAbstractAbstractKeyword_0_3_0_0(), "abstract");
     }
  
 	    {
@@ -463,7 +475,7 @@ ruleSimpleModel returns [EObject current=null]
 (
 		lv_final_5_0=	'final' 
     {
-        createLeafNode(grammarAccess.getSimpleModelAccess().getFinalFinalKeyword_0_3_1_0(), "final"); 
+        createLeafNode(lv_final_5_0, grammarAccess.getSimpleModelAccess().getFinalFinalKeyword_0_3_1_0(), "final");
     }
  
 	    {
@@ -494,15 +506,15 @@ ruleSimpleModel returns [EObject current=null]
 	  getUnorderedGroupHelper().leave(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
 	}
 
-)	'class' 
+)	otherlv_6='class' 
     {
-        createLeafNode(grammarAccess.getSimpleModelAccess().getClassKeyword_1(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getSimpleModelAccess().getClassKeyword_1(), null);
     }
 (
 (
 		lv_name_7_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getSimpleModelAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+			createLeafNode(lv_name_7_0, grammarAccess.getSimpleModelAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -522,16 +534,19 @@ ruleSimpleModel returns [EObject current=null]
 	    }
 
 )
-)	'{' 
+)	otherlv_8='{' 
     {
-        createLeafNode(grammarAccess.getSimpleModelAccess().getLeftCurlyBracketKeyword_3(), null); 
+    	createLeafNode(otherlv_8, grammarAccess.getSimpleModelAccess().getLeftCurlyBracketKeyword_3(), null);
     }
-	'}' 
+	otherlv_9='}' 
     {
-        createLeafNode(grammarAccess.getSimpleModelAccess().getRightCurlyBracketKeyword_4(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getSimpleModelAccess().getRightCurlyBracketKeyword_4(), null);
     }
 )
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 
 
@@ -539,16 +554,27 @@ ruleSimpleModel returns [EObject current=null]
 
 // Entry rule entryRuleMandatoryModel
 entryRuleMandatoryModel returns [EObject current=null] 
+	@init { 
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+			grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0()
+		);
+	}
 	:
 	{ currentNode = createCompositeNode(grammarAccess.getMandatoryModelRule(), currentNode); }
 	 iv_ruleMandatoryModel=ruleMandatoryModel 
 	 { $current=$iv_ruleMandatoryModel.current; } 
 	 EOF 
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 // Rule MandatoryModel
 ruleMandatoryModel returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+			grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0()
+		);
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -572,7 +598,7 @@ ruleMandatoryModel returns [EObject current=null]
 (
 		lv_visibility_1_1=	'public' 
     {
-        createLeafNode(grammarAccess.getMandatoryModelAccess().getVisibilityPublicKeyword_0_0_0_0(), "visibility"); 
+        createLeafNode(lv_visibility_1_1, grammarAccess.getMandatoryModelAccess().getVisibilityPublicKeyword_0_0_0_0(), "visibility");
     }
  
 	    {
@@ -590,7 +616,7 @@ ruleMandatoryModel returns [EObject current=null]
 
     |		lv_visibility_1_2=	'private' 
     {
-        createLeafNode(grammarAccess.getMandatoryModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), "visibility"); 
+        createLeafNode(lv_visibility_1_2, grammarAccess.getMandatoryModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), "visibility");
     }
  
 	    {
@@ -608,7 +634,7 @@ ruleMandatoryModel returns [EObject current=null]
 
     |		lv_visibility_1_3=	'protected' 
     {
-        createLeafNode(grammarAccess.getMandatoryModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), "visibility"); 
+        createLeafNode(lv_visibility_1_3, grammarAccess.getMandatoryModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), "visibility");
     }
  
 	    {
@@ -643,7 +669,7 @@ ruleMandatoryModel returns [EObject current=null]
 (
 		lv_static_2_0=	'static' 
     {
-        createLeafNode(grammarAccess.getMandatoryModelAccess().getStaticStaticKeyword_0_1_0(), "static"); 
+        createLeafNode(lv_static_2_0, grammarAccess.getMandatoryModelAccess().getStaticStaticKeyword_0_1_0(), "static");
     }
  
 	    {
@@ -676,7 +702,7 @@ ruleMandatoryModel returns [EObject current=null]
 (
 		lv_synchronized_3_0=	'synchronized' 
     {
-        createLeafNode(grammarAccess.getMandatoryModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), "synchronized"); 
+        createLeafNode(lv_synchronized_3_0, grammarAccess.getMandatoryModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), "synchronized");
     }
  
 	    {
@@ -709,7 +735,7 @@ ruleMandatoryModel returns [EObject current=null]
 (
 		lv_abstract_4_0=	'abstract' 
     {
-        createLeafNode(grammarAccess.getMandatoryModelAccess().getAbstractAbstractKeyword_0_3_0_0(), "abstract"); 
+        createLeafNode(lv_abstract_4_0, grammarAccess.getMandatoryModelAccess().getAbstractAbstractKeyword_0_3_0_0(), "abstract");
     }
  
 	    {
@@ -731,7 +757,7 @@ ruleMandatoryModel returns [EObject current=null]
 (
 		lv_final_5_0=	'final' 
     {
-        createLeafNode(grammarAccess.getMandatoryModelAccess().getFinalFinalKeyword_0_3_1_0(), "final"); 
+        createLeafNode(lv_final_5_0, grammarAccess.getMandatoryModelAccess().getFinalFinalKeyword_0_3_1_0(), "final");
     }
  
 	    {
@@ -763,15 +789,15 @@ ruleMandatoryModel returns [EObject current=null]
 	  getUnorderedGroupHelper().leave(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
 	}
 
-)	'class' 
+)	otherlv_6='class' 
     {
-        createLeafNode(grammarAccess.getMandatoryModelAccess().getClassKeyword_1(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getMandatoryModelAccess().getClassKeyword_1(), null);
     }
 (
 (
 		lv_name_7_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getMandatoryModelAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+			createLeafNode(lv_name_7_0, grammarAccess.getMandatoryModelAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -791,16 +817,19 @@ ruleMandatoryModel returns [EObject current=null]
 	    }
 
 )
-)	'{' 
+)	otherlv_8='{' 
     {
-        createLeafNode(grammarAccess.getMandatoryModelAccess().getLeftCurlyBracketKeyword_3(), null); 
+    	createLeafNode(otherlv_8, grammarAccess.getMandatoryModelAccess().getLeftCurlyBracketKeyword_3(), null);
     }
-	'}' 
+	otherlv_9='}' 
     {
-        createLeafNode(grammarAccess.getMandatoryModelAccess().getRightCurlyBracketKeyword_4(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getMandatoryModelAccess().getRightCurlyBracketKeyword_4(), null);
     }
 )
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 
 
@@ -808,16 +837,27 @@ ruleMandatoryModel returns [EObject current=null]
 
 // Entry rule entryRuleLoopedModel
 entryRuleLoopedModel returns [EObject current=null] 
+	@init { 
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+			grammarAccess.getLoopedModelAccess().getUnorderedGroup_0()
+		);
+	}
 	:
 	{ currentNode = createCompositeNode(grammarAccess.getLoopedModelRule(), currentNode); }
 	 iv_ruleLoopedModel=ruleLoopedModel 
 	 { $current=$iv_ruleLoopedModel.current; } 
 	 EOF 
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 // Rule LoopedModel
 ruleLoopedModel returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+			grammarAccess.getLoopedModelAccess().getUnorderedGroup_0()
+		);
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -841,7 +881,7 @@ ruleLoopedModel returns [EObject current=null]
 (
 		lv_visibility_1_1=	'public' 
     {
-        createLeafNode(grammarAccess.getLoopedModelAccess().getVisibilityPublicKeyword_0_0_0_0(), "visibility"); 
+        createLeafNode(lv_visibility_1_1, grammarAccess.getLoopedModelAccess().getVisibilityPublicKeyword_0_0_0_0(), "visibility");
     }
  
 	    {
@@ -859,7 +899,7 @@ ruleLoopedModel returns [EObject current=null]
 
     |		lv_visibility_1_2=	'private' 
     {
-        createLeafNode(grammarAccess.getLoopedModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), "visibility"); 
+        createLeafNode(lv_visibility_1_2, grammarAccess.getLoopedModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), "visibility");
     }
  
 	    {
@@ -877,7 +917,7 @@ ruleLoopedModel returns [EObject current=null]
 
     |		lv_visibility_1_3=	'protected' 
     {
-        createLeafNode(grammarAccess.getLoopedModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), "visibility"); 
+        createLeafNode(lv_visibility_1_3, grammarAccess.getLoopedModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), "visibility");
     }
  
 	    {
@@ -912,7 +952,7 @@ ruleLoopedModel returns [EObject current=null]
 (
 		lv_static_2_0=	'static' 
     {
-        createLeafNode(grammarAccess.getLoopedModelAccess().getStaticStaticKeyword_0_1_0(), "static"); 
+        createLeafNode(lv_static_2_0, grammarAccess.getLoopedModelAccess().getStaticStaticKeyword_0_1_0(), "static");
     }
  
 	    {
@@ -945,7 +985,7 @@ ruleLoopedModel returns [EObject current=null]
 (
 		lv_synchronized_3_0=	'synchronized' 
     {
-        createLeafNode(grammarAccess.getLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), "synchronized"); 
+        createLeafNode(lv_synchronized_3_0, grammarAccess.getLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), "synchronized");
     }
  
 	    {
@@ -978,7 +1018,7 @@ ruleLoopedModel returns [EObject current=null]
 (
 		lv_abstract_4_0=	'abstract' 
     {
-        createLeafNode(grammarAccess.getLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0(), "abstract"); 
+        createLeafNode(lv_abstract_4_0, grammarAccess.getLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0(), "abstract");
     }
  
 	    {
@@ -1000,7 +1040,7 @@ ruleLoopedModel returns [EObject current=null]
 (
 		lv_final_5_0=	'final' 
     {
-        createLeafNode(grammarAccess.getLoopedModelAccess().getFinalFinalKeyword_0_3_1_0(), "final"); 
+        createLeafNode(lv_final_5_0, grammarAccess.getLoopedModelAccess().getFinalFinalKeyword_0_3_1_0(), "final");
     }
  
 	    {
@@ -1031,15 +1071,15 @@ ruleLoopedModel returns [EObject current=null]
 	  getUnorderedGroupHelper().leave(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
 	}
 
-)	'class' 
+)	otherlv_6='class' 
     {
-        createLeafNode(grammarAccess.getLoopedModelAccess().getClassKeyword_1(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getLoopedModelAccess().getClassKeyword_1(), null);
     }
 (
 (
 		lv_name_7_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getLoopedModelAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+			createLeafNode(lv_name_7_0, grammarAccess.getLoopedModelAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -1059,16 +1099,19 @@ ruleLoopedModel returns [EObject current=null]
 	    }
 
 )
-)	'{' 
+)	otherlv_8='{' 
     {
-        createLeafNode(grammarAccess.getLoopedModelAccess().getLeftCurlyBracketKeyword_3(), null); 
+    	createLeafNode(otherlv_8, grammarAccess.getLoopedModelAccess().getLeftCurlyBracketKeyword_3(), null);
     }
-	'}' 
+	otherlv_9='}' 
     {
-        createLeafNode(grammarAccess.getLoopedModelAccess().getRightCurlyBracketKeyword_4(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getLoopedModelAccess().getRightCurlyBracketKeyword_4(), null);
     }
 )
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 
 
@@ -1076,16 +1119,27 @@ ruleLoopedModel returns [EObject current=null]
 
 // Entry rule entryRuleGroupLoopedModel
 entryRuleGroupLoopedModel returns [EObject current=null] 
+	@init { 
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+			grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0()
+		);
+	}
 	:
 	{ currentNode = createCompositeNode(grammarAccess.getGroupLoopedModelRule(), currentNode); }
 	 iv_ruleGroupLoopedModel=ruleGroupLoopedModel 
 	 { $current=$iv_ruleGroupLoopedModel.current; } 
 	 EOF 
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 // Rule GroupLoopedModel
 ruleGroupLoopedModel returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+			grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0()
+		);
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1109,7 +1163,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 (
 		lv_visibility_1_1=	'public' 
     {
-        createLeafNode(grammarAccess.getGroupLoopedModelAccess().getVisibilityPublicKeyword_0_0_0_0(), "visibility"); 
+        createLeafNode(lv_visibility_1_1, grammarAccess.getGroupLoopedModelAccess().getVisibilityPublicKeyword_0_0_0_0(), "visibility");
     }
  
 	    {
@@ -1127,7 +1181,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 
     |		lv_visibility_1_2=	'private' 
     {
-        createLeafNode(grammarAccess.getGroupLoopedModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), "visibility"); 
+        createLeafNode(lv_visibility_1_2, grammarAccess.getGroupLoopedModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), "visibility");
     }
  
 	    {
@@ -1145,7 +1199,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 
     |		lv_visibility_1_3=	'protected' 
     {
-        createLeafNode(grammarAccess.getGroupLoopedModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), "visibility"); 
+        createLeafNode(lv_visibility_1_3, grammarAccess.getGroupLoopedModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), "visibility");
     }
  
 	    {
@@ -1180,7 +1234,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 (
 		lv_static_2_0=	'static' 
     {
-        createLeafNode(grammarAccess.getGroupLoopedModelAccess().getStaticStaticKeyword_0_1_0(), "static"); 
+        createLeafNode(lv_static_2_0, grammarAccess.getGroupLoopedModelAccess().getStaticStaticKeyword_0_1_0(), "static");
     }
  
 	    {
@@ -1213,7 +1267,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 (
 		lv_synchronized_3_0=	'synchronized' 
     {
-        createLeafNode(grammarAccess.getGroupLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), "synchronized"); 
+        createLeafNode(lv_synchronized_3_0, grammarAccess.getGroupLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), "synchronized");
     }
  
 	    {
@@ -1246,7 +1300,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 (
 		lv_abstract_4_0=	'abstract' 
     {
-        createLeafNode(grammarAccess.getGroupLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0(), "abstract"); 
+        createLeafNode(lv_abstract_4_0, grammarAccess.getGroupLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0(), "abstract");
     }
  
 	    {
@@ -1268,7 +1322,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 (
 		lv_final_5_0=	'final' 
     {
-        createLeafNode(grammarAccess.getGroupLoopedModelAccess().getFinalFinalKeyword_0_3_1_0(), "final"); 
+        createLeafNode(lv_final_5_0, grammarAccess.getGroupLoopedModelAccess().getFinalFinalKeyword_0_3_1_0(), "final");
     }
  
 	    {
@@ -1300,15 +1354,15 @@ ruleGroupLoopedModel returns [EObject current=null]
 	  getUnorderedGroupHelper().leave(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
 	}
 
-)*	'class' 
+)*	otherlv_6='class' 
     {
-        createLeafNode(grammarAccess.getGroupLoopedModelAccess().getClassKeyword_1(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getGroupLoopedModelAccess().getClassKeyword_1(), null);
     }
 (
 (
 		lv_name_7_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getGroupLoopedModelAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+			createLeafNode(lv_name_7_0, grammarAccess.getGroupLoopedModelAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -1328,16 +1382,19 @@ ruleGroupLoopedModel returns [EObject current=null]
 	    }
 
 )
-)	'{' 
+)	otherlv_8='{' 
     {
-        createLeafNode(grammarAccess.getGroupLoopedModelAccess().getLeftCurlyBracketKeyword_3(), null); 
+    	createLeafNode(otherlv_8, grammarAccess.getGroupLoopedModelAccess().getLeftCurlyBracketKeyword_3(), null);
     }
-	'}' 
+	otherlv_9='}' 
     {
-        createLeafNode(grammarAccess.getGroupLoopedModelAccess().getRightCurlyBracketKeyword_4(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getGroupLoopedModelAccess().getRightCurlyBracketKeyword_4(), null);
     }
 )
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 
 
@@ -1364,7 +1421,7 @@ ruleLoopedAlternativeModel returns [EObject current=null]
 (
 		lv_visibility_0_1=	'public' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getVisibilityPublicKeyword_0_0_0_0(), "visibility"); 
+        createLeafNode(lv_visibility_0_1, grammarAccess.getLoopedAlternativeModelAccess().getVisibilityPublicKeyword_0_0_0_0(), "visibility");
     }
  
 	    {
@@ -1382,7 +1439,7 @@ ruleLoopedAlternativeModel returns [EObject current=null]
 
     |		lv_visibility_0_2=	'private' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), "visibility"); 
+        createLeafNode(lv_visibility_0_2, grammarAccess.getLoopedAlternativeModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), "visibility");
     }
  
 	    {
@@ -1400,7 +1457,7 @@ ruleLoopedAlternativeModel returns [EObject current=null]
 
     |		lv_visibility_0_3=	'protected' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), "visibility"); 
+        createLeafNode(lv_visibility_0_3, grammarAccess.getLoopedAlternativeModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), "visibility");
     }
  
 	    {
@@ -1424,7 +1481,7 @@ ruleLoopedAlternativeModel returns [EObject current=null]
 (
 		lv_static_1_0=	'static' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getStaticStaticKeyword_0_1_0(), "static"); 
+        createLeafNode(lv_static_1_0, grammarAccess.getLoopedAlternativeModelAccess().getStaticStaticKeyword_0_1_0(), "static");
     }
  
 	    {
@@ -1446,7 +1503,7 @@ ruleLoopedAlternativeModel returns [EObject current=null]
 (
 		lv_synchronized_2_0=	'synchronized' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), "synchronized"); 
+        createLeafNode(lv_synchronized_2_0, grammarAccess.getLoopedAlternativeModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), "synchronized");
     }
  
 	    {
@@ -1468,7 +1525,7 @@ ruleLoopedAlternativeModel returns [EObject current=null]
 (
 		lv_abstract_3_0=	'abstract' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getAbstractAbstractKeyword_0_3_0_0(), "abstract"); 
+        createLeafNode(lv_abstract_3_0, grammarAccess.getLoopedAlternativeModelAccess().getAbstractAbstractKeyword_0_3_0_0(), "abstract");
     }
  
 	    {
@@ -1490,7 +1547,7 @@ ruleLoopedAlternativeModel returns [EObject current=null]
 (
 		lv_final_4_0=	'final' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getFinalFinalKeyword_0_3_1_0(), "final"); 
+        createLeafNode(lv_final_4_0, grammarAccess.getLoopedAlternativeModelAccess().getFinalFinalKeyword_0_3_1_0(), "final");
     }
  
 	    {
@@ -1508,23 +1565,23 @@ ruleLoopedAlternativeModel returns [EObject current=null]
 
 )
 ))
-    |(	'before' 
+    |(	otherlv_5='before' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getBeforeKeyword_0_4_0(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getLoopedAlternativeModelAccess().getBeforeKeyword_0_4_0(), null);
     }
-(	'after' 
+(	otherlv_6='after' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getAfterKeyword_0_4_1(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getLoopedAlternativeModelAccess().getAfterKeyword_0_4_1(), null);
     }
-)*))*	'class' 
+)*))*	otherlv_7='class' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getClassKeyword_1(), null); 
+    	createLeafNode(otherlv_7, grammarAccess.getLoopedAlternativeModelAccess().getClassKeyword_1(), null);
     }
 (
 (
 		lv_name_8_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+			createLeafNode(lv_name_8_0, grammarAccess.getLoopedAlternativeModelAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -1544,13 +1601,13 @@ ruleLoopedAlternativeModel returns [EObject current=null]
 	    }
 
 )
-)	'{' 
+)	otherlv_9='{' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getLeftCurlyBracketKeyword_3(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getLoopedAlternativeModelAccess().getLeftCurlyBracketKeyword_3(), null);
     }
-	'}' 
+	otherlv_10='}' 
     {
-        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getRightCurlyBracketKeyword_4(), null); 
+    	createLeafNode(otherlv_10, grammarAccess.getLoopedAlternativeModelAccess().getRightCurlyBracketKeyword_4(), null);
     }
 )
 ;
@@ -1561,21 +1618,35 @@ ruleLoopedAlternativeModel returns [EObject current=null]
 
 // Entry rule entryRuleBug304681Model
 entryRuleBug304681Model returns [EObject current=null] 
+	@init { 
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+			grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2()
+		);
+	}
 	:
 	{ currentNode = createCompositeNode(grammarAccess.getBug304681ModelRule(), currentNode); }
 	 iv_ruleBug304681Model=ruleBug304681Model 
 	 { $current=$iv_ruleBug304681Model.current; } 
 	 EOF 
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 // Rule Bug304681Model
 ruleBug304681Model returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+			grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2()
+		);
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
 ((
+	{ 
+	  /* */ 
+	}
     { 
         temp=factory.create(grammarAccess.getBug304681ModelAccess().getBug304681ModelAction_0().getType().getClassifier());
         $current = temp; 
@@ -1586,9 +1657,9 @@ ruleBug304681Model returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'{' 
+)	otherlv_1='{' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getLeftCurlyBracketKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getBug304681ModelAccess().getLeftCurlyBracketKeyword_1(), null);
     }
 (
 
@@ -1604,15 +1675,15 @@ ruleBug304681Model returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0);
 	 				}
-					(	'short' 
+					(	otherlv_3='short' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getShortKeyword_2_0_0(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getBug304681ModelAccess().getShortKeyword_2_0_0(), null);
     }
 (
 (
 		lv_shortDescription_4_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_2_0_1_0(), "shortDescription"); 
+			createLeafNode(lv_shortDescription_4_0, grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_2_0_1_0(), "shortDescription"); 
 		}
 		{
 	        if ($current==null) {
@@ -1632,9 +1703,9 @@ ruleBug304681Model returns [EObject current=null]
 	    }
 
 )
-)	';' 
+)	otherlv_5=';' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_0_2(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_0_2(), null);
     }
 )
 					{ 
@@ -1648,15 +1719,15 @@ ruleBug304681Model returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1);
 	 				}
-					(	'long' 
+					(	otherlv_6='long' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getLongKeyword_2_1_0(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getBug304681ModelAccess().getLongKeyword_2_1_0(), null);
     }
 (
 (
 		lv_longDescription_7_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_2_1_1_0(), "longDescription"); 
+			createLeafNode(lv_longDescription_7_0, grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_2_1_1_0(), "longDescription"); 
 		}
 		{
 	        if ($current==null) {
@@ -1676,9 +1747,9 @@ ruleBug304681Model returns [EObject current=null]
 	    }
 
 )
-)	';' 
+)	otherlv_8=';' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_1_2(), null); 
+    	createLeafNode(otherlv_8, grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_1_2(), null);
     }
 )
 					{ 
@@ -1692,15 +1763,15 @@ ruleBug304681Model returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2);
 	 				}
-					(	'uid' 
+					(	otherlv_9='uid' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getUidKeyword_2_2_0(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getBug304681ModelAccess().getUidKeyword_2_2_0(), null);
     }
 (
 (
 		lv_uid_10_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_2_2_1_0(), "uid"); 
+			createLeafNode(lv_uid_10_0, grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_2_2_1_0(), "uid"); 
 		}
 		{
 	        if ($current==null) {
@@ -1720,9 +1791,9 @@ ruleBug304681Model returns [EObject current=null]
 	    }
 
 )
-)	';' 
+)	otherlv_11=';' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_2_2(), null); 
+    	createLeafNode(otherlv_11, grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_2_2(), null);
     }
 )
 					{ 
@@ -1740,7 +1811,7 @@ ruleBug304681Model returns [EObject current=null]
 (
 		lv_flag_12_0=	'flag' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_2_3_0_0(), "flag"); 
+        createLeafNode(lv_flag_12_0, grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_2_3_0_0(), "flag");
     }
  
 	    {
@@ -1757,9 +1828,9 @@ ruleBug304681Model returns [EObject current=null]
 	    }
 
 )
-)	';' 
+)	otherlv_13=';' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_3_1(), null); 
+    	createLeafNode(otherlv_13, grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_3_1(), null);
     }
 )
 					{ 
@@ -1811,12 +1882,15 @@ ruleBug304681Model returns [EObject current=null]
 	  getUnorderedGroupHelper().leave(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	}
 
-)	'}' 
+)	otherlv_15='}' 
     {
-        createLeafNode(grammarAccess.getBug304681ModelAccess().getRightCurlyBracketKeyword_3(), null); 
+    	createLeafNode(otherlv_15, grammarAccess.getBug304681ModelAccess().getRightCurlyBracketKeyword_3(), null);
     }
 )
 ;
+finally {
+	myUnorderedGroupState.restore();
+}
 
 
 
@@ -1839,6 +1913,9 @@ ruleBug304681Feature returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 (
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getBug304681FeatureAccess().getBug304681AttributeParserRuleCall_0(), currentNode); 
     }
@@ -1849,6 +1926,9 @@ ruleBug304681Feature returns [EObject current=null]
     }
 
     |
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getBug304681FeatureAccess().getBug304681ReferenceParserRuleCall_1(), currentNode); 
     }
@@ -1880,15 +1960,15 @@ ruleBug304681Attribute returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'attr' 
+(	otherlv_0='attr' 
     {
-        createLeafNode(grammarAccess.getBug304681AttributeAccess().getAttrKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getBug304681AttributeAccess().getAttrKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getBug304681AttributeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getBug304681AttributeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -1908,9 +1988,9 @@ ruleBug304681Attribute returns [EObject current=null]
 	    }
 
 )
-)	';' 
+)	otherlv_2=';' 
     {
-        createLeafNode(grammarAccess.getBug304681AttributeAccess().getSemicolonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getBug304681AttributeAccess().getSemicolonKeyword_2(), null);
     }
 )
 ;
@@ -1935,15 +2015,15 @@ ruleBug304681Reference returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'ref' 
+(	otherlv_0='ref' 
     {
-        createLeafNode(grammarAccess.getBug304681ReferenceAccess().getRefKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getBug304681ReferenceAccess().getRefKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getBug304681ReferenceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getBug304681ReferenceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -1963,9 +2043,9 @@ ruleBug304681Reference returns [EObject current=null]
 	    }
 
 )
-)	';' 
+)	otherlv_2=';' 
     {
-        createLeafNode(grammarAccess.getBug304681ReferenceAccess().getSemicolonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getBug304681ReferenceAccess().getSemicolonKeyword_2(), null);
     }
 )
 ;

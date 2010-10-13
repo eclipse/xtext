@@ -47,12 +47,6 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalLookaheadTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Entry";	
    	}
@@ -188,15 +182,15 @@ ruleLookAhead0 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'bar' 
+(	otherlv_0='bar' 
     {
-        createLeafNode(grammarAccess.getLookAhead0Access().getBarKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getLookAhead0Access().getBarKeyword_0(), null);
     }
 (
 (
 		lv_x_1_0=	'a' 
     {
-        createLeafNode(grammarAccess.getLookAhead0Access().getXAKeyword_1_0(), "x"); 
+        createLeafNode(lv_x_1_0, grammarAccess.getLookAhead0Access().getXAKeyword_1_0(), "x");
     }
  
 	    {
@@ -236,9 +230,9 @@ ruleLookAhead1 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'foo' 
+(	otherlv_0='foo' 
     {
-        createLeafNode(grammarAccess.getLookAhead1Access().getFooKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getLookAhead1Access().getFooKeyword_0(), null);
     }
 (
 (
@@ -268,7 +262,7 @@ ruleLookAhead1 returns [EObject current=null]
 (
 		lv_x_2_0=	'b' 
     {
-        createLeafNode(grammarAccess.getLookAhead1Access().getXBKeyword_2_0(), "x"); 
+        createLeafNode(lv_x_2_0, grammarAccess.getLookAhead1Access().getXBKeyword_2_0(), "x");
     }
  
 	    {
@@ -289,7 +283,7 @@ ruleLookAhead1 returns [EObject current=null]
 (
 		lv_x_3_0=	'd' 
     {
-        createLeafNode(grammarAccess.getLookAhead1Access().getXDKeyword_3_0(), "x"); 
+        createLeafNode(lv_x_3_0, grammarAccess.getLookAhead1Access().getXDKeyword_3_0(), "x");
     }
  
 	    {
@@ -333,7 +327,7 @@ ruleLookAhead2 returns [EObject current=null]
 (
 		lv_z_0_0=	'foo' 
     {
-        createLeafNode(grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0(), "z"); 
+        createLeafNode(lv_z_0_0, grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0(), "z");
     }
  
 	    {
@@ -355,7 +349,7 @@ ruleLookAhead2 returns [EObject current=null]
 (
 		lv_z_1_0=	'bar' 
     {
-        createLeafNode(grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0(), "z"); 
+        createLeafNode(lv_z_1_0, grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0(), "z");
     }
  
 	    {
@@ -372,9 +366,9 @@ ruleLookAhead2 returns [EObject current=null]
 	    }
 
 )
-))	'c' 
+))	otherlv_2='c' 
     {
-        createLeafNode(grammarAccess.getLookAhead2Access().getCKeyword_1(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getLookAhead2Access().getCKeyword_1(), null);
     }
 )
 ;
@@ -399,19 +393,19 @@ ruleLookAhead3 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'foo' 
+(	otherlv_0='foo' 
     {
-        createLeafNode(grammarAccess.getLookAhead3Access().getFooKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getLookAhead3Access().getFooKeyword_0(), null);
     }
-	'bar' 
+	otherlv_1='bar' 
     {
-        createLeafNode(grammarAccess.getLookAhead3Access().getBarKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getLookAhead3Access().getBarKeyword_1(), null);
     }
 (
 (
 		lv_x_2_0=	'b' 
     {
-        createLeafNode(grammarAccess.getLookAhead3Access().getXBKeyword_2_0(), "x"); 
+        createLeafNode(lv_x_2_0, grammarAccess.getLookAhead3Access().getXBKeyword_2_0(), "x");
     }
  
 	    {
@@ -479,7 +473,7 @@ ruleLookAhead4 returns [EObject current=null]
 (
 		lv_x_0_0=	'c' 
     {
-        createLeafNode(grammarAccess.getLookAhead4Access().getXCKeyword_0_0(), "x"); 
+        createLeafNode(lv_x_0_0, grammarAccess.getLookAhead4Access().getXCKeyword_0_0(), "x");
     }
  
 	    {
@@ -501,7 +495,7 @@ ruleLookAhead4 returns [EObject current=null]
 (
 		lv_x_1_0=	'd' 
     {
-        createLeafNode(grammarAccess.getLookAhead4Access().getXDKeyword_1_0(), "x"); 
+        createLeafNode(lv_x_1_0, grammarAccess.getLookAhead4Access().getXDKeyword_1_0(), "x");
     }
  
 	    {

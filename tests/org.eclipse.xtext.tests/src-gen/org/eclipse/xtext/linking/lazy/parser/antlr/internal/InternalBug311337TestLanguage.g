@@ -47,12 +47,6 @@ import org.eclipse.xtext.linking.lazy.services.Bug311337TestLanguageGrammarAcces
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/linking/lazy/parser/antlr/internal/InternalBug311337TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -136,15 +130,15 @@ ruleDefinition returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'(def)' 
+(	otherlv_0='(def)' 
     {
-        createLeafNode(grammarAccess.getDefinitionAccess().getDefKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getDefinitionAccess().getDefKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getDefinitionAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getDefinitionAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -164,9 +158,9 @@ ruleDefinition returns [EObject current=null]
 	    }
 
 )
-)	':' 
+)	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getDefinitionAccess().getColonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getDefinitionAccess().getColonKeyword_2(), null);
     }
 (
 (
@@ -239,15 +233,15 @@ ruleChild returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'(child)' 
+(	otherlv_0='(child)' 
     {
-        createLeafNode(grammarAccess.getChildAccess().getChildKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getChildAccess().getChildKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getChildAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getChildAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -267,9 +261,9 @@ ruleChild returns [EObject current=null]
 	    }
 
 )
-)	':' 
+)	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getChildAccess().getColonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getChildAccess().getColonKeyword_2(), null);
     }
 (
 (
@@ -279,9 +273,9 @@ ruleChild returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_3=RULE_ID
 	{
-		createLeafNode(grammarAccess.getChildAccess().getLinkDefinitionCrossReference_3_0(), "link"); 
+		createLeafNode(otherlv_3, grammarAccess.getChildAccess().getLinkDefinitionCrossReference_3_0(), "link"); 
 	}
 
 )
@@ -308,9 +302,9 @@ ruleReference returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'(ref)' 
+(	otherlv_0='(ref)' 
     {
-        createLeafNode(grammarAccess.getReferenceAccess().getRefKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getReferenceAccess().getRefKeyword_0(), null);
     }
 (
 (
@@ -320,15 +314,15 @@ ruleReference returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_1=RULE_ID
 	{
-		createLeafNode(grammarAccess.getReferenceAccess().getRefChildChildCrossReference_1_0(), "refChild"); 
+		createLeafNode(otherlv_1, grammarAccess.getReferenceAccess().getRefChildChildCrossReference_1_0(), "refChild"); 
 	}
 
 )
-)(	':' 
+)(	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getReferenceAccess().getColonKeyword_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getReferenceAccess().getColonKeyword_2_0(), null);
     }
 (
     { 
@@ -354,9 +348,9 @@ ruleReference returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_4=RULE_ID
 	{
-		createLeafNode(grammarAccess.getReferenceAccess().getRefChildChildCrossReference_2_2_0(), "refChild"); 
+		createLeafNode(otherlv_4, grammarAccess.getReferenceAccess().getRefChildChildCrossReference_2_2_0(), "refChild"); 
 	}
 
 )

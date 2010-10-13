@@ -47,12 +47,6 @@ import org.eclipse.xtext.parsetree.impl.services.CommentAssociationTestLanguageG
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalCommentAssociationTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -136,15 +130,15 @@ ruleElement returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'element' 
+(	otherlv_0='element' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getElementKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -180,15 +174,15 @@ ruleElement returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'parent' 
+)	otherlv_3='parent' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getParentKeyword_2_1(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getElementAccess().getParentKeyword_2_1(), null);
     }
 (
 (
 		lv_name_4_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_2_0(), "name"); 
+			createLeafNode(lv_name_4_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {

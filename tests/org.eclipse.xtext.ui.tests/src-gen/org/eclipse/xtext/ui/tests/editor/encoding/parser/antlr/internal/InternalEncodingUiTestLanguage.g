@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingUiTestLanguag
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/encoding/parser/antlr/internal/InternalEncodingUiTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -140,7 +134,7 @@ ruleWord returns [EObject current=null]
 (
 		lv_value_0_0=RULE_LEXEME
 		{
-			createLeafNode(grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0(), "value"); 
+			createLeafNode(lv_value_0_0, grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0(), "value"); 
 		}
 		{
 	        if ($current==null) {

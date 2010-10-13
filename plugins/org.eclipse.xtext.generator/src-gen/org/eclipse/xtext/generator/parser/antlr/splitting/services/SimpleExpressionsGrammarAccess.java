@@ -317,7 +317,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final Keyword cFullStopKeyword_1_3_0 = (Keyword)cGroup_1_3.eContents().get(0);
 		private final RuleCall cMethodCallLiteralParserRuleCall_1_3_1 = (RuleCall)cGroup_1_3.eContents().get(1);
 		
-		//MethodCallLiteral returns ecore::EString:
+		//MethodCallLiteral:
 		//	FQN ("(" (Argument ("," Argument)*)? ")" ("." MethodCallLiteral)?)?;
 		public ParserRule getRule() { return rule; }
 
@@ -367,7 +367,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cMethodCallLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Argument returns ecore::EString:
+		//Argument:
 		//	MethodCallLiteral | INT;
 		public ParserRule getRule() { return rule; }
 
@@ -389,7 +389,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//FQN returns ecore::EString:
+		//FQN:
 		//	ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -534,7 +534,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		return getMethodCallAccess().getRule();
 	}
 
-	//MethodCallLiteral returns ecore::EString:
+	//MethodCallLiteral:
 	//	FQN ("(" (Argument ("," Argument)*)? ")" ("." MethodCallLiteral)?)?;
 	public MethodCallLiteralElements getMethodCallLiteralAccess() {
 		return (pMethodCallLiteral != null) ? pMethodCallLiteral : (pMethodCallLiteral = new MethodCallLiteralElements());
@@ -544,7 +544,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		return getMethodCallLiteralAccess().getRule();
 	}
 
-	//Argument returns ecore::EString:
+	//Argument:
 	//	MethodCallLiteral | INT;
 	public ArgumentElements getArgumentAccess() {
 		return (pArgument != null) ? pArgument : (pArgument = new ArgumentElements());
@@ -554,7 +554,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		return getArgumentAccess().getRule();
 	}
 
-	//FQN returns ecore::EString:
+	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());

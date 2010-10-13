@@ -47,12 +47,6 @@ import org.eclipse.xtext.parsetree.reconstr.services.PartialSerializationTestLan
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -121,9 +115,9 @@ ruleNodeRoot returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'#1' 
+(	otherlv_0='#1' 
     {
-        createLeafNode(grammarAccess.getNodeRootAccess().getNumberSignDigitOneKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getNodeRootAccess().getNumberSignDigitOneKeyword_0(), null);
     }
 (
 (
@@ -172,15 +166,15 @@ ruleNode returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'node' 
+(	otherlv_0='node' 
     {
-        createLeafNode(grammarAccess.getNodeAccess().getNodeKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getNodeAccess().getNodeKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -200,9 +194,9 @@ ruleNode returns [EObject current=null]
 	    }
 
 )
-)(	'(' 
+)(	otherlv_2='(' 
     {
-        createLeafNode(grammarAccess.getNodeAccess().getLeftParenthesisKeyword_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getNodeAccess().getLeftParenthesisKeyword_2_0(), null);
     }
 (
 (
@@ -228,9 +222,9 @@ ruleNode returns [EObject current=null]
 	    }
 
 )
-)+	')' 
+)+	otherlv_4=')' 
     {
-        createLeafNode(grammarAccess.getNodeAccess().getRightParenthesisKeyword_2_2(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getNodeAccess().getRightParenthesisKeyword_2_2(), null);
     }
 )?)
 ;

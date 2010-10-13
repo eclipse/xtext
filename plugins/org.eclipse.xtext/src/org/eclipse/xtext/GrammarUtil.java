@@ -91,6 +91,10 @@ public class GrammarUtil {
 		return getContainerOfType(e, Group.class);
 	}
 	
+	public static UnorderedGroup containingUnorderedGroup(EObject e) {
+		return getContainerOfType(e, UnorderedGroup.class);
+	}
+	
 	public static CrossReference containingCrossReference(EObject e) {
 		return getContainerOfType(e, CrossReference.class);
 	}

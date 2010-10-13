@@ -47,12 +47,6 @@ import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammar
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalConcreteTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "RootRule";	
    	}
@@ -151,15 +145,15 @@ ruleConcreteParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'model' 
+(	otherlv_0='model' 
     {
-        createLeafNode(grammarAccess.getConcreteParserRuleAccess().getModelKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getConcreteParserRuleAccess().getModelKeyword_0(), null);
     }
 (
 (
 		lv_magicNumber_1_0=RULE_REAL
 		{
-			createLeafNode(grammarAccess.getConcreteParserRuleAccess().getMagicNumberREALTerminalRuleCall_1_0(), "magicNumber"); 
+			createLeafNode(lv_magicNumber_1_0, grammarAccess.getConcreteParserRuleAccess().getMagicNumberREALTerminalRuleCall_1_0(), "magicNumber"); 
 		}
 		{
 	        if ($current==null) {
@@ -179,9 +173,9 @@ ruleConcreteParserRule returns [EObject current=null]
 	    }
 
 )
-)	':' 
+)	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getConcreteParserRuleAccess().getColonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getConcreteParserRuleAccess().getColonKeyword_2(), null);
     }
 (
 (
@@ -230,15 +224,15 @@ ruleOverridableParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'overriddenelement' 
+(	otherlv_0='overriddenelement' 
     {
-        createLeafNode(grammarAccess.getOverridableParserRuleAccess().getOverriddenelementKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getOverridableParserRuleAccess().getOverriddenelementKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -328,15 +322,15 @@ ruleOverridableParserRule2 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'overridden other element' 
+(	otherlv_0='overridden other element' 
     {
-        createLeafNode(grammarAccess.getOverridableParserRule2Access().getOverriddenOtherElementKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getOverridableParserRule2Access().getOverriddenOtherElementKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getOverridableParserRule2Access().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getOverridableParserRule2Access().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -356,15 +350,15 @@ ruleOverridableParserRule2 returns [EObject current=null]
 	    }
 
 )
-)	'-' 
+)	otherlv_2='-' 
     {
-        createLeafNode(grammarAccess.getOverridableParserRule2Access().getHyphenMinusKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getOverridableParserRule2Access().getHyphenMinusKeyword_2(), null);
     }
 (
 (
 		lv_age_3_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getOverridableParserRule2Access().getAgeINTTerminalRuleCall_3_0(), "age"); 
+			createLeafNode(lv_age_3_0, grammarAccess.getOverridableParserRule2Access().getAgeINTTerminalRuleCall_3_0(), "age"); 
 		}
 		{
 	        if ($current==null) {
@@ -459,15 +453,15 @@ ruleSubrule1 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'subrule1' 
+(	otherlv_0='subrule1' 
     {
-        createLeafNode(grammarAccess.getSubrule1Access().getSubrule1Keyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getSubrule1Access().getSubrule1Keyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getSubrule1Access().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getSubrule1Access().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -491,7 +485,7 @@ ruleSubrule1 returns [EObject current=null]
 (
 		lv_sub1_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getSubrule1Access().getSub1IDTerminalRuleCall_2_0(), "sub1"); 
+			createLeafNode(lv_sub1_2_0, grammarAccess.getSubrule1Access().getSub1IDTerminalRuleCall_2_0(), "sub1"); 
 		}
 		{
 	        if ($current==null) {
@@ -534,15 +528,15 @@ ruleSubrule2 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'subrule3' 
+(	otherlv_0='subrule3' 
     {
-        createLeafNode(grammarAccess.getSubrule2Access().getSubrule3Keyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getSubrule2Access().getSubrule3Keyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getSubrule2Access().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getSubrule2Access().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -566,7 +560,7 @@ ruleSubrule2 returns [EObject current=null]
 (
 		lv_sub2_2_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getSubrule2Access().getSub2STRINGTerminalRuleCall_2_0(), "sub2"); 
+			createLeafNode(lv_sub2_2_0, grammarAccess.getSubrule2Access().getSub2STRINGTerminalRuleCall_2_0(), "sub2"); 
 		}
 		{
 	        if ($current==null) {
@@ -609,15 +603,15 @@ ruleSubrule3 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'subrule3' 
+(	otherlv_0='subrule3' 
     {
-        createLeafNode(grammarAccess.getSubrule3Access().getSubrule3Keyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getSubrule3Access().getSubrule3Keyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getSubrule3Access().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getSubrule3Access().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -641,7 +635,7 @@ ruleSubrule3 returns [EObject current=null]
 (
 		lv_sub1_2_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getSubrule3Access().getSub1INTTerminalRuleCall_2_0(), "sub1"); 
+			createLeafNode(lv_sub1_2_0, grammarAccess.getSubrule3Access().getSub1INTTerminalRuleCall_2_0(), "sub1"); 
 		}
 		{
 	        if ($current==null) {
@@ -731,15 +725,15 @@ ruleInheritedParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'element' 
+(	otherlv_0='element' 
     {
-        createLeafNode(grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -782,9 +776,9 @@ ruleAbstractCallOverridenParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'overridemodel' 
+(	otherlv_0='overridemodel' 
     {
-        createLeafNode(grammarAccess.getAbstractCallOverridenParserRuleAccess().getOverridemodelKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getAbstractCallOverridenParserRuleAccess().getOverridemodelKeyword_0(), null);
     }
 (
 (
@@ -833,9 +827,9 @@ ruleAbstractCallExtendedParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'extendedmodel' 
+(	otherlv_0='extendedmodel' 
     {
-        createLeafNode(grammarAccess.getAbstractCallExtendedParserRuleAccess().getExtendedmodelKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getAbstractCallExtendedParserRuleAccess().getExtendedmodelKeyword_0(), null);
     }
 (
 (

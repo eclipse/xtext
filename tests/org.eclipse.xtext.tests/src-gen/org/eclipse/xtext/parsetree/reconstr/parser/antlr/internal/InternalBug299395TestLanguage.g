@@ -47,12 +47,6 @@ import org.eclipse.xtext.parsetree.reconstr.services.Bug299395TestLanguageGramma
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug299395TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -100,15 +94,15 @@ ruleModel returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)(	'{' 
+)(	otherlv_1='{' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_1_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_1_0(), null);
     }
 (
 (
 		lv_strings_2_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getModelAccess().getStringsSTRINGTerminalRuleCall_1_1_0(), "strings"); 
+			createLeafNode(lv_strings_2_0, grammarAccess.getModelAccess().getStringsSTRINGTerminalRuleCall_1_1_0(), "strings"); 
 		}
 		{
 	        if ($current==null) {
@@ -128,19 +122,19 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)?	'}' 
+)?	otherlv_3='}' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getRightCurlyBracketKeyword_1_2(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getModelAccess().getRightCurlyBracketKeyword_1_2(), null);
     }
-)*(	'[' 
+)*(	otherlv_4='[' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getLeftSquareBracketKeyword_2_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getLeftSquareBracketKeyword_2_0(), null);
     }
 ((
 (
 		lv_keys_5_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getModelAccess().getKeysSTRINGTerminalRuleCall_2_1_0_0(), "keys"); 
+			createLeafNode(lv_keys_5_0, grammarAccess.getModelAccess().getKeysSTRINGTerminalRuleCall_2_1_0_0(), "keys"); 
 		}
 		{
 	        if ($current==null) {
@@ -164,7 +158,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_values_6_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getModelAccess().getValuesSTRINGTerminalRuleCall_2_1_1_0(), "values"); 
+			createLeafNode(lv_values_6_0, grammarAccess.getModelAccess().getValuesSTRINGTerminalRuleCall_2_1_1_0(), "values"); 
 		}
 		{
 	        if ($current==null) {
@@ -184,13 +178,13 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-))*	']' 
+))*	otherlv_7=']' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getRightSquareBracketKeyword_2_2(), null); 
+    	createLeafNode(otherlv_7, grammarAccess.getModelAccess().getRightSquareBracketKeyword_2_2(), null);
     }
-)*(	'subModel' 
+)*(	otherlv_8='subModel' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getSubModelKeyword_3_0(), null); 
+    	createLeafNode(otherlv_8, grammarAccess.getModelAccess().getSubModelKeyword_3_0(), null);
     }
 (
 (
@@ -250,19 +244,19 @@ ruleSubModel returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)(	'1' 
+)(	otherlv_1='1' 
     {
-        createLeafNode(grammarAccess.getSubModelAccess().getDigitOneKeyword_1_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getSubModelAccess().getDigitOneKeyword_1_0(), null);
     }
-	'2' 
+	otherlv_2='2' 
     {
-        createLeafNode(grammarAccess.getSubModelAccess().getDigitTwoKeyword_1_1(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getSubModelAccess().getDigitTwoKeyword_1_1(), null);
     }
 (
 (
 		lv_strings_3_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getSubModelAccess().getStringsSTRINGTerminalRuleCall_1_2_0(), "strings"); 
+			createLeafNode(lv_strings_3_0, grammarAccess.getSubModelAccess().getStringsSTRINGTerminalRuleCall_1_2_0(), "strings"); 
 		}
 		{
 	        if ($current==null) {

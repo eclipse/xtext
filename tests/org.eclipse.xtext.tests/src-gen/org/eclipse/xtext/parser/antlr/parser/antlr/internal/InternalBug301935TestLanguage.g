@@ -47,12 +47,6 @@ import org.eclipse.xtext.parser.antlr.services.Bug301935TestLanguageGrammarAcces
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -93,7 +87,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -113,15 +107,15 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)RULE_WS
+)this_WS_1=RULE_WS
     { 
-    createLeafNode(grammarAccess.getModelAccess().getWSTerminalRuleCall_1(), null); 
+    createLeafNode(this_WS_1, grammarAccess.getModelAccess().getWSTerminalRuleCall_1(), null); 
     }
 (
 (
 		lv_value_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getModelAccess().getValueIDTerminalRuleCall_2_0(), "value"); 
+			createLeafNode(lv_value_2_0, grammarAccess.getModelAccess().getValueIDTerminalRuleCall_2_0(), "value"); 
 		}
 		{
 	        if ($current==null) {
@@ -153,7 +147,7 @@ ruleNL
 (
 		lv_value2_4_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getModelAccess().getValue2IDTerminalRuleCall_4_0(), "value2"); 
+			createLeafNode(lv_value2_4_0, grammarAccess.getModelAccess().getValue2IDTerminalRuleCall_4_0(), "value2"); 
 		}
 		{
 	        if ($current==null) {
@@ -173,9 +167,9 @@ ruleNL
 	    }
 
 )
-)RULE_WS
+)this_WS_5=RULE_WS
     { 
-    createLeafNode(grammarAccess.getModelAccess().getWSTerminalRuleCall_5(), null); 
+    createLeafNode(this_WS_5, grammarAccess.getModelAccess().getWSTerminalRuleCall_5(), null); 
     }
 )
 ;
@@ -205,26 +199,26 @@ ruleNL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getNLAccess().getWSTerminalRuleCall_0(), null); 
+    createLeafNode(this_WS_0, grammarAccess.getNLAccess().getWSTerminalRuleCall_0(), null); 
     }
 )*((
 	kw='\r' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getNLAccess().getCarriageReturnCrKeyword_1_0(), null); 
+        createLeafNode(kw, grammarAccess.getNLAccess().getCarriageReturnCrKeyword_1_0(), null); 
     }
 )?
 	kw='\n' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getNLAccess().getLineFeedLfKeyword_1_1(), null); 
+        createLeafNode(kw, grammarAccess.getNLAccess().getLineFeedLfKeyword_1_1(), null); 
     }
 )(    this_WS_3=RULE_WS    {
 		$current.merge(this_WS_3);
     }
 
     { 
-    createLeafNode(grammarAccess.getNLAccess().getWSTerminalRuleCall_2(), null); 
+    createLeafNode(this_WS_3, grammarAccess.getNLAccess().getWSTerminalRuleCall_2(), null); 
     }
 )*)
     ;

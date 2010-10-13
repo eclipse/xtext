@@ -17,7 +17,7 @@
 	«EXPAND IParser::parser(helper)»
 	«EXPAND LexerGrammar::grammar(options, helper)»
 	«EXPAND ParserGrammar::grammar(options, helper)»
-	«EXPAND org::eclipse::xtext::generator::parser::antlr::AntlrTokenFileProvider::file»
+	«EXPAND org::eclipse::xtext::generator::parser::antlr::AntlrTokenFileProvider::file(helper.getParserGrammarFileName(this))»
 «ENDDEFINE»
 
 «DEFINE addToPluginXmlRt(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, org::eclipse::xtext::generator::parser::antlr::ex::common::AntlrFragmentHelper helper) FOR Grammar»«ENDDEFINE»

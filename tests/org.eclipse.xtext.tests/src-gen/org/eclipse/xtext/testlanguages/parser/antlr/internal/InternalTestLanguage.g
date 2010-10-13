@@ -47,12 +47,6 @@ import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "EntryRule";	
    	}
@@ -178,15 +172,15 @@ ruleChoiceRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'choice' 
+(	otherlv_0='choice' 
     {
-        createLeafNode(grammarAccess.getChoiceRuleAccess().getChoiceKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getChoiceRuleAccess().getChoiceKeyword_0(), null);
     }
 (
 (
 		lv_optionalKeyword_1_0=	'optional' 
     {
-        createLeafNode(grammarAccess.getChoiceRuleAccess().getOptionalKeywordOptionalKeyword_1_0(), "optionalKeyword"); 
+        createLeafNode(lv_optionalKeyword_1_0, grammarAccess.getChoiceRuleAccess().getOptionalKeywordOptionalKeyword_1_0(), "optionalKeyword");
     }
  
 	    {
@@ -207,7 +201,7 @@ ruleChoiceRule returns [EObject current=null]
 (
 		lv_name_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getChoiceRuleAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+			createLeafNode(lv_name_2_0, grammarAccess.getChoiceRuleAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -250,9 +244,9 @@ ruleReducibleRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'reducible' 
+(	otherlv_0='reducible' 
     {
-        createLeafNode(grammarAccess.getReducibleRuleAccess().getReducibleKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getReducibleRuleAccess().getReducibleKeyword_0(), null);
     }
 
     { 
@@ -330,7 +324,7 @@ ruleTerminalRule returns [EObject current=null]
 (
 		lv_stringFeature_0_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getTerminalRuleAccess().getStringFeatureSTRINGTerminalRuleCall_0(), "stringFeature"); 
+			createLeafNode(lv_stringFeature_0_0, grammarAccess.getTerminalRuleAccess().getStringFeatureSTRINGTerminalRuleCall_0(), "stringFeature"); 
 		}
 		{
 	        if ($current==null) {

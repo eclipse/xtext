@@ -26,17 +26,29 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_APOSTROPHE_CHAR", "RULE_CHAR", "RULE_WS", "'FIX'", "'ERROR'", "'TICK'", "'^'"
     };
+    public static final int T__7=7;
     public static final int RULE_WS=6;
-    public static final int RULE_CHAR=5;
+    public static final int T__8=8;
     public static final int EOF=-1;
     public static final int RULE_APOSTROPHE_CHAR=4;
+    public static final int T__10=10;
+    public static final int RULE_CHAR=5;
+    public static final int T__9=9;
+
+    // delegates
+    // delegators
+
 
         public InternalBug292245TestLanguageParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalBug292245TestLanguageParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalBug292245TestLanguageParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g"; }
 
 
@@ -51,12 +63,6 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         
         @Override
-        protected InputStream getTokenFile() {
-        	ClassLoader classLoader = getClass().getClassLoader();
-        	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.tokens");
-        }
-        
-        @Override
         protected String getFirstRuleName() {
         	return "Model";	
        	}
@@ -68,8 +74,8 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
 
 
 
-    // $ANTLR start entryRuleModel
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:77:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // $ANTLR start "entryRuleModel"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:71:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -80,13 +86,14 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
         	
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:81:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:82:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:75:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:76:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel81);
             iv_ruleModel=ruleModel();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleModel; 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel91); 
@@ -106,14 +113,17 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end entryRuleModel
+    // $ANTLR end "entryRuleModel"
 
 
-    // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:92:1: ruleModel returns [EObject current=null] : ( ( 'FIX' ( (lv_fix_1_0= ruleFix ) )+ ) | ( 'ERROR' ( (lv_error_3_0= ruleError ) )+ ) | ( 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ ) )* ;
+    // $ANTLR start "ruleModel"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:86:1: ruleModel returns [EObject current=null] : ( (otherlv_0= 'FIX' ( (lv_fix_1_0= ruleFix ) )+ ) | (otherlv_2= 'ERROR' ( (lv_error_3_0= ruleError ) )+ ) | (otherlv_4= 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
+        Token otherlv_0=null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
         AntlrDatatypeRuleToken lv_fix_1_0 = null;
 
         AntlrDatatypeRuleToken lv_error_3_0 = null;
@@ -125,10 +135,10 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:98:6: ( ( ( 'FIX' ( (lv_fix_1_0= ruleFix ) )+ ) | ( 'ERROR' ( (lv_error_3_0= ruleError ) )+ ) | ( 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:99:1: ( ( 'FIX' ( (lv_fix_1_0= ruleFix ) )+ ) | ( 'ERROR' ( (lv_error_3_0= ruleError ) )+ ) | ( 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:92:6: ( ( (otherlv_0= 'FIX' ( (lv_fix_1_0= ruleFix ) )+ ) | (otherlv_2= 'ERROR' ( (lv_error_3_0= ruleError ) )+ ) | (otherlv_4= 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:93:1: ( (otherlv_0= 'FIX' ( (lv_fix_1_0= ruleFix ) )+ ) | (otherlv_2= 'ERROR' ( (lv_error_3_0= ruleError ) )+ ) | (otherlv_4= 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ ) )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:99:1: ( ( 'FIX' ( (lv_fix_1_0= ruleFix ) )+ ) | ( 'ERROR' ( (lv_error_3_0= ruleError ) )+ ) | ( 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:93:1: ( (otherlv_0= 'FIX' ( (lv_fix_1_0= ruleFix ) )+ ) | (otherlv_2= 'ERROR' ( (lv_error_3_0= ruleError ) )+ ) | (otherlv_4= 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ ) )*
             loop4:
             do {
                 int alt4=4;
@@ -153,16 +163,16 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:99:2: ( 'FIX' ( (lv_fix_1_0= ruleFix ) )+ )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:93:2: (otherlv_0= 'FIX' ( (lv_fix_1_0= ruleFix ) )+ )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:99:2: ( 'FIX' ( (lv_fix_1_0= ruleFix ) )+ )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:99:4: 'FIX' ( (lv_fix_1_0= ruleFix ) )+
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:93:2: (otherlv_0= 'FIX' ( (lv_fix_1_0= ruleFix ) )+ )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:93:4: otherlv_0= 'FIX' ( (lv_fix_1_0= ruleFix ) )+
             	    {
-            	    match(input,7,FollowSets000.FOLLOW_7_in_ruleModel131); 
+            	    otherlv_0=(Token)match(input,7,FollowSets000.FOLLOW_7_in_ruleModel133); 
 
-            	            createLeafNode(grammarAccess.getModelAccess().getFIXKeyword_0_0(), null); 
+            	        	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getFIXKeyword_0_0(), null);
             	        
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:103:1: ( (lv_fix_1_0= ruleFix ) )+
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:97:1: ( (lv_fix_1_0= ruleFix ) )+
             	    int cnt1=0;
             	    loop1:
             	    do {
@@ -176,17 +186,18 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
 
             	        switch (alt1) {
             	    	case 1 :
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:104:1: (lv_fix_1_0= ruleFix )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:98:1: (lv_fix_1_0= ruleFix )
             	    	    {
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:104:1: (lv_fix_1_0= ruleFix )
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:105:3: lv_fix_1_0= ruleFix
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:98:1: (lv_fix_1_0= ruleFix )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:99:3: lv_fix_1_0= ruleFix
             	    	    {
             	    	     
             	    	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getFixFixParserRuleCall_0_1_0(), currentNode); 
             	    	    	    
-            	    	    pushFollow(FollowSets000.FOLLOW_ruleFix_in_ruleModel152);
+            	    	    pushFollow(FollowSets000.FOLLOW_ruleFix_in_ruleModel154);
             	    	    lv_fix_1_0=ruleFix();
-            	    	    _fsp--;
+
+            	    	    state._fsp--;
 
 
             	    	    	        if (current==null) {
@@ -228,16 +239,16 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:128:6: ( 'ERROR' ( (lv_error_3_0= ruleError ) )+ )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:122:6: (otherlv_2= 'ERROR' ( (lv_error_3_0= ruleError ) )+ )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:128:6: ( 'ERROR' ( (lv_error_3_0= ruleError ) )+ )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:128:8: 'ERROR' ( (lv_error_3_0= ruleError ) )+
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:122:6: (otherlv_2= 'ERROR' ( (lv_error_3_0= ruleError ) )+ )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:122:8: otherlv_2= 'ERROR' ( (lv_error_3_0= ruleError ) )+
             	    {
-            	    match(input,8,FollowSets000.FOLLOW_8_in_ruleModel171); 
+            	    otherlv_2=(Token)match(input,8,FollowSets000.FOLLOW_8_in_ruleModel175); 
 
-            	            createLeafNode(grammarAccess.getModelAccess().getERRORKeyword_1_0(), null); 
+            	        	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getERRORKeyword_1_0(), null);
             	        
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:132:1: ( (lv_error_3_0= ruleError ) )+
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:126:1: ( (lv_error_3_0= ruleError ) )+
             	    int cnt2=0;
             	    loop2:
             	    do {
@@ -251,17 +262,18 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
 
             	        switch (alt2) {
             	    	case 1 :
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:133:1: (lv_error_3_0= ruleError )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:127:1: (lv_error_3_0= ruleError )
             	    	    {
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:133:1: (lv_error_3_0= ruleError )
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:134:3: lv_error_3_0= ruleError
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:127:1: (lv_error_3_0= ruleError )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:128:3: lv_error_3_0= ruleError
             	    	    {
             	    	     
             	    	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getErrorErrorParserRuleCall_1_1_0(), currentNode); 
             	    	    	    
-            	    	    pushFollow(FollowSets000.FOLLOW_ruleError_in_ruleModel192);
+            	    	    pushFollow(FollowSets000.FOLLOW_ruleError_in_ruleModel196);
             	    	    lv_error_3_0=ruleError();
-            	    	    _fsp--;
+
+            	    	    state._fsp--;
 
 
             	    	    	        if (current==null) {
@@ -303,16 +315,16 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:157:6: ( 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:151:6: (otherlv_4= 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:157:6: ( 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:157:8: 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:151:6: (otherlv_4= 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+ )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:151:8: otherlv_4= 'TICK' ( (lv_tick_5_0= ruleApostrophe ) )+
             	    {
-            	    match(input,9,FollowSets000.FOLLOW_9_in_ruleModel211); 
+            	    otherlv_4=(Token)match(input,9,FollowSets000.FOLLOW_9_in_ruleModel217); 
 
-            	            createLeafNode(grammarAccess.getModelAccess().getTICKKeyword_2_0(), null); 
+            	        	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getTICKKeyword_2_0(), null);
             	        
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:161:1: ( (lv_tick_5_0= ruleApostrophe ) )+
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:155:1: ( (lv_tick_5_0= ruleApostrophe ) )+
             	    int cnt3=0;
             	    loop3:
             	    do {
@@ -326,17 +338,18 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
 
             	        switch (alt3) {
             	    	case 1 :
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:162:1: (lv_tick_5_0= ruleApostrophe )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:156:1: (lv_tick_5_0= ruleApostrophe )
             	    	    {
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:162:1: (lv_tick_5_0= ruleApostrophe )
-            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:163:3: lv_tick_5_0= ruleApostrophe
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:156:1: (lv_tick_5_0= ruleApostrophe )
+            	    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:157:3: lv_tick_5_0= ruleApostrophe
             	    	    {
             	    	     
             	    	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getTickApostropheParserRuleCall_2_1_0(), currentNode); 
             	    	    	    
-            	    	    pushFollow(FollowSets000.FOLLOW_ruleApostrophe_in_ruleModel232);
+            	    	    pushFollow(FollowSets000.FOLLOW_ruleApostrophe_in_ruleModel238);
             	    	    lv_tick_5_0=ruleApostrophe();
-            	    	    _fsp--;
+
+            	    	    state._fsp--;
 
 
             	    	    	        if (current==null) {
@@ -402,11 +415,11 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end ruleModel
+    // $ANTLR end "ruleModel"
 
 
-    // $ANTLR start entryRuleError
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:196:1: entryRuleError returns [String current=null] : iv_ruleError= ruleError EOF ;
+    // $ANTLR start "entryRuleError"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:190:1: entryRuleError returns [String current=null] : iv_ruleError= ruleError EOF ;
     public final String entryRuleError() throws RecognitionException {
         String current = null;
 
@@ -417,16 +430,17 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         	
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:200:2: (iv_ruleError= ruleError EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:201:2: iv_ruleError= ruleError EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:194:2: (iv_ruleError= ruleError EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:195:2: iv_ruleError= ruleError EOF
             {
              currentNode = createCompositeNode(grammarAccess.getErrorRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleError_in_entryRuleError282);
+            pushFollow(FollowSets000.FOLLOW_ruleError_in_entryRuleError288);
             iv_ruleError=ruleError();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleError.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleError293); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleError299); 
 
             }
 
@@ -443,11 +457,11 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end entryRuleError
+    // $ANTLR end "entryRuleError"
 
 
-    // $ANTLR start ruleError
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:211:1: ruleError returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR ) ;
+    // $ANTLR start "ruleError"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:205:1: ruleError returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR ) ;
     public final AntlrDatatypeRuleToken ruleError() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -460,26 +474,26 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:217:6: ( (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:218:1: (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:211:6: ( (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:212:1: (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:218:1: (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:218:6: this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:212:1: (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:212:6: this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR
             {
-            this_APOSTROPHE_CHAR_0=(Token)input.LT(1);
-            match(input,RULE_APOSTROPHE_CHAR,FollowSets000.FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleError337); 
+            this_APOSTROPHE_CHAR_0=(Token)match(input,RULE_APOSTROPHE_CHAR,FollowSets000.FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleError343); 
 
             		current.merge(this_APOSTROPHE_CHAR_0);
                 
              
-                createLeafNode(grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_0(), null); 
+                createLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_0(), null); 
                 
              
                     currentNode=createCompositeNode(grammarAccess.getErrorAccess().getGraphicalParserRuleCall_1(), currentNode); 
                 
-            pushFollow(FollowSets000.FOLLOW_ruleGraphical_in_ruleError364);
+            pushFollow(FollowSets000.FOLLOW_ruleGraphical_in_ruleError370);
             this_Graphical_1=ruleGraphical();
-            _fsp--;
+
+            state._fsp--;
 
 
             		current.merge(this_Graphical_1);
@@ -487,13 +501,12 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
              
                     currentNode = currentNode.getParent();
                 
-            this_APOSTROPHE_CHAR_2=(Token)input.LT(1);
-            match(input,RULE_APOSTROPHE_CHAR,FollowSets000.FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleError384); 
+            this_APOSTROPHE_CHAR_2=(Token)match(input,RULE_APOSTROPHE_CHAR,FollowSets000.FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleError390); 
 
             		current.merge(this_APOSTROPHE_CHAR_2);
                 
              
-                createLeafNode(grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_2(), null); 
+                createLeafNode(this_APOSTROPHE_CHAR_2, grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_2(), null); 
                 
 
             }
@@ -517,11 +530,11 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end ruleError
+    // $ANTLR end "ruleError"
 
 
-    // $ANTLR start entryRuleFix
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:254:1: entryRuleFix returns [String current=null] : iv_ruleFix= ruleFix EOF ;
+    // $ANTLR start "entryRuleFix"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:248:1: entryRuleFix returns [String current=null] : iv_ruleFix= ruleFix EOF ;
     public final String entryRuleFix() throws RecognitionException {
         String current = null;
 
@@ -532,16 +545,17 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
         	
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:258:2: (iv_ruleFix= ruleFix EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:259:2: iv_ruleFix= ruleFix EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:252:2: (iv_ruleFix= ruleFix EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:253:2: iv_ruleFix= ruleFix EOF
             {
              currentNode = createCompositeNode(grammarAccess.getFixRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleFix_in_entryRuleFix440);
+            pushFollow(FollowSets000.FOLLOW_ruleFix_in_entryRuleFix446);
             iv_ruleFix=ruleFix();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleFix.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFix451); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFix457); 
 
             }
 
@@ -558,11 +572,11 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end entryRuleFix
+    // $ANTLR end "entryRuleFix"
 
 
-    // $ANTLR start ruleFix
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:269:1: ruleFix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR this_Rehide_3= ruleRehide ) ;
+    // $ANTLR start "ruleFix"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:263:1: ruleFix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR this_Rehide_3= ruleRehide ) ;
     public final AntlrDatatypeRuleToken ruleFix() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -577,26 +591,26 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:275:6: ( (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR this_Rehide_3= ruleRehide ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:276:1: (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR this_Rehide_3= ruleRehide )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:269:6: ( (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR this_Rehide_3= ruleRehide ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:270:1: (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR this_Rehide_3= ruleRehide )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:276:1: (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR this_Rehide_3= ruleRehide )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:276:6: this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR this_Rehide_3= ruleRehide
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:270:1: (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR this_Rehide_3= ruleRehide )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:270:6: this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR this_Graphical_1= ruleGraphical this_APOSTROPHE_CHAR_2= RULE_APOSTROPHE_CHAR this_Rehide_3= ruleRehide
             {
-            this_APOSTROPHE_CHAR_0=(Token)input.LT(1);
-            match(input,RULE_APOSTROPHE_CHAR,FollowSets000.FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleFix495); 
+            this_APOSTROPHE_CHAR_0=(Token)match(input,RULE_APOSTROPHE_CHAR,FollowSets000.FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleFix501); 
 
             		current.merge(this_APOSTROPHE_CHAR_0);
                 
              
-                createLeafNode(grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_0(), null); 
+                createLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_0(), null); 
                 
              
                     currentNode=createCompositeNode(grammarAccess.getFixAccess().getGraphicalParserRuleCall_1(), currentNode); 
                 
-            pushFollow(FollowSets000.FOLLOW_ruleGraphical_in_ruleFix522);
+            pushFollow(FollowSets000.FOLLOW_ruleGraphical_in_ruleFix528);
             this_Graphical_1=ruleGraphical();
-            _fsp--;
+
+            state._fsp--;
 
 
             		current.merge(this_Graphical_1);
@@ -604,20 +618,20 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
              
                     currentNode = currentNode.getParent();
                 
-            this_APOSTROPHE_CHAR_2=(Token)input.LT(1);
-            match(input,RULE_APOSTROPHE_CHAR,FollowSets000.FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleFix542); 
+            this_APOSTROPHE_CHAR_2=(Token)match(input,RULE_APOSTROPHE_CHAR,FollowSets000.FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleFix548); 
 
             		current.merge(this_APOSTROPHE_CHAR_2);
                 
              
-                createLeafNode(grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_2(), null); 
+                createLeafNode(this_APOSTROPHE_CHAR_2, grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_2(), null); 
                 
              
                     currentNode=createCompositeNode(grammarAccess.getFixAccess().getRehideParserRuleCall_3(), currentNode); 
                 
-            pushFollow(FollowSets000.FOLLOW_ruleRehide_in_ruleFix569);
+            pushFollow(FollowSets000.FOLLOW_ruleRehide_in_ruleFix575);
             this_Rehide_3=ruleRehide();
-            _fsp--;
+
+            state._fsp--;
 
 
             		current.merge(this_Rehide_3);
@@ -647,11 +661,11 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end ruleFix
+    // $ANTLR end "ruleFix"
 
 
-    // $ANTLR start entryRuleApostrophe
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:323:1: entryRuleApostrophe returns [String current=null] : iv_ruleApostrophe= ruleApostrophe EOF ;
+    // $ANTLR start "entryRuleApostrophe"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:317:1: entryRuleApostrophe returns [String current=null] : iv_ruleApostrophe= ruleApostrophe EOF ;
     public final String entryRuleApostrophe() throws RecognitionException {
         String current = null;
 
@@ -662,16 +676,17 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
         	
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:327:2: (iv_ruleApostrophe= ruleApostrophe EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:328:2: iv_ruleApostrophe= ruleApostrophe EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:321:2: (iv_ruleApostrophe= ruleApostrophe EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:322:2: iv_ruleApostrophe= ruleApostrophe EOF
             {
              currentNode = createCompositeNode(grammarAccess.getApostropheRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleApostrophe_in_entryRuleApostrophe625);
+            pushFollow(FollowSets000.FOLLOW_ruleApostrophe_in_entryRuleApostrophe631);
             iv_ruleApostrophe=ruleApostrophe();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleApostrophe.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleApostrophe636); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleApostrophe642); 
 
             }
 
@@ -688,11 +703,11 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end entryRuleApostrophe
+    // $ANTLR end "entryRuleApostrophe"
 
 
-    // $ANTLR start ruleApostrophe
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:338:1: ruleApostrophe returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR ;
+    // $ANTLR start "ruleApostrophe"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:332:1: ruleApostrophe returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR ;
     public final AntlrDatatypeRuleToken ruleApostrophe() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -702,16 +717,15 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:344:6: (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:345:5: this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:338:6: (this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:339:5: this_APOSTROPHE_CHAR_0= RULE_APOSTROPHE_CHAR
             {
-            this_APOSTROPHE_CHAR_0=(Token)input.LT(1);
-            match(input,RULE_APOSTROPHE_CHAR,FollowSets000.FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleApostrophe679); 
+            this_APOSTROPHE_CHAR_0=(Token)match(input,RULE_APOSTROPHE_CHAR,FollowSets000.FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleApostrophe685); 
 
             		current.merge(this_APOSTROPHE_CHAR_0);
                 
              
-                createLeafNode(grammarAccess.getApostropheAccess().getAPOSTROPHE_CHARTerminalRuleCall(), null); 
+                createLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getApostropheAccess().getAPOSTROPHE_CHARTerminalRuleCall(), null); 
                 
 
             }
@@ -732,11 +746,11 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end ruleApostrophe
+    // $ANTLR end "ruleApostrophe"
 
 
-    // $ANTLR start entryRuleRehide
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:363:1: entryRuleRehide returns [String current=null] : iv_ruleRehide= ruleRehide EOF ;
+    // $ANTLR start "entryRuleRehide"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:357:1: entryRuleRehide returns [String current=null] : iv_ruleRehide= ruleRehide EOF ;
     public final String entryRuleRehide() throws RecognitionException {
         String current = null;
 
@@ -747,16 +761,17 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
         	
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:367:2: (iv_ruleRehide= ruleRehide EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:368:2: iv_ruleRehide= ruleRehide EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:361:2: (iv_ruleRehide= ruleRehide EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:362:2: iv_ruleRehide= ruleRehide EOF
             {
              currentNode = createCompositeNode(grammarAccess.getRehideRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleRehide_in_entryRuleRehide734);
+            pushFollow(FollowSets000.FOLLOW_ruleRehide_in_entryRuleRehide740);
             iv_ruleRehide=ruleRehide();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleRehide.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRehide745); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRehide751); 
 
             }
 
@@ -773,11 +788,11 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end entryRuleRehide
+    // $ANTLR end "entryRuleRehide"
 
 
-    // $ANTLR start ruleRehide
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:378:1: ruleRehide returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '^' )? ;
+    // $ANTLR start "ruleRehide"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:372:1: ruleRehide returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '^' )? ;
     public final AntlrDatatypeRuleToken ruleRehide() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -787,10 +802,10 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:384:6: ( (kw= '^' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:385:1: (kw= '^' )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:378:6: ( (kw= '^' )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:379:1: (kw= '^' )?
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:385:1: (kw= '^' )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:379:1: (kw= '^' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -799,13 +814,12 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:386:2: kw= '^'
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:380:2: kw= '^'
                     {
-                    kw=(Token)input.LT(1);
-                    match(input,10,FollowSets000.FOLLOW_10_in_ruleRehide787); 
+                    kw=(Token)match(input,10,FollowSets000.FOLLOW_10_in_ruleRehide793); 
 
                             current.merge(kw);
-                            createLeafNode(grammarAccess.getRehideAccess().getCircumflexAccentKeyword(), null); 
+                            createLeafNode(kw, grammarAccess.getRehideAccess().getCircumflexAccentKeyword(), null); 
                         
 
                     }
@@ -832,11 +846,11 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end ruleRehide
+    // $ANTLR end "ruleRehide"
 
 
-    // $ANTLR start entryRuleGraphical
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:402:1: entryRuleGraphical returns [String current=null] : iv_ruleGraphical= ruleGraphical EOF ;
+    // $ANTLR start "entryRuleGraphical"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:396:1: entryRuleGraphical returns [String current=null] : iv_ruleGraphical= ruleGraphical EOF ;
     public final String entryRuleGraphical() throws RecognitionException {
         String current = null;
 
@@ -844,16 +858,17 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:403:2: (iv_ruleGraphical= ruleGraphical EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:404:2: iv_ruleGraphical= ruleGraphical EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:397:2: (iv_ruleGraphical= ruleGraphical EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:398:2: iv_ruleGraphical= ruleGraphical EOF
             {
              currentNode = createCompositeNode(grammarAccess.getGraphicalRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleGraphical_in_entryRuleGraphical833);
+            pushFollow(FollowSets000.FOLLOW_ruleGraphical_in_entryRuleGraphical839);
             iv_ruleGraphical=ruleGraphical();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleGraphical.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGraphical844); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGraphical850); 
 
             }
 
@@ -867,11 +882,11 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end entryRuleGraphical
+    // $ANTLR end "entryRuleGraphical"
 
 
-    // $ANTLR start ruleGraphical
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:411:1: ruleGraphical returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_CHAR_0= RULE_CHAR | this_WS_1= RULE_WS ) ;
+    // $ANTLR start "ruleGraphical"
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:405:1: ruleGraphical returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_CHAR_0= RULE_CHAR | this_WS_1= RULE_WS ) ;
     public final AntlrDatatypeRuleToken ruleGraphical() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -881,10 +896,10 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:416:6: ( (this_CHAR_0= RULE_CHAR | this_WS_1= RULE_WS ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:417:1: (this_CHAR_0= RULE_CHAR | this_WS_1= RULE_WS )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:410:6: ( (this_CHAR_0= RULE_CHAR | this_WS_1= RULE_WS ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:411:1: (this_CHAR_0= RULE_CHAR | this_WS_1= RULE_WS )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:417:1: (this_CHAR_0= RULE_CHAR | this_WS_1= RULE_WS )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:411:1: (this_CHAR_0= RULE_CHAR | this_WS_1= RULE_WS )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -896,35 +911,33 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("417:1: (this_CHAR_0= RULE_CHAR | this_WS_1= RULE_WS )", 6, 0, input);
+                    new NoViableAltException("", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:417:6: this_CHAR_0= RULE_CHAR
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:411:6: this_CHAR_0= RULE_CHAR
                     {
-                    this_CHAR_0=(Token)input.LT(1);
-                    match(input,RULE_CHAR,FollowSets000.FOLLOW_RULE_CHAR_in_ruleGraphical884); 
+                    this_CHAR_0=(Token)match(input,RULE_CHAR,FollowSets000.FOLLOW_RULE_CHAR_in_ruleGraphical890); 
 
                     		current.merge(this_CHAR_0);
                         
                      
-                        createLeafNode(grammarAccess.getGraphicalAccess().getCHARTerminalRuleCall_0(), null); 
+                        createLeafNode(this_CHAR_0, grammarAccess.getGraphicalAccess().getCHARTerminalRuleCall_0(), null); 
                         
 
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:425:10: this_WS_1= RULE_WS
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.g:419:10: this_WS_1= RULE_WS
                     {
-                    this_WS_1=(Token)input.LT(1);
-                    match(input,RULE_WS,FollowSets000.FOLLOW_RULE_WS_in_ruleGraphical910); 
+                    this_WS_1=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_RULE_WS_in_ruleGraphical916); 
 
                     		current.merge(this_WS_1);
                         
                      
-                        createLeafNode(grammarAccess.getGraphicalAccess().getWSTerminalRuleCall_1(), null); 
+                        createLeafNode(this_WS_1, grammarAccess.getGraphicalAccess().getWSTerminalRuleCall_1(), null); 
                         
 
                     }
@@ -948,7 +961,9 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
         }
         return current;
     }
-    // $ANTLR end ruleGraphical
+    // $ANTLR end "ruleGraphical"
+
+    // Delegated rules
 
 
  
@@ -957,33 +972,33 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel81 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleModel91 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_7_in_ruleModel131 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleFix_in_ruleModel152 = new BitSet(new long[]{0x0000000000000392L});
-        public static final BitSet FOLLOW_8_in_ruleModel171 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleError_in_ruleModel192 = new BitSet(new long[]{0x0000000000000392L});
-        public static final BitSet FOLLOW_9_in_ruleModel211 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleApostrophe_in_ruleModel232 = new BitSet(new long[]{0x0000000000000392L});
-        public static final BitSet FOLLOW_ruleError_in_entryRuleError282 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleError293 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleError337 = new BitSet(new long[]{0x0000000000000060L});
-        public static final BitSet FOLLOW_ruleGraphical_in_ruleError364 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleError384 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFix_in_entryRuleFix440 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFix451 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleFix495 = new BitSet(new long[]{0x0000000000000060L});
-        public static final BitSet FOLLOW_ruleGraphical_in_ruleFix522 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleFix542 = new BitSet(new long[]{0x0000000000000402L});
-        public static final BitSet FOLLOW_ruleRehide_in_ruleFix569 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleApostrophe_in_entryRuleApostrophe625 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleApostrophe636 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleApostrophe679 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleRehide_in_entryRuleRehide734 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleRehide745 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_10_in_ruleRehide787 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleGraphical_in_entryRuleGraphical833 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleGraphical844 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_CHAR_in_ruleGraphical884 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_WS_in_ruleGraphical910 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_7_in_ruleModel133 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleFix_in_ruleModel154 = new BitSet(new long[]{0x0000000000000392L});
+        public static final BitSet FOLLOW_8_in_ruleModel175 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleError_in_ruleModel196 = new BitSet(new long[]{0x0000000000000392L});
+        public static final BitSet FOLLOW_9_in_ruleModel217 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleApostrophe_in_ruleModel238 = new BitSet(new long[]{0x0000000000000392L});
+        public static final BitSet FOLLOW_ruleError_in_entryRuleError288 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleError299 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleError343 = new BitSet(new long[]{0x0000000000000060L});
+        public static final BitSet FOLLOW_ruleGraphical_in_ruleError370 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleError390 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFix_in_entryRuleFix446 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFix457 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleFix501 = new BitSet(new long[]{0x0000000000000060L});
+        public static final BitSet FOLLOW_ruleGraphical_in_ruleFix528 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleFix548 = new BitSet(new long[]{0x0000000000000400L});
+        public static final BitSet FOLLOW_ruleRehide_in_ruleFix575 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleApostrophe_in_entryRuleApostrophe631 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleApostrophe642 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_APOSTROPHE_CHAR_in_ruleApostrophe685 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRehide_in_entryRuleRehide740 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRehide751 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_10_in_ruleRehide793 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGraphical_in_entryRuleGraphical839 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleGraphical850 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_CHAR_in_ruleGraphical890 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_WS_in_ruleGraphical916 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

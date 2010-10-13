@@ -27,19 +27,42 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=5;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=6;
+    public static final int T__12=12;
+    public static final int T__23=23;
+    public static final int T__20=20;
+    public static final int T__13=13;
     public static final int RULE_STRING=4;
+    public static final int T__21=21;
+    public static final int T__19=19;
+    public static final int T__14=14;
+    public static final int T__11=11;
+    public static final int T__22=22;
+    public static final int RULE_WS=9;
+    public static final int T__17=17;
+    public static final int RULE_INT=6;
+    public static final int EOF=-1;
+    public static final int T__16=16;
+    public static final int T__24=24;
     public static final int RULE_ANY_OTHER=10;
+    public static final int T__25=25;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__18=18;
+    public static final int T__15=15;
+
+    // delegates
+    // delegators
+
 
         public InternalReferenceGrammarUiTestLanguageParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalReferenceGrammarUiTestLanguageParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalReferenceGrammarUiTestLanguageParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g"; }
 
 
@@ -63,7 +86,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
 
-    // $ANTLR start entryRuleSpielplatz
+    // $ANTLR start "entryRuleSpielplatz"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:61:1: entryRuleSpielplatz : ruleSpielplatz EOF ;
     public final void entryRuleSpielplatz() throws RecognitionException {
         try {
@@ -73,7 +96,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              before(grammarAccess.getSpielplatzRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz61);
             ruleSpielplatz();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSpielplatzRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSpielplatz68); 
@@ -89,10 +113,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end entryRuleSpielplatz
+    // $ANTLR end "entryRuleSpielplatz"
 
 
-    // $ANTLR start ruleSpielplatz
+    // $ANTLR start "ruleSpielplatz"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:70:1: ruleSpielplatz : ( ( rule__Spielplatz__Group__0 )? ) ;
     public final void ruleSpielplatz() throws RecognitionException {
 
@@ -119,7 +143,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__0_in_ruleSpielplatz94);
                     rule__Spielplatz__Group__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -146,10 +171,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end ruleSpielplatz
+    // $ANTLR end "ruleSpielplatz"
 
 
-    // $ANTLR start entryRuleKind
+    // $ANTLR start "entryRuleKind"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:91:1: entryRuleKind : ruleKind EOF ;
     public final void entryRuleKind() throws RecognitionException {
         try {
@@ -159,7 +184,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              before(grammarAccess.getKindRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleKind_in_entryRuleKind124);
             ruleKind();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getKindRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKind131); 
@@ -175,10 +201,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end entryRuleKind
+    // $ANTLR end "entryRuleKind"
 
 
-    // $ANTLR start ruleKind
+    // $ANTLR start "ruleKind"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:100:1: ruleKind : ( ( rule__Kind__Group__0 ) ) ;
     public final void ruleKind() throws RecognitionException {
 
@@ -197,7 +223,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Kind__Group__0_in_ruleKind157);
             rule__Kind__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -221,10 +248,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end ruleKind
+    // $ANTLR end "ruleKind"
 
 
-    // $ANTLR start entryRuleErwachsener
+    // $ANTLR start "entryRuleErwachsener"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:119:1: entryRuleErwachsener : ruleErwachsener EOF ;
     public final void entryRuleErwachsener() throws RecognitionException {
         try {
@@ -234,7 +261,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              before(grammarAccess.getErwachsenerRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleErwachsener_in_entryRuleErwachsener184);
             ruleErwachsener();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getErwachsenerRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleErwachsener191); 
@@ -250,10 +278,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end entryRuleErwachsener
+    // $ANTLR end "entryRuleErwachsener"
 
 
-    // $ANTLR start ruleErwachsener
+    // $ANTLR start "ruleErwachsener"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:128:1: ruleErwachsener : ( ( rule__Erwachsener__Group__0 ) ) ;
     public final void ruleErwachsener() throws RecognitionException {
 
@@ -272,7 +300,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__Group__0_in_ruleErwachsener217);
             rule__Erwachsener__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -296,10 +325,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end ruleErwachsener
+    // $ANTLR end "ruleErwachsener"
 
 
-    // $ANTLR start entryRuleSpielzeug
+    // $ANTLR start "entryRuleSpielzeug"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:147:1: entryRuleSpielzeug : ruleSpielzeug EOF ;
     public final void entryRuleSpielzeug() throws RecognitionException {
         try {
@@ -309,7 +338,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              before(grammarAccess.getSpielzeugRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug244);
             ruleSpielzeug();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSpielzeugRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSpielzeug251); 
@@ -325,10 +355,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end entryRuleSpielzeug
+    // $ANTLR end "entryRuleSpielzeug"
 
 
-    // $ANTLR start ruleSpielzeug
+    // $ANTLR start "ruleSpielzeug"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:156:1: ruleSpielzeug : ( ( rule__Spielzeug__Group__0 ) ) ;
     public final void ruleSpielzeug() throws RecognitionException {
 
@@ -347,7 +377,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__Group__0_in_ruleSpielzeug277);
             rule__Spielzeug__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -371,10 +402,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end ruleSpielzeug
+    // $ANTLR end "ruleSpielzeug"
 
 
-    // $ANTLR start entryRuleFarbe
+    // $ANTLR start "entryRuleFarbe"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:175:1: entryRuleFarbe : ruleFarbe EOF ;
     public final void entryRuleFarbe() throws RecognitionException {
         try {
@@ -384,7 +415,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              before(grammarAccess.getFarbeRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleFarbe_in_entryRuleFarbe304);
             ruleFarbe();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getFarbeRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFarbe311); 
@@ -400,10 +432,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end entryRuleFarbe
+    // $ANTLR end "entryRuleFarbe"
 
 
-    // $ANTLR start ruleFarbe
+    // $ANTLR start "ruleFarbe"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:184:1: ruleFarbe : ( ( rule__Farbe__WertAssignment ) ) ;
     public final void ruleFarbe() throws RecognitionException {
 
@@ -422,7 +454,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Farbe__WertAssignment_in_ruleFarbe337);
             rule__Farbe__WertAssignment();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -446,10 +479,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end ruleFarbe
+    // $ANTLR end "ruleFarbe"
 
 
-    // $ANTLR start entryRuleFamilie
+    // $ANTLR start "entryRuleFamilie"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:203:1: entryRuleFamilie : ruleFamilie EOF ;
     public final void entryRuleFamilie() throws RecognitionException {
         try {
@@ -459,7 +492,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              before(grammarAccess.getFamilieRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleFamilie_in_entryRuleFamilie364);
             ruleFamilie();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getFamilieRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFamilie371); 
@@ -475,10 +509,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end entryRuleFamilie
+    // $ANTLR end "entryRuleFamilie"
 
 
-    // $ANTLR start ruleFamilie
+    // $ANTLR start "ruleFamilie"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:212:1: ruleFamilie : ( ( rule__Familie__Group__0 ) ) ;
     public final void ruleFamilie() throws RecognitionException {
 
@@ -497,7 +531,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__0_in_ruleFamilie397);
             rule__Familie__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -521,10 +556,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end ruleFamilie
+    // $ANTLR end "ruleFamilie"
 
 
-    // $ANTLR start rule__Spielplatz__Alternatives_4
+    // $ANTLR start "rule__Spielplatz__Alternatives_4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:231:1: rule__Spielplatz__Alternatives_4 : ( ( ( rule__Spielplatz__KinderAssignment_4_0 ) ) | ( ( rule__Spielplatz__ErzieherAssignment_4_1 ) ) | ( ( rule__Spielplatz__SpielzeugeAssignment_4_2 ) ) | ( ( rule__Spielplatz__FamilieAssignment_4_3 ) ) );
     public final void rule__Spielplatz__Alternatives_4() throws RecognitionException {
 
@@ -556,7 +591,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("231:1: rule__Spielplatz__Alternatives_4 : ( ( ( rule__Spielplatz__KinderAssignment_4_0 ) ) | ( ( rule__Spielplatz__ErzieherAssignment_4_1 ) ) | ( ( rule__Spielplatz__SpielzeugeAssignment_4_2 ) ) | ( ( rule__Spielplatz__FamilieAssignment_4_3 ) ) );", 2, 0, input);
+                    new NoViableAltException("", 2, 0, input);
 
                 throw nvae;
             }
@@ -574,7 +609,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__KinderAssignment_4_0_in_rule__Spielplatz__Alternatives_4433);
                     rule__Spielplatz__KinderAssignment_4_0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -598,7 +634,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__ErzieherAssignment_4_1_in_rule__Spielplatz__Alternatives_4451);
                     rule__Spielplatz__ErzieherAssignment_4_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -622,7 +659,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__SpielzeugeAssignment_4_2_in_rule__Spielplatz__Alternatives_4469);
                     rule__Spielplatz__SpielzeugeAssignment_4_2();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -646,7 +684,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__FamilieAssignment_4_3_in_rule__Spielplatz__Alternatives_4487);
                     rule__Spielplatz__FamilieAssignment_4_3();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -672,10 +711,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Alternatives_4
+    // $ANTLR end "rule__Spielplatz__Alternatives_4"
 
 
-    // $ANTLR start rule__Farbe__WertAlternatives_0
+    // $ANTLR start "rule__Farbe__WertAlternatives_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:266:1: rule__Farbe__WertAlternatives_0 : ( ( 'ROT' ) | ( 'BLAU' ) | ( 'GELB' ) | ( 'GR\\u00DCN' ) );
     public final void rule__Farbe__WertAlternatives_0() throws RecognitionException {
 
@@ -707,7 +746,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("266:1: rule__Farbe__WertAlternatives_0 : ( ( 'ROT' ) | ( 'BLAU' ) | ( 'GELB' ) | ( 'GR\\u00DCN' ) );", 3, 0, input);
+                    new NoViableAltException("", 3, 0, input);
 
                 throw nvae;
             }
@@ -787,10 +826,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Farbe__WertAlternatives_0
+    // $ANTLR end "rule__Farbe__WertAlternatives_0"
 
 
-    // $ANTLR start rule__Familie__NameAlternatives_2_0
+    // $ANTLR start "rule__Familie__NameAlternatives_2_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:308:1: rule__Familie__NameAlternatives_2_0 : ( ( 'keyword' ) | ( RULE_STRING ) | ( RULE_ID ) );
     public final void rule__Familie__NameAlternatives_2_0() throws RecognitionException {
 
@@ -817,7 +856,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("308:1: rule__Familie__NameAlternatives_2_0 : ( ( 'keyword' ) | ( RULE_STRING ) | ( RULE_ID ) );", 4, 0, input);
+                    new NoViableAltException("", 4, 0, input);
 
                 throw nvae;
             }
@@ -882,10 +921,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__NameAlternatives_2_0
+    // $ANTLR end "rule__Familie__NameAlternatives_2_0"
 
 
-    // $ANTLR start rule__Spielplatz__Group__0
+    // $ANTLR start "rule__Spielplatz__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:340:1: rule__Spielplatz__Group__0 : rule__Spielplatz__Group__0__Impl rule__Spielplatz__Group__1 ;
     public final void rule__Spielplatz__Group__0() throws RecognitionException {
 
@@ -897,11 +936,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__0__Impl_in_rule__Spielplatz__Group__0683);
             rule__Spielplatz__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__1_in_rule__Spielplatz__Group__0686);
             rule__Spielplatz__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -918,10 +959,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__0
+    // $ANTLR end "rule__Spielplatz__Group__0"
 
 
-    // $ANTLR start rule__Spielplatz__Group__0__Impl
+    // $ANTLR start "rule__Spielplatz__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:352:1: rule__Spielplatz__Group__0__Impl : ( 'spielplatz' ) ;
     public final void rule__Spielplatz__Group__0__Impl() throws RecognitionException {
 
@@ -955,10 +996,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__0__Impl
+    // $ANTLR end "rule__Spielplatz__Group__0__Impl"
 
 
-    // $ANTLR start rule__Spielplatz__Group__1
+    // $ANTLR start "rule__Spielplatz__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:371:1: rule__Spielplatz__Group__1 : rule__Spielplatz__Group__1__Impl rule__Spielplatz__Group__2 ;
     public final void rule__Spielplatz__Group__1() throws RecognitionException {
 
@@ -970,11 +1011,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__1__Impl_in_rule__Spielplatz__Group__1745);
             rule__Spielplatz__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__2_in_rule__Spielplatz__Group__1748);
             rule__Spielplatz__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -991,10 +1034,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__1
+    // $ANTLR end "rule__Spielplatz__Group__1"
 
 
-    // $ANTLR start rule__Spielplatz__Group__1__Impl
+    // $ANTLR start "rule__Spielplatz__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:383:1: rule__Spielplatz__Group__1__Impl : ( ( rule__Spielplatz__GroesseAssignment_1 ) ) ;
     public final void rule__Spielplatz__Group__1__Impl() throws RecognitionException {
 
@@ -1013,7 +1056,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__GroesseAssignment_1_in_rule__Spielplatz__Group__1__Impl775);
             rule__Spielplatz__GroesseAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1037,10 +1081,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__1__Impl
+    // $ANTLR end "rule__Spielplatz__Group__1__Impl"
 
 
-    // $ANTLR start rule__Spielplatz__Group__2
+    // $ANTLR start "rule__Spielplatz__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:400:1: rule__Spielplatz__Group__2 : rule__Spielplatz__Group__2__Impl rule__Spielplatz__Group__3 ;
     public final void rule__Spielplatz__Group__2() throws RecognitionException {
 
@@ -1052,11 +1096,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__2__Impl_in_rule__Spielplatz__Group__2805);
             rule__Spielplatz__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__3_in_rule__Spielplatz__Group__2808);
             rule__Spielplatz__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1073,10 +1119,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__2
+    // $ANTLR end "rule__Spielplatz__Group__2"
 
 
-    // $ANTLR start rule__Spielplatz__Group__2__Impl
+    // $ANTLR start "rule__Spielplatz__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:412:1: rule__Spielplatz__Group__2__Impl : ( ( rule__Spielplatz__BeschreibungAssignment_2 )? ) ;
     public final void rule__Spielplatz__Group__2__Impl() throws RecognitionException {
 
@@ -1103,7 +1149,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__BeschreibungAssignment_2_in_rule__Spielplatz__Group__2__Impl835);
                     rule__Spielplatz__BeschreibungAssignment_2();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -1130,10 +1177,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__2__Impl
+    // $ANTLR end "rule__Spielplatz__Group__2__Impl"
 
 
-    // $ANTLR start rule__Spielplatz__Group__3
+    // $ANTLR start "rule__Spielplatz__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:429:1: rule__Spielplatz__Group__3 : rule__Spielplatz__Group__3__Impl rule__Spielplatz__Group__4 ;
     public final void rule__Spielplatz__Group__3() throws RecognitionException {
 
@@ -1145,11 +1192,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__3__Impl_in_rule__Spielplatz__Group__3866);
             rule__Spielplatz__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__4_in_rule__Spielplatz__Group__3869);
             rule__Spielplatz__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1166,10 +1215,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__3
+    // $ANTLR end "rule__Spielplatz__Group__3"
 
 
-    // $ANTLR start rule__Spielplatz__Group__3__Impl
+    // $ANTLR start "rule__Spielplatz__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:441:1: rule__Spielplatz__Group__3__Impl : ( '{' ) ;
     public final void rule__Spielplatz__Group__3__Impl() throws RecognitionException {
 
@@ -1203,10 +1252,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__3__Impl
+    // $ANTLR end "rule__Spielplatz__Group__3__Impl"
 
 
-    // $ANTLR start rule__Spielplatz__Group__4
+    // $ANTLR start "rule__Spielplatz__Group__4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:460:1: rule__Spielplatz__Group__4 : rule__Spielplatz__Group__4__Impl rule__Spielplatz__Group__5 ;
     public final void rule__Spielplatz__Group__4() throws RecognitionException {
 
@@ -1218,11 +1267,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__4__Impl_in_rule__Spielplatz__Group__4928);
             rule__Spielplatz__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__5_in_rule__Spielplatz__Group__4931);
             rule__Spielplatz__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1239,10 +1290,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__4
+    // $ANTLR end "rule__Spielplatz__Group__4"
 
 
-    // $ANTLR start rule__Spielplatz__Group__4__Impl
+    // $ANTLR start "rule__Spielplatz__Group__4__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:472:1: rule__Spielplatz__Group__4__Impl : ( ( rule__Spielplatz__Alternatives_4 )* ) ;
     public final void rule__Spielplatz__Group__4__Impl() throws RecognitionException {
 
@@ -1273,7 +1324,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Alternatives_4_in_rule__Spielplatz__Group__4__Impl958);
             	    rule__Spielplatz__Alternatives_4();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -1303,10 +1355,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__4__Impl
+    // $ANTLR end "rule__Spielplatz__Group__4__Impl"
 
 
-    // $ANTLR start rule__Spielplatz__Group__5
+    // $ANTLR start "rule__Spielplatz__Group__5"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:489:1: rule__Spielplatz__Group__5 : rule__Spielplatz__Group__5__Impl ;
     public final void rule__Spielplatz__Group__5() throws RecognitionException {
 
@@ -1318,7 +1370,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielplatz__Group__5__Impl_in_rule__Spielplatz__Group__5989);
             rule__Spielplatz__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1335,10 +1388,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__5
+    // $ANTLR end "rule__Spielplatz__Group__5"
 
 
-    // $ANTLR start rule__Spielplatz__Group__5__Impl
+    // $ANTLR start "rule__Spielplatz__Group__5__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:500:1: rule__Spielplatz__Group__5__Impl : ( '}' ) ;
     public final void rule__Spielplatz__Group__5__Impl() throws RecognitionException {
 
@@ -1372,10 +1425,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__Group__5__Impl
+    // $ANTLR end "rule__Spielplatz__Group__5__Impl"
 
 
-    // $ANTLR start rule__Kind__Group__0
+    // $ANTLR start "rule__Kind__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:531:1: rule__Kind__Group__0 : rule__Kind__Group__0__Impl rule__Kind__Group__1 ;
     public final void rule__Kind__Group__0() throws RecognitionException {
 
@@ -1387,11 +1440,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Kind__Group__0__Impl_in_rule__Kind__Group__01060);
             rule__Kind__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Kind__Group__1_in_rule__Kind__Group__01063);
             rule__Kind__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1408,10 +1463,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__Group__0
+    // $ANTLR end "rule__Kind__Group__0"
 
 
-    // $ANTLR start rule__Kind__Group__0__Impl
+    // $ANTLR start "rule__Kind__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:543:1: rule__Kind__Group__0__Impl : ( 'kind' ) ;
     public final void rule__Kind__Group__0__Impl() throws RecognitionException {
 
@@ -1445,10 +1500,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__Group__0__Impl
+    // $ANTLR end "rule__Kind__Group__0__Impl"
 
 
-    // $ANTLR start rule__Kind__Group__1
+    // $ANTLR start "rule__Kind__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:562:1: rule__Kind__Group__1 : rule__Kind__Group__1__Impl rule__Kind__Group__2 ;
     public final void rule__Kind__Group__1() throws RecognitionException {
 
@@ -1460,11 +1515,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Kind__Group__1__Impl_in_rule__Kind__Group__11122);
             rule__Kind__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Kind__Group__2_in_rule__Kind__Group__11125);
             rule__Kind__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1481,10 +1538,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__Group__1
+    // $ANTLR end "rule__Kind__Group__1"
 
 
-    // $ANTLR start rule__Kind__Group__1__Impl
+    // $ANTLR start "rule__Kind__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:574:1: rule__Kind__Group__1__Impl : ( '(' ) ;
     public final void rule__Kind__Group__1__Impl() throws RecognitionException {
 
@@ -1518,10 +1575,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__Group__1__Impl
+    // $ANTLR end "rule__Kind__Group__1__Impl"
 
 
-    // $ANTLR start rule__Kind__Group__2
+    // $ANTLR start "rule__Kind__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:593:1: rule__Kind__Group__2 : rule__Kind__Group__2__Impl rule__Kind__Group__3 ;
     public final void rule__Kind__Group__2() throws RecognitionException {
 
@@ -1533,11 +1590,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Kind__Group__2__Impl_in_rule__Kind__Group__21184);
             rule__Kind__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Kind__Group__3_in_rule__Kind__Group__21187);
             rule__Kind__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1554,10 +1613,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__Group__2
+    // $ANTLR end "rule__Kind__Group__2"
 
 
-    // $ANTLR start rule__Kind__Group__2__Impl
+    // $ANTLR start "rule__Kind__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:605:1: rule__Kind__Group__2__Impl : ( ( rule__Kind__NameAssignment_2 ) ) ;
     public final void rule__Kind__Group__2__Impl() throws RecognitionException {
 
@@ -1576,7 +1635,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Kind__NameAssignment_2_in_rule__Kind__Group__2__Impl1214);
             rule__Kind__NameAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1600,10 +1660,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__Group__2__Impl
+    // $ANTLR end "rule__Kind__Group__2__Impl"
 
 
-    // $ANTLR start rule__Kind__Group__3
+    // $ANTLR start "rule__Kind__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:622:1: rule__Kind__Group__3 : rule__Kind__Group__3__Impl rule__Kind__Group__4 ;
     public final void rule__Kind__Group__3() throws RecognitionException {
 
@@ -1615,11 +1675,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Kind__Group__3__Impl_in_rule__Kind__Group__31244);
             rule__Kind__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Kind__Group__4_in_rule__Kind__Group__31247);
             rule__Kind__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1636,10 +1698,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__Group__3
+    // $ANTLR end "rule__Kind__Group__3"
 
 
-    // $ANTLR start rule__Kind__Group__3__Impl
+    // $ANTLR start "rule__Kind__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:634:1: rule__Kind__Group__3__Impl : ( ( rule__Kind__AgeAssignment_3 ) ) ;
     public final void rule__Kind__Group__3__Impl() throws RecognitionException {
 
@@ -1658,7 +1720,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Kind__AgeAssignment_3_in_rule__Kind__Group__3__Impl1274);
             rule__Kind__AgeAssignment_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1682,10 +1745,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__Group__3__Impl
+    // $ANTLR end "rule__Kind__Group__3__Impl"
 
 
-    // $ANTLR start rule__Kind__Group__4
+    // $ANTLR start "rule__Kind__Group__4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:651:1: rule__Kind__Group__4 : rule__Kind__Group__4__Impl ;
     public final void rule__Kind__Group__4() throws RecognitionException {
 
@@ -1697,7 +1760,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Kind__Group__4__Impl_in_rule__Kind__Group__41304);
             rule__Kind__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1714,10 +1778,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__Group__4
+    // $ANTLR end "rule__Kind__Group__4"
 
 
-    // $ANTLR start rule__Kind__Group__4__Impl
+    // $ANTLR start "rule__Kind__Group__4__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:662:1: rule__Kind__Group__4__Impl : ( ')' ) ;
     public final void rule__Kind__Group__4__Impl() throws RecognitionException {
 
@@ -1751,10 +1815,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__Group__4__Impl
+    // $ANTLR end "rule__Kind__Group__4__Impl"
 
 
-    // $ANTLR start rule__Erwachsener__Group__0
+    // $ANTLR start "rule__Erwachsener__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:691:1: rule__Erwachsener__Group__0 : rule__Erwachsener__Group__0__Impl rule__Erwachsener__Group__1 ;
     public final void rule__Erwachsener__Group__0() throws RecognitionException {
 
@@ -1766,11 +1830,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__Group__0__Impl_in_rule__Erwachsener__Group__01373);
             rule__Erwachsener__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__Group__1_in_rule__Erwachsener__Group__01376);
             rule__Erwachsener__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1787,10 +1853,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__Group__0
+    // $ANTLR end "rule__Erwachsener__Group__0"
 
 
-    // $ANTLR start rule__Erwachsener__Group__0__Impl
+    // $ANTLR start "rule__Erwachsener__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:703:1: rule__Erwachsener__Group__0__Impl : ( 'erwachsener' ) ;
     public final void rule__Erwachsener__Group__0__Impl() throws RecognitionException {
 
@@ -1824,10 +1890,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__Group__0__Impl
+    // $ANTLR end "rule__Erwachsener__Group__0__Impl"
 
 
-    // $ANTLR start rule__Erwachsener__Group__1
+    // $ANTLR start "rule__Erwachsener__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:722:1: rule__Erwachsener__Group__1 : rule__Erwachsener__Group__1__Impl rule__Erwachsener__Group__2 ;
     public final void rule__Erwachsener__Group__1() throws RecognitionException {
 
@@ -1839,11 +1905,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__Group__1__Impl_in_rule__Erwachsener__Group__11435);
             rule__Erwachsener__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__Group__2_in_rule__Erwachsener__Group__11438);
             rule__Erwachsener__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1860,10 +1928,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__Group__1
+    // $ANTLR end "rule__Erwachsener__Group__1"
 
 
-    // $ANTLR start rule__Erwachsener__Group__1__Impl
+    // $ANTLR start "rule__Erwachsener__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:734:1: rule__Erwachsener__Group__1__Impl : ( '(' ) ;
     public final void rule__Erwachsener__Group__1__Impl() throws RecognitionException {
 
@@ -1897,10 +1965,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__Group__1__Impl
+    // $ANTLR end "rule__Erwachsener__Group__1__Impl"
 
 
-    // $ANTLR start rule__Erwachsener__Group__2
+    // $ANTLR start "rule__Erwachsener__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:753:1: rule__Erwachsener__Group__2 : rule__Erwachsener__Group__2__Impl rule__Erwachsener__Group__3 ;
     public final void rule__Erwachsener__Group__2() throws RecognitionException {
 
@@ -1912,11 +1980,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__Group__2__Impl_in_rule__Erwachsener__Group__21497);
             rule__Erwachsener__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__Group__3_in_rule__Erwachsener__Group__21500);
             rule__Erwachsener__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1933,10 +2003,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__Group__2
+    // $ANTLR end "rule__Erwachsener__Group__2"
 
 
-    // $ANTLR start rule__Erwachsener__Group__2__Impl
+    // $ANTLR start "rule__Erwachsener__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:765:1: rule__Erwachsener__Group__2__Impl : ( ( rule__Erwachsener__NameAssignment_2 ) ) ;
     public final void rule__Erwachsener__Group__2__Impl() throws RecognitionException {
 
@@ -1955,7 +2025,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__NameAssignment_2_in_rule__Erwachsener__Group__2__Impl1527);
             rule__Erwachsener__NameAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1979,10 +2050,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__Group__2__Impl
+    // $ANTLR end "rule__Erwachsener__Group__2__Impl"
 
 
-    // $ANTLR start rule__Erwachsener__Group__3
+    // $ANTLR start "rule__Erwachsener__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:782:1: rule__Erwachsener__Group__3 : rule__Erwachsener__Group__3__Impl rule__Erwachsener__Group__4 ;
     public final void rule__Erwachsener__Group__3() throws RecognitionException {
 
@@ -1994,11 +2065,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__Group__3__Impl_in_rule__Erwachsener__Group__31557);
             rule__Erwachsener__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__Group__4_in_rule__Erwachsener__Group__31560);
             rule__Erwachsener__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2015,10 +2088,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__Group__3
+    // $ANTLR end "rule__Erwachsener__Group__3"
 
 
-    // $ANTLR start rule__Erwachsener__Group__3__Impl
+    // $ANTLR start "rule__Erwachsener__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:794:1: rule__Erwachsener__Group__3__Impl : ( ( rule__Erwachsener__AgeAssignment_3 ) ) ;
     public final void rule__Erwachsener__Group__3__Impl() throws RecognitionException {
 
@@ -2037,7 +2110,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__AgeAssignment_3_in_rule__Erwachsener__Group__3__Impl1587);
             rule__Erwachsener__AgeAssignment_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2061,10 +2135,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__Group__3__Impl
+    // $ANTLR end "rule__Erwachsener__Group__3__Impl"
 
 
-    // $ANTLR start rule__Erwachsener__Group__4
+    // $ANTLR start "rule__Erwachsener__Group__4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:811:1: rule__Erwachsener__Group__4 : rule__Erwachsener__Group__4__Impl ;
     public final void rule__Erwachsener__Group__4() throws RecognitionException {
 
@@ -2076,7 +2150,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Erwachsener__Group__4__Impl_in_rule__Erwachsener__Group__41617);
             rule__Erwachsener__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2093,10 +2168,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__Group__4
+    // $ANTLR end "rule__Erwachsener__Group__4"
 
 
-    // $ANTLR start rule__Erwachsener__Group__4__Impl
+    // $ANTLR start "rule__Erwachsener__Group__4__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:822:1: rule__Erwachsener__Group__4__Impl : ( ')' ) ;
     public final void rule__Erwachsener__Group__4__Impl() throws RecognitionException {
 
@@ -2130,10 +2205,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__Group__4__Impl
+    // $ANTLR end "rule__Erwachsener__Group__4__Impl"
 
 
-    // $ANTLR start rule__Spielzeug__Group__0
+    // $ANTLR start "rule__Spielzeug__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:851:1: rule__Spielzeug__Group__0 : rule__Spielzeug__Group__0__Impl rule__Spielzeug__Group__1 ;
     public final void rule__Spielzeug__Group__0() throws RecognitionException {
 
@@ -2145,11 +2220,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__Group__0__Impl_in_rule__Spielzeug__Group__01686);
             rule__Spielzeug__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__Group__1_in_rule__Spielzeug__Group__01689);
             rule__Spielzeug__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2166,10 +2243,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__Group__0
+    // $ANTLR end "rule__Spielzeug__Group__0"
 
 
-    // $ANTLR start rule__Spielzeug__Group__0__Impl
+    // $ANTLR start "rule__Spielzeug__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:863:1: rule__Spielzeug__Group__0__Impl : ( 'spielzeug' ) ;
     public final void rule__Spielzeug__Group__0__Impl() throws RecognitionException {
 
@@ -2203,10 +2280,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__Group__0__Impl
+    // $ANTLR end "rule__Spielzeug__Group__0__Impl"
 
 
-    // $ANTLR start rule__Spielzeug__Group__1
+    // $ANTLR start "rule__Spielzeug__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:882:1: rule__Spielzeug__Group__1 : rule__Spielzeug__Group__1__Impl rule__Spielzeug__Group__2 ;
     public final void rule__Spielzeug__Group__1() throws RecognitionException {
 
@@ -2218,11 +2295,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__Group__1__Impl_in_rule__Spielzeug__Group__11748);
             rule__Spielzeug__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__Group__2_in_rule__Spielzeug__Group__11751);
             rule__Spielzeug__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2239,10 +2318,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__Group__1
+    // $ANTLR end "rule__Spielzeug__Group__1"
 
 
-    // $ANTLR start rule__Spielzeug__Group__1__Impl
+    // $ANTLR start "rule__Spielzeug__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:894:1: rule__Spielzeug__Group__1__Impl : ( '(' ) ;
     public final void rule__Spielzeug__Group__1__Impl() throws RecognitionException {
 
@@ -2276,10 +2355,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__Group__1__Impl
+    // $ANTLR end "rule__Spielzeug__Group__1__Impl"
 
 
-    // $ANTLR start rule__Spielzeug__Group__2
+    // $ANTLR start "rule__Spielzeug__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:913:1: rule__Spielzeug__Group__2 : rule__Spielzeug__Group__2__Impl rule__Spielzeug__Group__3 ;
     public final void rule__Spielzeug__Group__2() throws RecognitionException {
 
@@ -2291,11 +2370,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__Group__2__Impl_in_rule__Spielzeug__Group__21810);
             rule__Spielzeug__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__Group__3_in_rule__Spielzeug__Group__21813);
             rule__Spielzeug__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2312,10 +2393,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__Group__2
+    // $ANTLR end "rule__Spielzeug__Group__2"
 
 
-    // $ANTLR start rule__Spielzeug__Group__2__Impl
+    // $ANTLR start "rule__Spielzeug__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:925:1: rule__Spielzeug__Group__2__Impl : ( ( rule__Spielzeug__NameAssignment_2 ) ) ;
     public final void rule__Spielzeug__Group__2__Impl() throws RecognitionException {
 
@@ -2334,7 +2415,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__NameAssignment_2_in_rule__Spielzeug__Group__2__Impl1840);
             rule__Spielzeug__NameAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2358,10 +2440,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__Group__2__Impl
+    // $ANTLR end "rule__Spielzeug__Group__2__Impl"
 
 
-    // $ANTLR start rule__Spielzeug__Group__3
+    // $ANTLR start "rule__Spielzeug__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:942:1: rule__Spielzeug__Group__3 : rule__Spielzeug__Group__3__Impl rule__Spielzeug__Group__4 ;
     public final void rule__Spielzeug__Group__3() throws RecognitionException {
 
@@ -2373,11 +2455,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__Group__3__Impl_in_rule__Spielzeug__Group__31870);
             rule__Spielzeug__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__Group__4_in_rule__Spielzeug__Group__31873);
             rule__Spielzeug__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2394,10 +2478,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__Group__3
+    // $ANTLR end "rule__Spielzeug__Group__3"
 
 
-    // $ANTLR start rule__Spielzeug__Group__3__Impl
+    // $ANTLR start "rule__Spielzeug__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:954:1: rule__Spielzeug__Group__3__Impl : ( ( rule__Spielzeug__FarbeAssignment_3 ) ) ;
     public final void rule__Spielzeug__Group__3__Impl() throws RecognitionException {
 
@@ -2416,7 +2500,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__FarbeAssignment_3_in_rule__Spielzeug__Group__3__Impl1900);
             rule__Spielzeug__FarbeAssignment_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2440,10 +2525,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__Group__3__Impl
+    // $ANTLR end "rule__Spielzeug__Group__3__Impl"
 
 
-    // $ANTLR start rule__Spielzeug__Group__4
+    // $ANTLR start "rule__Spielzeug__Group__4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:971:1: rule__Spielzeug__Group__4 : rule__Spielzeug__Group__4__Impl ;
     public final void rule__Spielzeug__Group__4() throws RecognitionException {
 
@@ -2455,7 +2540,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Spielzeug__Group__4__Impl_in_rule__Spielzeug__Group__41930);
             rule__Spielzeug__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2472,10 +2558,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__Group__4
+    // $ANTLR end "rule__Spielzeug__Group__4"
 
 
-    // $ANTLR start rule__Spielzeug__Group__4__Impl
+    // $ANTLR start "rule__Spielzeug__Group__4__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:982:1: rule__Spielzeug__Group__4__Impl : ( ')' ) ;
     public final void rule__Spielzeug__Group__4__Impl() throws RecognitionException {
 
@@ -2509,10 +2595,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__Group__4__Impl
+    // $ANTLR end "rule__Spielzeug__Group__4__Impl"
 
 
-    // $ANTLR start rule__Familie__Group__0
+    // $ANTLR start "rule__Familie__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1011:1: rule__Familie__Group__0 : rule__Familie__Group__0__Impl rule__Familie__Group__1 ;
     public final void rule__Familie__Group__0() throws RecognitionException {
 
@@ -2524,11 +2610,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__0__Impl_in_rule__Familie__Group__01999);
             rule__Familie__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__1_in_rule__Familie__Group__02002);
             rule__Familie__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2545,10 +2633,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__0
+    // $ANTLR end "rule__Familie__Group__0"
 
 
-    // $ANTLR start rule__Familie__Group__0__Impl
+    // $ANTLR start "rule__Familie__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1023:1: rule__Familie__Group__0__Impl : ( 'familie' ) ;
     public final void rule__Familie__Group__0__Impl() throws RecognitionException {
 
@@ -2582,10 +2670,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__0__Impl
+    // $ANTLR end "rule__Familie__Group__0__Impl"
 
 
-    // $ANTLR start rule__Familie__Group__1
+    // $ANTLR start "rule__Familie__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1042:1: rule__Familie__Group__1 : rule__Familie__Group__1__Impl rule__Familie__Group__2 ;
     public final void rule__Familie__Group__1() throws RecognitionException {
 
@@ -2597,11 +2685,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__1__Impl_in_rule__Familie__Group__12061);
             rule__Familie__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__2_in_rule__Familie__Group__12064);
             rule__Familie__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2618,10 +2708,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__1
+    // $ANTLR end "rule__Familie__Group__1"
 
 
-    // $ANTLR start rule__Familie__Group__1__Impl
+    // $ANTLR start "rule__Familie__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1054:1: rule__Familie__Group__1__Impl : ( '(' ) ;
     public final void rule__Familie__Group__1__Impl() throws RecognitionException {
 
@@ -2655,10 +2745,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__1__Impl
+    // $ANTLR end "rule__Familie__Group__1__Impl"
 
 
-    // $ANTLR start rule__Familie__Group__2
+    // $ANTLR start "rule__Familie__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1073:1: rule__Familie__Group__2 : rule__Familie__Group__2__Impl rule__Familie__Group__3 ;
     public final void rule__Familie__Group__2() throws RecognitionException {
 
@@ -2670,11 +2760,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__2__Impl_in_rule__Familie__Group__22123);
             rule__Familie__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__3_in_rule__Familie__Group__22126);
             rule__Familie__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2691,10 +2783,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__2
+    // $ANTLR end "rule__Familie__Group__2"
 
 
-    // $ANTLR start rule__Familie__Group__2__Impl
+    // $ANTLR start "rule__Familie__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1085:1: rule__Familie__Group__2__Impl : ( ( rule__Familie__NameAssignment_2 ) ) ;
     public final void rule__Familie__Group__2__Impl() throws RecognitionException {
 
@@ -2713,7 +2805,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__NameAssignment_2_in_rule__Familie__Group__2__Impl2153);
             rule__Familie__NameAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2737,10 +2830,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__2__Impl
+    // $ANTLR end "rule__Familie__Group__2__Impl"
 
 
-    // $ANTLR start rule__Familie__Group__3
+    // $ANTLR start "rule__Familie__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1102:1: rule__Familie__Group__3 : rule__Familie__Group__3__Impl rule__Familie__Group__4 ;
     public final void rule__Familie__Group__3() throws RecognitionException {
 
@@ -2752,11 +2845,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__3__Impl_in_rule__Familie__Group__32183);
             rule__Familie__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__4_in_rule__Familie__Group__32186);
             rule__Familie__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2773,10 +2868,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__3
+    // $ANTLR end "rule__Familie__Group__3"
 
 
-    // $ANTLR start rule__Familie__Group__3__Impl
+    // $ANTLR start "rule__Familie__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1114:1: rule__Familie__Group__3__Impl : ( ( rule__Familie__MutterAssignment_3 ) ) ;
     public final void rule__Familie__Group__3__Impl() throws RecognitionException {
 
@@ -2795,7 +2890,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__MutterAssignment_3_in_rule__Familie__Group__3__Impl2213);
             rule__Familie__MutterAssignment_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2819,10 +2915,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__3__Impl
+    // $ANTLR end "rule__Familie__Group__3__Impl"
 
 
-    // $ANTLR start rule__Familie__Group__4
+    // $ANTLR start "rule__Familie__Group__4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1131:1: rule__Familie__Group__4 : rule__Familie__Group__4__Impl rule__Familie__Group__5 ;
     public final void rule__Familie__Group__4() throws RecognitionException {
 
@@ -2834,11 +2930,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__4__Impl_in_rule__Familie__Group__42243);
             rule__Familie__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__5_in_rule__Familie__Group__42246);
             rule__Familie__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2855,10 +2953,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__4
+    // $ANTLR end "rule__Familie__Group__4"
 
 
-    // $ANTLR start rule__Familie__Group__4__Impl
+    // $ANTLR start "rule__Familie__Group__4__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1143:1: rule__Familie__Group__4__Impl : ( ( rule__Familie__VaterAssignment_4 ) ) ;
     public final void rule__Familie__Group__4__Impl() throws RecognitionException {
 
@@ -2877,7 +2975,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__VaterAssignment_4_in_rule__Familie__Group__4__Impl2273);
             rule__Familie__VaterAssignment_4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2901,10 +3000,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__4__Impl
+    // $ANTLR end "rule__Familie__Group__4__Impl"
 
 
-    // $ANTLR start rule__Familie__Group__5
+    // $ANTLR start "rule__Familie__Group__5"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1160:1: rule__Familie__Group__5 : rule__Familie__Group__5__Impl rule__Familie__Group__6 ;
     public final void rule__Familie__Group__5() throws RecognitionException {
 
@@ -2916,11 +3015,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__5__Impl_in_rule__Familie__Group__52303);
             rule__Familie__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__6_in_rule__Familie__Group__52306);
             rule__Familie__Group__6();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2937,10 +3038,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__5
+    // $ANTLR end "rule__Familie__Group__5"
 
 
-    // $ANTLR start rule__Familie__Group__5__Impl
+    // $ANTLR start "rule__Familie__Group__5__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1172:1: rule__Familie__Group__5__Impl : ( ( rule__Familie__KinderAssignment_5 ) ) ;
     public final void rule__Familie__Group__5__Impl() throws RecognitionException {
 
@@ -2959,7 +3060,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__KinderAssignment_5_in_rule__Familie__Group__5__Impl2333);
             rule__Familie__KinderAssignment_5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2983,10 +3085,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__5__Impl
+    // $ANTLR end "rule__Familie__Group__5__Impl"
 
 
-    // $ANTLR start rule__Familie__Group__6
+    // $ANTLR start "rule__Familie__Group__6"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1189:1: rule__Familie__Group__6 : rule__Familie__Group__6__Impl rule__Familie__Group__7 ;
     public final void rule__Familie__Group__6() throws RecognitionException {
 
@@ -2998,11 +3100,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__6__Impl_in_rule__Familie__Group__62363);
             rule__Familie__Group__6__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__7_in_rule__Familie__Group__62366);
             rule__Familie__Group__7();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3019,10 +3123,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__6
+    // $ANTLR end "rule__Familie__Group__6"
 
 
-    // $ANTLR start rule__Familie__Group__6__Impl
+    // $ANTLR start "rule__Familie__Group__6__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1201:1: rule__Familie__Group__6__Impl : ( ( rule__Familie__Group_6__0 )* ) ;
     public final void rule__Familie__Group__6__Impl() throws RecognitionException {
 
@@ -3053,7 +3157,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Familie__Group_6__0_in_rule__Familie__Group__6__Impl2393);
             	    rule__Familie__Group_6__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -3083,10 +3188,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__6__Impl
+    // $ANTLR end "rule__Familie__Group__6__Impl"
 
 
-    // $ANTLR start rule__Familie__Group__7
+    // $ANTLR start "rule__Familie__Group__7"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1218:1: rule__Familie__Group__7 : rule__Familie__Group__7__Impl ;
     public final void rule__Familie__Group__7() throws RecognitionException {
 
@@ -3098,7 +3203,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group__7__Impl_in_rule__Familie__Group__72424);
             rule__Familie__Group__7__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3115,10 +3221,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__7
+    // $ANTLR end "rule__Familie__Group__7"
 
 
-    // $ANTLR start rule__Familie__Group__7__Impl
+    // $ANTLR start "rule__Familie__Group__7__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1229:1: rule__Familie__Group__7__Impl : ( ')' ) ;
     public final void rule__Familie__Group__7__Impl() throws RecognitionException {
 
@@ -3152,10 +3258,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group__7__Impl
+    // $ANTLR end "rule__Familie__Group__7__Impl"
 
 
-    // $ANTLR start rule__Familie__Group_6__0
+    // $ANTLR start "rule__Familie__Group_6__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1264:1: rule__Familie__Group_6__0 : rule__Familie__Group_6__0__Impl rule__Familie__Group_6__1 ;
     public final void rule__Familie__Group_6__0() throws RecognitionException {
 
@@ -3167,11 +3273,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group_6__0__Impl_in_rule__Familie__Group_6__02499);
             rule__Familie__Group_6__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group_6__1_in_rule__Familie__Group_6__02502);
             rule__Familie__Group_6__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3188,10 +3296,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group_6__0
+    // $ANTLR end "rule__Familie__Group_6__0"
 
 
-    // $ANTLR start rule__Familie__Group_6__0__Impl
+    // $ANTLR start "rule__Familie__Group_6__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1276:1: rule__Familie__Group_6__0__Impl : ( ',' ) ;
     public final void rule__Familie__Group_6__0__Impl() throws RecognitionException {
 
@@ -3225,10 +3333,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group_6__0__Impl
+    // $ANTLR end "rule__Familie__Group_6__0__Impl"
 
 
-    // $ANTLR start rule__Familie__Group_6__1
+    // $ANTLR start "rule__Familie__Group_6__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1295:1: rule__Familie__Group_6__1 : rule__Familie__Group_6__1__Impl ;
     public final void rule__Familie__Group_6__1() throws RecognitionException {
 
@@ -3240,7 +3348,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__Group_6__1__Impl_in_rule__Familie__Group_6__12561);
             rule__Familie__Group_6__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3257,10 +3366,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group_6__1
+    // $ANTLR end "rule__Familie__Group_6__1"
 
 
-    // $ANTLR start rule__Familie__Group_6__1__Impl
+    // $ANTLR start "rule__Familie__Group_6__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1306:1: rule__Familie__Group_6__1__Impl : ( ( rule__Familie__KinderAssignment_6_1 ) ) ;
     public final void rule__Familie__Group_6__1__Impl() throws RecognitionException {
 
@@ -3279,7 +3388,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__KinderAssignment_6_1_in_rule__Familie__Group_6__1__Impl2588);
             rule__Familie__KinderAssignment_6_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3303,10 +3413,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__Group_6__1__Impl
+    // $ANTLR end "rule__Familie__Group_6__1__Impl"
 
 
-    // $ANTLR start rule__Spielplatz__GroesseAssignment_1
+    // $ANTLR start "rule__Spielplatz__GroesseAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1328:1: rule__Spielplatz__GroesseAssignment_1 : ( RULE_INT ) ;
     public final void rule__Spielplatz__GroesseAssignment_1() throws RecognitionException {
 
@@ -3340,10 +3450,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__GroesseAssignment_1
+    // $ANTLR end "rule__Spielplatz__GroesseAssignment_1"
 
 
-    // $ANTLR start rule__Spielplatz__BeschreibungAssignment_2
+    // $ANTLR start "rule__Spielplatz__BeschreibungAssignment_2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1343:1: rule__Spielplatz__BeschreibungAssignment_2 : ( RULE_STRING ) ;
     public final void rule__Spielplatz__BeschreibungAssignment_2() throws RecognitionException {
 
@@ -3377,10 +3487,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__BeschreibungAssignment_2
+    // $ANTLR end "rule__Spielplatz__BeschreibungAssignment_2"
 
 
-    // $ANTLR start rule__Spielplatz__KinderAssignment_4_0
+    // $ANTLR start "rule__Spielplatz__KinderAssignment_4_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1358:1: rule__Spielplatz__KinderAssignment_4_0 : ( ruleKind ) ;
     public final void rule__Spielplatz__KinderAssignment_4_0() throws RecognitionException {
 
@@ -3396,7 +3506,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              before(grammarAccess.getSpielplatzAccess().getKinderKindParserRuleCall_4_0_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleKind_in_rule__Spielplatz__KinderAssignment_4_02689);
             ruleKind();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSpielplatzAccess().getKinderKindParserRuleCall_4_0_0()); 
 
@@ -3417,10 +3528,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__KinderAssignment_4_0
+    // $ANTLR end "rule__Spielplatz__KinderAssignment_4_0"
 
 
-    // $ANTLR start rule__Spielplatz__ErzieherAssignment_4_1
+    // $ANTLR start "rule__Spielplatz__ErzieherAssignment_4_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1373:1: rule__Spielplatz__ErzieherAssignment_4_1 : ( ruleErwachsener ) ;
     public final void rule__Spielplatz__ErzieherAssignment_4_1() throws RecognitionException {
 
@@ -3436,7 +3547,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              before(grammarAccess.getSpielplatzAccess().getErzieherErwachsenerParserRuleCall_4_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleErwachsener_in_rule__Spielplatz__ErzieherAssignment_4_12720);
             ruleErwachsener();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSpielplatzAccess().getErzieherErwachsenerParserRuleCall_4_1_0()); 
 
@@ -3457,10 +3569,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__ErzieherAssignment_4_1
+    // $ANTLR end "rule__Spielplatz__ErzieherAssignment_4_1"
 
 
-    // $ANTLR start rule__Spielplatz__SpielzeugeAssignment_4_2
+    // $ANTLR start "rule__Spielplatz__SpielzeugeAssignment_4_2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1388:1: rule__Spielplatz__SpielzeugeAssignment_4_2 : ( ruleSpielzeug ) ;
     public final void rule__Spielplatz__SpielzeugeAssignment_4_2() throws RecognitionException {
 
@@ -3476,7 +3588,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              before(grammarAccess.getSpielplatzAccess().getSpielzeugeSpielzeugParserRuleCall_4_2_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleSpielzeug_in_rule__Spielplatz__SpielzeugeAssignment_4_22751);
             ruleSpielzeug();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSpielplatzAccess().getSpielzeugeSpielzeugParserRuleCall_4_2_0()); 
 
@@ -3497,10 +3610,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__SpielzeugeAssignment_4_2
+    // $ANTLR end "rule__Spielplatz__SpielzeugeAssignment_4_2"
 
 
-    // $ANTLR start rule__Spielplatz__FamilieAssignment_4_3
+    // $ANTLR start "rule__Spielplatz__FamilieAssignment_4_3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1403:1: rule__Spielplatz__FamilieAssignment_4_3 : ( ruleFamilie ) ;
     public final void rule__Spielplatz__FamilieAssignment_4_3() throws RecognitionException {
 
@@ -3516,7 +3629,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              before(grammarAccess.getSpielplatzAccess().getFamilieFamilieParserRuleCall_4_3_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleFamilie_in_rule__Spielplatz__FamilieAssignment_4_32782);
             ruleFamilie();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSpielplatzAccess().getFamilieFamilieParserRuleCall_4_3_0()); 
 
@@ -3537,10 +3651,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielplatz__FamilieAssignment_4_3
+    // $ANTLR end "rule__Spielplatz__FamilieAssignment_4_3"
 
 
-    // $ANTLR start rule__Kind__NameAssignment_2
+    // $ANTLR start "rule__Kind__NameAssignment_2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1418:1: rule__Kind__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Kind__NameAssignment_2() throws RecognitionException {
 
@@ -3574,10 +3688,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__NameAssignment_2
+    // $ANTLR end "rule__Kind__NameAssignment_2"
 
 
-    // $ANTLR start rule__Kind__AgeAssignment_3
+    // $ANTLR start "rule__Kind__AgeAssignment_3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1433:1: rule__Kind__AgeAssignment_3 : ( RULE_INT ) ;
     public final void rule__Kind__AgeAssignment_3() throws RecognitionException {
 
@@ -3611,10 +3725,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Kind__AgeAssignment_3
+    // $ANTLR end "rule__Kind__AgeAssignment_3"
 
 
-    // $ANTLR start rule__Erwachsener__NameAssignment_2
+    // $ANTLR start "rule__Erwachsener__NameAssignment_2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1448:1: rule__Erwachsener__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Erwachsener__NameAssignment_2() throws RecognitionException {
 
@@ -3648,10 +3762,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__NameAssignment_2
+    // $ANTLR end "rule__Erwachsener__NameAssignment_2"
 
 
-    // $ANTLR start rule__Erwachsener__AgeAssignment_3
+    // $ANTLR start "rule__Erwachsener__AgeAssignment_3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1463:1: rule__Erwachsener__AgeAssignment_3 : ( RULE_INT ) ;
     public final void rule__Erwachsener__AgeAssignment_3() throws RecognitionException {
 
@@ -3685,10 +3799,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Erwachsener__AgeAssignment_3
+    // $ANTLR end "rule__Erwachsener__AgeAssignment_3"
 
 
-    // $ANTLR start rule__Spielzeug__NameAssignment_2
+    // $ANTLR start "rule__Spielzeug__NameAssignment_2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1478:1: rule__Spielzeug__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Spielzeug__NameAssignment_2() throws RecognitionException {
 
@@ -3722,10 +3836,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__NameAssignment_2
+    // $ANTLR end "rule__Spielzeug__NameAssignment_2"
 
 
-    // $ANTLR start rule__Spielzeug__FarbeAssignment_3
+    // $ANTLR start "rule__Spielzeug__FarbeAssignment_3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1493:1: rule__Spielzeug__FarbeAssignment_3 : ( ruleFarbe ) ;
     public final void rule__Spielzeug__FarbeAssignment_3() throws RecognitionException {
 
@@ -3741,7 +3855,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              before(grammarAccess.getSpielzeugAccess().getFarbeFarbeParserRuleCall_3_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleFarbe_in_rule__Spielzeug__FarbeAssignment_32968);
             ruleFarbe();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSpielzeugAccess().getFarbeFarbeParserRuleCall_3_0()); 
 
@@ -3762,10 +3877,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Spielzeug__FarbeAssignment_3
+    // $ANTLR end "rule__Spielzeug__FarbeAssignment_3"
 
 
-    // $ANTLR start rule__Farbe__WertAssignment
+    // $ANTLR start "rule__Farbe__WertAssignment"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1508:1: rule__Farbe__WertAssignment : ( ( rule__Farbe__WertAlternatives_0 ) ) ;
     public final void rule__Farbe__WertAssignment() throws RecognitionException {
 
@@ -3784,7 +3899,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Farbe__WertAlternatives_0_in_rule__Farbe__WertAssignment2999);
             rule__Farbe__WertAlternatives_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3808,10 +3924,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Farbe__WertAssignment
+    // $ANTLR end "rule__Farbe__WertAssignment"
 
 
-    // $ANTLR start rule__Familie__NameAssignment_2
+    // $ANTLR start "rule__Familie__NameAssignment_2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1524:1: rule__Familie__NameAssignment_2 : ( ( rule__Familie__NameAlternatives_2_0 ) ) ;
     public final void rule__Familie__NameAssignment_2() throws RecognitionException {
 
@@ -3830,7 +3946,8 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             {
             pushFollow(FollowSets000.FOLLOW_rule__Familie__NameAlternatives_2_0_in_rule__Familie__NameAssignment_23032);
             rule__Familie__NameAlternatives_2_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3854,10 +3971,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__NameAssignment_2
+    // $ANTLR end "rule__Familie__NameAssignment_2"
 
 
-    // $ANTLR start rule__Familie__MutterAssignment_3
+    // $ANTLR start "rule__Familie__MutterAssignment_3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1540:1: rule__Familie__MutterAssignment_3 : ( ( RULE_ID ) ) ;
     public final void rule__Familie__MutterAssignment_3() throws RecognitionException {
 
@@ -3899,10 +4016,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__MutterAssignment_3
+    // $ANTLR end "rule__Familie__MutterAssignment_3"
 
 
-    // $ANTLR start rule__Familie__VaterAssignment_4
+    // $ANTLR start "rule__Familie__VaterAssignment_4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1559:1: rule__Familie__VaterAssignment_4 : ( ( RULE_ID ) ) ;
     public final void rule__Familie__VaterAssignment_4() throws RecognitionException {
 
@@ -3944,10 +4061,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__VaterAssignment_4
+    // $ANTLR end "rule__Familie__VaterAssignment_4"
 
 
-    // $ANTLR start rule__Familie__KinderAssignment_5
+    // $ANTLR start "rule__Familie__KinderAssignment_5"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1578:1: rule__Familie__KinderAssignment_5 : ( ( RULE_ID ) ) ;
     public final void rule__Familie__KinderAssignment_5() throws RecognitionException {
 
@@ -3989,10 +4106,10 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__KinderAssignment_5
+    // $ANTLR end "rule__Familie__KinderAssignment_5"
 
 
-    // $ANTLR start rule__Familie__KinderAssignment_6_1
+    // $ANTLR start "rule__Familie__KinderAssignment_6_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ui/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1597:1: rule__Familie__KinderAssignment_6_1 : ( ( RULE_ID ) ) ;
     public final void rule__Familie__KinderAssignment_6_1() throws RecognitionException {
 
@@ -4034,7 +4151,9 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         }
         return ;
     }
-    // $ANTLR end rule__Familie__KinderAssignment_6_1
+    // $ANTLR end "rule__Familie__KinderAssignment_6_1"
+
+    // Delegated rules
 
 
  
@@ -4076,13 +4195,13 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         public static final BitSet FOLLOW_rule__Spielplatz__Group__1__Impl_in_rule__Spielplatz__Group__1745 = new BitSet(new long[]{0x0000000000020010L});
         public static final BitSet FOLLOW_rule__Spielplatz__Group__2_in_rule__Spielplatz__Group__1748 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Spielplatz__GroesseAssignment_1_in_rule__Spielplatz__Group__1__Impl775 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Spielplatz__Group__2__Impl_in_rule__Spielplatz__Group__2805 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_rule__Spielplatz__Group__2__Impl_in_rule__Spielplatz__Group__2805 = new BitSet(new long[]{0x0000000000020010L});
         public static final BitSet FOLLOW_rule__Spielplatz__Group__3_in_rule__Spielplatz__Group__2808 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Spielplatz__BeschreibungAssignment_2_in_rule__Spielplatz__Group__2__Impl835 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Spielplatz__Group__3__Impl_in_rule__Spielplatz__Group__3866 = new BitSet(new long[]{0x0000000001CC0000L});
         public static final BitSet FOLLOW_rule__Spielplatz__Group__4_in_rule__Spielplatz__Group__3869 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_17_in_rule__Spielplatz__Group__3__Impl897 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Spielplatz__Group__4__Impl_in_rule__Spielplatz__Group__4928 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_rule__Spielplatz__Group__4__Impl_in_rule__Spielplatz__Group__4928 = new BitSet(new long[]{0x0000000001CC0000L});
         public static final BitSet FOLLOW_rule__Spielplatz__Group__5_in_rule__Spielplatz__Group__4931 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Spielplatz__Alternatives_4_in_rule__Spielplatz__Group__4__Impl958 = new BitSet(new long[]{0x0000000001C80002L});
         public static final BitSet FOLLOW_rule__Spielplatz__Group__5__Impl_in_rule__Spielplatz__Group__5989 = new BitSet(new long[]{0x0000000000000002L});
@@ -4147,7 +4266,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         public static final BitSet FOLLOW_rule__Familie__Group__5__Impl_in_rule__Familie__Group__52303 = new BitSet(new long[]{0x0000000002200000L});
         public static final BitSet FOLLOW_rule__Familie__Group__6_in_rule__Familie__Group__52306 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Familie__KinderAssignment_5_in_rule__Familie__Group__5__Impl2333 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Familie__Group__6__Impl_in_rule__Familie__Group__62363 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_rule__Familie__Group__6__Impl_in_rule__Familie__Group__62363 = new BitSet(new long[]{0x0000000002200000L});
         public static final BitSet FOLLOW_rule__Familie__Group__7_in_rule__Familie__Group__62366 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Familie__Group_6__0_in_rule__Familie__Group__6__Impl2393 = new BitSet(new long[]{0x0000000002000002L});
         public static final BitSet FOLLOW_rule__Familie__Group__7__Impl_in_rule__Familie__Group__72424 = new BitSet(new long[]{0x0000000000000002L});

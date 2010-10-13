@@ -105,12 +105,16 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	protected void simplifyUnorderedGroupPredicatesIfRequired(Grammar grammar, String absoluteParserFileName) {
 		try {
 			if (containsUnorderedGroup(grammar)) {
-				String javaFile = absoluteParserFileName.replaceAll("\\.g$", "Parser.java");
+				String javaFile = absoluteParserFileName.replaceAll("\\.g$", getParserFileNameSuffix());
 				simplifyUnorderedGroupPredicates(javaFile);
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	protected String getParserFileNameSuffix() {
+		return "Parser.java";
 	}
 
 	protected void simplifyUnorderedGroupPredicates(String javaFile) throws IOException {
@@ -133,8 +137,12 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	}
 
 	protected void suppressWarnings(String absoluteLexerGrammarFileName, String absoluteParserGrammarFileName) {
-		suppressWarningsImpl(absoluteLexerGrammarFileName.replaceAll("\\.g$", "Lexer.java"));
-		suppressWarningsImpl(absoluteParserGrammarFileName.replaceAll("\\.g$", "Parser.java"));
+		suppressWarningsImpl(absoluteLexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix()));
+		suppressWarningsImpl(absoluteParserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix()));
+	}
+
+	protected String getLexerFileNameSuffix() {
+		return "Lexer.java";
 	}
 
 	protected void splitParserAndLexerIfEnabled(String absoluteLexerGrammarFileName,
@@ -142,8 +150,8 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 
 		if (getOptions().isClassSplitting()) {
 			try {
-				splitLexerClassFile(absoluteLexerGrammarFileName.replaceAll("\\.g$", "Lexer.java"));
-				splitParserClassFile(absoluteParserGrammarFileName.replaceAll("\\.g$", "Parser.java"));
+				splitLexerClassFile(absoluteLexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix()));
+				splitParserClassFile(absoluteParserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix()));
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}

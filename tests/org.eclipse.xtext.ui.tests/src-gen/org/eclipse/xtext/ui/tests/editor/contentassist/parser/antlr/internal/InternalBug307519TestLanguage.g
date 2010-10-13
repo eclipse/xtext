@@ -48,12 +48,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug307519TestLan
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -233,17 +227,17 @@ ruleElem2 returns [EObject current=null]
 	    }
 
 )
-)	'foo' 
+)	otherlv_1='foo' 
     {
-        createLeafNode(grammarAccess.getElem2Access().getFooKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getElem2Access().getFooKeyword_1(), null);
     }
-	'%' 
+	otherlv_2='%' 
     {
-        createLeafNode(grammarAccess.getElem2Access().getPercentSignKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getElem2Access().getPercentSignKeyword_2(), null);
     }
-	'$' 
+	otherlv_3='$' 
     {
-        createLeafNode(grammarAccess.getElem2Access().getDollarSignKeyword_3(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getElem2Access().getDollarSignKeyword_3(), null);
     }
 )
 ;
@@ -258,16 +252,16 @@ ruleEnumT returns [Enumerator current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	'T1' 
+((	enumLiteral_0='T1' 
 	{
         $current = grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0(), null); 
+        createLeafNode(enumLiteral_0, grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0(), null); 
     }
 )
-    |(	'T2' 
+    |(	enumLiteral_1='T2' 
 	{
         $current = grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1(), null); 
+        createLeafNode(enumLiteral_1, grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1(), null); 
     }
 ));
 

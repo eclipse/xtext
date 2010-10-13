@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.services.BmTestLanguage
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "File";	
    	}
@@ -156,9 +150,9 @@ ruleExpression returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    |(	'[' 
+    |(	otherlv_2='[' 
     {
-        createLeafNode(grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0(), null);
     }
 
     { 
@@ -169,9 +163,9 @@ ruleExpression returns [EObject current=null]
         $current = $this_Expression_3.current; 
         currentNode = currentNode.getParent();
     }
-	']' 
+	otherlv_4=']' 
     {
-        createLeafNode(grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2(), null);
     }
 ))
 ;
@@ -207,9 +201,9 @@ ruleSExpression returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)((	'(' 
+)((	otherlv_1='(' 
     {
-        createLeafNode(grammarAccess.getSExpressionAccess().getLeftParenthesisKeyword_1_0_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getSExpressionAccess().getLeftParenthesisKeyword_1_0_0(), null);
     }
 (
 (
@@ -235,14 +229,14 @@ ruleSExpression returns [EObject current=null]
 	    }
 
 )
-)*	')' 
+)*	otherlv_3=')' 
     {
-        createLeafNode(grammarAccess.getSExpressionAccess().getRightParenthesisKeyword_1_0_2(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getSExpressionAccess().getRightParenthesisKeyword_1_0_2(), null);
     }
 )
-    |(	'begin' 
+    |(	otherlv_4='begin' 
     {
-        createLeafNode(grammarAccess.getSExpressionAccess().getBeginKeyword_1_1_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getSExpressionAccess().getBeginKeyword_1_1_0(), null);
     }
 (
 (
@@ -268,9 +262,9 @@ ruleSExpression returns [EObject current=null]
 	    }
 
 )
-)*	'end' 
+)*	otherlv_6='end' 
     {
-        createLeafNode(grammarAccess.getSExpressionAccess().getEndKeyword_1_1_2(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getSExpressionAccess().getEndKeyword_1_1_2(), null);
     }
 )))
 ;
@@ -347,7 +341,7 @@ ruleVALUE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getVALUEAccess().getIDTerminalRuleCall_0(), null); 
+    createLeafNode(this_ID_0, grammarAccess.getVALUEAccess().getIDTerminalRuleCall_0(), null); 
     }
 
     |    this_INT_1=RULE_INT    {
@@ -355,7 +349,7 @@ ruleVALUE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getVALUEAccess().getINTTerminalRuleCall_1(), null); 
+    createLeafNode(this_INT_1, grammarAccess.getVALUEAccess().getINTTerminalRuleCall_1(), null); 
     }
 
     |    this_STRING_2=RULE_STRING    {
@@ -363,7 +357,7 @@ ruleVALUE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getVALUEAccess().getSTRINGTerminalRuleCall_2(), null); 
+    createLeafNode(this_STRING_2, grammarAccess.getVALUEAccess().getSTRINGTerminalRuleCall_2(), null); 
     }
 )
     ;

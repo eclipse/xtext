@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug288734TestLan
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288734TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -212,19 +206,19 @@ ruleTStringConstant returns [EObject current=null]
 	    }
 
 )
-)*	'constant' 
+)*	otherlv_1='constant' 
     {
-        createLeafNode(grammarAccess.getTStringConstantAccess().getConstantKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getTStringConstantAccess().getConstantKeyword_1(), null);
     }
-	'string' 
+	otherlv_2='string' 
     {
-        createLeafNode(grammarAccess.getTStringConstantAccess().getStringKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getTStringConstantAccess().getStringKeyword_2(), null);
     }
 (
 (
 		lv_name_3_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getTStringConstantAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
+			createLeafNode(lv_name_3_0, grammarAccess.getTStringConstantAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -291,19 +285,19 @@ ruleTIntegerConstant returns [EObject current=null]
 	    }
 
 )
-)*	'constant' 
+)*	otherlv_1='constant' 
     {
-        createLeafNode(grammarAccess.getTIntegerConstantAccess().getConstantKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getTIntegerConstantAccess().getConstantKeyword_1(), null);
     }
-	'integer' 
+	otherlv_2='integer' 
     {
-        createLeafNode(grammarAccess.getTIntegerConstantAccess().getIntegerKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getTIntegerConstantAccess().getIntegerKeyword_2(), null);
     }
 (
 (
 		lv_name_3_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getTIntegerConstantAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
+			createLeafNode(lv_name_3_0, grammarAccess.getTIntegerConstantAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -370,19 +364,19 @@ ruleTBooleanConstant returns [EObject current=null]
 	    }
 
 )
-)*	'constant' 
+)*	otherlv_1='constant' 
     {
-        createLeafNode(grammarAccess.getTBooleanConstantAccess().getConstantKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getTBooleanConstantAccess().getConstantKeyword_1(), null);
     }
-	'boolean' 
+	otherlv_2='boolean' 
     {
-        createLeafNode(grammarAccess.getTBooleanConstantAccess().getBooleanKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getTBooleanConstantAccess().getBooleanKeyword_2(), null);
     }
 (
 (
 		lv_name_3_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getTBooleanConstantAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
+			createLeafNode(lv_name_3_0, grammarAccess.getTBooleanConstantAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -425,15 +419,15 @@ ruleTAnnotation returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'@desc' 
+(	otherlv_0='@desc' 
     {
-        createLeafNode(grammarAccess.getTAnnotationAccess().getDescKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getTAnnotationAccess().getDescKeyword_0(), null);
     }
 (
 (
 		lv_description_1_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getTAnnotationAccess().getDescriptionSTRINGTerminalRuleCall_1_0(), "description"); 
+			createLeafNode(lv_description_1_0, grammarAccess.getTAnnotationAccess().getDescriptionSTRINGTerminalRuleCall_1_0(), "description"); 
 		}
 		{
 	        if ($current==null) {

@@ -47,12 +47,6 @@ import org.eclipse.xtext.parser.terminalrules.services.Bug292245TestLanguageGram
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug292245TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -96,9 +90,9 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	'FIX' 
+((	otherlv_0='FIX' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getFIXKeyword_0_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getFIXKeyword_0_0(), null);
     }
 (
 (
@@ -125,9 +119,9 @@ ruleModel returns [EObject current=null]
 
 )
 )+)
-    |(	'ERROR' 
+    |(	otherlv_2='ERROR' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getERRORKeyword_1_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getERRORKeyword_1_0(), null);
     }
 (
 (
@@ -154,9 +148,9 @@ ruleModel returns [EObject current=null]
 
 )
 )+)
-    |(	'TICK' 
+    |(	otherlv_4='TICK' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getTICKKeyword_2_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getTICKKeyword_2_0(), null);
     }
 (
 (
@@ -220,7 +214,7 @@ ruleError returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_0(), null); 
+    createLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_0(), null); 
     }
 
     { 
@@ -238,7 +232,7 @@ ruleError returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_2(), null); 
+    createLeafNode(this_APOSTROPHE_CHAR_2, grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_2(), null); 
     }
 )
     ;
@@ -278,7 +272,7 @@ ruleFix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_0(), null); 
+    createLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_0(), null); 
     }
 
     { 
@@ -296,7 +290,7 @@ ruleFix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_2(), null); 
+    createLeafNode(this_APOSTROPHE_CHAR_2, grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_2(), null); 
     }
 
     { 
@@ -347,7 +341,7 @@ ruleApostrophe returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
     }
 
     { 
-    createLeafNode(grammarAccess.getApostropheAccess().getAPOSTROPHE_CHARTerminalRuleCall(), null); 
+    createLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getApostropheAccess().getAPOSTROPHE_CHARTerminalRuleCall(), null); 
     }
 
     ;
@@ -386,7 +380,7 @@ ruleRehide returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	kw='^' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getRehideAccess().getCircumflexAccentKeyword(), null); 
+        createLeafNode(kw, grammarAccess.getRehideAccess().getCircumflexAccentKeyword(), null); 
     }
 )?
     ;
@@ -419,7 +413,7 @@ ruleGraphical returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
     }
 
     { 
-    createLeafNode(grammarAccess.getGraphicalAccess().getCHARTerminalRuleCall_0(), null); 
+    createLeafNode(this_CHAR_0, grammarAccess.getGraphicalAccess().getCHARTerminalRuleCall_0(), null); 
     }
 
     |    this_WS_1=RULE_WS    {
@@ -427,7 +421,7 @@ ruleGraphical returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
     }
 
     { 
-    createLeafNode(grammarAccess.getGraphicalAccess().getWSTerminalRuleCall_1(), null); 
+    createLeafNode(this_WS_1, grammarAccess.getGraphicalAccess().getWSTerminalRuleCall_1(), null); 
     }
 )
     ;

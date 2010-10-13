@@ -48,12 +48,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug286935TestLan
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug286935TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "State";	
    	}
@@ -105,7 +99,7 @@ ruleState returns [EObject current=null]
 (
 		lv_isInitial_1_0=	'init' 
     {
-        createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_1_0_0(), "isInitial"); 
+        createLeafNode(lv_isInitial_1_0, grammarAccess.getStateAccess().getIsInitialInitKeyword_1_0_0(), "isInitial");
     }
  
 	    {
@@ -127,7 +121,7 @@ ruleState returns [EObject current=null]
 (
 		lv_isFinal_2_0=	'final' 
     {
-        createLeafNode(grammarAccess.getStateAccess().getIsFinalFinalKeyword_1_1_0(), "isFinal"); 
+        createLeafNode(lv_isFinal_2_0, grammarAccess.getStateAccess().getIsFinalFinalKeyword_1_1_0(), "isFinal");
     }
  
 	    {
@@ -174,7 +168,7 @@ ruleState returns [EObject current=null]
 (
 		lv_isInitial_4_0=	'init' 
     {
-        createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_1_3_0_0(), "isInitial"); 
+        createLeafNode(lv_isInitial_4_0, grammarAccess.getStateAccess().getIsInitialInitKeyword_1_3_0_0(), "isInitial");
     }
  
 	    {
@@ -220,7 +214,7 @@ ruleState returns [EObject current=null]
 (
 		lv_isInitial_6_0=	'init' 
     {
-        createLeafNode(grammarAccess.getStateAccess().getIsInitialInitKeyword_1_4_0_0(), "isInitial"); 
+        createLeafNode(lv_isInitial_6_0, grammarAccess.getStateAccess().getIsInitialInitKeyword_1_4_0_0(), "isInitial");
     }
  
 	    {
@@ -265,7 +259,7 @@ ruleState returns [EObject current=null]
 (
 		lv_isFinal_8_0=	'final' 
     {
-        createLeafNode(grammarAccess.getStateAccess().getIsFinalFinalKeyword_1_4_2_0(), "isFinal"); 
+        createLeafNode(lv_isFinal_8_0, grammarAccess.getStateAccess().getIsFinalFinalKeyword_1_4_2_0(), "isFinal");
     }
  
 	    {
@@ -282,15 +276,15 @@ ruleState returns [EObject current=null]
 	    }
 
 )
-)))?(	'state' 
+)))?(	otherlv_9='state' 
     {
-        createLeafNode(grammarAccess.getStateAccess().getStateKeyword_2(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getStateAccess().getStateKeyword_2(), null);
     }
 )?(
 (
 		lv_stateName_10_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_3_0(), "stateName"); 
+			createLeafNode(lv_stateName_10_0, grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_3_0(), "stateName"); 
 		}
 		{
 	        if ($current==null) {
@@ -314,7 +308,7 @@ ruleState returns [EObject current=null]
 (
 		lv_label_11_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_4_0(), "label"); 
+			createLeafNode(lv_label_11_0, grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_4_0(), "label"); 
 		}
 		{
 	        if ($current==null) {
@@ -347,28 +341,28 @@ ruleStateType returns [Enumerator current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	'NORMAL' 
+((	enumLiteral_0='NORMAL' 
 	{
         $current = grammarAccess.getStateTypeAccess().getNORMALEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getStateTypeAccess().getNORMALEnumLiteralDeclaration_0(), null); 
+        createLeafNode(enumLiteral_0, grammarAccess.getStateTypeAccess().getNORMALEnumLiteralDeclaration_0(), null); 
     }
 )
-    |(	'cond' 
+    |(	enumLiteral_1='cond' 
 	{
         $current = grammarAccess.getStateTypeAccess().getPSEUDOEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getStateTypeAccess().getPSEUDOEnumLiteralDeclaration_1(), null); 
+        createLeafNode(enumLiteral_1, grammarAccess.getStateTypeAccess().getPSEUDOEnumLiteralDeclaration_1(), null); 
     }
 )
-    |(	'reference' 
+    |(	enumLiteral_2='reference' 
 	{
         $current = grammarAccess.getStateTypeAccess().getREFERENCEEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getStateTypeAccess().getREFERENCEEnumLiteralDeclaration_2(), null); 
+        createLeafNode(enumLiteral_2, grammarAccess.getStateTypeAccess().getREFERENCEEnumLiteralDeclaration_2(), null); 
     }
 )
-    |(	'textual' 
+    |(	enumLiteral_3='textual' 
 	{
         $current = grammarAccess.getStateTypeAccess().getTEXTUALEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getStateTypeAccess().getTEXTUALEnumLiteralDeclaration_3(), null); 
+        createLeafNode(enumLiteral_3, grammarAccess.getStateTypeAccess().getTEXTUALEnumLiteralDeclaration_3(), null); 
     }
 ));
 

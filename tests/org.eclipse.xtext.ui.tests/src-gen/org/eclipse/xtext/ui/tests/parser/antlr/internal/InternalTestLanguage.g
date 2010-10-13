@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.services.TestLanguageGrammarAccess;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "File";	
    	}
@@ -136,15 +130,15 @@ ruleStuff returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'stuff' 
+(	otherlv_0='stuff' 
     {
-        createLeafNode(grammarAccess.getStuffAccess().getStuffKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getStuffAccess().getStuffKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getStuffAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getStuffAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -164,9 +158,9 @@ ruleStuff returns [EObject current=null]
 	    }
 
 )
-)(	'refs' 
+)(	otherlv_2='refs' 
     {
-        createLeafNode(grammarAccess.getStuffAccess().getRefsKeyword_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getStuffAccess().getRefsKeyword_2_0(), null);
     }
 (
 (
@@ -176,9 +170,9 @@ ruleStuff returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_3=RULE_ID
 	{
-		createLeafNode(grammarAccess.getStuffAccess().getRefsStuffCrossReference_2_1_0(), "refs"); 
+		createLeafNode(otherlv_3, grammarAccess.getStuffAccess().getRefsStuffCrossReference_2_1_0(), "refs"); 
 	}
 
 )

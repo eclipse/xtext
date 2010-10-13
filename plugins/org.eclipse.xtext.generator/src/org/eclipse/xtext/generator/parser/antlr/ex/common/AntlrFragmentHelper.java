@@ -43,7 +43,7 @@ public class AntlrFragmentHelper {
 	}
 	
 	public String getLexerClassName(Grammar g) {
-		return getLexerGrammarFileName(g) + "Lexer";
+		return getLexerGrammarFileName(g);
 	}
 
 	public String getParserClassName(Grammar g) {
@@ -51,15 +51,15 @@ public class AntlrFragmentHelper {
 	}
 
 	public String getInternalParserClassName(Grammar g) {
-		return getParserGrammarFileName(g) + "Parser";
+		return getParserGrammarFileName(g);
 	}
 
 	public String getLexerGrammarFileName(Grammar g) {
-		return naming.basePackageRuntime(g) + ".parser.antlr.lexer.Internal" + GrammarUtil.getName(g);
+		return naming.basePackageRuntime(g) + ".parser.antlr.lexer.Internal" + GrammarUtil.getName(g) + "Lexer";
 	}
 	
 	public String getParserGrammarFileName(Grammar g) {
-		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getName(g);
+		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getName(g) + "Parser";
 	}
 
 	public String getContentAssistParserClassName(Grammar g) {
@@ -67,7 +67,7 @@ public class AntlrFragmentHelper {
 	}
 
 	public String getInternalContentAssistLexerClassName(Grammar g) {
-		return getContentAssistLexerGrammarFileName(g) + "Lexer";
+		return getContentAssistLexerGrammarFileName(g);
 	}
 	
 	public String getLexerSuperClass(Grammar g) {
@@ -79,15 +79,15 @@ public class AntlrFragmentHelper {
 	}
 
 	public String getInternalContentAssistParserClassName(Grammar g) {
-		return getContentAssistParserGrammarFileName(g) + "Parser";
+		return getContentAssistParserGrammarFileName(g);
 	}
 
 	public String getContentAssistLexerGrammarFileName(Grammar g) {
-		return naming.basePackageUi(g) + ".contentassist.antlr.lexer.Internal" + GrammarUtil.getName(g);
+		return naming.basePackageUi(g) + ".contentassist.antlr.lexer.Internal" + GrammarUtil.getName(g) + "Lexer";
 	}
 	
 	public String getContentAssistParserGrammarFileName(Grammar g) {
-		return naming.basePackageUi(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g);
+		return naming.basePackageUi(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g) + "Parser";
 	}
 
 	public Collection<? extends AbstractElement> getAllAlternatives(Grammar g) {

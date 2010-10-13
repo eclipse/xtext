@@ -36,6 +36,8 @@ localVar(Assignment this, AbstractElement terminal) :
 	'lv_'+feature + '_' + containingParserRule().contentsAsList().indexOf(this) + '_' + this.allContents().indexOf(terminal);
 	
 localVar(RuleCall this) : 'this_'+rule.name + '_' + containingParserRule().contentsAsList().indexOf(this);
+localVar(AbstractElement this) : 'otherlv_' + containingParserRule().contentsAsList().indexOf(this);
+localVar(EnumLiteralDeclaration this) : 'enumLiteral_' + containingEnumRule().alternatives.contentsAsList().indexOf(this);
 
 List[AbstractElement] contentsAsList(ParserRule this):
 	alternatives.contentsAsList();

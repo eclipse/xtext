@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.LookAheadContent
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalLookAheadContentAssistTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -100,9 +94,9 @@ ruleModel returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)((	'(' 
+)((	otherlv_1='(' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getLeftParenthesisKeyword_1_0_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getModelAccess().getLeftParenthesisKeyword_1_0_0(), null);
     }
 (
 (
@@ -152,14 +146,14 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)*	')' 
+)*	otherlv_4=')' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getRightParenthesisKeyword_1_0_3(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getRightParenthesisKeyword_1_0_3(), null);
     }
 )
-    |(	'[' 
+    |(	otherlv_5='[' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getLeftSquareBracketKeyword_1_1_0(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getModelAccess().getLeftSquareBracketKeyword_1_1_0(), null);
     }
 (
 (
@@ -209,14 +203,14 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)*	']' 
+)*	otherlv_8=']' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getRightSquareBracketKeyword_1_1_3(), null); 
+    	createLeafNode(otherlv_8, grammarAccess.getModelAccess().getRightSquareBracketKeyword_1_1_3(), null);
     }
 )
-    |(	'<' 
+    |(	otherlv_9='<' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getLessThanSignKeyword_1_2_0(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getModelAccess().getLessThanSignKeyword_1_2_0(), null);
     }
 (
 (
@@ -266,14 +260,14 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)+	'>' 
+)+	otherlv_12='>' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getGreaterThanSignKeyword_1_2_3(), null); 
+    	createLeafNode(otherlv_12, grammarAccess.getModelAccess().getGreaterThanSignKeyword_1_2_3(), null);
     }
 )
-    |(	'{' 
+    |(	otherlv_13='{' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_1_3_0(), null); 
+    	createLeafNode(otherlv_13, grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_1_3_0(), null);
     }
 (
 (
@@ -323,9 +317,9 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)+	'}' 
+)+	otherlv_16='}' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getRightCurlyBracketKeyword_1_3_3(), null); 
+    	createLeafNode(otherlv_16, grammarAccess.getModelAccess().getRightCurlyBracketKeyword_1_3_3(), null);
     }
 )))
 ;
@@ -354,7 +348,7 @@ ruleAttribute returns [EObject current=null]
 (
 		lv_value_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getAttributeAccess().getValueIDTerminalRuleCall_0(), "value"); 
+			createLeafNode(lv_value_0_0, grammarAccess.getAttributeAccess().getValueIDTerminalRuleCall_0(), "value"); 
 		}
 		{
 	        if ($current==null) {
@@ -401,7 +395,7 @@ rulePair returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getPairAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getPairAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -421,15 +415,15 @@ rulePair returns [EObject current=null]
 	    }
 
 )
-)	'=' 
+)	otherlv_1='=' 
     {
-        createLeafNode(grammarAccess.getPairAccess().getEqualsSignKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getPairAccess().getEqualsSignKeyword_1(), null);
     }
 (
 (
 		lv_value_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getPairAccess().getValueIDTerminalRuleCall_2_0(), "value"); 
+			createLeafNode(lv_value_2_0, grammarAccess.getPairAccess().getValueIDTerminalRuleCall_2_0(), "value"); 
 		}
 		{
 	        if ($current==null) {

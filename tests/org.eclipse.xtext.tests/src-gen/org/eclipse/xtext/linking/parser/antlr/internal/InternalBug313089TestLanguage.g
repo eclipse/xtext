@@ -47,12 +47,6 @@ import org.eclipse.xtext.linking.services.Bug313089TestLanguageGrammarAccess;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/linking/parser/antlr/internal/InternalBug313089TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Foo";	
    	}
@@ -93,7 +87,7 @@ ruleFoo returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -170,9 +164,9 @@ ruleFoo returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_3=RULE_ID
 	{
-		createLeafNode(grammarAccess.getFooAccess().getRefFooCrossReference_2_0(), "ref"); 
+		createLeafNode(otherlv_3, grammarAccess.getFooAccess().getRefFooCrossReference_2_0(), "ref"); 
 	}
 
 )
@@ -214,7 +208,7 @@ ruleBar returns [EObject current=null]
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getBarAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getBarAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -257,15 +251,15 @@ ruleBaz returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'baz' 
+(	otherlv_0='baz' 
     {
-        createLeafNode(grammarAccess.getBazAccess().getBazKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getBazAccess().getBazKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getBazAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getBazAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -301,15 +295,15 @@ ruleBaz returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'baz' 
+)	otherlv_3='baz' 
     {
-        createLeafNode(grammarAccess.getBazAccess().getBazKeyword_2_1(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getBazAccess().getBazKeyword_2_1(), null);
     }
 (
 (
 		lv_name_4_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getBazAccess().getNameIDTerminalRuleCall_2_2_0(), "name"); 
+			createLeafNode(lv_name_4_0, grammarAccess.getBazAccess().getNameIDTerminalRuleCall_2_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {

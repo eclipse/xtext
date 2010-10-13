@@ -25,26 +25,75 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_SERIALIZABLE", "RULE_BAG", "RULE_RANDOM", "RULE_READONLY", "RULE_LOCAL", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'class'", "'ref'", "'void'", "'.'", "'$'", "'import'", "';'", "'='", "'package'", "'nsURI'", "'nsPrefix'", "'{'", "'}'", "'datatype'", "':'", "'@'", "'('", "')'", "','", "'<'", "'>'", "'extends'", "'attr'", "'['", "']'", "'..'", "'#'", "'enum'", "'?'", "'super'", "'op'", "'throws'", "'-'", "'abstract'", "'interface'", "'ID'", "'volatile'", "'transient'", "'unsettable'", "'derived'", "'val'"
     };
-    public static final int RULE_ML_COMMENT=12;
-    public static final int RULE_ID=5;
-    public static final int RULE_WS=14;
-    public static final int EOF=-1;
-    public static final int RULE_INT=6;
-    public static final int RULE_LOCAL=11;
+    public static final int T__42=42;
+    public static final int T__28=28;
+    public static final int T__23=23;
+    public static final int T__51=51;
     public static final int RULE_STRING=4;
-    public static final int RULE_ANY_OTHER=15;
-    public static final int RULE_RANDOM=9;
-    public static final int RULE_BAG=8;
-    public static final int RULE_SERIALIZABLE=7;
+    public static final int T__47=47;
+    public static final int T__50=50;
+    public static final int T__21=21;
+    public static final int T__19=19;
     public static final int RULE_READONLY=10;
+    public static final int T__39=39;
+    public static final int T__30=30;
+    public static final int T__46=46;
+    public static final int T__52=52;
+    public static final int T__17=17;
+    public static final int RULE_INT=6;
+    public static final int T__27=27;
+    public static final int T__24=24;
+    public static final int T__49=49;
+    public static final int RULE_RANDOM=9;
+    public static final int RULE_SERIALIZABLE=7;
+    public static final int T__48=48;
+    public static final int T__54=54;
+    public static final int T__34=34;
+    public static final int T__56=56;
+    public static final int RULE_ML_COMMENT=12;
+    public static final int T__35=35;
+    public static final int RULE_ID=5;
+    public static final int T__36=36;
+    public static final int T__20=20;
+    public static final int T__44=44;
+    public static final int RULE_BAG=8;
+    public static final int T__33=33;
+    public static final int T__22=22;
+    public static final int T__29=29;
+    public static final int T__45=45;
+    public static final int T__55=55;
+    public static final int RULE_WS=14;
+    public static final int T__43=43;
+    public static final int T__31=31;
+    public static final int T__40=40;
+    public static final int EOF=-1;
+    public static final int T__53=53;
+    public static final int RULE_LOCAL=11;
+    public static final int T__16=16;
+    public static final int T__32=32;
+    public static final int T__38=38;
+    public static final int T__37=37;
+    public static final int RULE_ANY_OTHER=15;
+    public static final int T__26=26;
+    public static final int T__25=25;
     public static final int RULE_SL_COMMENT=13;
+    public static final int T__41=41;
+    public static final int T__18=18;
+
+    // delegates
+    // delegators
+
 
         public InternalEcoreDslParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalEcoreDslParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalEcoreDslParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g"; }
 
 
@@ -68,7 +117,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
 
-    // $ANTLR start entryRuleEcoreDsl
+    // $ANTLR start "entryRuleEcoreDsl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:61:1: entryRuleEcoreDsl : ruleEcoreDsl EOF ;
     public final void entryRuleEcoreDsl() throws RecognitionException {
         try {
@@ -78,7 +127,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEcoreDslRule()); 
             pushFollow(FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl61);
             ruleEcoreDsl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEcoreDslRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEcoreDsl68); 
@@ -94,10 +144,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEcoreDsl
+    // $ANTLR end "entryRuleEcoreDsl"
 
 
-    // $ANTLR start ruleEcoreDsl
+    // $ANTLR start "ruleEcoreDsl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:70:1: ruleEcoreDsl : ( ( rule__EcoreDsl__Group__0 ) ) ;
     public final void ruleEcoreDsl() throws RecognitionException {
 
@@ -116,7 +166,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EcoreDsl__Group__0_in_ruleEcoreDsl94);
             rule__EcoreDsl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -140,10 +191,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEcoreDsl
+    // $ANTLR end "ruleEcoreDsl"
 
 
-    // $ANTLR start entryRuleReferencedMetamodel
+    // $ANTLR start "entryRuleReferencedMetamodel"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:89:1: entryRuleReferencedMetamodel : ruleReferencedMetamodel EOF ;
     public final void entryRuleReferencedMetamodel() throws RecognitionException {
         try {
@@ -153,7 +204,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getReferencedMetamodelRule()); 
             pushFollow(FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel121);
             ruleReferencedMetamodel();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getReferencedMetamodelRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleReferencedMetamodel128); 
@@ -169,10 +221,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleReferencedMetamodel
+    // $ANTLR end "entryRuleReferencedMetamodel"
 
 
-    // $ANTLR start ruleReferencedMetamodel
+    // $ANTLR start "ruleReferencedMetamodel"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:98:1: ruleReferencedMetamodel : ( ( rule__ReferencedMetamodel__Group__0 ) ) ;
     public final void ruleReferencedMetamodel() throws RecognitionException {
 
@@ -191,7 +243,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__0_in_ruleReferencedMetamodel154);
             rule__ReferencedMetamodel__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -215,10 +268,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleReferencedMetamodel
+    // $ANTLR end "ruleReferencedMetamodel"
 
 
-    // $ANTLR start entryRuleEPackageDecl
+    // $ANTLR start "entryRuleEPackageDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:117:1: entryRuleEPackageDecl : ruleEPackageDecl EOF ;
     public final void entryRuleEPackageDecl() throws RecognitionException {
         try {
@@ -228,7 +281,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEPackageDeclRule()); 
             pushFollow(FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl181);
             ruleEPackageDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEPackageDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEPackageDecl188); 
@@ -244,10 +298,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEPackageDecl
+    // $ANTLR end "entryRuleEPackageDecl"
 
 
-    // $ANTLR start ruleEPackageDecl
+    // $ANTLR start "ruleEPackageDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:126:1: ruleEPackageDecl : ( ( rule__EPackageDecl__Group__0 ) ) ;
     public final void ruleEPackageDecl() throws RecognitionException {
 
@@ -266,7 +320,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__0_in_ruleEPackageDecl214);
             rule__EPackageDecl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -290,10 +345,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEPackageDecl
+    // $ANTLR end "ruleEPackageDecl"
 
 
-    // $ANTLR start entryRuleSubEPackageDecl
+    // $ANTLR start "entryRuleSubEPackageDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:145:1: entryRuleSubEPackageDecl : ruleSubEPackageDecl EOF ;
     public final void entryRuleSubEPackageDecl() throws RecognitionException {
         try {
@@ -303,7 +358,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getSubEPackageDeclRule()); 
             pushFollow(FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl241);
             ruleSubEPackageDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSubEPackageDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleSubEPackageDecl248); 
@@ -319,10 +375,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleSubEPackageDecl
+    // $ANTLR end "entryRuleSubEPackageDecl"
 
 
-    // $ANTLR start ruleSubEPackageDecl
+    // $ANTLR start "ruleSubEPackageDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:154:1: ruleSubEPackageDecl : ( ( rule__SubEPackageDecl__Group__0 ) ) ;
     public final void ruleSubEPackageDecl() throws RecognitionException {
 
@@ -341,7 +397,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__0_in_ruleSubEPackageDecl274);
             rule__SubEPackageDecl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -365,10 +422,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleSubEPackageDecl
+    // $ANTLR end "ruleSubEPackageDecl"
 
 
-    // $ANTLR start entryRuleEClassifierDecl
+    // $ANTLR start "entryRuleEClassifierDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:173:1: entryRuleEClassifierDecl : ruleEClassifierDecl EOF ;
     public final void entryRuleEClassifierDecl() throws RecognitionException {
         try {
@@ -378,7 +435,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEClassifierDeclRule()); 
             pushFollow(FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl301);
             ruleEClassifierDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEClassifierDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEClassifierDecl308); 
@@ -394,10 +452,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEClassifierDecl
+    // $ANTLR end "entryRuleEClassifierDecl"
 
 
-    // $ANTLR start ruleEClassifierDecl
+    // $ANTLR start "ruleEClassifierDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:182:1: ruleEClassifierDecl : ( ( rule__EClassifierDecl__Alternatives ) ) ;
     public final void ruleEClassifierDecl() throws RecognitionException {
 
@@ -416,7 +474,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassifierDecl__Alternatives_in_ruleEClassifierDecl334);
             rule__EClassifierDecl__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -440,10 +499,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEClassifierDecl
+    // $ANTLR end "ruleEClassifierDecl"
 
 
-    // $ANTLR start entryRuleEDataTypeDecl
+    // $ANTLR start "entryRuleEDataTypeDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:201:1: entryRuleEDataTypeDecl : ruleEDataTypeDecl EOF ;
     public final void entryRuleEDataTypeDecl() throws RecognitionException {
         try {
@@ -453,7 +512,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEDataTypeDeclRule()); 
             pushFollow(FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl361);
             ruleEDataTypeDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEDataTypeDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEDataTypeDecl368); 
@@ -469,10 +529,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEDataTypeDecl
+    // $ANTLR end "entryRuleEDataTypeDecl"
 
 
-    // $ANTLR start ruleEDataTypeDecl
+    // $ANTLR start "ruleEDataTypeDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:210:1: ruleEDataTypeDecl : ( ( rule__EDataTypeDecl__Alternatives ) ) ;
     public final void ruleEDataTypeDecl() throws RecognitionException {
 
@@ -491,7 +551,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__Alternatives_in_ruleEDataTypeDecl394);
             rule__EDataTypeDecl__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -515,10 +576,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEDataTypeDecl
+    // $ANTLR end "ruleEDataTypeDecl"
 
 
-    // $ANTLR start entryRuleEAnnotationDecl
+    // $ANTLR start "entryRuleEAnnotationDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:229:1: entryRuleEAnnotationDecl : ruleEAnnotationDecl EOF ;
     public final void entryRuleEAnnotationDecl() throws RecognitionException {
         try {
@@ -528,7 +589,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEAnnotationDeclRule()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl421);
             ruleEAnnotationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEAnnotationDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEAnnotationDecl428); 
@@ -544,10 +606,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEAnnotationDecl
+    // $ANTLR end "entryRuleEAnnotationDecl"
 
 
-    // $ANTLR start ruleEAnnotationDecl
+    // $ANTLR start "ruleEAnnotationDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:238:1: ruleEAnnotationDecl : ( ( rule__EAnnotationDecl__Group__0 ) ) ;
     public final void ruleEAnnotationDecl() throws RecognitionException {
 
@@ -566,7 +628,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group__0_in_ruleEAnnotationDecl454);
             rule__EAnnotationDecl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -590,10 +653,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEAnnotationDecl
+    // $ANTLR end "ruleEAnnotationDecl"
 
 
-    // $ANTLR start entryRuleEClassDecl
+    // $ANTLR start "entryRuleEClassDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:257:1: entryRuleEClassDecl : ruleEClassDecl EOF ;
     public final void entryRuleEClassDecl() throws RecognitionException {
         try {
@@ -603,7 +666,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEClassDeclRule()); 
             pushFollow(FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl481);
             ruleEClassDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEClassDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEClassDecl488); 
@@ -619,10 +683,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEClassDecl
+    // $ANTLR end "entryRuleEClassDecl"
 
 
-    // $ANTLR start ruleEClassDecl
+    // $ANTLR start "ruleEClassDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:266:1: ruleEClassDecl : ( ( rule__EClassDecl__Group__0 ) ) ;
     public final void ruleEClassDecl() throws RecognitionException {
 
@@ -641,7 +705,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group__0_in_ruleEClassDecl514);
             rule__EClassDecl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -665,10 +730,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEClassDecl
+    // $ANTLR end "ruleEClassDecl"
 
 
-    // $ANTLR start entryRuleEStructuralFeatureDecl
+    // $ANTLR start "entryRuleEStructuralFeatureDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:285:1: entryRuleEStructuralFeatureDecl : ruleEStructuralFeatureDecl EOF ;
     public final void entryRuleEStructuralFeatureDecl() throws RecognitionException {
         try {
@@ -678,7 +743,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEStructuralFeatureDeclRule()); 
             pushFollow(FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl541);
             ruleEStructuralFeatureDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEStructuralFeatureDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEStructuralFeatureDecl548); 
@@ -694,10 +760,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEStructuralFeatureDecl
+    // $ANTLR end "entryRuleEStructuralFeatureDecl"
 
 
-    // $ANTLR start ruleEStructuralFeatureDecl
+    // $ANTLR start "ruleEStructuralFeatureDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:294:1: ruleEStructuralFeatureDecl : ( ( rule__EStructuralFeatureDecl__Alternatives ) ) ;
     public final void ruleEStructuralFeatureDecl() throws RecognitionException {
 
@@ -716,7 +782,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EStructuralFeatureDecl__Alternatives_in_ruleEStructuralFeatureDecl574);
             rule__EStructuralFeatureDecl__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -740,10 +807,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEStructuralFeatureDecl
+    // $ANTLR end "ruleEStructuralFeatureDecl"
 
 
-    // $ANTLR start entryRuleEAttributeDecl
+    // $ANTLR start "entryRuleEAttributeDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:313:1: entryRuleEAttributeDecl : ruleEAttributeDecl EOF ;
     public final void entryRuleEAttributeDecl() throws RecognitionException {
         try {
@@ -753,7 +820,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEAttributeDeclRule()); 
             pushFollow(FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl601);
             ruleEAttributeDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEAttributeDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEAttributeDecl608); 
@@ -769,10 +837,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEAttributeDecl
+    // $ANTLR end "entryRuleEAttributeDecl"
 
 
-    // $ANTLR start ruleEAttributeDecl
+    // $ANTLR start "ruleEAttributeDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:322:1: ruleEAttributeDecl : ( ( rule__EAttributeDecl__Group__0 ) ) ;
     public final void ruleEAttributeDecl() throws RecognitionException {
 
@@ -791,7 +859,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__0_in_ruleEAttributeDecl634);
             rule__EAttributeDecl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -815,10 +884,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEAttributeDecl
+    // $ANTLR end "ruleEAttributeDecl"
 
 
-    // $ANTLR start entryRuleEReferenceDecl
+    // $ANTLR start "entryRuleEReferenceDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:341:1: entryRuleEReferenceDecl : ruleEReferenceDecl EOF ;
     public final void entryRuleEReferenceDecl() throws RecognitionException {
         try {
@@ -828,7 +897,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEReferenceDeclRule()); 
             pushFollow(FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl661);
             ruleEReferenceDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEReferenceDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEReferenceDecl668); 
@@ -844,10 +914,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEReferenceDecl
+    // $ANTLR end "entryRuleEReferenceDecl"
 
 
-    // $ANTLR start ruleEReferenceDecl
+    // $ANTLR start "ruleEReferenceDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:350:1: ruleEReferenceDecl : ( ( rule__EReferenceDecl__Group__0 ) ) ;
     public final void ruleEReferenceDecl() throws RecognitionException {
 
@@ -866,7 +936,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__0_in_ruleEReferenceDecl694);
             rule__EReferenceDecl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -890,10 +961,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEReferenceDecl
+    // $ANTLR end "ruleEReferenceDecl"
 
 
-    // $ANTLR start entryRuleEEnumDecl
+    // $ANTLR start "entryRuleEEnumDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:369:1: entryRuleEEnumDecl : ruleEEnumDecl EOF ;
     public final void entryRuleEEnumDecl() throws RecognitionException {
         try {
@@ -903,7 +974,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEEnumDeclRule()); 
             pushFollow(FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl721);
             ruleEEnumDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEEnumDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEEnumDecl728); 
@@ -919,10 +991,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEEnumDecl
+    // $ANTLR end "entryRuleEEnumDecl"
 
 
-    // $ANTLR start ruleEEnumDecl
+    // $ANTLR start "ruleEEnumDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:378:1: ruleEEnumDecl : ( ( rule__EEnumDecl__Group__0 ) ) ;
     public final void ruleEEnumDecl() throws RecognitionException {
 
@@ -941,7 +1013,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumDecl__Group__0_in_ruleEEnumDecl754);
             rule__EEnumDecl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -965,10 +1038,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEEnumDecl
+    // $ANTLR end "ruleEEnumDecl"
 
 
-    // $ANTLR start entryRuleEEnumLiteralDecl
+    // $ANTLR start "entryRuleEEnumLiteralDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:397:1: entryRuleEEnumLiteralDecl : ruleEEnumLiteralDecl EOF ;
     public final void entryRuleEEnumLiteralDecl() throws RecognitionException {
         try {
@@ -978,7 +1051,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEEnumLiteralDeclRule()); 
             pushFollow(FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl781);
             ruleEEnumLiteralDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEEnumLiteralDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEEnumLiteralDecl788); 
@@ -994,10 +1068,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEEnumLiteralDecl
+    // $ANTLR end "entryRuleEEnumLiteralDecl"
 
 
-    // $ANTLR start ruleEEnumLiteralDecl
+    // $ANTLR start "ruleEEnumLiteralDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:406:1: ruleEEnumLiteralDecl : ( ( rule__EEnumLiteralDecl__Group__0 ) ) ;
     public final void ruleEEnumLiteralDecl() throws RecognitionException {
 
@@ -1016,7 +1090,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__0_in_ruleEEnumLiteralDecl814);
             rule__EEnumLiteralDecl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1040,10 +1115,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEEnumLiteralDecl
+    // $ANTLR end "ruleEEnumLiteralDecl"
 
 
-    // $ANTLR start entryRuleETypeParameterDecl
+    // $ANTLR start "entryRuleETypeParameterDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:425:1: entryRuleETypeParameterDecl : ruleETypeParameterDecl EOF ;
     public final void entryRuleETypeParameterDecl() throws RecognitionException {
         try {
@@ -1053,7 +1128,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getETypeParameterDeclRule()); 
             pushFollow(FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl841);
             ruleETypeParameterDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getETypeParameterDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleETypeParameterDecl848); 
@@ -1069,10 +1145,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleETypeParameterDecl
+    // $ANTLR end "entryRuleETypeParameterDecl"
 
 
-    // $ANTLR start ruleETypeParameterDecl
+    // $ANTLR start "ruleETypeParameterDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:434:1: ruleETypeParameterDecl : ( ( rule__ETypeParameterDecl__Group__0 ) ) ;
     public final void ruleETypeParameterDecl() throws RecognitionException {
 
@@ -1091,7 +1167,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ETypeParameterDecl__Group__0_in_ruleETypeParameterDecl874);
             rule__ETypeParameterDecl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1115,10 +1192,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleETypeParameterDecl
+    // $ANTLR end "ruleETypeParameterDecl"
 
 
-    // $ANTLR start entryRuleEGenericTypeReferenceDecl
+    // $ANTLR start "entryRuleEGenericTypeReferenceDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:453:1: entryRuleEGenericTypeReferenceDecl : ruleEGenericTypeReferenceDecl EOF ;
     public final void entryRuleEGenericTypeReferenceDecl() throws RecognitionException {
         try {
@@ -1128,7 +1205,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEGenericTypeReferenceDeclRule()); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl901);
             ruleEGenericTypeReferenceDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEGenericTypeReferenceDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEGenericTypeReferenceDecl908); 
@@ -1144,10 +1222,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEGenericTypeReferenceDecl
+    // $ANTLR end "entryRuleEGenericTypeReferenceDecl"
 
 
-    // $ANTLR start ruleEGenericTypeReferenceDecl
+    // $ANTLR start "ruleEGenericTypeReferenceDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:462:1: ruleEGenericTypeReferenceDecl : ( ( rule__EGenericTypeReferenceDecl__Alternatives ) ) ;
     public final void ruleEGenericTypeReferenceDecl() throws RecognitionException {
 
@@ -1166,7 +1244,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Alternatives_in_ruleEGenericTypeReferenceDecl934);
             rule__EGenericTypeReferenceDecl__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1190,10 +1269,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEGenericTypeReferenceDecl
+    // $ANTLR end "ruleEGenericTypeReferenceDecl"
 
 
-    // $ANTLR start entryRuleEGenericTypeDecl
+    // $ANTLR start "entryRuleEGenericTypeDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:481:1: entryRuleEGenericTypeDecl : ruleEGenericTypeDecl EOF ;
     public final void entryRuleEGenericTypeDecl() throws RecognitionException {
         try {
@@ -1203,7 +1282,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEGenericTypeDeclRule()); 
             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl961);
             ruleEGenericTypeDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEGenericTypeDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEGenericTypeDecl968); 
@@ -1219,10 +1299,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEGenericTypeDecl
+    // $ANTLR end "entryRuleEGenericTypeDecl"
 
 
-    // $ANTLR start ruleEGenericTypeDecl
+    // $ANTLR start "ruleEGenericTypeDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:490:1: ruleEGenericTypeDecl : ( ( rule__EGenericTypeDecl__Alternatives ) ) ;
     public final void ruleEGenericTypeDecl() throws RecognitionException {
 
@@ -1241,7 +1321,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Alternatives_in_ruleEGenericTypeDecl994);
             rule__EGenericTypeDecl__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1265,10 +1346,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEGenericTypeDecl
+    // $ANTLR end "ruleEGenericTypeDecl"
 
 
-    // $ANTLR start entryRuleEOperationDecl
+    // $ANTLR start "entryRuleEOperationDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:509:1: entryRuleEOperationDecl : ruleEOperationDecl EOF ;
     public final void entryRuleEOperationDecl() throws RecognitionException {
         try {
@@ -1278,7 +1359,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEOperationDeclRule()); 
             pushFollow(FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl1021);
             ruleEOperationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEOperationDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEOperationDecl1028); 
@@ -1294,10 +1376,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEOperationDecl
+    // $ANTLR end "entryRuleEOperationDecl"
 
 
-    // $ANTLR start ruleEOperationDecl
+    // $ANTLR start "ruleEOperationDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:518:1: ruleEOperationDecl : ( ( rule__EOperationDecl__Group__0 ) ) ;
     public final void ruleEOperationDecl() throws RecognitionException {
 
@@ -1316,7 +1398,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__0_in_ruleEOperationDecl1054);
             rule__EOperationDecl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1340,10 +1423,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEOperationDecl
+    // $ANTLR end "ruleEOperationDecl"
 
 
-    // $ANTLR start entryRuleEParameterDecl
+    // $ANTLR start "entryRuleEParameterDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:537:1: entryRuleEParameterDecl : ruleEParameterDecl EOF ;
     public final void entryRuleEParameterDecl() throws RecognitionException {
         try {
@@ -1353,7 +1436,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEParameterDeclRule()); 
             pushFollow(FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl1081);
             ruleEParameterDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEParameterDeclRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEParameterDecl1088); 
@@ -1369,10 +1453,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleEParameterDecl
+    // $ANTLR end "entryRuleEParameterDecl"
 
 
-    // $ANTLR start ruleEParameterDecl
+    // $ANTLR start "ruleEParameterDecl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:546:1: ruleEParameterDecl : ( ( rule__EParameterDecl__Group__0 ) ) ;
     public final void ruleEParameterDecl() throws RecognitionException {
 
@@ -1391,7 +1475,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EParameterDecl__Group__0_in_ruleEParameterDecl1114);
             rule__EParameterDecl__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1415,10 +1500,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleEParameterDecl
+    // $ANTLR end "ruleEParameterDecl"
 
 
-    // $ANTLR start entryRuleMapEntry
+    // $ANTLR start "entryRuleMapEntry"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:565:1: entryRuleMapEntry : ruleMapEntry EOF ;
     public final void entryRuleMapEntry() throws RecognitionException {
         try {
@@ -1428,7 +1513,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getMapEntryRule()); 
             pushFollow(FOLLOW_ruleMapEntry_in_entryRuleMapEntry1141);
             ruleMapEntry();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getMapEntryRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleMapEntry1148); 
@@ -1444,10 +1530,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleMapEntry
+    // $ANTLR end "entryRuleMapEntry"
 
 
-    // $ANTLR start ruleMapEntry
+    // $ANTLR start "ruleMapEntry"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:574:1: ruleMapEntry : ( ( rule__MapEntry__Group__0 ) ) ;
     public final void ruleMapEntry() throws RecognitionException {
 
@@ -1466,7 +1552,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__MapEntry__Group__0_in_ruleMapEntry1174);
             rule__MapEntry__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1490,10 +1577,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleMapEntry
+    // $ANTLR end "ruleMapEntry"
 
 
-    // $ANTLR start entryRuleQID
+    // $ANTLR start "entryRuleQID"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:593:1: entryRuleQID : ruleQID EOF ;
     public final void entryRuleQID() throws RecognitionException {
         try {
@@ -1503,7 +1590,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getQIDRule()); 
             pushFollow(FOLLOW_ruleQID_in_entryRuleQID1201);
             ruleQID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getQIDRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleQID1208); 
@@ -1519,10 +1607,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleQID
+    // $ANTLR end "entryRuleQID"
 
 
-    // $ANTLR start ruleQID
+    // $ANTLR start "ruleQID"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:602:1: ruleQID : ( ( rule__QID__Group__0 ) ) ;
     public final void ruleQID() throws RecognitionException {
 
@@ -1541,7 +1629,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__QID__Group__0_in_ruleQID1234);
             rule__QID__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1565,10 +1654,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleQID
+    // $ANTLR end "ruleQID"
 
 
-    // $ANTLR start entryRuleSTRING_OR_QID
+    // $ANTLR start "entryRuleSTRING_OR_QID"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:621:1: entryRuleSTRING_OR_QID : ruleSTRING_OR_QID EOF ;
     public final void entryRuleSTRING_OR_QID() throws RecognitionException {
         try {
@@ -1578,7 +1667,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getSTRING_OR_QIDRule()); 
             pushFollow(FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID1261);
             ruleSTRING_OR_QID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSTRING_OR_QIDRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleSTRING_OR_QID1268); 
@@ -1594,10 +1684,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleSTRING_OR_QID
+    // $ANTLR end "entryRuleSTRING_OR_QID"
 
 
-    // $ANTLR start ruleSTRING_OR_QID
+    // $ANTLR start "ruleSTRING_OR_QID"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:630:1: ruleSTRING_OR_QID : ( ( rule__STRING_OR_QID__Alternatives ) ) ;
     public final void ruleSTRING_OR_QID() throws RecognitionException {
 
@@ -1616,7 +1706,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__STRING_OR_QID__Alternatives_in_ruleSTRING_OR_QID1294);
             rule__STRING_OR_QID__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1640,10 +1731,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleSTRING_OR_QID
+    // $ANTLR end "ruleSTRING_OR_QID"
 
 
-    // $ANTLR start entryRuleSINT
+    // $ANTLR start "entryRuleSINT"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:649:1: entryRuleSINT : ruleSINT EOF ;
     public final void entryRuleSINT() throws RecognitionException {
         try {
@@ -1653,7 +1744,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getSINTRule()); 
             pushFollow(FOLLOW_ruleSINT_in_entryRuleSINT1321);
             ruleSINT();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSINTRule()); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleSINT1328); 
@@ -1669,10 +1761,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end entryRuleSINT
+    // $ANTLR end "entryRuleSINT"
 
 
-    // $ANTLR start ruleSINT
+    // $ANTLR start "ruleSINT"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:658:1: ruleSINT : ( ( rule__SINT__Group__0 ) ) ;
     public final void ruleSINT() throws RecognitionException {
 
@@ -1691,7 +1783,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__SINT__Group__0_in_ruleSINT1354);
             rule__SINT__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1715,10 +1808,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end ruleSINT
+    // $ANTLR end "ruleSINT"
 
 
-    // $ANTLR start rule__EPackageDecl__Alternatives_10
+    // $ANTLR start "rule__EPackageDecl__Alternatives_10"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:677:1: rule__EPackageDecl__Alternatives_10 : ( ( ( rule__EPackageDecl__ESubpackagesAssignment_10_0 ) ) | ( ( rule__EPackageDecl__EClassifiersAssignment_10_1 ) ) );
     public final void rule__EPackageDecl__Alternatives_10() throws RecognitionException {
 
@@ -1741,7 +1834,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EPackageDecl__ESubpackagesAssignment_10_0_in_rule__EPackageDecl__Alternatives_101390);
                     rule__EPackageDecl__ESubpackagesAssignment_10_0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -1765,7 +1859,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EPackageDecl__EClassifiersAssignment_10_1_in_rule__EPackageDecl__Alternatives_101408);
                     rule__EPackageDecl__EClassifiersAssignment_10_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -1791,10 +1886,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Alternatives_10
+    // $ANTLR end "rule__EPackageDecl__Alternatives_10"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Alternatives_4
+    // $ANTLR start "rule__SubEPackageDecl__Alternatives_4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:699:1: rule__SubEPackageDecl__Alternatives_4 : ( ( ( rule__SubEPackageDecl__ESubpackagesAssignment_4_0 ) ) | ( ( rule__SubEPackageDecl__EClassifiersAssignment_4_1 ) ) );
     public final void rule__SubEPackageDecl__Alternatives_4() throws RecognitionException {
 
@@ -1817,7 +1912,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__SubEPackageDecl__ESubpackagesAssignment_4_0_in_rule__SubEPackageDecl__Alternatives_41441);
                     rule__SubEPackageDecl__ESubpackagesAssignment_4_0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -1841,7 +1937,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__SubEPackageDecl__EClassifiersAssignment_4_1_in_rule__SubEPackageDecl__Alternatives_41459);
                     rule__SubEPackageDecl__EClassifiersAssignment_4_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -1867,10 +1964,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Alternatives_4
+    // $ANTLR end "rule__SubEPackageDecl__Alternatives_4"
 
 
-    // $ANTLR start rule__EClassifierDecl__Alternatives
+    // $ANTLR start "rule__EClassifierDecl__Alternatives"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:721:1: rule__EClassifierDecl__Alternatives : ( ( ruleEClassDecl ) | ( ruleEDataTypeDecl ) );
     public final void rule__EClassifierDecl__Alternatives() throws RecognitionException {
 
@@ -1890,7 +1987,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                      before(grammarAccess.getEClassifierDeclAccess().getEClassDeclParserRuleCall_0()); 
                     pushFollow(FOLLOW_ruleEClassDecl_in_rule__EClassifierDecl__Alternatives1492);
                     ruleEClassDecl();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getEClassifierDeclAccess().getEClassDeclParserRuleCall_0()); 
 
@@ -1908,7 +2006,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                      before(grammarAccess.getEClassifierDeclAccess().getEDataTypeDeclParserRuleCall_1()); 
                     pushFollow(FOLLOW_ruleEDataTypeDecl_in_rule__EClassifierDecl__Alternatives1509);
                     ruleEDataTypeDecl();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getEClassifierDeclAccess().getEDataTypeDeclParserRuleCall_1()); 
 
@@ -1931,10 +2030,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassifierDecl__Alternatives
+    // $ANTLR end "rule__EClassifierDecl__Alternatives"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Alternatives
+    // $ANTLR start "rule__EDataTypeDecl__Alternatives"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:743:1: rule__EDataTypeDecl__Alternatives : ( ( ( rule__EDataTypeDecl__Group_0__0 ) ) | ( ruleEEnumDecl ) );
     public final void rule__EDataTypeDecl__Alternatives() throws RecognitionException {
 
@@ -1957,7 +2056,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0__0_in_rule__EDataTypeDecl__Alternatives1541);
                     rule__EDataTypeDecl__Group_0__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -1978,7 +2078,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                      before(grammarAccess.getEDataTypeDeclAccess().getEEnumDeclParserRuleCall_1()); 
                     pushFollow(FOLLOW_ruleEEnumDecl_in_rule__EDataTypeDecl__Alternatives1559);
                     ruleEEnumDecl();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getEDataTypeDeclAccess().getEEnumDeclParserRuleCall_1()); 
 
@@ -2001,10 +2102,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Alternatives
+    // $ANTLR end "rule__EDataTypeDecl__Alternatives"
 
 
-    // $ANTLR start rule__EClassDecl__Alternatives_2
+    // $ANTLR start "rule__EClassDecl__Alternatives_2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:765:1: rule__EClassDecl__Alternatives_2 : ( ( ( rule__EClassDecl__InterfaceAssignment_2_0 ) ) | ( 'class' ) );
     public final void rule__EClassDecl__Alternatives_2() throws RecognitionException {
 
@@ -2023,7 +2124,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("765:1: rule__EClassDecl__Alternatives_2 : ( ( ( rule__EClassDecl__InterfaceAssignment_2_0 ) ) | ( 'class' ) );", 5, 0, input);
+                    new NoViableAltException("", 5, 0, input);
 
                 throw nvae;
             }
@@ -2040,7 +2141,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EClassDecl__InterfaceAssignment_2_0_in_rule__EClassDecl__Alternatives_21591);
                     rule__EClassDecl__InterfaceAssignment_2_0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2081,10 +2183,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Alternatives_2
+    // $ANTLR end "rule__EClassDecl__Alternatives_2"
 
 
-    // $ANTLR start rule__EClassDecl__Alternatives_8
+    // $ANTLR start "rule__EClassDecl__Alternatives_8"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:789:1: rule__EClassDecl__Alternatives_8 : ( ( ( rule__EClassDecl__EStructuralFeaturesAssignment_8_0 ) ) | ( ( rule__EClassDecl__EOperationsAssignment_8_1 ) ) );
     public final void rule__EClassDecl__Alternatives_8() throws RecognitionException {
 
@@ -2107,7 +2209,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EClassDecl__EStructuralFeaturesAssignment_8_0_in_rule__EClassDecl__Alternatives_81644);
                     rule__EClassDecl__EStructuralFeaturesAssignment_8_0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2131,7 +2234,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EClassDecl__EOperationsAssignment_8_1_in_rule__EClassDecl__Alternatives_81662);
                     rule__EClassDecl__EOperationsAssignment_8_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2157,10 +2261,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Alternatives_8
+    // $ANTLR end "rule__EClassDecl__Alternatives_8"
 
 
-    // $ANTLR start rule__EStructuralFeatureDecl__Alternatives
+    // $ANTLR start "rule__EStructuralFeatureDecl__Alternatives"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:811:1: rule__EStructuralFeatureDecl__Alternatives : ( ( ruleEAttributeDecl ) | ( ruleEReferenceDecl ) );
     public final void rule__EStructuralFeatureDecl__Alternatives() throws RecognitionException {
 
@@ -2180,7 +2284,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                      before(grammarAccess.getEStructuralFeatureDeclAccess().getEAttributeDeclParserRuleCall_0()); 
                     pushFollow(FOLLOW_ruleEAttributeDecl_in_rule__EStructuralFeatureDecl__Alternatives1695);
                     ruleEAttributeDecl();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getEStructuralFeatureDeclAccess().getEAttributeDeclParserRuleCall_0()); 
 
@@ -2198,7 +2303,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                      before(grammarAccess.getEStructuralFeatureDeclAccess().getEReferenceDeclParserRuleCall_1()); 
                     pushFollow(FOLLOW_ruleEReferenceDecl_in_rule__EStructuralFeatureDecl__Alternatives1712);
                     ruleEReferenceDecl();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getEStructuralFeatureDeclAccess().getEReferenceDeclParserRuleCall_1()); 
 
@@ -2221,10 +2327,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EStructuralFeatureDecl__Alternatives
+    // $ANTLR end "rule__EStructuralFeatureDecl__Alternatives"
 
 
-    // $ANTLR start rule__EAttributeDecl__Alternatives_1
+    // $ANTLR start "rule__EAttributeDecl__Alternatives_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:833:1: rule__EAttributeDecl__Alternatives_1 : ( ( ( rule__EAttributeDecl__IDAssignment_1_0 ) ) | ( ( rule__EAttributeDecl__UniqueAssignment_1_1 ) ) | ( ( rule__EAttributeDecl__OrderedAssignment_1_2 ) ) | ( ( rule__EAttributeDecl__ChangeableAssignment_1_3 ) ) | ( ( rule__EAttributeDecl__VolatileAssignment_1_4 ) ) | ( ( rule__EAttributeDecl__TransientAssignment_1_5 ) ) | ( ( rule__EAttributeDecl__UnsettableAssignment_1_6 ) ) | ( ( rule__EAttributeDecl__DerivedAssignment_1_7 ) ) );
     public final void rule__EAttributeDecl__Alternatives_1() throws RecognitionException {
 
@@ -2276,7 +2382,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("833:1: rule__EAttributeDecl__Alternatives_1 : ( ( ( rule__EAttributeDecl__IDAssignment_1_0 ) ) | ( ( rule__EAttributeDecl__UniqueAssignment_1_1 ) ) | ( ( rule__EAttributeDecl__OrderedAssignment_1_2 ) ) | ( ( rule__EAttributeDecl__ChangeableAssignment_1_3 ) ) | ( ( rule__EAttributeDecl__VolatileAssignment_1_4 ) ) | ( ( rule__EAttributeDecl__TransientAssignment_1_5 ) ) | ( ( rule__EAttributeDecl__UnsettableAssignment_1_6 ) ) | ( ( rule__EAttributeDecl__DerivedAssignment_1_7 ) ) );", 8, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
             }
@@ -2294,7 +2400,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAttributeDecl__IDAssignment_1_0_in_rule__EAttributeDecl__Alternatives_11744);
                     rule__EAttributeDecl__IDAssignment_1_0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2318,7 +2425,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAttributeDecl__UniqueAssignment_1_1_in_rule__EAttributeDecl__Alternatives_11762);
                     rule__EAttributeDecl__UniqueAssignment_1_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2342,7 +2450,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAttributeDecl__OrderedAssignment_1_2_in_rule__EAttributeDecl__Alternatives_11780);
                     rule__EAttributeDecl__OrderedAssignment_1_2();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2366,7 +2475,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAttributeDecl__ChangeableAssignment_1_3_in_rule__EAttributeDecl__Alternatives_11798);
                     rule__EAttributeDecl__ChangeableAssignment_1_3();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2390,7 +2500,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAttributeDecl__VolatileAssignment_1_4_in_rule__EAttributeDecl__Alternatives_11816);
                     rule__EAttributeDecl__VolatileAssignment_1_4();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2414,7 +2525,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAttributeDecl__TransientAssignment_1_5_in_rule__EAttributeDecl__Alternatives_11834);
                     rule__EAttributeDecl__TransientAssignment_1_5();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2438,7 +2550,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAttributeDecl__UnsettableAssignment_1_6_in_rule__EAttributeDecl__Alternatives_11852);
                     rule__EAttributeDecl__UnsettableAssignment_1_6();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2462,7 +2575,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAttributeDecl__DerivedAssignment_1_7_in_rule__EAttributeDecl__Alternatives_11870);
                     rule__EAttributeDecl__DerivedAssignment_1_7();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2488,10 +2602,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Alternatives_1
+    // $ANTLR end "rule__EAttributeDecl__Alternatives_1"
 
 
-    // $ANTLR start rule__EReferenceDecl__Alternatives_1
+    // $ANTLR start "rule__EReferenceDecl__Alternatives_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:891:1: rule__EReferenceDecl__Alternatives_1 : ( ( ( rule__EReferenceDecl__ResolveProxiesAssignment_1_0 ) ) | ( ( rule__EReferenceDecl__UniqueAssignment_1_1 ) ) | ( ( rule__EReferenceDecl__OrderedAssignment_1_2 ) ) | ( ( rule__EReferenceDecl__ChangeableAssignment_1_3 ) ) | ( ( rule__EReferenceDecl__VolatileAssignment_1_4 ) ) | ( ( rule__EReferenceDecl__TransientAssignment_1_5 ) ) | ( ( rule__EReferenceDecl__UnsettableAssignment_1_6 ) ) | ( ( rule__EReferenceDecl__DerivedAssignment_1_7 ) ) );
     public final void rule__EReferenceDecl__Alternatives_1() throws RecognitionException {
 
@@ -2543,7 +2657,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("891:1: rule__EReferenceDecl__Alternatives_1 : ( ( ( rule__EReferenceDecl__ResolveProxiesAssignment_1_0 ) ) | ( ( rule__EReferenceDecl__UniqueAssignment_1_1 ) ) | ( ( rule__EReferenceDecl__OrderedAssignment_1_2 ) ) | ( ( rule__EReferenceDecl__ChangeableAssignment_1_3 ) ) | ( ( rule__EReferenceDecl__VolatileAssignment_1_4 ) ) | ( ( rule__EReferenceDecl__TransientAssignment_1_5 ) ) | ( ( rule__EReferenceDecl__UnsettableAssignment_1_6 ) ) | ( ( rule__EReferenceDecl__DerivedAssignment_1_7 ) ) );", 9, 0, input);
+                    new NoViableAltException("", 9, 0, input);
 
                 throw nvae;
             }
@@ -2561,7 +2675,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__ResolveProxiesAssignment_1_0_in_rule__EReferenceDecl__Alternatives_11903);
                     rule__EReferenceDecl__ResolveProxiesAssignment_1_0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2585,7 +2700,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__UniqueAssignment_1_1_in_rule__EReferenceDecl__Alternatives_11921);
                     rule__EReferenceDecl__UniqueAssignment_1_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2609,7 +2725,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__OrderedAssignment_1_2_in_rule__EReferenceDecl__Alternatives_11939);
                     rule__EReferenceDecl__OrderedAssignment_1_2();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2633,7 +2750,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__ChangeableAssignment_1_3_in_rule__EReferenceDecl__Alternatives_11957);
                     rule__EReferenceDecl__ChangeableAssignment_1_3();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2657,7 +2775,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__VolatileAssignment_1_4_in_rule__EReferenceDecl__Alternatives_11975);
                     rule__EReferenceDecl__VolatileAssignment_1_4();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2681,7 +2800,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__TransientAssignment_1_5_in_rule__EReferenceDecl__Alternatives_11993);
                     rule__EReferenceDecl__TransientAssignment_1_5();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2705,7 +2825,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__UnsettableAssignment_1_6_in_rule__EReferenceDecl__Alternatives_12011);
                     rule__EReferenceDecl__UnsettableAssignment_1_6();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2729,7 +2850,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__DerivedAssignment_1_7_in_rule__EReferenceDecl__Alternatives_12029);
                     rule__EReferenceDecl__DerivedAssignment_1_7();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2755,10 +2877,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Alternatives_1
+    // $ANTLR end "rule__EReferenceDecl__Alternatives_1"
 
 
-    // $ANTLR start rule__EReferenceDecl__Alternatives_2
+    // $ANTLR start "rule__EReferenceDecl__Alternatives_2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:949:1: rule__EReferenceDecl__Alternatives_2 : ( ( ( rule__EReferenceDecl__ContainmentAssignment_2_0 ) ) | ( 'ref' ) );
     public final void rule__EReferenceDecl__Alternatives_2() throws RecognitionException {
 
@@ -2777,7 +2899,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("949:1: rule__EReferenceDecl__Alternatives_2 : ( ( ( rule__EReferenceDecl__ContainmentAssignment_2_0 ) ) | ( 'ref' ) );", 10, 0, input);
+                    new NoViableAltException("", 10, 0, input);
 
                 throw nvae;
             }
@@ -2794,7 +2916,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__ContainmentAssignment_2_0_in_rule__EReferenceDecl__Alternatives_22062);
                     rule__EReferenceDecl__ContainmentAssignment_2_0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2835,10 +2958,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Alternatives_2
+    // $ANTLR end "rule__EReferenceDecl__Alternatives_2"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Alternatives
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Alternatives"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:973:1: rule__EGenericTypeReferenceDecl__Alternatives : ( ( ( rule__EGenericTypeReferenceDecl__Group_0__0 ) ) | ( ( rule__EGenericTypeReferenceDecl__Group_1__0 ) ) );
     public final void rule__EGenericTypeReferenceDecl__Alternatives() throws RecognitionException {
 
@@ -2857,7 +2980,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("973:1: rule__EGenericTypeReferenceDecl__Alternatives : ( ( ( rule__EGenericTypeReferenceDecl__Group_0__0 ) ) | ( ( rule__EGenericTypeReferenceDecl__Group_1__0 ) ) );", 11, 0, input);
+                    new NoViableAltException("", 11, 0, input);
 
                 throw nvae;
             }
@@ -2874,7 +2997,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__0_in_rule__EGenericTypeReferenceDecl__Alternatives2115);
                     rule__EGenericTypeReferenceDecl__Group_0__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2898,7 +3022,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__0_in_rule__EGenericTypeReferenceDecl__Alternatives2133);
                     rule__EGenericTypeReferenceDecl__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2924,10 +3049,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Alternatives
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Alternatives"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Alternatives
+    // $ANTLR start "rule__EGenericTypeDecl__Alternatives"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:995:1: rule__EGenericTypeDecl__Alternatives : ( ( ( rule__EGenericTypeDecl__Group_0__0 ) ) | ( ( rule__EGenericTypeDecl__Group_1__0 ) ) | ( ( rule__EGenericTypeDecl__Group_2__0 ) ) );
     public final void rule__EGenericTypeDecl__Alternatives() throws RecognitionException {
 
@@ -2954,7 +3079,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("995:1: rule__EGenericTypeDecl__Alternatives : ( ( ( rule__EGenericTypeDecl__Group_0__0 ) ) | ( ( rule__EGenericTypeDecl__Group_1__0 ) ) | ( ( rule__EGenericTypeDecl__Group_2__0 ) ) );", 12, 0, input);
+                    new NoViableAltException("", 12, 0, input);
 
                 throw nvae;
             }
@@ -2972,7 +3097,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0__0_in_rule__EGenericTypeDecl__Alternatives2166);
                     rule__EGenericTypeDecl__Group_0__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -2996,7 +3122,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_1__0_in_rule__EGenericTypeDecl__Alternatives2184);
                     rule__EGenericTypeDecl__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -3020,7 +3147,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2__0_in_rule__EGenericTypeDecl__Alternatives2202);
                     rule__EGenericTypeDecl__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -3046,10 +3174,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Alternatives
+    // $ANTLR end "rule__EGenericTypeDecl__Alternatives"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Alternatives_2_1
+    // $ANTLR start "rule__EGenericTypeDecl__Alternatives_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1023:1: rule__EGenericTypeDecl__Alternatives_2_1 : ( ( ( rule__EGenericTypeDecl__Group_2_1_0__0 ) ) | ( ( rule__EGenericTypeDecl__Group_2_1_1__0 ) ) );
     public final void rule__EGenericTypeDecl__Alternatives_2_1() throws RecognitionException {
 
@@ -3068,7 +3196,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1023:1: rule__EGenericTypeDecl__Alternatives_2_1 : ( ( ( rule__EGenericTypeDecl__Group_2_1_0__0 ) ) | ( ( rule__EGenericTypeDecl__Group_2_1_1__0 ) ) );", 13, 0, input);
+                    new NoViableAltException("", 13, 0, input);
 
                 throw nvae;
             }
@@ -3085,7 +3213,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__0_in_rule__EGenericTypeDecl__Alternatives_2_12235);
                     rule__EGenericTypeDecl__Group_2_1_0__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -3109,7 +3238,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__0_in_rule__EGenericTypeDecl__Alternatives_2_12253);
                     rule__EGenericTypeDecl__Group_2_1_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -3135,10 +3265,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Alternatives_2_1
+    // $ANTLR end "rule__EGenericTypeDecl__Alternatives_2_1"
 
 
-    // $ANTLR start rule__EOperationDecl__Alternatives_1
+    // $ANTLR start "rule__EOperationDecl__Alternatives_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1045:1: rule__EOperationDecl__Alternatives_1 : ( ( ( rule__EOperationDecl__UniqueAssignment_1_0 ) ) | ( ( rule__EOperationDecl__OrderedAssignment_1_1 ) ) );
     public final void rule__EOperationDecl__Alternatives_1() throws RecognitionException {
 
@@ -3157,7 +3287,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1045:1: rule__EOperationDecl__Alternatives_1 : ( ( ( rule__EOperationDecl__UniqueAssignment_1_0 ) ) | ( ( rule__EOperationDecl__OrderedAssignment_1_1 ) ) );", 14, 0, input);
+                    new NoViableAltException("", 14, 0, input);
 
                 throw nvae;
             }
@@ -3174,7 +3304,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EOperationDecl__UniqueAssignment_1_0_in_rule__EOperationDecl__Alternatives_12286);
                     rule__EOperationDecl__UniqueAssignment_1_0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -3198,7 +3329,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EOperationDecl__OrderedAssignment_1_1_in_rule__EOperationDecl__Alternatives_12304);
                     rule__EOperationDecl__OrderedAssignment_1_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -3224,10 +3356,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Alternatives_1
+    // $ANTLR end "rule__EOperationDecl__Alternatives_1"
 
 
-    // $ANTLR start rule__EOperationDecl__Alternatives_3
+    // $ANTLR start "rule__EOperationDecl__Alternatives_3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1067:1: rule__EOperationDecl__Alternatives_3 : ( ( ( rule__EOperationDecl__EGenericTypeAssignment_3_0 ) ) | ( 'void' ) );
     public final void rule__EOperationDecl__Alternatives_3() throws RecognitionException {
 
@@ -3246,7 +3378,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1067:1: rule__EOperationDecl__Alternatives_3 : ( ( ( rule__EOperationDecl__EGenericTypeAssignment_3_0 ) ) | ( 'void' ) );", 15, 0, input);
+                    new NoViableAltException("", 15, 0, input);
 
                 throw nvae;
             }
@@ -3263,7 +3395,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EOperationDecl__EGenericTypeAssignment_3_0_in_rule__EOperationDecl__Alternatives_32337);
                     rule__EOperationDecl__EGenericTypeAssignment_3_0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -3304,10 +3437,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Alternatives_3
+    // $ANTLR end "rule__EOperationDecl__Alternatives_3"
 
 
-    // $ANTLR start rule__QID__Alternatives_1_0
+    // $ANTLR start "rule__QID__Alternatives_1_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1091:1: rule__QID__Alternatives_1_0 : ( ( '.' ) | ( '$' ) );
     public final void rule__QID__Alternatives_1_0() throws RecognitionException {
 
@@ -3326,7 +3459,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1091:1: rule__QID__Alternatives_1_0 : ( ( '.' ) | ( '$' ) );", 16, 0, input);
+                    new NoViableAltException("", 16, 0, input);
 
                 throw nvae;
             }
@@ -3375,10 +3508,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__QID__Alternatives_1_0
+    // $ANTLR end "rule__QID__Alternatives_1_0"
 
 
-    // $ANTLR start rule__STRING_OR_QID__Alternatives
+    // $ANTLR start "rule__STRING_OR_QID__Alternatives"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1117:1: rule__STRING_OR_QID__Alternatives : ( ( RULE_STRING ) | ( ruleQID ) );
     public final void rule__STRING_OR_QID__Alternatives() throws RecognitionException {
 
@@ -3397,7 +3530,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1117:1: rule__STRING_OR_QID__Alternatives : ( ( RULE_STRING ) | ( ruleQID ) );", 17, 0, input);
+                    new NoViableAltException("", 17, 0, input);
 
                 throw nvae;
             }
@@ -3426,7 +3559,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                      before(grammarAccess.getSTRING_OR_QIDAccess().getQIDParserRuleCall_1()); 
                     pushFollow(FOLLOW_ruleQID_in_rule__STRING_OR_QID__Alternatives2462);
                     ruleQID();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getSTRING_OR_QIDAccess().getQIDParserRuleCall_1()); 
 
@@ -3449,10 +3583,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__STRING_OR_QID__Alternatives
+    // $ANTLR end "rule__STRING_OR_QID__Alternatives"
 
 
-    // $ANTLR start rule__EcoreDsl__Group__0
+    // $ANTLR start "rule__EcoreDsl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1141:1: rule__EcoreDsl__Group__0 : rule__EcoreDsl__Group__0__Impl rule__EcoreDsl__Group__1 ;
     public final void rule__EcoreDsl__Group__0() throws RecognitionException {
 
@@ -3464,11 +3598,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EcoreDsl__Group__0__Impl_in_rule__EcoreDsl__Group__02492);
             rule__EcoreDsl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EcoreDsl__Group__1_in_rule__EcoreDsl__Group__02495);
             rule__EcoreDsl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3485,10 +3621,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EcoreDsl__Group__0
+    // $ANTLR end "rule__EcoreDsl__Group__0"
 
 
-    // $ANTLR start rule__EcoreDsl__Group__0__Impl
+    // $ANTLR start "rule__EcoreDsl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1153:1: rule__EcoreDsl__Group__0__Impl : ( ( rule__EcoreDsl__MetamodelDeclarationsAssignment_0 )* ) ;
     public final void rule__EcoreDsl__Group__0__Impl() throws RecognitionException {
 
@@ -3519,7 +3655,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EcoreDsl__MetamodelDeclarationsAssignment_0_in_rule__EcoreDsl__Group__0__Impl2522);
             	    rule__EcoreDsl__MetamodelDeclarationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -3549,10 +3686,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EcoreDsl__Group__0__Impl
+    // $ANTLR end "rule__EcoreDsl__Group__0__Impl"
 
 
-    // $ANTLR start rule__EcoreDsl__Group__1
+    // $ANTLR start "rule__EcoreDsl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1170:1: rule__EcoreDsl__Group__1 : rule__EcoreDsl__Group__1__Impl ;
     public final void rule__EcoreDsl__Group__1() throws RecognitionException {
 
@@ -3564,7 +3701,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EcoreDsl__Group__1__Impl_in_rule__EcoreDsl__Group__12553);
             rule__EcoreDsl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3581,10 +3719,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EcoreDsl__Group__1
+    // $ANTLR end "rule__EcoreDsl__Group__1"
 
 
-    // $ANTLR start rule__EcoreDsl__Group__1__Impl
+    // $ANTLR start "rule__EcoreDsl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1181:1: rule__EcoreDsl__Group__1__Impl : ( ( rule__EcoreDsl__PackageAssignment_1 ) ) ;
     public final void rule__EcoreDsl__Group__1__Impl() throws RecognitionException {
 
@@ -3603,7 +3741,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EcoreDsl__PackageAssignment_1_in_rule__EcoreDsl__Group__1__Impl2580);
             rule__EcoreDsl__PackageAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3627,10 +3766,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EcoreDsl__Group__1__Impl
+    // $ANTLR end "rule__EcoreDsl__Group__1__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__0
+    // $ANTLR start "rule__ReferencedMetamodel__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1202:1: rule__ReferencedMetamodel__Group__0 : rule__ReferencedMetamodel__Group__0__Impl rule__ReferencedMetamodel__Group__1 ;
     public final void rule__ReferencedMetamodel__Group__0() throws RecognitionException {
 
@@ -3642,11 +3781,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__0__Impl_in_rule__ReferencedMetamodel__Group__02614);
             rule__ReferencedMetamodel__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__02617);
             rule__ReferencedMetamodel__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3663,10 +3804,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__0
+    // $ANTLR end "rule__ReferencedMetamodel__Group__0"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__0__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1214:1: rule__ReferencedMetamodel__Group__0__Impl : ( 'import' ) ;
     public final void rule__ReferencedMetamodel__Group__0__Impl() throws RecognitionException {
 
@@ -3700,10 +3841,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__0__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group__0__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__1
+    // $ANTLR start "rule__ReferencedMetamodel__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1233:1: rule__ReferencedMetamodel__Group__1 : rule__ReferencedMetamodel__Group__1__Impl rule__ReferencedMetamodel__Group__2 ;
     public final void rule__ReferencedMetamodel__Group__1() throws RecognitionException {
 
@@ -3715,11 +3856,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__1__Impl_in_rule__ReferencedMetamodel__Group__12676);
             rule__ReferencedMetamodel__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__12679);
             rule__ReferencedMetamodel__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3736,10 +3879,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__1
+    // $ANTLR end "rule__ReferencedMetamodel__Group__1"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__1__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1245:1: rule__ReferencedMetamodel__Group__1__Impl : ( ( rule__ReferencedMetamodel__Group_1__0 )? ) ;
     public final void rule__ReferencedMetamodel__Group__1__Impl() throws RecognitionException {
 
@@ -3766,7 +3909,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__ReferencedMetamodel__Group_1__0_in_rule__ReferencedMetamodel__Group__1__Impl2706);
                     rule__ReferencedMetamodel__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -3793,10 +3937,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__1__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group__1__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__2
+    // $ANTLR start "rule__ReferencedMetamodel__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1262:1: rule__ReferencedMetamodel__Group__2 : rule__ReferencedMetamodel__Group__2__Impl rule__ReferencedMetamodel__Group__3 ;
     public final void rule__ReferencedMetamodel__Group__2() throws RecognitionException {
 
@@ -3808,11 +3952,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__2__Impl_in_rule__ReferencedMetamodel__Group__22737);
             rule__ReferencedMetamodel__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__3_in_rule__ReferencedMetamodel__Group__22740);
             rule__ReferencedMetamodel__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3829,10 +3975,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__2
+    // $ANTLR end "rule__ReferencedMetamodel__Group__2"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__2__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1274:1: rule__ReferencedMetamodel__Group__2__Impl : ( ( rule__ReferencedMetamodel__EPackageAssignment_2 ) ) ;
     public final void rule__ReferencedMetamodel__Group__2__Impl() throws RecognitionException {
 
@@ -3851,7 +3997,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_2_in_rule__ReferencedMetamodel__Group__2__Impl2767);
             rule__ReferencedMetamodel__EPackageAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3875,10 +4022,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__2__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group__2__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__3
+    // $ANTLR start "rule__ReferencedMetamodel__Group__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1291:1: rule__ReferencedMetamodel__Group__3 : rule__ReferencedMetamodel__Group__3__Impl ;
     public final void rule__ReferencedMetamodel__Group__3() throws RecognitionException {
 
@@ -3890,7 +4037,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__3__Impl_in_rule__ReferencedMetamodel__Group__32797);
             rule__ReferencedMetamodel__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3907,10 +4055,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__3
+    // $ANTLR end "rule__ReferencedMetamodel__Group__3"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__3__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1302:1: rule__ReferencedMetamodel__Group__3__Impl : ( ';' ) ;
     public final void rule__ReferencedMetamodel__Group__3__Impl() throws RecognitionException {
 
@@ -3944,10 +4092,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__3__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group__3__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_1__0
+    // $ANTLR start "rule__ReferencedMetamodel__Group_1__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1329:1: rule__ReferencedMetamodel__Group_1__0 : rule__ReferencedMetamodel__Group_1__0__Impl rule__ReferencedMetamodel__Group_1__1 ;
     public final void rule__ReferencedMetamodel__Group_1__0() throws RecognitionException {
 
@@ -3959,11 +4107,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ReferencedMetamodel__Group_1__0__Impl_in_rule__ReferencedMetamodel__Group_1__02864);
             rule__ReferencedMetamodel__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__ReferencedMetamodel__Group_1__1_in_rule__ReferencedMetamodel__Group_1__02867);
             rule__ReferencedMetamodel__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -3980,10 +4130,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_1__0
+    // $ANTLR end "rule__ReferencedMetamodel__Group_1__0"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_1__0__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group_1__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1341:1: rule__ReferencedMetamodel__Group_1__0__Impl : ( ( rule__ReferencedMetamodel__AliasAssignment_1_0 ) ) ;
     public final void rule__ReferencedMetamodel__Group_1__0__Impl() throws RecognitionException {
 
@@ -4002,7 +4152,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ReferencedMetamodel__AliasAssignment_1_0_in_rule__ReferencedMetamodel__Group_1__0__Impl2894);
             rule__ReferencedMetamodel__AliasAssignment_1_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4026,10 +4177,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_1__0__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_1__1
+    // $ANTLR start "rule__ReferencedMetamodel__Group_1__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1358:1: rule__ReferencedMetamodel__Group_1__1 : rule__ReferencedMetamodel__Group_1__1__Impl ;
     public final void rule__ReferencedMetamodel__Group_1__1() throws RecognitionException {
 
@@ -4041,7 +4192,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ReferencedMetamodel__Group_1__1__Impl_in_rule__ReferencedMetamodel__Group_1__12924);
             rule__ReferencedMetamodel__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4058,10 +4210,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_1__1
+    // $ANTLR end "rule__ReferencedMetamodel__Group_1__1"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_1__1__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group_1__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1369:1: rule__ReferencedMetamodel__Group_1__1__Impl : ( '=' ) ;
     public final void rule__ReferencedMetamodel__Group_1__1__Impl() throws RecognitionException {
 
@@ -4095,10 +4247,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_1__1__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__0
+    // $ANTLR start "rule__EPackageDecl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1392:1: rule__EPackageDecl__Group__0 : rule__EPackageDecl__Group__0__Impl rule__EPackageDecl__Group__1 ;
     public final void rule__EPackageDecl__Group__0() throws RecognitionException {
 
@@ -4110,11 +4262,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__0__Impl_in_rule__EPackageDecl__Group__02987);
             rule__EPackageDecl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EPackageDecl__Group__1_in_rule__EPackageDecl__Group__02990);
             rule__EPackageDecl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4131,10 +4285,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__0
+    // $ANTLR end "rule__EPackageDecl__Group__0"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__0__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1404:1: rule__EPackageDecl__Group__0__Impl : ( ( rule__EPackageDecl__EAnnotationsAssignment_0 )* ) ;
     public final void rule__EPackageDecl__Group__0__Impl() throws RecognitionException {
 
@@ -4165,7 +4319,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EPackageDecl__EAnnotationsAssignment_0_in_rule__EPackageDecl__Group__0__Impl3017);
             	    rule__EPackageDecl__EAnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -4195,10 +4350,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__0__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__0__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__1
+    // $ANTLR start "rule__EPackageDecl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1421:1: rule__EPackageDecl__Group__1 : rule__EPackageDecl__Group__1__Impl rule__EPackageDecl__Group__2 ;
     public final void rule__EPackageDecl__Group__1() throws RecognitionException {
 
@@ -4210,11 +4365,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__1__Impl_in_rule__EPackageDecl__Group__13048);
             rule__EPackageDecl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EPackageDecl__Group__2_in_rule__EPackageDecl__Group__13051);
             rule__EPackageDecl__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4231,10 +4388,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__1
+    // $ANTLR end "rule__EPackageDecl__Group__1"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__1__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1433:1: rule__EPackageDecl__Group__1__Impl : ( 'package' ) ;
     public final void rule__EPackageDecl__Group__1__Impl() throws RecognitionException {
 
@@ -4268,10 +4425,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__1__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__1__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__2
+    // $ANTLR start "rule__EPackageDecl__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1452:1: rule__EPackageDecl__Group__2 : rule__EPackageDecl__Group__2__Impl rule__EPackageDecl__Group__3 ;
     public final void rule__EPackageDecl__Group__2() throws RecognitionException {
 
@@ -4283,11 +4440,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__2__Impl_in_rule__EPackageDecl__Group__23110);
             rule__EPackageDecl__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EPackageDecl__Group__3_in_rule__EPackageDecl__Group__23113);
             rule__EPackageDecl__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4304,10 +4463,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__2
+    // $ANTLR end "rule__EPackageDecl__Group__2"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__2__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1464:1: rule__EPackageDecl__Group__2__Impl : ( ( rule__EPackageDecl__NameAssignment_2 ) ) ;
     public final void rule__EPackageDecl__Group__2__Impl() throws RecognitionException {
 
@@ -4326,7 +4485,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__NameAssignment_2_in_rule__EPackageDecl__Group__2__Impl3140);
             rule__EPackageDecl__NameAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4350,10 +4510,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__2__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__2__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__3
+    // $ANTLR start "rule__EPackageDecl__Group__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1481:1: rule__EPackageDecl__Group__3 : rule__EPackageDecl__Group__3__Impl rule__EPackageDecl__Group__4 ;
     public final void rule__EPackageDecl__Group__3() throws RecognitionException {
 
@@ -4365,11 +4525,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__3__Impl_in_rule__EPackageDecl__Group__33170);
             rule__EPackageDecl__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EPackageDecl__Group__4_in_rule__EPackageDecl__Group__33173);
             rule__EPackageDecl__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4386,10 +4548,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__3
+    // $ANTLR end "rule__EPackageDecl__Group__3"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__3__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1493:1: rule__EPackageDecl__Group__3__Impl : ( 'nsURI' ) ;
     public final void rule__EPackageDecl__Group__3__Impl() throws RecognitionException {
 
@@ -4423,10 +4585,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__3__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__3__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__4
+    // $ANTLR start "rule__EPackageDecl__Group__4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1512:1: rule__EPackageDecl__Group__4 : rule__EPackageDecl__Group__4__Impl rule__EPackageDecl__Group__5 ;
     public final void rule__EPackageDecl__Group__4() throws RecognitionException {
 
@@ -4438,11 +4600,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__4__Impl_in_rule__EPackageDecl__Group__43232);
             rule__EPackageDecl__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EPackageDecl__Group__5_in_rule__EPackageDecl__Group__43235);
             rule__EPackageDecl__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4459,10 +4623,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__4
+    // $ANTLR end "rule__EPackageDecl__Group__4"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__4__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__4__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1524:1: rule__EPackageDecl__Group__4__Impl : ( '=' ) ;
     public final void rule__EPackageDecl__Group__4__Impl() throws RecognitionException {
 
@@ -4496,10 +4660,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__4__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__4__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__5
+    // $ANTLR start "rule__EPackageDecl__Group__5"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1543:1: rule__EPackageDecl__Group__5 : rule__EPackageDecl__Group__5__Impl rule__EPackageDecl__Group__6 ;
     public final void rule__EPackageDecl__Group__5() throws RecognitionException {
 
@@ -4511,11 +4675,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__5__Impl_in_rule__EPackageDecl__Group__53294);
             rule__EPackageDecl__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EPackageDecl__Group__6_in_rule__EPackageDecl__Group__53297);
             rule__EPackageDecl__Group__6();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4532,10 +4698,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__5
+    // $ANTLR end "rule__EPackageDecl__Group__5"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__5__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__5__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1555:1: rule__EPackageDecl__Group__5__Impl : ( ( rule__EPackageDecl__NsURIAssignment_5 ) ) ;
     public final void rule__EPackageDecl__Group__5__Impl() throws RecognitionException {
 
@@ -4554,7 +4720,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__NsURIAssignment_5_in_rule__EPackageDecl__Group__5__Impl3324);
             rule__EPackageDecl__NsURIAssignment_5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4578,10 +4745,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__5__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__5__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__6
+    // $ANTLR start "rule__EPackageDecl__Group__6"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1572:1: rule__EPackageDecl__Group__6 : rule__EPackageDecl__Group__6__Impl rule__EPackageDecl__Group__7 ;
     public final void rule__EPackageDecl__Group__6() throws RecognitionException {
 
@@ -4593,11 +4760,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__6__Impl_in_rule__EPackageDecl__Group__63354);
             rule__EPackageDecl__Group__6__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EPackageDecl__Group__7_in_rule__EPackageDecl__Group__63357);
             rule__EPackageDecl__Group__7();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4614,10 +4783,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__6
+    // $ANTLR end "rule__EPackageDecl__Group__6"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__6__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__6__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1584:1: rule__EPackageDecl__Group__6__Impl : ( 'nsPrefix' ) ;
     public final void rule__EPackageDecl__Group__6__Impl() throws RecognitionException {
 
@@ -4651,10 +4820,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__6__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__6__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__7
+    // $ANTLR start "rule__EPackageDecl__Group__7"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1603:1: rule__EPackageDecl__Group__7 : rule__EPackageDecl__Group__7__Impl rule__EPackageDecl__Group__8 ;
     public final void rule__EPackageDecl__Group__7() throws RecognitionException {
 
@@ -4666,11 +4835,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__7__Impl_in_rule__EPackageDecl__Group__73416);
             rule__EPackageDecl__Group__7__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EPackageDecl__Group__8_in_rule__EPackageDecl__Group__73419);
             rule__EPackageDecl__Group__8();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4687,10 +4858,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__7
+    // $ANTLR end "rule__EPackageDecl__Group__7"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__7__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__7__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1615:1: rule__EPackageDecl__Group__7__Impl : ( '=' ) ;
     public final void rule__EPackageDecl__Group__7__Impl() throws RecognitionException {
 
@@ -4724,10 +4895,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__7__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__7__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__8
+    // $ANTLR start "rule__EPackageDecl__Group__8"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1634:1: rule__EPackageDecl__Group__8 : rule__EPackageDecl__Group__8__Impl rule__EPackageDecl__Group__9 ;
     public final void rule__EPackageDecl__Group__8() throws RecognitionException {
 
@@ -4739,11 +4910,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__8__Impl_in_rule__EPackageDecl__Group__83478);
             rule__EPackageDecl__Group__8__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EPackageDecl__Group__9_in_rule__EPackageDecl__Group__83481);
             rule__EPackageDecl__Group__9();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4760,10 +4933,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__8
+    // $ANTLR end "rule__EPackageDecl__Group__8"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__8__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__8__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1646:1: rule__EPackageDecl__Group__8__Impl : ( ( rule__EPackageDecl__NsPrefixAssignment_8 ) ) ;
     public final void rule__EPackageDecl__Group__8__Impl() throws RecognitionException {
 
@@ -4782,7 +4955,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__NsPrefixAssignment_8_in_rule__EPackageDecl__Group__8__Impl3508);
             rule__EPackageDecl__NsPrefixAssignment_8();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4806,10 +4980,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__8__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__8__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__9
+    // $ANTLR start "rule__EPackageDecl__Group__9"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1663:1: rule__EPackageDecl__Group__9 : rule__EPackageDecl__Group__9__Impl rule__EPackageDecl__Group__10 ;
     public final void rule__EPackageDecl__Group__9() throws RecognitionException {
 
@@ -4821,11 +4995,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__9__Impl_in_rule__EPackageDecl__Group__93538);
             rule__EPackageDecl__Group__9__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EPackageDecl__Group__10_in_rule__EPackageDecl__Group__93541);
             rule__EPackageDecl__Group__10();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4842,10 +5018,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__9
+    // $ANTLR end "rule__EPackageDecl__Group__9"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__9__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__9__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1675:1: rule__EPackageDecl__Group__9__Impl : ( '{' ) ;
     public final void rule__EPackageDecl__Group__9__Impl() throws RecognitionException {
 
@@ -4879,10 +5055,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__9__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__9__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__10
+    // $ANTLR start "rule__EPackageDecl__Group__10"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1694:1: rule__EPackageDecl__Group__10 : rule__EPackageDecl__Group__10__Impl rule__EPackageDecl__Group__11 ;
     public final void rule__EPackageDecl__Group__10() throws RecognitionException {
 
@@ -4894,11 +5070,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__10__Impl_in_rule__EPackageDecl__Group__103600);
             rule__EPackageDecl__Group__10__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EPackageDecl__Group__11_in_rule__EPackageDecl__Group__103603);
             rule__EPackageDecl__Group__11();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4915,10 +5093,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__10
+    // $ANTLR end "rule__EPackageDecl__Group__10"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__10__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__10__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1706:1: rule__EPackageDecl__Group__10__Impl : ( ( rule__EPackageDecl__Alternatives_10 )* ) ;
     public final void rule__EPackageDecl__Group__10__Impl() throws RecognitionException {
 
@@ -4949,7 +5127,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EPackageDecl__Alternatives_10_in_rule__EPackageDecl__Group__10__Impl3630);
             	    rule__EPackageDecl__Alternatives_10();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -4979,10 +5158,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__10__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__10__Impl"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__11
+    // $ANTLR start "rule__EPackageDecl__Group__11"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1723:1: rule__EPackageDecl__Group__11 : rule__EPackageDecl__Group__11__Impl ;
     public final void rule__EPackageDecl__Group__11() throws RecognitionException {
 
@@ -4994,7 +5173,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EPackageDecl__Group__11__Impl_in_rule__EPackageDecl__Group__113661);
             rule__EPackageDecl__Group__11__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5011,10 +5191,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__11
+    // $ANTLR end "rule__EPackageDecl__Group__11"
 
 
-    // $ANTLR start rule__EPackageDecl__Group__11__Impl
+    // $ANTLR start "rule__EPackageDecl__Group__11__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1734:1: rule__EPackageDecl__Group__11__Impl : ( '}' ) ;
     public final void rule__EPackageDecl__Group__11__Impl() throws RecognitionException {
 
@@ -5048,10 +5228,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__Group__11__Impl
+    // $ANTLR end "rule__EPackageDecl__Group__11__Impl"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__0
+    // $ANTLR start "rule__SubEPackageDecl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1777:1: rule__SubEPackageDecl__Group__0 : rule__SubEPackageDecl__Group__0__Impl rule__SubEPackageDecl__Group__1 ;
     public final void rule__SubEPackageDecl__Group__0() throws RecognitionException {
 
@@ -5063,11 +5243,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__0__Impl_in_rule__SubEPackageDecl__Group__03744);
             rule__SubEPackageDecl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__1_in_rule__SubEPackageDecl__Group__03747);
             rule__SubEPackageDecl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5084,10 +5266,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__0
+    // $ANTLR end "rule__SubEPackageDecl__Group__0"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__0__Impl
+    // $ANTLR start "rule__SubEPackageDecl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1789:1: rule__SubEPackageDecl__Group__0__Impl : ( ( rule__SubEPackageDecl__EAnnotationsAssignment_0 )* ) ;
     public final void rule__SubEPackageDecl__Group__0__Impl() throws RecognitionException {
 
@@ -5118,7 +5300,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__SubEPackageDecl__EAnnotationsAssignment_0_in_rule__SubEPackageDecl__Group__0__Impl3774);
             	    rule__SubEPackageDecl__EAnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -5148,10 +5331,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__0__Impl
+    // $ANTLR end "rule__SubEPackageDecl__Group__0__Impl"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__1
+    // $ANTLR start "rule__SubEPackageDecl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1806:1: rule__SubEPackageDecl__Group__1 : rule__SubEPackageDecl__Group__1__Impl rule__SubEPackageDecl__Group__2 ;
     public final void rule__SubEPackageDecl__Group__1() throws RecognitionException {
 
@@ -5163,11 +5346,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__1__Impl_in_rule__SubEPackageDecl__Group__13805);
             rule__SubEPackageDecl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__2_in_rule__SubEPackageDecl__Group__13808);
             rule__SubEPackageDecl__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5184,10 +5369,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__1
+    // $ANTLR end "rule__SubEPackageDecl__Group__1"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__1__Impl
+    // $ANTLR start "rule__SubEPackageDecl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1818:1: rule__SubEPackageDecl__Group__1__Impl : ( 'package' ) ;
     public final void rule__SubEPackageDecl__Group__1__Impl() throws RecognitionException {
 
@@ -5221,10 +5406,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__1__Impl
+    // $ANTLR end "rule__SubEPackageDecl__Group__1__Impl"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__2
+    // $ANTLR start "rule__SubEPackageDecl__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1837:1: rule__SubEPackageDecl__Group__2 : rule__SubEPackageDecl__Group__2__Impl rule__SubEPackageDecl__Group__3 ;
     public final void rule__SubEPackageDecl__Group__2() throws RecognitionException {
 
@@ -5236,11 +5421,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__2__Impl_in_rule__SubEPackageDecl__Group__23867);
             rule__SubEPackageDecl__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__3_in_rule__SubEPackageDecl__Group__23870);
             rule__SubEPackageDecl__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5257,10 +5444,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__2
+    // $ANTLR end "rule__SubEPackageDecl__Group__2"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__2__Impl
+    // $ANTLR start "rule__SubEPackageDecl__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1849:1: rule__SubEPackageDecl__Group__2__Impl : ( ( rule__SubEPackageDecl__NameAssignment_2 ) ) ;
     public final void rule__SubEPackageDecl__Group__2__Impl() throws RecognitionException {
 
@@ -5279,7 +5466,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__SubEPackageDecl__NameAssignment_2_in_rule__SubEPackageDecl__Group__2__Impl3897);
             rule__SubEPackageDecl__NameAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5303,10 +5491,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__2__Impl
+    // $ANTLR end "rule__SubEPackageDecl__Group__2__Impl"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__3
+    // $ANTLR start "rule__SubEPackageDecl__Group__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1866:1: rule__SubEPackageDecl__Group__3 : rule__SubEPackageDecl__Group__3__Impl rule__SubEPackageDecl__Group__4 ;
     public final void rule__SubEPackageDecl__Group__3() throws RecognitionException {
 
@@ -5318,11 +5506,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__3__Impl_in_rule__SubEPackageDecl__Group__33927);
             rule__SubEPackageDecl__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__4_in_rule__SubEPackageDecl__Group__33930);
             rule__SubEPackageDecl__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5339,10 +5529,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__3
+    // $ANTLR end "rule__SubEPackageDecl__Group__3"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__3__Impl
+    // $ANTLR start "rule__SubEPackageDecl__Group__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1878:1: rule__SubEPackageDecl__Group__3__Impl : ( '{' ) ;
     public final void rule__SubEPackageDecl__Group__3__Impl() throws RecognitionException {
 
@@ -5376,10 +5566,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__3__Impl
+    // $ANTLR end "rule__SubEPackageDecl__Group__3__Impl"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__4
+    // $ANTLR start "rule__SubEPackageDecl__Group__4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1897:1: rule__SubEPackageDecl__Group__4 : rule__SubEPackageDecl__Group__4__Impl rule__SubEPackageDecl__Group__5 ;
     public final void rule__SubEPackageDecl__Group__4() throws RecognitionException {
 
@@ -5391,11 +5581,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__4__Impl_in_rule__SubEPackageDecl__Group__43989);
             rule__SubEPackageDecl__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__5_in_rule__SubEPackageDecl__Group__43992);
             rule__SubEPackageDecl__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5412,10 +5604,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__4
+    // $ANTLR end "rule__SubEPackageDecl__Group__4"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__4__Impl
+    // $ANTLR start "rule__SubEPackageDecl__Group__4__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1909:1: rule__SubEPackageDecl__Group__4__Impl : ( ( rule__SubEPackageDecl__Alternatives_4 )* ) ;
     public final void rule__SubEPackageDecl__Group__4__Impl() throws RecognitionException {
 
@@ -5446,7 +5638,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__SubEPackageDecl__Alternatives_4_in_rule__SubEPackageDecl__Group__4__Impl4019);
             	    rule__SubEPackageDecl__Alternatives_4();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -5476,10 +5669,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__4__Impl
+    // $ANTLR end "rule__SubEPackageDecl__Group__4__Impl"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__5
+    // $ANTLR start "rule__SubEPackageDecl__Group__5"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1926:1: rule__SubEPackageDecl__Group__5 : rule__SubEPackageDecl__Group__5__Impl ;
     public final void rule__SubEPackageDecl__Group__5() throws RecognitionException {
 
@@ -5491,7 +5684,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__SubEPackageDecl__Group__5__Impl_in_rule__SubEPackageDecl__Group__54050);
             rule__SubEPackageDecl__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5508,10 +5702,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__5
+    // $ANTLR end "rule__SubEPackageDecl__Group__5"
 
 
-    // $ANTLR start rule__SubEPackageDecl__Group__5__Impl
+    // $ANTLR start "rule__SubEPackageDecl__Group__5__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1937:1: rule__SubEPackageDecl__Group__5__Impl : ( '}' ) ;
     public final void rule__SubEPackageDecl__Group__5__Impl() throws RecognitionException {
 
@@ -5545,10 +5739,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__Group__5__Impl
+    // $ANTLR end "rule__SubEPackageDecl__Group__5__Impl"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0__0
+    // $ANTLR start "rule__EDataTypeDecl__Group_0__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1968:1: rule__EDataTypeDecl__Group_0__0 : rule__EDataTypeDecl__Group_0__0__Impl rule__EDataTypeDecl__Group_0__1 ;
     public final void rule__EDataTypeDecl__Group_0__0() throws RecognitionException {
 
@@ -5560,11 +5754,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0__0__Impl_in_rule__EDataTypeDecl__Group_0__04121);
             rule__EDataTypeDecl__Group_0__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0__1_in_rule__EDataTypeDecl__Group_0__04124);
             rule__EDataTypeDecl__Group_0__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5581,10 +5777,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0__0
+    // $ANTLR end "rule__EDataTypeDecl__Group_0__0"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0__0__Impl
+    // $ANTLR start "rule__EDataTypeDecl__Group_0__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1980:1: rule__EDataTypeDecl__Group_0__0__Impl : ( ( rule__EDataTypeDecl__EAnnotationsAssignment_0_0 )* ) ;
     public final void rule__EDataTypeDecl__Group_0__0__Impl() throws RecognitionException {
 
@@ -5615,7 +5811,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EDataTypeDecl__EAnnotationsAssignment_0_0_in_rule__EDataTypeDecl__Group_0__0__Impl4151);
             	    rule__EDataTypeDecl__EAnnotationsAssignment_0_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -5645,10 +5842,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0__0__Impl
+    // $ANTLR end "rule__EDataTypeDecl__Group_0__0__Impl"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0__1
+    // $ANTLR start "rule__EDataTypeDecl__Group_0__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:1997:1: rule__EDataTypeDecl__Group_0__1 : rule__EDataTypeDecl__Group_0__1__Impl rule__EDataTypeDecl__Group_0__2 ;
     public final void rule__EDataTypeDecl__Group_0__1() throws RecognitionException {
 
@@ -5660,11 +5857,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0__1__Impl_in_rule__EDataTypeDecl__Group_0__14182);
             rule__EDataTypeDecl__Group_0__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0__2_in_rule__EDataTypeDecl__Group_0__14185);
             rule__EDataTypeDecl__Group_0__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5681,10 +5880,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0__1
+    // $ANTLR end "rule__EDataTypeDecl__Group_0__1"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0__1__Impl
+    // $ANTLR start "rule__EDataTypeDecl__Group_0__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2009:1: rule__EDataTypeDecl__Group_0__1__Impl : ( ( rule__EDataTypeDecl__SerializableAssignment_0_1 )? ) ;
     public final void rule__EDataTypeDecl__Group_0__1__Impl() throws RecognitionException {
 
@@ -5711,7 +5910,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EDataTypeDecl__SerializableAssignment_0_1_in_rule__EDataTypeDecl__Group_0__1__Impl4212);
                     rule__EDataTypeDecl__SerializableAssignment_0_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -5738,10 +5938,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0__1__Impl
+    // $ANTLR end "rule__EDataTypeDecl__Group_0__1__Impl"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0__2
+    // $ANTLR start "rule__EDataTypeDecl__Group_0__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2026:1: rule__EDataTypeDecl__Group_0__2 : rule__EDataTypeDecl__Group_0__2__Impl ;
     public final void rule__EDataTypeDecl__Group_0__2() throws RecognitionException {
 
@@ -5753,7 +5953,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0__2__Impl_in_rule__EDataTypeDecl__Group_0__24243);
             rule__EDataTypeDecl__Group_0__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5770,10 +5971,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0__2
+    // $ANTLR end "rule__EDataTypeDecl__Group_0__2"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0__2__Impl
+    // $ANTLR start "rule__EDataTypeDecl__Group_0__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2037:1: rule__EDataTypeDecl__Group_0__2__Impl : ( ( rule__EDataTypeDecl__Group_0_2__0 ) ) ;
     public final void rule__EDataTypeDecl__Group_0__2__Impl() throws RecognitionException {
 
@@ -5792,7 +5993,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__0_in_rule__EDataTypeDecl__Group_0__2__Impl4270);
             rule__EDataTypeDecl__Group_0_2__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5816,10 +6018,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0__2__Impl
+    // $ANTLR end "rule__EDataTypeDecl__Group_0__2__Impl"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0_2__0
+    // $ANTLR start "rule__EDataTypeDecl__Group_0_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2060:1: rule__EDataTypeDecl__Group_0_2__0 : rule__EDataTypeDecl__Group_0_2__0__Impl rule__EDataTypeDecl__Group_0_2__1 ;
     public final void rule__EDataTypeDecl__Group_0_2__0() throws RecognitionException {
 
@@ -5831,11 +6033,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__0__Impl_in_rule__EDataTypeDecl__Group_0_2__04306);
             rule__EDataTypeDecl__Group_0_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__1_in_rule__EDataTypeDecl__Group_0_2__04309);
             rule__EDataTypeDecl__Group_0_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5852,10 +6056,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0_2__0
+    // $ANTLR end "rule__EDataTypeDecl__Group_0_2__0"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0_2__0__Impl
+    // $ANTLR start "rule__EDataTypeDecl__Group_0_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2072:1: rule__EDataTypeDecl__Group_0_2__0__Impl : ( 'datatype' ) ;
     public final void rule__EDataTypeDecl__Group_0_2__0__Impl() throws RecognitionException {
 
@@ -5889,10 +6093,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0_2__0__Impl
+    // $ANTLR end "rule__EDataTypeDecl__Group_0_2__0__Impl"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0_2__1
+    // $ANTLR start "rule__EDataTypeDecl__Group_0_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2091:1: rule__EDataTypeDecl__Group_0_2__1 : rule__EDataTypeDecl__Group_0_2__1__Impl rule__EDataTypeDecl__Group_0_2__2 ;
     public final void rule__EDataTypeDecl__Group_0_2__1() throws RecognitionException {
 
@@ -5904,11 +6108,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__1__Impl_in_rule__EDataTypeDecl__Group_0_2__14368);
             rule__EDataTypeDecl__Group_0_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__2_in_rule__EDataTypeDecl__Group_0_2__14371);
             rule__EDataTypeDecl__Group_0_2__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5925,10 +6131,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0_2__1
+    // $ANTLR end "rule__EDataTypeDecl__Group_0_2__1"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0_2__1__Impl
+    // $ANTLR start "rule__EDataTypeDecl__Group_0_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2103:1: rule__EDataTypeDecl__Group_0_2__1__Impl : ( ( rule__EDataTypeDecl__NameAssignment_0_2_1 ) ) ;
     public final void rule__EDataTypeDecl__Group_0_2__1__Impl() throws RecognitionException {
 
@@ -5947,7 +6153,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__NameAssignment_0_2_1_in_rule__EDataTypeDecl__Group_0_2__1__Impl4398);
             rule__EDataTypeDecl__NameAssignment_0_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5971,10 +6178,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0_2__1__Impl
+    // $ANTLR end "rule__EDataTypeDecl__Group_0_2__1__Impl"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0_2__2
+    // $ANTLR start "rule__EDataTypeDecl__Group_0_2__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2120:1: rule__EDataTypeDecl__Group_0_2__2 : rule__EDataTypeDecl__Group_0_2__2__Impl rule__EDataTypeDecl__Group_0_2__3 ;
     public final void rule__EDataTypeDecl__Group_0_2__2() throws RecognitionException {
 
@@ -5986,11 +6193,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__2__Impl_in_rule__EDataTypeDecl__Group_0_2__24428);
             rule__EDataTypeDecl__Group_0_2__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__3_in_rule__EDataTypeDecl__Group_0_2__24431);
             rule__EDataTypeDecl__Group_0_2__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6007,10 +6216,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0_2__2
+    // $ANTLR end "rule__EDataTypeDecl__Group_0_2__2"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0_2__2__Impl
+    // $ANTLR start "rule__EDataTypeDecl__Group_0_2__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2132:1: rule__EDataTypeDecl__Group_0_2__2__Impl : ( ':' ) ;
     public final void rule__EDataTypeDecl__Group_0_2__2__Impl() throws RecognitionException {
 
@@ -6044,10 +6253,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0_2__2__Impl
+    // $ANTLR end "rule__EDataTypeDecl__Group_0_2__2__Impl"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0_2__3
+    // $ANTLR start "rule__EDataTypeDecl__Group_0_2__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2151:1: rule__EDataTypeDecl__Group_0_2__3 : rule__EDataTypeDecl__Group_0_2__3__Impl rule__EDataTypeDecl__Group_0_2__4 ;
     public final void rule__EDataTypeDecl__Group_0_2__3() throws RecognitionException {
 
@@ -6059,11 +6268,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__3__Impl_in_rule__EDataTypeDecl__Group_0_2__34490);
             rule__EDataTypeDecl__Group_0_2__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__4_in_rule__EDataTypeDecl__Group_0_2__34493);
             rule__EDataTypeDecl__Group_0_2__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6080,10 +6291,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0_2__3
+    // $ANTLR end "rule__EDataTypeDecl__Group_0_2__3"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0_2__3__Impl
+    // $ANTLR start "rule__EDataTypeDecl__Group_0_2__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2163:1: rule__EDataTypeDecl__Group_0_2__3__Impl : ( ( rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3 ) ) ;
     public final void rule__EDataTypeDecl__Group_0_2__3__Impl() throws RecognitionException {
 
@@ -6102,7 +6313,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3_in_rule__EDataTypeDecl__Group_0_2__3__Impl4520);
             rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6126,10 +6338,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0_2__3__Impl
+    // $ANTLR end "rule__EDataTypeDecl__Group_0_2__3__Impl"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0_2__4
+    // $ANTLR start "rule__EDataTypeDecl__Group_0_2__4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2180:1: rule__EDataTypeDecl__Group_0_2__4 : rule__EDataTypeDecl__Group_0_2__4__Impl ;
     public final void rule__EDataTypeDecl__Group_0_2__4() throws RecognitionException {
 
@@ -6141,7 +6353,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__4__Impl_in_rule__EDataTypeDecl__Group_0_2__44550);
             rule__EDataTypeDecl__Group_0_2__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6158,10 +6371,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0_2__4
+    // $ANTLR end "rule__EDataTypeDecl__Group_0_2__4"
 
 
-    // $ANTLR start rule__EDataTypeDecl__Group_0_2__4__Impl
+    // $ANTLR start "rule__EDataTypeDecl__Group_0_2__4__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2191:1: rule__EDataTypeDecl__Group_0_2__4__Impl : ( ';' ) ;
     public final void rule__EDataTypeDecl__Group_0_2__4__Impl() throws RecognitionException {
 
@@ -6195,10 +6408,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__Group_0_2__4__Impl
+    // $ANTLR end "rule__EDataTypeDecl__Group_0_2__4__Impl"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group__0
+    // $ANTLR start "rule__EAnnotationDecl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2220:1: rule__EAnnotationDecl__Group__0 : rule__EAnnotationDecl__Group__0__Impl rule__EAnnotationDecl__Group__1 ;
     public final void rule__EAnnotationDecl__Group__0() throws RecognitionException {
 
@@ -6210,11 +6423,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group__0__Impl_in_rule__EAnnotationDecl__Group__04619);
             rule__EAnnotationDecl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group__1_in_rule__EAnnotationDecl__Group__04622);
             rule__EAnnotationDecl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6231,10 +6446,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group__0
+    // $ANTLR end "rule__EAnnotationDecl__Group__0"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group__0__Impl
+    // $ANTLR start "rule__EAnnotationDecl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2232:1: rule__EAnnotationDecl__Group__0__Impl : ( '@' ) ;
     public final void rule__EAnnotationDecl__Group__0__Impl() throws RecognitionException {
 
@@ -6268,10 +6483,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group__0__Impl
+    // $ANTLR end "rule__EAnnotationDecl__Group__0__Impl"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group__1
+    // $ANTLR start "rule__EAnnotationDecl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2251:1: rule__EAnnotationDecl__Group__1 : rule__EAnnotationDecl__Group__1__Impl rule__EAnnotationDecl__Group__2 ;
     public final void rule__EAnnotationDecl__Group__1() throws RecognitionException {
 
@@ -6283,11 +6498,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group__1__Impl_in_rule__EAnnotationDecl__Group__14681);
             rule__EAnnotationDecl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group__2_in_rule__EAnnotationDecl__Group__14684);
             rule__EAnnotationDecl__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6304,10 +6521,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group__1
+    // $ANTLR end "rule__EAnnotationDecl__Group__1"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group__1__Impl
+    // $ANTLR start "rule__EAnnotationDecl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2263:1: rule__EAnnotationDecl__Group__1__Impl : ( ( rule__EAnnotationDecl__SourceAssignment_1 ) ) ;
     public final void rule__EAnnotationDecl__Group__1__Impl() throws RecognitionException {
 
@@ -6326,7 +6543,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__SourceAssignment_1_in_rule__EAnnotationDecl__Group__1__Impl4711);
             rule__EAnnotationDecl__SourceAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6350,10 +6568,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group__1__Impl
+    // $ANTLR end "rule__EAnnotationDecl__Group__1__Impl"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group__2
+    // $ANTLR start "rule__EAnnotationDecl__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2280:1: rule__EAnnotationDecl__Group__2 : rule__EAnnotationDecl__Group__2__Impl ;
     public final void rule__EAnnotationDecl__Group__2() throws RecognitionException {
 
@@ -6365,7 +6583,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group__2__Impl_in_rule__EAnnotationDecl__Group__24741);
             rule__EAnnotationDecl__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6382,10 +6601,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group__2
+    // $ANTLR end "rule__EAnnotationDecl__Group__2"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group__2__Impl
+    // $ANTLR start "rule__EAnnotationDecl__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2291:1: rule__EAnnotationDecl__Group__2__Impl : ( ( rule__EAnnotationDecl__Group_2__0 )? ) ;
     public final void rule__EAnnotationDecl__Group__2__Impl() throws RecognitionException {
 
@@ -6412,7 +6631,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__0_in_rule__EAnnotationDecl__Group__2__Impl4768);
                     rule__EAnnotationDecl__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -6439,10 +6659,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group__2__Impl
+    // $ANTLR end "rule__EAnnotationDecl__Group__2__Impl"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2__0
+    // $ANTLR start "rule__EAnnotationDecl__Group_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2314:1: rule__EAnnotationDecl__Group_2__0 : rule__EAnnotationDecl__Group_2__0__Impl rule__EAnnotationDecl__Group_2__1 ;
     public final void rule__EAnnotationDecl__Group_2__0() throws RecognitionException {
 
@@ -6454,11 +6674,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__0__Impl_in_rule__EAnnotationDecl__Group_2__04805);
             rule__EAnnotationDecl__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__1_in_rule__EAnnotationDecl__Group_2__04808);
             rule__EAnnotationDecl__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6475,10 +6697,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2__0
+    // $ANTLR end "rule__EAnnotationDecl__Group_2__0"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2__0__Impl
+    // $ANTLR start "rule__EAnnotationDecl__Group_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2326:1: rule__EAnnotationDecl__Group_2__0__Impl : ( '(' ) ;
     public final void rule__EAnnotationDecl__Group_2__0__Impl() throws RecognitionException {
 
@@ -6512,10 +6734,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2__0__Impl
+    // $ANTLR end "rule__EAnnotationDecl__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2__1
+    // $ANTLR start "rule__EAnnotationDecl__Group_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2345:1: rule__EAnnotationDecl__Group_2__1 : rule__EAnnotationDecl__Group_2__1__Impl rule__EAnnotationDecl__Group_2__2 ;
     public final void rule__EAnnotationDecl__Group_2__1() throws RecognitionException {
 
@@ -6527,11 +6749,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__1__Impl_in_rule__EAnnotationDecl__Group_2__14867);
             rule__EAnnotationDecl__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__2_in_rule__EAnnotationDecl__Group_2__14870);
             rule__EAnnotationDecl__Group_2__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6548,10 +6772,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2__1
+    // $ANTLR end "rule__EAnnotationDecl__Group_2__1"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2__1__Impl
+    // $ANTLR start "rule__EAnnotationDecl__Group_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2357:1: rule__EAnnotationDecl__Group_2__1__Impl : ( ( rule__EAnnotationDecl__DetailsAssignment_2_1 ) ) ;
     public final void rule__EAnnotationDecl__Group_2__1__Impl() throws RecognitionException {
 
@@ -6570,7 +6794,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_1_in_rule__EAnnotationDecl__Group_2__1__Impl4897);
             rule__EAnnotationDecl__DetailsAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6594,10 +6819,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2__1__Impl
+    // $ANTLR end "rule__EAnnotationDecl__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2__2
+    // $ANTLR start "rule__EAnnotationDecl__Group_2__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2374:1: rule__EAnnotationDecl__Group_2__2 : rule__EAnnotationDecl__Group_2__2__Impl rule__EAnnotationDecl__Group_2__3 ;
     public final void rule__EAnnotationDecl__Group_2__2() throws RecognitionException {
 
@@ -6609,11 +6834,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__2__Impl_in_rule__EAnnotationDecl__Group_2__24927);
             rule__EAnnotationDecl__Group_2__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__3_in_rule__EAnnotationDecl__Group_2__24930);
             rule__EAnnotationDecl__Group_2__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6630,10 +6857,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2__2
+    // $ANTLR end "rule__EAnnotationDecl__Group_2__2"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2__2__Impl
+    // $ANTLR start "rule__EAnnotationDecl__Group_2__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2386:1: rule__EAnnotationDecl__Group_2__2__Impl : ( ( rule__EAnnotationDecl__Group_2_2__0 )* ) ;
     public final void rule__EAnnotationDecl__Group_2__2__Impl() throws RecognitionException {
 
@@ -6664,7 +6891,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2_2__0_in_rule__EAnnotationDecl__Group_2__2__Impl4957);
             	    rule__EAnnotationDecl__Group_2_2__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -6694,10 +6922,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2__2__Impl
+    // $ANTLR end "rule__EAnnotationDecl__Group_2__2__Impl"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2__3
+    // $ANTLR start "rule__EAnnotationDecl__Group_2__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2403:1: rule__EAnnotationDecl__Group_2__3 : rule__EAnnotationDecl__Group_2__3__Impl ;
     public final void rule__EAnnotationDecl__Group_2__3() throws RecognitionException {
 
@@ -6709,7 +6937,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__3__Impl_in_rule__EAnnotationDecl__Group_2__34988);
             rule__EAnnotationDecl__Group_2__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6726,10 +6955,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2__3
+    // $ANTLR end "rule__EAnnotationDecl__Group_2__3"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2__3__Impl
+    // $ANTLR start "rule__EAnnotationDecl__Group_2__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2414:1: rule__EAnnotationDecl__Group_2__3__Impl : ( ')' ) ;
     public final void rule__EAnnotationDecl__Group_2__3__Impl() throws RecognitionException {
 
@@ -6763,10 +6992,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2__3__Impl
+    // $ANTLR end "rule__EAnnotationDecl__Group_2__3__Impl"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2_2__0
+    // $ANTLR start "rule__EAnnotationDecl__Group_2_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2441:1: rule__EAnnotationDecl__Group_2_2__0 : rule__EAnnotationDecl__Group_2_2__0__Impl rule__EAnnotationDecl__Group_2_2__1 ;
     public final void rule__EAnnotationDecl__Group_2_2__0() throws RecognitionException {
 
@@ -6778,11 +7007,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2_2__0__Impl_in_rule__EAnnotationDecl__Group_2_2__05055);
             rule__EAnnotationDecl__Group_2_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2_2__1_in_rule__EAnnotationDecl__Group_2_2__05058);
             rule__EAnnotationDecl__Group_2_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6799,10 +7030,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2_2__0
+    // $ANTLR end "rule__EAnnotationDecl__Group_2_2__0"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2_2__0__Impl
+    // $ANTLR start "rule__EAnnotationDecl__Group_2_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2453:1: rule__EAnnotationDecl__Group_2_2__0__Impl : ( ',' ) ;
     public final void rule__EAnnotationDecl__Group_2_2__0__Impl() throws RecognitionException {
 
@@ -6836,10 +7067,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2_2__0__Impl
+    // $ANTLR end "rule__EAnnotationDecl__Group_2_2__0__Impl"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2_2__1
+    // $ANTLR start "rule__EAnnotationDecl__Group_2_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2472:1: rule__EAnnotationDecl__Group_2_2__1 : rule__EAnnotationDecl__Group_2_2__1__Impl ;
     public final void rule__EAnnotationDecl__Group_2_2__1() throws RecognitionException {
 
@@ -6851,7 +7082,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2_2__1__Impl_in_rule__EAnnotationDecl__Group_2_2__15117);
             rule__EAnnotationDecl__Group_2_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6868,10 +7100,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2_2__1
+    // $ANTLR end "rule__EAnnotationDecl__Group_2_2__1"
 
 
-    // $ANTLR start rule__EAnnotationDecl__Group_2_2__1__Impl
+    // $ANTLR start "rule__EAnnotationDecl__Group_2_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2483:1: rule__EAnnotationDecl__Group_2_2__1__Impl : ( ( rule__EAnnotationDecl__DetailsAssignment_2_2_1 ) ) ;
     public final void rule__EAnnotationDecl__Group_2_2__1__Impl() throws RecognitionException {
 
@@ -6890,7 +7122,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_2_1_in_rule__EAnnotationDecl__Group_2_2__1__Impl5144);
             rule__EAnnotationDecl__DetailsAssignment_2_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6914,10 +7147,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__Group_2_2__1__Impl
+    // $ANTLR end "rule__EAnnotationDecl__Group_2_2__1__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group__0
+    // $ANTLR start "rule__EClassDecl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2504:1: rule__EClassDecl__Group__0 : rule__EClassDecl__Group__0__Impl rule__EClassDecl__Group__1 ;
     public final void rule__EClassDecl__Group__0() throws RecognitionException {
 
@@ -6929,11 +7162,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group__0__Impl_in_rule__EClassDecl__Group__05178);
             rule__EClassDecl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group__1_in_rule__EClassDecl__Group__05181);
             rule__EClassDecl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6950,10 +7185,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__0
+    // $ANTLR end "rule__EClassDecl__Group__0"
 
 
-    // $ANTLR start rule__EClassDecl__Group__0__Impl
+    // $ANTLR start "rule__EClassDecl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2516:1: rule__EClassDecl__Group__0__Impl : ( ( rule__EClassDecl__EAnnotationsAssignment_0 )* ) ;
     public final void rule__EClassDecl__Group__0__Impl() throws RecognitionException {
 
@@ -6984,7 +7219,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EClassDecl__EAnnotationsAssignment_0_in_rule__EClassDecl__Group__0__Impl5208);
             	    rule__EClassDecl__EAnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -7014,10 +7250,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__0__Impl
+    // $ANTLR end "rule__EClassDecl__Group__0__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group__1
+    // $ANTLR start "rule__EClassDecl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2533:1: rule__EClassDecl__Group__1 : rule__EClassDecl__Group__1__Impl rule__EClassDecl__Group__2 ;
     public final void rule__EClassDecl__Group__1() throws RecognitionException {
 
@@ -7029,11 +7265,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group__1__Impl_in_rule__EClassDecl__Group__15239);
             rule__EClassDecl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group__2_in_rule__EClassDecl__Group__15242);
             rule__EClassDecl__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7050,10 +7288,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__1
+    // $ANTLR end "rule__EClassDecl__Group__1"
 
 
-    // $ANTLR start rule__EClassDecl__Group__1__Impl
+    // $ANTLR start "rule__EClassDecl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2545:1: rule__EClassDecl__Group__1__Impl : ( ( rule__EClassDecl__AbstractAssignment_1 )? ) ;
     public final void rule__EClassDecl__Group__1__Impl() throws RecognitionException {
 
@@ -7080,7 +7318,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EClassDecl__AbstractAssignment_1_in_rule__EClassDecl__Group__1__Impl5269);
                     rule__EClassDecl__AbstractAssignment_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -7107,10 +7346,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__1__Impl
+    // $ANTLR end "rule__EClassDecl__Group__1__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group__2
+    // $ANTLR start "rule__EClassDecl__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2562:1: rule__EClassDecl__Group__2 : rule__EClassDecl__Group__2__Impl rule__EClassDecl__Group__3 ;
     public final void rule__EClassDecl__Group__2() throws RecognitionException {
 
@@ -7122,11 +7361,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group__2__Impl_in_rule__EClassDecl__Group__25300);
             rule__EClassDecl__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group__3_in_rule__EClassDecl__Group__25303);
             rule__EClassDecl__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7143,10 +7384,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__2
+    // $ANTLR end "rule__EClassDecl__Group__2"
 
 
-    // $ANTLR start rule__EClassDecl__Group__2__Impl
+    // $ANTLR start "rule__EClassDecl__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2574:1: rule__EClassDecl__Group__2__Impl : ( ( rule__EClassDecl__Alternatives_2 ) ) ;
     public final void rule__EClassDecl__Group__2__Impl() throws RecognitionException {
 
@@ -7165,7 +7406,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Alternatives_2_in_rule__EClassDecl__Group__2__Impl5330);
             rule__EClassDecl__Alternatives_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7189,10 +7431,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__2__Impl
+    // $ANTLR end "rule__EClassDecl__Group__2__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group__3
+    // $ANTLR start "rule__EClassDecl__Group__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2591:1: rule__EClassDecl__Group__3 : rule__EClassDecl__Group__3__Impl rule__EClassDecl__Group__4 ;
     public final void rule__EClassDecl__Group__3() throws RecognitionException {
 
@@ -7204,11 +7446,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group__3__Impl_in_rule__EClassDecl__Group__35360);
             rule__EClassDecl__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group__4_in_rule__EClassDecl__Group__35363);
             rule__EClassDecl__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7225,10 +7469,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__3
+    // $ANTLR end "rule__EClassDecl__Group__3"
 
 
-    // $ANTLR start rule__EClassDecl__Group__3__Impl
+    // $ANTLR start "rule__EClassDecl__Group__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2603:1: rule__EClassDecl__Group__3__Impl : ( ( rule__EClassDecl__NameAssignment_3 ) ) ;
     public final void rule__EClassDecl__Group__3__Impl() throws RecognitionException {
 
@@ -7247,7 +7491,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__NameAssignment_3_in_rule__EClassDecl__Group__3__Impl5390);
             rule__EClassDecl__NameAssignment_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7271,10 +7516,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__3__Impl
+    // $ANTLR end "rule__EClassDecl__Group__3__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group__4
+    // $ANTLR start "rule__EClassDecl__Group__4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2620:1: rule__EClassDecl__Group__4 : rule__EClassDecl__Group__4__Impl rule__EClassDecl__Group__5 ;
     public final void rule__EClassDecl__Group__4() throws RecognitionException {
 
@@ -7286,11 +7531,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group__4__Impl_in_rule__EClassDecl__Group__45420);
             rule__EClassDecl__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group__5_in_rule__EClassDecl__Group__45423);
             rule__EClassDecl__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7307,10 +7554,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__4
+    // $ANTLR end "rule__EClassDecl__Group__4"
 
 
-    // $ANTLR start rule__EClassDecl__Group__4__Impl
+    // $ANTLR start "rule__EClassDecl__Group__4__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2632:1: rule__EClassDecl__Group__4__Impl : ( ( rule__EClassDecl__Group_4__0 )? ) ;
     public final void rule__EClassDecl__Group__4__Impl() throws RecognitionException {
 
@@ -7337,7 +7584,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EClassDecl__Group_4__0_in_rule__EClassDecl__Group__4__Impl5450);
                     rule__EClassDecl__Group_4__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -7364,10 +7612,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__4__Impl
+    // $ANTLR end "rule__EClassDecl__Group__4__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group__5
+    // $ANTLR start "rule__EClassDecl__Group__5"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2649:1: rule__EClassDecl__Group__5 : rule__EClassDecl__Group__5__Impl rule__EClassDecl__Group__6 ;
     public final void rule__EClassDecl__Group__5() throws RecognitionException {
 
@@ -7379,11 +7627,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group__5__Impl_in_rule__EClassDecl__Group__55481);
             rule__EClassDecl__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group__6_in_rule__EClassDecl__Group__55484);
             rule__EClassDecl__Group__6();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7400,10 +7650,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__5
+    // $ANTLR end "rule__EClassDecl__Group__5"
 
 
-    // $ANTLR start rule__EClassDecl__Group__5__Impl
+    // $ANTLR start "rule__EClassDecl__Group__5__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2661:1: rule__EClassDecl__Group__5__Impl : ( ( rule__EClassDecl__Group_5__0 )? ) ;
     public final void rule__EClassDecl__Group__5__Impl() throws RecognitionException {
 
@@ -7430,7 +7680,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EClassDecl__Group_5__0_in_rule__EClassDecl__Group__5__Impl5511);
                     rule__EClassDecl__Group_5__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -7457,10 +7708,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__5__Impl
+    // $ANTLR end "rule__EClassDecl__Group__5__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group__6
+    // $ANTLR start "rule__EClassDecl__Group__6"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2678:1: rule__EClassDecl__Group__6 : rule__EClassDecl__Group__6__Impl rule__EClassDecl__Group__7 ;
     public final void rule__EClassDecl__Group__6() throws RecognitionException {
 
@@ -7472,11 +7723,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group__6__Impl_in_rule__EClassDecl__Group__65542);
             rule__EClassDecl__Group__6__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group__7_in_rule__EClassDecl__Group__65545);
             rule__EClassDecl__Group__7();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7493,10 +7746,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__6
+    // $ANTLR end "rule__EClassDecl__Group__6"
 
 
-    // $ANTLR start rule__EClassDecl__Group__6__Impl
+    // $ANTLR start "rule__EClassDecl__Group__6__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2690:1: rule__EClassDecl__Group__6__Impl : ( ( rule__EClassDecl__Group_6__0 )? ) ;
     public final void rule__EClassDecl__Group__6__Impl() throws RecognitionException {
 
@@ -7523,7 +7776,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EClassDecl__Group_6__0_in_rule__EClassDecl__Group__6__Impl5572);
                     rule__EClassDecl__Group_6__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -7550,10 +7804,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__6__Impl
+    // $ANTLR end "rule__EClassDecl__Group__6__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group__7
+    // $ANTLR start "rule__EClassDecl__Group__7"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2707:1: rule__EClassDecl__Group__7 : rule__EClassDecl__Group__7__Impl rule__EClassDecl__Group__8 ;
     public final void rule__EClassDecl__Group__7() throws RecognitionException {
 
@@ -7565,11 +7819,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group__7__Impl_in_rule__EClassDecl__Group__75603);
             rule__EClassDecl__Group__7__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group__8_in_rule__EClassDecl__Group__75606);
             rule__EClassDecl__Group__8();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7586,10 +7842,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__7
+    // $ANTLR end "rule__EClassDecl__Group__7"
 
 
-    // $ANTLR start rule__EClassDecl__Group__7__Impl
+    // $ANTLR start "rule__EClassDecl__Group__7__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2719:1: rule__EClassDecl__Group__7__Impl : ( '{' ) ;
     public final void rule__EClassDecl__Group__7__Impl() throws RecognitionException {
 
@@ -7623,10 +7879,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__7__Impl
+    // $ANTLR end "rule__EClassDecl__Group__7__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group__8
+    // $ANTLR start "rule__EClassDecl__Group__8"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2738:1: rule__EClassDecl__Group__8 : rule__EClassDecl__Group__8__Impl rule__EClassDecl__Group__9 ;
     public final void rule__EClassDecl__Group__8() throws RecognitionException {
 
@@ -7638,11 +7894,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group__8__Impl_in_rule__EClassDecl__Group__85665);
             rule__EClassDecl__Group__8__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group__9_in_rule__EClassDecl__Group__85668);
             rule__EClassDecl__Group__9();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7659,10 +7917,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__8
+    // $ANTLR end "rule__EClassDecl__Group__8"
 
 
-    // $ANTLR start rule__EClassDecl__Group__8__Impl
+    // $ANTLR start "rule__EClassDecl__Group__8__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2750:1: rule__EClassDecl__Group__8__Impl : ( ( rule__EClassDecl__Alternatives_8 )* ) ;
     public final void rule__EClassDecl__Group__8__Impl() throws RecognitionException {
 
@@ -7693,7 +7951,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EClassDecl__Alternatives_8_in_rule__EClassDecl__Group__8__Impl5695);
             	    rule__EClassDecl__Alternatives_8();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -7723,10 +7982,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__8__Impl
+    // $ANTLR end "rule__EClassDecl__Group__8__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group__9
+    // $ANTLR start "rule__EClassDecl__Group__9"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2767:1: rule__EClassDecl__Group__9 : rule__EClassDecl__Group__9__Impl ;
     public final void rule__EClassDecl__Group__9() throws RecognitionException {
 
@@ -7738,7 +7997,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group__9__Impl_in_rule__EClassDecl__Group__95726);
             rule__EClassDecl__Group__9__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7755,10 +8015,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__9
+    // $ANTLR end "rule__EClassDecl__Group__9"
 
 
-    // $ANTLR start rule__EClassDecl__Group__9__Impl
+    // $ANTLR start "rule__EClassDecl__Group__9__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2778:1: rule__EClassDecl__Group__9__Impl : ( '}' ) ;
     public final void rule__EClassDecl__Group__9__Impl() throws RecognitionException {
 
@@ -7792,10 +8052,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group__9__Impl
+    // $ANTLR end "rule__EClassDecl__Group__9__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4__0
+    // $ANTLR start "rule__EClassDecl__Group_4__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2817:1: rule__EClassDecl__Group_4__0 : rule__EClassDecl__Group_4__0__Impl rule__EClassDecl__Group_4__1 ;
     public final void rule__EClassDecl__Group_4__0() throws RecognitionException {
 
@@ -7807,11 +8067,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_4__0__Impl_in_rule__EClassDecl__Group_4__05805);
             rule__EClassDecl__Group_4__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group_4__1_in_rule__EClassDecl__Group_4__05808);
             rule__EClassDecl__Group_4__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7828,10 +8090,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4__0
+    // $ANTLR end "rule__EClassDecl__Group_4__0"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4__0__Impl
+    // $ANTLR start "rule__EClassDecl__Group_4__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2829:1: rule__EClassDecl__Group_4__0__Impl : ( '<' ) ;
     public final void rule__EClassDecl__Group_4__0__Impl() throws RecognitionException {
 
@@ -7865,10 +8127,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4__0__Impl
+    // $ANTLR end "rule__EClassDecl__Group_4__0__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4__1
+    // $ANTLR start "rule__EClassDecl__Group_4__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2848:1: rule__EClassDecl__Group_4__1 : rule__EClassDecl__Group_4__1__Impl rule__EClassDecl__Group_4__2 ;
     public final void rule__EClassDecl__Group_4__1() throws RecognitionException {
 
@@ -7880,11 +8142,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_4__1__Impl_in_rule__EClassDecl__Group_4__15867);
             rule__EClassDecl__Group_4__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group_4__2_in_rule__EClassDecl__Group_4__15870);
             rule__EClassDecl__Group_4__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7901,10 +8165,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4__1
+    // $ANTLR end "rule__EClassDecl__Group_4__1"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4__1__Impl
+    // $ANTLR start "rule__EClassDecl__Group_4__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2860:1: rule__EClassDecl__Group_4__1__Impl : ( ( rule__EClassDecl__ETypeParametersAssignment_4_1 ) ) ;
     public final void rule__EClassDecl__Group_4__1__Impl() throws RecognitionException {
 
@@ -7923,7 +8187,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__ETypeParametersAssignment_4_1_in_rule__EClassDecl__Group_4__1__Impl5897);
             rule__EClassDecl__ETypeParametersAssignment_4_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7947,10 +8212,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4__1__Impl
+    // $ANTLR end "rule__EClassDecl__Group_4__1__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4__2
+    // $ANTLR start "rule__EClassDecl__Group_4__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2877:1: rule__EClassDecl__Group_4__2 : rule__EClassDecl__Group_4__2__Impl rule__EClassDecl__Group_4__3 ;
     public final void rule__EClassDecl__Group_4__2() throws RecognitionException {
 
@@ -7962,11 +8227,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_4__2__Impl_in_rule__EClassDecl__Group_4__25927);
             rule__EClassDecl__Group_4__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group_4__3_in_rule__EClassDecl__Group_4__25930);
             rule__EClassDecl__Group_4__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7983,10 +8250,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4__2
+    // $ANTLR end "rule__EClassDecl__Group_4__2"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4__2__Impl
+    // $ANTLR start "rule__EClassDecl__Group_4__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2889:1: rule__EClassDecl__Group_4__2__Impl : ( ( rule__EClassDecl__Group_4_2__0 )* ) ;
     public final void rule__EClassDecl__Group_4__2__Impl() throws RecognitionException {
 
@@ -8017,7 +8284,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EClassDecl__Group_4_2__0_in_rule__EClassDecl__Group_4__2__Impl5957);
             	    rule__EClassDecl__Group_4_2__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -8047,10 +8315,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4__2__Impl
+    // $ANTLR end "rule__EClassDecl__Group_4__2__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4__3
+    // $ANTLR start "rule__EClassDecl__Group_4__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2906:1: rule__EClassDecl__Group_4__3 : rule__EClassDecl__Group_4__3__Impl ;
     public final void rule__EClassDecl__Group_4__3() throws RecognitionException {
 
@@ -8062,7 +8330,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_4__3__Impl_in_rule__EClassDecl__Group_4__35988);
             rule__EClassDecl__Group_4__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8079,10 +8348,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4__3
+    // $ANTLR end "rule__EClassDecl__Group_4__3"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4__3__Impl
+    // $ANTLR start "rule__EClassDecl__Group_4__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2917:1: rule__EClassDecl__Group_4__3__Impl : ( '>' ) ;
     public final void rule__EClassDecl__Group_4__3__Impl() throws RecognitionException {
 
@@ -8116,10 +8385,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4__3__Impl
+    // $ANTLR end "rule__EClassDecl__Group_4__3__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4_2__0
+    // $ANTLR start "rule__EClassDecl__Group_4_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2944:1: rule__EClassDecl__Group_4_2__0 : rule__EClassDecl__Group_4_2__0__Impl rule__EClassDecl__Group_4_2__1 ;
     public final void rule__EClassDecl__Group_4_2__0() throws RecognitionException {
 
@@ -8131,11 +8400,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_4_2__0__Impl_in_rule__EClassDecl__Group_4_2__06055);
             rule__EClassDecl__Group_4_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group_4_2__1_in_rule__EClassDecl__Group_4_2__06058);
             rule__EClassDecl__Group_4_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8152,10 +8423,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4_2__0
+    // $ANTLR end "rule__EClassDecl__Group_4_2__0"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4_2__0__Impl
+    // $ANTLR start "rule__EClassDecl__Group_4_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2956:1: rule__EClassDecl__Group_4_2__0__Impl : ( ',' ) ;
     public final void rule__EClassDecl__Group_4_2__0__Impl() throws RecognitionException {
 
@@ -8189,10 +8460,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4_2__0__Impl
+    // $ANTLR end "rule__EClassDecl__Group_4_2__0__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4_2__1
+    // $ANTLR start "rule__EClassDecl__Group_4_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2975:1: rule__EClassDecl__Group_4_2__1 : rule__EClassDecl__Group_4_2__1__Impl ;
     public final void rule__EClassDecl__Group_4_2__1() throws RecognitionException {
 
@@ -8204,7 +8475,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_4_2__1__Impl_in_rule__EClassDecl__Group_4_2__16117);
             rule__EClassDecl__Group_4_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8221,10 +8493,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4_2__1
+    // $ANTLR end "rule__EClassDecl__Group_4_2__1"
 
 
-    // $ANTLR start rule__EClassDecl__Group_4_2__1__Impl
+    // $ANTLR start "rule__EClassDecl__Group_4_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:2986:1: rule__EClassDecl__Group_4_2__1__Impl : ( ( rule__EClassDecl__ETypeParametersAssignment_4_2_1 ) ) ;
     public final void rule__EClassDecl__Group_4_2__1__Impl() throws RecognitionException {
 
@@ -8243,7 +8515,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__ETypeParametersAssignment_4_2_1_in_rule__EClassDecl__Group_4_2__1__Impl6144);
             rule__EClassDecl__ETypeParametersAssignment_4_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8267,10 +8540,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_4_2__1__Impl
+    // $ANTLR end "rule__EClassDecl__Group_4_2__1__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_5__0
+    // $ANTLR start "rule__EClassDecl__Group_5__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3007:1: rule__EClassDecl__Group_5__0 : rule__EClassDecl__Group_5__0__Impl rule__EClassDecl__Group_5__1 ;
     public final void rule__EClassDecl__Group_5__0() throws RecognitionException {
 
@@ -8282,11 +8555,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_5__0__Impl_in_rule__EClassDecl__Group_5__06178);
             rule__EClassDecl__Group_5__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group_5__1_in_rule__EClassDecl__Group_5__06181);
             rule__EClassDecl__Group_5__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8303,10 +8578,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_5__0
+    // $ANTLR end "rule__EClassDecl__Group_5__0"
 
 
-    // $ANTLR start rule__EClassDecl__Group_5__0__Impl
+    // $ANTLR start "rule__EClassDecl__Group_5__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3019:1: rule__EClassDecl__Group_5__0__Impl : ( 'extends' ) ;
     public final void rule__EClassDecl__Group_5__0__Impl() throws RecognitionException {
 
@@ -8340,10 +8615,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_5__0__Impl
+    // $ANTLR end "rule__EClassDecl__Group_5__0__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_5__1
+    // $ANTLR start "rule__EClassDecl__Group_5__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3038:1: rule__EClassDecl__Group_5__1 : rule__EClassDecl__Group_5__1__Impl rule__EClassDecl__Group_5__2 ;
     public final void rule__EClassDecl__Group_5__1() throws RecognitionException {
 
@@ -8355,11 +8630,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_5__1__Impl_in_rule__EClassDecl__Group_5__16240);
             rule__EClassDecl__Group_5__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group_5__2_in_rule__EClassDecl__Group_5__16243);
             rule__EClassDecl__Group_5__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8376,10 +8653,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_5__1
+    // $ANTLR end "rule__EClassDecl__Group_5__1"
 
 
-    // $ANTLR start rule__EClassDecl__Group_5__1__Impl
+    // $ANTLR start "rule__EClassDecl__Group_5__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3050:1: rule__EClassDecl__Group_5__1__Impl : ( ( rule__EClassDecl__EGenericSuperTypesAssignment_5_1 ) ) ;
     public final void rule__EClassDecl__Group_5__1__Impl() throws RecognitionException {
 
@@ -8398,7 +8675,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__EGenericSuperTypesAssignment_5_1_in_rule__EClassDecl__Group_5__1__Impl6270);
             rule__EClassDecl__EGenericSuperTypesAssignment_5_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8422,10 +8700,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_5__1__Impl
+    // $ANTLR end "rule__EClassDecl__Group_5__1__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_5__2
+    // $ANTLR start "rule__EClassDecl__Group_5__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3067:1: rule__EClassDecl__Group_5__2 : rule__EClassDecl__Group_5__2__Impl ;
     public final void rule__EClassDecl__Group_5__2() throws RecognitionException {
 
@@ -8437,7 +8715,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_5__2__Impl_in_rule__EClassDecl__Group_5__26300);
             rule__EClassDecl__Group_5__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8454,10 +8733,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_5__2
+    // $ANTLR end "rule__EClassDecl__Group_5__2"
 
 
-    // $ANTLR start rule__EClassDecl__Group_5__2__Impl
+    // $ANTLR start "rule__EClassDecl__Group_5__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3078:1: rule__EClassDecl__Group_5__2__Impl : ( ( rule__EClassDecl__Group_5_2__0 )* ) ;
     public final void rule__EClassDecl__Group_5__2__Impl() throws RecognitionException {
 
@@ -8488,7 +8767,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EClassDecl__Group_5_2__0_in_rule__EClassDecl__Group_5__2__Impl6327);
             	    rule__EClassDecl__Group_5_2__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -8518,10 +8798,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_5__2__Impl
+    // $ANTLR end "rule__EClassDecl__Group_5__2__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_5_2__0
+    // $ANTLR start "rule__EClassDecl__Group_5_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3101:1: rule__EClassDecl__Group_5_2__0 : rule__EClassDecl__Group_5_2__0__Impl rule__EClassDecl__Group_5_2__1 ;
     public final void rule__EClassDecl__Group_5_2__0() throws RecognitionException {
 
@@ -8533,11 +8813,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_5_2__0__Impl_in_rule__EClassDecl__Group_5_2__06364);
             rule__EClassDecl__Group_5_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group_5_2__1_in_rule__EClassDecl__Group_5_2__06367);
             rule__EClassDecl__Group_5_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8554,10 +8836,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_5_2__0
+    // $ANTLR end "rule__EClassDecl__Group_5_2__0"
 
 
-    // $ANTLR start rule__EClassDecl__Group_5_2__0__Impl
+    // $ANTLR start "rule__EClassDecl__Group_5_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3113:1: rule__EClassDecl__Group_5_2__0__Impl : ( ',' ) ;
     public final void rule__EClassDecl__Group_5_2__0__Impl() throws RecognitionException {
 
@@ -8591,10 +8873,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_5_2__0__Impl
+    // $ANTLR end "rule__EClassDecl__Group_5_2__0__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_5_2__1
+    // $ANTLR start "rule__EClassDecl__Group_5_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3132:1: rule__EClassDecl__Group_5_2__1 : rule__EClassDecl__Group_5_2__1__Impl ;
     public final void rule__EClassDecl__Group_5_2__1() throws RecognitionException {
 
@@ -8606,7 +8888,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_5_2__1__Impl_in_rule__EClassDecl__Group_5_2__16426);
             rule__EClassDecl__Group_5_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8623,10 +8906,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_5_2__1
+    // $ANTLR end "rule__EClassDecl__Group_5_2__1"
 
 
-    // $ANTLR start rule__EClassDecl__Group_5_2__1__Impl
+    // $ANTLR start "rule__EClassDecl__Group_5_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3143:1: rule__EClassDecl__Group_5_2__1__Impl : ( ( rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1 ) ) ;
     public final void rule__EClassDecl__Group_5_2__1__Impl() throws RecognitionException {
 
@@ -8645,7 +8928,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1_in_rule__EClassDecl__Group_5_2__1__Impl6453);
             rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8669,10 +8953,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_5_2__1__Impl
+    // $ANTLR end "rule__EClassDecl__Group_5_2__1__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_6__0
+    // $ANTLR start "rule__EClassDecl__Group_6__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3164:1: rule__EClassDecl__Group_6__0 : rule__EClassDecl__Group_6__0__Impl rule__EClassDecl__Group_6__1 ;
     public final void rule__EClassDecl__Group_6__0() throws RecognitionException {
 
@@ -8684,11 +8968,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_6__0__Impl_in_rule__EClassDecl__Group_6__06487);
             rule__EClassDecl__Group_6__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EClassDecl__Group_6__1_in_rule__EClassDecl__Group_6__06490);
             rule__EClassDecl__Group_6__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8705,10 +8991,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_6__0
+    // $ANTLR end "rule__EClassDecl__Group_6__0"
 
 
-    // $ANTLR start rule__EClassDecl__Group_6__0__Impl
+    // $ANTLR start "rule__EClassDecl__Group_6__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3176:1: rule__EClassDecl__Group_6__0__Impl : ( ':' ) ;
     public final void rule__EClassDecl__Group_6__0__Impl() throws RecognitionException {
 
@@ -8742,10 +9028,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_6__0__Impl
+    // $ANTLR end "rule__EClassDecl__Group_6__0__Impl"
 
 
-    // $ANTLR start rule__EClassDecl__Group_6__1
+    // $ANTLR start "rule__EClassDecl__Group_6__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3195:1: rule__EClassDecl__Group_6__1 : rule__EClassDecl__Group_6__1__Impl ;
     public final void rule__EClassDecl__Group_6__1() throws RecognitionException {
 
@@ -8757,7 +9043,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__Group_6__1__Impl_in_rule__EClassDecl__Group_6__16549);
             rule__EClassDecl__Group_6__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8774,10 +9061,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_6__1
+    // $ANTLR end "rule__EClassDecl__Group_6__1"
 
 
-    // $ANTLR start rule__EClassDecl__Group_6__1__Impl
+    // $ANTLR start "rule__EClassDecl__Group_6__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3206:1: rule__EClassDecl__Group_6__1__Impl : ( ( rule__EClassDecl__InstanceClassNameAssignment_6_1 ) ) ;
     public final void rule__EClassDecl__Group_6__1__Impl() throws RecognitionException {
 
@@ -8796,7 +9083,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EClassDecl__InstanceClassNameAssignment_6_1_in_rule__EClassDecl__Group_6__1__Impl6576);
             rule__EClassDecl__InstanceClassNameAssignment_6_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8820,10 +9108,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__Group_6__1__Impl
+    // $ANTLR end "rule__EClassDecl__Group_6__1__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__0
+    // $ANTLR start "rule__EAttributeDecl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3227:1: rule__EAttributeDecl__Group__0 : rule__EAttributeDecl__Group__0__Impl rule__EAttributeDecl__Group__1 ;
     public final void rule__EAttributeDecl__Group__0() throws RecognitionException {
 
@@ -8835,11 +9123,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__0__Impl_in_rule__EAttributeDecl__Group__06610);
             rule__EAttributeDecl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__1_in_rule__EAttributeDecl__Group__06613);
             rule__EAttributeDecl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8856,10 +9146,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__0
+    // $ANTLR end "rule__EAttributeDecl__Group__0"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__0__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3239:1: rule__EAttributeDecl__Group__0__Impl : ( ( rule__EAttributeDecl__EAnnotationsAssignment_0 )* ) ;
     public final void rule__EAttributeDecl__Group__0__Impl() throws RecognitionException {
 
@@ -8890,7 +9180,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EAttributeDecl__EAnnotationsAssignment_0_in_rule__EAttributeDecl__Group__0__Impl6640);
             	    rule__EAttributeDecl__EAnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -8920,10 +9211,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__0__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group__0__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__1
+    // $ANTLR start "rule__EAttributeDecl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3256:1: rule__EAttributeDecl__Group__1 : rule__EAttributeDecl__Group__1__Impl rule__EAttributeDecl__Group__2 ;
     public final void rule__EAttributeDecl__Group__1() throws RecognitionException {
 
@@ -8935,11 +9226,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__1__Impl_in_rule__EAttributeDecl__Group__16671);
             rule__EAttributeDecl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__2_in_rule__EAttributeDecl__Group__16674);
             rule__EAttributeDecl__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8956,10 +9249,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__1
+    // $ANTLR end "rule__EAttributeDecl__Group__1"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__1__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3268:1: rule__EAttributeDecl__Group__1__Impl : ( ( rule__EAttributeDecl__Alternatives_1 )* ) ;
     public final void rule__EAttributeDecl__Group__1__Impl() throws RecognitionException {
 
@@ -8990,7 +9283,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EAttributeDecl__Alternatives_1_in_rule__EAttributeDecl__Group__1__Impl6701);
             	    rule__EAttributeDecl__Alternatives_1();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -9020,10 +9314,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__1__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group__1__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__2
+    // $ANTLR start "rule__EAttributeDecl__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3285:1: rule__EAttributeDecl__Group__2 : rule__EAttributeDecl__Group__2__Impl rule__EAttributeDecl__Group__3 ;
     public final void rule__EAttributeDecl__Group__2() throws RecognitionException {
 
@@ -9035,11 +9329,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__2__Impl_in_rule__EAttributeDecl__Group__26732);
             rule__EAttributeDecl__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__3_in_rule__EAttributeDecl__Group__26735);
             rule__EAttributeDecl__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9056,10 +9352,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__2
+    // $ANTLR end "rule__EAttributeDecl__Group__2"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__2__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3297:1: rule__EAttributeDecl__Group__2__Impl : ( 'attr' ) ;
     public final void rule__EAttributeDecl__Group__2__Impl() throws RecognitionException {
 
@@ -9093,10 +9389,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__2__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group__2__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__3
+    // $ANTLR start "rule__EAttributeDecl__Group__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3316:1: rule__EAttributeDecl__Group__3 : rule__EAttributeDecl__Group__3__Impl rule__EAttributeDecl__Group__4 ;
     public final void rule__EAttributeDecl__Group__3() throws RecognitionException {
 
@@ -9108,11 +9404,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__3__Impl_in_rule__EAttributeDecl__Group__36794);
             rule__EAttributeDecl__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__4_in_rule__EAttributeDecl__Group__36797);
             rule__EAttributeDecl__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9129,10 +9427,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__3
+    // $ANTLR end "rule__EAttributeDecl__Group__3"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__3__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3328:1: rule__EAttributeDecl__Group__3__Impl : ( ( rule__EAttributeDecl__EGenericTypeAssignment_3 ) ) ;
     public final void rule__EAttributeDecl__Group__3__Impl() throws RecognitionException {
 
@@ -9151,7 +9449,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__EGenericTypeAssignment_3_in_rule__EAttributeDecl__Group__3__Impl6824);
             rule__EAttributeDecl__EGenericTypeAssignment_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9175,10 +9474,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__3__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group__3__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__4
+    // $ANTLR start "rule__EAttributeDecl__Group__4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3345:1: rule__EAttributeDecl__Group__4 : rule__EAttributeDecl__Group__4__Impl rule__EAttributeDecl__Group__5 ;
     public final void rule__EAttributeDecl__Group__4() throws RecognitionException {
 
@@ -9190,11 +9489,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__4__Impl_in_rule__EAttributeDecl__Group__46854);
             rule__EAttributeDecl__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__5_in_rule__EAttributeDecl__Group__46857);
             rule__EAttributeDecl__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9211,10 +9512,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__4
+    // $ANTLR end "rule__EAttributeDecl__Group__4"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__4__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group__4__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3357:1: rule__EAttributeDecl__Group__4__Impl : ( ( rule__EAttributeDecl__Group_4__0 )? ) ;
     public final void rule__EAttributeDecl__Group__4__Impl() throws RecognitionException {
 
@@ -9241,7 +9542,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__0_in_rule__EAttributeDecl__Group__4__Impl6884);
                     rule__EAttributeDecl__Group_4__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -9268,10 +9570,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__4__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group__4__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__5
+    // $ANTLR start "rule__EAttributeDecl__Group__5"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3374:1: rule__EAttributeDecl__Group__5 : rule__EAttributeDecl__Group__5__Impl rule__EAttributeDecl__Group__6 ;
     public final void rule__EAttributeDecl__Group__5() throws RecognitionException {
 
@@ -9283,11 +9585,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__5__Impl_in_rule__EAttributeDecl__Group__56915);
             rule__EAttributeDecl__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__6_in_rule__EAttributeDecl__Group__56918);
             rule__EAttributeDecl__Group__6();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9304,10 +9608,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__5
+    // $ANTLR end "rule__EAttributeDecl__Group__5"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__5__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group__5__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3386:1: rule__EAttributeDecl__Group__5__Impl : ( ( rule__EAttributeDecl__NameAssignment_5 ) ) ;
     public final void rule__EAttributeDecl__Group__5__Impl() throws RecognitionException {
 
@@ -9326,7 +9630,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__NameAssignment_5_in_rule__EAttributeDecl__Group__5__Impl6945);
             rule__EAttributeDecl__NameAssignment_5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9350,10 +9655,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__5__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group__5__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__6
+    // $ANTLR start "rule__EAttributeDecl__Group__6"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3403:1: rule__EAttributeDecl__Group__6 : rule__EAttributeDecl__Group__6__Impl rule__EAttributeDecl__Group__7 ;
     public final void rule__EAttributeDecl__Group__6() throws RecognitionException {
 
@@ -9365,11 +9670,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__6__Impl_in_rule__EAttributeDecl__Group__66975);
             rule__EAttributeDecl__Group__6__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__7_in_rule__EAttributeDecl__Group__66978);
             rule__EAttributeDecl__Group__7();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9386,10 +9693,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__6
+    // $ANTLR end "rule__EAttributeDecl__Group__6"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__6__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group__6__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3415:1: rule__EAttributeDecl__Group__6__Impl : ( ( rule__EAttributeDecl__Group_6__0 )? ) ;
     public final void rule__EAttributeDecl__Group__6__Impl() throws RecognitionException {
 
@@ -9416,7 +9723,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAttributeDecl__Group_6__0_in_rule__EAttributeDecl__Group__6__Impl7005);
                     rule__EAttributeDecl__Group_6__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -9443,10 +9751,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__6__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group__6__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__7
+    // $ANTLR start "rule__EAttributeDecl__Group__7"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3432:1: rule__EAttributeDecl__Group__7 : rule__EAttributeDecl__Group__7__Impl ;
     public final void rule__EAttributeDecl__Group__7() throws RecognitionException {
 
@@ -9458,7 +9766,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group__7__Impl_in_rule__EAttributeDecl__Group__77036);
             rule__EAttributeDecl__Group__7__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9475,10 +9784,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__7
+    // $ANTLR end "rule__EAttributeDecl__Group__7"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group__7__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group__7__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3443:1: rule__EAttributeDecl__Group__7__Impl : ( ';' ) ;
     public final void rule__EAttributeDecl__Group__7__Impl() throws RecognitionException {
 
@@ -9512,10 +9821,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group__7__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group__7__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4__0
+    // $ANTLR start "rule__EAttributeDecl__Group_4__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3478:1: rule__EAttributeDecl__Group_4__0 : rule__EAttributeDecl__Group_4__0__Impl rule__EAttributeDecl__Group_4__1 ;
     public final void rule__EAttributeDecl__Group_4__0() throws RecognitionException {
 
@@ -9527,11 +9836,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__0__Impl_in_rule__EAttributeDecl__Group_4__07111);
             rule__EAttributeDecl__Group_4__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__1_in_rule__EAttributeDecl__Group_4__07114);
             rule__EAttributeDecl__Group_4__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9548,10 +9859,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4__0
+    // $ANTLR end "rule__EAttributeDecl__Group_4__0"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4__0__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group_4__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3490:1: rule__EAttributeDecl__Group_4__0__Impl : ( '[' ) ;
     public final void rule__EAttributeDecl__Group_4__0__Impl() throws RecognitionException {
 
@@ -9585,10 +9896,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4__0__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group_4__0__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4__1
+    // $ANTLR start "rule__EAttributeDecl__Group_4__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3509:1: rule__EAttributeDecl__Group_4__1 : rule__EAttributeDecl__Group_4__1__Impl rule__EAttributeDecl__Group_4__2 ;
     public final void rule__EAttributeDecl__Group_4__1() throws RecognitionException {
 
@@ -9600,11 +9911,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__1__Impl_in_rule__EAttributeDecl__Group_4__17173);
             rule__EAttributeDecl__Group_4__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__2_in_rule__EAttributeDecl__Group_4__17176);
             rule__EAttributeDecl__Group_4__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9621,10 +9934,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4__1
+    // $ANTLR end "rule__EAttributeDecl__Group_4__1"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4__1__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group_4__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3521:1: rule__EAttributeDecl__Group_4__1__Impl : ( ( rule__EAttributeDecl__LowerBoundAssignment_4_1 ) ) ;
     public final void rule__EAttributeDecl__Group_4__1__Impl() throws RecognitionException {
 
@@ -9643,7 +9956,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__LowerBoundAssignment_4_1_in_rule__EAttributeDecl__Group_4__1__Impl7203);
             rule__EAttributeDecl__LowerBoundAssignment_4_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9667,10 +9981,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4__1__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group_4__1__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4__2
+    // $ANTLR start "rule__EAttributeDecl__Group_4__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3538:1: rule__EAttributeDecl__Group_4__2 : rule__EAttributeDecl__Group_4__2__Impl rule__EAttributeDecl__Group_4__3 ;
     public final void rule__EAttributeDecl__Group_4__2() throws RecognitionException {
 
@@ -9682,11 +9996,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__2__Impl_in_rule__EAttributeDecl__Group_4__27233);
             rule__EAttributeDecl__Group_4__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__3_in_rule__EAttributeDecl__Group_4__27236);
             rule__EAttributeDecl__Group_4__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9703,10 +10019,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4__2
+    // $ANTLR end "rule__EAttributeDecl__Group_4__2"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4__2__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group_4__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3550:1: rule__EAttributeDecl__Group_4__2__Impl : ( ( rule__EAttributeDecl__Group_4_2__0 )? ) ;
     public final void rule__EAttributeDecl__Group_4__2__Impl() throws RecognitionException {
 
@@ -9733,7 +10049,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EAttributeDecl__Group_4_2__0_in_rule__EAttributeDecl__Group_4__2__Impl7263);
                     rule__EAttributeDecl__Group_4_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -9760,10 +10077,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4__2__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group_4__2__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4__3
+    // $ANTLR start "rule__EAttributeDecl__Group_4__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3567:1: rule__EAttributeDecl__Group_4__3 : rule__EAttributeDecl__Group_4__3__Impl ;
     public final void rule__EAttributeDecl__Group_4__3() throws RecognitionException {
 
@@ -9775,7 +10092,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__3__Impl_in_rule__EAttributeDecl__Group_4__37294);
             rule__EAttributeDecl__Group_4__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9792,10 +10110,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4__3
+    // $ANTLR end "rule__EAttributeDecl__Group_4__3"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4__3__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group_4__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3578:1: rule__EAttributeDecl__Group_4__3__Impl : ( ']' ) ;
     public final void rule__EAttributeDecl__Group_4__3__Impl() throws RecognitionException {
 
@@ -9829,10 +10147,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4__3__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group_4__3__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4_2__0
+    // $ANTLR start "rule__EAttributeDecl__Group_4_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3605:1: rule__EAttributeDecl__Group_4_2__0 : rule__EAttributeDecl__Group_4_2__0__Impl rule__EAttributeDecl__Group_4_2__1 ;
     public final void rule__EAttributeDecl__Group_4_2__0() throws RecognitionException {
 
@@ -9844,11 +10162,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_4_2__0__Impl_in_rule__EAttributeDecl__Group_4_2__07361);
             rule__EAttributeDecl__Group_4_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_4_2__1_in_rule__EAttributeDecl__Group_4_2__07364);
             rule__EAttributeDecl__Group_4_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9865,10 +10185,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4_2__0
+    // $ANTLR end "rule__EAttributeDecl__Group_4_2__0"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4_2__0__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group_4_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3617:1: rule__EAttributeDecl__Group_4_2__0__Impl : ( '..' ) ;
     public final void rule__EAttributeDecl__Group_4_2__0__Impl() throws RecognitionException {
 
@@ -9902,10 +10222,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4_2__0__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group_4_2__0__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4_2__1
+    // $ANTLR start "rule__EAttributeDecl__Group_4_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3636:1: rule__EAttributeDecl__Group_4_2__1 : rule__EAttributeDecl__Group_4_2__1__Impl ;
     public final void rule__EAttributeDecl__Group_4_2__1() throws RecognitionException {
 
@@ -9917,7 +10237,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_4_2__1__Impl_in_rule__EAttributeDecl__Group_4_2__17423);
             rule__EAttributeDecl__Group_4_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9934,10 +10255,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4_2__1
+    // $ANTLR end "rule__EAttributeDecl__Group_4_2__1"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_4_2__1__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group_4_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3647:1: rule__EAttributeDecl__Group_4_2__1__Impl : ( ( rule__EAttributeDecl__UpperBoundAssignment_4_2_1 ) ) ;
     public final void rule__EAttributeDecl__Group_4_2__1__Impl() throws RecognitionException {
 
@@ -9956,7 +10277,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__UpperBoundAssignment_4_2_1_in_rule__EAttributeDecl__Group_4_2__1__Impl7450);
             rule__EAttributeDecl__UpperBoundAssignment_4_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9980,10 +10302,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_4_2__1__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group_4_2__1__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_6__0
+    // $ANTLR start "rule__EAttributeDecl__Group_6__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3668:1: rule__EAttributeDecl__Group_6__0 : rule__EAttributeDecl__Group_6__0__Impl rule__EAttributeDecl__Group_6__1 ;
     public final void rule__EAttributeDecl__Group_6__0() throws RecognitionException {
 
@@ -9995,11 +10317,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_6__0__Impl_in_rule__EAttributeDecl__Group_6__07484);
             rule__EAttributeDecl__Group_6__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_6__1_in_rule__EAttributeDecl__Group_6__07487);
             rule__EAttributeDecl__Group_6__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10016,10 +10340,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_6__0
+    // $ANTLR end "rule__EAttributeDecl__Group_6__0"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_6__0__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group_6__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3680:1: rule__EAttributeDecl__Group_6__0__Impl : ( '=' ) ;
     public final void rule__EAttributeDecl__Group_6__0__Impl() throws RecognitionException {
 
@@ -10053,10 +10377,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_6__0__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group_6__0__Impl"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_6__1
+    // $ANTLR start "rule__EAttributeDecl__Group_6__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3699:1: rule__EAttributeDecl__Group_6__1 : rule__EAttributeDecl__Group_6__1__Impl ;
     public final void rule__EAttributeDecl__Group_6__1() throws RecognitionException {
 
@@ -10068,7 +10392,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__Group_6__1__Impl_in_rule__EAttributeDecl__Group_6__17546);
             rule__EAttributeDecl__Group_6__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10085,10 +10410,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_6__1
+    // $ANTLR end "rule__EAttributeDecl__Group_6__1"
 
 
-    // $ANTLR start rule__EAttributeDecl__Group_6__1__Impl
+    // $ANTLR start "rule__EAttributeDecl__Group_6__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3710:1: rule__EAttributeDecl__Group_6__1__Impl : ( ( rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1 ) ) ;
     public final void rule__EAttributeDecl__Group_6__1__Impl() throws RecognitionException {
 
@@ -10107,7 +10432,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1_in_rule__EAttributeDecl__Group_6__1__Impl7573);
             rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10131,10 +10457,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__Group_6__1__Impl
+    // $ANTLR end "rule__EAttributeDecl__Group_6__1__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__0
+    // $ANTLR start "rule__EReferenceDecl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3731:1: rule__EReferenceDecl__Group__0 : rule__EReferenceDecl__Group__0__Impl rule__EReferenceDecl__Group__1 ;
     public final void rule__EReferenceDecl__Group__0() throws RecognitionException {
 
@@ -10146,11 +10472,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__0__Impl_in_rule__EReferenceDecl__Group__07607);
             rule__EReferenceDecl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__1_in_rule__EReferenceDecl__Group__07610);
             rule__EReferenceDecl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10167,10 +10495,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__0
+    // $ANTLR end "rule__EReferenceDecl__Group__0"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__0__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3743:1: rule__EReferenceDecl__Group__0__Impl : ( ( rule__EReferenceDecl__EAnnotationsAssignment_0 )* ) ;
     public final void rule__EReferenceDecl__Group__0__Impl() throws RecognitionException {
 
@@ -10201,7 +10529,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EReferenceDecl__EAnnotationsAssignment_0_in_rule__EReferenceDecl__Group__0__Impl7637);
             	    rule__EReferenceDecl__EAnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -10231,10 +10560,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__0__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group__0__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__1
+    // $ANTLR start "rule__EReferenceDecl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3760:1: rule__EReferenceDecl__Group__1 : rule__EReferenceDecl__Group__1__Impl rule__EReferenceDecl__Group__2 ;
     public final void rule__EReferenceDecl__Group__1() throws RecognitionException {
 
@@ -10246,11 +10575,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__1__Impl_in_rule__EReferenceDecl__Group__17668);
             rule__EReferenceDecl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__2_in_rule__EReferenceDecl__Group__17671);
             rule__EReferenceDecl__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10267,10 +10598,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__1
+    // $ANTLR end "rule__EReferenceDecl__Group__1"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__1__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3772:1: rule__EReferenceDecl__Group__1__Impl : ( ( rule__EReferenceDecl__Alternatives_1 )* ) ;
     public final void rule__EReferenceDecl__Group__1__Impl() throws RecognitionException {
 
@@ -10301,7 +10632,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EReferenceDecl__Alternatives_1_in_rule__EReferenceDecl__Group__1__Impl7698);
             	    rule__EReferenceDecl__Alternatives_1();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -10331,10 +10663,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__1__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group__1__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__2
+    // $ANTLR start "rule__EReferenceDecl__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3789:1: rule__EReferenceDecl__Group__2 : rule__EReferenceDecl__Group__2__Impl rule__EReferenceDecl__Group__3 ;
     public final void rule__EReferenceDecl__Group__2() throws RecognitionException {
 
@@ -10346,11 +10678,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__2__Impl_in_rule__EReferenceDecl__Group__27729);
             rule__EReferenceDecl__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__3_in_rule__EReferenceDecl__Group__27732);
             rule__EReferenceDecl__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10367,10 +10701,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__2
+    // $ANTLR end "rule__EReferenceDecl__Group__2"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__2__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3801:1: rule__EReferenceDecl__Group__2__Impl : ( ( rule__EReferenceDecl__Alternatives_2 ) ) ;
     public final void rule__EReferenceDecl__Group__2__Impl() throws RecognitionException {
 
@@ -10389,7 +10723,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Alternatives_2_in_rule__EReferenceDecl__Group__2__Impl7759);
             rule__EReferenceDecl__Alternatives_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10413,10 +10748,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__2__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group__2__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__3
+    // $ANTLR start "rule__EReferenceDecl__Group__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3818:1: rule__EReferenceDecl__Group__3 : rule__EReferenceDecl__Group__3__Impl rule__EReferenceDecl__Group__4 ;
     public final void rule__EReferenceDecl__Group__3() throws RecognitionException {
 
@@ -10428,11 +10763,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__3__Impl_in_rule__EReferenceDecl__Group__37789);
             rule__EReferenceDecl__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__4_in_rule__EReferenceDecl__Group__37792);
             rule__EReferenceDecl__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10449,10 +10786,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__3
+    // $ANTLR end "rule__EReferenceDecl__Group__3"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__3__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3830:1: rule__EReferenceDecl__Group__3__Impl : ( ( rule__EReferenceDecl__EGenericTypeAssignment_3 ) ) ;
     public final void rule__EReferenceDecl__Group__3__Impl() throws RecognitionException {
 
@@ -10471,7 +10808,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__EGenericTypeAssignment_3_in_rule__EReferenceDecl__Group__3__Impl7819);
             rule__EReferenceDecl__EGenericTypeAssignment_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10495,10 +10833,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__3__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group__3__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__4
+    // $ANTLR start "rule__EReferenceDecl__Group__4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3847:1: rule__EReferenceDecl__Group__4 : rule__EReferenceDecl__Group__4__Impl rule__EReferenceDecl__Group__5 ;
     public final void rule__EReferenceDecl__Group__4() throws RecognitionException {
 
@@ -10510,11 +10848,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__4__Impl_in_rule__EReferenceDecl__Group__47849);
             rule__EReferenceDecl__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__5_in_rule__EReferenceDecl__Group__47852);
             rule__EReferenceDecl__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10531,10 +10871,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__4
+    // $ANTLR end "rule__EReferenceDecl__Group__4"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__4__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group__4__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3859:1: rule__EReferenceDecl__Group__4__Impl : ( ( rule__EReferenceDecl__Group_4__0 )? ) ;
     public final void rule__EReferenceDecl__Group__4__Impl() throws RecognitionException {
 
@@ -10561,7 +10901,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__0_in_rule__EReferenceDecl__Group__4__Impl7879);
                     rule__EReferenceDecl__Group_4__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -10588,10 +10929,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__4__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group__4__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__5
+    // $ANTLR start "rule__EReferenceDecl__Group__5"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3876:1: rule__EReferenceDecl__Group__5 : rule__EReferenceDecl__Group__5__Impl rule__EReferenceDecl__Group__6 ;
     public final void rule__EReferenceDecl__Group__5() throws RecognitionException {
 
@@ -10603,11 +10944,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__5__Impl_in_rule__EReferenceDecl__Group__57910);
             rule__EReferenceDecl__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__6_in_rule__EReferenceDecl__Group__57913);
             rule__EReferenceDecl__Group__6();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10624,10 +10967,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__5
+    // $ANTLR end "rule__EReferenceDecl__Group__5"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__5__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group__5__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3888:1: rule__EReferenceDecl__Group__5__Impl : ( ( rule__EReferenceDecl__Group_5__0 )? ) ;
     public final void rule__EReferenceDecl__Group__5__Impl() throws RecognitionException {
 
@@ -10654,7 +10997,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__Group_5__0_in_rule__EReferenceDecl__Group__5__Impl7940);
                     rule__EReferenceDecl__Group_5__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -10681,10 +11025,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__5__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group__5__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__6
+    // $ANTLR start "rule__EReferenceDecl__Group__6"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3905:1: rule__EReferenceDecl__Group__6 : rule__EReferenceDecl__Group__6__Impl rule__EReferenceDecl__Group__7 ;
     public final void rule__EReferenceDecl__Group__6() throws RecognitionException {
 
@@ -10696,11 +11040,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__6__Impl_in_rule__EReferenceDecl__Group__67971);
             rule__EReferenceDecl__Group__6__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__7_in_rule__EReferenceDecl__Group__67974);
             rule__EReferenceDecl__Group__7();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10717,10 +11063,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__6
+    // $ANTLR end "rule__EReferenceDecl__Group__6"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__6__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group__6__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3917:1: rule__EReferenceDecl__Group__6__Impl : ( ( rule__EReferenceDecl__NameAssignment_6 ) ) ;
     public final void rule__EReferenceDecl__Group__6__Impl() throws RecognitionException {
 
@@ -10739,7 +11085,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__NameAssignment_6_in_rule__EReferenceDecl__Group__6__Impl8001);
             rule__EReferenceDecl__NameAssignment_6();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10763,10 +11110,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__6__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group__6__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__7
+    // $ANTLR start "rule__EReferenceDecl__Group__7"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3934:1: rule__EReferenceDecl__Group__7 : rule__EReferenceDecl__Group__7__Impl ;
     public final void rule__EReferenceDecl__Group__7() throws RecognitionException {
 
@@ -10778,7 +11125,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group__7__Impl_in_rule__EReferenceDecl__Group__78031);
             rule__EReferenceDecl__Group__7__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10795,10 +11143,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__7
+    // $ANTLR end "rule__EReferenceDecl__Group__7"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group__7__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group__7__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3945:1: rule__EReferenceDecl__Group__7__Impl : ( ';' ) ;
     public final void rule__EReferenceDecl__Group__7__Impl() throws RecognitionException {
 
@@ -10832,10 +11180,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group__7__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group__7__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4__0
+    // $ANTLR start "rule__EReferenceDecl__Group_4__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3980:1: rule__EReferenceDecl__Group_4__0 : rule__EReferenceDecl__Group_4__0__Impl rule__EReferenceDecl__Group_4__1 ;
     public final void rule__EReferenceDecl__Group_4__0() throws RecognitionException {
 
@@ -10847,11 +11195,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__0__Impl_in_rule__EReferenceDecl__Group_4__08106);
             rule__EReferenceDecl__Group_4__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__1_in_rule__EReferenceDecl__Group_4__08109);
             rule__EReferenceDecl__Group_4__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10868,10 +11218,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4__0
+    // $ANTLR end "rule__EReferenceDecl__Group_4__0"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4__0__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group_4__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:3992:1: rule__EReferenceDecl__Group_4__0__Impl : ( '[' ) ;
     public final void rule__EReferenceDecl__Group_4__0__Impl() throws RecognitionException {
 
@@ -10905,10 +11255,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4__0__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group_4__0__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4__1
+    // $ANTLR start "rule__EReferenceDecl__Group_4__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4011:1: rule__EReferenceDecl__Group_4__1 : rule__EReferenceDecl__Group_4__1__Impl rule__EReferenceDecl__Group_4__2 ;
     public final void rule__EReferenceDecl__Group_4__1() throws RecognitionException {
 
@@ -10920,11 +11270,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__1__Impl_in_rule__EReferenceDecl__Group_4__18168);
             rule__EReferenceDecl__Group_4__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__2_in_rule__EReferenceDecl__Group_4__18171);
             rule__EReferenceDecl__Group_4__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10941,10 +11293,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4__1
+    // $ANTLR end "rule__EReferenceDecl__Group_4__1"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4__1__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group_4__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4023:1: rule__EReferenceDecl__Group_4__1__Impl : ( ( rule__EReferenceDecl__LowerBoundAssignment_4_1 ) ) ;
     public final void rule__EReferenceDecl__Group_4__1__Impl() throws RecognitionException {
 
@@ -10963,7 +11315,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__LowerBoundAssignment_4_1_in_rule__EReferenceDecl__Group_4__1__Impl8198);
             rule__EReferenceDecl__LowerBoundAssignment_4_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10987,10 +11340,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4__1__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group_4__1__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4__2
+    // $ANTLR start "rule__EReferenceDecl__Group_4__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4040:1: rule__EReferenceDecl__Group_4__2 : rule__EReferenceDecl__Group_4__2__Impl rule__EReferenceDecl__Group_4__3 ;
     public final void rule__EReferenceDecl__Group_4__2() throws RecognitionException {
 
@@ -11002,11 +11355,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__2__Impl_in_rule__EReferenceDecl__Group_4__28228);
             rule__EReferenceDecl__Group_4__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__3_in_rule__EReferenceDecl__Group_4__28231);
             rule__EReferenceDecl__Group_4__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11023,10 +11378,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4__2
+    // $ANTLR end "rule__EReferenceDecl__Group_4__2"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4__2__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group_4__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4052:1: rule__EReferenceDecl__Group_4__2__Impl : ( ( rule__EReferenceDecl__Group_4_2__0 )? ) ;
     public final void rule__EReferenceDecl__Group_4__2__Impl() throws RecognitionException {
 
@@ -11053,7 +11408,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EReferenceDecl__Group_4_2__0_in_rule__EReferenceDecl__Group_4__2__Impl8258);
                     rule__EReferenceDecl__Group_4_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -11080,10 +11436,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4__2__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group_4__2__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4__3
+    // $ANTLR start "rule__EReferenceDecl__Group_4__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4069:1: rule__EReferenceDecl__Group_4__3 : rule__EReferenceDecl__Group_4__3__Impl ;
     public final void rule__EReferenceDecl__Group_4__3() throws RecognitionException {
 
@@ -11095,7 +11451,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__3__Impl_in_rule__EReferenceDecl__Group_4__38289);
             rule__EReferenceDecl__Group_4__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11112,10 +11469,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4__3
+    // $ANTLR end "rule__EReferenceDecl__Group_4__3"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4__3__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group_4__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4080:1: rule__EReferenceDecl__Group_4__3__Impl : ( ']' ) ;
     public final void rule__EReferenceDecl__Group_4__3__Impl() throws RecognitionException {
 
@@ -11149,10 +11506,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4__3__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group_4__3__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4_2__0
+    // $ANTLR start "rule__EReferenceDecl__Group_4_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4107:1: rule__EReferenceDecl__Group_4_2__0 : rule__EReferenceDecl__Group_4_2__0__Impl rule__EReferenceDecl__Group_4_2__1 ;
     public final void rule__EReferenceDecl__Group_4_2__0() throws RecognitionException {
 
@@ -11164,11 +11521,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_4_2__0__Impl_in_rule__EReferenceDecl__Group_4_2__08356);
             rule__EReferenceDecl__Group_4_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_4_2__1_in_rule__EReferenceDecl__Group_4_2__08359);
             rule__EReferenceDecl__Group_4_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11185,10 +11544,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4_2__0
+    // $ANTLR end "rule__EReferenceDecl__Group_4_2__0"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4_2__0__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group_4_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4119:1: rule__EReferenceDecl__Group_4_2__0__Impl : ( '..' ) ;
     public final void rule__EReferenceDecl__Group_4_2__0__Impl() throws RecognitionException {
 
@@ -11222,10 +11581,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4_2__0__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group_4_2__0__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4_2__1
+    // $ANTLR start "rule__EReferenceDecl__Group_4_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4138:1: rule__EReferenceDecl__Group_4_2__1 : rule__EReferenceDecl__Group_4_2__1__Impl ;
     public final void rule__EReferenceDecl__Group_4_2__1() throws RecognitionException {
 
@@ -11237,7 +11596,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_4_2__1__Impl_in_rule__EReferenceDecl__Group_4_2__18418);
             rule__EReferenceDecl__Group_4_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11254,10 +11614,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4_2__1
+    // $ANTLR end "rule__EReferenceDecl__Group_4_2__1"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_4_2__1__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group_4_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4149:1: rule__EReferenceDecl__Group_4_2__1__Impl : ( ( rule__EReferenceDecl__UpperBoundAssignment_4_2_1 ) ) ;
     public final void rule__EReferenceDecl__Group_4_2__1__Impl() throws RecognitionException {
 
@@ -11276,7 +11636,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__UpperBoundAssignment_4_2_1_in_rule__EReferenceDecl__Group_4_2__1__Impl8445);
             rule__EReferenceDecl__UpperBoundAssignment_4_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11300,10 +11661,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_4_2__1__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group_4_2__1__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_5__0
+    // $ANTLR start "rule__EReferenceDecl__Group_5__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4170:1: rule__EReferenceDecl__Group_5__0 : rule__EReferenceDecl__Group_5__0__Impl rule__EReferenceDecl__Group_5__1 ;
     public final void rule__EReferenceDecl__Group_5__0() throws RecognitionException {
 
@@ -11315,11 +11676,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_5__0__Impl_in_rule__EReferenceDecl__Group_5__08479);
             rule__EReferenceDecl__Group_5__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_5__1_in_rule__EReferenceDecl__Group_5__08482);
             rule__EReferenceDecl__Group_5__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11336,10 +11699,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_5__0
+    // $ANTLR end "rule__EReferenceDecl__Group_5__0"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_5__0__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group_5__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4182:1: rule__EReferenceDecl__Group_5__0__Impl : ( '#' ) ;
     public final void rule__EReferenceDecl__Group_5__0__Impl() throws RecognitionException {
 
@@ -11373,10 +11736,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_5__0__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group_5__0__Impl"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_5__1
+    // $ANTLR start "rule__EReferenceDecl__Group_5__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4201:1: rule__EReferenceDecl__Group_5__1 : rule__EReferenceDecl__Group_5__1__Impl ;
     public final void rule__EReferenceDecl__Group_5__1() throws RecognitionException {
 
@@ -11388,7 +11751,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__Group_5__1__Impl_in_rule__EReferenceDecl__Group_5__18541);
             rule__EReferenceDecl__Group_5__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11405,10 +11769,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_5__1
+    // $ANTLR end "rule__EReferenceDecl__Group_5__1"
 
 
-    // $ANTLR start rule__EReferenceDecl__Group_5__1__Impl
+    // $ANTLR start "rule__EReferenceDecl__Group_5__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4212:1: rule__EReferenceDecl__Group_5__1__Impl : ( ( rule__EReferenceDecl__EOppositeAssignment_5_1 ) ) ;
     public final void rule__EReferenceDecl__Group_5__1__Impl() throws RecognitionException {
 
@@ -11427,7 +11791,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EReferenceDecl__EOppositeAssignment_5_1_in_rule__EReferenceDecl__Group_5__1__Impl8568);
             rule__EReferenceDecl__EOppositeAssignment_5_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11451,10 +11816,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__Group_5__1__Impl
+    // $ANTLR end "rule__EReferenceDecl__Group_5__1__Impl"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__0
+    // $ANTLR start "rule__EEnumDecl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4233:1: rule__EEnumDecl__Group__0 : rule__EEnumDecl__Group__0__Impl rule__EEnumDecl__Group__1 ;
     public final void rule__EEnumDecl__Group__0() throws RecognitionException {
 
@@ -11466,11 +11831,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumDecl__Group__0__Impl_in_rule__EEnumDecl__Group__08602);
             rule__EEnumDecl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EEnumDecl__Group__1_in_rule__EEnumDecl__Group__08605);
             rule__EEnumDecl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11487,10 +11854,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__0
+    // $ANTLR end "rule__EEnumDecl__Group__0"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__0__Impl
+    // $ANTLR start "rule__EEnumDecl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4245:1: rule__EEnumDecl__Group__0__Impl : ( ( rule__EEnumDecl__EAnnotationsAssignment_0 )* ) ;
     public final void rule__EEnumDecl__Group__0__Impl() throws RecognitionException {
 
@@ -11521,7 +11888,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EEnumDecl__EAnnotationsAssignment_0_in_rule__EEnumDecl__Group__0__Impl8632);
             	    rule__EEnumDecl__EAnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -11551,10 +11919,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__0__Impl
+    // $ANTLR end "rule__EEnumDecl__Group__0__Impl"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__1
+    // $ANTLR start "rule__EEnumDecl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4262:1: rule__EEnumDecl__Group__1 : rule__EEnumDecl__Group__1__Impl rule__EEnumDecl__Group__2 ;
     public final void rule__EEnumDecl__Group__1() throws RecognitionException {
 
@@ -11566,11 +11934,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumDecl__Group__1__Impl_in_rule__EEnumDecl__Group__18663);
             rule__EEnumDecl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EEnumDecl__Group__2_in_rule__EEnumDecl__Group__18666);
             rule__EEnumDecl__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11587,10 +11957,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__1
+    // $ANTLR end "rule__EEnumDecl__Group__1"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__1__Impl
+    // $ANTLR start "rule__EEnumDecl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4274:1: rule__EEnumDecl__Group__1__Impl : ( 'enum' ) ;
     public final void rule__EEnumDecl__Group__1__Impl() throws RecognitionException {
 
@@ -11624,10 +11994,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__1__Impl
+    // $ANTLR end "rule__EEnumDecl__Group__1__Impl"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__2
+    // $ANTLR start "rule__EEnumDecl__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4293:1: rule__EEnumDecl__Group__2 : rule__EEnumDecl__Group__2__Impl rule__EEnumDecl__Group__3 ;
     public final void rule__EEnumDecl__Group__2() throws RecognitionException {
 
@@ -11639,11 +12009,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumDecl__Group__2__Impl_in_rule__EEnumDecl__Group__28725);
             rule__EEnumDecl__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EEnumDecl__Group__3_in_rule__EEnumDecl__Group__28728);
             rule__EEnumDecl__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11660,10 +12032,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__2
+    // $ANTLR end "rule__EEnumDecl__Group__2"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__2__Impl
+    // $ANTLR start "rule__EEnumDecl__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4305:1: rule__EEnumDecl__Group__2__Impl : ( ( rule__EEnumDecl__NameAssignment_2 ) ) ;
     public final void rule__EEnumDecl__Group__2__Impl() throws RecognitionException {
 
@@ -11682,7 +12054,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumDecl__NameAssignment_2_in_rule__EEnumDecl__Group__2__Impl8755);
             rule__EEnumDecl__NameAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11706,10 +12079,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__2__Impl
+    // $ANTLR end "rule__EEnumDecl__Group__2__Impl"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__3
+    // $ANTLR start "rule__EEnumDecl__Group__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4322:1: rule__EEnumDecl__Group__3 : rule__EEnumDecl__Group__3__Impl rule__EEnumDecl__Group__4 ;
     public final void rule__EEnumDecl__Group__3() throws RecognitionException {
 
@@ -11721,11 +12094,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumDecl__Group__3__Impl_in_rule__EEnumDecl__Group__38785);
             rule__EEnumDecl__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EEnumDecl__Group__4_in_rule__EEnumDecl__Group__38788);
             rule__EEnumDecl__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11742,10 +12117,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__3
+    // $ANTLR end "rule__EEnumDecl__Group__3"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__3__Impl
+    // $ANTLR start "rule__EEnumDecl__Group__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4334:1: rule__EEnumDecl__Group__3__Impl : ( '{' ) ;
     public final void rule__EEnumDecl__Group__3__Impl() throws RecognitionException {
 
@@ -11779,10 +12154,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__3__Impl
+    // $ANTLR end "rule__EEnumDecl__Group__3__Impl"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__4
+    // $ANTLR start "rule__EEnumDecl__Group__4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4353:1: rule__EEnumDecl__Group__4 : rule__EEnumDecl__Group__4__Impl rule__EEnumDecl__Group__5 ;
     public final void rule__EEnumDecl__Group__4() throws RecognitionException {
 
@@ -11794,11 +12169,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumDecl__Group__4__Impl_in_rule__EEnumDecl__Group__48847);
             rule__EEnumDecl__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EEnumDecl__Group__5_in_rule__EEnumDecl__Group__48850);
             rule__EEnumDecl__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11815,10 +12192,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__4
+    // $ANTLR end "rule__EEnumDecl__Group__4"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__4__Impl
+    // $ANTLR start "rule__EEnumDecl__Group__4__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4365:1: rule__EEnumDecl__Group__4__Impl : ( ( ( rule__EEnumDecl__ELiteralsAssignment_4 ) ) ( ( rule__EEnumDecl__ELiteralsAssignment_4 )* ) ) ;
     public final void rule__EEnumDecl__Group__4__Impl() throws RecognitionException {
 
@@ -11840,7 +12217,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumDecl__ELiteralsAssignment_4_in_rule__EEnumDecl__Group__4__Impl8879);
             rule__EEnumDecl__ELiteralsAssignment_4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11870,7 +12248,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EEnumDecl__ELiteralsAssignment_4_in_rule__EEnumDecl__Group__4__Impl8891);
             	    rule__EEnumDecl__ELiteralsAssignment_4();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -11903,10 +12282,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__4__Impl
+    // $ANTLR end "rule__EEnumDecl__Group__4__Impl"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__5
+    // $ANTLR start "rule__EEnumDecl__Group__5"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4389:1: rule__EEnumDecl__Group__5 : rule__EEnumDecl__Group__5__Impl ;
     public final void rule__EEnumDecl__Group__5() throws RecognitionException {
 
@@ -11918,7 +12297,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumDecl__Group__5__Impl_in_rule__EEnumDecl__Group__58924);
             rule__EEnumDecl__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11935,10 +12315,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__5
+    // $ANTLR end "rule__EEnumDecl__Group__5"
 
 
-    // $ANTLR start rule__EEnumDecl__Group__5__Impl
+    // $ANTLR start "rule__EEnumDecl__Group__5__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4400:1: rule__EEnumDecl__Group__5__Impl : ( '}' ) ;
     public final void rule__EEnumDecl__Group__5__Impl() throws RecognitionException {
 
@@ -11972,10 +12352,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__Group__5__Impl
+    // $ANTLR end "rule__EEnumDecl__Group__5__Impl"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group__0
+    // $ANTLR start "rule__EEnumLiteralDecl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4431:1: rule__EEnumLiteralDecl__Group__0 : rule__EEnumLiteralDecl__Group__0__Impl rule__EEnumLiteralDecl__Group__1 ;
     public final void rule__EEnumLiteralDecl__Group__0() throws RecognitionException {
 
@@ -11987,11 +12367,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__0__Impl_in_rule__EEnumLiteralDecl__Group__08995);
             rule__EEnumLiteralDecl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__1_in_rule__EEnumLiteralDecl__Group__08998);
             rule__EEnumLiteralDecl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12008,10 +12390,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group__0
+    // $ANTLR end "rule__EEnumLiteralDecl__Group__0"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group__0__Impl
+    // $ANTLR start "rule__EEnumLiteralDecl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4443:1: rule__EEnumLiteralDecl__Group__0__Impl : ( ( rule__EEnumLiteralDecl__EAnnotationsAssignment_0 )* ) ;
     public final void rule__EEnumLiteralDecl__Group__0__Impl() throws RecognitionException {
 
@@ -12042,7 +12424,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EEnumLiteralDecl__EAnnotationsAssignment_0_in_rule__EEnumLiteralDecl__Group__0__Impl9025);
             	    rule__EEnumLiteralDecl__EAnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -12072,10 +12455,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group__0__Impl
+    // $ANTLR end "rule__EEnumLiteralDecl__Group__0__Impl"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group__1
+    // $ANTLR start "rule__EEnumLiteralDecl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4460:1: rule__EEnumLiteralDecl__Group__1 : rule__EEnumLiteralDecl__Group__1__Impl rule__EEnumLiteralDecl__Group__2 ;
     public final void rule__EEnumLiteralDecl__Group__1() throws RecognitionException {
 
@@ -12087,11 +12470,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__1__Impl_in_rule__EEnumLiteralDecl__Group__19056);
             rule__EEnumLiteralDecl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__2_in_rule__EEnumLiteralDecl__Group__19059);
             rule__EEnumLiteralDecl__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12108,10 +12493,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group__1
+    // $ANTLR end "rule__EEnumLiteralDecl__Group__1"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group__1__Impl
+    // $ANTLR start "rule__EEnumLiteralDecl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4472:1: rule__EEnumLiteralDecl__Group__1__Impl : ( ( rule__EEnumLiteralDecl__NameAssignment_1 ) ) ;
     public final void rule__EEnumLiteralDecl__Group__1__Impl() throws RecognitionException {
 
@@ -12130,7 +12515,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__NameAssignment_1_in_rule__EEnumLiteralDecl__Group__1__Impl9086);
             rule__EEnumLiteralDecl__NameAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12154,10 +12540,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group__1__Impl
+    // $ANTLR end "rule__EEnumLiteralDecl__Group__1__Impl"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group__2
+    // $ANTLR start "rule__EEnumLiteralDecl__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4489:1: rule__EEnumLiteralDecl__Group__2 : rule__EEnumLiteralDecl__Group__2__Impl rule__EEnumLiteralDecl__Group__3 ;
     public final void rule__EEnumLiteralDecl__Group__2() throws RecognitionException {
 
@@ -12169,11 +12555,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__2__Impl_in_rule__EEnumLiteralDecl__Group__29116);
             rule__EEnumLiteralDecl__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__3_in_rule__EEnumLiteralDecl__Group__29119);
             rule__EEnumLiteralDecl__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12190,10 +12578,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group__2
+    // $ANTLR end "rule__EEnumLiteralDecl__Group__2"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group__2__Impl
+    // $ANTLR start "rule__EEnumLiteralDecl__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4501:1: rule__EEnumLiteralDecl__Group__2__Impl : ( ( rule__EEnumLiteralDecl__Group_2__0 )? ) ;
     public final void rule__EEnumLiteralDecl__Group__2__Impl() throws RecognitionException {
 
@@ -12220,7 +12608,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group_2__0_in_rule__EEnumLiteralDecl__Group__2__Impl9146);
                     rule__EEnumLiteralDecl__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -12247,10 +12636,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group__2__Impl
+    // $ANTLR end "rule__EEnumLiteralDecl__Group__2__Impl"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group__3
+    // $ANTLR start "rule__EEnumLiteralDecl__Group__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4518:1: rule__EEnumLiteralDecl__Group__3 : rule__EEnumLiteralDecl__Group__3__Impl rule__EEnumLiteralDecl__Group__4 ;
     public final void rule__EEnumLiteralDecl__Group__3() throws RecognitionException {
 
@@ -12262,11 +12651,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__3__Impl_in_rule__EEnumLiteralDecl__Group__39177);
             rule__EEnumLiteralDecl__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__4_in_rule__EEnumLiteralDecl__Group__39180);
             rule__EEnumLiteralDecl__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12283,10 +12674,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group__3
+    // $ANTLR end "rule__EEnumLiteralDecl__Group__3"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group__3__Impl
+    // $ANTLR start "rule__EEnumLiteralDecl__Group__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4530:1: rule__EEnumLiteralDecl__Group__3__Impl : ( ( rule__EEnumLiteralDecl__LiteralAssignment_3 )? ) ;
     public final void rule__EEnumLiteralDecl__Group__3__Impl() throws RecognitionException {
 
@@ -12313,7 +12704,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EEnumLiteralDecl__LiteralAssignment_3_in_rule__EEnumLiteralDecl__Group__3__Impl9207);
                     rule__EEnumLiteralDecl__LiteralAssignment_3();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -12340,10 +12732,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group__3__Impl
+    // $ANTLR end "rule__EEnumLiteralDecl__Group__3__Impl"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group__4
+    // $ANTLR start "rule__EEnumLiteralDecl__Group__4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4547:1: rule__EEnumLiteralDecl__Group__4 : rule__EEnumLiteralDecl__Group__4__Impl ;
     public final void rule__EEnumLiteralDecl__Group__4() throws RecognitionException {
 
@@ -12355,7 +12747,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__4__Impl_in_rule__EEnumLiteralDecl__Group__49238);
             rule__EEnumLiteralDecl__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12372,10 +12765,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group__4
+    // $ANTLR end "rule__EEnumLiteralDecl__Group__4"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group__4__Impl
+    // $ANTLR start "rule__EEnumLiteralDecl__Group__4__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4558:1: rule__EEnumLiteralDecl__Group__4__Impl : ( ';' ) ;
     public final void rule__EEnumLiteralDecl__Group__4__Impl() throws RecognitionException {
 
@@ -12409,10 +12802,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group__4__Impl
+    // $ANTLR end "rule__EEnumLiteralDecl__Group__4__Impl"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group_2__0
+    // $ANTLR start "rule__EEnumLiteralDecl__Group_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4587:1: rule__EEnumLiteralDecl__Group_2__0 : rule__EEnumLiteralDecl__Group_2__0__Impl rule__EEnumLiteralDecl__Group_2__1 ;
     public final void rule__EEnumLiteralDecl__Group_2__0() throws RecognitionException {
 
@@ -12424,11 +12817,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group_2__0__Impl_in_rule__EEnumLiteralDecl__Group_2__09307);
             rule__EEnumLiteralDecl__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group_2__1_in_rule__EEnumLiteralDecl__Group_2__09310);
             rule__EEnumLiteralDecl__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12445,10 +12840,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group_2__0
+    // $ANTLR end "rule__EEnumLiteralDecl__Group_2__0"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group_2__0__Impl
+    // $ANTLR start "rule__EEnumLiteralDecl__Group_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4599:1: rule__EEnumLiteralDecl__Group_2__0__Impl : ( '=' ) ;
     public final void rule__EEnumLiteralDecl__Group_2__0__Impl() throws RecognitionException {
 
@@ -12482,10 +12877,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group_2__0__Impl
+    // $ANTLR end "rule__EEnumLiteralDecl__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group_2__1
+    // $ANTLR start "rule__EEnumLiteralDecl__Group_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4618:1: rule__EEnumLiteralDecl__Group_2__1 : rule__EEnumLiteralDecl__Group_2__1__Impl ;
     public final void rule__EEnumLiteralDecl__Group_2__1() throws RecognitionException {
 
@@ -12497,7 +12892,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group_2__1__Impl_in_rule__EEnumLiteralDecl__Group_2__19369);
             rule__EEnumLiteralDecl__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12514,10 +12910,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group_2__1
+    // $ANTLR end "rule__EEnumLiteralDecl__Group_2__1"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__Group_2__1__Impl
+    // $ANTLR start "rule__EEnumLiteralDecl__Group_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4629:1: rule__EEnumLiteralDecl__Group_2__1__Impl : ( ( rule__EEnumLiteralDecl__ValueAssignment_2_1 ) ) ;
     public final void rule__EEnumLiteralDecl__Group_2__1__Impl() throws RecognitionException {
 
@@ -12536,7 +12932,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EEnumLiteralDecl__ValueAssignment_2_1_in_rule__EEnumLiteralDecl__Group_2__1__Impl9396);
             rule__EEnumLiteralDecl__ValueAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12560,10 +12957,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__Group_2__1__Impl
+    // $ANTLR end "rule__EEnumLiteralDecl__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__ETypeParameterDecl__Group__0
+    // $ANTLR start "rule__ETypeParameterDecl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4650:1: rule__ETypeParameterDecl__Group__0 : rule__ETypeParameterDecl__Group__0__Impl rule__ETypeParameterDecl__Group__1 ;
     public final void rule__ETypeParameterDecl__Group__0() throws RecognitionException {
 
@@ -12575,11 +12972,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ETypeParameterDecl__Group__0__Impl_in_rule__ETypeParameterDecl__Group__09430);
             rule__ETypeParameterDecl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__ETypeParameterDecl__Group__1_in_rule__ETypeParameterDecl__Group__09433);
             rule__ETypeParameterDecl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12596,10 +12995,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ETypeParameterDecl__Group__0
+    // $ANTLR end "rule__ETypeParameterDecl__Group__0"
 
 
-    // $ANTLR start rule__ETypeParameterDecl__Group__0__Impl
+    // $ANTLR start "rule__ETypeParameterDecl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4662:1: rule__ETypeParameterDecl__Group__0__Impl : ( ( rule__ETypeParameterDecl__NameAssignment_0 ) ) ;
     public final void rule__ETypeParameterDecl__Group__0__Impl() throws RecognitionException {
 
@@ -12618,7 +13017,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ETypeParameterDecl__NameAssignment_0_in_rule__ETypeParameterDecl__Group__0__Impl9460);
             rule__ETypeParameterDecl__NameAssignment_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12642,10 +13042,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ETypeParameterDecl__Group__0__Impl
+    // $ANTLR end "rule__ETypeParameterDecl__Group__0__Impl"
 
 
-    // $ANTLR start rule__ETypeParameterDecl__Group__1
+    // $ANTLR start "rule__ETypeParameterDecl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4679:1: rule__ETypeParameterDecl__Group__1 : rule__ETypeParameterDecl__Group__1__Impl ;
     public final void rule__ETypeParameterDecl__Group__1() throws RecognitionException {
 
@@ -12657,7 +13057,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ETypeParameterDecl__Group__1__Impl_in_rule__ETypeParameterDecl__Group__19490);
             rule__ETypeParameterDecl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12674,10 +13075,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ETypeParameterDecl__Group__1
+    // $ANTLR end "rule__ETypeParameterDecl__Group__1"
 
 
-    // $ANTLR start rule__ETypeParameterDecl__Group__1__Impl
+    // $ANTLR start "rule__ETypeParameterDecl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4690:1: rule__ETypeParameterDecl__Group__1__Impl : ( ( rule__ETypeParameterDecl__Group_1__0 )? ) ;
     public final void rule__ETypeParameterDecl__Group__1__Impl() throws RecognitionException {
 
@@ -12704,7 +13105,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__ETypeParameterDecl__Group_1__0_in_rule__ETypeParameterDecl__Group__1__Impl9517);
                     rule__ETypeParameterDecl__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -12731,10 +13133,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ETypeParameterDecl__Group__1__Impl
+    // $ANTLR end "rule__ETypeParameterDecl__Group__1__Impl"
 
 
-    // $ANTLR start rule__ETypeParameterDecl__Group_1__0
+    // $ANTLR start "rule__ETypeParameterDecl__Group_1__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4711:1: rule__ETypeParameterDecl__Group_1__0 : rule__ETypeParameterDecl__Group_1__0__Impl rule__ETypeParameterDecl__Group_1__1 ;
     public final void rule__ETypeParameterDecl__Group_1__0() throws RecognitionException {
 
@@ -12746,11 +13148,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ETypeParameterDecl__Group_1__0__Impl_in_rule__ETypeParameterDecl__Group_1__09552);
             rule__ETypeParameterDecl__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__ETypeParameterDecl__Group_1__1_in_rule__ETypeParameterDecl__Group_1__09555);
             rule__ETypeParameterDecl__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12767,10 +13171,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ETypeParameterDecl__Group_1__0
+    // $ANTLR end "rule__ETypeParameterDecl__Group_1__0"
 
 
-    // $ANTLR start rule__ETypeParameterDecl__Group_1__0__Impl
+    // $ANTLR start "rule__ETypeParameterDecl__Group_1__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4723:1: rule__ETypeParameterDecl__Group_1__0__Impl : ( 'extends' ) ;
     public final void rule__ETypeParameterDecl__Group_1__0__Impl() throws RecognitionException {
 
@@ -12804,10 +13208,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ETypeParameterDecl__Group_1__0__Impl
+    // $ANTLR end "rule__ETypeParameterDecl__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__ETypeParameterDecl__Group_1__1
+    // $ANTLR start "rule__ETypeParameterDecl__Group_1__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4742:1: rule__ETypeParameterDecl__Group_1__1 : rule__ETypeParameterDecl__Group_1__1__Impl ;
     public final void rule__ETypeParameterDecl__Group_1__1() throws RecognitionException {
 
@@ -12819,7 +13223,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ETypeParameterDecl__Group_1__1__Impl_in_rule__ETypeParameterDecl__Group_1__19614);
             rule__ETypeParameterDecl__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12836,10 +13241,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ETypeParameterDecl__Group_1__1
+    // $ANTLR end "rule__ETypeParameterDecl__Group_1__1"
 
 
-    // $ANTLR start rule__ETypeParameterDecl__Group_1__1__Impl
+    // $ANTLR start "rule__ETypeParameterDecl__Group_1__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4753:1: rule__ETypeParameterDecl__Group_1__1__Impl : ( ( rule__ETypeParameterDecl__EBoundsAssignment_1_1 ) ) ;
     public final void rule__ETypeParameterDecl__Group_1__1__Impl() throws RecognitionException {
 
@@ -12858,7 +13263,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__ETypeParameterDecl__EBoundsAssignment_1_1_in_rule__ETypeParameterDecl__Group_1__1__Impl9641);
             rule__ETypeParameterDecl__EBoundsAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12882,10 +13288,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ETypeParameterDecl__Group_1__1__Impl
+    // $ANTLR end "rule__ETypeParameterDecl__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0__0
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4774:1: rule__EGenericTypeReferenceDecl__Group_0__0 : rule__EGenericTypeReferenceDecl__Group_0__0__Impl rule__EGenericTypeReferenceDecl__Group_0__1 ;
     public final void rule__EGenericTypeReferenceDecl__Group_0__0() throws RecognitionException {
 
@@ -12897,11 +13303,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__0__Impl_in_rule__EGenericTypeReferenceDecl__Group_0__09675);
             rule__EGenericTypeReferenceDecl__Group_0__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__1_in_rule__EGenericTypeReferenceDecl__Group_0__09678);
             rule__EGenericTypeReferenceDecl__Group_0__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12918,10 +13326,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0__0
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0__0"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0__0__Impl
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4786:1: rule__EGenericTypeReferenceDecl__Group_0__0__Impl : ( ( rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0 ) ) ;
     public final void rule__EGenericTypeReferenceDecl__Group_0__0__Impl() throws RecognitionException {
 
@@ -12940,7 +13348,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeReferenceDecl__Group_0__0__Impl9705);
             rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12964,10 +13373,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0__0__Impl
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0__0__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0__1
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4803:1: rule__EGenericTypeReferenceDecl__Group_0__1 : rule__EGenericTypeReferenceDecl__Group_0__1__Impl ;
     public final void rule__EGenericTypeReferenceDecl__Group_0__1() throws RecognitionException {
 
@@ -12979,7 +13388,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__1__Impl_in_rule__EGenericTypeReferenceDecl__Group_0__19735);
             rule__EGenericTypeReferenceDecl__Group_0__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12996,10 +13406,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0__1
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0__1"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0__1__Impl
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4814:1: rule__EGenericTypeReferenceDecl__Group_0__1__Impl : ( ( rule__EGenericTypeReferenceDecl__Group_0_1__0 )? ) ;
     public final void rule__EGenericTypeReferenceDecl__Group_0__1__Impl() throws RecognitionException {
 
@@ -13026,7 +13436,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__0_in_rule__EGenericTypeReferenceDecl__Group_0__1__Impl9762);
                     rule__EGenericTypeReferenceDecl__Group_0_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -13053,10 +13464,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0__1__Impl
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0__1__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1__0
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4835:1: rule__EGenericTypeReferenceDecl__Group_0_1__0 : rule__EGenericTypeReferenceDecl__Group_0_1__0__Impl rule__EGenericTypeReferenceDecl__Group_0_1__1 ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1__0() throws RecognitionException {
 
@@ -13068,11 +13479,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__0__Impl_in_rule__EGenericTypeReferenceDecl__Group_0_1__09797);
             rule__EGenericTypeReferenceDecl__Group_0_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__1_in_rule__EGenericTypeReferenceDecl__Group_0_1__09800);
             rule__EGenericTypeReferenceDecl__Group_0_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13089,10 +13502,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1__0
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1__0"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1__0__Impl
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4847:1: rule__EGenericTypeReferenceDecl__Group_0_1__0__Impl : ( '<' ) ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1__0__Impl() throws RecognitionException {
 
@@ -13126,10 +13539,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1__0__Impl
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1__0__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1__1
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4866:1: rule__EGenericTypeReferenceDecl__Group_0_1__1 : rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl rule__EGenericTypeReferenceDecl__Group_0_1__2 ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1__1() throws RecognitionException {
 
@@ -13141,11 +13554,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl_in_rule__EGenericTypeReferenceDecl__Group_0_1__19859);
             rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__2_in_rule__EGenericTypeReferenceDecl__Group_0_1__19862);
             rule__EGenericTypeReferenceDecl__Group_0_1__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13162,10 +13577,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1__1
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1__1"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4878:1: rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl : ( ( rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1 ) ) ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl() throws RecognitionException {
 
@@ -13184,7 +13599,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl9889);
             rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13208,10 +13624,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1__2
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4895:1: rule__EGenericTypeReferenceDecl__Group_0_1__2 : rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl rule__EGenericTypeReferenceDecl__Group_0_1__3 ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1__2() throws RecognitionException {
 
@@ -13223,11 +13639,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl_in_rule__EGenericTypeReferenceDecl__Group_0_1__29919);
             rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__3_in_rule__EGenericTypeReferenceDecl__Group_0_1__29922);
             rule__EGenericTypeReferenceDecl__Group_0_1__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13244,10 +13662,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1__2
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1__2"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4907:1: rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl : ( ( rule__EGenericTypeReferenceDecl__Group_0_1_2__0 )* ) ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl() throws RecognitionException {
 
@@ -13278,7 +13696,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__0_in_rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl9949);
             	    rule__EGenericTypeReferenceDecl__Group_0_1_2__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -13308,10 +13727,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1__3
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4924:1: rule__EGenericTypeReferenceDecl__Group_0_1__3 : rule__EGenericTypeReferenceDecl__Group_0_1__3__Impl ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1__3() throws RecognitionException {
 
@@ -13323,7 +13742,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__3__Impl_in_rule__EGenericTypeReferenceDecl__Group_0_1__39980);
             rule__EGenericTypeReferenceDecl__Group_0_1__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13340,10 +13760,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1__3
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1__3"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1__3__Impl
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4935:1: rule__EGenericTypeReferenceDecl__Group_0_1__3__Impl : ( '>' ) ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1__3__Impl() throws RecognitionException {
 
@@ -13377,10 +13797,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1__3__Impl
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1__3__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1_2__0
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4962:1: rule__EGenericTypeReferenceDecl__Group_0_1_2__0 : rule__EGenericTypeReferenceDecl__Group_0_1_2__0__Impl rule__EGenericTypeReferenceDecl__Group_0_1_2__1 ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1_2__0() throws RecognitionException {
 
@@ -13392,11 +13812,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__0__Impl_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__010047);
             rule__EGenericTypeReferenceDecl__Group_0_1_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__1_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__010050);
             rule__EGenericTypeReferenceDecl__Group_0_1_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13413,10 +13835,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1_2__0
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1_2__0"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1_2__0__Impl
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4974:1: rule__EGenericTypeReferenceDecl__Group_0_1_2__0__Impl : ( ',' ) ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1_2__0__Impl() throws RecognitionException {
 
@@ -13450,10 +13872,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1_2__0__Impl
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1_2__0__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1_2__1
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:4993:1: rule__EGenericTypeReferenceDecl__Group_0_1_2__1 : rule__EGenericTypeReferenceDecl__Group_0_1_2__1__Impl ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1_2__1() throws RecognitionException {
 
@@ -13465,7 +13887,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__1__Impl_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__110109);
             rule__EGenericTypeReferenceDecl__Group_0_1_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13482,10 +13905,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1_2__1
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1_2__1"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_0_1_2__1__Impl
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_0_1_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5004:1: rule__EGenericTypeReferenceDecl__Group_0_1_2__1__Impl : ( ( rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1 ) ) ;
     public final void rule__EGenericTypeReferenceDecl__Group_0_1_2__1__Impl() throws RecognitionException {
 
@@ -13504,7 +13927,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__1__Impl10136);
             rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13528,10 +13952,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_0_1_2__1__Impl
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_0_1_2__1__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_1__0
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_1__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5025:1: rule__EGenericTypeReferenceDecl__Group_1__0 : rule__EGenericTypeReferenceDecl__Group_1__0__Impl rule__EGenericTypeReferenceDecl__Group_1__1 ;
     public final void rule__EGenericTypeReferenceDecl__Group_1__0() throws RecognitionException {
 
@@ -13543,11 +13967,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__0__Impl_in_rule__EGenericTypeReferenceDecl__Group_1__010170);
             rule__EGenericTypeReferenceDecl__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__1_in_rule__EGenericTypeReferenceDecl__Group_1__010173);
             rule__EGenericTypeReferenceDecl__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13564,10 +13990,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_1__0
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_1__0"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_1__0__Impl
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_1__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5037:1: rule__EGenericTypeReferenceDecl__Group_1__0__Impl : ( '#' ) ;
     public final void rule__EGenericTypeReferenceDecl__Group_1__0__Impl() throws RecognitionException {
 
@@ -13601,10 +14027,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_1__0__Impl
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_1__1
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_1__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5056:1: rule__EGenericTypeReferenceDecl__Group_1__1 : rule__EGenericTypeReferenceDecl__Group_1__1__Impl ;
     public final void rule__EGenericTypeReferenceDecl__Group_1__1() throws RecognitionException {
 
@@ -13616,7 +14042,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__1__Impl_in_rule__EGenericTypeReferenceDecl__Group_1__110232);
             rule__EGenericTypeReferenceDecl__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13633,10 +14060,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_1__1
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_1__1"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__Group_1__1__Impl
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__Group_1__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5067:1: rule__EGenericTypeReferenceDecl__Group_1__1__Impl : ( ( rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1 ) ) ;
     public final void rule__EGenericTypeReferenceDecl__Group_1__1__Impl() throws RecognitionException {
 
@@ -13655,7 +14082,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1_in_rule__EGenericTypeReferenceDecl__Group_1__1__Impl10259);
             rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13679,10 +14107,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__Group_1__1__Impl
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0__0
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5088:1: rule__EGenericTypeDecl__Group_0__0 : rule__EGenericTypeDecl__Group_0__0__Impl rule__EGenericTypeDecl__Group_0__1 ;
     public final void rule__EGenericTypeDecl__Group_0__0() throws RecognitionException {
 
@@ -13694,11 +14122,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0__0__Impl_in_rule__EGenericTypeDecl__Group_0__010293);
             rule__EGenericTypeDecl__Group_0__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0__1_in_rule__EGenericTypeDecl__Group_0__010296);
             rule__EGenericTypeDecl__Group_0__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13715,10 +14145,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0__0
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0__0"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0__0__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5100:1: rule__EGenericTypeDecl__Group_0__0__Impl : ( ( rule__EGenericTypeDecl__EClassifierAssignment_0_0 ) ) ;
     public final void rule__EGenericTypeDecl__Group_0__0__Impl() throws RecognitionException {
 
@@ -13737,7 +14167,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeDecl__Group_0__0__Impl10323);
             rule__EGenericTypeDecl__EClassifierAssignment_0_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13761,10 +14192,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0__0__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0__0__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0__1
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5117:1: rule__EGenericTypeDecl__Group_0__1 : rule__EGenericTypeDecl__Group_0__1__Impl ;
     public final void rule__EGenericTypeDecl__Group_0__1() throws RecognitionException {
 
@@ -13776,7 +14207,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0__1__Impl_in_rule__EGenericTypeDecl__Group_0__110353);
             rule__EGenericTypeDecl__Group_0__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13793,10 +14225,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0__1
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0__1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0__1__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5128:1: rule__EGenericTypeDecl__Group_0__1__Impl : ( ( rule__EGenericTypeDecl__Group_0_1__0 )? ) ;
     public final void rule__EGenericTypeDecl__Group_0__1__Impl() throws RecognitionException {
 
@@ -13823,7 +14255,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__0_in_rule__EGenericTypeDecl__Group_0__1__Impl10380);
                     rule__EGenericTypeDecl__Group_0_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -13850,10 +14283,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0__1__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0__1__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1__0
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5149:1: rule__EGenericTypeDecl__Group_0_1__0 : rule__EGenericTypeDecl__Group_0_1__0__Impl rule__EGenericTypeDecl__Group_0_1__1 ;
     public final void rule__EGenericTypeDecl__Group_0_1__0() throws RecognitionException {
 
@@ -13865,11 +14298,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__0__Impl_in_rule__EGenericTypeDecl__Group_0_1__010415);
             rule__EGenericTypeDecl__Group_0_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__1_in_rule__EGenericTypeDecl__Group_0_1__010418);
             rule__EGenericTypeDecl__Group_0_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13886,10 +14321,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1__0
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1__0"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1__0__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5161:1: rule__EGenericTypeDecl__Group_0_1__0__Impl : ( '<' ) ;
     public final void rule__EGenericTypeDecl__Group_0_1__0__Impl() throws RecognitionException {
 
@@ -13923,10 +14358,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1__0__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1__0__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1__1
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5180:1: rule__EGenericTypeDecl__Group_0_1__1 : rule__EGenericTypeDecl__Group_0_1__1__Impl rule__EGenericTypeDecl__Group_0_1__2 ;
     public final void rule__EGenericTypeDecl__Group_0_1__1() throws RecognitionException {
 
@@ -13938,11 +14373,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__1__Impl_in_rule__EGenericTypeDecl__Group_0_1__110477);
             rule__EGenericTypeDecl__Group_0_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__2_in_rule__EGenericTypeDecl__Group_0_1__110480);
             rule__EGenericTypeDecl__Group_0_1__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13959,10 +14396,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1__1
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1__1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1__1__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5192:1: rule__EGenericTypeDecl__Group_0_1__1__Impl : ( ( rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1 ) ) ;
     public final void rule__EGenericTypeDecl__Group_0_1__1__Impl() throws RecognitionException {
 
@@ -13981,7 +14418,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeDecl__Group_0_1__1__Impl10507);
             rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14005,10 +14443,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1__1__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1__1__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1__2
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5209:1: rule__EGenericTypeDecl__Group_0_1__2 : rule__EGenericTypeDecl__Group_0_1__2__Impl rule__EGenericTypeDecl__Group_0_1__3 ;
     public final void rule__EGenericTypeDecl__Group_0_1__2() throws RecognitionException {
 
@@ -14020,11 +14458,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__2__Impl_in_rule__EGenericTypeDecl__Group_0_1__210537);
             rule__EGenericTypeDecl__Group_0_1__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__3_in_rule__EGenericTypeDecl__Group_0_1__210540);
             rule__EGenericTypeDecl__Group_0_1__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14041,10 +14481,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1__2
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1__2"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1__2__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5221:1: rule__EGenericTypeDecl__Group_0_1__2__Impl : ( ( rule__EGenericTypeDecl__Group_0_1_2__0 )* ) ;
     public final void rule__EGenericTypeDecl__Group_0_1__2__Impl() throws RecognitionException {
 
@@ -14075,7 +14515,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__0_in_rule__EGenericTypeDecl__Group_0_1__2__Impl10567);
             	    rule__EGenericTypeDecl__Group_0_1_2__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -14105,10 +14546,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1__2__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1__2__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1__3
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5238:1: rule__EGenericTypeDecl__Group_0_1__3 : rule__EGenericTypeDecl__Group_0_1__3__Impl ;
     public final void rule__EGenericTypeDecl__Group_0_1__3() throws RecognitionException {
 
@@ -14120,7 +14561,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__3__Impl_in_rule__EGenericTypeDecl__Group_0_1__310598);
             rule__EGenericTypeDecl__Group_0_1__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14137,10 +14579,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1__3
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1__3"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1__3__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5249:1: rule__EGenericTypeDecl__Group_0_1__3__Impl : ( '>' ) ;
     public final void rule__EGenericTypeDecl__Group_0_1__3__Impl() throws RecognitionException {
 
@@ -14174,10 +14616,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1__3__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1__3__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1_2__0
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5276:1: rule__EGenericTypeDecl__Group_0_1_2__0 : rule__EGenericTypeDecl__Group_0_1_2__0__Impl rule__EGenericTypeDecl__Group_0_1_2__1 ;
     public final void rule__EGenericTypeDecl__Group_0_1_2__0() throws RecognitionException {
 
@@ -14189,11 +14631,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__0__Impl_in_rule__EGenericTypeDecl__Group_0_1_2__010665);
             rule__EGenericTypeDecl__Group_0_1_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__1_in_rule__EGenericTypeDecl__Group_0_1_2__010668);
             rule__EGenericTypeDecl__Group_0_1_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14210,10 +14654,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1_2__0
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1_2__0"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1_2__0__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5288:1: rule__EGenericTypeDecl__Group_0_1_2__0__Impl : ( ',' ) ;
     public final void rule__EGenericTypeDecl__Group_0_1_2__0__Impl() throws RecognitionException {
 
@@ -14247,10 +14691,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1_2__0__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1_2__0__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1_2__1
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5307:1: rule__EGenericTypeDecl__Group_0_1_2__1 : rule__EGenericTypeDecl__Group_0_1_2__1__Impl ;
     public final void rule__EGenericTypeDecl__Group_0_1_2__1() throws RecognitionException {
 
@@ -14262,7 +14706,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__1__Impl_in_rule__EGenericTypeDecl__Group_0_1_2__110727);
             rule__EGenericTypeDecl__Group_0_1_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14279,10 +14724,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1_2__1
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1_2__1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_0_1_2__1__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_0_1_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5318:1: rule__EGenericTypeDecl__Group_0_1_2__1__Impl : ( ( rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1 ) ) ;
     public final void rule__EGenericTypeDecl__Group_0_1_2__1__Impl() throws RecognitionException {
 
@@ -14301,7 +14746,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1_in_rule__EGenericTypeDecl__Group_0_1_2__1__Impl10754);
             rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14325,10 +14771,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_0_1_2__1__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_0_1_2__1__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_1__0
+    // $ANTLR start "rule__EGenericTypeDecl__Group_1__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5339:1: rule__EGenericTypeDecl__Group_1__0 : rule__EGenericTypeDecl__Group_1__0__Impl rule__EGenericTypeDecl__Group_1__1 ;
     public final void rule__EGenericTypeDecl__Group_1__0() throws RecognitionException {
 
@@ -14340,11 +14786,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_1__0__Impl_in_rule__EGenericTypeDecl__Group_1__010788);
             rule__EGenericTypeDecl__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_1__1_in_rule__EGenericTypeDecl__Group_1__010791);
             rule__EGenericTypeDecl__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14361,10 +14809,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_1__0
+    // $ANTLR end "rule__EGenericTypeDecl__Group_1__0"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_1__0__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_1__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5351:1: rule__EGenericTypeDecl__Group_1__0__Impl : ( '#' ) ;
     public final void rule__EGenericTypeDecl__Group_1__0__Impl() throws RecognitionException {
 
@@ -14398,10 +14846,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_1__0__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_1__1
+    // $ANTLR start "rule__EGenericTypeDecl__Group_1__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5370:1: rule__EGenericTypeDecl__Group_1__1 : rule__EGenericTypeDecl__Group_1__1__Impl ;
     public final void rule__EGenericTypeDecl__Group_1__1() throws RecognitionException {
 
@@ -14413,7 +14861,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_1__1__Impl_in_rule__EGenericTypeDecl__Group_1__110850);
             rule__EGenericTypeDecl__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14430,10 +14879,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_1__1
+    // $ANTLR end "rule__EGenericTypeDecl__Group_1__1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_1__1__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_1__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5381:1: rule__EGenericTypeDecl__Group_1__1__Impl : ( ( rule__EGenericTypeDecl__ETypeParameterAssignment_1_1 ) ) ;
     public final void rule__EGenericTypeDecl__Group_1__1__Impl() throws RecognitionException {
 
@@ -14452,7 +14901,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__ETypeParameterAssignment_1_1_in_rule__EGenericTypeDecl__Group_1__1__Impl10877);
             rule__EGenericTypeDecl__ETypeParameterAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14476,10 +14926,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_1__1__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2__0
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5402:1: rule__EGenericTypeDecl__Group_2__0 : rule__EGenericTypeDecl__Group_2__0__Impl rule__EGenericTypeDecl__Group_2__1 ;
     public final void rule__EGenericTypeDecl__Group_2__0() throws RecognitionException {
 
@@ -14491,11 +14941,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2__0__Impl_in_rule__EGenericTypeDecl__Group_2__010911);
             rule__EGenericTypeDecl__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2__1_in_rule__EGenericTypeDecl__Group_2__010914);
             rule__EGenericTypeDecl__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14512,10 +14964,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2__0
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2__0"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2__0__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5414:1: rule__EGenericTypeDecl__Group_2__0__Impl : ( '?' ) ;
     public final void rule__EGenericTypeDecl__Group_2__0__Impl() throws RecognitionException {
 
@@ -14549,10 +15001,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2__0__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2__1
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5433:1: rule__EGenericTypeDecl__Group_2__1 : rule__EGenericTypeDecl__Group_2__1__Impl ;
     public final void rule__EGenericTypeDecl__Group_2__1() throws RecognitionException {
 
@@ -14564,7 +15016,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2__1__Impl_in_rule__EGenericTypeDecl__Group_2__110973);
             rule__EGenericTypeDecl__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14581,10 +15034,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2__1
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2__1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2__1__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5444:1: rule__EGenericTypeDecl__Group_2__1__Impl : ( ( rule__EGenericTypeDecl__Alternatives_2_1 ) ) ;
     public final void rule__EGenericTypeDecl__Group_2__1__Impl() throws RecognitionException {
 
@@ -14603,7 +15056,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Alternatives_2_1_in_rule__EGenericTypeDecl__Group_2__1__Impl11000);
             rule__EGenericTypeDecl__Alternatives_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14627,10 +15081,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2__1__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2_1_0__0
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2_1_0__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5465:1: rule__EGenericTypeDecl__Group_2_1_0__0 : rule__EGenericTypeDecl__Group_2_1_0__0__Impl rule__EGenericTypeDecl__Group_2_1_0__1 ;
     public final void rule__EGenericTypeDecl__Group_2_1_0__0() throws RecognitionException {
 
@@ -14642,11 +15096,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__0__Impl_in_rule__EGenericTypeDecl__Group_2_1_0__011034);
             rule__EGenericTypeDecl__Group_2_1_0__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__1_in_rule__EGenericTypeDecl__Group_2_1_0__011037);
             rule__EGenericTypeDecl__Group_2_1_0__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14663,10 +15119,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2_1_0__0
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2_1_0__0"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2_1_0__0__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2_1_0__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5477:1: rule__EGenericTypeDecl__Group_2_1_0__0__Impl : ( 'extends' ) ;
     public final void rule__EGenericTypeDecl__Group_2_1_0__0__Impl() throws RecognitionException {
 
@@ -14700,10 +15156,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2_1_0__0__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2_1_0__0__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2_1_0__1
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2_1_0__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5496:1: rule__EGenericTypeDecl__Group_2_1_0__1 : rule__EGenericTypeDecl__Group_2_1_0__1__Impl ;
     public final void rule__EGenericTypeDecl__Group_2_1_0__1() throws RecognitionException {
 
@@ -14715,7 +15171,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__1__Impl_in_rule__EGenericTypeDecl__Group_2_1_0__111096);
             rule__EGenericTypeDecl__Group_2_1_0__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14732,10 +15189,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2_1_0__1
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2_1_0__1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2_1_0__1__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2_1_0__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5507:1: rule__EGenericTypeDecl__Group_2_1_0__1__Impl : ( ( rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1 ) ) ;
     public final void rule__EGenericTypeDecl__Group_2_1_0__1__Impl() throws RecognitionException {
 
@@ -14754,7 +15211,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1_in_rule__EGenericTypeDecl__Group_2_1_0__1__Impl11123);
             rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14778,10 +15236,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2_1_0__1__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2_1_0__1__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2_1_1__0
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2_1_1__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5528:1: rule__EGenericTypeDecl__Group_2_1_1__0 : rule__EGenericTypeDecl__Group_2_1_1__0__Impl rule__EGenericTypeDecl__Group_2_1_1__1 ;
     public final void rule__EGenericTypeDecl__Group_2_1_1__0() throws RecognitionException {
 
@@ -14793,11 +15251,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__0__Impl_in_rule__EGenericTypeDecl__Group_2_1_1__011157);
             rule__EGenericTypeDecl__Group_2_1_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__1_in_rule__EGenericTypeDecl__Group_2_1_1__011160);
             rule__EGenericTypeDecl__Group_2_1_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14814,10 +15274,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2_1_1__0
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2_1_1__0"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2_1_1__0__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2_1_1__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5540:1: rule__EGenericTypeDecl__Group_2_1_1__0__Impl : ( 'super' ) ;
     public final void rule__EGenericTypeDecl__Group_2_1_1__0__Impl() throws RecognitionException {
 
@@ -14851,10 +15311,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2_1_1__0__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2_1_1__0__Impl"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2_1_1__1
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2_1_1__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5559:1: rule__EGenericTypeDecl__Group_2_1_1__1 : rule__EGenericTypeDecl__Group_2_1_1__1__Impl ;
     public final void rule__EGenericTypeDecl__Group_2_1_1__1() throws RecognitionException {
 
@@ -14866,7 +15326,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__1__Impl_in_rule__EGenericTypeDecl__Group_2_1_1__111219);
             rule__EGenericTypeDecl__Group_2_1_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14883,10 +15344,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2_1_1__1
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2_1_1__1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__Group_2_1_1__1__Impl
+    // $ANTLR start "rule__EGenericTypeDecl__Group_2_1_1__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5570:1: rule__EGenericTypeDecl__Group_2_1_1__1__Impl : ( ( rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1 ) ) ;
     public final void rule__EGenericTypeDecl__Group_2_1_1__1__Impl() throws RecognitionException {
 
@@ -14905,7 +15366,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1_in_rule__EGenericTypeDecl__Group_2_1_1__1__Impl11246);
             rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14929,10 +15391,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__Group_2_1_1__1__Impl
+    // $ANTLR end "rule__EGenericTypeDecl__Group_2_1_1__1__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__0
+    // $ANTLR start "rule__EOperationDecl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5591:1: rule__EOperationDecl__Group__0 : rule__EOperationDecl__Group__0__Impl rule__EOperationDecl__Group__1 ;
     public final void rule__EOperationDecl__Group__0() throws RecognitionException {
 
@@ -14944,11 +15406,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__0__Impl_in_rule__EOperationDecl__Group__011280);
             rule__EOperationDecl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group__1_in_rule__EOperationDecl__Group__011283);
             rule__EOperationDecl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14965,10 +15429,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__0
+    // $ANTLR end "rule__EOperationDecl__Group__0"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__0__Impl
+    // $ANTLR start "rule__EOperationDecl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5603:1: rule__EOperationDecl__Group__0__Impl : ( ( rule__EOperationDecl__EAnnotationsAssignment_0 )* ) ;
     public final void rule__EOperationDecl__Group__0__Impl() throws RecognitionException {
 
@@ -14999,7 +15463,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EOperationDecl__EAnnotationsAssignment_0_in_rule__EOperationDecl__Group__0__Impl11310);
             	    rule__EOperationDecl__EAnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -15029,10 +15494,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__0__Impl
+    // $ANTLR end "rule__EOperationDecl__Group__0__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__1
+    // $ANTLR start "rule__EOperationDecl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5620:1: rule__EOperationDecl__Group__1 : rule__EOperationDecl__Group__1__Impl rule__EOperationDecl__Group__2 ;
     public final void rule__EOperationDecl__Group__1() throws RecognitionException {
 
@@ -15044,11 +15509,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__1__Impl_in_rule__EOperationDecl__Group__111341);
             rule__EOperationDecl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group__2_in_rule__EOperationDecl__Group__111344);
             rule__EOperationDecl__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15065,10 +15532,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__1
+    // $ANTLR end "rule__EOperationDecl__Group__1"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__1__Impl
+    // $ANTLR start "rule__EOperationDecl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5632:1: rule__EOperationDecl__Group__1__Impl : ( ( rule__EOperationDecl__Alternatives_1 )* ) ;
     public final void rule__EOperationDecl__Group__1__Impl() throws RecognitionException {
 
@@ -15099,7 +15566,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EOperationDecl__Alternatives_1_in_rule__EOperationDecl__Group__1__Impl11371);
             	    rule__EOperationDecl__Alternatives_1();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -15129,10 +15597,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__1__Impl
+    // $ANTLR end "rule__EOperationDecl__Group__1__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__2
+    // $ANTLR start "rule__EOperationDecl__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5649:1: rule__EOperationDecl__Group__2 : rule__EOperationDecl__Group__2__Impl rule__EOperationDecl__Group__3 ;
     public final void rule__EOperationDecl__Group__2() throws RecognitionException {
 
@@ -15144,11 +15612,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__2__Impl_in_rule__EOperationDecl__Group__211402);
             rule__EOperationDecl__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group__3_in_rule__EOperationDecl__Group__211405);
             rule__EOperationDecl__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15165,10 +15635,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__2
+    // $ANTLR end "rule__EOperationDecl__Group__2"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__2__Impl
+    // $ANTLR start "rule__EOperationDecl__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5661:1: rule__EOperationDecl__Group__2__Impl : ( 'op' ) ;
     public final void rule__EOperationDecl__Group__2__Impl() throws RecognitionException {
 
@@ -15202,10 +15672,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__2__Impl
+    // $ANTLR end "rule__EOperationDecl__Group__2__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__3
+    // $ANTLR start "rule__EOperationDecl__Group__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5680:1: rule__EOperationDecl__Group__3 : rule__EOperationDecl__Group__3__Impl rule__EOperationDecl__Group__4 ;
     public final void rule__EOperationDecl__Group__3() throws RecognitionException {
 
@@ -15217,11 +15687,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__3__Impl_in_rule__EOperationDecl__Group__311464);
             rule__EOperationDecl__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group__4_in_rule__EOperationDecl__Group__311467);
             rule__EOperationDecl__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15238,10 +15710,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__3
+    // $ANTLR end "rule__EOperationDecl__Group__3"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__3__Impl
+    // $ANTLR start "rule__EOperationDecl__Group__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5692:1: rule__EOperationDecl__Group__3__Impl : ( ( rule__EOperationDecl__Alternatives_3 ) ) ;
     public final void rule__EOperationDecl__Group__3__Impl() throws RecognitionException {
 
@@ -15260,7 +15732,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Alternatives_3_in_rule__EOperationDecl__Group__3__Impl11494);
             rule__EOperationDecl__Alternatives_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15284,10 +15757,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__3__Impl
+    // $ANTLR end "rule__EOperationDecl__Group__3__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__4
+    // $ANTLR start "rule__EOperationDecl__Group__4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5709:1: rule__EOperationDecl__Group__4 : rule__EOperationDecl__Group__4__Impl rule__EOperationDecl__Group__5 ;
     public final void rule__EOperationDecl__Group__4() throws RecognitionException {
 
@@ -15299,11 +15772,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__4__Impl_in_rule__EOperationDecl__Group__411524);
             rule__EOperationDecl__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group__5_in_rule__EOperationDecl__Group__411527);
             rule__EOperationDecl__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15320,10 +15795,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__4
+    // $ANTLR end "rule__EOperationDecl__Group__4"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__4__Impl
+    // $ANTLR start "rule__EOperationDecl__Group__4__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5721:1: rule__EOperationDecl__Group__4__Impl : ( ( rule__EOperationDecl__NameAssignment_4 ) ) ;
     public final void rule__EOperationDecl__Group__4__Impl() throws RecognitionException {
 
@@ -15342,7 +15817,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__NameAssignment_4_in_rule__EOperationDecl__Group__4__Impl11554);
             rule__EOperationDecl__NameAssignment_4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15366,10 +15842,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__4__Impl
+    // $ANTLR end "rule__EOperationDecl__Group__4__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__5
+    // $ANTLR start "rule__EOperationDecl__Group__5"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5738:1: rule__EOperationDecl__Group__5 : rule__EOperationDecl__Group__5__Impl rule__EOperationDecl__Group__6 ;
     public final void rule__EOperationDecl__Group__5() throws RecognitionException {
 
@@ -15381,11 +15857,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__5__Impl_in_rule__EOperationDecl__Group__511584);
             rule__EOperationDecl__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group__6_in_rule__EOperationDecl__Group__511587);
             rule__EOperationDecl__Group__6();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15402,10 +15880,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__5
+    // $ANTLR end "rule__EOperationDecl__Group__5"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__5__Impl
+    // $ANTLR start "rule__EOperationDecl__Group__5__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5750:1: rule__EOperationDecl__Group__5__Impl : ( ( rule__EOperationDecl__Group_5__0 )? ) ;
     public final void rule__EOperationDecl__Group__5__Impl() throws RecognitionException {
 
@@ -15432,7 +15910,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EOperationDecl__Group_5__0_in_rule__EOperationDecl__Group__5__Impl11614);
                     rule__EOperationDecl__Group_5__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -15459,10 +15938,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__5__Impl
+    // $ANTLR end "rule__EOperationDecl__Group__5__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__6
+    // $ANTLR start "rule__EOperationDecl__Group__6"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5767:1: rule__EOperationDecl__Group__6 : rule__EOperationDecl__Group__6__Impl rule__EOperationDecl__Group__7 ;
     public final void rule__EOperationDecl__Group__6() throws RecognitionException {
 
@@ -15474,11 +15953,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__6__Impl_in_rule__EOperationDecl__Group__611645);
             rule__EOperationDecl__Group__6__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group__7_in_rule__EOperationDecl__Group__611648);
             rule__EOperationDecl__Group__7();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15495,10 +15976,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__6
+    // $ANTLR end "rule__EOperationDecl__Group__6"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__6__Impl
+    // $ANTLR start "rule__EOperationDecl__Group__6__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5779:1: rule__EOperationDecl__Group__6__Impl : ( '(' ) ;
     public final void rule__EOperationDecl__Group__6__Impl() throws RecognitionException {
 
@@ -15532,10 +16013,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__6__Impl
+    // $ANTLR end "rule__EOperationDecl__Group__6__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__7
+    // $ANTLR start "rule__EOperationDecl__Group__7"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5798:1: rule__EOperationDecl__Group__7 : rule__EOperationDecl__Group__7__Impl rule__EOperationDecl__Group__8 ;
     public final void rule__EOperationDecl__Group__7() throws RecognitionException {
 
@@ -15547,11 +16028,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__7__Impl_in_rule__EOperationDecl__Group__711707);
             rule__EOperationDecl__Group__7__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group__8_in_rule__EOperationDecl__Group__711710);
             rule__EOperationDecl__Group__8();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15568,10 +16051,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__7
+    // $ANTLR end "rule__EOperationDecl__Group__7"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__7__Impl
+    // $ANTLR start "rule__EOperationDecl__Group__7__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5810:1: rule__EOperationDecl__Group__7__Impl : ( ( rule__EOperationDecl__Group_7__0 )? ) ;
     public final void rule__EOperationDecl__Group__7__Impl() throws RecognitionException {
 
@@ -15598,7 +16081,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EOperationDecl__Group_7__0_in_rule__EOperationDecl__Group__7__Impl11737);
                     rule__EOperationDecl__Group_7__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -15625,10 +16109,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__7__Impl
+    // $ANTLR end "rule__EOperationDecl__Group__7__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__8
+    // $ANTLR start "rule__EOperationDecl__Group__8"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5827:1: rule__EOperationDecl__Group__8 : rule__EOperationDecl__Group__8__Impl rule__EOperationDecl__Group__9 ;
     public final void rule__EOperationDecl__Group__8() throws RecognitionException {
 
@@ -15640,11 +16124,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__8__Impl_in_rule__EOperationDecl__Group__811768);
             rule__EOperationDecl__Group__8__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group__9_in_rule__EOperationDecl__Group__811771);
             rule__EOperationDecl__Group__9();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15661,10 +16147,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__8
+    // $ANTLR end "rule__EOperationDecl__Group__8"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__8__Impl
+    // $ANTLR start "rule__EOperationDecl__Group__8__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5839:1: rule__EOperationDecl__Group__8__Impl : ( ')' ) ;
     public final void rule__EOperationDecl__Group__8__Impl() throws RecognitionException {
 
@@ -15698,10 +16184,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__8__Impl
+    // $ANTLR end "rule__EOperationDecl__Group__8__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__9
+    // $ANTLR start "rule__EOperationDecl__Group__9"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5858:1: rule__EOperationDecl__Group__9 : rule__EOperationDecl__Group__9__Impl rule__EOperationDecl__Group__10 ;
     public final void rule__EOperationDecl__Group__9() throws RecognitionException {
 
@@ -15713,11 +16199,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__9__Impl_in_rule__EOperationDecl__Group__911830);
             rule__EOperationDecl__Group__9__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group__10_in_rule__EOperationDecl__Group__911833);
             rule__EOperationDecl__Group__10();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15734,10 +16222,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__9
+    // $ANTLR end "rule__EOperationDecl__Group__9"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__9__Impl
+    // $ANTLR start "rule__EOperationDecl__Group__9__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5870:1: rule__EOperationDecl__Group__9__Impl : ( ( rule__EOperationDecl__Group_9__0 )? ) ;
     public final void rule__EOperationDecl__Group__9__Impl() throws RecognitionException {
 
@@ -15764,7 +16252,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     {
                     pushFollow(FOLLOW_rule__EOperationDecl__Group_9__0_in_rule__EOperationDecl__Group__9__Impl11860);
                     rule__EOperationDecl__Group_9__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -15791,10 +16280,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__9__Impl
+    // $ANTLR end "rule__EOperationDecl__Group__9__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__10
+    // $ANTLR start "rule__EOperationDecl__Group__10"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5887:1: rule__EOperationDecl__Group__10 : rule__EOperationDecl__Group__10__Impl ;
     public final void rule__EOperationDecl__Group__10() throws RecognitionException {
 
@@ -15806,7 +16295,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group__10__Impl_in_rule__EOperationDecl__Group__1011891);
             rule__EOperationDecl__Group__10__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15823,10 +16313,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__10
+    // $ANTLR end "rule__EOperationDecl__Group__10"
 
 
-    // $ANTLR start rule__EOperationDecl__Group__10__Impl
+    // $ANTLR start "rule__EOperationDecl__Group__10__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5898:1: rule__EOperationDecl__Group__10__Impl : ( ';' ) ;
     public final void rule__EOperationDecl__Group__10__Impl() throws RecognitionException {
 
@@ -15860,10 +16350,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group__10__Impl
+    // $ANTLR end "rule__EOperationDecl__Group__10__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5__0
+    // $ANTLR start "rule__EOperationDecl__Group_5__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5939:1: rule__EOperationDecl__Group_5__0 : rule__EOperationDecl__Group_5__0__Impl rule__EOperationDecl__Group_5__1 ;
     public final void rule__EOperationDecl__Group_5__0() throws RecognitionException {
 
@@ -15875,11 +16365,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_5__0__Impl_in_rule__EOperationDecl__Group_5__011972);
             rule__EOperationDecl__Group_5__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group_5__1_in_rule__EOperationDecl__Group_5__011975);
             rule__EOperationDecl__Group_5__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15896,10 +16388,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5__0
+    // $ANTLR end "rule__EOperationDecl__Group_5__0"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5__0__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_5__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5951:1: rule__EOperationDecl__Group_5__0__Impl : ( '<' ) ;
     public final void rule__EOperationDecl__Group_5__0__Impl() throws RecognitionException {
 
@@ -15933,10 +16425,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5__0__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_5__0__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5__1
+    // $ANTLR start "rule__EOperationDecl__Group_5__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5970:1: rule__EOperationDecl__Group_5__1 : rule__EOperationDecl__Group_5__1__Impl rule__EOperationDecl__Group_5__2 ;
     public final void rule__EOperationDecl__Group_5__1() throws RecognitionException {
 
@@ -15948,11 +16440,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_5__1__Impl_in_rule__EOperationDecl__Group_5__112034);
             rule__EOperationDecl__Group_5__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group_5__2_in_rule__EOperationDecl__Group_5__112037);
             rule__EOperationDecl__Group_5__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15969,10 +16463,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5__1
+    // $ANTLR end "rule__EOperationDecl__Group_5__1"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5__1__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_5__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5982:1: rule__EOperationDecl__Group_5__1__Impl : ( ( rule__EOperationDecl__ETypeParametersAssignment_5_1 ) ) ;
     public final void rule__EOperationDecl__Group_5__1__Impl() throws RecognitionException {
 
@@ -15991,7 +16485,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_1_in_rule__EOperationDecl__Group_5__1__Impl12064);
             rule__EOperationDecl__ETypeParametersAssignment_5_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16015,10 +16510,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5__1__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_5__1__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5__2
+    // $ANTLR start "rule__EOperationDecl__Group_5__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:5999:1: rule__EOperationDecl__Group_5__2 : rule__EOperationDecl__Group_5__2__Impl rule__EOperationDecl__Group_5__3 ;
     public final void rule__EOperationDecl__Group_5__2() throws RecognitionException {
 
@@ -16030,11 +16525,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_5__2__Impl_in_rule__EOperationDecl__Group_5__212094);
             rule__EOperationDecl__Group_5__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group_5__3_in_rule__EOperationDecl__Group_5__212097);
             rule__EOperationDecl__Group_5__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16051,10 +16548,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5__2
+    // $ANTLR end "rule__EOperationDecl__Group_5__2"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5__2__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_5__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6011:1: rule__EOperationDecl__Group_5__2__Impl : ( ( rule__EOperationDecl__Group_5_2__0 )* ) ;
     public final void rule__EOperationDecl__Group_5__2__Impl() throws RecognitionException {
 
@@ -16085,7 +16582,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EOperationDecl__Group_5_2__0_in_rule__EOperationDecl__Group_5__2__Impl12124);
             	    rule__EOperationDecl__Group_5_2__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -16115,10 +16613,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5__2__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_5__2__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5__3
+    // $ANTLR start "rule__EOperationDecl__Group_5__3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6028:1: rule__EOperationDecl__Group_5__3 : rule__EOperationDecl__Group_5__3__Impl ;
     public final void rule__EOperationDecl__Group_5__3() throws RecognitionException {
 
@@ -16130,7 +16628,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_5__3__Impl_in_rule__EOperationDecl__Group_5__312155);
             rule__EOperationDecl__Group_5__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16147,10 +16646,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5__3
+    // $ANTLR end "rule__EOperationDecl__Group_5__3"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5__3__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_5__3__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6039:1: rule__EOperationDecl__Group_5__3__Impl : ( '>' ) ;
     public final void rule__EOperationDecl__Group_5__3__Impl() throws RecognitionException {
 
@@ -16184,10 +16683,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5__3__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_5__3__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5_2__0
+    // $ANTLR start "rule__EOperationDecl__Group_5_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6066:1: rule__EOperationDecl__Group_5_2__0 : rule__EOperationDecl__Group_5_2__0__Impl rule__EOperationDecl__Group_5_2__1 ;
     public final void rule__EOperationDecl__Group_5_2__0() throws RecognitionException {
 
@@ -16199,11 +16698,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_5_2__0__Impl_in_rule__EOperationDecl__Group_5_2__012222);
             rule__EOperationDecl__Group_5_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group_5_2__1_in_rule__EOperationDecl__Group_5_2__012225);
             rule__EOperationDecl__Group_5_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16220,10 +16721,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5_2__0
+    // $ANTLR end "rule__EOperationDecl__Group_5_2__0"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5_2__0__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_5_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6078:1: rule__EOperationDecl__Group_5_2__0__Impl : ( ',' ) ;
     public final void rule__EOperationDecl__Group_5_2__0__Impl() throws RecognitionException {
 
@@ -16257,10 +16758,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5_2__0__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_5_2__0__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5_2__1
+    // $ANTLR start "rule__EOperationDecl__Group_5_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6097:1: rule__EOperationDecl__Group_5_2__1 : rule__EOperationDecl__Group_5_2__1__Impl ;
     public final void rule__EOperationDecl__Group_5_2__1() throws RecognitionException {
 
@@ -16272,7 +16773,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_5_2__1__Impl_in_rule__EOperationDecl__Group_5_2__112284);
             rule__EOperationDecl__Group_5_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16289,10 +16791,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5_2__1
+    // $ANTLR end "rule__EOperationDecl__Group_5_2__1"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_5_2__1__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_5_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6108:1: rule__EOperationDecl__Group_5_2__1__Impl : ( ( rule__EOperationDecl__ETypeParametersAssignment_5_2_1 ) ) ;
     public final void rule__EOperationDecl__Group_5_2__1__Impl() throws RecognitionException {
 
@@ -16311,7 +16813,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_2_1_in_rule__EOperationDecl__Group_5_2__1__Impl12311);
             rule__EOperationDecl__ETypeParametersAssignment_5_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16335,10 +16838,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_5_2__1__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_5_2__1__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_7__0
+    // $ANTLR start "rule__EOperationDecl__Group_7__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6129:1: rule__EOperationDecl__Group_7__0 : rule__EOperationDecl__Group_7__0__Impl rule__EOperationDecl__Group_7__1 ;
     public final void rule__EOperationDecl__Group_7__0() throws RecognitionException {
 
@@ -16350,11 +16853,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_7__0__Impl_in_rule__EOperationDecl__Group_7__012345);
             rule__EOperationDecl__Group_7__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group_7__1_in_rule__EOperationDecl__Group_7__012348);
             rule__EOperationDecl__Group_7__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16371,10 +16876,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_7__0
+    // $ANTLR end "rule__EOperationDecl__Group_7__0"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_7__0__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_7__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6141:1: rule__EOperationDecl__Group_7__0__Impl : ( ( rule__EOperationDecl__EParametersAssignment_7_0 ) ) ;
     public final void rule__EOperationDecl__Group_7__0__Impl() throws RecognitionException {
 
@@ -16393,7 +16898,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__EParametersAssignment_7_0_in_rule__EOperationDecl__Group_7__0__Impl12375);
             rule__EOperationDecl__EParametersAssignment_7_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16417,10 +16923,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_7__0__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_7__0__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_7__1
+    // $ANTLR start "rule__EOperationDecl__Group_7__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6158:1: rule__EOperationDecl__Group_7__1 : rule__EOperationDecl__Group_7__1__Impl ;
     public final void rule__EOperationDecl__Group_7__1() throws RecognitionException {
 
@@ -16432,7 +16938,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_7__1__Impl_in_rule__EOperationDecl__Group_7__112405);
             rule__EOperationDecl__Group_7__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16449,10 +16956,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_7__1
+    // $ANTLR end "rule__EOperationDecl__Group_7__1"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_7__1__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_7__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6169:1: rule__EOperationDecl__Group_7__1__Impl : ( ( rule__EOperationDecl__Group_7_1__0 )* ) ;
     public final void rule__EOperationDecl__Group_7__1__Impl() throws RecognitionException {
 
@@ -16483,7 +16990,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EOperationDecl__Group_7_1__0_in_rule__EOperationDecl__Group_7__1__Impl12432);
             	    rule__EOperationDecl__Group_7_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -16513,10 +17021,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_7__1__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_7__1__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_7_1__0
+    // $ANTLR start "rule__EOperationDecl__Group_7_1__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6190:1: rule__EOperationDecl__Group_7_1__0 : rule__EOperationDecl__Group_7_1__0__Impl rule__EOperationDecl__Group_7_1__1 ;
     public final void rule__EOperationDecl__Group_7_1__0() throws RecognitionException {
 
@@ -16528,11 +17036,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_7_1__0__Impl_in_rule__EOperationDecl__Group_7_1__012467);
             rule__EOperationDecl__Group_7_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group_7_1__1_in_rule__EOperationDecl__Group_7_1__012470);
             rule__EOperationDecl__Group_7_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16549,10 +17059,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_7_1__0
+    // $ANTLR end "rule__EOperationDecl__Group_7_1__0"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_7_1__0__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_7_1__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6202:1: rule__EOperationDecl__Group_7_1__0__Impl : ( ',' ) ;
     public final void rule__EOperationDecl__Group_7_1__0__Impl() throws RecognitionException {
 
@@ -16586,10 +17096,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_7_1__0__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_7_1__0__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_7_1__1
+    // $ANTLR start "rule__EOperationDecl__Group_7_1__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6221:1: rule__EOperationDecl__Group_7_1__1 : rule__EOperationDecl__Group_7_1__1__Impl ;
     public final void rule__EOperationDecl__Group_7_1__1() throws RecognitionException {
 
@@ -16601,7 +17111,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_7_1__1__Impl_in_rule__EOperationDecl__Group_7_1__112529);
             rule__EOperationDecl__Group_7_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16618,10 +17129,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_7_1__1
+    // $ANTLR end "rule__EOperationDecl__Group_7_1__1"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_7_1__1__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_7_1__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6232:1: rule__EOperationDecl__Group_7_1__1__Impl : ( ( rule__EOperationDecl__EParametersAssignment_7_1_1 ) ) ;
     public final void rule__EOperationDecl__Group_7_1__1__Impl() throws RecognitionException {
 
@@ -16640,7 +17151,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__EParametersAssignment_7_1_1_in_rule__EOperationDecl__Group_7_1__1__Impl12556);
             rule__EOperationDecl__EParametersAssignment_7_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16664,10 +17176,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_7_1__1__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_7_1__1__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_9__0
+    // $ANTLR start "rule__EOperationDecl__Group_9__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6253:1: rule__EOperationDecl__Group_9__0 : rule__EOperationDecl__Group_9__0__Impl rule__EOperationDecl__Group_9__1 ;
     public final void rule__EOperationDecl__Group_9__0() throws RecognitionException {
 
@@ -16679,11 +17191,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_9__0__Impl_in_rule__EOperationDecl__Group_9__012590);
             rule__EOperationDecl__Group_9__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group_9__1_in_rule__EOperationDecl__Group_9__012593);
             rule__EOperationDecl__Group_9__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16700,10 +17214,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_9__0
+    // $ANTLR end "rule__EOperationDecl__Group_9__0"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_9__0__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_9__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6265:1: rule__EOperationDecl__Group_9__0__Impl : ( 'throws' ) ;
     public final void rule__EOperationDecl__Group_9__0__Impl() throws RecognitionException {
 
@@ -16737,10 +17251,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_9__0__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_9__0__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_9__1
+    // $ANTLR start "rule__EOperationDecl__Group_9__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6284:1: rule__EOperationDecl__Group_9__1 : rule__EOperationDecl__Group_9__1__Impl rule__EOperationDecl__Group_9__2 ;
     public final void rule__EOperationDecl__Group_9__1() throws RecognitionException {
 
@@ -16752,11 +17266,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_9__1__Impl_in_rule__EOperationDecl__Group_9__112652);
             rule__EOperationDecl__Group_9__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group_9__2_in_rule__EOperationDecl__Group_9__112655);
             rule__EOperationDecl__Group_9__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16773,10 +17289,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_9__1
+    // $ANTLR end "rule__EOperationDecl__Group_9__1"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_9__1__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_9__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6296:1: rule__EOperationDecl__Group_9__1__Impl : ( ( rule__EOperationDecl__EGenericExceptionsAssignment_9_1 ) ) ;
     public final void rule__EOperationDecl__Group_9__1__Impl() throws RecognitionException {
 
@@ -16795,7 +17311,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_1_in_rule__EOperationDecl__Group_9__1__Impl12682);
             rule__EOperationDecl__EGenericExceptionsAssignment_9_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16819,10 +17336,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_9__1__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_9__1__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_9__2
+    // $ANTLR start "rule__EOperationDecl__Group_9__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6313:1: rule__EOperationDecl__Group_9__2 : rule__EOperationDecl__Group_9__2__Impl ;
     public final void rule__EOperationDecl__Group_9__2() throws RecognitionException {
 
@@ -16834,7 +17351,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_9__2__Impl_in_rule__EOperationDecl__Group_9__212712);
             rule__EOperationDecl__Group_9__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16851,10 +17369,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_9__2
+    // $ANTLR end "rule__EOperationDecl__Group_9__2"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_9__2__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_9__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6324:1: rule__EOperationDecl__Group_9__2__Impl : ( ( rule__EOperationDecl__Group_9_2__0 )* ) ;
     public final void rule__EOperationDecl__Group_9__2__Impl() throws RecognitionException {
 
@@ -16885,7 +17403,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EOperationDecl__Group_9_2__0_in_rule__EOperationDecl__Group_9__2__Impl12739);
             	    rule__EOperationDecl__Group_9_2__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -16915,10 +17434,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_9__2__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_9__2__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_9_2__0
+    // $ANTLR start "rule__EOperationDecl__Group_9_2__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6347:1: rule__EOperationDecl__Group_9_2__0 : rule__EOperationDecl__Group_9_2__0__Impl rule__EOperationDecl__Group_9_2__1 ;
     public final void rule__EOperationDecl__Group_9_2__0() throws RecognitionException {
 
@@ -16930,11 +17449,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_9_2__0__Impl_in_rule__EOperationDecl__Group_9_2__012776);
             rule__EOperationDecl__Group_9_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EOperationDecl__Group_9_2__1_in_rule__EOperationDecl__Group_9_2__012779);
             rule__EOperationDecl__Group_9_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16951,10 +17472,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_9_2__0
+    // $ANTLR end "rule__EOperationDecl__Group_9_2__0"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_9_2__0__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_9_2__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6359:1: rule__EOperationDecl__Group_9_2__0__Impl : ( ',' ) ;
     public final void rule__EOperationDecl__Group_9_2__0__Impl() throws RecognitionException {
 
@@ -16988,10 +17509,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_9_2__0__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_9_2__0__Impl"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_9_2__1
+    // $ANTLR start "rule__EOperationDecl__Group_9_2__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6378:1: rule__EOperationDecl__Group_9_2__1 : rule__EOperationDecl__Group_9_2__1__Impl ;
     public final void rule__EOperationDecl__Group_9_2__1() throws RecognitionException {
 
@@ -17003,7 +17524,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__Group_9_2__1__Impl_in_rule__EOperationDecl__Group_9_2__112838);
             rule__EOperationDecl__Group_9_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17020,10 +17542,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_9_2__1
+    // $ANTLR end "rule__EOperationDecl__Group_9_2__1"
 
 
-    // $ANTLR start rule__EOperationDecl__Group_9_2__1__Impl
+    // $ANTLR start "rule__EOperationDecl__Group_9_2__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6389:1: rule__EOperationDecl__Group_9_2__1__Impl : ( ( rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1 ) ) ;
     public final void rule__EOperationDecl__Group_9_2__1__Impl() throws RecognitionException {
 
@@ -17042,7 +17564,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1_in_rule__EOperationDecl__Group_9_2__1__Impl12865);
             rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17066,10 +17589,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__Group_9_2__1__Impl
+    // $ANTLR end "rule__EOperationDecl__Group_9_2__1__Impl"
 
 
-    // $ANTLR start rule__EParameterDecl__Group__0
+    // $ANTLR start "rule__EParameterDecl__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6410:1: rule__EParameterDecl__Group__0 : rule__EParameterDecl__Group__0__Impl rule__EParameterDecl__Group__1 ;
     public final void rule__EParameterDecl__Group__0() throws RecognitionException {
 
@@ -17081,11 +17604,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EParameterDecl__Group__0__Impl_in_rule__EParameterDecl__Group__012899);
             rule__EParameterDecl__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EParameterDecl__Group__1_in_rule__EParameterDecl__Group__012902);
             rule__EParameterDecl__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17102,10 +17627,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EParameterDecl__Group__0
+    // $ANTLR end "rule__EParameterDecl__Group__0"
 
 
-    // $ANTLR start rule__EParameterDecl__Group__0__Impl
+    // $ANTLR start "rule__EParameterDecl__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6422:1: rule__EParameterDecl__Group__0__Impl : ( ( rule__EParameterDecl__EAnnotationsAssignment_0 )* ) ;
     public final void rule__EParameterDecl__Group__0__Impl() throws RecognitionException {
 
@@ -17136,7 +17661,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__EParameterDecl__EAnnotationsAssignment_0_in_rule__EParameterDecl__Group__0__Impl12929);
             	    rule__EParameterDecl__EAnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -17166,10 +17692,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EParameterDecl__Group__0__Impl
+    // $ANTLR end "rule__EParameterDecl__Group__0__Impl"
 
 
-    // $ANTLR start rule__EParameterDecl__Group__1
+    // $ANTLR start "rule__EParameterDecl__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6439:1: rule__EParameterDecl__Group__1 : rule__EParameterDecl__Group__1__Impl rule__EParameterDecl__Group__2 ;
     public final void rule__EParameterDecl__Group__1() throws RecognitionException {
 
@@ -17181,11 +17707,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EParameterDecl__Group__1__Impl_in_rule__EParameterDecl__Group__112960);
             rule__EParameterDecl__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__EParameterDecl__Group__2_in_rule__EParameterDecl__Group__112963);
             rule__EParameterDecl__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17202,10 +17730,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EParameterDecl__Group__1
+    // $ANTLR end "rule__EParameterDecl__Group__1"
 
 
-    // $ANTLR start rule__EParameterDecl__Group__1__Impl
+    // $ANTLR start "rule__EParameterDecl__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6451:1: rule__EParameterDecl__Group__1__Impl : ( ( rule__EParameterDecl__EGenericTypeAssignment_1 ) ) ;
     public final void rule__EParameterDecl__Group__1__Impl() throws RecognitionException {
 
@@ -17224,7 +17752,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EParameterDecl__EGenericTypeAssignment_1_in_rule__EParameterDecl__Group__1__Impl12990);
             rule__EParameterDecl__EGenericTypeAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17248,10 +17777,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EParameterDecl__Group__1__Impl
+    // $ANTLR end "rule__EParameterDecl__Group__1__Impl"
 
 
-    // $ANTLR start rule__EParameterDecl__Group__2
+    // $ANTLR start "rule__EParameterDecl__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6468:1: rule__EParameterDecl__Group__2 : rule__EParameterDecl__Group__2__Impl ;
     public final void rule__EParameterDecl__Group__2() throws RecognitionException {
 
@@ -17263,7 +17792,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EParameterDecl__Group__2__Impl_in_rule__EParameterDecl__Group__213020);
             rule__EParameterDecl__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17280,10 +17810,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EParameterDecl__Group__2
+    // $ANTLR end "rule__EParameterDecl__Group__2"
 
 
-    // $ANTLR start rule__EParameterDecl__Group__2__Impl
+    // $ANTLR start "rule__EParameterDecl__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6479:1: rule__EParameterDecl__Group__2__Impl : ( ( rule__EParameterDecl__NameAssignment_2 ) ) ;
     public final void rule__EParameterDecl__Group__2__Impl() throws RecognitionException {
 
@@ -17302,7 +17832,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__EParameterDecl__NameAssignment_2_in_rule__EParameterDecl__Group__2__Impl13047);
             rule__EParameterDecl__NameAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17326,10 +17857,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EParameterDecl__Group__2__Impl
+    // $ANTLR end "rule__EParameterDecl__Group__2__Impl"
 
 
-    // $ANTLR start rule__MapEntry__Group__0
+    // $ANTLR start "rule__MapEntry__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6502:1: rule__MapEntry__Group__0 : rule__MapEntry__Group__0__Impl rule__MapEntry__Group__1 ;
     public final void rule__MapEntry__Group__0() throws RecognitionException {
 
@@ -17341,11 +17872,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__MapEntry__Group__0__Impl_in_rule__MapEntry__Group__013083);
             rule__MapEntry__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__MapEntry__Group__1_in_rule__MapEntry__Group__013086);
             rule__MapEntry__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17362,10 +17895,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__MapEntry__Group__0
+    // $ANTLR end "rule__MapEntry__Group__0"
 
 
-    // $ANTLR start rule__MapEntry__Group__0__Impl
+    // $ANTLR start "rule__MapEntry__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6514:1: rule__MapEntry__Group__0__Impl : ( ( rule__MapEntry__KeyAssignment_0 ) ) ;
     public final void rule__MapEntry__Group__0__Impl() throws RecognitionException {
 
@@ -17384,7 +17917,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__MapEntry__KeyAssignment_0_in_rule__MapEntry__Group__0__Impl13113);
             rule__MapEntry__KeyAssignment_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17408,10 +17942,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__MapEntry__Group__0__Impl
+    // $ANTLR end "rule__MapEntry__Group__0__Impl"
 
 
-    // $ANTLR start rule__MapEntry__Group__1
+    // $ANTLR start "rule__MapEntry__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6531:1: rule__MapEntry__Group__1 : rule__MapEntry__Group__1__Impl rule__MapEntry__Group__2 ;
     public final void rule__MapEntry__Group__1() throws RecognitionException {
 
@@ -17423,11 +17957,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__MapEntry__Group__1__Impl_in_rule__MapEntry__Group__113143);
             rule__MapEntry__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__MapEntry__Group__2_in_rule__MapEntry__Group__113146);
             rule__MapEntry__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17444,10 +17980,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__MapEntry__Group__1
+    // $ANTLR end "rule__MapEntry__Group__1"
 
 
-    // $ANTLR start rule__MapEntry__Group__1__Impl
+    // $ANTLR start "rule__MapEntry__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6543:1: rule__MapEntry__Group__1__Impl : ( '=' ) ;
     public final void rule__MapEntry__Group__1__Impl() throws RecognitionException {
 
@@ -17481,10 +18017,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__MapEntry__Group__1__Impl
+    // $ANTLR end "rule__MapEntry__Group__1__Impl"
 
 
-    // $ANTLR start rule__MapEntry__Group__2
+    // $ANTLR start "rule__MapEntry__Group__2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6562:1: rule__MapEntry__Group__2 : rule__MapEntry__Group__2__Impl ;
     public final void rule__MapEntry__Group__2() throws RecognitionException {
 
@@ -17496,7 +18032,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__MapEntry__Group__2__Impl_in_rule__MapEntry__Group__213205);
             rule__MapEntry__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17513,10 +18050,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__MapEntry__Group__2
+    // $ANTLR end "rule__MapEntry__Group__2"
 
 
-    // $ANTLR start rule__MapEntry__Group__2__Impl
+    // $ANTLR start "rule__MapEntry__Group__2__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6573:1: rule__MapEntry__Group__2__Impl : ( ( rule__MapEntry__ValueAssignment_2 ) ) ;
     public final void rule__MapEntry__Group__2__Impl() throws RecognitionException {
 
@@ -17535,7 +18072,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__MapEntry__ValueAssignment_2_in_rule__MapEntry__Group__2__Impl13232);
             rule__MapEntry__ValueAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17559,10 +18097,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__MapEntry__Group__2__Impl
+    // $ANTLR end "rule__MapEntry__Group__2__Impl"
 
 
-    // $ANTLR start rule__QID__Group__0
+    // $ANTLR start "rule__QID__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6596:1: rule__QID__Group__0 : rule__QID__Group__0__Impl rule__QID__Group__1 ;
     public final void rule__QID__Group__0() throws RecognitionException {
 
@@ -17574,11 +18112,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__QID__Group__0__Impl_in_rule__QID__Group__013268);
             rule__QID__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__QID__Group__1_in_rule__QID__Group__013271);
             rule__QID__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17595,10 +18135,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__QID__Group__0
+    // $ANTLR end "rule__QID__Group__0"
 
 
-    // $ANTLR start rule__QID__Group__0__Impl
+    // $ANTLR start "rule__QID__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6608:1: rule__QID__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__QID__Group__0__Impl() throws RecognitionException {
 
@@ -17632,10 +18172,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__QID__Group__0__Impl
+    // $ANTLR end "rule__QID__Group__0__Impl"
 
 
-    // $ANTLR start rule__QID__Group__1
+    // $ANTLR start "rule__QID__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6625:1: rule__QID__Group__1 : rule__QID__Group__1__Impl ;
     public final void rule__QID__Group__1() throws RecognitionException {
 
@@ -17647,7 +18187,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__QID__Group__1__Impl_in_rule__QID__Group__113327);
             rule__QID__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17664,10 +18205,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__QID__Group__1
+    // $ANTLR end "rule__QID__Group__1"
 
 
-    // $ANTLR start rule__QID__Group__1__Impl
+    // $ANTLR start "rule__QID__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6636:1: rule__QID__Group__1__Impl : ( ( rule__QID__Group_1__0 )* ) ;
     public final void rule__QID__Group__1__Impl() throws RecognitionException {
 
@@ -17698,7 +18239,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	    {
             	    pushFollow(FOLLOW_rule__QID__Group_1__0_in_rule__QID__Group__1__Impl13354);
             	    rule__QID__Group_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -17728,10 +18270,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__QID__Group__1__Impl
+    // $ANTLR end "rule__QID__Group__1__Impl"
 
 
-    // $ANTLR start rule__QID__Group_1__0
+    // $ANTLR start "rule__QID__Group_1__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6657:1: rule__QID__Group_1__0 : rule__QID__Group_1__0__Impl rule__QID__Group_1__1 ;
     public final void rule__QID__Group_1__0() throws RecognitionException {
 
@@ -17743,11 +18285,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__QID__Group_1__0__Impl_in_rule__QID__Group_1__013389);
             rule__QID__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__QID__Group_1__1_in_rule__QID__Group_1__013392);
             rule__QID__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17764,10 +18308,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__QID__Group_1__0
+    // $ANTLR end "rule__QID__Group_1__0"
 
 
-    // $ANTLR start rule__QID__Group_1__0__Impl
+    // $ANTLR start "rule__QID__Group_1__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6669:1: rule__QID__Group_1__0__Impl : ( ( rule__QID__Alternatives_1_0 ) ) ;
     public final void rule__QID__Group_1__0__Impl() throws RecognitionException {
 
@@ -17786,7 +18330,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__QID__Alternatives_1_0_in_rule__QID__Group_1__0__Impl13419);
             rule__QID__Alternatives_1_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17810,10 +18355,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__QID__Group_1__0__Impl
+    // $ANTLR end "rule__QID__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__QID__Group_1__1
+    // $ANTLR start "rule__QID__Group_1__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6686:1: rule__QID__Group_1__1 : rule__QID__Group_1__1__Impl ;
     public final void rule__QID__Group_1__1() throws RecognitionException {
 
@@ -17825,7 +18370,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__QID__Group_1__1__Impl_in_rule__QID__Group_1__113449);
             rule__QID__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17842,10 +18388,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__QID__Group_1__1
+    // $ANTLR end "rule__QID__Group_1__1"
 
 
-    // $ANTLR start rule__QID__Group_1__1__Impl
+    // $ANTLR start "rule__QID__Group_1__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6697:1: rule__QID__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__QID__Group_1__1__Impl() throws RecognitionException {
 
@@ -17879,10 +18425,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__QID__Group_1__1__Impl
+    // $ANTLR end "rule__QID__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__SINT__Group__0
+    // $ANTLR start "rule__SINT__Group__0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6718:1: rule__SINT__Group__0 : rule__SINT__Group__0__Impl rule__SINT__Group__1 ;
     public final void rule__SINT__Group__0() throws RecognitionException {
 
@@ -17894,11 +18440,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__SINT__Group__0__Impl_in_rule__SINT__Group__013509);
             rule__SINT__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FOLLOW_rule__SINT__Group__1_in_rule__SINT__Group__013512);
             rule__SINT__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17915,10 +18463,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SINT__Group__0
+    // $ANTLR end "rule__SINT__Group__0"
 
 
-    // $ANTLR start rule__SINT__Group__0__Impl
+    // $ANTLR start "rule__SINT__Group__0__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6730:1: rule__SINT__Group__0__Impl : ( ( '-' )? ) ;
     public final void rule__SINT__Group__0__Impl() throws RecognitionException {
 
@@ -17969,10 +18517,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SINT__Group__0__Impl
+    // $ANTLR end "rule__SINT__Group__0__Impl"
 
 
-    // $ANTLR start rule__SINT__Group__1
+    // $ANTLR start "rule__SINT__Group__1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6749:1: rule__SINT__Group__1 : rule__SINT__Group__1__Impl ;
     public final void rule__SINT__Group__1() throws RecognitionException {
 
@@ -17984,7 +18532,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             {
             pushFollow(FOLLOW_rule__SINT__Group__1__Impl_in_rule__SINT__Group__113574);
             rule__SINT__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -18001,10 +18550,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SINT__Group__1
+    // $ANTLR end "rule__SINT__Group__1"
 
 
-    // $ANTLR start rule__SINT__Group__1__Impl
+    // $ANTLR start "rule__SINT__Group__1__Impl"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6760:1: rule__SINT__Group__1__Impl : ( RULE_INT ) ;
     public final void rule__SINT__Group__1__Impl() throws RecognitionException {
 
@@ -18038,10 +18587,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SINT__Group__1__Impl
+    // $ANTLR end "rule__SINT__Group__1__Impl"
 
 
-    // $ANTLR start rule__EcoreDsl__MetamodelDeclarationsAssignment_0
+    // $ANTLR start "rule__EcoreDsl__MetamodelDeclarationsAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6782:1: rule__EcoreDsl__MetamodelDeclarationsAssignment_0 : ( ruleReferencedMetamodel ) ;
     public final void rule__EcoreDsl__MetamodelDeclarationsAssignment_0() throws RecognitionException {
 
@@ -18057,7 +18606,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEcoreDslAccess().getMetamodelDeclarationsReferencedMetamodelParserRuleCall_0_0()); 
             pushFollow(FOLLOW_ruleReferencedMetamodel_in_rule__EcoreDsl__MetamodelDeclarationsAssignment_013639);
             ruleReferencedMetamodel();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEcoreDslAccess().getMetamodelDeclarationsReferencedMetamodelParserRuleCall_0_0()); 
 
@@ -18078,10 +18628,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EcoreDsl__MetamodelDeclarationsAssignment_0
+    // $ANTLR end "rule__EcoreDsl__MetamodelDeclarationsAssignment_0"
 
 
-    // $ANTLR start rule__EcoreDsl__PackageAssignment_1
+    // $ANTLR start "rule__EcoreDsl__PackageAssignment_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6797:1: rule__EcoreDsl__PackageAssignment_1 : ( ruleEPackageDecl ) ;
     public final void rule__EcoreDsl__PackageAssignment_1() throws RecognitionException {
 
@@ -18097,7 +18647,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEcoreDslAccess().getPackageEPackageDeclParserRuleCall_1_0()); 
             pushFollow(FOLLOW_ruleEPackageDecl_in_rule__EcoreDsl__PackageAssignment_113670);
             ruleEPackageDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEcoreDslAccess().getPackageEPackageDeclParserRuleCall_1_0()); 
 
@@ -18118,10 +18669,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EcoreDsl__PackageAssignment_1
+    // $ANTLR end "rule__EcoreDsl__PackageAssignment_1"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__AliasAssignment_1_0
+    // $ANTLR start "rule__ReferencedMetamodel__AliasAssignment_1_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6812:1: rule__ReferencedMetamodel__AliasAssignment_1_0 : ( RULE_ID ) ;
     public final void rule__ReferencedMetamodel__AliasAssignment_1_0() throws RecognitionException {
 
@@ -18155,10 +18706,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__AliasAssignment_1_0
+    // $ANTLR end "rule__ReferencedMetamodel__AliasAssignment_1_0"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__EPackageAssignment_2
+    // $ANTLR start "rule__ReferencedMetamodel__EPackageAssignment_2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6827:1: rule__ReferencedMetamodel__EPackageAssignment_2 : ( ( RULE_STRING ) ) ;
     public final void rule__ReferencedMetamodel__EPackageAssignment_2() throws RecognitionException {
 
@@ -18200,10 +18751,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__EPackageAssignment_2
+    // $ANTLR end "rule__ReferencedMetamodel__EPackageAssignment_2"
 
 
-    // $ANTLR start rule__EPackageDecl__EAnnotationsAssignment_0
+    // $ANTLR start "rule__EPackageDecl__EAnnotationsAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6846:1: rule__EPackageDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EPackageDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
@@ -18219,7 +18770,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EPackageDecl__EAnnotationsAssignment_013771);
             ruleEAnnotationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
 
@@ -18240,10 +18792,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__EAnnotationsAssignment_0
+    // $ANTLR end "rule__EPackageDecl__EAnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__EPackageDecl__NameAssignment_2
+    // $ANTLR start "rule__EPackageDecl__NameAssignment_2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6861:1: rule__EPackageDecl__NameAssignment_2 : ( ruleQID ) ;
     public final void rule__EPackageDecl__NameAssignment_2() throws RecognitionException {
 
@@ -18259,7 +18811,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEPackageDeclAccess().getNameQIDParserRuleCall_2_0()); 
             pushFollow(FOLLOW_ruleQID_in_rule__EPackageDecl__NameAssignment_213802);
             ruleQID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEPackageDeclAccess().getNameQIDParserRuleCall_2_0()); 
 
@@ -18280,10 +18833,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__NameAssignment_2
+    // $ANTLR end "rule__EPackageDecl__NameAssignment_2"
 
 
-    // $ANTLR start rule__EPackageDecl__NsURIAssignment_5
+    // $ANTLR start "rule__EPackageDecl__NsURIAssignment_5"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6876:1: rule__EPackageDecl__NsURIAssignment_5 : ( RULE_STRING ) ;
     public final void rule__EPackageDecl__NsURIAssignment_5() throws RecognitionException {
 
@@ -18317,10 +18870,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__NsURIAssignment_5
+    // $ANTLR end "rule__EPackageDecl__NsURIAssignment_5"
 
 
-    // $ANTLR start rule__EPackageDecl__NsPrefixAssignment_8
+    // $ANTLR start "rule__EPackageDecl__NsPrefixAssignment_8"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6891:1: rule__EPackageDecl__NsPrefixAssignment_8 : ( ruleQID ) ;
     public final void rule__EPackageDecl__NsPrefixAssignment_8() throws RecognitionException {
 
@@ -18336,7 +18889,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEPackageDeclAccess().getNsPrefixQIDParserRuleCall_8_0()); 
             pushFollow(FOLLOW_ruleQID_in_rule__EPackageDecl__NsPrefixAssignment_813864);
             ruleQID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEPackageDeclAccess().getNsPrefixQIDParserRuleCall_8_0()); 
 
@@ -18357,10 +18911,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__NsPrefixAssignment_8
+    // $ANTLR end "rule__EPackageDecl__NsPrefixAssignment_8"
 
 
-    // $ANTLR start rule__EPackageDecl__ESubpackagesAssignment_10_0
+    // $ANTLR start "rule__EPackageDecl__ESubpackagesAssignment_10_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6906:1: rule__EPackageDecl__ESubpackagesAssignment_10_0 : ( ruleSubEPackageDecl ) ;
     public final void rule__EPackageDecl__ESubpackagesAssignment_10_0() throws RecognitionException {
 
@@ -18376,7 +18930,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_10_0_0()); 
             pushFollow(FOLLOW_ruleSubEPackageDecl_in_rule__EPackageDecl__ESubpackagesAssignment_10_013895);
             ruleSubEPackageDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_10_0_0()); 
 
@@ -18397,10 +18952,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__ESubpackagesAssignment_10_0
+    // $ANTLR end "rule__EPackageDecl__ESubpackagesAssignment_10_0"
 
 
-    // $ANTLR start rule__EPackageDecl__EClassifiersAssignment_10_1
+    // $ANTLR start "rule__EPackageDecl__EClassifiersAssignment_10_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6921:1: rule__EPackageDecl__EClassifiersAssignment_10_1 : ( ruleEClassifierDecl ) ;
     public final void rule__EPackageDecl__EClassifiersAssignment_10_1() throws RecognitionException {
 
@@ -18416,7 +18971,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_10_1_0()); 
             pushFollow(FOLLOW_ruleEClassifierDecl_in_rule__EPackageDecl__EClassifiersAssignment_10_113926);
             ruleEClassifierDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_10_1_0()); 
 
@@ -18437,10 +18993,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EPackageDecl__EClassifiersAssignment_10_1
+    // $ANTLR end "rule__EPackageDecl__EClassifiersAssignment_10_1"
 
 
-    // $ANTLR start rule__SubEPackageDecl__EAnnotationsAssignment_0
+    // $ANTLR start "rule__SubEPackageDecl__EAnnotationsAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6936:1: rule__SubEPackageDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__SubEPackageDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
@@ -18456,7 +19012,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getSubEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__SubEPackageDecl__EAnnotationsAssignment_013957);
             ruleEAnnotationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSubEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
 
@@ -18477,10 +19034,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__EAnnotationsAssignment_0
+    // $ANTLR end "rule__SubEPackageDecl__EAnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__SubEPackageDecl__NameAssignment_2
+    // $ANTLR start "rule__SubEPackageDecl__NameAssignment_2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6951:1: rule__SubEPackageDecl__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__SubEPackageDecl__NameAssignment_2() throws RecognitionException {
 
@@ -18514,10 +19071,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__NameAssignment_2
+    // $ANTLR end "rule__SubEPackageDecl__NameAssignment_2"
 
 
-    // $ANTLR start rule__SubEPackageDecl__ESubpackagesAssignment_4_0
+    // $ANTLR start "rule__SubEPackageDecl__ESubpackagesAssignment_4_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6966:1: rule__SubEPackageDecl__ESubpackagesAssignment_4_0 : ( ruleSubEPackageDecl ) ;
     public final void rule__SubEPackageDecl__ESubpackagesAssignment_4_0() throws RecognitionException {
 
@@ -18533,7 +19090,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getSubEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_4_0_0()); 
             pushFollow(FOLLOW_ruleSubEPackageDecl_in_rule__SubEPackageDecl__ESubpackagesAssignment_4_014019);
             ruleSubEPackageDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSubEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_4_0_0()); 
 
@@ -18554,10 +19112,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__ESubpackagesAssignment_4_0
+    // $ANTLR end "rule__SubEPackageDecl__ESubpackagesAssignment_4_0"
 
 
-    // $ANTLR start rule__SubEPackageDecl__EClassifiersAssignment_4_1
+    // $ANTLR start "rule__SubEPackageDecl__EClassifiersAssignment_4_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6981:1: rule__SubEPackageDecl__EClassifiersAssignment_4_1 : ( ruleEClassifierDecl ) ;
     public final void rule__SubEPackageDecl__EClassifiersAssignment_4_1() throws RecognitionException {
 
@@ -18573,7 +19131,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getSubEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_4_1_0()); 
             pushFollow(FOLLOW_ruleEClassifierDecl_in_rule__SubEPackageDecl__EClassifiersAssignment_4_114050);
             ruleEClassifierDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getSubEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_4_1_0()); 
 
@@ -18594,10 +19153,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__SubEPackageDecl__EClassifiersAssignment_4_1
+    // $ANTLR end "rule__SubEPackageDecl__EClassifiersAssignment_4_1"
 
 
-    // $ANTLR start rule__EDataTypeDecl__EAnnotationsAssignment_0_0
+    // $ANTLR start "rule__EDataTypeDecl__EAnnotationsAssignment_0_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:6996:1: rule__EDataTypeDecl__EAnnotationsAssignment_0_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EDataTypeDecl__EAnnotationsAssignment_0_0() throws RecognitionException {
 
@@ -18613,7 +19172,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEDataTypeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0_0()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EDataTypeDecl__EAnnotationsAssignment_0_014081);
             ruleEAnnotationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEDataTypeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0_0()); 
 
@@ -18634,10 +19194,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__EAnnotationsAssignment_0_0
+    // $ANTLR end "rule__EDataTypeDecl__EAnnotationsAssignment_0_0"
 
 
-    // $ANTLR start rule__EDataTypeDecl__SerializableAssignment_0_1
+    // $ANTLR start "rule__EDataTypeDecl__SerializableAssignment_0_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7011:1: rule__EDataTypeDecl__SerializableAssignment_0_1 : ( RULE_SERIALIZABLE ) ;
     public final void rule__EDataTypeDecl__SerializableAssignment_0_1() throws RecognitionException {
 
@@ -18671,10 +19231,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__SerializableAssignment_0_1
+    // $ANTLR end "rule__EDataTypeDecl__SerializableAssignment_0_1"
 
 
-    // $ANTLR start rule__EDataTypeDecl__NameAssignment_0_2_1
+    // $ANTLR start "rule__EDataTypeDecl__NameAssignment_0_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7026:1: rule__EDataTypeDecl__NameAssignment_0_2_1 : ( RULE_ID ) ;
     public final void rule__EDataTypeDecl__NameAssignment_0_2_1() throws RecognitionException {
 
@@ -18708,10 +19268,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__NameAssignment_0_2_1
+    // $ANTLR end "rule__EDataTypeDecl__NameAssignment_0_2_1"
 
 
-    // $ANTLR start rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3
+    // $ANTLR start "rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7041:1: rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3 : ( ruleSTRING_OR_QID ) ;
     public final void rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3() throws RecognitionException {
 
@@ -18727,7 +19287,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEDataTypeDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0()); 
             pushFollow(FOLLOW_ruleSTRING_OR_QID_in_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_314174);
             ruleSTRING_OR_QID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEDataTypeDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0()); 
 
@@ -18748,10 +19309,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3
+    // $ANTLR end "rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3"
 
 
-    // $ANTLR start rule__EAnnotationDecl__SourceAssignment_1
+    // $ANTLR start "rule__EAnnotationDecl__SourceAssignment_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7056:1: rule__EAnnotationDecl__SourceAssignment_1 : ( ruleSTRING_OR_QID ) ;
     public final void rule__EAnnotationDecl__SourceAssignment_1() throws RecognitionException {
 
@@ -18767,7 +19328,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEAnnotationDeclAccess().getSourceSTRING_OR_QIDParserRuleCall_1_0()); 
             pushFollow(FOLLOW_ruleSTRING_OR_QID_in_rule__EAnnotationDecl__SourceAssignment_114205);
             ruleSTRING_OR_QID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEAnnotationDeclAccess().getSourceSTRING_OR_QIDParserRuleCall_1_0()); 
 
@@ -18788,10 +19350,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__SourceAssignment_1
+    // $ANTLR end "rule__EAnnotationDecl__SourceAssignment_1"
 
 
-    // $ANTLR start rule__EAnnotationDecl__DetailsAssignment_2_1
+    // $ANTLR start "rule__EAnnotationDecl__DetailsAssignment_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7071:1: rule__EAnnotationDecl__DetailsAssignment_2_1 : ( ruleMapEntry ) ;
     public final void rule__EAnnotationDecl__DetailsAssignment_2_1() throws RecognitionException {
 
@@ -18807,7 +19369,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_1_0()); 
             pushFollow(FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_114236);
             ruleMapEntry();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_1_0()); 
 
@@ -18828,10 +19391,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__DetailsAssignment_2_1
+    // $ANTLR end "rule__EAnnotationDecl__DetailsAssignment_2_1"
 
 
-    // $ANTLR start rule__EAnnotationDecl__DetailsAssignment_2_2_1
+    // $ANTLR start "rule__EAnnotationDecl__DetailsAssignment_2_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7086:1: rule__EAnnotationDecl__DetailsAssignment_2_2_1 : ( ruleMapEntry ) ;
     public final void rule__EAnnotationDecl__DetailsAssignment_2_2_1() throws RecognitionException {
 
@@ -18847,7 +19410,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_2_1_0()); 
             pushFollow(FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_2_114267);
             ruleMapEntry();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_2_1_0()); 
 
@@ -18868,10 +19432,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAnnotationDecl__DetailsAssignment_2_2_1
+    // $ANTLR end "rule__EAnnotationDecl__DetailsAssignment_2_2_1"
 
 
-    // $ANTLR start rule__EClassDecl__EAnnotationsAssignment_0
+    // $ANTLR start "rule__EClassDecl__EAnnotationsAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7101:1: rule__EClassDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EClassDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
@@ -18887,7 +19451,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEClassDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EClassDecl__EAnnotationsAssignment_014298);
             ruleEAnnotationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEClassDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
 
@@ -18908,10 +19473,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__EAnnotationsAssignment_0
+    // $ANTLR end "rule__EClassDecl__EAnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__EClassDecl__AbstractAssignment_1
+    // $ANTLR start "rule__EClassDecl__AbstractAssignment_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7116:1: rule__EClassDecl__AbstractAssignment_1 : ( ( 'abstract' ) ) ;
     public final void rule__EClassDecl__AbstractAssignment_1() throws RecognitionException {
 
@@ -18953,10 +19518,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__AbstractAssignment_1
+    // $ANTLR end "rule__EClassDecl__AbstractAssignment_1"
 
 
-    // $ANTLR start rule__EClassDecl__InterfaceAssignment_2_0
+    // $ANTLR start "rule__EClassDecl__InterfaceAssignment_2_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7139:1: rule__EClassDecl__InterfaceAssignment_2_0 : ( ( 'interface' ) ) ;
     public final void rule__EClassDecl__InterfaceAssignment_2_0() throws RecognitionException {
 
@@ -18998,10 +19563,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__InterfaceAssignment_2_0
+    // $ANTLR end "rule__EClassDecl__InterfaceAssignment_2_0"
 
 
-    // $ANTLR start rule__EClassDecl__NameAssignment_3
+    // $ANTLR start "rule__EClassDecl__NameAssignment_3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7162:1: rule__EClassDecl__NameAssignment_3 : ( RULE_ID ) ;
     public final void rule__EClassDecl__NameAssignment_3() throws RecognitionException {
 
@@ -19035,10 +19600,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__NameAssignment_3
+    // $ANTLR end "rule__EClassDecl__NameAssignment_3"
 
 
-    // $ANTLR start rule__EClassDecl__ETypeParametersAssignment_4_1
+    // $ANTLR start "rule__EClassDecl__ETypeParametersAssignment_4_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7177:1: rule__EClassDecl__ETypeParametersAssignment_4_1 : ( ruleETypeParameterDecl ) ;
     public final void rule__EClassDecl__ETypeParametersAssignment_4_1() throws RecognitionException {
 
@@ -19054,7 +19619,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_1_0()); 
             pushFollow(FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_114448);
             ruleETypeParameterDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_1_0()); 
 
@@ -19075,10 +19641,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__ETypeParametersAssignment_4_1
+    // $ANTLR end "rule__EClassDecl__ETypeParametersAssignment_4_1"
 
 
-    // $ANTLR start rule__EClassDecl__ETypeParametersAssignment_4_2_1
+    // $ANTLR start "rule__EClassDecl__ETypeParametersAssignment_4_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7192:1: rule__EClassDecl__ETypeParametersAssignment_4_2_1 : ( ruleETypeParameterDecl ) ;
     public final void rule__EClassDecl__ETypeParametersAssignment_4_2_1() throws RecognitionException {
 
@@ -19094,7 +19660,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_2_1_0()); 
             pushFollow(FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_2_114479);
             ruleETypeParameterDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_2_1_0()); 
 
@@ -19115,10 +19682,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__ETypeParametersAssignment_4_2_1
+    // $ANTLR end "rule__EClassDecl__ETypeParametersAssignment_4_2_1"
 
 
-    // $ANTLR start rule__EClassDecl__EGenericSuperTypesAssignment_5_1
+    // $ANTLR start "rule__EClassDecl__EGenericSuperTypesAssignment_5_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7207:1: rule__EClassDecl__EGenericSuperTypesAssignment_5_1 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EClassDecl__EGenericSuperTypesAssignment_5_1() throws RecognitionException {
 
@@ -19134,7 +19701,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_114510);
             ruleEGenericTypeReferenceDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_1_0()); 
 
@@ -19155,10 +19723,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__EGenericSuperTypesAssignment_5_1
+    // $ANTLR end "rule__EClassDecl__EGenericSuperTypesAssignment_5_1"
 
 
-    // $ANTLR start rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1
+    // $ANTLR start "rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7222:1: rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1() throws RecognitionException {
 
@@ -19174,7 +19742,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_2_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_114541);
             ruleEGenericTypeReferenceDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_2_1_0()); 
 
@@ -19195,10 +19764,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1
+    // $ANTLR end "rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1"
 
 
-    // $ANTLR start rule__EClassDecl__InstanceClassNameAssignment_6_1
+    // $ANTLR start "rule__EClassDecl__InstanceClassNameAssignment_6_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7237:1: rule__EClassDecl__InstanceClassNameAssignment_6_1 : ( ruleSTRING_OR_QID ) ;
     public final void rule__EClassDecl__InstanceClassNameAssignment_6_1() throws RecognitionException {
 
@@ -19214,7 +19783,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEClassDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0()); 
             pushFollow(FOLLOW_ruleSTRING_OR_QID_in_rule__EClassDecl__InstanceClassNameAssignment_6_114572);
             ruleSTRING_OR_QID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEClassDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0()); 
 
@@ -19235,10 +19805,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__InstanceClassNameAssignment_6_1
+    // $ANTLR end "rule__EClassDecl__InstanceClassNameAssignment_6_1"
 
 
-    // $ANTLR start rule__EClassDecl__EStructuralFeaturesAssignment_8_0
+    // $ANTLR start "rule__EClassDecl__EStructuralFeaturesAssignment_8_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7252:1: rule__EClassDecl__EStructuralFeaturesAssignment_8_0 : ( ruleEStructuralFeatureDecl ) ;
     public final void rule__EClassDecl__EStructuralFeaturesAssignment_8_0() throws RecognitionException {
 
@@ -19254,7 +19824,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEClassDeclAccess().getEStructuralFeaturesEStructuralFeatureDeclParserRuleCall_8_0_0()); 
             pushFollow(FOLLOW_ruleEStructuralFeatureDecl_in_rule__EClassDecl__EStructuralFeaturesAssignment_8_014603);
             ruleEStructuralFeatureDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEClassDeclAccess().getEStructuralFeaturesEStructuralFeatureDeclParserRuleCall_8_0_0()); 
 
@@ -19275,10 +19846,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__EStructuralFeaturesAssignment_8_0
+    // $ANTLR end "rule__EClassDecl__EStructuralFeaturesAssignment_8_0"
 
 
-    // $ANTLR start rule__EClassDecl__EOperationsAssignment_8_1
+    // $ANTLR start "rule__EClassDecl__EOperationsAssignment_8_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7267:1: rule__EClassDecl__EOperationsAssignment_8_1 : ( ruleEOperationDecl ) ;
     public final void rule__EClassDecl__EOperationsAssignment_8_1() throws RecognitionException {
 
@@ -19294,7 +19865,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEClassDeclAccess().getEOperationsEOperationDeclParserRuleCall_8_1_0()); 
             pushFollow(FOLLOW_ruleEOperationDecl_in_rule__EClassDecl__EOperationsAssignment_8_114634);
             ruleEOperationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEClassDeclAccess().getEOperationsEOperationDeclParserRuleCall_8_1_0()); 
 
@@ -19315,10 +19887,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EClassDecl__EOperationsAssignment_8_1
+    // $ANTLR end "rule__EClassDecl__EOperationsAssignment_8_1"
 
 
-    // $ANTLR start rule__EAttributeDecl__EAnnotationsAssignment_0
+    // $ANTLR start "rule__EAttributeDecl__EAnnotationsAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7282:1: rule__EAttributeDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EAttributeDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
@@ -19334,7 +19906,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEAttributeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EAttributeDecl__EAnnotationsAssignment_014665);
             ruleEAnnotationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEAttributeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
 
@@ -19355,10 +19928,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__EAnnotationsAssignment_0
+    // $ANTLR end "rule__EAttributeDecl__EAnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__EAttributeDecl__IDAssignment_1_0
+    // $ANTLR start "rule__EAttributeDecl__IDAssignment_1_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7297:1: rule__EAttributeDecl__IDAssignment_1_0 : ( ( 'ID' ) ) ;
     public final void rule__EAttributeDecl__IDAssignment_1_0() throws RecognitionException {
 
@@ -19400,10 +19973,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__IDAssignment_1_0
+    // $ANTLR end "rule__EAttributeDecl__IDAssignment_1_0"
 
 
-    // $ANTLR start rule__EAttributeDecl__UniqueAssignment_1_1
+    // $ANTLR start "rule__EAttributeDecl__UniqueAssignment_1_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7320:1: rule__EAttributeDecl__UniqueAssignment_1_1 : ( RULE_BAG ) ;
     public final void rule__EAttributeDecl__UniqueAssignment_1_1() throws RecognitionException {
 
@@ -19437,10 +20010,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__UniqueAssignment_1_1
+    // $ANTLR end "rule__EAttributeDecl__UniqueAssignment_1_1"
 
 
-    // $ANTLR start rule__EAttributeDecl__OrderedAssignment_1_2
+    // $ANTLR start "rule__EAttributeDecl__OrderedAssignment_1_2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7335:1: rule__EAttributeDecl__OrderedAssignment_1_2 : ( RULE_RANDOM ) ;
     public final void rule__EAttributeDecl__OrderedAssignment_1_2() throws RecognitionException {
 
@@ -19474,10 +20047,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__OrderedAssignment_1_2
+    // $ANTLR end "rule__EAttributeDecl__OrderedAssignment_1_2"
 
 
-    // $ANTLR start rule__EAttributeDecl__ChangeableAssignment_1_3
+    // $ANTLR start "rule__EAttributeDecl__ChangeableAssignment_1_3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7350:1: rule__EAttributeDecl__ChangeableAssignment_1_3 : ( RULE_READONLY ) ;
     public final void rule__EAttributeDecl__ChangeableAssignment_1_3() throws RecognitionException {
 
@@ -19511,10 +20084,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__ChangeableAssignment_1_3
+    // $ANTLR end "rule__EAttributeDecl__ChangeableAssignment_1_3"
 
 
-    // $ANTLR start rule__EAttributeDecl__VolatileAssignment_1_4
+    // $ANTLR start "rule__EAttributeDecl__VolatileAssignment_1_4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7365:1: rule__EAttributeDecl__VolatileAssignment_1_4 : ( ( 'volatile' ) ) ;
     public final void rule__EAttributeDecl__VolatileAssignment_1_4() throws RecognitionException {
 
@@ -19556,10 +20129,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__VolatileAssignment_1_4
+    // $ANTLR end "rule__EAttributeDecl__VolatileAssignment_1_4"
 
 
-    // $ANTLR start rule__EAttributeDecl__TransientAssignment_1_5
+    // $ANTLR start "rule__EAttributeDecl__TransientAssignment_1_5"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7388:1: rule__EAttributeDecl__TransientAssignment_1_5 : ( ( 'transient' ) ) ;
     public final void rule__EAttributeDecl__TransientAssignment_1_5() throws RecognitionException {
 
@@ -19601,10 +20174,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__TransientAssignment_1_5
+    // $ANTLR end "rule__EAttributeDecl__TransientAssignment_1_5"
 
 
-    // $ANTLR start rule__EAttributeDecl__UnsettableAssignment_1_6
+    // $ANTLR start "rule__EAttributeDecl__UnsettableAssignment_1_6"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7411:1: rule__EAttributeDecl__UnsettableAssignment_1_6 : ( ( 'unsettable' ) ) ;
     public final void rule__EAttributeDecl__UnsettableAssignment_1_6() throws RecognitionException {
 
@@ -19646,10 +20219,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__UnsettableAssignment_1_6
+    // $ANTLR end "rule__EAttributeDecl__UnsettableAssignment_1_6"
 
 
-    // $ANTLR start rule__EAttributeDecl__DerivedAssignment_1_7
+    // $ANTLR start "rule__EAttributeDecl__DerivedAssignment_1_7"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7434:1: rule__EAttributeDecl__DerivedAssignment_1_7 : ( ( 'derived' ) ) ;
     public final void rule__EAttributeDecl__DerivedAssignment_1_7() throws RecognitionException {
 
@@ -19691,10 +20264,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__DerivedAssignment_1_7
+    // $ANTLR end "rule__EAttributeDecl__DerivedAssignment_1_7"
 
 
-    // $ANTLR start rule__EAttributeDecl__EGenericTypeAssignment_3
+    // $ANTLR start "rule__EAttributeDecl__EGenericTypeAssignment_3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7457:1: rule__EAttributeDecl__EGenericTypeAssignment_3 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EAttributeDecl__EGenericTypeAssignment_3() throws RecognitionException {
 
@@ -19710,7 +20283,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEAttributeDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EAttributeDecl__EGenericTypeAssignment_315009);
             ruleEGenericTypeReferenceDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEAttributeDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0()); 
 
@@ -19731,10 +20305,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__EGenericTypeAssignment_3
+    // $ANTLR end "rule__EAttributeDecl__EGenericTypeAssignment_3"
 
 
-    // $ANTLR start rule__EAttributeDecl__LowerBoundAssignment_4_1
+    // $ANTLR start "rule__EAttributeDecl__LowerBoundAssignment_4_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7472:1: rule__EAttributeDecl__LowerBoundAssignment_4_1 : ( RULE_INT ) ;
     public final void rule__EAttributeDecl__LowerBoundAssignment_4_1() throws RecognitionException {
 
@@ -19768,10 +20342,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__LowerBoundAssignment_4_1
+    // $ANTLR end "rule__EAttributeDecl__LowerBoundAssignment_4_1"
 
 
-    // $ANTLR start rule__EAttributeDecl__UpperBoundAssignment_4_2_1
+    // $ANTLR start "rule__EAttributeDecl__UpperBoundAssignment_4_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7487:1: rule__EAttributeDecl__UpperBoundAssignment_4_2_1 : ( ruleSINT ) ;
     public final void rule__EAttributeDecl__UpperBoundAssignment_4_2_1() throws RecognitionException {
 
@@ -19787,7 +20361,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEAttributeDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0()); 
             pushFollow(FOLLOW_ruleSINT_in_rule__EAttributeDecl__UpperBoundAssignment_4_2_115071);
             ruleSINT();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEAttributeDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0()); 
 
@@ -19808,10 +20383,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__UpperBoundAssignment_4_2_1
+    // $ANTLR end "rule__EAttributeDecl__UpperBoundAssignment_4_2_1"
 
 
-    // $ANTLR start rule__EAttributeDecl__NameAssignment_5
+    // $ANTLR start "rule__EAttributeDecl__NameAssignment_5"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7502:1: rule__EAttributeDecl__NameAssignment_5 : ( RULE_ID ) ;
     public final void rule__EAttributeDecl__NameAssignment_5() throws RecognitionException {
 
@@ -19845,10 +20420,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__NameAssignment_5
+    // $ANTLR end "rule__EAttributeDecl__NameAssignment_5"
 
 
-    // $ANTLR start rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1
+    // $ANTLR start "rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7517:1: rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1 : ( RULE_STRING ) ;
     public final void rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1() throws RecognitionException {
 
@@ -19882,10 +20457,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1
+    // $ANTLR end "rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1"
 
 
-    // $ANTLR start rule__EReferenceDecl__EAnnotationsAssignment_0
+    // $ANTLR start "rule__EReferenceDecl__EAnnotationsAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7532:1: rule__EReferenceDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EReferenceDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
@@ -19901,7 +20476,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEReferenceDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EReferenceDecl__EAnnotationsAssignment_015164);
             ruleEAnnotationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEReferenceDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
 
@@ -19922,10 +20498,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__EAnnotationsAssignment_0
+    // $ANTLR end "rule__EReferenceDecl__EAnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__EReferenceDecl__ResolveProxiesAssignment_1_0
+    // $ANTLR start "rule__EReferenceDecl__ResolveProxiesAssignment_1_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7547:1: rule__EReferenceDecl__ResolveProxiesAssignment_1_0 : ( RULE_LOCAL ) ;
     public final void rule__EReferenceDecl__ResolveProxiesAssignment_1_0() throws RecognitionException {
 
@@ -19959,10 +20535,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__ResolveProxiesAssignment_1_0
+    // $ANTLR end "rule__EReferenceDecl__ResolveProxiesAssignment_1_0"
 
 
-    // $ANTLR start rule__EReferenceDecl__UniqueAssignment_1_1
+    // $ANTLR start "rule__EReferenceDecl__UniqueAssignment_1_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7562:1: rule__EReferenceDecl__UniqueAssignment_1_1 : ( RULE_BAG ) ;
     public final void rule__EReferenceDecl__UniqueAssignment_1_1() throws RecognitionException {
 
@@ -19996,10 +20572,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__UniqueAssignment_1_1
+    // $ANTLR end "rule__EReferenceDecl__UniqueAssignment_1_1"
 
 
-    // $ANTLR start rule__EReferenceDecl__OrderedAssignment_1_2
+    // $ANTLR start "rule__EReferenceDecl__OrderedAssignment_1_2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7577:1: rule__EReferenceDecl__OrderedAssignment_1_2 : ( RULE_RANDOM ) ;
     public final void rule__EReferenceDecl__OrderedAssignment_1_2() throws RecognitionException {
 
@@ -20033,10 +20609,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__OrderedAssignment_1_2
+    // $ANTLR end "rule__EReferenceDecl__OrderedAssignment_1_2"
 
 
-    // $ANTLR start rule__EReferenceDecl__ChangeableAssignment_1_3
+    // $ANTLR start "rule__EReferenceDecl__ChangeableAssignment_1_3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7592:1: rule__EReferenceDecl__ChangeableAssignment_1_3 : ( RULE_READONLY ) ;
     public final void rule__EReferenceDecl__ChangeableAssignment_1_3() throws RecognitionException {
 
@@ -20070,10 +20646,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__ChangeableAssignment_1_3
+    // $ANTLR end "rule__EReferenceDecl__ChangeableAssignment_1_3"
 
 
-    // $ANTLR start rule__EReferenceDecl__VolatileAssignment_1_4
+    // $ANTLR start "rule__EReferenceDecl__VolatileAssignment_1_4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7607:1: rule__EReferenceDecl__VolatileAssignment_1_4 : ( ( 'volatile' ) ) ;
     public final void rule__EReferenceDecl__VolatileAssignment_1_4() throws RecognitionException {
 
@@ -20115,10 +20691,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__VolatileAssignment_1_4
+    // $ANTLR end "rule__EReferenceDecl__VolatileAssignment_1_4"
 
 
-    // $ANTLR start rule__EReferenceDecl__TransientAssignment_1_5
+    // $ANTLR start "rule__EReferenceDecl__TransientAssignment_1_5"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7630:1: rule__EReferenceDecl__TransientAssignment_1_5 : ( ( 'transient' ) ) ;
     public final void rule__EReferenceDecl__TransientAssignment_1_5() throws RecognitionException {
 
@@ -20160,10 +20736,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__TransientAssignment_1_5
+    // $ANTLR end "rule__EReferenceDecl__TransientAssignment_1_5"
 
 
-    // $ANTLR start rule__EReferenceDecl__UnsettableAssignment_1_6
+    // $ANTLR start "rule__EReferenceDecl__UnsettableAssignment_1_6"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7653:1: rule__EReferenceDecl__UnsettableAssignment_1_6 : ( ( 'unsettable' ) ) ;
     public final void rule__EReferenceDecl__UnsettableAssignment_1_6() throws RecognitionException {
 
@@ -20205,10 +20781,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__UnsettableAssignment_1_6
+    // $ANTLR end "rule__EReferenceDecl__UnsettableAssignment_1_6"
 
 
-    // $ANTLR start rule__EReferenceDecl__DerivedAssignment_1_7
+    // $ANTLR start "rule__EReferenceDecl__DerivedAssignment_1_7"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7676:1: rule__EReferenceDecl__DerivedAssignment_1_7 : ( ( 'derived' ) ) ;
     public final void rule__EReferenceDecl__DerivedAssignment_1_7() throws RecognitionException {
 
@@ -20250,10 +20826,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__DerivedAssignment_1_7
+    // $ANTLR end "rule__EReferenceDecl__DerivedAssignment_1_7"
 
 
-    // $ANTLR start rule__EReferenceDecl__ContainmentAssignment_2_0
+    // $ANTLR start "rule__EReferenceDecl__ContainmentAssignment_2_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7699:1: rule__EReferenceDecl__ContainmentAssignment_2_0 : ( ( 'val' ) ) ;
     public final void rule__EReferenceDecl__ContainmentAssignment_2_0() throws RecognitionException {
 
@@ -20295,10 +20871,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__ContainmentAssignment_2_0
+    // $ANTLR end "rule__EReferenceDecl__ContainmentAssignment_2_0"
 
 
-    // $ANTLR start rule__EReferenceDecl__EGenericTypeAssignment_3
+    // $ANTLR start "rule__EReferenceDecl__EGenericTypeAssignment_3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7722:1: rule__EReferenceDecl__EGenericTypeAssignment_3 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EReferenceDecl__EGenericTypeAssignment_3() throws RecognitionException {
 
@@ -20314,7 +20890,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEReferenceDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EReferenceDecl__EGenericTypeAssignment_315539);
             ruleEGenericTypeReferenceDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEReferenceDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0()); 
 
@@ -20335,10 +20912,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__EGenericTypeAssignment_3
+    // $ANTLR end "rule__EReferenceDecl__EGenericTypeAssignment_3"
 
 
-    // $ANTLR start rule__EReferenceDecl__LowerBoundAssignment_4_1
+    // $ANTLR start "rule__EReferenceDecl__LowerBoundAssignment_4_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7737:1: rule__EReferenceDecl__LowerBoundAssignment_4_1 : ( RULE_INT ) ;
     public final void rule__EReferenceDecl__LowerBoundAssignment_4_1() throws RecognitionException {
 
@@ -20372,10 +20949,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__LowerBoundAssignment_4_1
+    // $ANTLR end "rule__EReferenceDecl__LowerBoundAssignment_4_1"
 
 
-    // $ANTLR start rule__EReferenceDecl__UpperBoundAssignment_4_2_1
+    // $ANTLR start "rule__EReferenceDecl__UpperBoundAssignment_4_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7752:1: rule__EReferenceDecl__UpperBoundAssignment_4_2_1 : ( ruleSINT ) ;
     public final void rule__EReferenceDecl__UpperBoundAssignment_4_2_1() throws RecognitionException {
 
@@ -20391,7 +20968,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEReferenceDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0()); 
             pushFollow(FOLLOW_ruleSINT_in_rule__EReferenceDecl__UpperBoundAssignment_4_2_115601);
             ruleSINT();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEReferenceDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0()); 
 
@@ -20412,10 +20990,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__UpperBoundAssignment_4_2_1
+    // $ANTLR end "rule__EReferenceDecl__UpperBoundAssignment_4_2_1"
 
 
-    // $ANTLR start rule__EReferenceDecl__EOppositeAssignment_5_1
+    // $ANTLR start "rule__EReferenceDecl__EOppositeAssignment_5_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7767:1: rule__EReferenceDecl__EOppositeAssignment_5_1 : ( ( RULE_ID ) ) ;
     public final void rule__EReferenceDecl__EOppositeAssignment_5_1() throws RecognitionException {
 
@@ -20457,10 +21035,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__EOppositeAssignment_5_1
+    // $ANTLR end "rule__EReferenceDecl__EOppositeAssignment_5_1"
 
 
-    // $ANTLR start rule__EReferenceDecl__NameAssignment_6
+    // $ANTLR start "rule__EReferenceDecl__NameAssignment_6"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7786:1: rule__EReferenceDecl__NameAssignment_6 : ( RULE_ID ) ;
     public final void rule__EReferenceDecl__NameAssignment_6() throws RecognitionException {
 
@@ -20494,10 +21072,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EReferenceDecl__NameAssignment_6
+    // $ANTLR end "rule__EReferenceDecl__NameAssignment_6"
 
 
-    // $ANTLR start rule__EEnumDecl__EAnnotationsAssignment_0
+    // $ANTLR start "rule__EEnumDecl__EAnnotationsAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7801:1: rule__EEnumDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EEnumDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
@@ -20513,7 +21091,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEEnumDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EEnumDecl__EAnnotationsAssignment_015702);
             ruleEAnnotationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEEnumDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
 
@@ -20534,10 +21113,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__EAnnotationsAssignment_0
+    // $ANTLR end "rule__EEnumDecl__EAnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__EEnumDecl__NameAssignment_2
+    // $ANTLR start "rule__EEnumDecl__NameAssignment_2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7816:1: rule__EEnumDecl__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__EEnumDecl__NameAssignment_2() throws RecognitionException {
 
@@ -20571,10 +21150,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__NameAssignment_2
+    // $ANTLR end "rule__EEnumDecl__NameAssignment_2"
 
 
-    // $ANTLR start rule__EEnumDecl__ELiteralsAssignment_4
+    // $ANTLR start "rule__EEnumDecl__ELiteralsAssignment_4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7831:1: rule__EEnumDecl__ELiteralsAssignment_4 : ( ruleEEnumLiteralDecl ) ;
     public final void rule__EEnumDecl__ELiteralsAssignment_4() throws RecognitionException {
 
@@ -20590,7 +21169,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEEnumDeclAccess().getELiteralsEEnumLiteralDeclParserRuleCall_4_0()); 
             pushFollow(FOLLOW_ruleEEnumLiteralDecl_in_rule__EEnumDecl__ELiteralsAssignment_415764);
             ruleEEnumLiteralDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEEnumDeclAccess().getELiteralsEEnumLiteralDeclParserRuleCall_4_0()); 
 
@@ -20611,10 +21191,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumDecl__ELiteralsAssignment_4
+    // $ANTLR end "rule__EEnumDecl__ELiteralsAssignment_4"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__EAnnotationsAssignment_0
+    // $ANTLR start "rule__EEnumLiteralDecl__EAnnotationsAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7846:1: rule__EEnumLiteralDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EEnumLiteralDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
@@ -20630,7 +21210,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEEnumLiteralDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EEnumLiteralDecl__EAnnotationsAssignment_015795);
             ruleEAnnotationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEEnumLiteralDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
 
@@ -20651,10 +21232,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__EAnnotationsAssignment_0
+    // $ANTLR end "rule__EEnumLiteralDecl__EAnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__NameAssignment_1
+    // $ANTLR start "rule__EEnumLiteralDecl__NameAssignment_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7861:1: rule__EEnumLiteralDecl__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__EEnumLiteralDecl__NameAssignment_1() throws RecognitionException {
 
@@ -20688,10 +21269,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__NameAssignment_1
+    // $ANTLR end "rule__EEnumLiteralDecl__NameAssignment_1"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__ValueAssignment_2_1
+    // $ANTLR start "rule__EEnumLiteralDecl__ValueAssignment_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7876:1: rule__EEnumLiteralDecl__ValueAssignment_2_1 : ( RULE_INT ) ;
     public final void rule__EEnumLiteralDecl__ValueAssignment_2_1() throws RecognitionException {
 
@@ -20725,10 +21306,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__ValueAssignment_2_1
+    // $ANTLR end "rule__EEnumLiteralDecl__ValueAssignment_2_1"
 
 
-    // $ANTLR start rule__EEnumLiteralDecl__LiteralAssignment_3
+    // $ANTLR start "rule__EEnumLiteralDecl__LiteralAssignment_3"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7891:1: rule__EEnumLiteralDecl__LiteralAssignment_3 : ( RULE_STRING ) ;
     public final void rule__EEnumLiteralDecl__LiteralAssignment_3() throws RecognitionException {
 
@@ -20762,10 +21343,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EEnumLiteralDecl__LiteralAssignment_3
+    // $ANTLR end "rule__EEnumLiteralDecl__LiteralAssignment_3"
 
 
-    // $ANTLR start rule__ETypeParameterDecl__NameAssignment_0
+    // $ANTLR start "rule__ETypeParameterDecl__NameAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7906:1: rule__ETypeParameterDecl__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__ETypeParameterDecl__NameAssignment_0() throws RecognitionException {
 
@@ -20799,10 +21380,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ETypeParameterDecl__NameAssignment_0
+    // $ANTLR end "rule__ETypeParameterDecl__NameAssignment_0"
 
 
-    // $ANTLR start rule__ETypeParameterDecl__EBoundsAssignment_1_1
+    // $ANTLR start "rule__ETypeParameterDecl__EBoundsAssignment_1_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7921:1: rule__ETypeParameterDecl__EBoundsAssignment_1_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__ETypeParameterDecl__EBoundsAssignment_1_1() throws RecognitionException {
 
@@ -20818,7 +21399,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getETypeParameterDeclAccess().getEBoundsEGenericTypeDeclParserRuleCall_1_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__ETypeParameterDecl__EBoundsAssignment_1_115950);
             ruleEGenericTypeDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getETypeParameterDeclAccess().getEBoundsEGenericTypeDeclParserRuleCall_1_1_0()); 
 
@@ -20839,10 +21421,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__ETypeParameterDecl__EBoundsAssignment_1_1
+    // $ANTLR end "rule__ETypeParameterDecl__EBoundsAssignment_1_1"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7936:1: rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0 : ( ( RULE_ID ) ) ;
     public final void rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0() throws RecognitionException {
 
@@ -20884,10 +21466,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7955:1: rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1() throws RecognitionException {
 
@@ -20903,7 +21485,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_116020);
             ruleEGenericTypeDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0()); 
 
@@ -20924,10 +21507,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7970:1: rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1() throws RecognitionException {
 
@@ -20943,7 +21526,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_116051);
             ruleEGenericTypeDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0()); 
 
@@ -20964,10 +21548,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1"
 
 
-    // $ANTLR start rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1
+    // $ANTLR start "rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:7985:1: rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1() throws RecognitionException {
 
@@ -21009,10 +21593,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1
+    // $ANTLR end "rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__EClassifierAssignment_0_0
+    // $ANTLR start "rule__EGenericTypeDecl__EClassifierAssignment_0_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8004:1: rule__EGenericTypeDecl__EClassifierAssignment_0_0 : ( ( RULE_ID ) ) ;
     public final void rule__EGenericTypeDecl__EClassifierAssignment_0_0() throws RecognitionException {
 
@@ -21054,10 +21638,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__EClassifierAssignment_0_0
+    // $ANTLR end "rule__EGenericTypeDecl__EClassifierAssignment_0_0"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1
+    // $ANTLR start "rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8023:1: rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1() throws RecognitionException {
 
@@ -21073,7 +21657,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_116160);
             ruleEGenericTypeDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0()); 
 
@@ -21094,10 +21679,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1
+    // $ANTLR end "rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1
+    // $ANTLR start "rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8038:1: rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1() throws RecognitionException {
 
@@ -21113,7 +21698,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_116191);
             ruleEGenericTypeDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0()); 
 
@@ -21134,10 +21720,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1
+    // $ANTLR end "rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__ETypeParameterAssignment_1_1
+    // $ANTLR start "rule__EGenericTypeDecl__ETypeParameterAssignment_1_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8053:1: rule__EGenericTypeDecl__ETypeParameterAssignment_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__EGenericTypeDecl__ETypeParameterAssignment_1_1() throws RecognitionException {
 
@@ -21179,10 +21765,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__ETypeParameterAssignment_1_1
+    // $ANTLR end "rule__EGenericTypeDecl__ETypeParameterAssignment_1_1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1
+    // $ANTLR start "rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8072:1: rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1() throws RecognitionException {
 
@@ -21198,7 +21784,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEGenericTypeDeclAccess().getEUpperBoundEGenericTypeDeclParserRuleCall_2_1_0_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_116261);
             ruleEGenericTypeDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEGenericTypeDeclAccess().getEUpperBoundEGenericTypeDeclParserRuleCall_2_1_0_1_0()); 
 
@@ -21219,10 +21806,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1
+    // $ANTLR end "rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1"
 
 
-    // $ANTLR start rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1
+    // $ANTLR start "rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8087:1: rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1() throws RecognitionException {
 
@@ -21238,7 +21825,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEGenericTypeDeclAccess().getELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_116292);
             ruleEGenericTypeDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEGenericTypeDeclAccess().getELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0()); 
 
@@ -21259,10 +21847,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1
+    // $ANTLR end "rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1"
 
 
-    // $ANTLR start rule__EOperationDecl__EAnnotationsAssignment_0
+    // $ANTLR start "rule__EOperationDecl__EAnnotationsAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8102:1: rule__EOperationDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EOperationDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
@@ -21278,7 +21866,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEOperationDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EOperationDecl__EAnnotationsAssignment_016323);
             ruleEAnnotationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEOperationDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
 
@@ -21299,10 +21888,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__EAnnotationsAssignment_0
+    // $ANTLR end "rule__EOperationDecl__EAnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__EOperationDecl__UniqueAssignment_1_0
+    // $ANTLR start "rule__EOperationDecl__UniqueAssignment_1_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8117:1: rule__EOperationDecl__UniqueAssignment_1_0 : ( RULE_BAG ) ;
     public final void rule__EOperationDecl__UniqueAssignment_1_0() throws RecognitionException {
 
@@ -21336,10 +21925,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__UniqueAssignment_1_0
+    // $ANTLR end "rule__EOperationDecl__UniqueAssignment_1_0"
 
 
-    // $ANTLR start rule__EOperationDecl__OrderedAssignment_1_1
+    // $ANTLR start "rule__EOperationDecl__OrderedAssignment_1_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8132:1: rule__EOperationDecl__OrderedAssignment_1_1 : ( RULE_RANDOM ) ;
     public final void rule__EOperationDecl__OrderedAssignment_1_1() throws RecognitionException {
 
@@ -21373,10 +21962,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__OrderedAssignment_1_1
+    // $ANTLR end "rule__EOperationDecl__OrderedAssignment_1_1"
 
 
-    // $ANTLR start rule__EOperationDecl__EGenericTypeAssignment_3_0
+    // $ANTLR start "rule__EOperationDecl__EGenericTypeAssignment_3_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8147:1: rule__EOperationDecl__EGenericTypeAssignment_3_0 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EOperationDecl__EGenericTypeAssignment_3_0() throws RecognitionException {
 
@@ -21392,7 +21981,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEOperationDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericTypeAssignment_3_016416);
             ruleEGenericTypeReferenceDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEOperationDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0_0()); 
 
@@ -21413,10 +22003,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__EGenericTypeAssignment_3_0
+    // $ANTLR end "rule__EOperationDecl__EGenericTypeAssignment_3_0"
 
 
-    // $ANTLR start rule__EOperationDecl__NameAssignment_4
+    // $ANTLR start "rule__EOperationDecl__NameAssignment_4"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8162:1: rule__EOperationDecl__NameAssignment_4 : ( RULE_ID ) ;
     public final void rule__EOperationDecl__NameAssignment_4() throws RecognitionException {
 
@@ -21450,10 +22040,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__NameAssignment_4
+    // $ANTLR end "rule__EOperationDecl__NameAssignment_4"
 
 
-    // $ANTLR start rule__EOperationDecl__ETypeParametersAssignment_5_1
+    // $ANTLR start "rule__EOperationDecl__ETypeParametersAssignment_5_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8177:1: rule__EOperationDecl__ETypeParametersAssignment_5_1 : ( ruleETypeParameterDecl ) ;
     public final void rule__EOperationDecl__ETypeParametersAssignment_5_1() throws RecognitionException {
 
@@ -21469,7 +22059,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_1_0()); 
             pushFollow(FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_116478);
             ruleETypeParameterDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_1_0()); 
 
@@ -21490,10 +22081,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__ETypeParametersAssignment_5_1
+    // $ANTLR end "rule__EOperationDecl__ETypeParametersAssignment_5_1"
 
 
-    // $ANTLR start rule__EOperationDecl__ETypeParametersAssignment_5_2_1
+    // $ANTLR start "rule__EOperationDecl__ETypeParametersAssignment_5_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8192:1: rule__EOperationDecl__ETypeParametersAssignment_5_2_1 : ( ruleETypeParameterDecl ) ;
     public final void rule__EOperationDecl__ETypeParametersAssignment_5_2_1() throws RecognitionException {
 
@@ -21509,7 +22100,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_2_1_0()); 
             pushFollow(FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_2_116509);
             ruleETypeParameterDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_2_1_0()); 
 
@@ -21530,10 +22122,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__ETypeParametersAssignment_5_2_1
+    // $ANTLR end "rule__EOperationDecl__ETypeParametersAssignment_5_2_1"
 
 
-    // $ANTLR start rule__EOperationDecl__EParametersAssignment_7_0
+    // $ANTLR start "rule__EOperationDecl__EParametersAssignment_7_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8207:1: rule__EOperationDecl__EParametersAssignment_7_0 : ( ruleEParameterDecl ) ;
     public final void rule__EOperationDecl__EParametersAssignment_7_0() throws RecognitionException {
 
@@ -21549,7 +22141,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_0_0()); 
             pushFollow(FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_016540);
             ruleEParameterDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_0_0()); 
 
@@ -21570,10 +22163,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__EParametersAssignment_7_0
+    // $ANTLR end "rule__EOperationDecl__EParametersAssignment_7_0"
 
 
-    // $ANTLR start rule__EOperationDecl__EParametersAssignment_7_1_1
+    // $ANTLR start "rule__EOperationDecl__EParametersAssignment_7_1_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8222:1: rule__EOperationDecl__EParametersAssignment_7_1_1 : ( ruleEParameterDecl ) ;
     public final void rule__EOperationDecl__EParametersAssignment_7_1_1() throws RecognitionException {
 
@@ -21589,7 +22182,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_1_1_0()); 
             pushFollow(FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_1_116571);
             ruleEParameterDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_1_1_0()); 
 
@@ -21610,10 +22204,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__EParametersAssignment_7_1_1
+    // $ANTLR end "rule__EOperationDecl__EParametersAssignment_7_1_1"
 
 
-    // $ANTLR start rule__EOperationDecl__EGenericExceptionsAssignment_9_1
+    // $ANTLR start "rule__EOperationDecl__EGenericExceptionsAssignment_9_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8237:1: rule__EOperationDecl__EGenericExceptionsAssignment_9_1 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EOperationDecl__EGenericExceptionsAssignment_9_1() throws RecognitionException {
 
@@ -21629,7 +22223,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_116602);
             ruleEGenericTypeReferenceDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_1_0()); 
 
@@ -21650,10 +22245,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__EGenericExceptionsAssignment_9_1
+    // $ANTLR end "rule__EOperationDecl__EGenericExceptionsAssignment_9_1"
 
 
-    // $ANTLR start rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1
+    // $ANTLR start "rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8252:1: rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1() throws RecognitionException {
 
@@ -21669,7 +22264,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_2_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_116633);
             ruleEGenericTypeReferenceDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_2_1_0()); 
 
@@ -21690,10 +22286,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1
+    // $ANTLR end "rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1"
 
 
-    // $ANTLR start rule__EParameterDecl__EAnnotationsAssignment_0
+    // $ANTLR start "rule__EParameterDecl__EAnnotationsAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8267:1: rule__EParameterDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EParameterDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
@@ -21709,7 +22305,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEParameterDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
             pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EParameterDecl__EAnnotationsAssignment_016664);
             ruleEAnnotationDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEParameterDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
 
@@ -21730,10 +22327,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EParameterDecl__EAnnotationsAssignment_0
+    // $ANTLR end "rule__EParameterDecl__EAnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__EParameterDecl__EGenericTypeAssignment_1
+    // $ANTLR start "rule__EParameterDecl__EGenericTypeAssignment_1"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8282:1: rule__EParameterDecl__EGenericTypeAssignment_1 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EParameterDecl__EGenericTypeAssignment_1() throws RecognitionException {
 
@@ -21749,7 +22346,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
              before(grammarAccess.getEParameterDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_1_0()); 
             pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EParameterDecl__EGenericTypeAssignment_116695);
             ruleEGenericTypeReferenceDecl();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEParameterDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_1_0()); 
 
@@ -21770,10 +22368,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EParameterDecl__EGenericTypeAssignment_1
+    // $ANTLR end "rule__EParameterDecl__EGenericTypeAssignment_1"
 
 
-    // $ANTLR start rule__EParameterDecl__NameAssignment_2
+    // $ANTLR start "rule__EParameterDecl__NameAssignment_2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8297:1: rule__EParameterDecl__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__EParameterDecl__NameAssignment_2() throws RecognitionException {
 
@@ -21807,10 +22405,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__EParameterDecl__NameAssignment_2
+    // $ANTLR end "rule__EParameterDecl__NameAssignment_2"
 
 
-    // $ANTLR start rule__MapEntry__KeyAssignment_0
+    // $ANTLR start "rule__MapEntry__KeyAssignment_0"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8312:1: rule__MapEntry__KeyAssignment_0 : ( RULE_ID ) ;
     public final void rule__MapEntry__KeyAssignment_0() throws RecognitionException {
 
@@ -21844,10 +22442,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__MapEntry__KeyAssignment_0
+    // $ANTLR end "rule__MapEntry__KeyAssignment_0"
 
 
-    // $ANTLR start rule__MapEntry__ValueAssignment_2
+    // $ANTLR start "rule__MapEntry__ValueAssignment_2"
     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/ui/contentassist/antlr/internal/InternalEcoreDsl.g:8327:1: rule__MapEntry__ValueAssignment_2 : ( RULE_STRING ) ;
     public final void rule__MapEntry__ValueAssignment_2() throws RecognitionException {
 
@@ -21881,7 +22479,9 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end rule__MapEntry__ValueAssignment_2
+    // $ANTLR end "rule__MapEntry__ValueAssignment_2"
+
+    // Delegated rules
 
 
     protected DFA1 dfa1 = new DFA1(this);
@@ -21911,14 +22511,14 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             "",
             "\1\3\10\uffff\1\3\7\uffff\1\2\4\uffff\1\3\1\uffff\1\1\1\6\12"+
             "\uffff\1\3\5\uffff\2\3",
-            "\1\3\10\uffff\1\3\2\uffff\1\7\1\10\3\uffff\1\2\4\uffff\1\3\1"+
-            "\uffff\1\1\1\6\12\uffff\1\3\5\uffff\2\3",
+            "\1\3\10\uffff\1\3\2\uffff\1\7\1\10\3\uffff\1\2\4\uffff\1\3"+
+            "\1\uffff\1\1\1\6\12\uffff\1\3\5\uffff\2\3",
             "\1\11",
             "\1\12",
             "\1\12",
             "\1\13",
-            "\1\3\10\uffff\1\3\2\uffff\1\7\1\10\3\uffff\1\2\4\uffff\1\3\1"+
-            "\uffff\1\1\1\6\12\uffff\1\3\5\uffff\2\3",
+            "\1\3\10\uffff\1\3\2\uffff\1\7\1\10\3\uffff\1\2\4\uffff\1\3"+
+            "\1\uffff\1\1\1\6\12\uffff\1\3\5\uffff\2\3",
             "\1\14",
             "\1\16\1\15",
             "\1\17",
@@ -21983,14 +22583,14 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             "",
             "\1\3\10\uffff\1\3\7\uffff\1\2\4\uffff\1\3\1\uffff\1\1\1\6\12"+
             "\uffff\1\3\5\uffff\2\3",
-            "\1\3\10\uffff\1\3\2\uffff\1\7\1\10\3\uffff\1\2\4\uffff\1\3\1"+
-            "\uffff\1\1\1\6\12\uffff\1\3\5\uffff\2\3",
+            "\1\3\10\uffff\1\3\2\uffff\1\7\1\10\3\uffff\1\2\4\uffff\1\3"+
+            "\1\uffff\1\1\1\6\12\uffff\1\3\5\uffff\2\3",
             "\1\11",
             "\1\12",
             "\1\12",
             "\1\13",
-            "\1\3\10\uffff\1\3\2\uffff\1\7\1\10\3\uffff\1\2\4\uffff\1\3\1"+
-            "\uffff\1\1\1\6\12\uffff\1\3\5\uffff\2\3",
+            "\1\3\10\uffff\1\3\2\uffff\1\7\1\10\3\uffff\1\2\4\uffff\1\3"+
+            "\1\uffff\1\1\1\6\12\uffff\1\3\5\uffff\2\3",
             "\1\14",
             "\1\16\1\15",
             "\1\17",
@@ -22271,23 +22871,23 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             "\1\2\1\6\1\7\1\10\1\11\1\12",
             "\1\13\1\14",
             "",
-            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1\6"+
-            "\1\7\1\10\1\11\1\12",
-            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1\6"+
-            "\1\7\1\10\1\11\1\12",
-            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1\6"+
-            "\1\7\1\10\1\11\1\12",
-            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1\6"+
-            "\1\7\1\10\1\11\1\12",
-            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1\6"+
-            "\1\7\1\10\1\11\1\12",
-            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1\6"+
-            "\1\7\1\10\1\11\1\12",
-            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1\6"+
-            "\1\7\1\10\1\11\1\12",
+            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1"+
+            "\6\1\7\1\10\1\11\1\12",
+            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1"+
+            "\6\1\7\1\10\1\11\1\12",
+            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1"+
+            "\6\1\7\1\10\1\11\1\12",
+            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1"+
+            "\6\1\7\1\10\1\11\1\12",
+            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1"+
+            "\6\1\7\1\10\1\11\1\12",
+            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1"+
+            "\6\1\7\1\10\1\11\1\12",
+            "\1\3\1\4\1\5\1\12\5\uffff\1\12\24\uffff\1\2\14\uffff\1\2\1"+
+            "\6\1\7\1\10\1\11\1\12",
             "",
-            "\1\3\1\4\1\5\1\12\5\uffff\1\12\15\uffff\1\1\1\15\5\uffff\1\2"+
-            "\14\uffff\1\2\1\6\1\7\1\10\1\11\1\12",
+            "\1\3\1\4\1\5\1\12\5\uffff\1\12\15\uffff\1\1\1\15\5\uffff\1"+
+            "\2\14\uffff\1\2\1\6\1\7\1\10\1\11\1\12",
             "\1\3\1\4\1\5\1\12\5\uffff\1\12\1\uffff\1\16\1\17\12\uffff\1"+
             "\1\1\15\5\uffff\1\2\14\uffff\1\2\1\6\1\7\1\10\1\11\1\12",
             "\1\20",
@@ -22299,8 +22899,8 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             "\1\23",
             "\1\25\1\24",
             "\1\26",
-            "\1\3\1\4\1\5\1\12\5\uffff\1\12\15\uffff\1\1\6\uffff\1\2\14\uffff"+
-            "\1\2\1\6\1\7\1\10\1\11\1\12",
+            "\1\3\1\4\1\5\1\12\5\uffff\1\12\15\uffff\1\1\6\uffff\1\2\14"+
+            "\uffff\1\2\1\6\1\7\1\10\1\11\1\12",
             "\1\27",
             "\1\30",
             "\1\25\1\24"
@@ -22462,7 +23062,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__0__Impl_in_rule__ReferencedMetamodel__Group__02614 = new BitSet(new long[]{0x0000000000000030L});
     public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__02617 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_21_in_rule__ReferencedMetamodel__Group__0__Impl2645 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1__Impl_in_rule__ReferencedMetamodel__Group__12676 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1__Impl_in_rule__ReferencedMetamodel__Group__12676 = new BitSet(new long[]{0x0000000000000030L});
     public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__12679 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group_1__0_in_rule__ReferencedMetamodel__Group__1__Impl2706 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__2__Impl_in_rule__ReferencedMetamodel__Group__22737 = new BitSet(new long[]{0x0000000000400000L});
@@ -22475,7 +23075,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__ReferencedMetamodel__AliasAssignment_1_0_in_rule__ReferencedMetamodel__Group_1__0__Impl2894 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group_1__1__Impl_in_rule__ReferencedMetamodel__Group_1__12924 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_23_in_rule__ReferencedMetamodel__Group_1__1__Impl2952 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__0__Impl_in_rule__EPackageDecl__Group__02987 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_rule__EPackageDecl__Group__0__Impl_in_rule__EPackageDecl__Group__02987 = new BitSet(new long[]{0x0000000081000000L});
     public static final BitSet FOLLOW_rule__EPackageDecl__Group__1_in_rule__EPackageDecl__Group__02990 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EPackageDecl__EAnnotationsAssignment_0_in_rule__EPackageDecl__Group__0__Impl3017 = new BitSet(new long[]{0x0000000080000002L});
     public static final BitSet FOLLOW_rule__EPackageDecl__Group__1__Impl_in_rule__EPackageDecl__Group__13048 = new BitSet(new long[]{0x0000000000000020L});
@@ -22505,12 +23105,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EPackageDecl__Group__9__Impl_in_rule__EPackageDecl__Group__93538 = new BitSet(new long[]{0x00060800B1010080L});
     public static final BitSet FOLLOW_rule__EPackageDecl__Group__10_in_rule__EPackageDecl__Group__93541 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_27_in_rule__EPackageDecl__Group__9__Impl3569 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__10__Impl_in_rule__EPackageDecl__Group__103600 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_rule__EPackageDecl__Group__10__Impl_in_rule__EPackageDecl__Group__103600 = new BitSet(new long[]{0x00060800B1010080L});
     public static final BitSet FOLLOW_rule__EPackageDecl__Group__11_in_rule__EPackageDecl__Group__103603 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EPackageDecl__Alternatives_10_in_rule__EPackageDecl__Group__10__Impl3630 = new BitSet(new long[]{0x00060800A1010082L});
     public static final BitSet FOLLOW_rule__EPackageDecl__Group__11__Impl_in_rule__EPackageDecl__Group__113661 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_28_in_rule__EPackageDecl__Group__11__Impl3689 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__0__Impl_in_rule__SubEPackageDecl__Group__03744 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__0__Impl_in_rule__SubEPackageDecl__Group__03744 = new BitSet(new long[]{0x0000000081000000L});
     public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__1_in_rule__SubEPackageDecl__Group__03747 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__SubEPackageDecl__EAnnotationsAssignment_0_in_rule__SubEPackageDecl__Group__0__Impl3774 = new BitSet(new long[]{0x0000000080000002L});
     public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__1__Impl_in_rule__SubEPackageDecl__Group__13805 = new BitSet(new long[]{0x0000000000000020L});
@@ -22522,15 +23122,15 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__3__Impl_in_rule__SubEPackageDecl__Group__33927 = new BitSet(new long[]{0x00060800B1010080L});
     public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__4_in_rule__SubEPackageDecl__Group__33930 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_27_in_rule__SubEPackageDecl__Group__3__Impl3958 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__4__Impl_in_rule__SubEPackageDecl__Group__43989 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__4__Impl_in_rule__SubEPackageDecl__Group__43989 = new BitSet(new long[]{0x00060800B1010080L});
     public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__5_in_rule__SubEPackageDecl__Group__43992 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__SubEPackageDecl__Alternatives_4_in_rule__SubEPackageDecl__Group__4__Impl4019 = new BitSet(new long[]{0x00060800A1010082L});
     public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__5__Impl_in_rule__SubEPackageDecl__Group__54050 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_28_in_rule__SubEPackageDecl__Group__5__Impl4078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__0__Impl_in_rule__EDataTypeDecl__Group_0__04121 = new BitSet(new long[]{0x0000000020000080L});
+    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__0__Impl_in_rule__EDataTypeDecl__Group_0__04121 = new BitSet(new long[]{0x00000000A0000080L});
     public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__1_in_rule__EDataTypeDecl__Group_0__04124 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EDataTypeDecl__EAnnotationsAssignment_0_0_in_rule__EDataTypeDecl__Group_0__0__Impl4151 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__1__Impl_in_rule__EDataTypeDecl__Group_0__14182 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__1__Impl_in_rule__EDataTypeDecl__Group_0__14182 = new BitSet(new long[]{0x00000000A0000080L});
     public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__2_in_rule__EDataTypeDecl__Group_0__14185 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EDataTypeDecl__SerializableAssignment_0_1_in_rule__EDataTypeDecl__Group_0__1__Impl4212 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__2__Impl_in_rule__EDataTypeDecl__Group_0__24243 = new BitSet(new long[]{0x0000000000000002L});
@@ -22552,7 +23152,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__0__Impl_in_rule__EAnnotationDecl__Group__04619 = new BitSet(new long[]{0x0000000000000030L});
     public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__1_in_rule__EAnnotationDecl__Group__04622 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_31_in_rule__EAnnotationDecl__Group__0__Impl4650 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__1__Impl_in_rule__EAnnotationDecl__Group__14681 = new BitSet(new long[]{0x0000000100000002L});
+    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__1__Impl_in_rule__EAnnotationDecl__Group__14681 = new BitSet(new long[]{0x0000000100000000L});
     public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__2_in_rule__EAnnotationDecl__Group__14684 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAnnotationDecl__SourceAssignment_1_in_rule__EAnnotationDecl__Group__1__Impl4711 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__2__Impl_in_rule__EAnnotationDecl__Group__24741 = new BitSet(new long[]{0x0000000000000002L});
@@ -22563,7 +23163,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__1__Impl_in_rule__EAnnotationDecl__Group_2__14867 = new BitSet(new long[]{0x0000000600000000L});
     public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__2_in_rule__EAnnotationDecl__Group_2__14870 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_1_in_rule__EAnnotationDecl__Group_2__1__Impl4897 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__2__Impl_in_rule__EAnnotationDecl__Group_2__24927 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__2__Impl_in_rule__EAnnotationDecl__Group_2__24927 = new BitSet(new long[]{0x0000000600000000L});
     public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__3_in_rule__EAnnotationDecl__Group_2__24930 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2_2__0_in_rule__EAnnotationDecl__Group_2__2__Impl4957 = new BitSet(new long[]{0x0000000400000002L});
     public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__3__Impl_in_rule__EAnnotationDecl__Group_2__34988 = new BitSet(new long[]{0x0000000000000002L});
@@ -22573,10 +23173,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_34_in_rule__EAnnotationDecl__Group_2_2__0__Impl5086 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2_2__1__Impl_in_rule__EAnnotationDecl__Group_2_2__15117 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_2_1_in_rule__EAnnotationDecl__Group_2_2__1__Impl5144 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__0__Impl_in_rule__EClassDecl__Group__05178 = new BitSet(new long[]{0x0006000000010000L});
+    public static final BitSet FOLLOW_rule__EClassDecl__Group__0__Impl_in_rule__EClassDecl__Group__05178 = new BitSet(new long[]{0x0006000080010000L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group__1_in_rule__EClassDecl__Group__05181 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__EAnnotationsAssignment_0_in_rule__EClassDecl__Group__0__Impl5208 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__1__Impl_in_rule__EClassDecl__Group__15239 = new BitSet(new long[]{0x0004000000010000L});
+    public static final BitSet FOLLOW_rule__EClassDecl__Group__1__Impl_in_rule__EClassDecl__Group__15239 = new BitSet(new long[]{0x0006000080010000L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group__2_in_rule__EClassDecl__Group__15242 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__AbstractAssignment_1_in_rule__EClassDecl__Group__1__Impl5269 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group__2__Impl_in_rule__EClassDecl__Group__25300 = new BitSet(new long[]{0x0000000000000020L});
@@ -22585,19 +23185,19 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EClassDecl__Group__3__Impl_in_rule__EClassDecl__Group__35360 = new BitSet(new long[]{0x0000002848000000L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group__4_in_rule__EClassDecl__Group__35363 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__NameAssignment_3_in_rule__EClassDecl__Group__3__Impl5390 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__4__Impl_in_rule__EClassDecl__Group__45420 = new BitSet(new long[]{0x0000002048000000L});
+    public static final BitSet FOLLOW_rule__EClassDecl__Group__4__Impl_in_rule__EClassDecl__Group__45420 = new BitSet(new long[]{0x0000002848000000L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group__5_in_rule__EClassDecl__Group__45423 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group_4__0_in_rule__EClassDecl__Group__4__Impl5450 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__5__Impl_in_rule__EClassDecl__Group__55481 = new BitSet(new long[]{0x0000000048000000L});
+    public static final BitSet FOLLOW_rule__EClassDecl__Group__5__Impl_in_rule__EClassDecl__Group__55481 = new BitSet(new long[]{0x0000002848000000L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group__6_in_rule__EClassDecl__Group__55484 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group_5__0_in_rule__EClassDecl__Group__5__Impl5511 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__6__Impl_in_rule__EClassDecl__Group__65542 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_rule__EClassDecl__Group__6__Impl_in_rule__EClassDecl__Group__65542 = new BitSet(new long[]{0x0000002848000000L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group__7_in_rule__EClassDecl__Group__65545 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group_6__0_in_rule__EClassDecl__Group__6__Impl5572 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group__7__Impl_in_rule__EClassDecl__Group__75603 = new BitSet(new long[]{0x01F8404090020F00L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group__8_in_rule__EClassDecl__Group__75606 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_27_in_rule__EClassDecl__Group__7__Impl5634 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__8__Impl_in_rule__EClassDecl__Group__85665 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_rule__EClassDecl__Group__8__Impl_in_rule__EClassDecl__Group__85665 = new BitSet(new long[]{0x01F8404090020F00L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group__9_in_rule__EClassDecl__Group__85668 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__Alternatives_8_in_rule__EClassDecl__Group__8__Impl5695 = new BitSet(new long[]{0x01F8404080020F02L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group__9__Impl_in_rule__EClassDecl__Group__95726 = new BitSet(new long[]{0x0000000000000002L});
@@ -22608,7 +23208,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EClassDecl__Group_4__1__Impl_in_rule__EClassDecl__Group_4__15867 = new BitSet(new long[]{0x0000001400000000L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group_4__2_in_rule__EClassDecl__Group_4__15870 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__ETypeParametersAssignment_4_1_in_rule__EClassDecl__Group_4__1__Impl5897 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_4__2__Impl_in_rule__EClassDecl__Group_4__25927 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_rule__EClassDecl__Group_4__2__Impl_in_rule__EClassDecl__Group_4__25927 = new BitSet(new long[]{0x0000001400000000L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group_4__3_in_rule__EClassDecl__Group_4__25930 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group_4_2__0_in_rule__EClassDecl__Group_4__2__Impl5957 = new BitSet(new long[]{0x0000000400000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group_4__3__Impl_in_rule__EClassDecl__Group_4__35988 = new BitSet(new long[]{0x0000000000000002L});
@@ -22621,7 +23221,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EClassDecl__Group_5__0__Impl_in_rule__EClassDecl__Group_5__06178 = new BitSet(new long[]{0x0000040000000020L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group_5__1_in_rule__EClassDecl__Group_5__06181 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_37_in_rule__EClassDecl__Group_5__0__Impl6209 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_5__1__Impl_in_rule__EClassDecl__Group_5__16240 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_rule__EClassDecl__Group_5__1__Impl_in_rule__EClassDecl__Group_5__16240 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group_5__2_in_rule__EClassDecl__Group_5__16243 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__EGenericSuperTypesAssignment_5_1_in_rule__EClassDecl__Group_5__1__Impl6270 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group_5__2__Impl_in_rule__EClassDecl__Group_5__26300 = new BitSet(new long[]{0x0000000000000002L});
@@ -22636,10 +23236,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_30_in_rule__EClassDecl__Group_6__0__Impl6518 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__Group_6__1__Impl_in_rule__EClassDecl__Group_6__16549 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EClassDecl__InstanceClassNameAssignment_6_1_in_rule__EClassDecl__Group_6__1__Impl6576 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__0__Impl_in_rule__EAttributeDecl__Group__06610 = new BitSet(new long[]{0x00F8004000000700L});
+    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__0__Impl_in_rule__EAttributeDecl__Group__06610 = new BitSet(new long[]{0x00F8004080000700L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group__1_in_rule__EAttributeDecl__Group__06613 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__EAnnotationsAssignment_0_in_rule__EAttributeDecl__Group__0__Impl6640 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__1__Impl_in_rule__EAttributeDecl__Group__16671 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__1__Impl_in_rule__EAttributeDecl__Group__16671 = new BitSet(new long[]{0x00F8004080000700L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group__2_in_rule__EAttributeDecl__Group__16674 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Alternatives_1_in_rule__EAttributeDecl__Group__1__Impl6701 = new BitSet(new long[]{0x00F8000000000702L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group__2__Impl_in_rule__EAttributeDecl__Group__26732 = new BitSet(new long[]{0x0000040000000020L});
@@ -22648,13 +23248,13 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group__3__Impl_in_rule__EAttributeDecl__Group__36794 = new BitSet(new long[]{0x0000008000000020L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group__4_in_rule__EAttributeDecl__Group__36797 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__EGenericTypeAssignment_3_in_rule__EAttributeDecl__Group__3__Impl6824 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__4__Impl_in_rule__EAttributeDecl__Group__46854 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__4__Impl_in_rule__EAttributeDecl__Group__46854 = new BitSet(new long[]{0x0000008000000020L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group__5_in_rule__EAttributeDecl__Group__46857 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__0_in_rule__EAttributeDecl__Group__4__Impl6884 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group__5__Impl_in_rule__EAttributeDecl__Group__56915 = new BitSet(new long[]{0x0000000000C00000L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group__6_in_rule__EAttributeDecl__Group__56918 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__NameAssignment_5_in_rule__EAttributeDecl__Group__5__Impl6945 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__6__Impl_in_rule__EAttributeDecl__Group__66975 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__6__Impl_in_rule__EAttributeDecl__Group__66975 = new BitSet(new long[]{0x0000000000C00000L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group__7_in_rule__EAttributeDecl__Group__66978 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group_6__0_in_rule__EAttributeDecl__Group__6__Impl7005 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group__7__Impl_in_rule__EAttributeDecl__Group__77036 = new BitSet(new long[]{0x0000000000000002L});
@@ -22665,7 +23265,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__1__Impl_in_rule__EAttributeDecl__Group_4__17173 = new BitSet(new long[]{0x0000030000000000L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__2_in_rule__EAttributeDecl__Group_4__17176 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__LowerBoundAssignment_4_1_in_rule__EAttributeDecl__Group_4__1__Impl7203 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__2__Impl_in_rule__EAttributeDecl__Group_4__27233 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__2__Impl_in_rule__EAttributeDecl__Group_4__27233 = new BitSet(new long[]{0x0000030000000000L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__3_in_rule__EAttributeDecl__Group_4__27236 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4_2__0_in_rule__EAttributeDecl__Group_4__2__Impl7263 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__3__Impl_in_rule__EAttributeDecl__Group_4__37294 = new BitSet(new long[]{0x0000000000000002L});
@@ -22680,10 +23280,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_23_in_rule__EAttributeDecl__Group_6__0__Impl7515 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__Group_6__1__Impl_in_rule__EAttributeDecl__Group_6__17546 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1_in_rule__EAttributeDecl__Group_6__1__Impl7573 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__0__Impl_in_rule__EReferenceDecl__Group__07607 = new BitSet(new long[]{0x01F0000000020F00L});
+    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__0__Impl_in_rule__EReferenceDecl__Group__07607 = new BitSet(new long[]{0x01F8004080020F00L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group__1_in_rule__EReferenceDecl__Group__07610 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__EAnnotationsAssignment_0_in_rule__EReferenceDecl__Group__0__Impl7637 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__1__Impl_in_rule__EReferenceDecl__Group__17668 = new BitSet(new long[]{0x0100000000020000L});
+    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__1__Impl_in_rule__EReferenceDecl__Group__17668 = new BitSet(new long[]{0x01F8004080020F00L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group__2_in_rule__EReferenceDecl__Group__17671 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Alternatives_1_in_rule__EReferenceDecl__Group__1__Impl7698 = new BitSet(new long[]{0x00F0000000000F02L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group__2__Impl_in_rule__EReferenceDecl__Group__27729 = new BitSet(new long[]{0x0000040000000020L});
@@ -22692,10 +23292,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group__3__Impl_in_rule__EReferenceDecl__Group__37789 = new BitSet(new long[]{0x0000048000000020L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group__4_in_rule__EReferenceDecl__Group__37792 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__EGenericTypeAssignment_3_in_rule__EReferenceDecl__Group__3__Impl7819 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__4__Impl_in_rule__EReferenceDecl__Group__47849 = new BitSet(new long[]{0x0000040000000020L});
+    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__4__Impl_in_rule__EReferenceDecl__Group__47849 = new BitSet(new long[]{0x0000048000000020L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group__5_in_rule__EReferenceDecl__Group__47852 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__0_in_rule__EReferenceDecl__Group__4__Impl7879 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__5__Impl_in_rule__EReferenceDecl__Group__57910 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__5__Impl_in_rule__EReferenceDecl__Group__57910 = new BitSet(new long[]{0x0000048000000020L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group__6_in_rule__EReferenceDecl__Group__57913 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group_5__0_in_rule__EReferenceDecl__Group__5__Impl7940 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group__6__Impl_in_rule__EReferenceDecl__Group__67971 = new BitSet(new long[]{0x0000000000400000L});
@@ -22709,7 +23309,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__1__Impl_in_rule__EReferenceDecl__Group_4__18168 = new BitSet(new long[]{0x0000030000000000L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__2_in_rule__EReferenceDecl__Group_4__18171 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__LowerBoundAssignment_4_1_in_rule__EReferenceDecl__Group_4__1__Impl8198 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__2__Impl_in_rule__EReferenceDecl__Group_4__28228 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__2__Impl_in_rule__EReferenceDecl__Group_4__28228 = new BitSet(new long[]{0x0000030000000000L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__3_in_rule__EReferenceDecl__Group_4__28231 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4_2__0_in_rule__EReferenceDecl__Group_4__2__Impl8258 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__3__Impl_in_rule__EReferenceDecl__Group_4__38289 = new BitSet(new long[]{0x0000000000000002L});
@@ -22724,7 +23324,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_42_in_rule__EReferenceDecl__Group_5__0__Impl8510 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__Group_5__1__Impl_in_rule__EReferenceDecl__Group_5__18541 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EReferenceDecl__EOppositeAssignment_5_1_in_rule__EReferenceDecl__Group_5__1__Impl8568 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumDecl__Group__0__Impl_in_rule__EEnumDecl__Group__08602 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__EEnumDecl__Group__0__Impl_in_rule__EEnumDecl__Group__08602 = new BitSet(new long[]{0x00060800A1010080L});
     public static final BitSet FOLLOW_rule__EEnumDecl__Group__1_in_rule__EEnumDecl__Group__08605 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EEnumDecl__EAnnotationsAssignment_0_in_rule__EEnumDecl__Group__0__Impl8632 = new BitSet(new long[]{0x0000000080000002L});
     public static final BitSet FOLLOW_rule__EEnumDecl__Group__1__Impl_in_rule__EEnumDecl__Group__18663 = new BitSet(new long[]{0x0000000000000020L});
@@ -22742,16 +23342,16 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EEnumDecl__ELiteralsAssignment_4_in_rule__EEnumDecl__Group__4__Impl8891 = new BitSet(new long[]{0x0000000080000022L});
     public static final BitSet FOLLOW_rule__EEnumDecl__Group__5__Impl_in_rule__EEnumDecl__Group__58924 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_28_in_rule__EEnumDecl__Group__5__Impl8952 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__0__Impl_in_rule__EEnumLiteralDecl__Group__08995 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__0__Impl_in_rule__EEnumLiteralDecl__Group__08995 = new BitSet(new long[]{0x0000000080000020L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__1_in_rule__EEnumLiteralDecl__Group__08998 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__EAnnotationsAssignment_0_in_rule__EEnumLiteralDecl__Group__0__Impl9025 = new BitSet(new long[]{0x0000000080000002L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__1__Impl_in_rule__EEnumLiteralDecl__Group__19056 = new BitSet(new long[]{0x0000000000C00010L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__2_in_rule__EEnumLiteralDecl__Group__19059 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__NameAssignment_1_in_rule__EEnumLiteralDecl__Group__1__Impl9086 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__2__Impl_in_rule__EEnumLiteralDecl__Group__29116 = new BitSet(new long[]{0x0000000000400010L});
+    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__2__Impl_in_rule__EEnumLiteralDecl__Group__29116 = new BitSet(new long[]{0x0000000000C00010L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__3_in_rule__EEnumLiteralDecl__Group__29119 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group_2__0_in_rule__EEnumLiteralDecl__Group__2__Impl9146 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__3__Impl_in_rule__EEnumLiteralDecl__Group__39177 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__3__Impl_in_rule__EEnumLiteralDecl__Group__39177 = new BitSet(new long[]{0x0000000000C00010L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__4_in_rule__EEnumLiteralDecl__Group__39180 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__LiteralAssignment_3_in_rule__EEnumLiteralDecl__Group__3__Impl9207 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__4__Impl_in_rule__EEnumLiteralDecl__Group__49238 = new BitSet(new long[]{0x0000000000000002L});
@@ -22761,7 +23361,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_23_in_rule__EEnumLiteralDecl__Group_2__0__Impl9338 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group_2__1__Impl_in_rule__EEnumLiteralDecl__Group_2__19369 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EEnumLiteralDecl__ValueAssignment_2_1_in_rule__EEnumLiteralDecl__Group_2__1__Impl9396 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group__0__Impl_in_rule__ETypeParameterDecl__Group__09430 = new BitSet(new long[]{0x0000002000000002L});
+    public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group__0__Impl_in_rule__ETypeParameterDecl__Group__09430 = new BitSet(new long[]{0x0000002000000000L});
     public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group__1_in_rule__ETypeParameterDecl__Group__09433 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ETypeParameterDecl__NameAssignment_0_in_rule__ETypeParameterDecl__Group__0__Impl9460 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group__1__Impl_in_rule__ETypeParameterDecl__Group__19490 = new BitSet(new long[]{0x0000000000000002L});
@@ -22771,7 +23371,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_37_in_rule__ETypeParameterDecl__Group_1__0__Impl9583 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group_1__1__Impl_in_rule__ETypeParameterDecl__Group_1__19614 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ETypeParameterDecl__EBoundsAssignment_1_1_in_rule__ETypeParameterDecl__Group_1__1__Impl9641 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__0__Impl_in_rule__EGenericTypeReferenceDecl__Group_0__09675 = new BitSet(new long[]{0x0000000800000002L});
+    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__0__Impl_in_rule__EGenericTypeReferenceDecl__Group_0__09675 = new BitSet(new long[]{0x0000000800000000L});
     public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__1_in_rule__EGenericTypeReferenceDecl__Group_0__09678 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeReferenceDecl__Group_0__0__Impl9705 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__1__Impl_in_rule__EGenericTypeReferenceDecl__Group_0__19735 = new BitSet(new long[]{0x0000000000000002L});
@@ -22782,7 +23382,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl_in_rule__EGenericTypeReferenceDecl__Group_0_1__19859 = new BitSet(new long[]{0x0000001400000000L});
     public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__2_in_rule__EGenericTypeReferenceDecl__Group_0_1__19862 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeReferenceDecl__Group_0_1__1__Impl9889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl_in_rule__EGenericTypeReferenceDecl__Group_0_1__29919 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl_in_rule__EGenericTypeReferenceDecl__Group_0_1__29919 = new BitSet(new long[]{0x0000001400000000L});
     public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__3_in_rule__EGenericTypeReferenceDecl__Group_0_1__29922 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__0_in_rule__EGenericTypeReferenceDecl__Group_0_1__2__Impl9949 = new BitSet(new long[]{0x0000000400000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__3__Impl_in_rule__EGenericTypeReferenceDecl__Group_0_1__39980 = new BitSet(new long[]{0x0000000000000002L});
@@ -22797,7 +23397,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_42_in_rule__EGenericTypeReferenceDecl__Group_1__0__Impl10201 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__1__Impl_in_rule__EGenericTypeReferenceDecl__Group_1__110232 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1_in_rule__EGenericTypeReferenceDecl__Group_1__1__Impl10259 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0__0__Impl_in_rule__EGenericTypeDecl__Group_0__010293 = new BitSet(new long[]{0x0000000800000002L});
+    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0__0__Impl_in_rule__EGenericTypeDecl__Group_0__010293 = new BitSet(new long[]{0x0000000800000000L});
     public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0__1_in_rule__EGenericTypeDecl__Group_0__010296 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeDecl__Group_0__0__Impl10323 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0__1__Impl_in_rule__EGenericTypeDecl__Group_0__110353 = new BitSet(new long[]{0x0000000000000002L});
@@ -22808,7 +23408,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__1__Impl_in_rule__EGenericTypeDecl__Group_0_1__110477 = new BitSet(new long[]{0x0000001400000000L});
     public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__2_in_rule__EGenericTypeDecl__Group_0_1__110480 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeDecl__Group_0_1__1__Impl10507 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__2__Impl_in_rule__EGenericTypeDecl__Group_0_1__210537 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__2__Impl_in_rule__EGenericTypeDecl__Group_0_1__210537 = new BitSet(new long[]{0x0000001400000000L});
     public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__3_in_rule__EGenericTypeDecl__Group_0_1__210540 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__0_in_rule__EGenericTypeDecl__Group_0_1__2__Impl10567 = new BitSet(new long[]{0x0000000400000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__3__Impl_in_rule__EGenericTypeDecl__Group_0_1__310598 = new BitSet(new long[]{0x0000000000000002L});
@@ -22838,10 +23438,10 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_45_in_rule__EGenericTypeDecl__Group_2_1_1__0__Impl11188 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__1__Impl_in_rule__EGenericTypeDecl__Group_2_1_1__111219 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1_in_rule__EGenericTypeDecl__Group_2_1_1__1__Impl11246 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__0__Impl_in_rule__EOperationDecl__Group__011280 = new BitSet(new long[]{0x0000400000000300L});
+    public static final BitSet FOLLOW_rule__EOperationDecl__Group__0__Impl_in_rule__EOperationDecl__Group__011280 = new BitSet(new long[]{0x01F8404080020F00L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__1_in_rule__EOperationDecl__Group__011283 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__EAnnotationsAssignment_0_in_rule__EOperationDecl__Group__0__Impl11310 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__1__Impl_in_rule__EOperationDecl__Group__111341 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_rule__EOperationDecl__Group__1__Impl_in_rule__EOperationDecl__Group__111341 = new BitSet(new long[]{0x01F8404080020F00L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__2_in_rule__EOperationDecl__Group__111344 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Alternatives_1_in_rule__EOperationDecl__Group__1__Impl11371 = new BitSet(new long[]{0x0000000000000302L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__2__Impl_in_rule__EOperationDecl__Group__211402 = new BitSet(new long[]{0x0000040000040020L});
@@ -22853,19 +23453,19 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__4__Impl_in_rule__EOperationDecl__Group__411524 = new BitSet(new long[]{0x0000000900000000L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__5_in_rule__EOperationDecl__Group__411527 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__NameAssignment_4_in_rule__EOperationDecl__Group__4__Impl11554 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__5__Impl_in_rule__EOperationDecl__Group__511584 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_rule__EOperationDecl__Group__5__Impl_in_rule__EOperationDecl__Group__511584 = new BitSet(new long[]{0x0000000900000000L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__6_in_rule__EOperationDecl__Group__511587 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__0_in_rule__EOperationDecl__Group__5__Impl11614 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__6__Impl_in_rule__EOperationDecl__Group__611645 = new BitSet(new long[]{0x0000040280000020L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__7_in_rule__EOperationDecl__Group__611648 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_32_in_rule__EOperationDecl__Group__6__Impl11676 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__7__Impl_in_rule__EOperationDecl__Group__711707 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_rule__EOperationDecl__Group__7__Impl_in_rule__EOperationDecl__Group__711707 = new BitSet(new long[]{0x0000040280000020L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__8_in_rule__EOperationDecl__Group__711710 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_7__0_in_rule__EOperationDecl__Group__7__Impl11737 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__8__Impl_in_rule__EOperationDecl__Group__811768 = new BitSet(new long[]{0x0000800000400000L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__9_in_rule__EOperationDecl__Group__811771 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_33_in_rule__EOperationDecl__Group__8__Impl11799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__9__Impl_in_rule__EOperationDecl__Group__911830 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_rule__EOperationDecl__Group__9__Impl_in_rule__EOperationDecl__Group__911830 = new BitSet(new long[]{0x0000800000400000L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__10_in_rule__EOperationDecl__Group__911833 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__0_in_rule__EOperationDecl__Group__9__Impl11860 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group__10__Impl_in_rule__EOperationDecl__Group__1011891 = new BitSet(new long[]{0x0000000000000002L});
@@ -22876,7 +23476,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__1__Impl_in_rule__EOperationDecl__Group_5__112034 = new BitSet(new long[]{0x0000001400000000L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__2_in_rule__EOperationDecl__Group_5__112037 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_1_in_rule__EOperationDecl__Group_5__1__Impl12064 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__2__Impl_in_rule__EOperationDecl__Group_5__212094 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__2__Impl_in_rule__EOperationDecl__Group_5__212094 = new BitSet(new long[]{0x0000001400000000L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__3_in_rule__EOperationDecl__Group_5__212097 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_5_2__0_in_rule__EOperationDecl__Group_5__2__Impl12124 = new BitSet(new long[]{0x0000000400000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__3__Impl_in_rule__EOperationDecl__Group_5__312155 = new BitSet(new long[]{0x0000000000000002L});
@@ -22886,7 +23486,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_34_in_rule__EOperationDecl__Group_5_2__0__Impl12253 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_5_2__1__Impl_in_rule__EOperationDecl__Group_5_2__112284 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_2_1_in_rule__EOperationDecl__Group_5_2__1__Impl12311 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_7__0__Impl_in_rule__EOperationDecl__Group_7__012345 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_rule__EOperationDecl__Group_7__0__Impl_in_rule__EOperationDecl__Group_7__012345 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_7__1_in_rule__EOperationDecl__Group_7__012348 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__EParametersAssignment_7_0_in_rule__EOperationDecl__Group_7__0__Impl12375 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_7__1__Impl_in_rule__EOperationDecl__Group_7__112405 = new BitSet(new long[]{0x0000000000000002L});
@@ -22899,7 +23499,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__0__Impl_in_rule__EOperationDecl__Group_9__012590 = new BitSet(new long[]{0x0000040000000020L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__1_in_rule__EOperationDecl__Group_9__012593 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_47_in_rule__EOperationDecl__Group_9__0__Impl12621 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__1__Impl_in_rule__EOperationDecl__Group_9__112652 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__1__Impl_in_rule__EOperationDecl__Group_9__112652 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__2_in_rule__EOperationDecl__Group_9__112655 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_1_in_rule__EOperationDecl__Group_9__1__Impl12682 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__2__Impl_in_rule__EOperationDecl__Group_9__212712 = new BitSet(new long[]{0x0000000000000002L});
@@ -22909,7 +23509,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_34_in_rule__EOperationDecl__Group_9_2__0__Impl12807 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__Group_9_2__1__Impl_in_rule__EOperationDecl__Group_9_2__112838 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1_in_rule__EOperationDecl__Group_9_2__1__Impl12865 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EParameterDecl__Group__0__Impl_in_rule__EParameterDecl__Group__012899 = new BitSet(new long[]{0x0000040000000020L});
+    public static final BitSet FOLLOW_rule__EParameterDecl__Group__0__Impl_in_rule__EParameterDecl__Group__012899 = new BitSet(new long[]{0x0000040080000020L});
     public static final BitSet FOLLOW_rule__EParameterDecl__Group__1_in_rule__EParameterDecl__Group__012902 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EParameterDecl__EAnnotationsAssignment_0_in_rule__EParameterDecl__Group__0__Impl12929 = new BitSet(new long[]{0x0000000080000002L});
     public static final BitSet FOLLOW_rule__EParameterDecl__Group__1__Impl_in_rule__EParameterDecl__Group__112960 = new BitSet(new long[]{0x0000000000000020L});
@@ -22925,7 +23525,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_23_in_rule__MapEntry__Group__1__Impl13174 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__MapEntry__Group__2__Impl_in_rule__MapEntry__Group__213205 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__MapEntry__ValueAssignment_2_in_rule__MapEntry__Group__2__Impl13232 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QID__Group__0__Impl_in_rule__QID__Group__013268 = new BitSet(new long[]{0x0000000000180002L});
+    public static final BitSet FOLLOW_rule__QID__Group__0__Impl_in_rule__QID__Group__013268 = new BitSet(new long[]{0x0000000000180000L});
     public static final BitSet FOLLOW_rule__QID__Group__1_in_rule__QID__Group__013271 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group__0__Impl13298 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__QID__Group__1__Impl_in_rule__QID__Group__113327 = new BitSet(new long[]{0x0000000000000002L});
@@ -22935,7 +23535,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_rule__QID__Alternatives_1_0_in_rule__QID__Group_1__0__Impl13419 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__QID__Group_1__1__Impl_in_rule__QID__Group_1__113449 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group_1__1__Impl13476 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SINT__Group__0__Impl_in_rule__SINT__Group__013509 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__SINT__Group__0__Impl_in_rule__SINT__Group__013509 = new BitSet(new long[]{0x0001000000000040L});
     public static final BitSet FOLLOW_rule__SINT__Group__1_in_rule__SINT__Group__013512 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_48_in_rule__SINT__Group__0__Impl13541 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__SINT__Group__1__Impl_in_rule__SINT__Group__113574 = new BitSet(new long[]{0x0000000000000002L});

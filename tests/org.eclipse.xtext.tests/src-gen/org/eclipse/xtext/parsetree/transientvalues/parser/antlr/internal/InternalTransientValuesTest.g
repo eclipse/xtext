@@ -47,12 +47,6 @@ import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestG
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/transientvalues/parser/antlr/internal/InternalTransientValuesTest.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Root";	
    	}
@@ -89,9 +83,9 @@ ruleRoot returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'test' 
+(	otherlv_0='test' 
     {
-        createLeafNode(grammarAccess.getRootAccess().getTestKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getRootAccess().getTestKeyword_0(), null);
     }
 (
     { 
@@ -145,15 +139,15 @@ ruleTestRequired returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'required' 
+(	otherlv_0='required' 
     {
-        createLeafNode(grammarAccess.getTestRequiredAccess().getRequiredKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getTestRequiredAccess().getRequiredKeyword_0(), null);
     }
 (
 (
 		lv_required1_1_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0(), "required1"); 
+			createLeafNode(lv_required1_1_0, grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0(), "required1"); 
 		}
 		{
 	        if ($current==null) {
@@ -177,7 +171,7 @@ ruleTestRequired returns [EObject current=null]
 (
 		lv_required2_2_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0(), "required2"); 
+			createLeafNode(lv_required2_2_0, grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0(), "required2"); 
 		}
 		{
 	        if ($current==null) {
@@ -220,15 +214,15 @@ ruleTestOptional returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'optional' 
+(	otherlv_0='optional' 
     {
-        createLeafNode(grammarAccess.getTestOptionalAccess().getOptionalKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getTestOptionalAccess().getOptionalKeyword_0(), null);
     }
 (
 (
 		lv_opt1_1_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0(), "opt1"); 
+			createLeafNode(lv_opt1_1_0, grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0(), "opt1"); 
 		}
 		{
 	        if ($current==null) {
@@ -248,15 +242,15 @@ ruleTestOptional returns [EObject current=null]
 	    }
 
 )
-)?(	':' 
+)?(	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getTestOptionalAccess().getColonKeyword_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getTestOptionalAccess().getColonKeyword_2_0(), null);
     }
 (
 (
 		lv_opt2_3_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0(), "opt2"); 
+			createLeafNode(lv_opt2_3_0, grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0(), "opt2"); 
 		}
 		{
 	        if ($current==null) {
@@ -299,15 +293,15 @@ ruleTestList returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'list' 
+(	otherlv_0='list' 
     {
-        createLeafNode(grammarAccess.getTestListAccess().getListKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getTestListAccess().getListKeyword_0(), null);
     }
 (
 (
 		lv_item_1_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0(), "item"); 
+			createLeafNode(lv_item_1_0, grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0(), "item"); 
 		}
 		{
 	        if ($current==null) {

@@ -47,12 +47,6 @@ import org.eclipse.xtext.parsetree.reconstr.services.Bug302128TestLanguageGramma
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalBug302128TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -164,7 +158,7 @@ ruleElement returns [EObject current=null]
 (
 		lv_value_1_0=RULE_VALUE
 		{
-			createLeafNode(grammarAccess.getElementAccess().getValueValueTerminalRuleCall_1_0(), "value"); 
+			createLeafNode(lv_value_1_0, grammarAccess.getElementAccess().getValueValueTerminalRuleCall_1_0(), "value"); 
 		}
 		{
 	        if ($current==null) {
@@ -212,27 +206,27 @@ ruleVariable returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 
     { 
-    createLeafNode(grammarAccess.getVariableAccess().getIDTerminalRuleCall_0(), null); 
+    createLeafNode(this_ID_0, grammarAccess.getVariableAccess().getIDTerminalRuleCall_0(), null); 
     }
 ((
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getVariableAccess().getFullStopKeyword_1_0_0(), null); 
+        createLeafNode(kw, grammarAccess.getVariableAccess().getFullStopKeyword_1_0_0(), null); 
     }
 
     |
 	kw='-' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getVariableAccess().getHyphenMinusKeyword_1_0_1(), null); 
+        createLeafNode(kw, grammarAccess.getVariableAccess().getHyphenMinusKeyword_1_0_1(), null); 
     }
 )    this_ID_3=RULE_ID    {
 		$current.merge(this_ID_3);
     }
 
     { 
-    createLeafNode(grammarAccess.getVariableAccess().getIDTerminalRuleCall_1_1(), null); 
+    createLeafNode(this_ID_3, grammarAccess.getVariableAccess().getIDTerminalRuleCall_1_1(), null); 
     }
 )*)
     ;

@@ -26,20 +26,60 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'?'", "'*'", "'+'", "'='", "'+='", "'?='", "'grammar'", "'with'", "','", "'('", "')'", "'.'", "'generate'", "'as'", "'import'", "':'", "';'", "'returns'", "'::'", "'|'", "'&'", "'{'", "'}'", "'current'", "'['", "']'", "'terminal'", "'!'", "'->'", "'..'", "'enum'", "'hidden'"
     };
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__42=42;
+    public static final int T__35=35;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=6;
+    public static final int T__12=12;
+    public static final int T__28=28;
+    public static final int T__23=23;
+    public static final int T__36=36;
+    public static final int T__20=20;
+    public static final int T__13=13;
     public static final int RULE_STRING=5;
+    public static final int T__21=21;
+    public static final int T__19=19;
+    public static final int T__33=33;
+    public static final int T__14=14;
+    public static final int T__11=11;
+    public static final int T__22=22;
+    public static final int T__29=29;
+    public static final int T__39=39;
+    public static final int T__30=30;
+    public static final int RULE_WS=9;
+    public static final int T__17=17;
+    public static final int T__31=31;
+    public static final int T__40=40;
+    public static final int RULE_INT=6;
+    public static final int EOF=-1;
+    public static final int T__27=27;
+    public static final int T__32=32;
+    public static final int T__16=16;
+    public static final int T__38=38;
+    public static final int T__24=24;
+    public static final int T__37=37;
     public static final int RULE_ANY_OTHER=10;
+    public static final int T__26=26;
+    public static final int T__25=25;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__34=34;
+    public static final int T__41=41;
+    public static final int T__18=18;
+    public static final int T__15=15;
+
+    // delegates
+    // delegators
+
 
         public InternalXtextParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalXtextParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalXtextParser.tokenNames; }
     public String getGrammarFileName() { return "../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g"; }
 
 
@@ -63,7 +103,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
 
 
 
-    // $ANTLR start entryRuleGrammar
+    // $ANTLR start "entryRuleGrammar"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:61:1: entryRuleGrammar : ruleGrammar EOF ;
     public final void entryRuleGrammar() throws RecognitionException {
         try {
@@ -73,7 +113,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getGrammarRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleGrammar_in_entryRuleGrammar61);
             ruleGrammar();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGrammar68); 
@@ -89,10 +130,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleGrammar
+    // $ANTLR end "entryRuleGrammar"
 
 
-    // $ANTLR start ruleGrammar
+    // $ANTLR start "ruleGrammar"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:70:1: ruleGrammar : ( ( rule__Grammar__Group__0 ) ) ;
     public final void ruleGrammar() throws RecognitionException {
 
@@ -111,7 +152,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__0_in_ruleGrammar94);
             rule__Grammar__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -135,10 +177,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleGrammar
+    // $ANTLR end "ruleGrammar"
 
 
-    // $ANTLR start entryRuleGrammarID
+    // $ANTLR start "entryRuleGrammarID"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:89:1: entryRuleGrammarID : ruleGrammarID EOF ;
     public final void entryRuleGrammarID() throws RecognitionException {
         try {
@@ -148,7 +190,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getGrammarIDRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_entryRuleGrammarID121);
             ruleGrammarID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarIDRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGrammarID128); 
@@ -164,10 +207,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleGrammarID
+    // $ANTLR end "entryRuleGrammarID"
 
 
-    // $ANTLR start ruleGrammarID
+    // $ANTLR start "ruleGrammarID"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:98:1: ruleGrammarID : ( ( rule__GrammarID__Group__0 ) ) ;
     public final void ruleGrammarID() throws RecognitionException {
 
@@ -186,7 +229,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group__0_in_ruleGrammarID154);
             rule__GrammarID__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -210,10 +254,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleGrammarID
+    // $ANTLR end "ruleGrammarID"
 
 
-    // $ANTLR start entryRuleAbstractRule
+    // $ANTLR start "entryRuleAbstractRule"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:117:1: entryRuleAbstractRule : ruleAbstractRule EOF ;
     public final void entryRuleAbstractRule() throws RecognitionException {
         try {
@@ -223,7 +267,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAbstractRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule181);
             ruleAbstractRule();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractRuleRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractRule188); 
@@ -239,10 +284,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractRule
+    // $ANTLR end "entryRuleAbstractRule"
 
 
-    // $ANTLR start ruleAbstractRule
+    // $ANTLR start "ruleAbstractRule"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:126:1: ruleAbstractRule : ( ( rule__AbstractRule__Alternatives ) ) ;
     public final void ruleAbstractRule() throws RecognitionException {
 
@@ -261,7 +306,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractRule__Alternatives_in_ruleAbstractRule214);
             rule__AbstractRule__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -285,10 +331,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleAbstractRule
+    // $ANTLR end "ruleAbstractRule"
 
 
-    // $ANTLR start entryRuleAbstractMetamodelDeclaration
+    // $ANTLR start "entryRuleAbstractMetamodelDeclaration"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:145:1: entryRuleAbstractMetamodelDeclaration : ruleAbstractMetamodelDeclaration EOF ;
     public final void entryRuleAbstractMetamodelDeclaration() throws RecognitionException {
         try {
@@ -298,7 +344,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAbstractMetamodelDeclarationRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractMetamodelDeclaration_in_entryRuleAbstractMetamodelDeclaration241);
             ruleAbstractMetamodelDeclaration();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractMetamodelDeclarationRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractMetamodelDeclaration248); 
@@ -314,10 +361,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractMetamodelDeclaration
+    // $ANTLR end "entryRuleAbstractMetamodelDeclaration"
 
 
-    // $ANTLR start ruleAbstractMetamodelDeclaration
+    // $ANTLR start "ruleAbstractMetamodelDeclaration"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:154:1: ruleAbstractMetamodelDeclaration : ( ( rule__AbstractMetamodelDeclaration__Alternatives ) ) ;
     public final void ruleAbstractMetamodelDeclaration() throws RecognitionException {
 
@@ -336,7 +383,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractMetamodelDeclaration__Alternatives_in_ruleAbstractMetamodelDeclaration274);
             rule__AbstractMetamodelDeclaration__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -360,10 +408,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleAbstractMetamodelDeclaration
+    // $ANTLR end "ruleAbstractMetamodelDeclaration"
 
 
-    // $ANTLR start entryRuleGeneratedMetamodel
+    // $ANTLR start "entryRuleGeneratedMetamodel"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:173:1: entryRuleGeneratedMetamodel : ruleGeneratedMetamodel EOF ;
     public final void entryRuleGeneratedMetamodel() throws RecognitionException {
         try {
@@ -373,7 +421,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getGeneratedMetamodelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleGeneratedMetamodel_in_entryRuleGeneratedMetamodel301);
             ruleGeneratedMetamodel();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGeneratedMetamodelRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGeneratedMetamodel308); 
@@ -389,10 +438,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleGeneratedMetamodel
+    // $ANTLR end "entryRuleGeneratedMetamodel"
 
 
-    // $ANTLR start ruleGeneratedMetamodel
+    // $ANTLR start "ruleGeneratedMetamodel"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:182:1: ruleGeneratedMetamodel : ( ( rule__GeneratedMetamodel__Group__0 ) ) ;
     public final void ruleGeneratedMetamodel() throws RecognitionException {
 
@@ -411,7 +460,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__0_in_ruleGeneratedMetamodel334);
             rule__GeneratedMetamodel__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -435,10 +485,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleGeneratedMetamodel
+    // $ANTLR end "ruleGeneratedMetamodel"
 
 
-    // $ANTLR start entryRuleReferencedMetamodel
+    // $ANTLR start "entryRuleReferencedMetamodel"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:201:1: entryRuleReferencedMetamodel : ruleReferencedMetamodel EOF ;
     public final void entryRuleReferencedMetamodel() throws RecognitionException {
         try {
@@ -448,7 +498,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getReferencedMetamodelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel361);
             ruleReferencedMetamodel();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getReferencedMetamodelRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleReferencedMetamodel368); 
@@ -464,10 +515,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleReferencedMetamodel
+    // $ANTLR end "entryRuleReferencedMetamodel"
 
 
-    // $ANTLR start ruleReferencedMetamodel
+    // $ANTLR start "ruleReferencedMetamodel"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:210:1: ruleReferencedMetamodel : ( ( rule__ReferencedMetamodel__Group__0 ) ) ;
     public final void ruleReferencedMetamodel() throws RecognitionException {
 
@@ -486,7 +537,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__0_in_ruleReferencedMetamodel394);
             rule__ReferencedMetamodel__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -510,10 +562,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleReferencedMetamodel
+    // $ANTLR end "ruleReferencedMetamodel"
 
 
-    // $ANTLR start entryRuleParserRule
+    // $ANTLR start "entryRuleParserRule"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:229:1: entryRuleParserRule : ruleParserRule EOF ;
     public final void entryRuleParserRule() throws RecognitionException {
         try {
@@ -523,7 +575,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getParserRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleParserRule_in_entryRuleParserRule421);
             ruleParserRule();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParserRuleRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParserRule428); 
@@ -539,10 +592,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleParserRule
+    // $ANTLR end "entryRuleParserRule"
 
 
-    // $ANTLR start ruleParserRule
+    // $ANTLR start "ruleParserRule"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:238:1: ruleParserRule : ( ( rule__ParserRule__Group__0 ) ) ;
     public final void ruleParserRule() throws RecognitionException {
 
@@ -561,7 +614,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__0_in_ruleParserRule454);
             rule__ParserRule__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -585,10 +639,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleParserRule
+    // $ANTLR end "ruleParserRule"
 
 
-    // $ANTLR start entryRuleTypeRef
+    // $ANTLR start "entryRuleTypeRef"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:257:1: entryRuleTypeRef : ruleTypeRef EOF ;
     public final void entryRuleTypeRef() throws RecognitionException {
         try {
@@ -598,7 +652,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTypeRefRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_entryRuleTypeRef481);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTypeRefRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeRef488); 
@@ -614,10 +669,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleTypeRef
+    // $ANTLR end "entryRuleTypeRef"
 
 
-    // $ANTLR start ruleTypeRef
+    // $ANTLR start "ruleTypeRef"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:266:1: ruleTypeRef : ( ( rule__TypeRef__Group__0 ) ) ;
     public final void ruleTypeRef() throws RecognitionException {
 
@@ -636,7 +691,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group__0_in_ruleTypeRef514);
             rule__TypeRef__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -660,10 +716,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleTypeRef
+    // $ANTLR end "ruleTypeRef"
 
 
-    // $ANTLR start entryRuleAlternatives
+    // $ANTLR start "entryRuleAlternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:285:1: entryRuleAlternatives : ruleAlternatives EOF ;
     public final void entryRuleAlternatives() throws RecognitionException {
         try {
@@ -673,7 +729,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAlternativesRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAlternatives_in_entryRuleAlternatives541);
             ruleAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAlternativesRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAlternatives548); 
@@ -689,10 +746,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleAlternatives
+    // $ANTLR end "entryRuleAlternatives"
 
 
-    // $ANTLR start ruleAlternatives
+    // $ANTLR start "ruleAlternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:294:1: ruleAlternatives : ( ( rule__Alternatives__Group__0 ) ) ;
     public final void ruleAlternatives() throws RecognitionException {
 
@@ -711,7 +768,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group__0_in_ruleAlternatives574);
             rule__Alternatives__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -735,10 +793,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleAlternatives
+    // $ANTLR end "ruleAlternatives"
 
 
-    // $ANTLR start entryRuleUnorderedGroup
+    // $ANTLR start "entryRuleUnorderedGroup"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:313:1: entryRuleUnorderedGroup : ruleUnorderedGroup EOF ;
     public final void entryRuleUnorderedGroup() throws RecognitionException {
         try {
@@ -748,7 +806,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getUnorderedGroupRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleUnorderedGroup_in_entryRuleUnorderedGroup601);
             ruleUnorderedGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getUnorderedGroupRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnorderedGroup608); 
@@ -764,10 +823,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleUnorderedGroup
+    // $ANTLR end "entryRuleUnorderedGroup"
 
 
-    // $ANTLR start ruleUnorderedGroup
+    // $ANTLR start "ruleUnorderedGroup"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:322:1: ruleUnorderedGroup : ( ( rule__UnorderedGroup__Group__0 ) ) ;
     public final void ruleUnorderedGroup() throws RecognitionException {
 
@@ -786,7 +845,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group__0_in_ruleUnorderedGroup634);
             rule__UnorderedGroup__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -810,10 +870,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleUnorderedGroup
+    // $ANTLR end "ruleUnorderedGroup"
 
 
-    // $ANTLR start entryRuleGroup
+    // $ANTLR start "entryRuleGroup"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:341:1: entryRuleGroup : ruleGroup EOF ;
     public final void entryRuleGroup() throws RecognitionException {
         try {
@@ -823,7 +883,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getGroupRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleGroup_in_entryRuleGroup661);
             ruleGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGroupRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGroup668); 
@@ -839,10 +900,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleGroup
+    // $ANTLR end "entryRuleGroup"
 
 
-    // $ANTLR start ruleGroup
+    // $ANTLR start "ruleGroup"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:350:1: ruleGroup : ( ( rule__Group__Group__0 ) ) ;
     public final void ruleGroup() throws RecognitionException {
 
@@ -861,7 +922,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group__0_in_ruleGroup694);
             rule__Group__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -885,10 +947,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleGroup
+    // $ANTLR end "ruleGroup"
 
 
-    // $ANTLR start entryRuleAbstractToken
+    // $ANTLR start "entryRuleAbstractToken"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:369:1: entryRuleAbstractToken : ruleAbstractToken EOF ;
     public final void entryRuleAbstractToken() throws RecognitionException {
         try {
@@ -898,7 +960,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAbstractTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractToken_in_entryRuleAbstractToken721);
             ruleAbstractToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractTokenRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractToken728); 
@@ -914,10 +977,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractToken
+    // $ANTLR end "entryRuleAbstractToken"
 
 
-    // $ANTLR start ruleAbstractToken
+    // $ANTLR start "ruleAbstractToken"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:378:1: ruleAbstractToken : ( ( rule__AbstractToken__Alternatives ) ) ;
     public final void ruleAbstractToken() throws RecognitionException {
 
@@ -936,7 +999,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractToken__Alternatives_in_ruleAbstractToken754);
             rule__AbstractToken__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -960,10 +1024,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleAbstractToken
+    // $ANTLR end "ruleAbstractToken"
 
 
-    // $ANTLR start entryRuleAbstractTokenWithCardinality
+    // $ANTLR start "entryRuleAbstractTokenWithCardinality"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:397:1: entryRuleAbstractTokenWithCardinality : ruleAbstractTokenWithCardinality EOF ;
     public final void entryRuleAbstractTokenWithCardinality() throws RecognitionException {
         try {
@@ -973,7 +1037,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAbstractTokenWithCardinalityRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractTokenWithCardinality_in_entryRuleAbstractTokenWithCardinality781);
             ruleAbstractTokenWithCardinality();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractTokenWithCardinalityRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractTokenWithCardinality788); 
@@ -989,10 +1054,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractTokenWithCardinality
+    // $ANTLR end "entryRuleAbstractTokenWithCardinality"
 
 
-    // $ANTLR start ruleAbstractTokenWithCardinality
+    // $ANTLR start "ruleAbstractTokenWithCardinality"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:406:1: ruleAbstractTokenWithCardinality : ( ( rule__AbstractTokenWithCardinality__Group__0 ) ) ;
     public final void ruleAbstractTokenWithCardinality() throws RecognitionException {
 
@@ -1011,7 +1076,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Group__0_in_ruleAbstractTokenWithCardinality814);
             rule__AbstractTokenWithCardinality__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1035,10 +1101,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleAbstractTokenWithCardinality
+    // $ANTLR end "ruleAbstractTokenWithCardinality"
 
 
-    // $ANTLR start entryRuleAction
+    // $ANTLR start "entryRuleAction"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:425:1: entryRuleAction : ruleAction EOF ;
     public final void entryRuleAction() throws RecognitionException {
         try {
@@ -1048,7 +1114,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getActionRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAction_in_entryRuleAction841);
             ruleAction();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getActionRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAction848); 
@@ -1064,10 +1131,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleAction
+    // $ANTLR end "entryRuleAction"
 
 
-    // $ANTLR start ruleAction
+    // $ANTLR start "ruleAction"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:434:1: ruleAction : ( ( rule__Action__Group__0 ) ) ;
     public final void ruleAction() throws RecognitionException {
 
@@ -1086,7 +1153,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__0_in_ruleAction874);
             rule__Action__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1110,10 +1178,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleAction
+    // $ANTLR end "ruleAction"
 
 
-    // $ANTLR start entryRuleAbstractTerminal
+    // $ANTLR start "entryRuleAbstractTerminal"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:453:1: entryRuleAbstractTerminal : ruleAbstractTerminal EOF ;
     public final void entryRuleAbstractTerminal() throws RecognitionException {
         try {
@@ -1123,7 +1191,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAbstractTerminalRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractTerminal_in_entryRuleAbstractTerminal901);
             ruleAbstractTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractTerminalRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractTerminal908); 
@@ -1139,10 +1208,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractTerminal
+    // $ANTLR end "entryRuleAbstractTerminal"
 
 
-    // $ANTLR start ruleAbstractTerminal
+    // $ANTLR start "ruleAbstractTerminal"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:462:1: ruleAbstractTerminal : ( ( rule__AbstractTerminal__Alternatives ) ) ;
     public final void ruleAbstractTerminal() throws RecognitionException {
 
@@ -1161,7 +1230,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTerminal__Alternatives_in_ruleAbstractTerminal934);
             rule__AbstractTerminal__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1185,10 +1255,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleAbstractTerminal
+    // $ANTLR end "ruleAbstractTerminal"
 
 
-    // $ANTLR start entryRuleKeyword
+    // $ANTLR start "entryRuleKeyword"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:481:1: entryRuleKeyword : ruleKeyword EOF ;
     public final void entryRuleKeyword() throws RecognitionException {
         try {
@@ -1198,7 +1268,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getKeywordRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_entryRuleKeyword961);
             ruleKeyword();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getKeywordRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKeyword968); 
@@ -1214,10 +1285,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleKeyword
+    // $ANTLR end "entryRuleKeyword"
 
 
-    // $ANTLR start ruleKeyword
+    // $ANTLR start "ruleKeyword"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:490:1: ruleKeyword : ( ( rule__Keyword__ValueAssignment ) ) ;
     public final void ruleKeyword() throws RecognitionException {
 
@@ -1236,7 +1307,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Keyword__ValueAssignment_in_ruleKeyword994);
             rule__Keyword__ValueAssignment();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1260,10 +1332,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleKeyword
+    // $ANTLR end "ruleKeyword"
 
 
-    // $ANTLR start entryRuleRuleCall
+    // $ANTLR start "entryRuleRuleCall"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:509:1: entryRuleRuleCall : ruleRuleCall EOF ;
     public final void entryRuleRuleCall() throws RecognitionException {
         try {
@@ -1273,7 +1345,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getRuleCallRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_entryRuleRuleCall1021);
             ruleRuleCall();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getRuleCallRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRuleCall1028); 
@@ -1289,10 +1362,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleRuleCall
+    // $ANTLR end "entryRuleRuleCall"
 
 
-    // $ANTLR start ruleRuleCall
+    // $ANTLR start "ruleRuleCall"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:518:1: ruleRuleCall : ( ( rule__RuleCall__RuleAssignment ) ) ;
     public final void ruleRuleCall() throws RecognitionException {
 
@@ -1311,7 +1384,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__RuleCall__RuleAssignment_in_ruleRuleCall1054);
             rule__RuleCall__RuleAssignment();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1335,10 +1409,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleRuleCall
+    // $ANTLR end "ruleRuleCall"
 
 
-    // $ANTLR start entryRuleAssignment
+    // $ANTLR start "entryRuleAssignment"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:537:1: entryRuleAssignment : ruleAssignment EOF ;
     public final void entryRuleAssignment() throws RecognitionException {
         try {
@@ -1348,7 +1422,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAssignmentRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignment_in_entryRuleAssignment1081);
             ruleAssignment();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignmentRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignment1088); 
@@ -1364,10 +1439,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleAssignment
+    // $ANTLR end "entryRuleAssignment"
 
 
-    // $ANTLR start ruleAssignment
+    // $ANTLR start "ruleAssignment"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:546:1: ruleAssignment : ( ( rule__Assignment__Group__0 ) ) ;
     public final void ruleAssignment() throws RecognitionException {
 
@@ -1386,7 +1461,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__0_in_ruleAssignment1114);
             rule__Assignment__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1410,10 +1486,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleAssignment
+    // $ANTLR end "ruleAssignment"
 
 
-    // $ANTLR start entryRuleAssignableTerminal
+    // $ANTLR start "entryRuleAssignableTerminal"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:565:1: entryRuleAssignableTerminal : ruleAssignableTerminal EOF ;
     public final void entryRuleAssignableTerminal() throws RecognitionException {
         try {
@@ -1423,7 +1499,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAssignableTerminalRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_entryRuleAssignableTerminal1141);
             ruleAssignableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignableTerminalRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignableTerminal1148); 
@@ -1439,10 +1516,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleAssignableTerminal
+    // $ANTLR end "entryRuleAssignableTerminal"
 
 
-    // $ANTLR start ruleAssignableTerminal
+    // $ANTLR start "ruleAssignableTerminal"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:574:1: ruleAssignableTerminal : ( ( rule__AssignableTerminal__Alternatives ) ) ;
     public final void ruleAssignableTerminal() throws RecognitionException {
 
@@ -1461,7 +1538,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableTerminal__Alternatives_in_ruleAssignableTerminal1174);
             rule__AssignableTerminal__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1485,10 +1563,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleAssignableTerminal
+    // $ANTLR end "ruleAssignableTerminal"
 
 
-    // $ANTLR start entryRuleParenthesizedAssignableElement
+    // $ANTLR start "entryRuleParenthesizedAssignableElement"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:593:1: entryRuleParenthesizedAssignableElement : ruleParenthesizedAssignableElement EOF ;
     public final void entryRuleParenthesizedAssignableElement() throws RecognitionException {
         try {
@@ -1498,7 +1576,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getParenthesizedAssignableElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleParenthesizedAssignableElement_in_entryRuleParenthesizedAssignableElement1201);
             ruleParenthesizedAssignableElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedAssignableElementRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParenthesizedAssignableElement1208); 
@@ -1514,10 +1593,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleParenthesizedAssignableElement
+    // $ANTLR end "entryRuleParenthesizedAssignableElement"
 
 
-    // $ANTLR start ruleParenthesizedAssignableElement
+    // $ANTLR start "ruleParenthesizedAssignableElement"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:602:1: ruleParenthesizedAssignableElement : ( ( rule__ParenthesizedAssignableElement__Group__0 ) ) ;
     public final void ruleParenthesizedAssignableElement() throws RecognitionException {
 
@@ -1536,7 +1615,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__0_in_ruleParenthesizedAssignableElement1234);
             rule__ParenthesizedAssignableElement__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1560,10 +1640,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleParenthesizedAssignableElement
+    // $ANTLR end "ruleParenthesizedAssignableElement"
 
 
-    // $ANTLR start entryRuleAssignableAlternatives
+    // $ANTLR start "entryRuleAssignableAlternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:621:1: entryRuleAssignableAlternatives : ruleAssignableAlternatives EOF ;
     public final void entryRuleAssignableAlternatives() throws RecognitionException {
         try {
@@ -1573,7 +1653,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAssignableAlternativesRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableAlternatives_in_entryRuleAssignableAlternatives1261);
             ruleAssignableAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignableAlternativesRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignableAlternatives1268); 
@@ -1589,10 +1670,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleAssignableAlternatives
+    // $ANTLR end "entryRuleAssignableAlternatives"
 
 
-    // $ANTLR start ruleAssignableAlternatives
+    // $ANTLR start "ruleAssignableAlternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:630:1: ruleAssignableAlternatives : ( ( rule__AssignableAlternatives__Group__0 ) ) ;
     public final void ruleAssignableAlternatives() throws RecognitionException {
 
@@ -1611,7 +1692,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group__0_in_ruleAssignableAlternatives1294);
             rule__AssignableAlternatives__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1635,10 +1717,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleAssignableAlternatives
+    // $ANTLR end "ruleAssignableAlternatives"
 
 
-    // $ANTLR start entryRuleCrossReference
+    // $ANTLR start "entryRuleCrossReference"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:649:1: entryRuleCrossReference : ruleCrossReference EOF ;
     public final void entryRuleCrossReference() throws RecognitionException {
         try {
@@ -1648,7 +1730,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getCrossReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleCrossReference_in_entryRuleCrossReference1321);
             ruleCrossReference();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCrossReferenceRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCrossReference1328); 
@@ -1664,10 +1747,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleCrossReference
+    // $ANTLR end "entryRuleCrossReference"
 
 
-    // $ANTLR start ruleCrossReference
+    // $ANTLR start "ruleCrossReference"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:658:1: ruleCrossReference : ( ( rule__CrossReference__Group__0 ) ) ;
     public final void ruleCrossReference() throws RecognitionException {
 
@@ -1686,7 +1769,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__0_in_ruleCrossReference1354);
             rule__CrossReference__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1710,10 +1794,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleCrossReference
+    // $ANTLR end "ruleCrossReference"
 
 
-    // $ANTLR start entryRuleCrossReferenceableTerminal
+    // $ANTLR start "entryRuleCrossReferenceableTerminal"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:677:1: entryRuleCrossReferenceableTerminal : ruleCrossReferenceableTerminal EOF ;
     public final void entryRuleCrossReferenceableTerminal() throws RecognitionException {
         try {
@@ -1723,7 +1807,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getCrossReferenceableTerminalRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableTerminal_in_entryRuleCrossReferenceableTerminal1381);
             ruleCrossReferenceableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCrossReferenceableTerminalRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCrossReferenceableTerminal1388); 
@@ -1739,10 +1824,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleCrossReferenceableTerminal
+    // $ANTLR end "entryRuleCrossReferenceableTerminal"
 
 
-    // $ANTLR start ruleCrossReferenceableTerminal
+    // $ANTLR start "ruleCrossReferenceableTerminal"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:686:1: ruleCrossReferenceableTerminal : ( ( rule__CrossReferenceableTerminal__Alternatives ) ) ;
     public final void ruleCrossReferenceableTerminal() throws RecognitionException {
 
@@ -1761,7 +1846,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableTerminal__Alternatives_in_ruleCrossReferenceableTerminal1414);
             rule__CrossReferenceableTerminal__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1785,10 +1871,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleCrossReferenceableTerminal
+    // $ANTLR end "ruleCrossReferenceableTerminal"
 
 
-    // $ANTLR start entryRuleParenthesizedElement
+    // $ANTLR start "entryRuleParenthesizedElement"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:705:1: entryRuleParenthesizedElement : ruleParenthesizedElement EOF ;
     public final void entryRuleParenthesizedElement() throws RecognitionException {
         try {
@@ -1798,7 +1884,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getParenthesizedElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleParenthesizedElement_in_entryRuleParenthesizedElement1441);
             ruleParenthesizedElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedElementRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParenthesizedElement1448); 
@@ -1814,10 +1901,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleParenthesizedElement
+    // $ANTLR end "entryRuleParenthesizedElement"
 
 
-    // $ANTLR start ruleParenthesizedElement
+    // $ANTLR start "ruleParenthesizedElement"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:714:1: ruleParenthesizedElement : ( ( rule__ParenthesizedElement__Group__0 ) ) ;
     public final void ruleParenthesizedElement() throws RecognitionException {
 
@@ -1836,7 +1923,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__0_in_ruleParenthesizedElement1474);
             rule__ParenthesizedElement__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1860,10 +1948,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleParenthesizedElement
+    // $ANTLR end "ruleParenthesizedElement"
 
 
-    // $ANTLR start entryRuleTerminalRule
+    // $ANTLR start "entryRuleTerminalRule"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:733:1: entryRuleTerminalRule : ruleTerminalRule EOF ;
     public final void entryRuleTerminalRule() throws RecognitionException {
         try {
@@ -1873,7 +1961,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalRule_in_entryRuleTerminalRule1501);
             ruleTerminalRule();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalRuleRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalRule1508); 
@@ -1889,10 +1978,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleTerminalRule
+    // $ANTLR end "entryRuleTerminalRule"
 
 
-    // $ANTLR start ruleTerminalRule
+    // $ANTLR start "ruleTerminalRule"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:742:1: ruleTerminalRule : ( ( rule__TerminalRule__Group__0 ) ) ;
     public final void ruleTerminalRule() throws RecognitionException {
 
@@ -1911,7 +2000,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__0_in_ruleTerminalRule1534);
             rule__TerminalRule__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1935,10 +2025,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleTerminalRule
+    // $ANTLR end "ruleTerminalRule"
 
 
-    // $ANTLR start entryRuleTerminalAlternatives
+    // $ANTLR start "entryRuleTerminalAlternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:761:1: entryRuleTerminalAlternatives : ruleTerminalAlternatives EOF ;
     public final void entryRuleTerminalAlternatives() throws RecognitionException {
         try {
@@ -1948,7 +2038,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalAlternativesRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalAlternatives_in_entryRuleTerminalAlternatives1561);
             ruleTerminalAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalAlternativesRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalAlternatives1568); 
@@ -1964,10 +2055,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleTerminalAlternatives
+    // $ANTLR end "entryRuleTerminalAlternatives"
 
 
-    // $ANTLR start ruleTerminalAlternatives
+    // $ANTLR start "ruleTerminalAlternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:770:1: ruleTerminalAlternatives : ( ( rule__TerminalAlternatives__Group__0 ) ) ;
     public final void ruleTerminalAlternatives() throws RecognitionException {
 
@@ -1986,7 +2077,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group__0_in_ruleTerminalAlternatives1594);
             rule__TerminalAlternatives__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2010,10 +2102,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleTerminalAlternatives
+    // $ANTLR end "ruleTerminalAlternatives"
 
 
-    // $ANTLR start entryRuleTerminalGroup
+    // $ANTLR start "entryRuleTerminalGroup"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:789:1: entryRuleTerminalGroup : ruleTerminalGroup EOF ;
     public final void entryRuleTerminalGroup() throws RecognitionException {
         try {
@@ -2023,7 +2115,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalGroupRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalGroup_in_entryRuleTerminalGroup1621);
             ruleTerminalGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalGroupRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalGroup1628); 
@@ -2039,10 +2132,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleTerminalGroup
+    // $ANTLR end "entryRuleTerminalGroup"
 
 
-    // $ANTLR start ruleTerminalGroup
+    // $ANTLR start "ruleTerminalGroup"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:798:1: ruleTerminalGroup : ( ( rule__TerminalGroup__Group__0 ) ) ;
     public final void ruleTerminalGroup() throws RecognitionException {
 
@@ -2061,7 +2154,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group__0_in_ruleTerminalGroup1654);
             rule__TerminalGroup__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2085,10 +2179,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleTerminalGroup
+    // $ANTLR end "ruleTerminalGroup"
 
 
-    // $ANTLR start entryRuleTerminalToken
+    // $ANTLR start "entryRuleTerminalToken"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:817:1: entryRuleTerminalToken : ruleTerminalToken EOF ;
     public final void entryRuleTerminalToken() throws RecognitionException {
         try {
@@ -2098,7 +2192,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalToken_in_entryRuleTerminalToken1681);
             ruleTerminalToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalTokenRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalToken1688); 
@@ -2114,10 +2209,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleTerminalToken
+    // $ANTLR end "entryRuleTerminalToken"
 
 
-    // $ANTLR start ruleTerminalToken
+    // $ANTLR start "ruleTerminalToken"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:826:1: ruleTerminalToken : ( ( rule__TerminalToken__Group__0 ) ) ;
     public final void ruleTerminalToken() throws RecognitionException {
 
@@ -2136,7 +2231,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__Group__0_in_ruleTerminalToken1714);
             rule__TerminalToken__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2160,10 +2256,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleTerminalToken
+    // $ANTLR end "ruleTerminalToken"
 
 
-    // $ANTLR start entryRuleTerminalTokenElement
+    // $ANTLR start "entryRuleTerminalTokenElement"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:845:1: entryRuleTerminalTokenElement : ruleTerminalTokenElement EOF ;
     public final void entryRuleTerminalTokenElement() throws RecognitionException {
         try {
@@ -2173,7 +2269,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalTokenElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_entryRuleTerminalTokenElement1741);
             ruleTerminalTokenElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalTokenElementRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalTokenElement1748); 
@@ -2189,10 +2286,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleTerminalTokenElement
+    // $ANTLR end "entryRuleTerminalTokenElement"
 
 
-    // $ANTLR start ruleTerminalTokenElement
+    // $ANTLR start "ruleTerminalTokenElement"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:854:1: ruleTerminalTokenElement : ( ( rule__TerminalTokenElement__Alternatives ) ) ;
     public final void ruleTerminalTokenElement() throws RecognitionException {
 
@@ -2211,7 +2308,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalTokenElement__Alternatives_in_ruleTerminalTokenElement1774);
             rule__TerminalTokenElement__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2235,10 +2333,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleTerminalTokenElement
+    // $ANTLR end "ruleTerminalTokenElement"
 
 
-    // $ANTLR start entryRuleParenthesizedTerminalElement
+    // $ANTLR start "entryRuleParenthesizedTerminalElement"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:873:1: entryRuleParenthesizedTerminalElement : ruleParenthesizedTerminalElement EOF ;
     public final void entryRuleParenthesizedTerminalElement() throws RecognitionException {
         try {
@@ -2248,7 +2346,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getParenthesizedTerminalElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleParenthesizedTerminalElement_in_entryRuleParenthesizedTerminalElement1801);
             ruleParenthesizedTerminalElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedTerminalElementRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParenthesizedTerminalElement1808); 
@@ -2264,10 +2363,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleParenthesizedTerminalElement
+    // $ANTLR end "entryRuleParenthesizedTerminalElement"
 
 
-    // $ANTLR start ruleParenthesizedTerminalElement
+    // $ANTLR start "ruleParenthesizedTerminalElement"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:882:1: ruleParenthesizedTerminalElement : ( ( rule__ParenthesizedTerminalElement__Group__0 ) ) ;
     public final void ruleParenthesizedTerminalElement() throws RecognitionException {
 
@@ -2286,7 +2385,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__0_in_ruleParenthesizedTerminalElement1834);
             rule__ParenthesizedTerminalElement__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2310,10 +2410,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleParenthesizedTerminalElement
+    // $ANTLR end "ruleParenthesizedTerminalElement"
 
 
-    // $ANTLR start entryRuleAbstractNegatedToken
+    // $ANTLR start "entryRuleAbstractNegatedToken"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:901:1: entryRuleAbstractNegatedToken : ruleAbstractNegatedToken EOF ;
     public final void entryRuleAbstractNegatedToken() throws RecognitionException {
         try {
@@ -2323,7 +2423,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAbstractNegatedTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractNegatedToken_in_entryRuleAbstractNegatedToken1861);
             ruleAbstractNegatedToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractNegatedTokenRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractNegatedToken1868); 
@@ -2339,10 +2440,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractNegatedToken
+    // $ANTLR end "entryRuleAbstractNegatedToken"
 
 
-    // $ANTLR start ruleAbstractNegatedToken
+    // $ANTLR start "ruleAbstractNegatedToken"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:910:1: ruleAbstractNegatedToken : ( ( rule__AbstractNegatedToken__Alternatives ) ) ;
     public final void ruleAbstractNegatedToken() throws RecognitionException {
 
@@ -2361,7 +2462,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractNegatedToken__Alternatives_in_ruleAbstractNegatedToken1894);
             rule__AbstractNegatedToken__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2385,10 +2487,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleAbstractNegatedToken
+    // $ANTLR end "ruleAbstractNegatedToken"
 
 
-    // $ANTLR start entryRuleNegatedToken
+    // $ANTLR start "entryRuleNegatedToken"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:929:1: entryRuleNegatedToken : ruleNegatedToken EOF ;
     public final void entryRuleNegatedToken() throws RecognitionException {
         try {
@@ -2398,7 +2500,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getNegatedTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleNegatedToken_in_entryRuleNegatedToken1921);
             ruleNegatedToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getNegatedTokenRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNegatedToken1928); 
@@ -2414,10 +2517,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleNegatedToken
+    // $ANTLR end "entryRuleNegatedToken"
 
 
-    // $ANTLR start ruleNegatedToken
+    // $ANTLR start "ruleNegatedToken"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:938:1: ruleNegatedToken : ( ( rule__NegatedToken__Group__0 ) ) ;
     public final void ruleNegatedToken() throws RecognitionException {
 
@@ -2436,7 +2539,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__Group__0_in_ruleNegatedToken1954);
             rule__NegatedToken__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2460,10 +2564,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleNegatedToken
+    // $ANTLR end "ruleNegatedToken"
 
 
-    // $ANTLR start entryRuleUntilToken
+    // $ANTLR start "entryRuleUntilToken"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:957:1: entryRuleUntilToken : ruleUntilToken EOF ;
     public final void entryRuleUntilToken() throws RecognitionException {
         try {
@@ -2473,7 +2577,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getUntilTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleUntilToken_in_entryRuleUntilToken1981);
             ruleUntilToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getUntilTokenRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUntilToken1988); 
@@ -2489,10 +2594,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleUntilToken
+    // $ANTLR end "entryRuleUntilToken"
 
 
-    // $ANTLR start ruleUntilToken
+    // $ANTLR start "ruleUntilToken"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:966:1: ruleUntilToken : ( ( rule__UntilToken__Group__0 ) ) ;
     public final void ruleUntilToken() throws RecognitionException {
 
@@ -2511,7 +2616,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UntilToken__Group__0_in_ruleUntilToken2014);
             rule__UntilToken__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2535,10 +2641,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleUntilToken
+    // $ANTLR end "ruleUntilToken"
 
 
-    // $ANTLR start entryRuleWildcard
+    // $ANTLR start "entryRuleWildcard"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:985:1: entryRuleWildcard : ruleWildcard EOF ;
     public final void entryRuleWildcard() throws RecognitionException {
         try {
@@ -2548,7 +2654,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getWildcardRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleWildcard_in_entryRuleWildcard2041);
             ruleWildcard();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getWildcardRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWildcard2048); 
@@ -2564,10 +2671,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleWildcard
+    // $ANTLR end "entryRuleWildcard"
 
 
-    // $ANTLR start ruleWildcard
+    // $ANTLR start "ruleWildcard"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:994:1: ruleWildcard : ( ( rule__Wildcard__Group__0 ) ) ;
     public final void ruleWildcard() throws RecognitionException {
 
@@ -2586,7 +2693,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Wildcard__Group__0_in_ruleWildcard2074);
             rule__Wildcard__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2610,10 +2718,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleWildcard
+    // $ANTLR end "ruleWildcard"
 
 
-    // $ANTLR start entryRuleCharacterRange
+    // $ANTLR start "entryRuleCharacterRange"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1013:1: entryRuleCharacterRange : ruleCharacterRange EOF ;
     public final void entryRuleCharacterRange() throws RecognitionException {
         try {
@@ -2623,7 +2731,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getCharacterRangeRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleCharacterRange_in_entryRuleCharacterRange2101);
             ruleCharacterRange();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCharacterRangeRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCharacterRange2108); 
@@ -2639,10 +2748,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleCharacterRange
+    // $ANTLR end "entryRuleCharacterRange"
 
 
-    // $ANTLR start ruleCharacterRange
+    // $ANTLR start "ruleCharacterRange"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1022:1: ruleCharacterRange : ( ( rule__CharacterRange__Group__0 ) ) ;
     public final void ruleCharacterRange() throws RecognitionException {
 
@@ -2661,7 +2770,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group__0_in_ruleCharacterRange2134);
             rule__CharacterRange__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2685,10 +2795,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleCharacterRange
+    // $ANTLR end "ruleCharacterRange"
 
 
-    // $ANTLR start entryRuleEnumRule
+    // $ANTLR start "entryRuleEnumRule"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1041:1: entryRuleEnumRule : ruleEnumRule EOF ;
     public final void entryRuleEnumRule() throws RecognitionException {
         try {
@@ -2698,7 +2808,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getEnumRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumRule_in_entryRuleEnumRule2161);
             ruleEnumRule();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumRuleRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEnumRule2168); 
@@ -2714,10 +2825,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleEnumRule
+    // $ANTLR end "entryRuleEnumRule"
 
 
-    // $ANTLR start ruleEnumRule
+    // $ANTLR start "ruleEnumRule"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1050:1: ruleEnumRule : ( ( rule__EnumRule__Group__0 ) ) ;
     public final void ruleEnumRule() throws RecognitionException {
 
@@ -2736,7 +2847,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__0_in_ruleEnumRule2194);
             rule__EnumRule__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2760,10 +2872,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleEnumRule
+    // $ANTLR end "ruleEnumRule"
 
 
-    // $ANTLR start entryRuleEnumLiterals
+    // $ANTLR start "entryRuleEnumLiterals"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1069:1: entryRuleEnumLiterals : ruleEnumLiterals EOF ;
     public final void entryRuleEnumLiterals() throws RecognitionException {
         try {
@@ -2773,7 +2885,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getEnumLiteralsRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumLiterals_in_entryRuleEnumLiterals2221);
             ruleEnumLiterals();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumLiteralsRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEnumLiterals2228); 
@@ -2789,10 +2902,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleEnumLiterals
+    // $ANTLR end "entryRuleEnumLiterals"
 
 
-    // $ANTLR start ruleEnumLiterals
+    // $ANTLR start "ruleEnumLiterals"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1078:1: ruleEnumLiterals : ( ( rule__EnumLiterals__Group__0 ) ) ;
     public final void ruleEnumLiterals() throws RecognitionException {
 
@@ -2811,7 +2924,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group__0_in_ruleEnumLiterals2254);
             rule__EnumLiterals__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2835,10 +2949,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleEnumLiterals
+    // $ANTLR end "ruleEnumLiterals"
 
 
-    // $ANTLR start entryRuleEnumLiteralDeclaration
+    // $ANTLR start "entryRuleEnumLiteralDeclaration"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1097:1: entryRuleEnumLiteralDeclaration : ruleEnumLiteralDeclaration EOF ;
     public final void entryRuleEnumLiteralDeclaration() throws RecognitionException {
         try {
@@ -2848,7 +2962,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getEnumLiteralDeclarationRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumLiteralDeclaration_in_entryRuleEnumLiteralDeclaration2281);
             ruleEnumLiteralDeclaration();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumLiteralDeclarationRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEnumLiteralDeclaration2288); 
@@ -2864,10 +2979,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end entryRuleEnumLiteralDeclaration
+    // $ANTLR end "entryRuleEnumLiteralDeclaration"
 
 
-    // $ANTLR start ruleEnumLiteralDeclaration
+    // $ANTLR start "ruleEnumLiteralDeclaration"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1106:1: ruleEnumLiteralDeclaration : ( ( rule__EnumLiteralDeclaration__Group__0 ) ) ;
     public final void ruleEnumLiteralDeclaration() throws RecognitionException {
 
@@ -2886,7 +3001,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group__0_in_ruleEnumLiteralDeclaration2314);
             rule__EnumLiteralDeclaration__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2910,10 +3026,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end ruleEnumLiteralDeclaration
+    // $ANTLR end "ruleEnumLiteralDeclaration"
 
 
-    // $ANTLR start rule__AbstractRule__Alternatives
+    // $ANTLR start "rule__AbstractRule__Alternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1125:1: rule__AbstractRule__Alternatives : ( ( ruleParserRule ) | ( ruleTerminalRule ) | ( ruleEnumRule ) );
     public final void rule__AbstractRule__Alternatives() throws RecognitionException {
 
@@ -2940,7 +3056,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1125:1: rule__AbstractRule__Alternatives : ( ( ruleParserRule ) | ( ruleTerminalRule ) | ( ruleEnumRule ) );", 1, 0, input);
+                    new NoViableAltException("", 1, 0, input);
 
                 throw nvae;
             }
@@ -2955,7 +3071,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractRuleAccess().getParserRuleParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleParserRule_in_rule__AbstractRule__Alternatives2350);
                     ruleParserRule();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractRuleAccess().getParserRuleParserRuleCall_0()); 
 
@@ -2973,7 +3090,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractRuleAccess().getTerminalRuleParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleTerminalRule_in_rule__AbstractRule__Alternatives2367);
                     ruleTerminalRule();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractRuleAccess().getTerminalRuleParserRuleCall_1()); 
 
@@ -2991,7 +3109,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractRuleAccess().getEnumRuleParserRuleCall_2()); 
                     pushFollow(FollowSets000.FOLLOW_ruleEnumRule_in_rule__AbstractRule__Alternatives2384);
                     ruleEnumRule();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractRuleAccess().getEnumRuleParserRuleCall_2()); 
 
@@ -3014,10 +3133,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractRule__Alternatives
+    // $ANTLR end "rule__AbstractRule__Alternatives"
 
 
-    // $ANTLR start rule__AbstractMetamodelDeclaration__Alternatives
+    // $ANTLR start "rule__AbstractMetamodelDeclaration__Alternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1153:1: rule__AbstractMetamodelDeclaration__Alternatives : ( ( ruleGeneratedMetamodel ) | ( ruleReferencedMetamodel ) );
     public final void rule__AbstractMetamodelDeclaration__Alternatives() throws RecognitionException {
 
@@ -3036,7 +3155,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1153:1: rule__AbstractMetamodelDeclaration__Alternatives : ( ( ruleGeneratedMetamodel ) | ( ruleReferencedMetamodel ) );", 2, 0, input);
+                    new NoViableAltException("", 2, 0, input);
 
                 throw nvae;
             }
@@ -3050,7 +3169,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractMetamodelDeclarationAccess().getGeneratedMetamodelParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleGeneratedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2416);
                     ruleGeneratedMetamodel();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractMetamodelDeclarationAccess().getGeneratedMetamodelParserRuleCall_0()); 
 
@@ -3068,7 +3188,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractMetamodelDeclarationAccess().getReferencedMetamodelParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2433);
                     ruleReferencedMetamodel();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractMetamodelDeclarationAccess().getReferencedMetamodelParserRuleCall_1()); 
 
@@ -3091,10 +3212,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractMetamodelDeclaration__Alternatives
+    // $ANTLR end "rule__AbstractMetamodelDeclaration__Alternatives"
 
 
-    // $ANTLR start rule__AbstractToken__Alternatives
+    // $ANTLR start "rule__AbstractToken__Alternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1175:1: rule__AbstractToken__Alternatives : ( ( ruleAbstractTokenWithCardinality ) | ( ruleAction ) );
     public final void rule__AbstractToken__Alternatives() throws RecognitionException {
 
@@ -3113,7 +3234,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1175:1: rule__AbstractToken__Alternatives : ( ( ruleAbstractTokenWithCardinality ) | ( ruleAction ) );", 3, 0, input);
+                    new NoViableAltException("", 3, 0, input);
 
                 throw nvae;
             }
@@ -3127,7 +3248,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractTokenAccess().getAbstractTokenWithCardinalityParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleAbstractTokenWithCardinality_in_rule__AbstractToken__Alternatives2465);
                     ruleAbstractTokenWithCardinality();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTokenAccess().getAbstractTokenWithCardinalityParserRuleCall_0()); 
 
@@ -3145,7 +3267,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractTokenAccess().getActionParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleAction_in_rule__AbstractToken__Alternatives2482);
                     ruleAction();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTokenAccess().getActionParserRuleCall_1()); 
 
@@ -3168,10 +3291,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractToken__Alternatives
+    // $ANTLR end "rule__AbstractToken__Alternatives"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__Alternatives_0
+    // $ANTLR start "rule__AbstractTokenWithCardinality__Alternatives_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1197:1: rule__AbstractTokenWithCardinality__Alternatives_0 : ( ( ruleAssignment ) | ( ruleAbstractTerminal ) );
     public final void rule__AbstractTokenWithCardinality__Alternatives_0() throws RecognitionException {
 
@@ -3193,7 +3316,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("1197:1: rule__AbstractTokenWithCardinality__Alternatives_0 : ( ( ruleAssignment ) | ( ruleAbstractTerminal ) );", 4, 1, input);
+                        new NoViableAltException("", 4, 1, input);
 
                     throw nvae;
                 }
@@ -3203,7 +3326,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1197:1: rule__AbstractTokenWithCardinality__Alternatives_0 : ( ( ruleAssignment ) | ( ruleAbstractTerminal ) );", 4, 0, input);
+                    new NoViableAltException("", 4, 0, input);
 
                 throw nvae;
             }
@@ -3217,7 +3340,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractTokenWithCardinalityAccess().getAssignmentParserRuleCall_0_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleAssignment_in_rule__AbstractTokenWithCardinality__Alternatives_02514);
                     ruleAssignment();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTokenWithCardinalityAccess().getAssignmentParserRuleCall_0_0()); 
 
@@ -3235,7 +3359,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractTokenWithCardinalityAccess().getAbstractTerminalParserRuleCall_0_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleAbstractTerminal_in_rule__AbstractTokenWithCardinality__Alternatives_02531);
                     ruleAbstractTerminal();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTokenWithCardinalityAccess().getAbstractTerminalParserRuleCall_0_1()); 
 
@@ -3258,10 +3383,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__Alternatives_0
+    // $ANTLR end "rule__AbstractTokenWithCardinality__Alternatives_0"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0
+    // $ANTLR start "rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1219:1: rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0 : ( ( '?' ) | ( '*' ) | ( '+' ) );
     public final void rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0() throws RecognitionException {
 
@@ -3288,7 +3413,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1219:1: rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0 : ( ( '?' ) | ( '*' ) | ( '+' ) );", 5, 0, input);
+                    new NoViableAltException("", 5, 0, input);
 
                 throw nvae;
             }
@@ -3353,10 +3478,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0
+    // $ANTLR end "rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0"
 
 
-    // $ANTLR start rule__Action__OperatorAlternatives_2_2_0
+    // $ANTLR start "rule__Action__OperatorAlternatives_2_2_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1253:1: rule__Action__OperatorAlternatives_2_2_0 : ( ( '=' ) | ( '+=' ) );
     public final void rule__Action__OperatorAlternatives_2_2_0() throws RecognitionException {
 
@@ -3375,7 +3500,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1253:1: rule__Action__OperatorAlternatives_2_2_0 : ( ( '=' ) | ( '+=' ) );", 6, 0, input);
+                    new NoViableAltException("", 6, 0, input);
 
                 throw nvae;
             }
@@ -3424,10 +3549,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__OperatorAlternatives_2_2_0
+    // $ANTLR end "rule__Action__OperatorAlternatives_2_2_0"
 
 
-    // $ANTLR start rule__AbstractTerminal__Alternatives
+    // $ANTLR start "rule__AbstractTerminal__Alternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1279:1: rule__AbstractTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) | ( ruleParenthesizedElement ) );
     public final void rule__AbstractTerminal__Alternatives() throws RecognitionException {
 
@@ -3454,7 +3579,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1279:1: rule__AbstractTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) | ( ruleParenthesizedElement ) );", 7, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
             }
@@ -3469,7 +3594,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractTerminalAccess().getKeywordParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__AbstractTerminal__Alternatives2693);
                     ruleKeyword();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTerminalAccess().getKeywordParserRuleCall_0()); 
 
@@ -3487,7 +3613,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractTerminalAccess().getRuleCallParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__AbstractTerminal__Alternatives2710);
                     ruleRuleCall();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTerminalAccess().getRuleCallParserRuleCall_1()); 
 
@@ -3505,7 +3632,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractTerminalAccess().getParenthesizedElementParserRuleCall_2()); 
                     pushFollow(FollowSets000.FOLLOW_ruleParenthesizedElement_in_rule__AbstractTerminal__Alternatives2727);
                     ruleParenthesizedElement();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTerminalAccess().getParenthesizedElementParserRuleCall_2()); 
 
@@ -3528,10 +3656,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTerminal__Alternatives
+    // $ANTLR end "rule__AbstractTerminal__Alternatives"
 
 
-    // $ANTLR start rule__Assignment__OperatorAlternatives_1_0
+    // $ANTLR start "rule__Assignment__OperatorAlternatives_1_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1307:1: rule__Assignment__OperatorAlternatives_1_0 : ( ( '+=' ) | ( '=' ) | ( '?=' ) );
     public final void rule__Assignment__OperatorAlternatives_1_0() throws RecognitionException {
 
@@ -3558,7 +3686,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1307:1: rule__Assignment__OperatorAlternatives_1_0 : ( ( '+=' ) | ( '=' ) | ( '?=' ) );", 8, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
             }
@@ -3623,10 +3751,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__OperatorAlternatives_1_0
+    // $ANTLR end "rule__Assignment__OperatorAlternatives_1_0"
 
 
-    // $ANTLR start rule__AssignableTerminal__Alternatives
+    // $ANTLR start "rule__AssignableTerminal__Alternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1341:1: rule__AssignableTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) | ( ruleParenthesizedAssignableElement ) | ( ruleCrossReference ) );
     public final void rule__AssignableTerminal__Alternatives() throws RecognitionException {
 
@@ -3658,7 +3786,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1341:1: rule__AssignableTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) | ( ruleParenthesizedAssignableElement ) | ( ruleCrossReference ) );", 9, 0, input);
+                    new NoViableAltException("", 9, 0, input);
 
                 throw nvae;
             }
@@ -3673,7 +3801,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAssignableTerminalAccess().getKeywordParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__AssignableTerminal__Alternatives2834);
                     ruleKeyword();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAssignableTerminalAccess().getKeywordParserRuleCall_0()); 
 
@@ -3691,7 +3820,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAssignableTerminalAccess().getRuleCallParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__AssignableTerminal__Alternatives2851);
                     ruleRuleCall();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAssignableTerminalAccess().getRuleCallParserRuleCall_1()); 
 
@@ -3709,7 +3839,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAssignableTerminalAccess().getParenthesizedAssignableElementParserRuleCall_2()); 
                     pushFollow(FollowSets000.FOLLOW_ruleParenthesizedAssignableElement_in_rule__AssignableTerminal__Alternatives2868);
                     ruleParenthesizedAssignableElement();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAssignableTerminalAccess().getParenthesizedAssignableElementParserRuleCall_2()); 
 
@@ -3727,7 +3858,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAssignableTerminalAccess().getCrossReferenceParserRuleCall_3()); 
                     pushFollow(FollowSets000.FOLLOW_ruleCrossReference_in_rule__AssignableTerminal__Alternatives2885);
                     ruleCrossReference();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAssignableTerminalAccess().getCrossReferenceParserRuleCall_3()); 
 
@@ -3750,10 +3882,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableTerminal__Alternatives
+    // $ANTLR end "rule__AssignableTerminal__Alternatives"
 
 
-    // $ANTLR start rule__CrossReferenceableTerminal__Alternatives
+    // $ANTLR start "rule__CrossReferenceableTerminal__Alternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1375:1: rule__CrossReferenceableTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) );
     public final void rule__CrossReferenceableTerminal__Alternatives() throws RecognitionException {
 
@@ -3772,7 +3904,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1375:1: rule__CrossReferenceableTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) );", 10, 0, input);
+                    new NoViableAltException("", 10, 0, input);
 
                 throw nvae;
             }
@@ -3786,7 +3918,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getCrossReferenceableTerminalAccess().getKeywordParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__CrossReferenceableTerminal__Alternatives2917);
                     ruleKeyword();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getCrossReferenceableTerminalAccess().getKeywordParserRuleCall_0()); 
 
@@ -3804,7 +3937,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getCrossReferenceableTerminalAccess().getRuleCallParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__CrossReferenceableTerminal__Alternatives2934);
                     ruleRuleCall();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getCrossReferenceableTerminalAccess().getRuleCallParserRuleCall_1()); 
 
@@ -3827,10 +3961,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableTerminal__Alternatives
+    // $ANTLR end "rule__CrossReferenceableTerminal__Alternatives"
 
 
-    // $ANTLR start rule__TerminalToken__CardinalityAlternatives_1_0
+    // $ANTLR start "rule__TerminalToken__CardinalityAlternatives_1_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1397:1: rule__TerminalToken__CardinalityAlternatives_1_0 : ( ( '?' ) | ( '*' ) | ( '+' ) );
     public final void rule__TerminalToken__CardinalityAlternatives_1_0() throws RecognitionException {
 
@@ -3857,7 +3991,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1397:1: rule__TerminalToken__CardinalityAlternatives_1_0 : ( ( '?' ) | ( '*' ) | ( '+' ) );", 11, 0, input);
+                    new NoViableAltException("", 11, 0, input);
 
                 throw nvae;
             }
@@ -3922,10 +4056,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__CardinalityAlternatives_1_0
+    // $ANTLR end "rule__TerminalToken__CardinalityAlternatives_1_0"
 
 
-    // $ANTLR start rule__TerminalTokenElement__Alternatives
+    // $ANTLR start "rule__TerminalTokenElement__Alternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1431:1: rule__TerminalTokenElement__Alternatives : ( ( ruleCharacterRange ) | ( ruleRuleCall ) | ( ruleParenthesizedTerminalElement ) | ( ruleAbstractNegatedToken ) | ( ruleWildcard ) );
     public final void rule__TerminalTokenElement__Alternatives() throws RecognitionException {
 
@@ -3963,7 +4097,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1431:1: rule__TerminalTokenElement__Alternatives : ( ( ruleCharacterRange ) | ( ruleRuleCall ) | ( ruleParenthesizedTerminalElement ) | ( ruleAbstractNegatedToken ) | ( ruleWildcard ) );", 12, 0, input);
+                    new NoViableAltException("", 12, 0, input);
 
                 throw nvae;
             }
@@ -3978,7 +4112,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getTerminalTokenElementAccess().getCharacterRangeParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleCharacterRange_in_rule__TerminalTokenElement__Alternatives3041);
                     ruleCharacterRange();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTerminalTokenElementAccess().getCharacterRangeParserRuleCall_0()); 
 
@@ -3996,7 +4131,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getTerminalTokenElementAccess().getRuleCallParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__TerminalTokenElement__Alternatives3058);
                     ruleRuleCall();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTerminalTokenElementAccess().getRuleCallParserRuleCall_1()); 
 
@@ -4014,7 +4150,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getTerminalTokenElementAccess().getParenthesizedTerminalElementParserRuleCall_2()); 
                     pushFollow(FollowSets000.FOLLOW_ruleParenthesizedTerminalElement_in_rule__TerminalTokenElement__Alternatives3075);
                     ruleParenthesizedTerminalElement();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTerminalTokenElementAccess().getParenthesizedTerminalElementParserRuleCall_2()); 
 
@@ -4032,7 +4169,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getTerminalTokenElementAccess().getAbstractNegatedTokenParserRuleCall_3()); 
                     pushFollow(FollowSets000.FOLLOW_ruleAbstractNegatedToken_in_rule__TerminalTokenElement__Alternatives3092);
                     ruleAbstractNegatedToken();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTerminalTokenElementAccess().getAbstractNegatedTokenParserRuleCall_3()); 
 
@@ -4050,7 +4188,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getTerminalTokenElementAccess().getWildcardParserRuleCall_4()); 
                     pushFollow(FollowSets000.FOLLOW_ruleWildcard_in_rule__TerminalTokenElement__Alternatives3109);
                     ruleWildcard();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTerminalTokenElementAccess().getWildcardParserRuleCall_4()); 
 
@@ -4073,10 +4212,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalTokenElement__Alternatives
+    // $ANTLR end "rule__TerminalTokenElement__Alternatives"
 
 
-    // $ANTLR start rule__AbstractNegatedToken__Alternatives
+    // $ANTLR start "rule__AbstractNegatedToken__Alternatives"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1471:1: rule__AbstractNegatedToken__Alternatives : ( ( ruleNegatedToken ) | ( ruleUntilToken ) );
     public final void rule__AbstractNegatedToken__Alternatives() throws RecognitionException {
 
@@ -4095,7 +4234,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1471:1: rule__AbstractNegatedToken__Alternatives : ( ( ruleNegatedToken ) | ( ruleUntilToken ) );", 13, 0, input);
+                    new NoViableAltException("", 13, 0, input);
 
                 throw nvae;
             }
@@ -4109,7 +4248,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractNegatedTokenAccess().getNegatedTokenParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleNegatedToken_in_rule__AbstractNegatedToken__Alternatives3141);
                     ruleNegatedToken();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractNegatedTokenAccess().getNegatedTokenParserRuleCall_0()); 
 
@@ -4127,7 +4267,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                      before(grammarAccess.getAbstractNegatedTokenAccess().getUntilTokenParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleUntilToken_in_rule__AbstractNegatedToken__Alternatives3158);
                     ruleUntilToken();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractNegatedTokenAccess().getUntilTokenParserRuleCall_1()); 
 
@@ -4150,10 +4291,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractNegatedToken__Alternatives
+    // $ANTLR end "rule__AbstractNegatedToken__Alternatives"
 
 
-    // $ANTLR start rule__Grammar__Group__0
+    // $ANTLR start "rule__Grammar__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1495:1: rule__Grammar__Group__0 : rule__Grammar__Group__0__Impl rule__Grammar__Group__1 ;
     public final void rule__Grammar__Group__0() throws RecognitionException {
 
@@ -4165,11 +4306,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__0__Impl_in_rule__Grammar__Group__03188);
             rule__Grammar__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__1_in_rule__Grammar__Group__03191);
             rule__Grammar__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4186,10 +4329,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__0
+    // $ANTLR end "rule__Grammar__Group__0"
 
 
-    // $ANTLR start rule__Grammar__Group__0__Impl
+    // $ANTLR start "rule__Grammar__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1507:1: rule__Grammar__Group__0__Impl : ( 'grammar' ) ;
     public final void rule__Grammar__Group__0__Impl() throws RecognitionException {
 
@@ -4223,10 +4366,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__0__Impl
+    // $ANTLR end "rule__Grammar__Group__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group__1
+    // $ANTLR start "rule__Grammar__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1526:1: rule__Grammar__Group__1 : rule__Grammar__Group__1__Impl rule__Grammar__Group__2 ;
     public final void rule__Grammar__Group__1() throws RecognitionException {
 
@@ -4238,11 +4381,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__1__Impl_in_rule__Grammar__Group__13250);
             rule__Grammar__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__2_in_rule__Grammar__Group__13253);
             rule__Grammar__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4259,10 +4404,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__1
+    // $ANTLR end "rule__Grammar__Group__1"
 
 
-    // $ANTLR start rule__Grammar__Group__1__Impl
+    // $ANTLR start "rule__Grammar__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1538:1: rule__Grammar__Group__1__Impl : ( ( rule__Grammar__NameAssignment_1 ) ) ;
     public final void rule__Grammar__Group__1__Impl() throws RecognitionException {
 
@@ -4281,7 +4426,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__NameAssignment_1_in_rule__Grammar__Group__1__Impl3280);
             rule__Grammar__NameAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4305,10 +4451,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__1__Impl
+    // $ANTLR end "rule__Grammar__Group__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group__2
+    // $ANTLR start "rule__Grammar__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1555:1: rule__Grammar__Group__2 : rule__Grammar__Group__2__Impl rule__Grammar__Group__3 ;
     public final void rule__Grammar__Group__2() throws RecognitionException {
 
@@ -4320,11 +4466,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__2__Impl_in_rule__Grammar__Group__23310);
             rule__Grammar__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__3_in_rule__Grammar__Group__23313);
             rule__Grammar__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4341,10 +4489,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__2
+    // $ANTLR end "rule__Grammar__Group__2"
 
 
-    // $ANTLR start rule__Grammar__Group__2__Impl
+    // $ANTLR start "rule__Grammar__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1567:1: rule__Grammar__Group__2__Impl : ( ( rule__Grammar__Group_2__0 )? ) ;
     public final void rule__Grammar__Group__2__Impl() throws RecognitionException {
 
@@ -4371,7 +4519,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__0_in_rule__Grammar__Group__2__Impl3340);
                     rule__Grammar__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -4398,10 +4547,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__2__Impl
+    // $ANTLR end "rule__Grammar__Group__2__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group__3
+    // $ANTLR start "rule__Grammar__Group__3"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1584:1: rule__Grammar__Group__3 : rule__Grammar__Group__3__Impl rule__Grammar__Group__4 ;
     public final void rule__Grammar__Group__3() throws RecognitionException {
 
@@ -4413,11 +4562,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__3__Impl_in_rule__Grammar__Group__33371);
             rule__Grammar__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__4_in_rule__Grammar__Group__33374);
             rule__Grammar__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4434,10 +4585,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__3
+    // $ANTLR end "rule__Grammar__Group__3"
 
 
-    // $ANTLR start rule__Grammar__Group__3__Impl
+    // $ANTLR start "rule__Grammar__Group__3__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1596:1: rule__Grammar__Group__3__Impl : ( ( rule__Grammar__Group_3__0 )? ) ;
     public final void rule__Grammar__Group__3__Impl() throws RecognitionException {
 
@@ -4464,7 +4615,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__0_in_rule__Grammar__Group__3__Impl3401);
                     rule__Grammar__Group_3__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -4491,10 +4643,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__3__Impl
+    // $ANTLR end "rule__Grammar__Group__3__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group__4
+    // $ANTLR start "rule__Grammar__Group__4"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1613:1: rule__Grammar__Group__4 : rule__Grammar__Group__4__Impl rule__Grammar__Group__5 ;
     public final void rule__Grammar__Group__4() throws RecognitionException {
 
@@ -4506,11 +4658,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__4__Impl_in_rule__Grammar__Group__43432);
             rule__Grammar__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__5_in_rule__Grammar__Group__43435);
             rule__Grammar__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4527,10 +4681,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__4
+    // $ANTLR end "rule__Grammar__Group__4"
 
 
-    // $ANTLR start rule__Grammar__Group__4__Impl
+    // $ANTLR start "rule__Grammar__Group__4__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1625:1: rule__Grammar__Group__4__Impl : ( ( rule__Grammar__MetamodelDeclarationsAssignment_4 )* ) ;
     public final void rule__Grammar__Group__4__Impl() throws RecognitionException {
 
@@ -4561,7 +4715,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__MetamodelDeclarationsAssignment_4_in_rule__Grammar__Group__4__Impl3462);
             	    rule__Grammar__MetamodelDeclarationsAssignment_4();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -4591,10 +4746,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__4__Impl
+    // $ANTLR end "rule__Grammar__Group__4__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group__5
+    // $ANTLR start "rule__Grammar__Group__5"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1642:1: rule__Grammar__Group__5 : rule__Grammar__Group__5__Impl ;
     public final void rule__Grammar__Group__5() throws RecognitionException {
 
@@ -4606,7 +4761,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__5__Impl_in_rule__Grammar__Group__53493);
             rule__Grammar__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4623,10 +4779,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__5
+    // $ANTLR end "rule__Grammar__Group__5"
 
 
-    // $ANTLR start rule__Grammar__Group__5__Impl
+    // $ANTLR start "rule__Grammar__Group__5__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1653:1: rule__Grammar__Group__5__Impl : ( ( ( rule__Grammar__RulesAssignment_5 ) ) ( ( rule__Grammar__RulesAssignment_5 )* ) ) ;
     public final void rule__Grammar__Group__5__Impl() throws RecognitionException {
 
@@ -4648,7 +4804,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3522);
             rule__Grammar__RulesAssignment_5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4678,7 +4835,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3534);
             	    rule__Grammar__RulesAssignment_5();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -4711,10 +4869,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__5__Impl
+    // $ANTLR end "rule__Grammar__Group__5__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_2__0
+    // $ANTLR start "rule__Grammar__Group_2__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1689:1: rule__Grammar__Group_2__0 : rule__Grammar__Group_2__0__Impl rule__Grammar__Group_2__1 ;
     public final void rule__Grammar__Group_2__0() throws RecognitionException {
 
@@ -4726,11 +4884,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__0__Impl_in_rule__Grammar__Group_2__03579);
             rule__Grammar__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__1_in_rule__Grammar__Group_2__03582);
             rule__Grammar__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4747,10 +4907,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__0
+    // $ANTLR end "rule__Grammar__Group_2__0"
 
 
-    // $ANTLR start rule__Grammar__Group_2__0__Impl
+    // $ANTLR start "rule__Grammar__Group_2__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1701:1: rule__Grammar__Group_2__0__Impl : ( 'with' ) ;
     public final void rule__Grammar__Group_2__0__Impl() throws RecognitionException {
 
@@ -4784,10 +4944,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__0__Impl
+    // $ANTLR end "rule__Grammar__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_2__1
+    // $ANTLR start "rule__Grammar__Group_2__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1720:1: rule__Grammar__Group_2__1 : rule__Grammar__Group_2__1__Impl rule__Grammar__Group_2__2 ;
     public final void rule__Grammar__Group_2__1() throws RecognitionException {
 
@@ -4799,11 +4959,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__1__Impl_in_rule__Grammar__Group_2__13641);
             rule__Grammar__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__2_in_rule__Grammar__Group_2__13644);
             rule__Grammar__Group_2__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4820,10 +4982,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__1
+    // $ANTLR end "rule__Grammar__Group_2__1"
 
 
-    // $ANTLR start rule__Grammar__Group_2__1__Impl
+    // $ANTLR start "rule__Grammar__Group_2__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1732:1: rule__Grammar__Group_2__1__Impl : ( ( rule__Grammar__UsedGrammarsAssignment_2_1 ) ) ;
     public final void rule__Grammar__Group_2__1__Impl() throws RecognitionException {
 
@@ -4842,7 +5004,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_1_in_rule__Grammar__Group_2__1__Impl3671);
             rule__Grammar__UsedGrammarsAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4866,10 +5029,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__1__Impl
+    // $ANTLR end "rule__Grammar__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_2__2
+    // $ANTLR start "rule__Grammar__Group_2__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1749:1: rule__Grammar__Group_2__2 : rule__Grammar__Group_2__2__Impl ;
     public final void rule__Grammar__Group_2__2() throws RecognitionException {
 
@@ -4881,7 +5044,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__2__Impl_in_rule__Grammar__Group_2__23701);
             rule__Grammar__Group_2__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4898,10 +5062,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__2
+    // $ANTLR end "rule__Grammar__Group_2__2"
 
 
-    // $ANTLR start rule__Grammar__Group_2__2__Impl
+    // $ANTLR start "rule__Grammar__Group_2__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1760:1: rule__Grammar__Group_2__2__Impl : ( ( rule__Grammar__Group_2_2__0 )* ) ;
     public final void rule__Grammar__Group_2__2__Impl() throws RecognitionException {
 
@@ -4932,7 +5096,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2_2__0_in_rule__Grammar__Group_2__2__Impl3728);
             	    rule__Grammar__Group_2_2__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -4962,10 +5127,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__2__Impl
+    // $ANTLR end "rule__Grammar__Group_2__2__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_2_2__0
+    // $ANTLR start "rule__Grammar__Group_2_2__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1783:1: rule__Grammar__Group_2_2__0 : rule__Grammar__Group_2_2__0__Impl rule__Grammar__Group_2_2__1 ;
     public final void rule__Grammar__Group_2_2__0() throws RecognitionException {
 
@@ -4977,11 +5142,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2_2__0__Impl_in_rule__Grammar__Group_2_2__03765);
             rule__Grammar__Group_2_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2_2__1_in_rule__Grammar__Group_2_2__03768);
             rule__Grammar__Group_2_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4998,10 +5165,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2_2__0
+    // $ANTLR end "rule__Grammar__Group_2_2__0"
 
 
-    // $ANTLR start rule__Grammar__Group_2_2__0__Impl
+    // $ANTLR start "rule__Grammar__Group_2_2__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1795:1: rule__Grammar__Group_2_2__0__Impl : ( ',' ) ;
     public final void rule__Grammar__Group_2_2__0__Impl() throws RecognitionException {
 
@@ -5035,10 +5202,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2_2__0__Impl
+    // $ANTLR end "rule__Grammar__Group_2_2__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_2_2__1
+    // $ANTLR start "rule__Grammar__Group_2_2__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1814:1: rule__Grammar__Group_2_2__1 : rule__Grammar__Group_2_2__1__Impl ;
     public final void rule__Grammar__Group_2_2__1() throws RecognitionException {
 
@@ -5050,7 +5217,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2_2__1__Impl_in_rule__Grammar__Group_2_2__13827);
             rule__Grammar__Group_2_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5067,10 +5235,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2_2__1
+    // $ANTLR end "rule__Grammar__Group_2_2__1"
 
 
-    // $ANTLR start rule__Grammar__Group_2_2__1__Impl
+    // $ANTLR start "rule__Grammar__Group_2_2__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1825:1: rule__Grammar__Group_2_2__1__Impl : ( ( rule__Grammar__UsedGrammarsAssignment_2_2_1 ) ) ;
     public final void rule__Grammar__Group_2_2__1__Impl() throws RecognitionException {
 
@@ -5089,7 +5257,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_2_1_in_rule__Grammar__Group_2_2__1__Impl3854);
             rule__Grammar__UsedGrammarsAssignment_2_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5113,10 +5282,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2_2__1__Impl
+    // $ANTLR end "rule__Grammar__Group_2_2__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3__0
+    // $ANTLR start "rule__Grammar__Group_3__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1846:1: rule__Grammar__Group_3__0 : rule__Grammar__Group_3__0__Impl rule__Grammar__Group_3__1 ;
     public final void rule__Grammar__Group_3__0() throws RecognitionException {
 
@@ -5128,11 +5297,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__0__Impl_in_rule__Grammar__Group_3__03888);
             rule__Grammar__Group_3__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__1_in_rule__Grammar__Group_3__03891);
             rule__Grammar__Group_3__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5149,10 +5320,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__0
+    // $ANTLR end "rule__Grammar__Group_3__0"
 
 
-    // $ANTLR start rule__Grammar__Group_3__0__Impl
+    // $ANTLR start "rule__Grammar__Group_3__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1858:1: rule__Grammar__Group_3__0__Impl : ( ( rule__Grammar__DefinesHiddenTokensAssignment_3_0 ) ) ;
     public final void rule__Grammar__Group_3__0__Impl() throws RecognitionException {
 
@@ -5171,7 +5342,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__DefinesHiddenTokensAssignment_3_0_in_rule__Grammar__Group_3__0__Impl3918);
             rule__Grammar__DefinesHiddenTokensAssignment_3_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5195,10 +5367,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__0__Impl
+    // $ANTLR end "rule__Grammar__Group_3__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3__1
+    // $ANTLR start "rule__Grammar__Group_3__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1875:1: rule__Grammar__Group_3__1 : rule__Grammar__Group_3__1__Impl rule__Grammar__Group_3__2 ;
     public final void rule__Grammar__Group_3__1() throws RecognitionException {
 
@@ -5210,11 +5382,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__1__Impl_in_rule__Grammar__Group_3__13948);
             rule__Grammar__Group_3__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__2_in_rule__Grammar__Group_3__13951);
             rule__Grammar__Group_3__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5231,10 +5405,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__1
+    // $ANTLR end "rule__Grammar__Group_3__1"
 
 
-    // $ANTLR start rule__Grammar__Group_3__1__Impl
+    // $ANTLR start "rule__Grammar__Group_3__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1887:1: rule__Grammar__Group_3__1__Impl : ( '(' ) ;
     public final void rule__Grammar__Group_3__1__Impl() throws RecognitionException {
 
@@ -5268,10 +5442,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__1__Impl
+    // $ANTLR end "rule__Grammar__Group_3__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3__2
+    // $ANTLR start "rule__Grammar__Group_3__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1906:1: rule__Grammar__Group_3__2 : rule__Grammar__Group_3__2__Impl rule__Grammar__Group_3__3 ;
     public final void rule__Grammar__Group_3__2() throws RecognitionException {
 
@@ -5283,11 +5457,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__2__Impl_in_rule__Grammar__Group_3__24010);
             rule__Grammar__Group_3__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__3_in_rule__Grammar__Group_3__24013);
             rule__Grammar__Group_3__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5304,10 +5480,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__2
+    // $ANTLR end "rule__Grammar__Group_3__2"
 
 
-    // $ANTLR start rule__Grammar__Group_3__2__Impl
+    // $ANTLR start "rule__Grammar__Group_3__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1918:1: rule__Grammar__Group_3__2__Impl : ( ( rule__Grammar__Group_3_2__0 )? ) ;
     public final void rule__Grammar__Group_3__2__Impl() throws RecognitionException {
 
@@ -5334,7 +5510,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2__0_in_rule__Grammar__Group_3__2__Impl4040);
                     rule__Grammar__Group_3_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -5361,10 +5538,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__2__Impl
+    // $ANTLR end "rule__Grammar__Group_3__2__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3__3
+    // $ANTLR start "rule__Grammar__Group_3__3"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1935:1: rule__Grammar__Group_3__3 : rule__Grammar__Group_3__3__Impl ;
     public final void rule__Grammar__Group_3__3() throws RecognitionException {
 
@@ -5376,7 +5553,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__3__Impl_in_rule__Grammar__Group_3__34071);
             rule__Grammar__Group_3__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5393,10 +5571,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__3
+    // $ANTLR end "rule__Grammar__Group_3__3"
 
 
-    // $ANTLR start rule__Grammar__Group_3__3__Impl
+    // $ANTLR start "rule__Grammar__Group_3__3__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1946:1: rule__Grammar__Group_3__3__Impl : ( ')' ) ;
     public final void rule__Grammar__Group_3__3__Impl() throws RecognitionException {
 
@@ -5430,10 +5608,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__3__Impl
+    // $ANTLR end "rule__Grammar__Group_3__3__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2__0
+    // $ANTLR start "rule__Grammar__Group_3_2__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1973:1: rule__Grammar__Group_3_2__0 : rule__Grammar__Group_3_2__0__Impl rule__Grammar__Group_3_2__1 ;
     public final void rule__Grammar__Group_3_2__0() throws RecognitionException {
 
@@ -5445,11 +5623,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2__0__Impl_in_rule__Grammar__Group_3_2__04138);
             rule__Grammar__Group_3_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2__1_in_rule__Grammar__Group_3_2__04141);
             rule__Grammar__Group_3_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5466,10 +5646,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2__0
+    // $ANTLR end "rule__Grammar__Group_3_2__0"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2__0__Impl
+    // $ANTLR start "rule__Grammar__Group_3_2__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:1985:1: rule__Grammar__Group_3_2__0__Impl : ( ( rule__Grammar__HiddenTokensAssignment_3_2_0 ) ) ;
     public final void rule__Grammar__Group_3_2__0__Impl() throws RecognitionException {
 
@@ -5488,7 +5668,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_0_in_rule__Grammar__Group_3_2__0__Impl4168);
             rule__Grammar__HiddenTokensAssignment_3_2_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5512,10 +5693,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2__0__Impl
+    // $ANTLR end "rule__Grammar__Group_3_2__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2__1
+    // $ANTLR start "rule__Grammar__Group_3_2__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2002:1: rule__Grammar__Group_3_2__1 : rule__Grammar__Group_3_2__1__Impl ;
     public final void rule__Grammar__Group_3_2__1() throws RecognitionException {
 
@@ -5527,7 +5708,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2__1__Impl_in_rule__Grammar__Group_3_2__14198);
             rule__Grammar__Group_3_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5544,10 +5726,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2__1
+    // $ANTLR end "rule__Grammar__Group_3_2__1"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2__1__Impl
+    // $ANTLR start "rule__Grammar__Group_3_2__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2013:1: rule__Grammar__Group_3_2__1__Impl : ( ( rule__Grammar__Group_3_2_1__0 )* ) ;
     public final void rule__Grammar__Group_3_2__1__Impl() throws RecognitionException {
 
@@ -5578,7 +5760,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2_1__0_in_rule__Grammar__Group_3_2__1__Impl4225);
             	    rule__Grammar__Group_3_2_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -5608,10 +5791,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2__1__Impl
+    // $ANTLR end "rule__Grammar__Group_3_2__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2_1__0
+    // $ANTLR start "rule__Grammar__Group_3_2_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2034:1: rule__Grammar__Group_3_2_1__0 : rule__Grammar__Group_3_2_1__0__Impl rule__Grammar__Group_3_2_1__1 ;
     public final void rule__Grammar__Group_3_2_1__0() throws RecognitionException {
 
@@ -5623,11 +5806,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2_1__0__Impl_in_rule__Grammar__Group_3_2_1__04260);
             rule__Grammar__Group_3_2_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2_1__1_in_rule__Grammar__Group_3_2_1__04263);
             rule__Grammar__Group_3_2_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5644,10 +5829,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2_1__0
+    // $ANTLR end "rule__Grammar__Group_3_2_1__0"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2_1__0__Impl
+    // $ANTLR start "rule__Grammar__Group_3_2_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2046:1: rule__Grammar__Group_3_2_1__0__Impl : ( ',' ) ;
     public final void rule__Grammar__Group_3_2_1__0__Impl() throws RecognitionException {
 
@@ -5681,10 +5866,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2_1__0__Impl
+    // $ANTLR end "rule__Grammar__Group_3_2_1__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2_1__1
+    // $ANTLR start "rule__Grammar__Group_3_2_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2065:1: rule__Grammar__Group_3_2_1__1 : rule__Grammar__Group_3_2_1__1__Impl ;
     public final void rule__Grammar__Group_3_2_1__1() throws RecognitionException {
 
@@ -5696,7 +5881,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2_1__1__Impl_in_rule__Grammar__Group_3_2_1__14322);
             rule__Grammar__Group_3_2_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5713,10 +5899,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2_1__1
+    // $ANTLR end "rule__Grammar__Group_3_2_1__1"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2_1__1__Impl
+    // $ANTLR start "rule__Grammar__Group_3_2_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2076:1: rule__Grammar__Group_3_2_1__1__Impl : ( ( rule__Grammar__HiddenTokensAssignment_3_2_1_1 ) ) ;
     public final void rule__Grammar__Group_3_2_1__1__Impl() throws RecognitionException {
 
@@ -5735,7 +5921,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_1_1_in_rule__Grammar__Group_3_2_1__1__Impl4349);
             rule__Grammar__HiddenTokensAssignment_3_2_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5759,10 +5946,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2_1__1__Impl
+    // $ANTLR end "rule__Grammar__Group_3_2_1__1__Impl"
 
 
-    // $ANTLR start rule__GrammarID__Group__0
+    // $ANTLR start "rule__GrammarID__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2097:1: rule__GrammarID__Group__0 : rule__GrammarID__Group__0__Impl rule__GrammarID__Group__1 ;
     public final void rule__GrammarID__Group__0() throws RecognitionException {
 
@@ -5774,11 +5961,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group__0__Impl_in_rule__GrammarID__Group__04383);
             rule__GrammarID__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group__1_in_rule__GrammarID__Group__04386);
             rule__GrammarID__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5795,10 +5984,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group__0
+    // $ANTLR end "rule__GrammarID__Group__0"
 
 
-    // $ANTLR start rule__GrammarID__Group__0__Impl
+    // $ANTLR start "rule__GrammarID__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2109:1: rule__GrammarID__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__GrammarID__Group__0__Impl() throws RecognitionException {
 
@@ -5832,10 +6021,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group__0__Impl
+    // $ANTLR end "rule__GrammarID__Group__0__Impl"
 
 
-    // $ANTLR start rule__GrammarID__Group__1
+    // $ANTLR start "rule__GrammarID__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2126:1: rule__GrammarID__Group__1 : rule__GrammarID__Group__1__Impl ;
     public final void rule__GrammarID__Group__1() throws RecognitionException {
 
@@ -5847,7 +6036,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group__1__Impl_in_rule__GrammarID__Group__14442);
             rule__GrammarID__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5864,10 +6054,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group__1
+    // $ANTLR end "rule__GrammarID__Group__1"
 
 
-    // $ANTLR start rule__GrammarID__Group__1__Impl
+    // $ANTLR start "rule__GrammarID__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2137:1: rule__GrammarID__Group__1__Impl : ( ( rule__GrammarID__Group_1__0 )* ) ;
     public final void rule__GrammarID__Group__1__Impl() throws RecognitionException {
 
@@ -5898,7 +6088,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group_1__0_in_rule__GrammarID__Group__1__Impl4469);
             	    rule__GrammarID__Group_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -5928,10 +6119,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group__1__Impl
+    // $ANTLR end "rule__GrammarID__Group__1__Impl"
 
 
-    // $ANTLR start rule__GrammarID__Group_1__0
+    // $ANTLR start "rule__GrammarID__Group_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2158:1: rule__GrammarID__Group_1__0 : rule__GrammarID__Group_1__0__Impl rule__GrammarID__Group_1__1 ;
     public final void rule__GrammarID__Group_1__0() throws RecognitionException {
 
@@ -5943,11 +6134,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group_1__0__Impl_in_rule__GrammarID__Group_1__04504);
             rule__GrammarID__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group_1__1_in_rule__GrammarID__Group_1__04507);
             rule__GrammarID__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5964,10 +6157,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group_1__0
+    // $ANTLR end "rule__GrammarID__Group_1__0"
 
 
-    // $ANTLR start rule__GrammarID__Group_1__0__Impl
+    // $ANTLR start "rule__GrammarID__Group_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2170:1: rule__GrammarID__Group_1__0__Impl : ( '.' ) ;
     public final void rule__GrammarID__Group_1__0__Impl() throws RecognitionException {
 
@@ -6001,10 +6194,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group_1__0__Impl
+    // $ANTLR end "rule__GrammarID__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__GrammarID__Group_1__1
+    // $ANTLR start "rule__GrammarID__Group_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2189:1: rule__GrammarID__Group_1__1 : rule__GrammarID__Group_1__1__Impl ;
     public final void rule__GrammarID__Group_1__1() throws RecognitionException {
 
@@ -6016,7 +6209,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group_1__1__Impl_in_rule__GrammarID__Group_1__14566);
             rule__GrammarID__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6033,10 +6227,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group_1__1
+    // $ANTLR end "rule__GrammarID__Group_1__1"
 
 
-    // $ANTLR start rule__GrammarID__Group_1__1__Impl
+    // $ANTLR start "rule__GrammarID__Group_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2200:1: rule__GrammarID__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__GrammarID__Group_1__1__Impl() throws RecognitionException {
 
@@ -6070,10 +6264,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group_1__1__Impl
+    // $ANTLR end "rule__GrammarID__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__0
+    // $ANTLR start "rule__GeneratedMetamodel__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2221:1: rule__GeneratedMetamodel__Group__0 : rule__GeneratedMetamodel__Group__0__Impl rule__GeneratedMetamodel__Group__1 ;
     public final void rule__GeneratedMetamodel__Group__0() throws RecognitionException {
 
@@ -6085,11 +6279,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__0__Impl_in_rule__GeneratedMetamodel__Group__04626);
             rule__GeneratedMetamodel__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__1_in_rule__GeneratedMetamodel__Group__04629);
             rule__GeneratedMetamodel__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6106,10 +6302,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__0
+    // $ANTLR end "rule__GeneratedMetamodel__Group__0"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__0__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2233:1: rule__GeneratedMetamodel__Group__0__Impl : ( 'generate' ) ;
     public final void rule__GeneratedMetamodel__Group__0__Impl() throws RecognitionException {
 
@@ -6143,10 +6339,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__0__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group__0__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__1
+    // $ANTLR start "rule__GeneratedMetamodel__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2252:1: rule__GeneratedMetamodel__Group__1 : rule__GeneratedMetamodel__Group__1__Impl rule__GeneratedMetamodel__Group__2 ;
     public final void rule__GeneratedMetamodel__Group__1() throws RecognitionException {
 
@@ -6158,11 +6354,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__1__Impl_in_rule__GeneratedMetamodel__Group__14688);
             rule__GeneratedMetamodel__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__2_in_rule__GeneratedMetamodel__Group__14691);
             rule__GeneratedMetamodel__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6179,10 +6377,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__1
+    // $ANTLR end "rule__GeneratedMetamodel__Group__1"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__1__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2264:1: rule__GeneratedMetamodel__Group__1__Impl : ( ( rule__GeneratedMetamodel__NameAssignment_1 ) ) ;
     public final void rule__GeneratedMetamodel__Group__1__Impl() throws RecognitionException {
 
@@ -6201,7 +6399,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__NameAssignment_1_in_rule__GeneratedMetamodel__Group__1__Impl4718);
             rule__GeneratedMetamodel__NameAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6225,10 +6424,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__1__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group__1__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__2
+    // $ANTLR start "rule__GeneratedMetamodel__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2281:1: rule__GeneratedMetamodel__Group__2 : rule__GeneratedMetamodel__Group__2__Impl rule__GeneratedMetamodel__Group__3 ;
     public final void rule__GeneratedMetamodel__Group__2() throws RecognitionException {
 
@@ -6240,11 +6439,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__2__Impl_in_rule__GeneratedMetamodel__Group__24748);
             rule__GeneratedMetamodel__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__3_in_rule__GeneratedMetamodel__Group__24751);
             rule__GeneratedMetamodel__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6261,10 +6462,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__2
+    // $ANTLR end "rule__GeneratedMetamodel__Group__2"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__2__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2293:1: rule__GeneratedMetamodel__Group__2__Impl : ( ( rule__GeneratedMetamodel__EPackageAssignment_2 ) ) ;
     public final void rule__GeneratedMetamodel__Group__2__Impl() throws RecognitionException {
 
@@ -6283,7 +6484,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__EPackageAssignment_2_in_rule__GeneratedMetamodel__Group__2__Impl4778);
             rule__GeneratedMetamodel__EPackageAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6307,10 +6509,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__2__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group__2__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__3
+    // $ANTLR start "rule__GeneratedMetamodel__Group__3"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2310:1: rule__GeneratedMetamodel__Group__3 : rule__GeneratedMetamodel__Group__3__Impl ;
     public final void rule__GeneratedMetamodel__Group__3() throws RecognitionException {
 
@@ -6322,7 +6524,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__3__Impl_in_rule__GeneratedMetamodel__Group__34808);
             rule__GeneratedMetamodel__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6339,10 +6542,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__3
+    // $ANTLR end "rule__GeneratedMetamodel__Group__3"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__3__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group__3__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2321:1: rule__GeneratedMetamodel__Group__3__Impl : ( ( rule__GeneratedMetamodel__Group_3__0 )? ) ;
     public final void rule__GeneratedMetamodel__Group__3__Impl() throws RecognitionException {
 
@@ -6369,7 +6572,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group_3__0_in_rule__GeneratedMetamodel__Group__3__Impl4835);
                     rule__GeneratedMetamodel__Group_3__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -6396,10 +6600,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__3__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group__3__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group_3__0
+    // $ANTLR start "rule__GeneratedMetamodel__Group_3__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2346:1: rule__GeneratedMetamodel__Group_3__0 : rule__GeneratedMetamodel__Group_3__0__Impl rule__GeneratedMetamodel__Group_3__1 ;
     public final void rule__GeneratedMetamodel__Group_3__0() throws RecognitionException {
 
@@ -6411,11 +6615,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group_3__0__Impl_in_rule__GeneratedMetamodel__Group_3__04874);
             rule__GeneratedMetamodel__Group_3__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group_3__1_in_rule__GeneratedMetamodel__Group_3__04877);
             rule__GeneratedMetamodel__Group_3__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6432,10 +6638,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group_3__0
+    // $ANTLR end "rule__GeneratedMetamodel__Group_3__0"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group_3__0__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group_3__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2358:1: rule__GeneratedMetamodel__Group_3__0__Impl : ( 'as' ) ;
     public final void rule__GeneratedMetamodel__Group_3__0__Impl() throws RecognitionException {
 
@@ -6469,10 +6675,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group_3__0__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group_3__0__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group_3__1
+    // $ANTLR start "rule__GeneratedMetamodel__Group_3__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2377:1: rule__GeneratedMetamodel__Group_3__1 : rule__GeneratedMetamodel__Group_3__1__Impl ;
     public final void rule__GeneratedMetamodel__Group_3__1() throws RecognitionException {
 
@@ -6484,7 +6690,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group_3__1__Impl_in_rule__GeneratedMetamodel__Group_3__14936);
             rule__GeneratedMetamodel__Group_3__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6501,10 +6708,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group_3__1
+    // $ANTLR end "rule__GeneratedMetamodel__Group_3__1"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group_3__1__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group_3__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2388:1: rule__GeneratedMetamodel__Group_3__1__Impl : ( ( rule__GeneratedMetamodel__AliasAssignment_3_1 ) ) ;
     public final void rule__GeneratedMetamodel__Group_3__1__Impl() throws RecognitionException {
 
@@ -6523,7 +6730,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__AliasAssignment_3_1_in_rule__GeneratedMetamodel__Group_3__1__Impl4963);
             rule__GeneratedMetamodel__AliasAssignment_3_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6547,10 +6755,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group_3__1__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group_3__1__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__0
+    // $ANTLR start "rule__ReferencedMetamodel__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2409:1: rule__ReferencedMetamodel__Group__0 : rule__ReferencedMetamodel__Group__0__Impl rule__ReferencedMetamodel__Group__1 ;
     public final void rule__ReferencedMetamodel__Group__0() throws RecognitionException {
 
@@ -6562,11 +6770,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__0__Impl_in_rule__ReferencedMetamodel__Group__04997);
             rule__ReferencedMetamodel__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__05000);
             rule__ReferencedMetamodel__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6583,10 +6793,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__0
+    // $ANTLR end "rule__ReferencedMetamodel__Group__0"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__0__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2421:1: rule__ReferencedMetamodel__Group__0__Impl : ( 'import' ) ;
     public final void rule__ReferencedMetamodel__Group__0__Impl() throws RecognitionException {
 
@@ -6620,10 +6830,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__0__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group__0__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__1
+    // $ANTLR start "rule__ReferencedMetamodel__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2440:1: rule__ReferencedMetamodel__Group__1 : rule__ReferencedMetamodel__Group__1__Impl rule__ReferencedMetamodel__Group__2 ;
     public final void rule__ReferencedMetamodel__Group__1() throws RecognitionException {
 
@@ -6635,11 +6845,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__1__Impl_in_rule__ReferencedMetamodel__Group__15059);
             rule__ReferencedMetamodel__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__15062);
             rule__ReferencedMetamodel__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6656,10 +6868,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__1
+    // $ANTLR end "rule__ReferencedMetamodel__Group__1"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__1__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2452:1: rule__ReferencedMetamodel__Group__1__Impl : ( ( rule__ReferencedMetamodel__EPackageAssignment_1 ) ) ;
     public final void rule__ReferencedMetamodel__Group__1__Impl() throws RecognitionException {
 
@@ -6678,7 +6890,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_1_in_rule__ReferencedMetamodel__Group__1__Impl5089);
             rule__ReferencedMetamodel__EPackageAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6702,10 +6915,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__1__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group__1__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__2
+    // $ANTLR start "rule__ReferencedMetamodel__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2469:1: rule__ReferencedMetamodel__Group__2 : rule__ReferencedMetamodel__Group__2__Impl ;
     public final void rule__ReferencedMetamodel__Group__2() throws RecognitionException {
 
@@ -6717,7 +6930,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__2__Impl_in_rule__ReferencedMetamodel__Group__25119);
             rule__ReferencedMetamodel__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6734,10 +6948,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__2
+    // $ANTLR end "rule__ReferencedMetamodel__Group__2"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__2__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2480:1: rule__ReferencedMetamodel__Group__2__Impl : ( ( rule__ReferencedMetamodel__Group_2__0 )? ) ;
     public final void rule__ReferencedMetamodel__Group__2__Impl() throws RecognitionException {
 
@@ -6764,7 +6978,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_2__0_in_rule__ReferencedMetamodel__Group__2__Impl5146);
                     rule__ReferencedMetamodel__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -6791,10 +7006,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__2__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group__2__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_2__0
+    // $ANTLR start "rule__ReferencedMetamodel__Group_2__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2503:1: rule__ReferencedMetamodel__Group_2__0 : rule__ReferencedMetamodel__Group_2__0__Impl rule__ReferencedMetamodel__Group_2__1 ;
     public final void rule__ReferencedMetamodel__Group_2__0() throws RecognitionException {
 
@@ -6806,11 +7021,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_2__0__Impl_in_rule__ReferencedMetamodel__Group_2__05183);
             rule__ReferencedMetamodel__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_2__1_in_rule__ReferencedMetamodel__Group_2__05186);
             rule__ReferencedMetamodel__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6827,10 +7044,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_2__0
+    // $ANTLR end "rule__ReferencedMetamodel__Group_2__0"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_2__0__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group_2__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2515:1: rule__ReferencedMetamodel__Group_2__0__Impl : ( 'as' ) ;
     public final void rule__ReferencedMetamodel__Group_2__0__Impl() throws RecognitionException {
 
@@ -6864,10 +7081,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_2__0__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_2__1
+    // $ANTLR start "rule__ReferencedMetamodel__Group_2__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2534:1: rule__ReferencedMetamodel__Group_2__1 : rule__ReferencedMetamodel__Group_2__1__Impl ;
     public final void rule__ReferencedMetamodel__Group_2__1() throws RecognitionException {
 
@@ -6879,7 +7096,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_2__1__Impl_in_rule__ReferencedMetamodel__Group_2__15245);
             rule__ReferencedMetamodel__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6896,10 +7114,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_2__1
+    // $ANTLR end "rule__ReferencedMetamodel__Group_2__1"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_2__1__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group_2__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2545:1: rule__ReferencedMetamodel__Group_2__1__Impl : ( ( rule__ReferencedMetamodel__AliasAssignment_2_1 ) ) ;
     public final void rule__ReferencedMetamodel__Group_2__1__Impl() throws RecognitionException {
 
@@ -6918,7 +7136,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__AliasAssignment_2_1_in_rule__ReferencedMetamodel__Group_2__1__Impl5272);
             rule__ReferencedMetamodel__AliasAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6942,10 +7161,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_2__1__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__0
+    // $ANTLR start "rule__ParserRule__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2566:1: rule__ParserRule__Group__0 : rule__ParserRule__Group__0__Impl rule__ParserRule__Group__1 ;
     public final void rule__ParserRule__Group__0() throws RecognitionException {
 
@@ -6957,11 +7176,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__0__Impl_in_rule__ParserRule__Group__05306);
             rule__ParserRule__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__1_in_rule__ParserRule__Group__05309);
             rule__ParserRule__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6978,10 +7199,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__0
+    // $ANTLR end "rule__ParserRule__Group__0"
 
 
-    // $ANTLR start rule__ParserRule__Group__0__Impl
+    // $ANTLR start "rule__ParserRule__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2578:1: rule__ParserRule__Group__0__Impl : ( ( rule__ParserRule__NameAssignment_0 ) ) ;
     public final void rule__ParserRule__Group__0__Impl() throws RecognitionException {
 
@@ -7000,7 +7221,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__NameAssignment_0_in_rule__ParserRule__Group__0__Impl5336);
             rule__ParserRule__NameAssignment_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7024,10 +7246,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__0__Impl
+    // $ANTLR end "rule__ParserRule__Group__0__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__1
+    // $ANTLR start "rule__ParserRule__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2595:1: rule__ParserRule__Group__1 : rule__ParserRule__Group__1__Impl rule__ParserRule__Group__2 ;
     public final void rule__ParserRule__Group__1() throws RecognitionException {
 
@@ -7039,11 +7261,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__1__Impl_in_rule__ParserRule__Group__15366);
             rule__ParserRule__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__2_in_rule__ParserRule__Group__15369);
             rule__ParserRule__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7060,10 +7284,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__1
+    // $ANTLR end "rule__ParserRule__Group__1"
 
 
-    // $ANTLR start rule__ParserRule__Group__1__Impl
+    // $ANTLR start "rule__ParserRule__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2607:1: rule__ParserRule__Group__1__Impl : ( ( rule__ParserRule__Group_1__0 )? ) ;
     public final void rule__ParserRule__Group__1__Impl() throws RecognitionException {
 
@@ -7090,7 +7314,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_1__0_in_rule__ParserRule__Group__1__Impl5396);
                     rule__ParserRule__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -7117,10 +7342,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__1__Impl
+    // $ANTLR end "rule__ParserRule__Group__1__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__2
+    // $ANTLR start "rule__ParserRule__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2624:1: rule__ParserRule__Group__2 : rule__ParserRule__Group__2__Impl rule__ParserRule__Group__3 ;
     public final void rule__ParserRule__Group__2() throws RecognitionException {
 
@@ -7132,11 +7357,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__2__Impl_in_rule__ParserRule__Group__25427);
             rule__ParserRule__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__3_in_rule__ParserRule__Group__25430);
             rule__ParserRule__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7153,10 +7380,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__2
+    // $ANTLR end "rule__ParserRule__Group__2"
 
 
-    // $ANTLR start rule__ParserRule__Group__2__Impl
+    // $ANTLR start "rule__ParserRule__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2636:1: rule__ParserRule__Group__2__Impl : ( ( rule__ParserRule__Group_2__0 )? ) ;
     public final void rule__ParserRule__Group__2__Impl() throws RecognitionException {
 
@@ -7183,7 +7410,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__0_in_rule__ParserRule__Group__2__Impl5457);
                     rule__ParserRule__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -7210,10 +7438,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__2__Impl
+    // $ANTLR end "rule__ParserRule__Group__2__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__3
+    // $ANTLR start "rule__ParserRule__Group__3"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2653:1: rule__ParserRule__Group__3 : rule__ParserRule__Group__3__Impl rule__ParserRule__Group__4 ;
     public final void rule__ParserRule__Group__3() throws RecognitionException {
 
@@ -7225,11 +7453,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__3__Impl_in_rule__ParserRule__Group__35488);
             rule__ParserRule__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__4_in_rule__ParserRule__Group__35491);
             rule__ParserRule__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7246,10 +7476,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__3
+    // $ANTLR end "rule__ParserRule__Group__3"
 
 
-    // $ANTLR start rule__ParserRule__Group__3__Impl
+    // $ANTLR start "rule__ParserRule__Group__3__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2665:1: rule__ParserRule__Group__3__Impl : ( ':' ) ;
     public final void rule__ParserRule__Group__3__Impl() throws RecognitionException {
 
@@ -7283,10 +7513,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__3__Impl
+    // $ANTLR end "rule__ParserRule__Group__3__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__4
+    // $ANTLR start "rule__ParserRule__Group__4"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2684:1: rule__ParserRule__Group__4 : rule__ParserRule__Group__4__Impl rule__ParserRule__Group__5 ;
     public final void rule__ParserRule__Group__4() throws RecognitionException {
 
@@ -7298,11 +7528,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__4__Impl_in_rule__ParserRule__Group__45550);
             rule__ParserRule__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__5_in_rule__ParserRule__Group__45553);
             rule__ParserRule__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7319,10 +7551,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__4
+    // $ANTLR end "rule__ParserRule__Group__4"
 
 
-    // $ANTLR start rule__ParserRule__Group__4__Impl
+    // $ANTLR start "rule__ParserRule__Group__4__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2696:1: rule__ParserRule__Group__4__Impl : ( ( rule__ParserRule__AlternativesAssignment_4 ) ) ;
     public final void rule__ParserRule__Group__4__Impl() throws RecognitionException {
 
@@ -7341,7 +7573,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__AlternativesAssignment_4_in_rule__ParserRule__Group__4__Impl5580);
             rule__ParserRule__AlternativesAssignment_4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7365,10 +7598,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__4__Impl
+    // $ANTLR end "rule__ParserRule__Group__4__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__5
+    // $ANTLR start "rule__ParserRule__Group__5"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2713:1: rule__ParserRule__Group__5 : rule__ParserRule__Group__5__Impl ;
     public final void rule__ParserRule__Group__5() throws RecognitionException {
 
@@ -7380,7 +7613,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__5__Impl_in_rule__ParserRule__Group__55610);
             rule__ParserRule__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7397,10 +7631,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__5
+    // $ANTLR end "rule__ParserRule__Group__5"
 
 
-    // $ANTLR start rule__ParserRule__Group__5__Impl
+    // $ANTLR start "rule__ParserRule__Group__5__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2724:1: rule__ParserRule__Group__5__Impl : ( ';' ) ;
     public final void rule__ParserRule__Group__5__Impl() throws RecognitionException {
 
@@ -7434,10 +7668,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__5__Impl
+    // $ANTLR end "rule__ParserRule__Group__5__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_1__0
+    // $ANTLR start "rule__ParserRule__Group_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2755:1: rule__ParserRule__Group_1__0 : rule__ParserRule__Group_1__0__Impl rule__ParserRule__Group_1__1 ;
     public final void rule__ParserRule__Group_1__0() throws RecognitionException {
 
@@ -7449,11 +7683,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_1__0__Impl_in_rule__ParserRule__Group_1__05681);
             rule__ParserRule__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_1__1_in_rule__ParserRule__Group_1__05684);
             rule__ParserRule__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7470,10 +7706,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_1__0
+    // $ANTLR end "rule__ParserRule__Group_1__0"
 
 
-    // $ANTLR start rule__ParserRule__Group_1__0__Impl
+    // $ANTLR start "rule__ParserRule__Group_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2767:1: rule__ParserRule__Group_1__0__Impl : ( 'returns' ) ;
     public final void rule__ParserRule__Group_1__0__Impl() throws RecognitionException {
 
@@ -7507,10 +7743,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_1__0__Impl
+    // $ANTLR end "rule__ParserRule__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_1__1
+    // $ANTLR start "rule__ParserRule__Group_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2786:1: rule__ParserRule__Group_1__1 : rule__ParserRule__Group_1__1__Impl ;
     public final void rule__ParserRule__Group_1__1() throws RecognitionException {
 
@@ -7522,7 +7758,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_1__1__Impl_in_rule__ParserRule__Group_1__15743);
             rule__ParserRule__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7539,10 +7776,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_1__1
+    // $ANTLR end "rule__ParserRule__Group_1__1"
 
 
-    // $ANTLR start rule__ParserRule__Group_1__1__Impl
+    // $ANTLR start "rule__ParserRule__Group_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2797:1: rule__ParserRule__Group_1__1__Impl : ( ( rule__ParserRule__TypeAssignment_1_1 ) ) ;
     public final void rule__ParserRule__Group_1__1__Impl() throws RecognitionException {
 
@@ -7561,7 +7798,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__TypeAssignment_1_1_in_rule__ParserRule__Group_1__1__Impl5770);
             rule__ParserRule__TypeAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7585,10 +7823,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_1__1__Impl
+    // $ANTLR end "rule__ParserRule__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__0
+    // $ANTLR start "rule__ParserRule__Group_2__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2818:1: rule__ParserRule__Group_2__0 : rule__ParserRule__Group_2__0__Impl rule__ParserRule__Group_2__1 ;
     public final void rule__ParserRule__Group_2__0() throws RecognitionException {
 
@@ -7600,11 +7838,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__0__Impl_in_rule__ParserRule__Group_2__05804);
             rule__ParserRule__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__1_in_rule__ParserRule__Group_2__05807);
             rule__ParserRule__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7621,10 +7861,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__0
+    // $ANTLR end "rule__ParserRule__Group_2__0"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__0__Impl
+    // $ANTLR start "rule__ParserRule__Group_2__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2830:1: rule__ParserRule__Group_2__0__Impl : ( ( rule__ParserRule__DefinesHiddenTokensAssignment_2_0 ) ) ;
     public final void rule__ParserRule__Group_2__0__Impl() throws RecognitionException {
 
@@ -7643,7 +7883,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__DefinesHiddenTokensAssignment_2_0_in_rule__ParserRule__Group_2__0__Impl5834);
             rule__ParserRule__DefinesHiddenTokensAssignment_2_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7667,10 +7908,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__0__Impl
+    // $ANTLR end "rule__ParserRule__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__1
+    // $ANTLR start "rule__ParserRule__Group_2__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2847:1: rule__ParserRule__Group_2__1 : rule__ParserRule__Group_2__1__Impl rule__ParserRule__Group_2__2 ;
     public final void rule__ParserRule__Group_2__1() throws RecognitionException {
 
@@ -7682,11 +7923,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__1__Impl_in_rule__ParserRule__Group_2__15864);
             rule__ParserRule__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__2_in_rule__ParserRule__Group_2__15867);
             rule__ParserRule__Group_2__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7703,10 +7946,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__1
+    // $ANTLR end "rule__ParserRule__Group_2__1"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__1__Impl
+    // $ANTLR start "rule__ParserRule__Group_2__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2859:1: rule__ParserRule__Group_2__1__Impl : ( '(' ) ;
     public final void rule__ParserRule__Group_2__1__Impl() throws RecognitionException {
 
@@ -7740,10 +7983,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__1__Impl
+    // $ANTLR end "rule__ParserRule__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__2
+    // $ANTLR start "rule__ParserRule__Group_2__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2878:1: rule__ParserRule__Group_2__2 : rule__ParserRule__Group_2__2__Impl rule__ParserRule__Group_2__3 ;
     public final void rule__ParserRule__Group_2__2() throws RecognitionException {
 
@@ -7755,11 +7998,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__2__Impl_in_rule__ParserRule__Group_2__25926);
             rule__ParserRule__Group_2__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__3_in_rule__ParserRule__Group_2__25929);
             rule__ParserRule__Group_2__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7776,10 +8021,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__2
+    // $ANTLR end "rule__ParserRule__Group_2__2"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__2__Impl
+    // $ANTLR start "rule__ParserRule__Group_2__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2890:1: rule__ParserRule__Group_2__2__Impl : ( ( rule__ParserRule__Group_2_2__0 )? ) ;
     public final void rule__ParserRule__Group_2__2__Impl() throws RecognitionException {
 
@@ -7806,7 +8051,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2__0_in_rule__ParserRule__Group_2__2__Impl5956);
                     rule__ParserRule__Group_2_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -7833,10 +8079,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__2__Impl
+    // $ANTLR end "rule__ParserRule__Group_2__2__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__3
+    // $ANTLR start "rule__ParserRule__Group_2__3"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2907:1: rule__ParserRule__Group_2__3 : rule__ParserRule__Group_2__3__Impl ;
     public final void rule__ParserRule__Group_2__3() throws RecognitionException {
 
@@ -7848,7 +8094,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__3__Impl_in_rule__ParserRule__Group_2__35987);
             rule__ParserRule__Group_2__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7865,10 +8112,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__3
+    // $ANTLR end "rule__ParserRule__Group_2__3"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__3__Impl
+    // $ANTLR start "rule__ParserRule__Group_2__3__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2918:1: rule__ParserRule__Group_2__3__Impl : ( ')' ) ;
     public final void rule__ParserRule__Group_2__3__Impl() throws RecognitionException {
 
@@ -7902,10 +8149,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__3__Impl
+    // $ANTLR end "rule__ParserRule__Group_2__3__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2__0
+    // $ANTLR start "rule__ParserRule__Group_2_2__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2945:1: rule__ParserRule__Group_2_2__0 : rule__ParserRule__Group_2_2__0__Impl rule__ParserRule__Group_2_2__1 ;
     public final void rule__ParserRule__Group_2_2__0() throws RecognitionException {
 
@@ -7917,11 +8164,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2__0__Impl_in_rule__ParserRule__Group_2_2__06054);
             rule__ParserRule__Group_2_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2__1_in_rule__ParserRule__Group_2_2__06057);
             rule__ParserRule__Group_2_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7938,10 +8187,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2__0
+    // $ANTLR end "rule__ParserRule__Group_2_2__0"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2__0__Impl
+    // $ANTLR start "rule__ParserRule__Group_2_2__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2957:1: rule__ParserRule__Group_2_2__0__Impl : ( ( rule__ParserRule__HiddenTokensAssignment_2_2_0 ) ) ;
     public final void rule__ParserRule__Group_2_2__0__Impl() throws RecognitionException {
 
@@ -7960,7 +8209,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_0_in_rule__ParserRule__Group_2_2__0__Impl6084);
             rule__ParserRule__HiddenTokensAssignment_2_2_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7984,10 +8234,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2__0__Impl
+    // $ANTLR end "rule__ParserRule__Group_2_2__0__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2__1
+    // $ANTLR start "rule__ParserRule__Group_2_2__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2974:1: rule__ParserRule__Group_2_2__1 : rule__ParserRule__Group_2_2__1__Impl ;
     public final void rule__ParserRule__Group_2_2__1() throws RecognitionException {
 
@@ -7999,7 +8249,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2__1__Impl_in_rule__ParserRule__Group_2_2__16114);
             rule__ParserRule__Group_2_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8016,10 +8267,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2__1
+    // $ANTLR end "rule__ParserRule__Group_2_2__1"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2__1__Impl
+    // $ANTLR start "rule__ParserRule__Group_2_2__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:2985:1: rule__ParserRule__Group_2_2__1__Impl : ( ( rule__ParserRule__Group_2_2_1__0 )* ) ;
     public final void rule__ParserRule__Group_2_2__1__Impl() throws RecognitionException {
 
@@ -8050,7 +8301,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2_1__0_in_rule__ParserRule__Group_2_2__1__Impl6141);
             	    rule__ParserRule__Group_2_2_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -8080,10 +8332,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2__1__Impl
+    // $ANTLR end "rule__ParserRule__Group_2_2__1__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2_1__0
+    // $ANTLR start "rule__ParserRule__Group_2_2_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3006:1: rule__ParserRule__Group_2_2_1__0 : rule__ParserRule__Group_2_2_1__0__Impl rule__ParserRule__Group_2_2_1__1 ;
     public final void rule__ParserRule__Group_2_2_1__0() throws RecognitionException {
 
@@ -8095,11 +8347,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2_1__0__Impl_in_rule__ParserRule__Group_2_2_1__06176);
             rule__ParserRule__Group_2_2_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2_1__1_in_rule__ParserRule__Group_2_2_1__06179);
             rule__ParserRule__Group_2_2_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8116,10 +8370,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2_1__0
+    // $ANTLR end "rule__ParserRule__Group_2_2_1__0"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2_1__0__Impl
+    // $ANTLR start "rule__ParserRule__Group_2_2_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3018:1: rule__ParserRule__Group_2_2_1__0__Impl : ( ',' ) ;
     public final void rule__ParserRule__Group_2_2_1__0__Impl() throws RecognitionException {
 
@@ -8153,10 +8407,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2_1__0__Impl
+    // $ANTLR end "rule__ParserRule__Group_2_2_1__0__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2_1__1
+    // $ANTLR start "rule__ParserRule__Group_2_2_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3037:1: rule__ParserRule__Group_2_2_1__1 : rule__ParserRule__Group_2_2_1__1__Impl ;
     public final void rule__ParserRule__Group_2_2_1__1() throws RecognitionException {
 
@@ -8168,7 +8422,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2_1__1__Impl_in_rule__ParserRule__Group_2_2_1__16238);
             rule__ParserRule__Group_2_2_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8185,10 +8440,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2_1__1
+    // $ANTLR end "rule__ParserRule__Group_2_2_1__1"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2_1__1__Impl
+    // $ANTLR start "rule__ParserRule__Group_2_2_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3048:1: rule__ParserRule__Group_2_2_1__1__Impl : ( ( rule__ParserRule__HiddenTokensAssignment_2_2_1_1 ) ) ;
     public final void rule__ParserRule__Group_2_2_1__1__Impl() throws RecognitionException {
 
@@ -8207,7 +8462,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_1_1_in_rule__ParserRule__Group_2_2_1__1__Impl6265);
             rule__ParserRule__HiddenTokensAssignment_2_2_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8231,10 +8487,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2_1__1__Impl
+    // $ANTLR end "rule__ParserRule__Group_2_2_1__1__Impl"
 
 
-    // $ANTLR start rule__TypeRef__Group__0
+    // $ANTLR start "rule__TypeRef__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3069:1: rule__TypeRef__Group__0 : rule__TypeRef__Group__0__Impl rule__TypeRef__Group__1 ;
     public final void rule__TypeRef__Group__0() throws RecognitionException {
 
@@ -8246,11 +8502,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group__0__Impl_in_rule__TypeRef__Group__06299);
             rule__TypeRef__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group__1_in_rule__TypeRef__Group__06302);
             rule__TypeRef__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8267,10 +8525,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group__0
+    // $ANTLR end "rule__TypeRef__Group__0"
 
 
-    // $ANTLR start rule__TypeRef__Group__0__Impl
+    // $ANTLR start "rule__TypeRef__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3081:1: rule__TypeRef__Group__0__Impl : ( ( rule__TypeRef__Group_0__0 )? ) ;
     public final void rule__TypeRef__Group__0__Impl() throws RecognitionException {
 
@@ -8301,7 +8559,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group_0__0_in_rule__TypeRef__Group__0__Impl6329);
                     rule__TypeRef__Group_0__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -8328,10 +8587,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group__0__Impl
+    // $ANTLR end "rule__TypeRef__Group__0__Impl"
 
 
-    // $ANTLR start rule__TypeRef__Group__1
+    // $ANTLR start "rule__TypeRef__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3098:1: rule__TypeRef__Group__1 : rule__TypeRef__Group__1__Impl ;
     public final void rule__TypeRef__Group__1() throws RecognitionException {
 
@@ -8343,7 +8602,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group__1__Impl_in_rule__TypeRef__Group__16360);
             rule__TypeRef__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8360,10 +8620,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group__1
+    // $ANTLR end "rule__TypeRef__Group__1"
 
 
-    // $ANTLR start rule__TypeRef__Group__1__Impl
+    // $ANTLR start "rule__TypeRef__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3109:1: rule__TypeRef__Group__1__Impl : ( ( rule__TypeRef__ClassifierAssignment_1 ) ) ;
     public final void rule__TypeRef__Group__1__Impl() throws RecognitionException {
 
@@ -8382,7 +8642,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__ClassifierAssignment_1_in_rule__TypeRef__Group__1__Impl6387);
             rule__TypeRef__ClassifierAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8406,10 +8667,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group__1__Impl
+    // $ANTLR end "rule__TypeRef__Group__1__Impl"
 
 
-    // $ANTLR start rule__TypeRef__Group_0__0
+    // $ANTLR start "rule__TypeRef__Group_0__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3130:1: rule__TypeRef__Group_0__0 : rule__TypeRef__Group_0__0__Impl rule__TypeRef__Group_0__1 ;
     public final void rule__TypeRef__Group_0__0() throws RecognitionException {
 
@@ -8421,11 +8682,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group_0__0__Impl_in_rule__TypeRef__Group_0__06421);
             rule__TypeRef__Group_0__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group_0__1_in_rule__TypeRef__Group_0__06424);
             rule__TypeRef__Group_0__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8442,10 +8705,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group_0__0
+    // $ANTLR end "rule__TypeRef__Group_0__0"
 
 
-    // $ANTLR start rule__TypeRef__Group_0__0__Impl
+    // $ANTLR start "rule__TypeRef__Group_0__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3142:1: rule__TypeRef__Group_0__0__Impl : ( ( rule__TypeRef__MetamodelAssignment_0_0 ) ) ;
     public final void rule__TypeRef__Group_0__0__Impl() throws RecognitionException {
 
@@ -8464,7 +8727,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__MetamodelAssignment_0_0_in_rule__TypeRef__Group_0__0__Impl6451);
             rule__TypeRef__MetamodelAssignment_0_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8488,10 +8752,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group_0__0__Impl
+    // $ANTLR end "rule__TypeRef__Group_0__0__Impl"
 
 
-    // $ANTLR start rule__TypeRef__Group_0__1
+    // $ANTLR start "rule__TypeRef__Group_0__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3159:1: rule__TypeRef__Group_0__1 : rule__TypeRef__Group_0__1__Impl ;
     public final void rule__TypeRef__Group_0__1() throws RecognitionException {
 
@@ -8503,7 +8767,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group_0__1__Impl_in_rule__TypeRef__Group_0__16481);
             rule__TypeRef__Group_0__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8520,10 +8785,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group_0__1
+    // $ANTLR end "rule__TypeRef__Group_0__1"
 
 
-    // $ANTLR start rule__TypeRef__Group_0__1__Impl
+    // $ANTLR start "rule__TypeRef__Group_0__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3170:1: rule__TypeRef__Group_0__1__Impl : ( '::' ) ;
     public final void rule__TypeRef__Group_0__1__Impl() throws RecognitionException {
 
@@ -8557,10 +8822,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group_0__1__Impl
+    // $ANTLR end "rule__TypeRef__Group_0__1__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group__0
+    // $ANTLR start "rule__Alternatives__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3193:1: rule__Alternatives__Group__0 : rule__Alternatives__Group__0__Impl rule__Alternatives__Group__1 ;
     public final void rule__Alternatives__Group__0() throws RecognitionException {
 
@@ -8572,11 +8837,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group__0__Impl_in_rule__Alternatives__Group__06544);
             rule__Alternatives__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group__1_in_rule__Alternatives__Group__06547);
             rule__Alternatives__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8593,10 +8860,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group__0
+    // $ANTLR end "rule__Alternatives__Group__0"
 
 
-    // $ANTLR start rule__Alternatives__Group__0__Impl
+    // $ANTLR start "rule__Alternatives__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3205:1: rule__Alternatives__Group__0__Impl : ( ruleUnorderedGroup ) ;
     public final void rule__Alternatives__Group__0__Impl() throws RecognitionException {
 
@@ -8612,7 +8879,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAlternativesAccess().getUnorderedGroupParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleUnorderedGroup_in_rule__Alternatives__Group__0__Impl6574);
             ruleUnorderedGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAlternativesAccess().getUnorderedGroupParserRuleCall_0()); 
 
@@ -8633,10 +8901,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group__0__Impl
+    // $ANTLR end "rule__Alternatives__Group__0__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group__1
+    // $ANTLR start "rule__Alternatives__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3222:1: rule__Alternatives__Group__1 : rule__Alternatives__Group__1__Impl ;
     public final void rule__Alternatives__Group__1() throws RecognitionException {
 
@@ -8648,7 +8916,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group__1__Impl_in_rule__Alternatives__Group__16603);
             rule__Alternatives__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8665,10 +8934,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group__1
+    // $ANTLR end "rule__Alternatives__Group__1"
 
 
-    // $ANTLR start rule__Alternatives__Group__1__Impl
+    // $ANTLR start "rule__Alternatives__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3233:1: rule__Alternatives__Group__1__Impl : ( ( rule__Alternatives__Group_1__0 )? ) ;
     public final void rule__Alternatives__Group__1__Impl() throws RecognitionException {
 
@@ -8695,7 +8964,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1__0_in_rule__Alternatives__Group__1__Impl6630);
                     rule__Alternatives__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -8722,10 +8992,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group__1__Impl
+    // $ANTLR end "rule__Alternatives__Group__1__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group_1__0
+    // $ANTLR start "rule__Alternatives__Group_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3254:1: rule__Alternatives__Group_1__0 : rule__Alternatives__Group_1__0__Impl rule__Alternatives__Group_1__1 ;
     public final void rule__Alternatives__Group_1__0() throws RecognitionException {
 
@@ -8737,11 +9007,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1__0__Impl_in_rule__Alternatives__Group_1__06665);
             rule__Alternatives__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1__1_in_rule__Alternatives__Group_1__06668);
             rule__Alternatives__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8758,10 +9030,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1__0
+    // $ANTLR end "rule__Alternatives__Group_1__0"
 
 
-    // $ANTLR start rule__Alternatives__Group_1__0__Impl
+    // $ANTLR start "rule__Alternatives__Group_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3266:1: rule__Alternatives__Group_1__0__Impl : ( () ) ;
     public final void rule__Alternatives__Group_1__0__Impl() throws RecognitionException {
 
@@ -8795,10 +9067,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1__0__Impl
+    // $ANTLR end "rule__Alternatives__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group_1__1
+    // $ANTLR start "rule__Alternatives__Group_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3285:1: rule__Alternatives__Group_1__1 : rule__Alternatives__Group_1__1__Impl ;
     public final void rule__Alternatives__Group_1__1() throws RecognitionException {
 
@@ -8810,7 +9082,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1__1__Impl_in_rule__Alternatives__Group_1__16726);
             rule__Alternatives__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8827,10 +9100,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1__1
+    // $ANTLR end "rule__Alternatives__Group_1__1"
 
 
-    // $ANTLR start rule__Alternatives__Group_1__1__Impl
+    // $ANTLR start "rule__Alternatives__Group_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3296:1: rule__Alternatives__Group_1__1__Impl : ( ( ( rule__Alternatives__Group_1_1__0 ) ) ( ( rule__Alternatives__Group_1_1__0 )* ) ) ;
     public final void rule__Alternatives__Group_1__1__Impl() throws RecognitionException {
 
@@ -8852,7 +9125,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__1__Impl6755);
             rule__Alternatives__Group_1_1__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8882,7 +9156,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__1__Impl6767);
             	    rule__Alternatives__Group_1_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -8915,10 +9190,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1__1__Impl
+    // $ANTLR end "rule__Alternatives__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group_1_1__0
+    // $ANTLR start "rule__Alternatives__Group_1_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3324:1: rule__Alternatives__Group_1_1__0 : rule__Alternatives__Group_1_1__0__Impl rule__Alternatives__Group_1_1__1 ;
     public final void rule__Alternatives__Group_1_1__0() throws RecognitionException {
 
@@ -8930,11 +9205,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__0__Impl_in_rule__Alternatives__Group_1_1__06804);
             rule__Alternatives__Group_1_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__1_in_rule__Alternatives__Group_1_1__06807);
             rule__Alternatives__Group_1_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8951,10 +9228,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1_1__0
+    // $ANTLR end "rule__Alternatives__Group_1_1__0"
 
 
-    // $ANTLR start rule__Alternatives__Group_1_1__0__Impl
+    // $ANTLR start "rule__Alternatives__Group_1_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3336:1: rule__Alternatives__Group_1_1__0__Impl : ( '|' ) ;
     public final void rule__Alternatives__Group_1_1__0__Impl() throws RecognitionException {
 
@@ -8988,10 +9265,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1_1__0__Impl
+    // $ANTLR end "rule__Alternatives__Group_1_1__0__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group_1_1__1
+    // $ANTLR start "rule__Alternatives__Group_1_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3355:1: rule__Alternatives__Group_1_1__1 : rule__Alternatives__Group_1_1__1__Impl ;
     public final void rule__Alternatives__Group_1_1__1() throws RecognitionException {
 
@@ -9003,7 +9280,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__1__Impl_in_rule__Alternatives__Group_1_1__16866);
             rule__Alternatives__Group_1_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9020,10 +9298,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1_1__1
+    // $ANTLR end "rule__Alternatives__Group_1_1__1"
 
 
-    // $ANTLR start rule__Alternatives__Group_1_1__1__Impl
+    // $ANTLR start "rule__Alternatives__Group_1_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3366:1: rule__Alternatives__Group_1_1__1__Impl : ( ( rule__Alternatives__ElementsAssignment_1_1_1 ) ) ;
     public final void rule__Alternatives__Group_1_1__1__Impl() throws RecognitionException {
 
@@ -9042,7 +9320,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__ElementsAssignment_1_1_1_in_rule__Alternatives__Group_1_1__1__Impl6893);
             rule__Alternatives__ElementsAssignment_1_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9066,10 +9345,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1_1__1__Impl
+    // $ANTLR end "rule__Alternatives__Group_1_1__1__Impl"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group__0
+    // $ANTLR start "rule__UnorderedGroup__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3387:1: rule__UnorderedGroup__Group__0 : rule__UnorderedGroup__Group__0__Impl rule__UnorderedGroup__Group__1 ;
     public final void rule__UnorderedGroup__Group__0() throws RecognitionException {
 
@@ -9081,11 +9360,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group__0__Impl_in_rule__UnorderedGroup__Group__06927);
             rule__UnorderedGroup__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group__1_in_rule__UnorderedGroup__Group__06930);
             rule__UnorderedGroup__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9102,10 +9383,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group__0
+    // $ANTLR end "rule__UnorderedGroup__Group__0"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group__0__Impl
+    // $ANTLR start "rule__UnorderedGroup__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3399:1: rule__UnorderedGroup__Group__0__Impl : ( ruleGroup ) ;
     public final void rule__UnorderedGroup__Group__0__Impl() throws RecognitionException {
 
@@ -9121,7 +9402,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getUnorderedGroupAccess().getGroupParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleGroup_in_rule__UnorderedGroup__Group__0__Impl6957);
             ruleGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getUnorderedGroupAccess().getGroupParserRuleCall_0()); 
 
@@ -9142,10 +9424,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group__0__Impl
+    // $ANTLR end "rule__UnorderedGroup__Group__0__Impl"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group__1
+    // $ANTLR start "rule__UnorderedGroup__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3416:1: rule__UnorderedGroup__Group__1 : rule__UnorderedGroup__Group__1__Impl ;
     public final void rule__UnorderedGroup__Group__1() throws RecognitionException {
 
@@ -9157,7 +9439,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group__1__Impl_in_rule__UnorderedGroup__Group__16986);
             rule__UnorderedGroup__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9174,10 +9457,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group__1
+    // $ANTLR end "rule__UnorderedGroup__Group__1"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group__1__Impl
+    // $ANTLR start "rule__UnorderedGroup__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3427:1: rule__UnorderedGroup__Group__1__Impl : ( ( rule__UnorderedGroup__Group_1__0 )? ) ;
     public final void rule__UnorderedGroup__Group__1__Impl() throws RecognitionException {
 
@@ -9204,7 +9487,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group_1__0_in_rule__UnorderedGroup__Group__1__Impl7013);
                     rule__UnorderedGroup__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -9231,10 +9515,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group__1__Impl
+    // $ANTLR end "rule__UnorderedGroup__Group__1__Impl"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group_1__0
+    // $ANTLR start "rule__UnorderedGroup__Group_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3448:1: rule__UnorderedGroup__Group_1__0 : rule__UnorderedGroup__Group_1__0__Impl rule__UnorderedGroup__Group_1__1 ;
     public final void rule__UnorderedGroup__Group_1__0() throws RecognitionException {
 
@@ -9246,11 +9530,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group_1__0__Impl_in_rule__UnorderedGroup__Group_1__07048);
             rule__UnorderedGroup__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group_1__1_in_rule__UnorderedGroup__Group_1__07051);
             rule__UnorderedGroup__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9267,10 +9553,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group_1__0
+    // $ANTLR end "rule__UnorderedGroup__Group_1__0"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group_1__0__Impl
+    // $ANTLR start "rule__UnorderedGroup__Group_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3460:1: rule__UnorderedGroup__Group_1__0__Impl : ( () ) ;
     public final void rule__UnorderedGroup__Group_1__0__Impl() throws RecognitionException {
 
@@ -9304,10 +9590,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group_1__0__Impl
+    // $ANTLR end "rule__UnorderedGroup__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group_1__1
+    // $ANTLR start "rule__UnorderedGroup__Group_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3479:1: rule__UnorderedGroup__Group_1__1 : rule__UnorderedGroup__Group_1__1__Impl ;
     public final void rule__UnorderedGroup__Group_1__1() throws RecognitionException {
 
@@ -9319,7 +9605,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group_1__1__Impl_in_rule__UnorderedGroup__Group_1__17109);
             rule__UnorderedGroup__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9336,10 +9623,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group_1__1
+    // $ANTLR end "rule__UnorderedGroup__Group_1__1"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group_1__1__Impl
+    // $ANTLR start "rule__UnorderedGroup__Group_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3490:1: rule__UnorderedGroup__Group_1__1__Impl : ( ( ( rule__UnorderedGroup__Group_1_1__0 ) ) ( ( rule__UnorderedGroup__Group_1_1__0 )* ) ) ;
     public final void rule__UnorderedGroup__Group_1__1__Impl() throws RecognitionException {
 
@@ -9361,7 +9648,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group_1_1__0_in_rule__UnorderedGroup__Group_1__1__Impl7138);
             rule__UnorderedGroup__Group_1_1__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9391,7 +9679,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group_1_1__0_in_rule__UnorderedGroup__Group_1__1__Impl7150);
             	    rule__UnorderedGroup__Group_1_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -9424,10 +9713,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group_1__1__Impl
+    // $ANTLR end "rule__UnorderedGroup__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group_1_1__0
+    // $ANTLR start "rule__UnorderedGroup__Group_1_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3518:1: rule__UnorderedGroup__Group_1_1__0 : rule__UnorderedGroup__Group_1_1__0__Impl rule__UnorderedGroup__Group_1_1__1 ;
     public final void rule__UnorderedGroup__Group_1_1__0() throws RecognitionException {
 
@@ -9439,11 +9728,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group_1_1__0__Impl_in_rule__UnorderedGroup__Group_1_1__07187);
             rule__UnorderedGroup__Group_1_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group_1_1__1_in_rule__UnorderedGroup__Group_1_1__07190);
             rule__UnorderedGroup__Group_1_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9460,10 +9751,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group_1_1__0
+    // $ANTLR end "rule__UnorderedGroup__Group_1_1__0"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group_1_1__0__Impl
+    // $ANTLR start "rule__UnorderedGroup__Group_1_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3530:1: rule__UnorderedGroup__Group_1_1__0__Impl : ( '&' ) ;
     public final void rule__UnorderedGroup__Group_1_1__0__Impl() throws RecognitionException {
 
@@ -9497,10 +9788,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group_1_1__0__Impl
+    // $ANTLR end "rule__UnorderedGroup__Group_1_1__0__Impl"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group_1_1__1
+    // $ANTLR start "rule__UnorderedGroup__Group_1_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3549:1: rule__UnorderedGroup__Group_1_1__1 : rule__UnorderedGroup__Group_1_1__1__Impl ;
     public final void rule__UnorderedGroup__Group_1_1__1() throws RecognitionException {
 
@@ -9512,7 +9803,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__Group_1_1__1__Impl_in_rule__UnorderedGroup__Group_1_1__17249);
             rule__UnorderedGroup__Group_1_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9529,10 +9821,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group_1_1__1
+    // $ANTLR end "rule__UnorderedGroup__Group_1_1__1"
 
 
-    // $ANTLR start rule__UnorderedGroup__Group_1_1__1__Impl
+    // $ANTLR start "rule__UnorderedGroup__Group_1_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3560:1: rule__UnorderedGroup__Group_1_1__1__Impl : ( ( rule__UnorderedGroup__ElementsAssignment_1_1_1 ) ) ;
     public final void rule__UnorderedGroup__Group_1_1__1__Impl() throws RecognitionException {
 
@@ -9551,7 +9843,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UnorderedGroup__ElementsAssignment_1_1_1_in_rule__UnorderedGroup__Group_1_1__1__Impl7276);
             rule__UnorderedGroup__ElementsAssignment_1_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9575,10 +9868,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__Group_1_1__1__Impl
+    // $ANTLR end "rule__UnorderedGroup__Group_1_1__1__Impl"
 
 
-    // $ANTLR start rule__Group__Group__0
+    // $ANTLR start "rule__Group__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3581:1: rule__Group__Group__0 : rule__Group__Group__0__Impl rule__Group__Group__1 ;
     public final void rule__Group__Group__0() throws RecognitionException {
 
@@ -9590,11 +9883,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group__0__Impl_in_rule__Group__Group__07310);
             rule__Group__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group__1_in_rule__Group__Group__07313);
             rule__Group__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9611,10 +9906,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group__0
+    // $ANTLR end "rule__Group__Group__0"
 
 
-    // $ANTLR start rule__Group__Group__0__Impl
+    // $ANTLR start "rule__Group__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3593:1: rule__Group__Group__0__Impl : ( ruleAbstractToken ) ;
     public final void rule__Group__Group__0__Impl() throws RecognitionException {
 
@@ -9630,7 +9925,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getGroupAccess().getAbstractTokenParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractToken_in_rule__Group__Group__0__Impl7340);
             ruleAbstractToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGroupAccess().getAbstractTokenParserRuleCall_0()); 
 
@@ -9651,10 +9947,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group__0__Impl
+    // $ANTLR end "rule__Group__Group__0__Impl"
 
 
-    // $ANTLR start rule__Group__Group__1
+    // $ANTLR start "rule__Group__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3610:1: rule__Group__Group__1 : rule__Group__Group__1__Impl ;
     public final void rule__Group__Group__1() throws RecognitionException {
 
@@ -9666,7 +9962,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group__1__Impl_in_rule__Group__Group__17369);
             rule__Group__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9683,10 +9980,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group__1
+    // $ANTLR end "rule__Group__Group__1"
 
 
-    // $ANTLR start rule__Group__Group__1__Impl
+    // $ANTLR start "rule__Group__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3621:1: rule__Group__Group__1__Impl : ( ( rule__Group__Group_1__0 )? ) ;
     public final void rule__Group__Group__1__Impl() throws RecognitionException {
 
@@ -9713,7 +10010,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Group__Group_1__0_in_rule__Group__Group__1__Impl7396);
                     rule__Group__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -9740,10 +10038,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group__1__Impl
+    // $ANTLR end "rule__Group__Group__1__Impl"
 
 
-    // $ANTLR start rule__Group__Group_1__0
+    // $ANTLR start "rule__Group__Group_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3642:1: rule__Group__Group_1__0 : rule__Group__Group_1__0__Impl rule__Group__Group_1__1 ;
     public final void rule__Group__Group_1__0() throws RecognitionException {
 
@@ -9755,11 +10053,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group_1__0__Impl_in_rule__Group__Group_1__07431);
             rule__Group__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group_1__1_in_rule__Group__Group_1__07434);
             rule__Group__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9776,10 +10076,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group_1__0
+    // $ANTLR end "rule__Group__Group_1__0"
 
 
-    // $ANTLR start rule__Group__Group_1__0__Impl
+    // $ANTLR start "rule__Group__Group_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3654:1: rule__Group__Group_1__0__Impl : ( () ) ;
     public final void rule__Group__Group_1__0__Impl() throws RecognitionException {
 
@@ -9813,10 +10113,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group_1__0__Impl
+    // $ANTLR end "rule__Group__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__Group__Group_1__1
+    // $ANTLR start "rule__Group__Group_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3673:1: rule__Group__Group_1__1 : rule__Group__Group_1__1__Impl ;
     public final void rule__Group__Group_1__1() throws RecognitionException {
 
@@ -9828,7 +10128,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group_1__1__Impl_in_rule__Group__Group_1__17492);
             rule__Group__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9845,10 +10146,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group_1__1
+    // $ANTLR end "rule__Group__Group_1__1"
 
 
-    // $ANTLR start rule__Group__Group_1__1__Impl
+    // $ANTLR start "rule__Group__Group_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3684:1: rule__Group__Group_1__1__Impl : ( ( ( rule__Group__ElementsAssignment_1_1 ) ) ( ( rule__Group__ElementsAssignment_1_1 )* ) ) ;
     public final void rule__Group__Group_1__1__Impl() throws RecognitionException {
 
@@ -9870,7 +10171,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__ElementsAssignment_1_1_in_rule__Group__Group_1__1__Impl7521);
             rule__Group__ElementsAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9900,7 +10202,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Group__ElementsAssignment_1_1_in_rule__Group__Group_1__1__Impl7533);
             	    rule__Group__ElementsAssignment_1_1();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -9933,10 +10236,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group_1__1__Impl
+    // $ANTLR end "rule__Group__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__Group__0
+    // $ANTLR start "rule__AbstractTokenWithCardinality__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3712:1: rule__AbstractTokenWithCardinality__Group__0 : rule__AbstractTokenWithCardinality__Group__0__Impl rule__AbstractTokenWithCardinality__Group__1 ;
     public final void rule__AbstractTokenWithCardinality__Group__0() throws RecognitionException {
 
@@ -9948,11 +10251,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Group__0__Impl_in_rule__AbstractTokenWithCardinality__Group__07570);
             rule__AbstractTokenWithCardinality__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Group__1_in_rule__AbstractTokenWithCardinality__Group__07573);
             rule__AbstractTokenWithCardinality__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9969,10 +10274,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__Group__0
+    // $ANTLR end "rule__AbstractTokenWithCardinality__Group__0"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__Group__0__Impl
+    // $ANTLR start "rule__AbstractTokenWithCardinality__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3724:1: rule__AbstractTokenWithCardinality__Group__0__Impl : ( ( rule__AbstractTokenWithCardinality__Alternatives_0 ) ) ;
     public final void rule__AbstractTokenWithCardinality__Group__0__Impl() throws RecognitionException {
 
@@ -9991,7 +10296,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Alternatives_0_in_rule__AbstractTokenWithCardinality__Group__0__Impl7600);
             rule__AbstractTokenWithCardinality__Alternatives_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10015,10 +10321,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__Group__0__Impl
+    // $ANTLR end "rule__AbstractTokenWithCardinality__Group__0__Impl"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__Group__1
+    // $ANTLR start "rule__AbstractTokenWithCardinality__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3741:1: rule__AbstractTokenWithCardinality__Group__1 : rule__AbstractTokenWithCardinality__Group__1__Impl ;
     public final void rule__AbstractTokenWithCardinality__Group__1() throws RecognitionException {
 
@@ -10030,7 +10336,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Group__1__Impl_in_rule__AbstractTokenWithCardinality__Group__17630);
             rule__AbstractTokenWithCardinality__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10047,10 +10354,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__Group__1
+    // $ANTLR end "rule__AbstractTokenWithCardinality__Group__1"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__Group__1__Impl
+    // $ANTLR start "rule__AbstractTokenWithCardinality__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3752:1: rule__AbstractTokenWithCardinality__Group__1__Impl : ( ( rule__AbstractTokenWithCardinality__CardinalityAssignment_1 )? ) ;
     public final void rule__AbstractTokenWithCardinality__Group__1__Impl() throws RecognitionException {
 
@@ -10077,7 +10384,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAssignment_1_in_rule__AbstractTokenWithCardinality__Group__1__Impl7657);
                     rule__AbstractTokenWithCardinality__CardinalityAssignment_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -10104,10 +10412,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__Group__1__Impl
+    // $ANTLR end "rule__AbstractTokenWithCardinality__Group__1__Impl"
 
 
-    // $ANTLR start rule__Action__Group__0
+    // $ANTLR start "rule__Action__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3773:1: rule__Action__Group__0 : rule__Action__Group__0__Impl rule__Action__Group__1 ;
     public final void rule__Action__Group__0() throws RecognitionException {
 
@@ -10119,11 +10427,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__0__Impl_in_rule__Action__Group__07692);
             rule__Action__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__1_in_rule__Action__Group__07695);
             rule__Action__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10140,10 +10450,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__0
+    // $ANTLR end "rule__Action__Group__0"
 
 
-    // $ANTLR start rule__Action__Group__0__Impl
+    // $ANTLR start "rule__Action__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3785:1: rule__Action__Group__0__Impl : ( '{' ) ;
     public final void rule__Action__Group__0__Impl() throws RecognitionException {
 
@@ -10177,10 +10487,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__0__Impl
+    // $ANTLR end "rule__Action__Group__0__Impl"
 
 
-    // $ANTLR start rule__Action__Group__1
+    // $ANTLR start "rule__Action__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3804:1: rule__Action__Group__1 : rule__Action__Group__1__Impl rule__Action__Group__2 ;
     public final void rule__Action__Group__1() throws RecognitionException {
 
@@ -10192,11 +10502,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__1__Impl_in_rule__Action__Group__17754);
             rule__Action__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__2_in_rule__Action__Group__17757);
             rule__Action__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10213,10 +10525,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__1
+    // $ANTLR end "rule__Action__Group__1"
 
 
-    // $ANTLR start rule__Action__Group__1__Impl
+    // $ANTLR start "rule__Action__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3816:1: rule__Action__Group__1__Impl : ( ( rule__Action__TypeAssignment_1 ) ) ;
     public final void rule__Action__Group__1__Impl() throws RecognitionException {
 
@@ -10235,7 +10547,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__TypeAssignment_1_in_rule__Action__Group__1__Impl7784);
             rule__Action__TypeAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10259,10 +10572,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__1__Impl
+    // $ANTLR end "rule__Action__Group__1__Impl"
 
 
-    // $ANTLR start rule__Action__Group__2
+    // $ANTLR start "rule__Action__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3833:1: rule__Action__Group__2 : rule__Action__Group__2__Impl rule__Action__Group__3 ;
     public final void rule__Action__Group__2() throws RecognitionException {
 
@@ -10274,11 +10587,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__2__Impl_in_rule__Action__Group__27814);
             rule__Action__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__3_in_rule__Action__Group__27817);
             rule__Action__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10295,10 +10610,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__2
+    // $ANTLR end "rule__Action__Group__2"
 
 
-    // $ANTLR start rule__Action__Group__2__Impl
+    // $ANTLR start "rule__Action__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3845:1: rule__Action__Group__2__Impl : ( ( rule__Action__Group_2__0 )? ) ;
     public final void rule__Action__Group__2__Impl() throws RecognitionException {
 
@@ -10325,7 +10640,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__0_in_rule__Action__Group__2__Impl7844);
                     rule__Action__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -10352,10 +10668,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__2__Impl
+    // $ANTLR end "rule__Action__Group__2__Impl"
 
 
-    // $ANTLR start rule__Action__Group__3
+    // $ANTLR start "rule__Action__Group__3"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3862:1: rule__Action__Group__3 : rule__Action__Group__3__Impl ;
     public final void rule__Action__Group__3() throws RecognitionException {
 
@@ -10367,7 +10683,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__3__Impl_in_rule__Action__Group__37875);
             rule__Action__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10384,10 +10701,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__3
+    // $ANTLR end "rule__Action__Group__3"
 
 
-    // $ANTLR start rule__Action__Group__3__Impl
+    // $ANTLR start "rule__Action__Group__3__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3873:1: rule__Action__Group__3__Impl : ( '}' ) ;
     public final void rule__Action__Group__3__Impl() throws RecognitionException {
 
@@ -10421,10 +10738,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__3__Impl
+    // $ANTLR end "rule__Action__Group__3__Impl"
 
 
-    // $ANTLR start rule__Action__Group_2__0
+    // $ANTLR start "rule__Action__Group_2__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3900:1: rule__Action__Group_2__0 : rule__Action__Group_2__0__Impl rule__Action__Group_2__1 ;
     public final void rule__Action__Group_2__0() throws RecognitionException {
 
@@ -10436,11 +10753,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__0__Impl_in_rule__Action__Group_2__07942);
             rule__Action__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__1_in_rule__Action__Group_2__07945);
             rule__Action__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10457,10 +10776,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__0
+    // $ANTLR end "rule__Action__Group_2__0"
 
 
-    // $ANTLR start rule__Action__Group_2__0__Impl
+    // $ANTLR start "rule__Action__Group_2__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3912:1: rule__Action__Group_2__0__Impl : ( '.' ) ;
     public final void rule__Action__Group_2__0__Impl() throws RecognitionException {
 
@@ -10494,10 +10813,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__0__Impl
+    // $ANTLR end "rule__Action__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__Action__Group_2__1
+    // $ANTLR start "rule__Action__Group_2__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3931:1: rule__Action__Group_2__1 : rule__Action__Group_2__1__Impl rule__Action__Group_2__2 ;
     public final void rule__Action__Group_2__1() throws RecognitionException {
 
@@ -10509,11 +10828,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__1__Impl_in_rule__Action__Group_2__18004);
             rule__Action__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__2_in_rule__Action__Group_2__18007);
             rule__Action__Group_2__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10530,10 +10851,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__1
+    // $ANTLR end "rule__Action__Group_2__1"
 
 
-    // $ANTLR start rule__Action__Group_2__1__Impl
+    // $ANTLR start "rule__Action__Group_2__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3943:1: rule__Action__Group_2__1__Impl : ( ( rule__Action__FeatureAssignment_2_1 ) ) ;
     public final void rule__Action__Group_2__1__Impl() throws RecognitionException {
 
@@ -10552,7 +10873,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__FeatureAssignment_2_1_in_rule__Action__Group_2__1__Impl8034);
             rule__Action__FeatureAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10576,10 +10898,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__1__Impl
+    // $ANTLR end "rule__Action__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__Action__Group_2__2
+    // $ANTLR start "rule__Action__Group_2__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3960:1: rule__Action__Group_2__2 : rule__Action__Group_2__2__Impl rule__Action__Group_2__3 ;
     public final void rule__Action__Group_2__2() throws RecognitionException {
 
@@ -10591,11 +10913,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__2__Impl_in_rule__Action__Group_2__28064);
             rule__Action__Group_2__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__3_in_rule__Action__Group_2__28067);
             rule__Action__Group_2__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10612,10 +10936,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__2
+    // $ANTLR end "rule__Action__Group_2__2"
 
 
-    // $ANTLR start rule__Action__Group_2__2__Impl
+    // $ANTLR start "rule__Action__Group_2__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3972:1: rule__Action__Group_2__2__Impl : ( ( rule__Action__OperatorAssignment_2_2 ) ) ;
     public final void rule__Action__Group_2__2__Impl() throws RecognitionException {
 
@@ -10634,7 +10958,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__OperatorAssignment_2_2_in_rule__Action__Group_2__2__Impl8094);
             rule__Action__OperatorAssignment_2_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10658,10 +10983,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__2__Impl
+    // $ANTLR end "rule__Action__Group_2__2__Impl"
 
 
-    // $ANTLR start rule__Action__Group_2__3
+    // $ANTLR start "rule__Action__Group_2__3"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:3989:1: rule__Action__Group_2__3 : rule__Action__Group_2__3__Impl ;
     public final void rule__Action__Group_2__3() throws RecognitionException {
 
@@ -10673,7 +10998,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__3__Impl_in_rule__Action__Group_2__38124);
             rule__Action__Group_2__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10690,10 +11016,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__3
+    // $ANTLR end "rule__Action__Group_2__3"
 
 
-    // $ANTLR start rule__Action__Group_2__3__Impl
+    // $ANTLR start "rule__Action__Group_2__3__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4000:1: rule__Action__Group_2__3__Impl : ( 'current' ) ;
     public final void rule__Action__Group_2__3__Impl() throws RecognitionException {
 
@@ -10727,10 +11053,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__3__Impl
+    // $ANTLR end "rule__Action__Group_2__3__Impl"
 
 
-    // $ANTLR start rule__Assignment__Group__0
+    // $ANTLR start "rule__Assignment__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4027:1: rule__Assignment__Group__0 : rule__Assignment__Group__0__Impl rule__Assignment__Group__1 ;
     public final void rule__Assignment__Group__0() throws RecognitionException {
 
@@ -10742,11 +11068,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__0__Impl_in_rule__Assignment__Group__08191);
             rule__Assignment__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__1_in_rule__Assignment__Group__08194);
             rule__Assignment__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10763,10 +11091,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__0
+    // $ANTLR end "rule__Assignment__Group__0"
 
 
-    // $ANTLR start rule__Assignment__Group__0__Impl
+    // $ANTLR start "rule__Assignment__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4039:1: rule__Assignment__Group__0__Impl : ( ( rule__Assignment__FeatureAssignment_0 ) ) ;
     public final void rule__Assignment__Group__0__Impl() throws RecognitionException {
 
@@ -10785,7 +11113,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__FeatureAssignment_0_in_rule__Assignment__Group__0__Impl8221);
             rule__Assignment__FeatureAssignment_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10809,10 +11138,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__0__Impl
+    // $ANTLR end "rule__Assignment__Group__0__Impl"
 
 
-    // $ANTLR start rule__Assignment__Group__1
+    // $ANTLR start "rule__Assignment__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4056:1: rule__Assignment__Group__1 : rule__Assignment__Group__1__Impl rule__Assignment__Group__2 ;
     public final void rule__Assignment__Group__1() throws RecognitionException {
 
@@ -10824,11 +11153,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__1__Impl_in_rule__Assignment__Group__18251);
             rule__Assignment__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__2_in_rule__Assignment__Group__18254);
             rule__Assignment__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10845,10 +11176,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__1
+    // $ANTLR end "rule__Assignment__Group__1"
 
 
-    // $ANTLR start rule__Assignment__Group__1__Impl
+    // $ANTLR start "rule__Assignment__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4068:1: rule__Assignment__Group__1__Impl : ( ( rule__Assignment__OperatorAssignment_1 ) ) ;
     public final void rule__Assignment__Group__1__Impl() throws RecognitionException {
 
@@ -10867,7 +11198,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__OperatorAssignment_1_in_rule__Assignment__Group__1__Impl8281);
             rule__Assignment__OperatorAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10891,10 +11223,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__1__Impl
+    // $ANTLR end "rule__Assignment__Group__1__Impl"
 
 
-    // $ANTLR start rule__Assignment__Group__2
+    // $ANTLR start "rule__Assignment__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4085:1: rule__Assignment__Group__2 : rule__Assignment__Group__2__Impl ;
     public final void rule__Assignment__Group__2() throws RecognitionException {
 
@@ -10906,7 +11238,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__2__Impl_in_rule__Assignment__Group__28311);
             rule__Assignment__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10923,10 +11256,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__2
+    // $ANTLR end "rule__Assignment__Group__2"
 
 
-    // $ANTLR start rule__Assignment__Group__2__Impl
+    // $ANTLR start "rule__Assignment__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4096:1: rule__Assignment__Group__2__Impl : ( ( rule__Assignment__TerminalAssignment_2 ) ) ;
     public final void rule__Assignment__Group__2__Impl() throws RecognitionException {
 
@@ -10945,7 +11278,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__TerminalAssignment_2_in_rule__Assignment__Group__2__Impl8338);
             rule__Assignment__TerminalAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10969,10 +11303,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__2__Impl
+    // $ANTLR end "rule__Assignment__Group__2__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__0
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4119:1: rule__ParenthesizedAssignableElement__Group__0 : rule__ParenthesizedAssignableElement__Group__0__Impl rule__ParenthesizedAssignableElement__Group__1 ;
     public final void rule__ParenthesizedAssignableElement__Group__0() throws RecognitionException {
 
@@ -10984,11 +11318,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__0__Impl_in_rule__ParenthesizedAssignableElement__Group__08374);
             rule__ParenthesizedAssignableElement__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__1_in_rule__ParenthesizedAssignableElement__Group__08377);
             rule__ParenthesizedAssignableElement__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11005,10 +11341,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__0
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__0"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__0__Impl
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4131:1: rule__ParenthesizedAssignableElement__Group__0__Impl : ( '(' ) ;
     public final void rule__ParenthesizedAssignableElement__Group__0__Impl() throws RecognitionException {
 
@@ -11042,10 +11378,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__0__Impl
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__0__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__1
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4150:1: rule__ParenthesizedAssignableElement__Group__1 : rule__ParenthesizedAssignableElement__Group__1__Impl rule__ParenthesizedAssignableElement__Group__2 ;
     public final void rule__ParenthesizedAssignableElement__Group__1() throws RecognitionException {
 
@@ -11057,11 +11393,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__1__Impl_in_rule__ParenthesizedAssignableElement__Group__18436);
             rule__ParenthesizedAssignableElement__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__2_in_rule__ParenthesizedAssignableElement__Group__18439);
             rule__ParenthesizedAssignableElement__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11078,10 +11416,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__1
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__1"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__1__Impl
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4162:1: rule__ParenthesizedAssignableElement__Group__1__Impl : ( ruleAssignableAlternatives ) ;
     public final void rule__ParenthesizedAssignableElement__Group__1__Impl() throws RecognitionException {
 
@@ -11097,7 +11435,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getParenthesizedAssignableElementAccess().getAssignableAlternativesParserRuleCall_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableAlternatives_in_rule__ParenthesizedAssignableElement__Group__1__Impl8466);
             ruleAssignableAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedAssignableElementAccess().getAssignableAlternativesParserRuleCall_1()); 
 
@@ -11118,10 +11457,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__1__Impl
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__2
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4179:1: rule__ParenthesizedAssignableElement__Group__2 : rule__ParenthesizedAssignableElement__Group__2__Impl ;
     public final void rule__ParenthesizedAssignableElement__Group__2() throws RecognitionException {
 
@@ -11133,7 +11472,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__2__Impl_in_rule__ParenthesizedAssignableElement__Group__28495);
             rule__ParenthesizedAssignableElement__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11150,10 +11490,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__2
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__2"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__2__Impl
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4190:1: rule__ParenthesizedAssignableElement__Group__2__Impl : ( ')' ) ;
     public final void rule__ParenthesizedAssignableElement__Group__2__Impl() throws RecognitionException {
 
@@ -11187,10 +11527,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__2__Impl
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__2__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group__0
+    // $ANTLR start "rule__AssignableAlternatives__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4215:1: rule__AssignableAlternatives__Group__0 : rule__AssignableAlternatives__Group__0__Impl rule__AssignableAlternatives__Group__1 ;
     public final void rule__AssignableAlternatives__Group__0() throws RecognitionException {
 
@@ -11202,11 +11542,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group__0__Impl_in_rule__AssignableAlternatives__Group__08560);
             rule__AssignableAlternatives__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group__1_in_rule__AssignableAlternatives__Group__08563);
             rule__AssignableAlternatives__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11223,10 +11565,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group__0
+    // $ANTLR end "rule__AssignableAlternatives__Group__0"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group__0__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4227:1: rule__AssignableAlternatives__Group__0__Impl : ( ruleAssignableTerminal ) ;
     public final void rule__AssignableAlternatives__Group__0__Impl() throws RecognitionException {
 
@@ -11242,7 +11584,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAssignableAlternativesAccess().getAssignableTerminalParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__Group__0__Impl8590);
             ruleAssignableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignableAlternativesAccess().getAssignableTerminalParserRuleCall_0()); 
 
@@ -11263,10 +11606,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group__0__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group__0__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group__1
+    // $ANTLR start "rule__AssignableAlternatives__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4244:1: rule__AssignableAlternatives__Group__1 : rule__AssignableAlternatives__Group__1__Impl ;
     public final void rule__AssignableAlternatives__Group__1() throws RecognitionException {
 
@@ -11278,7 +11621,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group__1__Impl_in_rule__AssignableAlternatives__Group__18619);
             rule__AssignableAlternatives__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11295,10 +11639,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group__1
+    // $ANTLR end "rule__AssignableAlternatives__Group__1"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group__1__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4255:1: rule__AssignableAlternatives__Group__1__Impl : ( ( rule__AssignableAlternatives__Group_1__0 )? ) ;
     public final void rule__AssignableAlternatives__Group__1__Impl() throws RecognitionException {
 
@@ -11325,7 +11669,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1__0_in_rule__AssignableAlternatives__Group__1__Impl8646);
                     rule__AssignableAlternatives__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -11352,10 +11697,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group__1__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group__1__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1__0
+    // $ANTLR start "rule__AssignableAlternatives__Group_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4276:1: rule__AssignableAlternatives__Group_1__0 : rule__AssignableAlternatives__Group_1__0__Impl rule__AssignableAlternatives__Group_1__1 ;
     public final void rule__AssignableAlternatives__Group_1__0() throws RecognitionException {
 
@@ -11367,11 +11712,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1__0__Impl_in_rule__AssignableAlternatives__Group_1__08681);
             rule__AssignableAlternatives__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1__1_in_rule__AssignableAlternatives__Group_1__08684);
             rule__AssignableAlternatives__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11388,10 +11735,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1__0
+    // $ANTLR end "rule__AssignableAlternatives__Group_1__0"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1__0__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4288:1: rule__AssignableAlternatives__Group_1__0__Impl : ( () ) ;
     public final void rule__AssignableAlternatives__Group_1__0__Impl() throws RecognitionException {
 
@@ -11425,10 +11772,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1__0__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1__1
+    // $ANTLR start "rule__AssignableAlternatives__Group_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4307:1: rule__AssignableAlternatives__Group_1__1 : rule__AssignableAlternatives__Group_1__1__Impl ;
     public final void rule__AssignableAlternatives__Group_1__1() throws RecognitionException {
 
@@ -11440,7 +11787,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1__1__Impl_in_rule__AssignableAlternatives__Group_1__18742);
             rule__AssignableAlternatives__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11457,10 +11805,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1__1
+    // $ANTLR end "rule__AssignableAlternatives__Group_1__1"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1__1__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4318:1: rule__AssignableAlternatives__Group_1__1__Impl : ( ( ( rule__AssignableAlternatives__Group_1_1__0 ) ) ( ( rule__AssignableAlternatives__Group_1_1__0 )* ) ) ;
     public final void rule__AssignableAlternatives__Group_1__1__Impl() throws RecognitionException {
 
@@ -11482,7 +11830,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__1__Impl8771);
             rule__AssignableAlternatives__Group_1_1__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11512,7 +11861,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__1__Impl8783);
             	    rule__AssignableAlternatives__Group_1_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -11545,10 +11895,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1__1__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1_1__0
+    // $ANTLR start "rule__AssignableAlternatives__Group_1_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4346:1: rule__AssignableAlternatives__Group_1_1__0 : rule__AssignableAlternatives__Group_1_1__0__Impl rule__AssignableAlternatives__Group_1_1__1 ;
     public final void rule__AssignableAlternatives__Group_1_1__0() throws RecognitionException {
 
@@ -11560,11 +11910,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__0__Impl_in_rule__AssignableAlternatives__Group_1_1__08820);
             rule__AssignableAlternatives__Group_1_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__1_in_rule__AssignableAlternatives__Group_1_1__08823);
             rule__AssignableAlternatives__Group_1_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11581,10 +11933,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1_1__0
+    // $ANTLR end "rule__AssignableAlternatives__Group_1_1__0"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1_1__0__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group_1_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4358:1: rule__AssignableAlternatives__Group_1_1__0__Impl : ( '|' ) ;
     public final void rule__AssignableAlternatives__Group_1_1__0__Impl() throws RecognitionException {
 
@@ -11618,10 +11970,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1_1__0__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group_1_1__0__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1_1__1
+    // $ANTLR start "rule__AssignableAlternatives__Group_1_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4377:1: rule__AssignableAlternatives__Group_1_1__1 : rule__AssignableAlternatives__Group_1_1__1__Impl ;
     public final void rule__AssignableAlternatives__Group_1_1__1() throws RecognitionException {
 
@@ -11633,7 +11985,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__1__Impl_in_rule__AssignableAlternatives__Group_1_1__18882);
             rule__AssignableAlternatives__Group_1_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11650,10 +12003,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1_1__1
+    // $ANTLR end "rule__AssignableAlternatives__Group_1_1__1"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1_1__1__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group_1_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4388:1: rule__AssignableAlternatives__Group_1_1__1__Impl : ( ( rule__AssignableAlternatives__ElementsAssignment_1_1_1 ) ) ;
     public final void rule__AssignableAlternatives__Group_1_1__1__Impl() throws RecognitionException {
 
@@ -11672,7 +12025,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__ElementsAssignment_1_1_1_in_rule__AssignableAlternatives__Group_1_1__1__Impl8909);
             rule__AssignableAlternatives__ElementsAssignment_1_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11696,10 +12050,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1_1__1__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group_1_1__1__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group__0
+    // $ANTLR start "rule__CrossReference__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4409:1: rule__CrossReference__Group__0 : rule__CrossReference__Group__0__Impl rule__CrossReference__Group__1 ;
     public final void rule__CrossReference__Group__0() throws RecognitionException {
 
@@ -11711,11 +12065,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__0__Impl_in_rule__CrossReference__Group__08943);
             rule__CrossReference__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__1_in_rule__CrossReference__Group__08946);
             rule__CrossReference__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11732,10 +12088,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__0
+    // $ANTLR end "rule__CrossReference__Group__0"
 
 
-    // $ANTLR start rule__CrossReference__Group__0__Impl
+    // $ANTLR start "rule__CrossReference__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4421:1: rule__CrossReference__Group__0__Impl : ( '[' ) ;
     public final void rule__CrossReference__Group__0__Impl() throws RecognitionException {
 
@@ -11769,10 +12125,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__0__Impl
+    // $ANTLR end "rule__CrossReference__Group__0__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group__1
+    // $ANTLR start "rule__CrossReference__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4440:1: rule__CrossReference__Group__1 : rule__CrossReference__Group__1__Impl rule__CrossReference__Group__2 ;
     public final void rule__CrossReference__Group__1() throws RecognitionException {
 
@@ -11784,11 +12140,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__1__Impl_in_rule__CrossReference__Group__19005);
             rule__CrossReference__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__2_in_rule__CrossReference__Group__19008);
             rule__CrossReference__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11805,10 +12163,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__1
+    // $ANTLR end "rule__CrossReference__Group__1"
 
 
-    // $ANTLR start rule__CrossReference__Group__1__Impl
+    // $ANTLR start "rule__CrossReference__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4452:1: rule__CrossReference__Group__1__Impl : ( ( rule__CrossReference__TypeAssignment_1 ) ) ;
     public final void rule__CrossReference__Group__1__Impl() throws RecognitionException {
 
@@ -11827,7 +12185,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__TypeAssignment_1_in_rule__CrossReference__Group__1__Impl9035);
             rule__CrossReference__TypeAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11851,10 +12210,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__1__Impl
+    // $ANTLR end "rule__CrossReference__Group__1__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group__2
+    // $ANTLR start "rule__CrossReference__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4469:1: rule__CrossReference__Group__2 : rule__CrossReference__Group__2__Impl rule__CrossReference__Group__3 ;
     public final void rule__CrossReference__Group__2() throws RecognitionException {
 
@@ -11866,11 +12225,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__2__Impl_in_rule__CrossReference__Group__29065);
             rule__CrossReference__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__3_in_rule__CrossReference__Group__29068);
             rule__CrossReference__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11887,10 +12248,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__2
+    // $ANTLR end "rule__CrossReference__Group__2"
 
 
-    // $ANTLR start rule__CrossReference__Group__2__Impl
+    // $ANTLR start "rule__CrossReference__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4481:1: rule__CrossReference__Group__2__Impl : ( ( rule__CrossReference__Group_2__0 )? ) ;
     public final void rule__CrossReference__Group__2__Impl() throws RecognitionException {
 
@@ -11917,7 +12278,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group_2__0_in_rule__CrossReference__Group__2__Impl9095);
                     rule__CrossReference__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -11944,10 +12306,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__2__Impl
+    // $ANTLR end "rule__CrossReference__Group__2__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group__3
+    // $ANTLR start "rule__CrossReference__Group__3"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4498:1: rule__CrossReference__Group__3 : rule__CrossReference__Group__3__Impl ;
     public final void rule__CrossReference__Group__3() throws RecognitionException {
 
@@ -11959,7 +12321,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__3__Impl_in_rule__CrossReference__Group__39126);
             rule__CrossReference__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11976,10 +12339,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__3
+    // $ANTLR end "rule__CrossReference__Group__3"
 
 
-    // $ANTLR start rule__CrossReference__Group__3__Impl
+    // $ANTLR start "rule__CrossReference__Group__3__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4509:1: rule__CrossReference__Group__3__Impl : ( ']' ) ;
     public final void rule__CrossReference__Group__3__Impl() throws RecognitionException {
 
@@ -12013,10 +12376,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__3__Impl
+    // $ANTLR end "rule__CrossReference__Group__3__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group_2__0
+    // $ANTLR start "rule__CrossReference__Group_2__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4536:1: rule__CrossReference__Group_2__0 : rule__CrossReference__Group_2__0__Impl rule__CrossReference__Group_2__1 ;
     public final void rule__CrossReference__Group_2__0() throws RecognitionException {
 
@@ -12028,11 +12391,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group_2__0__Impl_in_rule__CrossReference__Group_2__09193);
             rule__CrossReference__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group_2__1_in_rule__CrossReference__Group_2__09196);
             rule__CrossReference__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12049,10 +12414,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group_2__0
+    // $ANTLR end "rule__CrossReference__Group_2__0"
 
 
-    // $ANTLR start rule__CrossReference__Group_2__0__Impl
+    // $ANTLR start "rule__CrossReference__Group_2__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4548:1: rule__CrossReference__Group_2__0__Impl : ( '|' ) ;
     public final void rule__CrossReference__Group_2__0__Impl() throws RecognitionException {
 
@@ -12086,10 +12451,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group_2__0__Impl
+    // $ANTLR end "rule__CrossReference__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group_2__1
+    // $ANTLR start "rule__CrossReference__Group_2__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4567:1: rule__CrossReference__Group_2__1 : rule__CrossReference__Group_2__1__Impl ;
     public final void rule__CrossReference__Group_2__1() throws RecognitionException {
 
@@ -12101,7 +12466,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group_2__1__Impl_in_rule__CrossReference__Group_2__19255);
             rule__CrossReference__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12118,10 +12484,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group_2__1
+    // $ANTLR end "rule__CrossReference__Group_2__1"
 
 
-    // $ANTLR start rule__CrossReference__Group_2__1__Impl
+    // $ANTLR start "rule__CrossReference__Group_2__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4578:1: rule__CrossReference__Group_2__1__Impl : ( ( rule__CrossReference__TerminalAssignment_2_1 ) ) ;
     public final void rule__CrossReference__Group_2__1__Impl() throws RecognitionException {
 
@@ -12140,7 +12506,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__TerminalAssignment_2_1_in_rule__CrossReference__Group_2__1__Impl9282);
             rule__CrossReference__TerminalAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12164,10 +12531,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group_2__1__Impl
+    // $ANTLR end "rule__CrossReference__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__0
+    // $ANTLR start "rule__ParenthesizedElement__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4599:1: rule__ParenthesizedElement__Group__0 : rule__ParenthesizedElement__Group__0__Impl rule__ParenthesizedElement__Group__1 ;
     public final void rule__ParenthesizedElement__Group__0() throws RecognitionException {
 
@@ -12179,11 +12546,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__0__Impl_in_rule__ParenthesizedElement__Group__09316);
             rule__ParenthesizedElement__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__1_in_rule__ParenthesizedElement__Group__09319);
             rule__ParenthesizedElement__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12200,10 +12569,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__0
+    // $ANTLR end "rule__ParenthesizedElement__Group__0"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__0__Impl
+    // $ANTLR start "rule__ParenthesizedElement__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4611:1: rule__ParenthesizedElement__Group__0__Impl : ( '(' ) ;
     public final void rule__ParenthesizedElement__Group__0__Impl() throws RecognitionException {
 
@@ -12237,10 +12606,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__0__Impl
+    // $ANTLR end "rule__ParenthesizedElement__Group__0__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__1
+    // $ANTLR start "rule__ParenthesizedElement__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4630:1: rule__ParenthesizedElement__Group__1 : rule__ParenthesizedElement__Group__1__Impl rule__ParenthesizedElement__Group__2 ;
     public final void rule__ParenthesizedElement__Group__1() throws RecognitionException {
 
@@ -12252,11 +12621,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__1__Impl_in_rule__ParenthesizedElement__Group__19378);
             rule__ParenthesizedElement__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__2_in_rule__ParenthesizedElement__Group__19381);
             rule__ParenthesizedElement__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12273,10 +12644,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__1
+    // $ANTLR end "rule__ParenthesizedElement__Group__1"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__1__Impl
+    // $ANTLR start "rule__ParenthesizedElement__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4642:1: rule__ParenthesizedElement__Group__1__Impl : ( ruleAlternatives ) ;
     public final void rule__ParenthesizedElement__Group__1__Impl() throws RecognitionException {
 
@@ -12292,7 +12663,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getParenthesizedElementAccess().getAlternativesParserRuleCall_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleAlternatives_in_rule__ParenthesizedElement__Group__1__Impl9408);
             ruleAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedElementAccess().getAlternativesParserRuleCall_1()); 
 
@@ -12313,10 +12685,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__1__Impl
+    // $ANTLR end "rule__ParenthesizedElement__Group__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__2
+    // $ANTLR start "rule__ParenthesizedElement__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4659:1: rule__ParenthesizedElement__Group__2 : rule__ParenthesizedElement__Group__2__Impl ;
     public final void rule__ParenthesizedElement__Group__2() throws RecognitionException {
 
@@ -12328,7 +12700,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__2__Impl_in_rule__ParenthesizedElement__Group__29437);
             rule__ParenthesizedElement__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12345,10 +12718,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__2
+    // $ANTLR end "rule__ParenthesizedElement__Group__2"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__2__Impl
+    // $ANTLR start "rule__ParenthesizedElement__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4670:1: rule__ParenthesizedElement__Group__2__Impl : ( ')' ) ;
     public final void rule__ParenthesizedElement__Group__2__Impl() throws RecognitionException {
 
@@ -12382,10 +12755,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__2__Impl
+    // $ANTLR end "rule__ParenthesizedElement__Group__2__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__0
+    // $ANTLR start "rule__TerminalRule__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4695:1: rule__TerminalRule__Group__0 : rule__TerminalRule__Group__0__Impl rule__TerminalRule__Group__1 ;
     public final void rule__TerminalRule__Group__0() throws RecognitionException {
 
@@ -12397,11 +12770,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__0__Impl_in_rule__TerminalRule__Group__09502);
             rule__TerminalRule__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__1_in_rule__TerminalRule__Group__09505);
             rule__TerminalRule__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12418,10 +12793,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__0
+    // $ANTLR end "rule__TerminalRule__Group__0"
 
 
-    // $ANTLR start rule__TerminalRule__Group__0__Impl
+    // $ANTLR start "rule__TerminalRule__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4707:1: rule__TerminalRule__Group__0__Impl : ( 'terminal' ) ;
     public final void rule__TerminalRule__Group__0__Impl() throws RecognitionException {
 
@@ -12455,10 +12830,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__0__Impl
+    // $ANTLR end "rule__TerminalRule__Group__0__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__1
+    // $ANTLR start "rule__TerminalRule__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4726:1: rule__TerminalRule__Group__1 : rule__TerminalRule__Group__1__Impl rule__TerminalRule__Group__2 ;
     public final void rule__TerminalRule__Group__1() throws RecognitionException {
 
@@ -12470,11 +12845,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__1__Impl_in_rule__TerminalRule__Group__19564);
             rule__TerminalRule__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__2_in_rule__TerminalRule__Group__19567);
             rule__TerminalRule__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12491,10 +12868,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__1
+    // $ANTLR end "rule__TerminalRule__Group__1"
 
 
-    // $ANTLR start rule__TerminalRule__Group__1__Impl
+    // $ANTLR start "rule__TerminalRule__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4738:1: rule__TerminalRule__Group__1__Impl : ( ( rule__TerminalRule__NameAssignment_1 ) ) ;
     public final void rule__TerminalRule__Group__1__Impl() throws RecognitionException {
 
@@ -12513,7 +12890,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__NameAssignment_1_in_rule__TerminalRule__Group__1__Impl9594);
             rule__TerminalRule__NameAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12537,10 +12915,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__1__Impl
+    // $ANTLR end "rule__TerminalRule__Group__1__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__2
+    // $ANTLR start "rule__TerminalRule__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4755:1: rule__TerminalRule__Group__2 : rule__TerminalRule__Group__2__Impl rule__TerminalRule__Group__3 ;
     public final void rule__TerminalRule__Group__2() throws RecognitionException {
 
@@ -12552,11 +12930,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__2__Impl_in_rule__TerminalRule__Group__29624);
             rule__TerminalRule__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__3_in_rule__TerminalRule__Group__29627);
             rule__TerminalRule__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12573,10 +12953,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__2
+    // $ANTLR end "rule__TerminalRule__Group__2"
 
 
-    // $ANTLR start rule__TerminalRule__Group__2__Impl
+    // $ANTLR start "rule__TerminalRule__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4767:1: rule__TerminalRule__Group__2__Impl : ( ( rule__TerminalRule__Group_2__0 )? ) ;
     public final void rule__TerminalRule__Group__2__Impl() throws RecognitionException {
 
@@ -12603,7 +12983,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group_2__0_in_rule__TerminalRule__Group__2__Impl9654);
                     rule__TerminalRule__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -12630,10 +13011,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__2__Impl
+    // $ANTLR end "rule__TerminalRule__Group__2__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__3
+    // $ANTLR start "rule__TerminalRule__Group__3"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4784:1: rule__TerminalRule__Group__3 : rule__TerminalRule__Group__3__Impl rule__TerminalRule__Group__4 ;
     public final void rule__TerminalRule__Group__3() throws RecognitionException {
 
@@ -12645,11 +13026,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__3__Impl_in_rule__TerminalRule__Group__39685);
             rule__TerminalRule__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__4_in_rule__TerminalRule__Group__39688);
             rule__TerminalRule__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12666,10 +13049,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__3
+    // $ANTLR end "rule__TerminalRule__Group__3"
 
 
-    // $ANTLR start rule__TerminalRule__Group__3__Impl
+    // $ANTLR start "rule__TerminalRule__Group__3__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4796:1: rule__TerminalRule__Group__3__Impl : ( ':' ) ;
     public final void rule__TerminalRule__Group__3__Impl() throws RecognitionException {
 
@@ -12703,10 +13086,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__3__Impl
+    // $ANTLR end "rule__TerminalRule__Group__3__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__4
+    // $ANTLR start "rule__TerminalRule__Group__4"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4815:1: rule__TerminalRule__Group__4 : rule__TerminalRule__Group__4__Impl rule__TerminalRule__Group__5 ;
     public final void rule__TerminalRule__Group__4() throws RecognitionException {
 
@@ -12718,11 +13101,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__4__Impl_in_rule__TerminalRule__Group__49747);
             rule__TerminalRule__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__5_in_rule__TerminalRule__Group__49750);
             rule__TerminalRule__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12739,10 +13124,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__4
+    // $ANTLR end "rule__TerminalRule__Group__4"
 
 
-    // $ANTLR start rule__TerminalRule__Group__4__Impl
+    // $ANTLR start "rule__TerminalRule__Group__4__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4827:1: rule__TerminalRule__Group__4__Impl : ( ( rule__TerminalRule__AlternativesAssignment_4 ) ) ;
     public final void rule__TerminalRule__Group__4__Impl() throws RecognitionException {
 
@@ -12761,7 +13146,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__AlternativesAssignment_4_in_rule__TerminalRule__Group__4__Impl9777);
             rule__TerminalRule__AlternativesAssignment_4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12785,10 +13171,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__4__Impl
+    // $ANTLR end "rule__TerminalRule__Group__4__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__5
+    // $ANTLR start "rule__TerminalRule__Group__5"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4844:1: rule__TerminalRule__Group__5 : rule__TerminalRule__Group__5__Impl ;
     public final void rule__TerminalRule__Group__5() throws RecognitionException {
 
@@ -12800,7 +13186,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__5__Impl_in_rule__TerminalRule__Group__59807);
             rule__TerminalRule__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12817,10 +13204,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__5
+    // $ANTLR end "rule__TerminalRule__Group__5"
 
 
-    // $ANTLR start rule__TerminalRule__Group__5__Impl
+    // $ANTLR start "rule__TerminalRule__Group__5__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4855:1: rule__TerminalRule__Group__5__Impl : ( ';' ) ;
     public final void rule__TerminalRule__Group__5__Impl() throws RecognitionException {
 
@@ -12854,10 +13241,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__5__Impl
+    // $ANTLR end "rule__TerminalRule__Group__5__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group_2__0
+    // $ANTLR start "rule__TerminalRule__Group_2__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4886:1: rule__TerminalRule__Group_2__0 : rule__TerminalRule__Group_2__0__Impl rule__TerminalRule__Group_2__1 ;
     public final void rule__TerminalRule__Group_2__0() throws RecognitionException {
 
@@ -12869,11 +13256,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group_2__0__Impl_in_rule__TerminalRule__Group_2__09878);
             rule__TerminalRule__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group_2__1_in_rule__TerminalRule__Group_2__09881);
             rule__TerminalRule__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12890,10 +13279,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group_2__0
+    // $ANTLR end "rule__TerminalRule__Group_2__0"
 
 
-    // $ANTLR start rule__TerminalRule__Group_2__0__Impl
+    // $ANTLR start "rule__TerminalRule__Group_2__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4898:1: rule__TerminalRule__Group_2__0__Impl : ( 'returns' ) ;
     public final void rule__TerminalRule__Group_2__0__Impl() throws RecognitionException {
 
@@ -12927,10 +13316,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group_2__0__Impl
+    // $ANTLR end "rule__TerminalRule__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group_2__1
+    // $ANTLR start "rule__TerminalRule__Group_2__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4917:1: rule__TerminalRule__Group_2__1 : rule__TerminalRule__Group_2__1__Impl ;
     public final void rule__TerminalRule__Group_2__1() throws RecognitionException {
 
@@ -12942,7 +13331,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group_2__1__Impl_in_rule__TerminalRule__Group_2__19940);
             rule__TerminalRule__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12959,10 +13349,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group_2__1
+    // $ANTLR end "rule__TerminalRule__Group_2__1"
 
 
-    // $ANTLR start rule__TerminalRule__Group_2__1__Impl
+    // $ANTLR start "rule__TerminalRule__Group_2__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4928:1: rule__TerminalRule__Group_2__1__Impl : ( ( rule__TerminalRule__TypeAssignment_2_1 ) ) ;
     public final void rule__TerminalRule__Group_2__1__Impl() throws RecognitionException {
 
@@ -12981,7 +13371,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__TypeAssignment_2_1_in_rule__TerminalRule__Group_2__1__Impl9967);
             rule__TerminalRule__TypeAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13005,10 +13396,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group_2__1__Impl
+    // $ANTLR end "rule__TerminalRule__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group__0
+    // $ANTLR start "rule__TerminalAlternatives__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4949:1: rule__TerminalAlternatives__Group__0 : rule__TerminalAlternatives__Group__0__Impl rule__TerminalAlternatives__Group__1 ;
     public final void rule__TerminalAlternatives__Group__0() throws RecognitionException {
 
@@ -13020,11 +13411,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group__0__Impl_in_rule__TerminalAlternatives__Group__010001);
             rule__TerminalAlternatives__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group__1_in_rule__TerminalAlternatives__Group__010004);
             rule__TerminalAlternatives__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13041,10 +13434,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group__0
+    // $ANTLR end "rule__TerminalAlternatives__Group__0"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group__0__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4961:1: rule__TerminalAlternatives__Group__0__Impl : ( ruleTerminalGroup ) ;
     public final void rule__TerminalAlternatives__Group__0__Impl() throws RecognitionException {
 
@@ -13060,7 +13453,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalAlternativesAccess().getTerminalGroupParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__Group__0__Impl10031);
             ruleTerminalGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalAlternativesAccess().getTerminalGroupParserRuleCall_0()); 
 
@@ -13081,10 +13475,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group__0__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group__0__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group__1
+    // $ANTLR start "rule__TerminalAlternatives__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4978:1: rule__TerminalAlternatives__Group__1 : rule__TerminalAlternatives__Group__1__Impl ;
     public final void rule__TerminalAlternatives__Group__1() throws RecognitionException {
 
@@ -13096,7 +13490,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group__1__Impl_in_rule__TerminalAlternatives__Group__110060);
             rule__TerminalAlternatives__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13113,10 +13508,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group__1
+    // $ANTLR end "rule__TerminalAlternatives__Group__1"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group__1__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:4989:1: rule__TerminalAlternatives__Group__1__Impl : ( ( rule__TerminalAlternatives__Group_1__0 )? ) ;
     public final void rule__TerminalAlternatives__Group__1__Impl() throws RecognitionException {
 
@@ -13143,7 +13538,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1__0_in_rule__TerminalAlternatives__Group__1__Impl10087);
                     rule__TerminalAlternatives__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -13170,10 +13566,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group__1__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group__1__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1__0
+    // $ANTLR start "rule__TerminalAlternatives__Group_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5010:1: rule__TerminalAlternatives__Group_1__0 : rule__TerminalAlternatives__Group_1__0__Impl rule__TerminalAlternatives__Group_1__1 ;
     public final void rule__TerminalAlternatives__Group_1__0() throws RecognitionException {
 
@@ -13185,11 +13581,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1__0__Impl_in_rule__TerminalAlternatives__Group_1__010122);
             rule__TerminalAlternatives__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1__1_in_rule__TerminalAlternatives__Group_1__010125);
             rule__TerminalAlternatives__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13206,10 +13604,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1__0
+    // $ANTLR end "rule__TerminalAlternatives__Group_1__0"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1__0__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5022:1: rule__TerminalAlternatives__Group_1__0__Impl : ( () ) ;
     public final void rule__TerminalAlternatives__Group_1__0__Impl() throws RecognitionException {
 
@@ -13243,10 +13641,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1__0__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1__1
+    // $ANTLR start "rule__TerminalAlternatives__Group_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5041:1: rule__TerminalAlternatives__Group_1__1 : rule__TerminalAlternatives__Group_1__1__Impl ;
     public final void rule__TerminalAlternatives__Group_1__1() throws RecognitionException {
 
@@ -13258,7 +13656,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1__1__Impl_in_rule__TerminalAlternatives__Group_1__110183);
             rule__TerminalAlternatives__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13275,10 +13674,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1__1
+    // $ANTLR end "rule__TerminalAlternatives__Group_1__1"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1__1__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5052:1: rule__TerminalAlternatives__Group_1__1__Impl : ( ( ( rule__TerminalAlternatives__Group_1_1__0 ) ) ( ( rule__TerminalAlternatives__Group_1_1__0 )* ) ) ;
     public final void rule__TerminalAlternatives__Group_1__1__Impl() throws RecognitionException {
 
@@ -13300,7 +13699,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__1__Impl10212);
             rule__TerminalAlternatives__Group_1_1__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13330,7 +13730,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__1__Impl10224);
             	    rule__TerminalAlternatives__Group_1_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -13363,10 +13764,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1__1__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1_1__0
+    // $ANTLR start "rule__TerminalAlternatives__Group_1_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5080:1: rule__TerminalAlternatives__Group_1_1__0 : rule__TerminalAlternatives__Group_1_1__0__Impl rule__TerminalAlternatives__Group_1_1__1 ;
     public final void rule__TerminalAlternatives__Group_1_1__0() throws RecognitionException {
 
@@ -13378,11 +13779,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__0__Impl_in_rule__TerminalAlternatives__Group_1_1__010261);
             rule__TerminalAlternatives__Group_1_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__1_in_rule__TerminalAlternatives__Group_1_1__010264);
             rule__TerminalAlternatives__Group_1_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13399,10 +13802,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1_1__0
+    // $ANTLR end "rule__TerminalAlternatives__Group_1_1__0"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1_1__0__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group_1_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5092:1: rule__TerminalAlternatives__Group_1_1__0__Impl : ( '|' ) ;
     public final void rule__TerminalAlternatives__Group_1_1__0__Impl() throws RecognitionException {
 
@@ -13436,10 +13839,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1_1__0__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group_1_1__0__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1_1__1
+    // $ANTLR start "rule__TerminalAlternatives__Group_1_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5111:1: rule__TerminalAlternatives__Group_1_1__1 : rule__TerminalAlternatives__Group_1_1__1__Impl ;
     public final void rule__TerminalAlternatives__Group_1_1__1() throws RecognitionException {
 
@@ -13451,7 +13854,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__1__Impl_in_rule__TerminalAlternatives__Group_1_1__110323);
             rule__TerminalAlternatives__Group_1_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13468,10 +13872,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1_1__1
+    // $ANTLR end "rule__TerminalAlternatives__Group_1_1__1"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1_1__1__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group_1_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5122:1: rule__TerminalAlternatives__Group_1_1__1__Impl : ( ( rule__TerminalAlternatives__ElementsAssignment_1_1_1 ) ) ;
     public final void rule__TerminalAlternatives__Group_1_1__1__Impl() throws RecognitionException {
 
@@ -13490,7 +13894,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__ElementsAssignment_1_1_1_in_rule__TerminalAlternatives__Group_1_1__1__Impl10350);
             rule__TerminalAlternatives__ElementsAssignment_1_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13514,10 +13919,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1_1__1__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group_1_1__1__Impl"
 
 
-    // $ANTLR start rule__TerminalGroup__Group__0
+    // $ANTLR start "rule__TerminalGroup__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5143:1: rule__TerminalGroup__Group__0 : rule__TerminalGroup__Group__0__Impl rule__TerminalGroup__Group__1 ;
     public final void rule__TerminalGroup__Group__0() throws RecognitionException {
 
@@ -13529,11 +13934,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group__0__Impl_in_rule__TerminalGroup__Group__010384);
             rule__TerminalGroup__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group__1_in_rule__TerminalGroup__Group__010387);
             rule__TerminalGroup__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13550,10 +13957,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group__0
+    // $ANTLR end "rule__TerminalGroup__Group__0"
 
 
-    // $ANTLR start rule__TerminalGroup__Group__0__Impl
+    // $ANTLR start "rule__TerminalGroup__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5155:1: rule__TerminalGroup__Group__0__Impl : ( ruleTerminalToken ) ;
     public final void rule__TerminalGroup__Group__0__Impl() throws RecognitionException {
 
@@ -13569,7 +13976,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalGroupAccess().getTerminalTokenParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__Group__0__Impl10414);
             ruleTerminalToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalGroupAccess().getTerminalTokenParserRuleCall_0()); 
 
@@ -13590,10 +13998,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group__0__Impl
+    // $ANTLR end "rule__TerminalGroup__Group__0__Impl"
 
 
-    // $ANTLR start rule__TerminalGroup__Group__1
+    // $ANTLR start "rule__TerminalGroup__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5172:1: rule__TerminalGroup__Group__1 : rule__TerminalGroup__Group__1__Impl ;
     public final void rule__TerminalGroup__Group__1() throws RecognitionException {
 
@@ -13605,7 +14013,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group__1__Impl_in_rule__TerminalGroup__Group__110443);
             rule__TerminalGroup__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13622,10 +14031,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group__1
+    // $ANTLR end "rule__TerminalGroup__Group__1"
 
 
-    // $ANTLR start rule__TerminalGroup__Group__1__Impl
+    // $ANTLR start "rule__TerminalGroup__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5183:1: rule__TerminalGroup__Group__1__Impl : ( ( rule__TerminalGroup__Group_1__0 )? ) ;
     public final void rule__TerminalGroup__Group__1__Impl() throws RecognitionException {
 
@@ -13652,7 +14061,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group_1__0_in_rule__TerminalGroup__Group__1__Impl10470);
                     rule__TerminalGroup__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -13679,10 +14089,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group__1__Impl
+    // $ANTLR end "rule__TerminalGroup__Group__1__Impl"
 
 
-    // $ANTLR start rule__TerminalGroup__Group_1__0
+    // $ANTLR start "rule__TerminalGroup__Group_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5204:1: rule__TerminalGroup__Group_1__0 : rule__TerminalGroup__Group_1__0__Impl rule__TerminalGroup__Group_1__1 ;
     public final void rule__TerminalGroup__Group_1__0() throws RecognitionException {
 
@@ -13694,11 +14104,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group_1__0__Impl_in_rule__TerminalGroup__Group_1__010505);
             rule__TerminalGroup__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group_1__1_in_rule__TerminalGroup__Group_1__010508);
             rule__TerminalGroup__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13715,10 +14127,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group_1__0
+    // $ANTLR end "rule__TerminalGroup__Group_1__0"
 
 
-    // $ANTLR start rule__TerminalGroup__Group_1__0__Impl
+    // $ANTLR start "rule__TerminalGroup__Group_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5216:1: rule__TerminalGroup__Group_1__0__Impl : ( () ) ;
     public final void rule__TerminalGroup__Group_1__0__Impl() throws RecognitionException {
 
@@ -13752,10 +14164,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group_1__0__Impl
+    // $ANTLR end "rule__TerminalGroup__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__TerminalGroup__Group_1__1
+    // $ANTLR start "rule__TerminalGroup__Group_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5235:1: rule__TerminalGroup__Group_1__1 : rule__TerminalGroup__Group_1__1__Impl ;
     public final void rule__TerminalGroup__Group_1__1() throws RecognitionException {
 
@@ -13767,7 +14179,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group_1__1__Impl_in_rule__TerminalGroup__Group_1__110566);
             rule__TerminalGroup__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13784,10 +14197,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group_1__1
+    // $ANTLR end "rule__TerminalGroup__Group_1__1"
 
 
-    // $ANTLR start rule__TerminalGroup__Group_1__1__Impl
+    // $ANTLR start "rule__TerminalGroup__Group_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5246:1: rule__TerminalGroup__Group_1__1__Impl : ( ( ( rule__TerminalGroup__ElementsAssignment_1_1 ) ) ( ( rule__TerminalGroup__ElementsAssignment_1_1 )* ) ) ;
     public final void rule__TerminalGroup__Group_1__1__Impl() throws RecognitionException {
 
@@ -13809,7 +14222,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__ElementsAssignment_1_1_in_rule__TerminalGroup__Group_1__1__Impl10595);
             rule__TerminalGroup__ElementsAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13839,7 +14253,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__ElementsAssignment_1_1_in_rule__TerminalGroup__Group_1__1__Impl10607);
             	    rule__TerminalGroup__ElementsAssignment_1_1();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -13872,10 +14287,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group_1__1__Impl
+    // $ANTLR end "rule__TerminalGroup__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__TerminalToken__Group__0
+    // $ANTLR start "rule__TerminalToken__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5274:1: rule__TerminalToken__Group__0 : rule__TerminalToken__Group__0__Impl rule__TerminalToken__Group__1 ;
     public final void rule__TerminalToken__Group__0() throws RecognitionException {
 
@@ -13887,11 +14302,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__Group__0__Impl_in_rule__TerminalToken__Group__010644);
             rule__TerminalToken__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__Group__1_in_rule__TerminalToken__Group__010647);
             rule__TerminalToken__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13908,10 +14325,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__Group__0
+    // $ANTLR end "rule__TerminalToken__Group__0"
 
 
-    // $ANTLR start rule__TerminalToken__Group__0__Impl
+    // $ANTLR start "rule__TerminalToken__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5286:1: rule__TerminalToken__Group__0__Impl : ( ruleTerminalTokenElement ) ;
     public final void rule__TerminalToken__Group__0__Impl() throws RecognitionException {
 
@@ -13927,7 +14344,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalTokenAccess().getTerminalTokenElementParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_rule__TerminalToken__Group__0__Impl10674);
             ruleTerminalTokenElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalTokenAccess().getTerminalTokenElementParserRuleCall_0()); 
 
@@ -13948,10 +14366,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__Group__0__Impl
+    // $ANTLR end "rule__TerminalToken__Group__0__Impl"
 
 
-    // $ANTLR start rule__TerminalToken__Group__1
+    // $ANTLR start "rule__TerminalToken__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5303:1: rule__TerminalToken__Group__1 : rule__TerminalToken__Group__1__Impl ;
     public final void rule__TerminalToken__Group__1() throws RecognitionException {
 
@@ -13963,7 +14381,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__Group__1__Impl_in_rule__TerminalToken__Group__110703);
             rule__TerminalToken__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13980,10 +14399,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__Group__1
+    // $ANTLR end "rule__TerminalToken__Group__1"
 
 
-    // $ANTLR start rule__TerminalToken__Group__1__Impl
+    // $ANTLR start "rule__TerminalToken__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5314:1: rule__TerminalToken__Group__1__Impl : ( ( rule__TerminalToken__CardinalityAssignment_1 )? ) ;
     public final void rule__TerminalToken__Group__1__Impl() throws RecognitionException {
 
@@ -14010,7 +14429,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__CardinalityAssignment_1_in_rule__TerminalToken__Group__1__Impl10730);
                     rule__TerminalToken__CardinalityAssignment_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -14037,10 +14457,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__Group__1__Impl
+    // $ANTLR end "rule__TerminalToken__Group__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__0
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5335:1: rule__ParenthesizedTerminalElement__Group__0 : rule__ParenthesizedTerminalElement__Group__0__Impl rule__ParenthesizedTerminalElement__Group__1 ;
     public final void rule__ParenthesizedTerminalElement__Group__0() throws RecognitionException {
 
@@ -14052,11 +14472,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__0__Impl_in_rule__ParenthesizedTerminalElement__Group__010765);
             rule__ParenthesizedTerminalElement__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__1_in_rule__ParenthesizedTerminalElement__Group__010768);
             rule__ParenthesizedTerminalElement__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14073,10 +14495,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__0
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__0"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__0__Impl
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5347:1: rule__ParenthesizedTerminalElement__Group__0__Impl : ( '(' ) ;
     public final void rule__ParenthesizedTerminalElement__Group__0__Impl() throws RecognitionException {
 
@@ -14110,10 +14532,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__0__Impl
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__0__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__1
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5366:1: rule__ParenthesizedTerminalElement__Group__1 : rule__ParenthesizedTerminalElement__Group__1__Impl rule__ParenthesizedTerminalElement__Group__2 ;
     public final void rule__ParenthesizedTerminalElement__Group__1() throws RecognitionException {
 
@@ -14125,11 +14547,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__1__Impl_in_rule__ParenthesizedTerminalElement__Group__110827);
             rule__ParenthesizedTerminalElement__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__2_in_rule__ParenthesizedTerminalElement__Group__110830);
             rule__ParenthesizedTerminalElement__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14146,10 +14570,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__1
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__1"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__1__Impl
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5378:1: rule__ParenthesizedTerminalElement__Group__1__Impl : ( ruleTerminalAlternatives ) ;
     public final void rule__ParenthesizedTerminalElement__Group__1__Impl() throws RecognitionException {
 
@@ -14165,7 +14589,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getParenthesizedTerminalElementAccess().getTerminalAlternativesParserRuleCall_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalAlternatives_in_rule__ParenthesizedTerminalElement__Group__1__Impl10857);
             ruleTerminalAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedTerminalElementAccess().getTerminalAlternativesParserRuleCall_1()); 
 
@@ -14186,10 +14611,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__1__Impl
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__2
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5395:1: rule__ParenthesizedTerminalElement__Group__2 : rule__ParenthesizedTerminalElement__Group__2__Impl ;
     public final void rule__ParenthesizedTerminalElement__Group__2() throws RecognitionException {
 
@@ -14201,7 +14626,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__2__Impl_in_rule__ParenthesizedTerminalElement__Group__210886);
             rule__ParenthesizedTerminalElement__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14218,10 +14644,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__2
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__2"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__2__Impl
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5406:1: rule__ParenthesizedTerminalElement__Group__2__Impl : ( ')' ) ;
     public final void rule__ParenthesizedTerminalElement__Group__2__Impl() throws RecognitionException {
 
@@ -14255,10 +14681,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__2__Impl
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__2__Impl"
 
 
-    // $ANTLR start rule__NegatedToken__Group__0
+    // $ANTLR start "rule__NegatedToken__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5431:1: rule__NegatedToken__Group__0 : rule__NegatedToken__Group__0__Impl rule__NegatedToken__Group__1 ;
     public final void rule__NegatedToken__Group__0() throws RecognitionException {
 
@@ -14270,11 +14696,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__Group__0__Impl_in_rule__NegatedToken__Group__010951);
             rule__NegatedToken__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__Group__1_in_rule__NegatedToken__Group__010954);
             rule__NegatedToken__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14291,10 +14719,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__NegatedToken__Group__0
+    // $ANTLR end "rule__NegatedToken__Group__0"
 
 
-    // $ANTLR start rule__NegatedToken__Group__0__Impl
+    // $ANTLR start "rule__NegatedToken__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5443:1: rule__NegatedToken__Group__0__Impl : ( '!' ) ;
     public final void rule__NegatedToken__Group__0__Impl() throws RecognitionException {
 
@@ -14328,10 +14756,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__NegatedToken__Group__0__Impl
+    // $ANTLR end "rule__NegatedToken__Group__0__Impl"
 
 
-    // $ANTLR start rule__NegatedToken__Group__1
+    // $ANTLR start "rule__NegatedToken__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5462:1: rule__NegatedToken__Group__1 : rule__NegatedToken__Group__1__Impl ;
     public final void rule__NegatedToken__Group__1() throws RecognitionException {
 
@@ -14343,7 +14771,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__Group__1__Impl_in_rule__NegatedToken__Group__111013);
             rule__NegatedToken__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14360,10 +14789,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__NegatedToken__Group__1
+    // $ANTLR end "rule__NegatedToken__Group__1"
 
 
-    // $ANTLR start rule__NegatedToken__Group__1__Impl
+    // $ANTLR start "rule__NegatedToken__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5473:1: rule__NegatedToken__Group__1__Impl : ( ( rule__NegatedToken__TerminalAssignment_1 ) ) ;
     public final void rule__NegatedToken__Group__1__Impl() throws RecognitionException {
 
@@ -14382,7 +14811,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__TerminalAssignment_1_in_rule__NegatedToken__Group__1__Impl11040);
             rule__NegatedToken__TerminalAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14406,10 +14836,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__NegatedToken__Group__1__Impl
+    // $ANTLR end "rule__NegatedToken__Group__1__Impl"
 
 
-    // $ANTLR start rule__UntilToken__Group__0
+    // $ANTLR start "rule__UntilToken__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5494:1: rule__UntilToken__Group__0 : rule__UntilToken__Group__0__Impl rule__UntilToken__Group__1 ;
     public final void rule__UntilToken__Group__0() throws RecognitionException {
 
@@ -14421,11 +14851,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UntilToken__Group__0__Impl_in_rule__UntilToken__Group__011074);
             rule__UntilToken__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__UntilToken__Group__1_in_rule__UntilToken__Group__011077);
             rule__UntilToken__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14442,10 +14874,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UntilToken__Group__0
+    // $ANTLR end "rule__UntilToken__Group__0"
 
 
-    // $ANTLR start rule__UntilToken__Group__0__Impl
+    // $ANTLR start "rule__UntilToken__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5506:1: rule__UntilToken__Group__0__Impl : ( '->' ) ;
     public final void rule__UntilToken__Group__0__Impl() throws RecognitionException {
 
@@ -14479,10 +14911,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UntilToken__Group__0__Impl
+    // $ANTLR end "rule__UntilToken__Group__0__Impl"
 
 
-    // $ANTLR start rule__UntilToken__Group__1
+    // $ANTLR start "rule__UntilToken__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5525:1: rule__UntilToken__Group__1 : rule__UntilToken__Group__1__Impl ;
     public final void rule__UntilToken__Group__1() throws RecognitionException {
 
@@ -14494,7 +14926,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UntilToken__Group__1__Impl_in_rule__UntilToken__Group__111136);
             rule__UntilToken__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14511,10 +14944,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UntilToken__Group__1
+    // $ANTLR end "rule__UntilToken__Group__1"
 
 
-    // $ANTLR start rule__UntilToken__Group__1__Impl
+    // $ANTLR start "rule__UntilToken__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5536:1: rule__UntilToken__Group__1__Impl : ( ( rule__UntilToken__TerminalAssignment_1 ) ) ;
     public final void rule__UntilToken__Group__1__Impl() throws RecognitionException {
 
@@ -14533,7 +14966,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__UntilToken__TerminalAssignment_1_in_rule__UntilToken__Group__1__Impl11163);
             rule__UntilToken__TerminalAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14557,10 +14991,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UntilToken__Group__1__Impl
+    // $ANTLR end "rule__UntilToken__Group__1__Impl"
 
 
-    // $ANTLR start rule__Wildcard__Group__0
+    // $ANTLR start "rule__Wildcard__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5557:1: rule__Wildcard__Group__0 : rule__Wildcard__Group__0__Impl rule__Wildcard__Group__1 ;
     public final void rule__Wildcard__Group__0() throws RecognitionException {
 
@@ -14572,11 +15006,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Wildcard__Group__0__Impl_in_rule__Wildcard__Group__011197);
             rule__Wildcard__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Wildcard__Group__1_in_rule__Wildcard__Group__011200);
             rule__Wildcard__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14593,10 +15029,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Wildcard__Group__0
+    // $ANTLR end "rule__Wildcard__Group__0"
 
 
-    // $ANTLR start rule__Wildcard__Group__0__Impl
+    // $ANTLR start "rule__Wildcard__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5569:1: rule__Wildcard__Group__0__Impl : ( () ) ;
     public final void rule__Wildcard__Group__0__Impl() throws RecognitionException {
 
@@ -14630,10 +15066,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Wildcard__Group__0__Impl
+    // $ANTLR end "rule__Wildcard__Group__0__Impl"
 
 
-    // $ANTLR start rule__Wildcard__Group__1
+    // $ANTLR start "rule__Wildcard__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5588:1: rule__Wildcard__Group__1 : rule__Wildcard__Group__1__Impl ;
     public final void rule__Wildcard__Group__1() throws RecognitionException {
 
@@ -14645,7 +15081,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Wildcard__Group__1__Impl_in_rule__Wildcard__Group__111258);
             rule__Wildcard__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14662,10 +15099,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Wildcard__Group__1
+    // $ANTLR end "rule__Wildcard__Group__1"
 
 
-    // $ANTLR start rule__Wildcard__Group__1__Impl
+    // $ANTLR start "rule__Wildcard__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5599:1: rule__Wildcard__Group__1__Impl : ( '.' ) ;
     public final void rule__Wildcard__Group__1__Impl() throws RecognitionException {
 
@@ -14699,10 +15136,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Wildcard__Group__1__Impl
+    // $ANTLR end "rule__Wildcard__Group__1__Impl"
 
 
-    // $ANTLR start rule__CharacterRange__Group__0
+    // $ANTLR start "rule__CharacterRange__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5622:1: rule__CharacterRange__Group__0 : rule__CharacterRange__Group__0__Impl rule__CharacterRange__Group__1 ;
     public final void rule__CharacterRange__Group__0() throws RecognitionException {
 
@@ -14714,11 +15151,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group__0__Impl_in_rule__CharacterRange__Group__011321);
             rule__CharacterRange__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group__1_in_rule__CharacterRange__Group__011324);
             rule__CharacterRange__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14735,10 +15174,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group__0
+    // $ANTLR end "rule__CharacterRange__Group__0"
 
 
-    // $ANTLR start rule__CharacterRange__Group__0__Impl
+    // $ANTLR start "rule__CharacterRange__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5634:1: rule__CharacterRange__Group__0__Impl : ( ruleKeyword ) ;
     public final void rule__CharacterRange__Group__0__Impl() throws RecognitionException {
 
@@ -14754,7 +15193,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getCharacterRangeAccess().getKeywordParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__CharacterRange__Group__0__Impl11351);
             ruleKeyword();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCharacterRangeAccess().getKeywordParserRuleCall_0()); 
 
@@ -14775,10 +15215,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group__0__Impl
+    // $ANTLR end "rule__CharacterRange__Group__0__Impl"
 
 
-    // $ANTLR start rule__CharacterRange__Group__1
+    // $ANTLR start "rule__CharacterRange__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5651:1: rule__CharacterRange__Group__1 : rule__CharacterRange__Group__1__Impl ;
     public final void rule__CharacterRange__Group__1() throws RecognitionException {
 
@@ -14790,7 +15230,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group__1__Impl_in_rule__CharacterRange__Group__111380);
             rule__CharacterRange__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14807,10 +15248,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group__1
+    // $ANTLR end "rule__CharacterRange__Group__1"
 
 
-    // $ANTLR start rule__CharacterRange__Group__1__Impl
+    // $ANTLR start "rule__CharacterRange__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5662:1: rule__CharacterRange__Group__1__Impl : ( ( rule__CharacterRange__Group_1__0 )? ) ;
     public final void rule__CharacterRange__Group__1__Impl() throws RecognitionException {
 
@@ -14837,7 +15278,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__0_in_rule__CharacterRange__Group__1__Impl11407);
                     rule__CharacterRange__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -14864,10 +15306,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group__1__Impl
+    // $ANTLR end "rule__CharacterRange__Group__1__Impl"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__0
+    // $ANTLR start "rule__CharacterRange__Group_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5683:1: rule__CharacterRange__Group_1__0 : rule__CharacterRange__Group_1__0__Impl rule__CharacterRange__Group_1__1 ;
     public final void rule__CharacterRange__Group_1__0() throws RecognitionException {
 
@@ -14879,11 +15321,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__0__Impl_in_rule__CharacterRange__Group_1__011442);
             rule__CharacterRange__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__1_in_rule__CharacterRange__Group_1__011445);
             rule__CharacterRange__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14900,10 +15344,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__0
+    // $ANTLR end "rule__CharacterRange__Group_1__0"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__0__Impl
+    // $ANTLR start "rule__CharacterRange__Group_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5695:1: rule__CharacterRange__Group_1__0__Impl : ( () ) ;
     public final void rule__CharacterRange__Group_1__0__Impl() throws RecognitionException {
 
@@ -14937,10 +15381,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__0__Impl
+    // $ANTLR end "rule__CharacterRange__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__1
+    // $ANTLR start "rule__CharacterRange__Group_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5714:1: rule__CharacterRange__Group_1__1 : rule__CharacterRange__Group_1__1__Impl rule__CharacterRange__Group_1__2 ;
     public final void rule__CharacterRange__Group_1__1() throws RecognitionException {
 
@@ -14952,11 +15396,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__1__Impl_in_rule__CharacterRange__Group_1__111503);
             rule__CharacterRange__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__2_in_rule__CharacterRange__Group_1__111506);
             rule__CharacterRange__Group_1__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14973,10 +15419,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__1
+    // $ANTLR end "rule__CharacterRange__Group_1__1"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__1__Impl
+    // $ANTLR start "rule__CharacterRange__Group_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5726:1: rule__CharacterRange__Group_1__1__Impl : ( '..' ) ;
     public final void rule__CharacterRange__Group_1__1__Impl() throws RecognitionException {
 
@@ -15010,10 +15456,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__1__Impl
+    // $ANTLR end "rule__CharacterRange__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__2
+    // $ANTLR start "rule__CharacterRange__Group_1__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5745:1: rule__CharacterRange__Group_1__2 : rule__CharacterRange__Group_1__2__Impl ;
     public final void rule__CharacterRange__Group_1__2() throws RecognitionException {
 
@@ -15025,7 +15471,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__2__Impl_in_rule__CharacterRange__Group_1__211565);
             rule__CharacterRange__Group_1__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15042,10 +15489,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__2
+    // $ANTLR end "rule__CharacterRange__Group_1__2"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__2__Impl
+    // $ANTLR start "rule__CharacterRange__Group_1__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5756:1: rule__CharacterRange__Group_1__2__Impl : ( ( rule__CharacterRange__RightAssignment_1_2 ) ) ;
     public final void rule__CharacterRange__Group_1__2__Impl() throws RecognitionException {
 
@@ -15064,7 +15511,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__RightAssignment_1_2_in_rule__CharacterRange__Group_1__2__Impl11592);
             rule__CharacterRange__RightAssignment_1_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15088,10 +15536,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__2__Impl
+    // $ANTLR end "rule__CharacterRange__Group_1__2__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__0
+    // $ANTLR start "rule__EnumRule__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5779:1: rule__EnumRule__Group__0 : rule__EnumRule__Group__0__Impl rule__EnumRule__Group__1 ;
     public final void rule__EnumRule__Group__0() throws RecognitionException {
 
@@ -15103,11 +15551,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__0__Impl_in_rule__EnumRule__Group__011628);
             rule__EnumRule__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__1_in_rule__EnumRule__Group__011631);
             rule__EnumRule__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15124,10 +15574,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__0
+    // $ANTLR end "rule__EnumRule__Group__0"
 
 
-    // $ANTLR start rule__EnumRule__Group__0__Impl
+    // $ANTLR start "rule__EnumRule__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5791:1: rule__EnumRule__Group__0__Impl : ( 'enum' ) ;
     public final void rule__EnumRule__Group__0__Impl() throws RecognitionException {
 
@@ -15161,10 +15611,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__0__Impl
+    // $ANTLR end "rule__EnumRule__Group__0__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__1
+    // $ANTLR start "rule__EnumRule__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5810:1: rule__EnumRule__Group__1 : rule__EnumRule__Group__1__Impl rule__EnumRule__Group__2 ;
     public final void rule__EnumRule__Group__1() throws RecognitionException {
 
@@ -15176,11 +15626,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__1__Impl_in_rule__EnumRule__Group__111690);
             rule__EnumRule__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__2_in_rule__EnumRule__Group__111693);
             rule__EnumRule__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15197,10 +15649,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__1
+    // $ANTLR end "rule__EnumRule__Group__1"
 
 
-    // $ANTLR start rule__EnumRule__Group__1__Impl
+    // $ANTLR start "rule__EnumRule__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5822:1: rule__EnumRule__Group__1__Impl : ( ( rule__EnumRule__NameAssignment_1 ) ) ;
     public final void rule__EnumRule__Group__1__Impl() throws RecognitionException {
 
@@ -15219,7 +15671,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__NameAssignment_1_in_rule__EnumRule__Group__1__Impl11720);
             rule__EnumRule__NameAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15243,10 +15696,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__1__Impl
+    // $ANTLR end "rule__EnumRule__Group__1__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__2
+    // $ANTLR start "rule__EnumRule__Group__2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5839:1: rule__EnumRule__Group__2 : rule__EnumRule__Group__2__Impl rule__EnumRule__Group__3 ;
     public final void rule__EnumRule__Group__2() throws RecognitionException {
 
@@ -15258,11 +15711,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__2__Impl_in_rule__EnumRule__Group__211750);
             rule__EnumRule__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__3_in_rule__EnumRule__Group__211753);
             rule__EnumRule__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15279,10 +15734,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__2
+    // $ANTLR end "rule__EnumRule__Group__2"
 
 
-    // $ANTLR start rule__EnumRule__Group__2__Impl
+    // $ANTLR start "rule__EnumRule__Group__2__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5851:1: rule__EnumRule__Group__2__Impl : ( ( rule__EnumRule__Group_2__0 )? ) ;
     public final void rule__EnumRule__Group__2__Impl() throws RecognitionException {
 
@@ -15309,7 +15764,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group_2__0_in_rule__EnumRule__Group__2__Impl11780);
                     rule__EnumRule__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -15336,10 +15792,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__2__Impl
+    // $ANTLR end "rule__EnumRule__Group__2__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__3
+    // $ANTLR start "rule__EnumRule__Group__3"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5868:1: rule__EnumRule__Group__3 : rule__EnumRule__Group__3__Impl rule__EnumRule__Group__4 ;
     public final void rule__EnumRule__Group__3() throws RecognitionException {
 
@@ -15351,11 +15807,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__3__Impl_in_rule__EnumRule__Group__311811);
             rule__EnumRule__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__4_in_rule__EnumRule__Group__311814);
             rule__EnumRule__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15372,10 +15830,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__3
+    // $ANTLR end "rule__EnumRule__Group__3"
 
 
-    // $ANTLR start rule__EnumRule__Group__3__Impl
+    // $ANTLR start "rule__EnumRule__Group__3__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5880:1: rule__EnumRule__Group__3__Impl : ( ':' ) ;
     public final void rule__EnumRule__Group__3__Impl() throws RecognitionException {
 
@@ -15409,10 +15867,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__3__Impl
+    // $ANTLR end "rule__EnumRule__Group__3__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__4
+    // $ANTLR start "rule__EnumRule__Group__4"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5899:1: rule__EnumRule__Group__4 : rule__EnumRule__Group__4__Impl rule__EnumRule__Group__5 ;
     public final void rule__EnumRule__Group__4() throws RecognitionException {
 
@@ -15424,11 +15882,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__4__Impl_in_rule__EnumRule__Group__411873);
             rule__EnumRule__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__5_in_rule__EnumRule__Group__411876);
             rule__EnumRule__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15445,10 +15905,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__4
+    // $ANTLR end "rule__EnumRule__Group__4"
 
 
-    // $ANTLR start rule__EnumRule__Group__4__Impl
+    // $ANTLR start "rule__EnumRule__Group__4__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5911:1: rule__EnumRule__Group__4__Impl : ( ( rule__EnumRule__AlternativesAssignment_4 ) ) ;
     public final void rule__EnumRule__Group__4__Impl() throws RecognitionException {
 
@@ -15467,7 +15927,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__AlternativesAssignment_4_in_rule__EnumRule__Group__4__Impl11903);
             rule__EnumRule__AlternativesAssignment_4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15491,10 +15952,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__4__Impl
+    // $ANTLR end "rule__EnumRule__Group__4__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__5
+    // $ANTLR start "rule__EnumRule__Group__5"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5928:1: rule__EnumRule__Group__5 : rule__EnumRule__Group__5__Impl ;
     public final void rule__EnumRule__Group__5() throws RecognitionException {
 
@@ -15506,7 +15967,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__5__Impl_in_rule__EnumRule__Group__511933);
             rule__EnumRule__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15523,10 +15985,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__5
+    // $ANTLR end "rule__EnumRule__Group__5"
 
 
-    // $ANTLR start rule__EnumRule__Group__5__Impl
+    // $ANTLR start "rule__EnumRule__Group__5__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5939:1: rule__EnumRule__Group__5__Impl : ( ';' ) ;
     public final void rule__EnumRule__Group__5__Impl() throws RecognitionException {
 
@@ -15560,10 +16022,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__5__Impl
+    // $ANTLR end "rule__EnumRule__Group__5__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group_2__0
+    // $ANTLR start "rule__EnumRule__Group_2__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5970:1: rule__EnumRule__Group_2__0 : rule__EnumRule__Group_2__0__Impl rule__EnumRule__Group_2__1 ;
     public final void rule__EnumRule__Group_2__0() throws RecognitionException {
 
@@ -15575,11 +16037,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group_2__0__Impl_in_rule__EnumRule__Group_2__012004);
             rule__EnumRule__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group_2__1_in_rule__EnumRule__Group_2__012007);
             rule__EnumRule__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15596,10 +16060,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group_2__0
+    // $ANTLR end "rule__EnumRule__Group_2__0"
 
 
-    // $ANTLR start rule__EnumRule__Group_2__0__Impl
+    // $ANTLR start "rule__EnumRule__Group_2__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:5982:1: rule__EnumRule__Group_2__0__Impl : ( 'returns' ) ;
     public final void rule__EnumRule__Group_2__0__Impl() throws RecognitionException {
 
@@ -15633,10 +16097,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group_2__0__Impl
+    // $ANTLR end "rule__EnumRule__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group_2__1
+    // $ANTLR start "rule__EnumRule__Group_2__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6001:1: rule__EnumRule__Group_2__1 : rule__EnumRule__Group_2__1__Impl ;
     public final void rule__EnumRule__Group_2__1() throws RecognitionException {
 
@@ -15648,7 +16112,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group_2__1__Impl_in_rule__EnumRule__Group_2__112066);
             rule__EnumRule__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15665,10 +16130,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group_2__1
+    // $ANTLR end "rule__EnumRule__Group_2__1"
 
 
-    // $ANTLR start rule__EnumRule__Group_2__1__Impl
+    // $ANTLR start "rule__EnumRule__Group_2__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6012:1: rule__EnumRule__Group_2__1__Impl : ( ( rule__EnumRule__TypeAssignment_2_1 ) ) ;
     public final void rule__EnumRule__Group_2__1__Impl() throws RecognitionException {
 
@@ -15687,7 +16152,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__TypeAssignment_2_1_in_rule__EnumRule__Group_2__1__Impl12093);
             rule__EnumRule__TypeAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15711,10 +16177,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group_2__1__Impl
+    // $ANTLR end "rule__EnumRule__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group__0
+    // $ANTLR start "rule__EnumLiterals__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6033:1: rule__EnumLiterals__Group__0 : rule__EnumLiterals__Group__0__Impl rule__EnumLiterals__Group__1 ;
     public final void rule__EnumLiterals__Group__0() throws RecognitionException {
 
@@ -15726,11 +16192,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group__0__Impl_in_rule__EnumLiterals__Group__012127);
             rule__EnumLiterals__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group__1_in_rule__EnumLiterals__Group__012130);
             rule__EnumLiterals__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15747,10 +16215,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group__0
+    // $ANTLR end "rule__EnumLiterals__Group__0"
 
 
-    // $ANTLR start rule__EnumLiterals__Group__0__Impl
+    // $ANTLR start "rule__EnumLiterals__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6045:1: rule__EnumLiterals__Group__0__Impl : ( ruleEnumLiteralDeclaration ) ;
     public final void rule__EnumLiterals__Group__0__Impl() throws RecognitionException {
 
@@ -15766,7 +16234,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getEnumLiteralsAccess().getEnumLiteralDeclarationParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__Group__0__Impl12157);
             ruleEnumLiteralDeclaration();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumLiteralsAccess().getEnumLiteralDeclarationParserRuleCall_0()); 
 
@@ -15787,10 +16256,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group__0__Impl
+    // $ANTLR end "rule__EnumLiterals__Group__0__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group__1
+    // $ANTLR start "rule__EnumLiterals__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6062:1: rule__EnumLiterals__Group__1 : rule__EnumLiterals__Group__1__Impl ;
     public final void rule__EnumLiterals__Group__1() throws RecognitionException {
 
@@ -15802,7 +16271,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group__1__Impl_in_rule__EnumLiterals__Group__112186);
             rule__EnumLiterals__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15819,10 +16289,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group__1
+    // $ANTLR end "rule__EnumLiterals__Group__1"
 
 
-    // $ANTLR start rule__EnumLiterals__Group__1__Impl
+    // $ANTLR start "rule__EnumLiterals__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6073:1: rule__EnumLiterals__Group__1__Impl : ( ( rule__EnumLiterals__Group_1__0 )? ) ;
     public final void rule__EnumLiterals__Group__1__Impl() throws RecognitionException {
 
@@ -15849,7 +16319,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1__0_in_rule__EnumLiterals__Group__1__Impl12213);
                     rule__EnumLiterals__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -15876,10 +16347,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group__1__Impl
+    // $ANTLR end "rule__EnumLiterals__Group__1__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1__0
+    // $ANTLR start "rule__EnumLiterals__Group_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6094:1: rule__EnumLiterals__Group_1__0 : rule__EnumLiterals__Group_1__0__Impl rule__EnumLiterals__Group_1__1 ;
     public final void rule__EnumLiterals__Group_1__0() throws RecognitionException {
 
@@ -15891,11 +16362,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1__0__Impl_in_rule__EnumLiterals__Group_1__012248);
             rule__EnumLiterals__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1__1_in_rule__EnumLiterals__Group_1__012251);
             rule__EnumLiterals__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15912,10 +16385,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1__0
+    // $ANTLR end "rule__EnumLiterals__Group_1__0"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1__0__Impl
+    // $ANTLR start "rule__EnumLiterals__Group_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6106:1: rule__EnumLiterals__Group_1__0__Impl : ( () ) ;
     public final void rule__EnumLiterals__Group_1__0__Impl() throws RecognitionException {
 
@@ -15949,10 +16422,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1__0__Impl
+    // $ANTLR end "rule__EnumLiterals__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1__1
+    // $ANTLR start "rule__EnumLiterals__Group_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6125:1: rule__EnumLiterals__Group_1__1 : rule__EnumLiterals__Group_1__1__Impl ;
     public final void rule__EnumLiterals__Group_1__1() throws RecognitionException {
 
@@ -15964,7 +16437,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1__1__Impl_in_rule__EnumLiterals__Group_1__112309);
             rule__EnumLiterals__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15981,10 +16455,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1__1
+    // $ANTLR end "rule__EnumLiterals__Group_1__1"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1__1__Impl
+    // $ANTLR start "rule__EnumLiterals__Group_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6136:1: rule__EnumLiterals__Group_1__1__Impl : ( ( ( rule__EnumLiterals__Group_1_1__0 ) ) ( ( rule__EnumLiterals__Group_1_1__0 )* ) ) ;
     public final void rule__EnumLiterals__Group_1__1__Impl() throws RecognitionException {
 
@@ -16006,7 +16480,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__1__Impl12338);
             rule__EnumLiterals__Group_1_1__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16036,7 +16511,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__1__Impl12350);
             	    rule__EnumLiterals__Group_1_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -16069,10 +16545,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1__1__Impl
+    // $ANTLR end "rule__EnumLiterals__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1_1__0
+    // $ANTLR start "rule__EnumLiterals__Group_1_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6164:1: rule__EnumLiterals__Group_1_1__0 : rule__EnumLiterals__Group_1_1__0__Impl rule__EnumLiterals__Group_1_1__1 ;
     public final void rule__EnumLiterals__Group_1_1__0() throws RecognitionException {
 
@@ -16084,11 +16560,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__0__Impl_in_rule__EnumLiterals__Group_1_1__012387);
             rule__EnumLiterals__Group_1_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__1_in_rule__EnumLiterals__Group_1_1__012390);
             rule__EnumLiterals__Group_1_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16105,10 +16583,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1_1__0
+    // $ANTLR end "rule__EnumLiterals__Group_1_1__0"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1_1__0__Impl
+    // $ANTLR start "rule__EnumLiterals__Group_1_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6176:1: rule__EnumLiterals__Group_1_1__0__Impl : ( '|' ) ;
     public final void rule__EnumLiterals__Group_1_1__0__Impl() throws RecognitionException {
 
@@ -16142,10 +16620,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1_1__0__Impl
+    // $ANTLR end "rule__EnumLiterals__Group_1_1__0__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1_1__1
+    // $ANTLR start "rule__EnumLiterals__Group_1_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6195:1: rule__EnumLiterals__Group_1_1__1 : rule__EnumLiterals__Group_1_1__1__Impl ;
     public final void rule__EnumLiterals__Group_1_1__1() throws RecognitionException {
 
@@ -16157,7 +16635,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__1__Impl_in_rule__EnumLiterals__Group_1_1__112449);
             rule__EnumLiterals__Group_1_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16174,10 +16653,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1_1__1
+    // $ANTLR end "rule__EnumLiterals__Group_1_1__1"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1_1__1__Impl
+    // $ANTLR start "rule__EnumLiterals__Group_1_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6206:1: rule__EnumLiterals__Group_1_1__1__Impl : ( ( rule__EnumLiterals__ElementsAssignment_1_1_1 ) ) ;
     public final void rule__EnumLiterals__Group_1_1__1__Impl() throws RecognitionException {
 
@@ -16196,7 +16675,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__ElementsAssignment_1_1_1_in_rule__EnumLiterals__Group_1_1__1__Impl12476);
             rule__EnumLiterals__ElementsAssignment_1_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16220,10 +16700,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1_1__1__Impl
+    // $ANTLR end "rule__EnumLiterals__Group_1_1__1__Impl"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group__0
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6227:1: rule__EnumLiteralDeclaration__Group__0 : rule__EnumLiteralDeclaration__Group__0__Impl rule__EnumLiteralDeclaration__Group__1 ;
     public final void rule__EnumLiteralDeclaration__Group__0() throws RecognitionException {
 
@@ -16235,11 +16715,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group__0__Impl_in_rule__EnumLiteralDeclaration__Group__012510);
             rule__EnumLiteralDeclaration__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group__1_in_rule__EnumLiteralDeclaration__Group__012513);
             rule__EnumLiteralDeclaration__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16256,10 +16738,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group__0
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group__0"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group__0__Impl
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6239:1: rule__EnumLiteralDeclaration__Group__0__Impl : ( ( rule__EnumLiteralDeclaration__EnumLiteralAssignment_0 ) ) ;
     public final void rule__EnumLiteralDeclaration__Group__0__Impl() throws RecognitionException {
 
@@ -16278,7 +16760,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__EnumLiteralAssignment_0_in_rule__EnumLiteralDeclaration__Group__0__Impl12540);
             rule__EnumLiteralDeclaration__EnumLiteralAssignment_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16302,10 +16785,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group__0__Impl
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group__0__Impl"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group__1
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6256:1: rule__EnumLiteralDeclaration__Group__1 : rule__EnumLiteralDeclaration__Group__1__Impl ;
     public final void rule__EnumLiteralDeclaration__Group__1() throws RecognitionException {
 
@@ -16317,7 +16800,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group__1__Impl_in_rule__EnumLiteralDeclaration__Group__112570);
             rule__EnumLiteralDeclaration__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16334,10 +16818,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group__1
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group__1"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group__1__Impl
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6267:1: rule__EnumLiteralDeclaration__Group__1__Impl : ( ( rule__EnumLiteralDeclaration__Group_1__0 )? ) ;
     public final void rule__EnumLiteralDeclaration__Group__1__Impl() throws RecognitionException {
 
@@ -16364,7 +16848,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group_1__0_in_rule__EnumLiteralDeclaration__Group__1__Impl12597);
                     rule__EnumLiteralDeclaration__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -16391,10 +16876,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group__1__Impl
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group__1__Impl"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group_1__0
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group_1__0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6288:1: rule__EnumLiteralDeclaration__Group_1__0 : rule__EnumLiteralDeclaration__Group_1__0__Impl rule__EnumLiteralDeclaration__Group_1__1 ;
     public final void rule__EnumLiteralDeclaration__Group_1__0() throws RecognitionException {
 
@@ -16406,11 +16891,13 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group_1__0__Impl_in_rule__EnumLiteralDeclaration__Group_1__012632);
             rule__EnumLiteralDeclaration__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group_1__1_in_rule__EnumLiteralDeclaration__Group_1__012635);
             rule__EnumLiteralDeclaration__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16427,10 +16914,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group_1__0
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group_1__0"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group_1__0__Impl
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group_1__0__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6300:1: rule__EnumLiteralDeclaration__Group_1__0__Impl : ( '=' ) ;
     public final void rule__EnumLiteralDeclaration__Group_1__0__Impl() throws RecognitionException {
 
@@ -16464,10 +16951,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group_1__0__Impl
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group_1__1
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group_1__1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6319:1: rule__EnumLiteralDeclaration__Group_1__1 : rule__EnumLiteralDeclaration__Group_1__1__Impl ;
     public final void rule__EnumLiteralDeclaration__Group_1__1() throws RecognitionException {
 
@@ -16479,7 +16966,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group_1__1__Impl_in_rule__EnumLiteralDeclaration__Group_1__112694);
             rule__EnumLiteralDeclaration__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16496,10 +16984,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group_1__1
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group_1__1"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group_1__1__Impl
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group_1__1__Impl"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6330:1: rule__EnumLiteralDeclaration__Group_1__1__Impl : ( ( rule__EnumLiteralDeclaration__LiteralAssignment_1_1 ) ) ;
     public final void rule__EnumLiteralDeclaration__Group_1__1__Impl() throws RecognitionException {
 
@@ -16518,7 +17006,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__LiteralAssignment_1_1_in_rule__EnumLiteralDeclaration__Group_1__1__Impl12721);
             rule__EnumLiteralDeclaration__LiteralAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16542,10 +17031,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group_1__1__Impl
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__NameAssignment_1
+    // $ANTLR start "rule__Grammar__NameAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6352:1: rule__Grammar__NameAssignment_1 : ( ruleGrammarID ) ;
     public final void rule__Grammar__NameAssignment_1() throws RecognitionException {
 
@@ -16561,7 +17050,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_rule__Grammar__NameAssignment_112760);
             ruleGrammarID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0()); 
 
@@ -16582,10 +17072,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__NameAssignment_1
+    // $ANTLR end "rule__Grammar__NameAssignment_1"
 
 
-    // $ANTLR start rule__Grammar__UsedGrammarsAssignment_2_1
+    // $ANTLR start "rule__Grammar__UsedGrammarsAssignment_2_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6367:1: rule__Grammar__UsedGrammarsAssignment_2_1 : ( ( ruleGrammarID ) ) ;
     public final void rule__Grammar__UsedGrammarsAssignment_2_1() throws RecognitionException {
 
@@ -16605,7 +17095,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarGrammarIDParserRuleCall_2_1_0_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_112795);
             ruleGrammarID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarGrammarIDParserRuleCall_2_1_0_1()); 
 
@@ -16630,10 +17121,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__UsedGrammarsAssignment_2_1
+    // $ANTLR end "rule__Grammar__UsedGrammarsAssignment_2_1"
 
 
-    // $ANTLR start rule__Grammar__UsedGrammarsAssignment_2_2_1
+    // $ANTLR start "rule__Grammar__UsedGrammarsAssignment_2_2_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6386:1: rule__Grammar__UsedGrammarsAssignment_2_2_1 : ( ( ruleGrammarID ) ) ;
     public final void rule__Grammar__UsedGrammarsAssignment_2_2_1() throws RecognitionException {
 
@@ -16653,7 +17144,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarGrammarIDParserRuleCall_2_2_1_0_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_2_112834);
             ruleGrammarID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarGrammarIDParserRuleCall_2_2_1_0_1()); 
 
@@ -16678,10 +17170,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__UsedGrammarsAssignment_2_2_1
+    // $ANTLR end "rule__Grammar__UsedGrammarsAssignment_2_2_1"
 
 
-    // $ANTLR start rule__Grammar__DefinesHiddenTokensAssignment_3_0
+    // $ANTLR start "rule__Grammar__DefinesHiddenTokensAssignment_3_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6405:1: rule__Grammar__DefinesHiddenTokensAssignment_3_0 : ( ( 'hidden' ) ) ;
     public final void rule__Grammar__DefinesHiddenTokensAssignment_3_0() throws RecognitionException {
 
@@ -16723,10 +17215,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__DefinesHiddenTokensAssignment_3_0
+    // $ANTLR end "rule__Grammar__DefinesHiddenTokensAssignment_3_0"
 
 
-    // $ANTLR start rule__Grammar__HiddenTokensAssignment_3_2_0
+    // $ANTLR start "rule__Grammar__HiddenTokensAssignment_3_2_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6428:1: rule__Grammar__HiddenTokensAssignment_3_2_0 : ( ( RULE_ID ) ) ;
     public final void rule__Grammar__HiddenTokensAssignment_3_2_0() throws RecognitionException {
 
@@ -16768,10 +17260,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__HiddenTokensAssignment_3_2_0
+    // $ANTLR end "rule__Grammar__HiddenTokensAssignment_3_2_0"
 
 
-    // $ANTLR start rule__Grammar__HiddenTokensAssignment_3_2_1_1
+    // $ANTLR start "rule__Grammar__HiddenTokensAssignment_3_2_1_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6447:1: rule__Grammar__HiddenTokensAssignment_3_2_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__Grammar__HiddenTokensAssignment_3_2_1_1() throws RecognitionException {
 
@@ -16813,10 +17305,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__HiddenTokensAssignment_3_2_1_1
+    // $ANTLR end "rule__Grammar__HiddenTokensAssignment_3_2_1_1"
 
 
-    // $ANTLR start rule__Grammar__MetamodelDeclarationsAssignment_4
+    // $ANTLR start "rule__Grammar__MetamodelDeclarationsAssignment_4"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6466:1: rule__Grammar__MetamodelDeclarationsAssignment_4 : ( ruleAbstractMetamodelDeclaration ) ;
     public final void rule__Grammar__MetamodelDeclarationsAssignment_4() throws RecognitionException {
 
@@ -16832,7 +17324,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getGrammarAccess().getMetamodelDeclarationsAbstractMetamodelDeclarationParserRuleCall_4_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractMetamodelDeclaration_in_rule__Grammar__MetamodelDeclarationsAssignment_412991);
             ruleAbstractMetamodelDeclaration();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarAccess().getMetamodelDeclarationsAbstractMetamodelDeclarationParserRuleCall_4_0()); 
 
@@ -16853,10 +17346,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__MetamodelDeclarationsAssignment_4
+    // $ANTLR end "rule__Grammar__MetamodelDeclarationsAssignment_4"
 
 
-    // $ANTLR start rule__Grammar__RulesAssignment_5
+    // $ANTLR start "rule__Grammar__RulesAssignment_5"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6481:1: rule__Grammar__RulesAssignment_5 : ( ruleAbstractRule ) ;
     public final void rule__Grammar__RulesAssignment_5() throws RecognitionException {
 
@@ -16872,7 +17365,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getGrammarAccess().getRulesAbstractRuleParserRuleCall_5_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_rule__Grammar__RulesAssignment_513022);
             ruleAbstractRule();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarAccess().getRulesAbstractRuleParserRuleCall_5_0()); 
 
@@ -16893,10 +17387,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__RulesAssignment_5
+    // $ANTLR end "rule__Grammar__RulesAssignment_5"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__NameAssignment_1
+    // $ANTLR start "rule__GeneratedMetamodel__NameAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6496:1: rule__GeneratedMetamodel__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__GeneratedMetamodel__NameAssignment_1() throws RecognitionException {
 
@@ -16930,10 +17424,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__NameAssignment_1
+    // $ANTLR end "rule__GeneratedMetamodel__NameAssignment_1"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__EPackageAssignment_2
+    // $ANTLR start "rule__GeneratedMetamodel__EPackageAssignment_2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6511:1: rule__GeneratedMetamodel__EPackageAssignment_2 : ( ( RULE_STRING ) ) ;
     public final void rule__GeneratedMetamodel__EPackageAssignment_2() throws RecognitionException {
 
@@ -16975,10 +17469,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__EPackageAssignment_2
+    // $ANTLR end "rule__GeneratedMetamodel__EPackageAssignment_2"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__AliasAssignment_3_1
+    // $ANTLR start "rule__GeneratedMetamodel__AliasAssignment_3_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6530:1: rule__GeneratedMetamodel__AliasAssignment_3_1 : ( RULE_ID ) ;
     public final void rule__GeneratedMetamodel__AliasAssignment_3_1() throws RecognitionException {
 
@@ -17012,10 +17506,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__AliasAssignment_3_1
+    // $ANTLR end "rule__GeneratedMetamodel__AliasAssignment_3_1"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__EPackageAssignment_1
+    // $ANTLR start "rule__ReferencedMetamodel__EPackageAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6545:1: rule__ReferencedMetamodel__EPackageAssignment_1 : ( ( RULE_STRING ) ) ;
     public final void rule__ReferencedMetamodel__EPackageAssignment_1() throws RecognitionException {
 
@@ -17057,10 +17551,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__EPackageAssignment_1
+    // $ANTLR end "rule__ReferencedMetamodel__EPackageAssignment_1"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__AliasAssignment_2_1
+    // $ANTLR start "rule__ReferencedMetamodel__AliasAssignment_2_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6564:1: rule__ReferencedMetamodel__AliasAssignment_2_1 : ( RULE_ID ) ;
     public final void rule__ReferencedMetamodel__AliasAssignment_2_1() throws RecognitionException {
 
@@ -17094,10 +17588,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__AliasAssignment_2_1
+    // $ANTLR end "rule__ReferencedMetamodel__AliasAssignment_2_1"
 
 
-    // $ANTLR start rule__ParserRule__NameAssignment_0
+    // $ANTLR start "rule__ParserRule__NameAssignment_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6579:1: rule__ParserRule__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__ParserRule__NameAssignment_0() throws RecognitionException {
 
@@ -17131,10 +17625,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__NameAssignment_0
+    // $ANTLR end "rule__ParserRule__NameAssignment_0"
 
 
-    // $ANTLR start rule__ParserRule__TypeAssignment_1_1
+    // $ANTLR start "rule__ParserRule__TypeAssignment_1_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6594:1: rule__ParserRule__TypeAssignment_1_1 : ( ruleTypeRef ) ;
     public final void rule__ParserRule__TypeAssignment_1_1() throws RecognitionException {
 
@@ -17150,7 +17644,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getParserRuleAccess().getTypeTypeRefParserRuleCall_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__ParserRule__TypeAssignment_1_113255);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParserRuleAccess().getTypeTypeRefParserRuleCall_1_1_0()); 
 
@@ -17171,10 +17666,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__TypeAssignment_1_1
+    // $ANTLR end "rule__ParserRule__TypeAssignment_1_1"
 
 
-    // $ANTLR start rule__ParserRule__DefinesHiddenTokensAssignment_2_0
+    // $ANTLR start "rule__ParserRule__DefinesHiddenTokensAssignment_2_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6609:1: rule__ParserRule__DefinesHiddenTokensAssignment_2_0 : ( ( 'hidden' ) ) ;
     public final void rule__ParserRule__DefinesHiddenTokensAssignment_2_0() throws RecognitionException {
 
@@ -17216,10 +17711,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__DefinesHiddenTokensAssignment_2_0
+    // $ANTLR end "rule__ParserRule__DefinesHiddenTokensAssignment_2_0"
 
 
-    // $ANTLR start rule__ParserRule__HiddenTokensAssignment_2_2_0
+    // $ANTLR start "rule__ParserRule__HiddenTokensAssignment_2_2_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6632:1: rule__ParserRule__HiddenTokensAssignment_2_2_0 : ( ( RULE_ID ) ) ;
     public final void rule__ParserRule__HiddenTokensAssignment_2_2_0() throws RecognitionException {
 
@@ -17261,10 +17756,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__HiddenTokensAssignment_2_2_0
+    // $ANTLR end "rule__ParserRule__HiddenTokensAssignment_2_2_0"
 
 
-    // $ANTLR start rule__ParserRule__HiddenTokensAssignment_2_2_1_1
+    // $ANTLR start "rule__ParserRule__HiddenTokensAssignment_2_2_1_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6651:1: rule__ParserRule__HiddenTokensAssignment_2_2_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__ParserRule__HiddenTokensAssignment_2_2_1_1() throws RecognitionException {
 
@@ -17306,10 +17801,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__HiddenTokensAssignment_2_2_1_1
+    // $ANTLR end "rule__ParserRule__HiddenTokensAssignment_2_2_1_1"
 
 
-    // $ANTLR start rule__ParserRule__AlternativesAssignment_4
+    // $ANTLR start "rule__ParserRule__AlternativesAssignment_4"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6670:1: rule__ParserRule__AlternativesAssignment_4 : ( ruleAlternatives ) ;
     public final void rule__ParserRule__AlternativesAssignment_4() throws RecognitionException {
 
@@ -17325,7 +17820,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getParserRuleAccess().getAlternativesAlternativesParserRuleCall_4_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAlternatives_in_rule__ParserRule__AlternativesAssignment_413408);
             ruleAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParserRuleAccess().getAlternativesAlternativesParserRuleCall_4_0()); 
 
@@ -17346,10 +17842,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__AlternativesAssignment_4
+    // $ANTLR end "rule__ParserRule__AlternativesAssignment_4"
 
 
-    // $ANTLR start rule__TypeRef__MetamodelAssignment_0_0
+    // $ANTLR start "rule__TypeRef__MetamodelAssignment_0_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6685:1: rule__TypeRef__MetamodelAssignment_0_0 : ( ( RULE_ID ) ) ;
     public final void rule__TypeRef__MetamodelAssignment_0_0() throws RecognitionException {
 
@@ -17391,10 +17887,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__MetamodelAssignment_0_0
+    // $ANTLR end "rule__TypeRef__MetamodelAssignment_0_0"
 
 
-    // $ANTLR start rule__TypeRef__ClassifierAssignment_1
+    // $ANTLR start "rule__TypeRef__ClassifierAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6704:1: rule__TypeRef__ClassifierAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__TypeRef__ClassifierAssignment_1() throws RecognitionException {
 
@@ -17436,10 +17932,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__ClassifierAssignment_1
+    // $ANTLR end "rule__TypeRef__ClassifierAssignment_1"
 
 
-    // $ANTLR start rule__Alternatives__ElementsAssignment_1_1_1
+    // $ANTLR start "rule__Alternatives__ElementsAssignment_1_1_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6723:1: rule__Alternatives__ElementsAssignment_1_1_1 : ( ruleUnorderedGroup ) ;
     public final void rule__Alternatives__ElementsAssignment_1_1_1() throws RecognitionException {
 
@@ -17455,7 +17951,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAlternativesAccess().getElementsUnorderedGroupParserRuleCall_1_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleUnorderedGroup_in_rule__Alternatives__ElementsAssignment_1_1_113517);
             ruleUnorderedGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAlternativesAccess().getElementsUnorderedGroupParserRuleCall_1_1_1_0()); 
 
@@ -17476,10 +17973,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__ElementsAssignment_1_1_1
+    // $ANTLR end "rule__Alternatives__ElementsAssignment_1_1_1"
 
 
-    // $ANTLR start rule__UnorderedGroup__ElementsAssignment_1_1_1
+    // $ANTLR start "rule__UnorderedGroup__ElementsAssignment_1_1_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6738:1: rule__UnorderedGroup__ElementsAssignment_1_1_1 : ( ruleGroup ) ;
     public final void rule__UnorderedGroup__ElementsAssignment_1_1_1() throws RecognitionException {
 
@@ -17495,7 +17992,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getUnorderedGroupAccess().getElementsGroupParserRuleCall_1_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleGroup_in_rule__UnorderedGroup__ElementsAssignment_1_1_113548);
             ruleGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getUnorderedGroupAccess().getElementsGroupParserRuleCall_1_1_1_0()); 
 
@@ -17516,10 +18014,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UnorderedGroup__ElementsAssignment_1_1_1
+    // $ANTLR end "rule__UnorderedGroup__ElementsAssignment_1_1_1"
 
 
-    // $ANTLR start rule__Group__ElementsAssignment_1_1
+    // $ANTLR start "rule__Group__ElementsAssignment_1_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6753:1: rule__Group__ElementsAssignment_1_1 : ( ruleAbstractToken ) ;
     public final void rule__Group__ElementsAssignment_1_1() throws RecognitionException {
 
@@ -17535,7 +18033,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getGroupAccess().getElementsAbstractTokenParserRuleCall_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractToken_in_rule__Group__ElementsAssignment_1_113579);
             ruleAbstractToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGroupAccess().getElementsAbstractTokenParserRuleCall_1_1_0()); 
 
@@ -17556,10 +18055,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Group__ElementsAssignment_1_1
+    // $ANTLR end "rule__Group__ElementsAssignment_1_1"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__CardinalityAssignment_1
+    // $ANTLR start "rule__AbstractTokenWithCardinality__CardinalityAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6768:1: rule__AbstractTokenWithCardinality__CardinalityAssignment_1 : ( ( rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0 ) ) ;
     public final void rule__AbstractTokenWithCardinality__CardinalityAssignment_1() throws RecognitionException {
 
@@ -17578,7 +18077,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0_in_rule__AbstractTokenWithCardinality__CardinalityAssignment_113610);
             rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17602,10 +18102,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__CardinalityAssignment_1
+    // $ANTLR end "rule__AbstractTokenWithCardinality__CardinalityAssignment_1"
 
 
-    // $ANTLR start rule__Action__TypeAssignment_1
+    // $ANTLR start "rule__Action__TypeAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6784:1: rule__Action__TypeAssignment_1 : ( ruleTypeRef ) ;
     public final void rule__Action__TypeAssignment_1() throws RecognitionException {
 
@@ -17621,7 +18121,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getActionAccess().getTypeTypeRefParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Action__TypeAssignment_113643);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getActionAccess().getTypeTypeRefParserRuleCall_1_0()); 
 
@@ -17642,10 +18143,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__TypeAssignment_1
+    // $ANTLR end "rule__Action__TypeAssignment_1"
 
 
-    // $ANTLR start rule__Action__FeatureAssignment_2_1
+    // $ANTLR start "rule__Action__FeatureAssignment_2_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6799:1: rule__Action__FeatureAssignment_2_1 : ( RULE_ID ) ;
     public final void rule__Action__FeatureAssignment_2_1() throws RecognitionException {
 
@@ -17679,10 +18180,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__FeatureAssignment_2_1
+    // $ANTLR end "rule__Action__FeatureAssignment_2_1"
 
 
-    // $ANTLR start rule__Action__OperatorAssignment_2_2
+    // $ANTLR start "rule__Action__OperatorAssignment_2_2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6814:1: rule__Action__OperatorAssignment_2_2 : ( ( rule__Action__OperatorAlternatives_2_2_0 ) ) ;
     public final void rule__Action__OperatorAssignment_2_2() throws RecognitionException {
 
@@ -17701,7 +18202,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__OperatorAlternatives_2_2_0_in_rule__Action__OperatorAssignment_2_213705);
             rule__Action__OperatorAlternatives_2_2_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17725,10 +18227,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Action__OperatorAssignment_2_2
+    // $ANTLR end "rule__Action__OperatorAssignment_2_2"
 
 
-    // $ANTLR start rule__Keyword__ValueAssignment
+    // $ANTLR start "rule__Keyword__ValueAssignment"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6830:1: rule__Keyword__ValueAssignment : ( RULE_STRING ) ;
     public final void rule__Keyword__ValueAssignment() throws RecognitionException {
 
@@ -17762,10 +18264,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Keyword__ValueAssignment
+    // $ANTLR end "rule__Keyword__ValueAssignment"
 
 
-    // $ANTLR start rule__RuleCall__RuleAssignment
+    // $ANTLR start "rule__RuleCall__RuleAssignment"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6845:1: rule__RuleCall__RuleAssignment : ( ( RULE_ID ) ) ;
     public final void rule__RuleCall__RuleAssignment() throws RecognitionException {
 
@@ -17807,10 +18309,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__RuleCall__RuleAssignment
+    // $ANTLR end "rule__RuleCall__RuleAssignment"
 
 
-    // $ANTLR start rule__Assignment__FeatureAssignment_0
+    // $ANTLR start "rule__Assignment__FeatureAssignment_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6864:1: rule__Assignment__FeatureAssignment_0 : ( RULE_ID ) ;
     public final void rule__Assignment__FeatureAssignment_0() throws RecognitionException {
 
@@ -17844,10 +18346,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__FeatureAssignment_0
+    // $ANTLR end "rule__Assignment__FeatureAssignment_0"
 
 
-    // $ANTLR start rule__Assignment__OperatorAssignment_1
+    // $ANTLR start "rule__Assignment__OperatorAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6879:1: rule__Assignment__OperatorAssignment_1 : ( ( rule__Assignment__OperatorAlternatives_1_0 ) ) ;
     public final void rule__Assignment__OperatorAssignment_1() throws RecognitionException {
 
@@ -17866,7 +18368,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__OperatorAlternatives_1_0_in_rule__Assignment__OperatorAssignment_113839);
             rule__Assignment__OperatorAlternatives_1_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17890,10 +18393,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__OperatorAssignment_1
+    // $ANTLR end "rule__Assignment__OperatorAssignment_1"
 
 
-    // $ANTLR start rule__Assignment__TerminalAssignment_2
+    // $ANTLR start "rule__Assignment__TerminalAssignment_2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6895:1: rule__Assignment__TerminalAssignment_2 : ( ruleAssignableTerminal ) ;
     public final void rule__Assignment__TerminalAssignment_2() throws RecognitionException {
 
@@ -17909,7 +18412,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAssignmentAccess().getTerminalAssignableTerminalParserRuleCall_2_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_rule__Assignment__TerminalAssignment_213872);
             ruleAssignableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignmentAccess().getTerminalAssignableTerminalParserRuleCall_2_0()); 
 
@@ -17930,10 +18434,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__TerminalAssignment_2
+    // $ANTLR end "rule__Assignment__TerminalAssignment_2"
 
 
-    // $ANTLR start rule__AssignableAlternatives__ElementsAssignment_1_1_1
+    // $ANTLR start "rule__AssignableAlternatives__ElementsAssignment_1_1_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6910:1: rule__AssignableAlternatives__ElementsAssignment_1_1_1 : ( ruleAssignableTerminal ) ;
     public final void rule__AssignableAlternatives__ElementsAssignment_1_1_1() throws RecognitionException {
 
@@ -17949,7 +18453,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getAssignableAlternativesAccess().getElementsAssignableTerminalParserRuleCall_1_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__ElementsAssignment_1_1_113903);
             ruleAssignableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignableAlternativesAccess().getElementsAssignableTerminalParserRuleCall_1_1_1_0()); 
 
@@ -17970,10 +18475,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__ElementsAssignment_1_1_1
+    // $ANTLR end "rule__AssignableAlternatives__ElementsAssignment_1_1_1"
 
 
-    // $ANTLR start rule__CrossReference__TypeAssignment_1
+    // $ANTLR start "rule__CrossReference__TypeAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6925:1: rule__CrossReference__TypeAssignment_1 : ( ruleTypeRef ) ;
     public final void rule__CrossReference__TypeAssignment_1() throws RecognitionException {
 
@@ -17989,7 +18494,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getCrossReferenceAccess().getTypeTypeRefParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__CrossReference__TypeAssignment_113934);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCrossReferenceAccess().getTypeTypeRefParserRuleCall_1_0()); 
 
@@ -18010,10 +18516,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__TypeAssignment_1
+    // $ANTLR end "rule__CrossReference__TypeAssignment_1"
 
 
-    // $ANTLR start rule__CrossReference__TerminalAssignment_2_1
+    // $ANTLR start "rule__CrossReference__TerminalAssignment_2_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6940:1: rule__CrossReference__TerminalAssignment_2_1 : ( ruleCrossReferenceableTerminal ) ;
     public final void rule__CrossReference__TerminalAssignment_2_1() throws RecognitionException {
 
@@ -18029,7 +18535,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getCrossReferenceAccess().getTerminalCrossReferenceableTerminalParserRuleCall_2_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReference__TerminalAssignment_2_113965);
             ruleCrossReferenceableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCrossReferenceAccess().getTerminalCrossReferenceableTerminalParserRuleCall_2_1_0()); 
 
@@ -18050,10 +18557,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__TerminalAssignment_2_1
+    // $ANTLR end "rule__CrossReference__TerminalAssignment_2_1"
 
 
-    // $ANTLR start rule__TerminalRule__NameAssignment_1
+    // $ANTLR start "rule__TerminalRule__NameAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6955:1: rule__TerminalRule__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__TerminalRule__NameAssignment_1() throws RecognitionException {
 
@@ -18087,10 +18594,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__NameAssignment_1
+    // $ANTLR end "rule__TerminalRule__NameAssignment_1"
 
 
-    // $ANTLR start rule__TerminalRule__TypeAssignment_2_1
+    // $ANTLR start "rule__TerminalRule__TypeAssignment_2_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6970:1: rule__TerminalRule__TypeAssignment_2_1 : ( ruleTypeRef ) ;
     public final void rule__TerminalRule__TypeAssignment_2_1() throws RecognitionException {
 
@@ -18106,7 +18613,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalRuleAccess().getTypeTypeRefParserRuleCall_2_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__TerminalRule__TypeAssignment_2_114027);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalRuleAccess().getTypeTypeRefParserRuleCall_2_1_0()); 
 
@@ -18127,10 +18635,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__TypeAssignment_2_1
+    // $ANTLR end "rule__TerminalRule__TypeAssignment_2_1"
 
 
-    // $ANTLR start rule__TerminalRule__AlternativesAssignment_4
+    // $ANTLR start "rule__TerminalRule__AlternativesAssignment_4"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:6985:1: rule__TerminalRule__AlternativesAssignment_4 : ( ruleTerminalAlternatives ) ;
     public final void rule__TerminalRule__AlternativesAssignment_4() throws RecognitionException {
 
@@ -18146,7 +18654,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalRuleAccess().getAlternativesTerminalAlternativesParserRuleCall_4_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalAlternatives_in_rule__TerminalRule__AlternativesAssignment_414058);
             ruleTerminalAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalRuleAccess().getAlternativesTerminalAlternativesParserRuleCall_4_0()); 
 
@@ -18167,10 +18676,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__AlternativesAssignment_4
+    // $ANTLR end "rule__TerminalRule__AlternativesAssignment_4"
 
 
-    // $ANTLR start rule__TerminalAlternatives__ElementsAssignment_1_1_1
+    // $ANTLR start "rule__TerminalAlternatives__ElementsAssignment_1_1_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7000:1: rule__TerminalAlternatives__ElementsAssignment_1_1_1 : ( ruleTerminalGroup ) ;
     public final void rule__TerminalAlternatives__ElementsAssignment_1_1_1() throws RecognitionException {
 
@@ -18186,7 +18695,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalAlternativesAccess().getElementsTerminalGroupParserRuleCall_1_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__ElementsAssignment_1_1_114089);
             ruleTerminalGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalAlternativesAccess().getElementsTerminalGroupParserRuleCall_1_1_1_0()); 
 
@@ -18207,10 +18717,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__ElementsAssignment_1_1_1
+    // $ANTLR end "rule__TerminalAlternatives__ElementsAssignment_1_1_1"
 
 
-    // $ANTLR start rule__TerminalGroup__ElementsAssignment_1_1
+    // $ANTLR start "rule__TerminalGroup__ElementsAssignment_1_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7015:1: rule__TerminalGroup__ElementsAssignment_1_1 : ( ruleTerminalToken ) ;
     public final void rule__TerminalGroup__ElementsAssignment_1_1() throws RecognitionException {
 
@@ -18226,7 +18736,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getTerminalGroupAccess().getElementsTerminalTokenParserRuleCall_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__ElementsAssignment_1_114120);
             ruleTerminalToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalGroupAccess().getElementsTerminalTokenParserRuleCall_1_1_0()); 
 
@@ -18247,10 +18758,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__ElementsAssignment_1_1
+    // $ANTLR end "rule__TerminalGroup__ElementsAssignment_1_1"
 
 
-    // $ANTLR start rule__TerminalToken__CardinalityAssignment_1
+    // $ANTLR start "rule__TerminalToken__CardinalityAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7030:1: rule__TerminalToken__CardinalityAssignment_1 : ( ( rule__TerminalToken__CardinalityAlternatives_1_0 ) ) ;
     public final void rule__TerminalToken__CardinalityAssignment_1() throws RecognitionException {
 
@@ -18269,7 +18780,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__CardinalityAlternatives_1_0_in_rule__TerminalToken__CardinalityAssignment_114151);
             rule__TerminalToken__CardinalityAlternatives_1_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -18293,10 +18805,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__CardinalityAssignment_1
+    // $ANTLR end "rule__TerminalToken__CardinalityAssignment_1"
 
 
-    // $ANTLR start rule__NegatedToken__TerminalAssignment_1
+    // $ANTLR start "rule__NegatedToken__TerminalAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7046:1: rule__NegatedToken__TerminalAssignment_1 : ( ruleTerminalTokenElement ) ;
     public final void rule__NegatedToken__TerminalAssignment_1() throws RecognitionException {
 
@@ -18312,7 +18824,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getNegatedTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_rule__NegatedToken__TerminalAssignment_114184);
             ruleTerminalTokenElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getNegatedTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
 
@@ -18333,10 +18846,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__NegatedToken__TerminalAssignment_1
+    // $ANTLR end "rule__NegatedToken__TerminalAssignment_1"
 
 
-    // $ANTLR start rule__UntilToken__TerminalAssignment_1
+    // $ANTLR start "rule__UntilToken__TerminalAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7061:1: rule__UntilToken__TerminalAssignment_1 : ( ruleTerminalTokenElement ) ;
     public final void rule__UntilToken__TerminalAssignment_1() throws RecognitionException {
 
@@ -18352,7 +18865,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getUntilTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_rule__UntilToken__TerminalAssignment_114215);
             ruleTerminalTokenElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getUntilTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
 
@@ -18373,10 +18887,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__UntilToken__TerminalAssignment_1
+    // $ANTLR end "rule__UntilToken__TerminalAssignment_1"
 
 
-    // $ANTLR start rule__CharacterRange__RightAssignment_1_2
+    // $ANTLR start "rule__CharacterRange__RightAssignment_1_2"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7076:1: rule__CharacterRange__RightAssignment_1_2 : ( ruleKeyword ) ;
     public final void rule__CharacterRange__RightAssignment_1_2() throws RecognitionException {
 
@@ -18392,7 +18906,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getCharacterRangeAccess().getRightKeywordParserRuleCall_1_2_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__CharacterRange__RightAssignment_1_214246);
             ruleKeyword();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCharacterRangeAccess().getRightKeywordParserRuleCall_1_2_0()); 
 
@@ -18413,10 +18928,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__RightAssignment_1_2
+    // $ANTLR end "rule__CharacterRange__RightAssignment_1_2"
 
 
-    // $ANTLR start rule__EnumRule__NameAssignment_1
+    // $ANTLR start "rule__EnumRule__NameAssignment_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7091:1: rule__EnumRule__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__EnumRule__NameAssignment_1() throws RecognitionException {
 
@@ -18450,10 +18965,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__NameAssignment_1
+    // $ANTLR end "rule__EnumRule__NameAssignment_1"
 
 
-    // $ANTLR start rule__EnumRule__TypeAssignment_2_1
+    // $ANTLR start "rule__EnumRule__TypeAssignment_2_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7106:1: rule__EnumRule__TypeAssignment_2_1 : ( ruleTypeRef ) ;
     public final void rule__EnumRule__TypeAssignment_2_1() throws RecognitionException {
 
@@ -18469,7 +18984,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getEnumRuleAccess().getTypeTypeRefParserRuleCall_2_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__EnumRule__TypeAssignment_2_114308);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumRuleAccess().getTypeTypeRefParserRuleCall_2_1_0()); 
 
@@ -18490,10 +19006,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__TypeAssignment_2_1
+    // $ANTLR end "rule__EnumRule__TypeAssignment_2_1"
 
 
-    // $ANTLR start rule__EnumRule__AlternativesAssignment_4
+    // $ANTLR start "rule__EnumRule__AlternativesAssignment_4"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7121:1: rule__EnumRule__AlternativesAssignment_4 : ( ruleEnumLiterals ) ;
     public final void rule__EnumRule__AlternativesAssignment_4() throws RecognitionException {
 
@@ -18509,7 +19025,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getEnumRuleAccess().getAlternativesEnumLiteralsParserRuleCall_4_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumLiterals_in_rule__EnumRule__AlternativesAssignment_414339);
             ruleEnumLiterals();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumRuleAccess().getAlternativesEnumLiteralsParserRuleCall_4_0()); 
 
@@ -18530,10 +19047,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__AlternativesAssignment_4
+    // $ANTLR end "rule__EnumRule__AlternativesAssignment_4"
 
 
-    // $ANTLR start rule__EnumLiterals__ElementsAssignment_1_1_1
+    // $ANTLR start "rule__EnumLiterals__ElementsAssignment_1_1_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7136:1: rule__EnumLiterals__ElementsAssignment_1_1_1 : ( ruleEnumLiteralDeclaration ) ;
     public final void rule__EnumLiterals__ElementsAssignment_1_1_1() throws RecognitionException {
 
@@ -18549,7 +19066,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getEnumLiteralsAccess().getElementsEnumLiteralDeclarationParserRuleCall_1_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__ElementsAssignment_1_1_114370);
             ruleEnumLiteralDeclaration();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumLiteralsAccess().getElementsEnumLiteralDeclarationParserRuleCall_1_1_1_0()); 
 
@@ -18570,10 +19088,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__ElementsAssignment_1_1_1
+    // $ANTLR end "rule__EnumLiterals__ElementsAssignment_1_1_1"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__EnumLiteralAssignment_0
+    // $ANTLR start "rule__EnumLiteralDeclaration__EnumLiteralAssignment_0"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7151:1: rule__EnumLiteralDeclaration__EnumLiteralAssignment_0 : ( ( RULE_ID ) ) ;
     public final void rule__EnumLiteralDeclaration__EnumLiteralAssignment_0() throws RecognitionException {
 
@@ -18615,10 +19133,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__EnumLiteralAssignment_0
+    // $ANTLR end "rule__EnumLiteralDeclaration__EnumLiteralAssignment_0"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__LiteralAssignment_1_1
+    // $ANTLR start "rule__EnumLiteralDeclaration__LiteralAssignment_1_1"
     // ../../plugins/org.eclipse.xtext.xtext.ui/src-gen/org/eclipse/xtext/ui/contentassist/antlr/internal/InternalXtext.g:7170:1: rule__EnumLiteralDeclaration__LiteralAssignment_1_1 : ( ruleKeyword ) ;
     public final void rule__EnumLiteralDeclaration__LiteralAssignment_1_1() throws RecognitionException {
 
@@ -18634,7 +19152,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
              before(grammarAccess.getEnumLiteralDeclarationAccess().getLiteralKeywordParserRuleCall_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__EnumLiteralDeclaration__LiteralAssignment_1_114440);
             ruleKeyword();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumLiteralDeclarationAccess().getLiteralKeywordParserRuleCall_1_1_0()); 
 
@@ -18655,7 +19174,9 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__LiteralAssignment_1_1
+    // $ANTLR end "rule__EnumLiteralDeclaration__LiteralAssignment_1_1"
+
+    // Delegated rules
 
 
  
@@ -18818,22 +19339,22 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__Grammar__Group__1__Impl_in_rule__Grammar__Group__13250 = new BitSet(new long[]{0x0000062002840010L});
         public static final BitSet FOLLOW_rule__Grammar__Group__2_in_rule__Grammar__Group__13253 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__NameAssignment_1_in_rule__Grammar__Group__1__Impl3280 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group__2__Impl_in_rule__Grammar__Group__23310 = new BitSet(new long[]{0x0000062002800010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__2__Impl_in_rule__Grammar__Group__23310 = new BitSet(new long[]{0x0000062002840010L});
         public static final BitSet FOLLOW_rule__Grammar__Group__3_in_rule__Grammar__Group__23313 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_2__0_in_rule__Grammar__Group__2__Impl3340 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group__3__Impl_in_rule__Grammar__Group__33371 = new BitSet(new long[]{0x0000022002800010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__3__Impl_in_rule__Grammar__Group__33371 = new BitSet(new long[]{0x0000062002840010L});
         public static final BitSet FOLLOW_rule__Grammar__Group__4_in_rule__Grammar__Group__33374 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3__0_in_rule__Grammar__Group__3__Impl3401 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group__4__Impl_in_rule__Grammar__Group__43432 = new BitSet(new long[]{0x0000022000000010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__4__Impl_in_rule__Grammar__Group__43432 = new BitSet(new long[]{0x0000062002840010L});
         public static final BitSet FOLLOW_rule__Grammar__Group__5_in_rule__Grammar__Group__43435 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__MetamodelDeclarationsAssignment_4_in_rule__Grammar__Group__4__Impl3462 = new BitSet(new long[]{0x0000000002800002L});
         public static final BitSet FOLLOW_rule__Grammar__Group__5__Impl_in_rule__Grammar__Group__53493 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3522 = new BitSet(new long[]{0x0000022000000012L});
-        public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3534 = new BitSet(new long[]{0x0000022000000012L});
+        public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3522 = new BitSet(new long[]{0x0000062002840012L});
+        public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3534 = new BitSet(new long[]{0x0000062002840012L});
         public static final BitSet FOLLOW_rule__Grammar__Group_2__0__Impl_in_rule__Grammar__Group_2__03579 = new BitSet(new long[]{0x0000000000000010L});
         public static final BitSet FOLLOW_rule__Grammar__Group_2__1_in_rule__Grammar__Group_2__03582 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_18_in_rule__Grammar__Group_2__0__Impl3610 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group_2__1__Impl_in_rule__Grammar__Group_2__13641 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_2__1__Impl_in_rule__Grammar__Group_2__13641 = new BitSet(new long[]{0x0000000000080000L});
         public static final BitSet FOLLOW_rule__Grammar__Group_2__2_in_rule__Grammar__Group_2__13644 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_1_in_rule__Grammar__Group_2__1__Impl3671 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_2__2__Impl_in_rule__Grammar__Group_2__23701 = new BitSet(new long[]{0x0000000000000002L});
@@ -18849,12 +19370,12 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__Grammar__Group_3__1__Impl_in_rule__Grammar__Group_3__13948 = new BitSet(new long[]{0x0000000000200010L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3__2_in_rule__Grammar__Group_3__13951 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_20_in_rule__Grammar__Group_3__1__Impl3979 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group_3__2__Impl_in_rule__Grammar__Group_3__24010 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3__2__Impl_in_rule__Grammar__Group_3__24010 = new BitSet(new long[]{0x0000000000200010L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3__3_in_rule__Grammar__Group_3__24013 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3_2__0_in_rule__Grammar__Group_3__2__Impl4040 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3__3__Impl_in_rule__Grammar__Group_3__34071 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_21_in_rule__Grammar__Group_3__3__Impl4099 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group_3_2__0__Impl_in_rule__Grammar__Group_3_2__04138 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3_2__0__Impl_in_rule__Grammar__Group_3_2__04138 = new BitSet(new long[]{0x0000000000080000L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3_2__1_in_rule__Grammar__Group_3_2__04141 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_0_in_rule__Grammar__Group_3_2__0__Impl4168 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3_2__1__Impl_in_rule__Grammar__Group_3_2__14198 = new BitSet(new long[]{0x0000000000000002L});
@@ -18864,7 +19385,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_19_in_rule__Grammar__Group_3_2_1__0__Impl4291 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3_2_1__1__Impl_in_rule__Grammar__Group_3_2_1__14322 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_1_1_in_rule__Grammar__Group_3_2_1__1__Impl4349 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GrammarID__Group__0__Impl_in_rule__GrammarID__Group__04383 = new BitSet(new long[]{0x0000000000400002L});
+        public static final BitSet FOLLOW_rule__GrammarID__Group__0__Impl_in_rule__GrammarID__Group__04383 = new BitSet(new long[]{0x0000000000400000L});
         public static final BitSet FOLLOW_rule__GrammarID__Group__1_in_rule__GrammarID__Group__04386 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__GrammarID__Group__0__Impl4413 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GrammarID__Group__1__Impl_in_rule__GrammarID__Group__14442 = new BitSet(new long[]{0x0000000000000002L});
@@ -18880,7 +19401,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__1__Impl_in_rule__GeneratedMetamodel__Group__14688 = new BitSet(new long[]{0x0000000000000020L});
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__2_in_rule__GeneratedMetamodel__Group__14691 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__NameAssignment_1_in_rule__GeneratedMetamodel__Group__1__Impl4718 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__2__Impl_in_rule__GeneratedMetamodel__Group__24748 = new BitSet(new long[]{0x0000000001000002L});
+        public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__2__Impl_in_rule__GeneratedMetamodel__Group__24748 = new BitSet(new long[]{0x0000000001000000L});
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__3_in_rule__GeneratedMetamodel__Group__24751 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__EPackageAssignment_2_in_rule__GeneratedMetamodel__Group__2__Impl4778 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__3__Impl_in_rule__GeneratedMetamodel__Group__34808 = new BitSet(new long[]{0x0000000000000002L});
@@ -18893,7 +19414,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__0__Impl_in_rule__ReferencedMetamodel__Group__04997 = new BitSet(new long[]{0x0000000000000020L});
         public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__05000 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_25_in_rule__ReferencedMetamodel__Group__0__Impl5028 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1__Impl_in_rule__ReferencedMetamodel__Group__15059 = new BitSet(new long[]{0x0000000001000002L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1__Impl_in_rule__ReferencedMetamodel__Group__15059 = new BitSet(new long[]{0x0000000001000000L});
         public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__15062 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_1_in_rule__ReferencedMetamodel__Group__1__Impl5089 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__2__Impl_in_rule__ReferencedMetamodel__Group__25119 = new BitSet(new long[]{0x0000000000000002L});
@@ -18906,10 +19427,10 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__ParserRule__Group__0__Impl_in_rule__ParserRule__Group__05306 = new BitSet(new long[]{0x0000040014000000L});
         public static final BitSet FOLLOW_rule__ParserRule__Group__1_in_rule__ParserRule__Group__05309 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__NameAssignment_0_in_rule__ParserRule__Group__0__Impl5336 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ParserRule__Group__1__Impl_in_rule__ParserRule__Group__15366 = new BitSet(new long[]{0x0000040004000000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group__1__Impl_in_rule__ParserRule__Group__15366 = new BitSet(new long[]{0x0000040014000000L});
         public static final BitSet FOLLOW_rule__ParserRule__Group__2_in_rule__ParserRule__Group__15369 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_1__0_in_rule__ParserRule__Group__1__Impl5396 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ParserRule__Group__2__Impl_in_rule__ParserRule__Group__25427 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group__2__Impl_in_rule__ParserRule__Group__25427 = new BitSet(new long[]{0x0000040014000000L});
         public static final BitSet FOLLOW_rule__ParserRule__Group__3_in_rule__ParserRule__Group__25430 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2__0_in_rule__ParserRule__Group__2__Impl5457 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group__3__Impl_in_rule__ParserRule__Group__35488 = new BitSet(new long[]{0x0000000100100030L});
@@ -18931,12 +19452,12 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__ParserRule__Group_2__1__Impl_in_rule__ParserRule__Group_2__15864 = new BitSet(new long[]{0x0000000000200010L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2__2_in_rule__ParserRule__Group_2__15867 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_20_in_rule__ParserRule__Group_2__1__Impl5895 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ParserRule__Group_2__2__Impl_in_rule__ParserRule__Group_2__25926 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2__2__Impl_in_rule__ParserRule__Group_2__25926 = new BitSet(new long[]{0x0000000000200010L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2__3_in_rule__ParserRule__Group_2__25929 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__0_in_rule__ParserRule__Group_2__2__Impl5956 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2__3__Impl_in_rule__ParserRule__Group_2__35987 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_21_in_rule__ParserRule__Group_2__3__Impl6015 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__0__Impl_in_rule__ParserRule__Group_2_2__06054 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__0__Impl_in_rule__ParserRule__Group_2_2__06054 = new BitSet(new long[]{0x0000000000080000L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__1_in_rule__ParserRule__Group_2_2__06057 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_0_in_rule__ParserRule__Group_2_2__0__Impl6084 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__1__Impl_in_rule__ParserRule__Group_2_2__16114 = new BitSet(new long[]{0x0000000000000002L});
@@ -18956,7 +19477,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__TypeRef__MetamodelAssignment_0_0_in_rule__TypeRef__Group_0__0__Impl6451 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TypeRef__Group_0__1__Impl_in_rule__TypeRef__Group_0__16481 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_29_in_rule__TypeRef__Group_0__1__Impl6509 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Alternatives__Group__0__Impl_in_rule__Alternatives__Group__06544 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__Alternatives__Group__0__Impl_in_rule__Alternatives__Group__06544 = new BitSet(new long[]{0x0000000040000000L});
         public static final BitSet FOLLOW_rule__Alternatives__Group__1_in_rule__Alternatives__Group__06547 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnorderedGroup_in_rule__Alternatives__Group__0__Impl6574 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Alternatives__Group__1__Impl_in_rule__Alternatives__Group__16603 = new BitSet(new long[]{0x0000000000000002L});
@@ -18971,7 +19492,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_30_in_rule__Alternatives__Group_1_1__0__Impl6835 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Alternatives__Group_1_1__1__Impl_in_rule__Alternatives__Group_1_1__16866 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Alternatives__ElementsAssignment_1_1_1_in_rule__Alternatives__Group_1_1__1__Impl6893 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__UnorderedGroup__Group__0__Impl_in_rule__UnorderedGroup__Group__06927 = new BitSet(new long[]{0x0000000080000002L});
+        public static final BitSet FOLLOW_rule__UnorderedGroup__Group__0__Impl_in_rule__UnorderedGroup__Group__06927 = new BitSet(new long[]{0x0000000080000000L});
         public static final BitSet FOLLOW_rule__UnorderedGroup__Group__1_in_rule__UnorderedGroup__Group__06930 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleGroup_in_rule__UnorderedGroup__Group__0__Impl6957 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__UnorderedGroup__Group__1__Impl_in_rule__UnorderedGroup__Group__16986 = new BitSet(new long[]{0x0000000000000002L});
@@ -18986,7 +19507,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_31_in_rule__UnorderedGroup__Group_1_1__0__Impl7218 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__UnorderedGroup__Group_1_1__1__Impl_in_rule__UnorderedGroup__Group_1_1__17249 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__UnorderedGroup__ElementsAssignment_1_1_1_in_rule__UnorderedGroup__Group_1_1__1__Impl7276 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Group__Group__0__Impl_in_rule__Group__Group__07310 = new BitSet(new long[]{0x0000000100100032L});
+        public static final BitSet FOLLOW_rule__Group__Group__0__Impl_in_rule__Group__Group__07310 = new BitSet(new long[]{0x0000000100100030L});
         public static final BitSet FOLLOW_rule__Group__Group__1_in_rule__Group__Group__07313 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleAbstractToken_in_rule__Group__Group__0__Impl7340 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Group__Group__1__Impl_in_rule__Group__Group__17369 = new BitSet(new long[]{0x0000000000000002L});
@@ -18996,7 +19517,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__Group__Group_1__1__Impl_in_rule__Group__Group_1__17492 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Group__ElementsAssignment_1_1_in_rule__Group__Group_1__1__Impl7521 = new BitSet(new long[]{0x0000000100100032L});
         public static final BitSet FOLLOW_rule__Group__ElementsAssignment_1_1_in_rule__Group__Group_1__1__Impl7533 = new BitSet(new long[]{0x0000000100100032L});
-        public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__0__Impl_in_rule__AbstractTokenWithCardinality__Group__07570 = new BitSet(new long[]{0x0000000000003802L});
+        public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__0__Impl_in_rule__AbstractTokenWithCardinality__Group__07570 = new BitSet(new long[]{0x0000000000003800L});
         public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__1_in_rule__AbstractTokenWithCardinality__Group__07573 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Alternatives_0_in_rule__AbstractTokenWithCardinality__Group__0__Impl7600 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__1__Impl_in_rule__AbstractTokenWithCardinality__Group__17630 = new BitSet(new long[]{0x0000000000000002L});
@@ -19007,7 +19528,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__Action__Group__1__Impl_in_rule__Action__Group__17754 = new BitSet(new long[]{0x0000000200400000L});
         public static final BitSet FOLLOW_rule__Action__Group__2_in_rule__Action__Group__17757 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Action__TypeAssignment_1_in_rule__Action__Group__1__Impl7784 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Action__Group__2__Impl_in_rule__Action__Group__27814 = new BitSet(new long[]{0x0000000200000000L});
+        public static final BitSet FOLLOW_rule__Action__Group__2__Impl_in_rule__Action__Group__27814 = new BitSet(new long[]{0x0000000200400000L});
         public static final BitSet FOLLOW_rule__Action__Group__3_in_rule__Action__Group__27817 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Action__Group_2__0_in_rule__Action__Group__2__Impl7844 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Action__Group__3__Impl_in_rule__Action__Group__37875 = new BitSet(new long[]{0x0000000000000002L});
@@ -19039,7 +19560,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_ruleAssignableAlternatives_in_rule__ParenthesizedAssignableElement__Group__1__Impl8466 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParenthesizedAssignableElement__Group__2__Impl_in_rule__ParenthesizedAssignableElement__Group__28495 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_21_in_rule__ParenthesizedAssignableElement__Group__2__Impl8523 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__0__Impl_in_rule__AssignableAlternatives__Group__08560 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__0__Impl_in_rule__AssignableAlternatives__Group__08560 = new BitSet(new long[]{0x0000000040000000L});
         public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__1_in_rule__AssignableAlternatives__Group__08563 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__Group__0__Impl8590 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__1__Impl_in_rule__AssignableAlternatives__Group__18619 = new BitSet(new long[]{0x0000000000000002L});
@@ -19060,7 +19581,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__CrossReference__Group__1__Impl_in_rule__CrossReference__Group__19005 = new BitSet(new long[]{0x0000001040000000L});
         public static final BitSet FOLLOW_rule__CrossReference__Group__2_in_rule__CrossReference__Group__19008 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CrossReference__TypeAssignment_1_in_rule__CrossReference__Group__1__Impl9035 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CrossReference__Group__2__Impl_in_rule__CrossReference__Group__29065 = new BitSet(new long[]{0x0000001000000000L});
+        public static final BitSet FOLLOW_rule__CrossReference__Group__2__Impl_in_rule__CrossReference__Group__29065 = new BitSet(new long[]{0x0000001040000000L});
         public static final BitSet FOLLOW_rule__CrossReference__Group__3_in_rule__CrossReference__Group__29068 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CrossReference__Group_2__0_in_rule__CrossReference__Group__2__Impl9095 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CrossReference__Group__3__Impl_in_rule__CrossReference__Group__39126 = new BitSet(new long[]{0x0000000000000002L});
@@ -19084,7 +19605,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__TerminalRule__Group__1__Impl_in_rule__TerminalRule__Group__19564 = new BitSet(new long[]{0x0000000014000000L});
         public static final BitSet FOLLOW_rule__TerminalRule__Group__2_in_rule__TerminalRule__Group__19567 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalRule__NameAssignment_1_in_rule__TerminalRule__Group__1__Impl9594 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TerminalRule__Group__2__Impl_in_rule__TerminalRule__Group__29624 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__TerminalRule__Group__2__Impl_in_rule__TerminalRule__Group__29624 = new BitSet(new long[]{0x0000000014000000L});
         public static final BitSet FOLLOW_rule__TerminalRule__Group__3_in_rule__TerminalRule__Group__29627 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalRule__Group_2__0_in_rule__TerminalRule__Group__2__Impl9654 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalRule__Group__3__Impl_in_rule__TerminalRule__Group__39685 = new BitSet(new long[]{0x000000C000500030L});
@@ -19100,7 +19621,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_28_in_rule__TerminalRule__Group_2__0__Impl9909 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalRule__Group_2__1__Impl_in_rule__TerminalRule__Group_2__19940 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalRule__TypeAssignment_2_1_in_rule__TerminalRule__Group_2__1__Impl9967 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__0__Impl_in_rule__TerminalAlternatives__Group__010001 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__0__Impl_in_rule__TerminalAlternatives__Group__010001 = new BitSet(new long[]{0x0000000040000000L});
         public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__1_in_rule__TerminalAlternatives__Group__010004 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__Group__0__Impl10031 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__1__Impl_in_rule__TerminalAlternatives__Group__110060 = new BitSet(new long[]{0x0000000000000002L});
@@ -19115,7 +19636,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_30_in_rule__TerminalAlternatives__Group_1_1__0__Impl10292 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1_1__1__Impl_in_rule__TerminalAlternatives__Group_1_1__110323 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalAlternatives__ElementsAssignment_1_1_1_in_rule__TerminalAlternatives__Group_1_1__1__Impl10350 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TerminalGroup__Group__0__Impl_in_rule__TerminalGroup__Group__010384 = new BitSet(new long[]{0x000000C000500032L});
+        public static final BitSet FOLLOW_rule__TerminalGroup__Group__0__Impl_in_rule__TerminalGroup__Group__010384 = new BitSet(new long[]{0x000000C000500030L});
         public static final BitSet FOLLOW_rule__TerminalGroup__Group__1_in_rule__TerminalGroup__Group__010387 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__Group__0__Impl10414 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalGroup__Group__1__Impl_in_rule__TerminalGroup__Group__110443 = new BitSet(new long[]{0x0000000000000002L});
@@ -19125,7 +19646,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__TerminalGroup__Group_1__1__Impl_in_rule__TerminalGroup__Group_1__110566 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalGroup__ElementsAssignment_1_1_in_rule__TerminalGroup__Group_1__1__Impl10595 = new BitSet(new long[]{0x000000C000500032L});
         public static final BitSet FOLLOW_rule__TerminalGroup__ElementsAssignment_1_1_in_rule__TerminalGroup__Group_1__1__Impl10607 = new BitSet(new long[]{0x000000C000500032L});
-        public static final BitSet FOLLOW_rule__TerminalToken__Group__0__Impl_in_rule__TerminalToken__Group__010644 = new BitSet(new long[]{0x0000000000003802L});
+        public static final BitSet FOLLOW_rule__TerminalToken__Group__0__Impl_in_rule__TerminalToken__Group__010644 = new BitSet(new long[]{0x0000000000003800L});
         public static final BitSet FOLLOW_rule__TerminalToken__Group__1_in_rule__TerminalToken__Group__010647 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTerminalTokenElement_in_rule__TerminalToken__Group__0__Impl10674 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalToken__Group__1__Impl_in_rule__TerminalToken__Group__110703 = new BitSet(new long[]{0x0000000000000002L});
@@ -19148,11 +19669,11 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_39_in_rule__UntilToken__Group__0__Impl11105 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__UntilToken__Group__1__Impl_in_rule__UntilToken__Group__111136 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__UntilToken__TerminalAssignment_1_in_rule__UntilToken__Group__1__Impl11163 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Wildcard__Group__0__Impl_in_rule__Wildcard__Group__011197 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_rule__Wildcard__Group__0__Impl_in_rule__Wildcard__Group__011197 = new BitSet(new long[]{0x000000C000500030L});
         public static final BitSet FOLLOW_rule__Wildcard__Group__1_in_rule__Wildcard__Group__011200 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Wildcard__Group__1__Impl_in_rule__Wildcard__Group__111258 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_22_in_rule__Wildcard__Group__1__Impl11286 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CharacterRange__Group__0__Impl_in_rule__CharacterRange__Group__011321 = new BitSet(new long[]{0x0000010000000002L});
+        public static final BitSet FOLLOW_rule__CharacterRange__Group__0__Impl_in_rule__CharacterRange__Group__011321 = new BitSet(new long[]{0x0000010000000000L});
         public static final BitSet FOLLOW_rule__CharacterRange__Group__1_in_rule__CharacterRange__Group__011324 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleKeyword_in_rule__CharacterRange__Group__0__Impl11351 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CharacterRange__Group__1__Impl_in_rule__CharacterRange__Group__111380 = new BitSet(new long[]{0x0000000000000002L});
@@ -19170,7 +19691,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_rule__EnumRule__Group__1__Impl_in_rule__EnumRule__Group__111690 = new BitSet(new long[]{0x0000000014000000L});
         public static final BitSet FOLLOW_rule__EnumRule__Group__2_in_rule__EnumRule__Group__111693 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumRule__NameAssignment_1_in_rule__EnumRule__Group__1__Impl11720 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__EnumRule__Group__2__Impl_in_rule__EnumRule__Group__211750 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__EnumRule__Group__2__Impl_in_rule__EnumRule__Group__211750 = new BitSet(new long[]{0x0000000014000000L});
         public static final BitSet FOLLOW_rule__EnumRule__Group__3_in_rule__EnumRule__Group__211753 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumRule__Group_2__0_in_rule__EnumRule__Group__2__Impl11780 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumRule__Group__3__Impl_in_rule__EnumRule__Group__311811 = new BitSet(new long[]{0x0000000000000010L});
@@ -19186,7 +19707,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_28_in_rule__EnumRule__Group_2__0__Impl12035 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumRule__Group_2__1__Impl_in_rule__EnumRule__Group_2__112066 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumRule__TypeAssignment_2_1_in_rule__EnumRule__Group_2__1__Impl12093 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__EnumLiterals__Group__0__Impl_in_rule__EnumLiterals__Group__012127 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__EnumLiterals__Group__0__Impl_in_rule__EnumLiterals__Group__012127 = new BitSet(new long[]{0x0000000040000000L});
         public static final BitSet FOLLOW_rule__EnumLiterals__Group__1_in_rule__EnumLiterals__Group__012130 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__Group__0__Impl12157 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumLiterals__Group__1__Impl_in_rule__EnumLiterals__Group__112186 = new BitSet(new long[]{0x0000000000000002L});
@@ -19201,7 +19722,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_30_in_rule__EnumLiterals__Group_1_1__0__Impl12418 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumLiterals__Group_1_1__1__Impl_in_rule__EnumLiterals__Group_1_1__112449 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumLiterals__ElementsAssignment_1_1_1_in_rule__EnumLiterals__Group_1_1__1__Impl12476 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__0__Impl_in_rule__EnumLiteralDeclaration__Group__012510 = new BitSet(new long[]{0x0000000000004002L});
+        public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__0__Impl_in_rule__EnumLiteralDeclaration__Group__012510 = new BitSet(new long[]{0x0000000000004000L});
         public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__1_in_rule__EnumLiteralDeclaration__Group__012513 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__EnumLiteralAssignment_0_in_rule__EnumLiteralDeclaration__Group__0__Impl12540 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__1__Impl_in_rule__EnumLiteralDeclaration__Group__112570 = new BitSet(new long[]{0x0000000000000002L});

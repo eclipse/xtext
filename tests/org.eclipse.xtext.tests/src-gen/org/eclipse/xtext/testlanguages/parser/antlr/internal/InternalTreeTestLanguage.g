@@ -47,12 +47,6 @@ import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalTreeTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -140,7 +134,7 @@ ruleNode returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -160,15 +154,15 @@ ruleNode returns [EObject current=null]
 	    }
 
 )
-)	'(' 
+)	otherlv_1='(' 
     {
-        createLeafNode(grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1(), null);
     }
 (
 (
 		lv_attrib_2_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getNodeAccess().getAttribSTRINGTerminalRuleCall_2_0(), "attrib"); 
+			createLeafNode(lv_attrib_2_0, grammarAccess.getNodeAccess().getAttribSTRINGTerminalRuleCall_2_0(), "attrib"); 
 		}
 		{
 	        if ($current==null) {
@@ -188,13 +182,13 @@ ruleNode returns [EObject current=null]
 	    }
 
 )
-)	')' 
+)	otherlv_3=')' 
     {
-        createLeafNode(grammarAccess.getNodeAccess().getRightParenthesisKeyword_3(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getNodeAccess().getRightParenthesisKeyword_3(), null);
     }
-	'{' 
+	otherlv_4='{' 
     {
-        createLeafNode(grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4(), null);
     }
 (
 (
@@ -220,9 +214,9 @@ ruleNode returns [EObject current=null]
 	    }
 
 )
-)*	'};' 
+)*	otherlv_6='};' 
     {
-        createLeafNode(grammarAccess.getNodeAccess().getRightCurlyBracketSemicolonKeyword_6(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getNodeAccess().getRightCurlyBracketSemicolonKeyword_6(), null);
     }
 )
 ;

@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.services.FoldingTestLanguageGrammarAccess;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalFoldingTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "FoldingModel";	
    	}
@@ -136,15 +130,15 @@ ruleElement returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'element' 
+(	otherlv_0='element' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getElementKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -188,9 +182,9 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)*	'end' 
+)*	otherlv_3='end' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getEndKeyword_3(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getElementAccess().getEndKeyword_3(), null);
     }
 )
 ;

@@ -47,12 +47,6 @@ import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammar
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "InheritedParserRule";	
    	}
@@ -89,15 +83,15 @@ ruleInheritedParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'element' 
+(	otherlv_0='element' 
     {
-        createLeafNode(grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -142,15 +136,15 @@ ruleOverridableParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'element' 
+(	otherlv_0='element' 
     {
-        createLeafNode(grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -197,15 +191,15 @@ ruleExtendableParserRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'element' 
+(	otherlv_0='element' 
     {
-        createLeafNode(grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getExtendableParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getExtendableParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {

@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -19,10 +18,14 @@ import java.util.Map.Entry;
 import org.antlr.runtime.BitSet;
 import org.antlr.runtime.FailedPredicateException;
 import org.antlr.runtime.IntStream;
+import org.antlr.runtime.MismatchedTokenException;
+import org.antlr.runtime.MissingTokenException;
 import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
+import org.antlr.runtime.UnwantedTokenException;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
@@ -189,6 +192,11 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		super(input);
 		allRules = Maps.newHashMap();
 	}
+	
+	protected AbstractInternalAntlrParser(TokenStream input, RecognizerSharedState state) {
+		super(input, state);
+		allRules = Maps.newHashMap();
+	}
 
 	protected void registerRules(Grammar grammar) {
 		for (AbstractRule rule: GrammarUtil.allRules(grammar)) {
@@ -221,8 +229,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		}
 	}
 
-	protected Object createLeafNode(EObject grammarElement, String feature) {
-		Token token = input.LT(-1);
+	protected Object createLeafNode(Token token, EObject grammarElement, String feature) {
 		if (token != null && token.getTokenIndex() > lastConsumedIndex) {
 			int indexOfTokenBefore = lastConsumedIndex;
 			if (indexOfTokenBefore + 1 < token.getTokenIndex()) {
@@ -242,7 +249,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		}
 		return null;
 	}
-
+	
 	private Map<Integer, String> antlrTypeToLexerName = null;
 	
 	private String[] readableTokenNames = null;
@@ -431,31 +438,6 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	}
 
 	@Override
-	public void recoverFromMismatchedToken(IntStream in, RecognitionException re, int ttype, BitSet follow)
-			throws RecognitionException {
-		if (currentError == null)
-			currentError = getSyntaxErrorMessage(re, getTokenNames());
-		// inlined super call because we want to get rid of the System.err.println(..)
-		// System.err.println("BR.recoverFromMismatchedToken");
-		// if next token is what we are looking for then "delete" this token
-		if ( input.LA(2)==ttype ) {
-			reportError(re);
-			/*
-			System.err.println("recoverFromMismatchedToken deleting "+input.LT(1)+
-							   " since "+input.LT(2)+" is what we want");
-			*/
-			beginResync();
-			input.consume(); // simply delete extra token
-			endResync();
-			input.consume(); // move past ttype token as if all were ok
-			return;
-		}
-		if ( !recoverFromMismatchedElement(input, re,follow) ) {
-			throw re;
-		}
-	}
-	
-	@Override
 	public String getErrorMessage(RecognitionException e, String[] tokenNames) {
 		throw new UnsupportedOperationException("getErrorMessage");
 	}
@@ -467,11 +449,49 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	@Override
 	public void reportError(RecognitionException e) {
-		if (errorRecovery) {
+		if ( state.errorRecovery ) {
 			return;
 		}
-		errorRecovery = true;
+		state.syntaxErrors++; // don't count spurious
+		state.errorRecovery = true;
+		if (currentError == null)
+			currentError = getSyntaxErrorMessage(e, getTokenNames());
 	}
+
+	@Override
+	protected Object recoverFromMismatchedToken(IntStream input, int ttype, BitSet follow)
+	throws RecognitionException
+{
+	RecognitionException e = null;
+	// if next token is what we are looking for then "delete" this token
+	if ( mismatchIsUnwantedToken(input, ttype) ) {
+		e = new UnwantedTokenException(ttype, input);
+		/*
+		System.err.println("recoverFromMismatchedToken deleting "+
+						   ((TokenStream)input).LT(1)+
+						   " since "+((TokenStream)input).LT(2)+" is what we want");
+		 */
+		beginResync();
+		input.consume(); // simply delete extra token
+		endResync();
+		reportError(e);  // report after consuming so AW sees the token in the exception
+		// we want to return the token we're actually matching
+		Object matchedSymbol = getCurrentInputSymbol(input);
+		input.consume(); // move past ttype token as if all were ok
+		return matchedSymbol;
+	}
+	// can't recover with single token deletion, try insertion
+	if ( mismatchIsMissingToken(input, follow) ) {
+		Object inserted = getMissingSymbol(input, e, ttype, follow);
+		e = new MissingTokenException(ttype, input, inserted);
+		reportError(e);  // report after inserting so AW sees the token in the exception
+		return null;
+//		throw e;
+	}
+	// even that didn't work; must throw the exception
+	e = new MismatchedTokenException(ttype, input);
+	throw e;
+}
 	
 	public SyntaxErrorMessage getSyntaxErrorMessage(RecognitionException e, String[] tokenNames) {
 		IParserErrorContext parseErrorContext = createErrorContext(e);
@@ -611,13 +631,14 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	 *      int, org.antlr.runtime.BitSet)
 	 */
 	@Override
-	public void match(IntStream input, int ttype, BitSet follow) throws RecognitionException {
+	public Object match(IntStream input, int ttype, BitSet follow) throws RecognitionException {
 		XtextTokenStream xtextTokenStream = (XtextTokenStream) input;
 		int numLookaheadBeforeMatch = xtextTokenStream.getLookaheadTokens().size();
-		super.match(input, ttype, follow);
+		Object result = super.match(input, ttype, follow);
 		if (xtextTokenStream.getLookaheadTokens().size() > numLookaheadBeforeMatch) {
 			xtextTokenStream.removeLastLookaheadToken();
 		}
+		return result;
 	}
 	
 	@Override
@@ -627,8 +648,6 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (logger.isTraceEnabled())
 			logger.trace(msg);
 	}
-
-	protected abstract InputStream getTokenFile();
 
 	/**
 	 * @return
@@ -643,14 +662,4 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		return unorderedGroupHelper;
 	}
 
-	@Override
-	// This is a WORKAROUND for https://bugs.eclipse.org/bugs/show_bug.cgi?id=326509
-	protected void pushFollow(BitSet fset) {
-		if ((_fsp + 1) >= following.length) {
-			BitSet[] f = new BitSet[following.length * 2];
-			System.arraycopy(following, 0, f, 0, following.length);
-			following = f;
-		}
-		following[++_fsp] = fset;
-	}
 }

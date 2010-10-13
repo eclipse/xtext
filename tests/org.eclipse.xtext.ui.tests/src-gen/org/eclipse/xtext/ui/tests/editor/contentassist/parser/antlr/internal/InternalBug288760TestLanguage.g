@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug288760TestLan
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug288760TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "WorkflowElement";	
    	}
@@ -93,7 +87,7 @@ ruleWorkflowElement returns [EObject current=null]
 (
 		lv_name_0_0=RULE_START_TAG
 		{
-			createLeafNode(grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_0_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_0_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -137,16 +131,16 @@ ruleWorkflowElement returns [EObject current=null]
 	    }
 
 )
-)*RULE_END_TAG_SHORT
+)*this_END_TAG_SHORT_2=RULE_END_TAG_SHORT
     { 
-    createLeafNode(grammarAccess.getWorkflowElementAccess().getEND_TAG_SHORTTerminalRuleCall_0_2(), null); 
+    createLeafNode(this_END_TAG_SHORT_2, grammarAccess.getWorkflowElementAccess().getEND_TAG_SHORTTerminalRuleCall_0_2(), null); 
     }
 )
     |((
 (
 		lv_name_3_0=RULE_START_TAG
 		{
-			createLeafNode(grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_1_0_0(), "name"); 
+			createLeafNode(lv_name_3_0, grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_1_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -190,9 +184,9 @@ ruleWorkflowElement returns [EObject current=null]
 	    }
 
 )
-)*RULE_GT
+)*this_GT_5=RULE_GT
     { 
-    createLeafNode(grammarAccess.getWorkflowElementAccess().getGTTerminalRuleCall_1_2(), null); 
+    createLeafNode(this_GT_5, grammarAccess.getWorkflowElementAccess().getGTTerminalRuleCall_1_2(), null); 
     }
 (
 (
@@ -222,7 +216,7 @@ ruleWorkflowElement returns [EObject current=null]
 (
 		lv_end_7_0=RULE_END_TAG
 		{
-			createLeafNode(grammarAccess.getWorkflowElementAccess().getEndEND_TAGTerminalRuleCall_1_4_0(), "end"); 
+			createLeafNode(lv_end_7_0, grammarAccess.getWorkflowElementAccess().getEndEND_TAGTerminalRuleCall_1_4_0(), "end"); 
 		}
 		{
 	        if ($current==null) {
@@ -269,7 +263,7 @@ ruleAttribute returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -289,15 +283,15 @@ ruleAttribute returns [EObject current=null]
 	    }
 
 )
-)RULE_EQ
+)this_EQ_1=RULE_EQ
     { 
-    createLeafNode(grammarAccess.getAttributeAccess().getEQTerminalRuleCall_1(), null); 
+    createLeafNode(this_EQ_1, grammarAccess.getAttributeAccess().getEQTerminalRuleCall_1(), null); 
     }
 (
 (
 		lv_value_2_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getAttributeAccess().getValueSTRINGTerminalRuleCall_2_0(), "value"); 
+			createLeafNode(lv_value_2_0, grammarAccess.getAttributeAccess().getValueSTRINGTerminalRuleCall_2_0(), "value"); 
 		}
 		{
 	        if ($current==null) {

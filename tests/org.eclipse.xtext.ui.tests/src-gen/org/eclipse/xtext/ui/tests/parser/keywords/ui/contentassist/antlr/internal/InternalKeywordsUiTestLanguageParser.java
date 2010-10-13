@@ -27,19 +27,35 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
+    public static final int T__12=12;
     public static final int RULE_WS=9;
-    public static final int EOF=-1;
+    public static final int T__17=17;
     public static final int RULE_INT=5;
+    public static final int EOF=-1;
+    public static final int T__13=13;
     public static final int RULE_STRING=6;
+    public static final int T__16=16;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__14=14;
+    public static final int T__11=11;
+    public static final int T__18=18;
+    public static final int T__15=15;
+
+    // delegates
+    // delegators
+
 
         public InternalKeywordsUiTestLanguageParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalKeywordsUiTestLanguageParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalKeywordsUiTestLanguageParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g"; }
 
 
@@ -63,7 +79,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
 
 
 
-    // $ANTLR start entryRuleModel
+    // $ANTLR start "entryRuleModel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:61:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
@@ -73,7 +89,8 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
              before(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel61);
             ruleModel();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getModelRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel68); 
@@ -89,10 +106,10 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end entryRuleModel
+    // $ANTLR end "entryRuleModel"
 
 
-    // $ANTLR start ruleModel
+    // $ANTLR start "ruleModel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:70:1: ruleModel : ( ( rule__Model__Alternatives ) ) ;
     public final void ruleModel() throws RecognitionException {
 
@@ -111,7 +128,8 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
             {
             pushFollow(FollowSets000.FOLLOW_rule__Model__Alternatives_in_ruleModel94);
             rule__Model__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -135,10 +153,10 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end ruleModel
+    // $ANTLR end "ruleModel"
 
 
-    // $ANTLR start rule__Model__Alternatives
+    // $ANTLR start "rule__Model__Alternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:89:1: rule__Model__Alternatives : ( ( ( rule__Model__FirstAssignment_0 ) ) | ( ( rule__Model__SecondAssignment_1 ) ) | ( ( rule__Model__ThirdAssignment_2 ) ) | ( ( rule__Model__ForthAssignment_3 ) ) | ( ( rule__Model__FifthAssignment_4 ) ) | ( ( rule__Model__SixthAssignment_5 ) ) | ( ( rule__Model__SeventhAssignment_6 ) ) | ( ( rule__Model__EighthAssignment_7 ) ) );
     public final void rule__Model__Alternatives() throws RecognitionException {
 
@@ -190,7 +208,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("89:1: rule__Model__Alternatives : ( ( ( rule__Model__FirstAssignment_0 ) ) | ( ( rule__Model__SecondAssignment_1 ) ) | ( ( rule__Model__ThirdAssignment_2 ) ) | ( ( rule__Model__ForthAssignment_3 ) ) | ( ( rule__Model__FifthAssignment_4 ) ) | ( ( rule__Model__SixthAssignment_5 ) ) | ( ( rule__Model__SeventhAssignment_6 ) ) | ( ( rule__Model__EighthAssignment_7 ) ) );", 1, 0, input);
+                    new NoViableAltException("", 1, 0, input);
 
                 throw nvae;
             }
@@ -208,7 +226,8 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Model__FirstAssignment_0_in_rule__Model__Alternatives130);
                     rule__Model__FirstAssignment_0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -232,7 +251,8 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Model__SecondAssignment_1_in_rule__Model__Alternatives148);
                     rule__Model__SecondAssignment_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -256,7 +276,8 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Model__ThirdAssignment_2_in_rule__Model__Alternatives166);
                     rule__Model__ThirdAssignment_2();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -280,7 +301,8 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Model__ForthAssignment_3_in_rule__Model__Alternatives184);
                     rule__Model__ForthAssignment_3();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -304,7 +326,8 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Model__FifthAssignment_4_in_rule__Model__Alternatives202);
                     rule__Model__FifthAssignment_4();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -328,7 +351,8 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Model__SixthAssignment_5_in_rule__Model__Alternatives220);
                     rule__Model__SixthAssignment_5();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -352,7 +376,8 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Model__SeventhAssignment_6_in_rule__Model__Alternatives238);
                     rule__Model__SeventhAssignment_6();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -376,7 +401,8 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Model__EighthAssignment_7_in_rule__Model__Alternatives256);
                     rule__Model__EighthAssignment_7();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -402,10 +428,10 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end rule__Model__Alternatives
+    // $ANTLR end "rule__Model__Alternatives"
 
 
-    // $ANTLR start rule__Model__FirstAssignment_0
+    // $ANTLR start "rule__Model__FirstAssignment_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:150:1: rule__Model__FirstAssignment_0 : ( ( 'foo\\\\bar' ) ) ;
     public final void rule__Model__FirstAssignment_0() throws RecognitionException {
 
@@ -447,10 +473,10 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end rule__Model__FirstAssignment_0
+    // $ANTLR end "rule__Model__FirstAssignment_0"
 
 
-    // $ANTLR start rule__Model__SecondAssignment_1
+    // $ANTLR start "rule__Model__SecondAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:173:1: rule__Model__SecondAssignment_1 : ( ( 'foo\\\\' ) ) ;
     public final void rule__Model__SecondAssignment_1() throws RecognitionException {
 
@@ -492,10 +518,10 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end rule__Model__SecondAssignment_1
+    // $ANTLR end "rule__Model__SecondAssignment_1"
 
 
-    // $ANTLR start rule__Model__ThirdAssignment_2
+    // $ANTLR start "rule__Model__ThirdAssignment_2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:196:1: rule__Model__ThirdAssignment_2 : ( ( '\\\\bar' ) ) ;
     public final void rule__Model__ThirdAssignment_2() throws RecognitionException {
 
@@ -537,10 +563,10 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end rule__Model__ThirdAssignment_2
+    // $ANTLR end "rule__Model__ThirdAssignment_2"
 
 
-    // $ANTLR start rule__Model__ForthAssignment_3
+    // $ANTLR start "rule__Model__ForthAssignment_3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:219:1: rule__Model__ForthAssignment_3 : ( ( '\\\\' ) ) ;
     public final void rule__Model__ForthAssignment_3() throws RecognitionException {
 
@@ -582,10 +608,10 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end rule__Model__ForthAssignment_3
+    // $ANTLR end "rule__Model__ForthAssignment_3"
 
 
-    // $ANTLR start rule__Model__FifthAssignment_4
+    // $ANTLR start "rule__Model__FifthAssignment_4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:242:1: rule__Model__FifthAssignment_4 : ( ( '\"a\"' ) ) ;
     public final void rule__Model__FifthAssignment_4() throws RecognitionException {
 
@@ -627,10 +653,10 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end rule__Model__FifthAssignment_4
+    // $ANTLR end "rule__Model__FifthAssignment_4"
 
 
-    // $ANTLR start rule__Model__SixthAssignment_5
+    // $ANTLR start "rule__Model__SixthAssignment_5"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:265:1: rule__Model__SixthAssignment_5 : ( ( '\\'b\\'' ) ) ;
     public final void rule__Model__SixthAssignment_5() throws RecognitionException {
 
@@ -672,10 +698,10 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end rule__Model__SixthAssignment_5
+    // $ANTLR end "rule__Model__SixthAssignment_5"
 
 
-    // $ANTLR start rule__Model__SeventhAssignment_6
+    // $ANTLR start "rule__Model__SeventhAssignment_6"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:288:1: rule__Model__SeventhAssignment_6 : ( ( '\\'c\\'' ) ) ;
     public final void rule__Model__SeventhAssignment_6() throws RecognitionException {
 
@@ -717,10 +743,10 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end rule__Model__SeventhAssignment_6
+    // $ANTLR end "rule__Model__SeventhAssignment_6"
 
 
-    // $ANTLR start rule__Model__EighthAssignment_7
+    // $ANTLR start "rule__Model__EighthAssignment_7"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/ui/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:311:1: rule__Model__EighthAssignment_7 : ( ( '\"d\"' ) ) ;
     public final void rule__Model__EighthAssignment_7() throws RecognitionException {
 
@@ -762,7 +788,9 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
         }
         return ;
     }
-    // $ANTLR end rule__Model__EighthAssignment_7
+    // $ANTLR end "rule__Model__EighthAssignment_7"
+
+    // Delegated rules
 
 
  

@@ -47,12 +47,6 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.services.SimpleExpress
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "IfCondition";	
    	}
@@ -93,7 +87,7 @@ ruleIfCondition returns [EObject current=null]
 (
 		lv_elseif_0_0=	'else' 
     {
-        createLeafNode(grammarAccess.getIfConditionAccess().getElseifElseKeyword_0_0(), "elseif"); 
+        createLeafNode(lv_elseif_0_0, grammarAccess.getIfConditionAccess().getElseifElseKeyword_0_0(), "elseif");
     }
  
 	    {
@@ -110,13 +104,13 @@ ruleIfCondition returns [EObject current=null]
 	    }
 
 )
-)?	'if' 
+)?	otherlv_1='if' 
     {
-        createLeafNode(grammarAccess.getIfConditionAccess().getIfKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getIfConditionAccess().getIfKeyword_1(), null);
     }
-	'(' 
+	otherlv_2='(' 
     {
-        createLeafNode(grammarAccess.getIfConditionAccess().getLeftParenthesisKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getIfConditionAccess().getLeftParenthesisKeyword_2(), null);
     }
 (
 (
@@ -142,13 +136,13 @@ ruleIfCondition returns [EObject current=null]
 	    }
 
 )
-)	')' 
+)	otherlv_4=')' 
     {
-        createLeafNode(grammarAccess.getIfConditionAccess().getRightParenthesisKeyword_4(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getIfConditionAccess().getRightParenthesisKeyword_4(), null);
     }
-	'{' 
+	otherlv_5='{' 
     {
-        createLeafNode(grammarAccess.getIfConditionAccess().getLeftCurlyBracketKeyword_5(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getIfConditionAccess().getLeftCurlyBracketKeyword_5(), null);
     }
 )
 ;
@@ -198,9 +192,9 @@ ruleExpression returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'||' 
+)	otherlv_2='||' 
     {
-        createLeafNode(grammarAccess.getExpressionAccess().getVerticalLineVerticalLineKeyword_1_1(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getExpressionAccess().getVerticalLineVerticalLineKeyword_1_1(), null);
     }
 (
 (
@@ -274,9 +268,9 @@ ruleAndExpression returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'&&' 
+)	otherlv_2='&&' 
     {
-        createLeafNode(grammarAccess.getAndExpressionAccess().getAmpersandAmpersandKeyword_1_1(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getAndExpressionAccess().getAmpersandAmpersandKeyword_1_1(), null);
     }
 (
 (
@@ -355,7 +349,7 @@ ruleComparison returns [EObject current=null]
 (
 		lv_operator_2_1=	'==' 
     {
-        createLeafNode(grammarAccess.getComparisonAccess().getOperatorEqualsSignEqualsSignKeyword_1_1_0_0(), "operator"); 
+        createLeafNode(lv_operator_2_1, grammarAccess.getComparisonAccess().getOperatorEqualsSignEqualsSignKeyword_1_1_0_0(), "operator");
     }
  
 	    {
@@ -373,7 +367,7 @@ ruleComparison returns [EObject current=null]
 
     |		lv_operator_2_2=	'<=' 
     {
-        createLeafNode(grammarAccess.getComparisonAccess().getOperatorLessThanSignEqualsSignKeyword_1_1_0_1(), "operator"); 
+        createLeafNode(lv_operator_2_2, grammarAccess.getComparisonAccess().getOperatorLessThanSignEqualsSignKeyword_1_1_0_1(), "operator");
     }
  
 	    {
@@ -391,7 +385,7 @@ ruleComparison returns [EObject current=null]
 
     |		lv_operator_2_3=	'>=' 
     {
-        createLeafNode(grammarAccess.getComparisonAccess().getOperatorGreaterThanSignEqualsSignKeyword_1_1_0_2(), "operator"); 
+        createLeafNode(lv_operator_2_3, grammarAccess.getComparisonAccess().getOperatorGreaterThanSignEqualsSignKeyword_1_1_0_2(), "operator");
     }
  
 	    {
@@ -468,9 +462,9 @@ rulePrefixExpression returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'!' 
+)	otherlv_1='!' 
     {
-        createLeafNode(grammarAccess.getPrefixExpressionAccess().getExclamationMarkKeyword_0_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getPrefixExpressionAccess().getExclamationMarkKeyword_0_1(), null);
     }
 (
 (
@@ -585,7 +579,7 @@ ruleNumberLiteral returns [EObject current=null]
 (
 		lv_value_0_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getNumberLiteralAccess().getValueINTTerminalRuleCall_0(), "value"); 
+			createLeafNode(lv_value_0_0, grammarAccess.getNumberLiteralAccess().getValueINTTerminalRuleCall_0(), "value"); 
 		}
 		{
 	        if ($current==null) {
@@ -628,9 +622,9 @@ ruleParenthesizedExpression returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'(' 
+(	otherlv_0='(' 
     {
-        createLeafNode(grammarAccess.getParenthesizedExpressionAccess().getLeftParenthesisKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getParenthesizedExpressionAccess().getLeftParenthesisKeyword_0(), null);
     }
 
     { 
@@ -641,9 +635,9 @@ ruleParenthesizedExpression returns [EObject current=null]
         $current = $this_Expression_1.current; 
         currentNode = currentNode.getParent();
     }
-	')' 
+	otherlv_2=')' 
     {
-        createLeafNode(grammarAccess.getParenthesizedExpressionAccess().getRightParenthesisKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getParenthesizedExpressionAccess().getRightParenthesisKeyword_2(), null);
     }
 )
 ;
@@ -730,7 +724,7 @@ ruleMethodCallLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='(' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getMethodCallLiteralAccess().getLeftParenthesisKeyword_1_0(), null); 
+        createLeafNode(kw, grammarAccess.getMethodCallLiteralAccess().getLeftParenthesisKeyword_1_0(), null); 
     }
 (
     { 
@@ -747,7 +741,7 @@ ruleMethodCallLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw=',' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getMethodCallLiteralAccess().getCommaKeyword_1_1_1_0(), null); 
+        createLeafNode(kw, grammarAccess.getMethodCallLiteralAccess().getCommaKeyword_1_1_1_0(), null); 
     }
 
     { 
@@ -764,13 +758,13 @@ ruleMethodCallLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw=')' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getMethodCallLiteralAccess().getRightParenthesisKeyword_1_2(), null); 
+        createLeafNode(kw, grammarAccess.getMethodCallLiteralAccess().getRightParenthesisKeyword_1_2(), null); 
     }
 (
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getMethodCallLiteralAccess().getFullStopKeyword_1_3_0(), null); 
+        createLeafNode(kw, grammarAccess.getMethodCallLiteralAccess().getFullStopKeyword_1_3_0(), null); 
     }
 
     { 
@@ -823,7 +817,7 @@ ruleArgument returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 
     { 
-    createLeafNode(grammarAccess.getArgumentAccess().getINTTerminalRuleCall_1(), null); 
+    createLeafNode(this_INT_1, grammarAccess.getArgumentAccess().getINTTerminalRuleCall_1(), null); 
     }
 )
     ;
@@ -853,20 +847,20 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
+    createLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
     }
 (
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
+        createLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
     }
     this_ID_2=RULE_ID    {
 		$current.merge(this_ID_2);
     }
 
     { 
-    createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), null); 
+    createLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), null); 
     }
 )*)
     ;

@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.BaseRecognizer;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStrea
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
@@ -74,6 +76,9 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 							}
 							return Token.EOF_TOKEN;
 						}
+						public String getSourceName() {
+							return "LookAheadTerminalTokenSource";
+						}
 					}, parser);
 					parser.setTokenStream(tokens);
 					tokens.setListener(parser);
@@ -81,6 +86,56 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 					parser.getGrammarElements().add(elementToParse);
 					parser.getLocalTrace().addAll(element.getLocalTrace());
 					parser.getLocalTrace().add(elementToParse);
+					if (elementToParse instanceof UnorderedGroup && element.getGrammarElement() == elementToParse) {
+						UnorderedGroup group = (UnorderedGroup) elementToParse;
+						final IUnorderedGroupHelper helper = parser.getUnorderedGroupHelper();
+						helper.initializeWith(parser);
+						helper.enter(group);
+						for(AbstractElement consumed: element.getHandledUnorderedGroupElements()) {
+							parser.before(consumed);
+							helper.select(group, group.getElements().indexOf(consumed));
+							helper.returnFromSelection(group);
+							parser.after(consumed);
+						}
+						parser.setUnorderedGroupHelper(new IUnorderedGroupHelper() {
+
+							boolean first = true;
+							public void initializeWith(BaseRecognizer recognizer) {
+								helper.initializeWith(recognizer);
+							}
+
+							public void enter(UnorderedGroup group) {
+								if (!first)
+									helper.enter(group);
+								first = false;
+							}
+
+							public void leave(UnorderedGroup group) {
+								helper.leave(group);
+							}
+
+							public boolean canSelect(UnorderedGroup group, int index) {
+								return helper.canSelect(group, index);
+							}
+
+							public void select(UnorderedGroup group, int index) {
+								helper.select(group, index);
+							}
+
+							public void returnFromSelection(UnorderedGroup group) {
+								helper.returnFromSelection(group);
+							}
+
+							public boolean canLeave(UnorderedGroup group) {
+								return helper.canLeave(group);
+							}
+
+							public UnorderedGroupState snapShot(UnorderedGroup... groups) {
+								return helper.snapShot(groups);
+							}
+							
+						});
+					}
 					Collection<FollowElement> elements = getFollowElements(parser, elementToParse, ruleNames, i);
 					result.addAll(elements);
 				}
@@ -89,8 +144,10 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		return result;
 	}
 	
-	private Collection<FollowElement> getFollowElements(final AbstractInternalContentAssistParser parser,
-			AbstractElement elementToParse, String[] ruleNames, int startIndex) {
+	private Collection<FollowElement> getFollowElements(
+			final AbstractInternalContentAssistParser parser,
+			final AbstractElement elementToParse, 
+			String[] ruleNames, int startIndex) {
 		try {
 			final boolean[] wasEof = new boolean[] { false };
 			final boolean[] announcedEofWithLA = new boolean[] { false };
@@ -104,7 +161,17 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 						if (lookAhead > 1)
 							announcedEofWithLA[0] = true;
 					}
-					wasEof[0] = true;
+					if (parser.isDFAPrediction()) {
+						int lastGrammarElement = parser.getGrammarElements().size() - 1;
+						if (elementToParse instanceof UnorderedGroup && parser.getGrammarElements().get(lastGrammarElement) == elementToParse) {
+							IUnorderedGroupHelper helper = parser.getUnorderedGroupHelper();
+							if (!helper.canLeave((UnorderedGroup) elementToParse)) {
+								wasEof[0] = true;		
+							}
+						}
+					} else {
+						wasEof[0] = true;
+					}
 				}
 				
 				public void announceConsume() {
@@ -195,7 +262,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	}
 
 	private Collection<AbstractElement> getElementsToParse(AbstractElement root) {
-		if (root instanceof Alternatives || root instanceof UnorderedGroup)
+		if (root instanceof Alternatives/* || root instanceof UnorderedGroup*/)
 			return ((CompoundElement) root).getElements();
 		return Collections.singleton(root);
 	}
@@ -219,7 +286,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		parser.setUnorderedGroupHelper(helper);
 		helper.initializeWith(parser);
 		tokens.setListener(parser);
-		return getFollowElements(parser);
+		return Lists.newArrayList(getFollowElements(parser));
 	}
 
 	public void setUnorderedGroupHelper(Provider<IUnorderedGroupHelper> unorderedGroupHelper) {

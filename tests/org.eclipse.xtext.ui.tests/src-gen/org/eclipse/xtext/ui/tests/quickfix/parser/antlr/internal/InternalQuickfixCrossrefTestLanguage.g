@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.quickfix.services.QuickfixCrossrefTestLanguage
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Main";	
    	}
@@ -140,7 +134,7 @@ ruleElement returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -160,9 +154,9 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)	'{' 
+)	otherlv_1='{' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_1(), null);
     }
 (
 (
@@ -188,9 +182,9 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)*(	'ref' 
+)*(	otherlv_3='ref' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getRefKeyword_3_0(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getElementAccess().getRefKeyword_3_0(), null);
     }
 (
 (
@@ -200,15 +194,15 @@ ruleElement returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_4=RULE_ID
 	{
-		createLeafNode(grammarAccess.getElementAccess().getReferencedElementCrossReference_3_1_0(), "referenced"); 
+		createLeafNode(otherlv_4, grammarAccess.getElementAccess().getReferencedElementCrossReference_3_1_0(), "referenced"); 
 	}
 
 )
-))*	'}' 
+))*	otherlv_5='}' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4(), null);
     }
 )
 ;

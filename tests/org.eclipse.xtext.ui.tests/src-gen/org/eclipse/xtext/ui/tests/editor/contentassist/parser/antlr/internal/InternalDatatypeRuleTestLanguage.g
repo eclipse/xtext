@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.DatatypeRuleTest
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalDatatypeRuleTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -132,9 +126,9 @@ ruleTypes returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'Types' 
+)	otherlv_1='Types' 
     {
-        createLeafNode(grammarAccess.getTypesAccess().getTypesKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getTypesAccess().getTypesKeyword_1(), null);
     }
 (
 (
@@ -225,15 +219,15 @@ ruleSimpleType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'Type' 
+(	otherlv_0='Type' 
     {
-        createLeafNode(grammarAccess.getSimpleTypeAccess().getTypeKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getSimpleTypeAccess().getTypeKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getSimpleTypeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getSimpleTypeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -253,9 +247,9 @@ ruleSimpleType returns [EObject current=null]
 	    }
 
 )
-)	';' 
+)	otherlv_2=';' 
     {
-        createLeafNode(grammarAccess.getSimpleTypeAccess().getSemicolonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getSimpleTypeAccess().getSemicolonKeyword_2(), null);
     }
 )
 ;
@@ -280,15 +274,15 @@ ruleCompositeType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'Composite' 
+(	otherlv_0='Composite' 
     {
-        createLeafNode(grammarAccess.getCompositeTypeAccess().getCompositeKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getCompositeTypeAccess().getCompositeKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getCompositeTypeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getCompositeTypeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -308,9 +302,9 @@ ruleCompositeType returns [EObject current=null]
 	    }
 
 )
-)	'base' 
+)	otherlv_2='base' 
     {
-        createLeafNode(grammarAccess.getCompositeTypeAccess().getBaseKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getCompositeTypeAccess().getBaseKeyword_2(), null);
     }
 (
 (
@@ -336,9 +330,9 @@ ruleCompositeType returns [EObject current=null]
 	    }
 
 )
-)	';' 
+)	otherlv_4=';' 
     {
-        createLeafNode(grammarAccess.getCompositeTypeAccess().getSemicolonKeyword_4(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getCompositeTypeAccess().getSemicolonKeyword_4(), null);
     }
 )
 ;
@@ -407,13 +401,13 @@ ruleTypeId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getTypeIdAccess().getIDTerminalRuleCall_0(), null); 
+    createLeafNode(this_ID_0, grammarAccess.getTypeIdAccess().getIDTerminalRuleCall_0(), null); 
     }
 (
 	kw='<' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getTypeIdAccess().getLessThanSignKeyword_1_0(), null); 
+        createLeafNode(kw, grammarAccess.getTypeIdAccess().getLessThanSignKeyword_1_0(), null); 
     }
 
     { 
@@ -430,7 +424,7 @@ ruleTypeId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	kw=',' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getTypeIdAccess().getCommaKeyword_1_2_0(), null); 
+        createLeafNode(kw, grammarAccess.getTypeIdAccess().getCommaKeyword_1_2_0(), null); 
     }
 
     { 
@@ -447,7 +441,7 @@ ruleTypeId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	kw='>' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getTypeIdAccess().getGreaterThanSignKeyword_1_3(), null); 
+        createLeafNode(kw, grammarAccess.getTypeIdAccess().getGreaterThanSignKeyword_1_3(), null); 
     }
 )?)
     ;

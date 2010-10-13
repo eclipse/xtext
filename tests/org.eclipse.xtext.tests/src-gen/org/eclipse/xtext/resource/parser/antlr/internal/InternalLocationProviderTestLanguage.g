@@ -47,12 +47,6 @@ import org.eclipse.xtext.resource.services.LocationProviderTestLanguageGrammarAc
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/resource/parser/antlr/internal/InternalLocationProviderTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -136,15 +130,15 @@ ruleElement returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'element' 
+(	otherlv_0='element' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getElementKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -164,9 +158,9 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)(	'singleref' 
+)(	otherlv_2='singleref' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getSinglerefKeyword_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getElementAccess().getSinglerefKeyword_2_0(), null);
     }
 (
 (
@@ -176,15 +170,15 @@ ruleElement returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_3=RULE_ID
 	{
-		createLeafNode(grammarAccess.getElementAccess().getSinglerefElementCrossReference_2_1_0(), "singleref"); 
+		createLeafNode(otherlv_3, grammarAccess.getElementAccess().getSinglerefElementCrossReference_2_1_0(), "singleref"); 
 	}
 
 )
-))?(	'multiref' 
+))?(	otherlv_4='multiref' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getMultirefKeyword_3_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getElementAccess().getMultirefKeyword_3_0(), null);
     }
 (
 (
@@ -194,9 +188,9 @@ ruleElement returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_5=RULE_ID
 	{
-		createLeafNode(grammarAccess.getElementAccess().getMultirefsElementCrossReference_3_1_0(), "multirefs"); 
+		createLeafNode(otherlv_5, grammarAccess.getElementAccess().getMultirefsElementCrossReference_3_1_0(), "multirefs"); 
 	}
 
 )

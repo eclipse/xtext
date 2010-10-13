@@ -10,6 +10,6 @@ public class ExBeeLangTestLanguageAntlrTokenFileProvider implements IAntlrTokenF
 	
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalExBeeLangTestLanguage.tokens");
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalExBeeLangTestLanguageParser.tokens");
 	}
 }

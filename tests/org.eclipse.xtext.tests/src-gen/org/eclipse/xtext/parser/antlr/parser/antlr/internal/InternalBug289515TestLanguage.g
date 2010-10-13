@@ -47,12 +47,6 @@ import org.eclipse.xtext.parser.antlr.services.Bug289515TestLanguageGrammarAcces
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -89,15 +83,15 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	'1' 
+((	otherlv_0='1' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDigitOneKeyword_0_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getDigitOneKeyword_0_0(), null);
     }
 (
 (
 		lv_value_1_0=	'%' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getValuePercentSignKeyword_0_1_0(), "value"); 
+        createLeafNode(lv_value_1_0, grammarAccess.getModelAccess().getValuePercentSignKeyword_0_1_0(), "value");
     }
  
 	    {
@@ -115,15 +109,15 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'2' 
+    |(	otherlv_2='2' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDigitTwoKeyword_1_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getDigitTwoKeyword_1_0(), null);
     }
 (
 (
 		lv_value_3_0=	'%' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getValuePercentSignKeyword_1_1_0(), "value"); 
+        createLeafNode(lv_value_3_0, grammarAccess.getModelAccess().getValuePercentSignKeyword_1_1_0(), "value");
     }
  
 	    {
@@ -141,15 +135,15 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'3' 
+    |(	otherlv_4='3' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDigitThreeKeyword_2_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getDigitThreeKeyword_2_0(), null);
     }
 (
 (
 		lv_value_5_0=	'\\%' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_2_1_0(), "value"); 
+        createLeafNode(lv_value_5_0, grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_2_1_0(), "value");
     }
  
 	    {
@@ -167,15 +161,15 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'4' 
+    |(	otherlv_6='4' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDigitFourKeyword_3_0(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getModelAccess().getDigitFourKeyword_3_0(), null);
     }
 (
 (
 		lv_value_7_0=	'\\%' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_3_1_0(), "value"); 
+        createLeafNode(lv_value_7_0, grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_3_1_0(), "value");
     }
  
 	    {
@@ -193,15 +187,15 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'5' 
+    |(	otherlv_8='5' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDigitFiveKeyword_4_0(), null); 
+    	createLeafNode(otherlv_8, grammarAccess.getModelAccess().getDigitFiveKeyword_4_0(), null);
     }
 (
 (
 		lv_value_9_0=	'%%' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_4_1_0(), "value"); 
+        createLeafNode(lv_value_9_0, grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_4_1_0(), "value");
     }
  
 	    {
@@ -219,15 +213,15 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'6' 
+    |(	otherlv_10='6' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDigitSixKeyword_5_0(), null); 
+    	createLeafNode(otherlv_10, grammarAccess.getModelAccess().getDigitSixKeyword_5_0(), null);
     }
 (
 (
 		lv_value_11_0=	'%%' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_5_1_0(), "value"); 
+        createLeafNode(lv_value_11_0, grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_5_1_0(), "value");
     }
  
 	    {

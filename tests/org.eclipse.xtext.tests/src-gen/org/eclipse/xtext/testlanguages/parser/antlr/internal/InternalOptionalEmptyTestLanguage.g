@@ -47,12 +47,6 @@ import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammar
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -136,15 +130,15 @@ ruleGreeting returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'hallo' 
+(	otherlv_0='hallo' 
     {
-        createLeafNode(grammarAccess.getGreetingAccess().getHalloKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getGreetingAccess().getHalloKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {

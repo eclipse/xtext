@@ -47,12 +47,6 @@ import org.eclipse.xtext.resource.services.EObjectAtOffsetTestLanguageGrammarAcc
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/resource/parser/antlr/internal/InternalEObjectAtOffsetTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -186,9 +180,9 @@ ruleAbstractBar returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'foobar' 
+)	otherlv_2='foobar' 
     {
-        createLeafNode(grammarAccess.getAbstractBarAccess().getFoobarKeyword_1_1(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getAbstractBarAccess().getFoobarKeyword_1_1(), null);
     }
 (
 (
@@ -198,9 +192,9 @@ ruleAbstractBar returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_3=RULE_ID
 	{
-		createLeafNode(grammarAccess.getAbstractBarAccess().getFooFooCrossReference_1_2_0(), "foo"); 
+		createLeafNode(otherlv_3, grammarAccess.getAbstractBarAccess().getFooFooCrossReference_1_2_0(), "foo"); 
 	}
 
 )
@@ -227,15 +221,15 @@ ruleBar returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'bar' 
+(	otherlv_0='bar' 
     {
-        createLeafNode(grammarAccess.getBarAccess().getBarKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getBarAccess().getBarKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getBarAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getBarAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -263,15 +257,15 @@ ruleBar returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_2=RULE_ID
 	{
-		createLeafNode(grammarAccess.getBarAccess().getFooFooCrossReference_2_0(), "foo"); 
+		createLeafNode(otherlv_2, grammarAccess.getBarAccess().getFooFooCrossReference_2_0(), "foo"); 
 	}
 
 )
-)(	',' 
+)(	otherlv_3=',' 
     {
-        createLeafNode(grammarAccess.getBarAccess().getCommaKeyword_3_0(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getBarAccess().getCommaKeyword_3_0(), null);
     }
 (
 (
@@ -281,9 +275,9 @@ ruleBar returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_4=RULE_ID
 	{
-		createLeafNode(grammarAccess.getBarAccess().getFooFooCrossReference_3_1_0(), "foo"); 
+		createLeafNode(otherlv_4, grammarAccess.getBarAccess().getFooFooCrossReference_3_1_0(), "foo"); 
 	}
 
 )
@@ -310,15 +304,15 @@ ruleFoo returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'foo' 
+(	otherlv_0='foo' 
     {
-        createLeafNode(grammarAccess.getFooAccess().getFooKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getFooAccess().getFooKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getFooAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getFooAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {

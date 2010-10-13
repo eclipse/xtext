@@ -47,12 +47,6 @@ import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLang
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Start";	
    	}
@@ -93,7 +87,7 @@ ruleStart returns [EObject current=null]
 (
 		lv_featureA_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), "featureA"); 
+			createLeafNode(lv_featureA_0_0, grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), "featureA"); 
 		}
 		{
 	        if ($current==null) {

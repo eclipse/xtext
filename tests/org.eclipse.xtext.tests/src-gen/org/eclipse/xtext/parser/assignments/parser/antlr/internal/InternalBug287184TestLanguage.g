@@ -47,12 +47,6 @@ import org.eclipse.xtext.parser.assignments.services.Bug287184TestLanguageGramma
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug287184TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -89,9 +83,9 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'model' 
+(	otherlv_0='model' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getModelKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0(), null);
     }
 (
 (
@@ -190,16 +184,16 @@ ruleDetail returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'detail' 
+(	otherlv_0='detail' 
     {
-        createLeafNode(grammarAccess.getDetailAccess().getDetailKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getDetailAccess().getDetailKeyword_0(), null);
     }
 (
 (
 (
 		lv_visibility_1_1=	'private' 
     {
-        createLeafNode(grammarAccess.getDetailAccess().getVisibilityPrivateKeyword_1_0_0(), "visibility"); 
+        createLeafNode(lv_visibility_1_1, grammarAccess.getDetailAccess().getVisibilityPrivateKeyword_1_0_0(), "visibility");
     }
  
 	    {
@@ -217,7 +211,7 @@ ruleDetail returns [EObject current=null]
 
     |		lv_visibility_1_2=	'protected' 
     {
-        createLeafNode(grammarAccess.getDetailAccess().getVisibilityProtectedKeyword_1_0_1(), "visibility"); 
+        createLeafNode(lv_visibility_1_2, grammarAccess.getDetailAccess().getVisibilityProtectedKeyword_1_0_1(), "visibility");
     }
  
 	    {
@@ -235,7 +229,7 @@ ruleDetail returns [EObject current=null]
 
     |		lv_visibility_1_3=	'public' 
     {
-        createLeafNode(grammarAccess.getDetailAccess().getVisibilityPublicKeyword_1_0_2(), "visibility"); 
+        createLeafNode(lv_visibility_1_3, grammarAccess.getDetailAccess().getVisibilityPublicKeyword_1_0_2(), "visibility");
     }
  
 	    {
@@ -293,9 +287,9 @@ ruleAssociatedDetail returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'associated' 
+(	otherlv_0='associated' 
     {
-        createLeafNode(grammarAccess.getAssociatedDetailAccess().getAssociatedKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getAssociatedDetailAccess().getAssociatedKeyword_0(), null);
     }
 (
 (
@@ -313,9 +307,9 @@ ruleAssociatedDetail returns [EObject current=null]
 	    }
 
 )
-)	';' 
+)	otherlv_2=';' 
     {
-        createLeafNode(grammarAccess.getAssociatedDetailAccess().getSemicolonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getAssociatedDetailAccess().getSemicolonKeyword_2(), null);
     }
 )
 ;
@@ -345,20 +339,20 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
+    createLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
     }
 (
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
+        createLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
     }
     this_ID_2=RULE_ID    {
 		$current.merge(this_ID_2);
     }
 
     { 
-    createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), null); 
+    createLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), null); 
     }
 )*)
     ;

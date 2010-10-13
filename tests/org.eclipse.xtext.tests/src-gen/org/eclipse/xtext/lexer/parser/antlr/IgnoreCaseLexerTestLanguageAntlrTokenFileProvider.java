@@ -10,6 +10,6 @@ public class IgnoreCaseLexerTestLanguageAntlrTokenFileProvider implements IAntlr
 	
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/lexer/parser/antlr/internal/InternalIgnoreCaseLexerTestLanguage.tokens");
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/lexer/parser/antlr/internal/InternalIgnoreCaseLexerTestLanguageParser.tokens");
 	}
 }

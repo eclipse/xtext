@@ -47,12 +47,6 @@ import org.eclipse.xtext.linking.services.LangATestLanguageGrammarAccess;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Main";	
    	}
@@ -160,15 +154,15 @@ ruleImport returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'import' 
+(	otherlv_0='import' 
     {
-        createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0(), null);
     }
 (
 (
 		lv_uri_1_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getImportAccess().getUriSTRINGTerminalRuleCall_1_0(), "uri"); 
+			createLeafNode(lv_uri_1_0, grammarAccess.getImportAccess().getUriSTRINGTerminalRuleCall_1_0(), "uri"); 
 		}
 		{
 	        if ($current==null) {
@@ -211,15 +205,15 @@ ruleType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'type' 
+(	otherlv_0='type' 
     {
-        createLeafNode(grammarAccess.getTypeAccess().getTypeKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getTypeAccess().getTypeKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -239,9 +233,9 @@ ruleType returns [EObject current=null]
 	    }
 
 )
-)(	'extends' 
+)(	otherlv_2='extends' 
     {
-        createLeafNode(grammarAccess.getTypeAccess().getExtendsKeyword_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getTypeAccess().getExtendsKeyword_2_0(), null);
     }
 (
 (
@@ -251,15 +245,15 @@ ruleType returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_3=RULE_ID
 	{
-		createLeafNode(grammarAccess.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), "extends"); 
+		createLeafNode(otherlv_3, grammarAccess.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), "extends"); 
 	}
 
 )
-))?(	'implements' 
+))?(	otherlv_4='implements' 
     {
-        createLeafNode(grammarAccess.getTypeAccess().getImplementsKeyword_3_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getTypeAccess().getImplementsKeyword_3_0(), null);
     }
 (
 (
@@ -269,15 +263,15 @@ ruleType returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_5=RULE_ID
 	{
-		createLeafNode(grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_1_0(), "implements"); 
+		createLeafNode(otherlv_5, grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_1_0(), "implements"); 
 	}
 
 )
-)(	',' 
+)(	otherlv_6=',' 
     {
-        createLeafNode(grammarAccess.getTypeAccess().getCommaKeyword_3_2_0(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getTypeAccess().getCommaKeyword_3_2_0(), null);
     }
 (
 (
@@ -287,9 +281,9 @@ ruleType returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_7=RULE_ID
 	{
-		createLeafNode(grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_2_1_0(), "implements"); 
+		createLeafNode(otherlv_7, grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_2_1_0(), "implements"); 
 	}
 
 )

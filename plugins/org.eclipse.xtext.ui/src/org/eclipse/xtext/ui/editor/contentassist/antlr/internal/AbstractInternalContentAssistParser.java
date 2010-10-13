@@ -14,9 +14,11 @@ import java.util.Map;
 import java.util.Set;
 
 import org.antlr.runtime.BitSet;
+import org.antlr.runtime.FailedPredicateException;
 import org.antlr.runtime.IntStream;
 import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
 import org.eclipse.emf.ecore.EObject;
@@ -75,9 +77,12 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			result.setGrammarElement(current);
 			result.setTrace(Lists.newArrayList(Iterators.filter(grammarElements.iterator(), AbstractElement.class)));
 			result.setLocalTrace(Lists.newArrayList(Iterators.filter(localTrace.iterator(), AbstractElement.class)));
-			if (current instanceof UnorderedGroup && indexToHandledElements != null) {
-				int index = grammarElements.lastIndexOf(current);
-				result.setHandledUnorderedGroupElements(Lists.newArrayList(Iterators.filter(indexToHandledElements.get(index).iterator(), AbstractElement.class)));
+			if (current instanceof UnorderedGroup) {
+				if (indexToHandledElements != null) {
+					int index = grammarElements.lastIndexOf(current);
+					List<AbstractElement> alreadyHandled = Lists.newArrayList(Iterators.filter(indexToHandledElements.get(index).iterator(), AbstractElement.class));
+					result.setHandledUnorderedGroupElements(alreadyHandled);
+				}
 			}
 			return result;
 		}
@@ -106,10 +111,18 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	protected int predictionLevel = 0;
 	protected int currentMarker;
 	protected int firstMarker;
+	protected boolean failedPredicateAtEOF = false;
 	protected Multimap<Integer, AbstractElement> indexToHandledElements;
 	protected IUnorderedGroupHelper unorderedGroupHelper;
 	protected IFollowElementFactory followElementFactory = new DefaultFollowElementFactory();
 
+	public AbstractInternalContentAssistParser(TokenStream input, RecognizerSharedState state) {
+		super(input, state);
+		this.grammarElements = new ArrayList<EObject>();
+		this.localTrace = new ArrayList<EObject>();
+		this.followElements = new LinkedHashSet<FollowElement>();
+	}
+	
 	public AbstractInternalContentAssistParser(TokenStream input) {
 		super(input);
 		this.grammarElements = new ArrayList<EObject>();
@@ -145,6 +158,9 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		if (recoveryListener != null)
 			recoveryListener.beginErrorRecovery();
 		removeUnexpectedElements();
+		if (ex instanceof FailedPredicateException && ex.token.getType() == Token.EOF) {
+			failedPredicateAtEOF = true;
+		}
 		super.recover(stream, ex);
 		if (recoveryListener != null)
 			recoveryListener.endErrorRecovery();
@@ -160,29 +176,6 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		// don't call super, since it would do a plain vanilla
 		// System.err.println(msg);
 	}
-	
-	@Override
-	public void recoverFromMismatchedToken(IntStream in, RecognitionException re, int ttype, BitSet follow)
-			throws RecognitionException {
-		// inlined super call because we want to get rid of the System.err.println(..)
-		// System.err.println("BR.recoverFromMismatchedToken");
-		// if next token is what we are looking for then "delete" this token
-		if ( input.LA(2)==ttype ) {
-			reportError(re);
-			/*
-			System.err.println("recoverFromMismatchedToken deleting "+input.LT(1)+
-							   " since "+input.LT(2)+" is what we want");
-			*/
-			beginResync();
-			input.consume(); // simply delete extra token
-			endResync();
-			input.consume(); // move past ttype token as if all were ok
-			return;
-		}
-		if ( !recoverFromMismatchedElement(input, re,follow) ) {
-			throw re;
-		}
-	}
 
 	protected abstract Grammar getGrammar();
 
@@ -193,7 +186,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 
 	protected void restoreStackSize(int stackSize) {
-		if (backtracking == 0) {
+		if (state.backtracking == 0) {
 			removeUnexpectedElements();
 			this.stackSize = stackSize;
 		}
@@ -216,7 +209,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	protected void selectEofStrategy() {
 		if (mismatch) {
 			delegate = createMismatchStrategy();
-		} else if (!errorRecovery) {
+		} else if (!state.errorRecovery) {
 			delegate = createNotErrorRecoveryStrategy();
 		} else {
 			delegate = createErrorRecoveryStrategy();
@@ -225,6 +218,8 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			delegate = createPredictionStrategy();
 		} 
 	}
+	
+	
 
 	protected StreamAdapter createPredictionStrategy() {
 		return new StreamAdapter() {
@@ -250,33 +245,44 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 
 			public void announceEof(int lookAhead) {
 				if (predictionLevel == 0) {
-					if (!wasMismatch && (!errorRecovery || !resyncing)) {
+					if (!wasMismatch && (!state.errorRecovery || !resyncing)) {
 						AbstractElement current = getCurrentGrammarElement();
 						if (current != null
 								&& (lastAddedElement == null || 
 									!EcoreUtil.isAncestor(current, lastAddedElement))) {
-							if (errorRecovery) {
-								if (globalLastAddedElement == null || GrammarUtil.isOptionalCardinality(globalLastAddedElement)
-										|| GrammarUtil.isOneOrMoreCardinality(globalLastAddedElement)) {
-									if (marked)
-										lookAhead+=lookAheadAddOn;
-									FollowElement followElement = followElementFactory.createFollowElement(current, lookAhead);
-									followElements.add(followElement);
-									lastAddedElement = current;
+							if (state.errorRecovery) {
+								if (!failedPredicateAtEOF && (globalLastAddedElement != current && (globalLastAddedElement == null 
+										|| GrammarUtil.isOptionalCardinality(globalLastAddedElement)
+										|| GrammarUtil.isOneOrMoreCardinality(globalLastAddedElement)))) {
+									createAndAddFollowElement(current, lookAhead);
 								}
 							} else {
-								if (marked)
-									lookAhead+=lookAheadAddOn;
-								FollowElement followElement = followElementFactory.createFollowElement(current, lookAhead);
-								followElements.add(followElement);
-								lastAddedElement = current;
+								if (globalLastAddedElement != current)
+									createAndAddFollowElement(current, lookAhead);
 							}
 						}
 					}
+					if (mismatch && !wasMismatch && !failedPredicateAtEOF) {
+						AbstractElement current = getCurrentGrammarElement();
+						if (current != null
+								&& (lastAddedElement == null || 
+									!EcoreUtil.isAncestor(current, lastAddedElement))) {
+							createAndAddFollowElement(current, lookAhead);
+						}
+					}
 				} else {
-					privateDelegate.announceEof(lookAhead);
+					if (globalLastAddedElement != getCurrentGrammarElement())
+						privateDelegate.announceEof(lookAhead);
 				}
 				wasMismatch |= mismatch;
+			}
+
+			protected void createAndAddFollowElement(AbstractElement current, int lookAhead) {
+				if (marked)
+					lookAhead+=lookAheadAddOn;
+				FollowElement followElement = followElementFactory.createFollowElement(current, lookAhead);
+				followElements.add(followElement);
+				lastAddedElement = current;
 			}
 
 		};
@@ -306,7 +312,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		return new StreamAdapter() {
 
 			public void announceEof(int lookAhead) {
-				if (!errorRecovery && !mismatch && (backtracking == 0 || marked)) {
+				if (!state.errorRecovery && !mismatch && (state.backtracking == 0 || marked)) {
 					AbstractElement current = getCurrentGrammarElement();
 					if (current != null) {
 						if (marked)
@@ -324,7 +330,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			private boolean wasErrorRecovery = false;
 			
 			public void announceEof(int lookAhead) {
-				wasErrorRecovery = wasErrorRecovery || errorRecovery;
+				wasErrorRecovery = wasErrorRecovery || state.errorRecovery;
 				if (!wasErrorRecovery && !mismatch) {
 					AbstractElement current = getCurrentGrammarElement();
 					if (current != null) {
@@ -348,16 +354,16 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 	
 	@Override
-	protected void mismatch(IntStream input, int ttype, BitSet follow) throws RecognitionException {
+	protected Object recoverFromMismatchedToken(IntStream input, int ttype, BitSet follow) throws RecognitionException {
 		try {
 			mismatch = true;
-			super.mismatch(input, ttype, follow);
+			return super.recoverFromMismatchedToken(input, ttype, follow);
 		}
 		finally {
 			mismatch = false;
 		}
 	}
-
+	
 	protected AbstractElement getCurrentGrammarElement() {
 		for (int i = grammarElements.size() - 1; i >= 0; i--) {
 			EObject result = grammarElements.get(grammarElements.size() - 1);
@@ -384,7 +390,6 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		LookAheadTerminalRuleCall result = new LookAheadTerminalRuleCall();
 		result.setToken(token);
 		String ruleName = tokenName.substring(5);
-		//		GrammarUtil.findRuleForName(grammar, tokenName); // does not work, as we change the terminal rule 'id' to antlr rule 'ID'
 		if (terminalRules == null)
 			terminalRules = GrammarUtil.allTerminalRules(grammar);
 		for (TerminalRule rule : terminalRules) {
@@ -434,6 +439,10 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		predictionLevel++;
 	}
 	
+	public boolean isDFAPrediction() {
+		return predictionLevel != 0;
+	}
+	
 	public void endDFAPrediction() {
 		predictionLevel--;
 	}
@@ -478,15 +487,5 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	public IUnorderedGroupHelper getUnorderedGroupHelper() {
 		return unorderedGroupHelper;
 	}
-	
-	@Override
-	// This is a WORKAROUND for https://bugs.eclipse.org/bugs/show_bug.cgi?id=326509
-	protected void pushFollow(BitSet fset) {
-		if ((_fsp + 1) >= following.length) {
-			BitSet[] f = new BitSet[following.length * 2];
-			System.arraycopy(following, 0, f, 0, following.length);
-			following = f;
-		}
-		following[++_fsp] = fset;
-	}
+
 }

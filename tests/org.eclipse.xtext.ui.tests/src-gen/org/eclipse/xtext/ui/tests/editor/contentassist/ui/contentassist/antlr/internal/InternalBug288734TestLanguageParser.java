@@ -27,19 +27,32 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
+    public static final int T__12=12;
     public static final int RULE_WS=9;
-    public static final int EOF=-1;
     public static final int RULE_INT=6;
+    public static final int EOF=-1;
+    public static final int T__13=13;
     public static final int RULE_STRING=5;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__14=14;
+    public static final int T__11=11;
+    public static final int T__15=15;
+
+    // delegates
+    // delegators
+
 
         public InternalBug288734TestLanguageParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalBug288734TestLanguageParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalBug288734TestLanguageParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g"; }
 
 
@@ -63,7 +76,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
 
 
 
-    // $ANTLR start entryRuleModel
+    // $ANTLR start "entryRuleModel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:61:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
@@ -73,7 +86,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
              before(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel61);
             ruleModel();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getModelRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel68); 
@@ -89,10 +103,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end entryRuleModel
+    // $ANTLR end "entryRuleModel"
 
 
-    // $ANTLR start ruleModel
+    // $ANTLR start "ruleModel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:70:1: ruleModel : ( ( rule__Model__ConstantsAssignment ) ) ;
     public final void ruleModel() throws RecognitionException {
 
@@ -111,7 +125,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__Model__ConstantsAssignment_in_ruleModel94);
             rule__Model__ConstantsAssignment();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -135,10 +150,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end ruleModel
+    // $ANTLR end "ruleModel"
 
 
-    // $ANTLR start entryRuleTConstant
+    // $ANTLR start "entryRuleTConstant"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:89:1: entryRuleTConstant : ruleTConstant EOF ;
     public final void entryRuleTConstant() throws RecognitionException {
         try {
@@ -148,7 +163,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
              before(grammarAccess.getTConstantRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTConstant_in_entryRuleTConstant121);
             ruleTConstant();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTConstantRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTConstant128); 
@@ -164,10 +180,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end entryRuleTConstant
+    // $ANTLR end "entryRuleTConstant"
 
 
-    // $ANTLR start ruleTConstant
+    // $ANTLR start "ruleTConstant"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:98:1: ruleTConstant : ( ( rule__TConstant__Alternatives ) ) ;
     public final void ruleTConstant() throws RecognitionException {
 
@@ -186,7 +202,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TConstant__Alternatives_in_ruleTConstant154);
             rule__TConstant__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -210,10 +227,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end ruleTConstant
+    // $ANTLR end "ruleTConstant"
 
 
-    // $ANTLR start entryRuleTStringConstant
+    // $ANTLR start "entryRuleTStringConstant"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:117:1: entryRuleTStringConstant : ruleTStringConstant EOF ;
     public final void entryRuleTStringConstant() throws RecognitionException {
         try {
@@ -223,7 +240,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
              before(grammarAccess.getTStringConstantRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTStringConstant_in_entryRuleTStringConstant181);
             ruleTStringConstant();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTStringConstantRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTStringConstant188); 
@@ -239,10 +257,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end entryRuleTStringConstant
+    // $ANTLR end "entryRuleTStringConstant"
 
 
-    // $ANTLR start ruleTStringConstant
+    // $ANTLR start "ruleTStringConstant"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:126:1: ruleTStringConstant : ( ( rule__TStringConstant__Group__0 ) ) ;
     public final void ruleTStringConstant() throws RecognitionException {
 
@@ -261,7 +279,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__0_in_ruleTStringConstant214);
             rule__TStringConstant__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -285,10 +304,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end ruleTStringConstant
+    // $ANTLR end "ruleTStringConstant"
 
 
-    // $ANTLR start entryRuleTIntegerConstant
+    // $ANTLR start "entryRuleTIntegerConstant"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:145:1: entryRuleTIntegerConstant : ruleTIntegerConstant EOF ;
     public final void entryRuleTIntegerConstant() throws RecognitionException {
         try {
@@ -298,7 +317,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
              before(grammarAccess.getTIntegerConstantRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTIntegerConstant_in_entryRuleTIntegerConstant241);
             ruleTIntegerConstant();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTIntegerConstantRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTIntegerConstant248); 
@@ -314,10 +334,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end entryRuleTIntegerConstant
+    // $ANTLR end "entryRuleTIntegerConstant"
 
 
-    // $ANTLR start ruleTIntegerConstant
+    // $ANTLR start "ruleTIntegerConstant"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:154:1: ruleTIntegerConstant : ( ( rule__TIntegerConstant__Group__0 ) ) ;
     public final void ruleTIntegerConstant() throws RecognitionException {
 
@@ -336,7 +356,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__0_in_ruleTIntegerConstant274);
             rule__TIntegerConstant__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -360,10 +381,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end ruleTIntegerConstant
+    // $ANTLR end "ruleTIntegerConstant"
 
 
-    // $ANTLR start entryRuleTBooleanConstant
+    // $ANTLR start "entryRuleTBooleanConstant"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:173:1: entryRuleTBooleanConstant : ruleTBooleanConstant EOF ;
     public final void entryRuleTBooleanConstant() throws RecognitionException {
         try {
@@ -373,7 +394,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
              before(grammarAccess.getTBooleanConstantRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTBooleanConstant_in_entryRuleTBooleanConstant301);
             ruleTBooleanConstant();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTBooleanConstantRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTBooleanConstant308); 
@@ -389,10 +411,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end entryRuleTBooleanConstant
+    // $ANTLR end "entryRuleTBooleanConstant"
 
 
-    // $ANTLR start ruleTBooleanConstant
+    // $ANTLR start "ruleTBooleanConstant"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:182:1: ruleTBooleanConstant : ( ( rule__TBooleanConstant__Group__0 ) ) ;
     public final void ruleTBooleanConstant() throws RecognitionException {
 
@@ -411,7 +433,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__0_in_ruleTBooleanConstant334);
             rule__TBooleanConstant__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -435,10 +458,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end ruleTBooleanConstant
+    // $ANTLR end "ruleTBooleanConstant"
 
 
-    // $ANTLR start entryRuleTAnnotation
+    // $ANTLR start "entryRuleTAnnotation"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:201:1: entryRuleTAnnotation : ruleTAnnotation EOF ;
     public final void entryRuleTAnnotation() throws RecognitionException {
         try {
@@ -448,7 +471,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
              before(grammarAccess.getTAnnotationRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTAnnotation_in_entryRuleTAnnotation361);
             ruleTAnnotation();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTAnnotationRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTAnnotation368); 
@@ -464,10 +488,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end entryRuleTAnnotation
+    // $ANTLR end "entryRuleTAnnotation"
 
 
-    // $ANTLR start ruleTAnnotation
+    // $ANTLR start "ruleTAnnotation"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:210:1: ruleTAnnotation : ( ( rule__TAnnotation__Group__0 ) ) ;
     public final void ruleTAnnotation() throws RecognitionException {
 
@@ -486,7 +510,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TAnnotation__Group__0_in_ruleTAnnotation394);
             rule__TAnnotation__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -510,10 +535,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end ruleTAnnotation
+    // $ANTLR end "ruleTAnnotation"
 
 
-    // $ANTLR start rule__TConstant__Alternatives
+    // $ANTLR start "rule__TConstant__Alternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:229:1: rule__TConstant__Alternatives : ( ( ruleTStringConstant ) | ( ruleTIntegerConstant ) | ( ruleTBooleanConstant ) );
     public final void rule__TConstant__Alternatives() throws RecognitionException {
 
@@ -533,7 +558,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
                      before(grammarAccess.getTConstantAccess().getTStringConstantParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleTStringConstant_in_rule__TConstant__Alternatives430);
                     ruleTStringConstant();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTConstantAccess().getTStringConstantParserRuleCall_0()); 
 
@@ -551,7 +577,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
                      before(grammarAccess.getTConstantAccess().getTIntegerConstantParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleTIntegerConstant_in_rule__TConstant__Alternatives447);
                     ruleTIntegerConstant();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTConstantAccess().getTIntegerConstantParserRuleCall_1()); 
 
@@ -569,7 +596,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
                      before(grammarAccess.getTConstantAccess().getTBooleanConstantParserRuleCall_2()); 
                     pushFollow(FollowSets000.FOLLOW_ruleTBooleanConstant_in_rule__TConstant__Alternatives464);
                     ruleTBooleanConstant();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTConstantAccess().getTBooleanConstantParserRuleCall_2()); 
 
@@ -592,10 +620,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TConstant__Alternatives
+    // $ANTLR end "rule__TConstant__Alternatives"
 
 
-    // $ANTLR start rule__TStringConstant__Group__0
+    // $ANTLR start "rule__TStringConstant__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:259:1: rule__TStringConstant__Group__0 : rule__TStringConstant__Group__0__Impl rule__TStringConstant__Group__1 ;
     public final void rule__TStringConstant__Group__0() throws RecognitionException {
 
@@ -607,11 +635,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__0__Impl_in_rule__TStringConstant__Group__0494);
             rule__TStringConstant__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__1_in_rule__TStringConstant__Group__0497);
             rule__TStringConstant__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -628,10 +658,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TStringConstant__Group__0
+    // $ANTLR end "rule__TStringConstant__Group__0"
 
 
-    // $ANTLR start rule__TStringConstant__Group__0__Impl
+    // $ANTLR start "rule__TStringConstant__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:271:1: rule__TStringConstant__Group__0__Impl : ( ( rule__TStringConstant__AnnotationsAssignment_0 )* ) ;
     public final void rule__TStringConstant__Group__0__Impl() throws RecognitionException {
 
@@ -662,7 +692,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__AnnotationsAssignment_0_in_rule__TStringConstant__Group__0__Impl524);
             	    rule__TStringConstant__AnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -692,10 +723,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TStringConstant__Group__0__Impl
+    // $ANTLR end "rule__TStringConstant__Group__0__Impl"
 
 
-    // $ANTLR start rule__TStringConstant__Group__1
+    // $ANTLR start "rule__TStringConstant__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:288:1: rule__TStringConstant__Group__1 : rule__TStringConstant__Group__1__Impl rule__TStringConstant__Group__2 ;
     public final void rule__TStringConstant__Group__1() throws RecognitionException {
 
@@ -707,11 +738,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__1__Impl_in_rule__TStringConstant__Group__1555);
             rule__TStringConstant__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__2_in_rule__TStringConstant__Group__1558);
             rule__TStringConstant__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -728,10 +761,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TStringConstant__Group__1
+    // $ANTLR end "rule__TStringConstant__Group__1"
 
 
-    // $ANTLR start rule__TStringConstant__Group__1__Impl
+    // $ANTLR start "rule__TStringConstant__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:300:1: rule__TStringConstant__Group__1__Impl : ( 'constant' ) ;
     public final void rule__TStringConstant__Group__1__Impl() throws RecognitionException {
 
@@ -765,10 +798,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TStringConstant__Group__1__Impl
+    // $ANTLR end "rule__TStringConstant__Group__1__Impl"
 
 
-    // $ANTLR start rule__TStringConstant__Group__2
+    // $ANTLR start "rule__TStringConstant__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:319:1: rule__TStringConstant__Group__2 : rule__TStringConstant__Group__2__Impl rule__TStringConstant__Group__3 ;
     public final void rule__TStringConstant__Group__2() throws RecognitionException {
 
@@ -780,11 +813,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__2__Impl_in_rule__TStringConstant__Group__2617);
             rule__TStringConstant__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__3_in_rule__TStringConstant__Group__2620);
             rule__TStringConstant__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -801,10 +836,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TStringConstant__Group__2
+    // $ANTLR end "rule__TStringConstant__Group__2"
 
 
-    // $ANTLR start rule__TStringConstant__Group__2__Impl
+    // $ANTLR start "rule__TStringConstant__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:331:1: rule__TStringConstant__Group__2__Impl : ( 'string' ) ;
     public final void rule__TStringConstant__Group__2__Impl() throws RecognitionException {
 
@@ -838,10 +873,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TStringConstant__Group__2__Impl
+    // $ANTLR end "rule__TStringConstant__Group__2__Impl"
 
 
-    // $ANTLR start rule__TStringConstant__Group__3
+    // $ANTLR start "rule__TStringConstant__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:350:1: rule__TStringConstant__Group__3 : rule__TStringConstant__Group__3__Impl ;
     public final void rule__TStringConstant__Group__3() throws RecognitionException {
 
@@ -853,7 +888,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__3__Impl_in_rule__TStringConstant__Group__3679);
             rule__TStringConstant__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -870,10 +906,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TStringConstant__Group__3
+    // $ANTLR end "rule__TStringConstant__Group__3"
 
 
-    // $ANTLR start rule__TStringConstant__Group__3__Impl
+    // $ANTLR start "rule__TStringConstant__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:361:1: rule__TStringConstant__Group__3__Impl : ( ( rule__TStringConstant__NameAssignment_3 ) ) ;
     public final void rule__TStringConstant__Group__3__Impl() throws RecognitionException {
 
@@ -892,7 +928,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__NameAssignment_3_in_rule__TStringConstant__Group__3__Impl706);
             rule__TStringConstant__NameAssignment_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -916,10 +953,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TStringConstant__Group__3__Impl
+    // $ANTLR end "rule__TStringConstant__Group__3__Impl"
 
 
-    // $ANTLR start rule__TIntegerConstant__Group__0
+    // $ANTLR start "rule__TIntegerConstant__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:386:1: rule__TIntegerConstant__Group__0 : rule__TIntegerConstant__Group__0__Impl rule__TIntegerConstant__Group__1 ;
     public final void rule__TIntegerConstant__Group__0() throws RecognitionException {
 
@@ -931,11 +968,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__0__Impl_in_rule__TIntegerConstant__Group__0744);
             rule__TIntegerConstant__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__1_in_rule__TIntegerConstant__Group__0747);
             rule__TIntegerConstant__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -952,10 +991,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TIntegerConstant__Group__0
+    // $ANTLR end "rule__TIntegerConstant__Group__0"
 
 
-    // $ANTLR start rule__TIntegerConstant__Group__0__Impl
+    // $ANTLR start "rule__TIntegerConstant__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:398:1: rule__TIntegerConstant__Group__0__Impl : ( ( rule__TIntegerConstant__AnnotationsAssignment_0 )* ) ;
     public final void rule__TIntegerConstant__Group__0__Impl() throws RecognitionException {
 
@@ -986,7 +1025,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__AnnotationsAssignment_0_in_rule__TIntegerConstant__Group__0__Impl774);
             	    rule__TIntegerConstant__AnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -1016,10 +1056,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TIntegerConstant__Group__0__Impl
+    // $ANTLR end "rule__TIntegerConstant__Group__0__Impl"
 
 
-    // $ANTLR start rule__TIntegerConstant__Group__1
+    // $ANTLR start "rule__TIntegerConstant__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:415:1: rule__TIntegerConstant__Group__1 : rule__TIntegerConstant__Group__1__Impl rule__TIntegerConstant__Group__2 ;
     public final void rule__TIntegerConstant__Group__1() throws RecognitionException {
 
@@ -1031,11 +1071,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__1__Impl_in_rule__TIntegerConstant__Group__1805);
             rule__TIntegerConstant__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__2_in_rule__TIntegerConstant__Group__1808);
             rule__TIntegerConstant__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1052,10 +1094,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TIntegerConstant__Group__1
+    // $ANTLR end "rule__TIntegerConstant__Group__1"
 
 
-    // $ANTLR start rule__TIntegerConstant__Group__1__Impl
+    // $ANTLR start "rule__TIntegerConstant__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:427:1: rule__TIntegerConstant__Group__1__Impl : ( 'constant' ) ;
     public final void rule__TIntegerConstant__Group__1__Impl() throws RecognitionException {
 
@@ -1089,10 +1131,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TIntegerConstant__Group__1__Impl
+    // $ANTLR end "rule__TIntegerConstant__Group__1__Impl"
 
 
-    // $ANTLR start rule__TIntegerConstant__Group__2
+    // $ANTLR start "rule__TIntegerConstant__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:446:1: rule__TIntegerConstant__Group__2 : rule__TIntegerConstant__Group__2__Impl rule__TIntegerConstant__Group__3 ;
     public final void rule__TIntegerConstant__Group__2() throws RecognitionException {
 
@@ -1104,11 +1146,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__2__Impl_in_rule__TIntegerConstant__Group__2867);
             rule__TIntegerConstant__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__3_in_rule__TIntegerConstant__Group__2870);
             rule__TIntegerConstant__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1125,10 +1169,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TIntegerConstant__Group__2
+    // $ANTLR end "rule__TIntegerConstant__Group__2"
 
 
-    // $ANTLR start rule__TIntegerConstant__Group__2__Impl
+    // $ANTLR start "rule__TIntegerConstant__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:458:1: rule__TIntegerConstant__Group__2__Impl : ( 'integer' ) ;
     public final void rule__TIntegerConstant__Group__2__Impl() throws RecognitionException {
 
@@ -1162,10 +1206,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TIntegerConstant__Group__2__Impl
+    // $ANTLR end "rule__TIntegerConstant__Group__2__Impl"
 
 
-    // $ANTLR start rule__TIntegerConstant__Group__3
+    // $ANTLR start "rule__TIntegerConstant__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:477:1: rule__TIntegerConstant__Group__3 : rule__TIntegerConstant__Group__3__Impl ;
     public final void rule__TIntegerConstant__Group__3() throws RecognitionException {
 
@@ -1177,7 +1221,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__3__Impl_in_rule__TIntegerConstant__Group__3929);
             rule__TIntegerConstant__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1194,10 +1239,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TIntegerConstant__Group__3
+    // $ANTLR end "rule__TIntegerConstant__Group__3"
 
 
-    // $ANTLR start rule__TIntegerConstant__Group__3__Impl
+    // $ANTLR start "rule__TIntegerConstant__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:488:1: rule__TIntegerConstant__Group__3__Impl : ( ( rule__TIntegerConstant__NameAssignment_3 ) ) ;
     public final void rule__TIntegerConstant__Group__3__Impl() throws RecognitionException {
 
@@ -1216,7 +1261,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__NameAssignment_3_in_rule__TIntegerConstant__Group__3__Impl956);
             rule__TIntegerConstant__NameAssignment_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1240,10 +1286,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TIntegerConstant__Group__3__Impl
+    // $ANTLR end "rule__TIntegerConstant__Group__3__Impl"
 
 
-    // $ANTLR start rule__TBooleanConstant__Group__0
+    // $ANTLR start "rule__TBooleanConstant__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:513:1: rule__TBooleanConstant__Group__0 : rule__TBooleanConstant__Group__0__Impl rule__TBooleanConstant__Group__1 ;
     public final void rule__TBooleanConstant__Group__0() throws RecognitionException {
 
@@ -1255,11 +1301,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__0__Impl_in_rule__TBooleanConstant__Group__0994);
             rule__TBooleanConstant__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__1_in_rule__TBooleanConstant__Group__0997);
             rule__TBooleanConstant__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1276,10 +1324,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TBooleanConstant__Group__0
+    // $ANTLR end "rule__TBooleanConstant__Group__0"
 
 
-    // $ANTLR start rule__TBooleanConstant__Group__0__Impl
+    // $ANTLR start "rule__TBooleanConstant__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:525:1: rule__TBooleanConstant__Group__0__Impl : ( ( rule__TBooleanConstant__AnnotationsAssignment_0 )* ) ;
     public final void rule__TBooleanConstant__Group__0__Impl() throws RecognitionException {
 
@@ -1310,7 +1358,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__AnnotationsAssignment_0_in_rule__TBooleanConstant__Group__0__Impl1024);
             	    rule__TBooleanConstant__AnnotationsAssignment_0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -1340,10 +1389,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TBooleanConstant__Group__0__Impl
+    // $ANTLR end "rule__TBooleanConstant__Group__0__Impl"
 
 
-    // $ANTLR start rule__TBooleanConstant__Group__1
+    // $ANTLR start "rule__TBooleanConstant__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:542:1: rule__TBooleanConstant__Group__1 : rule__TBooleanConstant__Group__1__Impl rule__TBooleanConstant__Group__2 ;
     public final void rule__TBooleanConstant__Group__1() throws RecognitionException {
 
@@ -1355,11 +1404,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__1__Impl_in_rule__TBooleanConstant__Group__11055);
             rule__TBooleanConstant__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__2_in_rule__TBooleanConstant__Group__11058);
             rule__TBooleanConstant__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1376,10 +1427,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TBooleanConstant__Group__1
+    // $ANTLR end "rule__TBooleanConstant__Group__1"
 
 
-    // $ANTLR start rule__TBooleanConstant__Group__1__Impl
+    // $ANTLR start "rule__TBooleanConstant__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:554:1: rule__TBooleanConstant__Group__1__Impl : ( 'constant' ) ;
     public final void rule__TBooleanConstant__Group__1__Impl() throws RecognitionException {
 
@@ -1413,10 +1464,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TBooleanConstant__Group__1__Impl
+    // $ANTLR end "rule__TBooleanConstant__Group__1__Impl"
 
 
-    // $ANTLR start rule__TBooleanConstant__Group__2
+    // $ANTLR start "rule__TBooleanConstant__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:573:1: rule__TBooleanConstant__Group__2 : rule__TBooleanConstant__Group__2__Impl rule__TBooleanConstant__Group__3 ;
     public final void rule__TBooleanConstant__Group__2() throws RecognitionException {
 
@@ -1428,11 +1479,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__2__Impl_in_rule__TBooleanConstant__Group__21117);
             rule__TBooleanConstant__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__3_in_rule__TBooleanConstant__Group__21120);
             rule__TBooleanConstant__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1449,10 +1502,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TBooleanConstant__Group__2
+    // $ANTLR end "rule__TBooleanConstant__Group__2"
 
 
-    // $ANTLR start rule__TBooleanConstant__Group__2__Impl
+    // $ANTLR start "rule__TBooleanConstant__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:585:1: rule__TBooleanConstant__Group__2__Impl : ( 'boolean' ) ;
     public final void rule__TBooleanConstant__Group__2__Impl() throws RecognitionException {
 
@@ -1486,10 +1539,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TBooleanConstant__Group__2__Impl
+    // $ANTLR end "rule__TBooleanConstant__Group__2__Impl"
 
 
-    // $ANTLR start rule__TBooleanConstant__Group__3
+    // $ANTLR start "rule__TBooleanConstant__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:604:1: rule__TBooleanConstant__Group__3 : rule__TBooleanConstant__Group__3__Impl ;
     public final void rule__TBooleanConstant__Group__3() throws RecognitionException {
 
@@ -1501,7 +1554,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__3__Impl_in_rule__TBooleanConstant__Group__31179);
             rule__TBooleanConstant__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1518,10 +1572,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TBooleanConstant__Group__3
+    // $ANTLR end "rule__TBooleanConstant__Group__3"
 
 
-    // $ANTLR start rule__TBooleanConstant__Group__3__Impl
+    // $ANTLR start "rule__TBooleanConstant__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:615:1: rule__TBooleanConstant__Group__3__Impl : ( ( rule__TBooleanConstant__NameAssignment_3 ) ) ;
     public final void rule__TBooleanConstant__Group__3__Impl() throws RecognitionException {
 
@@ -1540,7 +1594,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__NameAssignment_3_in_rule__TBooleanConstant__Group__3__Impl1206);
             rule__TBooleanConstant__NameAssignment_3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1564,10 +1619,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TBooleanConstant__Group__3__Impl
+    // $ANTLR end "rule__TBooleanConstant__Group__3__Impl"
 
 
-    // $ANTLR start rule__TAnnotation__Group__0
+    // $ANTLR start "rule__TAnnotation__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:640:1: rule__TAnnotation__Group__0 : rule__TAnnotation__Group__0__Impl rule__TAnnotation__Group__1 ;
     public final void rule__TAnnotation__Group__0() throws RecognitionException {
 
@@ -1579,11 +1634,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TAnnotation__Group__0__Impl_in_rule__TAnnotation__Group__01244);
             rule__TAnnotation__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TAnnotation__Group__1_in_rule__TAnnotation__Group__01247);
             rule__TAnnotation__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1600,10 +1657,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TAnnotation__Group__0
+    // $ANTLR end "rule__TAnnotation__Group__0"
 
 
-    // $ANTLR start rule__TAnnotation__Group__0__Impl
+    // $ANTLR start "rule__TAnnotation__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:652:1: rule__TAnnotation__Group__0__Impl : ( '@desc' ) ;
     public final void rule__TAnnotation__Group__0__Impl() throws RecognitionException {
 
@@ -1637,10 +1694,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TAnnotation__Group__0__Impl
+    // $ANTLR end "rule__TAnnotation__Group__0__Impl"
 
 
-    // $ANTLR start rule__TAnnotation__Group__1
+    // $ANTLR start "rule__TAnnotation__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:671:1: rule__TAnnotation__Group__1 : rule__TAnnotation__Group__1__Impl ;
     public final void rule__TAnnotation__Group__1() throws RecognitionException {
 
@@ -1652,7 +1709,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TAnnotation__Group__1__Impl_in_rule__TAnnotation__Group__11306);
             rule__TAnnotation__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1669,10 +1727,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TAnnotation__Group__1
+    // $ANTLR end "rule__TAnnotation__Group__1"
 
 
-    // $ANTLR start rule__TAnnotation__Group__1__Impl
+    // $ANTLR start "rule__TAnnotation__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:682:1: rule__TAnnotation__Group__1__Impl : ( ( rule__TAnnotation__DescriptionAssignment_1 ) ) ;
     public final void rule__TAnnotation__Group__1__Impl() throws RecognitionException {
 
@@ -1691,7 +1749,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             {
             pushFollow(FollowSets000.FOLLOW_rule__TAnnotation__DescriptionAssignment_1_in_rule__TAnnotation__Group__1__Impl1333);
             rule__TAnnotation__DescriptionAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1715,10 +1774,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TAnnotation__Group__1__Impl
+    // $ANTLR end "rule__TAnnotation__Group__1__Impl"
 
 
-    // $ANTLR start rule__Model__ConstantsAssignment
+    // $ANTLR start "rule__Model__ConstantsAssignment"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:704:1: rule__Model__ConstantsAssignment : ( ruleTConstant ) ;
     public final void rule__Model__ConstantsAssignment() throws RecognitionException {
 
@@ -1734,7 +1793,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
              before(grammarAccess.getModelAccess().getConstantsTConstantParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTConstant_in_rule__Model__ConstantsAssignment1372);
             ruleTConstant();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getModelAccess().getConstantsTConstantParserRuleCall_0()); 
 
@@ -1755,10 +1815,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__Model__ConstantsAssignment
+    // $ANTLR end "rule__Model__ConstantsAssignment"
 
 
-    // $ANTLR start rule__TStringConstant__AnnotationsAssignment_0
+    // $ANTLR start "rule__TStringConstant__AnnotationsAssignment_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:719:1: rule__TStringConstant__AnnotationsAssignment_0 : ( ruleTAnnotation ) ;
     public final void rule__TStringConstant__AnnotationsAssignment_0() throws RecognitionException {
 
@@ -1774,7 +1834,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
              before(grammarAccess.getTStringConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTAnnotation_in_rule__TStringConstant__AnnotationsAssignment_01403);
             ruleTAnnotation();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTStringConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
 
@@ -1795,10 +1856,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TStringConstant__AnnotationsAssignment_0
+    // $ANTLR end "rule__TStringConstant__AnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__TStringConstant__NameAssignment_3
+    // $ANTLR start "rule__TStringConstant__NameAssignment_3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:734:1: rule__TStringConstant__NameAssignment_3 : ( RULE_ID ) ;
     public final void rule__TStringConstant__NameAssignment_3() throws RecognitionException {
 
@@ -1832,10 +1893,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TStringConstant__NameAssignment_3
+    // $ANTLR end "rule__TStringConstant__NameAssignment_3"
 
 
-    // $ANTLR start rule__TIntegerConstant__AnnotationsAssignment_0
+    // $ANTLR start "rule__TIntegerConstant__AnnotationsAssignment_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:749:1: rule__TIntegerConstant__AnnotationsAssignment_0 : ( ruleTAnnotation ) ;
     public final void rule__TIntegerConstant__AnnotationsAssignment_0() throws RecognitionException {
 
@@ -1851,7 +1912,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
              before(grammarAccess.getTIntegerConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTAnnotation_in_rule__TIntegerConstant__AnnotationsAssignment_01465);
             ruleTAnnotation();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTIntegerConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
 
@@ -1872,10 +1934,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TIntegerConstant__AnnotationsAssignment_0
+    // $ANTLR end "rule__TIntegerConstant__AnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__TIntegerConstant__NameAssignment_3
+    // $ANTLR start "rule__TIntegerConstant__NameAssignment_3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:764:1: rule__TIntegerConstant__NameAssignment_3 : ( RULE_ID ) ;
     public final void rule__TIntegerConstant__NameAssignment_3() throws RecognitionException {
 
@@ -1909,10 +1971,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TIntegerConstant__NameAssignment_3
+    // $ANTLR end "rule__TIntegerConstant__NameAssignment_3"
 
 
-    // $ANTLR start rule__TBooleanConstant__AnnotationsAssignment_0
+    // $ANTLR start "rule__TBooleanConstant__AnnotationsAssignment_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:779:1: rule__TBooleanConstant__AnnotationsAssignment_0 : ( ruleTAnnotation ) ;
     public final void rule__TBooleanConstant__AnnotationsAssignment_0() throws RecognitionException {
 
@@ -1928,7 +1990,8 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
              before(grammarAccess.getTBooleanConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTAnnotation_in_rule__TBooleanConstant__AnnotationsAssignment_01527);
             ruleTAnnotation();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTBooleanConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
 
@@ -1949,10 +2012,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TBooleanConstant__AnnotationsAssignment_0
+    // $ANTLR end "rule__TBooleanConstant__AnnotationsAssignment_0"
 
 
-    // $ANTLR start rule__TBooleanConstant__NameAssignment_3
+    // $ANTLR start "rule__TBooleanConstant__NameAssignment_3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:794:1: rule__TBooleanConstant__NameAssignment_3 : ( RULE_ID ) ;
     public final void rule__TBooleanConstant__NameAssignment_3() throws RecognitionException {
 
@@ -1986,10 +2049,10 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TBooleanConstant__NameAssignment_3
+    // $ANTLR end "rule__TBooleanConstant__NameAssignment_3"
 
 
-    // $ANTLR start rule__TAnnotation__DescriptionAssignment_1
+    // $ANTLR start "rule__TAnnotation__DescriptionAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug288734TestLanguage.g:809:1: rule__TAnnotation__DescriptionAssignment_1 : ( RULE_STRING ) ;
     public final void rule__TAnnotation__DescriptionAssignment_1() throws RecognitionException {
 
@@ -2023,7 +2086,9 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
         }
         return ;
     }
-    // $ANTLR end rule__TAnnotation__DescriptionAssignment_1
+    // $ANTLR end "rule__TAnnotation__DescriptionAssignment_1"
+
+    // Delegated rules
 
 
     protected DFA1 dfa1 = new DFA1(this);
@@ -2036,13 +2101,13 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
     static final String DFA1_maxS =
         "\1\17\1\5\1\16\1\17\3\uffff";
     static final String DFA1_acceptS =
-        "\4\uffff\1\3\1\1\1\2";
+        "\4\uffff\1\1\1\3\1\2";
     static final String DFA1_specialS =
         "\7\uffff}>";
     static final String[] DFA1_transitionS = {
             "\1\2\3\uffff\1\1",
             "\1\3",
-            "\1\5\1\6\1\4",
+            "\1\4\1\6\1\5",
             "\1\2\3\uffff\1\1",
             "",
             "",

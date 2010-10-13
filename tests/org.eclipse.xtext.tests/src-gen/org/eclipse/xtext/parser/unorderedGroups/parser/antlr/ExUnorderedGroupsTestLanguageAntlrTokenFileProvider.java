@@ -10,6 +10,6 @@ public class ExUnorderedGroupsTestLanguageAntlrTokenFileProvider implements IAnt
 	
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExUnorderedGroupsTestLanguage.tokens");
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/unorderedGroups/parser/antlr/internal/InternalExUnorderedGroupsTestLanguageParser.tokens");
 	}
 }

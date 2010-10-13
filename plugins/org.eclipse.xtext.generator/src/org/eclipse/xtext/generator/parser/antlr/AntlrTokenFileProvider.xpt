@@ -16,6 +16,10 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
 «DEFINE file FOR Grammar»
+«EXPAND file(getGrammarFileName())»
+«ENDDEFINE»
+
+«DEFINE file(String grammarFileName) FOR Grammar»
 «FILE getAntlrTokenFileProviderClassName().asPath()+".java" SRC_GEN-»
 /*
 «fileHeader()»
@@ -29,7 +33,7 @@ public class «getAntlrTokenFileProviderClassName().toSimpleName()» implements IA
 	
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("«getGrammarFileName().asPath()».tokens");
+    	return classLoader.getResourceAsStream("«grammarFileName.asPath()».tokens");
 	}
 }
 «ENDFILE»

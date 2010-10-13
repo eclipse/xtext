@@ -47,12 +47,6 @@ import org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/dummy/parser/antlr/internal/InternalDummyTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -140,7 +134,7 @@ ruleElement returns [EObject current=null]
 (
 		lv_optional_0_0=	'optional' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getOptionalOptionalKeyword_0_0(), "optional"); 
+        createLeafNode(lv_optional_0_0, grammarAccess.getElementAccess().getOptionalOptionalKeyword_0_0(), "optional");
     }
  
 	    {
@@ -157,15 +151,15 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)?	'element' 
+)?	otherlv_1='element' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getElementKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getElementAccess().getElementKeyword_1(), null);
     }
 (
 (
 		lv_name_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+			createLeafNode(lv_name_2_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -189,7 +183,7 @@ ruleElement returns [EObject current=null]
 (
 		lv_descriptions_3_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getElementAccess().getDescriptionsSTRINGTerminalRuleCall_3_0(), "descriptions"); 
+			createLeafNode(lv_descriptions_3_0, grammarAccess.getElementAccess().getDescriptionsSTRINGTerminalRuleCall_3_0(), "descriptions"); 
 		}
 		{
 	        if ($current==null) {
@@ -209,9 +203,9 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)*	';' 
+)*	otherlv_4=';' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getSemicolonKeyword_4(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getElementAccess().getSemicolonKeyword_4(), null);
     }
 )
 ;

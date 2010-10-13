@@ -47,12 +47,6 @@ import org.eclipse.xtext.parser.terminalrules.services.EcoreTerminalsTestLanguag
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -89,15 +83,15 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	'int' 
+((	otherlv_0='int' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getIntKeyword_0_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getIntKeyword_0_0(), null);
     }
 (
 (
 		lv_intValues_1_0=RULE_EINT
 		{
-			createLeafNode(grammarAccess.getModelAccess().getIntValuesEINTTerminalRuleCall_0_1_0(), "intValues"); 
+			createLeafNode(lv_intValues_1_0, grammarAccess.getModelAccess().getIntValuesEINTTerminalRuleCall_0_1_0(), "intValues"); 
 		}
 		{
 	        if ($current==null) {
@@ -118,15 +112,15 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'double' 
+    |(	otherlv_2='double' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDoubleKeyword_1_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getDoubleKeyword_1_0(), null);
     }
 (
 (
 		lv_doubleValues_3_0=RULE_EDOUBLE
 		{
-			createLeafNode(grammarAccess.getModelAccess().getDoubleValuesEDOUBLETerminalRuleCall_1_1_0(), "doubleValues"); 
+			createLeafNode(lv_doubleValues_3_0, grammarAccess.getModelAccess().getDoubleValuesEDOUBLETerminalRuleCall_1_1_0(), "doubleValues"); 
 		}
 		{
 	        if ($current==null) {
@@ -147,15 +141,15 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'date' 
+    |(	otherlv_4='date' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getDateKeyword_2_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getDateKeyword_2_0(), null);
     }
 (
 (
 		lv_dateValues_5_0=RULE_EDATE
 		{
-			createLeafNode(grammarAccess.getModelAccess().getDateValuesEDATETerminalRuleCall_2_1_0(), "dateValues"); 
+			createLeafNode(lv_dateValues_5_0, grammarAccess.getModelAccess().getDateValuesEDATETerminalRuleCall_2_1_0(), "dateValues"); 
 		}
 		{
 	        if ($current==null) {

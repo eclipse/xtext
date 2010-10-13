@@ -27,20 +27,41 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_ID", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'else'", "'if'", "'('", "')'", "'{'", "'||'", "'&&'", "'=='", "'<='", "'>='", "'!'", "','", "'.'"
     };
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
     public static final int RULE_ID=5;
+    public static final int T__23=23;
+    public static final int T__20=20;
+    public static final int T__13=13;
+    public static final int RULE_STRING=6;
+    public static final int T__21=21;
+    public static final int T__19=19;
+    public static final int T__14=14;
+    public static final int T__11=11;
+    public static final int T__22=22;
     public static final int RULE_WS=9;
+    public static final int T__17=17;
     public static final int EOF=-1;
     public static final int RULE_INT=4;
-    public static final int RULE_STRING=6;
+    public static final int T__16=16;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__18=18;
+    public static final int T__15=15;
+
+    // delegates
+    // delegators
+
 
         public InternalSimpleExpressionsParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalSimpleExpressionsParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalSimpleExpressionsParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g"; }
 
 
@@ -55,12 +76,6 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         
         @Override
-        protected InputStream getTokenFile() {
-        	ClassLoader classLoader = getClass().getClassLoader();
-        	return classLoader.getResourceAsStream("org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.tokens");
-        }
-        
-        @Override
         protected String getFirstRuleName() {
         	return "IfCondition";	
        	}
@@ -72,8 +87,8 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
 
-    // $ANTLR start entryRuleIfCondition
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:77:1: entryRuleIfCondition returns [EObject current=null] : iv_ruleIfCondition= ruleIfCondition EOF ;
+    // $ANTLR start "entryRuleIfCondition"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:71:1: entryRuleIfCondition returns [EObject current=null] : iv_ruleIfCondition= ruleIfCondition EOF ;
     public final EObject entryRuleIfCondition() throws RecognitionException {
         EObject current = null;
 
@@ -81,13 +96,14 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:78:2: (iv_ruleIfCondition= ruleIfCondition EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:79:2: iv_ruleIfCondition= ruleIfCondition EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:72:2: (iv_ruleIfCondition= ruleIfCondition EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:73:2: iv_ruleIfCondition= ruleIfCondition EOF
             {
              currentNode = createCompositeNode(grammarAccess.getIfConditionRule(), currentNode); 
             pushFollow(FOLLOW_ruleIfCondition_in_entryRuleIfCondition75);
             iv_ruleIfCondition=ruleIfCondition();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleIfCondition; 
             match(input,EOF,FOLLOW_EOF_in_entryRuleIfCondition85); 
@@ -104,28 +120,32 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRuleIfCondition
+    // $ANTLR end "entryRuleIfCondition"
 
 
-    // $ANTLR start ruleIfCondition
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:86:1: ruleIfCondition returns [EObject current=null] : ( ( (lv_elseif_0_0= 'else' ) )? 'if' '(' ( (lv_condition_3_0= ruleExpression ) ) ')' '{' ) ;
+    // $ANTLR start "ruleIfCondition"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:80:1: ruleIfCondition returns [EObject current=null] : ( ( (lv_elseif_0_0= 'else' ) )? otherlv_1= 'if' otherlv_2= '(' ( (lv_condition_3_0= ruleExpression ) ) otherlv_4= ')' otherlv_5= '{' ) ;
     public final EObject ruleIfCondition() throws RecognitionException {
         EObject current = null;
 
         Token lv_elseif_0_0=null;
+        Token otherlv_1=null;
+        Token otherlv_2=null;
+        Token otherlv_4=null;
+        Token otherlv_5=null;
         EObject lv_condition_3_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:91:6: ( ( ( (lv_elseif_0_0= 'else' ) )? 'if' '(' ( (lv_condition_3_0= ruleExpression ) ) ')' '{' ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:92:1: ( ( (lv_elseif_0_0= 'else' ) )? 'if' '(' ( (lv_condition_3_0= ruleExpression ) ) ')' '{' )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:85:6: ( ( ( (lv_elseif_0_0= 'else' ) )? otherlv_1= 'if' otherlv_2= '(' ( (lv_condition_3_0= ruleExpression ) ) otherlv_4= ')' otherlv_5= '{' ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:86:1: ( ( (lv_elseif_0_0= 'else' ) )? otherlv_1= 'if' otherlv_2= '(' ( (lv_condition_3_0= ruleExpression ) ) otherlv_4= ')' otherlv_5= '{' )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:92:1: ( ( (lv_elseif_0_0= 'else' ) )? 'if' '(' ( (lv_condition_3_0= ruleExpression ) ) ')' '{' )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:92:2: ( (lv_elseif_0_0= 'else' ) )? 'if' '(' ( (lv_condition_3_0= ruleExpression ) ) ')' '{'
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:86:1: ( ( (lv_elseif_0_0= 'else' ) )? otherlv_1= 'if' otherlv_2= '(' ( (lv_condition_3_0= ruleExpression ) ) otherlv_4= ')' otherlv_5= '{' )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:86:2: ( (lv_elseif_0_0= 'else' ) )? otherlv_1= 'if' otherlv_2= '(' ( (lv_condition_3_0= ruleExpression ) ) otherlv_4= ')' otherlv_5= '{'
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:92:2: ( (lv_elseif_0_0= 'else' ) )?
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:86:2: ( (lv_elseif_0_0= 'else' ) )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -134,15 +154,14 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:93:1: (lv_elseif_0_0= 'else' )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:87:1: (lv_elseif_0_0= 'else' )
                     {
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:93:1: (lv_elseif_0_0= 'else' )
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:94:3: lv_elseif_0_0= 'else'
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:87:1: (lv_elseif_0_0= 'else' )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:88:3: lv_elseif_0_0= 'else'
                     {
-                    lv_elseif_0_0=(Token)input.LT(1);
-                    match(input,11,FOLLOW_11_in_ruleIfCondition128); 
+                    lv_elseif_0_0=(Token)match(input,11,FOLLOW_11_in_ruleIfCondition128); 
 
-                            createLeafNode(grammarAccess.getIfConditionAccess().getElseifElseKeyword_0_0(), "elseif"); 
+                            createLeafNode(lv_elseif_0_0, grammarAccess.getIfConditionAccess().getElseifElseKeyword_0_0(), "elseif");
                         
 
                     	        if (current==null) {
@@ -165,26 +184,27 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleIfCondition152); 
+            otherlv_1=(Token)match(input,12,FOLLOW_12_in_ruleIfCondition154); 
 
-                    createLeafNode(grammarAccess.getIfConditionAccess().getIfKeyword_1(), null); 
+                	createLeafNode(otherlv_1, grammarAccess.getIfConditionAccess().getIfKeyword_1(), null);
                 
-            match(input,13,FOLLOW_13_in_ruleIfCondition162); 
+            otherlv_2=(Token)match(input,13,FOLLOW_13_in_ruleIfCondition166); 
 
-                    createLeafNode(grammarAccess.getIfConditionAccess().getLeftParenthesisKeyword_2(), null); 
+                	createLeafNode(otherlv_2, grammarAccess.getIfConditionAccess().getLeftParenthesisKeyword_2(), null);
                 
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:121:1: ( (lv_condition_3_0= ruleExpression ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:122:1: (lv_condition_3_0= ruleExpression )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:115:1: ( (lv_condition_3_0= ruleExpression ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:116:1: (lv_condition_3_0= ruleExpression )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:122:1: (lv_condition_3_0= ruleExpression )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:123:3: lv_condition_3_0= ruleExpression
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:116:1: (lv_condition_3_0= ruleExpression )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:117:3: lv_condition_3_0= ruleExpression
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getIfConditionAccess().getConditionExpressionParserRuleCall_3_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleExpression_in_ruleIfCondition183);
+            pushFollow(FOLLOW_ruleExpression_in_ruleIfCondition187);
             lv_condition_3_0=ruleExpression();
-            _fsp--;
+
+            state._fsp--;
 
 
             	        if (current==null) {
@@ -209,13 +229,13 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
             }
 
-            match(input,14,FOLLOW_14_in_ruleIfCondition193); 
+            otherlv_4=(Token)match(input,14,FOLLOW_14_in_ruleIfCondition199); 
 
-                    createLeafNode(grammarAccess.getIfConditionAccess().getRightParenthesisKeyword_4(), null); 
+                	createLeafNode(otherlv_4, grammarAccess.getIfConditionAccess().getRightParenthesisKeyword_4(), null);
                 
-            match(input,15,FOLLOW_15_in_ruleIfCondition203); 
+            otherlv_5=(Token)match(input,15,FOLLOW_15_in_ruleIfCondition211); 
 
-                    createLeafNode(grammarAccess.getIfConditionAccess().getLeftCurlyBracketKeyword_5(), null); 
+                	createLeafNode(otherlv_5, grammarAccess.getIfConditionAccess().getLeftCurlyBracketKeyword_5(), null);
                 
 
             }
@@ -236,11 +256,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end ruleIfCondition
+    // $ANTLR end "ruleIfCondition"
 
 
-    // $ANTLR start entryRuleExpression
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:161:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
+    // $ANTLR start "entryRuleExpression"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:155:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
     public final EObject entryRuleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -248,16 +268,17 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:162:2: (iv_ruleExpression= ruleExpression EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:163:2: iv_ruleExpression= ruleExpression EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:156:2: (iv_ruleExpression= ruleExpression EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:157:2: iv_ruleExpression= ruleExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleExpression_in_entryRuleExpression239);
+            pushFollow(FOLLOW_ruleExpression_in_entryRuleExpression247);
             iv_ruleExpression=ruleExpression();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExpression249); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExpression257); 
 
             }
 
@@ -271,14 +292,15 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRuleExpression
+    // $ANTLR end "entryRuleExpression"
 
 
-    // $ANTLR start ruleExpression
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:170:1: ruleExpression returns [EObject current=null] : (this_AndExpression_0= ruleAndExpression ( () '||' ( (lv_right_3_0= ruleAndExpression ) ) )* ) ;
+    // $ANTLR start "ruleExpression"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:164:1: ruleExpression returns [EObject current=null] : (this_AndExpression_0= ruleAndExpression ( () otherlv_2= '||' ( (lv_right_3_0= ruleAndExpression ) ) )* ) ;
     public final EObject ruleExpression() throws RecognitionException {
         EObject current = null;
 
+        Token otherlv_2=null;
         EObject this_AndExpression_0 = null;
 
         EObject lv_right_3_0 = null;
@@ -287,24 +309,25 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:175:6: ( (this_AndExpression_0= ruleAndExpression ( () '||' ( (lv_right_3_0= ruleAndExpression ) ) )* ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:176:1: (this_AndExpression_0= ruleAndExpression ( () '||' ( (lv_right_3_0= ruleAndExpression ) ) )* )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:169:6: ( (this_AndExpression_0= ruleAndExpression ( () otherlv_2= '||' ( (lv_right_3_0= ruleAndExpression ) ) )* ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:170:1: (this_AndExpression_0= ruleAndExpression ( () otherlv_2= '||' ( (lv_right_3_0= ruleAndExpression ) ) )* )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:176:1: (this_AndExpression_0= ruleAndExpression ( () '||' ( (lv_right_3_0= ruleAndExpression ) ) )* )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:177:5: this_AndExpression_0= ruleAndExpression ( () '||' ( (lv_right_3_0= ruleAndExpression ) ) )*
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:170:1: (this_AndExpression_0= ruleAndExpression ( () otherlv_2= '||' ( (lv_right_3_0= ruleAndExpression ) ) )* )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:171:5: this_AndExpression_0= ruleAndExpression ( () otherlv_2= '||' ( (lv_right_3_0= ruleAndExpression ) ) )*
             {
              
                     currentNode=createCompositeNode(grammarAccess.getExpressionAccess().getAndExpressionParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleAndExpression_in_ruleExpression296);
+            pushFollow(FOLLOW_ruleAndExpression_in_ruleExpression304);
             this_AndExpression_0=ruleAndExpression();
-            _fsp--;
+
+            state._fsp--;
 
              
                     current = this_AndExpression_0; 
                     currentNode = currentNode.getParent();
                 
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:185:1: ( () '||' ( (lv_right_3_0= ruleAndExpression ) ) )*
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:179:1: ( () otherlv_2= '||' ( (lv_right_3_0= ruleAndExpression ) ) )*
             loop2:
             do {
                 int alt2=2;
@@ -317,10 +340,10 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:185:2: () '||' ( (lv_right_3_0= ruleAndExpression ) )
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:179:2: () otherlv_2= '||' ( (lv_right_3_0= ruleAndExpression ) )
             	    {
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:185:2: ()
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:186:5: 
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:179:2: ()
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:180:5: 
             	    {
             	     
             	            temp=factory.create(grammarAccess.getExpressionAccess().getOrExpressionLeftAction_1_0().getType().getClassifier());
@@ -340,22 +363,23 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
             	    }
 
-            	    match(input,16,FOLLOW_16_in_ruleExpression315); 
+            	    otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleExpression325); 
 
-            	            createLeafNode(grammarAccess.getExpressionAccess().getVerticalLineVerticalLineKeyword_1_1(), null); 
+            	        	createLeafNode(otherlv_2, grammarAccess.getExpressionAccess().getVerticalLineVerticalLineKeyword_1_1(), null);
             	        
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:205:1: ( (lv_right_3_0= ruleAndExpression ) )
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:206:1: (lv_right_3_0= ruleAndExpression )
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:199:1: ( (lv_right_3_0= ruleAndExpression ) )
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:200:1: (lv_right_3_0= ruleAndExpression )
             	    {
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:206:1: (lv_right_3_0= ruleAndExpression )
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:207:3: lv_right_3_0= ruleAndExpression
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:200:1: (lv_right_3_0= ruleAndExpression )
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:201:3: lv_right_3_0= ruleAndExpression
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getExpressionAccess().getRightAndExpressionParserRuleCall_1_2_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAndExpression_in_ruleExpression336);
+            	    pushFollow(FOLLOW_ruleAndExpression_in_ruleExpression346);
             	    lv_right_3_0=ruleAndExpression();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    	        if (current==null) {
@@ -408,11 +432,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end ruleExpression
+    // $ANTLR end "ruleExpression"
 
 
-    // $ANTLR start entryRuleAndExpression
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:237:1: entryRuleAndExpression returns [EObject current=null] : iv_ruleAndExpression= ruleAndExpression EOF ;
+    // $ANTLR start "entryRuleAndExpression"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:231:1: entryRuleAndExpression returns [EObject current=null] : iv_ruleAndExpression= ruleAndExpression EOF ;
     public final EObject entryRuleAndExpression() throws RecognitionException {
         EObject current = null;
 
@@ -420,16 +444,17 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:238:2: (iv_ruleAndExpression= ruleAndExpression EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:239:2: iv_ruleAndExpression= ruleAndExpression EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:232:2: (iv_ruleAndExpression= ruleAndExpression EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:233:2: iv_ruleAndExpression= ruleAndExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getAndExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleAndExpression_in_entryRuleAndExpression374);
+            pushFollow(FOLLOW_ruleAndExpression_in_entryRuleAndExpression384);
             iv_ruleAndExpression=ruleAndExpression();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleAndExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAndExpression384); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAndExpression394); 
 
             }
 
@@ -443,14 +468,15 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRuleAndExpression
+    // $ANTLR end "entryRuleAndExpression"
 
 
-    // $ANTLR start ruleAndExpression
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:246:1: ruleAndExpression returns [EObject current=null] : (this_Comparison_0= ruleComparison ( () '&&' ( (lv_right_3_0= ruleComparison ) ) )* ) ;
+    // $ANTLR start "ruleAndExpression"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:240:1: ruleAndExpression returns [EObject current=null] : (this_Comparison_0= ruleComparison ( () otherlv_2= '&&' ( (lv_right_3_0= ruleComparison ) ) )* ) ;
     public final EObject ruleAndExpression() throws RecognitionException {
         EObject current = null;
 
+        Token otherlv_2=null;
         EObject this_Comparison_0 = null;
 
         EObject lv_right_3_0 = null;
@@ -459,24 +485,25 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:251:6: ( (this_Comparison_0= ruleComparison ( () '&&' ( (lv_right_3_0= ruleComparison ) ) )* ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:252:1: (this_Comparison_0= ruleComparison ( () '&&' ( (lv_right_3_0= ruleComparison ) ) )* )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:245:6: ( (this_Comparison_0= ruleComparison ( () otherlv_2= '&&' ( (lv_right_3_0= ruleComparison ) ) )* ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:246:1: (this_Comparison_0= ruleComparison ( () otherlv_2= '&&' ( (lv_right_3_0= ruleComparison ) ) )* )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:252:1: (this_Comparison_0= ruleComparison ( () '&&' ( (lv_right_3_0= ruleComparison ) ) )* )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:253:5: this_Comparison_0= ruleComparison ( () '&&' ( (lv_right_3_0= ruleComparison ) ) )*
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:246:1: (this_Comparison_0= ruleComparison ( () otherlv_2= '&&' ( (lv_right_3_0= ruleComparison ) ) )* )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:247:5: this_Comparison_0= ruleComparison ( () otherlv_2= '&&' ( (lv_right_3_0= ruleComparison ) ) )*
             {
              
                     currentNode=createCompositeNode(grammarAccess.getAndExpressionAccess().getComparisonParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleComparison_in_ruleAndExpression431);
+            pushFollow(FOLLOW_ruleComparison_in_ruleAndExpression441);
             this_Comparison_0=ruleComparison();
-            _fsp--;
+
+            state._fsp--;
 
              
                     current = this_Comparison_0; 
                     currentNode = currentNode.getParent();
                 
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:261:1: ( () '&&' ( (lv_right_3_0= ruleComparison ) ) )*
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:255:1: ( () otherlv_2= '&&' ( (lv_right_3_0= ruleComparison ) ) )*
             loop3:
             do {
                 int alt3=2;
@@ -489,10 +516,10 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:261:2: () '&&' ( (lv_right_3_0= ruleComparison ) )
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:255:2: () otherlv_2= '&&' ( (lv_right_3_0= ruleComparison ) )
             	    {
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:261:2: ()
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:262:5: 
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:255:2: ()
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:256:5: 
             	    {
             	     
             	            temp=factory.create(grammarAccess.getAndExpressionAccess().getAndExpressionLeftAction_1_0().getType().getClassifier());
@@ -512,22 +539,23 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
             	    }
 
-            	    match(input,17,FOLLOW_17_in_ruleAndExpression450); 
+            	    otherlv_2=(Token)match(input,17,FOLLOW_17_in_ruleAndExpression462); 
 
-            	            createLeafNode(grammarAccess.getAndExpressionAccess().getAmpersandAmpersandKeyword_1_1(), null); 
+            	        	createLeafNode(otherlv_2, grammarAccess.getAndExpressionAccess().getAmpersandAmpersandKeyword_1_1(), null);
             	        
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:281:1: ( (lv_right_3_0= ruleComparison ) )
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:282:1: (lv_right_3_0= ruleComparison )
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:275:1: ( (lv_right_3_0= ruleComparison ) )
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:276:1: (lv_right_3_0= ruleComparison )
             	    {
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:282:1: (lv_right_3_0= ruleComparison )
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:283:3: lv_right_3_0= ruleComparison
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:276:1: (lv_right_3_0= ruleComparison )
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:277:3: lv_right_3_0= ruleComparison
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getAndExpressionAccess().getRightComparisonParserRuleCall_1_2_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleComparison_in_ruleAndExpression471);
+            	    pushFollow(FOLLOW_ruleComparison_in_ruleAndExpression483);
             	    lv_right_3_0=ruleComparison();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    	        if (current==null) {
@@ -580,11 +608,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end ruleAndExpression
+    // $ANTLR end "ruleAndExpression"
 
 
-    // $ANTLR start entryRuleComparison
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:313:1: entryRuleComparison returns [EObject current=null] : iv_ruleComparison= ruleComparison EOF ;
+    // $ANTLR start "entryRuleComparison"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:307:1: entryRuleComparison returns [EObject current=null] : iv_ruleComparison= ruleComparison EOF ;
     public final EObject entryRuleComparison() throws RecognitionException {
         EObject current = null;
 
@@ -592,16 +620,17 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:314:2: (iv_ruleComparison= ruleComparison EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:315:2: iv_ruleComparison= ruleComparison EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:308:2: (iv_ruleComparison= ruleComparison EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:309:2: iv_ruleComparison= ruleComparison EOF
             {
              currentNode = createCompositeNode(grammarAccess.getComparisonRule(), currentNode); 
-            pushFollow(FOLLOW_ruleComparison_in_entryRuleComparison509);
+            pushFollow(FOLLOW_ruleComparison_in_entryRuleComparison521);
             iv_ruleComparison=ruleComparison();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleComparison; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleComparison519); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleComparison531); 
 
             }
 
@@ -615,11 +644,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRuleComparison
+    // $ANTLR end "entryRuleComparison"
 
 
-    // $ANTLR start ruleComparison
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:322:1: ruleComparison returns [EObject current=null] : (this_PrefixExpression_0= rulePrefixExpression ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )? ) ;
+    // $ANTLR start "ruleComparison"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:316:1: ruleComparison returns [EObject current=null] : (this_PrefixExpression_0= rulePrefixExpression ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )? ) ;
     public final EObject ruleComparison() throws RecognitionException {
         EObject current = null;
 
@@ -634,24 +663,25 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:327:6: ( (this_PrefixExpression_0= rulePrefixExpression ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )? ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:328:1: (this_PrefixExpression_0= rulePrefixExpression ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )? )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:321:6: ( (this_PrefixExpression_0= rulePrefixExpression ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )? ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:322:1: (this_PrefixExpression_0= rulePrefixExpression ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )? )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:328:1: (this_PrefixExpression_0= rulePrefixExpression ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )? )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:329:5: this_PrefixExpression_0= rulePrefixExpression ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )?
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:322:1: (this_PrefixExpression_0= rulePrefixExpression ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )? )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:323:5: this_PrefixExpression_0= rulePrefixExpression ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )?
             {
              
                     currentNode=createCompositeNode(grammarAccess.getComparisonAccess().getPrefixExpressionParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_rulePrefixExpression_in_ruleComparison566);
+            pushFollow(FOLLOW_rulePrefixExpression_in_ruleComparison578);
             this_PrefixExpression_0=rulePrefixExpression();
-            _fsp--;
+
+            state._fsp--;
 
              
                     current = this_PrefixExpression_0; 
                     currentNode = currentNode.getParent();
                 
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:337:1: ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )?
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:331:1: ( () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -660,10 +690,10 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:337:2: () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:331:2: () ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) ) ( (lv_right_3_0= rulePrefixExpression ) )
                     {
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:337:2: ()
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:338:5: 
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:331:2: ()
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:332:5: 
                     {
                      
                             temp=factory.create(grammarAccess.getComparisonAccess().getComparisonLeftAction_1_0().getType().getClassifier());
@@ -683,13 +713,13 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
                     }
 
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:353:2: ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) )
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:354:1: ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:347:2: ( ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) ) )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:348:1: ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) )
                     {
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:354:1: ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) )
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:355:1: (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:348:1: ( (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' ) )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:349:1: (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' )
                     {
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:355:1: (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:349:1: (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' )
                     int alt4=3;
                     switch ( input.LA(1) ) {
                     case 18:
@@ -709,19 +739,18 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
                         break;
                     default:
                         NoViableAltException nvae =
-                            new NoViableAltException("355:1: (lv_operator_2_1= '==' | lv_operator_2_2= '<=' | lv_operator_2_3= '>=' )", 4, 0, input);
+                            new NoViableAltException("", 4, 0, input);
 
                         throw nvae;
                     }
 
                     switch (alt4) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:356:3: lv_operator_2_1= '=='
+                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:350:3: lv_operator_2_1= '=='
                             {
-                            lv_operator_2_1=(Token)input.LT(1);
-                            match(input,18,FOLLOW_18_in_ruleComparison595); 
+                            lv_operator_2_1=(Token)match(input,18,FOLLOW_18_in_ruleComparison607); 
 
-                                    createLeafNode(grammarAccess.getComparisonAccess().getOperatorEqualsSignEqualsSignKeyword_1_1_0_0(), "operator"); 
+                                    createLeafNode(lv_operator_2_1, grammarAccess.getComparisonAccess().getOperatorEqualsSignEqualsSignKeyword_1_1_0_0(), "operator");
                                 
 
                             	        if (current==null) {
@@ -739,12 +768,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:374:8: lv_operator_2_2= '<='
+                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:368:8: lv_operator_2_2= '<='
                             {
-                            lv_operator_2_2=(Token)input.LT(1);
-                            match(input,19,FOLLOW_19_in_ruleComparison624); 
+                            lv_operator_2_2=(Token)match(input,19,FOLLOW_19_in_ruleComparison636); 
 
-                                    createLeafNode(grammarAccess.getComparisonAccess().getOperatorLessThanSignEqualsSignKeyword_1_1_0_1(), "operator"); 
+                                    createLeafNode(lv_operator_2_2, grammarAccess.getComparisonAccess().getOperatorLessThanSignEqualsSignKeyword_1_1_0_1(), "operator");
                                 
 
                             	        if (current==null) {
@@ -762,12 +790,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
                             }
                             break;
                         case 3 :
-                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:392:8: lv_operator_2_3= '>='
+                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:386:8: lv_operator_2_3= '>='
                             {
-                            lv_operator_2_3=(Token)input.LT(1);
-                            match(input,20,FOLLOW_20_in_ruleComparison653); 
+                            lv_operator_2_3=(Token)match(input,20,FOLLOW_20_in_ruleComparison665); 
 
-                                    createLeafNode(grammarAccess.getComparisonAccess().getOperatorGreaterThanSignEqualsSignKeyword_1_1_0_2(), "operator"); 
+                                    createLeafNode(lv_operator_2_3, grammarAccess.getComparisonAccess().getOperatorGreaterThanSignEqualsSignKeyword_1_1_0_2(), "operator");
                                 
 
                             	        if (current==null) {
@@ -793,18 +820,19 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
                     }
 
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:413:2: ( (lv_right_3_0= rulePrefixExpression ) )
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:414:1: (lv_right_3_0= rulePrefixExpression )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:407:2: ( (lv_right_3_0= rulePrefixExpression ) )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:408:1: (lv_right_3_0= rulePrefixExpression )
                     {
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:414:1: (lv_right_3_0= rulePrefixExpression )
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:415:3: lv_right_3_0= rulePrefixExpression
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:408:1: (lv_right_3_0= rulePrefixExpression )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:409:3: lv_right_3_0= rulePrefixExpression
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getComparisonAccess().getRightPrefixExpressionParserRuleCall_1_2_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_rulePrefixExpression_in_ruleComparison690);
+                    pushFollow(FOLLOW_rulePrefixExpression_in_ruleComparison702);
                     lv_right_3_0=rulePrefixExpression();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     	        if (current==null) {
@@ -854,11 +882,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end ruleComparison
+    // $ANTLR end "ruleComparison"
 
 
-    // $ANTLR start entryRulePrefixExpression
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:445:1: entryRulePrefixExpression returns [EObject current=null] : iv_rulePrefixExpression= rulePrefixExpression EOF ;
+    // $ANTLR start "entryRulePrefixExpression"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:439:1: entryRulePrefixExpression returns [EObject current=null] : iv_rulePrefixExpression= rulePrefixExpression EOF ;
     public final EObject entryRulePrefixExpression() throws RecognitionException {
         EObject current = null;
 
@@ -866,16 +894,17 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:446:2: (iv_rulePrefixExpression= rulePrefixExpression EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:447:2: iv_rulePrefixExpression= rulePrefixExpression EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:440:2: (iv_rulePrefixExpression= rulePrefixExpression EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:441:2: iv_rulePrefixExpression= rulePrefixExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getPrefixExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_rulePrefixExpression_in_entryRulePrefixExpression728);
+            pushFollow(FOLLOW_rulePrefixExpression_in_entryRulePrefixExpression740);
             iv_rulePrefixExpression=rulePrefixExpression();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_rulePrefixExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePrefixExpression738); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePrefixExpression750); 
 
             }
 
@@ -889,14 +918,15 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRulePrefixExpression
+    // $ANTLR end "entryRulePrefixExpression"
 
 
-    // $ANTLR start rulePrefixExpression
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:454:1: rulePrefixExpression returns [EObject current=null] : ( ( () '!' ( (lv_expression_2_0= ruleAtom ) ) ) | this_Atom_3= ruleAtom ) ;
+    // $ANTLR start "rulePrefixExpression"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:448:1: rulePrefixExpression returns [EObject current=null] : ( ( () otherlv_1= '!' ( (lv_expression_2_0= ruleAtom ) ) ) | this_Atom_3= ruleAtom ) ;
     public final EObject rulePrefixExpression() throws RecognitionException {
         EObject current = null;
 
+        Token otherlv_1=null;
         EObject lv_expression_2_0 = null;
 
         EObject this_Atom_3 = null;
@@ -905,10 +935,10 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:459:6: ( ( ( () '!' ( (lv_expression_2_0= ruleAtom ) ) ) | this_Atom_3= ruleAtom ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:460:1: ( ( () '!' ( (lv_expression_2_0= ruleAtom ) ) ) | this_Atom_3= ruleAtom )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:453:6: ( ( ( () otherlv_1= '!' ( (lv_expression_2_0= ruleAtom ) ) ) | this_Atom_3= ruleAtom ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:454:1: ( ( () otherlv_1= '!' ( (lv_expression_2_0= ruleAtom ) ) ) | this_Atom_3= ruleAtom )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:460:1: ( ( () '!' ( (lv_expression_2_0= ruleAtom ) ) ) | this_Atom_3= ruleAtom )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:454:1: ( ( () otherlv_1= '!' ( (lv_expression_2_0= ruleAtom ) ) ) | this_Atom_3= ruleAtom )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -920,19 +950,19 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("460:1: ( ( () '!' ( (lv_expression_2_0= ruleAtom ) ) ) | this_Atom_3= ruleAtom )", 6, 0, input);
+                    new NoViableAltException("", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:460:2: ( () '!' ( (lv_expression_2_0= ruleAtom ) ) )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:454:2: ( () otherlv_1= '!' ( (lv_expression_2_0= ruleAtom ) ) )
                     {
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:460:2: ( () '!' ( (lv_expression_2_0= ruleAtom ) ) )
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:460:3: () '!' ( (lv_expression_2_0= ruleAtom ) )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:454:2: ( () otherlv_1= '!' ( (lv_expression_2_0= ruleAtom ) ) )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:454:3: () otherlv_1= '!' ( (lv_expression_2_0= ruleAtom ) )
                     {
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:460:3: ()
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:461:5: 
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:454:3: ()
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:455:5: 
                     {
                      
                             temp=factory.create(grammarAccess.getPrefixExpressionAccess().getNotExpressionAction_0_0().getType().getClassifier());
@@ -947,22 +977,23 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
                     }
 
-                    match(input,21,FOLLOW_21_in_rulePrefixExpression783); 
+                    otherlv_1=(Token)match(input,21,FOLLOW_21_in_rulePrefixExpression797); 
 
-                            createLeafNode(grammarAccess.getPrefixExpressionAccess().getExclamationMarkKeyword_0_1(), null); 
+                        	createLeafNode(otherlv_1, grammarAccess.getPrefixExpressionAccess().getExclamationMarkKeyword_0_1(), null);
                         
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:475:1: ( (lv_expression_2_0= ruleAtom ) )
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:476:1: (lv_expression_2_0= ruleAtom )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:469:1: ( (lv_expression_2_0= ruleAtom ) )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:470:1: (lv_expression_2_0= ruleAtom )
                     {
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:476:1: (lv_expression_2_0= ruleAtom )
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:477:3: lv_expression_2_0= ruleAtom
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:470:1: (lv_expression_2_0= ruleAtom )
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:471:3: lv_expression_2_0= ruleAtom
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getPrefixExpressionAccess().getExpressionAtomParserRuleCall_0_2_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleAtom_in_rulePrefixExpression804);
+                    pushFollow(FOLLOW_ruleAtom_in_rulePrefixExpression818);
                     lv_expression_2_0=ruleAtom();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     	        if (current==null) {
@@ -994,14 +1025,15 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:501:5: this_Atom_3= ruleAtom
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:495:5: this_Atom_3= ruleAtom
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getPrefixExpressionAccess().getAtomParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleAtom_in_rulePrefixExpression833);
+                    pushFollow(FOLLOW_ruleAtom_in_rulePrefixExpression847);
                     this_Atom_3=ruleAtom();
-                    _fsp--;
+
+                    state._fsp--;
 
                      
                             current = this_Atom_3; 
@@ -1029,11 +1061,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end rulePrefixExpression
+    // $ANTLR end "rulePrefixExpression"
 
 
-    // $ANTLR start entryRuleAtom
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:517:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
+    // $ANTLR start "entryRuleAtom"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:511:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
     public final EObject entryRuleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -1041,16 +1073,17 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:518:2: (iv_ruleAtom= ruleAtom EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:519:2: iv_ruleAtom= ruleAtom EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:512:2: (iv_ruleAtom= ruleAtom EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:513:2: iv_ruleAtom= ruleAtom EOF
             {
              currentNode = createCompositeNode(grammarAccess.getAtomRule(), currentNode); 
-            pushFollow(FOLLOW_ruleAtom_in_entryRuleAtom868);
+            pushFollow(FOLLOW_ruleAtom_in_entryRuleAtom882);
             iv_ruleAtom=ruleAtom();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleAtom; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAtom878); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAtom892); 
 
             }
 
@@ -1064,11 +1097,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRuleAtom
+    // $ANTLR end "entryRuleAtom"
 
 
-    // $ANTLR start ruleAtom
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:526:1: ruleAtom returns [EObject current=null] : (this_ParenthesizedExpression_0= ruleParenthesizedExpression | this_NumberLiteral_1= ruleNumberLiteral | this_MethodCall_2= ruleMethodCall ) ;
+    // $ANTLR start "ruleAtom"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:520:1: ruleAtom returns [EObject current=null] : (this_ParenthesizedExpression_0= ruleParenthesizedExpression | this_NumberLiteral_1= ruleNumberLiteral | this_MethodCall_2= ruleMethodCall ) ;
     public final EObject ruleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -1082,10 +1115,10 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:531:6: ( (this_ParenthesizedExpression_0= ruleParenthesizedExpression | this_NumberLiteral_1= ruleNumberLiteral | this_MethodCall_2= ruleMethodCall ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:532:1: (this_ParenthesizedExpression_0= ruleParenthesizedExpression | this_NumberLiteral_1= ruleNumberLiteral | this_MethodCall_2= ruleMethodCall )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:525:6: ( (this_ParenthesizedExpression_0= ruleParenthesizedExpression | this_NumberLiteral_1= ruleNumberLiteral | this_MethodCall_2= ruleMethodCall ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:526:1: (this_ParenthesizedExpression_0= ruleParenthesizedExpression | this_NumberLiteral_1= ruleNumberLiteral | this_MethodCall_2= ruleMethodCall )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:532:1: (this_ParenthesizedExpression_0= ruleParenthesizedExpression | this_NumberLiteral_1= ruleNumberLiteral | this_MethodCall_2= ruleMethodCall )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:526:1: (this_ParenthesizedExpression_0= ruleParenthesizedExpression | this_NumberLiteral_1= ruleNumberLiteral | this_MethodCall_2= ruleMethodCall )
             int alt7=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -1105,21 +1138,22 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("532:1: (this_ParenthesizedExpression_0= ruleParenthesizedExpression | this_NumberLiteral_1= ruleNumberLiteral | this_MethodCall_2= ruleMethodCall )", 7, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
             }
 
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:533:5: this_ParenthesizedExpression_0= ruleParenthesizedExpression
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:527:5: this_ParenthesizedExpression_0= ruleParenthesizedExpression
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getAtomAccess().getParenthesizedExpressionParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleParenthesizedExpression_in_ruleAtom925);
+                    pushFollow(FOLLOW_ruleParenthesizedExpression_in_ruleAtom939);
                     this_ParenthesizedExpression_0=ruleParenthesizedExpression();
-                    _fsp--;
+
+                    state._fsp--;
 
                      
                             current = this_ParenthesizedExpression_0; 
@@ -1129,14 +1163,15 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:543:5: this_NumberLiteral_1= ruleNumberLiteral
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:537:5: this_NumberLiteral_1= ruleNumberLiteral
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getAtomAccess().getNumberLiteralParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleNumberLiteral_in_ruleAtom952);
+                    pushFollow(FOLLOW_ruleNumberLiteral_in_ruleAtom966);
                     this_NumberLiteral_1=ruleNumberLiteral();
-                    _fsp--;
+
+                    state._fsp--;
 
                      
                             current = this_NumberLiteral_1; 
@@ -1146,14 +1181,15 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:553:5: this_MethodCall_2= ruleMethodCall
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:547:5: this_MethodCall_2= ruleMethodCall
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getAtomAccess().getMethodCallParserRuleCall_2(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleMethodCall_in_ruleAtom979);
+                    pushFollow(FOLLOW_ruleMethodCall_in_ruleAtom993);
                     this_MethodCall_2=ruleMethodCall();
-                    _fsp--;
+
+                    state._fsp--;
 
                      
                             current = this_MethodCall_2; 
@@ -1181,11 +1217,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end ruleAtom
+    // $ANTLR end "ruleAtom"
 
 
-    // $ANTLR start entryRuleNumberLiteral
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:569:1: entryRuleNumberLiteral returns [EObject current=null] : iv_ruleNumberLiteral= ruleNumberLiteral EOF ;
+    // $ANTLR start "entryRuleNumberLiteral"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:563:1: entryRuleNumberLiteral returns [EObject current=null] : iv_ruleNumberLiteral= ruleNumberLiteral EOF ;
     public final EObject entryRuleNumberLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -1193,16 +1229,17 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:570:2: (iv_ruleNumberLiteral= ruleNumberLiteral EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:571:2: iv_ruleNumberLiteral= ruleNumberLiteral EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:564:2: (iv_ruleNumberLiteral= ruleNumberLiteral EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:565:2: iv_ruleNumberLiteral= ruleNumberLiteral EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNumberLiteralRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral1014);
+            pushFollow(FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral1028);
             iv_ruleNumberLiteral=ruleNumberLiteral();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleNumberLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumberLiteral1024); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumberLiteral1038); 
 
             }
 
@@ -1216,11 +1253,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRuleNumberLiteral
+    // $ANTLR end "entryRuleNumberLiteral"
 
 
-    // $ANTLR start ruleNumberLiteral
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:578:1: ruleNumberLiteral returns [EObject current=null] : ( (lv_value_0_0= RULE_INT ) ) ;
+    // $ANTLR start "ruleNumberLiteral"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:572:1: ruleNumberLiteral returns [EObject current=null] : ( (lv_value_0_0= RULE_INT ) ) ;
     public final EObject ruleNumberLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -1229,19 +1266,18 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:583:6: ( ( (lv_value_0_0= RULE_INT ) ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:584:1: ( (lv_value_0_0= RULE_INT ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:577:6: ( ( (lv_value_0_0= RULE_INT ) ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:578:1: ( (lv_value_0_0= RULE_INT ) )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:584:1: ( (lv_value_0_0= RULE_INT ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:585:1: (lv_value_0_0= RULE_INT )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:578:1: ( (lv_value_0_0= RULE_INT ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:579:1: (lv_value_0_0= RULE_INT )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:585:1: (lv_value_0_0= RULE_INT )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:586:3: lv_value_0_0= RULE_INT
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:579:1: (lv_value_0_0= RULE_INT )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:580:3: lv_value_0_0= RULE_INT
             {
-            lv_value_0_0=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleNumberLiteral1065); 
+            lv_value_0_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleNumberLiteral1079); 
 
-            			createLeafNode(grammarAccess.getNumberLiteralAccess().getValueINTTerminalRuleCall_0(), "value"); 
+            			createLeafNode(lv_value_0_0, grammarAccess.getNumberLiteralAccess().getValueINTTerminalRuleCall_0(), "value"); 
             		
 
             	        if (current==null) {
@@ -1281,11 +1317,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end ruleNumberLiteral
+    // $ANTLR end "ruleNumberLiteral"
 
 
-    // $ANTLR start entryRuleParenthesizedExpression
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:616:1: entryRuleParenthesizedExpression returns [EObject current=null] : iv_ruleParenthesizedExpression= ruleParenthesizedExpression EOF ;
+    // $ANTLR start "entryRuleParenthesizedExpression"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:610:1: entryRuleParenthesizedExpression returns [EObject current=null] : iv_ruleParenthesizedExpression= ruleParenthesizedExpression EOF ;
     public final EObject entryRuleParenthesizedExpression() throws RecognitionException {
         EObject current = null;
 
@@ -1293,16 +1329,17 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:617:2: (iv_ruleParenthesizedExpression= ruleParenthesizedExpression EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:618:2: iv_ruleParenthesizedExpression= ruleParenthesizedExpression EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:611:2: (iv_ruleParenthesizedExpression= ruleParenthesizedExpression EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:612:2: iv_ruleParenthesizedExpression= ruleParenthesizedExpression EOF
             {
              currentNode = createCompositeNode(grammarAccess.getParenthesizedExpressionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleParenthesizedExpression_in_entryRuleParenthesizedExpression1105);
+            pushFollow(FOLLOW_ruleParenthesizedExpression_in_entryRuleParenthesizedExpression1119);
             iv_ruleParenthesizedExpression=ruleParenthesizedExpression();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleParenthesizedExpression; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleParenthesizedExpression1115); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleParenthesizedExpression1129); 
 
             }
 
@@ -1316,44 +1353,47 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRuleParenthesizedExpression
+    // $ANTLR end "entryRuleParenthesizedExpression"
 
 
-    // $ANTLR start ruleParenthesizedExpression
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:625:1: ruleParenthesizedExpression returns [EObject current=null] : ( '(' this_Expression_1= ruleExpression ')' ) ;
+    // $ANTLR start "ruleParenthesizedExpression"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:619:1: ruleParenthesizedExpression returns [EObject current=null] : (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) ;
     public final EObject ruleParenthesizedExpression() throws RecognitionException {
         EObject current = null;
 
+        Token otherlv_0=null;
+        Token otherlv_2=null;
         EObject this_Expression_1 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:630:6: ( ( '(' this_Expression_1= ruleExpression ')' ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:631:1: ( '(' this_Expression_1= ruleExpression ')' )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:624:6: ( (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:625:1: (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:631:1: ( '(' this_Expression_1= ruleExpression ')' )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:631:3: '(' this_Expression_1= ruleExpression ')'
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:625:1: (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:625:3: otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')'
             {
-            match(input,13,FOLLOW_13_in_ruleParenthesizedExpression1150); 
+            otherlv_0=(Token)match(input,13,FOLLOW_13_in_ruleParenthesizedExpression1166); 
 
-                    createLeafNode(grammarAccess.getParenthesizedExpressionAccess().getLeftParenthesisKeyword_0(), null); 
+                	createLeafNode(otherlv_0, grammarAccess.getParenthesizedExpressionAccess().getLeftParenthesisKeyword_0(), null);
                 
              
                     currentNode=createCompositeNode(grammarAccess.getParenthesizedExpressionAccess().getExpressionParserRuleCall_1(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleExpression_in_ruleParenthesizedExpression1172);
+            pushFollow(FOLLOW_ruleExpression_in_ruleParenthesizedExpression1188);
             this_Expression_1=ruleExpression();
-            _fsp--;
+
+            state._fsp--;
 
              
                     current = this_Expression_1; 
                     currentNode = currentNode.getParent();
                 
-            match(input,14,FOLLOW_14_in_ruleParenthesizedExpression1181); 
+            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleParenthesizedExpression1199); 
 
-                    createLeafNode(grammarAccess.getParenthesizedExpressionAccess().getRightParenthesisKeyword_2(), null); 
+                	createLeafNode(otherlv_2, grammarAccess.getParenthesizedExpressionAccess().getRightParenthesisKeyword_2(), null);
                 
 
             }
@@ -1374,11 +1414,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end ruleParenthesizedExpression
+    // $ANTLR end "ruleParenthesizedExpression"
 
 
-    // $ANTLR start entryRuleMethodCall
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:656:1: entryRuleMethodCall returns [EObject current=null] : iv_ruleMethodCall= ruleMethodCall EOF ;
+    // $ANTLR start "entryRuleMethodCall"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:650:1: entryRuleMethodCall returns [EObject current=null] : iv_ruleMethodCall= ruleMethodCall EOF ;
     public final EObject entryRuleMethodCall() throws RecognitionException {
         EObject current = null;
 
@@ -1386,16 +1426,17 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:657:2: (iv_ruleMethodCall= ruleMethodCall EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:658:2: iv_ruleMethodCall= ruleMethodCall EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:651:2: (iv_ruleMethodCall= ruleMethodCall EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:652:2: iv_ruleMethodCall= ruleMethodCall EOF
             {
              currentNode = createCompositeNode(grammarAccess.getMethodCallRule(), currentNode); 
-            pushFollow(FOLLOW_ruleMethodCall_in_entryRuleMethodCall1217);
+            pushFollow(FOLLOW_ruleMethodCall_in_entryRuleMethodCall1235);
             iv_ruleMethodCall=ruleMethodCall();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleMethodCall; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMethodCall1227); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMethodCall1245); 
 
             }
 
@@ -1409,11 +1450,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRuleMethodCall
+    // $ANTLR end "entryRuleMethodCall"
 
 
-    // $ANTLR start ruleMethodCall
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:665:1: ruleMethodCall returns [EObject current=null] : ( (lv_value_0_0= ruleMethodCallLiteral ) ) ;
+    // $ANTLR start "ruleMethodCall"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:659:1: ruleMethodCall returns [EObject current=null] : ( (lv_value_0_0= ruleMethodCallLiteral ) ) ;
     public final EObject ruleMethodCall() throws RecognitionException {
         EObject current = null;
 
@@ -1423,21 +1464,22 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:670:6: ( ( (lv_value_0_0= ruleMethodCallLiteral ) ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:671:1: ( (lv_value_0_0= ruleMethodCallLiteral ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:664:6: ( ( (lv_value_0_0= ruleMethodCallLiteral ) ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:665:1: ( (lv_value_0_0= ruleMethodCallLiteral ) )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:671:1: ( (lv_value_0_0= ruleMethodCallLiteral ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:672:1: (lv_value_0_0= ruleMethodCallLiteral )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:665:1: ( (lv_value_0_0= ruleMethodCallLiteral ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:666:1: (lv_value_0_0= ruleMethodCallLiteral )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:672:1: (lv_value_0_0= ruleMethodCallLiteral )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:673:3: lv_value_0_0= ruleMethodCallLiteral
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:666:1: (lv_value_0_0= ruleMethodCallLiteral )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:667:3: lv_value_0_0= ruleMethodCallLiteral
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getMethodCallAccess().getValueMethodCallLiteralParserRuleCall_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleMethodCallLiteral_in_ruleMethodCall1272);
+            pushFollow(FOLLOW_ruleMethodCallLiteral_in_ruleMethodCall1290);
             lv_value_0_0=ruleMethodCallLiteral();
-            _fsp--;
+
+            state._fsp--;
 
 
             	        if (current==null) {
@@ -1478,11 +1520,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end ruleMethodCall
+    // $ANTLR end "ruleMethodCall"
 
 
-    // $ANTLR start entryRuleMethodCallLiteral
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:703:1: entryRuleMethodCallLiteral returns [String current=null] : iv_ruleMethodCallLiteral= ruleMethodCallLiteral EOF ;
+    // $ANTLR start "entryRuleMethodCallLiteral"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:697:1: entryRuleMethodCallLiteral returns [String current=null] : iv_ruleMethodCallLiteral= ruleMethodCallLiteral EOF ;
     public final String entryRuleMethodCallLiteral() throws RecognitionException {
         String current = null;
 
@@ -1490,16 +1532,17 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:704:2: (iv_ruleMethodCallLiteral= ruleMethodCallLiteral EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:705:2: iv_ruleMethodCallLiteral= ruleMethodCallLiteral EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:698:2: (iv_ruleMethodCallLiteral= ruleMethodCallLiteral EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:699:2: iv_ruleMethodCallLiteral= ruleMethodCallLiteral EOF
             {
              currentNode = createCompositeNode(grammarAccess.getMethodCallLiteralRule(), currentNode); 
-            pushFollow(FOLLOW_ruleMethodCallLiteral_in_entryRuleMethodCallLiteral1308);
+            pushFollow(FOLLOW_ruleMethodCallLiteral_in_entryRuleMethodCallLiteral1326);
             iv_ruleMethodCallLiteral=ruleMethodCallLiteral();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleMethodCallLiteral.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMethodCallLiteral1319); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMethodCallLiteral1337); 
 
             }
 
@@ -1513,11 +1556,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRuleMethodCallLiteral
+    // $ANTLR end "entryRuleMethodCallLiteral"
 
 
-    // $ANTLR start ruleMethodCallLiteral
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:712:1: ruleMethodCallLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )? ) ;
+    // $ANTLR start "ruleMethodCallLiteral"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:706:1: ruleMethodCallLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )? ) ;
     public final AntlrDatatypeRuleToken ruleMethodCallLiteral() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1534,18 +1577,19 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:717:6: ( (this_FQN_0= ruleFQN (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )? ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:718:1: (this_FQN_0= ruleFQN (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )? )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:711:6: ( (this_FQN_0= ruleFQN (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )? ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:712:1: (this_FQN_0= ruleFQN (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )? )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:718:1: (this_FQN_0= ruleFQN (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )? )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:719:5: this_FQN_0= ruleFQN (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )?
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:712:1: (this_FQN_0= ruleFQN (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )? )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:713:5: this_FQN_0= ruleFQN (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )?
             {
              
                     currentNode=createCompositeNode(grammarAccess.getMethodCallLiteralAccess().getFQNParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleFQN_in_ruleMethodCallLiteral1366);
+            pushFollow(FOLLOW_ruleFQN_in_ruleMethodCallLiteral1384);
             this_FQN_0=ruleFQN();
-            _fsp--;
+
+            state._fsp--;
 
 
             		current.merge(this_FQN_0);
@@ -1553,7 +1597,7 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
              
                     currentNode = currentNode.getParent();
                 
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:729:1: (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )?
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:723:1: (kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )? )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1562,15 +1606,14 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
             }
             switch (alt11) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:730:2: kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )?
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:724:2: kw= '(' (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )? kw= ')' (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )?
                     {
-                    kw=(Token)input.LT(1);
-                    match(input,13,FOLLOW_13_in_ruleMethodCallLiteral1385); 
+                    kw=(Token)match(input,13,FOLLOW_13_in_ruleMethodCallLiteral1403); 
 
                             current.merge(kw);
-                            createLeafNode(grammarAccess.getMethodCallLiteralAccess().getLeftParenthesisKeyword_1_0(), null); 
+                            createLeafNode(kw, grammarAccess.getMethodCallLiteralAccess().getLeftParenthesisKeyword_1_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:735:1: (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )?
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:729:1: (this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )* )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1579,14 +1622,15 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:736:5: this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )*
+                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:730:5: this_Argument_2= ruleArgument (kw= ',' this_Argument_4= ruleArgument )*
                             {
                              
                                     currentNode=createCompositeNode(grammarAccess.getMethodCallLiteralAccess().getArgumentParserRuleCall_1_1_0(), currentNode); 
                                 
-                            pushFollow(FOLLOW_ruleArgument_in_ruleMethodCallLiteral1408);
+                            pushFollow(FOLLOW_ruleArgument_in_ruleMethodCallLiteral1426);
                             this_Argument_2=ruleArgument();
-                            _fsp--;
+
+                            state._fsp--;
 
 
                             		current.merge(this_Argument_2);
@@ -1594,7 +1638,7 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
                              
                                     currentNode = currentNode.getParent();
                                 
-                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:746:1: (kw= ',' this_Argument_4= ruleArgument )*
+                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:740:1: (kw= ',' this_Argument_4= ruleArgument )*
                             loop8:
                             do {
                                 int alt8=2;
@@ -1607,20 +1651,20 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
                                 switch (alt8) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:747:2: kw= ',' this_Argument_4= ruleArgument
+                            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:741:2: kw= ',' this_Argument_4= ruleArgument
                             	    {
-                            	    kw=(Token)input.LT(1);
-                            	    match(input,22,FOLLOW_22_in_ruleMethodCallLiteral1427); 
+                            	    kw=(Token)match(input,22,FOLLOW_22_in_ruleMethodCallLiteral1445); 
 
                             	            current.merge(kw);
-                            	            createLeafNode(grammarAccess.getMethodCallLiteralAccess().getCommaKeyword_1_1_1_0(), null); 
+                            	            createLeafNode(kw, grammarAccess.getMethodCallLiteralAccess().getCommaKeyword_1_1_1_0(), null); 
                             	        
                             	     
                             	            currentNode=createCompositeNode(grammarAccess.getMethodCallLiteralAccess().getArgumentParserRuleCall_1_1_1_1(), currentNode); 
                             	        
-                            	    pushFollow(FOLLOW_ruleArgument_in_ruleMethodCallLiteral1449);
+                            	    pushFollow(FOLLOW_ruleArgument_in_ruleMethodCallLiteral1467);
                             	    this_Argument_4=ruleArgument();
-                            	    _fsp--;
+
+                            	    state._fsp--;
 
 
                             	    		current.merge(this_Argument_4);
@@ -1643,13 +1687,12 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
                     }
 
-                    kw=(Token)input.LT(1);
-                    match(input,14,FOLLOW_14_in_ruleMethodCallLiteral1471); 
+                    kw=(Token)match(input,14,FOLLOW_14_in_ruleMethodCallLiteral1489); 
 
                             current.merge(kw);
-                            createLeafNode(grammarAccess.getMethodCallLiteralAccess().getRightParenthesisKeyword_1_2(), null); 
+                            createLeafNode(kw, grammarAccess.getMethodCallLiteralAccess().getRightParenthesisKeyword_1_2(), null); 
                         
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:769:1: (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )?
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:763:1: (kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1658,20 +1701,20 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
                     }
                     switch (alt10) {
                         case 1 :
-                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:770:2: kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral
+                            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:764:2: kw= '.' this_MethodCallLiteral_7= ruleMethodCallLiteral
                             {
-                            kw=(Token)input.LT(1);
-                            match(input,23,FOLLOW_23_in_ruleMethodCallLiteral1485); 
+                            kw=(Token)match(input,23,FOLLOW_23_in_ruleMethodCallLiteral1503); 
 
                                     current.merge(kw);
-                                    createLeafNode(grammarAccess.getMethodCallLiteralAccess().getFullStopKeyword_1_3_0(), null); 
+                                    createLeafNode(kw, grammarAccess.getMethodCallLiteralAccess().getFullStopKeyword_1_3_0(), null); 
                                 
                              
                                     currentNode=createCompositeNode(grammarAccess.getMethodCallLiteralAccess().getMethodCallLiteralParserRuleCall_1_3_1(), currentNode); 
                                 
-                            pushFollow(FOLLOW_ruleMethodCallLiteral_in_ruleMethodCallLiteral1507);
+                            pushFollow(FOLLOW_ruleMethodCallLiteral_in_ruleMethodCallLiteral1525);
                             this_MethodCallLiteral_7=ruleMethodCallLiteral();
-                            _fsp--;
+
+                            state._fsp--;
 
 
                             		current.merge(this_MethodCallLiteral_7);
@@ -1710,11 +1753,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end ruleMethodCallLiteral
+    // $ANTLR end "ruleMethodCallLiteral"
 
 
-    // $ANTLR start entryRuleArgument
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:794:1: entryRuleArgument returns [String current=null] : iv_ruleArgument= ruleArgument EOF ;
+    // $ANTLR start "entryRuleArgument"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:788:1: entryRuleArgument returns [String current=null] : iv_ruleArgument= ruleArgument EOF ;
     public final String entryRuleArgument() throws RecognitionException {
         String current = null;
 
@@ -1722,16 +1765,17 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:795:2: (iv_ruleArgument= ruleArgument EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:796:2: iv_ruleArgument= ruleArgument EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:789:2: (iv_ruleArgument= ruleArgument EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:790:2: iv_ruleArgument= ruleArgument EOF
             {
              currentNode = createCompositeNode(grammarAccess.getArgumentRule(), currentNode); 
-            pushFollow(FOLLOW_ruleArgument_in_entryRuleArgument1557);
+            pushFollow(FOLLOW_ruleArgument_in_entryRuleArgument1575);
             iv_ruleArgument=ruleArgument();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleArgument.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleArgument1568); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleArgument1586); 
 
             }
 
@@ -1745,11 +1789,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRuleArgument
+    // $ANTLR end "entryRuleArgument"
 
 
-    // $ANTLR start ruleArgument
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:803:1: ruleArgument returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_MethodCallLiteral_0= ruleMethodCallLiteral | this_INT_1= RULE_INT ) ;
+    // $ANTLR start "ruleArgument"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:797:1: ruleArgument returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_MethodCallLiteral_0= ruleMethodCallLiteral | this_INT_1= RULE_INT ) ;
     public final AntlrDatatypeRuleToken ruleArgument() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1760,10 +1804,10 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:808:6: ( (this_MethodCallLiteral_0= ruleMethodCallLiteral | this_INT_1= RULE_INT ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:809:1: (this_MethodCallLiteral_0= ruleMethodCallLiteral | this_INT_1= RULE_INT )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:802:6: ( (this_MethodCallLiteral_0= ruleMethodCallLiteral | this_INT_1= RULE_INT ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:803:1: (this_MethodCallLiteral_0= ruleMethodCallLiteral | this_INT_1= RULE_INT )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:809:1: (this_MethodCallLiteral_0= ruleMethodCallLiteral | this_INT_1= RULE_INT )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:803:1: (this_MethodCallLiteral_0= ruleMethodCallLiteral | this_INT_1= RULE_INT )
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1775,20 +1819,21 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("809:1: (this_MethodCallLiteral_0= ruleMethodCallLiteral | this_INT_1= RULE_INT )", 12, 0, input);
+                    new NoViableAltException("", 12, 0, input);
 
                 throw nvae;
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:810:5: this_MethodCallLiteral_0= ruleMethodCallLiteral
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:804:5: this_MethodCallLiteral_0= ruleMethodCallLiteral
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getArgumentAccess().getMethodCallLiteralParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleMethodCallLiteral_in_ruleArgument1615);
+                    pushFollow(FOLLOW_ruleMethodCallLiteral_in_ruleArgument1633);
                     this_MethodCallLiteral_0=ruleMethodCallLiteral();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     		current.merge(this_MethodCallLiteral_0);
@@ -1800,15 +1845,14 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:821:10: this_INT_1= RULE_INT
+                    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:815:10: this_INT_1= RULE_INT
                     {
-                    this_INT_1=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleArgument1641); 
+                    this_INT_1=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleArgument1659); 
 
                     		current.merge(this_INT_1);
                         
                      
-                        createLeafNode(grammarAccess.getArgumentAccess().getINTTerminalRuleCall_1(), null); 
+                        createLeafNode(this_INT_1, grammarAccess.getArgumentAccess().getINTTerminalRuleCall_1(), null); 
                         
 
                     }
@@ -1832,11 +1876,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end ruleArgument
+    // $ANTLR end "ruleArgument"
 
 
-    // $ANTLR start entryRuleFQN
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:836:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // $ANTLR start "entryRuleFQN"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:830:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -1844,16 +1888,17 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:837:2: (iv_ruleFQN= ruleFQN EOF )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:838:2: iv_ruleFQN= ruleFQN EOF
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:831:2: (iv_ruleFQN= ruleFQN EOF )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:832:2: iv_ruleFQN= ruleFQN EOF
             {
              currentNode = createCompositeNode(grammarAccess.getFQNRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN1687);
+            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN1705);
             iv_ruleFQN=ruleFQN();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN1698); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN1716); 
 
             }
 
@@ -1867,11 +1912,11 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end entryRuleFQN
+    // $ANTLR end "entryRuleFQN"
 
 
-    // $ANTLR start ruleFQN
-    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:845:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // $ANTLR start "ruleFQN"
+    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:839:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1882,21 +1927,20 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:850:6: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:851:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:844:6: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:845:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:851:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:851:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:845:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:845:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
-            this_ID_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN1738); 
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN1756); 
 
             		current.merge(this_ID_0);
                 
              
-                createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
+                createLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
                 
-            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:858:1: (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:852:1: (kw= '.' this_ID_2= RULE_ID )*
             loop13:
             do {
                 int alt13=2;
@@ -1909,21 +1953,19 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
 
                 switch (alt13) {
             	case 1 :
-            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:859:2: kw= '.' this_ID_2= RULE_ID
+            	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:853:2: kw= '.' this_ID_2= RULE_ID
             	    {
-            	    kw=(Token)input.LT(1);
-            	    match(input,23,FOLLOW_23_in_ruleFQN1757); 
+            	    kw=(Token)match(input,23,FOLLOW_23_in_ruleFQN1775); 
 
             	            current.merge(kw);
-            	            createLeafNode(grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
+            	            createLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
             	        
-            	    this_ID_2=(Token)input.LT(1);
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN1772); 
+            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN1790); 
 
             	    		current.merge(this_ID_2);
             	        
             	     
-            	        createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), null); 
+            	        createLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), null); 
             	        
 
             	    }
@@ -1953,7 +1995,9 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
         }
         return current;
     }
-    // $ANTLR end ruleFQN
+    // $ANTLR end "ruleFQN"
+
+    // Delegated rules
 
 
  
@@ -1961,67 +2005,67 @@ public class InternalSimpleExpressionsParser extends AbstractInternalAntlrParser
     public static final BitSet FOLLOW_ruleIfCondition_in_entryRuleIfCondition75 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleIfCondition85 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_11_in_ruleIfCondition128 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleIfCondition152 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleIfCondition162 = new BitSet(new long[]{0x0000000000202030L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleIfCondition183 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleIfCondition193 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleIfCondition203 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression239 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExpression249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAndExpression_in_ruleExpression296 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_ruleExpression315 = new BitSet(new long[]{0x0000000000202030L});
-    public static final BitSet FOLLOW_ruleAndExpression_in_ruleExpression336 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_ruleAndExpression_in_entryRuleAndExpression374 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAndExpression384 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleComparison_in_ruleAndExpression431 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_17_in_ruleAndExpression450 = new BitSet(new long[]{0x0000000000202030L});
-    public static final BitSet FOLLOW_ruleComparison_in_ruleAndExpression471 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_ruleComparison_in_entryRuleComparison509 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleComparison519 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrefixExpression_in_ruleComparison566 = new BitSet(new long[]{0x00000000001C0002L});
-    public static final BitSet FOLLOW_18_in_ruleComparison595 = new BitSet(new long[]{0x0000000000202030L});
-    public static final BitSet FOLLOW_19_in_ruleComparison624 = new BitSet(new long[]{0x0000000000202030L});
-    public static final BitSet FOLLOW_20_in_ruleComparison653 = new BitSet(new long[]{0x0000000000202030L});
-    public static final BitSet FOLLOW_rulePrefixExpression_in_ruleComparison690 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePrefixExpression_in_entryRulePrefixExpression728 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePrefixExpression738 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rulePrefixExpression783 = new BitSet(new long[]{0x0000000000002030L});
-    public static final BitSet FOLLOW_ruleAtom_in_rulePrefixExpression804 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAtom_in_rulePrefixExpression833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAtom_in_entryRuleAtom868 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAtom878 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParenthesizedExpression_in_ruleAtom925 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumberLiteral_in_ruleAtom952 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMethodCall_in_ruleAtom979 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral1014 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumberLiteral1024 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleNumberLiteral1065 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParenthesizedExpression_in_entryRuleParenthesizedExpression1105 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedExpression1115 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleParenthesizedExpression1150 = new BitSet(new long[]{0x0000000000202030L});
-    public static final BitSet FOLLOW_ruleExpression_in_ruleParenthesizedExpression1172 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleParenthesizedExpression1181 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMethodCall_in_entryRuleMethodCall1217 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMethodCall1227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMethodCallLiteral_in_ruleMethodCall1272 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMethodCallLiteral_in_entryRuleMethodCallLiteral1308 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMethodCallLiteral1319 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleMethodCallLiteral1366 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_13_in_ruleMethodCallLiteral1385 = new BitSet(new long[]{0x0000000000004030L});
-    public static final BitSet FOLLOW_ruleArgument_in_ruleMethodCallLiteral1408 = new BitSet(new long[]{0x0000000000404000L});
-    public static final BitSet FOLLOW_22_in_ruleMethodCallLiteral1427 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_ruleArgument_in_ruleMethodCallLiteral1449 = new BitSet(new long[]{0x0000000000404000L});
-    public static final BitSet FOLLOW_14_in_ruleMethodCallLiteral1471 = new BitSet(new long[]{0x0000000000800002L});
-    public static final BitSet FOLLOW_23_in_ruleMethodCallLiteral1485 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ruleMethodCallLiteral_in_ruleMethodCallLiteral1507 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleArgument_in_entryRuleArgument1557 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleArgument1568 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMethodCallLiteral_in_ruleArgument1615 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleArgument1641 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN1687 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFQN1698 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN1738 = new BitSet(new long[]{0x0000000000800002L});
-    public static final BitSet FOLLOW_23_in_ruleFQN1757 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN1772 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_12_in_ruleIfCondition154 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleIfCondition166 = new BitSet(new long[]{0x0000000000202030L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleIfCondition187 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleIfCondition199 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleIfCondition211 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression247 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExpression257 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAndExpression_in_ruleExpression304 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_16_in_ruleExpression325 = new BitSet(new long[]{0x0000000000202030L});
+    public static final BitSet FOLLOW_ruleAndExpression_in_ruleExpression346 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_ruleAndExpression_in_entryRuleAndExpression384 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAndExpression394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleComparison_in_ruleAndExpression441 = new BitSet(new long[]{0x0000000000020002L});
+    public static final BitSet FOLLOW_17_in_ruleAndExpression462 = new BitSet(new long[]{0x0000000000202030L});
+    public static final BitSet FOLLOW_ruleComparison_in_ruleAndExpression483 = new BitSet(new long[]{0x0000000000020002L});
+    public static final BitSet FOLLOW_ruleComparison_in_entryRuleComparison521 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleComparison531 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrefixExpression_in_ruleComparison578 = new BitSet(new long[]{0x00000000001C0002L});
+    public static final BitSet FOLLOW_18_in_ruleComparison607 = new BitSet(new long[]{0x0000000000202030L});
+    public static final BitSet FOLLOW_19_in_ruleComparison636 = new BitSet(new long[]{0x0000000000202030L});
+    public static final BitSet FOLLOW_20_in_ruleComparison665 = new BitSet(new long[]{0x0000000000202030L});
+    public static final BitSet FOLLOW_rulePrefixExpression_in_ruleComparison702 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePrefixExpression_in_entryRulePrefixExpression740 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePrefixExpression750 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_rulePrefixExpression797 = new BitSet(new long[]{0x0000000000202030L});
+    public static final BitSet FOLLOW_ruleAtom_in_rulePrefixExpression818 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAtom_in_rulePrefixExpression847 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAtom_in_entryRuleAtom882 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAtom892 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParenthesizedExpression_in_ruleAtom939 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumberLiteral_in_ruleAtom966 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMethodCall_in_ruleAtom993 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral1028 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumberLiteral1038 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleNumberLiteral1079 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleParenthesizedExpression_in_entryRuleParenthesizedExpression1119 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedExpression1129 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleParenthesizedExpression1166 = new BitSet(new long[]{0x0000000000202030L});
+    public static final BitSet FOLLOW_ruleExpression_in_ruleParenthesizedExpression1188 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleParenthesizedExpression1199 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMethodCall_in_entryRuleMethodCall1235 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMethodCall1245 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMethodCallLiteral_in_ruleMethodCall1290 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMethodCallLiteral_in_entryRuleMethodCallLiteral1326 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMethodCallLiteral1337 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleMethodCallLiteral1384 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_13_in_ruleMethodCallLiteral1403 = new BitSet(new long[]{0x0000000000206030L});
+    public static final BitSet FOLLOW_ruleArgument_in_ruleMethodCallLiteral1426 = new BitSet(new long[]{0x0000000000404000L});
+    public static final BitSet FOLLOW_22_in_ruleMethodCallLiteral1445 = new BitSet(new long[]{0x0000000000202030L});
+    public static final BitSet FOLLOW_ruleArgument_in_ruleMethodCallLiteral1467 = new BitSet(new long[]{0x0000000000404000L});
+    public static final BitSet FOLLOW_14_in_ruleMethodCallLiteral1489 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_23_in_ruleMethodCallLiteral1503 = new BitSet(new long[]{0x0000000000202030L});
+    public static final BitSet FOLLOW_ruleMethodCallLiteral_in_ruleMethodCallLiteral1525 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleArgument_in_entryRuleArgument1575 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleArgument1586 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMethodCallLiteral_in_ruleArgument1633 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleArgument1659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN1705 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFQN1716 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN1756 = new BitSet(new long[]{0x0000000000800002L});
+    public static final BitSet FOLLOW_23_in_ruleFQN1775 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN1790 = new BitSet(new long[]{0x0000000000800002L});
 
 }

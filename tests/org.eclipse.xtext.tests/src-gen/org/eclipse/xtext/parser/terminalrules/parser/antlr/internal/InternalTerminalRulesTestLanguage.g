@@ -47,12 +47,6 @@ import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguage
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -93,7 +87,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_idValue_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0(), "idValue"); 
+			createLeafNode(lv_idValue_0_0, grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0(), "idValue"); 
 		}
 		{
 	        if ($current==null) {
@@ -118,7 +112,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_intValue_1_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0(), "intValue"); 
+			createLeafNode(lv_intValue_1_0, grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0(), "intValue"); 
 		}
 		{
 	        if ($current==null) {
@@ -143,7 +137,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_stringValue_2_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0(), "stringValue"); 
+			createLeafNode(lv_stringValue_2_0, grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0(), "stringValue"); 
 		}
 		{
 	        if ($current==null) {
@@ -168,7 +162,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_mlCommentValue_3_0=RULE_ML_COMMENT
 		{
-			createLeafNode(grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0(), "mlCommentValue"); 
+			createLeafNode(lv_mlCommentValue_3_0, grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0(), "mlCommentValue"); 
 		}
 		{
 	        if ($current==null) {
@@ -193,7 +187,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_slCommentValue_4_0=RULE_SL_COMMENT
 		{
-			createLeafNode(grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0(), "slCommentValue"); 
+			createLeafNode(lv_slCommentValue_4_0, grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0(), "slCommentValue"); 
 		}
 		{
 	        if ($current==null) {
@@ -218,7 +212,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_wsValue_5_0=RULE_WS
 		{
-			createLeafNode(grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0(), "wsValue"); 
+			createLeafNode(lv_wsValue_5_0, grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0(), "wsValue"); 
 		}
 		{
 	        if ($current==null) {
@@ -243,7 +237,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_anyValue_6_0=RULE_ANY_OTHER
 		{
-			createLeafNode(grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0(), "anyValue"); 
+			createLeafNode(lv_anyValue_6_0, grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0(), "anyValue"); 
 		}
 		{
 	        if ($current==null) {

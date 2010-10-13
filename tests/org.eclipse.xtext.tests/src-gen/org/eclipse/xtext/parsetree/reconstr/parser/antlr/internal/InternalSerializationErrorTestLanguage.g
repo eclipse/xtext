@@ -47,12 +47,6 @@ import org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLangu
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalSerializationErrorTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -161,9 +155,9 @@ ruleParenthesis returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'(' 
+(	otherlv_0='(' 
     {
-        createLeafNode(grammarAccess.getParenthesisAccess().getLeftParenthesisKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getParenthesisAccess().getLeftParenthesisKeyword_0(), null);
     }
 
     { 
@@ -174,9 +168,9 @@ ruleParenthesis returns [EObject current=null]
         $current = $this_Test_1.current; 
         currentNode = currentNode.getParent();
     }
-	')' 
+	otherlv_2=')' 
     {
-        createLeafNode(grammarAccess.getParenthesisAccess().getRightParenthesisKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getParenthesisAccess().getRightParenthesisKeyword_2(), null);
     }
 )
 ;
@@ -253,15 +247,15 @@ ruleTwoRequired returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'tworequired' 
+(	otherlv_0='tworequired' 
     {
-        createLeafNode(grammarAccess.getTwoRequiredAccess().getTworequiredKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getTwoRequiredAccess().getTworequiredKeyword_0(), null);
     }
 (
 (
 		lv_one_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getTwoRequiredAccess().getOneIDTerminalRuleCall_1_0(), "one"); 
+			createLeafNode(lv_one_1_0, grammarAccess.getTwoRequiredAccess().getOneIDTerminalRuleCall_1_0(), "one"); 
 		}
 		{
 	        if ($current==null) {
@@ -285,7 +279,7 @@ ruleTwoRequired returns [EObject current=null]
 (
 		lv_two_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getTwoRequiredAccess().getTwoIDTerminalRuleCall_2_0(), "two"); 
+			createLeafNode(lv_two_2_0, grammarAccess.getTwoRequiredAccess().getTwoIDTerminalRuleCall_2_0(), "two"); 
 		}
 		{
 	        if ($current==null) {
@@ -328,19 +322,19 @@ ruleTwoOptions returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'twooptions' 
+(	otherlv_0='twooptions' 
     {
-        createLeafNode(grammarAccess.getTwoOptionsAccess().getTwooptionsKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getTwoOptionsAccess().getTwooptionsKeyword_0(), null);
     }
-((	'one' 
+((	otherlv_1='one' 
     {
-        createLeafNode(grammarAccess.getTwoOptionsAccess().getOneKeyword_1_0_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getTwoOptionsAccess().getOneKeyword_1_0_0(), null);
     }
 (
 (
 		lv_one_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getTwoOptionsAccess().getOneIDTerminalRuleCall_1_0_1_0(), "one"); 
+			createLeafNode(lv_one_2_0, grammarAccess.getTwoOptionsAccess().getOneIDTerminalRuleCall_1_0_1_0(), "one"); 
 		}
 		{
 	        if ($current==null) {
@@ -361,15 +355,15 @@ ruleTwoOptions returns [EObject current=null]
 
 )
 ))
-    |(	'two' 
+    |(	otherlv_3='two' 
     {
-        createLeafNode(grammarAccess.getTwoOptionsAccess().getTwoKeyword_1_1_0(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getTwoOptionsAccess().getTwoKeyword_1_1_0(), null);
     }
 (
 (
 		lv_two_4_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getTwoOptionsAccess().getTwoIDTerminalRuleCall_1_1_1_0(), "two"); 
+			createLeafNode(lv_two_4_0, grammarAccess.getTwoOptionsAccess().getTwoIDTerminalRuleCall_1_1_1_0(), "two"); 
 		}
 		{
 	        if ($current==null) {
@@ -412,9 +406,9 @@ ruleIndent returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'{' 
+(	otherlv_0='{' 
     {
-        createLeafNode(grammarAccess.getIndentAccess().getLeftCurlyBracketKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getIndentAccess().getLeftCurlyBracketKeyword_0(), null);
     }
 (
 (
@@ -488,9 +482,9 @@ ruleIndent returns [EObject current=null]
 	    }
 
 )
-)*	'}' 
+)*	otherlv_4='}' 
     {
-        createLeafNode(grammarAccess.getIndentAccess().getRightCurlyBracketKeyword_4(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getIndentAccess().getRightCurlyBracketKeyword_4(), null);
     }
 )
 ;

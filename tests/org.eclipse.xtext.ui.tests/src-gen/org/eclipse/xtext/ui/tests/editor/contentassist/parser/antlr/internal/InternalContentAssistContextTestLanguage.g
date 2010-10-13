@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.ContentAssistCon
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalContentAssistContextTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "FirstLevel";	
    	}
@@ -302,9 +296,9 @@ ruleThirdLevelA1 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'A1' 
+(	otherlv_0='A1' 
     {
-        createLeafNode(grammarAccess.getThirdLevelA1Access().getA1Keyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getThirdLevelA1Access().getA1Keyword_0(), null);
     }
 (
     { 
@@ -321,7 +315,7 @@ ruleThirdLevelA1 returns [EObject current=null]
 (
 		lv_name_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0(), "name"); 
+			createLeafNode(lv_name_2_0, grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -364,9 +358,9 @@ ruleThirdLevelA2 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'A2' 
+(	otherlv_0='A2' 
     {
-        createLeafNode(grammarAccess.getThirdLevelA2Access().getA2Keyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getThirdLevelA2Access().getA2Keyword_0(), null);
     }
 (
     { 
@@ -383,7 +377,7 @@ ruleThirdLevelA2 returns [EObject current=null]
 (
 		lv_name_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0(), "name"); 
+			createLeafNode(lv_name_2_0, grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -426,9 +420,9 @@ ruleThirdLevelB1 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'B1' 
+(	otherlv_0='B1' 
     {
-        createLeafNode(grammarAccess.getThirdLevelB1Access().getB1Keyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getThirdLevelB1Access().getB1Keyword_0(), null);
     }
 (
     { 
@@ -445,7 +439,7 @@ ruleThirdLevelB1 returns [EObject current=null]
 (
 		lv_name_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0(), "name"); 
+			createLeafNode(lv_name_2_0, grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -488,9 +482,9 @@ ruleThirdLevelB2 returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'B2' 
+(	otherlv_0='B2' 
     {
-        createLeafNode(grammarAccess.getThirdLevelB2Access().getB2Keyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getThirdLevelB2Access().getB2Keyword_0(), null);
     }
 (
     { 
@@ -507,7 +501,7 @@ ruleThirdLevelB2 returns [EObject current=null]
 (
 		lv_name_2_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0(), "name"); 
+			createLeafNode(lv_name_2_0, grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0(), "name"); 
 		}
 		{
 	        if ($current==null) {

@@ -53,12 +53,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.BacktrackingCont
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBacktrackingContentAssistTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Document";	
    	}
@@ -167,9 +161,9 @@ ruleBody returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'body' 
+(	otherlv_0='body' 
     {
-        createLeafNode(grammarAccess.getBodyAccess().getBodyKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getBodyAccess().getBodyKeyword_0(), null);
     }
 (
 (
@@ -195,9 +189,9 @@ ruleBody returns [EObject current=null]
 	    }
 
 )
-)?	':' 
+)?	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getBodyAccess().getColonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getBodyAccess().getColonKeyword_2(), null);
     }
 (
 (
@@ -246,9 +240,9 @@ ruleClassifierContextDecl returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'context' 
+(	otherlv_0='context' 
     {
-        createLeafNode(grammarAccess.getClassifierContextDeclAccess().getContextKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getClassifierContextDeclAccess().getContextKeyword_0(), null);
     }
 ((
 (
@@ -274,9 +268,9 @@ ruleClassifierContextDecl returns [EObject current=null]
 	    }
 
 )
-)	':' 
+)	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getClassifierContextDeclAccess().getColonKeyword_1_1(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getClassifierContextDeclAccess().getColonKeyword_1_1(), null);
     }
 )?(
 (
@@ -487,7 +481,7 @@ ruleDefinition returns [EObject current=null]
 (
 		lv_static_0_0=	'static' 
     {
-        createLeafNode(grammarAccess.getDefinitionAccess().getStaticStaticKeyword_0_0(), "static"); 
+        createLeafNode(lv_static_0_0, grammarAccess.getDefinitionAccess().getStaticStaticKeyword_0_0(), "static");
     }
  
 	    {
@@ -504,9 +498,9 @@ ruleDefinition returns [EObject current=null]
 	    }
 
 )
-)?	'def' 
+)?	otherlv_1='def' 
     {
-        createLeafNode(grammarAccess.getDefinitionAccess().getDefKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getDefinitionAccess().getDefKeyword_1(), null);
     }
 (
 (
@@ -532,9 +526,9 @@ ruleDefinition returns [EObject current=null]
 	    }
 
 )
-)?	':' 
+)?	otherlv_3=':' 
     {
-        createLeafNode(grammarAccess.getDefinitionAccess().getColonKeyword_3(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getDefinitionAccess().getColonKeyword_3(), null);
     }
 (
 (
@@ -560,9 +554,9 @@ ruleDefinition returns [EObject current=null]
 	    }
 
 )
-)(	'(' 
+)(	otherlv_5='(' 
     {
-        createLeafNode(grammarAccess.getDefinitionAccess().getLeftParenthesisKeyword_5_0(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getDefinitionAccess().getLeftParenthesisKeyword_5_0(), null);
     }
 ((
 (
@@ -588,9 +582,9 @@ ruleDefinition returns [EObject current=null]
 	    }
 
 )
-)(	',' 
+)(	otherlv_7=',' 
     {
-        createLeafNode(grammarAccess.getDefinitionAccess().getCommaKeyword_5_1_1_0(), null); 
+    	createLeafNode(otherlv_7, grammarAccess.getDefinitionAccess().getCommaKeyword_5_1_1_0(), null);
     }
 (
 (
@@ -616,13 +610,13 @@ ruleDefinition returns [EObject current=null]
 	    }
 
 )
-))*)?	')' 
+))*)?	otherlv_9=')' 
     {
-        createLeafNode(grammarAccess.getDefinitionAccess().getRightParenthesisKeyword_5_2(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getDefinitionAccess().getRightParenthesisKeyword_5_2(), null);
     }
-)?	':' 
+)?	otherlv_10=':' 
     {
-        createLeafNode(grammarAccess.getDefinitionAccess().getColonKeyword_6(), null); 
+    	createLeafNode(otherlv_10, grammarAccess.getDefinitionAccess().getColonKeyword_6(), null);
     }
 (
 (
@@ -648,9 +642,9 @@ ruleDefinition returns [EObject current=null]
 	    }
 
 )
-)?	'=' 
+)?	otherlv_12='=' 
     {
-        createLeafNode(grammarAccess.getDefinitionAccess().getEqualsSignKeyword_8(), null); 
+    	createLeafNode(otherlv_12, grammarAccess.getDefinitionAccess().getEqualsSignKeyword_8(), null);
     }
 (
 (
@@ -699,13 +693,13 @@ ruleDer returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'derive' 
+(	otherlv_0='derive' 
     {
-        createLeafNode(grammarAccess.getDerAccess().getDeriveKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getDerAccess().getDeriveKeyword_0(), null);
     }
-	':' 
+	otherlv_1=':' 
     {
-        createLeafNode(grammarAccess.getDerAccess().getColonKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getDerAccess().getColonKeyword_1(), null);
     }
 (
 (
@@ -754,13 +748,13 @@ ruleInit returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'init' 
+(	otherlv_0='init' 
     {
-        createLeafNode(grammarAccess.getInitAccess().getInitKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getInitAccess().getInitKeyword_0(), null);
     }
-	':' 
+	otherlv_1=':' 
     {
-        createLeafNode(grammarAccess.getInitAccess().getColonKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getInitAccess().getColonKeyword_1(), null);
     }
 (
 (
@@ -809,9 +803,9 @@ ruleInvariant returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'inv' 
+(	otherlv_0='inv' 
     {
-        createLeafNode(grammarAccess.getInvariantAccess().getInvKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getInvariantAccess().getInvKeyword_0(), null);
     }
 (
 (
@@ -837,9 +831,9 @@ ruleInvariant returns [EObject current=null]
 	    }
 
 )
-)?	':' 
+)?	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getInvariantAccess().getColonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getInvariantAccess().getColonKeyword_2(), null);
     }
 (
 (
@@ -888,9 +882,9 @@ ruleOperationContextDecl returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'context' 
+(	otherlv_0='context' 
     {
-        createLeafNode(grammarAccess.getOperationContextDeclAccess().getContextKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getOperationContextDeclAccess().getContextKeyword_0(), null);
     }
 (
 (
@@ -916,9 +910,9 @@ ruleOperationContextDecl returns [EObject current=null]
 	    }
 
 )
-)	'(' 
+)	otherlv_2='(' 
     {
-        createLeafNode(grammarAccess.getOperationContextDeclAccess().getLeftParenthesisKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getOperationContextDeclAccess().getLeftParenthesisKeyword_2(), null);
     }
 ((
 (
@@ -944,9 +938,9 @@ ruleOperationContextDecl returns [EObject current=null]
 	    }
 
 )
-)(	',' 
+)(	otherlv_4=',' 
     {
-        createLeafNode(grammarAccess.getOperationContextDeclAccess().getCommaKeyword_3_1_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getOperationContextDeclAccess().getCommaKeyword_3_1_0(), null);
     }
 (
 (
@@ -972,13 +966,13 @@ ruleOperationContextDecl returns [EObject current=null]
 	    }
 
 )
-))*)?	')' 
+))*)?	otherlv_6=')' 
     {
-        createLeafNode(grammarAccess.getOperationContextDeclAccess().getRightParenthesisKeyword_4(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getOperationContextDeclAccess().getRightParenthesisKeyword_4(), null);
     }
-	':' 
+	otherlv_7=':' 
     {
-        createLeafNode(grammarAccess.getOperationContextDeclAccess().getColonKeyword_5(), null); 
+    	createLeafNode(otherlv_7, grammarAccess.getOperationContextDeclAccess().getColonKeyword_5(), null);
     }
 (
 (
@@ -1149,9 +1143,9 @@ rulePackageDeclaration returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'package' 
+(	otherlv_0='package' 
     {
-        createLeafNode(grammarAccess.getPackageDeclarationAccess().getPackageKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getPackageDeclarationAccess().getPackageKeyword_0(), null);
     }
 (
 (
@@ -1201,9 +1195,9 @@ rulePackageDeclaration returns [EObject current=null]
 	    }
 
 )
-)*	'endpackage' 
+)*	otherlv_3='endpackage' 
     {
-        createLeafNode(grammarAccess.getPackageDeclarationAccess().getEndpackageKeyword_3(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getPackageDeclarationAccess().getEndpackageKeyword_3(), null);
     }
 )
 ;
@@ -1300,9 +1294,9 @@ ruleParameter returns [EObject current=null]
 	    }
 
 )
-)	':' 
+)	otherlv_1=':' 
     {
-        createLeafNode(grammarAccess.getParameterAccess().getColonKeyword_0_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getParameterAccess().getColonKeyword_0_1(), null);
     }
 )?(
 (
@@ -1351,9 +1345,9 @@ rulePost returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'post' 
+(	otherlv_0='post' 
     {
-        createLeafNode(grammarAccess.getPostAccess().getPostKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getPostAccess().getPostKeyword_0(), null);
     }
 (
 (
@@ -1379,9 +1373,9 @@ rulePost returns [EObject current=null]
 	    }
 
 )
-)?	':' 
+)?	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getPostAccess().getColonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getPostAccess().getColonKeyword_2(), null);
     }
 (
 (
@@ -1430,9 +1424,9 @@ rulePre returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'pre' 
+(	otherlv_0='pre' 
     {
-        createLeafNode(grammarAccess.getPreAccess().getPreKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getPreAccess().getPreKeyword_0(), null);
     }
 (
 (
@@ -1458,9 +1452,9 @@ rulePre returns [EObject current=null]
 	    }
 
 )
-)?	':' 
+)?	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getPreAccess().getColonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getPreAccess().getColonKeyword_2(), null);
     }
 (
 (
@@ -1509,9 +1503,9 @@ rulePropertyContextDecl returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'context' 
+(	otherlv_0='context' 
     {
-        createLeafNode(grammarAccess.getPropertyContextDeclAccess().getContextKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getPropertyContextDeclAccess().getContextKeyword_0(), null);
     }
 (
 (
@@ -1537,9 +1531,9 @@ rulePropertyContextDecl returns [EObject current=null]
 	    }
 
 )
-)	':' 
+)	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getPropertyContextDeclAccess().getColonKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getPropertyContextDeclAccess().getColonKeyword_2(), null);
     }
 (
 (
@@ -1757,9 +1751,9 @@ ruleQualifiedClassifierRef returns [EObject current=null]
 	    }
 
 )
-)	'::' 
+)	otherlv_1='::' 
     {
-        createLeafNode(grammarAccess.getQualifiedClassifierRefAccess().getColonColonKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getQualifiedClassifierRefAccess().getColonColonKeyword_1(), null);
     }
 (
 (
@@ -1832,9 +1826,9 @@ ruleQualifiedOperationRef returns [EObject current=null]
 	    }
 
 )
-)	'::' 
+)	otherlv_1='::' 
     {
-        createLeafNode(grammarAccess.getQualifiedOperationRefAccess().getColonColonKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getQualifiedOperationRefAccess().getColonColonKeyword_1(), null);
     }
 (
 (
@@ -1907,9 +1901,9 @@ ruleQualifiedPropertyRef returns [EObject current=null]
 	    }
 
 )
-)	'::' 
+)	otherlv_1='::' 
     {
-        createLeafNode(grammarAccess.getQualifiedPropertyRefAccess().getColonColonKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getQualifiedPropertyRefAccess().getColonColonKeyword_1(), null);
     }
 (
 (
@@ -1982,9 +1976,9 @@ ruleQualifiedPackageRef returns [EObject current=null]
 	    }
 
 )
-)	'::' 
+)	otherlv_1='::' 
     {
-        createLeafNode(grammarAccess.getQualifiedPackageRefAccess().getColonColonKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getQualifiedPackageRefAccess().getColonColonKeyword_1(), null);
     }
 (
 (
@@ -2257,7 +2251,7 @@ ruleNavigationExp returns [EObject current=null]
 (
 		lv_op_2_1=	'.' 
     {
-        createLeafNode(grammarAccess.getNavigationExpAccess().getOpFullStopKeyword_1_0_1_0_0(), "op"); 
+        createLeafNode(lv_op_2_1, grammarAccess.getNavigationExpAccess().getOpFullStopKeyword_1_0_1_0_0(), "op");
     }
  
 	    {
@@ -2275,7 +2269,7 @@ ruleNavigationExp returns [EObject current=null]
 
     |		lv_op_2_2=	'->' 
     {
-        createLeafNode(grammarAccess.getNavigationExpAccess().getOpHyphenMinusGreaterThanSignKeyword_1_0_1_0_1(), "op"); 
+        createLeafNode(lv_op_2_2, grammarAccess.getNavigationExpAccess().getOpHyphenMinusGreaterThanSignKeyword_1_0_1_0_1(), "op");
     }
  
 	    {
@@ -2343,7 +2337,7 @@ ruleNavigationExp returns [EObject current=null]
 (
 		lv_op_5_1=	'^^' 
     {
-        createLeafNode(grammarAccess.getNavigationExpAccess().getOpCircumflexAccentCircumflexAccentKeyword_1_1_1_0_0(), "op"); 
+        createLeafNode(lv_op_5_1, grammarAccess.getNavigationExpAccess().getOpCircumflexAccentCircumflexAccentKeyword_1_1_1_0_0(), "op");
     }
  
 	    {
@@ -2361,7 +2355,7 @@ ruleNavigationExp returns [EObject current=null]
 
     |		lv_op_5_2=	'^' 
     {
-        createLeafNode(grammarAccess.getNavigationExpAccess().getOpCircumflexAccentKeyword_1_1_1_0_1(), "op"); 
+        createLeafNode(lv_op_5_2, grammarAccess.getNavigationExpAccess().getOpCircumflexAccentKeyword_1_1_1_0_1(), "op");
     }
  
 	    {
@@ -2404,9 +2398,9 @@ ruleNavigationExp returns [EObject current=null]
 	    }
 
 )
-)	'(' 
+)	otherlv_7='(' 
     {
-        createLeafNode(grammarAccess.getNavigationExpAccess().getLeftParenthesisKeyword_1_1_3(), null); 
+    	createLeafNode(otherlv_7, grammarAccess.getNavigationExpAccess().getLeftParenthesisKeyword_1_1_3(), null);
     }
 ((
 (
@@ -2432,9 +2426,9 @@ ruleNavigationExp returns [EObject current=null]
 	    }
 
 )
-)(	',' 
+)(	otherlv_9=',' 
     {
-        createLeafNode(grammarAccess.getNavigationExpAccess().getCommaKeyword_1_1_4_1_0(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getNavigationExpAccess().getCommaKeyword_1_1_4_1_0(), null);
     }
 (
 (
@@ -2460,9 +2454,9 @@ ruleNavigationExp returns [EObject current=null]
 	    }
 
 )
-))*)?	')' 
+))*)?	otherlv_11=')' 
     {
-        createLeafNode(grammarAccess.getNavigationExpAccess().getRightParenthesisKeyword_1_1_5(), null); 
+    	createLeafNode(otherlv_11, grammarAccess.getNavigationExpAccess().getRightParenthesisKeyword_1_1_5(), null);
     }
 ))?)
 ;
@@ -2523,7 +2517,7 @@ ruleNavigatingExp returns [EObject current=null]
 (
 		lv_op_2_1=	'.' 
     {
-        createLeafNode(grammarAccess.getNavigatingExpAccess().getOpFullStopKeyword_1_0_1_0_0(), "op"); 
+        createLeafNode(lv_op_2_1, grammarAccess.getNavigatingExpAccess().getOpFullStopKeyword_1_0_1_0_0(), "op");
     }
  
 	    {
@@ -2541,7 +2535,7 @@ ruleNavigatingExp returns [EObject current=null]
 
     |		lv_op_2_2=	'->' 
     {
-        createLeafNode(grammarAccess.getNavigatingExpAccess().getOpHyphenMinusGreaterThanSignKeyword_1_0_1_0_1(), "op"); 
+        createLeafNode(lv_op_2_2, grammarAccess.getNavigatingExpAccess().getOpHyphenMinusGreaterThanSignKeyword_1_0_1_0_1(), "op");
     }
  
 	    {
@@ -2609,7 +2603,7 @@ ruleNavigatingExp returns [EObject current=null]
 (
 		lv_op_5_1=	'^^' 
     {
-        createLeafNode(grammarAccess.getNavigatingExpAccess().getOpCircumflexAccentCircumflexAccentKeyword_1_1_1_0_0(), "op"); 
+        createLeafNode(lv_op_5_1, grammarAccess.getNavigatingExpAccess().getOpCircumflexAccentCircumflexAccentKeyword_1_1_1_0_0(), "op");
     }
  
 	    {
@@ -2627,7 +2621,7 @@ ruleNavigatingExp returns [EObject current=null]
 
     |		lv_op_5_2=	'^' 
     {
-        createLeafNode(grammarAccess.getNavigatingExpAccess().getOpCircumflexAccentKeyword_1_1_1_0_1(), "op"); 
+        createLeafNode(lv_op_5_2, grammarAccess.getNavigatingExpAccess().getOpCircumflexAccentKeyword_1_1_1_0_1(), "op");
     }
  
 	    {
@@ -2670,9 +2664,9 @@ ruleNavigatingExp returns [EObject current=null]
 	    }
 
 )
-)	'(' 
+)	otherlv_7='(' 
     {
-        createLeafNode(grammarAccess.getNavigatingExpAccess().getLeftParenthesisKeyword_1_1_3(), null); 
+    	createLeafNode(otherlv_7, grammarAccess.getNavigatingExpAccess().getLeftParenthesisKeyword_1_1_3(), null);
     }
 ((
 (
@@ -2698,9 +2692,9 @@ ruleNavigatingExp returns [EObject current=null]
 	    }
 
 )
-)(	',' 
+)(	otherlv_9=',' 
     {
-        createLeafNode(grammarAccess.getNavigatingExpAccess().getCommaKeyword_1_1_4_1_0(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getNavigatingExpAccess().getCommaKeyword_1_1_4_1_0(), null);
     }
 (
 (
@@ -2726,9 +2720,9 @@ ruleNavigatingExp returns [EObject current=null]
 	    }
 
 )
-))*)?	')' 
+))*)?	otherlv_11=')' 
     {
-        createLeafNode(grammarAccess.getNavigatingExpAccess().getRightParenthesisKeyword_1_1_5(), null); 
+    	createLeafNode(otherlv_11, grammarAccess.getNavigatingExpAccess().getRightParenthesisKeyword_1_1_5(), null);
     }
 ))?)
 ;
@@ -2767,13 +2761,13 @@ ruleOclMessageArg returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'?' 
+)	otherlv_1='?' 
     {
-        createLeafNode(grammarAccess.getOclMessageArgAccess().getQuestionMarkKeyword_0_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getOclMessageArgAccess().getQuestionMarkKeyword_0_1(), null);
     }
-(	':' 
+(	otherlv_2=':' 
     {
-        createLeafNode(grammarAccess.getOclMessageArgAccess().getColonKeyword_0_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getOclMessageArgAccess().getColonKeyword_0_2_0(), null);
     }
 (
 (
@@ -2840,53 +2834,53 @@ ruleNUMBER_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRule
     }
 
     { 
-    createLeafNode(grammarAccess.getNUMBER_LITERALAccess().getINTTerminalRuleCall_0(), null); 
+    createLeafNode(this_INT_0, grammarAccess.getNUMBER_LITERALAccess().getINTTerminalRuleCall_0(), null); 
     }
 (
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getNUMBER_LITERALAccess().getFullStopKeyword_1_0(), null); 
+        createLeafNode(kw, grammarAccess.getNUMBER_LITERALAccess().getFullStopKeyword_1_0(), null); 
     }
     this_INT_2=RULE_INT    {
 		$current.merge(this_INT_2);
     }
 
     { 
-    createLeafNode(grammarAccess.getNUMBER_LITERALAccess().getINTTerminalRuleCall_1_1(), null); 
+    createLeafNode(this_INT_2, grammarAccess.getNUMBER_LITERALAccess().getINTTerminalRuleCall_1_1(), null); 
     }
 )?((
 	kw='e' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getNUMBER_LITERALAccess().getEKeyword_2_0_0(), null); 
+        createLeafNode(kw, grammarAccess.getNUMBER_LITERALAccess().getEKeyword_2_0_0(), null); 
     }
 
     |
 	kw='E' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getNUMBER_LITERALAccess().getEKeyword_2_0_1(), null); 
+        createLeafNode(kw, grammarAccess.getNUMBER_LITERALAccess().getEKeyword_2_0_1(), null); 
     }
 )(
 	kw='+' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getNUMBER_LITERALAccess().getPlusSignKeyword_2_1_0(), null); 
+        createLeafNode(kw, grammarAccess.getNUMBER_LITERALAccess().getPlusSignKeyword_2_1_0(), null); 
     }
 
     |
 	kw='-' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getNUMBER_LITERALAccess().getHyphenMinusKeyword_2_1_1(), null); 
+        createLeafNode(kw, grammarAccess.getNUMBER_LITERALAccess().getHyphenMinusKeyword_2_1_1(), null); 
     }
 )?    this_INT_7=RULE_INT    {
 		$current.merge(this_INT_7);
     }
 
     { 
-    createLeafNode(grammarAccess.getNUMBER_LITERALAccess().getINTTerminalRuleCall_2_2(), null); 
+    createLeafNode(this_INT_7, grammarAccess.getNUMBER_LITERALAccess().getINTTerminalRuleCall_2_2(), null); 
     }
 )?)
     ;
@@ -2915,14 +2909,14 @@ ruleEssentialOCLRestrictedKeywords returns [AntlrDatatypeRuleToken current=new A
 	kw='e' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getEssentialOCLRestrictedKeywordsAccess().getEKeyword_0(), null); 
+        createLeafNode(kw, grammarAccess.getEssentialOCLRestrictedKeywordsAccess().getEKeyword_0(), null); 
     }
 
     |
 	kw='E' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getEssentialOCLRestrictedKeywordsAccess().getEKeyword_1(), null); 
+        createLeafNode(kw, grammarAccess.getEssentialOCLRestrictedKeywordsAccess().getEKeyword_1(), null); 
     }
 )
     ;
@@ -2986,7 +2980,7 @@ ruleIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
     }
 
     { 
-    createLeafNode(grammarAccess.getIdentifierAccess().getIDTerminalRuleCall_0(), null); 
+    createLeafNode(this_ID_0, grammarAccess.getIdentifierAccess().getIDTerminalRuleCall_0(), null); 
     }
 
     |
@@ -3028,7 +3022,7 @@ ruleStringLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     }
 
     { 
-    createLeafNode(grammarAccess.getStringLiteralAccess().getSTRINGTerminalRuleCall(), null); 
+    createLeafNode(this_STRING_0, grammarAccess.getStringLiteralAccess().getSTRINGTerminalRuleCall(), null); 
     }
 
     ;
@@ -3059,56 +3053,56 @@ rulePrimitiveTypeIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDat
 	kw='Boolean' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getPrimitiveTypeIdentifierAccess().getBooleanKeyword_0(), null); 
+        createLeafNode(kw, grammarAccess.getPrimitiveTypeIdentifierAccess().getBooleanKeyword_0(), null); 
     }
 
     |
 	kw='Integer' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getPrimitiveTypeIdentifierAccess().getIntegerKeyword_1(), null); 
+        createLeafNode(kw, grammarAccess.getPrimitiveTypeIdentifierAccess().getIntegerKeyword_1(), null); 
     }
 
     |
 	kw='Real' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getPrimitiveTypeIdentifierAccess().getRealKeyword_2(), null); 
+        createLeafNode(kw, grammarAccess.getPrimitiveTypeIdentifierAccess().getRealKeyword_2(), null); 
     }
 
     |
 	kw='String' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getPrimitiveTypeIdentifierAccess().getStringKeyword_3(), null); 
+        createLeafNode(kw, grammarAccess.getPrimitiveTypeIdentifierAccess().getStringKeyword_3(), null); 
     }
 
     |
 	kw='UnlimitedNatural' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getPrimitiveTypeIdentifierAccess().getUnlimitedNaturalKeyword_4(), null); 
+        createLeafNode(kw, grammarAccess.getPrimitiveTypeIdentifierAccess().getUnlimitedNaturalKeyword_4(), null); 
     }
 
     |
 	kw='OclAny' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getPrimitiveTypeIdentifierAccess().getOclAnyKeyword_5(), null); 
+        createLeafNode(kw, grammarAccess.getPrimitiveTypeIdentifierAccess().getOclAnyKeyword_5(), null); 
     }
 
     |
 	kw='OclInvalid' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getPrimitiveTypeIdentifierAccess().getOclInvalidKeyword_6(), null); 
+        createLeafNode(kw, grammarAccess.getPrimitiveTypeIdentifierAccess().getOclInvalidKeyword_6(), null); 
     }
 
     |
 	kw='OclVoid' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getPrimitiveTypeIdentifierAccess().getOclVoidKeyword_7(), null); 
+        createLeafNode(kw, grammarAccess.getPrimitiveTypeIdentifierAccess().getOclVoidKeyword_7(), null); 
     }
 )
     ;
@@ -3184,35 +3178,35 @@ ruleCollectionTypeIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDa
 	kw='Set' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getCollectionTypeIdentifierAccess().getSetKeyword_0(), null); 
+        createLeafNode(kw, grammarAccess.getCollectionTypeIdentifierAccess().getSetKeyword_0(), null); 
     }
 
     |
 	kw='Bag' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getCollectionTypeIdentifierAccess().getBagKeyword_1(), null); 
+        createLeafNode(kw, grammarAccess.getCollectionTypeIdentifierAccess().getBagKeyword_1(), null); 
     }
 
     |
 	kw='Sequence' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getCollectionTypeIdentifierAccess().getSequenceKeyword_2(), null); 
+        createLeafNode(kw, grammarAccess.getCollectionTypeIdentifierAccess().getSequenceKeyword_2(), null); 
     }
 
     |
 	kw='Collection' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getCollectionTypeIdentifierAccess().getCollectionKeyword_3(), null); 
+        createLeafNode(kw, grammarAccess.getCollectionTypeIdentifierAccess().getCollectionKeyword_3(), null); 
     }
 
     |
 	kw='OrderedSet' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getCollectionTypeIdentifierAccess().getOrderedSetKeyword_4(), null); 
+        createLeafNode(kw, grammarAccess.getCollectionTypeIdentifierAccess().getOrderedSetKeyword_4(), null); 
     }
 )
     ;
@@ -3335,9 +3329,9 @@ ruleCollectionType returns [EObject current=null]
 	    }
 
 )
-)(	'(' 
+)(	otherlv_1='(' 
     {
-        createLeafNode(grammarAccess.getCollectionTypeAccess().getLeftParenthesisKeyword_1_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getCollectionTypeAccess().getLeftParenthesisKeyword_1_0(), null);
     }
 (
 (
@@ -3363,9 +3357,9 @@ ruleCollectionType returns [EObject current=null]
 	    }
 
 )
-)	')' 
+)	otherlv_3=')' 
     {
-        createLeafNode(grammarAccess.getCollectionTypeAccess().getRightParenthesisKeyword_1_2(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getCollectionTypeAccess().getRightParenthesisKeyword_1_2(), null);
     }
 )?)
 ;
@@ -3394,7 +3388,7 @@ ruleTupleType returns [EObject current=null]
 (
 		lv_name_0_0=	'Tuple' 
     {
-        createLeafNode(grammarAccess.getTupleTypeAccess().getNameTupleKeyword_0_0(), "name"); 
+        createLeafNode(lv_name_0_0, grammarAccess.getTupleTypeAccess().getNameTupleKeyword_0_0(), "name");
     }
  
 	    {
@@ -3411,9 +3405,9 @@ ruleTupleType returns [EObject current=null]
 	    }
 
 )
-)	'(' 
+)	otherlv_1='(' 
     {
-        createLeafNode(grammarAccess.getTupleTypeAccess().getLeftParenthesisKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getTupleTypeAccess().getLeftParenthesisKeyword_1(), null);
     }
 ((
 (
@@ -3439,9 +3433,9 @@ ruleTupleType returns [EObject current=null]
 	    }
 
 )
-)(	',' 
+)(	otherlv_3=',' 
     {
-        createLeafNode(grammarAccess.getTupleTypeAccess().getCommaKeyword_2_1_0(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getTupleTypeAccess().getCommaKeyword_2_1_0(), null);
     }
 (
 (
@@ -3467,9 +3461,9 @@ ruleTupleType returns [EObject current=null]
 	    }
 
 )
-))*)?	')' 
+))*)?	otherlv_5=')' 
     {
-        createLeafNode(grammarAccess.getTupleTypeAccess().getRightParenthesisKeyword_3(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getTupleTypeAccess().getRightParenthesisKeyword_3(), null);
     }
 )
 ;
@@ -3518,9 +3512,9 @@ ruletuplePart returns [EObject current=null]
 	    }
 
 )
-)	':' 
+)	otherlv_1=':' 
     {
-        createLeafNode(grammarAccess.getTuplePartAccess().getColonKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getTuplePartAccess().getColonKeyword_1(), null);
     }
 (
 (
@@ -3600,9 +3594,9 @@ ruleCollectionLiteralExp returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'{' 
+)	otherlv_2='{' 
     {
-        createLeafNode(grammarAccess.getCollectionLiteralExpAccess().getLeftCurlyBracketKeyword_1_1(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getCollectionLiteralExpAccess().getLeftCurlyBracketKeyword_1_1(), null);
     }
 ((
 (
@@ -3628,9 +3622,9 @@ ruleCollectionLiteralExp returns [EObject current=null]
 	    }
 
 )
-)(	',' 
+)(	otherlv_4=',' 
     {
-        createLeafNode(grammarAccess.getCollectionLiteralExpAccess().getCommaKeyword_1_2_1_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getCollectionLiteralExpAccess().getCommaKeyword_1_2_1_0(), null);
     }
 (
 (
@@ -3656,9 +3650,9 @@ ruleCollectionLiteralExp returns [EObject current=null]
 	    }
 
 )
-))*)?	'}' 
+))*)?	otherlv_6='}' 
     {
-        createLeafNode(grammarAccess.getCollectionLiteralExpAccess().getRightCurlyBracketKeyword_1_3(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getCollectionLiteralExpAccess().getRightCurlyBracketKeyword_1_3(), null);
     }
 )?)
 ;
@@ -3707,9 +3701,9 @@ ruleCollectionLiteralPart returns [EObject current=null]
 	    }
 
 )
-)(	'..' 
+)(	otherlv_1='..' 
     {
-        createLeafNode(grammarAccess.getCollectionLiteralPartAccess().getFullStopFullStopKeyword_1_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getCollectionLiteralPartAccess().getFullStopFullStopKeyword_1_0(), null);
     }
 (
 (
@@ -3859,13 +3853,13 @@ ruleTupleLiteralExp returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'Tuple' 
+)	otherlv_1='Tuple' 
     {
-        createLeafNode(grammarAccess.getTupleLiteralExpAccess().getTupleKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getTupleLiteralExpAccess().getTupleKeyword_1(), null);
     }
-(	'{' 
+(	otherlv_2='{' 
     {
-        createLeafNode(grammarAccess.getTupleLiteralExpAccess().getLeftCurlyBracketKeyword_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getTupleLiteralExpAccess().getLeftCurlyBracketKeyword_2_0(), null);
     }
 (
 (
@@ -3891,9 +3885,9 @@ ruleTupleLiteralExp returns [EObject current=null]
 	    }
 
 )
-)(	',' 
+)(	otherlv_4=',' 
     {
-        createLeafNode(grammarAccess.getTupleLiteralExpAccess().getCommaKeyword_2_2_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getTupleLiteralExpAccess().getCommaKeyword_2_2_0(), null);
     }
 (
 (
@@ -3919,9 +3913,9 @@ ruleTupleLiteralExp returns [EObject current=null]
 	    }
 
 )
-))*	'}' 
+))*	otherlv_6='}' 
     {
-        createLeafNode(grammarAccess.getTupleLiteralExpAccess().getRightCurlyBracketKeyword_2_3(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getTupleLiteralExpAccess().getRightCurlyBracketKeyword_2_3(), null);
     }
 )?)
 ;
@@ -3970,9 +3964,9 @@ ruleTupleLiteralPart returns [EObject current=null]
 	    }
 
 )
-)(	':' 
+)(	otherlv_1=':' 
     {
-        createLeafNode(grammarAccess.getTupleLiteralPartAccess().getColonKeyword_1_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getTupleLiteralPartAccess().getColonKeyword_1_0(), null);
     }
 (
 (
@@ -3998,9 +3992,9 @@ ruleTupleLiteralPart returns [EObject current=null]
 	    }
 
 )
-))?	'=' 
+))?	otherlv_3='=' 
     {
-        createLeafNode(grammarAccess.getTupleLiteralPartAccess().getEqualsSignKeyword_2(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getTupleLiteralPartAccess().getEqualsSignKeyword_2(), null);
     }
 (
 (
@@ -4161,7 +4155,7 @@ ruleBooleanLiteralExp returns [EObject current=null]
 (
 		lv_isTrue_1_0=	'true' 
     {
-        createLeafNode(grammarAccess.getBooleanLiteralExpAccess().getIsTrueTrueKeyword_1_0_0(), "isTrue"); 
+        createLeafNode(lv_isTrue_1_0, grammarAccess.getBooleanLiteralExpAccess().getIsTrueTrueKeyword_1_0_0(), "isTrue");
     }
  
 	    {
@@ -4179,9 +4173,9 @@ ruleBooleanLiteralExp returns [EObject current=null]
 
 )
 )
-    |	'false' 
+    |	otherlv_2='false' 
     {
-        createLeafNode(grammarAccess.getBooleanLiteralExpAccess().getFalseKeyword_1_1(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getBooleanLiteralExpAccess().getFalseKeyword_1_1(), null);
     }
 ))
 ;
@@ -4220,9 +4214,9 @@ ruleInvalidLiteralExp returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'invalid' 
+)	otherlv_1='invalid' 
     {
-        createLeafNode(grammarAccess.getInvalidLiteralExpAccess().getInvalidKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getInvalidLiteralExpAccess().getInvalidKeyword_1(), null);
     }
 )
 ;
@@ -4261,9 +4255,9 @@ ruleNullLiteralExp returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'null' 
+)	otherlv_1='null' 
     {
-        createLeafNode(grammarAccess.getNullLiteralExpAccess().getNullKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getNullLiteralExpAccess().getNullKeyword_1(), null);
     }
 )
 ;
@@ -4371,7 +4365,7 @@ ruleimplies returns [EObject current=null]
 (
 		lv_op_2_0=	'implies' 
     {
-        createLeafNode(grammarAccess.getImpliesAccess().getOpImpliesKeyword_1_1_0(), "op"); 
+        createLeafNode(lv_op_2_0, grammarAccess.getImpliesAccess().getOpImpliesKeyword_1_1_0(), "op");
     }
  
 	    {
@@ -4494,7 +4488,7 @@ rulexor returns [EObject current=null]
 (
 		lv_op_2_0=	'xor' 
     {
-        createLeafNode(grammarAccess.getXorAccess().getOpXorKeyword_1_1_0(), "op"); 
+        createLeafNode(lv_op_2_0, grammarAccess.getXorAccess().getOpXorKeyword_1_1_0(), "op");
     }
  
 	    {
@@ -4617,7 +4611,7 @@ ruleor returns [EObject current=null]
 (
 		lv_op_2_0=	'or' 
     {
-        createLeafNode(grammarAccess.getOrAccess().getOpOrKeyword_1_1_0(), "op"); 
+        createLeafNode(lv_op_2_0, grammarAccess.getOrAccess().getOpOrKeyword_1_1_0(), "op");
     }
  
 	    {
@@ -4740,7 +4734,7 @@ ruleand returns [EObject current=null]
 (
 		lv_op_2_0=	'and' 
     {
-        createLeafNode(grammarAccess.getAndAccess().getOpAndKeyword_1_1_0(), "op"); 
+        createLeafNode(lv_op_2_0, grammarAccess.getAndAccess().getOpAndKeyword_1_1_0(), "op");
     }
  
 	    {
@@ -4864,7 +4858,7 @@ ruleequality returns [EObject current=null]
 (
 		lv_op_2_1=	'=' 
     {
-        createLeafNode(grammarAccess.getEqualityAccess().getOpEqualsSignKeyword_1_1_0_0(), "op"); 
+        createLeafNode(lv_op_2_1, grammarAccess.getEqualityAccess().getOpEqualsSignKeyword_1_1_0_0(), "op");
     }
  
 	    {
@@ -4882,7 +4876,7 @@ ruleequality returns [EObject current=null]
 
     |		lv_op_2_2=	'<>' 
     {
-        createLeafNode(grammarAccess.getEqualityAccess().getOpLessThanSignGreaterThanSignKeyword_1_1_0_1(), "op"); 
+        createLeafNode(lv_op_2_2, grammarAccess.getEqualityAccess().getOpLessThanSignGreaterThanSignKeyword_1_1_0_1(), "op");
     }
  
 	    {
@@ -5008,7 +5002,7 @@ rulerelational returns [EObject current=null]
 (
 		lv_op_2_1=	'>' 
     {
-        createLeafNode(grammarAccess.getRelationalAccess().getOpGreaterThanSignKeyword_1_1_0_0(), "op"); 
+        createLeafNode(lv_op_2_1, grammarAccess.getRelationalAccess().getOpGreaterThanSignKeyword_1_1_0_0(), "op");
     }
  
 	    {
@@ -5026,7 +5020,7 @@ rulerelational returns [EObject current=null]
 
     |		lv_op_2_2=	'<' 
     {
-        createLeafNode(grammarAccess.getRelationalAccess().getOpLessThanSignKeyword_1_1_0_1(), "op"); 
+        createLeafNode(lv_op_2_2, grammarAccess.getRelationalAccess().getOpLessThanSignKeyword_1_1_0_1(), "op");
     }
  
 	    {
@@ -5044,7 +5038,7 @@ rulerelational returns [EObject current=null]
 
     |		lv_op_2_3=	'>=' 
     {
-        createLeafNode(grammarAccess.getRelationalAccess().getOpGreaterThanSignEqualsSignKeyword_1_1_0_2(), "op"); 
+        createLeafNode(lv_op_2_3, grammarAccess.getRelationalAccess().getOpGreaterThanSignEqualsSignKeyword_1_1_0_2(), "op");
     }
  
 	    {
@@ -5062,7 +5056,7 @@ rulerelational returns [EObject current=null]
 
     |		lv_op_2_4=	'<=' 
     {
-        createLeafNode(grammarAccess.getRelationalAccess().getOpLessThanSignEqualsSignKeyword_1_1_0_3(), "op"); 
+        createLeafNode(lv_op_2_4, grammarAccess.getRelationalAccess().getOpLessThanSignEqualsSignKeyword_1_1_0_3(), "op");
     }
  
 	    {
@@ -5188,7 +5182,7 @@ ruleadditive returns [EObject current=null]
 (
 		lv_op_2_1=	'+' 
     {
-        createLeafNode(grammarAccess.getAdditiveAccess().getOpPlusSignKeyword_1_1_0_0(), "op"); 
+        createLeafNode(lv_op_2_1, grammarAccess.getAdditiveAccess().getOpPlusSignKeyword_1_1_0_0(), "op");
     }
  
 	    {
@@ -5206,7 +5200,7 @@ ruleadditive returns [EObject current=null]
 
     |		lv_op_2_2=	'-' 
     {
-        createLeafNode(grammarAccess.getAdditiveAccess().getOpHyphenMinusKeyword_1_1_0_1(), "op"); 
+        createLeafNode(lv_op_2_2, grammarAccess.getAdditiveAccess().getOpHyphenMinusKeyword_1_1_0_1(), "op");
     }
  
 	    {
@@ -5332,7 +5326,7 @@ rulemultiplicative returns [EObject current=null]
 (
 		lv_op_2_1=	'*' 
     {
-        createLeafNode(grammarAccess.getMultiplicativeAccess().getOpAsteriskKeyword_1_1_0_0(), "op"); 
+        createLeafNode(lv_op_2_1, grammarAccess.getMultiplicativeAccess().getOpAsteriskKeyword_1_1_0_0(), "op");
     }
  
 	    {
@@ -5350,7 +5344,7 @@ rulemultiplicative returns [EObject current=null]
 
     |		lv_op_2_2=	'/' 
     {
-        createLeafNode(grammarAccess.getMultiplicativeAccess().getOpSolidusKeyword_1_1_0_1(), "op"); 
+        createLeafNode(lv_op_2_2, grammarAccess.getMultiplicativeAccess().getOpSolidusKeyword_1_1_0_1(), "op");
     }
  
 	    {
@@ -5472,7 +5466,7 @@ ruleunary returns [EObject current=null]
 (
 		lv_op_2_1=	'-' 
     {
-        createLeafNode(grammarAccess.getUnaryAccess().getOpHyphenMinusKeyword_1_1_0_0(), "op"); 
+        createLeafNode(lv_op_2_1, grammarAccess.getUnaryAccess().getOpHyphenMinusKeyword_1_1_0_0(), "op");
     }
  
 	    {
@@ -5490,7 +5484,7 @@ ruleunary returns [EObject current=null]
 
     |		lv_op_2_2=	'not' 
     {
-        createLeafNode(grammarAccess.getUnaryAccess().getOpNotKeyword_1_1_0_1(), "op"); 
+        createLeafNode(lv_op_2_2, grammarAccess.getUnaryAccess().getOpNotKeyword_1_1_0_1(), "op");
     }
  
 	    {
@@ -5673,9 +5667,9 @@ ruleSubNavigationExp returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 
-    |(	'(' 
+    |(	otherlv_9='(' 
     {
-        createLeafNode(grammarAccess.getSubNavigationExpAccess().getLeftParenthesisKeyword_9_0(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getSubNavigationExpAccess().getLeftParenthesisKeyword_9_0(), null);
     }
 (
 	{ 
@@ -5715,9 +5709,9 @@ ruleSubNavigationExp returns [EObject current=null]
 	    }
 
 )
-)	')' 
+)	otherlv_12=')' 
     {
-        createLeafNode(grammarAccess.getSubNavigationExpAccess().getRightParenthesisKeyword_9_3(), null); 
+    	createLeafNode(otherlv_12, grammarAccess.getSubNavigationExpAccess().getRightParenthesisKeyword_9_3(), null);
     }
 ))
 ;
@@ -5840,9 +5834,9 @@ ruleiteratorVariable returns [EObject current=null]
 	    }
 
 )
-)(	':' 
+)(	otherlv_1=':' 
     {
-        createLeafNode(grammarAccess.getIteratorVariableAccess().getColonKeyword_1_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getIteratorVariableAccess().getColonKeyword_1_0(), null);
     }
 (
 (
@@ -5915,9 +5909,9 @@ ruleiteratorAccumulator returns [EObject current=null]
 	    }
 
 )
-)	':' 
+)	otherlv_1=':' 
     {
-        createLeafNode(grammarAccess.getIteratorAccumulatorAccess().getColonKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getIteratorAccumulatorAccess().getColonKeyword_1(), null);
     }
 (
 (
@@ -5943,9 +5937,9 @@ ruleiteratorAccumulator returns [EObject current=null]
 	    }
 
 )
-)	'=' 
+)	otherlv_3='=' 
     {
-        createLeafNode(grammarAccess.getIteratorAccumulatorAccess().getEqualsSignKeyword_3(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getIteratorAccumulatorAccess().getEqualsSignKeyword_3(), null);
     }
 (
 (
@@ -6018,15 +6012,15 @@ ruleRoundBracketExp returns [EObject current=null]
 	    }
 
 )
-)(	'@' 
+)(	otherlv_1='@' 
     {
-        createLeafNode(grammarAccess.getRoundBracketExpAccess().getCommercialAtKeyword_1_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getRoundBracketExpAccess().getCommercialAtKeyword_1_0(), null);
     }
 (
 (
 		lv_pre_2_0=	'pre' 
     {
-        createLeafNode(grammarAccess.getRoundBracketExpAccess().getPrePreKeyword_1_1_0(), "pre"); 
+        createLeafNode(lv_pre_2_0, grammarAccess.getRoundBracketExpAccess().getPrePreKeyword_1_1_0(), "pre");
     }
  
 	    {
@@ -6043,9 +6037,9 @@ ruleRoundBracketExp returns [EObject current=null]
 	    }
 
 )
-))?	'(' 
+))?	otherlv_3='(' 
     {
-        createLeafNode(grammarAccess.getRoundBracketExpAccess().getLeftParenthesisKeyword_2(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getRoundBracketExpAccess().getLeftParenthesisKeyword_2(), null);
     }
 ((
 (
@@ -6071,9 +6065,9 @@ ruleRoundBracketExp returns [EObject current=null]
 	    }
 
 )
-)((	',' 
+)((	otherlv_5=',' 
     {
-        createLeafNode(grammarAccess.getRoundBracketExpAccess().getCommaKeyword_3_1_0_0(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getRoundBracketExpAccess().getCommaKeyword_3_1_0_0(), null);
     }
 (
 (
@@ -6100,9 +6094,9 @@ ruleRoundBracketExp returns [EObject current=null]
 
 )
 ))
-    |(	';' 
+    |(	otherlv_7=';' 
     {
-        createLeafNode(grammarAccess.getRoundBracketExpAccess().getSemicolonKeyword_3_1_1_0(), null); 
+    	createLeafNode(otherlv_7, grammarAccess.getRoundBracketExpAccess().getSemicolonKeyword_3_1_1_0(), null);
     }
 (
 (
@@ -6128,9 +6122,9 @@ ruleRoundBracketExp returns [EObject current=null]
 	    }
 
 )
-)))?	'|' 
+)))?	otherlv_9='|' 
     {
-        createLeafNode(grammarAccess.getRoundBracketExpAccess().getVerticalLineKeyword_3_2(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getRoundBracketExpAccess().getVerticalLineKeyword_3_2(), null);
     }
 )?((
 (
@@ -6156,9 +6150,9 @@ ruleRoundBracketExp returns [EObject current=null]
 	    }
 
 )
-)(	',' 
+)(	otherlv_11=',' 
     {
-        createLeafNode(grammarAccess.getRoundBracketExpAccess().getCommaKeyword_4_1_0(), null); 
+    	createLeafNode(otherlv_11, grammarAccess.getRoundBracketExpAccess().getCommaKeyword_4_1_0(), null);
     }
 (
 (
@@ -6184,9 +6178,9 @@ ruleRoundBracketExp returns [EObject current=null]
 	    }
 
 )
-))*)?	')' 
+))*)?	otherlv_13=')' 
     {
-        createLeafNode(grammarAccess.getRoundBracketExpAccess().getRightParenthesisKeyword_5(), null); 
+    	createLeafNode(otherlv_13, grammarAccess.getRoundBracketExpAccess().getRightParenthesisKeyword_5(), null);
     }
 )
 ;
@@ -6235,9 +6229,9 @@ ruleSquareBracketExp returns [EObject current=null]
 	    }
 
 )
-)	'[' 
+)	otherlv_1='[' 
     {
-        createLeafNode(grammarAccess.getSquareBracketExpAccess().getLeftSquareBracketKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getSquareBracketExpAccess().getLeftSquareBracketKeyword_1(), null);
     }
 (
 (
@@ -6263,9 +6257,9 @@ ruleSquareBracketExp returns [EObject current=null]
 	    }
 
 )
-)(	',' 
+)(	otherlv_3=',' 
     {
-        createLeafNode(grammarAccess.getSquareBracketExpAccess().getCommaKeyword_3_0(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getSquareBracketExpAccess().getCommaKeyword_3_0(), null);
     }
 (
 (
@@ -6291,19 +6285,19 @@ ruleSquareBracketExp returns [EObject current=null]
 	    }
 
 )
-))*	']' 
+))*	otherlv_5=']' 
     {
-        createLeafNode(grammarAccess.getSquareBracketExpAccess().getRightSquareBracketKeyword_4(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getSquareBracketExpAccess().getRightSquareBracketKeyword_4(), null);
     }
-(	'@' 
+(	otherlv_6='@' 
     {
-        createLeafNode(grammarAccess.getSquareBracketExpAccess().getCommercialAtKeyword_5_0(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getSquareBracketExpAccess().getCommercialAtKeyword_5_0(), null);
     }
 (
 (
 		lv_pre_7_0=	'pre' 
     {
-        createLeafNode(grammarAccess.getSquareBracketExpAccess().getPrePreKeyword_5_1_0(), "pre"); 
+        createLeafNode(lv_pre_7_0, grammarAccess.getSquareBracketExpAccess().getPrePreKeyword_5_1_0(), "pre");
     }
  
 	    {
@@ -6367,13 +6361,13 @@ rulePreExp returns [EObject current=null]
 	    }
 
 )
-)	'@' 
+)	otherlv_1='@' 
     {
-        createLeafNode(grammarAccess.getPreExpAccess().getCommercialAtKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getPreExpAccess().getCommercialAtKeyword_1(), null);
     }
-	'pre' 
+	otherlv_2='pre' 
     {
-        createLeafNode(grammarAccess.getPreExpAccess().getPreKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getPreExpAccess().getPreKeyword_2(), null);
     }
 )
 ;
@@ -6412,9 +6406,9 @@ ruleSelfExp returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'self' 
+)	otherlv_1='self' 
     {
-        createLeafNode(grammarAccess.getSelfExpAccess().getSelfKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getSelfExpAccess().getSelfKeyword_1(), null);
     }
 )
 ;
@@ -6511,9 +6505,9 @@ rulePathNameExp returns [EObject current=null]
 	    }
 
 )
-)	'::' 
+)	otherlv_1='::' 
     {
-        createLeafNode(grammarAccess.getPathNameExpAccess().getColonColonKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getPathNameExpAccess().getColonColonKeyword_1(), null);
     }
 (
 (
@@ -6609,9 +6603,9 @@ ruleIfExp returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'if' 
+(	otherlv_0='if' 
     {
-        createLeafNode(grammarAccess.getIfExpAccess().getIfKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getIfExpAccess().getIfKeyword_0(), null);
     }
 (
 (
@@ -6637,9 +6631,9 @@ ruleIfExp returns [EObject current=null]
 	    }
 
 )
-)	'then' 
+)	otherlv_2='then' 
     {
-        createLeafNode(grammarAccess.getIfExpAccess().getThenKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getIfExpAccess().getThenKeyword_2(), null);
     }
 (
 (
@@ -6665,9 +6659,9 @@ ruleIfExp returns [EObject current=null]
 	    }
 
 )
-)	'else' 
+)	otherlv_4='else' 
     {
-        createLeafNode(grammarAccess.getIfExpAccess().getElseKeyword_4(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getIfExpAccess().getElseKeyword_4(), null);
     }
 (
 (
@@ -6693,9 +6687,9 @@ ruleIfExp returns [EObject current=null]
 	    }
 
 )
-)	'endif' 
+)	otherlv_6='endif' 
     {
-        createLeafNode(grammarAccess.getIfExpAccess().getEndifKeyword_6(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getIfExpAccess().getEndifKeyword_6(), null);
     }
 )
 ;
@@ -6720,9 +6714,9 @@ ruleLetExp returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'let' 
+(	otherlv_0='let' 
     {
-        createLeafNode(grammarAccess.getLetExpAccess().getLetKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getLetExpAccess().getLetKeyword_0(), null);
     }
 (
 (
@@ -6748,9 +6742,9 @@ ruleLetExp returns [EObject current=null]
 	    }
 
 )
-)(	',' 
+)(	otherlv_2=',' 
     {
-        createLeafNode(grammarAccess.getLetExpAccess().getCommaKeyword_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getLetExpAccess().getCommaKeyword_2_0(), null);
     }
 (
 (
@@ -6776,9 +6770,9 @@ ruleLetExp returns [EObject current=null]
 	    }
 
 )
-))*	'in' 
+))*	otherlv_4='in' 
     {
-        createLeafNode(grammarAccess.getLetExpAccess().getInKeyword_3(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getLetExpAccess().getInKeyword_3(), null);
     }
 (
 (
@@ -6851,9 +6845,9 @@ ruleLetVariable returns [EObject current=null]
 	    }
 
 )
-)	':' 
+)	otherlv_1=':' 
     {
-        createLeafNode(grammarAccess.getLetVariableAccess().getColonKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getLetVariableAccess().getColonKeyword_1(), null);
     }
 (
 (
@@ -6879,9 +6873,9 @@ ruleLetVariable returns [EObject current=null]
 	    }
 
 )
-)	'=' 
+)	otherlv_3='=' 
     {
-        createLeafNode(grammarAccess.getLetVariableAccess().getEqualsSignKeyword_3(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getLetVariableAccess().getEqualsSignKeyword_3(), null);
     }
 (
 (

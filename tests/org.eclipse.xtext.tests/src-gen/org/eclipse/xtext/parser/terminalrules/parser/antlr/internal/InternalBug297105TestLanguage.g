@@ -53,12 +53,6 @@ import org.eclipse.xtext.parser.terminalrules.services.Bug297105TestLanguageGram
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalBug297105TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -166,9 +160,9 @@ ruleExpression returns [EObject current=null]
 	    }
 
 )
-)	'+' 
+)	otherlv_1='+' 
     {
-        createLeafNode(grammarAccess.getExpressionAccess().getPlusSignKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getExpressionAccess().getPlusSignKeyword_1(), null);
     }
 (
 (
@@ -364,7 +358,7 @@ ruleIntValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 
     { 
-    createLeafNode(grammarAccess.getIntValueAccess().getINTTerminalRuleCall(), null); 
+    createLeafNode(this_INT_0, grammarAccess.getIntValueAccess().getINTTerminalRuleCall(), null); 
     }
 
     ;
@@ -435,20 +429,20 @@ ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getRealAccess().getINTTerminalRuleCall_0(), null); 
+    createLeafNode(this_INT_0, grammarAccess.getRealAccess().getINTTerminalRuleCall_0(), null); 
     }
 )?
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getRealAccess().getFullStopKeyword_1(), null); 
+        createLeafNode(kw, grammarAccess.getRealAccess().getFullStopKeyword_1(), null); 
     }
 (    this_EXT_INT_2=RULE_EXT_INT    {
 		$current.merge(this_EXT_INT_2);
     }
 
     { 
-    createLeafNode(grammarAccess.getRealAccess().getEXT_INTTerminalRuleCall_2_0(), null); 
+    createLeafNode(this_EXT_INT_2, grammarAccess.getRealAccess().getEXT_INTTerminalRuleCall_2_0(), null); 
     }
 
     |    this_INT_3=RULE_INT    {
@@ -456,7 +450,7 @@ ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getRealAccess().getINTTerminalRuleCall_2_1(), null); 
+    createLeafNode(this_INT_3, grammarAccess.getRealAccess().getINTTerminalRuleCall_2_1(), null); 
     }
 ))
     ;

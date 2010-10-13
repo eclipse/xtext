@@ -27,19 +27,31 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=4;
+    public static final int T__12=12;
     public static final int RULE_WS=9;
-    public static final int EOF=-1;
     public static final int RULE_INT=5;
+    public static final int EOF=-1;
+    public static final int T__13=13;
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__14=14;
+    public static final int T__11=11;
+
+    // delegates
+    // delegators
+
 
         public InternalOutlineTestLanguageParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalOutlineTestLanguageParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalOutlineTestLanguageParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g"; }
 
 
@@ -63,7 +75,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
 
-    // $ANTLR start entryRuleModel
+    // $ANTLR start "entryRuleModel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:61:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
@@ -73,7 +85,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
              before(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel61);
             ruleModel();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getModelRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel68); 
@@ -89,10 +102,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end entryRuleModel
+    // $ANTLR end "entryRuleModel"
 
 
-    // $ANTLR start ruleModel
+    // $ANTLR start "ruleModel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:70:1: ruleModel : ( ( rule__Model__ElementsAssignment )* ) ;
     public final void ruleModel() throws RecognitionException {
 
@@ -123,7 +136,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Model__ElementsAssignment_in_ruleModel94);
             	    rule__Model__ElementsAssignment();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -153,10 +167,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end ruleModel
+    // $ANTLR end "ruleModel"
 
 
-    // $ANTLR start entryRuleElement
+    // $ANTLR start "entryRuleElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:89:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
@@ -166,7 +180,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
              before(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement122);
             ruleElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getElementRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElement129); 
@@ -182,10 +197,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end entryRuleElement
+    // $ANTLR end "entryRuleElement"
 
 
-    // $ANTLR start ruleElement
+    // $ANTLR start "ruleElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:98:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
     public final void ruleElement() throws RecognitionException {
 
@@ -204,7 +219,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__0_in_ruleElement155);
             rule__Element__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -228,10 +244,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end ruleElement
+    // $ANTLR end "ruleElement"
 
 
-    // $ANTLR start rule__Element__Group__0
+    // $ANTLR start "rule__Element__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:119:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
     public final void rule__Element__Group__0() throws RecognitionException {
 
@@ -243,11 +259,13 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__0__Impl_in_rule__Element__Group__0189);
             rule__Element__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__1_in_rule__Element__Group__0192);
             rule__Element__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -264,10 +282,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group__0
+    // $ANTLR end "rule__Element__Group__0"
 
 
-    // $ANTLR start rule__Element__Group__0__Impl
+    // $ANTLR start "rule__Element__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:131:1: rule__Element__Group__0__Impl : ( ( rule__Element__NameAssignment_0 ) ) ;
     public final void rule__Element__Group__0__Impl() throws RecognitionException {
 
@@ -286,7 +304,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__NameAssignment_0_in_rule__Element__Group__0__Impl219);
             rule__Element__NameAssignment_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -310,10 +329,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group__0__Impl
+    // $ANTLR end "rule__Element__Group__0__Impl"
 
 
-    // $ANTLR start rule__Element__Group__1
+    // $ANTLR start "rule__Element__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:148:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
     public final void rule__Element__Group__1() throws RecognitionException {
 
@@ -325,11 +344,13 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__1__Impl_in_rule__Element__Group__1249);
             rule__Element__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__2_in_rule__Element__Group__1252);
             rule__Element__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -346,10 +367,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group__1
+    // $ANTLR end "rule__Element__Group__1"
 
 
-    // $ANTLR start rule__Element__Group__1__Impl
+    // $ANTLR start "rule__Element__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:160:1: rule__Element__Group__1__Impl : ( ( rule__Element__Group_1__0 )? ) ;
     public final void rule__Element__Group__1__Impl() throws RecognitionException {
 
@@ -376,7 +397,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__0_in_rule__Element__Group__1__Impl279);
                     rule__Element__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -403,10 +425,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group__1__Impl
+    // $ANTLR end "rule__Element__Group__1__Impl"
 
 
-    // $ANTLR start rule__Element__Group__2
+    // $ANTLR start "rule__Element__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:177:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
     public final void rule__Element__Group__2() throws RecognitionException {
 
@@ -418,11 +440,13 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__2__Impl_in_rule__Element__Group__2310);
             rule__Element__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__3_in_rule__Element__Group__2313);
             rule__Element__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -439,10 +463,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group__2
+    // $ANTLR end "rule__Element__Group__2"
 
 
-    // $ANTLR start rule__Element__Group__2__Impl
+    // $ANTLR start "rule__Element__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:189:1: rule__Element__Group__2__Impl : ( '{' ) ;
     public final void rule__Element__Group__2__Impl() throws RecognitionException {
 
@@ -476,10 +500,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group__2__Impl
+    // $ANTLR end "rule__Element__Group__2__Impl"
 
 
-    // $ANTLR start rule__Element__Group__3
+    // $ANTLR start "rule__Element__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:208:1: rule__Element__Group__3 : rule__Element__Group__3__Impl rule__Element__Group__4 ;
     public final void rule__Element__Group__3() throws RecognitionException {
 
@@ -491,11 +515,13 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__3__Impl_in_rule__Element__Group__3372);
             rule__Element__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__4_in_rule__Element__Group__3375);
             rule__Element__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -512,10 +538,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group__3
+    // $ANTLR end "rule__Element__Group__3"
 
 
-    // $ANTLR start rule__Element__Group__3__Impl
+    // $ANTLR start "rule__Element__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:220:1: rule__Element__Group__3__Impl : ( ( rule__Element__ChildrenAssignment_3 )* ) ;
     public final void rule__Element__Group__3__Impl() throws RecognitionException {
 
@@ -546,7 +572,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Element__ChildrenAssignment_3_in_rule__Element__Group__3__Impl402);
             	    rule__Element__ChildrenAssignment_3();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -576,10 +603,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group__3__Impl
+    // $ANTLR end "rule__Element__Group__3__Impl"
 
 
-    // $ANTLR start rule__Element__Group__4
+    // $ANTLR start "rule__Element__Group__4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:237:1: rule__Element__Group__4 : rule__Element__Group__4__Impl ;
     public final void rule__Element__Group__4() throws RecognitionException {
 
@@ -591,7 +618,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__4__Impl_in_rule__Element__Group__4433);
             rule__Element__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -608,10 +636,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group__4
+    // $ANTLR end "rule__Element__Group__4"
 
 
-    // $ANTLR start rule__Element__Group__4__Impl
+    // $ANTLR start "rule__Element__Group__4__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:248:1: rule__Element__Group__4__Impl : ( '}' ) ;
     public final void rule__Element__Group__4__Impl() throws RecognitionException {
 
@@ -645,10 +673,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group__4__Impl
+    // $ANTLR end "rule__Element__Group__4__Impl"
 
 
-    // $ANTLR start rule__Element__Group_1__0
+    // $ANTLR start "rule__Element__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:277:1: rule__Element__Group_1__0 : rule__Element__Group_1__0__Impl rule__Element__Group_1__1 ;
     public final void rule__Element__Group_1__0() throws RecognitionException {
 
@@ -660,11 +688,13 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__0__Impl_in_rule__Element__Group_1__0502);
             rule__Element__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__1_in_rule__Element__Group_1__0505);
             rule__Element__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -681,10 +711,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group_1__0
+    // $ANTLR end "rule__Element__Group_1__0"
 
 
-    // $ANTLR start rule__Element__Group_1__0__Impl
+    // $ANTLR start "rule__Element__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:289:1: rule__Element__Group_1__0__Impl : ( '(' ) ;
     public final void rule__Element__Group_1__0__Impl() throws RecognitionException {
 
@@ -718,10 +748,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group_1__0__Impl
+    // $ANTLR end "rule__Element__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__Element__Group_1__1
+    // $ANTLR start "rule__Element__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:308:1: rule__Element__Group_1__1 : rule__Element__Group_1__1__Impl rule__Element__Group_1__2 ;
     public final void rule__Element__Group_1__1() throws RecognitionException {
 
@@ -733,11 +763,13 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__1__Impl_in_rule__Element__Group_1__1564);
             rule__Element__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__2_in_rule__Element__Group_1__1567);
             rule__Element__Group_1__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -754,10 +786,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group_1__1
+    // $ANTLR end "rule__Element__Group_1__1"
 
 
-    // $ANTLR start rule__Element__Group_1__1__Impl
+    // $ANTLR start "rule__Element__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:320:1: rule__Element__Group_1__1__Impl : ( ( rule__Element__XrefsAssignment_1_1 )* ) ;
     public final void rule__Element__Group_1__1__Impl() throws RecognitionException {
 
@@ -788,7 +820,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Element__XrefsAssignment_1_1_in_rule__Element__Group_1__1__Impl594);
             	    rule__Element__XrefsAssignment_1_1();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -818,10 +851,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group_1__1__Impl
+    // $ANTLR end "rule__Element__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__Element__Group_1__2
+    // $ANTLR start "rule__Element__Group_1__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:337:1: rule__Element__Group_1__2 : rule__Element__Group_1__2__Impl ;
     public final void rule__Element__Group_1__2() throws RecognitionException {
 
@@ -833,7 +866,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__2__Impl_in_rule__Element__Group_1__2625);
             rule__Element__Group_1__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -850,10 +884,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group_1__2
+    // $ANTLR end "rule__Element__Group_1__2"
 
 
-    // $ANTLR start rule__Element__Group_1__2__Impl
+    // $ANTLR start "rule__Element__Group_1__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:348:1: rule__Element__Group_1__2__Impl : ( ')' ) ;
     public final void rule__Element__Group_1__2__Impl() throws RecognitionException {
 
@@ -887,10 +921,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__Group_1__2__Impl
+    // $ANTLR end "rule__Element__Group_1__2__Impl"
 
 
-    // $ANTLR start rule__Model__ElementsAssignment
+    // $ANTLR start "rule__Model__ElementsAssignment"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:374:1: rule__Model__ElementsAssignment : ( ruleElement ) ;
     public final void rule__Model__ElementsAssignment() throws RecognitionException {
 
@@ -906,7 +940,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
              before(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__Model__ElementsAssignment695);
             ruleElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0()); 
 
@@ -927,10 +962,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Model__ElementsAssignment
+    // $ANTLR end "rule__Model__ElementsAssignment"
 
 
-    // $ANTLR start rule__Element__NameAssignment_0
+    // $ANTLR start "rule__Element__NameAssignment_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:389:1: rule__Element__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__Element__NameAssignment_0() throws RecognitionException {
 
@@ -964,10 +999,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__NameAssignment_0
+    // $ANTLR end "rule__Element__NameAssignment_0"
 
 
-    // $ANTLR start rule__Element__XrefsAssignment_1_1
+    // $ANTLR start "rule__Element__XrefsAssignment_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:404:1: rule__Element__XrefsAssignment_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__Element__XrefsAssignment_1_1() throws RecognitionException {
 
@@ -1009,10 +1044,10 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__XrefsAssignment_1_1
+    // $ANTLR end "rule__Element__XrefsAssignment_1_1"
 
 
-    // $ANTLR start rule__Element__ChildrenAssignment_3
+    // $ANTLR start "rule__Element__ChildrenAssignment_3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:423:1: rule__Element__ChildrenAssignment_3 : ( ruleElement ) ;
     public final void rule__Element__ChildrenAssignment_3() throws RecognitionException {
 
@@ -1028,7 +1063,8 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
              before(grammarAccess.getElementAccess().getChildrenElementParserRuleCall_3_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__Element__ChildrenAssignment_3796);
             ruleElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getElementAccess().getChildrenElementParserRuleCall_3_0()); 
 
@@ -1049,7 +1085,9 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         }
         return ;
     }
-    // $ANTLR end rule__Element__ChildrenAssignment_3
+    // $ANTLR end "rule__Element__ChildrenAssignment_3"
+
+    // Delegated rules
 
 
  
@@ -1065,13 +1103,13 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         public static final BitSet FOLLOW_rule__Element__Group__0__Impl_in_rule__Element__Group__0189 = new BitSet(new long[]{0x0000000000002800L});
         public static final BitSet FOLLOW_rule__Element__Group__1_in_rule__Element__Group__0192 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Element__NameAssignment_0_in_rule__Element__Group__0__Impl219 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__Group__1__Impl_in_rule__Element__Group__1249 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_rule__Element__Group__1__Impl_in_rule__Element__Group__1249 = new BitSet(new long[]{0x0000000000002800L});
         public static final BitSet FOLLOW_rule__Element__Group__2_in_rule__Element__Group__1252 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Element__Group_1__0_in_rule__Element__Group__1__Impl279 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Element__Group__2__Impl_in_rule__Element__Group__2310 = new BitSet(new long[]{0x0000000000001010L});
         public static final BitSet FOLLOW_rule__Element__Group__3_in_rule__Element__Group__2313 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_11_in_rule__Element__Group__2__Impl341 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__Group__3__Impl_in_rule__Element__Group__3372 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_rule__Element__Group__3__Impl_in_rule__Element__Group__3372 = new BitSet(new long[]{0x0000000000001010L});
         public static final BitSet FOLLOW_rule__Element__Group__4_in_rule__Element__Group__3375 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Element__ChildrenAssignment_3_in_rule__Element__Group__3__Impl402 = new BitSet(new long[]{0x0000000000000012L});
         public static final BitSet FOLLOW_rule__Element__Group__4__Impl_in_rule__Element__Group__4433 = new BitSet(new long[]{0x0000000000000002L});
@@ -1079,7 +1117,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         public static final BitSet FOLLOW_rule__Element__Group_1__0__Impl_in_rule__Element__Group_1__0502 = new BitSet(new long[]{0x0000000000004010L});
         public static final BitSet FOLLOW_rule__Element__Group_1__1_in_rule__Element__Group_1__0505 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_13_in_rule__Element__Group_1__0__Impl533 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__Group_1__1__Impl_in_rule__Element__Group_1__1564 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_rule__Element__Group_1__1__Impl_in_rule__Element__Group_1__1564 = new BitSet(new long[]{0x0000000000004010L});
         public static final BitSet FOLLOW_rule__Element__Group_1__2_in_rule__Element__Group_1__1567 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Element__XrefsAssignment_1_1_in_rule__Element__Group_1__1__Impl594 = new BitSet(new long[]{0x0000000000000012L});
         public static final BitSet FOLLOW_rule__Element__Group_1__2__Impl_in_rule__Element__Group_1__2625 = new BitSet(new long[]{0x0000000000000002L});

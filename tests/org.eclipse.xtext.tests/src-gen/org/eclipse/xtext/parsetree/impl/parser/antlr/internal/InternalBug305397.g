@@ -47,12 +47,6 @@ import org.eclipse.xtext.parsetree.impl.services.Bug305397GrammarAccess;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -151,7 +145,7 @@ ruleElement returns [EObject current=null]
 (
 		lv_a_1_0=	'a' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getAAKeyword_1_0(), "a"); 
+        createLeafNode(lv_a_1_0, grammarAccess.getElementAccess().getAAKeyword_1_0(), "a");
     }
  
 	    {
@@ -168,15 +162,15 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)?	'element' 
+)?	otherlv_2='element' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getElementKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getElementAccess().getElementKeyword_2(), null);
     }
 (
 (
 		lv_name_3_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
+			createLeafNode(lv_name_3_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -220,9 +214,9 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)*	'end' 
+)*	otherlv_5='end' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getEndKeyword_5(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getElementAccess().getEndKeyword_5(), null);
     }
 )
 ;

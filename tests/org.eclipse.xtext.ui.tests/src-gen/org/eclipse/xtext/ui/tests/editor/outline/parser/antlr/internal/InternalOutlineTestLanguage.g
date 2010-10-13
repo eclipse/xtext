@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.editor.outline.services.OutlineTestLanguageGra
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/outline/parser/antlr/internal/InternalOutlineTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -140,7 +134,7 @@ ruleElement returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -160,9 +154,9 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)(	'(' 
+)(	otherlv_1='(' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getLeftParenthesisKeyword_1_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getElementAccess().getLeftParenthesisKeyword_1_0(), null);
     }
 (
 (
@@ -172,19 +166,19 @@ ruleElement returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_2=RULE_ID
 	{
-		createLeafNode(grammarAccess.getElementAccess().getXrefsElementCrossReference_1_1_0(), "xrefs"); 
+		createLeafNode(otherlv_2, grammarAccess.getElementAccess().getXrefsElementCrossReference_1_1_0(), "xrefs"); 
 	}
 
 )
-)*	')' 
+)*	otherlv_3=')' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getRightParenthesisKeyword_1_2(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getElementAccess().getRightParenthesisKeyword_1_2(), null);
     }
-)?	'{' 
+)?	otherlv_4='{' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2(), null);
     }
 (
 (
@@ -210,9 +204,9 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-)*	'}' 
+)*	otherlv_6='}' 
     {
-        createLeafNode(grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4(), null); 
+    	createLeafNode(otherlv_6, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4(), null);
     }
 )
 ;

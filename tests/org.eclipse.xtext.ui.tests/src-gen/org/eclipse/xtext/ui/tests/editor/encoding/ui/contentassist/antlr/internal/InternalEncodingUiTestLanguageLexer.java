@@ -12,21 +12,29 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalEncodingUiTestLanguageLexer extends Lexer {
-    public static final int RULE_WS=5;
-    public static final int EOF=-1;
-    public static final int RULE_LEXEME=4;
-    public static final int Tokens=7;
     public static final int RULE_ANY_OTHER=6;
+    public static final int RULE_WS=5;
+    public static final int RULE_LEXEME=4;
+    public static final int EOF=-1;
+
+    // delegates
+    // delegators
+
     public InternalEncodingUiTestLanguageLexer() {;} 
     public InternalEncodingUiTestLanguageLexer(CharStream input) {
-        super(input);
+        this(input, new RecognizerSharedState());
+    }
+    public InternalEncodingUiTestLanguageLexer(CharStream input, RecognizerSharedState state) {
+        super(input,state);
+
     }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g"; }
 
-    // $ANTLR start RULE_LEXEME
+    // $ANTLR start "RULE_LEXEME"
     public final void mRULE_LEXEME() throws RecognitionException {
         try {
             int _type = RULE_LEXEME;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:151:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )* )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:151:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
             {
@@ -50,10 +58,9 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
 
             	    }
             	    else {
-            	        MismatchedSetException mse =
-            	            new MismatchedSetException(null,input);
-            	        recover(mse);    throw mse;
-            	    }
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;}
 
 
             	    }
@@ -67,17 +74,19 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
 
             }
 
-            this.type = _type;
+            state.type = _type;
+            state.channel = _channel;
         }
         finally {
         }
     }
-    // $ANTLR end RULE_LEXEME
+    // $ANTLR end "RULE_LEXEME"
 
-    // $ANTLR start RULE_WS
+    // $ANTLR start "RULE_WS"
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:153:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:153:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
@@ -102,10 +111,9 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
 
             	    }
             	    else {
-            	        MismatchedSetException mse =
-            	            new MismatchedSetException(null,input);
-            	        recover(mse);    throw mse;
-            	    }
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;}
 
 
             	    }
@@ -123,17 +131,19 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
 
             }
 
-            this.type = _type;
+            state.type = _type;
+            state.channel = _channel;
         }
         finally {
         }
     }
-    // $ANTLR end RULE_WS
+    // $ANTLR end "RULE_WS"
 
-    // $ANTLR start RULE_ANY_OTHER
+    // $ANTLR start "RULE_ANY_OTHER"
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:155:16: ( . )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:155:18: .
             {
@@ -141,12 +151,13 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
 
             }
 
-            this.type = _type;
+            state.type = _type;
+            state.channel = _channel;
         }
         finally {
         }
     }
-    // $ANTLR end RULE_ANY_OTHER
+    // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:1:8: ( RULE_LEXEME | RULE_WS | RULE_ANY_OTHER )
@@ -159,7 +170,7 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
         else if ( ((LA3_0>='\t' && LA3_0<='\n')||LA3_0=='\r'||LA3_0==' ') ) {
             alt3 = mTokensHelper002();
         }
-        else if ( ((LA3_0>='\u0000' && LA3_0<='\b')||(LA3_0>='\u000B' && LA3_0<='\f')||(LA3_0>='\u000E' && LA3_0<='\u001F')||(LA3_0>='!' && LA3_0<='/')||(LA3_0>=':' && LA3_0<='@')||(LA3_0>='[' && LA3_0<='`')||(LA3_0>='{' && LA3_0<='\u00C3')||(LA3_0>='\u00C5' && LA3_0<='\u00D5')||(LA3_0>='\u00D7' && LA3_0<='\u00DB')||(LA3_0>='\u00DD' && LA3_0<='\u00DE')||(LA3_0>='\u00E0' && LA3_0<='\u00E3')||(LA3_0>='\u00E5' && LA3_0<='\u00F5')||(LA3_0>='\u00F7' && LA3_0<='\u00FB')||(LA3_0>='\u00FD' && LA3_0<='\uFFFE')) ) {
+        else if ( ((LA3_0>='\u0000' && LA3_0<='\b')||(LA3_0>='\u000B' && LA3_0<='\f')||(LA3_0>='\u000E' && LA3_0<='\u001F')||(LA3_0>='!' && LA3_0<='/')||(LA3_0>=':' && LA3_0<='@')||(LA3_0>='[' && LA3_0<='`')||(LA3_0>='{' && LA3_0<='\u00C3')||(LA3_0>='\u00C5' && LA3_0<='\u00D5')||(LA3_0>='\u00D7' && LA3_0<='\u00DB')||(LA3_0>='\u00DD' && LA3_0<='\u00DE')||(LA3_0>='\u00E0' && LA3_0<='\u00E3')||(LA3_0>='\u00E5' && LA3_0<='\u00F5')||(LA3_0>='\u00F7' && LA3_0<='\u00FB')||(LA3_0>='\u00FD' && LA3_0<='\uFFFF')) ) {
             alt3 = mTokensHelper003();
         }
         else {

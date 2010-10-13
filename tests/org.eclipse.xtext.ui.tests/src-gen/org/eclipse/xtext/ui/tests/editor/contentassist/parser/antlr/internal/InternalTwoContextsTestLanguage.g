@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.TwoContextsTestL
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalTwoContextsTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "MainModel";	
    	}
@@ -140,7 +134,7 @@ ruleAnElement returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -160,9 +154,9 @@ ruleAnElement returns [EObject current=null]
 	    }
 
 )
-)(	'refersTo' 
+)(	otherlv_1='refersTo' 
     {
-        createLeafNode(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getAnElementAccess().getRefersToKeyword_1_0(), null);
     }
 (
 (
@@ -172,15 +166,15 @@ ruleAnElement returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_2=RULE_ID
 	{
-		createLeafNode(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0(), "referred"); 
+		createLeafNode(otherlv_2, grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0(), "referred"); 
 	}
 
 )
-))?	';' 
+))?	otherlv_3=';' 
     {
-        createLeafNode(grammarAccess.getAnElementAccess().getSemicolonKeyword_2(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getAnElementAccess().getSemicolonKeyword_2(), null);
     }
 )
 ;

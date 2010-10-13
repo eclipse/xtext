@@ -47,12 +47,6 @@ import org.eclipse.xtext.generator.ecore.services.SubTestLanguageGrammarAccess;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "SubMain";	
    	}
@@ -89,9 +83,9 @@ ruleSubMain returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'{' 
+(	otherlv_0='{' 
     {
-        createLeafNode(grammarAccess.getSubMainAccess().getLeftCurlyBracketKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getSubMainAccess().getLeftCurlyBracketKeyword_0(), null);
     }
 (
 (
@@ -117,9 +111,9 @@ ruleSubMain returns [EObject current=null]
 	    }
 
 )
-)	'}' 
+)	otherlv_2='}' 
     {
-        createLeafNode(grammarAccess.getSubMainAccess().getRightCurlyBracketKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getSubMainAccess().getRightCurlyBracketKeyword_2(), null);
     }
 (
 (
@@ -168,15 +162,15 @@ ruleAnotherSuperMain returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'ups' 
+(	otherlv_0='ups' 
     {
-        createLeafNode(grammarAccess.getAnotherSuperMainAccess().getUpsKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getAnotherSuperMainAccess().getUpsKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getAnotherSuperMainAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getAnotherSuperMainAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -219,15 +213,15 @@ ruleSuperMain returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'super' 
+(	otherlv_0='super' 
     {
-        createLeafNode(grammarAccess.getSuperMainAccess().getSuperKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {

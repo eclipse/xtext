@@ -23,7 +23,8 @@ public class AntlrDatatypeRuleToken extends DatatypeRuleToken {
 	}
 	
 	public void merge(Token token) {
-		internalMerge(token.getText(), TokenTool.getOffset(token));
+		if (token != null)
+			internalMerge(token.getText(), TokenTool.getOffset(token));
 	}
 	
 }

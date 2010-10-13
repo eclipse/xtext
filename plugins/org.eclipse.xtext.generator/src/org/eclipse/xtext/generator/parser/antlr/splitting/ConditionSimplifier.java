@@ -71,7 +71,7 @@ public class ConditionSimplifier extends SimpleExpressionsSwitch<Expression>{
 		object.setRight(right);
 		return object;
 	}
-		
+	
 	@Override
 	public Expression caseNotExpression(NotExpression object) {
 		if (object.getExpression() instanceof NotExpression)

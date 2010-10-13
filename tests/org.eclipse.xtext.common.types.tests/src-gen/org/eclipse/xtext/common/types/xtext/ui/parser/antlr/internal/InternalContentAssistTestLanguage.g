@@ -47,12 +47,6 @@ import org.eclipse.xtext.common.types.xtext.ui.services.ContentAssistTestLanguag
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/common/types/xtext/ui/parser/antlr/internal/InternalContentAssistTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -160,9 +154,9 @@ ruleReferenceHolder returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	'default' 
+((	otherlv_0='default' 
     {
-        createLeafNode(grammarAccess.getReferenceHolderAccess().getDefaultKeyword_0_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getReferenceHolderAccess().getDefaultKeyword_0_0(), null);
     }
 (
 (
@@ -181,9 +175,9 @@ ruleReferenceHolder returns [EObject current=null]
 
 )
 ))
-    |(	'custom' 
+    |(	otherlv_2='custom' 
     {
-        createLeafNode(grammarAccess.getReferenceHolderAccess().getCustomKeyword_1_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getReferenceHolderAccess().getCustomKeyword_1_0(), null);
     }
 (
 (
@@ -202,9 +196,9 @@ ruleReferenceHolder returns [EObject current=null]
 
 )
 ))
-    |(	'subtype' 
+    |(	otherlv_4='subtype' 
     {
-        createLeafNode(grammarAccess.getReferenceHolderAccess().getSubtypeKeyword_2_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getReferenceHolderAccess().getSubtypeKeyword_2_0(), null);
     }
 (
 (
@@ -245,9 +239,9 @@ ruleImport returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'import' 
+(	otherlv_0='import' 
     {
-        createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0(), null);
     }
 (
 (
@@ -311,7 +305,7 @@ ruleImportedFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTok
 	kw='.*' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1(), null); 
+        createLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1(), null); 
     }
 )?)
     ;
@@ -341,20 +335,20 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
+    createLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
     }
 (
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
+        createLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
     }
     this_ID_2=RULE_ID    {
 		$current.merge(this_ID_2);
     }
 
     { 
-    createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), null); 
+    createLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), null); 
     }
 )*)
     ;

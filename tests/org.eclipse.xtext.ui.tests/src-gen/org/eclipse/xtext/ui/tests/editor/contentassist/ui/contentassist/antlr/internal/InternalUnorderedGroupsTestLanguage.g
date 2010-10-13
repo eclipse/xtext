@@ -5,6 +5,7 @@ grammar InternalUnorderedGroupsTestLanguage;
 
 options {
 	superClass=AbstractInternalContentAssistParser;
+	backtrack=true;
 	
 }
 

@@ -47,12 +47,6 @@ import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGramma
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalBug288432TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Body";	
    	}
@@ -89,9 +83,9 @@ ruleBody returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	'(' 
+((	otherlv_0='(' 
     {
-        createLeafNode(grammarAccess.getBodyAccess().getLeftParenthesisKeyword_0_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getBodyAccess().getLeftParenthesisKeyword_0_0(), null);
     }
 (
 (
@@ -117,9 +111,9 @@ ruleBody returns [EObject current=null]
 	    }
 
 )
-)(	',' 
+)(	otherlv_2=',' 
     {
-        createLeafNode(grammarAccess.getBodyAccess().getCommaKeyword_0_2_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getBodyAccess().getCommaKeyword_0_2_0(), null);
     }
 (
 (
@@ -145,13 +139,13 @@ ruleBody returns [EObject current=null]
 	    }
 
 )
-))*	')' 
+))*	otherlv_4=')' 
     {
-        createLeafNode(grammarAccess.getBodyAccess().getRightParenthesisKeyword_0_3(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getBodyAccess().getRightParenthesisKeyword_0_3(), null);
     }
-)?	'body' 
+)?	otherlv_5='body' 
     {
-        createLeafNode(grammarAccess.getBodyAccess().getBodyKeyword_1(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getBodyAccess().getBodyKeyword_1(), null);
     }
 (
 (
@@ -225,9 +219,9 @@ ruleBody returns [EObject current=null]
 	    }
 
 )
-)+	'end body' 
+)+	otherlv_8='end body' 
     {
-        createLeafNode(grammarAccess.getBodyAccess().getEndBodyKeyword_4(), null); 
+    	createLeafNode(otherlv_8, grammarAccess.getBodyAccess().getEndBodyKeyword_4(), null);
     }
 )
 ;
@@ -256,7 +250,7 @@ ruleFoo returns [EObject current=null]
 (
 		lv_fooValue_0_0=RULE_STRING
 		{
-			createLeafNode(grammarAccess.getFooAccess().getFooValueSTRINGTerminalRuleCall_0(), "fooValue"); 
+			createLeafNode(lv_fooValue_0_0, grammarAccess.getFooAccess().getFooValueSTRINGTerminalRuleCall_0(), "fooValue"); 
 		}
 		{
 	        if ($current==null) {
@@ -299,9 +293,9 @@ ruleContent returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'content' 
+(	otherlv_0='content' 
     {
-        createLeafNode(grammarAccess.getContentAccess().getContentKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getContentAccess().getContentKeyword_0(), null);
     }
 
     { 
@@ -312,9 +306,9 @@ ruleContent returns [EObject current=null]
         $current = $this_MyElement_1.current; 
         currentNode = currentNode.getParent();
     }
-	'end content' 
+	otherlv_2='end content' 
     {
-        createLeafNode(grammarAccess.getContentAccess().getEndContentKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getContentAccess().getEndContentKeyword_2(), null);
     }
 )
 ;
@@ -339,9 +333,9 @@ ruleMyElement returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'element' 
+(	otherlv_0='element' 
     {
-        createLeafNode(grammarAccess.getMyElementAccess().getElementKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getMyElementAccess().getElementKeyword_0(), null);
     }
 (
 (
@@ -420,7 +414,7 @@ ruleParameter returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -448,9 +442,9 @@ ruleParameter returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_1=RULE_ID
 	{
-		createLeafNode(grammarAccess.getParameterAccess().getValueParameterObjectCrossReference_1_0(), "value"); 
+		createLeafNode(otherlv_1, grammarAccess.getParameterAccess().getValueParameterObjectCrossReference_1_0(), "value"); 
 	}
 
 )
@@ -485,9 +479,9 @@ ruleParameterRef returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_0=RULE_ID
 	{
-		createLeafNode(grammarAccess.getParameterRefAccess().getParameterParameterCrossReference_0(), "parameter"); 
+		createLeafNode(otherlv_0, grammarAccess.getParameterRefAccess().getParameterParameterCrossReference_0(), "parameter"); 
 	}
 
 )
@@ -518,7 +512,7 @@ ruleMyInt returns [EObject current=null]
 (
 		lv_int_0_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getMyIntAccess().getIntINTTerminalRuleCall_0(), "int"); 
+			createLeafNode(lv_int_0_0, grammarAccess.getMyIntAccess().getIntINTTerminalRuleCall_0(), "int"); 
 		}
 		{
 	        if ($current==null) {

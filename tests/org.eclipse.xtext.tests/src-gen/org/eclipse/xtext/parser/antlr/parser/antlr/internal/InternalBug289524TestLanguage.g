@@ -53,12 +53,6 @@ import org.eclipse.xtext.parser.antlr.services.Bug289524TestLanguageGrammarAcces
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289524TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -109,9 +103,9 @@ ruleModel returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'Model' 
+)	otherlv_1='Model' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getModelKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getModelAccess().getModelKeyword_1(), null);
     }
 (
 (
@@ -199,9 +193,9 @@ ruleModelElement returns [EObject current=null]
 
 )
 )
-    |(	'reference' 
+    |(	otherlv_2='reference' 
     {
-        createLeafNode(grammarAccess.getModelElementAccess().getReferenceKeyword_1_1_0(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getModelElementAccess().getReferenceKeyword_1_1_0(), null);
     }
 (
 (
@@ -214,15 +208,15 @@ ruleModelElement returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_3=RULE_ID
 	{
-		createLeafNode(grammarAccess.getModelElementAccess().getRefsContainedCrossReference_1_1_1_0(), "refs"); 
+		createLeafNode(otherlv_3, grammarAccess.getModelElementAccess().getRefsContainedCrossReference_1_1_1_0(), "refs"); 
 	}
 
 )
-)(	'$' 
+)(	otherlv_4='$' 
     {
-        createLeafNode(grammarAccess.getModelElementAccess().getDollarSignKeyword_1_1_2_0(), null); 
+    	createLeafNode(otherlv_4, grammarAccess.getModelElementAccess().getDollarSignKeyword_1_1_2_0(), null);
     }
 (
 (
@@ -235,9 +229,9 @@ ruleModelElement returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_5=RULE_ID
 	{
-		createLeafNode(grammarAccess.getModelElementAccess().getRefsContainedCrossReference_1_1_2_1_0(), "refs"); 
+		createLeafNode(otherlv_5, grammarAccess.getModelElementAccess().getRefsContainedCrossReference_1_1_2_1_0(), "refs"); 
 	}
 
 )
@@ -264,15 +258,15 @@ ruleContained returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'containment' 
+(	otherlv_0='containment' 
     {
-        createLeafNode(grammarAccess.getContainedAccess().getContainmentKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getContainedAccess().getContainmentKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getContainedAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getContainedAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {

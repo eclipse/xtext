@@ -47,12 +47,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.ContentAssistCus
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalContentAssistCustomizingTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -160,9 +154,9 @@ ruleType returns [EObject current=null]
 	    }
 
 )
-)(	'extends' 
+)(	otherlv_1='extends' 
     {
-        createLeafNode(grammarAccess.getTypeAccess().getExtendsKeyword_1_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getTypeAccess().getExtendsKeyword_1_0(), null);
     }
 (
 (
@@ -188,9 +182,9 @@ ruleType returns [EObject current=null]
 	    }
 
 )
-))?	';' 
+))?	otherlv_3=';' 
     {
-        createLeafNode(grammarAccess.getTypeAccess().getSemicolonKeyword_2(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getTypeAccess().getSemicolonKeyword_2(), null);
     }
 )
 ;
@@ -259,20 +253,20 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
+    createLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), null); 
     }
 (
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
+        createLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), null); 
     }
     this_ID_2=RULE_ID    {
 		$current.merge(this_ID_2);
     }
 
     { 
-    createLeafNode(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), null); 
+    createLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), null); 
     }
 )*)
     ;

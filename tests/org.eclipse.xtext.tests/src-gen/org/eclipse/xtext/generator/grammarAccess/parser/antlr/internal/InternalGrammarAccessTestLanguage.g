@@ -47,12 +47,6 @@ import org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLangu
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/generator/grammarAccess/parser/antlr/internal/InternalGrammarAccessTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Root";	
    	}
@@ -178,9 +172,9 @@ ruleAType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'foo' 
+(	otherlv_0='foo' 
     {
-        createLeafNode(grammarAccess.getATypeAccess().getFooKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getATypeAccess().getFooKeyword_0(), null);
     }
 (
     { 
@@ -216,9 +210,9 @@ ruleAnotherType returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'bar' 
+(	otherlv_0='bar' 
     {
-        createLeafNode(grammarAccess.getAnotherTypeAccess().getBarKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getAnotherTypeAccess().getBarKeyword_0(), null);
     }
 (
     { 

@@ -26,6 +26,7 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'stuff'", "'refs'"
     };
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
     public static final int RULE_ID=4;
     public static final int RULE_WS=9;
     public static final int EOF=-1;
@@ -33,13 +34,22 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
     public static final int RULE_STRING=6;
     public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__11=11;
+
+    // delegates
+    // delegators
+
 
         public InternalTestLanguageParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalTestLanguageParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalTestLanguageParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g"; }
 
 
@@ -63,7 +73,7 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
 
 
 
-    // $ANTLR start entryRuleFile
+    // $ANTLR start "entryRuleFile"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:61:1: entryRuleFile : ruleFile EOF ;
     public final void entryRuleFile() throws RecognitionException {
         try {
@@ -73,7 +83,8 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
              before(grammarAccess.getFileRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleFile_in_entryRuleFile61);
             ruleFile();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getFileRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFile68); 
@@ -89,10 +100,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end entryRuleFile
+    // $ANTLR end "entryRuleFile"
 
 
-    // $ANTLR start ruleFile
+    // $ANTLR start "ruleFile"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:70:1: ruleFile : ( ( rule__File__StuffAssignment )* ) ;
     public final void ruleFile() throws RecognitionException {
 
@@ -123,7 +134,8 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__File__StuffAssignment_in_ruleFile94);
             	    rule__File__StuffAssignment();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -153,10 +165,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end ruleFile
+    // $ANTLR end "ruleFile"
 
 
-    // $ANTLR start entryRuleStuff
+    // $ANTLR start "entryRuleStuff"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:89:1: entryRuleStuff : ruleStuff EOF ;
     public final void entryRuleStuff() throws RecognitionException {
         try {
@@ -166,7 +178,8 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
              before(grammarAccess.getStuffRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleStuff_in_entryRuleStuff122);
             ruleStuff();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getStuffRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStuff129); 
@@ -182,10 +195,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end entryRuleStuff
+    // $ANTLR end "entryRuleStuff"
 
 
-    // $ANTLR start ruleStuff
+    // $ANTLR start "ruleStuff"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:98:1: ruleStuff : ( ( rule__Stuff__Group__0 ) ) ;
     public final void ruleStuff() throws RecognitionException {
 
@@ -204,7 +217,8 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             {
             pushFollow(FollowSets000.FOLLOW_rule__Stuff__Group__0_in_ruleStuff155);
             rule__Stuff__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -228,10 +242,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end ruleStuff
+    // $ANTLR end "ruleStuff"
 
 
-    // $ANTLR start rule__Stuff__Group__0
+    // $ANTLR start "rule__Stuff__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:119:1: rule__Stuff__Group__0 : rule__Stuff__Group__0__Impl rule__Stuff__Group__1 ;
     public final void rule__Stuff__Group__0() throws RecognitionException {
 
@@ -243,11 +257,13 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             {
             pushFollow(FollowSets000.FOLLOW_rule__Stuff__Group__0__Impl_in_rule__Stuff__Group__0189);
             rule__Stuff__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Stuff__Group__1_in_rule__Stuff__Group__0192);
             rule__Stuff__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -264,10 +280,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__Group__0
+    // $ANTLR end "rule__Stuff__Group__0"
 
 
-    // $ANTLR start rule__Stuff__Group__0__Impl
+    // $ANTLR start "rule__Stuff__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:131:1: rule__Stuff__Group__0__Impl : ( 'stuff' ) ;
     public final void rule__Stuff__Group__0__Impl() throws RecognitionException {
 
@@ -301,10 +317,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__Group__0__Impl
+    // $ANTLR end "rule__Stuff__Group__0__Impl"
 
 
-    // $ANTLR start rule__Stuff__Group__1
+    // $ANTLR start "rule__Stuff__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:150:1: rule__Stuff__Group__1 : rule__Stuff__Group__1__Impl rule__Stuff__Group__2 ;
     public final void rule__Stuff__Group__1() throws RecognitionException {
 
@@ -316,11 +332,13 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             {
             pushFollow(FollowSets000.FOLLOW_rule__Stuff__Group__1__Impl_in_rule__Stuff__Group__1251);
             rule__Stuff__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Stuff__Group__2_in_rule__Stuff__Group__1254);
             rule__Stuff__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -337,10 +355,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__Group__1
+    // $ANTLR end "rule__Stuff__Group__1"
 
 
-    // $ANTLR start rule__Stuff__Group__1__Impl
+    // $ANTLR start "rule__Stuff__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:162:1: rule__Stuff__Group__1__Impl : ( ( rule__Stuff__NameAssignment_1 ) ) ;
     public final void rule__Stuff__Group__1__Impl() throws RecognitionException {
 
@@ -359,7 +377,8 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             {
             pushFollow(FollowSets000.FOLLOW_rule__Stuff__NameAssignment_1_in_rule__Stuff__Group__1__Impl281);
             rule__Stuff__NameAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -383,10 +402,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__Group__1__Impl
+    // $ANTLR end "rule__Stuff__Group__1__Impl"
 
 
-    // $ANTLR start rule__Stuff__Group__2
+    // $ANTLR start "rule__Stuff__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:179:1: rule__Stuff__Group__2 : rule__Stuff__Group__2__Impl ;
     public final void rule__Stuff__Group__2() throws RecognitionException {
 
@@ -398,7 +417,8 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             {
             pushFollow(FollowSets000.FOLLOW_rule__Stuff__Group__2__Impl_in_rule__Stuff__Group__2311);
             rule__Stuff__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -415,10 +435,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__Group__2
+    // $ANTLR end "rule__Stuff__Group__2"
 
 
-    // $ANTLR start rule__Stuff__Group__2__Impl
+    // $ANTLR start "rule__Stuff__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:190:1: rule__Stuff__Group__2__Impl : ( ( rule__Stuff__Group_2__0 )? ) ;
     public final void rule__Stuff__Group__2__Impl() throws RecognitionException {
 
@@ -445,7 +465,8 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Stuff__Group_2__0_in_rule__Stuff__Group__2__Impl338);
                     rule__Stuff__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -472,10 +493,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__Group__2__Impl
+    // $ANTLR end "rule__Stuff__Group__2__Impl"
 
 
-    // $ANTLR start rule__Stuff__Group_2__0
+    // $ANTLR start "rule__Stuff__Group_2__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:213:1: rule__Stuff__Group_2__0 : rule__Stuff__Group_2__0__Impl rule__Stuff__Group_2__1 ;
     public final void rule__Stuff__Group_2__0() throws RecognitionException {
 
@@ -487,11 +508,13 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             {
             pushFollow(FollowSets000.FOLLOW_rule__Stuff__Group_2__0__Impl_in_rule__Stuff__Group_2__0375);
             rule__Stuff__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Stuff__Group_2__1_in_rule__Stuff__Group_2__0378);
             rule__Stuff__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -508,10 +531,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__Group_2__0
+    // $ANTLR end "rule__Stuff__Group_2__0"
 
 
-    // $ANTLR start rule__Stuff__Group_2__0__Impl
+    // $ANTLR start "rule__Stuff__Group_2__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:225:1: rule__Stuff__Group_2__0__Impl : ( 'refs' ) ;
     public final void rule__Stuff__Group_2__0__Impl() throws RecognitionException {
 
@@ -545,10 +568,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__Group_2__0__Impl
+    // $ANTLR end "rule__Stuff__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__Stuff__Group_2__1
+    // $ANTLR start "rule__Stuff__Group_2__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:244:1: rule__Stuff__Group_2__1 : rule__Stuff__Group_2__1__Impl ;
     public final void rule__Stuff__Group_2__1() throws RecognitionException {
 
@@ -560,7 +583,8 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             {
             pushFollow(FollowSets000.FOLLOW_rule__Stuff__Group_2__1__Impl_in_rule__Stuff__Group_2__1437);
             rule__Stuff__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -577,10 +601,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__Group_2__1
+    // $ANTLR end "rule__Stuff__Group_2__1"
 
 
-    // $ANTLR start rule__Stuff__Group_2__1__Impl
+    // $ANTLR start "rule__Stuff__Group_2__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:255:1: rule__Stuff__Group_2__1__Impl : ( ( rule__Stuff__RefsAssignment_2_1 ) ) ;
     public final void rule__Stuff__Group_2__1__Impl() throws RecognitionException {
 
@@ -599,7 +623,8 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
             {
             pushFollow(FollowSets000.FOLLOW_rule__Stuff__RefsAssignment_2_1_in_rule__Stuff__Group_2__1__Impl464);
             rule__Stuff__RefsAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -623,10 +648,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__Group_2__1__Impl
+    // $ANTLR end "rule__Stuff__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__File__StuffAssignment
+    // $ANTLR start "rule__File__StuffAssignment"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:277:1: rule__File__StuffAssignment : ( ruleStuff ) ;
     public final void rule__File__StuffAssignment() throws RecognitionException {
 
@@ -642,7 +667,8 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
              before(grammarAccess.getFileAccess().getStuffStuffParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleStuff_in_rule__File__StuffAssignment503);
             ruleStuff();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getFileAccess().getStuffStuffParserRuleCall_0()); 
 
@@ -663,10 +689,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__File__StuffAssignment
+    // $ANTLR end "rule__File__StuffAssignment"
 
 
-    // $ANTLR start rule__Stuff__NameAssignment_1
+    // $ANTLR start "rule__Stuff__NameAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:292:1: rule__Stuff__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Stuff__NameAssignment_1() throws RecognitionException {
 
@@ -700,10 +726,10 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__NameAssignment_1
+    // $ANTLR end "rule__Stuff__NameAssignment_1"
 
 
-    // $ANTLR start rule__Stuff__RefsAssignment_2_1
+    // $ANTLR start "rule__Stuff__RefsAssignment_2_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalTestLanguage.g:307:1: rule__Stuff__RefsAssignment_2_1 : ( ( RULE_ID ) ) ;
     public final void rule__Stuff__RefsAssignment_2_1() throws RecognitionException {
 
@@ -745,7 +771,9 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         }
         return ;
     }
-    // $ANTLR end rule__Stuff__RefsAssignment_2_1
+    // $ANTLR end "rule__Stuff__RefsAssignment_2_1"
+
+    // Delegated rules
 
 
  
@@ -761,7 +789,7 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         public static final BitSet FOLLOW_rule__Stuff__Group__0__Impl_in_rule__Stuff__Group__0189 = new BitSet(new long[]{0x0000000000000010L});
         public static final BitSet FOLLOW_rule__Stuff__Group__1_in_rule__Stuff__Group__0192 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_11_in_rule__Stuff__Group__0__Impl220 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Stuff__Group__1__Impl_in_rule__Stuff__Group__1251 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_rule__Stuff__Group__1__Impl_in_rule__Stuff__Group__1251 = new BitSet(new long[]{0x0000000000001000L});
         public static final BitSet FOLLOW_rule__Stuff__Group__2_in_rule__Stuff__Group__1254 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Stuff__NameAssignment_1_in_rule__Stuff__Group__1__Impl281 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Stuff__Group__2__Impl_in_rule__Stuff__Group__2311 = new BitSet(new long[]{0x0000000000000002L});

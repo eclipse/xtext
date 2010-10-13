@@ -47,12 +47,6 @@ import org.eclipse.xtext.linking.services.Bug289059TestLanguageGrammarAccess;
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -93,7 +87,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -145,9 +139,9 @@ ruleModel returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_2=RULE_ID
 	{
-		createLeafNode(grammarAccess.getModelAccess().getReferenceModelCrossReference_2_0(), "reference"); 
+		createLeafNode(otherlv_2, grammarAccess.getModelAccess().getReferenceModelCrossReference_2_0(), "reference"); 
 	}
 
 )
@@ -185,9 +179,9 @@ ruleUnassignedAction returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'enabled' 
+)	otherlv_1='enabled' 
     {
-        createLeafNode(grammarAccess.getUnassignedActionAccess().getEnabledKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getUnassignedActionAccess().getEnabledKeyword_1(), null);
     }
 )
 ;

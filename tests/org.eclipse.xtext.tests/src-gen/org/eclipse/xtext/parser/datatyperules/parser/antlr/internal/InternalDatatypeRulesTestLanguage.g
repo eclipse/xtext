@@ -47,12 +47,6 @@ import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguage
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/datatyperules/parser/antlr/internal/InternalDatatypeRulesTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "CompositeModel";	
    	}
@@ -160,9 +154,9 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)(	':' 
+)(	otherlv_1=':' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getColonKeyword_1_0(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getModelAccess().getColonKeyword_1_0(), null);
     }
 (
 (
@@ -188,9 +182,9 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-))?(	'#' 
+))?(	otherlv_3='#' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getNumberSignKeyword_2_0(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getModelAccess().getNumberSignKeyword_2_0(), null);
     }
 (
 (
@@ -216,9 +210,9 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-))?(	'+' 
+))?(	otherlv_5='+' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getPlusSignKeyword_3_0(), null); 
+    	createLeafNode(otherlv_5, grammarAccess.getModelAccess().getPlusSignKeyword_3_0(), null);
     }
 (
 (
@@ -244,9 +238,9 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-))?(	'*' 
+))?(	otherlv_7='*' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getAsteriskKeyword_4_0(), null); 
+    	createLeafNode(otherlv_7, grammarAccess.getModelAccess().getAsteriskKeyword_4_0(), null);
     }
 (
 (
@@ -272,9 +266,9 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-))?	';' 
+))?	otherlv_9=';' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getSemicolonKeyword_5(), null); 
+    	createLeafNode(otherlv_9, grammarAccess.getModelAccess().getSemicolonKeyword_5(), null);
     }
 )
 ;
@@ -304,20 +298,20 @@ ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     }
 
     { 
-    createLeafNode(grammarAccess.getModelIdAccess().getIDTerminalRuleCall_0(), null); 
+    createLeafNode(this_ID_0, grammarAccess.getModelIdAccess().getIDTerminalRuleCall_0(), null); 
     }
 
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getModelIdAccess().getFullStopKeyword_1(), null); 
+        createLeafNode(kw, grammarAccess.getModelIdAccess().getFullStopKeyword_1(), null); 
     }
     this_ID_2=RULE_ID    {
 		$current.merge(this_ID_2);
     }
 
     { 
-    createLeafNode(grammarAccess.getModelIdAccess().getIDTerminalRuleCall_2(), null); 
+    createLeafNode(this_ID_2, grammarAccess.getModelIdAccess().getIDTerminalRuleCall_2(), null); 
     }
 )
     ;
@@ -357,7 +351,7 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getNestedModelIdAccess().getFullStopKeyword_1(), null); 
+        createLeafNode(kw, grammarAccess.getNestedModelIdAccess().getFullStopKeyword_1(), null); 
     }
 
     { 
@@ -398,20 +392,20 @@ ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 
     { 
-    createLeafNode(grammarAccess.getFractionAccess().getINTTerminalRuleCall_0(), null); 
+    createLeafNode(this_INT_0, grammarAccess.getFractionAccess().getINTTerminalRuleCall_0(), null); 
     }
 (
 	kw='/' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getFractionAccess().getSolidusKeyword_1_0(), null); 
+        createLeafNode(kw, grammarAccess.getFractionAccess().getSolidusKeyword_1_0(), null); 
     }
     this_INT_2=RULE_INT    {
 		$current.merge(this_INT_2);
     }
 
     { 
-    createLeafNode(grammarAccess.getFractionAccess().getINTTerminalRuleCall_1_1(), null); 
+    createLeafNode(this_INT_2, grammarAccess.getFractionAccess().getINTTerminalRuleCall_1_1(), null); 
     }
 )?)
     ;
@@ -440,27 +434,27 @@ ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	kw='(' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getVectorAccess().getLeftParenthesisKeyword_0(), null); 
+        createLeafNode(kw, grammarAccess.getVectorAccess().getLeftParenthesisKeyword_0(), null); 
     }
     this_INT_1=RULE_INT    {
 		$current.merge(this_INT_1);
     }
 
     { 
-    createLeafNode(grammarAccess.getVectorAccess().getINTTerminalRuleCall_1(), null); 
+    createLeafNode(this_INT_1, grammarAccess.getVectorAccess().getINTTerminalRuleCall_1(), null); 
     }
     this_INT_2=RULE_INT    {
 		$current.merge(this_INT_2);
     }
 
     { 
-    createLeafNode(grammarAccess.getVectorAccess().getINTTerminalRuleCall_2(), null); 
+    createLeafNode(this_INT_2, grammarAccess.getVectorAccess().getINTTerminalRuleCall_2(), null); 
     }
 
 	kw=')' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getVectorAccess().getRightParenthesisKeyword_3(), null); 
+        createLeafNode(kw, grammarAccess.getVectorAccess().getRightParenthesisKeyword_3(), null); 
     }
 )
     ;
@@ -489,20 +483,20 @@ ruleDots returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDotsAccess().getFullStopKeyword_0_0(), null); 
+        createLeafNode(kw, grammarAccess.getDotsAccess().getFullStopKeyword_0_0(), null); 
     }
 
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDotsAccess().getFullStopKeyword_0_1(), null); 
+        createLeafNode(kw, grammarAccess.getDotsAccess().getFullStopKeyword_0_1(), null); 
     }
 )
     |
 	kw='..' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDotsAccess().getFullStopFullStopKeyword_1(), null); 
+        createLeafNode(kw, grammarAccess.getDotsAccess().getFullStopFullStopKeyword_1(), null); 
     }
 )
     ;
@@ -531,46 +525,46 @@ ruleDouble returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	kw='-' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDoubleAccess().getHyphenMinusKeyword_0(), null); 
+        createLeafNode(kw, grammarAccess.getDoubleAccess().getHyphenMinusKeyword_0(), null); 
     }
 )?(    this_INT_1=RULE_INT    {
 		$current.merge(this_INT_1);
     }
 
     { 
-    createLeafNode(grammarAccess.getDoubleAccess().getINTTerminalRuleCall_1(), null); 
+    createLeafNode(this_INT_1, grammarAccess.getDoubleAccess().getINTTerminalRuleCall_1(), null); 
     }
 )?
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDoubleAccess().getFullStopKeyword_2(), null); 
+        createLeafNode(kw, grammarAccess.getDoubleAccess().getFullStopKeyword_2(), null); 
     }
     this_INT_3=RULE_INT    {
 		$current.merge(this_INT_3);
     }
 
     { 
-    createLeafNode(grammarAccess.getDoubleAccess().getINTTerminalRuleCall_3(), null); 
+    createLeafNode(this_INT_3, grammarAccess.getDoubleAccess().getINTTerminalRuleCall_3(), null); 
     }
 (
 	kw='E' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDoubleAccess().getEKeyword_4_0(), null); 
+        createLeafNode(kw, grammarAccess.getDoubleAccess().getEKeyword_4_0(), null); 
     }
 (
 	kw='-' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDoubleAccess().getHyphenMinusKeyword_4_1(), null); 
+        createLeafNode(kw, grammarAccess.getDoubleAccess().getHyphenMinusKeyword_4_1(), null); 
     }
 )?    this_INT_6=RULE_INT    {
 		$current.merge(this_INT_6);
     }
 
     { 
-    createLeafNode(grammarAccess.getDoubleAccess().getINTTerminalRuleCall_4_2(), null); 
+    createLeafNode(this_INT_6, grammarAccess.getDoubleAccess().getINTTerminalRuleCall_4_2(), null); 
     }
 )?)
     ;

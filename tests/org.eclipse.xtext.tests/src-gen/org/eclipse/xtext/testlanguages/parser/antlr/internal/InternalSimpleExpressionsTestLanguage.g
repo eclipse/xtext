@@ -47,12 +47,6 @@ import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGra
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalSimpleExpressionsTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Sequence";	
    	}
@@ -191,7 +185,7 @@ ruleAddition returns [EObject current=null]
 (
 		lv_operator_2_1=	'+' 
     {
-        createLeafNode(grammarAccess.getAdditionAccess().getOperatorPlusSignKeyword_1_1_0_0(), "operator"); 
+        createLeafNode(lv_operator_2_1, grammarAccess.getAdditionAccess().getOperatorPlusSignKeyword_1_1_0_0(), "operator");
     }
  
 	    {
@@ -209,7 +203,7 @@ ruleAddition returns [EObject current=null]
 
     |		lv_operator_2_2=	'-' 
     {
-        createLeafNode(grammarAccess.getAdditionAccess().getOperatorHyphenMinusKeyword_1_1_0_1(), "operator"); 
+        createLeafNode(lv_operator_2_2, grammarAccess.getAdditionAccess().getOperatorHyphenMinusKeyword_1_1_0_1(), "operator");
     }
  
 	    {
@@ -305,7 +299,7 @@ ruleMultiplication returns [EObject current=null]
 (
 		lv_operator_2_1=	'*' 
     {
-        createLeafNode(grammarAccess.getMultiplicationAccess().getOperatorAsteriskKeyword_1_1_0_0(), "operator"); 
+        createLeafNode(lv_operator_2_1, grammarAccess.getMultiplicationAccess().getOperatorAsteriskKeyword_1_1_0_0(), "operator");
     }
  
 	    {
@@ -323,7 +317,7 @@ ruleMultiplication returns [EObject current=null]
 
     |		lv_operator_2_2=	'/' 
     {
-        createLeafNode(grammarAccess.getMultiplicationAccess().getOperatorSolidusKeyword_1_1_0_1(), "operator"); 
+        createLeafNode(lv_operator_2_2, grammarAccess.getMultiplicationAccess().getOperatorSolidusKeyword_1_1_0_1(), "operator");
     }
  
 	    {
@@ -435,7 +429,7 @@ ruleAtom returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -478,9 +472,9 @@ ruleParens returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'(' 
+(	otherlv_0='(' 
     {
-        createLeafNode(grammarAccess.getParensAccess().getLeftParenthesisKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getParensAccess().getLeftParenthesisKeyword_0(), null);
     }
 
     { 
@@ -491,9 +485,9 @@ ruleParens returns [EObject current=null]
         $current = $this_Addition_1.current; 
         currentNode = currentNode.getParent();
     }
-	')' 
+	otherlv_2=')' 
     {
-        createLeafNode(grammarAccess.getParensAccess().getRightParenthesisKeyword_2(), null); 
+    	createLeafNode(otherlv_2, grammarAccess.getParensAccess().getRightParenthesisKeyword_2(), null);
     }
 )
 ;

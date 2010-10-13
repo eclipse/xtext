@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +81,10 @@ public class UnorderedGroupHelper implements IUnorderedGroupHelper {
 		this.recognizer = recognizer;
 	}
 	
+	protected BaseRecognizer getRecognizer() {
+		return recognizer;
+	}
+	
 	protected void configure(UnorderedGroup group) {
 		groupToState.put(group, new State(group));
 	}
@@ -93,7 +98,7 @@ public class UnorderedGroupHelper implements IUnorderedGroupHelper {
 	}
 
 	protected void snapShotForBacktracking() {
-		int backtrackingLevel = recognizer.getBacktrackingLevel();
+		int backtrackingLevel = getBacktrackingLevel();
 		// recognizer is currently in backtracking mode or was previously in backtracking mode
 		if (backtrackingLevel != 0 || !backtrackingSnapShot.isEmpty()) {
 			// backtracking stack was reduced
@@ -111,6 +116,10 @@ public class UnorderedGroupHelper implements IUnorderedGroupHelper {
 				backtrackingSnapShot.put(backtrackingLevel, state);
 			}
 		}
+	}
+
+	protected int getBacktrackingLevel() {
+		return recognizer.getBacktrackingLevel();
 	}
 	
 	public void enter(UnorderedGroup group) {
@@ -139,6 +148,11 @@ public class UnorderedGroupHelper implements IUnorderedGroupHelper {
 	
 	public UnorderedGroupState snapShot(UnorderedGroup... groups) {
 		return new UnorderedGroupStateImpl(groups);
+	}
+	
+	@Override
+	public String toString() {
+		return "UnorderedGroupHelper: " + groupToState;
 	}
 	
 	protected class UnorderedGroupStateImpl implements UnorderedGroupState {
@@ -246,6 +260,14 @@ public class UnorderedGroupHelper implements IUnorderedGroupHelper {
 		
 		public State copy() {
 			return new State(this);
+		}
+		
+		@Override
+		public String toString() {
+			if (frames.isEmpty()) 
+				return "State: []";
+			Frame frame = frames.peek();
+			return "State: " + Arrays.toString(frame.predicate) + " " + frame.remaining + " remaining";
 		}
 		
 	}

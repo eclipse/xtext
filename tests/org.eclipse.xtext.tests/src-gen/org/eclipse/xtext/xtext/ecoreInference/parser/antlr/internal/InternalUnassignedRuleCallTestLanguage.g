@@ -47,12 +47,6 @@ import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLan
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -89,13 +83,13 @@ ruleModel returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'model' 
+(	otherlv_0='model' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getModelKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0(), null);
     }
-(RULE_INT
+(this_INT_1=RULE_INT
     { 
-    createLeafNode(grammarAccess.getModelAccess().getINTTerminalRuleCall_1(), null); 
+    createLeafNode(this_INT_1, grammarAccess.getModelAccess().getINTTerminalRuleCall_1(), null); 
     }
 )+(
 (
@@ -144,15 +138,15 @@ ruleModelFeatures returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'feature' 
+(	otherlv_0='feature' 
     {
-        createLeafNode(grammarAccess.getModelFeaturesAccess().getFeatureKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getModelFeaturesAccess().getFeatureKeyword_0(), null);
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getModelFeaturesAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			createLeafNode(lv_name_1_0, grammarAccess.getModelFeaturesAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -180,9 +174,9 @@ ruleDataTypeRule
     { 
         currentNode = currentNode.getParent();
     }
-	';' 
+	otherlv_3=';' 
     {
-        createLeafNode(grammarAccess.getModelFeaturesAccess().getSemicolonKeyword_3(), null); 
+    	createLeafNode(otherlv_3, grammarAccess.getModelFeaturesAccess().getSemicolonKeyword_3(), null);
     }
 )
 ;
@@ -212,27 +206,27 @@ ruleDataTypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
     }
 
     { 
-    createLeafNode(grammarAccess.getDataTypeRuleAccess().getINTTerminalRuleCall_0(), null); 
+    createLeafNode(this_INT_0, grammarAccess.getDataTypeRuleAccess().getINTTerminalRuleCall_0(), null); 
     }
 
 	kw='keyword' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDataTypeRuleAccess().getKeywordKeyword_1(), null); 
+        createLeafNode(kw, grammarAccess.getDataTypeRuleAccess().getKeywordKeyword_1(), null); 
     }
     this_INT_2=RULE_INT    {
 		$current.merge(this_INT_2);
     }
 
     { 
-    createLeafNode(grammarAccess.getDataTypeRuleAccess().getINTTerminalRuleCall_2(), null); 
+    createLeafNode(this_INT_2, grammarAccess.getDataTypeRuleAccess().getINTTerminalRuleCall_2(), null); 
     }
 (    this_STRING_3=RULE_STRING    {
 		$current.merge(this_STRING_3);
     }
 
     { 
-    createLeafNode(grammarAccess.getDataTypeRuleAccess().getSTRINGTerminalRuleCall_3(), null); 
+    createLeafNode(this_STRING_3, grammarAccess.getDataTypeRuleAccess().getSTRINGTerminalRuleCall_3(), null); 
     }
 )?)
     ;

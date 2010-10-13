@@ -26,4 +26,9 @@ public abstract class LookAheadTerminal {
 	public void setToken(Token token) {
 		this.token = token;
 	}
+	
+	@Override
+	public String toString() {
+		return "LookAheadTerminal: " + token.toString();
+	}
 }

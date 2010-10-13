@@ -26,20 +26,59 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'?'", "'*'", "'+'", "'='", "'+='", "'?='", "'grammar'", "'with'", "','", "'('", "')'", "'.'", "'generate'", "'as'", "'import'", "':'", "';'", "'returns'", "'::'", "'|'", "'{'", "'}'", "'current'", "'['", "']'", "'terminal'", "'!'", "'->'", "'..'", "'enum'", "'hidden'"
     };
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__35=35;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int EOF=-1;
-    public static final int RULE_INT=6;
+    public static final int T__12=12;
+    public static final int T__28=28;
+    public static final int T__23=23;
+    public static final int T__36=36;
+    public static final int T__20=20;
+    public static final int T__13=13;
     public static final int RULE_STRING=5;
+    public static final int T__21=21;
+    public static final int T__19=19;
+    public static final int T__33=33;
+    public static final int T__14=14;
+    public static final int T__11=11;
+    public static final int T__22=22;
+    public static final int T__29=29;
+    public static final int T__39=39;
+    public static final int T__30=30;
+    public static final int RULE_WS=9;
+    public static final int T__17=17;
+    public static final int T__31=31;
+    public static final int T__40=40;
+    public static final int RULE_INT=6;
+    public static final int EOF=-1;
+    public static final int T__27=27;
+    public static final int T__32=32;
+    public static final int T__16=16;
+    public static final int T__38=38;
+    public static final int T__24=24;
+    public static final int T__37=37;
     public static final int RULE_ANY_OTHER=10;
+    public static final int T__26=26;
+    public static final int T__25=25;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__34=34;
+    public static final int T__41=41;
+    public static final int T__18=18;
+    public static final int T__15=15;
+
+    // delegates
+    // delegators
+
 
         public InternalXtextGrammarUiTestLanguageParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalXtextGrammarUiTestLanguageParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalXtextGrammarUiTestLanguageParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g"; }
 
 
@@ -63,7 +102,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
 
 
-    // $ANTLR start entryRuleGrammar
+    // $ANTLR start "entryRuleGrammar"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:61:1: entryRuleGrammar : ruleGrammar EOF ;
     public final void entryRuleGrammar() throws RecognitionException {
         try {
@@ -73,7 +112,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getGrammarRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleGrammar_in_entryRuleGrammar61);
             ruleGrammar();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGrammar68); 
@@ -89,10 +129,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleGrammar
+    // $ANTLR end "entryRuleGrammar"
 
 
-    // $ANTLR start ruleGrammar
+    // $ANTLR start "ruleGrammar"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:70:1: ruleGrammar : ( ( rule__Grammar__Group__0 ) ) ;
     public final void ruleGrammar() throws RecognitionException {
 
@@ -111,7 +151,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__0_in_ruleGrammar94);
             rule__Grammar__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -135,10 +176,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleGrammar
+    // $ANTLR end "ruleGrammar"
 
 
-    // $ANTLR start entryRuleGrammarID
+    // $ANTLR start "entryRuleGrammarID"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:89:1: entryRuleGrammarID : ruleGrammarID EOF ;
     public final void entryRuleGrammarID() throws RecognitionException {
         try {
@@ -148,7 +189,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getGrammarIDRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_entryRuleGrammarID121);
             ruleGrammarID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarIDRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGrammarID128); 
@@ -164,10 +206,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleGrammarID
+    // $ANTLR end "entryRuleGrammarID"
 
 
-    // $ANTLR start ruleGrammarID
+    // $ANTLR start "ruleGrammarID"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:98:1: ruleGrammarID : ( ( rule__GrammarID__Group__0 ) ) ;
     public final void ruleGrammarID() throws RecognitionException {
 
@@ -186,7 +228,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group__0_in_ruleGrammarID154);
             rule__GrammarID__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -210,10 +253,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleGrammarID
+    // $ANTLR end "ruleGrammarID"
 
 
-    // $ANTLR start entryRuleAbstractRule
+    // $ANTLR start "entryRuleAbstractRule"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:117:1: entryRuleAbstractRule : ruleAbstractRule EOF ;
     public final void entryRuleAbstractRule() throws RecognitionException {
         try {
@@ -223,7 +266,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAbstractRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule181);
             ruleAbstractRule();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractRuleRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractRule188); 
@@ -239,10 +283,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractRule
+    // $ANTLR end "entryRuleAbstractRule"
 
 
-    // $ANTLR start ruleAbstractRule
+    // $ANTLR start "ruleAbstractRule"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:126:1: ruleAbstractRule : ( ( rule__AbstractRule__Alternatives ) ) ;
     public final void ruleAbstractRule() throws RecognitionException {
 
@@ -261,7 +305,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractRule__Alternatives_in_ruleAbstractRule214);
             rule__AbstractRule__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -285,10 +330,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleAbstractRule
+    // $ANTLR end "ruleAbstractRule"
 
 
-    // $ANTLR start entryRuleAbstractMetamodelDeclaration
+    // $ANTLR start "entryRuleAbstractMetamodelDeclaration"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:145:1: entryRuleAbstractMetamodelDeclaration : ruleAbstractMetamodelDeclaration EOF ;
     public final void entryRuleAbstractMetamodelDeclaration() throws RecognitionException {
         try {
@@ -298,7 +343,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAbstractMetamodelDeclarationRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractMetamodelDeclaration_in_entryRuleAbstractMetamodelDeclaration241);
             ruleAbstractMetamodelDeclaration();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractMetamodelDeclarationRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractMetamodelDeclaration248); 
@@ -314,10 +360,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractMetamodelDeclaration
+    // $ANTLR end "entryRuleAbstractMetamodelDeclaration"
 
 
-    // $ANTLR start ruleAbstractMetamodelDeclaration
+    // $ANTLR start "ruleAbstractMetamodelDeclaration"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:154:1: ruleAbstractMetamodelDeclaration : ( ( rule__AbstractMetamodelDeclaration__Alternatives ) ) ;
     public final void ruleAbstractMetamodelDeclaration() throws RecognitionException {
 
@@ -336,7 +382,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractMetamodelDeclaration__Alternatives_in_ruleAbstractMetamodelDeclaration274);
             rule__AbstractMetamodelDeclaration__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -360,10 +407,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleAbstractMetamodelDeclaration
+    // $ANTLR end "ruleAbstractMetamodelDeclaration"
 
 
-    // $ANTLR start entryRuleGeneratedMetamodel
+    // $ANTLR start "entryRuleGeneratedMetamodel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:173:1: entryRuleGeneratedMetamodel : ruleGeneratedMetamodel EOF ;
     public final void entryRuleGeneratedMetamodel() throws RecognitionException {
         try {
@@ -373,7 +420,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getGeneratedMetamodelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleGeneratedMetamodel_in_entryRuleGeneratedMetamodel301);
             ruleGeneratedMetamodel();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGeneratedMetamodelRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGeneratedMetamodel308); 
@@ -389,10 +437,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleGeneratedMetamodel
+    // $ANTLR end "entryRuleGeneratedMetamodel"
 
 
-    // $ANTLR start ruleGeneratedMetamodel
+    // $ANTLR start "ruleGeneratedMetamodel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:182:1: ruleGeneratedMetamodel : ( ( rule__GeneratedMetamodel__Group__0 ) ) ;
     public final void ruleGeneratedMetamodel() throws RecognitionException {
 
@@ -411,7 +459,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__0_in_ruleGeneratedMetamodel334);
             rule__GeneratedMetamodel__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -435,10 +484,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleGeneratedMetamodel
+    // $ANTLR end "ruleGeneratedMetamodel"
 
 
-    // $ANTLR start entryRuleReferencedMetamodel
+    // $ANTLR start "entryRuleReferencedMetamodel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:201:1: entryRuleReferencedMetamodel : ruleReferencedMetamodel EOF ;
     public final void entryRuleReferencedMetamodel() throws RecognitionException {
         try {
@@ -448,7 +497,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getReferencedMetamodelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel361);
             ruleReferencedMetamodel();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getReferencedMetamodelRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleReferencedMetamodel368); 
@@ -464,10 +514,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleReferencedMetamodel
+    // $ANTLR end "entryRuleReferencedMetamodel"
 
 
-    // $ANTLR start ruleReferencedMetamodel
+    // $ANTLR start "ruleReferencedMetamodel"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:210:1: ruleReferencedMetamodel : ( ( rule__ReferencedMetamodel__Group__0 ) ) ;
     public final void ruleReferencedMetamodel() throws RecognitionException {
 
@@ -486,7 +536,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__0_in_ruleReferencedMetamodel394);
             rule__ReferencedMetamodel__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -510,10 +561,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleReferencedMetamodel
+    // $ANTLR end "ruleReferencedMetamodel"
 
 
-    // $ANTLR start entryRuleParserRule
+    // $ANTLR start "entryRuleParserRule"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:229:1: entryRuleParserRule : ruleParserRule EOF ;
     public final void entryRuleParserRule() throws RecognitionException {
         try {
@@ -523,7 +574,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getParserRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleParserRule_in_entryRuleParserRule421);
             ruleParserRule();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParserRuleRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParserRule428); 
@@ -539,10 +591,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleParserRule
+    // $ANTLR end "entryRuleParserRule"
 
 
-    // $ANTLR start ruleParserRule
+    // $ANTLR start "ruleParserRule"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:238:1: ruleParserRule : ( ( rule__ParserRule__Group__0 ) ) ;
     public final void ruleParserRule() throws RecognitionException {
 
@@ -561,7 +613,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__0_in_ruleParserRule454);
             rule__ParserRule__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -585,10 +638,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleParserRule
+    // $ANTLR end "ruleParserRule"
 
 
-    // $ANTLR start entryRuleTypeRef
+    // $ANTLR start "entryRuleTypeRef"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:257:1: entryRuleTypeRef : ruleTypeRef EOF ;
     public final void entryRuleTypeRef() throws RecognitionException {
         try {
@@ -598,7 +651,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTypeRefRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_entryRuleTypeRef481);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTypeRefRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeRef488); 
@@ -614,10 +668,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleTypeRef
+    // $ANTLR end "entryRuleTypeRef"
 
 
-    // $ANTLR start ruleTypeRef
+    // $ANTLR start "ruleTypeRef"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:266:1: ruleTypeRef : ( ( rule__TypeRef__Group__0 ) ) ;
     public final void ruleTypeRef() throws RecognitionException {
 
@@ -636,7 +690,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group__0_in_ruleTypeRef514);
             rule__TypeRef__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -660,10 +715,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleTypeRef
+    // $ANTLR end "ruleTypeRef"
 
 
-    // $ANTLR start entryRuleAlternatives
+    // $ANTLR start "entryRuleAlternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:285:1: entryRuleAlternatives : ruleAlternatives EOF ;
     public final void entryRuleAlternatives() throws RecognitionException {
         try {
@@ -673,7 +728,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAlternativesRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAlternatives_in_entryRuleAlternatives541);
             ruleAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAlternativesRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAlternatives548); 
@@ -689,10 +745,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleAlternatives
+    // $ANTLR end "entryRuleAlternatives"
 
 
-    // $ANTLR start ruleAlternatives
+    // $ANTLR start "ruleAlternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:294:1: ruleAlternatives : ( ( rule__Alternatives__Group__0 ) ) ;
     public final void ruleAlternatives() throws RecognitionException {
 
@@ -711,7 +767,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group__0_in_ruleAlternatives574);
             rule__Alternatives__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -735,10 +792,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleAlternatives
+    // $ANTLR end "ruleAlternatives"
 
 
-    // $ANTLR start entryRuleGroup
+    // $ANTLR start "entryRuleGroup"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:313:1: entryRuleGroup : ruleGroup EOF ;
     public final void entryRuleGroup() throws RecognitionException {
         try {
@@ -748,7 +805,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getGroupRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleGroup_in_entryRuleGroup601);
             ruleGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGroupRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGroup608); 
@@ -764,10 +822,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleGroup
+    // $ANTLR end "entryRuleGroup"
 
 
-    // $ANTLR start ruleGroup
+    // $ANTLR start "ruleGroup"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:322:1: ruleGroup : ( ( rule__Group__Group__0 ) ) ;
     public final void ruleGroup() throws RecognitionException {
 
@@ -786,7 +844,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group__0_in_ruleGroup634);
             rule__Group__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -810,10 +869,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleGroup
+    // $ANTLR end "ruleGroup"
 
 
-    // $ANTLR start entryRuleAbstractToken
+    // $ANTLR start "entryRuleAbstractToken"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:341:1: entryRuleAbstractToken : ruleAbstractToken EOF ;
     public final void entryRuleAbstractToken() throws RecognitionException {
         try {
@@ -823,7 +882,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAbstractTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractToken_in_entryRuleAbstractToken661);
             ruleAbstractToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractTokenRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractToken668); 
@@ -839,10 +899,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractToken
+    // $ANTLR end "entryRuleAbstractToken"
 
 
-    // $ANTLR start ruleAbstractToken
+    // $ANTLR start "ruleAbstractToken"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:350:1: ruleAbstractToken : ( ( rule__AbstractToken__Alternatives ) ) ;
     public final void ruleAbstractToken() throws RecognitionException {
 
@@ -861,7 +921,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractToken__Alternatives_in_ruleAbstractToken694);
             rule__AbstractToken__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -885,10 +946,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleAbstractToken
+    // $ANTLR end "ruleAbstractToken"
 
 
-    // $ANTLR start entryRuleAbstractTokenWithCardinality
+    // $ANTLR start "entryRuleAbstractTokenWithCardinality"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:369:1: entryRuleAbstractTokenWithCardinality : ruleAbstractTokenWithCardinality EOF ;
     public final void entryRuleAbstractTokenWithCardinality() throws RecognitionException {
         try {
@@ -898,7 +959,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAbstractTokenWithCardinalityRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractTokenWithCardinality_in_entryRuleAbstractTokenWithCardinality721);
             ruleAbstractTokenWithCardinality();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractTokenWithCardinalityRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractTokenWithCardinality728); 
@@ -914,10 +976,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractTokenWithCardinality
+    // $ANTLR end "entryRuleAbstractTokenWithCardinality"
 
 
-    // $ANTLR start ruleAbstractTokenWithCardinality
+    // $ANTLR start "ruleAbstractTokenWithCardinality"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:378:1: ruleAbstractTokenWithCardinality : ( ( rule__AbstractTokenWithCardinality__Group__0 ) ) ;
     public final void ruleAbstractTokenWithCardinality() throws RecognitionException {
 
@@ -936,7 +998,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Group__0_in_ruleAbstractTokenWithCardinality754);
             rule__AbstractTokenWithCardinality__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -960,10 +1023,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleAbstractTokenWithCardinality
+    // $ANTLR end "ruleAbstractTokenWithCardinality"
 
 
-    // $ANTLR start entryRuleAction
+    // $ANTLR start "entryRuleAction"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:397:1: entryRuleAction : ruleAction EOF ;
     public final void entryRuleAction() throws RecognitionException {
         try {
@@ -973,7 +1036,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getActionRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAction_in_entryRuleAction781);
             ruleAction();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getActionRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAction788); 
@@ -989,10 +1053,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleAction
+    // $ANTLR end "entryRuleAction"
 
 
-    // $ANTLR start ruleAction
+    // $ANTLR start "ruleAction"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:406:1: ruleAction : ( ( rule__Action__Group__0 ) ) ;
     public final void ruleAction() throws RecognitionException {
 
@@ -1011,7 +1075,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__0_in_ruleAction814);
             rule__Action__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1035,10 +1100,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleAction
+    // $ANTLR end "ruleAction"
 
 
-    // $ANTLR start entryRuleAbstractTerminal
+    // $ANTLR start "entryRuleAbstractTerminal"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:425:1: entryRuleAbstractTerminal : ruleAbstractTerminal EOF ;
     public final void entryRuleAbstractTerminal() throws RecognitionException {
         try {
@@ -1048,7 +1113,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAbstractTerminalRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractTerminal_in_entryRuleAbstractTerminal841);
             ruleAbstractTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractTerminalRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractTerminal848); 
@@ -1064,10 +1130,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractTerminal
+    // $ANTLR end "entryRuleAbstractTerminal"
 
 
-    // $ANTLR start ruleAbstractTerminal
+    // $ANTLR start "ruleAbstractTerminal"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:434:1: ruleAbstractTerminal : ( ( rule__AbstractTerminal__Alternatives ) ) ;
     public final void ruleAbstractTerminal() throws RecognitionException {
 
@@ -1086,7 +1152,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTerminal__Alternatives_in_ruleAbstractTerminal874);
             rule__AbstractTerminal__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1110,10 +1177,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleAbstractTerminal
+    // $ANTLR end "ruleAbstractTerminal"
 
 
-    // $ANTLR start entryRuleKeyword
+    // $ANTLR start "entryRuleKeyword"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:453:1: entryRuleKeyword : ruleKeyword EOF ;
     public final void entryRuleKeyword() throws RecognitionException {
         try {
@@ -1123,7 +1190,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getKeywordRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_entryRuleKeyword901);
             ruleKeyword();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getKeywordRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKeyword908); 
@@ -1139,10 +1207,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleKeyword
+    // $ANTLR end "entryRuleKeyword"
 
 
-    // $ANTLR start ruleKeyword
+    // $ANTLR start "ruleKeyword"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:462:1: ruleKeyword : ( ( rule__Keyword__ValueAssignment ) ) ;
     public final void ruleKeyword() throws RecognitionException {
 
@@ -1161,7 +1229,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Keyword__ValueAssignment_in_ruleKeyword934);
             rule__Keyword__ValueAssignment();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1185,10 +1254,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleKeyword
+    // $ANTLR end "ruleKeyword"
 
 
-    // $ANTLR start entryRuleRuleCall
+    // $ANTLR start "entryRuleRuleCall"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:481:1: entryRuleRuleCall : ruleRuleCall EOF ;
     public final void entryRuleRuleCall() throws RecognitionException {
         try {
@@ -1198,7 +1267,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getRuleCallRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_entryRuleRuleCall961);
             ruleRuleCall();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getRuleCallRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRuleCall968); 
@@ -1214,10 +1284,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleRuleCall
+    // $ANTLR end "entryRuleRuleCall"
 
 
-    // $ANTLR start ruleRuleCall
+    // $ANTLR start "ruleRuleCall"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:490:1: ruleRuleCall : ( ( rule__RuleCall__RuleAssignment ) ) ;
     public final void ruleRuleCall() throws RecognitionException {
 
@@ -1236,7 +1306,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__RuleCall__RuleAssignment_in_ruleRuleCall994);
             rule__RuleCall__RuleAssignment();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1260,10 +1331,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleRuleCall
+    // $ANTLR end "ruleRuleCall"
 
 
-    // $ANTLR start entryRuleAssignment
+    // $ANTLR start "entryRuleAssignment"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:509:1: entryRuleAssignment : ruleAssignment EOF ;
     public final void entryRuleAssignment() throws RecognitionException {
         try {
@@ -1273,7 +1344,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAssignmentRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignment_in_entryRuleAssignment1021);
             ruleAssignment();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignmentRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignment1028); 
@@ -1289,10 +1361,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleAssignment
+    // $ANTLR end "entryRuleAssignment"
 
 
-    // $ANTLR start ruleAssignment
+    // $ANTLR start "ruleAssignment"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:518:1: ruleAssignment : ( ( rule__Assignment__Group__0 ) ) ;
     public final void ruleAssignment() throws RecognitionException {
 
@@ -1311,7 +1383,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__0_in_ruleAssignment1054);
             rule__Assignment__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1335,10 +1408,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleAssignment
+    // $ANTLR end "ruleAssignment"
 
 
-    // $ANTLR start entryRuleAssignableTerminal
+    // $ANTLR start "entryRuleAssignableTerminal"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:537:1: entryRuleAssignableTerminal : ruleAssignableTerminal EOF ;
     public final void entryRuleAssignableTerminal() throws RecognitionException {
         try {
@@ -1348,7 +1421,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAssignableTerminalRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_entryRuleAssignableTerminal1081);
             ruleAssignableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignableTerminalRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignableTerminal1088); 
@@ -1364,10 +1438,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleAssignableTerminal
+    // $ANTLR end "entryRuleAssignableTerminal"
 
 
-    // $ANTLR start ruleAssignableTerminal
+    // $ANTLR start "ruleAssignableTerminal"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:546:1: ruleAssignableTerminal : ( ( rule__AssignableTerminal__Alternatives ) ) ;
     public final void ruleAssignableTerminal() throws RecognitionException {
 
@@ -1386,7 +1460,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableTerminal__Alternatives_in_ruleAssignableTerminal1114);
             rule__AssignableTerminal__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1410,10 +1485,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleAssignableTerminal
+    // $ANTLR end "ruleAssignableTerminal"
 
 
-    // $ANTLR start entryRuleParenthesizedAssignableElement
+    // $ANTLR start "entryRuleParenthesizedAssignableElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:565:1: entryRuleParenthesizedAssignableElement : ruleParenthesizedAssignableElement EOF ;
     public final void entryRuleParenthesizedAssignableElement() throws RecognitionException {
         try {
@@ -1423,7 +1498,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getParenthesizedAssignableElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleParenthesizedAssignableElement_in_entryRuleParenthesizedAssignableElement1141);
             ruleParenthesizedAssignableElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedAssignableElementRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParenthesizedAssignableElement1148); 
@@ -1439,10 +1515,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleParenthesizedAssignableElement
+    // $ANTLR end "entryRuleParenthesizedAssignableElement"
 
 
-    // $ANTLR start ruleParenthesizedAssignableElement
+    // $ANTLR start "ruleParenthesizedAssignableElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:574:1: ruleParenthesizedAssignableElement : ( ( rule__ParenthesizedAssignableElement__Group__0 ) ) ;
     public final void ruleParenthesizedAssignableElement() throws RecognitionException {
 
@@ -1461,7 +1537,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__0_in_ruleParenthesizedAssignableElement1174);
             rule__ParenthesizedAssignableElement__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1485,10 +1562,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleParenthesizedAssignableElement
+    // $ANTLR end "ruleParenthesizedAssignableElement"
 
 
-    // $ANTLR start entryRuleAssignableAlternatives
+    // $ANTLR start "entryRuleAssignableAlternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:593:1: entryRuleAssignableAlternatives : ruleAssignableAlternatives EOF ;
     public final void entryRuleAssignableAlternatives() throws RecognitionException {
         try {
@@ -1498,7 +1575,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAssignableAlternativesRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableAlternatives_in_entryRuleAssignableAlternatives1201);
             ruleAssignableAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignableAlternativesRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignableAlternatives1208); 
@@ -1514,10 +1592,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleAssignableAlternatives
+    // $ANTLR end "entryRuleAssignableAlternatives"
 
 
-    // $ANTLR start ruleAssignableAlternatives
+    // $ANTLR start "ruleAssignableAlternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:602:1: ruleAssignableAlternatives : ( ( rule__AssignableAlternatives__Group__0 ) ) ;
     public final void ruleAssignableAlternatives() throws RecognitionException {
 
@@ -1536,7 +1614,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group__0_in_ruleAssignableAlternatives1234);
             rule__AssignableAlternatives__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1560,10 +1639,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleAssignableAlternatives
+    // $ANTLR end "ruleAssignableAlternatives"
 
 
-    // $ANTLR start entryRuleCrossReference
+    // $ANTLR start "entryRuleCrossReference"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:621:1: entryRuleCrossReference : ruleCrossReference EOF ;
     public final void entryRuleCrossReference() throws RecognitionException {
         try {
@@ -1573,7 +1652,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getCrossReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleCrossReference_in_entryRuleCrossReference1261);
             ruleCrossReference();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCrossReferenceRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCrossReference1268); 
@@ -1589,10 +1669,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleCrossReference
+    // $ANTLR end "entryRuleCrossReference"
 
 
-    // $ANTLR start ruleCrossReference
+    // $ANTLR start "ruleCrossReference"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:630:1: ruleCrossReference : ( ( rule__CrossReference__Group__0 ) ) ;
     public final void ruleCrossReference() throws RecognitionException {
 
@@ -1611,7 +1691,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__0_in_ruleCrossReference1294);
             rule__CrossReference__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1635,10 +1716,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleCrossReference
+    // $ANTLR end "ruleCrossReference"
 
 
-    // $ANTLR start entryRuleCrossReferenceableTerminal
+    // $ANTLR start "entryRuleCrossReferenceableTerminal"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:649:1: entryRuleCrossReferenceableTerminal : ruleCrossReferenceableTerminal EOF ;
     public final void entryRuleCrossReferenceableTerminal() throws RecognitionException {
         try {
@@ -1648,7 +1729,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getCrossReferenceableTerminalRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableTerminal_in_entryRuleCrossReferenceableTerminal1321);
             ruleCrossReferenceableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCrossReferenceableTerminalRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCrossReferenceableTerminal1328); 
@@ -1664,10 +1746,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleCrossReferenceableTerminal
+    // $ANTLR end "entryRuleCrossReferenceableTerminal"
 
 
-    // $ANTLR start ruleCrossReferenceableTerminal
+    // $ANTLR start "ruleCrossReferenceableTerminal"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:658:1: ruleCrossReferenceableTerminal : ( ( rule__CrossReferenceableTerminal__Alternatives ) ) ;
     public final void ruleCrossReferenceableTerminal() throws RecognitionException {
 
@@ -1686,7 +1768,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableTerminal__Alternatives_in_ruleCrossReferenceableTerminal1354);
             rule__CrossReferenceableTerminal__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1710,10 +1793,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleCrossReferenceableTerminal
+    // $ANTLR end "ruleCrossReferenceableTerminal"
 
 
-    // $ANTLR start entryRuleParenthesizedCrossReferenceableElement
+    // $ANTLR start "entryRuleParenthesizedCrossReferenceableElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:677:1: entryRuleParenthesizedCrossReferenceableElement : ruleParenthesizedCrossReferenceableElement EOF ;
     public final void entryRuleParenthesizedCrossReferenceableElement() throws RecognitionException {
         try {
@@ -1723,7 +1806,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getParenthesizedCrossReferenceableElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleParenthesizedCrossReferenceableElement_in_entryRuleParenthesizedCrossReferenceableElement1381);
             ruleParenthesizedCrossReferenceableElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedCrossReferenceableElementRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParenthesizedCrossReferenceableElement1388); 
@@ -1739,10 +1823,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleParenthesizedCrossReferenceableElement
+    // $ANTLR end "entryRuleParenthesizedCrossReferenceableElement"
 
 
-    // $ANTLR start ruleParenthesizedCrossReferenceableElement
+    // $ANTLR start "ruleParenthesizedCrossReferenceableElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:686:1: ruleParenthesizedCrossReferenceableElement : ( ( rule__ParenthesizedCrossReferenceableElement__Group__0 ) ) ;
     public final void ruleParenthesizedCrossReferenceableElement() throws RecognitionException {
 
@@ -1761,7 +1845,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__0_in_ruleParenthesizedCrossReferenceableElement1414);
             rule__ParenthesizedCrossReferenceableElement__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1785,10 +1870,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleParenthesizedCrossReferenceableElement
+    // $ANTLR end "ruleParenthesizedCrossReferenceableElement"
 
 
-    // $ANTLR start entryRuleCrossReferenceableAlternatives
+    // $ANTLR start "entryRuleCrossReferenceableAlternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:705:1: entryRuleCrossReferenceableAlternatives : ruleCrossReferenceableAlternatives EOF ;
     public final void entryRuleCrossReferenceableAlternatives() throws RecognitionException {
         try {
@@ -1798,7 +1883,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getCrossReferenceableAlternativesRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableAlternatives_in_entryRuleCrossReferenceableAlternatives1441);
             ruleCrossReferenceableAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCrossReferenceableAlternativesRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCrossReferenceableAlternatives1448); 
@@ -1814,10 +1900,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleCrossReferenceableAlternatives
+    // $ANTLR end "entryRuleCrossReferenceableAlternatives"
 
 
-    // $ANTLR start ruleCrossReferenceableAlternatives
+    // $ANTLR start "ruleCrossReferenceableAlternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:714:1: ruleCrossReferenceableAlternatives : ( ( rule__CrossReferenceableAlternatives__Group__0 ) ) ;
     public final void ruleCrossReferenceableAlternatives() throws RecognitionException {
 
@@ -1836,7 +1922,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group__0_in_ruleCrossReferenceableAlternatives1474);
             rule__CrossReferenceableAlternatives__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1860,10 +1947,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleCrossReferenceableAlternatives
+    // $ANTLR end "ruleCrossReferenceableAlternatives"
 
 
-    // $ANTLR start entryRuleParenthesizedElement
+    // $ANTLR start "entryRuleParenthesizedElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:733:1: entryRuleParenthesizedElement : ruleParenthesizedElement EOF ;
     public final void entryRuleParenthesizedElement() throws RecognitionException {
         try {
@@ -1873,7 +1960,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getParenthesizedElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleParenthesizedElement_in_entryRuleParenthesizedElement1501);
             ruleParenthesizedElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedElementRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParenthesizedElement1508); 
@@ -1889,10 +1977,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleParenthesizedElement
+    // $ANTLR end "entryRuleParenthesizedElement"
 
 
-    // $ANTLR start ruleParenthesizedElement
+    // $ANTLR start "ruleParenthesizedElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:742:1: ruleParenthesizedElement : ( ( rule__ParenthesizedElement__Group__0 ) ) ;
     public final void ruleParenthesizedElement() throws RecognitionException {
 
@@ -1911,7 +1999,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__0_in_ruleParenthesizedElement1534);
             rule__ParenthesizedElement__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -1935,10 +2024,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleParenthesizedElement
+    // $ANTLR end "ruleParenthesizedElement"
 
 
-    // $ANTLR start entryRuleTerminalRule
+    // $ANTLR start "entryRuleTerminalRule"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:761:1: entryRuleTerminalRule : ruleTerminalRule EOF ;
     public final void entryRuleTerminalRule() throws RecognitionException {
         try {
@@ -1948,7 +2037,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalRule_in_entryRuleTerminalRule1561);
             ruleTerminalRule();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalRuleRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalRule1568); 
@@ -1964,10 +2054,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleTerminalRule
+    // $ANTLR end "entryRuleTerminalRule"
 
 
-    // $ANTLR start ruleTerminalRule
+    // $ANTLR start "ruleTerminalRule"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:770:1: ruleTerminalRule : ( ( rule__TerminalRule__Group__0 ) ) ;
     public final void ruleTerminalRule() throws RecognitionException {
 
@@ -1986,7 +2076,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__0_in_ruleTerminalRule1594);
             rule__TerminalRule__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2010,10 +2101,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleTerminalRule
+    // $ANTLR end "ruleTerminalRule"
 
 
-    // $ANTLR start entryRuleTerminalAlternatives
+    // $ANTLR start "entryRuleTerminalAlternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:789:1: entryRuleTerminalAlternatives : ruleTerminalAlternatives EOF ;
     public final void entryRuleTerminalAlternatives() throws RecognitionException {
         try {
@@ -2023,7 +2114,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalAlternativesRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalAlternatives_in_entryRuleTerminalAlternatives1621);
             ruleTerminalAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalAlternativesRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalAlternatives1628); 
@@ -2039,10 +2131,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleTerminalAlternatives
+    // $ANTLR end "entryRuleTerminalAlternatives"
 
 
-    // $ANTLR start ruleTerminalAlternatives
+    // $ANTLR start "ruleTerminalAlternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:798:1: ruleTerminalAlternatives : ( ( rule__TerminalAlternatives__Group__0 ) ) ;
     public final void ruleTerminalAlternatives() throws RecognitionException {
 
@@ -2061,7 +2153,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group__0_in_ruleTerminalAlternatives1654);
             rule__TerminalAlternatives__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2085,10 +2178,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleTerminalAlternatives
+    // $ANTLR end "ruleTerminalAlternatives"
 
 
-    // $ANTLR start entryRuleTerminalGroup
+    // $ANTLR start "entryRuleTerminalGroup"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:817:1: entryRuleTerminalGroup : ruleTerminalGroup EOF ;
     public final void entryRuleTerminalGroup() throws RecognitionException {
         try {
@@ -2098,7 +2191,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalGroupRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalGroup_in_entryRuleTerminalGroup1681);
             ruleTerminalGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalGroupRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalGroup1688); 
@@ -2114,10 +2208,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleTerminalGroup
+    // $ANTLR end "entryRuleTerminalGroup"
 
 
-    // $ANTLR start ruleTerminalGroup
+    // $ANTLR start "ruleTerminalGroup"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:826:1: ruleTerminalGroup : ( ( rule__TerminalGroup__Group__0 ) ) ;
     public final void ruleTerminalGroup() throws RecognitionException {
 
@@ -2136,7 +2230,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group__0_in_ruleTerminalGroup1714);
             rule__TerminalGroup__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2160,10 +2255,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleTerminalGroup
+    // $ANTLR end "ruleTerminalGroup"
 
 
-    // $ANTLR start entryRuleTerminalToken
+    // $ANTLR start "entryRuleTerminalToken"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:845:1: entryRuleTerminalToken : ruleTerminalToken EOF ;
     public final void entryRuleTerminalToken() throws RecognitionException {
         try {
@@ -2173,7 +2268,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalToken_in_entryRuleTerminalToken1741);
             ruleTerminalToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalTokenRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalToken1748); 
@@ -2189,10 +2285,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleTerminalToken
+    // $ANTLR end "entryRuleTerminalToken"
 
 
-    // $ANTLR start ruleTerminalToken
+    // $ANTLR start "ruleTerminalToken"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:854:1: ruleTerminalToken : ( ( rule__TerminalToken__Group__0 ) ) ;
     public final void ruleTerminalToken() throws RecognitionException {
 
@@ -2211,7 +2307,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__Group__0_in_ruleTerminalToken1774);
             rule__TerminalToken__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2235,10 +2332,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleTerminalToken
+    // $ANTLR end "ruleTerminalToken"
 
 
-    // $ANTLR start entryRuleTerminalTokenElement
+    // $ANTLR start "entryRuleTerminalTokenElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:873:1: entryRuleTerminalTokenElement : ruleTerminalTokenElement EOF ;
     public final void entryRuleTerminalTokenElement() throws RecognitionException {
         try {
@@ -2248,7 +2345,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalTokenElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_entryRuleTerminalTokenElement1801);
             ruleTerminalTokenElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalTokenElementRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalTokenElement1808); 
@@ -2264,10 +2362,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleTerminalTokenElement
+    // $ANTLR end "entryRuleTerminalTokenElement"
 
 
-    // $ANTLR start ruleTerminalTokenElement
+    // $ANTLR start "ruleTerminalTokenElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:882:1: ruleTerminalTokenElement : ( ( rule__TerminalTokenElement__Alternatives ) ) ;
     public final void ruleTerminalTokenElement() throws RecognitionException {
 
@@ -2286,7 +2384,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalTokenElement__Alternatives_in_ruleTerminalTokenElement1834);
             rule__TerminalTokenElement__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2310,10 +2409,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleTerminalTokenElement
+    // $ANTLR end "ruleTerminalTokenElement"
 
 
-    // $ANTLR start entryRuleParenthesizedTerminalElement
+    // $ANTLR start "entryRuleParenthesizedTerminalElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:901:1: entryRuleParenthesizedTerminalElement : ruleParenthesizedTerminalElement EOF ;
     public final void entryRuleParenthesizedTerminalElement() throws RecognitionException {
         try {
@@ -2323,7 +2422,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getParenthesizedTerminalElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleParenthesizedTerminalElement_in_entryRuleParenthesizedTerminalElement1861);
             ruleParenthesizedTerminalElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedTerminalElementRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParenthesizedTerminalElement1868); 
@@ -2339,10 +2439,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleParenthesizedTerminalElement
+    // $ANTLR end "entryRuleParenthesizedTerminalElement"
 
 
-    // $ANTLR start ruleParenthesizedTerminalElement
+    // $ANTLR start "ruleParenthesizedTerminalElement"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:910:1: ruleParenthesizedTerminalElement : ( ( rule__ParenthesizedTerminalElement__Group__0 ) ) ;
     public final void ruleParenthesizedTerminalElement() throws RecognitionException {
 
@@ -2361,7 +2461,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__0_in_ruleParenthesizedTerminalElement1894);
             rule__ParenthesizedTerminalElement__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2385,10 +2486,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleParenthesizedTerminalElement
+    // $ANTLR end "ruleParenthesizedTerminalElement"
 
 
-    // $ANTLR start entryRuleAbstractNegatedToken
+    // $ANTLR start "entryRuleAbstractNegatedToken"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:929:1: entryRuleAbstractNegatedToken : ruleAbstractNegatedToken EOF ;
     public final void entryRuleAbstractNegatedToken() throws RecognitionException {
         try {
@@ -2398,7 +2499,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAbstractNegatedTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractNegatedToken_in_entryRuleAbstractNegatedToken1921);
             ruleAbstractNegatedToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAbstractNegatedTokenRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractNegatedToken1928); 
@@ -2414,10 +2516,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleAbstractNegatedToken
+    // $ANTLR end "entryRuleAbstractNegatedToken"
 
 
-    // $ANTLR start ruleAbstractNegatedToken
+    // $ANTLR start "ruleAbstractNegatedToken"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:938:1: ruleAbstractNegatedToken : ( ( rule__AbstractNegatedToken__Alternatives ) ) ;
     public final void ruleAbstractNegatedToken() throws RecognitionException {
 
@@ -2436,7 +2538,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractNegatedToken__Alternatives_in_ruleAbstractNegatedToken1954);
             rule__AbstractNegatedToken__Alternatives();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2460,10 +2563,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleAbstractNegatedToken
+    // $ANTLR end "ruleAbstractNegatedToken"
 
 
-    // $ANTLR start entryRuleNegatedToken
+    // $ANTLR start "entryRuleNegatedToken"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:957:1: entryRuleNegatedToken : ruleNegatedToken EOF ;
     public final void entryRuleNegatedToken() throws RecognitionException {
         try {
@@ -2473,7 +2576,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getNegatedTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleNegatedToken_in_entryRuleNegatedToken1981);
             ruleNegatedToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getNegatedTokenRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNegatedToken1988); 
@@ -2489,10 +2593,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleNegatedToken
+    // $ANTLR end "entryRuleNegatedToken"
 
 
-    // $ANTLR start ruleNegatedToken
+    // $ANTLR start "ruleNegatedToken"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:966:1: ruleNegatedToken : ( ( rule__NegatedToken__Group__0 ) ) ;
     public final void ruleNegatedToken() throws RecognitionException {
 
@@ -2511,7 +2615,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__Group__0_in_ruleNegatedToken2014);
             rule__NegatedToken__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2535,10 +2640,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleNegatedToken
+    // $ANTLR end "ruleNegatedToken"
 
 
-    // $ANTLR start entryRuleUntilToken
+    // $ANTLR start "entryRuleUntilToken"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:985:1: entryRuleUntilToken : ruleUntilToken EOF ;
     public final void entryRuleUntilToken() throws RecognitionException {
         try {
@@ -2548,7 +2653,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getUntilTokenRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleUntilToken_in_entryRuleUntilToken2041);
             ruleUntilToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getUntilTokenRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUntilToken2048); 
@@ -2564,10 +2670,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleUntilToken
+    // $ANTLR end "entryRuleUntilToken"
 
 
-    // $ANTLR start ruleUntilToken
+    // $ANTLR start "ruleUntilToken"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:994:1: ruleUntilToken : ( ( rule__UntilToken__Group__0 ) ) ;
     public final void ruleUntilToken() throws RecognitionException {
 
@@ -2586,7 +2692,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__UntilToken__Group__0_in_ruleUntilToken2074);
             rule__UntilToken__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2610,10 +2717,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleUntilToken
+    // $ANTLR end "ruleUntilToken"
 
 
-    // $ANTLR start entryRuleWildcard
+    // $ANTLR start "entryRuleWildcard"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1013:1: entryRuleWildcard : ruleWildcard EOF ;
     public final void entryRuleWildcard() throws RecognitionException {
         try {
@@ -2623,7 +2730,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getWildcardRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleWildcard_in_entryRuleWildcard2101);
             ruleWildcard();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getWildcardRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWildcard2108); 
@@ -2639,10 +2747,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleWildcard
+    // $ANTLR end "entryRuleWildcard"
 
 
-    // $ANTLR start ruleWildcard
+    // $ANTLR start "ruleWildcard"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1022:1: ruleWildcard : ( ( rule__Wildcard__Group__0 ) ) ;
     public final void ruleWildcard() throws RecognitionException {
 
@@ -2661,7 +2769,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Wildcard__Group__0_in_ruleWildcard2134);
             rule__Wildcard__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2685,10 +2794,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleWildcard
+    // $ANTLR end "ruleWildcard"
 
 
-    // $ANTLR start entryRuleCharacterRange
+    // $ANTLR start "entryRuleCharacterRange"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1041:1: entryRuleCharacterRange : ruleCharacterRange EOF ;
     public final void entryRuleCharacterRange() throws RecognitionException {
         try {
@@ -2698,7 +2807,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getCharacterRangeRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleCharacterRange_in_entryRuleCharacterRange2161);
             ruleCharacterRange();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCharacterRangeRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCharacterRange2168); 
@@ -2714,10 +2824,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleCharacterRange
+    // $ANTLR end "entryRuleCharacterRange"
 
 
-    // $ANTLR start ruleCharacterRange
+    // $ANTLR start "ruleCharacterRange"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1050:1: ruleCharacterRange : ( ( rule__CharacterRange__Group__0 ) ) ;
     public final void ruleCharacterRange() throws RecognitionException {
 
@@ -2736,7 +2846,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group__0_in_ruleCharacterRange2194);
             rule__CharacterRange__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2760,10 +2871,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleCharacterRange
+    // $ANTLR end "ruleCharacterRange"
 
 
-    // $ANTLR start entryRuleEnumRule
+    // $ANTLR start "entryRuleEnumRule"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1069:1: entryRuleEnumRule : ruleEnumRule EOF ;
     public final void entryRuleEnumRule() throws RecognitionException {
         try {
@@ -2773,7 +2884,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getEnumRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumRule_in_entryRuleEnumRule2221);
             ruleEnumRule();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumRuleRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEnumRule2228); 
@@ -2789,10 +2901,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleEnumRule
+    // $ANTLR end "entryRuleEnumRule"
 
 
-    // $ANTLR start ruleEnumRule
+    // $ANTLR start "ruleEnumRule"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1078:1: ruleEnumRule : ( ( rule__EnumRule__Group__0 ) ) ;
     public final void ruleEnumRule() throws RecognitionException {
 
@@ -2811,7 +2923,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__0_in_ruleEnumRule2254);
             rule__EnumRule__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2835,10 +2948,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleEnumRule
+    // $ANTLR end "ruleEnumRule"
 
 
-    // $ANTLR start entryRuleEnumLiterals
+    // $ANTLR start "entryRuleEnumLiterals"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1097:1: entryRuleEnumLiterals : ruleEnumLiterals EOF ;
     public final void entryRuleEnumLiterals() throws RecognitionException {
         try {
@@ -2848,7 +2961,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getEnumLiteralsRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumLiterals_in_entryRuleEnumLiterals2281);
             ruleEnumLiterals();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumLiteralsRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEnumLiterals2288); 
@@ -2864,10 +2978,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleEnumLiterals
+    // $ANTLR end "entryRuleEnumLiterals"
 
 
-    // $ANTLR start ruleEnumLiterals
+    // $ANTLR start "ruleEnumLiterals"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1106:1: ruleEnumLiterals : ( ( rule__EnumLiterals__Group__0 ) ) ;
     public final void ruleEnumLiterals() throws RecognitionException {
 
@@ -2886,7 +3000,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group__0_in_ruleEnumLiterals2314);
             rule__EnumLiterals__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2910,10 +3025,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleEnumLiterals
+    // $ANTLR end "ruleEnumLiterals"
 
 
-    // $ANTLR start entryRuleEnumLiteralDeclaration
+    // $ANTLR start "entryRuleEnumLiteralDeclaration"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1125:1: entryRuleEnumLiteralDeclaration : ruleEnumLiteralDeclaration EOF ;
     public final void entryRuleEnumLiteralDeclaration() throws RecognitionException {
         try {
@@ -2923,7 +3038,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getEnumLiteralDeclarationRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumLiteralDeclaration_in_entryRuleEnumLiteralDeclaration2341);
             ruleEnumLiteralDeclaration();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumLiteralDeclarationRule()); 
             match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEnumLiteralDeclaration2348); 
@@ -2939,10 +3055,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end entryRuleEnumLiteralDeclaration
+    // $ANTLR end "entryRuleEnumLiteralDeclaration"
 
 
-    // $ANTLR start ruleEnumLiteralDeclaration
+    // $ANTLR start "ruleEnumLiteralDeclaration"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1134:1: ruleEnumLiteralDeclaration : ( ( rule__EnumLiteralDeclaration__Group__0 ) ) ;
     public final void ruleEnumLiteralDeclaration() throws RecognitionException {
 
@@ -2961,7 +3077,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group__0_in_ruleEnumLiteralDeclaration2374);
             rule__EnumLiteralDeclaration__Group__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -2985,10 +3102,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end ruleEnumLiteralDeclaration
+    // $ANTLR end "ruleEnumLiteralDeclaration"
 
 
-    // $ANTLR start rule__AbstractRule__Alternatives
+    // $ANTLR start "rule__AbstractRule__Alternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1153:1: rule__AbstractRule__Alternatives : ( ( ruleParserRule ) | ( ruleTerminalRule ) | ( ruleEnumRule ) );
     public final void rule__AbstractRule__Alternatives() throws RecognitionException {
 
@@ -3015,7 +3132,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1153:1: rule__AbstractRule__Alternatives : ( ( ruleParserRule ) | ( ruleTerminalRule ) | ( ruleEnumRule ) );", 1, 0, input);
+                    new NoViableAltException("", 1, 0, input);
 
                 throw nvae;
             }
@@ -3030,7 +3147,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractRuleAccess().getParserRuleParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleParserRule_in_rule__AbstractRule__Alternatives2410);
                     ruleParserRule();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractRuleAccess().getParserRuleParserRuleCall_0()); 
 
@@ -3048,7 +3166,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractRuleAccess().getTerminalRuleParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleTerminalRule_in_rule__AbstractRule__Alternatives2427);
                     ruleTerminalRule();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractRuleAccess().getTerminalRuleParserRuleCall_1()); 
 
@@ -3066,7 +3185,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractRuleAccess().getEnumRuleParserRuleCall_2()); 
                     pushFollow(FollowSets000.FOLLOW_ruleEnumRule_in_rule__AbstractRule__Alternatives2444);
                     ruleEnumRule();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractRuleAccess().getEnumRuleParserRuleCall_2()); 
 
@@ -3089,10 +3209,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractRule__Alternatives
+    // $ANTLR end "rule__AbstractRule__Alternatives"
 
 
-    // $ANTLR start rule__AbstractMetamodelDeclaration__Alternatives
+    // $ANTLR start "rule__AbstractMetamodelDeclaration__Alternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1181:1: rule__AbstractMetamodelDeclaration__Alternatives : ( ( ruleGeneratedMetamodel ) | ( ruleReferencedMetamodel ) );
     public final void rule__AbstractMetamodelDeclaration__Alternatives() throws RecognitionException {
 
@@ -3111,7 +3231,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1181:1: rule__AbstractMetamodelDeclaration__Alternatives : ( ( ruleGeneratedMetamodel ) | ( ruleReferencedMetamodel ) );", 2, 0, input);
+                    new NoViableAltException("", 2, 0, input);
 
                 throw nvae;
             }
@@ -3125,7 +3245,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractMetamodelDeclarationAccess().getGeneratedMetamodelParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleGeneratedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2476);
                     ruleGeneratedMetamodel();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractMetamodelDeclarationAccess().getGeneratedMetamodelParserRuleCall_0()); 
 
@@ -3143,7 +3264,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractMetamodelDeclarationAccess().getReferencedMetamodelParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2493);
                     ruleReferencedMetamodel();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractMetamodelDeclarationAccess().getReferencedMetamodelParserRuleCall_1()); 
 
@@ -3166,10 +3288,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractMetamodelDeclaration__Alternatives
+    // $ANTLR end "rule__AbstractMetamodelDeclaration__Alternatives"
 
 
-    // $ANTLR start rule__AbstractToken__Alternatives
+    // $ANTLR start "rule__AbstractToken__Alternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1203:1: rule__AbstractToken__Alternatives : ( ( ruleAbstractTokenWithCardinality ) | ( ruleAction ) );
     public final void rule__AbstractToken__Alternatives() throws RecognitionException {
 
@@ -3188,7 +3310,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1203:1: rule__AbstractToken__Alternatives : ( ( ruleAbstractTokenWithCardinality ) | ( ruleAction ) );", 3, 0, input);
+                    new NoViableAltException("", 3, 0, input);
 
                 throw nvae;
             }
@@ -3202,7 +3324,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractTokenAccess().getAbstractTokenWithCardinalityParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleAbstractTokenWithCardinality_in_rule__AbstractToken__Alternatives2525);
                     ruleAbstractTokenWithCardinality();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTokenAccess().getAbstractTokenWithCardinalityParserRuleCall_0()); 
 
@@ -3220,7 +3343,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractTokenAccess().getActionParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleAction_in_rule__AbstractToken__Alternatives2542);
                     ruleAction();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTokenAccess().getActionParserRuleCall_1()); 
 
@@ -3243,10 +3367,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractToken__Alternatives
+    // $ANTLR end "rule__AbstractToken__Alternatives"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__Alternatives_0
+    // $ANTLR start "rule__AbstractTokenWithCardinality__Alternatives_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1225:1: rule__AbstractTokenWithCardinality__Alternatives_0 : ( ( ruleAssignment ) | ( ruleAbstractTerminal ) );
     public final void rule__AbstractTokenWithCardinality__Alternatives_0() throws RecognitionException {
 
@@ -3260,15 +3384,15 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             if ( (LA4_0==RULE_ID) ) {
                 int LA4_1 = input.LA(2);
 
-                if ( (LA4_1==EOF||(LA4_1>=RULE_ID && LA4_1<=RULE_STRING)||(LA4_1>=11 && LA4_1<=13)||(LA4_1>=20 && LA4_1<=21)||LA4_1==27||(LA4_1>=30 && LA4_1<=31)) ) {
-                    alt4=2;
-                }
-                else if ( ((LA4_1>=14 && LA4_1<=16)) ) {
+                if ( ((LA4_1>=14 && LA4_1<=16)) ) {
                     alt4=1;
+                }
+                else if ( (LA4_1==EOF||(LA4_1>=RULE_ID && LA4_1<=RULE_STRING)||(LA4_1>=11 && LA4_1<=13)||(LA4_1>=20 && LA4_1<=21)||LA4_1==27||(LA4_1>=30 && LA4_1<=31)) ) {
+                    alt4=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("1225:1: rule__AbstractTokenWithCardinality__Alternatives_0 : ( ( ruleAssignment ) | ( ruleAbstractTerminal ) );", 4, 1, input);
+                        new NoViableAltException("", 4, 1, input);
 
                     throw nvae;
                 }
@@ -3278,7 +3402,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1225:1: rule__AbstractTokenWithCardinality__Alternatives_0 : ( ( ruleAssignment ) | ( ruleAbstractTerminal ) );", 4, 0, input);
+                    new NoViableAltException("", 4, 0, input);
 
                 throw nvae;
             }
@@ -3292,7 +3416,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractTokenWithCardinalityAccess().getAssignmentParserRuleCall_0_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleAssignment_in_rule__AbstractTokenWithCardinality__Alternatives_02574);
                     ruleAssignment();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTokenWithCardinalityAccess().getAssignmentParserRuleCall_0_0()); 
 
@@ -3310,7 +3435,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractTokenWithCardinalityAccess().getAbstractTerminalParserRuleCall_0_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleAbstractTerminal_in_rule__AbstractTokenWithCardinality__Alternatives_02591);
                     ruleAbstractTerminal();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTokenWithCardinalityAccess().getAbstractTerminalParserRuleCall_0_1()); 
 
@@ -3333,10 +3459,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__Alternatives_0
+    // $ANTLR end "rule__AbstractTokenWithCardinality__Alternatives_0"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0
+    // $ANTLR start "rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1247:1: rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0 : ( ( '?' ) | ( '*' ) | ( '+' ) );
     public final void rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0() throws RecognitionException {
 
@@ -3363,7 +3489,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1247:1: rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0 : ( ( '?' ) | ( '*' ) | ( '+' ) );", 5, 0, input);
+                    new NoViableAltException("", 5, 0, input);
 
                 throw nvae;
             }
@@ -3428,10 +3554,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0
+    // $ANTLR end "rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0"
 
 
-    // $ANTLR start rule__Action__OperatorAlternatives_2_2_0
+    // $ANTLR start "rule__Action__OperatorAlternatives_2_2_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1281:1: rule__Action__OperatorAlternatives_2_2_0 : ( ( '=' ) | ( '+=' ) );
     public final void rule__Action__OperatorAlternatives_2_2_0() throws RecognitionException {
 
@@ -3450,7 +3576,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1281:1: rule__Action__OperatorAlternatives_2_2_0 : ( ( '=' ) | ( '+=' ) );", 6, 0, input);
+                    new NoViableAltException("", 6, 0, input);
 
                 throw nvae;
             }
@@ -3499,10 +3625,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__OperatorAlternatives_2_2_0
+    // $ANTLR end "rule__Action__OperatorAlternatives_2_2_0"
 
 
-    // $ANTLR start rule__AbstractTerminal__Alternatives
+    // $ANTLR start "rule__AbstractTerminal__Alternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1307:1: rule__AbstractTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) | ( ruleParenthesizedElement ) );
     public final void rule__AbstractTerminal__Alternatives() throws RecognitionException {
 
@@ -3529,7 +3655,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1307:1: rule__AbstractTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) | ( ruleParenthesizedElement ) );", 7, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
             }
@@ -3544,7 +3670,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractTerminalAccess().getKeywordParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__AbstractTerminal__Alternatives2753);
                     ruleKeyword();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTerminalAccess().getKeywordParserRuleCall_0()); 
 
@@ -3562,7 +3689,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractTerminalAccess().getRuleCallParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__AbstractTerminal__Alternatives2770);
                     ruleRuleCall();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTerminalAccess().getRuleCallParserRuleCall_1()); 
 
@@ -3580,7 +3708,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractTerminalAccess().getParenthesizedElementParserRuleCall_2()); 
                     pushFollow(FollowSets000.FOLLOW_ruleParenthesizedElement_in_rule__AbstractTerminal__Alternatives2787);
                     ruleParenthesizedElement();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractTerminalAccess().getParenthesizedElementParserRuleCall_2()); 
 
@@ -3603,10 +3732,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTerminal__Alternatives
+    // $ANTLR end "rule__AbstractTerminal__Alternatives"
 
 
-    // $ANTLR start rule__Assignment__OperatorAlternatives_1_0
+    // $ANTLR start "rule__Assignment__OperatorAlternatives_1_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1335:1: rule__Assignment__OperatorAlternatives_1_0 : ( ( '+=' ) | ( '=' ) | ( '?=' ) );
     public final void rule__Assignment__OperatorAlternatives_1_0() throws RecognitionException {
 
@@ -3633,7 +3762,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1335:1: rule__Assignment__OperatorAlternatives_1_0 : ( ( '+=' ) | ( '=' ) | ( '?=' ) );", 8, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
             }
@@ -3698,10 +3827,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__OperatorAlternatives_1_0
+    // $ANTLR end "rule__Assignment__OperatorAlternatives_1_0"
 
 
-    // $ANTLR start rule__AssignableTerminal__Alternatives
+    // $ANTLR start "rule__AssignableTerminal__Alternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1369:1: rule__AssignableTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) | ( ruleParenthesizedAssignableElement ) | ( ruleCrossReference ) );
     public final void rule__AssignableTerminal__Alternatives() throws RecognitionException {
 
@@ -3733,7 +3862,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1369:1: rule__AssignableTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) | ( ruleParenthesizedAssignableElement ) | ( ruleCrossReference ) );", 9, 0, input);
+                    new NoViableAltException("", 9, 0, input);
 
                 throw nvae;
             }
@@ -3748,7 +3877,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAssignableTerminalAccess().getKeywordParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__AssignableTerminal__Alternatives2894);
                     ruleKeyword();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAssignableTerminalAccess().getKeywordParserRuleCall_0()); 
 
@@ -3766,7 +3896,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAssignableTerminalAccess().getRuleCallParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__AssignableTerminal__Alternatives2911);
                     ruleRuleCall();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAssignableTerminalAccess().getRuleCallParserRuleCall_1()); 
 
@@ -3784,7 +3915,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAssignableTerminalAccess().getParenthesizedAssignableElementParserRuleCall_2()); 
                     pushFollow(FollowSets000.FOLLOW_ruleParenthesizedAssignableElement_in_rule__AssignableTerminal__Alternatives2928);
                     ruleParenthesizedAssignableElement();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAssignableTerminalAccess().getParenthesizedAssignableElementParserRuleCall_2()); 
 
@@ -3802,7 +3934,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAssignableTerminalAccess().getCrossReferenceParserRuleCall_3()); 
                     pushFollow(FollowSets000.FOLLOW_ruleCrossReference_in_rule__AssignableTerminal__Alternatives2945);
                     ruleCrossReference();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAssignableTerminalAccess().getCrossReferenceParserRuleCall_3()); 
 
@@ -3825,10 +3958,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableTerminal__Alternatives
+    // $ANTLR end "rule__AssignableTerminal__Alternatives"
 
 
-    // $ANTLR start rule__CrossReferenceableTerminal__Alternatives
+    // $ANTLR start "rule__CrossReferenceableTerminal__Alternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1403:1: rule__CrossReferenceableTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) | ( ruleParenthesizedCrossReferenceableElement ) );
     public final void rule__CrossReferenceableTerminal__Alternatives() throws RecognitionException {
 
@@ -3855,7 +3988,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1403:1: rule__CrossReferenceableTerminal__Alternatives : ( ( ruleKeyword ) | ( ruleRuleCall ) | ( ruleParenthesizedCrossReferenceableElement ) );", 10, 0, input);
+                    new NoViableAltException("", 10, 0, input);
 
                 throw nvae;
             }
@@ -3870,7 +4003,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getCrossReferenceableTerminalAccess().getKeywordParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__CrossReferenceableTerminal__Alternatives2977);
                     ruleKeyword();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getCrossReferenceableTerminalAccess().getKeywordParserRuleCall_0()); 
 
@@ -3888,7 +4022,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getCrossReferenceableTerminalAccess().getRuleCallParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__CrossReferenceableTerminal__Alternatives2994);
                     ruleRuleCall();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getCrossReferenceableTerminalAccess().getRuleCallParserRuleCall_1()); 
 
@@ -3906,7 +4041,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getCrossReferenceableTerminalAccess().getParenthesizedCrossReferenceableElementParserRuleCall_2()); 
                     pushFollow(FollowSets000.FOLLOW_ruleParenthesizedCrossReferenceableElement_in_rule__CrossReferenceableTerminal__Alternatives3011);
                     ruleParenthesizedCrossReferenceableElement();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getCrossReferenceableTerminalAccess().getParenthesizedCrossReferenceableElementParserRuleCall_2()); 
 
@@ -3929,10 +4065,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableTerminal__Alternatives
+    // $ANTLR end "rule__CrossReferenceableTerminal__Alternatives"
 
 
-    // $ANTLR start rule__TerminalToken__CardinalityAlternatives_1_0
+    // $ANTLR start "rule__TerminalToken__CardinalityAlternatives_1_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1431:1: rule__TerminalToken__CardinalityAlternatives_1_0 : ( ( '?' ) | ( '*' ) | ( '+' ) );
     public final void rule__TerminalToken__CardinalityAlternatives_1_0() throws RecognitionException {
 
@@ -3959,7 +4095,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1431:1: rule__TerminalToken__CardinalityAlternatives_1_0 : ( ( '?' ) | ( '*' ) | ( '+' ) );", 11, 0, input);
+                    new NoViableAltException("", 11, 0, input);
 
                 throw nvae;
             }
@@ -4024,10 +4160,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__CardinalityAlternatives_1_0
+    // $ANTLR end "rule__TerminalToken__CardinalityAlternatives_1_0"
 
 
-    // $ANTLR start rule__TerminalTokenElement__Alternatives
+    // $ANTLR start "rule__TerminalTokenElement__Alternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1465:1: rule__TerminalTokenElement__Alternatives : ( ( ruleCharacterRange ) | ( ruleRuleCall ) | ( ruleParenthesizedTerminalElement ) | ( ruleAbstractNegatedToken ) | ( ruleWildcard ) );
     public final void rule__TerminalTokenElement__Alternatives() throws RecognitionException {
 
@@ -4065,7 +4201,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("1465:1: rule__TerminalTokenElement__Alternatives : ( ( ruleCharacterRange ) | ( ruleRuleCall ) | ( ruleParenthesizedTerminalElement ) | ( ruleAbstractNegatedToken ) | ( ruleWildcard ) );", 12, 0, input);
+                    new NoViableAltException("", 12, 0, input);
 
                 throw nvae;
             }
@@ -4080,7 +4216,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getTerminalTokenElementAccess().getCharacterRangeParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleCharacterRange_in_rule__TerminalTokenElement__Alternatives3118);
                     ruleCharacterRange();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTerminalTokenElementAccess().getCharacterRangeParserRuleCall_0()); 
 
@@ -4098,7 +4235,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getTerminalTokenElementAccess().getRuleCallParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__TerminalTokenElement__Alternatives3135);
                     ruleRuleCall();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTerminalTokenElementAccess().getRuleCallParserRuleCall_1()); 
 
@@ -4116,7 +4254,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getTerminalTokenElementAccess().getParenthesizedTerminalElementParserRuleCall_2()); 
                     pushFollow(FollowSets000.FOLLOW_ruleParenthesizedTerminalElement_in_rule__TerminalTokenElement__Alternatives3152);
                     ruleParenthesizedTerminalElement();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTerminalTokenElementAccess().getParenthesizedTerminalElementParserRuleCall_2()); 
 
@@ -4134,7 +4273,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getTerminalTokenElementAccess().getAbstractNegatedTokenParserRuleCall_3()); 
                     pushFollow(FollowSets000.FOLLOW_ruleAbstractNegatedToken_in_rule__TerminalTokenElement__Alternatives3169);
                     ruleAbstractNegatedToken();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTerminalTokenElementAccess().getAbstractNegatedTokenParserRuleCall_3()); 
 
@@ -4152,7 +4292,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getTerminalTokenElementAccess().getWildcardParserRuleCall_4()); 
                     pushFollow(FollowSets000.FOLLOW_ruleWildcard_in_rule__TerminalTokenElement__Alternatives3186);
                     ruleWildcard();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getTerminalTokenElementAccess().getWildcardParserRuleCall_4()); 
 
@@ -4175,10 +4316,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalTokenElement__Alternatives
+    // $ANTLR end "rule__TerminalTokenElement__Alternatives"
 
 
-    // $ANTLR start rule__AbstractNegatedToken__Alternatives
+    // $ANTLR start "rule__AbstractNegatedToken__Alternatives"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1505:1: rule__AbstractNegatedToken__Alternatives : ( ( ruleNegatedToken ) | ( ruleUntilToken ) );
     public final void rule__AbstractNegatedToken__Alternatives() throws RecognitionException {
 
@@ -4197,7 +4338,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1505:1: rule__AbstractNegatedToken__Alternatives : ( ( ruleNegatedToken ) | ( ruleUntilToken ) );", 13, 0, input);
+                    new NoViableAltException("", 13, 0, input);
 
                 throw nvae;
             }
@@ -4211,7 +4352,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractNegatedTokenAccess().getNegatedTokenParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleNegatedToken_in_rule__AbstractNegatedToken__Alternatives3218);
                     ruleNegatedToken();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractNegatedTokenAccess().getNegatedTokenParserRuleCall_0()); 
 
@@ -4229,7 +4371,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                      before(grammarAccess.getAbstractNegatedTokenAccess().getUntilTokenParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleUntilToken_in_rule__AbstractNegatedToken__Alternatives3235);
                     ruleUntilToken();
-                    _fsp--;
+
+                    state._fsp--;
 
                      after(grammarAccess.getAbstractNegatedTokenAccess().getUntilTokenParserRuleCall_1()); 
 
@@ -4252,10 +4395,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractNegatedToken__Alternatives
+    // $ANTLR end "rule__AbstractNegatedToken__Alternatives"
 
 
-    // $ANTLR start rule__Grammar__Group__0
+    // $ANTLR start "rule__Grammar__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1529:1: rule__Grammar__Group__0 : rule__Grammar__Group__0__Impl rule__Grammar__Group__1 ;
     public final void rule__Grammar__Group__0() throws RecognitionException {
 
@@ -4267,11 +4410,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__0__Impl_in_rule__Grammar__Group__03265);
             rule__Grammar__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__1_in_rule__Grammar__Group__03268);
             rule__Grammar__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4288,10 +4433,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__0
+    // $ANTLR end "rule__Grammar__Group__0"
 
 
-    // $ANTLR start rule__Grammar__Group__0__Impl
+    // $ANTLR start "rule__Grammar__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1541:1: rule__Grammar__Group__0__Impl : ( 'grammar' ) ;
     public final void rule__Grammar__Group__0__Impl() throws RecognitionException {
 
@@ -4325,10 +4470,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__0__Impl
+    // $ANTLR end "rule__Grammar__Group__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group__1
+    // $ANTLR start "rule__Grammar__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1560:1: rule__Grammar__Group__1 : rule__Grammar__Group__1__Impl rule__Grammar__Group__2 ;
     public final void rule__Grammar__Group__1() throws RecognitionException {
 
@@ -4340,11 +4485,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__1__Impl_in_rule__Grammar__Group__13327);
             rule__Grammar__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__2_in_rule__Grammar__Group__13330);
             rule__Grammar__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4361,10 +4508,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__1
+    // $ANTLR end "rule__Grammar__Group__1"
 
 
-    // $ANTLR start rule__Grammar__Group__1__Impl
+    // $ANTLR start "rule__Grammar__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1572:1: rule__Grammar__Group__1__Impl : ( ( rule__Grammar__NameAssignment_1 ) ) ;
     public final void rule__Grammar__Group__1__Impl() throws RecognitionException {
 
@@ -4383,7 +4530,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__NameAssignment_1_in_rule__Grammar__Group__1__Impl3357);
             rule__Grammar__NameAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4407,10 +4555,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__1__Impl
+    // $ANTLR end "rule__Grammar__Group__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group__2
+    // $ANTLR start "rule__Grammar__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1589:1: rule__Grammar__Group__2 : rule__Grammar__Group__2__Impl rule__Grammar__Group__3 ;
     public final void rule__Grammar__Group__2() throws RecognitionException {
 
@@ -4422,11 +4570,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__2__Impl_in_rule__Grammar__Group__23387);
             rule__Grammar__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__3_in_rule__Grammar__Group__23390);
             rule__Grammar__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4443,10 +4593,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__2
+    // $ANTLR end "rule__Grammar__Group__2"
 
 
-    // $ANTLR start rule__Grammar__Group__2__Impl
+    // $ANTLR start "rule__Grammar__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1601:1: rule__Grammar__Group__2__Impl : ( ( rule__Grammar__Group_2__0 )? ) ;
     public final void rule__Grammar__Group__2__Impl() throws RecognitionException {
 
@@ -4473,7 +4623,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__0_in_rule__Grammar__Group__2__Impl3417);
                     rule__Grammar__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -4500,10 +4651,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__2__Impl
+    // $ANTLR end "rule__Grammar__Group__2__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group__3
+    // $ANTLR start "rule__Grammar__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1618:1: rule__Grammar__Group__3 : rule__Grammar__Group__3__Impl rule__Grammar__Group__4 ;
     public final void rule__Grammar__Group__3() throws RecognitionException {
 
@@ -4515,11 +4666,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__3__Impl_in_rule__Grammar__Group__33448);
             rule__Grammar__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__4_in_rule__Grammar__Group__33451);
             rule__Grammar__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4536,10 +4689,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__3
+    // $ANTLR end "rule__Grammar__Group__3"
 
 
-    // $ANTLR start rule__Grammar__Group__3__Impl
+    // $ANTLR start "rule__Grammar__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1630:1: rule__Grammar__Group__3__Impl : ( ( rule__Grammar__Group_3__0 )? ) ;
     public final void rule__Grammar__Group__3__Impl() throws RecognitionException {
 
@@ -4566,7 +4719,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__0_in_rule__Grammar__Group__3__Impl3478);
                     rule__Grammar__Group_3__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -4593,10 +4747,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__3__Impl
+    // $ANTLR end "rule__Grammar__Group__3__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group__4
+    // $ANTLR start "rule__Grammar__Group__4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1647:1: rule__Grammar__Group__4 : rule__Grammar__Group__4__Impl rule__Grammar__Group__5 ;
     public final void rule__Grammar__Group__4() throws RecognitionException {
 
@@ -4608,11 +4762,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__4__Impl_in_rule__Grammar__Group__43509);
             rule__Grammar__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__5_in_rule__Grammar__Group__43512);
             rule__Grammar__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4629,10 +4785,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__4
+    // $ANTLR end "rule__Grammar__Group__4"
 
 
-    // $ANTLR start rule__Grammar__Group__4__Impl
+    // $ANTLR start "rule__Grammar__Group__4__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1659:1: rule__Grammar__Group__4__Impl : ( ( rule__Grammar__MetamodelDeclarationsAssignment_4 )* ) ;
     public final void rule__Grammar__Group__4__Impl() throws RecognitionException {
 
@@ -4663,7 +4819,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__MetamodelDeclarationsAssignment_4_in_rule__Grammar__Group__4__Impl3539);
             	    rule__Grammar__MetamodelDeclarationsAssignment_4();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -4693,10 +4850,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__4__Impl
+    // $ANTLR end "rule__Grammar__Group__4__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group__5
+    // $ANTLR start "rule__Grammar__Group__5"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1676:1: rule__Grammar__Group__5 : rule__Grammar__Group__5__Impl ;
     public final void rule__Grammar__Group__5() throws RecognitionException {
 
@@ -4708,7 +4865,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__5__Impl_in_rule__Grammar__Group__53570);
             rule__Grammar__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4725,10 +4883,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__5
+    // $ANTLR end "rule__Grammar__Group__5"
 
 
-    // $ANTLR start rule__Grammar__Group__5__Impl
+    // $ANTLR start "rule__Grammar__Group__5__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1687:1: rule__Grammar__Group__5__Impl : ( ( ( rule__Grammar__RulesAssignment_5 ) ) ( ( rule__Grammar__RulesAssignment_5 )* ) ) ;
     public final void rule__Grammar__Group__5__Impl() throws RecognitionException {
 
@@ -4750,7 +4908,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3599);
             rule__Grammar__RulesAssignment_5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4780,7 +4939,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3611);
             	    rule__Grammar__RulesAssignment_5();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -4813,10 +4973,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group__5__Impl
+    // $ANTLR end "rule__Grammar__Group__5__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_2__0
+    // $ANTLR start "rule__Grammar__Group_2__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1723:1: rule__Grammar__Group_2__0 : rule__Grammar__Group_2__0__Impl rule__Grammar__Group_2__1 ;
     public final void rule__Grammar__Group_2__0() throws RecognitionException {
 
@@ -4828,11 +4988,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__0__Impl_in_rule__Grammar__Group_2__03656);
             rule__Grammar__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__1_in_rule__Grammar__Group_2__03659);
             rule__Grammar__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4849,10 +5011,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__0
+    // $ANTLR end "rule__Grammar__Group_2__0"
 
 
-    // $ANTLR start rule__Grammar__Group_2__0__Impl
+    // $ANTLR start "rule__Grammar__Group_2__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1735:1: rule__Grammar__Group_2__0__Impl : ( 'with' ) ;
     public final void rule__Grammar__Group_2__0__Impl() throws RecognitionException {
 
@@ -4886,10 +5048,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__0__Impl
+    // $ANTLR end "rule__Grammar__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_2__1
+    // $ANTLR start "rule__Grammar__Group_2__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1754:1: rule__Grammar__Group_2__1 : rule__Grammar__Group_2__1__Impl rule__Grammar__Group_2__2 ;
     public final void rule__Grammar__Group_2__1() throws RecognitionException {
 
@@ -4901,11 +5063,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__1__Impl_in_rule__Grammar__Group_2__13718);
             rule__Grammar__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__2_in_rule__Grammar__Group_2__13721);
             rule__Grammar__Group_2__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4922,10 +5086,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__1
+    // $ANTLR end "rule__Grammar__Group_2__1"
 
 
-    // $ANTLR start rule__Grammar__Group_2__1__Impl
+    // $ANTLR start "rule__Grammar__Group_2__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1766:1: rule__Grammar__Group_2__1__Impl : ( ( rule__Grammar__UsedGrammarsAssignment_2_1 ) ) ;
     public final void rule__Grammar__Group_2__1__Impl() throws RecognitionException {
 
@@ -4944,7 +5108,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_1_in_rule__Grammar__Group_2__1__Impl3748);
             rule__Grammar__UsedGrammarsAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -4968,10 +5133,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__1__Impl
+    // $ANTLR end "rule__Grammar__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_2__2
+    // $ANTLR start "rule__Grammar__Group_2__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1783:1: rule__Grammar__Group_2__2 : rule__Grammar__Group_2__2__Impl ;
     public final void rule__Grammar__Group_2__2() throws RecognitionException {
 
@@ -4983,7 +5148,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__2__Impl_in_rule__Grammar__Group_2__23778);
             rule__Grammar__Group_2__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5000,10 +5166,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__2
+    // $ANTLR end "rule__Grammar__Group_2__2"
 
 
-    // $ANTLR start rule__Grammar__Group_2__2__Impl
+    // $ANTLR start "rule__Grammar__Group_2__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1794:1: rule__Grammar__Group_2__2__Impl : ( ( rule__Grammar__Group_2_2__0 )* ) ;
     public final void rule__Grammar__Group_2__2__Impl() throws RecognitionException {
 
@@ -5034,7 +5200,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2_2__0_in_rule__Grammar__Group_2__2__Impl3805);
             	    rule__Grammar__Group_2_2__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -5064,10 +5231,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2__2__Impl
+    // $ANTLR end "rule__Grammar__Group_2__2__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_2_2__0
+    // $ANTLR start "rule__Grammar__Group_2_2__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1817:1: rule__Grammar__Group_2_2__0 : rule__Grammar__Group_2_2__0__Impl rule__Grammar__Group_2_2__1 ;
     public final void rule__Grammar__Group_2_2__0() throws RecognitionException {
 
@@ -5079,11 +5246,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2_2__0__Impl_in_rule__Grammar__Group_2_2__03842);
             rule__Grammar__Group_2_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2_2__1_in_rule__Grammar__Group_2_2__03845);
             rule__Grammar__Group_2_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5100,10 +5269,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2_2__0
+    // $ANTLR end "rule__Grammar__Group_2_2__0"
 
 
-    // $ANTLR start rule__Grammar__Group_2_2__0__Impl
+    // $ANTLR start "rule__Grammar__Group_2_2__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1829:1: rule__Grammar__Group_2_2__0__Impl : ( ',' ) ;
     public final void rule__Grammar__Group_2_2__0__Impl() throws RecognitionException {
 
@@ -5137,10 +5306,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2_2__0__Impl
+    // $ANTLR end "rule__Grammar__Group_2_2__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_2_2__1
+    // $ANTLR start "rule__Grammar__Group_2_2__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1848:1: rule__Grammar__Group_2_2__1 : rule__Grammar__Group_2_2__1__Impl ;
     public final void rule__Grammar__Group_2_2__1() throws RecognitionException {
 
@@ -5152,7 +5321,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2_2__1__Impl_in_rule__Grammar__Group_2_2__13904);
             rule__Grammar__Group_2_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5169,10 +5339,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2_2__1
+    // $ANTLR end "rule__Grammar__Group_2_2__1"
 
 
-    // $ANTLR start rule__Grammar__Group_2_2__1__Impl
+    // $ANTLR start "rule__Grammar__Group_2_2__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1859:1: rule__Grammar__Group_2_2__1__Impl : ( ( rule__Grammar__UsedGrammarsAssignment_2_2_1 ) ) ;
     public final void rule__Grammar__Group_2_2__1__Impl() throws RecognitionException {
 
@@ -5191,7 +5361,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_2_1_in_rule__Grammar__Group_2_2__1__Impl3931);
             rule__Grammar__UsedGrammarsAssignment_2_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5215,10 +5386,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_2_2__1__Impl
+    // $ANTLR end "rule__Grammar__Group_2_2__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3__0
+    // $ANTLR start "rule__Grammar__Group_3__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1880:1: rule__Grammar__Group_3__0 : rule__Grammar__Group_3__0__Impl rule__Grammar__Group_3__1 ;
     public final void rule__Grammar__Group_3__0() throws RecognitionException {
 
@@ -5230,11 +5401,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__0__Impl_in_rule__Grammar__Group_3__03965);
             rule__Grammar__Group_3__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__1_in_rule__Grammar__Group_3__03968);
             rule__Grammar__Group_3__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5251,10 +5424,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__0
+    // $ANTLR end "rule__Grammar__Group_3__0"
 
 
-    // $ANTLR start rule__Grammar__Group_3__0__Impl
+    // $ANTLR start "rule__Grammar__Group_3__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1892:1: rule__Grammar__Group_3__0__Impl : ( ( rule__Grammar__DefinesHiddenTokensAssignment_3_0 ) ) ;
     public final void rule__Grammar__Group_3__0__Impl() throws RecognitionException {
 
@@ -5273,7 +5446,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__DefinesHiddenTokensAssignment_3_0_in_rule__Grammar__Group_3__0__Impl3995);
             rule__Grammar__DefinesHiddenTokensAssignment_3_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5297,10 +5471,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__0__Impl
+    // $ANTLR end "rule__Grammar__Group_3__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3__1
+    // $ANTLR start "rule__Grammar__Group_3__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1909:1: rule__Grammar__Group_3__1 : rule__Grammar__Group_3__1__Impl rule__Grammar__Group_3__2 ;
     public final void rule__Grammar__Group_3__1() throws RecognitionException {
 
@@ -5312,11 +5486,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__1__Impl_in_rule__Grammar__Group_3__14025);
             rule__Grammar__Group_3__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__2_in_rule__Grammar__Group_3__14028);
             rule__Grammar__Group_3__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5333,10 +5509,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__1
+    // $ANTLR end "rule__Grammar__Group_3__1"
 
 
-    // $ANTLR start rule__Grammar__Group_3__1__Impl
+    // $ANTLR start "rule__Grammar__Group_3__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1921:1: rule__Grammar__Group_3__1__Impl : ( '(' ) ;
     public final void rule__Grammar__Group_3__1__Impl() throws RecognitionException {
 
@@ -5370,10 +5546,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__1__Impl
+    // $ANTLR end "rule__Grammar__Group_3__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3__2
+    // $ANTLR start "rule__Grammar__Group_3__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1940:1: rule__Grammar__Group_3__2 : rule__Grammar__Group_3__2__Impl rule__Grammar__Group_3__3 ;
     public final void rule__Grammar__Group_3__2() throws RecognitionException {
 
@@ -5385,11 +5561,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__2__Impl_in_rule__Grammar__Group_3__24087);
             rule__Grammar__Group_3__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__3_in_rule__Grammar__Group_3__24090);
             rule__Grammar__Group_3__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5406,10 +5584,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__2
+    // $ANTLR end "rule__Grammar__Group_3__2"
 
 
-    // $ANTLR start rule__Grammar__Group_3__2__Impl
+    // $ANTLR start "rule__Grammar__Group_3__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1952:1: rule__Grammar__Group_3__2__Impl : ( ( rule__Grammar__Group_3_2__0 )? ) ;
     public final void rule__Grammar__Group_3__2__Impl() throws RecognitionException {
 
@@ -5436,7 +5614,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2__0_in_rule__Grammar__Group_3__2__Impl4117);
                     rule__Grammar__Group_3_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -5463,10 +5642,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__2__Impl
+    // $ANTLR end "rule__Grammar__Group_3__2__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3__3
+    // $ANTLR start "rule__Grammar__Group_3__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1969:1: rule__Grammar__Group_3__3 : rule__Grammar__Group_3__3__Impl ;
     public final void rule__Grammar__Group_3__3() throws RecognitionException {
 
@@ -5478,7 +5657,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__3__Impl_in_rule__Grammar__Group_3__34148);
             rule__Grammar__Group_3__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5495,10 +5675,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__3
+    // $ANTLR end "rule__Grammar__Group_3__3"
 
 
-    // $ANTLR start rule__Grammar__Group_3__3__Impl
+    // $ANTLR start "rule__Grammar__Group_3__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1980:1: rule__Grammar__Group_3__3__Impl : ( ')' ) ;
     public final void rule__Grammar__Group_3__3__Impl() throws RecognitionException {
 
@@ -5532,10 +5712,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3__3__Impl
+    // $ANTLR end "rule__Grammar__Group_3__3__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2__0
+    // $ANTLR start "rule__Grammar__Group_3_2__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2007:1: rule__Grammar__Group_3_2__0 : rule__Grammar__Group_3_2__0__Impl rule__Grammar__Group_3_2__1 ;
     public final void rule__Grammar__Group_3_2__0() throws RecognitionException {
 
@@ -5547,11 +5727,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2__0__Impl_in_rule__Grammar__Group_3_2__04215);
             rule__Grammar__Group_3_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2__1_in_rule__Grammar__Group_3_2__04218);
             rule__Grammar__Group_3_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5568,10 +5750,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2__0
+    // $ANTLR end "rule__Grammar__Group_3_2__0"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2__0__Impl
+    // $ANTLR start "rule__Grammar__Group_3_2__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2019:1: rule__Grammar__Group_3_2__0__Impl : ( ( rule__Grammar__HiddenTokensAssignment_3_2_0 ) ) ;
     public final void rule__Grammar__Group_3_2__0__Impl() throws RecognitionException {
 
@@ -5590,7 +5772,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_0_in_rule__Grammar__Group_3_2__0__Impl4245);
             rule__Grammar__HiddenTokensAssignment_3_2_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5614,10 +5797,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2__0__Impl
+    // $ANTLR end "rule__Grammar__Group_3_2__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2__1
+    // $ANTLR start "rule__Grammar__Group_3_2__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2036:1: rule__Grammar__Group_3_2__1 : rule__Grammar__Group_3_2__1__Impl ;
     public final void rule__Grammar__Group_3_2__1() throws RecognitionException {
 
@@ -5629,7 +5812,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2__1__Impl_in_rule__Grammar__Group_3_2__14275);
             rule__Grammar__Group_3_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5646,10 +5830,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2__1
+    // $ANTLR end "rule__Grammar__Group_3_2__1"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2__1__Impl
+    // $ANTLR start "rule__Grammar__Group_3_2__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2047:1: rule__Grammar__Group_3_2__1__Impl : ( ( rule__Grammar__Group_3_2_1__0 )* ) ;
     public final void rule__Grammar__Group_3_2__1__Impl() throws RecognitionException {
 
@@ -5680,7 +5864,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2_1__0_in_rule__Grammar__Group_3_2__1__Impl4302);
             	    rule__Grammar__Group_3_2_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -5710,10 +5895,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2__1__Impl
+    // $ANTLR end "rule__Grammar__Group_3_2__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2_1__0
+    // $ANTLR start "rule__Grammar__Group_3_2_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2068:1: rule__Grammar__Group_3_2_1__0 : rule__Grammar__Group_3_2_1__0__Impl rule__Grammar__Group_3_2_1__1 ;
     public final void rule__Grammar__Group_3_2_1__0() throws RecognitionException {
 
@@ -5725,11 +5910,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2_1__0__Impl_in_rule__Grammar__Group_3_2_1__04337);
             rule__Grammar__Group_3_2_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2_1__1_in_rule__Grammar__Group_3_2_1__04340);
             rule__Grammar__Group_3_2_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5746,10 +5933,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2_1__0
+    // $ANTLR end "rule__Grammar__Group_3_2_1__0"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2_1__0__Impl
+    // $ANTLR start "rule__Grammar__Group_3_2_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2080:1: rule__Grammar__Group_3_2_1__0__Impl : ( ',' ) ;
     public final void rule__Grammar__Group_3_2_1__0__Impl() throws RecognitionException {
 
@@ -5783,10 +5970,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2_1__0__Impl
+    // $ANTLR end "rule__Grammar__Group_3_2_1__0__Impl"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2_1__1
+    // $ANTLR start "rule__Grammar__Group_3_2_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2099:1: rule__Grammar__Group_3_2_1__1 : rule__Grammar__Group_3_2_1__1__Impl ;
     public final void rule__Grammar__Group_3_2_1__1() throws RecognitionException {
 
@@ -5798,7 +5985,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2_1__1__Impl_in_rule__Grammar__Group_3_2_1__14399);
             rule__Grammar__Group_3_2_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5815,10 +6003,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2_1__1
+    // $ANTLR end "rule__Grammar__Group_3_2_1__1"
 
 
-    // $ANTLR start rule__Grammar__Group_3_2_1__1__Impl
+    // $ANTLR start "rule__Grammar__Group_3_2_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2110:1: rule__Grammar__Group_3_2_1__1__Impl : ( ( rule__Grammar__HiddenTokensAssignment_3_2_1_1 ) ) ;
     public final void rule__Grammar__Group_3_2_1__1__Impl() throws RecognitionException {
 
@@ -5837,7 +6025,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_1_1_in_rule__Grammar__Group_3_2_1__1__Impl4426);
             rule__Grammar__HiddenTokensAssignment_3_2_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5861,10 +6050,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__Group_3_2_1__1__Impl
+    // $ANTLR end "rule__Grammar__Group_3_2_1__1__Impl"
 
 
-    // $ANTLR start rule__GrammarID__Group__0
+    // $ANTLR start "rule__GrammarID__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2131:1: rule__GrammarID__Group__0 : rule__GrammarID__Group__0__Impl rule__GrammarID__Group__1 ;
     public final void rule__GrammarID__Group__0() throws RecognitionException {
 
@@ -5876,11 +6065,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group__0__Impl_in_rule__GrammarID__Group__04460);
             rule__GrammarID__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group__1_in_rule__GrammarID__Group__04463);
             rule__GrammarID__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5897,10 +6088,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group__0
+    // $ANTLR end "rule__GrammarID__Group__0"
 
 
-    // $ANTLR start rule__GrammarID__Group__0__Impl
+    // $ANTLR start "rule__GrammarID__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2143:1: rule__GrammarID__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__GrammarID__Group__0__Impl() throws RecognitionException {
 
@@ -5934,10 +6125,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group__0__Impl
+    // $ANTLR end "rule__GrammarID__Group__0__Impl"
 
 
-    // $ANTLR start rule__GrammarID__Group__1
+    // $ANTLR start "rule__GrammarID__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2160:1: rule__GrammarID__Group__1 : rule__GrammarID__Group__1__Impl ;
     public final void rule__GrammarID__Group__1() throws RecognitionException {
 
@@ -5949,7 +6140,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group__1__Impl_in_rule__GrammarID__Group__14519);
             rule__GrammarID__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -5966,10 +6158,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group__1
+    // $ANTLR end "rule__GrammarID__Group__1"
 
 
-    // $ANTLR start rule__GrammarID__Group__1__Impl
+    // $ANTLR start "rule__GrammarID__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2171:1: rule__GrammarID__Group__1__Impl : ( ( rule__GrammarID__Group_1__0 )* ) ;
     public final void rule__GrammarID__Group__1__Impl() throws RecognitionException {
 
@@ -6000,7 +6192,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group_1__0_in_rule__GrammarID__Group__1__Impl4546);
             	    rule__GrammarID__Group_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -6030,10 +6223,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group__1__Impl
+    // $ANTLR end "rule__GrammarID__Group__1__Impl"
 
 
-    // $ANTLR start rule__GrammarID__Group_1__0
+    // $ANTLR start "rule__GrammarID__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2192:1: rule__GrammarID__Group_1__0 : rule__GrammarID__Group_1__0__Impl rule__GrammarID__Group_1__1 ;
     public final void rule__GrammarID__Group_1__0() throws RecognitionException {
 
@@ -6045,11 +6238,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group_1__0__Impl_in_rule__GrammarID__Group_1__04581);
             rule__GrammarID__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group_1__1_in_rule__GrammarID__Group_1__04584);
             rule__GrammarID__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6066,10 +6261,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group_1__0
+    // $ANTLR end "rule__GrammarID__Group_1__0"
 
 
-    // $ANTLR start rule__GrammarID__Group_1__0__Impl
+    // $ANTLR start "rule__GrammarID__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2204:1: rule__GrammarID__Group_1__0__Impl : ( '.' ) ;
     public final void rule__GrammarID__Group_1__0__Impl() throws RecognitionException {
 
@@ -6103,10 +6298,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group_1__0__Impl
+    // $ANTLR end "rule__GrammarID__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__GrammarID__Group_1__1
+    // $ANTLR start "rule__GrammarID__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2223:1: rule__GrammarID__Group_1__1 : rule__GrammarID__Group_1__1__Impl ;
     public final void rule__GrammarID__Group_1__1() throws RecognitionException {
 
@@ -6118,7 +6313,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group_1__1__Impl_in_rule__GrammarID__Group_1__14643);
             rule__GrammarID__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6135,10 +6331,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group_1__1
+    // $ANTLR end "rule__GrammarID__Group_1__1"
 
 
-    // $ANTLR start rule__GrammarID__Group_1__1__Impl
+    // $ANTLR start "rule__GrammarID__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2234:1: rule__GrammarID__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__GrammarID__Group_1__1__Impl() throws RecognitionException {
 
@@ -6172,10 +6368,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GrammarID__Group_1__1__Impl
+    // $ANTLR end "rule__GrammarID__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__0
+    // $ANTLR start "rule__GeneratedMetamodel__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2255:1: rule__GeneratedMetamodel__Group__0 : rule__GeneratedMetamodel__Group__0__Impl rule__GeneratedMetamodel__Group__1 ;
     public final void rule__GeneratedMetamodel__Group__0() throws RecognitionException {
 
@@ -6187,11 +6383,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__0__Impl_in_rule__GeneratedMetamodel__Group__04703);
             rule__GeneratedMetamodel__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__1_in_rule__GeneratedMetamodel__Group__04706);
             rule__GeneratedMetamodel__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6208,10 +6406,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__0
+    // $ANTLR end "rule__GeneratedMetamodel__Group__0"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__0__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2267:1: rule__GeneratedMetamodel__Group__0__Impl : ( 'generate' ) ;
     public final void rule__GeneratedMetamodel__Group__0__Impl() throws RecognitionException {
 
@@ -6245,10 +6443,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__0__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group__0__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__1
+    // $ANTLR start "rule__GeneratedMetamodel__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2286:1: rule__GeneratedMetamodel__Group__1 : rule__GeneratedMetamodel__Group__1__Impl rule__GeneratedMetamodel__Group__2 ;
     public final void rule__GeneratedMetamodel__Group__1() throws RecognitionException {
 
@@ -6260,11 +6458,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__1__Impl_in_rule__GeneratedMetamodel__Group__14765);
             rule__GeneratedMetamodel__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__2_in_rule__GeneratedMetamodel__Group__14768);
             rule__GeneratedMetamodel__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6281,10 +6481,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__1
+    // $ANTLR end "rule__GeneratedMetamodel__Group__1"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__1__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2298:1: rule__GeneratedMetamodel__Group__1__Impl : ( ( rule__GeneratedMetamodel__NameAssignment_1 ) ) ;
     public final void rule__GeneratedMetamodel__Group__1__Impl() throws RecognitionException {
 
@@ -6303,7 +6503,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__NameAssignment_1_in_rule__GeneratedMetamodel__Group__1__Impl4795);
             rule__GeneratedMetamodel__NameAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6327,10 +6528,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__1__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group__1__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__2
+    // $ANTLR start "rule__GeneratedMetamodel__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2315:1: rule__GeneratedMetamodel__Group__2 : rule__GeneratedMetamodel__Group__2__Impl rule__GeneratedMetamodel__Group__3 ;
     public final void rule__GeneratedMetamodel__Group__2() throws RecognitionException {
 
@@ -6342,11 +6543,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__2__Impl_in_rule__GeneratedMetamodel__Group__24825);
             rule__GeneratedMetamodel__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__3_in_rule__GeneratedMetamodel__Group__24828);
             rule__GeneratedMetamodel__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6363,10 +6566,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__2
+    // $ANTLR end "rule__GeneratedMetamodel__Group__2"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__2__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2327:1: rule__GeneratedMetamodel__Group__2__Impl : ( ( rule__GeneratedMetamodel__EPackageAssignment_2 ) ) ;
     public final void rule__GeneratedMetamodel__Group__2__Impl() throws RecognitionException {
 
@@ -6385,7 +6588,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__EPackageAssignment_2_in_rule__GeneratedMetamodel__Group__2__Impl4855);
             rule__GeneratedMetamodel__EPackageAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6409,10 +6613,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__2__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group__2__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__3
+    // $ANTLR start "rule__GeneratedMetamodel__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2344:1: rule__GeneratedMetamodel__Group__3 : rule__GeneratedMetamodel__Group__3__Impl ;
     public final void rule__GeneratedMetamodel__Group__3() throws RecognitionException {
 
@@ -6424,7 +6628,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__3__Impl_in_rule__GeneratedMetamodel__Group__34885);
             rule__GeneratedMetamodel__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6441,10 +6646,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__3
+    // $ANTLR end "rule__GeneratedMetamodel__Group__3"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group__3__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2355:1: rule__GeneratedMetamodel__Group__3__Impl : ( ( rule__GeneratedMetamodel__Group_3__0 )? ) ;
     public final void rule__GeneratedMetamodel__Group__3__Impl() throws RecognitionException {
 
@@ -6471,7 +6676,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group_3__0_in_rule__GeneratedMetamodel__Group__3__Impl4912);
                     rule__GeneratedMetamodel__Group_3__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -6498,10 +6704,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group__3__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group__3__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group_3__0
+    // $ANTLR start "rule__GeneratedMetamodel__Group_3__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2380:1: rule__GeneratedMetamodel__Group_3__0 : rule__GeneratedMetamodel__Group_3__0__Impl rule__GeneratedMetamodel__Group_3__1 ;
     public final void rule__GeneratedMetamodel__Group_3__0() throws RecognitionException {
 
@@ -6513,11 +6719,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group_3__0__Impl_in_rule__GeneratedMetamodel__Group_3__04951);
             rule__GeneratedMetamodel__Group_3__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group_3__1_in_rule__GeneratedMetamodel__Group_3__04954);
             rule__GeneratedMetamodel__Group_3__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6534,10 +6742,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group_3__0
+    // $ANTLR end "rule__GeneratedMetamodel__Group_3__0"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group_3__0__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group_3__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2392:1: rule__GeneratedMetamodel__Group_3__0__Impl : ( 'as' ) ;
     public final void rule__GeneratedMetamodel__Group_3__0__Impl() throws RecognitionException {
 
@@ -6571,10 +6779,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group_3__0__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group_3__0__Impl"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group_3__1
+    // $ANTLR start "rule__GeneratedMetamodel__Group_3__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2411:1: rule__GeneratedMetamodel__Group_3__1 : rule__GeneratedMetamodel__Group_3__1__Impl ;
     public final void rule__GeneratedMetamodel__Group_3__1() throws RecognitionException {
 
@@ -6586,7 +6794,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group_3__1__Impl_in_rule__GeneratedMetamodel__Group_3__15013);
             rule__GeneratedMetamodel__Group_3__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6603,10 +6812,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group_3__1
+    // $ANTLR end "rule__GeneratedMetamodel__Group_3__1"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__Group_3__1__Impl
+    // $ANTLR start "rule__GeneratedMetamodel__Group_3__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2422:1: rule__GeneratedMetamodel__Group_3__1__Impl : ( ( rule__GeneratedMetamodel__AliasAssignment_3_1 ) ) ;
     public final void rule__GeneratedMetamodel__Group_3__1__Impl() throws RecognitionException {
 
@@ -6625,7 +6834,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__AliasAssignment_3_1_in_rule__GeneratedMetamodel__Group_3__1__Impl5040);
             rule__GeneratedMetamodel__AliasAssignment_3_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6649,10 +6859,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__Group_3__1__Impl
+    // $ANTLR end "rule__GeneratedMetamodel__Group_3__1__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__0
+    // $ANTLR start "rule__ReferencedMetamodel__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2443:1: rule__ReferencedMetamodel__Group__0 : rule__ReferencedMetamodel__Group__0__Impl rule__ReferencedMetamodel__Group__1 ;
     public final void rule__ReferencedMetamodel__Group__0() throws RecognitionException {
 
@@ -6664,11 +6874,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__0__Impl_in_rule__ReferencedMetamodel__Group__05074);
             rule__ReferencedMetamodel__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__05077);
             rule__ReferencedMetamodel__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6685,10 +6897,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__0
+    // $ANTLR end "rule__ReferencedMetamodel__Group__0"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__0__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2455:1: rule__ReferencedMetamodel__Group__0__Impl : ( 'import' ) ;
     public final void rule__ReferencedMetamodel__Group__0__Impl() throws RecognitionException {
 
@@ -6722,10 +6934,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__0__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group__0__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__1
+    // $ANTLR start "rule__ReferencedMetamodel__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2474:1: rule__ReferencedMetamodel__Group__1 : rule__ReferencedMetamodel__Group__1__Impl rule__ReferencedMetamodel__Group__2 ;
     public final void rule__ReferencedMetamodel__Group__1() throws RecognitionException {
 
@@ -6737,11 +6949,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__1__Impl_in_rule__ReferencedMetamodel__Group__15136);
             rule__ReferencedMetamodel__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__15139);
             rule__ReferencedMetamodel__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6758,10 +6972,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__1
+    // $ANTLR end "rule__ReferencedMetamodel__Group__1"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__1__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2486:1: rule__ReferencedMetamodel__Group__1__Impl : ( ( rule__ReferencedMetamodel__EPackageAssignment_1 ) ) ;
     public final void rule__ReferencedMetamodel__Group__1__Impl() throws RecognitionException {
 
@@ -6780,7 +6994,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_1_in_rule__ReferencedMetamodel__Group__1__Impl5166);
             rule__ReferencedMetamodel__EPackageAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6804,10 +7019,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__1__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group__1__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__2
+    // $ANTLR start "rule__ReferencedMetamodel__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2503:1: rule__ReferencedMetamodel__Group__2 : rule__ReferencedMetamodel__Group__2__Impl ;
     public final void rule__ReferencedMetamodel__Group__2() throws RecognitionException {
 
@@ -6819,7 +7034,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__2__Impl_in_rule__ReferencedMetamodel__Group__25196);
             rule__ReferencedMetamodel__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6836,10 +7052,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__2
+    // $ANTLR end "rule__ReferencedMetamodel__Group__2"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group__2__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2514:1: rule__ReferencedMetamodel__Group__2__Impl : ( ( rule__ReferencedMetamodel__Group_2__0 )? ) ;
     public final void rule__ReferencedMetamodel__Group__2__Impl() throws RecognitionException {
 
@@ -6866,7 +7082,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_2__0_in_rule__ReferencedMetamodel__Group__2__Impl5223);
                     rule__ReferencedMetamodel__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -6893,10 +7110,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group__2__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group__2__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_2__0
+    // $ANTLR start "rule__ReferencedMetamodel__Group_2__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2537:1: rule__ReferencedMetamodel__Group_2__0 : rule__ReferencedMetamodel__Group_2__0__Impl rule__ReferencedMetamodel__Group_2__1 ;
     public final void rule__ReferencedMetamodel__Group_2__0() throws RecognitionException {
 
@@ -6908,11 +7125,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_2__0__Impl_in_rule__ReferencedMetamodel__Group_2__05260);
             rule__ReferencedMetamodel__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_2__1_in_rule__ReferencedMetamodel__Group_2__05263);
             rule__ReferencedMetamodel__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6929,10 +7148,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_2__0
+    // $ANTLR end "rule__ReferencedMetamodel__Group_2__0"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_2__0__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group_2__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2549:1: rule__ReferencedMetamodel__Group_2__0__Impl : ( 'as' ) ;
     public final void rule__ReferencedMetamodel__Group_2__0__Impl() throws RecognitionException {
 
@@ -6966,10 +7185,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_2__0__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_2__1
+    // $ANTLR start "rule__ReferencedMetamodel__Group_2__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2568:1: rule__ReferencedMetamodel__Group_2__1 : rule__ReferencedMetamodel__Group_2__1__Impl ;
     public final void rule__ReferencedMetamodel__Group_2__1() throws RecognitionException {
 
@@ -6981,7 +7200,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_2__1__Impl_in_rule__ReferencedMetamodel__Group_2__15322);
             rule__ReferencedMetamodel__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -6998,10 +7218,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_2__1
+    // $ANTLR end "rule__ReferencedMetamodel__Group_2__1"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__Group_2__1__Impl
+    // $ANTLR start "rule__ReferencedMetamodel__Group_2__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2579:1: rule__ReferencedMetamodel__Group_2__1__Impl : ( ( rule__ReferencedMetamodel__AliasAssignment_2_1 ) ) ;
     public final void rule__ReferencedMetamodel__Group_2__1__Impl() throws RecognitionException {
 
@@ -7020,7 +7240,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__AliasAssignment_2_1_in_rule__ReferencedMetamodel__Group_2__1__Impl5349);
             rule__ReferencedMetamodel__AliasAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7044,10 +7265,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__Group_2__1__Impl
+    // $ANTLR end "rule__ReferencedMetamodel__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__0
+    // $ANTLR start "rule__ParserRule__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2600:1: rule__ParserRule__Group__0 : rule__ParserRule__Group__0__Impl rule__ParserRule__Group__1 ;
     public final void rule__ParserRule__Group__0() throws RecognitionException {
 
@@ -7059,11 +7280,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__0__Impl_in_rule__ParserRule__Group__05383);
             rule__ParserRule__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__1_in_rule__ParserRule__Group__05386);
             rule__ParserRule__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7080,10 +7303,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__0
+    // $ANTLR end "rule__ParserRule__Group__0"
 
 
-    // $ANTLR start rule__ParserRule__Group__0__Impl
+    // $ANTLR start "rule__ParserRule__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2612:1: rule__ParserRule__Group__0__Impl : ( ( rule__ParserRule__NameAssignment_0 ) ) ;
     public final void rule__ParserRule__Group__0__Impl() throws RecognitionException {
 
@@ -7102,7 +7325,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__NameAssignment_0_in_rule__ParserRule__Group__0__Impl5413);
             rule__ParserRule__NameAssignment_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7126,10 +7350,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__0__Impl
+    // $ANTLR end "rule__ParserRule__Group__0__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__1
+    // $ANTLR start "rule__ParserRule__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2629:1: rule__ParserRule__Group__1 : rule__ParserRule__Group__1__Impl rule__ParserRule__Group__2 ;
     public final void rule__ParserRule__Group__1() throws RecognitionException {
 
@@ -7141,11 +7365,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__1__Impl_in_rule__ParserRule__Group__15443);
             rule__ParserRule__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__2_in_rule__ParserRule__Group__15446);
             rule__ParserRule__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7162,10 +7388,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__1
+    // $ANTLR end "rule__ParserRule__Group__1"
 
 
-    // $ANTLR start rule__ParserRule__Group__1__Impl
+    // $ANTLR start "rule__ParserRule__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2641:1: rule__ParserRule__Group__1__Impl : ( ( rule__ParserRule__Group_1__0 )? ) ;
     public final void rule__ParserRule__Group__1__Impl() throws RecognitionException {
 
@@ -7192,7 +7418,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_1__0_in_rule__ParserRule__Group__1__Impl5473);
                     rule__ParserRule__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -7219,10 +7446,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__1__Impl
+    // $ANTLR end "rule__ParserRule__Group__1__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__2
+    // $ANTLR start "rule__ParserRule__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2658:1: rule__ParserRule__Group__2 : rule__ParserRule__Group__2__Impl rule__ParserRule__Group__3 ;
     public final void rule__ParserRule__Group__2() throws RecognitionException {
 
@@ -7234,11 +7461,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__2__Impl_in_rule__ParserRule__Group__25504);
             rule__ParserRule__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__3_in_rule__ParserRule__Group__25507);
             rule__ParserRule__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7255,10 +7484,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__2
+    // $ANTLR end "rule__ParserRule__Group__2"
 
 
-    // $ANTLR start rule__ParserRule__Group__2__Impl
+    // $ANTLR start "rule__ParserRule__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2670:1: rule__ParserRule__Group__2__Impl : ( ( rule__ParserRule__Group_2__0 )? ) ;
     public final void rule__ParserRule__Group__2__Impl() throws RecognitionException {
 
@@ -7285,7 +7514,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__0_in_rule__ParserRule__Group__2__Impl5534);
                     rule__ParserRule__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -7312,10 +7542,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__2__Impl
+    // $ANTLR end "rule__ParserRule__Group__2__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__3
+    // $ANTLR start "rule__ParserRule__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2687:1: rule__ParserRule__Group__3 : rule__ParserRule__Group__3__Impl rule__ParserRule__Group__4 ;
     public final void rule__ParserRule__Group__3() throws RecognitionException {
 
@@ -7327,11 +7557,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__3__Impl_in_rule__ParserRule__Group__35565);
             rule__ParserRule__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__4_in_rule__ParserRule__Group__35568);
             rule__ParserRule__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7348,10 +7580,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__3
+    // $ANTLR end "rule__ParserRule__Group__3"
 
 
-    // $ANTLR start rule__ParserRule__Group__3__Impl
+    // $ANTLR start "rule__ParserRule__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2699:1: rule__ParserRule__Group__3__Impl : ( ':' ) ;
     public final void rule__ParserRule__Group__3__Impl() throws RecognitionException {
 
@@ -7385,10 +7617,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__3__Impl
+    // $ANTLR end "rule__ParserRule__Group__3__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__4
+    // $ANTLR start "rule__ParserRule__Group__4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2718:1: rule__ParserRule__Group__4 : rule__ParserRule__Group__4__Impl rule__ParserRule__Group__5 ;
     public final void rule__ParserRule__Group__4() throws RecognitionException {
 
@@ -7400,11 +7632,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__4__Impl_in_rule__ParserRule__Group__45627);
             rule__ParserRule__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__5_in_rule__ParserRule__Group__45630);
             rule__ParserRule__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7421,10 +7655,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__4
+    // $ANTLR end "rule__ParserRule__Group__4"
 
 
-    // $ANTLR start rule__ParserRule__Group__4__Impl
+    // $ANTLR start "rule__ParserRule__Group__4__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2730:1: rule__ParserRule__Group__4__Impl : ( ( rule__ParserRule__AlternativesAssignment_4 ) ) ;
     public final void rule__ParserRule__Group__4__Impl() throws RecognitionException {
 
@@ -7443,7 +7677,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__AlternativesAssignment_4_in_rule__ParserRule__Group__4__Impl5657);
             rule__ParserRule__AlternativesAssignment_4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7467,10 +7702,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__4__Impl
+    // $ANTLR end "rule__ParserRule__Group__4__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group__5
+    // $ANTLR start "rule__ParserRule__Group__5"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2747:1: rule__ParserRule__Group__5 : rule__ParserRule__Group__5__Impl ;
     public final void rule__ParserRule__Group__5() throws RecognitionException {
 
@@ -7482,7 +7717,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__5__Impl_in_rule__ParserRule__Group__55687);
             rule__ParserRule__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7499,10 +7735,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__5
+    // $ANTLR end "rule__ParserRule__Group__5"
 
 
-    // $ANTLR start rule__ParserRule__Group__5__Impl
+    // $ANTLR start "rule__ParserRule__Group__5__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2758:1: rule__ParserRule__Group__5__Impl : ( ';' ) ;
     public final void rule__ParserRule__Group__5__Impl() throws RecognitionException {
 
@@ -7536,10 +7772,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group__5__Impl
+    // $ANTLR end "rule__ParserRule__Group__5__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_1__0
+    // $ANTLR start "rule__ParserRule__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2789:1: rule__ParserRule__Group_1__0 : rule__ParserRule__Group_1__0__Impl rule__ParserRule__Group_1__1 ;
     public final void rule__ParserRule__Group_1__0() throws RecognitionException {
 
@@ -7551,11 +7787,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_1__0__Impl_in_rule__ParserRule__Group_1__05758);
             rule__ParserRule__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_1__1_in_rule__ParserRule__Group_1__05761);
             rule__ParserRule__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7572,10 +7810,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_1__0
+    // $ANTLR end "rule__ParserRule__Group_1__0"
 
 
-    // $ANTLR start rule__ParserRule__Group_1__0__Impl
+    // $ANTLR start "rule__ParserRule__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2801:1: rule__ParserRule__Group_1__0__Impl : ( 'returns' ) ;
     public final void rule__ParserRule__Group_1__0__Impl() throws RecognitionException {
 
@@ -7609,10 +7847,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_1__0__Impl
+    // $ANTLR end "rule__ParserRule__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_1__1
+    // $ANTLR start "rule__ParserRule__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2820:1: rule__ParserRule__Group_1__1 : rule__ParserRule__Group_1__1__Impl ;
     public final void rule__ParserRule__Group_1__1() throws RecognitionException {
 
@@ -7624,7 +7862,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_1__1__Impl_in_rule__ParserRule__Group_1__15820);
             rule__ParserRule__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7641,10 +7880,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_1__1
+    // $ANTLR end "rule__ParserRule__Group_1__1"
 
 
-    // $ANTLR start rule__ParserRule__Group_1__1__Impl
+    // $ANTLR start "rule__ParserRule__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2831:1: rule__ParserRule__Group_1__1__Impl : ( ( rule__ParserRule__TypeAssignment_1_1 ) ) ;
     public final void rule__ParserRule__Group_1__1__Impl() throws RecognitionException {
 
@@ -7663,7 +7902,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__TypeAssignment_1_1_in_rule__ParserRule__Group_1__1__Impl5847);
             rule__ParserRule__TypeAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7687,10 +7927,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_1__1__Impl
+    // $ANTLR end "rule__ParserRule__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__0
+    // $ANTLR start "rule__ParserRule__Group_2__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2852:1: rule__ParserRule__Group_2__0 : rule__ParserRule__Group_2__0__Impl rule__ParserRule__Group_2__1 ;
     public final void rule__ParserRule__Group_2__0() throws RecognitionException {
 
@@ -7702,11 +7942,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__0__Impl_in_rule__ParserRule__Group_2__05881);
             rule__ParserRule__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__1_in_rule__ParserRule__Group_2__05884);
             rule__ParserRule__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7723,10 +7965,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__0
+    // $ANTLR end "rule__ParserRule__Group_2__0"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__0__Impl
+    // $ANTLR start "rule__ParserRule__Group_2__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2864:1: rule__ParserRule__Group_2__0__Impl : ( ( rule__ParserRule__DefinesHiddenTokensAssignment_2_0 ) ) ;
     public final void rule__ParserRule__Group_2__0__Impl() throws RecognitionException {
 
@@ -7745,7 +7987,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__DefinesHiddenTokensAssignment_2_0_in_rule__ParserRule__Group_2__0__Impl5911);
             rule__ParserRule__DefinesHiddenTokensAssignment_2_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7769,10 +8012,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__0__Impl
+    // $ANTLR end "rule__ParserRule__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__1
+    // $ANTLR start "rule__ParserRule__Group_2__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2881:1: rule__ParserRule__Group_2__1 : rule__ParserRule__Group_2__1__Impl rule__ParserRule__Group_2__2 ;
     public final void rule__ParserRule__Group_2__1() throws RecognitionException {
 
@@ -7784,11 +8027,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__1__Impl_in_rule__ParserRule__Group_2__15941);
             rule__ParserRule__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__2_in_rule__ParserRule__Group_2__15944);
             rule__ParserRule__Group_2__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7805,10 +8050,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__1
+    // $ANTLR end "rule__ParserRule__Group_2__1"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__1__Impl
+    // $ANTLR start "rule__ParserRule__Group_2__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2893:1: rule__ParserRule__Group_2__1__Impl : ( '(' ) ;
     public final void rule__ParserRule__Group_2__1__Impl() throws RecognitionException {
 
@@ -7842,10 +8087,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__1__Impl
+    // $ANTLR end "rule__ParserRule__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__2
+    // $ANTLR start "rule__ParserRule__Group_2__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2912:1: rule__ParserRule__Group_2__2 : rule__ParserRule__Group_2__2__Impl rule__ParserRule__Group_2__3 ;
     public final void rule__ParserRule__Group_2__2() throws RecognitionException {
 
@@ -7857,11 +8102,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__2__Impl_in_rule__ParserRule__Group_2__26003);
             rule__ParserRule__Group_2__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__3_in_rule__ParserRule__Group_2__26006);
             rule__ParserRule__Group_2__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7878,10 +8125,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__2
+    // $ANTLR end "rule__ParserRule__Group_2__2"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__2__Impl
+    // $ANTLR start "rule__ParserRule__Group_2__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2924:1: rule__ParserRule__Group_2__2__Impl : ( ( rule__ParserRule__Group_2_2__0 )? ) ;
     public final void rule__ParserRule__Group_2__2__Impl() throws RecognitionException {
 
@@ -7908,7 +8155,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2__0_in_rule__ParserRule__Group_2__2__Impl6033);
                     rule__ParserRule__Group_2_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -7935,10 +8183,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__2__Impl
+    // $ANTLR end "rule__ParserRule__Group_2__2__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__3
+    // $ANTLR start "rule__ParserRule__Group_2__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2941:1: rule__ParserRule__Group_2__3 : rule__ParserRule__Group_2__3__Impl ;
     public final void rule__ParserRule__Group_2__3() throws RecognitionException {
 
@@ -7950,7 +8198,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__3__Impl_in_rule__ParserRule__Group_2__36064);
             rule__ParserRule__Group_2__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -7967,10 +8216,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__3
+    // $ANTLR end "rule__ParserRule__Group_2__3"
 
 
-    // $ANTLR start rule__ParserRule__Group_2__3__Impl
+    // $ANTLR start "rule__ParserRule__Group_2__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2952:1: rule__ParserRule__Group_2__3__Impl : ( ')' ) ;
     public final void rule__ParserRule__Group_2__3__Impl() throws RecognitionException {
 
@@ -8004,10 +8253,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2__3__Impl
+    // $ANTLR end "rule__ParserRule__Group_2__3__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2__0
+    // $ANTLR start "rule__ParserRule__Group_2_2__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2979:1: rule__ParserRule__Group_2_2__0 : rule__ParserRule__Group_2_2__0__Impl rule__ParserRule__Group_2_2__1 ;
     public final void rule__ParserRule__Group_2_2__0() throws RecognitionException {
 
@@ -8019,11 +8268,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2__0__Impl_in_rule__ParserRule__Group_2_2__06131);
             rule__ParserRule__Group_2_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2__1_in_rule__ParserRule__Group_2_2__06134);
             rule__ParserRule__Group_2_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8040,10 +8291,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2__0
+    // $ANTLR end "rule__ParserRule__Group_2_2__0"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2__0__Impl
+    // $ANTLR start "rule__ParserRule__Group_2_2__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2991:1: rule__ParserRule__Group_2_2__0__Impl : ( ( rule__ParserRule__HiddenTokensAssignment_2_2_0 ) ) ;
     public final void rule__ParserRule__Group_2_2__0__Impl() throws RecognitionException {
 
@@ -8062,7 +8313,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_0_in_rule__ParserRule__Group_2_2__0__Impl6161);
             rule__ParserRule__HiddenTokensAssignment_2_2_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8086,10 +8338,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2__0__Impl
+    // $ANTLR end "rule__ParserRule__Group_2_2__0__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2__1
+    // $ANTLR start "rule__ParserRule__Group_2_2__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3008:1: rule__ParserRule__Group_2_2__1 : rule__ParserRule__Group_2_2__1__Impl ;
     public final void rule__ParserRule__Group_2_2__1() throws RecognitionException {
 
@@ -8101,7 +8353,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2__1__Impl_in_rule__ParserRule__Group_2_2__16191);
             rule__ParserRule__Group_2_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8118,10 +8371,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2__1
+    // $ANTLR end "rule__ParserRule__Group_2_2__1"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2__1__Impl
+    // $ANTLR start "rule__ParserRule__Group_2_2__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3019:1: rule__ParserRule__Group_2_2__1__Impl : ( ( rule__ParserRule__Group_2_2_1__0 )* ) ;
     public final void rule__ParserRule__Group_2_2__1__Impl() throws RecognitionException {
 
@@ -8152,7 +8405,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2_1__0_in_rule__ParserRule__Group_2_2__1__Impl6218);
             	    rule__ParserRule__Group_2_2_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -8182,10 +8436,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2__1__Impl
+    // $ANTLR end "rule__ParserRule__Group_2_2__1__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2_1__0
+    // $ANTLR start "rule__ParserRule__Group_2_2_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3040:1: rule__ParserRule__Group_2_2_1__0 : rule__ParserRule__Group_2_2_1__0__Impl rule__ParserRule__Group_2_2_1__1 ;
     public final void rule__ParserRule__Group_2_2_1__0() throws RecognitionException {
 
@@ -8197,11 +8451,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2_1__0__Impl_in_rule__ParserRule__Group_2_2_1__06253);
             rule__ParserRule__Group_2_2_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2_1__1_in_rule__ParserRule__Group_2_2_1__06256);
             rule__ParserRule__Group_2_2_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8218,10 +8474,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2_1__0
+    // $ANTLR end "rule__ParserRule__Group_2_2_1__0"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2_1__0__Impl
+    // $ANTLR start "rule__ParserRule__Group_2_2_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3052:1: rule__ParserRule__Group_2_2_1__0__Impl : ( ',' ) ;
     public final void rule__ParserRule__Group_2_2_1__0__Impl() throws RecognitionException {
 
@@ -8255,10 +8511,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2_1__0__Impl
+    // $ANTLR end "rule__ParserRule__Group_2_2_1__0__Impl"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2_1__1
+    // $ANTLR start "rule__ParserRule__Group_2_2_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3071:1: rule__ParserRule__Group_2_2_1__1 : rule__ParserRule__Group_2_2_1__1__Impl ;
     public final void rule__ParserRule__Group_2_2_1__1() throws RecognitionException {
 
@@ -8270,7 +8526,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2_1__1__Impl_in_rule__ParserRule__Group_2_2_1__16315);
             rule__ParserRule__Group_2_2_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8287,10 +8544,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2_1__1
+    // $ANTLR end "rule__ParserRule__Group_2_2_1__1"
 
 
-    // $ANTLR start rule__ParserRule__Group_2_2_1__1__Impl
+    // $ANTLR start "rule__ParserRule__Group_2_2_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3082:1: rule__ParserRule__Group_2_2_1__1__Impl : ( ( rule__ParserRule__HiddenTokensAssignment_2_2_1_1 ) ) ;
     public final void rule__ParserRule__Group_2_2_1__1__Impl() throws RecognitionException {
 
@@ -8309,7 +8566,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_1_1_in_rule__ParserRule__Group_2_2_1__1__Impl6342);
             rule__ParserRule__HiddenTokensAssignment_2_2_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8333,10 +8591,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__Group_2_2_1__1__Impl
+    // $ANTLR end "rule__ParserRule__Group_2_2_1__1__Impl"
 
 
-    // $ANTLR start rule__TypeRef__Group__0
+    // $ANTLR start "rule__TypeRef__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3103:1: rule__TypeRef__Group__0 : rule__TypeRef__Group__0__Impl rule__TypeRef__Group__1 ;
     public final void rule__TypeRef__Group__0() throws RecognitionException {
 
@@ -8348,11 +8606,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group__0__Impl_in_rule__TypeRef__Group__06376);
             rule__TypeRef__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group__1_in_rule__TypeRef__Group__06379);
             rule__TypeRef__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8369,10 +8629,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group__0
+    // $ANTLR end "rule__TypeRef__Group__0"
 
 
-    // $ANTLR start rule__TypeRef__Group__0__Impl
+    // $ANTLR start "rule__TypeRef__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3115:1: rule__TypeRef__Group__0__Impl : ( ( rule__TypeRef__Group_0__0 )? ) ;
     public final void rule__TypeRef__Group__0__Impl() throws RecognitionException {
 
@@ -8403,7 +8663,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group_0__0_in_rule__TypeRef__Group__0__Impl6406);
                     rule__TypeRef__Group_0__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -8430,10 +8691,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group__0__Impl
+    // $ANTLR end "rule__TypeRef__Group__0__Impl"
 
 
-    // $ANTLR start rule__TypeRef__Group__1
+    // $ANTLR start "rule__TypeRef__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3132:1: rule__TypeRef__Group__1 : rule__TypeRef__Group__1__Impl ;
     public final void rule__TypeRef__Group__1() throws RecognitionException {
 
@@ -8445,7 +8706,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group__1__Impl_in_rule__TypeRef__Group__16437);
             rule__TypeRef__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8462,10 +8724,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group__1
+    // $ANTLR end "rule__TypeRef__Group__1"
 
 
-    // $ANTLR start rule__TypeRef__Group__1__Impl
+    // $ANTLR start "rule__TypeRef__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3143:1: rule__TypeRef__Group__1__Impl : ( ( rule__TypeRef__ClassifierAssignment_1 ) ) ;
     public final void rule__TypeRef__Group__1__Impl() throws RecognitionException {
 
@@ -8484,7 +8746,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__ClassifierAssignment_1_in_rule__TypeRef__Group__1__Impl6464);
             rule__TypeRef__ClassifierAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8508,10 +8771,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group__1__Impl
+    // $ANTLR end "rule__TypeRef__Group__1__Impl"
 
 
-    // $ANTLR start rule__TypeRef__Group_0__0
+    // $ANTLR start "rule__TypeRef__Group_0__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3164:1: rule__TypeRef__Group_0__0 : rule__TypeRef__Group_0__0__Impl rule__TypeRef__Group_0__1 ;
     public final void rule__TypeRef__Group_0__0() throws RecognitionException {
 
@@ -8523,11 +8786,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group_0__0__Impl_in_rule__TypeRef__Group_0__06498);
             rule__TypeRef__Group_0__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group_0__1_in_rule__TypeRef__Group_0__06501);
             rule__TypeRef__Group_0__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8544,10 +8809,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group_0__0
+    // $ANTLR end "rule__TypeRef__Group_0__0"
 
 
-    // $ANTLR start rule__TypeRef__Group_0__0__Impl
+    // $ANTLR start "rule__TypeRef__Group_0__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3176:1: rule__TypeRef__Group_0__0__Impl : ( ( rule__TypeRef__MetamodelAssignment_0_0 ) ) ;
     public final void rule__TypeRef__Group_0__0__Impl() throws RecognitionException {
 
@@ -8566,7 +8831,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__MetamodelAssignment_0_0_in_rule__TypeRef__Group_0__0__Impl6528);
             rule__TypeRef__MetamodelAssignment_0_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8590,10 +8856,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group_0__0__Impl
+    // $ANTLR end "rule__TypeRef__Group_0__0__Impl"
 
 
-    // $ANTLR start rule__TypeRef__Group_0__1
+    // $ANTLR start "rule__TypeRef__Group_0__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3193:1: rule__TypeRef__Group_0__1 : rule__TypeRef__Group_0__1__Impl ;
     public final void rule__TypeRef__Group_0__1() throws RecognitionException {
 
@@ -8605,7 +8871,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group_0__1__Impl_in_rule__TypeRef__Group_0__16558);
             rule__TypeRef__Group_0__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8622,10 +8889,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group_0__1
+    // $ANTLR end "rule__TypeRef__Group_0__1"
 
 
-    // $ANTLR start rule__TypeRef__Group_0__1__Impl
+    // $ANTLR start "rule__TypeRef__Group_0__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3204:1: rule__TypeRef__Group_0__1__Impl : ( '::' ) ;
     public final void rule__TypeRef__Group_0__1__Impl() throws RecognitionException {
 
@@ -8659,10 +8926,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__Group_0__1__Impl
+    // $ANTLR end "rule__TypeRef__Group_0__1__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group__0
+    // $ANTLR start "rule__Alternatives__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3227:1: rule__Alternatives__Group__0 : rule__Alternatives__Group__0__Impl rule__Alternatives__Group__1 ;
     public final void rule__Alternatives__Group__0() throws RecognitionException {
 
@@ -8674,11 +8941,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group__0__Impl_in_rule__Alternatives__Group__06621);
             rule__Alternatives__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group__1_in_rule__Alternatives__Group__06624);
             rule__Alternatives__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8695,10 +8964,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group__0
+    // $ANTLR end "rule__Alternatives__Group__0"
 
 
-    // $ANTLR start rule__Alternatives__Group__0__Impl
+    // $ANTLR start "rule__Alternatives__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3239:1: rule__Alternatives__Group__0__Impl : ( ruleGroup ) ;
     public final void rule__Alternatives__Group__0__Impl() throws RecognitionException {
 
@@ -8714,7 +8983,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAlternativesAccess().getGroupParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleGroup_in_rule__Alternatives__Group__0__Impl6651);
             ruleGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAlternativesAccess().getGroupParserRuleCall_0()); 
 
@@ -8735,10 +9005,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group__0__Impl
+    // $ANTLR end "rule__Alternatives__Group__0__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group__1
+    // $ANTLR start "rule__Alternatives__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3256:1: rule__Alternatives__Group__1 : rule__Alternatives__Group__1__Impl ;
     public final void rule__Alternatives__Group__1() throws RecognitionException {
 
@@ -8750,7 +9020,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group__1__Impl_in_rule__Alternatives__Group__16680);
             rule__Alternatives__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8767,10 +9038,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group__1
+    // $ANTLR end "rule__Alternatives__Group__1"
 
 
-    // $ANTLR start rule__Alternatives__Group__1__Impl
+    // $ANTLR start "rule__Alternatives__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3267:1: rule__Alternatives__Group__1__Impl : ( ( rule__Alternatives__Group_1__0 )? ) ;
     public final void rule__Alternatives__Group__1__Impl() throws RecognitionException {
 
@@ -8797,7 +9068,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1__0_in_rule__Alternatives__Group__1__Impl6707);
                     rule__Alternatives__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -8824,10 +9096,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group__1__Impl
+    // $ANTLR end "rule__Alternatives__Group__1__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group_1__0
+    // $ANTLR start "rule__Alternatives__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3288:1: rule__Alternatives__Group_1__0 : rule__Alternatives__Group_1__0__Impl rule__Alternatives__Group_1__1 ;
     public final void rule__Alternatives__Group_1__0() throws RecognitionException {
 
@@ -8839,11 +9111,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1__0__Impl_in_rule__Alternatives__Group_1__06742);
             rule__Alternatives__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1__1_in_rule__Alternatives__Group_1__06745);
             rule__Alternatives__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8860,10 +9134,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1__0
+    // $ANTLR end "rule__Alternatives__Group_1__0"
 
 
-    // $ANTLR start rule__Alternatives__Group_1__0__Impl
+    // $ANTLR start "rule__Alternatives__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3300:1: rule__Alternatives__Group_1__0__Impl : ( () ) ;
     public final void rule__Alternatives__Group_1__0__Impl() throws RecognitionException {
 
@@ -8897,10 +9171,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1__0__Impl
+    // $ANTLR end "rule__Alternatives__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group_1__1
+    // $ANTLR start "rule__Alternatives__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3319:1: rule__Alternatives__Group_1__1 : rule__Alternatives__Group_1__1__Impl ;
     public final void rule__Alternatives__Group_1__1() throws RecognitionException {
 
@@ -8912,7 +9186,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1__1__Impl_in_rule__Alternatives__Group_1__16803);
             rule__Alternatives__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8929,10 +9204,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1__1
+    // $ANTLR end "rule__Alternatives__Group_1__1"
 
 
-    // $ANTLR start rule__Alternatives__Group_1__1__Impl
+    // $ANTLR start "rule__Alternatives__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3330:1: rule__Alternatives__Group_1__1__Impl : ( ( ( rule__Alternatives__Group_1_1__0 ) ) ( ( rule__Alternatives__Group_1_1__0 )* ) ) ;
     public final void rule__Alternatives__Group_1__1__Impl() throws RecognitionException {
 
@@ -8954,7 +9229,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__1__Impl6832);
             rule__Alternatives__Group_1_1__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -8984,7 +9260,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__1__Impl6844);
             	    rule__Alternatives__Group_1_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -9017,10 +9294,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1__1__Impl
+    // $ANTLR end "rule__Alternatives__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group_1_1__0
+    // $ANTLR start "rule__Alternatives__Group_1_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3358:1: rule__Alternatives__Group_1_1__0 : rule__Alternatives__Group_1_1__0__Impl rule__Alternatives__Group_1_1__1 ;
     public final void rule__Alternatives__Group_1_1__0() throws RecognitionException {
 
@@ -9032,11 +9309,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__0__Impl_in_rule__Alternatives__Group_1_1__06881);
             rule__Alternatives__Group_1_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__1_in_rule__Alternatives__Group_1_1__06884);
             rule__Alternatives__Group_1_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9053,10 +9332,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1_1__0
+    // $ANTLR end "rule__Alternatives__Group_1_1__0"
 
 
-    // $ANTLR start rule__Alternatives__Group_1_1__0__Impl
+    // $ANTLR start "rule__Alternatives__Group_1_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3370:1: rule__Alternatives__Group_1_1__0__Impl : ( '|' ) ;
     public final void rule__Alternatives__Group_1_1__0__Impl() throws RecognitionException {
 
@@ -9090,10 +9369,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1_1__0__Impl
+    // $ANTLR end "rule__Alternatives__Group_1_1__0__Impl"
 
 
-    // $ANTLR start rule__Alternatives__Group_1_1__1
+    // $ANTLR start "rule__Alternatives__Group_1_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3389:1: rule__Alternatives__Group_1_1__1 : rule__Alternatives__Group_1_1__1__Impl ;
     public final void rule__Alternatives__Group_1_1__1() throws RecognitionException {
 
@@ -9105,7 +9384,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__1__Impl_in_rule__Alternatives__Group_1_1__16943);
             rule__Alternatives__Group_1_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9122,10 +9402,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1_1__1
+    // $ANTLR end "rule__Alternatives__Group_1_1__1"
 
 
-    // $ANTLR start rule__Alternatives__Group_1_1__1__Impl
+    // $ANTLR start "rule__Alternatives__Group_1_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3400:1: rule__Alternatives__Group_1_1__1__Impl : ( ( rule__Alternatives__GroupsAssignment_1_1_1 ) ) ;
     public final void rule__Alternatives__Group_1_1__1__Impl() throws RecognitionException {
 
@@ -9144,7 +9424,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Alternatives__GroupsAssignment_1_1_1_in_rule__Alternatives__Group_1_1__1__Impl6970);
             rule__Alternatives__GroupsAssignment_1_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9168,10 +9449,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__Group_1_1__1__Impl
+    // $ANTLR end "rule__Alternatives__Group_1_1__1__Impl"
 
 
-    // $ANTLR start rule__Group__Group__0
+    // $ANTLR start "rule__Group__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3421:1: rule__Group__Group__0 : rule__Group__Group__0__Impl rule__Group__Group__1 ;
     public final void rule__Group__Group__0() throws RecognitionException {
 
@@ -9183,11 +9464,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group__0__Impl_in_rule__Group__Group__07004);
             rule__Group__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group__1_in_rule__Group__Group__07007);
             rule__Group__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9204,10 +9487,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group__0
+    // $ANTLR end "rule__Group__Group__0"
 
 
-    // $ANTLR start rule__Group__Group__0__Impl
+    // $ANTLR start "rule__Group__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3433:1: rule__Group__Group__0__Impl : ( ruleAbstractToken ) ;
     public final void rule__Group__Group__0__Impl() throws RecognitionException {
 
@@ -9223,7 +9506,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getGroupAccess().getAbstractTokenParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractToken_in_rule__Group__Group__0__Impl7034);
             ruleAbstractToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGroupAccess().getAbstractTokenParserRuleCall_0()); 
 
@@ -9244,10 +9528,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group__0__Impl
+    // $ANTLR end "rule__Group__Group__0__Impl"
 
 
-    // $ANTLR start rule__Group__Group__1
+    // $ANTLR start "rule__Group__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3450:1: rule__Group__Group__1 : rule__Group__Group__1__Impl ;
     public final void rule__Group__Group__1() throws RecognitionException {
 
@@ -9259,7 +9543,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group__1__Impl_in_rule__Group__Group__17063);
             rule__Group__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9276,10 +9561,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group__1
+    // $ANTLR end "rule__Group__Group__1"
 
 
-    // $ANTLR start rule__Group__Group__1__Impl
+    // $ANTLR start "rule__Group__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3461:1: rule__Group__Group__1__Impl : ( ( rule__Group__Group_1__0 )? ) ;
     public final void rule__Group__Group__1__Impl() throws RecognitionException {
 
@@ -9306,7 +9591,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Group__Group_1__0_in_rule__Group__Group__1__Impl7090);
                     rule__Group__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -9333,10 +9619,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group__1__Impl
+    // $ANTLR end "rule__Group__Group__1__Impl"
 
 
-    // $ANTLR start rule__Group__Group_1__0
+    // $ANTLR start "rule__Group__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3482:1: rule__Group__Group_1__0 : rule__Group__Group_1__0__Impl rule__Group__Group_1__1 ;
     public final void rule__Group__Group_1__0() throws RecognitionException {
 
@@ -9348,11 +9634,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group_1__0__Impl_in_rule__Group__Group_1__07125);
             rule__Group__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group_1__1_in_rule__Group__Group_1__07128);
             rule__Group__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9369,10 +9657,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group_1__0
+    // $ANTLR end "rule__Group__Group_1__0"
 
 
-    // $ANTLR start rule__Group__Group_1__0__Impl
+    // $ANTLR start "rule__Group__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3494:1: rule__Group__Group_1__0__Impl : ( () ) ;
     public final void rule__Group__Group_1__0__Impl() throws RecognitionException {
 
@@ -9406,10 +9694,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group_1__0__Impl
+    // $ANTLR end "rule__Group__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__Group__Group_1__1
+    // $ANTLR start "rule__Group__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3513:1: rule__Group__Group_1__1 : rule__Group__Group_1__1__Impl ;
     public final void rule__Group__Group_1__1() throws RecognitionException {
 
@@ -9421,7 +9709,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__Group_1__1__Impl_in_rule__Group__Group_1__17186);
             rule__Group__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9438,10 +9727,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group_1__1
+    // $ANTLR end "rule__Group__Group_1__1"
 
 
-    // $ANTLR start rule__Group__Group_1__1__Impl
+    // $ANTLR start "rule__Group__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3524:1: rule__Group__Group_1__1__Impl : ( ( ( rule__Group__TokensAssignment_1_1 ) ) ( ( rule__Group__TokensAssignment_1_1 )* ) ) ;
     public final void rule__Group__Group_1__1__Impl() throws RecognitionException {
 
@@ -9463,7 +9752,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__1__Impl7215);
             rule__Group__TokensAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9493,7 +9783,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__1__Impl7227);
             	    rule__Group__TokensAssignment_1_1();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -9526,10 +9817,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Group__Group_1__1__Impl
+    // $ANTLR end "rule__Group__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__Group__0
+    // $ANTLR start "rule__AbstractTokenWithCardinality__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3552:1: rule__AbstractTokenWithCardinality__Group__0 : rule__AbstractTokenWithCardinality__Group__0__Impl rule__AbstractTokenWithCardinality__Group__1 ;
     public final void rule__AbstractTokenWithCardinality__Group__0() throws RecognitionException {
 
@@ -9541,11 +9832,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Group__0__Impl_in_rule__AbstractTokenWithCardinality__Group__07264);
             rule__AbstractTokenWithCardinality__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Group__1_in_rule__AbstractTokenWithCardinality__Group__07267);
             rule__AbstractTokenWithCardinality__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9562,10 +9855,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__Group__0
+    // $ANTLR end "rule__AbstractTokenWithCardinality__Group__0"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__Group__0__Impl
+    // $ANTLR start "rule__AbstractTokenWithCardinality__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3564:1: rule__AbstractTokenWithCardinality__Group__0__Impl : ( ( rule__AbstractTokenWithCardinality__Alternatives_0 ) ) ;
     public final void rule__AbstractTokenWithCardinality__Group__0__Impl() throws RecognitionException {
 
@@ -9584,7 +9877,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Alternatives_0_in_rule__AbstractTokenWithCardinality__Group__0__Impl7294);
             rule__AbstractTokenWithCardinality__Alternatives_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9608,10 +9902,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__Group__0__Impl
+    // $ANTLR end "rule__AbstractTokenWithCardinality__Group__0__Impl"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__Group__1
+    // $ANTLR start "rule__AbstractTokenWithCardinality__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3581:1: rule__AbstractTokenWithCardinality__Group__1 : rule__AbstractTokenWithCardinality__Group__1__Impl ;
     public final void rule__AbstractTokenWithCardinality__Group__1() throws RecognitionException {
 
@@ -9623,7 +9917,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Group__1__Impl_in_rule__AbstractTokenWithCardinality__Group__17324);
             rule__AbstractTokenWithCardinality__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9640,10 +9935,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__Group__1
+    // $ANTLR end "rule__AbstractTokenWithCardinality__Group__1"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__Group__1__Impl
+    // $ANTLR start "rule__AbstractTokenWithCardinality__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3592:1: rule__AbstractTokenWithCardinality__Group__1__Impl : ( ( rule__AbstractTokenWithCardinality__CardinalityAssignment_1 )? ) ;
     public final void rule__AbstractTokenWithCardinality__Group__1__Impl() throws RecognitionException {
 
@@ -9670,7 +9965,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAssignment_1_in_rule__AbstractTokenWithCardinality__Group__1__Impl7351);
                     rule__AbstractTokenWithCardinality__CardinalityAssignment_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -9697,10 +9993,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__Group__1__Impl
+    // $ANTLR end "rule__AbstractTokenWithCardinality__Group__1__Impl"
 
 
-    // $ANTLR start rule__Action__Group__0
+    // $ANTLR start "rule__Action__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3613:1: rule__Action__Group__0 : rule__Action__Group__0__Impl rule__Action__Group__1 ;
     public final void rule__Action__Group__0() throws RecognitionException {
 
@@ -9712,11 +10008,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__0__Impl_in_rule__Action__Group__07386);
             rule__Action__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__1_in_rule__Action__Group__07389);
             rule__Action__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9733,10 +10031,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__0
+    // $ANTLR end "rule__Action__Group__0"
 
 
-    // $ANTLR start rule__Action__Group__0__Impl
+    // $ANTLR start "rule__Action__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3625:1: rule__Action__Group__0__Impl : ( '{' ) ;
     public final void rule__Action__Group__0__Impl() throws RecognitionException {
 
@@ -9770,10 +10068,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__0__Impl
+    // $ANTLR end "rule__Action__Group__0__Impl"
 
 
-    // $ANTLR start rule__Action__Group__1
+    // $ANTLR start "rule__Action__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3644:1: rule__Action__Group__1 : rule__Action__Group__1__Impl rule__Action__Group__2 ;
     public final void rule__Action__Group__1() throws RecognitionException {
 
@@ -9785,11 +10083,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__1__Impl_in_rule__Action__Group__17448);
             rule__Action__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__2_in_rule__Action__Group__17451);
             rule__Action__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9806,10 +10106,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__1
+    // $ANTLR end "rule__Action__Group__1"
 
 
-    // $ANTLR start rule__Action__Group__1__Impl
+    // $ANTLR start "rule__Action__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3656:1: rule__Action__Group__1__Impl : ( ( rule__Action__TypeAssignment_1 ) ) ;
     public final void rule__Action__Group__1__Impl() throws RecognitionException {
 
@@ -9828,7 +10128,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__TypeAssignment_1_in_rule__Action__Group__1__Impl7478);
             rule__Action__TypeAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9852,10 +10153,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__1__Impl
+    // $ANTLR end "rule__Action__Group__1__Impl"
 
 
-    // $ANTLR start rule__Action__Group__2
+    // $ANTLR start "rule__Action__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3673:1: rule__Action__Group__2 : rule__Action__Group__2__Impl rule__Action__Group__3 ;
     public final void rule__Action__Group__2() throws RecognitionException {
 
@@ -9867,11 +10168,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__2__Impl_in_rule__Action__Group__27508);
             rule__Action__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__3_in_rule__Action__Group__27511);
             rule__Action__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9888,10 +10191,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__2
+    // $ANTLR end "rule__Action__Group__2"
 
 
-    // $ANTLR start rule__Action__Group__2__Impl
+    // $ANTLR start "rule__Action__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3685:1: rule__Action__Group__2__Impl : ( ( rule__Action__Group_2__0 )? ) ;
     public final void rule__Action__Group__2__Impl() throws RecognitionException {
 
@@ -9918,7 +10221,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__0_in_rule__Action__Group__2__Impl7538);
                     rule__Action__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -9945,10 +10249,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__2__Impl
+    // $ANTLR end "rule__Action__Group__2__Impl"
 
 
-    // $ANTLR start rule__Action__Group__3
+    // $ANTLR start "rule__Action__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3702:1: rule__Action__Group__3 : rule__Action__Group__3__Impl ;
     public final void rule__Action__Group__3() throws RecognitionException {
 
@@ -9960,7 +10264,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group__3__Impl_in_rule__Action__Group__37569);
             rule__Action__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -9977,10 +10282,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__3
+    // $ANTLR end "rule__Action__Group__3"
 
 
-    // $ANTLR start rule__Action__Group__3__Impl
+    // $ANTLR start "rule__Action__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3713:1: rule__Action__Group__3__Impl : ( '}' ) ;
     public final void rule__Action__Group__3__Impl() throws RecognitionException {
 
@@ -10014,10 +10319,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group__3__Impl
+    // $ANTLR end "rule__Action__Group__3__Impl"
 
 
-    // $ANTLR start rule__Action__Group_2__0
+    // $ANTLR start "rule__Action__Group_2__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3740:1: rule__Action__Group_2__0 : rule__Action__Group_2__0__Impl rule__Action__Group_2__1 ;
     public final void rule__Action__Group_2__0() throws RecognitionException {
 
@@ -10029,11 +10334,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__0__Impl_in_rule__Action__Group_2__07636);
             rule__Action__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__1_in_rule__Action__Group_2__07639);
             rule__Action__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10050,10 +10357,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__0
+    // $ANTLR end "rule__Action__Group_2__0"
 
 
-    // $ANTLR start rule__Action__Group_2__0__Impl
+    // $ANTLR start "rule__Action__Group_2__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3752:1: rule__Action__Group_2__0__Impl : ( '.' ) ;
     public final void rule__Action__Group_2__0__Impl() throws RecognitionException {
 
@@ -10087,10 +10394,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__0__Impl
+    // $ANTLR end "rule__Action__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__Action__Group_2__1
+    // $ANTLR start "rule__Action__Group_2__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3771:1: rule__Action__Group_2__1 : rule__Action__Group_2__1__Impl rule__Action__Group_2__2 ;
     public final void rule__Action__Group_2__1() throws RecognitionException {
 
@@ -10102,11 +10409,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__1__Impl_in_rule__Action__Group_2__17698);
             rule__Action__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__2_in_rule__Action__Group_2__17701);
             rule__Action__Group_2__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10123,10 +10432,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__1
+    // $ANTLR end "rule__Action__Group_2__1"
 
 
-    // $ANTLR start rule__Action__Group_2__1__Impl
+    // $ANTLR start "rule__Action__Group_2__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3783:1: rule__Action__Group_2__1__Impl : ( ( rule__Action__FeatureAssignment_2_1 ) ) ;
     public final void rule__Action__Group_2__1__Impl() throws RecognitionException {
 
@@ -10145,7 +10454,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__FeatureAssignment_2_1_in_rule__Action__Group_2__1__Impl7728);
             rule__Action__FeatureAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10169,10 +10479,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__1__Impl
+    // $ANTLR end "rule__Action__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__Action__Group_2__2
+    // $ANTLR start "rule__Action__Group_2__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3800:1: rule__Action__Group_2__2 : rule__Action__Group_2__2__Impl rule__Action__Group_2__3 ;
     public final void rule__Action__Group_2__2() throws RecognitionException {
 
@@ -10184,11 +10494,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__2__Impl_in_rule__Action__Group_2__27758);
             rule__Action__Group_2__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__3_in_rule__Action__Group_2__27761);
             rule__Action__Group_2__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10205,10 +10517,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__2
+    // $ANTLR end "rule__Action__Group_2__2"
 
 
-    // $ANTLR start rule__Action__Group_2__2__Impl
+    // $ANTLR start "rule__Action__Group_2__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3812:1: rule__Action__Group_2__2__Impl : ( ( rule__Action__OperatorAssignment_2_2 ) ) ;
     public final void rule__Action__Group_2__2__Impl() throws RecognitionException {
 
@@ -10227,7 +10539,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__OperatorAssignment_2_2_in_rule__Action__Group_2__2__Impl7788);
             rule__Action__OperatorAssignment_2_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10251,10 +10564,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__2__Impl
+    // $ANTLR end "rule__Action__Group_2__2__Impl"
 
 
-    // $ANTLR start rule__Action__Group_2__3
+    // $ANTLR start "rule__Action__Group_2__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3829:1: rule__Action__Group_2__3 : rule__Action__Group_2__3__Impl ;
     public final void rule__Action__Group_2__3() throws RecognitionException {
 
@@ -10266,7 +10579,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__3__Impl_in_rule__Action__Group_2__37818);
             rule__Action__Group_2__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10283,10 +10597,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__3
+    // $ANTLR end "rule__Action__Group_2__3"
 
 
-    // $ANTLR start rule__Action__Group_2__3__Impl
+    // $ANTLR start "rule__Action__Group_2__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3840:1: rule__Action__Group_2__3__Impl : ( 'current' ) ;
     public final void rule__Action__Group_2__3__Impl() throws RecognitionException {
 
@@ -10320,10 +10634,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__Group_2__3__Impl
+    // $ANTLR end "rule__Action__Group_2__3__Impl"
 
 
-    // $ANTLR start rule__Assignment__Group__0
+    // $ANTLR start "rule__Assignment__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3867:1: rule__Assignment__Group__0 : rule__Assignment__Group__0__Impl rule__Assignment__Group__1 ;
     public final void rule__Assignment__Group__0() throws RecognitionException {
 
@@ -10335,11 +10649,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__0__Impl_in_rule__Assignment__Group__07885);
             rule__Assignment__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__1_in_rule__Assignment__Group__07888);
             rule__Assignment__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10356,10 +10672,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__0
+    // $ANTLR end "rule__Assignment__Group__0"
 
 
-    // $ANTLR start rule__Assignment__Group__0__Impl
+    // $ANTLR start "rule__Assignment__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3879:1: rule__Assignment__Group__0__Impl : ( ( rule__Assignment__FeatureAssignment_0 ) ) ;
     public final void rule__Assignment__Group__0__Impl() throws RecognitionException {
 
@@ -10378,7 +10694,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__FeatureAssignment_0_in_rule__Assignment__Group__0__Impl7915);
             rule__Assignment__FeatureAssignment_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10402,10 +10719,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__0__Impl
+    // $ANTLR end "rule__Assignment__Group__0__Impl"
 
 
-    // $ANTLR start rule__Assignment__Group__1
+    // $ANTLR start "rule__Assignment__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3896:1: rule__Assignment__Group__1 : rule__Assignment__Group__1__Impl rule__Assignment__Group__2 ;
     public final void rule__Assignment__Group__1() throws RecognitionException {
 
@@ -10417,11 +10734,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__1__Impl_in_rule__Assignment__Group__17945);
             rule__Assignment__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__2_in_rule__Assignment__Group__17948);
             rule__Assignment__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10438,10 +10757,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__1
+    // $ANTLR end "rule__Assignment__Group__1"
 
 
-    // $ANTLR start rule__Assignment__Group__1__Impl
+    // $ANTLR start "rule__Assignment__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3908:1: rule__Assignment__Group__1__Impl : ( ( rule__Assignment__OperatorAssignment_1 ) ) ;
     public final void rule__Assignment__Group__1__Impl() throws RecognitionException {
 
@@ -10460,7 +10779,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__OperatorAssignment_1_in_rule__Assignment__Group__1__Impl7975);
             rule__Assignment__OperatorAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10484,10 +10804,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__1__Impl
+    // $ANTLR end "rule__Assignment__Group__1__Impl"
 
 
-    // $ANTLR start rule__Assignment__Group__2
+    // $ANTLR start "rule__Assignment__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3925:1: rule__Assignment__Group__2 : rule__Assignment__Group__2__Impl ;
     public final void rule__Assignment__Group__2() throws RecognitionException {
 
@@ -10499,7 +10819,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__2__Impl_in_rule__Assignment__Group__28005);
             rule__Assignment__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10516,10 +10837,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__2
+    // $ANTLR end "rule__Assignment__Group__2"
 
 
-    // $ANTLR start rule__Assignment__Group__2__Impl
+    // $ANTLR start "rule__Assignment__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3936:1: rule__Assignment__Group__2__Impl : ( ( rule__Assignment__TerminalAssignment_2 ) ) ;
     public final void rule__Assignment__Group__2__Impl() throws RecognitionException {
 
@@ -10538,7 +10859,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__TerminalAssignment_2_in_rule__Assignment__Group__2__Impl8032);
             rule__Assignment__TerminalAssignment_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10562,10 +10884,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__Group__2__Impl
+    // $ANTLR end "rule__Assignment__Group__2__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__0
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3959:1: rule__ParenthesizedAssignableElement__Group__0 : rule__ParenthesizedAssignableElement__Group__0__Impl rule__ParenthesizedAssignableElement__Group__1 ;
     public final void rule__ParenthesizedAssignableElement__Group__0() throws RecognitionException {
 
@@ -10577,11 +10899,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__0__Impl_in_rule__ParenthesizedAssignableElement__Group__08068);
             rule__ParenthesizedAssignableElement__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__1_in_rule__ParenthesizedAssignableElement__Group__08071);
             rule__ParenthesizedAssignableElement__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10598,10 +10922,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__0
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__0"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__0__Impl
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3971:1: rule__ParenthesizedAssignableElement__Group__0__Impl : ( '(' ) ;
     public final void rule__ParenthesizedAssignableElement__Group__0__Impl() throws RecognitionException {
 
@@ -10635,10 +10959,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__0__Impl
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__0__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__1
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3990:1: rule__ParenthesizedAssignableElement__Group__1 : rule__ParenthesizedAssignableElement__Group__1__Impl rule__ParenthesizedAssignableElement__Group__2 ;
     public final void rule__ParenthesizedAssignableElement__Group__1() throws RecognitionException {
 
@@ -10650,11 +10974,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__1__Impl_in_rule__ParenthesizedAssignableElement__Group__18130);
             rule__ParenthesizedAssignableElement__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__2_in_rule__ParenthesizedAssignableElement__Group__18133);
             rule__ParenthesizedAssignableElement__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10671,10 +10997,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__1
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__1"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__1__Impl
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4002:1: rule__ParenthesizedAssignableElement__Group__1__Impl : ( ruleAssignableAlternatives ) ;
     public final void rule__ParenthesizedAssignableElement__Group__1__Impl() throws RecognitionException {
 
@@ -10690,7 +11016,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getParenthesizedAssignableElementAccess().getAssignableAlternativesParserRuleCall_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableAlternatives_in_rule__ParenthesizedAssignableElement__Group__1__Impl8160);
             ruleAssignableAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedAssignableElementAccess().getAssignableAlternativesParserRuleCall_1()); 
 
@@ -10711,10 +11038,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__1__Impl
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__2
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4019:1: rule__ParenthesizedAssignableElement__Group__2 : rule__ParenthesizedAssignableElement__Group__2__Impl ;
     public final void rule__ParenthesizedAssignableElement__Group__2() throws RecognitionException {
 
@@ -10726,7 +11053,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__2__Impl_in_rule__ParenthesizedAssignableElement__Group__28189);
             rule__ParenthesizedAssignableElement__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10743,10 +11071,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__2
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__2"
 
 
-    // $ANTLR start rule__ParenthesizedAssignableElement__Group__2__Impl
+    // $ANTLR start "rule__ParenthesizedAssignableElement__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4030:1: rule__ParenthesizedAssignableElement__Group__2__Impl : ( ')' ) ;
     public final void rule__ParenthesizedAssignableElement__Group__2__Impl() throws RecognitionException {
 
@@ -10780,10 +11108,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedAssignableElement__Group__2__Impl
+    // $ANTLR end "rule__ParenthesizedAssignableElement__Group__2__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group__0
+    // $ANTLR start "rule__AssignableAlternatives__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4055:1: rule__AssignableAlternatives__Group__0 : rule__AssignableAlternatives__Group__0__Impl rule__AssignableAlternatives__Group__1 ;
     public final void rule__AssignableAlternatives__Group__0() throws RecognitionException {
 
@@ -10795,11 +11123,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group__0__Impl_in_rule__AssignableAlternatives__Group__08254);
             rule__AssignableAlternatives__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group__1_in_rule__AssignableAlternatives__Group__08257);
             rule__AssignableAlternatives__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10816,10 +11146,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group__0
+    // $ANTLR end "rule__AssignableAlternatives__Group__0"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group__0__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4067:1: rule__AssignableAlternatives__Group__0__Impl : ( ruleAssignableTerminal ) ;
     public final void rule__AssignableAlternatives__Group__0__Impl() throws RecognitionException {
 
@@ -10835,7 +11165,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAssignableAlternativesAccess().getAssignableTerminalParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__Group__0__Impl8284);
             ruleAssignableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignableAlternativesAccess().getAssignableTerminalParserRuleCall_0()); 
 
@@ -10856,10 +11187,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group__0__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group__0__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group__1
+    // $ANTLR start "rule__AssignableAlternatives__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4084:1: rule__AssignableAlternatives__Group__1 : rule__AssignableAlternatives__Group__1__Impl ;
     public final void rule__AssignableAlternatives__Group__1() throws RecognitionException {
 
@@ -10871,7 +11202,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group__1__Impl_in_rule__AssignableAlternatives__Group__18313);
             rule__AssignableAlternatives__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10888,10 +11220,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group__1
+    // $ANTLR end "rule__AssignableAlternatives__Group__1"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group__1__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4095:1: rule__AssignableAlternatives__Group__1__Impl : ( ( rule__AssignableAlternatives__Group_1__0 )? ) ;
     public final void rule__AssignableAlternatives__Group__1__Impl() throws RecognitionException {
 
@@ -10918,7 +11250,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1__0_in_rule__AssignableAlternatives__Group__1__Impl8340);
                     rule__AssignableAlternatives__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -10945,10 +11278,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group__1__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group__1__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1__0
+    // $ANTLR start "rule__AssignableAlternatives__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4116:1: rule__AssignableAlternatives__Group_1__0 : rule__AssignableAlternatives__Group_1__0__Impl rule__AssignableAlternatives__Group_1__1 ;
     public final void rule__AssignableAlternatives__Group_1__0() throws RecognitionException {
 
@@ -10960,11 +11293,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1__0__Impl_in_rule__AssignableAlternatives__Group_1__08375);
             rule__AssignableAlternatives__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1__1_in_rule__AssignableAlternatives__Group_1__08378);
             rule__AssignableAlternatives__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -10981,10 +11316,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1__0
+    // $ANTLR end "rule__AssignableAlternatives__Group_1__0"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1__0__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4128:1: rule__AssignableAlternatives__Group_1__0__Impl : ( () ) ;
     public final void rule__AssignableAlternatives__Group_1__0__Impl() throws RecognitionException {
 
@@ -11018,10 +11353,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1__0__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1__1
+    // $ANTLR start "rule__AssignableAlternatives__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4147:1: rule__AssignableAlternatives__Group_1__1 : rule__AssignableAlternatives__Group_1__1__Impl ;
     public final void rule__AssignableAlternatives__Group_1__1() throws RecognitionException {
 
@@ -11033,7 +11368,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1__1__Impl_in_rule__AssignableAlternatives__Group_1__18436);
             rule__AssignableAlternatives__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11050,10 +11386,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1__1
+    // $ANTLR end "rule__AssignableAlternatives__Group_1__1"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1__1__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4158:1: rule__AssignableAlternatives__Group_1__1__Impl : ( ( ( rule__AssignableAlternatives__Group_1_1__0 ) ) ( ( rule__AssignableAlternatives__Group_1_1__0 )* ) ) ;
     public final void rule__AssignableAlternatives__Group_1__1__Impl() throws RecognitionException {
 
@@ -11075,7 +11411,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__1__Impl8465);
             rule__AssignableAlternatives__Group_1_1__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11105,7 +11442,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__1__Impl8477);
             	    rule__AssignableAlternatives__Group_1_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -11138,10 +11476,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1__1__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1_1__0
+    // $ANTLR start "rule__AssignableAlternatives__Group_1_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4186:1: rule__AssignableAlternatives__Group_1_1__0 : rule__AssignableAlternatives__Group_1_1__0__Impl rule__AssignableAlternatives__Group_1_1__1 ;
     public final void rule__AssignableAlternatives__Group_1_1__0() throws RecognitionException {
 
@@ -11153,11 +11491,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__0__Impl_in_rule__AssignableAlternatives__Group_1_1__08514);
             rule__AssignableAlternatives__Group_1_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__1_in_rule__AssignableAlternatives__Group_1_1__08517);
             rule__AssignableAlternatives__Group_1_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11174,10 +11514,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1_1__0
+    // $ANTLR end "rule__AssignableAlternatives__Group_1_1__0"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1_1__0__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group_1_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4198:1: rule__AssignableAlternatives__Group_1_1__0__Impl : ( '|' ) ;
     public final void rule__AssignableAlternatives__Group_1_1__0__Impl() throws RecognitionException {
 
@@ -11211,10 +11551,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1_1__0__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group_1_1__0__Impl"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1_1__1
+    // $ANTLR start "rule__AssignableAlternatives__Group_1_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4217:1: rule__AssignableAlternatives__Group_1_1__1 : rule__AssignableAlternatives__Group_1_1__1__Impl ;
     public final void rule__AssignableAlternatives__Group_1_1__1() throws RecognitionException {
 
@@ -11226,7 +11566,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__1__Impl_in_rule__AssignableAlternatives__Group_1_1__18576);
             rule__AssignableAlternatives__Group_1_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11243,10 +11584,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1_1__1
+    // $ANTLR end "rule__AssignableAlternatives__Group_1_1__1"
 
 
-    // $ANTLR start rule__AssignableAlternatives__Group_1_1__1__Impl
+    // $ANTLR start "rule__AssignableAlternatives__Group_1_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4228:1: rule__AssignableAlternatives__Group_1_1__1__Impl : ( ( rule__AssignableAlternatives__GroupsAssignment_1_1_1 ) ) ;
     public final void rule__AssignableAlternatives__Group_1_1__1__Impl() throws RecognitionException {
 
@@ -11265,7 +11606,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__GroupsAssignment_1_1_1_in_rule__AssignableAlternatives__Group_1_1__1__Impl8603);
             rule__AssignableAlternatives__GroupsAssignment_1_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11289,10 +11631,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__Group_1_1__1__Impl
+    // $ANTLR end "rule__AssignableAlternatives__Group_1_1__1__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group__0
+    // $ANTLR start "rule__CrossReference__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4249:1: rule__CrossReference__Group__0 : rule__CrossReference__Group__0__Impl rule__CrossReference__Group__1 ;
     public final void rule__CrossReference__Group__0() throws RecognitionException {
 
@@ -11304,11 +11646,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__0__Impl_in_rule__CrossReference__Group__08637);
             rule__CrossReference__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__1_in_rule__CrossReference__Group__08640);
             rule__CrossReference__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11325,10 +11669,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__0
+    // $ANTLR end "rule__CrossReference__Group__0"
 
 
-    // $ANTLR start rule__CrossReference__Group__0__Impl
+    // $ANTLR start "rule__CrossReference__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4261:1: rule__CrossReference__Group__0__Impl : ( '[' ) ;
     public final void rule__CrossReference__Group__0__Impl() throws RecognitionException {
 
@@ -11362,10 +11706,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__0__Impl
+    // $ANTLR end "rule__CrossReference__Group__0__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group__1
+    // $ANTLR start "rule__CrossReference__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4280:1: rule__CrossReference__Group__1 : rule__CrossReference__Group__1__Impl rule__CrossReference__Group__2 ;
     public final void rule__CrossReference__Group__1() throws RecognitionException {
 
@@ -11377,11 +11721,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__1__Impl_in_rule__CrossReference__Group__18699);
             rule__CrossReference__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__2_in_rule__CrossReference__Group__18702);
             rule__CrossReference__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11398,10 +11744,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__1
+    // $ANTLR end "rule__CrossReference__Group__1"
 
 
-    // $ANTLR start rule__CrossReference__Group__1__Impl
+    // $ANTLR start "rule__CrossReference__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4292:1: rule__CrossReference__Group__1__Impl : ( ( rule__CrossReference__TypeAssignment_1 ) ) ;
     public final void rule__CrossReference__Group__1__Impl() throws RecognitionException {
 
@@ -11420,7 +11766,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__TypeAssignment_1_in_rule__CrossReference__Group__1__Impl8729);
             rule__CrossReference__TypeAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11444,10 +11791,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__1__Impl
+    // $ANTLR end "rule__CrossReference__Group__1__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group__2
+    // $ANTLR start "rule__CrossReference__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4309:1: rule__CrossReference__Group__2 : rule__CrossReference__Group__2__Impl rule__CrossReference__Group__3 ;
     public final void rule__CrossReference__Group__2() throws RecognitionException {
 
@@ -11459,11 +11806,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__2__Impl_in_rule__CrossReference__Group__28759);
             rule__CrossReference__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__3_in_rule__CrossReference__Group__28762);
             rule__CrossReference__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11480,10 +11829,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__2
+    // $ANTLR end "rule__CrossReference__Group__2"
 
 
-    // $ANTLR start rule__CrossReference__Group__2__Impl
+    // $ANTLR start "rule__CrossReference__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4321:1: rule__CrossReference__Group__2__Impl : ( ( rule__CrossReference__Group_2__0 )? ) ;
     public final void rule__CrossReference__Group__2__Impl() throws RecognitionException {
 
@@ -11510,7 +11859,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group_2__0_in_rule__CrossReference__Group__2__Impl8789);
                     rule__CrossReference__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -11537,10 +11887,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__2__Impl
+    // $ANTLR end "rule__CrossReference__Group__2__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group__3
+    // $ANTLR start "rule__CrossReference__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4338:1: rule__CrossReference__Group__3 : rule__CrossReference__Group__3__Impl ;
     public final void rule__CrossReference__Group__3() throws RecognitionException {
 
@@ -11552,7 +11902,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__3__Impl_in_rule__CrossReference__Group__38820);
             rule__CrossReference__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11569,10 +11920,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__3
+    // $ANTLR end "rule__CrossReference__Group__3"
 
 
-    // $ANTLR start rule__CrossReference__Group__3__Impl
+    // $ANTLR start "rule__CrossReference__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4349:1: rule__CrossReference__Group__3__Impl : ( ']' ) ;
     public final void rule__CrossReference__Group__3__Impl() throws RecognitionException {
 
@@ -11606,10 +11957,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group__3__Impl
+    // $ANTLR end "rule__CrossReference__Group__3__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group_2__0
+    // $ANTLR start "rule__CrossReference__Group_2__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4376:1: rule__CrossReference__Group_2__0 : rule__CrossReference__Group_2__0__Impl rule__CrossReference__Group_2__1 ;
     public final void rule__CrossReference__Group_2__0() throws RecognitionException {
 
@@ -11621,11 +11972,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group_2__0__Impl_in_rule__CrossReference__Group_2__08887);
             rule__CrossReference__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group_2__1_in_rule__CrossReference__Group_2__08890);
             rule__CrossReference__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11642,10 +11995,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group_2__0
+    // $ANTLR end "rule__CrossReference__Group_2__0"
 
 
-    // $ANTLR start rule__CrossReference__Group_2__0__Impl
+    // $ANTLR start "rule__CrossReference__Group_2__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4388:1: rule__CrossReference__Group_2__0__Impl : ( '|' ) ;
     public final void rule__CrossReference__Group_2__0__Impl() throws RecognitionException {
 
@@ -11679,10 +12032,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group_2__0__Impl
+    // $ANTLR end "rule__CrossReference__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__CrossReference__Group_2__1
+    // $ANTLR start "rule__CrossReference__Group_2__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4407:1: rule__CrossReference__Group_2__1 : rule__CrossReference__Group_2__1__Impl ;
     public final void rule__CrossReference__Group_2__1() throws RecognitionException {
 
@@ -11694,7 +12047,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group_2__1__Impl_in_rule__CrossReference__Group_2__18949);
             rule__CrossReference__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11711,10 +12065,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group_2__1
+    // $ANTLR end "rule__CrossReference__Group_2__1"
 
 
-    // $ANTLR start rule__CrossReference__Group_2__1__Impl
+    // $ANTLR start "rule__CrossReference__Group_2__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4418:1: rule__CrossReference__Group_2__1__Impl : ( ( rule__CrossReference__TerminalAssignment_2_1 ) ) ;
     public final void rule__CrossReference__Group_2__1__Impl() throws RecognitionException {
 
@@ -11733,7 +12087,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReference__TerminalAssignment_2_1_in_rule__CrossReference__Group_2__1__Impl8976);
             rule__CrossReference__TerminalAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11757,10 +12112,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__Group_2__1__Impl
+    // $ANTLR end "rule__CrossReference__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedCrossReferenceableElement__Group__0
+    // $ANTLR start "rule__ParenthesizedCrossReferenceableElement__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4439:1: rule__ParenthesizedCrossReferenceableElement__Group__0 : rule__ParenthesizedCrossReferenceableElement__Group__0__Impl rule__ParenthesizedCrossReferenceableElement__Group__1 ;
     public final void rule__ParenthesizedCrossReferenceableElement__Group__0() throws RecognitionException {
 
@@ -11772,11 +12127,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__0__Impl_in_rule__ParenthesizedCrossReferenceableElement__Group__09010);
             rule__ParenthesizedCrossReferenceableElement__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__1_in_rule__ParenthesizedCrossReferenceableElement__Group__09013);
             rule__ParenthesizedCrossReferenceableElement__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11793,10 +12150,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedCrossReferenceableElement__Group__0
+    // $ANTLR end "rule__ParenthesizedCrossReferenceableElement__Group__0"
 
 
-    // $ANTLR start rule__ParenthesizedCrossReferenceableElement__Group__0__Impl
+    // $ANTLR start "rule__ParenthesizedCrossReferenceableElement__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4451:1: rule__ParenthesizedCrossReferenceableElement__Group__0__Impl : ( '(' ) ;
     public final void rule__ParenthesizedCrossReferenceableElement__Group__0__Impl() throws RecognitionException {
 
@@ -11830,10 +12187,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedCrossReferenceableElement__Group__0__Impl
+    // $ANTLR end "rule__ParenthesizedCrossReferenceableElement__Group__0__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedCrossReferenceableElement__Group__1
+    // $ANTLR start "rule__ParenthesizedCrossReferenceableElement__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4470:1: rule__ParenthesizedCrossReferenceableElement__Group__1 : rule__ParenthesizedCrossReferenceableElement__Group__1__Impl rule__ParenthesizedCrossReferenceableElement__Group__2 ;
     public final void rule__ParenthesizedCrossReferenceableElement__Group__1() throws RecognitionException {
 
@@ -11845,11 +12202,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__1__Impl_in_rule__ParenthesizedCrossReferenceableElement__Group__19072);
             rule__ParenthesizedCrossReferenceableElement__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__2_in_rule__ParenthesizedCrossReferenceableElement__Group__19075);
             rule__ParenthesizedCrossReferenceableElement__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11866,10 +12225,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedCrossReferenceableElement__Group__1
+    // $ANTLR end "rule__ParenthesizedCrossReferenceableElement__Group__1"
 
 
-    // $ANTLR start rule__ParenthesizedCrossReferenceableElement__Group__1__Impl
+    // $ANTLR start "rule__ParenthesizedCrossReferenceableElement__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4482:1: rule__ParenthesizedCrossReferenceableElement__Group__1__Impl : ( ruleCrossReferenceableAlternatives ) ;
     public final void rule__ParenthesizedCrossReferenceableElement__Group__1__Impl() throws RecognitionException {
 
@@ -11885,7 +12244,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getParenthesizedCrossReferenceableElementAccess().getCrossReferenceableAlternativesParserRuleCall_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableAlternatives_in_rule__ParenthesizedCrossReferenceableElement__Group__1__Impl9102);
             ruleCrossReferenceableAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedCrossReferenceableElementAccess().getCrossReferenceableAlternativesParserRuleCall_1()); 
 
@@ -11906,10 +12266,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedCrossReferenceableElement__Group__1__Impl
+    // $ANTLR end "rule__ParenthesizedCrossReferenceableElement__Group__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedCrossReferenceableElement__Group__2
+    // $ANTLR start "rule__ParenthesizedCrossReferenceableElement__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4499:1: rule__ParenthesizedCrossReferenceableElement__Group__2 : rule__ParenthesizedCrossReferenceableElement__Group__2__Impl ;
     public final void rule__ParenthesizedCrossReferenceableElement__Group__2() throws RecognitionException {
 
@@ -11921,7 +12281,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__2__Impl_in_rule__ParenthesizedCrossReferenceableElement__Group__29131);
             rule__ParenthesizedCrossReferenceableElement__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -11938,10 +12299,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedCrossReferenceableElement__Group__2
+    // $ANTLR end "rule__ParenthesizedCrossReferenceableElement__Group__2"
 
 
-    // $ANTLR start rule__ParenthesizedCrossReferenceableElement__Group__2__Impl
+    // $ANTLR start "rule__ParenthesizedCrossReferenceableElement__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4510:1: rule__ParenthesizedCrossReferenceableElement__Group__2__Impl : ( ')' ) ;
     public final void rule__ParenthesizedCrossReferenceableElement__Group__2__Impl() throws RecognitionException {
 
@@ -11975,10 +12336,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedCrossReferenceableElement__Group__2__Impl
+    // $ANTLR end "rule__ParenthesizedCrossReferenceableElement__Group__2__Impl"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group__0
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4535:1: rule__CrossReferenceableAlternatives__Group__0 : rule__CrossReferenceableAlternatives__Group__0__Impl rule__CrossReferenceableAlternatives__Group__1 ;
     public final void rule__CrossReferenceableAlternatives__Group__0() throws RecognitionException {
 
@@ -11990,11 +12351,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group__0__Impl_in_rule__CrossReferenceableAlternatives__Group__09196);
             rule__CrossReferenceableAlternatives__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group__1_in_rule__CrossReferenceableAlternatives__Group__09199);
             rule__CrossReferenceableAlternatives__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12011,10 +12374,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group__0
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group__0"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group__0__Impl
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4547:1: rule__CrossReferenceableAlternatives__Group__0__Impl : ( ruleCrossReferenceableTerminal ) ;
     public final void rule__CrossReferenceableAlternatives__Group__0__Impl() throws RecognitionException {
 
@@ -12030,7 +12393,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getCrossReferenceableAlternativesAccess().getCrossReferenceableTerminalParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReferenceableAlternatives__Group__0__Impl9226);
             ruleCrossReferenceableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCrossReferenceableAlternativesAccess().getCrossReferenceableTerminalParserRuleCall_0()); 
 
@@ -12051,10 +12415,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group__0__Impl
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group__0__Impl"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group__1
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4564:1: rule__CrossReferenceableAlternatives__Group__1 : rule__CrossReferenceableAlternatives__Group__1__Impl ;
     public final void rule__CrossReferenceableAlternatives__Group__1() throws RecognitionException {
 
@@ -12066,7 +12430,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group__1__Impl_in_rule__CrossReferenceableAlternatives__Group__19255);
             rule__CrossReferenceableAlternatives__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12083,10 +12448,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group__1
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group__1"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group__1__Impl
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4575:1: rule__CrossReferenceableAlternatives__Group__1__Impl : ( ( rule__CrossReferenceableAlternatives__Group_1__0 )? ) ;
     public final void rule__CrossReferenceableAlternatives__Group__1__Impl() throws RecognitionException {
 
@@ -12113,7 +12478,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1__0_in_rule__CrossReferenceableAlternatives__Group__1__Impl9282);
                     rule__CrossReferenceableAlternatives__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -12140,10 +12506,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group__1__Impl
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group__1__Impl"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group_1__0
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4596:1: rule__CrossReferenceableAlternatives__Group_1__0 : rule__CrossReferenceableAlternatives__Group_1__0__Impl rule__CrossReferenceableAlternatives__Group_1__1 ;
     public final void rule__CrossReferenceableAlternatives__Group_1__0() throws RecognitionException {
 
@@ -12155,11 +12521,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1__0__Impl_in_rule__CrossReferenceableAlternatives__Group_1__09317);
             rule__CrossReferenceableAlternatives__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1__1_in_rule__CrossReferenceableAlternatives__Group_1__09320);
             rule__CrossReferenceableAlternatives__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12176,10 +12544,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group_1__0
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group_1__0"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group_1__0__Impl
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4608:1: rule__CrossReferenceableAlternatives__Group_1__0__Impl : ( () ) ;
     public final void rule__CrossReferenceableAlternatives__Group_1__0__Impl() throws RecognitionException {
 
@@ -12213,10 +12581,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group_1__0__Impl
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group_1__1
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4627:1: rule__CrossReferenceableAlternatives__Group_1__1 : rule__CrossReferenceableAlternatives__Group_1__1__Impl ;
     public final void rule__CrossReferenceableAlternatives__Group_1__1() throws RecognitionException {
 
@@ -12228,7 +12596,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1__1__Impl_in_rule__CrossReferenceableAlternatives__Group_1__19378);
             rule__CrossReferenceableAlternatives__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12245,10 +12614,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group_1__1
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group_1__1"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group_1__1__Impl
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4638:1: rule__CrossReferenceableAlternatives__Group_1__1__Impl : ( ( ( rule__CrossReferenceableAlternatives__Group_1_1__0 ) ) ( ( rule__CrossReferenceableAlternatives__Group_1_1__0 )* ) ) ;
     public final void rule__CrossReferenceableAlternatives__Group_1__1__Impl() throws RecognitionException {
 
@@ -12270,7 +12639,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__0_in_rule__CrossReferenceableAlternatives__Group_1__1__Impl9407);
             rule__CrossReferenceableAlternatives__Group_1_1__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12300,7 +12670,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__0_in_rule__CrossReferenceableAlternatives__Group_1__1__Impl9419);
             	    rule__CrossReferenceableAlternatives__Group_1_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -12333,10 +12704,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group_1__1__Impl
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group_1_1__0
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group_1_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4666:1: rule__CrossReferenceableAlternatives__Group_1_1__0 : rule__CrossReferenceableAlternatives__Group_1_1__0__Impl rule__CrossReferenceableAlternatives__Group_1_1__1 ;
     public final void rule__CrossReferenceableAlternatives__Group_1_1__0() throws RecognitionException {
 
@@ -12348,11 +12719,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__0__Impl_in_rule__CrossReferenceableAlternatives__Group_1_1__09456);
             rule__CrossReferenceableAlternatives__Group_1_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__1_in_rule__CrossReferenceableAlternatives__Group_1_1__09459);
             rule__CrossReferenceableAlternatives__Group_1_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12369,10 +12742,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group_1_1__0
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group_1_1__0"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group_1_1__0__Impl
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group_1_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4678:1: rule__CrossReferenceableAlternatives__Group_1_1__0__Impl : ( '|' ) ;
     public final void rule__CrossReferenceableAlternatives__Group_1_1__0__Impl() throws RecognitionException {
 
@@ -12406,10 +12779,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group_1_1__0__Impl
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group_1_1__0__Impl"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group_1_1__1
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group_1_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4697:1: rule__CrossReferenceableAlternatives__Group_1_1__1 : rule__CrossReferenceableAlternatives__Group_1_1__1__Impl ;
     public final void rule__CrossReferenceableAlternatives__Group_1_1__1() throws RecognitionException {
 
@@ -12421,7 +12794,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__1__Impl_in_rule__CrossReferenceableAlternatives__Group_1_1__19518);
             rule__CrossReferenceableAlternatives__Group_1_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12438,10 +12812,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group_1_1__1
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group_1_1__1"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__Group_1_1__1__Impl
+    // $ANTLR start "rule__CrossReferenceableAlternatives__Group_1_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4708:1: rule__CrossReferenceableAlternatives__Group_1_1__1__Impl : ( ( rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1 ) ) ;
     public final void rule__CrossReferenceableAlternatives__Group_1_1__1__Impl() throws RecognitionException {
 
@@ -12460,7 +12834,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1_in_rule__CrossReferenceableAlternatives__Group_1_1__1__Impl9545);
             rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12484,10 +12859,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__Group_1_1__1__Impl
+    // $ANTLR end "rule__CrossReferenceableAlternatives__Group_1_1__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__0
+    // $ANTLR start "rule__ParenthesizedElement__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4729:1: rule__ParenthesizedElement__Group__0 : rule__ParenthesizedElement__Group__0__Impl rule__ParenthesizedElement__Group__1 ;
     public final void rule__ParenthesizedElement__Group__0() throws RecognitionException {
 
@@ -12499,11 +12874,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__0__Impl_in_rule__ParenthesizedElement__Group__09579);
             rule__ParenthesizedElement__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__1_in_rule__ParenthesizedElement__Group__09582);
             rule__ParenthesizedElement__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12520,10 +12897,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__0
+    // $ANTLR end "rule__ParenthesizedElement__Group__0"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__0__Impl
+    // $ANTLR start "rule__ParenthesizedElement__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4741:1: rule__ParenthesizedElement__Group__0__Impl : ( '(' ) ;
     public final void rule__ParenthesizedElement__Group__0__Impl() throws RecognitionException {
 
@@ -12557,10 +12934,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__0__Impl
+    // $ANTLR end "rule__ParenthesizedElement__Group__0__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__1
+    // $ANTLR start "rule__ParenthesizedElement__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4760:1: rule__ParenthesizedElement__Group__1 : rule__ParenthesizedElement__Group__1__Impl rule__ParenthesizedElement__Group__2 ;
     public final void rule__ParenthesizedElement__Group__1() throws RecognitionException {
 
@@ -12572,11 +12949,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__1__Impl_in_rule__ParenthesizedElement__Group__19641);
             rule__ParenthesizedElement__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__2_in_rule__ParenthesizedElement__Group__19644);
             rule__ParenthesizedElement__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12593,10 +12972,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__1
+    // $ANTLR end "rule__ParenthesizedElement__Group__1"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__1__Impl
+    // $ANTLR start "rule__ParenthesizedElement__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4772:1: rule__ParenthesizedElement__Group__1__Impl : ( ruleAlternatives ) ;
     public final void rule__ParenthesizedElement__Group__1__Impl() throws RecognitionException {
 
@@ -12612,7 +12991,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getParenthesizedElementAccess().getAlternativesParserRuleCall_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleAlternatives_in_rule__ParenthesizedElement__Group__1__Impl9671);
             ruleAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedElementAccess().getAlternativesParserRuleCall_1()); 
 
@@ -12633,10 +13013,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__1__Impl
+    // $ANTLR end "rule__ParenthesizedElement__Group__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__2
+    // $ANTLR start "rule__ParenthesizedElement__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4789:1: rule__ParenthesizedElement__Group__2 : rule__ParenthesizedElement__Group__2__Impl ;
     public final void rule__ParenthesizedElement__Group__2() throws RecognitionException {
 
@@ -12648,7 +13028,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__2__Impl_in_rule__ParenthesizedElement__Group__29700);
             rule__ParenthesizedElement__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12665,10 +13046,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__2
+    // $ANTLR end "rule__ParenthesizedElement__Group__2"
 
 
-    // $ANTLR start rule__ParenthesizedElement__Group__2__Impl
+    // $ANTLR start "rule__ParenthesizedElement__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4800:1: rule__ParenthesizedElement__Group__2__Impl : ( ')' ) ;
     public final void rule__ParenthesizedElement__Group__2__Impl() throws RecognitionException {
 
@@ -12702,10 +13083,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedElement__Group__2__Impl
+    // $ANTLR end "rule__ParenthesizedElement__Group__2__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__0
+    // $ANTLR start "rule__TerminalRule__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4825:1: rule__TerminalRule__Group__0 : rule__TerminalRule__Group__0__Impl rule__TerminalRule__Group__1 ;
     public final void rule__TerminalRule__Group__0() throws RecognitionException {
 
@@ -12717,11 +13098,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__0__Impl_in_rule__TerminalRule__Group__09765);
             rule__TerminalRule__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__1_in_rule__TerminalRule__Group__09768);
             rule__TerminalRule__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12738,10 +13121,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__0
+    // $ANTLR end "rule__TerminalRule__Group__0"
 
 
-    // $ANTLR start rule__TerminalRule__Group__0__Impl
+    // $ANTLR start "rule__TerminalRule__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4837:1: rule__TerminalRule__Group__0__Impl : ( 'terminal' ) ;
     public final void rule__TerminalRule__Group__0__Impl() throws RecognitionException {
 
@@ -12775,10 +13158,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__0__Impl
+    // $ANTLR end "rule__TerminalRule__Group__0__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__1
+    // $ANTLR start "rule__TerminalRule__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4856:1: rule__TerminalRule__Group__1 : rule__TerminalRule__Group__1__Impl rule__TerminalRule__Group__2 ;
     public final void rule__TerminalRule__Group__1() throws RecognitionException {
 
@@ -12790,11 +13173,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__1__Impl_in_rule__TerminalRule__Group__19827);
             rule__TerminalRule__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__2_in_rule__TerminalRule__Group__19830);
             rule__TerminalRule__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12811,10 +13196,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__1
+    // $ANTLR end "rule__TerminalRule__Group__1"
 
 
-    // $ANTLR start rule__TerminalRule__Group__1__Impl
+    // $ANTLR start "rule__TerminalRule__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4868:1: rule__TerminalRule__Group__1__Impl : ( ( rule__TerminalRule__NameAssignment_1 ) ) ;
     public final void rule__TerminalRule__Group__1__Impl() throws RecognitionException {
 
@@ -12833,7 +13218,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__NameAssignment_1_in_rule__TerminalRule__Group__1__Impl9857);
             rule__TerminalRule__NameAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12857,10 +13243,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__1__Impl
+    // $ANTLR end "rule__TerminalRule__Group__1__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__2
+    // $ANTLR start "rule__TerminalRule__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4885:1: rule__TerminalRule__Group__2 : rule__TerminalRule__Group__2__Impl rule__TerminalRule__Group__3 ;
     public final void rule__TerminalRule__Group__2() throws RecognitionException {
 
@@ -12872,11 +13258,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__2__Impl_in_rule__TerminalRule__Group__29887);
             rule__TerminalRule__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__3_in_rule__TerminalRule__Group__29890);
             rule__TerminalRule__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12893,10 +13281,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__2
+    // $ANTLR end "rule__TerminalRule__Group__2"
 
 
-    // $ANTLR start rule__TerminalRule__Group__2__Impl
+    // $ANTLR start "rule__TerminalRule__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4897:1: rule__TerminalRule__Group__2__Impl : ( ( rule__TerminalRule__Group_2__0 )? ) ;
     public final void rule__TerminalRule__Group__2__Impl() throws RecognitionException {
 
@@ -12923,7 +13311,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group_2__0_in_rule__TerminalRule__Group__2__Impl9917);
                     rule__TerminalRule__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -12950,10 +13339,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__2__Impl
+    // $ANTLR end "rule__TerminalRule__Group__2__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__3
+    // $ANTLR start "rule__TerminalRule__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4914:1: rule__TerminalRule__Group__3 : rule__TerminalRule__Group__3__Impl rule__TerminalRule__Group__4 ;
     public final void rule__TerminalRule__Group__3() throws RecognitionException {
 
@@ -12965,11 +13354,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__3__Impl_in_rule__TerminalRule__Group__39948);
             rule__TerminalRule__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__4_in_rule__TerminalRule__Group__39951);
             rule__TerminalRule__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -12986,10 +13377,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__3
+    // $ANTLR end "rule__TerminalRule__Group__3"
 
 
-    // $ANTLR start rule__TerminalRule__Group__3__Impl
+    // $ANTLR start "rule__TerminalRule__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4926:1: rule__TerminalRule__Group__3__Impl : ( ':' ) ;
     public final void rule__TerminalRule__Group__3__Impl() throws RecognitionException {
 
@@ -13023,10 +13414,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__3__Impl
+    // $ANTLR end "rule__TerminalRule__Group__3__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__4
+    // $ANTLR start "rule__TerminalRule__Group__4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4945:1: rule__TerminalRule__Group__4 : rule__TerminalRule__Group__4__Impl rule__TerminalRule__Group__5 ;
     public final void rule__TerminalRule__Group__4() throws RecognitionException {
 
@@ -13038,11 +13429,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__4__Impl_in_rule__TerminalRule__Group__410010);
             rule__TerminalRule__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__5_in_rule__TerminalRule__Group__410013);
             rule__TerminalRule__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13059,10 +13452,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__4
+    // $ANTLR end "rule__TerminalRule__Group__4"
 
 
-    // $ANTLR start rule__TerminalRule__Group__4__Impl
+    // $ANTLR start "rule__TerminalRule__Group__4__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4957:1: rule__TerminalRule__Group__4__Impl : ( ( rule__TerminalRule__AlternativesAssignment_4 ) ) ;
     public final void rule__TerminalRule__Group__4__Impl() throws RecognitionException {
 
@@ -13081,7 +13474,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__AlternativesAssignment_4_in_rule__TerminalRule__Group__4__Impl10040);
             rule__TerminalRule__AlternativesAssignment_4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13105,10 +13499,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__4__Impl
+    // $ANTLR end "rule__TerminalRule__Group__4__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group__5
+    // $ANTLR start "rule__TerminalRule__Group__5"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4974:1: rule__TerminalRule__Group__5 : rule__TerminalRule__Group__5__Impl ;
     public final void rule__TerminalRule__Group__5() throws RecognitionException {
 
@@ -13120,7 +13514,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__5__Impl_in_rule__TerminalRule__Group__510070);
             rule__TerminalRule__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13137,10 +13532,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__5
+    // $ANTLR end "rule__TerminalRule__Group__5"
 
 
-    // $ANTLR start rule__TerminalRule__Group__5__Impl
+    // $ANTLR start "rule__TerminalRule__Group__5__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4985:1: rule__TerminalRule__Group__5__Impl : ( ';' ) ;
     public final void rule__TerminalRule__Group__5__Impl() throws RecognitionException {
 
@@ -13174,10 +13569,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group__5__Impl
+    // $ANTLR end "rule__TerminalRule__Group__5__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group_2__0
+    // $ANTLR start "rule__TerminalRule__Group_2__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5016:1: rule__TerminalRule__Group_2__0 : rule__TerminalRule__Group_2__0__Impl rule__TerminalRule__Group_2__1 ;
     public final void rule__TerminalRule__Group_2__0() throws RecognitionException {
 
@@ -13189,11 +13584,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group_2__0__Impl_in_rule__TerminalRule__Group_2__010141);
             rule__TerminalRule__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group_2__1_in_rule__TerminalRule__Group_2__010144);
             rule__TerminalRule__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13210,10 +13607,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group_2__0
+    // $ANTLR end "rule__TerminalRule__Group_2__0"
 
 
-    // $ANTLR start rule__TerminalRule__Group_2__0__Impl
+    // $ANTLR start "rule__TerminalRule__Group_2__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5028:1: rule__TerminalRule__Group_2__0__Impl : ( 'returns' ) ;
     public final void rule__TerminalRule__Group_2__0__Impl() throws RecognitionException {
 
@@ -13247,10 +13644,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group_2__0__Impl
+    // $ANTLR end "rule__TerminalRule__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__TerminalRule__Group_2__1
+    // $ANTLR start "rule__TerminalRule__Group_2__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5047:1: rule__TerminalRule__Group_2__1 : rule__TerminalRule__Group_2__1__Impl ;
     public final void rule__TerminalRule__Group_2__1() throws RecognitionException {
 
@@ -13262,7 +13659,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group_2__1__Impl_in_rule__TerminalRule__Group_2__110203);
             rule__TerminalRule__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13279,10 +13677,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group_2__1
+    // $ANTLR end "rule__TerminalRule__Group_2__1"
 
 
-    // $ANTLR start rule__TerminalRule__Group_2__1__Impl
+    // $ANTLR start "rule__TerminalRule__Group_2__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5058:1: rule__TerminalRule__Group_2__1__Impl : ( ( rule__TerminalRule__TypeAssignment_2_1 ) ) ;
     public final void rule__TerminalRule__Group_2__1__Impl() throws RecognitionException {
 
@@ -13301,7 +13699,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__TypeAssignment_2_1_in_rule__TerminalRule__Group_2__1__Impl10230);
             rule__TerminalRule__TypeAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13325,10 +13724,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__Group_2__1__Impl
+    // $ANTLR end "rule__TerminalRule__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group__0
+    // $ANTLR start "rule__TerminalAlternatives__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5079:1: rule__TerminalAlternatives__Group__0 : rule__TerminalAlternatives__Group__0__Impl rule__TerminalAlternatives__Group__1 ;
     public final void rule__TerminalAlternatives__Group__0() throws RecognitionException {
 
@@ -13340,11 +13739,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group__0__Impl_in_rule__TerminalAlternatives__Group__010264);
             rule__TerminalAlternatives__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group__1_in_rule__TerminalAlternatives__Group__010267);
             rule__TerminalAlternatives__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13361,10 +13762,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group__0
+    // $ANTLR end "rule__TerminalAlternatives__Group__0"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group__0__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5091:1: rule__TerminalAlternatives__Group__0__Impl : ( ruleTerminalGroup ) ;
     public final void rule__TerminalAlternatives__Group__0__Impl() throws RecognitionException {
 
@@ -13380,7 +13781,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalAlternativesAccess().getTerminalGroupParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__Group__0__Impl10294);
             ruleTerminalGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalAlternativesAccess().getTerminalGroupParserRuleCall_0()); 
 
@@ -13401,10 +13803,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group__0__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group__0__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group__1
+    // $ANTLR start "rule__TerminalAlternatives__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5108:1: rule__TerminalAlternatives__Group__1 : rule__TerminalAlternatives__Group__1__Impl ;
     public final void rule__TerminalAlternatives__Group__1() throws RecognitionException {
 
@@ -13416,7 +13818,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group__1__Impl_in_rule__TerminalAlternatives__Group__110323);
             rule__TerminalAlternatives__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13433,10 +13836,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group__1
+    // $ANTLR end "rule__TerminalAlternatives__Group__1"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group__1__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5119:1: rule__TerminalAlternatives__Group__1__Impl : ( ( rule__TerminalAlternatives__Group_1__0 )? ) ;
     public final void rule__TerminalAlternatives__Group__1__Impl() throws RecognitionException {
 
@@ -13463,7 +13866,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1__0_in_rule__TerminalAlternatives__Group__1__Impl10350);
                     rule__TerminalAlternatives__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -13490,10 +13894,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group__1__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group__1__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1__0
+    // $ANTLR start "rule__TerminalAlternatives__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5140:1: rule__TerminalAlternatives__Group_1__0 : rule__TerminalAlternatives__Group_1__0__Impl rule__TerminalAlternatives__Group_1__1 ;
     public final void rule__TerminalAlternatives__Group_1__0() throws RecognitionException {
 
@@ -13505,11 +13909,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1__0__Impl_in_rule__TerminalAlternatives__Group_1__010385);
             rule__TerminalAlternatives__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1__1_in_rule__TerminalAlternatives__Group_1__010388);
             rule__TerminalAlternatives__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13526,10 +13932,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1__0
+    // $ANTLR end "rule__TerminalAlternatives__Group_1__0"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1__0__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5152:1: rule__TerminalAlternatives__Group_1__0__Impl : ( () ) ;
     public final void rule__TerminalAlternatives__Group_1__0__Impl() throws RecognitionException {
 
@@ -13563,10 +13969,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1__0__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1__1
+    // $ANTLR start "rule__TerminalAlternatives__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5171:1: rule__TerminalAlternatives__Group_1__1 : rule__TerminalAlternatives__Group_1__1__Impl ;
     public final void rule__TerminalAlternatives__Group_1__1() throws RecognitionException {
 
@@ -13578,7 +13984,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1__1__Impl_in_rule__TerminalAlternatives__Group_1__110446);
             rule__TerminalAlternatives__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13595,10 +14002,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1__1
+    // $ANTLR end "rule__TerminalAlternatives__Group_1__1"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1__1__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5182:1: rule__TerminalAlternatives__Group_1__1__Impl : ( ( ( rule__TerminalAlternatives__Group_1_1__0 ) ) ( ( rule__TerminalAlternatives__Group_1_1__0 )* ) ) ;
     public final void rule__TerminalAlternatives__Group_1__1__Impl() throws RecognitionException {
 
@@ -13620,7 +14027,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__1__Impl10475);
             rule__TerminalAlternatives__Group_1_1__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13650,7 +14058,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__1__Impl10487);
             	    rule__TerminalAlternatives__Group_1_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -13683,10 +14092,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1__1__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1_1__0
+    // $ANTLR start "rule__TerminalAlternatives__Group_1_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5210:1: rule__TerminalAlternatives__Group_1_1__0 : rule__TerminalAlternatives__Group_1_1__0__Impl rule__TerminalAlternatives__Group_1_1__1 ;
     public final void rule__TerminalAlternatives__Group_1_1__0() throws RecognitionException {
 
@@ -13698,11 +14107,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__0__Impl_in_rule__TerminalAlternatives__Group_1_1__010524);
             rule__TerminalAlternatives__Group_1_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__1_in_rule__TerminalAlternatives__Group_1_1__010527);
             rule__TerminalAlternatives__Group_1_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13719,10 +14130,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1_1__0
+    // $ANTLR end "rule__TerminalAlternatives__Group_1_1__0"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1_1__0__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group_1_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5222:1: rule__TerminalAlternatives__Group_1_1__0__Impl : ( '|' ) ;
     public final void rule__TerminalAlternatives__Group_1_1__0__Impl() throws RecognitionException {
 
@@ -13756,10 +14167,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1_1__0__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group_1_1__0__Impl"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1_1__1
+    // $ANTLR start "rule__TerminalAlternatives__Group_1_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5241:1: rule__TerminalAlternatives__Group_1_1__1 : rule__TerminalAlternatives__Group_1_1__1__Impl ;
     public final void rule__TerminalAlternatives__Group_1_1__1() throws RecognitionException {
 
@@ -13771,7 +14182,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__1__Impl_in_rule__TerminalAlternatives__Group_1_1__110586);
             rule__TerminalAlternatives__Group_1_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13788,10 +14200,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1_1__1
+    // $ANTLR end "rule__TerminalAlternatives__Group_1_1__1"
 
 
-    // $ANTLR start rule__TerminalAlternatives__Group_1_1__1__Impl
+    // $ANTLR start "rule__TerminalAlternatives__Group_1_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5252:1: rule__TerminalAlternatives__Group_1_1__1__Impl : ( ( rule__TerminalAlternatives__GroupsAssignment_1_1_1 ) ) ;
     public final void rule__TerminalAlternatives__Group_1_1__1__Impl() throws RecognitionException {
 
@@ -13810,7 +14222,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__GroupsAssignment_1_1_1_in_rule__TerminalAlternatives__Group_1_1__1__Impl10613);
             rule__TerminalAlternatives__GroupsAssignment_1_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13834,10 +14247,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__Group_1_1__1__Impl
+    // $ANTLR end "rule__TerminalAlternatives__Group_1_1__1__Impl"
 
 
-    // $ANTLR start rule__TerminalGroup__Group__0
+    // $ANTLR start "rule__TerminalGroup__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5273:1: rule__TerminalGroup__Group__0 : rule__TerminalGroup__Group__0__Impl rule__TerminalGroup__Group__1 ;
     public final void rule__TerminalGroup__Group__0() throws RecognitionException {
 
@@ -13849,11 +14262,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group__0__Impl_in_rule__TerminalGroup__Group__010647);
             rule__TerminalGroup__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group__1_in_rule__TerminalGroup__Group__010650);
             rule__TerminalGroup__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13870,10 +14285,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group__0
+    // $ANTLR end "rule__TerminalGroup__Group__0"
 
 
-    // $ANTLR start rule__TerminalGroup__Group__0__Impl
+    // $ANTLR start "rule__TerminalGroup__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5285:1: rule__TerminalGroup__Group__0__Impl : ( ruleTerminalToken ) ;
     public final void rule__TerminalGroup__Group__0__Impl() throws RecognitionException {
 
@@ -13889,7 +14304,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalGroupAccess().getTerminalTokenParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__Group__0__Impl10677);
             ruleTerminalToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalGroupAccess().getTerminalTokenParserRuleCall_0()); 
 
@@ -13910,10 +14326,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group__0__Impl
+    // $ANTLR end "rule__TerminalGroup__Group__0__Impl"
 
 
-    // $ANTLR start rule__TerminalGroup__Group__1
+    // $ANTLR start "rule__TerminalGroup__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5302:1: rule__TerminalGroup__Group__1 : rule__TerminalGroup__Group__1__Impl ;
     public final void rule__TerminalGroup__Group__1() throws RecognitionException {
 
@@ -13925,7 +14341,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group__1__Impl_in_rule__TerminalGroup__Group__110706);
             rule__TerminalGroup__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -13942,10 +14359,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group__1
+    // $ANTLR end "rule__TerminalGroup__Group__1"
 
 
-    // $ANTLR start rule__TerminalGroup__Group__1__Impl
+    // $ANTLR start "rule__TerminalGroup__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5313:1: rule__TerminalGroup__Group__1__Impl : ( ( rule__TerminalGroup__Group_1__0 )? ) ;
     public final void rule__TerminalGroup__Group__1__Impl() throws RecognitionException {
 
@@ -13972,7 +14389,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group_1__0_in_rule__TerminalGroup__Group__1__Impl10733);
                     rule__TerminalGroup__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -13999,10 +14417,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group__1__Impl
+    // $ANTLR end "rule__TerminalGroup__Group__1__Impl"
 
 
-    // $ANTLR start rule__TerminalGroup__Group_1__0
+    // $ANTLR start "rule__TerminalGroup__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5334:1: rule__TerminalGroup__Group_1__0 : rule__TerminalGroup__Group_1__0__Impl rule__TerminalGroup__Group_1__1 ;
     public final void rule__TerminalGroup__Group_1__0() throws RecognitionException {
 
@@ -14014,11 +14432,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group_1__0__Impl_in_rule__TerminalGroup__Group_1__010768);
             rule__TerminalGroup__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group_1__1_in_rule__TerminalGroup__Group_1__010771);
             rule__TerminalGroup__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14035,10 +14455,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group_1__0
+    // $ANTLR end "rule__TerminalGroup__Group_1__0"
 
 
-    // $ANTLR start rule__TerminalGroup__Group_1__0__Impl
+    // $ANTLR start "rule__TerminalGroup__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5346:1: rule__TerminalGroup__Group_1__0__Impl : ( () ) ;
     public final void rule__TerminalGroup__Group_1__0__Impl() throws RecognitionException {
 
@@ -14072,10 +14492,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group_1__0__Impl
+    // $ANTLR end "rule__TerminalGroup__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__TerminalGroup__Group_1__1
+    // $ANTLR start "rule__TerminalGroup__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5365:1: rule__TerminalGroup__Group_1__1 : rule__TerminalGroup__Group_1__1__Impl ;
     public final void rule__TerminalGroup__Group_1__1() throws RecognitionException {
 
@@ -14087,7 +14507,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group_1__1__Impl_in_rule__TerminalGroup__Group_1__110829);
             rule__TerminalGroup__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14104,10 +14525,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group_1__1
+    // $ANTLR end "rule__TerminalGroup__Group_1__1"
 
 
-    // $ANTLR start rule__TerminalGroup__Group_1__1__Impl
+    // $ANTLR start "rule__TerminalGroup__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5376:1: rule__TerminalGroup__Group_1__1__Impl : ( ( ( rule__TerminalGroup__TokensAssignment_1_1 ) ) ( ( rule__TerminalGroup__TokensAssignment_1_1 )* ) ) ;
     public final void rule__TerminalGroup__Group_1__1__Impl() throws RecognitionException {
 
@@ -14129,7 +14550,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__1__Impl10858);
             rule__TerminalGroup__TokensAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14159,7 +14581,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__1__Impl10870);
             	    rule__TerminalGroup__TokensAssignment_1_1();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -14192,10 +14615,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__Group_1__1__Impl
+    // $ANTLR end "rule__TerminalGroup__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__TerminalToken__Group__0
+    // $ANTLR start "rule__TerminalToken__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5404:1: rule__TerminalToken__Group__0 : rule__TerminalToken__Group__0__Impl rule__TerminalToken__Group__1 ;
     public final void rule__TerminalToken__Group__0() throws RecognitionException {
 
@@ -14207,11 +14630,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__Group__0__Impl_in_rule__TerminalToken__Group__010907);
             rule__TerminalToken__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__Group__1_in_rule__TerminalToken__Group__010910);
             rule__TerminalToken__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14228,10 +14653,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__Group__0
+    // $ANTLR end "rule__TerminalToken__Group__0"
 
 
-    // $ANTLR start rule__TerminalToken__Group__0__Impl
+    // $ANTLR start "rule__TerminalToken__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5416:1: rule__TerminalToken__Group__0__Impl : ( ruleTerminalTokenElement ) ;
     public final void rule__TerminalToken__Group__0__Impl() throws RecognitionException {
 
@@ -14247,7 +14672,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalTokenAccess().getTerminalTokenElementParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_rule__TerminalToken__Group__0__Impl10937);
             ruleTerminalTokenElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalTokenAccess().getTerminalTokenElementParserRuleCall_0()); 
 
@@ -14268,10 +14694,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__Group__0__Impl
+    // $ANTLR end "rule__TerminalToken__Group__0__Impl"
 
 
-    // $ANTLR start rule__TerminalToken__Group__1
+    // $ANTLR start "rule__TerminalToken__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5433:1: rule__TerminalToken__Group__1 : rule__TerminalToken__Group__1__Impl ;
     public final void rule__TerminalToken__Group__1() throws RecognitionException {
 
@@ -14283,7 +14709,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__Group__1__Impl_in_rule__TerminalToken__Group__110966);
             rule__TerminalToken__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14300,10 +14727,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__Group__1
+    // $ANTLR end "rule__TerminalToken__Group__1"
 
 
-    // $ANTLR start rule__TerminalToken__Group__1__Impl
+    // $ANTLR start "rule__TerminalToken__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5444:1: rule__TerminalToken__Group__1__Impl : ( ( rule__TerminalToken__CardinalityAssignment_1 )? ) ;
     public final void rule__TerminalToken__Group__1__Impl() throws RecognitionException {
 
@@ -14330,7 +14757,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__CardinalityAssignment_1_in_rule__TerminalToken__Group__1__Impl10993);
                     rule__TerminalToken__CardinalityAssignment_1();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -14357,10 +14785,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__Group__1__Impl
+    // $ANTLR end "rule__TerminalToken__Group__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__0
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5465:1: rule__ParenthesizedTerminalElement__Group__0 : rule__ParenthesizedTerminalElement__Group__0__Impl rule__ParenthesizedTerminalElement__Group__1 ;
     public final void rule__ParenthesizedTerminalElement__Group__0() throws RecognitionException {
 
@@ -14372,11 +14800,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__0__Impl_in_rule__ParenthesizedTerminalElement__Group__011028);
             rule__ParenthesizedTerminalElement__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__1_in_rule__ParenthesizedTerminalElement__Group__011031);
             rule__ParenthesizedTerminalElement__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14393,10 +14823,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__0
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__0"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__0__Impl
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5477:1: rule__ParenthesizedTerminalElement__Group__0__Impl : ( '(' ) ;
     public final void rule__ParenthesizedTerminalElement__Group__0__Impl() throws RecognitionException {
 
@@ -14430,10 +14860,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__0__Impl
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__0__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__1
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5496:1: rule__ParenthesizedTerminalElement__Group__1 : rule__ParenthesizedTerminalElement__Group__1__Impl rule__ParenthesizedTerminalElement__Group__2 ;
     public final void rule__ParenthesizedTerminalElement__Group__1() throws RecognitionException {
 
@@ -14445,11 +14875,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__1__Impl_in_rule__ParenthesizedTerminalElement__Group__111090);
             rule__ParenthesizedTerminalElement__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__2_in_rule__ParenthesizedTerminalElement__Group__111093);
             rule__ParenthesizedTerminalElement__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14466,10 +14898,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__1
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__1"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__1__Impl
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5508:1: rule__ParenthesizedTerminalElement__Group__1__Impl : ( ruleTerminalAlternatives ) ;
     public final void rule__ParenthesizedTerminalElement__Group__1__Impl() throws RecognitionException {
 
@@ -14485,7 +14917,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getParenthesizedTerminalElementAccess().getTerminalAlternativesParserRuleCall_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalAlternatives_in_rule__ParenthesizedTerminalElement__Group__1__Impl11120);
             ruleTerminalAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParenthesizedTerminalElementAccess().getTerminalAlternativesParserRuleCall_1()); 
 
@@ -14506,10 +14939,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__1__Impl
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__1__Impl"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__2
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5525:1: rule__ParenthesizedTerminalElement__Group__2 : rule__ParenthesizedTerminalElement__Group__2__Impl ;
     public final void rule__ParenthesizedTerminalElement__Group__2() throws RecognitionException {
 
@@ -14521,7 +14954,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__2__Impl_in_rule__ParenthesizedTerminalElement__Group__211149);
             rule__ParenthesizedTerminalElement__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14538,10 +14972,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__2
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__2"
 
 
-    // $ANTLR start rule__ParenthesizedTerminalElement__Group__2__Impl
+    // $ANTLR start "rule__ParenthesizedTerminalElement__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5536:1: rule__ParenthesizedTerminalElement__Group__2__Impl : ( ')' ) ;
     public final void rule__ParenthesizedTerminalElement__Group__2__Impl() throws RecognitionException {
 
@@ -14575,10 +15009,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParenthesizedTerminalElement__Group__2__Impl
+    // $ANTLR end "rule__ParenthesizedTerminalElement__Group__2__Impl"
 
 
-    // $ANTLR start rule__NegatedToken__Group__0
+    // $ANTLR start "rule__NegatedToken__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5561:1: rule__NegatedToken__Group__0 : rule__NegatedToken__Group__0__Impl rule__NegatedToken__Group__1 ;
     public final void rule__NegatedToken__Group__0() throws RecognitionException {
 
@@ -14590,11 +15024,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__Group__0__Impl_in_rule__NegatedToken__Group__011214);
             rule__NegatedToken__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__Group__1_in_rule__NegatedToken__Group__011217);
             rule__NegatedToken__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14611,10 +15047,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__NegatedToken__Group__0
+    // $ANTLR end "rule__NegatedToken__Group__0"
 
 
-    // $ANTLR start rule__NegatedToken__Group__0__Impl
+    // $ANTLR start "rule__NegatedToken__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5573:1: rule__NegatedToken__Group__0__Impl : ( '!' ) ;
     public final void rule__NegatedToken__Group__0__Impl() throws RecognitionException {
 
@@ -14648,10 +15084,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__NegatedToken__Group__0__Impl
+    // $ANTLR end "rule__NegatedToken__Group__0__Impl"
 
 
-    // $ANTLR start rule__NegatedToken__Group__1
+    // $ANTLR start "rule__NegatedToken__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5592:1: rule__NegatedToken__Group__1 : rule__NegatedToken__Group__1__Impl ;
     public final void rule__NegatedToken__Group__1() throws RecognitionException {
 
@@ -14663,7 +15099,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__Group__1__Impl_in_rule__NegatedToken__Group__111276);
             rule__NegatedToken__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14680,10 +15117,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__NegatedToken__Group__1
+    // $ANTLR end "rule__NegatedToken__Group__1"
 
 
-    // $ANTLR start rule__NegatedToken__Group__1__Impl
+    // $ANTLR start "rule__NegatedToken__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5603:1: rule__NegatedToken__Group__1__Impl : ( ( rule__NegatedToken__TerminalAssignment_1 ) ) ;
     public final void rule__NegatedToken__Group__1__Impl() throws RecognitionException {
 
@@ -14702,7 +15139,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__TerminalAssignment_1_in_rule__NegatedToken__Group__1__Impl11303);
             rule__NegatedToken__TerminalAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14726,10 +15164,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__NegatedToken__Group__1__Impl
+    // $ANTLR end "rule__NegatedToken__Group__1__Impl"
 
 
-    // $ANTLR start rule__UntilToken__Group__0
+    // $ANTLR start "rule__UntilToken__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5624:1: rule__UntilToken__Group__0 : rule__UntilToken__Group__0__Impl rule__UntilToken__Group__1 ;
     public final void rule__UntilToken__Group__0() throws RecognitionException {
 
@@ -14741,11 +15179,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__UntilToken__Group__0__Impl_in_rule__UntilToken__Group__011337);
             rule__UntilToken__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__UntilToken__Group__1_in_rule__UntilToken__Group__011340);
             rule__UntilToken__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14762,10 +15202,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__UntilToken__Group__0
+    // $ANTLR end "rule__UntilToken__Group__0"
 
 
-    // $ANTLR start rule__UntilToken__Group__0__Impl
+    // $ANTLR start "rule__UntilToken__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5636:1: rule__UntilToken__Group__0__Impl : ( '->' ) ;
     public final void rule__UntilToken__Group__0__Impl() throws RecognitionException {
 
@@ -14799,10 +15239,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__UntilToken__Group__0__Impl
+    // $ANTLR end "rule__UntilToken__Group__0__Impl"
 
 
-    // $ANTLR start rule__UntilToken__Group__1
+    // $ANTLR start "rule__UntilToken__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5655:1: rule__UntilToken__Group__1 : rule__UntilToken__Group__1__Impl ;
     public final void rule__UntilToken__Group__1() throws RecognitionException {
 
@@ -14814,7 +15254,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__UntilToken__Group__1__Impl_in_rule__UntilToken__Group__111399);
             rule__UntilToken__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14831,10 +15272,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__UntilToken__Group__1
+    // $ANTLR end "rule__UntilToken__Group__1"
 
 
-    // $ANTLR start rule__UntilToken__Group__1__Impl
+    // $ANTLR start "rule__UntilToken__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5666:1: rule__UntilToken__Group__1__Impl : ( ( rule__UntilToken__TerminalAssignment_1 ) ) ;
     public final void rule__UntilToken__Group__1__Impl() throws RecognitionException {
 
@@ -14853,7 +15294,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__UntilToken__TerminalAssignment_1_in_rule__UntilToken__Group__1__Impl11426);
             rule__UntilToken__TerminalAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14877,10 +15319,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__UntilToken__Group__1__Impl
+    // $ANTLR end "rule__UntilToken__Group__1__Impl"
 
 
-    // $ANTLR start rule__Wildcard__Group__0
+    // $ANTLR start "rule__Wildcard__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5687:1: rule__Wildcard__Group__0 : rule__Wildcard__Group__0__Impl rule__Wildcard__Group__1 ;
     public final void rule__Wildcard__Group__0() throws RecognitionException {
 
@@ -14892,11 +15334,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Wildcard__Group__0__Impl_in_rule__Wildcard__Group__011460);
             rule__Wildcard__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__Wildcard__Group__1_in_rule__Wildcard__Group__011463);
             rule__Wildcard__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14913,10 +15357,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Wildcard__Group__0
+    // $ANTLR end "rule__Wildcard__Group__0"
 
 
-    // $ANTLR start rule__Wildcard__Group__0__Impl
+    // $ANTLR start "rule__Wildcard__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5699:1: rule__Wildcard__Group__0__Impl : ( () ) ;
     public final void rule__Wildcard__Group__0__Impl() throws RecognitionException {
 
@@ -14950,10 +15394,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Wildcard__Group__0__Impl
+    // $ANTLR end "rule__Wildcard__Group__0__Impl"
 
 
-    // $ANTLR start rule__Wildcard__Group__1
+    // $ANTLR start "rule__Wildcard__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5718:1: rule__Wildcard__Group__1 : rule__Wildcard__Group__1__Impl ;
     public final void rule__Wildcard__Group__1() throws RecognitionException {
 
@@ -14965,7 +15409,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Wildcard__Group__1__Impl_in_rule__Wildcard__Group__111521);
             rule__Wildcard__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -14982,10 +15427,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Wildcard__Group__1
+    // $ANTLR end "rule__Wildcard__Group__1"
 
 
-    // $ANTLR start rule__Wildcard__Group__1__Impl
+    // $ANTLR start "rule__Wildcard__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5729:1: rule__Wildcard__Group__1__Impl : ( '.' ) ;
     public final void rule__Wildcard__Group__1__Impl() throws RecognitionException {
 
@@ -15019,10 +15464,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Wildcard__Group__1__Impl
+    // $ANTLR end "rule__Wildcard__Group__1__Impl"
 
 
-    // $ANTLR start rule__CharacterRange__Group__0
+    // $ANTLR start "rule__CharacterRange__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5752:1: rule__CharacterRange__Group__0 : rule__CharacterRange__Group__0__Impl rule__CharacterRange__Group__1 ;
     public final void rule__CharacterRange__Group__0() throws RecognitionException {
 
@@ -15034,11 +15479,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group__0__Impl_in_rule__CharacterRange__Group__011584);
             rule__CharacterRange__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group__1_in_rule__CharacterRange__Group__011587);
             rule__CharacterRange__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15055,10 +15502,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group__0
+    // $ANTLR end "rule__CharacterRange__Group__0"
 
 
-    // $ANTLR start rule__CharacterRange__Group__0__Impl
+    // $ANTLR start "rule__CharacterRange__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5764:1: rule__CharacterRange__Group__0__Impl : ( ruleKeyword ) ;
     public final void rule__CharacterRange__Group__0__Impl() throws RecognitionException {
 
@@ -15074,7 +15521,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getCharacterRangeAccess().getKeywordParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__CharacterRange__Group__0__Impl11614);
             ruleKeyword();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCharacterRangeAccess().getKeywordParserRuleCall_0()); 
 
@@ -15095,10 +15543,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group__0__Impl
+    // $ANTLR end "rule__CharacterRange__Group__0__Impl"
 
 
-    // $ANTLR start rule__CharacterRange__Group__1
+    // $ANTLR start "rule__CharacterRange__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5781:1: rule__CharacterRange__Group__1 : rule__CharacterRange__Group__1__Impl ;
     public final void rule__CharacterRange__Group__1() throws RecognitionException {
 
@@ -15110,7 +15558,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group__1__Impl_in_rule__CharacterRange__Group__111643);
             rule__CharacterRange__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15127,10 +15576,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group__1
+    // $ANTLR end "rule__CharacterRange__Group__1"
 
 
-    // $ANTLR start rule__CharacterRange__Group__1__Impl
+    // $ANTLR start "rule__CharacterRange__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5792:1: rule__CharacterRange__Group__1__Impl : ( ( rule__CharacterRange__Group_1__0 )? ) ;
     public final void rule__CharacterRange__Group__1__Impl() throws RecognitionException {
 
@@ -15157,7 +15606,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__0_in_rule__CharacterRange__Group__1__Impl11670);
                     rule__CharacterRange__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -15184,10 +15634,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group__1__Impl
+    // $ANTLR end "rule__CharacterRange__Group__1__Impl"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__0
+    // $ANTLR start "rule__CharacterRange__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5813:1: rule__CharacterRange__Group_1__0 : rule__CharacterRange__Group_1__0__Impl rule__CharacterRange__Group_1__1 ;
     public final void rule__CharacterRange__Group_1__0() throws RecognitionException {
 
@@ -15199,11 +15649,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__0__Impl_in_rule__CharacterRange__Group_1__011705);
             rule__CharacterRange__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__1_in_rule__CharacterRange__Group_1__011708);
             rule__CharacterRange__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15220,10 +15672,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__0
+    // $ANTLR end "rule__CharacterRange__Group_1__0"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__0__Impl
+    // $ANTLR start "rule__CharacterRange__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5825:1: rule__CharacterRange__Group_1__0__Impl : ( () ) ;
     public final void rule__CharacterRange__Group_1__0__Impl() throws RecognitionException {
 
@@ -15257,10 +15709,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__0__Impl
+    // $ANTLR end "rule__CharacterRange__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__1
+    // $ANTLR start "rule__CharacterRange__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5844:1: rule__CharacterRange__Group_1__1 : rule__CharacterRange__Group_1__1__Impl rule__CharacterRange__Group_1__2 ;
     public final void rule__CharacterRange__Group_1__1() throws RecognitionException {
 
@@ -15272,11 +15724,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__1__Impl_in_rule__CharacterRange__Group_1__111766);
             rule__CharacterRange__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__2_in_rule__CharacterRange__Group_1__111769);
             rule__CharacterRange__Group_1__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15293,10 +15747,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__1
+    // $ANTLR end "rule__CharacterRange__Group_1__1"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__1__Impl
+    // $ANTLR start "rule__CharacterRange__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5856:1: rule__CharacterRange__Group_1__1__Impl : ( '..' ) ;
     public final void rule__CharacterRange__Group_1__1__Impl() throws RecognitionException {
 
@@ -15330,10 +15784,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__1__Impl
+    // $ANTLR end "rule__CharacterRange__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__2
+    // $ANTLR start "rule__CharacterRange__Group_1__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5875:1: rule__CharacterRange__Group_1__2 : rule__CharacterRange__Group_1__2__Impl ;
     public final void rule__CharacterRange__Group_1__2() throws RecognitionException {
 
@@ -15345,7 +15799,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__2__Impl_in_rule__CharacterRange__Group_1__211828);
             rule__CharacterRange__Group_1__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15362,10 +15817,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__2
+    // $ANTLR end "rule__CharacterRange__Group_1__2"
 
 
-    // $ANTLR start rule__CharacterRange__Group_1__2__Impl
+    // $ANTLR start "rule__CharacterRange__Group_1__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5886:1: rule__CharacterRange__Group_1__2__Impl : ( ( rule__CharacterRange__RightAssignment_1_2 ) ) ;
     public final void rule__CharacterRange__Group_1__2__Impl() throws RecognitionException {
 
@@ -15384,7 +15839,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__RightAssignment_1_2_in_rule__CharacterRange__Group_1__2__Impl11855);
             rule__CharacterRange__RightAssignment_1_2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15408,10 +15864,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__Group_1__2__Impl
+    // $ANTLR end "rule__CharacterRange__Group_1__2__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__0
+    // $ANTLR start "rule__EnumRule__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5909:1: rule__EnumRule__Group__0 : rule__EnumRule__Group__0__Impl rule__EnumRule__Group__1 ;
     public final void rule__EnumRule__Group__0() throws RecognitionException {
 
@@ -15423,11 +15879,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__0__Impl_in_rule__EnumRule__Group__011891);
             rule__EnumRule__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__1_in_rule__EnumRule__Group__011894);
             rule__EnumRule__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15444,10 +15902,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__0
+    // $ANTLR end "rule__EnumRule__Group__0"
 
 
-    // $ANTLR start rule__EnumRule__Group__0__Impl
+    // $ANTLR start "rule__EnumRule__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5921:1: rule__EnumRule__Group__0__Impl : ( 'enum' ) ;
     public final void rule__EnumRule__Group__0__Impl() throws RecognitionException {
 
@@ -15481,10 +15939,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__0__Impl
+    // $ANTLR end "rule__EnumRule__Group__0__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__1
+    // $ANTLR start "rule__EnumRule__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5940:1: rule__EnumRule__Group__1 : rule__EnumRule__Group__1__Impl rule__EnumRule__Group__2 ;
     public final void rule__EnumRule__Group__1() throws RecognitionException {
 
@@ -15496,11 +15954,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__1__Impl_in_rule__EnumRule__Group__111953);
             rule__EnumRule__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__2_in_rule__EnumRule__Group__111956);
             rule__EnumRule__Group__2();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15517,10 +15977,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__1
+    // $ANTLR end "rule__EnumRule__Group__1"
 
 
-    // $ANTLR start rule__EnumRule__Group__1__Impl
+    // $ANTLR start "rule__EnumRule__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5952:1: rule__EnumRule__Group__1__Impl : ( ( rule__EnumRule__NameAssignment_1 ) ) ;
     public final void rule__EnumRule__Group__1__Impl() throws RecognitionException {
 
@@ -15539,7 +15999,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__NameAssignment_1_in_rule__EnumRule__Group__1__Impl11983);
             rule__EnumRule__NameAssignment_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15563,10 +16024,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__1__Impl
+    // $ANTLR end "rule__EnumRule__Group__1__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__2
+    // $ANTLR start "rule__EnumRule__Group__2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5969:1: rule__EnumRule__Group__2 : rule__EnumRule__Group__2__Impl rule__EnumRule__Group__3 ;
     public final void rule__EnumRule__Group__2() throws RecognitionException {
 
@@ -15578,11 +16039,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__2__Impl_in_rule__EnumRule__Group__212013);
             rule__EnumRule__Group__2__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__3_in_rule__EnumRule__Group__212016);
             rule__EnumRule__Group__3();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15599,10 +16062,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__2
+    // $ANTLR end "rule__EnumRule__Group__2"
 
 
-    // $ANTLR start rule__EnumRule__Group__2__Impl
+    // $ANTLR start "rule__EnumRule__Group__2__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5981:1: rule__EnumRule__Group__2__Impl : ( ( rule__EnumRule__Group_2__0 )? ) ;
     public final void rule__EnumRule__Group__2__Impl() throws RecognitionException {
 
@@ -15629,7 +16092,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group_2__0_in_rule__EnumRule__Group__2__Impl12043);
                     rule__EnumRule__Group_2__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -15656,10 +16120,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__2__Impl
+    // $ANTLR end "rule__EnumRule__Group__2__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__3
+    // $ANTLR start "rule__EnumRule__Group__3"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5998:1: rule__EnumRule__Group__3 : rule__EnumRule__Group__3__Impl rule__EnumRule__Group__4 ;
     public final void rule__EnumRule__Group__3() throws RecognitionException {
 
@@ -15671,11 +16135,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__3__Impl_in_rule__EnumRule__Group__312074);
             rule__EnumRule__Group__3__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__4_in_rule__EnumRule__Group__312077);
             rule__EnumRule__Group__4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15692,10 +16158,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__3
+    // $ANTLR end "rule__EnumRule__Group__3"
 
 
-    // $ANTLR start rule__EnumRule__Group__3__Impl
+    // $ANTLR start "rule__EnumRule__Group__3__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6010:1: rule__EnumRule__Group__3__Impl : ( ':' ) ;
     public final void rule__EnumRule__Group__3__Impl() throws RecognitionException {
 
@@ -15729,10 +16195,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__3__Impl
+    // $ANTLR end "rule__EnumRule__Group__3__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__4
+    // $ANTLR start "rule__EnumRule__Group__4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6029:1: rule__EnumRule__Group__4 : rule__EnumRule__Group__4__Impl rule__EnumRule__Group__5 ;
     public final void rule__EnumRule__Group__4() throws RecognitionException {
 
@@ -15744,11 +16210,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__4__Impl_in_rule__EnumRule__Group__412136);
             rule__EnumRule__Group__4__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__5_in_rule__EnumRule__Group__412139);
             rule__EnumRule__Group__5();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15765,10 +16233,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__4
+    // $ANTLR end "rule__EnumRule__Group__4"
 
 
-    // $ANTLR start rule__EnumRule__Group__4__Impl
+    // $ANTLR start "rule__EnumRule__Group__4__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6041:1: rule__EnumRule__Group__4__Impl : ( ( rule__EnumRule__AlternativesAssignment_4 ) ) ;
     public final void rule__EnumRule__Group__4__Impl() throws RecognitionException {
 
@@ -15787,7 +16255,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__AlternativesAssignment_4_in_rule__EnumRule__Group__4__Impl12166);
             rule__EnumRule__AlternativesAssignment_4();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15811,10 +16280,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__4__Impl
+    // $ANTLR end "rule__EnumRule__Group__4__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group__5
+    // $ANTLR start "rule__EnumRule__Group__5"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6058:1: rule__EnumRule__Group__5 : rule__EnumRule__Group__5__Impl ;
     public final void rule__EnumRule__Group__5() throws RecognitionException {
 
@@ -15826,7 +16295,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__5__Impl_in_rule__EnumRule__Group__512196);
             rule__EnumRule__Group__5__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15843,10 +16313,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__5
+    // $ANTLR end "rule__EnumRule__Group__5"
 
 
-    // $ANTLR start rule__EnumRule__Group__5__Impl
+    // $ANTLR start "rule__EnumRule__Group__5__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6069:1: rule__EnumRule__Group__5__Impl : ( ';' ) ;
     public final void rule__EnumRule__Group__5__Impl() throws RecognitionException {
 
@@ -15880,10 +16350,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group__5__Impl
+    // $ANTLR end "rule__EnumRule__Group__5__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group_2__0
+    // $ANTLR start "rule__EnumRule__Group_2__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6100:1: rule__EnumRule__Group_2__0 : rule__EnumRule__Group_2__0__Impl rule__EnumRule__Group_2__1 ;
     public final void rule__EnumRule__Group_2__0() throws RecognitionException {
 
@@ -15895,11 +16365,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group_2__0__Impl_in_rule__EnumRule__Group_2__012267);
             rule__EnumRule__Group_2__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group_2__1_in_rule__EnumRule__Group_2__012270);
             rule__EnumRule__Group_2__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15916,10 +16388,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group_2__0
+    // $ANTLR end "rule__EnumRule__Group_2__0"
 
 
-    // $ANTLR start rule__EnumRule__Group_2__0__Impl
+    // $ANTLR start "rule__EnumRule__Group_2__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6112:1: rule__EnumRule__Group_2__0__Impl : ( 'returns' ) ;
     public final void rule__EnumRule__Group_2__0__Impl() throws RecognitionException {
 
@@ -15953,10 +16425,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group_2__0__Impl
+    // $ANTLR end "rule__EnumRule__Group_2__0__Impl"
 
 
-    // $ANTLR start rule__EnumRule__Group_2__1
+    // $ANTLR start "rule__EnumRule__Group_2__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6131:1: rule__EnumRule__Group_2__1 : rule__EnumRule__Group_2__1__Impl ;
     public final void rule__EnumRule__Group_2__1() throws RecognitionException {
 
@@ -15968,7 +16440,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group_2__1__Impl_in_rule__EnumRule__Group_2__112329);
             rule__EnumRule__Group_2__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -15985,10 +16458,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group_2__1
+    // $ANTLR end "rule__EnumRule__Group_2__1"
 
 
-    // $ANTLR start rule__EnumRule__Group_2__1__Impl
+    // $ANTLR start "rule__EnumRule__Group_2__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6142:1: rule__EnumRule__Group_2__1__Impl : ( ( rule__EnumRule__TypeAssignment_2_1 ) ) ;
     public final void rule__EnumRule__Group_2__1__Impl() throws RecognitionException {
 
@@ -16007,7 +16480,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumRule__TypeAssignment_2_1_in_rule__EnumRule__Group_2__1__Impl12356);
             rule__EnumRule__TypeAssignment_2_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16031,10 +16505,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__Group_2__1__Impl
+    // $ANTLR end "rule__EnumRule__Group_2__1__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group__0
+    // $ANTLR start "rule__EnumLiterals__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6163:1: rule__EnumLiterals__Group__0 : rule__EnumLiterals__Group__0__Impl rule__EnumLiterals__Group__1 ;
     public final void rule__EnumLiterals__Group__0() throws RecognitionException {
 
@@ -16046,11 +16520,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group__0__Impl_in_rule__EnumLiterals__Group__012390);
             rule__EnumLiterals__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group__1_in_rule__EnumLiterals__Group__012393);
             rule__EnumLiterals__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16067,10 +16543,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group__0
+    // $ANTLR end "rule__EnumLiterals__Group__0"
 
 
-    // $ANTLR start rule__EnumLiterals__Group__0__Impl
+    // $ANTLR start "rule__EnumLiterals__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6175:1: rule__EnumLiterals__Group__0__Impl : ( ruleEnumLiteralDeclaration ) ;
     public final void rule__EnumLiterals__Group__0__Impl() throws RecognitionException {
 
@@ -16086,7 +16562,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getEnumLiteralsAccess().getEnumLiteralDeclarationParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__Group__0__Impl12420);
             ruleEnumLiteralDeclaration();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumLiteralsAccess().getEnumLiteralDeclarationParserRuleCall_0()); 
 
@@ -16107,10 +16584,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group__0__Impl
+    // $ANTLR end "rule__EnumLiterals__Group__0__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group__1
+    // $ANTLR start "rule__EnumLiterals__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6192:1: rule__EnumLiterals__Group__1 : rule__EnumLiterals__Group__1__Impl ;
     public final void rule__EnumLiterals__Group__1() throws RecognitionException {
 
@@ -16122,7 +16599,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group__1__Impl_in_rule__EnumLiterals__Group__112449);
             rule__EnumLiterals__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16139,10 +16617,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group__1
+    // $ANTLR end "rule__EnumLiterals__Group__1"
 
 
-    // $ANTLR start rule__EnumLiterals__Group__1__Impl
+    // $ANTLR start "rule__EnumLiterals__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6203:1: rule__EnumLiterals__Group__1__Impl : ( ( rule__EnumLiterals__Group_1__0 )? ) ;
     public final void rule__EnumLiterals__Group__1__Impl() throws RecognitionException {
 
@@ -16169,7 +16647,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1__0_in_rule__EnumLiterals__Group__1__Impl12476);
                     rule__EnumLiterals__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -16196,10 +16675,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group__1__Impl
+    // $ANTLR end "rule__EnumLiterals__Group__1__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1__0
+    // $ANTLR start "rule__EnumLiterals__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6224:1: rule__EnumLiterals__Group_1__0 : rule__EnumLiterals__Group_1__0__Impl rule__EnumLiterals__Group_1__1 ;
     public final void rule__EnumLiterals__Group_1__0() throws RecognitionException {
 
@@ -16211,11 +16690,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1__0__Impl_in_rule__EnumLiterals__Group_1__012511);
             rule__EnumLiterals__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1__1_in_rule__EnumLiterals__Group_1__012514);
             rule__EnumLiterals__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16232,10 +16713,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1__0
+    // $ANTLR end "rule__EnumLiterals__Group_1__0"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1__0__Impl
+    // $ANTLR start "rule__EnumLiterals__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6236:1: rule__EnumLiterals__Group_1__0__Impl : ( () ) ;
     public final void rule__EnumLiterals__Group_1__0__Impl() throws RecognitionException {
 
@@ -16269,10 +16750,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1__0__Impl
+    // $ANTLR end "rule__EnumLiterals__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1__1
+    // $ANTLR start "rule__EnumLiterals__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6255:1: rule__EnumLiterals__Group_1__1 : rule__EnumLiterals__Group_1__1__Impl ;
     public final void rule__EnumLiterals__Group_1__1() throws RecognitionException {
 
@@ -16284,7 +16765,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1__1__Impl_in_rule__EnumLiterals__Group_1__112572);
             rule__EnumLiterals__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16301,10 +16783,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1__1
+    // $ANTLR end "rule__EnumLiterals__Group_1__1"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1__1__Impl
+    // $ANTLR start "rule__EnumLiterals__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6266:1: rule__EnumLiterals__Group_1__1__Impl : ( ( ( rule__EnumLiterals__Group_1_1__0 ) ) ( ( rule__EnumLiterals__Group_1_1__0 )* ) ) ;
     public final void rule__EnumLiterals__Group_1__1__Impl() throws RecognitionException {
 
@@ -16326,7 +16808,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__1__Impl12601);
             rule__EnumLiterals__Group_1_1__0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16356,7 +16839,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__1__Impl12613);
             	    rule__EnumLiterals__Group_1_1__0();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    }
@@ -16389,10 +16873,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1__1__Impl
+    // $ANTLR end "rule__EnumLiterals__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1_1__0
+    // $ANTLR start "rule__EnumLiterals__Group_1_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6294:1: rule__EnumLiterals__Group_1_1__0 : rule__EnumLiterals__Group_1_1__0__Impl rule__EnumLiterals__Group_1_1__1 ;
     public final void rule__EnumLiterals__Group_1_1__0() throws RecognitionException {
 
@@ -16404,11 +16888,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__0__Impl_in_rule__EnumLiterals__Group_1_1__012650);
             rule__EnumLiterals__Group_1_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__1_in_rule__EnumLiterals__Group_1_1__012653);
             rule__EnumLiterals__Group_1_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16425,10 +16911,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1_1__0
+    // $ANTLR end "rule__EnumLiterals__Group_1_1__0"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1_1__0__Impl
+    // $ANTLR start "rule__EnumLiterals__Group_1_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6306:1: rule__EnumLiterals__Group_1_1__0__Impl : ( '|' ) ;
     public final void rule__EnumLiterals__Group_1_1__0__Impl() throws RecognitionException {
 
@@ -16462,10 +16948,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1_1__0__Impl
+    // $ANTLR end "rule__EnumLiterals__Group_1_1__0__Impl"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1_1__1
+    // $ANTLR start "rule__EnumLiterals__Group_1_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6325:1: rule__EnumLiterals__Group_1_1__1 : rule__EnumLiterals__Group_1_1__1__Impl ;
     public final void rule__EnumLiterals__Group_1_1__1() throws RecognitionException {
 
@@ -16477,7 +16963,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__1__Impl_in_rule__EnumLiterals__Group_1_1__112712);
             rule__EnumLiterals__Group_1_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16494,10 +16981,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1_1__1
+    // $ANTLR end "rule__EnumLiterals__Group_1_1__1"
 
 
-    // $ANTLR start rule__EnumLiterals__Group_1_1__1__Impl
+    // $ANTLR start "rule__EnumLiterals__Group_1_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6336:1: rule__EnumLiterals__Group_1_1__1__Impl : ( ( rule__EnumLiterals__GroupsAssignment_1_1_1 ) ) ;
     public final void rule__EnumLiterals__Group_1_1__1__Impl() throws RecognitionException {
 
@@ -16516,7 +17003,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__GroupsAssignment_1_1_1_in_rule__EnumLiterals__Group_1_1__1__Impl12739);
             rule__EnumLiterals__GroupsAssignment_1_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16540,10 +17028,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__Group_1_1__1__Impl
+    // $ANTLR end "rule__EnumLiterals__Group_1_1__1__Impl"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group__0
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6357:1: rule__EnumLiteralDeclaration__Group__0 : rule__EnumLiteralDeclaration__Group__0__Impl rule__EnumLiteralDeclaration__Group__1 ;
     public final void rule__EnumLiteralDeclaration__Group__0() throws RecognitionException {
 
@@ -16555,11 +17043,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group__0__Impl_in_rule__EnumLiteralDeclaration__Group__012773);
             rule__EnumLiteralDeclaration__Group__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group__1_in_rule__EnumLiteralDeclaration__Group__012776);
             rule__EnumLiteralDeclaration__Group__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16576,10 +17066,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group__0
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group__0"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group__0__Impl
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6369:1: rule__EnumLiteralDeclaration__Group__0__Impl : ( ( rule__EnumLiteralDeclaration__EnumLiteralAssignment_0 ) ) ;
     public final void rule__EnumLiteralDeclaration__Group__0__Impl() throws RecognitionException {
 
@@ -16598,7 +17088,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__EnumLiteralAssignment_0_in_rule__EnumLiteralDeclaration__Group__0__Impl12803);
             rule__EnumLiteralDeclaration__EnumLiteralAssignment_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16622,10 +17113,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group__0__Impl
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group__0__Impl"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group__1
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6386:1: rule__EnumLiteralDeclaration__Group__1 : rule__EnumLiteralDeclaration__Group__1__Impl ;
     public final void rule__EnumLiteralDeclaration__Group__1() throws RecognitionException {
 
@@ -16637,7 +17128,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group__1__Impl_in_rule__EnumLiteralDeclaration__Group__112833);
             rule__EnumLiteralDeclaration__Group__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16654,10 +17146,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group__1
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group__1"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group__1__Impl
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6397:1: rule__EnumLiteralDeclaration__Group__1__Impl : ( ( rule__EnumLiteralDeclaration__Group_1__0 )? ) ;
     public final void rule__EnumLiteralDeclaration__Group__1__Impl() throws RecognitionException {
 
@@ -16684,7 +17176,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group_1__0_in_rule__EnumLiteralDeclaration__Group__1__Impl12860);
                     rule__EnumLiteralDeclaration__Group_1__0();
-                    _fsp--;
+
+                    state._fsp--;
 
 
                     }
@@ -16711,10 +17204,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group__1__Impl
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group__1__Impl"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group_1__0
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group_1__0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6418:1: rule__EnumLiteralDeclaration__Group_1__0 : rule__EnumLiteralDeclaration__Group_1__0__Impl rule__EnumLiteralDeclaration__Group_1__1 ;
     public final void rule__EnumLiteralDeclaration__Group_1__0() throws RecognitionException {
 
@@ -16726,11 +17219,13 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group_1__0__Impl_in_rule__EnumLiteralDeclaration__Group_1__012895);
             rule__EnumLiteralDeclaration__Group_1__0__Impl();
-            _fsp--;
+
+            state._fsp--;
 
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group_1__1_in_rule__EnumLiteralDeclaration__Group_1__012898);
             rule__EnumLiteralDeclaration__Group_1__1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16747,10 +17242,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group_1__0
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group_1__0"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group_1__0__Impl
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group_1__0__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6430:1: rule__EnumLiteralDeclaration__Group_1__0__Impl : ( '=' ) ;
     public final void rule__EnumLiteralDeclaration__Group_1__0__Impl() throws RecognitionException {
 
@@ -16784,10 +17279,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group_1__0__Impl
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group_1__0__Impl"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group_1__1
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group_1__1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6449:1: rule__EnumLiteralDeclaration__Group_1__1 : rule__EnumLiteralDeclaration__Group_1__1__Impl ;
     public final void rule__EnumLiteralDeclaration__Group_1__1() throws RecognitionException {
 
@@ -16799,7 +17294,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group_1__1__Impl_in_rule__EnumLiteralDeclaration__Group_1__112957);
             rule__EnumLiteralDeclaration__Group_1__1__Impl();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16816,10 +17312,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group_1__1
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group_1__1"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__Group_1__1__Impl
+    // $ANTLR start "rule__EnumLiteralDeclaration__Group_1__1__Impl"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6460:1: rule__EnumLiteralDeclaration__Group_1__1__Impl : ( ( rule__EnumLiteralDeclaration__LiteralAssignment_1_1 ) ) ;
     public final void rule__EnumLiteralDeclaration__Group_1__1__Impl() throws RecognitionException {
 
@@ -16838,7 +17334,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__LiteralAssignment_1_1_in_rule__EnumLiteralDeclaration__Group_1__1__Impl12984);
             rule__EnumLiteralDeclaration__LiteralAssignment_1_1();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -16862,10 +17359,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__Group_1__1__Impl
+    // $ANTLR end "rule__EnumLiteralDeclaration__Group_1__1__Impl"
 
 
-    // $ANTLR start rule__Grammar__NameAssignment_1
+    // $ANTLR start "rule__Grammar__NameAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6482:1: rule__Grammar__NameAssignment_1 : ( ruleGrammarID ) ;
     public final void rule__Grammar__NameAssignment_1() throws RecognitionException {
 
@@ -16881,7 +17378,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_rule__Grammar__NameAssignment_113023);
             ruleGrammarID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0()); 
 
@@ -16902,10 +17400,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__NameAssignment_1
+    // $ANTLR end "rule__Grammar__NameAssignment_1"
 
 
-    // $ANTLR start rule__Grammar__UsedGrammarsAssignment_2_1
+    // $ANTLR start "rule__Grammar__UsedGrammarsAssignment_2_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6497:1: rule__Grammar__UsedGrammarsAssignment_2_1 : ( ( ruleGrammarID ) ) ;
     public final void rule__Grammar__UsedGrammarsAssignment_2_1() throws RecognitionException {
 
@@ -16925,7 +17423,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarGrammarIDParserRuleCall_2_1_0_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_113058);
             ruleGrammarID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarGrammarIDParserRuleCall_2_1_0_1()); 
 
@@ -16950,10 +17449,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__UsedGrammarsAssignment_2_1
+    // $ANTLR end "rule__Grammar__UsedGrammarsAssignment_2_1"
 
 
-    // $ANTLR start rule__Grammar__UsedGrammarsAssignment_2_2_1
+    // $ANTLR start "rule__Grammar__UsedGrammarsAssignment_2_2_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6516:1: rule__Grammar__UsedGrammarsAssignment_2_2_1 : ( ( ruleGrammarID ) ) ;
     public final void rule__Grammar__UsedGrammarsAssignment_2_2_1() throws RecognitionException {
 
@@ -16973,7 +17472,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarGrammarIDParserRuleCall_2_2_1_0_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_2_113097);
             ruleGrammarID();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarGrammarIDParserRuleCall_2_2_1_0_1()); 
 
@@ -16998,10 +17498,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__UsedGrammarsAssignment_2_2_1
+    // $ANTLR end "rule__Grammar__UsedGrammarsAssignment_2_2_1"
 
 
-    // $ANTLR start rule__Grammar__DefinesHiddenTokensAssignment_3_0
+    // $ANTLR start "rule__Grammar__DefinesHiddenTokensAssignment_3_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6535:1: rule__Grammar__DefinesHiddenTokensAssignment_3_0 : ( ( 'hidden' ) ) ;
     public final void rule__Grammar__DefinesHiddenTokensAssignment_3_0() throws RecognitionException {
 
@@ -17043,10 +17543,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__DefinesHiddenTokensAssignment_3_0
+    // $ANTLR end "rule__Grammar__DefinesHiddenTokensAssignment_3_0"
 
 
-    // $ANTLR start rule__Grammar__HiddenTokensAssignment_3_2_0
+    // $ANTLR start "rule__Grammar__HiddenTokensAssignment_3_2_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6558:1: rule__Grammar__HiddenTokensAssignment_3_2_0 : ( ( RULE_ID ) ) ;
     public final void rule__Grammar__HiddenTokensAssignment_3_2_0() throws RecognitionException {
 
@@ -17088,10 +17588,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__HiddenTokensAssignment_3_2_0
+    // $ANTLR end "rule__Grammar__HiddenTokensAssignment_3_2_0"
 
 
-    // $ANTLR start rule__Grammar__HiddenTokensAssignment_3_2_1_1
+    // $ANTLR start "rule__Grammar__HiddenTokensAssignment_3_2_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6577:1: rule__Grammar__HiddenTokensAssignment_3_2_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__Grammar__HiddenTokensAssignment_3_2_1_1() throws RecognitionException {
 
@@ -17133,10 +17633,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__HiddenTokensAssignment_3_2_1_1
+    // $ANTLR end "rule__Grammar__HiddenTokensAssignment_3_2_1_1"
 
 
-    // $ANTLR start rule__Grammar__MetamodelDeclarationsAssignment_4
+    // $ANTLR start "rule__Grammar__MetamodelDeclarationsAssignment_4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6596:1: rule__Grammar__MetamodelDeclarationsAssignment_4 : ( ruleAbstractMetamodelDeclaration ) ;
     public final void rule__Grammar__MetamodelDeclarationsAssignment_4() throws RecognitionException {
 
@@ -17152,7 +17652,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getGrammarAccess().getMetamodelDeclarationsAbstractMetamodelDeclarationParserRuleCall_4_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractMetamodelDeclaration_in_rule__Grammar__MetamodelDeclarationsAssignment_413254);
             ruleAbstractMetamodelDeclaration();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarAccess().getMetamodelDeclarationsAbstractMetamodelDeclarationParserRuleCall_4_0()); 
 
@@ -17173,10 +17674,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__MetamodelDeclarationsAssignment_4
+    // $ANTLR end "rule__Grammar__MetamodelDeclarationsAssignment_4"
 
 
-    // $ANTLR start rule__Grammar__RulesAssignment_5
+    // $ANTLR start "rule__Grammar__RulesAssignment_5"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6611:1: rule__Grammar__RulesAssignment_5 : ( ruleAbstractRule ) ;
     public final void rule__Grammar__RulesAssignment_5() throws RecognitionException {
 
@@ -17192,7 +17693,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getGrammarAccess().getRulesAbstractRuleParserRuleCall_5_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_rule__Grammar__RulesAssignment_513285);
             ruleAbstractRule();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGrammarAccess().getRulesAbstractRuleParserRuleCall_5_0()); 
 
@@ -17213,10 +17715,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Grammar__RulesAssignment_5
+    // $ANTLR end "rule__Grammar__RulesAssignment_5"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__NameAssignment_1
+    // $ANTLR start "rule__GeneratedMetamodel__NameAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6626:1: rule__GeneratedMetamodel__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__GeneratedMetamodel__NameAssignment_1() throws RecognitionException {
 
@@ -17250,10 +17752,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__NameAssignment_1
+    // $ANTLR end "rule__GeneratedMetamodel__NameAssignment_1"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__EPackageAssignment_2
+    // $ANTLR start "rule__GeneratedMetamodel__EPackageAssignment_2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6641:1: rule__GeneratedMetamodel__EPackageAssignment_2 : ( ( RULE_STRING ) ) ;
     public final void rule__GeneratedMetamodel__EPackageAssignment_2() throws RecognitionException {
 
@@ -17295,10 +17797,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__EPackageAssignment_2
+    // $ANTLR end "rule__GeneratedMetamodel__EPackageAssignment_2"
 
 
-    // $ANTLR start rule__GeneratedMetamodel__AliasAssignment_3_1
+    // $ANTLR start "rule__GeneratedMetamodel__AliasAssignment_3_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6660:1: rule__GeneratedMetamodel__AliasAssignment_3_1 : ( RULE_ID ) ;
     public final void rule__GeneratedMetamodel__AliasAssignment_3_1() throws RecognitionException {
 
@@ -17332,10 +17834,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__GeneratedMetamodel__AliasAssignment_3_1
+    // $ANTLR end "rule__GeneratedMetamodel__AliasAssignment_3_1"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__EPackageAssignment_1
+    // $ANTLR start "rule__ReferencedMetamodel__EPackageAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6675:1: rule__ReferencedMetamodel__EPackageAssignment_1 : ( ( RULE_STRING ) ) ;
     public final void rule__ReferencedMetamodel__EPackageAssignment_1() throws RecognitionException {
 
@@ -17377,10 +17879,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__EPackageAssignment_1
+    // $ANTLR end "rule__ReferencedMetamodel__EPackageAssignment_1"
 
 
-    // $ANTLR start rule__ReferencedMetamodel__AliasAssignment_2_1
+    // $ANTLR start "rule__ReferencedMetamodel__AliasAssignment_2_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6694:1: rule__ReferencedMetamodel__AliasAssignment_2_1 : ( RULE_ID ) ;
     public final void rule__ReferencedMetamodel__AliasAssignment_2_1() throws RecognitionException {
 
@@ -17414,10 +17916,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ReferencedMetamodel__AliasAssignment_2_1
+    // $ANTLR end "rule__ReferencedMetamodel__AliasAssignment_2_1"
 
 
-    // $ANTLR start rule__ParserRule__NameAssignment_0
+    // $ANTLR start "rule__ParserRule__NameAssignment_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6709:1: rule__ParserRule__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__ParserRule__NameAssignment_0() throws RecognitionException {
 
@@ -17451,10 +17953,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__NameAssignment_0
+    // $ANTLR end "rule__ParserRule__NameAssignment_0"
 
 
-    // $ANTLR start rule__ParserRule__TypeAssignment_1_1
+    // $ANTLR start "rule__ParserRule__TypeAssignment_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6724:1: rule__ParserRule__TypeAssignment_1_1 : ( ruleTypeRef ) ;
     public final void rule__ParserRule__TypeAssignment_1_1() throws RecognitionException {
 
@@ -17470,7 +17972,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getParserRuleAccess().getTypeTypeRefParserRuleCall_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__ParserRule__TypeAssignment_1_113518);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParserRuleAccess().getTypeTypeRefParserRuleCall_1_1_0()); 
 
@@ -17491,10 +17994,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__TypeAssignment_1_1
+    // $ANTLR end "rule__ParserRule__TypeAssignment_1_1"
 
 
-    // $ANTLR start rule__ParserRule__DefinesHiddenTokensAssignment_2_0
+    // $ANTLR start "rule__ParserRule__DefinesHiddenTokensAssignment_2_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6739:1: rule__ParserRule__DefinesHiddenTokensAssignment_2_0 : ( ( 'hidden' ) ) ;
     public final void rule__ParserRule__DefinesHiddenTokensAssignment_2_0() throws RecognitionException {
 
@@ -17536,10 +18039,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__DefinesHiddenTokensAssignment_2_0
+    // $ANTLR end "rule__ParserRule__DefinesHiddenTokensAssignment_2_0"
 
 
-    // $ANTLR start rule__ParserRule__HiddenTokensAssignment_2_2_0
+    // $ANTLR start "rule__ParserRule__HiddenTokensAssignment_2_2_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6762:1: rule__ParserRule__HiddenTokensAssignment_2_2_0 : ( ( RULE_ID ) ) ;
     public final void rule__ParserRule__HiddenTokensAssignment_2_2_0() throws RecognitionException {
 
@@ -17581,10 +18084,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__HiddenTokensAssignment_2_2_0
+    // $ANTLR end "rule__ParserRule__HiddenTokensAssignment_2_2_0"
 
 
-    // $ANTLR start rule__ParserRule__HiddenTokensAssignment_2_2_1_1
+    // $ANTLR start "rule__ParserRule__HiddenTokensAssignment_2_2_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6781:1: rule__ParserRule__HiddenTokensAssignment_2_2_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__ParserRule__HiddenTokensAssignment_2_2_1_1() throws RecognitionException {
 
@@ -17626,10 +18129,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__HiddenTokensAssignment_2_2_1_1
+    // $ANTLR end "rule__ParserRule__HiddenTokensAssignment_2_2_1_1"
 
 
-    // $ANTLR start rule__ParserRule__AlternativesAssignment_4
+    // $ANTLR start "rule__ParserRule__AlternativesAssignment_4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6800:1: rule__ParserRule__AlternativesAssignment_4 : ( ruleAlternatives ) ;
     public final void rule__ParserRule__AlternativesAssignment_4() throws RecognitionException {
 
@@ -17645,7 +18148,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getParserRuleAccess().getAlternativesAlternativesParserRuleCall_4_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAlternatives_in_rule__ParserRule__AlternativesAssignment_413671);
             ruleAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getParserRuleAccess().getAlternativesAlternativesParserRuleCall_4_0()); 
 
@@ -17666,10 +18170,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__ParserRule__AlternativesAssignment_4
+    // $ANTLR end "rule__ParserRule__AlternativesAssignment_4"
 
 
-    // $ANTLR start rule__TypeRef__MetamodelAssignment_0_0
+    // $ANTLR start "rule__TypeRef__MetamodelAssignment_0_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6815:1: rule__TypeRef__MetamodelAssignment_0_0 : ( ( RULE_ID ) ) ;
     public final void rule__TypeRef__MetamodelAssignment_0_0() throws RecognitionException {
 
@@ -17711,10 +18215,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__MetamodelAssignment_0_0
+    // $ANTLR end "rule__TypeRef__MetamodelAssignment_0_0"
 
 
-    // $ANTLR start rule__TypeRef__ClassifierAssignment_1
+    // $ANTLR start "rule__TypeRef__ClassifierAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6834:1: rule__TypeRef__ClassifierAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__TypeRef__ClassifierAssignment_1() throws RecognitionException {
 
@@ -17756,10 +18260,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TypeRef__ClassifierAssignment_1
+    // $ANTLR end "rule__TypeRef__ClassifierAssignment_1"
 
 
-    // $ANTLR start rule__Alternatives__GroupsAssignment_1_1_1
+    // $ANTLR start "rule__Alternatives__GroupsAssignment_1_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6853:1: rule__Alternatives__GroupsAssignment_1_1_1 : ( ruleGroup ) ;
     public final void rule__Alternatives__GroupsAssignment_1_1_1() throws RecognitionException {
 
@@ -17775,7 +18279,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAlternativesAccess().getGroupsGroupParserRuleCall_1_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleGroup_in_rule__Alternatives__GroupsAssignment_1_1_113780);
             ruleGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAlternativesAccess().getGroupsGroupParserRuleCall_1_1_1_0()); 
 
@@ -17796,10 +18301,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Alternatives__GroupsAssignment_1_1_1
+    // $ANTLR end "rule__Alternatives__GroupsAssignment_1_1_1"
 
 
-    // $ANTLR start rule__Group__TokensAssignment_1_1
+    // $ANTLR start "rule__Group__TokensAssignment_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6868:1: rule__Group__TokensAssignment_1_1 : ( ruleAbstractToken ) ;
     public final void rule__Group__TokensAssignment_1_1() throws RecognitionException {
 
@@ -17815,7 +18320,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getGroupAccess().getTokensAbstractTokenParserRuleCall_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractToken_in_rule__Group__TokensAssignment_1_113811);
             ruleAbstractToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getGroupAccess().getTokensAbstractTokenParserRuleCall_1_1_0()); 
 
@@ -17836,10 +18342,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Group__TokensAssignment_1_1
+    // $ANTLR end "rule__Group__TokensAssignment_1_1"
 
 
-    // $ANTLR start rule__AbstractTokenWithCardinality__CardinalityAssignment_1
+    // $ANTLR start "rule__AbstractTokenWithCardinality__CardinalityAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6883:1: rule__AbstractTokenWithCardinality__CardinalityAssignment_1 : ( ( rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0 ) ) ;
     public final void rule__AbstractTokenWithCardinality__CardinalityAssignment_1() throws RecognitionException {
 
@@ -17858,7 +18364,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0_in_rule__AbstractTokenWithCardinality__CardinalityAssignment_113842);
             rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -17882,10 +18389,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AbstractTokenWithCardinality__CardinalityAssignment_1
+    // $ANTLR end "rule__AbstractTokenWithCardinality__CardinalityAssignment_1"
 
 
-    // $ANTLR start rule__Action__TypeAssignment_1
+    // $ANTLR start "rule__Action__TypeAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6899:1: rule__Action__TypeAssignment_1 : ( ruleTypeRef ) ;
     public final void rule__Action__TypeAssignment_1() throws RecognitionException {
 
@@ -17901,7 +18408,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getActionAccess().getTypeTypeRefParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Action__TypeAssignment_113875);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getActionAccess().getTypeTypeRefParserRuleCall_1_0()); 
 
@@ -17922,10 +18430,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__TypeAssignment_1
+    // $ANTLR end "rule__Action__TypeAssignment_1"
 
 
-    // $ANTLR start rule__Action__FeatureAssignment_2_1
+    // $ANTLR start "rule__Action__FeatureAssignment_2_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6914:1: rule__Action__FeatureAssignment_2_1 : ( RULE_ID ) ;
     public final void rule__Action__FeatureAssignment_2_1() throws RecognitionException {
 
@@ -17959,10 +18467,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__FeatureAssignment_2_1
+    // $ANTLR end "rule__Action__FeatureAssignment_2_1"
 
 
-    // $ANTLR start rule__Action__OperatorAssignment_2_2
+    // $ANTLR start "rule__Action__OperatorAssignment_2_2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6929:1: rule__Action__OperatorAssignment_2_2 : ( ( rule__Action__OperatorAlternatives_2_2_0 ) ) ;
     public final void rule__Action__OperatorAssignment_2_2() throws RecognitionException {
 
@@ -17981,7 +18489,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Action__OperatorAlternatives_2_2_0_in_rule__Action__OperatorAssignment_2_213937);
             rule__Action__OperatorAlternatives_2_2_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -18005,10 +18514,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Action__OperatorAssignment_2_2
+    // $ANTLR end "rule__Action__OperatorAssignment_2_2"
 
 
-    // $ANTLR start rule__Keyword__ValueAssignment
+    // $ANTLR start "rule__Keyword__ValueAssignment"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6945:1: rule__Keyword__ValueAssignment : ( RULE_STRING ) ;
     public final void rule__Keyword__ValueAssignment() throws RecognitionException {
 
@@ -18042,10 +18551,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Keyword__ValueAssignment
+    // $ANTLR end "rule__Keyword__ValueAssignment"
 
 
-    // $ANTLR start rule__RuleCall__RuleAssignment
+    // $ANTLR start "rule__RuleCall__RuleAssignment"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6960:1: rule__RuleCall__RuleAssignment : ( ( RULE_ID ) ) ;
     public final void rule__RuleCall__RuleAssignment() throws RecognitionException {
 
@@ -18087,10 +18596,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__RuleCall__RuleAssignment
+    // $ANTLR end "rule__RuleCall__RuleAssignment"
 
 
-    // $ANTLR start rule__Assignment__FeatureAssignment_0
+    // $ANTLR start "rule__Assignment__FeatureAssignment_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6979:1: rule__Assignment__FeatureAssignment_0 : ( RULE_ID ) ;
     public final void rule__Assignment__FeatureAssignment_0() throws RecognitionException {
 
@@ -18124,10 +18633,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__FeatureAssignment_0
+    // $ANTLR end "rule__Assignment__FeatureAssignment_0"
 
 
-    // $ANTLR start rule__Assignment__OperatorAssignment_1
+    // $ANTLR start "rule__Assignment__OperatorAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:6994:1: rule__Assignment__OperatorAssignment_1 : ( ( rule__Assignment__OperatorAlternatives_1_0 ) ) ;
     public final void rule__Assignment__OperatorAssignment_1() throws RecognitionException {
 
@@ -18146,7 +18655,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__Assignment__OperatorAlternatives_1_0_in_rule__Assignment__OperatorAssignment_114071);
             rule__Assignment__OperatorAlternatives_1_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -18170,10 +18680,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__OperatorAssignment_1
+    // $ANTLR end "rule__Assignment__OperatorAssignment_1"
 
 
-    // $ANTLR start rule__Assignment__TerminalAssignment_2
+    // $ANTLR start "rule__Assignment__TerminalAssignment_2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7010:1: rule__Assignment__TerminalAssignment_2 : ( ruleAssignableTerminal ) ;
     public final void rule__Assignment__TerminalAssignment_2() throws RecognitionException {
 
@@ -18189,7 +18699,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAssignmentAccess().getTerminalAssignableTerminalParserRuleCall_2_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_rule__Assignment__TerminalAssignment_214104);
             ruleAssignableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignmentAccess().getTerminalAssignableTerminalParserRuleCall_2_0()); 
 
@@ -18210,10 +18721,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__Assignment__TerminalAssignment_2
+    // $ANTLR end "rule__Assignment__TerminalAssignment_2"
 
 
-    // $ANTLR start rule__AssignableAlternatives__GroupsAssignment_1_1_1
+    // $ANTLR start "rule__AssignableAlternatives__GroupsAssignment_1_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7025:1: rule__AssignableAlternatives__GroupsAssignment_1_1_1 : ( ruleAssignableTerminal ) ;
     public final void rule__AssignableAlternatives__GroupsAssignment_1_1_1() throws RecognitionException {
 
@@ -18229,7 +18740,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getAssignableAlternativesAccess().getGroupsAssignableTerminalParserRuleCall_1_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__GroupsAssignment_1_1_114135);
             ruleAssignableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getAssignableAlternativesAccess().getGroupsAssignableTerminalParserRuleCall_1_1_1_0()); 
 
@@ -18250,10 +18762,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__AssignableAlternatives__GroupsAssignment_1_1_1
+    // $ANTLR end "rule__AssignableAlternatives__GroupsAssignment_1_1_1"
 
 
-    // $ANTLR start rule__CrossReference__TypeAssignment_1
+    // $ANTLR start "rule__CrossReference__TypeAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7040:1: rule__CrossReference__TypeAssignment_1 : ( ruleTypeRef ) ;
     public final void rule__CrossReference__TypeAssignment_1() throws RecognitionException {
 
@@ -18269,7 +18781,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getCrossReferenceAccess().getTypeTypeRefParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__CrossReference__TypeAssignment_114166);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCrossReferenceAccess().getTypeTypeRefParserRuleCall_1_0()); 
 
@@ -18290,10 +18803,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__TypeAssignment_1
+    // $ANTLR end "rule__CrossReference__TypeAssignment_1"
 
 
-    // $ANTLR start rule__CrossReference__TerminalAssignment_2_1
+    // $ANTLR start "rule__CrossReference__TerminalAssignment_2_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7055:1: rule__CrossReference__TerminalAssignment_2_1 : ( ruleCrossReferenceableTerminal ) ;
     public final void rule__CrossReference__TerminalAssignment_2_1() throws RecognitionException {
 
@@ -18309,7 +18822,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getCrossReferenceAccess().getTerminalCrossReferenceableTerminalParserRuleCall_2_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReference__TerminalAssignment_2_114197);
             ruleCrossReferenceableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCrossReferenceAccess().getTerminalCrossReferenceableTerminalParserRuleCall_2_1_0()); 
 
@@ -18330,10 +18844,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReference__TerminalAssignment_2_1
+    // $ANTLR end "rule__CrossReference__TerminalAssignment_2_1"
 
 
-    // $ANTLR start rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1
+    // $ANTLR start "rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7070:1: rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1 : ( ruleCrossReferenceableTerminal ) ;
     public final void rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1() throws RecognitionException {
 
@@ -18349,7 +18863,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getCrossReferenceableAlternativesAccess().getGroupsCrossReferenceableTerminalParserRuleCall_1_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_114228);
             ruleCrossReferenceableTerminal();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCrossReferenceableAlternativesAccess().getGroupsCrossReferenceableTerminalParserRuleCall_1_1_1_0()); 
 
@@ -18370,10 +18885,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1
+    // $ANTLR end "rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1"
 
 
-    // $ANTLR start rule__TerminalRule__NameAssignment_1
+    // $ANTLR start "rule__TerminalRule__NameAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7085:1: rule__TerminalRule__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__TerminalRule__NameAssignment_1() throws RecognitionException {
 
@@ -18407,10 +18922,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__NameAssignment_1
+    // $ANTLR end "rule__TerminalRule__NameAssignment_1"
 
 
-    // $ANTLR start rule__TerminalRule__TypeAssignment_2_1
+    // $ANTLR start "rule__TerminalRule__TypeAssignment_2_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7100:1: rule__TerminalRule__TypeAssignment_2_1 : ( ruleTypeRef ) ;
     public final void rule__TerminalRule__TypeAssignment_2_1() throws RecognitionException {
 
@@ -18426,7 +18941,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalRuleAccess().getTypeTypeRefParserRuleCall_2_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__TerminalRule__TypeAssignment_2_114290);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalRuleAccess().getTypeTypeRefParserRuleCall_2_1_0()); 
 
@@ -18447,10 +18963,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__TypeAssignment_2_1
+    // $ANTLR end "rule__TerminalRule__TypeAssignment_2_1"
 
 
-    // $ANTLR start rule__TerminalRule__AlternativesAssignment_4
+    // $ANTLR start "rule__TerminalRule__AlternativesAssignment_4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7115:1: rule__TerminalRule__AlternativesAssignment_4 : ( ruleTerminalAlternatives ) ;
     public final void rule__TerminalRule__AlternativesAssignment_4() throws RecognitionException {
 
@@ -18466,7 +18982,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalRuleAccess().getAlternativesTerminalAlternativesParserRuleCall_4_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalAlternatives_in_rule__TerminalRule__AlternativesAssignment_414321);
             ruleTerminalAlternatives();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalRuleAccess().getAlternativesTerminalAlternativesParserRuleCall_4_0()); 
 
@@ -18487,10 +19004,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalRule__AlternativesAssignment_4
+    // $ANTLR end "rule__TerminalRule__AlternativesAssignment_4"
 
 
-    // $ANTLR start rule__TerminalAlternatives__GroupsAssignment_1_1_1
+    // $ANTLR start "rule__TerminalAlternatives__GroupsAssignment_1_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7130:1: rule__TerminalAlternatives__GroupsAssignment_1_1_1 : ( ruleTerminalGroup ) ;
     public final void rule__TerminalAlternatives__GroupsAssignment_1_1_1() throws RecognitionException {
 
@@ -18506,7 +19023,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalAlternativesAccess().getGroupsTerminalGroupParserRuleCall_1_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__GroupsAssignment_1_1_114352);
             ruleTerminalGroup();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalAlternativesAccess().getGroupsTerminalGroupParserRuleCall_1_1_1_0()); 
 
@@ -18527,10 +19045,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalAlternatives__GroupsAssignment_1_1_1
+    // $ANTLR end "rule__TerminalAlternatives__GroupsAssignment_1_1_1"
 
 
-    // $ANTLR start rule__TerminalGroup__TokensAssignment_1_1
+    // $ANTLR start "rule__TerminalGroup__TokensAssignment_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7145:1: rule__TerminalGroup__TokensAssignment_1_1 : ( ruleTerminalToken ) ;
     public final void rule__TerminalGroup__TokensAssignment_1_1() throws RecognitionException {
 
@@ -18546,7 +19064,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getTerminalGroupAccess().getTokensTerminalTokenParserRuleCall_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__TokensAssignment_1_114383);
             ruleTerminalToken();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getTerminalGroupAccess().getTokensTerminalTokenParserRuleCall_1_1_0()); 
 
@@ -18567,10 +19086,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalGroup__TokensAssignment_1_1
+    // $ANTLR end "rule__TerminalGroup__TokensAssignment_1_1"
 
 
-    // $ANTLR start rule__TerminalToken__CardinalityAssignment_1
+    // $ANTLR start "rule__TerminalToken__CardinalityAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7160:1: rule__TerminalToken__CardinalityAssignment_1 : ( ( rule__TerminalToken__CardinalityAlternatives_1_0 ) ) ;
     public final void rule__TerminalToken__CardinalityAssignment_1() throws RecognitionException {
 
@@ -18589,7 +19108,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             {
             pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__CardinalityAlternatives_1_0_in_rule__TerminalToken__CardinalityAssignment_114414);
             rule__TerminalToken__CardinalityAlternatives_1_0();
-            _fsp--;
+
+            state._fsp--;
 
 
             }
@@ -18613,10 +19133,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__TerminalToken__CardinalityAssignment_1
+    // $ANTLR end "rule__TerminalToken__CardinalityAssignment_1"
 
 
-    // $ANTLR start rule__NegatedToken__TerminalAssignment_1
+    // $ANTLR start "rule__NegatedToken__TerminalAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7176:1: rule__NegatedToken__TerminalAssignment_1 : ( ruleTerminalTokenElement ) ;
     public final void rule__NegatedToken__TerminalAssignment_1() throws RecognitionException {
 
@@ -18632,7 +19152,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getNegatedTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_rule__NegatedToken__TerminalAssignment_114447);
             ruleTerminalTokenElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getNegatedTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
 
@@ -18653,10 +19174,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__NegatedToken__TerminalAssignment_1
+    // $ANTLR end "rule__NegatedToken__TerminalAssignment_1"
 
 
-    // $ANTLR start rule__UntilToken__TerminalAssignment_1
+    // $ANTLR start "rule__UntilToken__TerminalAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7191:1: rule__UntilToken__TerminalAssignment_1 : ( ruleTerminalTokenElement ) ;
     public final void rule__UntilToken__TerminalAssignment_1() throws RecognitionException {
 
@@ -18672,7 +19193,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getUntilTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_rule__UntilToken__TerminalAssignment_114478);
             ruleTerminalTokenElement();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getUntilTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
 
@@ -18693,10 +19215,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__UntilToken__TerminalAssignment_1
+    // $ANTLR end "rule__UntilToken__TerminalAssignment_1"
 
 
-    // $ANTLR start rule__CharacterRange__RightAssignment_1_2
+    // $ANTLR start "rule__CharacterRange__RightAssignment_1_2"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7206:1: rule__CharacterRange__RightAssignment_1_2 : ( ruleKeyword ) ;
     public final void rule__CharacterRange__RightAssignment_1_2() throws RecognitionException {
 
@@ -18712,7 +19234,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getCharacterRangeAccess().getRightKeywordParserRuleCall_1_2_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__CharacterRange__RightAssignment_1_214509);
             ruleKeyword();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getCharacterRangeAccess().getRightKeywordParserRuleCall_1_2_0()); 
 
@@ -18733,10 +19256,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__CharacterRange__RightAssignment_1_2
+    // $ANTLR end "rule__CharacterRange__RightAssignment_1_2"
 
 
-    // $ANTLR start rule__EnumRule__NameAssignment_1
+    // $ANTLR start "rule__EnumRule__NameAssignment_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7221:1: rule__EnumRule__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__EnumRule__NameAssignment_1() throws RecognitionException {
 
@@ -18770,10 +19293,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__NameAssignment_1
+    // $ANTLR end "rule__EnumRule__NameAssignment_1"
 
 
-    // $ANTLR start rule__EnumRule__TypeAssignment_2_1
+    // $ANTLR start "rule__EnumRule__TypeAssignment_2_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7236:1: rule__EnumRule__TypeAssignment_2_1 : ( ruleTypeRef ) ;
     public final void rule__EnumRule__TypeAssignment_2_1() throws RecognitionException {
 
@@ -18789,7 +19312,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getEnumRuleAccess().getTypeTypeRefParserRuleCall_2_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__EnumRule__TypeAssignment_2_114571);
             ruleTypeRef();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumRuleAccess().getTypeTypeRefParserRuleCall_2_1_0()); 
 
@@ -18810,10 +19334,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__TypeAssignment_2_1
+    // $ANTLR end "rule__EnumRule__TypeAssignment_2_1"
 
 
-    // $ANTLR start rule__EnumRule__AlternativesAssignment_4
+    // $ANTLR start "rule__EnumRule__AlternativesAssignment_4"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7251:1: rule__EnumRule__AlternativesAssignment_4 : ( ruleEnumLiterals ) ;
     public final void rule__EnumRule__AlternativesAssignment_4() throws RecognitionException {
 
@@ -18829,7 +19353,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getEnumRuleAccess().getAlternativesEnumLiteralsParserRuleCall_4_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumLiterals_in_rule__EnumRule__AlternativesAssignment_414602);
             ruleEnumLiterals();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumRuleAccess().getAlternativesEnumLiteralsParserRuleCall_4_0()); 
 
@@ -18850,10 +19375,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumRule__AlternativesAssignment_4
+    // $ANTLR end "rule__EnumRule__AlternativesAssignment_4"
 
 
-    // $ANTLR start rule__EnumLiterals__GroupsAssignment_1_1_1
+    // $ANTLR start "rule__EnumLiterals__GroupsAssignment_1_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7266:1: rule__EnumLiterals__GroupsAssignment_1_1_1 : ( ruleEnumLiteralDeclaration ) ;
     public final void rule__EnumLiterals__GroupsAssignment_1_1_1() throws RecognitionException {
 
@@ -18869,7 +19394,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getEnumLiteralsAccess().getGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__GroupsAssignment_1_1_114633);
             ruleEnumLiteralDeclaration();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumLiteralsAccess().getGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0()); 
 
@@ -18890,10 +19416,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiterals__GroupsAssignment_1_1_1
+    // $ANTLR end "rule__EnumLiterals__GroupsAssignment_1_1_1"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__EnumLiteralAssignment_0
+    // $ANTLR start "rule__EnumLiteralDeclaration__EnumLiteralAssignment_0"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7281:1: rule__EnumLiteralDeclaration__EnumLiteralAssignment_0 : ( ( RULE_ID ) ) ;
     public final void rule__EnumLiteralDeclaration__EnumLiteralAssignment_0() throws RecognitionException {
 
@@ -18935,10 +19461,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__EnumLiteralAssignment_0
+    // $ANTLR end "rule__EnumLiteralDeclaration__EnumLiteralAssignment_0"
 
 
-    // $ANTLR start rule__EnumLiteralDeclaration__LiteralAssignment_1_1
+    // $ANTLR start "rule__EnumLiteralDeclaration__LiteralAssignment_1_1"
     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/ui/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:7300:1: rule__EnumLiteralDeclaration__LiteralAssignment_1_1 : ( ruleKeyword ) ;
     public final void rule__EnumLiteralDeclaration__LiteralAssignment_1_1() throws RecognitionException {
 
@@ -18954,7 +19480,8 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
              before(grammarAccess.getEnumLiteralDeclarationAccess().getLiteralKeywordParserRuleCall_1_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__EnumLiteralDeclaration__LiteralAssignment_1_114703);
             ruleKeyword();
-            _fsp--;
+
+            state._fsp--;
 
              after(grammarAccess.getEnumLiteralDeclarationAccess().getLiteralKeywordParserRuleCall_1_1_0()); 
 
@@ -18975,7 +19502,9 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         }
         return ;
     }
-    // $ANTLR end rule__EnumLiteralDeclaration__LiteralAssignment_1_1
+    // $ANTLR end "rule__EnumLiteralDeclaration__LiteralAssignment_1_1"
+
+    // Delegated rules
 
 
  
@@ -19142,22 +19671,22 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__Grammar__Group__1__Impl_in_rule__Grammar__Group__13327 = new BitSet(new long[]{0x0000031002840010L});
         public static final BitSet FOLLOW_rule__Grammar__Group__2_in_rule__Grammar__Group__13330 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__NameAssignment_1_in_rule__Grammar__Group__1__Impl3357 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group__2__Impl_in_rule__Grammar__Group__23387 = new BitSet(new long[]{0x0000031002800010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__2__Impl_in_rule__Grammar__Group__23387 = new BitSet(new long[]{0x0000031002840010L});
         public static final BitSet FOLLOW_rule__Grammar__Group__3_in_rule__Grammar__Group__23390 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_2__0_in_rule__Grammar__Group__2__Impl3417 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group__3__Impl_in_rule__Grammar__Group__33448 = new BitSet(new long[]{0x0000011002800010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__3__Impl_in_rule__Grammar__Group__33448 = new BitSet(new long[]{0x0000031002840010L});
         public static final BitSet FOLLOW_rule__Grammar__Group__4_in_rule__Grammar__Group__33451 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3__0_in_rule__Grammar__Group__3__Impl3478 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group__4__Impl_in_rule__Grammar__Group__43509 = new BitSet(new long[]{0x0000011000000010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__4__Impl_in_rule__Grammar__Group__43509 = new BitSet(new long[]{0x0000031002840010L});
         public static final BitSet FOLLOW_rule__Grammar__Group__5_in_rule__Grammar__Group__43512 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__MetamodelDeclarationsAssignment_4_in_rule__Grammar__Group__4__Impl3539 = new BitSet(new long[]{0x0000000002800002L});
         public static final BitSet FOLLOW_rule__Grammar__Group__5__Impl_in_rule__Grammar__Group__53570 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3599 = new BitSet(new long[]{0x0000011000000012L});
-        public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3611 = new BitSet(new long[]{0x0000011000000012L});
+        public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3599 = new BitSet(new long[]{0x0000031002840012L});
+        public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__5__Impl3611 = new BitSet(new long[]{0x0000031002840012L});
         public static final BitSet FOLLOW_rule__Grammar__Group_2__0__Impl_in_rule__Grammar__Group_2__03656 = new BitSet(new long[]{0x0000000000000010L});
         public static final BitSet FOLLOW_rule__Grammar__Group_2__1_in_rule__Grammar__Group_2__03659 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_18_in_rule__Grammar__Group_2__0__Impl3687 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group_2__1__Impl_in_rule__Grammar__Group_2__13718 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_2__1__Impl_in_rule__Grammar__Group_2__13718 = new BitSet(new long[]{0x0000000000080000L});
         public static final BitSet FOLLOW_rule__Grammar__Group_2__2_in_rule__Grammar__Group_2__13721 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_1_in_rule__Grammar__Group_2__1__Impl3748 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_2__2__Impl_in_rule__Grammar__Group_2__23778 = new BitSet(new long[]{0x0000000000000002L});
@@ -19173,12 +19702,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__Grammar__Group_3__1__Impl_in_rule__Grammar__Group_3__14025 = new BitSet(new long[]{0x0000000000200010L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3__2_in_rule__Grammar__Group_3__14028 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_20_in_rule__Grammar__Group_3__1__Impl4056 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group_3__2__Impl_in_rule__Grammar__Group_3__24087 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3__2__Impl_in_rule__Grammar__Group_3__24087 = new BitSet(new long[]{0x0000000000200010L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3__3_in_rule__Grammar__Group_3__24090 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3_2__0_in_rule__Grammar__Group_3__2__Impl4117 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3__3__Impl_in_rule__Grammar__Group_3__34148 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_21_in_rule__Grammar__Group_3__3__Impl4176 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Grammar__Group_3_2__0__Impl_in_rule__Grammar__Group_3_2__04215 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3_2__0__Impl_in_rule__Grammar__Group_3_2__04215 = new BitSet(new long[]{0x0000000000080000L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3_2__1_in_rule__Grammar__Group_3_2__04218 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_0_in_rule__Grammar__Group_3_2__0__Impl4245 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3_2__1__Impl_in_rule__Grammar__Group_3_2__14275 = new BitSet(new long[]{0x0000000000000002L});
@@ -19188,7 +19717,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_19_in_rule__Grammar__Group_3_2_1__0__Impl4368 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__Group_3_2_1__1__Impl_in_rule__Grammar__Group_3_2_1__14399 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_1_1_in_rule__Grammar__Group_3_2_1__1__Impl4426 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GrammarID__Group__0__Impl_in_rule__GrammarID__Group__04460 = new BitSet(new long[]{0x0000000000400002L});
+        public static final BitSet FOLLOW_rule__GrammarID__Group__0__Impl_in_rule__GrammarID__Group__04460 = new BitSet(new long[]{0x0000000000400000L});
         public static final BitSet FOLLOW_rule__GrammarID__Group__1_in_rule__GrammarID__Group__04463 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__GrammarID__Group__0__Impl4490 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GrammarID__Group__1__Impl_in_rule__GrammarID__Group__14519 = new BitSet(new long[]{0x0000000000000002L});
@@ -19204,7 +19733,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__1__Impl_in_rule__GeneratedMetamodel__Group__14765 = new BitSet(new long[]{0x0000000000000020L});
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__2_in_rule__GeneratedMetamodel__Group__14768 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__NameAssignment_1_in_rule__GeneratedMetamodel__Group__1__Impl4795 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__2__Impl_in_rule__GeneratedMetamodel__Group__24825 = new BitSet(new long[]{0x0000000001000002L});
+        public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__2__Impl_in_rule__GeneratedMetamodel__Group__24825 = new BitSet(new long[]{0x0000000001000000L});
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__3_in_rule__GeneratedMetamodel__Group__24828 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__EPackageAssignment_2_in_rule__GeneratedMetamodel__Group__2__Impl4855 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__3__Impl_in_rule__GeneratedMetamodel__Group__34885 = new BitSet(new long[]{0x0000000000000002L});
@@ -19217,7 +19746,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__0__Impl_in_rule__ReferencedMetamodel__Group__05074 = new BitSet(new long[]{0x0000000000000020L});
         public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__05077 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_25_in_rule__ReferencedMetamodel__Group__0__Impl5105 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1__Impl_in_rule__ReferencedMetamodel__Group__15136 = new BitSet(new long[]{0x0000000001000002L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1__Impl_in_rule__ReferencedMetamodel__Group__15136 = new BitSet(new long[]{0x0000000001000000L});
         public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__15139 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_1_in_rule__ReferencedMetamodel__Group__1__Impl5166 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__2__Impl_in_rule__ReferencedMetamodel__Group__25196 = new BitSet(new long[]{0x0000000000000002L});
@@ -19230,10 +19759,10 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__ParserRule__Group__0__Impl_in_rule__ParserRule__Group__05383 = new BitSet(new long[]{0x0000020014000000L});
         public static final BitSet FOLLOW_rule__ParserRule__Group__1_in_rule__ParserRule__Group__05386 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__NameAssignment_0_in_rule__ParserRule__Group__0__Impl5413 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ParserRule__Group__1__Impl_in_rule__ParserRule__Group__15443 = new BitSet(new long[]{0x0000020004000000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group__1__Impl_in_rule__ParserRule__Group__15443 = new BitSet(new long[]{0x0000020014000000L});
         public static final BitSet FOLLOW_rule__ParserRule__Group__2_in_rule__ParserRule__Group__15446 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_1__0_in_rule__ParserRule__Group__1__Impl5473 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ParserRule__Group__2__Impl_in_rule__ParserRule__Group__25504 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group__2__Impl_in_rule__ParserRule__Group__25504 = new BitSet(new long[]{0x0000020014000000L});
         public static final BitSet FOLLOW_rule__ParserRule__Group__3_in_rule__ParserRule__Group__25507 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2__0_in_rule__ParserRule__Group__2__Impl5534 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group__3__Impl_in_rule__ParserRule__Group__35565 = new BitSet(new long[]{0x0000000080100030L});
@@ -19255,12 +19784,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__ParserRule__Group_2__1__Impl_in_rule__ParserRule__Group_2__15941 = new BitSet(new long[]{0x0000000000200010L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2__2_in_rule__ParserRule__Group_2__15944 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_20_in_rule__ParserRule__Group_2__1__Impl5972 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ParserRule__Group_2__2__Impl_in_rule__ParserRule__Group_2__26003 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2__2__Impl_in_rule__ParserRule__Group_2__26003 = new BitSet(new long[]{0x0000000000200010L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2__3_in_rule__ParserRule__Group_2__26006 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__0_in_rule__ParserRule__Group_2__2__Impl6033 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2__3__Impl_in_rule__ParserRule__Group_2__36064 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_21_in_rule__ParserRule__Group_2__3__Impl6092 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__0__Impl_in_rule__ParserRule__Group_2_2__06131 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__0__Impl_in_rule__ParserRule__Group_2_2__06131 = new BitSet(new long[]{0x0000000000080000L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__1_in_rule__ParserRule__Group_2_2__06134 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_0_in_rule__ParserRule__Group_2_2__0__Impl6161 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__1__Impl_in_rule__ParserRule__Group_2_2__16191 = new BitSet(new long[]{0x0000000000000002L});
@@ -19280,7 +19809,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__TypeRef__MetamodelAssignment_0_0_in_rule__TypeRef__Group_0__0__Impl6528 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TypeRef__Group_0__1__Impl_in_rule__TypeRef__Group_0__16558 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_29_in_rule__TypeRef__Group_0__1__Impl6586 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Alternatives__Group__0__Impl_in_rule__Alternatives__Group__06621 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__Alternatives__Group__0__Impl_in_rule__Alternatives__Group__06621 = new BitSet(new long[]{0x0000000040000000L});
         public static final BitSet FOLLOW_rule__Alternatives__Group__1_in_rule__Alternatives__Group__06624 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleGroup_in_rule__Alternatives__Group__0__Impl6651 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Alternatives__Group__1__Impl_in_rule__Alternatives__Group__16680 = new BitSet(new long[]{0x0000000000000002L});
@@ -19295,7 +19824,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_30_in_rule__Alternatives__Group_1_1__0__Impl6912 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Alternatives__Group_1_1__1__Impl_in_rule__Alternatives__Group_1_1__16943 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Alternatives__GroupsAssignment_1_1_1_in_rule__Alternatives__Group_1_1__1__Impl6970 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Group__Group__0__Impl_in_rule__Group__Group__07004 = new BitSet(new long[]{0x0000000080100032L});
+        public static final BitSet FOLLOW_rule__Group__Group__0__Impl_in_rule__Group__Group__07004 = new BitSet(new long[]{0x0000000080100030L});
         public static final BitSet FOLLOW_rule__Group__Group__1_in_rule__Group__Group__07007 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleAbstractToken_in_rule__Group__Group__0__Impl7034 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Group__Group__1__Impl_in_rule__Group__Group__17063 = new BitSet(new long[]{0x0000000000000002L});
@@ -19305,7 +19834,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__Group__Group_1__1__Impl_in_rule__Group__Group_1__17186 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__1__Impl7215 = new BitSet(new long[]{0x0000000080100032L});
         public static final BitSet FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__1__Impl7227 = new BitSet(new long[]{0x0000000080100032L});
-        public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__0__Impl_in_rule__AbstractTokenWithCardinality__Group__07264 = new BitSet(new long[]{0x0000000000003802L});
+        public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__0__Impl_in_rule__AbstractTokenWithCardinality__Group__07264 = new BitSet(new long[]{0x0000000000003800L});
         public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__1_in_rule__AbstractTokenWithCardinality__Group__07267 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Alternatives_0_in_rule__AbstractTokenWithCardinality__Group__0__Impl7294 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__1__Impl_in_rule__AbstractTokenWithCardinality__Group__17324 = new BitSet(new long[]{0x0000000000000002L});
@@ -19316,7 +19845,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__Action__Group__1__Impl_in_rule__Action__Group__17448 = new BitSet(new long[]{0x0000000100400000L});
         public static final BitSet FOLLOW_rule__Action__Group__2_in_rule__Action__Group__17451 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Action__TypeAssignment_1_in_rule__Action__Group__1__Impl7478 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Action__Group__2__Impl_in_rule__Action__Group__27508 = new BitSet(new long[]{0x0000000100000000L});
+        public static final BitSet FOLLOW_rule__Action__Group__2__Impl_in_rule__Action__Group__27508 = new BitSet(new long[]{0x0000000100400000L});
         public static final BitSet FOLLOW_rule__Action__Group__3_in_rule__Action__Group__27511 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Action__Group_2__0_in_rule__Action__Group__2__Impl7538 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Action__Group__3__Impl_in_rule__Action__Group__37569 = new BitSet(new long[]{0x0000000000000002L});
@@ -19348,7 +19877,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_ruleAssignableAlternatives_in_rule__ParenthesizedAssignableElement__Group__1__Impl8160 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParenthesizedAssignableElement__Group__2__Impl_in_rule__ParenthesizedAssignableElement__Group__28189 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_21_in_rule__ParenthesizedAssignableElement__Group__2__Impl8217 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__0__Impl_in_rule__AssignableAlternatives__Group__08254 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__0__Impl_in_rule__AssignableAlternatives__Group__08254 = new BitSet(new long[]{0x0000000040000000L});
         public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__1_in_rule__AssignableAlternatives__Group__08257 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__Group__0__Impl8284 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__1__Impl_in_rule__AssignableAlternatives__Group__18313 = new BitSet(new long[]{0x0000000000000002L});
@@ -19369,7 +19898,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__CrossReference__Group__1__Impl_in_rule__CrossReference__Group__18699 = new BitSet(new long[]{0x0000000840000000L});
         public static final BitSet FOLLOW_rule__CrossReference__Group__2_in_rule__CrossReference__Group__18702 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CrossReference__TypeAssignment_1_in_rule__CrossReference__Group__1__Impl8729 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CrossReference__Group__2__Impl_in_rule__CrossReference__Group__28759 = new BitSet(new long[]{0x0000000800000000L});
+        public static final BitSet FOLLOW_rule__CrossReference__Group__2__Impl_in_rule__CrossReference__Group__28759 = new BitSet(new long[]{0x0000000840000000L});
         public static final BitSet FOLLOW_rule__CrossReference__Group__3_in_rule__CrossReference__Group__28762 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CrossReference__Group_2__0_in_rule__CrossReference__Group__2__Impl8789 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CrossReference__Group__3__Impl_in_rule__CrossReference__Group__38820 = new BitSet(new long[]{0x0000000000000002L});
@@ -19387,7 +19916,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_ruleCrossReferenceableAlternatives_in_rule__ParenthesizedCrossReferenceableElement__Group__1__Impl9102 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__2__Impl_in_rule__ParenthesizedCrossReferenceableElement__Group__29131 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_21_in_rule__ParenthesizedCrossReferenceableElement__Group__2__Impl9159 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group__0__Impl_in_rule__CrossReferenceableAlternatives__Group__09196 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group__0__Impl_in_rule__CrossReferenceableAlternatives__Group__09196 = new BitSet(new long[]{0x0000000040000000L});
         public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group__1_in_rule__CrossReferenceableAlternatives__Group__09199 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReferenceableAlternatives__Group__0__Impl9226 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group__1__Impl_in_rule__CrossReferenceableAlternatives__Group__19255 = new BitSet(new long[]{0x0000000000000002L});
@@ -19416,7 +19945,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__TerminalRule__Group__1__Impl_in_rule__TerminalRule__Group__19827 = new BitSet(new long[]{0x0000000014000000L});
         public static final BitSet FOLLOW_rule__TerminalRule__Group__2_in_rule__TerminalRule__Group__19830 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalRule__NameAssignment_1_in_rule__TerminalRule__Group__1__Impl9857 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TerminalRule__Group__2__Impl_in_rule__TerminalRule__Group__29887 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__TerminalRule__Group__2__Impl_in_rule__TerminalRule__Group__29887 = new BitSet(new long[]{0x0000000014000000L});
         public static final BitSet FOLLOW_rule__TerminalRule__Group__3_in_rule__TerminalRule__Group__29890 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalRule__Group_2__0_in_rule__TerminalRule__Group__2__Impl9917 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalRule__Group__3__Impl_in_rule__TerminalRule__Group__39948 = new BitSet(new long[]{0x0000006000500030L});
@@ -19432,7 +19961,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_28_in_rule__TerminalRule__Group_2__0__Impl10172 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalRule__Group_2__1__Impl_in_rule__TerminalRule__Group_2__110203 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalRule__TypeAssignment_2_1_in_rule__TerminalRule__Group_2__1__Impl10230 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__0__Impl_in_rule__TerminalAlternatives__Group__010264 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__0__Impl_in_rule__TerminalAlternatives__Group__010264 = new BitSet(new long[]{0x0000000040000000L});
         public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__1_in_rule__TerminalAlternatives__Group__010267 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__Group__0__Impl10294 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__1__Impl_in_rule__TerminalAlternatives__Group__110323 = new BitSet(new long[]{0x0000000000000002L});
@@ -19447,7 +19976,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_30_in_rule__TerminalAlternatives__Group_1_1__0__Impl10555 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1_1__1__Impl_in_rule__TerminalAlternatives__Group_1_1__110586 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalAlternatives__GroupsAssignment_1_1_1_in_rule__TerminalAlternatives__Group_1_1__1__Impl10613 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TerminalGroup__Group__0__Impl_in_rule__TerminalGroup__Group__010647 = new BitSet(new long[]{0x0000006000500032L});
+        public static final BitSet FOLLOW_rule__TerminalGroup__Group__0__Impl_in_rule__TerminalGroup__Group__010647 = new BitSet(new long[]{0x0000006000500030L});
         public static final BitSet FOLLOW_rule__TerminalGroup__Group__1_in_rule__TerminalGroup__Group__010650 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__Group__0__Impl10677 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalGroup__Group__1__Impl_in_rule__TerminalGroup__Group__110706 = new BitSet(new long[]{0x0000000000000002L});
@@ -19457,7 +19986,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__TerminalGroup__Group_1__1__Impl_in_rule__TerminalGroup__Group_1__110829 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__1__Impl10858 = new BitSet(new long[]{0x0000006000500032L});
         public static final BitSet FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__1__Impl10870 = new BitSet(new long[]{0x0000006000500032L});
-        public static final BitSet FOLLOW_rule__TerminalToken__Group__0__Impl_in_rule__TerminalToken__Group__010907 = new BitSet(new long[]{0x0000000000003802L});
+        public static final BitSet FOLLOW_rule__TerminalToken__Group__0__Impl_in_rule__TerminalToken__Group__010907 = new BitSet(new long[]{0x0000000000003800L});
         public static final BitSet FOLLOW_rule__TerminalToken__Group__1_in_rule__TerminalToken__Group__010910 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTerminalTokenElement_in_rule__TerminalToken__Group__0__Impl10937 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TerminalToken__Group__1__Impl_in_rule__TerminalToken__Group__110966 = new BitSet(new long[]{0x0000000000000002L});
@@ -19480,11 +20009,11 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_38_in_rule__UntilToken__Group__0__Impl11368 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__UntilToken__Group__1__Impl_in_rule__UntilToken__Group__111399 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__UntilToken__TerminalAssignment_1_in_rule__UntilToken__Group__1__Impl11426 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Wildcard__Group__0__Impl_in_rule__Wildcard__Group__011460 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_rule__Wildcard__Group__0__Impl_in_rule__Wildcard__Group__011460 = new BitSet(new long[]{0x0000006000500030L});
         public static final BitSet FOLLOW_rule__Wildcard__Group__1_in_rule__Wildcard__Group__011463 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Wildcard__Group__1__Impl_in_rule__Wildcard__Group__111521 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_22_in_rule__Wildcard__Group__1__Impl11549 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CharacterRange__Group__0__Impl_in_rule__CharacterRange__Group__011584 = new BitSet(new long[]{0x0000008000000002L});
+        public static final BitSet FOLLOW_rule__CharacterRange__Group__0__Impl_in_rule__CharacterRange__Group__011584 = new BitSet(new long[]{0x0000008000000000L});
         public static final BitSet FOLLOW_rule__CharacterRange__Group__1_in_rule__CharacterRange__Group__011587 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleKeyword_in_rule__CharacterRange__Group__0__Impl11614 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CharacterRange__Group__1__Impl_in_rule__CharacterRange__Group__111643 = new BitSet(new long[]{0x0000000000000002L});
@@ -19502,7 +20031,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_rule__EnumRule__Group__1__Impl_in_rule__EnumRule__Group__111953 = new BitSet(new long[]{0x0000000014000000L});
         public static final BitSet FOLLOW_rule__EnumRule__Group__2_in_rule__EnumRule__Group__111956 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumRule__NameAssignment_1_in_rule__EnumRule__Group__1__Impl11983 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__EnumRule__Group__2__Impl_in_rule__EnumRule__Group__212013 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__EnumRule__Group__2__Impl_in_rule__EnumRule__Group__212013 = new BitSet(new long[]{0x0000000014000000L});
         public static final BitSet FOLLOW_rule__EnumRule__Group__3_in_rule__EnumRule__Group__212016 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumRule__Group_2__0_in_rule__EnumRule__Group__2__Impl12043 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumRule__Group__3__Impl_in_rule__EnumRule__Group__312074 = new BitSet(new long[]{0x0000000000000010L});
@@ -19518,7 +20047,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_28_in_rule__EnumRule__Group_2__0__Impl12298 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumRule__Group_2__1__Impl_in_rule__EnumRule__Group_2__112329 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumRule__TypeAssignment_2_1_in_rule__EnumRule__Group_2__1__Impl12356 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__EnumLiterals__Group__0__Impl_in_rule__EnumLiterals__Group__012390 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__EnumLiterals__Group__0__Impl_in_rule__EnumLiterals__Group__012390 = new BitSet(new long[]{0x0000000040000000L});
         public static final BitSet FOLLOW_rule__EnumLiterals__Group__1_in_rule__EnumLiterals__Group__012393 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__Group__0__Impl12420 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumLiterals__Group__1__Impl_in_rule__EnumLiterals__Group__112449 = new BitSet(new long[]{0x0000000000000002L});
@@ -19533,7 +20062,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
         public static final BitSet FOLLOW_30_in_rule__EnumLiterals__Group_1_1__0__Impl12681 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumLiterals__Group_1_1__1__Impl_in_rule__EnumLiterals__Group_1_1__112712 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumLiterals__GroupsAssignment_1_1_1_in_rule__EnumLiterals__Group_1_1__1__Impl12739 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__0__Impl_in_rule__EnumLiteralDeclaration__Group__012773 = new BitSet(new long[]{0x0000000000004002L});
+        public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__0__Impl_in_rule__EnumLiteralDeclaration__Group__012773 = new BitSet(new long[]{0x0000000000004000L});
         public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__1_in_rule__EnumLiteralDeclaration__Group__012776 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__EnumLiteralAssignment_0_in_rule__EnumLiteralDeclaration__Group__0__Impl12803 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__1__Impl_in_rule__EnumLiteralDeclaration__Group__112833 = new BitSet(new long[]{0x0000000000000002L});

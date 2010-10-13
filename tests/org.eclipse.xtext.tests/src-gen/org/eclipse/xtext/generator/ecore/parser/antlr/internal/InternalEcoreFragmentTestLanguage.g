@@ -47,12 +47,6 @@ import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGramm
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Second";	
    	}
@@ -93,7 +87,7 @@ ruleSecond returns [EObject current=null]
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getSecondAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			createLeafNode(lv_name_0_0, grammarAccess.getSecondAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 		}
 		{
 	        if ($current==null) {
@@ -113,9 +107,9 @@ ruleSecond returns [EObject current=null]
 	    }
 
 )
-)	'first' 
+)	otherlv_1='first' 
     {
-        createLeafNode(grammarAccess.getSecondAccess().getFirstKeyword_1(), null); 
+    	createLeafNode(otherlv_1, grammarAccess.getSecondAccess().getFirstKeyword_1(), null);
     }
 (
 (
@@ -125,9 +119,9 @@ ruleSecond returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
         }
-	RULE_ID
+	otherlv_2=RULE_ID
 	{
-		createLeafNode(grammarAccess.getSecondAccess().getFirstFirstCrossReference_2_0(), "first"); 
+		createLeafNode(otherlv_2, grammarAccess.getSecondAccess().getFirstFirstCrossReference_2_0(), "first"); 
 	}
 
 )

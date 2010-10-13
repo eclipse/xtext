@@ -47,12 +47,6 @@ import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLan
     }
     
     @Override
-    protected InputStream getTokenFile() {
-    	ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/unassignedtext/parser/antlr/internal/InternalUnassignedTextTestLanguage.tokens");
-    }
-    
-    @Override
     protected String getFirstRuleName() {
     	return "Model";	
    	}
@@ -161,15 +155,15 @@ ruleCaseInsensitiveKeywordRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(RULE_CASEINSENSITIVEKEYWORD
+(this_CaseInsensitiveKeyword_0=RULE_CASEINSENSITIVEKEYWORD
     { 
-    createLeafNode(grammarAccess.getCaseInsensitiveKeywordRuleAccess().getCaseInsensitiveKeywordTerminalRuleCall_0(), null); 
+    createLeafNode(this_CaseInsensitiveKeyword_0, grammarAccess.getCaseInsensitiveKeywordRuleAccess().getCaseInsensitiveKeywordTerminalRuleCall_0(), null); 
     }
 (
 (
 		lv_val_1_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getCaseInsensitiveKeywordRuleAccess().getValINTTerminalRuleCall_1_0(), "val"); 
+			createLeafNode(lv_val_1_0, grammarAccess.getCaseInsensitiveKeywordRuleAccess().getValINTTerminalRuleCall_1_0(), "val"); 
 		}
 		{
 	        if ($current==null) {
@@ -212,15 +206,15 @@ rulePluralRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'contents:' 
+(	otherlv_0='contents:' 
     {
-        createLeafNode(grammarAccess.getPluralRuleAccess().getContentsKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getPluralRuleAccess().getContentsKeyword_0(), null);
     }
 (
 (
 		lv_count_1_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getPluralRuleAccess().getCountINTTerminalRuleCall_1_0(), "count"); 
+			createLeafNode(lv_count_1_0, grammarAccess.getPluralRuleAccess().getCountINTTerminalRuleCall_1_0(), "count"); 
 		}
 		{
 	        if ($current==null) {
@@ -240,9 +234,9 @@ rulePluralRule returns [EObject current=null]
 	    }
 
 )
-)RULE_PLURAL
+)this_Plural_2=RULE_PLURAL
     { 
-    createLeafNode(grammarAccess.getPluralRuleAccess().getPluralTerminalRuleCall_2(), null); 
+    createLeafNode(this_Plural_2, grammarAccess.getPluralRuleAccess().getPluralTerminalRuleCall_2(), null); 
     }
 )
 ;
@@ -267,15 +261,15 @@ ruleMultiRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'multi' 
+(	otherlv_0='multi' 
     {
-        createLeafNode(grammarAccess.getMultiRuleAccess().getMultiKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getMultiRuleAccess().getMultiKeyword_0(), null);
     }
 (
 (
 		lv_val_1_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getMultiRuleAccess().getValINTTerminalRuleCall_1_0(), "val"); 
+			createLeafNode(lv_val_1_0, grammarAccess.getMultiRuleAccess().getValINTTerminalRuleCall_1_0(), "val"); 
 		}
 		{
 	        if ($current==null) {
@@ -295,17 +289,17 @@ ruleMultiRule returns [EObject current=null]
 	    }
 
 )
-)RULE_MULTI
+)this_Multi_2=RULE_MULTI
     { 
-    createLeafNode(grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_2(), null); 
+    createLeafNode(this_Multi_2, grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_2(), null); 
     }
-RULE_MULTI
+this_Multi_3=RULE_MULTI
     { 
-    createLeafNode(grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_3(), null); 
+    createLeafNode(this_Multi_3, grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_3(), null); 
     }
-RULE_MULTI
+this_Multi_4=RULE_MULTI
     { 
-    createLeafNode(grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_4(), null); 
+    createLeafNode(this_Multi_4, grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_4(), null); 
     }
 )
 ;
@@ -330,15 +324,15 @@ ruleDatatypeRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'datatype' 
+(	otherlv_0='datatype' 
     {
-        createLeafNode(grammarAccess.getDatatypeRuleAccess().getDatatypeKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getDatatypeRuleAccess().getDatatypeKeyword_0(), null);
     }
 (
 (
 		lv_val_1_0=RULE_INT
 		{
-			createLeafNode(grammarAccess.getDatatypeRuleAccess().getValINTTerminalRuleCall_1_0(), "val"); 
+			createLeafNode(lv_val_1_0, grammarAccess.getDatatypeRuleAccess().getValINTTerminalRuleCall_1_0(), "val"); 
 		}
 		{
 	        if ($current==null) {
@@ -393,7 +387,7 @@ ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 	kw='str' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getDatatypeAccess().getStrKeyword_0(), null); 
+        createLeafNode(kw, grammarAccess.getDatatypeAccess().getStrKeyword_0(), null); 
     }
 
     |    this_INT_1=RULE_INT    {
@@ -401,7 +395,7 @@ ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
     }
 
     { 
-    createLeafNode(grammarAccess.getDatatypeAccess().getINTTerminalRuleCall_1(), null); 
+    createLeafNode(this_INT_1, grammarAccess.getDatatypeAccess().getINTTerminalRuleCall_1(), null); 
     }
 
     |
@@ -443,7 +437,7 @@ ruleDatatype2 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
     }
 
     { 
-    createLeafNode(grammarAccess.getDatatype2Access().getSTRINGTerminalRuleCall(), null); 
+    createLeafNode(this_STRING_0, grammarAccess.getDatatype2Access().getSTRINGTerminalRuleCall(), null); 
     }
 
     ;
@@ -468,27 +462,27 @@ ruleCommonTerminalsRule returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(	'terminals' 
+(	otherlv_0='terminals' 
     {
-        createLeafNode(grammarAccess.getCommonTerminalsRuleAccess().getTerminalsKeyword_0(), null); 
+    	createLeafNode(otherlv_0, grammarAccess.getCommonTerminalsRuleAccess().getTerminalsKeyword_0(), null);
     }
-RULE_ID
+this_ID_1=RULE_ID
     { 
-    createLeafNode(grammarAccess.getCommonTerminalsRuleAccess().getIDTerminalRuleCall_1(), null); 
+    createLeafNode(this_ID_1, grammarAccess.getCommonTerminalsRuleAccess().getIDTerminalRuleCall_1(), null); 
     }
-RULE_INT
+this_INT_2=RULE_INT
     { 
-    createLeafNode(grammarAccess.getCommonTerminalsRuleAccess().getINTTerminalRuleCall_2(), null); 
+    createLeafNode(this_INT_2, grammarAccess.getCommonTerminalsRuleAccess().getINTTerminalRuleCall_2(), null); 
     }
-RULE_STRING
+this_STRING_3=RULE_STRING
     { 
-    createLeafNode(grammarAccess.getCommonTerminalsRuleAccess().getSTRINGTerminalRuleCall_3(), null); 
+    createLeafNode(this_STRING_3, grammarAccess.getCommonTerminalsRuleAccess().getSTRINGTerminalRuleCall_3(), null); 
     }
 (
 (
 		lv_val_4_0=RULE_ID
 		{
-			createLeafNode(grammarAccess.getCommonTerminalsRuleAccess().getValIDTerminalRuleCall_4_0(), "val"); 
+			createLeafNode(lv_val_4_0, grammarAccess.getCommonTerminalsRuleAccess().getValIDTerminalRuleCall_4_0(), "val"); 
 		}
 		{
 	        if ($current==null) {
