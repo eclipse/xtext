@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typing;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.JvmTypes;
@@ -53,6 +54,16 @@ public class ExpressionsTypeResolver extends AbstractTypeProvider<JvmTypeReferen
 
 	@Inject
 	private ICallableFeatureFacade callableFeatureFacade;
+	
+	@Inject
+	private TypeConverter typeConverter;
+	
+	
+	@Override
+	protected JvmTypeReference dispatch_type(EObject expression, JvmTypeReference expected) {
+		JvmTypeReference dispatch_type = super.dispatch_type(expression, expected);
+		return typeConverter.convert(dispatch_type,expected, expression);
+	}
 	
 	protected JvmTypeReference _type(XIntLiteral object, JvmTypeReference expected) {
 		return typesService.getTypeForName(INTEGER_TYPE_NAME, object);

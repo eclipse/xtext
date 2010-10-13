@@ -74,6 +74,14 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 		assertResolvedReturnType("(java.lang.String)=>java.lang.Boolean", "java.lang.String x| true");
 	}
 	
+	public void testFeatureCall() throws Exception {
+		assertResolvedReturnType("java.lang.Integer", "'foo'.length");
+	}
+	
+	public void testFeatureCall_1() throws Exception {
+		assertResolvedReturnType("java.util.List<java.lang.Byte>", "'foo'.getBytes()");
+	}
+	
 	
 	public void assertResolvedReturnType(String type, String expression) throws Exception {
 		JvmTypeReference typeRef = typeResolver.getType(expression(expression),null,null);

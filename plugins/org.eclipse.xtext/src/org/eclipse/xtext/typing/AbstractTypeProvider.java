@@ -59,13 +59,17 @@ public class AbstractTypeProvider<T> implements ITypeProvider<T> {
 	protected T internalGetType(EObject expression, T expected) {
 		if (expression == null)
 			throw new IllegalArgumentException("expression was null");
-		T actual = dispatcher.invoke(expression, expected);
+		T actual = dispatch_type(expression, expected);
 		if (actual == null)
 			return null;
 		if (expected != null) {
 			checkConformance(expression, expected, actual);
 		}
 		return actual;
+	}
+
+	protected T dispatch_type(EObject expression, T expected) {
+		return dispatcher.invoke(expression, expected);
 	}
 
 	protected void checkConformance(EObject expression, T expected, T actual) {
