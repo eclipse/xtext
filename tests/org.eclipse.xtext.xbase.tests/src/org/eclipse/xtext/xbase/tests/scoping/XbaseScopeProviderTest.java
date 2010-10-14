@@ -32,6 +32,7 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 				"}");
 		assertEquals("java.util.List.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
 	}
+	
 	public void testShadowing_1() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{ " +
@@ -41,6 +42,7 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 				"}");
 		assertTrue(((XFeatureCall)bop.getExpressions().get(2)).getFeature() instanceof XVariableDeclaration);
 	}
+	
 	public void testShadowing_2() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{ " +
@@ -50,6 +52,7 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 				"}");
 		assertTrue(((XFeatureCall)bop.getExpressions().get(2)).getFeature() instanceof XVariableDeclaration);
 	}
+	
 	public void testShadowing_3() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{" +
@@ -62,6 +65,7 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression innerBlock = (XBlockExpression)bop.getExpressions().get(1);
 		assertEquals("java.util.List.size()",((XFeatureCall)innerBlock.getExpressions().get(1)).getFeature().getCanonicalName());
 	}
+	
 	public void testShadowing_4() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{" +
@@ -71,6 +75,7 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 		XClosure closure = (XClosure)bop.getExpressions().get(1);
 		assertSame(closure.getFormalParameters().get(0), ((XFeatureCall)closure.getExpression()).getFeature());
 	}
+	
 	public void testShadowing_5() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{" +
@@ -80,6 +85,7 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 		XClosure closure = (XClosure)bop.getExpressions().get(1);
 		assertSame(bop.getExpressions().get(0), ((XFeatureCall)closure.getExpression()).getFeature());
 	}
+	
 	public void testShadowing_6() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{" +

@@ -59,61 +59,61 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 	private TypeConverter typeConverter;
 
 	@Override
-	protected JvmTypeReference dispatch_type(EObject expression, JvmTypeReference expected) {
-		JvmTypeReference dispatch_type = super.dispatch_type(expression, expected);
-		return typeConverter.convert(dispatch_type, expected, expression);
+	protected JvmTypeReference dispatch_type(EObject expression, Context<JvmTypeReference> context) {
+		JvmTypeReference dispatch_type = super.dispatch_type(expression, context);
+		return typeConverter.convert(dispatch_type, context.getExpectedType(), expression);
 	}
 
-	protected JvmTypeReference _type(XIntLiteral object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XIntLiteral object, Context<JvmTypeReference> context) {
 		return typesService.getTypeForName(INTEGER_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _type(XBlockExpression object, JvmTypeReference expected) {
-		return internalGetType(object.getExpressions().get(object.getExpressions().size() - 1), expected);
+	protected JvmTypeReference _type(XBlockExpression object, Context<JvmTypeReference> context) {
+		return internalGetType(object.getExpressions().get(object.getExpressions().size() - 1), context);
 	}
 
-	protected JvmTypeReference _type(XSwitchExpression object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XSwitchExpression object, Context<JvmTypeReference> context) {
 		List<JvmTypeReference> returnTypes = Lists.newArrayList();
 		EList<XCasePart> cases = object.getCases();
 		for (XCasePart xCasePart : cases) {
-			returnTypes.add(internalGetType(xCasePart, expected));
+			returnTypes.add(internalGetType(xCasePart, context));
 		}
 		if (object.getDefault() != null)
-			returnTypes.add(internalGetType(object.getDefault(), expected));
+			returnTypes.add(internalGetType(object.getDefault(), context));
 		return typesService.getCommonType(returnTypes);
 	}
 
-	protected JvmTypeReference _type(XCasePart object, JvmTypeReference expected) {
-		return internalGetType(object.getThen(), expected);
+	protected JvmTypeReference _type(XCasePart object, Context<JvmTypeReference> context) {
+		return internalGetType(object.getThen(), context);
 	}
 
-	protected JvmTypeReference _type(XVariableDeclaration object, JvmTypeReference expected) {
-		return internalGetType(object.getRight(), object.getType());
+	protected JvmTypeReference _type(XVariableDeclaration object, Context<JvmTypeReference> context) {
+		return internalGetType(object.getRight(), Context.newCtx(object.getType(),context));
 	}
 
-	protected JvmTypeReference _type(XAbstractFeatureCall object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XAbstractFeatureCall object, Context<JvmTypeReference> context) {
 		JvmIdentifyableElement eobject = object.getFeature();
-		return internalGetType(eobject, expected);
+		return internalGetType(eobject, context);
 	}
 
-	protected JvmTypeReference _type(XConstructorCall object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XConstructorCall object, Context<JvmTypeReference> context) {
 		return object.getType();
 	}
 
-	protected JvmTypeReference _type(XBooleanLiteral object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XBooleanLiteral object, Context<JvmTypeReference> context) {
 		return typesService.getTypeForName(BOOLEAN_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _type(XNullLiteral object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XNullLiteral object, Context<JvmTypeReference> context) {
 		return typesService.getTypeForName(VOID_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _type(XStringLiteral object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XStringLiteral object, Context<JvmTypeReference> context) {
 		return typesService.getTypeForName(STRING_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _type(XClosure object, JvmTypeReference expected) {
-		JvmTypeReference returnType = internalGetType(object.getExpression(), expected);
+	protected JvmTypeReference _type(XClosure object, Context<JvmTypeReference> context) {
+		JvmTypeReference returnType = internalGetType(object.getExpression(), context);
 		List<JvmTypeReference> parameterTypes = Lists.newArrayList();
 		EList<JvmFormalParameter> params = object.getFormalParameters();
 		for (JvmFormalParameter param : params) {
@@ -130,16 +130,16 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 		return object.getType();
 	}
 
-	protected JvmTypeReference _type(XAbstractWhileExpression object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XAbstractWhileExpression object, Context<JvmTypeReference> context) {
 		return typesService.getTypeForName(VOID_TYPE_NAME, object);
 	}
 
-	protected JvmTypeReference _type(XTypeLiteral object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XTypeLiteral object, Context<JvmTypeReference> context) {
 		JvmTypeReference paramType = jvmTypes.createJvmTypeReference(object.getType());
 		return typesService.getTypeForName(JAVA_LANG_CLASS, object, paramType);
 	}
 
-	protected JvmTypeReference _type(XInstanceOfExpression object, JvmTypeReference expected) {
+	protected JvmTypeReference _type(XInstanceOfExpression object, Context<JvmTypeReference> context) {
 		return typesService.getTypeForName(BOOLEAN_TYPE_NAME, object);
 	}
 
