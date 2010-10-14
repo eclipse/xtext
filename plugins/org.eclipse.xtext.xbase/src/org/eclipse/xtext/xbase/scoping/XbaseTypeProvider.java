@@ -126,7 +126,7 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 		return typesService.createFunctionTypeRef(parameterTypes, returnType);
 	}
 
-	protected JvmTypeReference _type(XCastedExpression object) {
+	protected JvmTypeReference _type(XCastedExpression object, Context<JvmTypeReference> context) {
 		return object.getType();
 	}
 
