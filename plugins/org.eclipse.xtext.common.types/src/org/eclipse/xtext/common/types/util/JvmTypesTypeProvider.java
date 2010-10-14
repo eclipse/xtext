@@ -27,7 +27,7 @@ public class JvmTypesTypeProvider extends AbstractTypeProvider<JvmTypeReference>
 		return operation.getReturnType();
 	}
 	
-	protected JvmTypeReference _type(JvmFormalParameter field, Context<JvmTypeReference> context) {
-		return field.getParameterType();
+	protected JvmTypeReference _type(JvmFormalParameter parameter, Context<JvmTypeReference> context) {
+		return parameter.getParameterType();
 	}
 }

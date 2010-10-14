@@ -344,7 +344,7 @@ section2[Syntax]
 
 code[
 XSwitchExpression:
-	'switch' XExpression? '{'
+	'switch' XExpressionOrVariableDeclaration? '{'
 		XCasePart+
 		('default' ':' (XBlockExpression 
 			  		  | XExpression ';'))?
@@ -368,16 +368,14 @@ code[
 	}
 ]
 
-the main expression code[e] is evaluated first and then each case sequentially. 
-If a case expression code[en] evaluates to something such that code[e == en] the result of the switch expression is code[ern]. If none of the 
-case expressions code[e1...en] is equal to the result of the main expression code[e] the result of the optional default part code[er] is returned.
-If not default is defined the expression returns code[null].
+the main expression code[e] is evaluated first and then each case sequentially. The result of the main expression, further called the switch value, is bound (and possibly shadows) the implicit
+code[this] variable. In order to avoid shadowing, a ref:VariableDeclaration[variable declaration] can be used.
+
+A case clause is taken if the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to code[true].
 
 section2[Leaving out the main expression]
 
-It is possible to leave out the main expression. Then the case expressions code[e1...en] have to be of type Boolean. They are evaluated 
-in the specified order and as soon as one predicate code[ex] evaluates to true the corresponding then expression code[ex] is the result of the switch expression.
-So it is mainly an alternative syntax to the ref:IfExpression.
+It is possible to leave out the main expression. Then the first case clause for which its guard returns code[true] is taken and executed.
 
 section2[Type guards]
 
@@ -394,19 +392,18 @@ code[
 	}
 ]
 
-The expression x, will be of type code[String] in any expression within the first case and of type code[List<?>] in the second. Note that the case expression
-has to be a predicate (i.e. it has to be of type code[Boolean]). At runtime a type guard is translated to an code[instanceof] of test and subsequent casts.
-The expression x is reevaluated everytime it is used. If the expression returns a different value on a subsequent evaluation, it might cause a
-code[ClassCastException] at runtime.
+Only if the switch value passes a type guard, i.e. an instanceof operation returns code[true], the case's guard expression is executed using the same semantics explained in
+previously. Statically the type guard acts like a cast, that is all references to the switch value will be of the type specified in the type guard.
 
 section2[Typing]
 
-The return type of a switch expression is computed using the rules defined in ref:CommonSuperType. 
-The set of types from which the common super type is computed corresponds to the types of each case's result expression.
+The return type of a switch expression is computed using the rules defined in ref:CommonSuperType. The set of types from which the common super type is 
+computed corresponds to the types of each case's result expression. In case a switch expression's type is
+computed using the expected type form the context, it is sufficient to return the expected type if all case branches types conform to the expected type.
 
 section:VariableDeclaration[Variable Declarations]
 
-Variable declarations are only allowed within a ref:Blocks[block]. They are visible in any subsequent expressions in
+Variable declarations are only allowed within ref:Blocks[blocks] and ref:SwitchExpression[switch expressions]. They are visible in any subsequent expressions in
 the block.
 
 section2[Syntax]
@@ -582,7 +579,7 @@ section2[Syntax]
 
 code[
 XConstructorCall:
-  'new' (type=JvmTypeReference '('(XExpression (',' XExpression)*)?')')?;
+  'new' (QualifiedName ('<' JvmTypeArgument (',' JvmTypeArgument)* '>')? '('(XExpression (',' XExpression)*)?')')?;
 ]
 
 section2[Example]

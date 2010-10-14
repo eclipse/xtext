@@ -16,8 +16,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 import org.eclipse.xtext.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.scoping.XbaseTypeProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
