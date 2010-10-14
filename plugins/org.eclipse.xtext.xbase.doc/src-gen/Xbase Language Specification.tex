@@ -5,6 +5,11 @@
 \usepackage[latin1]{inputenc}
 \usepackage{listings}
 
+\usepackage{todonotes}
+
+
+\renewcommand{\todo}[1]{}
+
 %%\usepackage{helvet}
 
 \lstdefinelanguage{Xtext}
@@ -17,7 +22,9 @@
   }
 
 \lstdefinelanguage{Xbase}
-  {morekeywords={extends, instanceof, new, null, true, false, if, else, switch, case, default, do, while, for, def, class, as},
+  {morekeywords={super, val, var, extends, instanceof, new,%
+   null, true, false, if, else, switch, case, default, do,%
+   while, for, def, class, as, throw, try, catch, finally},
     sensitive=true,
     morecomment=[l]{//},
     morecomment=[s]{/*}{*/},
@@ -25,9 +32,21 @@
     morestring=[b]',
   }
 
+%% force more space between subsections!
+\makeatletter
+\renewcommand\subsection{\medskip\@startsection{subsection}{2}{\z@}%
+  {-.25ex\@plus -.1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex \@minus -.4ex}%
+  {\ifnum \scr@compatibility>\@nameuse{scr@v@2.96}\relax
+    \setlength{\parfillskip}{\z@ plus 1fil}\fi
+    \raggedsection\normalfont\sectfont\nobreak\size@subsection
+  }%
+}
+\makeatother
+
 %\lstdefinelanguage{xtext}{keywords={terminal, grammar, import, generate, hidden, as}, sensitive=true,string={"},morestring={'},comment={//},morecomment=[s]{/*}{*/}}
 
-\lstset{breaklines=true, tabsize=4, basicstyle=\sffamily\footnotesize, keywordstyle=\bfseries, language=Xbase, columns=[r]fullflexible}
+\lstset{tabsize=4, basicstyle=\sffamily\small, keywordstyle=\bfseries, language=Xbase, columns=[r]fullflexible}
 
 \usepackage[english]{babel}
 
@@ -35,11 +54,15 @@
 \usepackage{hyperref}
 
 \newlength{\itemindentlen}
+\author{Sven Efftinge, et al.}
+\title{Xbase Language Specification}
+
 
 \begin{document}
-
+\maketitle
+\tableofcontents
 \chapter{Preface}
-
+\label{Preface}
 This document specifies the expression language Xbase. Xbase is a partial programming language implemented in Xtext and is meant to be embedded and extended
 within other programming languages and domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development framework 
 covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse.  
@@ -61,7 +84,7 @@ Conceptually and syntactically, Xbase is like Java statements+expressions, with 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
 \item \begin{minipage}[t]{\itemindentlen}
 No checked exceptions
@@ -88,16 +111,11 @@ Simple operator overloading
 Powerful switch expressions
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 \chapter{Lexical Syntax}
-
+\label{LexicalStructure}
 Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully chosen and it is recommended to stick 
 with the lexical syntax described in the following.
-
 \section{Identifiers}
 \label{Identifiers}
 Identifiers are used to name all constructs, such as types, methods and variables. They start with a "Java letter", which is a character for which the Java method 
@@ -114,16 +132,12 @@ See \href{http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.8
 
 
 
-
-
 \subsection{Escaped Identifiers}
 
 Identifiers may not have the same spelling as any reserved keyword. 
-However, identifiers starting with a \lstinline°^° are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
-conflict with a reserved keyword. Imagine you have introduced a keyword \lstinline°service° in your language but want to call a Java property \textit{service} at some point. 
-In such cases you use an escaped identifier \lstinline°^service° to reference the Java property.
-
-
+However, identifiers starting with a \lstinline[]°^° are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
+conflict with a reserved keyword. Imagine you have introduced a keyword \lstinline[]°service° in your language but want to call a Java property \textit{service} at some point. 
+In such cases you use an escaped identifier \lstinline[]°^service° to reference the Java property.
 
 
 \subsection{Examples}
@@ -131,31 +145,28 @@ In such cases you use an escaped identifier \lstinline°^service° to reference th
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°Foo°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°Foo°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°Foo42°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°Foo42°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°FOO°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°FOO°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°_42°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°_42°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°_foo°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°_foo°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°^extends°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°^extends°
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
@@ -178,20 +189,18 @@ In contrast to Java, equal string literals within the same class do not neccessa
 
 
 
-
-
 \subsection{Examples}
 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°'Foo Bar Baz'°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°'Foo Bar Baz'°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°"Foo Bar Baz"°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°"Foo Bar Baz"°
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
 \begin{lstlisting}
@@ -200,29 +209,26 @@ In contrast to Java, equal string literals within the same class do not neccessa
 \end{lstlisting}
 
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°'Escapes : \' '°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°'Escapes : \' '°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°"Escapes : \" "°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°"Escapes : \" "°
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
 \section{Integer Literals}
 \label{IntegerLiterals}
 Integer literals consist of one or more digits. 
-Only decimal literals are supported and they always result in a value of type \lstinline°java.lang.Integer° 
-(it might result in native type \lstinline°int° when translated to Java, see 
-\hyperref[Types]{Types~(\ref*{Types})}).
+Only decimal literals are supported and they always result in a value of type \lstinline[]°java.lang.Integer° 
+(it might result in native type \lstinline[]°int° when translated to Java, see 
+\hyperref[Types]{Types~(§\ref*{Types})}).
 The compiler makes sure that only numbers between 0 and \textit{Integer.MAX} (0x7fffffff) are used.
 
-There is no negative integer literal, instead the expression \lstinline°-23° is parsed as the prefix operator \lstinline°-° applied to an integer literal.
+There is no negative integer literal, instead the expression \lstinline[]°-23° is parsed as the prefix operator \lstinline[]°-° applied to an integer literal.
 
 \subsection{Syntax}
 
@@ -232,9 +238,6 @@ terminal INT returns ecore::EInt:
 ;
 
 \end{lstlisting}
-
-
-
 
 
 
@@ -259,13 +262,9 @@ terminal SL_COMMENT :
 
 
 
-
-
-
 \section{White Space}
 \label{Whitespace}
-The white space characters \lstinline°' '°, \lstinline°'\t'°, \lstinline°'\n'°, and \lstinline°'\r° are allowed to occur anywhere between the other syntactic elements. 
-
+The white space characters \lstinline[]°' '°, \lstinline[]°'\t'°, \lstinline[]°'\n'°, and \lstinline[]°'\r° are allowed to occur anywhere between the other syntactic elements. 
 
 
 
@@ -275,87 +274,83 @@ The following list of words are reserved keywords, thus reducing the set of poss
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{enumerate}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°extends°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°extends°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°super°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°super°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°instanceof°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°instanceof°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°new°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°new°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°null°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°null°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°false°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°false°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°true°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°true°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°val°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°val°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°var°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°var°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°if°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°if°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°else°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°else°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°switch°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°switch°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°case°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°case°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°default°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°default°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°do°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°do°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°while°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°while°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°for°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°for°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°class°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°class°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°throw°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°throw°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°try°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°try°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°catch°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°catch°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°finally°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°finally°
 \end{minipage}
 \end{enumerate}
-\addtolength{\itemindentlen}{2em}
+\addtolength{\itemindentlen}{2.5em}
 
 However, in case some of the keywords have to be used as identifiers, the escape character for 
-\hyperref[Identifiers]{identifiers~(\ref*{Identifiers})} comes in handy. 
-
-
-
-
+\hyperref[Identifiers]{identifiers~(§\ref*{Identifiers})} comes in handy. 
 
 
 \chapter{Types}
-
+\label{Types}
 Xbase binds to the Java Virtual Machine. This means that expressions written in Xbase refer to Java types and Java type members. Xbase itself uses only types 
 defined in the Java language, such as classes, interfaces, annotations and enums. It also supports Java generics and shares the known syntax. In addition to Java, 
 Xbase comes with the notion of function types. 
@@ -363,10 +358,9 @@ Xbase comes with the notion of function types.
 Xbase does not bind to any of the built-in types such as \textit{int} or \textit{boolean}, instead any references to those built-in types will automatically use the corresponding 
 wrapper type, e.g. \textit{java.lang.Boolean} instead of \textit{boolean}. Arrays are supported also in Xbase but are translated to \textit{java.util.List}s: An 
 array \textit{int[]} binds to \textit{java.util.List<java.lang.Integer>} (in short \textit{List<Integer>}). 
-This means when referring to \lstinline°myList.isEmpty()° within an Xbase expression the static return type is \textit{java.lang.Boolean}. 
+This means when referring to \lstinline[]°myList.isEmpty()° within an Xbase expression the static return type is \textit{java.lang.Boolean}. 
 At runtime however the compiler may be smarter and use the native types. Especially the types \textit{int} and \textit{boolean} are most often used with
- built-in operators and the wrapper type is only occasionally needed (for instance when putting \lstinline°int°s into collections).
-
+ built-in operators and the wrapper type is only occasionally needed (for instance when putting \lstinline[]°int°s into collections).
 \section{Simple Type References}
 \label{TypeReferences}
 A simple type reference only consists of a \textit{qualified name}. A qualified name is a name made up of identifiers which are separated by a dot (like in Java).
@@ -384,35 +378,30 @@ QualifiedName:
 There is no rule for a simple type reference, as it is expressed as a parameterized type references without paramters.
 
 
-
-
 \subsection{Examples}
 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°java.lang.String°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°java.lang.String°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°String°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°String°
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
 \section{Function Types}
 \label{FunctionTypes}
 Xbase introduces \textit{closures}, which require an additional kind of type. On the JVM-Level a closure (or more generally any function object) is just an instance of one of the 
-types in \lstinline°org.eclipse.xtext.xbase.lib.Function*°, dependening on the number of arguments. However, as closures are a very important language feature, a special 
+types in \lstinline[]°org.eclipse.xtext.xbase.lib.Function*°, dependening on the number of arguments. However, as closures are a very important language feature, a special 
 sugared syntax for function types has been introduced.  
-So instead of writing \lstinline°Function1<String,Boolean>° one can write \lstinline°(String)=>Boolean°.
+So instead of writing \lstinline[]°Function1<String,Boolean>° one can write \lstinline[]°(String)=>Boolean°.
 
 \subsection{Syntax}
 
@@ -425,32 +414,27 @@ XFunctionTypeRef:
 
 
 
-
-
 \subsection{Examples}
 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°=>Boolean // predicate without parameters°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°=>Boolean // predicate without parameters°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°(String)=>Boolean // One argument predicate°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°(String)=>Boolean // One argument predicate°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°(Mutable)=>Void // A method doing side effects on an instance of Mutable and returns null°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°(Mutable)=>Void // A method doing side effects on an instance of Mutable and returns null°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°(List<String>)=>String°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°(List<String>)=>String°
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
@@ -497,49 +481,43 @@ JvmUpperBound :
 
 
 
-
-
 \subsection{Examples}
 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°String°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°String°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°java.lang.String°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°java.lang.String°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°List<?>°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°List<?>°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°List<? extends Comparable<? extends FooBar>°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°List<? extends Comparable<? extends FooBar>°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°List<? super MyLowerBound>°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°List<? super MyLowerBound>°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°List<? extends =>Boolean>°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°List<? extends =>Boolean>°
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
 \section{The type java.lang.Void}
 \label{VoidType}
-The \lstinline°null° reference is the only valid value of the type \lstinline°Void°, which gets some special treatment in Xbase. Every Java method which is declared \textit{void} (i.e. without a return value)
+The \lstinline[]°null° reference is the only valid value of the type \lstinline[]°Void°, which gets some special treatment in Xbase. Every Java method which is declared \textit{void} (i.e. without a return value)
 is translated to a method with return type \textit{java.lang.Void}. At runtime such method invocations will result in \textit{null}.
-The speciality is that while it is allowed to pass \lstinline°null° everywhere (TODO discuss use of nullable annotation) instead of any other value, this does not mean that \textit{java.lang.Void}
-is a subtype of any other type. The \lstinline°instanceOf° operator as well as the type matchers in the 
-\autoref{SwitchExpression} do not match \lstinline°null°.
-
+The speciality is that while it is allowed to pass \lstinline[]°null° everywhere (TODO discuss use of nullable annotation) instead of any other value, this does not mean that \textit{java.lang.Void}
+is a subtype of any other type. The \lstinline[]°instanceOf° operator as well as the type matchers in the 
+\autoref{SwitchExpression} do not match \lstinline[]°null°.
 
 
 
@@ -552,7 +530,7 @@ A type \textit{T1} conforms to a type \textit{T2} if
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
 \item \begin{minipage}[t]{\itemindentlen}
 T1==T2
@@ -564,7 +542,7 @@ T1==java.lang.Void
 T1 is a subtype of T2
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
+\addtolength{\itemindentlen}{2.5em}
 
 \textit{T1<T1P,..T1Pn>} conforms to \textit{T2<T2P, ... T2Pn>} if \textit{T1} conforms to \textit{T2} and each upper bound of a \textit{T1Pn} conforms to the corresponding upper bound of \textit{T2Pn}.
 
@@ -575,20 +553,13 @@ conforms to each \textit{T2,..,Tn}. The linear type inheritance sequence of \tex
 by their specificity. A type \textit{T1} is considered more specific than \textit{T2} if \textit{T1} is a subtype of \textit{T2}. Any types with equal specificity will be sorted 
 by their qualified name just to ensure deterministic results. 
 
-
-
-
-
-
-
 \chapter{Expressions}
-
+\label{Expressions}
 Expressions are the main language constructs which are used to express behavior and computation of values. Xbase does not support the concept of a statement, but instead comes with powerful 
 expressions to handle situations in which the imperative nature of statements are a better fit. An expression always results in a value (might be the value 'null' though). In addition expressions can
 be statically typed. By default it is assumed that languages making use of Xbase provide enough static context information for static type analysis, which is the basis of a lot of
 IDE features coming with Xbase. However, the static typing is not mandatory and might be completely skipped if not wished. The openness of the compiler even allows to change the generation of 
 concrete feature invocations to reflective calls, such that the language can be fully dynamically typed.
-
 \section{Literals}
 \label{Literals}
 A literal denotes a fixed unchangeable value. Xbase comes with the following literals
@@ -596,9 +567,7 @@ A literal denotes a fixed unchangeable value. Xbase comes with the following lit
 \subsection{String Literals}
 \label{ExpressionsStringLiterals}
 A string literal as defined in 
-\autoref{StringLiterals} is a valid expression and returns an instance of \lstinline°java.lang.String° of the given value.
-
-
+\autoref{StringLiterals} is a valid expression and returns an instance of \lstinline[]°java.lang.String° of the given value.
 
 
 \subsection{Syntax}
@@ -611,14 +580,10 @@ XStringLiteral:
 
 
 
-
-
 \subsection{Integer Literals}
 \label{ExpressionsIntegerLiterals}
 An integer literal as defined in 
-\autoref{IntegerLiterals} creates an instance of \lstinline°Integer°.
-
-
+\autoref{IntegerLiterals} creates an instance of \lstinline[]°Integer°.
 
 
 \subsection{Syntax}
@@ -631,13 +596,9 @@ XIntegerLiteral:
 
 
 
-
-
 \subsection{Boolean Literals}
 \label{BooleanLiteral}
-There are two boolean literals, \lstinline°true° and \lstinline°false° which correspond to their Java counterpart of type \textit{java.lang.Boolean}. 
-
-
+There are two boolean literals, \lstinline[]°true° and \lstinline[]°false° which correspond to their Java counterpart of type \textit{java.lang.Boolean}. 
 
 
 \subsection{Syntax}
@@ -650,15 +611,11 @@ XBooleanLiteral:
 
 
 
-
-
 \subsection{Null Literal}
 \label{NullLiteral}
-The null pointer literal is, like in Java, \lstinline°null°. 
+The null pointer literal is, like in Java, \lstinline[]°null°. 
 It is the only value of the type \textit{java.lang.Void} which has a special meaning in Xbase (see 
 \autoref{VoidType}).
-
-
 
 
 \subsection{Syntax}
@@ -671,13 +628,9 @@ XNullLiteral:
 
 
 
-
-
 \subsection{Type Literals}
 \label{TypeLiteral}
-Type literals are written like in Java. They consist of a reference to a raw type suffixed with a dot and the keyword \lstinline°class°.
-
-
+Type literals are written like in Java. They consist of a reference to a raw type suffixed with a dot and the keyword \lstinline[]°class°.
 
 
 \subsection{Syntax}
@@ -691,9 +644,6 @@ XTypeLiteral:
 
 
 
-
-
-
 \section{Infix Operators}
 \label{Operators}
 Xbase supports a couple of predefined infix operators. In contrast to Java, the operators are not fixed
@@ -702,50 +652,50 @@ operators for any type just by implementing the corresponding method signature.
 The following defines the operators and the corresponding Java method signatures / expressions.
 
 
-\begin{tabular}{|p{0.5\textwidth}|p{0.5\textwidth}|}
-\lstinline°e1.someProp = e2° & \lstinline°e1.someProp = e2°\\
-  & \lstinline°e1.someProp(e2)°\\
-  & \lstinline°e1.setSomeProp(e2)°\\
-\lstinline°e1 += e2° & \lstinline°e1.add(e2)°\\
-\lstinline°e1.someFeature += e2° & \lstinline°e1.addSomeFeature(e2)°\\
-\lstinline° ° & \lstinline° °\\
-\lstinline°e1 || e2° & \lstinline°e1.or(e2)°\\
-\lstinline° ° & \lstinline° °\\
-\lstinline°e1 && e2° & \lstinline°e1.and(e2)°\\
-\lstinline° ° & \lstinline° °\\
-\lstinline°e1 instanceof RawTypeRef° & \lstinline°e1 instanceof RawTypeRef /* direct translation to Java */°\\
-\lstinline°e1 == e2° & \lstinline°e1.equals(e2)°\\
-\lstinline°e1 != e2° & \lstinline°e1.notEquals(e2)°\\
-\lstinline°e1 < e2° & \lstinline°e1.lessThan(e2)°\\
-\lstinline°e1 > e2° & \lstinline°e1.greaterThan(e2)°\\
-\lstinline°e1 <= e2° & \lstinline°e1.lessEqualsThan(e2)°\\
-\lstinline°e1 >= e2° & \lstinline°e1.greaterEqualsThan(e2)°\\
-\lstinline° ° & \lstinline° °\\
-\lstinline°e1 -> e2° & \lstinline°e1.mappedTo(e2)°\\
-\lstinline°e1 .. e2° & \lstinline°e1.upTo(e2)°\\
-\lstinline° ° & \lstinline° °\\
-\lstinline°e1 + e2° & \lstinline°e1.plus(e2)°\\
-\lstinline°e1 - e2° & \lstinline°e1.minus(e2)°\\
-\lstinline° ° & \lstinline° °\\
-\lstinline°e1 * e2° & \lstinline°e1.multiply(e2)°\\
-\lstinline°e1 / e2° & \lstinline°e1.divide(e2)°\\
-\lstinline°e1 % e2° & \lstinline°e1.modulo(e2)°\\
-\lstinline°e1 ** e2° & \lstinline°e1.power(e2)°\\
-\lstinline° ° & \lstinline° °\\
-\lstinline°! e1° & \lstinline°e1.not()°\\
-\lstinline°- e1° & \lstinline°e1.minus()°\\
-\lstinline° ° & \lstinline° °\\
-\lstinline°e1[e2]° & \lstinline°e1.apply(<Exp2)°
+\noindent\begin{tabular}{|p{0.5\textwidth}|p{0.5\textwidth}|}
+\lstinline[]°e1.someProp = e2° & \lstinline[]°e1.someProp = e2°\\
+  & \lstinline[]°e1.someProp(e2)°\\
+  & \lstinline[]°e1.setSomeProp(e2)°\\
+\lstinline[]°e1 += e2° & \lstinline[]°e1.add(e2)°\\
+\lstinline[]°e1.someFeature += e2° & \lstinline[]°e1.addSomeFeature(e2)°\\
+\lstinline[]° ° & \lstinline[]° °\\
+\lstinline[]°e1 || e2° & \lstinline[]°e1.or(e2)°\\
+\lstinline[]° ° & \lstinline[]° °\\
+\lstinline[]°e1 && e2° & \lstinline[]°e1.and(e2)°\\
+\lstinline[]° ° & \lstinline[]° °\\
+\lstinline[]°e1 instanceof RawTypeRef° & \lstinline[]°e1 instanceof RawTypeRef /* direct translation to Java */°\\
+\lstinline[]°e1 == e2° & \lstinline[]°e1.equals(e2)°\\
+\lstinline[]°e1 != e2° & \lstinline[]°e1.notEquals(e2)°\\
+\lstinline[]°e1 < e2° & \lstinline[]°e1.lessThan(e2)°\\
+\lstinline[]°e1 > e2° & \lstinline[]°e1.greaterThan(e2)°\\
+\lstinline[]°e1 <= e2° & \lstinline[]°e1.lessEqualsThan(e2)°\\
+\lstinline[]°e1 >= e2° & \lstinline[]°e1.greaterEqualsThan(e2)°\\
+\lstinline[]° ° & \lstinline[]° °\\
+\lstinline[]°e1 -> e2° & \lstinline[]°e1.mappedTo(e2)°\\
+\lstinline[]°e1 .. e2° & \lstinline[]°e1.upTo(e2)°\\
+\lstinline[]° ° & \lstinline[]° °\\
+\lstinline[]°e1 + e2° & \lstinline[]°e1.plus(e2)°\\
+\lstinline[]°e1 - e2° & \lstinline[]°e1.minus(e2)°\\
+\lstinline[]° ° & \lstinline[]° °\\
+\lstinline[]°e1 * e2° & \lstinline[]°e1.multiply(e2)°\\
+\lstinline[]°e1 / e2° & \lstinline[]°e1.divide(e2)°\\
+\lstinline[]°e1 % e2° & \lstinline[]°e1.modulo(e2)°\\
+\lstinline[]°e1 ** e2° & \lstinline[]°e1.power(e2)°\\
+\lstinline[]° ° & \lstinline[]° °\\
+\lstinline[]°! e1° & \lstinline[]°e1.not()°\\
+\lstinline[]°- e1° & \lstinline[]°e1.minus()°\\
+\lstinline[]° ° & \lstinline[]° °\\
+\lstinline[]°e1[e2]° & \lstinline[]°e1.apply(<Exp2)°
 \end{tabular}
 
 		
 The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
-The two assignment operators \lstinline°=° and \lstinline°+=° are right-to-left associative, that is a = b = c is executed as a = (b = c), all other
+The two assignment operators \lstinline[]°=° and \lstinline[]°+=° are right-to-left associative, that is a = b = c is executed as a = (b = c), all other
 operators are left-to-right associative. Parenthesis can be used to adjust the default precedence and associativity. 
 
 \subsection{Property Assignment}
 \label{propertyAssignment}
-The translation rule for the simple assignment operator \lstinline°=° is a bit more complicated.
+The translation rule for the simple assignment operator \lstinline[]°=° is a bit more complicated.
 Given the expression 
 
 \begin{lstlisting}
@@ -754,7 +704,7 @@ myObj.myProperty = "foo"
 \end{lstlisting}
 
 
-The compiler first looks up whether there is an accessible Java Field called \lstinline°myProperty° on the type of \lstinline°myObj°. If there is one it translates to
+The compiler first looks up whether there is an accessible Java Field called \lstinline[]°myProperty° on the type of \lstinline[]°myObj°. If there is one it translates to
 the following Java expression :
 
 \begin{lstlisting} [language=Java]
@@ -766,8 +716,8 @@ myObj.myProperty = "foo";
 Remember in Xbase everything is an expression and has to return something. In the case of simple assignments the return value is the value returned from the corresponding
 Java expression, which is the assigned value.
 
-If there is no accessible field on the left operand's type, first a method called \lstinline°myProperty(OneArg)° and then \lstinline°setMyProperty(OneArg)° is looked up. It has to take 
-one argument of the type (or a super type) of the right hand operand. The return value will be whatever the setter method returns (which usually is \lstinline°null°). 
+If there is no accessible field on the left operand's type, first a method called \lstinline[]°myProperty(OneArg)° and then \lstinline[]°setMyProperty(OneArg)° is looked up. It has to take 
+one argument of the type (or a super type) of the right hand operand. The return value will be whatever the setter method returns (which usually is \lstinline[]°null°). 
 As a result the compiler translates to :
 
 \begin{lstlisting} [language=Java]
@@ -777,11 +727,9 @@ myObj.setMyProperty("foo")
 
 
 
-
-
 \subsection{Add Assignment}
 \label{addAssignment}
-The translation rule for the add assignment operator \lstinline°+=° is as follows:
+The translation rule for the add assignment operator \lstinline[]°+=° is as follows:
 Given the expression 
 
 \begin{lstlisting}
@@ -790,7 +738,7 @@ myObj.myProperty += "foo"
 \end{lstlisting}
 
 
-The compiler first looks up whether, the left hand side operand is of some type providing a method \lstinline°add(StringOrSuperType)°. 
+The compiler first looks up whether, the left hand side operand is of some type providing a method \lstinline[]°add(StringOrSuperType)°. 
 In that case the expression translates to the following Java expression :
 
 \begin{lstlisting} [language=Java]
@@ -799,34 +747,30 @@ myObj.myProperty.add("foo");
 \end{lstlisting}
 
 
-If there is no such method, the compiler looks for a method called \lstinline°addMyProperty(OneArg)° on the type of the target expression
-of the feature call. That is it looks whether the type of \lstinline°myObj° provides a method called \lstinline°addMyProperty(StringOrSuperType)°.
+If there is no such method, the compiler looks for a method called \lstinline[]°addMyProperty(OneArg)° on the type of the target expression
+of the feature call. That is it looks whether the type of \lstinline[]°myObj° provides a method called \lstinline[]°addMyProperty(StringOrSuperType)°.
 
 The return value and compile-time type will be whatever the invoked Java method returns.
 
 
-
-
 \subsection{Short-Circuit Boolean Operators}
 
-If the operators \lstinline°||° and \lstinline°&&° are used in a context where the left hand operand is of type boolean, the operation is evaluated
+If the operators \lstinline[]°||° and \lstinline[]°&&° are used in a context where the left hand operand is of type boolean, the operation is evaluated
 in short circuit mode, which means that the right hand operand might not be evaluated at all in the following cases: 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{enumerate}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
 \item \begin{minipage}[t]{\itemindentlen}
-in the case of \lstinline°||° the operand on the right hand side is not evaluated if the left operand evaluates to \lstinline°true°.
+in the case of \lstinline[]°||° the operand on the right hand side is not evaluated if the left operand evaluates to \lstinline[]°true°.
 \end{minipage}
 \item \begin{minipage}[t]{\itemindentlen}
-in the case of \lstinline°&&° the operand on the right hand side is not evaluated if the left operand evaluates to \lstinline°false°.
+in the case of \lstinline[]°&&° the operand on the right hand side is not evaluated if the left operand evaluates to \lstinline[]°false°.
 \end{minipage}
 \end{enumerate}
-\addtolength{\itemindentlen}{2em}
+\addtolength{\itemindentlen}{2.5em}
  
-
-
 
 
 \subsection{Examples}
@@ -834,37 +778,34 @@ in the case of \lstinline°&&° the operand on the right hand side is not evaluate
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°my.foo = 23°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°my.foo = 23°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°myList += 23°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°myList += 23°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°x > 23 && y < 23°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°x > 23 && y < 23°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°x && y || z°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°x && y || z°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°1 + 3 * 5 * (- 23)°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°1 + 3 * 5 * (- 23)°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°!(x)°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°!(x)°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°my.foo = 23°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°my.foo = 23°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°my.foo = 23°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°my.foo = 23°
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
@@ -885,8 +826,6 @@ FeatureCall :
 
 
 
-
-
 \subsection{Property Access}
 \label{PropertyAccess}
 Feature calls are directly translated to their Java equivalent with the exception, that for calls to properties an equivalent rule as 
@@ -900,15 +839,13 @@ myObj.myProperty
 \end{lstlisting}
 
 
-the compiler first looks for an accessible field in the type of \lstinline°myObj°. If no such field exists it looks for a method called \lstinline°myProperty()° before it looks 
-for the getter methods \lstinline°getMyProperty()°. If none of these members can be found the expression is unbound and a compiliation error is thrown.
-
-
+the compiler first looks for an accessible field in the type of \lstinline[]°myObj°. If no such field exists it looks for a method called \lstinline[]°myProperty()° before it looks 
+for the getter methods \lstinline[]°getMyProperty()°. If none of these members can be found the expression is unbound and a compiliation error is thrown.
 
 
 \subsection{Implicit 'this' variable}
 \label{ImplicitThis}
-If the current scope contains a variable named \lstinline°this°, the compiler will make all its members available to the scope. 
+If the current scope contains a variable named \lstinline[]°this°, the compiler will make all its members available to the scope. 
 That is if 
 \begin{lstlisting}
 this.myProperty
@@ -924,32 +861,27 @@ myProperty
 is valid as well and is equivalent. 
 
 
-
-
 \subsection{Examples}
 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°foo°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°foo°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°my.foo°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°my.foo°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°my.foo(x)°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°my.foo(x)°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°oh.my.foo(bar)°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°oh.my.foo(bar)°
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
@@ -971,8 +903,6 @@ JvmFormalParameter:
 
 
 
-
-
 \subsection{Function Mapping}
 \label{FunctionMapping}
 An Xbase closure is a Java object of one of the \textit{Function} interfaces shipped with the runtime library of Xbase. There is an interface for each number of parameters.
@@ -980,7 +910,7 @@ The names of the interfaces are
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
 \item \begin{minipage}[t]{\itemindentlen}
 \textit{Function0<ReturnType>} for zero parameters, 
@@ -998,22 +928,20 @@ The names of the interfaces are
 \textit{Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>} for six parameters, 
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
+\addtolength{\itemindentlen}{2.5em}
 
-In order to allow seamless integration with Google Guava (formerly known as Google Collect) the type \lstinline°Function1° 
-extends \lstinline°com.google.common.base.Function<F, T>° and the type \textit{Function0} extends \lstinline°com.google.common.base.Supplier<T>°. 
-There is also an auto-coercion for any \lstinline°Function1<T,Boolean>° to \lstinline°com.google.common.base.Predicate<T>°.
+In order to allow seamless integration with Google Guava (formerly known as Google Collect) the type \lstinline[]°Function1° 
+extends \lstinline[]°com.google.common.base.Function<F, T>° and the type \textit{Function0} extends \lstinline[]°com.google.common.base.Supplier<T>°. 
+There is also an auto-coercion for any \lstinline[]°Function1<T,Boolean>° to \lstinline[]°com.google.common.base.Predicate<T>°.
 
 \textit{TODO: Discuss, whether we want to go a step further and do auto conversion to any type declaring only one method. That would allow to pass
-closures also to methods expecting other such types like e.g. \lstinline°Iterable°. This would avoid a fixed dependency to Google Guava, too.}
-
-
+closures also to methods expecting other such types like e.g. \lstinline[]°Iterable°. This would avoid a fixed dependency to Google Guava, too.}
 
 
 \subsection{Typing}
 \label{ClosuresTypeInference}
 Closures are expressions which produce function objects. The type is a 
-\hyperref[FunctionTypes]{function type~(\ref*{FunctionTypes})}, consisting of the types of the 
+\hyperref[FunctionTypes]{function type~(§\ref*{FunctionTypes})}, consisting of the types of the 
 parameters as well as the return type. The return type is never specified explicitly but is always inferred from the expression. 
 The parameter types can be inferred if the closure is used in a context where this is possible.
 
@@ -1038,36 +966,31 @@ getFirst(arrayList("Foo","Bar"), String e|e=="Bar")
 
 
 
-
-
 \subsection{Examples}
 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°| "foo"   // closure without parameters°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°| "foo"   // closure without parameters°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°String s | s.toUpperCase() // explicit argument type°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°String s | s.toUpperCase() // explicit argument type°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°a,b,a | a+b+c  // inferred argument types°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°a,b,a | a+b+c  // inferred argument types°
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
 \section{If Expression}
 \label{IfExpression}
 An if expression is used to choose two different values based on a predicate. While it has the syntax of Java's if statement it behaves  
-like Java's ternary operator (\lstinline°predicate ? thenPart : elsePart°), i.e. it is an expression that returns a value. Consequently, you can use 
+like Java's ternary operator (\lstinline[]°predicate ? thenPart : elsePart°), i.e. it is an expression that returns a value. Consequently, you can use 
 if expressions deeply nested within expressions.
 
 \subsection{Syntax}
@@ -1081,8 +1004,8 @@ XIfExpression:
 \end{lstlisting}
 
 
-An expression \lstinline°if (p) e1 else e2° results to either the value \lstinline°e1° or \lstinline°e2° depending on whether the predicate \lstinline°p° evaluates to \lstinline°true° or \lstinline°false°. 
-The else part is optional which is a shorthand for \lstinline°else null°.
+An expression \lstinline[]°if (p) e1 else e2° results to either the value \lstinline[]°e1° or \lstinline[]°e2° depending on whether the predicate \lstinline[]°p° evaluates to \lstinline[]°true° or \lstinline[]°false°. 
+The else part is optional which is a shorthand for \lstinline[]°else null°.
 That is 
 \begin{lstlisting}
 if (foo) x // is the same as 'if (foo) x else null'
@@ -1091,15 +1014,11 @@ if (foo) x // is the same as 'if (foo) x else null'
 
 
 
-
-
 \subsection{Typing}
 \label{IfTypeInference}
-The type of an if expression is calculated by the return types \lstinline°T1° and \lstinline°T2° of the two expression \lstinline°e1° and \lstinline°e2°.
+The type of an if expression is calculated by the return types \lstinline[]°T1° and \lstinline[]°T2° of the two expression \lstinline[]°e1° and \lstinline[]°e2°.
 It uses the rules defined in 
 \autoref{CommonSuperType}.
-
-
 
 
 \subsection{Examples}
@@ -1107,22 +1026,19 @@ It uses the rules defined in
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°if (isFoo) this else that°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°if (isFoo) this else that°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°if (isFoo) this else if (thatFoo) that else other°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°if (isFoo) this else if (thatFoo) that else other°
 \end{minipage}
-\item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
-\lstinline°if (isFoo) this°
+\item \begin{minipage}[t]{\itemindentlen}
+\lstinline[]°if (isFoo) this°
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
@@ -1134,7 +1050,7 @@ It uses the rules defined in
 
 \begin{lstlisting}
 XSwitchExpression:
-	'switch' XExpression? '{'
+	'switch' XExpressionOrVariableDeclaration? '{'
 		XCasePart+
 		('default' ':' (XBlockExpression 
 			  		  | XExpression ';'))?
@@ -1162,28 +1078,22 @@ switch e {
 \end{lstlisting}
 
 
-the main expression \lstinline°e° is evaluated first and then each case sequentially. 
-If a case expression \lstinline°en° evaluates to something such that \lstinline°e == en° the result of the switch expression is \lstinline°ern°. If none of the 
-case expressions \lstinline°e1...en° is equal to the result of the main expression \lstinline°e° the result of the optional default part \lstinline°er° is returned.
-If not default is defined the expression returns \lstinline°null°.
+the main expression \lstinline[]°e° is evaluated first and then each case sequentially. The result of the main expression, further called the switch value, is bound (and possibly shadows) the implicit
+\lstinline[]°this° variable. In order to avoid shadowing, a 
+\hyperref[VariableDeclaration]{variable declaration~(§\ref*{VariableDeclaration})} can be used.
 
-
+A case clause is taken if the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to \lstinline[]°true°.
 
 
 \subsection{Leaving out the main expression}
 
-It is possible to leave out the main expression. Then the case expressions \lstinline°e1...en° have to be of type Boolean. They are evaluated 
-in the specified order and as soon as one predicate \lstinline°ex° evaluates to true the corresponding then expression \lstinline°ex° is the result of the switch expression.
-So it is mainly an alternative syntax to the 
-\autoref{IfExpression}.
-
-
+It is possible to leave out the main expression. Then the first case clause for which its guard returns \lstinline[]°true° is taken and executed.
 
 
 \subsection{Type guards}
 
 In addition to the case predicate one can add a so called \textit{Type Guard} which is syntactically just 
-\hyperref[TypeReferences]{type reference~(\ref*{TypeReferences})} in front of the case keyword.  
+\hyperref[TypeReferences]{type reference~(§\ref*{TypeReferences})} in front of the case keyword.  
 The compiler will use that type for the switch expression in subsequent expressions.
 Example:
 \begin{lstlisting}
@@ -1198,29 +1108,24 @@ switch x {
 \end{lstlisting}
 
 
-The expression x, will be of type \lstinline°String° in any expression within the first case and of type \lstinline°List<?>° in the second. Note that the case expression
-has to be a predicate (i.e. it has to be of type \lstinline°Boolean°). At runtime a type guard is translated to an \lstinline°instanceof° of test and subsequent casts.
-The expression x is reevaluated everytime it is used. If the expression returns a different value on a subsequent evaluation, it might cause a
-\lstinline°ClassCastException° at runtime.
-
-
+Only if the switch value passes a type guard, i.e. an instanceof operation returns \lstinline[]°true°, the case's guard expression is executed using the same semantics explained in
+previously. Statically the type guard acts like a cast, that is all references to the switch value will be of the type specified in the type guard.
 
 
 \subsection{Typing}
 
 The return type of a switch expression is computed using the rules defined in 
-\autoref{CommonSuperType}. 
-The set of types from which the common super type is computed corresponds to the types of each case's result expression.
-
-
-
+\autoref{CommonSuperType}. The set of types from which the common super type is 
+computed corresponds to the types of each case's result expression. In case a switch expression's type is
+computed using the expected type form the context, it is sufficient to return the expected type if all case branches types conform to the expected type.
 
 
 
 \section{Variable Declarations}
 \label{VariableDeclaration}
-Variable declarations are only allowed within a 
-\hyperref[Blocks]{block~(\ref*{Blocks})}. They are visible in any subsequent expressions in
+Variable declarations are only allowed within 
+\hyperref[Blocks]{blocks~(§\ref*{Blocks})} and 
+\hyperref[SwitchExpression]{switch expressions~(§\ref*{SwitchExpression})}. They are visible in any subsequent expressions in
 the block.
 
 \subsection{Syntax}
@@ -1232,9 +1137,9 @@ XVariableDeclaration:
 \end{lstlisting}
 
 
-Xbase resembles the keywords \lstinline°val° and \lstinline°var° known from Scala (\href{http://www.scala-lang.org/docu/files/ScalaReference.pdf}{The Scala Language Specification 2.8}).
-A variable declaration starting with the keyword \lstinline°val° denotes a so called value, which is essentially a final (i.e. unsettable) variable. In rare cases, one
-needs to update the value of a reference. In such situations the variable needs to be declared with the keyowrd \lstinline°var°, which stands for 'variable'.
+Xbase resembles the keywords \lstinline[]°val° and \lstinline[]°var° known from Scala (\href{http://www.scala-lang.org/docu/files/ScalaReference.pdf}{The Scala Language Specification 2.8}).
+A variable declaration starting with the keyword \lstinline[]°val° denotes a so called value, which is essentially a final (i.e. unsettable) variable. In rare cases, one
+needs to update the value of a reference. In such situations the variable needs to be declared with the keyowrd \lstinline[]°var°, which stands for 'variable'.
 
 \begin{lstlisting}
 {
@@ -1252,11 +1157,9 @@ needs to update the value of a reference. In such situations the variable needs 
 
 
 
-
-
 \subsection{Typing}
 
-The return type of a variable declaration expression is always \lstinline°java.lang.Void°. 
+The return type of a variable declaration expression is always \lstinline[]°java.lang.Void°. 
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
 Here is an example for an explicitly declared type:
 \begin{lstlisting}
@@ -1265,7 +1168,7 @@ var List<String> msg = new ArrayList<String>();
 \end{lstlisting}
 
 In such cases, the right hand expression's type must 
-\hyperref[ConformanceRules]{conform~(\ref*{ConformanceRules})} to the type on the left hand side. 
+\hyperref[ConformanceRules]{conform~(§\ref*{ConformanceRules})} to the type on the left hand side. 
 
 Alternatively the type can be left out and will be inferred from the initialization expression:  
 \begin{lstlisting}
@@ -1276,15 +1179,12 @@ var msg = new ArrayList<String>(); // -> type ArrayList<String>
 
 
 
-
-
-
 \section{Blocks}
 \label{Blocks}
 The block expression allows to simulate imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
-The return type of a block is also the type of the last expression. 
+The return type of a block is also the type of the last expression. Empty blocks return \lstinline[]°null°. 
 
-\hyperref[VariableDeclaration]{Variable declarations~(\ref*{VariableDeclaration})} are only allowed within blocks and cannot be used as a block's last expression.
+\hyperref[VariableDeclaration]{Variable declarations~(§\ref*{VariableDeclaration})} are only allowed within blocks and cannot be used as a block's last expression.
 
 \subsection{Syntax}
 
@@ -1301,14 +1201,12 @@ A block expression is surrounded by curly braces and contains at least one expre
 It can optionally be terminated by a semicolon.
 
 
-
-
 \subsection{Examples}
 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
 \item \begin{minipage}[t]{\itemindentlen}
 
@@ -1331,17 +1229,14 @@ It can optionally be terminated by a semicolon.
 	
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
 \section{While Loop}
 \label{WhileExpression}
-A while loop \lstinline°while (predicate) expression° is used to execute a certain \lstinline°expression° unless the \lstinline°predicate° is evaluated to \lstinline°false°.
-The return type of a while loop is \lstinline°java.lang.Void° and the return value is \lstinline°null°.
+A while loop \lstinline[]°while (predicate) expression° is used to execute a certain \lstinline[]°expression° unless the \lstinline[]°predicate° is evaluated to \lstinline[]°false°.
+The return type of a while loop is \lstinline[]°java.lang.Void° and the return value is \lstinline[]°null°.
 
 \subsection{Syntax}
 
@@ -1354,14 +1249,12 @@ XWhileExpression:
  
 
 
-
-
 \subsection{Examples}
 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
 \item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
 \begin{lstlisting}
@@ -1380,19 +1273,16 @@ while ((i=i+1)<max) doSideEffect("foo")
 
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
 \section{Do-While Loop}
 \label{DoWhileExpression}
-A do-while loop \lstinline°do expression while (predicate)° is used to execute a certain \lstinline°expression° unless the \lstinline°predicate° is evaluated to \lstinline°false°.
+A do-while loop \lstinline[]°do expression while (predicate)° is used to execute a certain \lstinline[]°expression° unless the \lstinline[]°predicate° is evaluated to \lstinline[]°false°.
 The difference to the 
-\hyperref[WhileExpression]{while loop~(\ref*{WhileExpression})} is that the execution starts by executing the block once before evaluating the predicate for the first time.
-The return type of a do-while loop is \lstinline°java.lang.Void° and the return value is \lstinline°null°.
+\hyperref[WhileExpression]{while loop~(§\ref*{WhileExpression})} is that the execution starts by executing the block once before evaluating the predicate for the first time.
+The return type of a do-while loop is \lstinline[]°java.lang.Void° and the return value is \lstinline[]°null°.
 
 \subsection{Syntax}
 
@@ -1406,14 +1296,12 @@ XDoWhileExpression:
  
 
 
-
-
 \subsection{Examples}
 
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
 \item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
 \begin{lstlisting}
@@ -1432,17 +1320,14 @@ do doSideEffect("foo") while ((i=i+1)<max)
 
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
 \section{For Loop}
 \label{ForLoop}
-The for loop \lstinline°for (T1 variable : iterableOfT1) expression° is used to execute a certain \lstinline°expression° for each element of an \lstinline°java.lang.Iterable°.
-The local \lstinline°variable° is final, hence canot be updated. 
+The for loop \lstinline[]°for (T1 variable : iterableOfT1) expression° is used to execute a certain \lstinline[]°expression° for each element of an \lstinline[]°java.lang.Iterable°.
+The local \lstinline[]°variable° is final, hence canot be updated. 
 
 \subsection{Syntax}
 
@@ -1456,14 +1341,10 @@ XForExpression:
  
 
 
-
-
 \subsection{Typing}
 
-The return type of a for loop is \lstinline°java.lang.Void° and the return value is \lstinline°null°.
-The type of the local variable can be left out. In that case it is inferred from the type of the \lstinline°java.lang.Iterable° returned by the iterable expression.
-
-
+The return type of a for loop is \lstinline[]°java.lang.Void° and the return value is \lstinline[]°null°.
+The type of the local variable can be left out. In that case it is inferred from the type of the \lstinline[]°java.lang.Iterable° returned by the iterable expression.
 
 
 \subsection{Examples}
@@ -1471,7 +1352,7 @@ The type of the local variable can be left out. In that case it is inferred from
 
 \setlength{\itemindentlen}{\textwidth}
 \begin{itemize}
-\addtolength{\itemindentlen}{-2em}
+\addtolength{\itemindentlen}{-2.5em}
 
 \item \begin{minipage}[t]{\itemindentlen}\vspace*{-\baselineskip}
 \begin{lstlisting}
@@ -1492,26 +1373,21 @@ for (s : myStrings)
 	
 \end{minipage}
 \end{itemize}
-\addtolength{\itemindentlen}{2em}
-
-
-
+\addtolength{\itemindentlen}{2.5em}
 
 
 
 \section{Constructor Call}
 \label{ConstructorCall}
-Construction of objects is done by invoking Java constructors. Xbase uses the \lstinline°new° keyword and the syntax is like the one known from Java.
+Construction of objects is done by invoking Java constructors. Xbase uses the \lstinline[]°new° keyword and the syntax is like the one known from Java.
 
 \subsection{Syntax}
 
 \begin{lstlisting}
 XConstructorCall:
-  'new' (type=JvmTypeReference '('(XExpression (',' XExpression)*)?')')?;
+  'new' (QualifiedName ('<' JvmTypeArgument (',' JvmTypeArgument)* '>')? '('(XExpression (',' XExpression)*)?')')?;
 
 \end{lstlisting}
-
-
 
 
 
@@ -1525,12 +1401,9 @@ new Foo()
 
 
 
-
-
-
 \section{Throwing Exceptions}
 \label{Throw}
-Like in Java it is possible to throw \lstinline°java.lang.Throwable°. The syntax is exactly the same as in Java.
+Like in Java it is possible to throw \lstinline[]°java.lang.Throwable°. The syntax is exactly the same as in Java.
 
 \subsection{Syntax}
 
@@ -1542,14 +1415,10 @@ XThrow:
 
 
 
-
-
 \subsection{Typing}
 
-The type of a throw expression is always \lstinline°java.lang.Void°. 
-The type of the expression after the \lstinline°throw° keyword needs to conform to \lstinline°java.lang.Throwable°.
-
-
+The type of a throw expression is always \lstinline[]°java.lang.Void°. 
+The type of the expression after the \lstinline[]°throw° keyword needs to conform to \lstinline[]°java.lang.Throwable°.
 
 
 \subsection{Example}
@@ -1558,9 +1427,6 @@ The type of the expression after the \lstinline°throw° keyword needs to conform 
 throw new RuntimeException()
 
 \end{lstlisting}
-
-
-
 
 
 
@@ -1590,8 +1456,6 @@ FinallyClause:
 
 
 
-
-
 \subsection{Example}
 
 \begin{lstlisting}
@@ -1607,9 +1471,15 @@ try {
 
 
 
+\chapter*{List of External Links}
+\noindent\url{http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7}
 
+\noindent\url{http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html}
 
+\noindent\url{http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.8}
 
+\noindent\url{http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5}
 
+\noindent\url{http://www.scala-lang.org/docu/files/ScalaReference.pdf}
 
 \end{document}
