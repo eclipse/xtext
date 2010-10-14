@@ -11,7 +11,6 @@ package org.eclipse.xtext.scoping;
 import static com.google.common.collect.Iterables.*;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;

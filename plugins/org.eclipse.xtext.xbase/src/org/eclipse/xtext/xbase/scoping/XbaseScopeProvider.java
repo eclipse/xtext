@@ -28,7 +28,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.typing.ITypeProvider;
-import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -74,7 +73,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (context instanceof XMemberFeatureCall || context instanceof XBinaryOperation) {
 			final XAbstractFeatureCall call = (XAbstractFeatureCall) context;
 			XExpression target = call.getArguments().get(0);
-			JvmTypeReference jvmTypeReference = typeResolver.getType(target, null, null);
+			JvmTypeReference jvmTypeReference = typeResolver.getType(target, null);
 			if (jvmTypeReference != null) {
 				IScope parent = createFeatureScopeForTypeRef(jvmTypeReference,
 						createCallableFeaturePredicate(call, null), IScope.NULLSCOPE);
@@ -93,7 +92,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 			if (thisVariable != null) {
 				EObject thisVal = thisVariable.getEObjectOrProxy();
-				JvmTypeReference type = typeResolver.getType(thisVal, null, ValidationMessageAcceptor.NULL);
+				JvmTypeReference type = typeResolver.getType(thisVal, null);
 				if (type != null) {
 					IScope allFeatures = createFeatureScopeForTypeRef(type, createCallableFeaturePredicate(call, type),
 							IScope.NULLSCOPE);
