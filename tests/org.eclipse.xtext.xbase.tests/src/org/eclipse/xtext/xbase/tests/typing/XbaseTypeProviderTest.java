@@ -26,7 +26,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  *
  */
-public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
+public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	private ITypeProvider<JvmTypeReference> typeResolver;
@@ -95,7 +95,7 @@ public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	}
 	
 	public void assertResolvedReturnType(String type, String expression) throws Exception {
-		JvmTypeReference typeRef = typeResolver.getType(expression(expression,true),null,null);
+		JvmTypeReference typeRef = typeResolver.getType(expression(expression,true),null);
 		assertNotNull("type ref was null for "+expression,typeRef);
 		assertEquals(type,toString(typeRef));
 	}

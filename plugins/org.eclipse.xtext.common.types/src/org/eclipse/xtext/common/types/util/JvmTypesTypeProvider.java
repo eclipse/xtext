@@ -19,15 +19,15 @@ import org.eclipse.xtext.typing.AbstractTypeProvider;
 public class JvmTypesTypeProvider extends AbstractTypeProvider<JvmTypeReference> {
 	
 	
-	protected JvmTypeReference _type(JvmField field, JvmTypeReference expected) {
+	protected JvmTypeReference _type(JvmField field, Context<JvmTypeReference> context) {
 		return field.getType();
 	}
 	
-	protected JvmTypeReference _type(JvmOperation operation, JvmTypeReference expected) {
+	protected JvmTypeReference _type(JvmOperation operation, Context<JvmTypeReference> context) {
 		return operation.getReturnType();
 	}
 	
-	protected JvmTypeReference _type(JvmFormalParameter field, JvmTypeReference expected) {
+	protected JvmTypeReference _type(JvmFormalParameter field, Context<JvmTypeReference> context) {
 		return field.getParameterType();
 	}
 }
