@@ -96,7 +96,7 @@ The link[http://www.eclipse.org/modeling/gmp/?project=gmf][Graphical Modeling Fr
 
 table[
 tr[td[Plug-in]td[Framework]td[Purpose]td[Contents]]
-tr[td[o.e.x.example.gmf]td[Xtext]td[Xtext runtime plug-in]td[Grammar, derived metamodel and language infrastructure]td[ ]]
+tr[td[o.e.x.example.gmf]td[Xtext]td[Xtext runtime plug-in]td[Grammar, derived metamodel and language infrastructure]]
 tr[td[o.e.x.e.g.ui]td[Xtext]td[Xtext UI plug-in]td[Xtext editor and services]]
 tr[td[o.e.x.e.g.edit]td[EMF]td[EMF.edit plug-in]td[UI services generated from the metamodel]]
 tr[td[o.e.x.e.g.models]td[GMF]td[GMF design models]td[Input for the GMF code generator]]
