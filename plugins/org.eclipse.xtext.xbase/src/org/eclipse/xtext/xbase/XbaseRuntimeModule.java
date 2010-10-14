@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.xbase.scoping.XbaseTypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
 /**
  * Use this class to register components to be used within the IDE.
