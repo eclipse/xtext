@@ -12,7 +12,6 @@ Require-Bundle: org.eclipse.xtext.example.css;visibility:=reexport,
  org.eclipse.xtext.ui.shared,
  org.eclipse.ui,
  org.eclipse.xtext.builder,
- org.antlr.runtime,
  org.eclipse.xtext.xbase;bundle-version="1.0.1",
  org.eclipse.xtext.xbase.ui;bundle-version="1.0.1",
  org.eclipse.xtext.common.types.ui
