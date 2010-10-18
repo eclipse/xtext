@@ -21,6 +21,7 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
@@ -48,11 +49,15 @@ import com.google.common.collect.Multimap;
 public abstract class AbstractInternalContentAssistParser extends Parser implements
 		ObservableXtextTokenStream.StreamListener, ITokenDefProvider {
 
+	private static final Logger logger = Logger.getLogger(AbstractInternalContentAssistParser.class);
+	
 	/**
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
 	protected class DefaultFollowElementFactory implements IFollowElementFactory {
 		public FollowElement createFollowElement(AbstractElement current, int lookAhead) {
+			if (logger.isDebugEnabled())
+				logger.debug("Creating FollowElement for: " + current);
 			FollowElement result = new FollowElement();
 			result.setLookAhead(lookAhead);
 			if (lookAhead != 1) {
@@ -61,8 +66,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 				if (marked) {
 					from = firstMarker;
 				}
-				List<LookAheadTerminal> lookAheadTerminals = Lists
-						.<LookAheadTerminal> newArrayListWithExpectedSize(to - from);
+				List<LookAheadTerminal> lookAheadTerminals = Lists.newArrayListWithExpectedSize(to - from);
 				for (int tokenIndex = from; tokenIndex < to; tokenIndex++) {
 					Token token = input.get(tokenIndex);
 					
@@ -83,6 +87,10 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 					List<AbstractElement> alreadyHandled = Lists.newArrayList(Iterators.filter(indexToHandledElements.get(index).iterator(), AbstractElement.class));
 					result.setHandledUnorderedGroupElements(alreadyHandled);
 				}
+			}
+			if (logger.isDebugEnabled()) {
+				logger.debug("FollowElement is: " + current);
+				logger.debug("==================================");
 			}
 			return result;
 		}
@@ -111,6 +119,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	protected int predictionLevel = 0;
 	protected int currentMarker;
 	protected int firstMarker;
+	protected boolean inMismatchIsUnwantedToken = false;
 	protected boolean failedPredicateAtEOF = false;
 	protected Multimap<Integer, AbstractElement> indexToHandledElements;
 	protected IUnorderedGroupHelper unorderedGroupHelper;
@@ -229,6 +238,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			private boolean wasMismatch = false;
 			private ObservableXtextTokenStream.StreamListener privateDelegate = delegate;
 			private IFollowElementFactory followElementFactory;
+			private AbstractElement recovered;
 			{
 				followElementFactory = AbstractInternalContentAssistParser.this.followElementFactory;
 				AbstractInternalContentAssistParser.this.followElementFactory = new IFollowElementFactory() {
@@ -244,37 +254,47 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			}
 
 			public void announceEof(int lookAhead) {
-				if (predictionLevel == 0) {
-					if (!wasMismatch && (!state.errorRecovery || !resyncing)) {
-						AbstractElement current = getCurrentGrammarElement();
-						if (current != null
-								&& (lastAddedElement == null || 
-									!EcoreUtil.isAncestor(current, lastAddedElement))) {
-							if (state.errorRecovery) {
-								if (!failedPredicateAtEOF && (globalLastAddedElement != current && (globalLastAddedElement == null 
-										|| GrammarUtil.isOptionalCardinality(globalLastAddedElement)
-										|| GrammarUtil.isOneOrMoreCardinality(globalLastAddedElement)))) {
-									createAndAddFollowElement(current, lookAhead);
+				try {
+					if (predictionLevel == 0) {
+						if (!wasMismatch && (!state.errorRecovery || !resyncing)) {
+							AbstractElement current = getCurrentGrammarElement();
+							if (current != null
+									&& (lastAddedElement == null || 
+										!EcoreUtil.isAncestor(current, lastAddedElement))) {
+								if (state.errorRecovery) {
+									if (!failedPredicateAtEOF && (globalLastAddedElement != current && (globalLastAddedElement == null 
+											|| GrammarUtil.isOptionalCardinality(globalLastAddedElement)
+											|| GrammarUtil.isOneOrMoreCardinality(globalLastAddedElement)))) {
+										createAndAddFollowElement(current, lookAhead);
+									} 
+								} else {
+									if (globalLastAddedElement != current)
+										createAndAddFollowElement(current, lookAhead);
 								}
-							} else {
-								if (globalLastAddedElement != current)
-									createAndAddFollowElement(current, lookAhead);
 							}
 						}
+						if (mismatch && !wasMismatch && !failedPredicateAtEOF) {
+							AbstractElement current = getCurrentGrammarElement();
+							if (recovered == null || recovered == current) {
+								if (current != null
+										&& (lastAddedElement == null || 
+											!EcoreUtil.isAncestor(current, lastAddedElement))) {
+									createAndAddFollowElement(current, lookAhead);
+								}
+							}
+						} 
+					} else {
+						if (globalLastAddedElement != getCurrentGrammarElement())
+							privateDelegate.announceEof(lookAhead);
 					}
-					if (mismatch && !wasMismatch && !failedPredicateAtEOF) {
-						AbstractElement current = getCurrentGrammarElement();
-						if (current != null
-								&& (lastAddedElement == null || 
-									!EcoreUtil.isAncestor(current, lastAddedElement))) {
-							createAndAddFollowElement(current, lookAhead);
+				} finally {
+					wasMismatch |= mismatch;
+					if (getCurrentGrammarElement() != null && getCurrentGrammarElement() != globalLastAddedElement) {
+						if (state.errorRecovery && recovered == null) {
+							recovered = getCurrentGrammarElement();
 						}
 					}
-				} else {
-					if (globalLastAddedElement != getCurrentGrammarElement())
-						privateDelegate.announceEof(lookAhead);
 				}
-				wasMismatch |= mismatch;
 			}
 
 			protected void createAndAddFollowElement(AbstractElement current, int lookAhead) {
@@ -283,6 +303,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 				FollowElement followElement = followElementFactory.createFollowElement(current, lookAhead);
 				followElements.add(followElement);
 				lastAddedElement = current;
+				globalLastAddedElement = current;
 			}
 
 		};
@@ -402,10 +423,30 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 
 	public void announceEof(int lookAhead) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("Reached Eof with LA " + lookAhead);
+			logger.debug("Internal parser state is: ");
+			logger.debug("  current: " + getCurrentGrammarElement());
+			logger.debug("  failed: " + state.failed);
+			logger.debug("  errorRecovery: " + state.errorRecovery);
+			logger.debug("  resyncing: " + resyncing);
+			logger.debug("  marked: " + marked);
+			logger.debug("  firstMarker: " + firstMarker);
+			logger.debug("  currentMarker: " + currentMarker);
+			logger.debug("  lookAheadAddOn: " + lookAheadAddOn);
+			logger.debug("  predictionLevel: " + predictionLevel);
+			logger.debug("  stackSize: " + stackSize);
+			logger.debug("  backtracking: " + state.backtracking);
+			logger.debug("  syntaxErrors: " + state.syntaxErrors);
+			logger.debug("  token: " + state.token);
+			logger.debug("==================================");
+		}
 		if (delegate == null) {
 			selectEofStrategy();
 		}
 		if (grammarElements.isEmpty() || delegate == null)
+			return;
+		if (inMismatchIsUnwantedToken)
 			return;
 		delegate.announceEof(lookAhead);
 	}
@@ -415,6 +456,16 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			localTrace.clear();
 		else
 			lookAheadAddOn++;
+	}
+	
+	@Override
+	public boolean mismatchIsUnwantedToken(IntStream input, int ttype) {
+		try {
+			inMismatchIsUnwantedToken = true;
+			return super.mismatchIsUnwantedToken(input, ttype);
+		} finally {
+			inMismatchIsUnwantedToken = false;
+		}
 	}
 	
 	public void announceRewind(int marker) {
