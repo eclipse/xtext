@@ -12,6 +12,7 @@
   <rm:locator pattern="^org\.apache(?:\..+)?$" searchPathRef="orbit" failOnError="false"/>
   <rm:locator pattern="^com\.google(?:\..+)?$" searchPathRef="mwe"/>
   <rm:locator pattern="^org\.(?:aopalliance|easymock)$" searchPathRef="orbit"/>
+  <rm:locator pattern="^org\.antlr\.runtime$" searchPathRef="xpand"/>
   <rm:locator searchPathRef="platform"/>
   <rm:searchPath name="local.releng">
     <rm:provider componentTypes="buckminster" readerType="local" mutable="false">
