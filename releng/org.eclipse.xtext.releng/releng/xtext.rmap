@@ -12,6 +12,8 @@
 	<locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse.test" />
 	<locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse.test" />
 
+	<!-- Use antlr from xtext git repo until available from orbit -->
+    <locator pattern="^org\.(?:antlr\.runtime)$" searchPathRef="xtext"/>
 
 	<searchPath name="xtext">
 		<provider componentTypes="osgi.bundle" readerType="local" mutable="false">
