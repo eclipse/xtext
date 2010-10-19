@@ -190,6 +190,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			IScope parent) {
 		if (jvmTypeRef.getType() instanceof JvmDeclaredType) {
 			JvmDeclaredType declType = (JvmDeclaredType) jvmTypeRef.getType();
+			//TODO don't use scopes to shadow overridden methods, but use a 
+			// to be written service, which does something like 
 			EList<JvmTypeReference> types = declType.getSuperTypes();
 			for (JvmTypeReference jvmTypeReference : types) {
 				parent = createFeatureScopeForTypeRef(jvmTypeReference, featurePredicate, parent);

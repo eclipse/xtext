@@ -5,6 +5,8 @@
  */
 package org.eclipse.xtext.common.types.impl;
 
+import java.lang.Iterable;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -25,7 +27,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -412,6 +416,30 @@ public abstract class JvmDeclaredTypeImpl extends JvmComponentTypeImpl implement
 	 * @generated
 	 */
 	public String getPackageName()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Iterable<JvmOperation> getDeclaredOperations()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Iterable<JvmField> getDeclaredFields()
 	{
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT

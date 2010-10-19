@@ -35,7 +35,7 @@ import com.google.inject.internal.Lists;
  */
 public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 
-	private JvmTypeConformanceComputer computer;
+	private IJvmTypeConformanceComputer computer = new IJvmTypeConformanceComputer.Impl(new SuperTypeCollector(TypesFactory.eINSTANCE));
 	private DeclaredTypeFactory factory = new DeclaredTypeFactory(new ClassURIHelper());
 
 	protected JvmTypeReference ref(java.lang.reflect.Type type, JvmTypeReference... arguments) {
@@ -87,18 +87,6 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 	protected abstract IJvmTypeProvider getTypeProvider();
 
 	protected abstract Resource getSyntheticResource();
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		computer = new JvmTypeConformanceComputer(new SuperTypeCollector(new JvmTypes()));
-	}
-
-	@Override
-	protected void tearDown() throws Exception {
-		computer = null;
-		super.tearDown();
-	}
 
 	/**
 	 * List <= List<? super CharSequence>

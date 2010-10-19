@@ -1682,6 +1682,18 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		addEOperation(jvmDeclaredTypeEClass, ecorePackage.getEString(), "getPackageName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		EOperation op = addEOperation(jvmDeclaredTypeEClass, null, "getDeclaredOperations", 1, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(this.getIterable());
+		EGenericType g2 = createEGenericType(this.getJvmOperation());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = addEOperation(jvmDeclaredTypeEClass, null, "getDeclaredFields", 1, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getIterable());
+		g2 = createEGenericType(this.getJvmField());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		initEClass(jvmTypeParameterEClass, JvmTypeParameter.class, "JvmTypeParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJvmTypeParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, JvmTypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJvmTypeParameter_Declarator(), this.getJvmTypeParameterDeclarator(), this.getJvmTypeParameterDeclarator_TypeParameters(), "declarator", null, 0, 1, JvmTypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1714,9 +1726,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEClass(jvmGenericTypeEClass, JvmGenericType.class, "JvmGenericType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJvmGenericType_Interface(), ecorePackage.getEBoolean(), "interface", null, 0, 1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(jvmGenericTypeEClass, null, "getExtendedInterfaces", 0, 1, IS_UNIQUE, IS_ORDERED);
-		EGenericType g1 = createEGenericType(this.getIterable());
-		EGenericType g2 = createEGenericType(this.getJvmType());
+		op = addEOperation(jvmGenericTypeEClass, null, "getExtendedInterfaces", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getIterable());
+		g2 = createEGenericType(this.getJvmType());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 

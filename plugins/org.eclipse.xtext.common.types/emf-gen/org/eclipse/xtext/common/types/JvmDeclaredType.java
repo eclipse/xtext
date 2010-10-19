@@ -5,6 +5,8 @@
  */
 package org.eclipse.xtext.common.types;
 
+import java.lang.Iterable;
+
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -148,5 +150,21 @@ public interface JvmDeclaredType extends JvmComponentType, JvmMember
 	 * @generated
 	 */
 	String getPackageName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmOperation>" required="true"
+	 * @generated
+	 */
+	Iterable<JvmOperation> getDeclaredOperations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmField>" required="true"
+	 * @generated
+	 */
+	Iterable<JvmField> getDeclaredFields();
 
 } // JvmDeclaredType

@@ -105,6 +105,11 @@ public abstract class AbstractXcssRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
+	public org.eclipse.xtext.common.types.TypesFactory bindTypesFactoryToInstance() {
+		return org.eclipse.xtext.common.types.TypesFactory.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
 	public Class<? extends org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory> bindIJvmTypeProvider$Factory() {
 		return org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory.class;
 	}

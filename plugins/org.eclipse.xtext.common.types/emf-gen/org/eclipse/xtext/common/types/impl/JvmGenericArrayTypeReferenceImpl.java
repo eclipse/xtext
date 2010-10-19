@@ -68,6 +68,7 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmArrayType getType()
 	{
 		return type;

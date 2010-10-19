@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.types;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
@@ -34,6 +35,7 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
 		     .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
+		     .addTypeToInstance(TypesFactory.class.getName(), "org.eclipse.xtext.common.types.TypesFactory.eINSTANCE")
 			 .addTypeToType(IJvmTypeProvider.Factory.class.getName(), ClasspathTypeProviderFactory.class.getName())
 			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), ClasspathBasedTypeScopeProvider.class.getName())
 			 .addfinalTypeToType(IGlobalScopeProvider.class.getName(), TypesAwareDefaultGlobalScopeProvider.class.getName())
