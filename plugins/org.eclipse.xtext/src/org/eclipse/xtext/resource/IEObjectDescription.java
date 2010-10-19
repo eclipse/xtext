@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface IEObjectDescription {
 	
 	/**
-	 * @return the name, this element can be accessed. Usually the qualified name.
+	 * @return the name, this element can be accessed by.
 	 */
 	String getName();
 	
