@@ -2102,9 +2102,9 @@ ruleXMemberFeatureCall returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmTypeArgumentParserRuleCall_1_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0(), currentNode); 
 	    }
-		lv_typeArguments_4_0=ruleJvmTypeArgument		{
+		lv_typeArguments_4_0=ruleJvmArgumentTypeReference		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXMemberFeatureCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2114,7 +2114,7 @@ ruleXMemberFeatureCall returns [EObject current=null]
 	       			$current, 
 	       			"typeArguments",
 	        		lv_typeArguments_4_0, 
-	        		"JvmTypeArgument", 
+	        		"JvmArgumentTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -2130,9 +2130,9 @@ ruleXMemberFeatureCall returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmTypeArgumentParserRuleCall_1_2_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_2_1_0(), currentNode); 
 	    }
-		lv_typeArguments_6_0=ruleJvmTypeArgument		{
+		lv_typeArguments_6_0=ruleJvmArgumentTypeReference		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXMemberFeatureCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2142,7 +2142,7 @@ ruleXMemberFeatureCall returns [EObject current=null]
 	       			$current, 
 	       			"typeArguments",
 	        		lv_typeArguments_6_0, 
-	        		"JvmTypeArgument", 
+	        		"JvmArgumentTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3725,9 +3725,9 @@ ruleXFeatureCall returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmTypeArgumentParserRuleCall_0_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_0_1_0(), currentNode); 
 	    }
-		lv_typeArguments_1_0=ruleJvmTypeArgument		{
+		lv_typeArguments_1_0=ruleJvmArgumentTypeReference		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXFeatureCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -3737,7 +3737,7 @@ ruleXFeatureCall returns [EObject current=null]
 	       			$current, 
 	       			"typeArguments",
 	        		lv_typeArguments_1_0, 
-	        		"JvmTypeArgument", 
+	        		"JvmArgumentTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -3753,9 +3753,9 @@ ruleXFeatureCall returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmTypeArgumentParserRuleCall_0_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_0_2_1_0(), currentNode); 
 	    }
-		lv_typeArguments_3_0=ruleJvmTypeArgument		{
+		lv_typeArguments_3_0=ruleJvmArgumentTypeReference		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXFeatureCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -3765,7 +3765,7 @@ ruleXFeatureCall returns [EObject current=null]
 	       			$current, 
 	       			"typeArguments",
 	        		lv_typeArguments_3_0, 
-	        		"JvmTypeArgument", 
+	        		"JvmArgumentTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -4688,9 +4688,9 @@ ruleJvmParameterizedTypeReference returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmTypeArgumentParserRuleCall_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0(), currentNode); 
 	    }
-		lv_arguments_2_0=ruleJvmTypeArgument		{
+		lv_arguments_2_0=ruleJvmArgumentTypeReference		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -4700,7 +4700,7 @@ ruleJvmParameterizedTypeReference returns [EObject current=null]
 	       			$current, 
 	       			"arguments",
 	        		lv_arguments_2_0, 
-	        		"JvmTypeArgument", 
+	        		"JvmArgumentTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -4716,9 +4716,9 @@ ruleJvmParameterizedTypeReference returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmTypeArgumentParserRuleCall_1_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0(), currentNode); 
 	    }
-		lv_arguments_4_0=ruleJvmTypeArgument		{
+		lv_arguments_4_0=ruleJvmArgumentTypeReference		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -4728,7 +4728,7 @@ ruleJvmParameterizedTypeReference returns [EObject current=null]
 	       			$current, 
 	       			"arguments",
 	        		lv_arguments_4_0, 
-	        		"JvmTypeArgument", 
+	        		"JvmArgumentTypeReference", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -4748,17 +4748,17 @@ ruleJvmParameterizedTypeReference returns [EObject current=null]
 
 
 
-// Entry rule entryRuleJvmTypeArgument
-entryRuleJvmTypeArgument returns [EObject current=null] 
+// Entry rule entryRuleJvmArgumentTypeReference
+entryRuleJvmArgumentTypeReference returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getJvmTypeArgumentRule(), currentNode); }
-	 iv_ruleJvmTypeArgument=ruleJvmTypeArgument 
-	 { $current=$iv_ruleJvmTypeArgument.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getJvmArgumentTypeReferenceRule(), currentNode); }
+	 iv_ruleJvmArgumentTypeReference=ruleJvmArgumentTypeReference 
+	 { $current=$iv_ruleJvmArgumentTypeReference.current; } 
 	 EOF 
 ;
 
-// Rule JvmTypeArgument
-ruleJvmTypeArgument returns [EObject current=null] 
+// Rule JvmArgumentTypeReference
+ruleJvmArgumentTypeReference returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -4769,11 +4769,11 @@ ruleJvmTypeArgument returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getJvmTypeArgumentAccess().getJvmReferenceTypeArgumentParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0(), currentNode); 
     }
-    this_JvmReferenceTypeArgument_0=ruleJvmReferenceTypeArgument
+    this_JvmTypeReference_0=ruleJvmTypeReference
     { 
-        $current = $this_JvmReferenceTypeArgument_0.current; 
+        $current = $this_JvmTypeReference_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -4782,60 +4782,13 @@ ruleJvmTypeArgument returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getJvmTypeArgumentAccess().getJvmWildcardTypeArgumentParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeArgumentParserRuleCall_1(), currentNode); 
     }
     this_JvmWildcardTypeArgument_1=ruleJvmWildcardTypeArgument
     { 
         $current = $this_JvmWildcardTypeArgument_1.current; 
         currentNode = currentNode.getParent();
     }
-)
-;
-
-
-
-
-
-// Entry rule entryRuleJvmReferenceTypeArgument
-entryRuleJvmReferenceTypeArgument returns [EObject current=null] 
-	:
-	{ currentNode = createCompositeNode(grammarAccess.getJvmReferenceTypeArgumentRule(), currentNode); }
-	 iv_ruleJvmReferenceTypeArgument=ruleJvmReferenceTypeArgument 
-	 { $current=$iv_ruleJvmReferenceTypeArgument.current; } 
-	 EOF 
-;
-
-// Rule JvmReferenceTypeArgument
-ruleJvmReferenceTypeArgument returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-    }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
-(
-(
-		{ 
-	        currentNode=createCompositeNode(grammarAccess.getJvmReferenceTypeArgumentAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_0(), currentNode); 
-	    }
-		lv_typeReference_0_0=ruleJvmTypeReference		{
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getJvmReferenceTypeArgumentRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
-	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"typeReference",
-	        		lv_typeReference_0_0, 
-	        		"JvmTypeReference", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
-
-)
 )
 ;
 
