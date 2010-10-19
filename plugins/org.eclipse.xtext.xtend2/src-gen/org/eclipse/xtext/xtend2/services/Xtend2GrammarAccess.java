@@ -475,8 +475,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XAssignment returns XExpression:
-	//	XOrExpression ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAssign]
-	//	rightOperand=XAssignment)?;
+	//	XOrExpression ({XAssignment.assignable=current} feature=[types::JvmIdentifyableElement|OpAssign] value=XAssignment)?;
 	public XbaseGrammarAccess.XAssignmentElements getXAssignmentAccess() {
 		return gaXbase.getXAssignmentAccess();
 	}
@@ -780,7 +779,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XBlockExpression:
-	//	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";")* "}";
+	//	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";"?)* "}";
 	public XbaseGrammarAccess.XBlockExpressionElements getXBlockExpressionAccess() {
 		return gaXbase.getXBlockExpressionAccess();
 	}
