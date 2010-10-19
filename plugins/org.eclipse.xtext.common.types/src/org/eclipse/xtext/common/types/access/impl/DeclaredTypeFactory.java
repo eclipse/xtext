@@ -45,7 +45,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 import com.google.common.collect.Lists;
@@ -361,7 +361,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			Type rawType, int i) {
 		if (actualTypeArgument instanceof WildcardType) {
 			WildcardType wildcardType = (WildcardType) actualTypeArgument;
-			JvmWildcardTypeArgument result = TypesFactory.eINSTANCE.createJvmWildcardTypeArgument();
+			JvmWildcardTypeReference result = TypesFactory.eINSTANCE.createJvmWildcardTypeReference();
 			if (wildcardType.getUpperBounds().length != 0) {
 				JvmUpperBound upperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
 				for (Type boundType : wildcardType.getUpperBounds()) {

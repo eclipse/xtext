@@ -87,7 +87,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmArrayType"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmWildcardTypeArgument" eSuperTypes="#//JvmConstraintOwner #//JvmTypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmWildcardTypeReference" eSuperTypes="#//JvmConstraintOwner #//JvmTypeReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmMember" abstract="true" eSuperTypes="#//JvmAnnotationTarget #//JvmIdentifyableElement">
     <eOperations name="getSimpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaringType" eType="#//JvmDeclaredType"

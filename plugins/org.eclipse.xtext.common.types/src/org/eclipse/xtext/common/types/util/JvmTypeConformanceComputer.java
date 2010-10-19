@@ -21,7 +21,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 
 import com.google.inject.Inject;
 import com.google.inject.internal.Lists;
@@ -100,11 +100,11 @@ public class JvmTypeConformanceComputer implements IJvmTypeConformanceComputer{
 		if (upperA != null) {
 			if (upperB != null) {
 				return isConformant(upperA, upperB);
-			} else if (!(refB instanceof JvmWildcardTypeArgument)) {
+			} else if (!(refB instanceof JvmWildcardTypeReference)) {
 				return isConformant(upperA, refB);
 			}
-		} else if (!(refA instanceof JvmWildcardTypeArgument)) {
-			if (!(refB instanceof JvmWildcardTypeArgument)) {
+		} else if (!(refA instanceof JvmWildcardTypeReference)) {
+			if (!(refB instanceof JvmWildcardTypeReference)) {
 				return isConformant(refA, refB);
 			}
 		} else if (lowerA != null) {
@@ -116,13 +116,13 @@ public class JvmTypeConformanceComputer implements IJvmTypeConformanceComputer{
 	}
 
 	protected boolean isUnconstraintWildcard(JvmTypeReference argumentA) {
-		return argumentA instanceof JvmWildcardTypeArgument
-				&& ((JvmWildcardTypeArgument) argumentA).getConstraints().isEmpty();
+		return argumentA instanceof JvmWildcardTypeReference
+				&& ((JvmWildcardTypeReference) argumentA).getConstraints().isEmpty();
 	}
 
 	protected JvmTypeReference getLower(JvmTypeReference argumentA) {
-		if (argumentA instanceof JvmWildcardTypeArgument) {
-			EList<JvmTypeConstraint> list = ((JvmWildcardTypeArgument) argumentA).getConstraints();
+		if (argumentA instanceof JvmWildcardTypeReference) {
+			EList<JvmTypeConstraint> list = ((JvmWildcardTypeReference) argumentA).getConstraints();
 			for (JvmTypeConstraint constraint : list) {
 				if (constraint instanceof JvmLowerBound) {
 					return constraint.getTypeReference();
@@ -133,8 +133,8 @@ public class JvmTypeConformanceComputer implements IJvmTypeConformanceComputer{
 	}
 
 	protected JvmTypeReference getUpper(JvmTypeReference argumentA) {
-		if (argumentA instanceof JvmWildcardTypeArgument) {
-			EList<JvmTypeConstraint> list = ((JvmWildcardTypeArgument) argumentA).getConstraints();
+		if (argumentA instanceof JvmWildcardTypeReference) {
+			EList<JvmTypeConstraint> list = ((JvmWildcardTypeReference) argumentA).getConstraints();
 			for (JvmTypeConstraint constraint : list) {
 				if (constraint instanceof JvmUpperBound) {
 					return constraint.getTypeReference();
