@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.interpreter;
 
+import java.util.Collections;
+
+import com.google.inject.internal.Lists;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -80,6 +84,17 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 		assertEvaluatesTo("literal", "{var x = 'literal' x}");
 	}
 	
+	public void testFeatureCall_02() {
+		assertEvaluatesTo(Collections.singletonList(new Character('a')), "'a'.toCharArray");
+	}
+	
+	public void testFeatureCall_03() {
+		assertEvaluatesTo(Lists.newArrayList(
+				new Character('a'), 
+				new Character('b'),
+				new Character('c')), "'abc'.toCharArray");
+	}
+	
 	public void testAssignment_01() {
 		assertEvaluatesTo("newValue", "{var x = 'literal' x = 'newValue'}");
 	}
@@ -88,4 +103,114 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 		assertEvaluatesTo("newValue", "{var x = 'literal' { x = 'newValue' } x }");
 	}
 	
+	public void testForLoop_01() {
+		assertEvaluatesTo(new Character('c'), 
+				"{\n" +
+				"  var java.lang.Character result = null\n" +
+				"  for(x: 'abc'.toCharArray) result = x\n" +
+				"  result" +
+				"}");
+	}
+	
+//	public void testForLoop_02() {
+//		assertEvaluatesTo(new Character('b'), 
+//				"{\n" +
+//				"  var java.lang.Character result = null\n" +
+//				"  for(x: 'aba'.toCharArray) if (result == null) result = x\n" +
+//				"  result" +
+//				"}");
+//	}
+
+	public void testWhileLoop_01() {
+		assertEvaluatesTo("newValue", 
+				"{\n" +
+				"  var value = 'oldValue'\n" +
+				"  var condition = true\n" +
+				"  while(condition) { value = 'newValue' condition=false }" +
+				"  value" +
+				"}");
+	}
+	
+	public void testWhileLoop_02() {
+		assertEvaluatesTo("oldValue", 
+				"{\n" +
+				"  var value = 'oldValue'\n" +
+				"  var condition = false\n" +
+				"  while(condition) { value = 'newValue' condition=false }" +
+				"  value" +
+				"}");
+	}
+	
+	public void testDoWhileLoop_01() {
+		assertEvaluatesTo("newValue", 
+				"{\n" +
+				"  var value = 'oldValue'\n" +
+				"  var condition = true\n" +
+				"  do {" +
+				"	 value ='newValue'" +
+				"    condition = false" +
+				"  } while(condition)" +
+				"  value" +
+				"}");
+	}
+	
+	public void testDoWhileLoop_02() {
+		assertEvaluatesTo("newValue", 
+				"{\n" +
+				"  var value = 'oldValue'\n" +
+				"  var condition = false\n" +
+				"  do {" +
+				"	 value = 'newValue'" +
+				"  } while(condition)" +
+				"  value" +
+				"}");
+	}
+	
+	public void testMemberFeatureCall_01() {
+		assertEvaluatesTo("LITERAL", "'literal'.toUpperCase()");
+	}
+	
+	public void testMemberFeatureCall_02() {
+		assertEvaluatesTo("literal", "'literal'.toUpperCase().toLowerCase()");
+	}
+	
+	public void testSwitchExpression_01() {
+		assertEvaluatesTo(null, "switch true { case false: 'literal'; }");
+	}
+	
+	public void testSwitchExpression_02() {
+		assertEvaluatesTo("literal", "switch false { case false: 'literal'; }");
+	}
+	
+	public void testSwitchExpression_03() {
+		assertEvaluatesTo(Boolean.FALSE, "{ var this = true switch false { case true: this; } }");
+	}
+	
+	public void testSwitchExpression_04() {
+		assertEvaluatesTo(Boolean.TRUE, "{ var this = false switch true { case true: this; } }");
+	}
+	
+	public void testSwitchExpression_05() {
+		assertEvaluatesTo(null, "switch true { java.lang.String : 'literal'; }");
+	}
+	
+	public void testSwitchExpression_06() {
+		assertEvaluatesTo("literal", "switch true { java.lang.Boolean : 'literal'; }");
+	}
+	
+	public void testSwitchExpression_07() {
+		assertEvaluatesTo("literal", "switch true { case false: null; default: 'literal'; }");
+	}
+	
+	public void testSwitchExpression_08() {
+		assertEvaluatesTo("literal", "switch true { case false: null; case true: 'literal'; }");
+	}
+	
+	public void testSwitchExpression_09() {
+		assertEvaluatesTo(Integer.valueOf(4), "switch 'foo' { case 'foo': 4; java.lang.String: 3; }");
+	}
+	
+	public void testSwitchExpression_10() {
+		assertEvaluatesTo(Integer.valueOf(3), "switch 'foo' { java.lang.Boolean case 'foo': 4; java.lang.String: 3; }");
+	}
 }
