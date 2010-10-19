@@ -213,4 +213,43 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	public void testSwitchExpression_10() {
 		assertEvaluatesTo(Integer.valueOf(3), "switch 'foo' { java.lang.Boolean case 'foo': 4; java.lang.String: 3; }");
 	}
+	
+	public void testCastedExpression_01() {
+		assertEvaluatesTo("literal", "(java.lang.String) 'literal'");
+	}
+	
+	public void testCastedExpression_02() {
+		assertEvaluatesWithException(ClassCastException.class, "(java.lang.Integer) 'literal'");
+	}
+	
+	public void testTryCatch_01() {
+		assertEvaluatesTo("caught", "try { (java.lang.Boolean) 'literal' } catch(java.lang.ClassCastException e) {'caught'}");
+	}
+	
+	public void testTryCatch_02() {
+		assertEvaluatesTo("literal", "try { (java.lang.String) 'literal' } catch(java.lang.ClassCastException e) {'caught'}");
+	}
+	
+	public void testTryCatch_03() {
+		assertEvaluatesTo("ClassCastException", "try { (java.lang.Boolean) 'literal' } catch(java.lang.ClassCastException e) {e.getClass().getSimpleName()}");
+	}
+	
+	public void testTryCatch_04() {
+		assertEvaluatesWithException(NullPointerException.class, "try { (java.lang.Boolean) 'literal' } catch(java.lang.ClassCastException e) e == null");
+	}
+	
+	public void testTryCatch_05() {
+		assertEvaluatesWithException(NullPointerException.class, 
+				"try (java.lang.Boolean) 'literal' " +
+				"  catch(java.lang.ClassCastException e) e == null // throw new NullPointerException()" +
+				"  catch(java.lang.NullPointerException e) 'dont catch subsequent exceptions'");
+	}
+	
+	public void testTryFinally_01() {
+		assertEvaluatesTo("literal", "try 'literal' finally 'finally'");
+	}
+	
+	public void testTryFinally_02() {
+		assertEvaluatesTo("finally", "{ var x = 'foo' try 'literal' finally x = 'finally' x }");
+	}
 }

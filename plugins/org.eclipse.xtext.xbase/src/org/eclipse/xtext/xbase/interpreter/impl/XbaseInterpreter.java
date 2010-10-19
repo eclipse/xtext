@@ -30,6 +30,8 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XCastedExpression;
+import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -40,6 +42,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
@@ -203,6 +206,55 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return DefaultEvaluationResult.NULL;
 	}
 	
+	public IEvaluationResult _evaluate(XCastedExpression castedExpression, IEvaluationContext context) {
+		IEvaluationResult result = evaluate(castedExpression.getTarget(), context);
+		if (result.getException() != null)
+			return result;
+		String typeName = castedExpression.getType().getType().getCanonicalName();
+		Class<?> expectedType = null;
+		try {
+			expectedType = Class.forName(typeName, false, classLoader);
+		} catch (ClassNotFoundException e) {
+			expectedType = Primitives.forName(typeName);
+			if (expectedType == null)
+				return new DefaultEvaluationResult(null, e);
+		}
+		try {
+			expectedType.cast(result.getResult());
+		} catch(ClassCastException e) {
+			return new DefaultEvaluationResult(null, e);
+		}
+		return result;
+	}
+	
+	public IEvaluationResult _evaluate(XTryCatchFinallyExpression tryCatchFinally, IEvaluationContext context) {
+		IEvaluationResult result = evaluate(tryCatchFinally.getExpression(), context);
+		if (result.getException() != null) {
+			for(XCatchClause catchClause: tryCatchFinally.getCatchClauses()) {
+				JvmFormalParameter exception = catchClause.getDeclaredParam();
+				String exceptionTypeName = exception.getParameterType().getType().getCanonicalName();
+				try {
+					Class<?> exceptionType = Class.forName(exceptionTypeName, false, classLoader);
+					if (!exceptionType.isInstance(result.getException()))
+						continue;
+				} catch(ClassNotFoundException e) {
+					return new DefaultEvaluationResult(null, e);
+				}
+				IEvaluationContext forked = context.fork();
+				forked.newValue(exception.getName(), result.getException());
+				result = evaluate(catchClause.getExpression(), forked);
+				break;
+			}
+		}
+		if (tryCatchFinally.getFinallyExpression() != null) {
+			IEvaluationResult finallyResult = evaluate(tryCatchFinally.getFinallyExpression(), context);
+			if (finallyResult.getException() != null) {
+				return new DefaultEvaluationResult(null, new FinallyDidNotCompleteException(finallyResult.getException()));
+			}
+		}
+		return result;
+	}
+	
 	protected boolean eq(Object a, Object b) {
 		return a == b || (a!=null && a.equals(b));
 	}
@@ -295,7 +347,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 	
 	public IEvaluationResult _evaluate(XMemberFeatureCall featureCall, IEvaluationContext context) {
-		IEvaluationResult memberCallTarget = evaluate(featureCall.getMemberCallTarget());
+		IEvaluationResult memberCallTarget = evaluate(featureCall.getMemberCallTarget(), context);
 		if (memberCallTarget.getException() != null)
 			return memberCallTarget;
 		IEvaluationResult result = featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, memberCallTarget.getResult(), context);
@@ -348,6 +400,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			Method method = javaReflectAccess.getMethod(operation);
 			method.setAccessible(true);
 			if (!Modifier.isStatic(method.getModifiers())) {
+				if (receiver == null)
+					return new DefaultEvaluationResult(null, new NullPointerException("Cannot invoke instance method: " + operation.getCanonicalName() + " without receiver"));
 				Object result = method.invoke(receiver, arguments.toArray(new Object[arguments.size()]));
 				return new DefaultEvaluationResult(result, null);
 			} else {
