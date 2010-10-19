@@ -14,6 +14,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -36,7 +37,7 @@ public abstract class AbstractScope implements IScope {
 	protected abstract Iterable<IEObjectDescription> internalGetContents();
 
 	public Iterable<IEObjectDescription> getAllContents() {
-		final Set<String> identifiers = Sets.newHashSet();
+		final Set<QualifiedName> identifiers = Sets.newHashSet();
 		return Iterables.concat(Iterables.transform(getContents(), new Function<IEObjectDescription, IEObjectDescription>() {
 			public IEObjectDescription apply(IEObjectDescription param) {
 				identifiers.add(param.getName());
@@ -58,7 +59,7 @@ public abstract class AbstractScope implements IScope {
 	
 	
 	public Iterable<IEObjectDescription> getAllContentsByEObject(EObject object) {
-		final Set<String> identifiers = Sets.newHashSet(); 
+		final Set<QualifiedName> identifiers = Sets.newHashSet(); 
 		final URI uri = EcoreUtil.getURI(object);
 		return Iterables.concat(Iterables.filter(getContents(), new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription param) {
@@ -72,15 +73,15 @@ public abstract class AbstractScope implements IScope {
 		}));
 	}
 
-	public IEObjectDescription getContentByName(String name) {
-		if (name==null)
+	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
+		if (qualifiedName==null)
 			throw new NullPointerException("name");
 		Iterator<IEObjectDescription> contents = getContents().iterator();
 		while (contents.hasNext()) {
 			IEObjectDescription element = contents.next();
-			if (name.equals(element.getName())) 
+			if (qualifiedName.equals(element.getName())) 
 				return element;
 		}
-		return getOuterScope().getContentByName(name);
+		return getOuterScope().getContentByName(qualifiedName);
 	}
 }

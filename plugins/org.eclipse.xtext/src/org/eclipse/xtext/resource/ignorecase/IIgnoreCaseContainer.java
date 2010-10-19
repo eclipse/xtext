@@ -11,6 +11,7 @@ import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -23,7 +24,7 @@ public interface IIgnoreCaseContainer extends IContainer {
 	/**
 	 * @return all matching {@link IEObjectDescription} in this container. Returns never <code>null</code>.
 	 */
-	Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(EClass type, String name);
+	Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(EClass type, QualifiedName qualifiedName);
 
 	/**
 	 * a reusable instance representing an empty ignore case container
@@ -33,7 +34,7 @@ public interface IIgnoreCaseContainer extends IContainer {
 		public Iterable<IEObjectDescription> findAllEObjects(EClass type) {
 			return Collections.emptyList();
 		}
-		public Iterable<IEObjectDescription> findAllEObjects(EClass type, String name) {
+		public Iterable<IEObjectDescription> findAllEObjects(EClass type, QualifiedName qualifiedName) {
 			return Collections.emptyList();
 		}
 		public IResourceDescription getResourceDescription(URI uri) {
@@ -42,7 +43,7 @@ public interface IIgnoreCaseContainer extends IContainer {
 		public Iterable<IResourceDescription> getResourceDescriptions() {
 			return Collections.emptyList();
 		}
-		public Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(EClass type, String name) {
+		public Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(EClass type, QualifiedName qualifiedName) {
 			return Collections.emptyList();
 		}
 	};

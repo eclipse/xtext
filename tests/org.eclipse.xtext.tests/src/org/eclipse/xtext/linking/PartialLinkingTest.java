@@ -55,7 +55,6 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
-		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider();
 		SimpleNameProvider nameProvider = new SimpleNameProvider();
 		ImportUriGlobalScopeProvider globalScopeProvider = new ImportUriGlobalScopeProvider();
 		globalScopeProvider.setImportResolver(new ImportUriResolver());
@@ -71,8 +70,7 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 				return PartialLinkingTest.this.get(LoadOnDemandResourceDescriptions.class);
 			}
 		});
-		scopeProvider.setGlobalScopeProvider(globalScopeProvider);
-		scopeProvider.setNameProvider(nameProvider);
+		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider(globalScopeProvider, nameProvider);
 		modelAsText =
 			"spielplatz 1 {\n" +
 			"  kind( Bommel1 1)\n" +

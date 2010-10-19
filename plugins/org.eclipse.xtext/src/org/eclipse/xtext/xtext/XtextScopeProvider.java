@@ -27,6 +27,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -76,7 +77,7 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 		return new SimpleScope(IScope.NULLSCOPE,
 				Iterables.transform(eEnum.getELiterals(), new Function<EEnumLiteral, IEObjectDescription>() {
 					public IEObjectDescription apply(EEnumLiteral param) {
-						return EObjectDescription.create(param.getName(), param);
+						return EObjectDescription.create(QualifiedName.create(param.getName()), param);
 					}
 				}));
 	}
@@ -85,7 +86,7 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 		return new SimpleScope(IScope.NULLSCOPE,
 				Iterables.transform(classifiers, new Function<EClassifier, IEObjectDescription>() {
 					public IEObjectDescription apply(EClassifier param) {
-						return EObjectDescription.create(param.getName(), param);
+						return EObjectDescription.create(QualifiedName.create(param.getName()), param);
 					}
 				}));
 	}
@@ -116,7 +117,7 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 			return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(grammar.getMetamodelDeclarations(),
 					new Function<AbstractMetamodelDeclaration,IEObjectDescription>(){
 						public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
-							return EObjectDescription.create(from.getAlias(), from);
+							return EObjectDescription.create(QualifiedName.create(from.getAlias()), from);
 						}
 					}));
 		}
@@ -157,7 +158,7 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 					}
 				}), new Function<AbstractMetamodelDeclaration, IEObjectDescription>() {
 			public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
-				return EObjectDescription.create(from.getEPackage().getNsURI(), from.getEPackage());
+				return EObjectDescription.create(QualifiedName.create(from.getEPackage().getNsURI()), from.getEPackage());
 			}
 		}));
 	}
@@ -166,7 +167,7 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 		final List<Grammar> allGrammars = getAllGrammars(grammar);
 		IScope current = new SimpleScope(Iterables.transform(EPackage.Registry.INSTANCE.keySet(), new Function<String, IEObjectDescription>() {
 			public IEObjectDescription apply(String from) {
-				return EObjectDescription.create(from, null);
+				return EObjectDescription.create(QualifiedName.create(from), null);
 			}
 		}));
 		for (int i = allGrammars.size() - 1; i >= 0; i--) {

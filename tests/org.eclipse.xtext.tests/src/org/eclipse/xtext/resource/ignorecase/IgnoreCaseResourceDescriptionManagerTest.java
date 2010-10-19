@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
@@ -30,7 +31,7 @@ public class IgnoreCaseResourceDescriptionManagerTest extends TestCase {
 	private Resource resource;
 	private DefaultResourceDescription resourceDescription;
 	private IgnoreCaseResourceDescriptionManager manager;
-	private Collection<String> importedNames;
+	private Collection<QualifiedName> importedNames;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -39,15 +40,15 @@ public class IgnoreCaseResourceDescriptionManagerTest extends TestCase {
 		resource = new ResourceImpl();
 		resource.getContents().add(copy);
 		IQualifiedNameProvider nameProvider = new IQualifiedNameProvider.AbstractImpl() {
-			public String getQualifiedName(EObject obj) {
+			public QualifiedName getQualifiedName(EObject obj) {
 				if (obj instanceof ENamedElement)
-					return ((ENamedElement) obj).getName();
+					return QualifiedName.create(((ENamedElement) obj).getName());
 				return null;
 			}
 		};
 		resourceDescription = new DefaultResourceDescription(resource, nameProvider) {
 			@Override
-			public Iterable<String> getImportedNames() {
+			public Iterable<QualifiedName> getImportedNames() {
 				return importedNames;
 			}
 		};
@@ -58,9 +59,9 @@ public class IgnoreCaseResourceDescriptionManagerTest extends TestCase {
 	public void testIsAffected() {
 		DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(null, resourceDescription);
 		assertFalse(manager.isAffected(delta, resourceDescription));
-		importedNames = Collections.singleton("eclass");
+		importedNames = Collections.singleton(QualifiedName.create("eclass"));
 		assertTrue(manager.isAffected(delta, resourceDescription));
-		importedNames = Collections.singleton("ECLASS");
+		importedNames = Collections.singleton(QualifiedName.create("ECLASS"));
 		assertTrue(manager.isAffected(delta, resourceDescription));
 	}
 	

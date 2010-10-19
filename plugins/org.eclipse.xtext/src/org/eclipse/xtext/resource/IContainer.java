@@ -11,12 +11,14 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public interface IContainer {
 
@@ -40,7 +42,7 @@ public interface IContainer {
 	/**
 	 * @return all matching {@link IEObjectDescription} in this container. Returns never <code>null</code>.
 	 */
-	Iterable<IEObjectDescription> findAllEObjects(EClass type, String name);
+	Iterable<IEObjectDescription> findAllEObjects(EClass type, QualifiedName qualifiedName);
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API

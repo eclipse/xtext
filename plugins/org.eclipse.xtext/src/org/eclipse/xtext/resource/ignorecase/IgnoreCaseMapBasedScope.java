@@ -9,6 +9,7 @@ package org.eclipse.xtext.resource.ignorecase;
 
 import java.util.Map;
 
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
@@ -18,13 +19,13 @@ import org.eclipse.xtext.scoping.impl.MapBasedScope;
  */
 public class IgnoreCaseMapBasedScope extends MapBasedScope {
 
-	public IgnoreCaseMapBasedScope(IScope parent, Map<String, IEObjectDescription> descriptions) {
+	public IgnoreCaseMapBasedScope(IScope parent, Map<QualifiedName, IEObjectDescription> descriptions) {
 		super(parent, descriptions);
 	}
 	
 	@Override
-	protected IEObjectDescription getContentByNameImpl(String name) {
-		return super.getContentByNameImpl(name.toLowerCase());
+	protected IEObjectDescription getContentByNameImpl(QualifiedName qualifiedName) {
+		return super.getContentByNameImpl(qualifiedName.toLowerCase());
 	}
 
 }

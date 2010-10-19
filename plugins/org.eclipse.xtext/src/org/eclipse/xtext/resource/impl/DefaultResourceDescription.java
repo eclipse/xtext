@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -86,18 +87,18 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	protected IEObjectDescription createIEObjectDescription(EObject from) {
 		if (nameProvider == null)
 			return null;
-		String qualifiedName = nameProvider.getQualifiedName(from);
+		QualifiedName qualifiedName = nameProvider.getQualifiedName(from);
 		if (qualifiedName != null) {
 			return EObjectDescription.create(qualifiedName, from);
 		}
 		return null;
 	}
 
-	public Iterable<String> getImportedNames() {
+	public Iterable<QualifiedName> getImportedNames() {
 		EcoreUtil.resolveAll(resource);
 		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(getResource());
 		if (adapter != null) {
-			ImmutableSet<String> result = ImmutableSet.copyOf(adapter.getImportedNames());
+			ImmutableSet<QualifiedName> result = ImmutableSet.copyOf(adapter.getImportedNames());
 			return result;
 		}
 		return Collections.emptySet();

@@ -13,6 +13,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -40,6 +42,9 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	
 	@Inject 
 	private LinkingHelper linkingHelper;
+	
+	@Inject
+	private IQualifiedNameProvider qualifiedNameSupport;
 
 	protected IScope getScope(EObject context, EReference reference) {
 		if (getScopeProvider() == null)
@@ -103,7 +108,8 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		final IScope scope = getScope(context, ref);
 		final String s = getCrossRefNodeAsString(node);
 		if (s != null) {
-			IEObjectDescription eObjectDescription = scope.getContentByName(s);
+			QualifiedName qualifiedLinkName =  qualifiedNameSupport.toValue(s);
+			IEObjectDescription eObjectDescription = scope.getContentByName(qualifiedLinkName);
 			if (eObjectDescription != null)
 				return Collections.singletonList(eObjectDescription.getEObjectOrProxy());
 		}

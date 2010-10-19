@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.google.common.base.Function;
@@ -28,7 +29,7 @@ import com.google.common.collect.Multimaps;
  */
 public class EObjectDescriptionLookUp {
 	
-	private volatile Multimap<String, IEObjectDescription> nameToObjects;
+	private volatile Multimap<QualifiedName, IEObjectDescription> nameToObjects;
 	
 	private volatile List<IEObjectDescription> allDescriptions;
 
@@ -36,24 +37,24 @@ public class EObjectDescriptionLookUp {
 		setExportedObjects(allDescriptions);
 	}
 	
-	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
+	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final QualifiedName qualifiedName) {
 		if (allDescriptions.isEmpty())
 			return Collections.emptyList();
-		String lowerCase = name.toLowerCase();
+		QualifiedName lowerCase = qualifiedName.toLowerCase();
 		if (getNameToObjects().containsKey(lowerCase))
 			return Iterables.filter(getNameToObjects().get(lowerCase), new Predicate<IEObjectDescription>() {
 				public boolean apply(IEObjectDescription input) {
-					return name.equals(input.getName()) && EcoreUtil2.isAssignableFrom(clazz, input.getEClass());
+					return qualifiedName.equals(input.getName()) && EcoreUtil2.isAssignableFrom(clazz, input.getEClass());
 				}
 			});
 		else
 			return Collections.emptyList();
 	}
 	
-	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(final EClass clazz, final String name) {
+	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(final EClass clazz, final QualifiedName qualifiedName) {
 		if (allDescriptions.isEmpty())
 			return Collections.emptyList();
-		String lowerCase = name.toLowerCase();
+		QualifiedName lowerCase = qualifiedName.toLowerCase();
 		if (getNameToObjects().containsKey(lowerCase))
 			return Iterables.filter(getNameToObjects().get(lowerCase), new Predicate<IEObjectDescription>() {
 				public boolean apply(IEObjectDescription input) {
@@ -96,15 +97,15 @@ public class EObjectDescriptionLookUp {
 		}
 	}
 
-	protected Multimap<String, IEObjectDescription> getNameToObjects() {
+	protected Multimap<QualifiedName, IEObjectDescription> getNameToObjects() {
 		if (nameToObjects == null) {
 			synchronized (this) {
 				if (nameToObjects == null) {
-					this.nameToObjects  = Multimaps.index(allDescriptions, new Function<IEObjectDescription, String>() {
-								public String apply(IEObjectDescription from) {
-									return from.getName().toLowerCase();
-								}
-							});
+					this.nameToObjects  = Multimaps.index(allDescriptions, new Function<IEObjectDescription, QualifiedName>() {
+						public QualifiedName apply(IEObjectDescription from) {
+							return from.getName().toLowerCase();
+						}
+					});
 				}
 			}
 		}

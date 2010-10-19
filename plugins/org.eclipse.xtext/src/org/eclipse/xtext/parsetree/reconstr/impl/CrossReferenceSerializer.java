@@ -16,6 +16,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
@@ -42,6 +43,9 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 
 	@Inject
 	private IValueConverterService valueConverter;
+	
+	@Inject
+	private IQualifiedNameProvider qualifiedNameProvider;
 
 	public boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, AbstractNode node) {
 		if (crossref != node.getGrammarElement())
@@ -67,7 +71,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 			return null;
 		IEObjectDescription eObjectDescription = scope.getContentByEObject(object);
 		if (eObjectDescription != null)
-			return eObjectDescription.getName();
+			return qualifiedNameProvider.toString(eObjectDescription.getName());
 		return null;
 	}
 

@@ -11,6 +11,7 @@ package org.eclipse.xtext.resource.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.AbstractEObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
@@ -21,19 +22,19 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 public class AliasedEObjectDescription extends AbstractEObjectDescription {
 
 	private IEObjectDescription delegate;
-	private String alias;
+	private QualifiedName alias;
 
-	public AliasedEObjectDescription(String alias, IEObjectDescription delegate) {
+	public AliasedEObjectDescription(QualifiedName alias, IEObjectDescription delegate) {
 		super();
 		this.alias = alias;
 		this.delegate = delegate;
 	}
 
-	public String getName() {
+	public QualifiedName getName() {
 		return alias;
 	}
 	
-	public String getQualifiedName() {
+	public QualifiedName getQualifiedName() {
 		return delegate.getQualifiedName();
 	}
 

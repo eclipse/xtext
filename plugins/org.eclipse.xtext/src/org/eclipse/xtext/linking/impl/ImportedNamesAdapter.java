@@ -15,6 +15,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.IScopeWrapper;
@@ -47,9 +48,9 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 			this.delegate = scope;
 		}
 
-		public IEObjectDescription getContentByName(String name) {
-			importedNames.add(name);
-			return delegate.getContentByName(name);
+		public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
+			importedNames.add(qualifiedName);
+			return delegate.getContentByName(qualifiedName);
 		}
 		
 		public IScope getOuterScope() {
@@ -79,9 +80,9 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 
 	}
 
-	private Set<String> importedNames = new HashSet<String>();
+	private Set<QualifiedName> importedNames = new HashSet<QualifiedName>();
 	
-	public Set<String> getImportedNames() {
+	public Set<QualifiedName> getImportedNames() {
 		return importedNames;
 	}
 

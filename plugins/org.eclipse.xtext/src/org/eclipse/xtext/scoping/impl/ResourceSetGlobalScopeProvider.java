@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
@@ -61,22 +62,22 @@ public class ResourceSetGlobalScopeProvider extends AbstractExportedObjectsAware
 		Iterable<IEObjectDescription> objectDescriptions = Iterables.concat(objectDescriptionsIter);
 		return new SimpleScope(parent, objectDescriptions) {
 			@Override
-			public IEObjectDescription getContentByName(String name) {
+			public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
 				IEObjectDescription result = null;
 				for(IResourceDescription description: filteredDescriptions) {
-					Iterable<IEObjectDescription> objects = description.getExportedObjects(reference.getEReferenceType(), name);
+					Iterable<IEObjectDescription> objects = description.getExportedObjects(reference.getEReferenceType(), qualifiedName);
 					Iterator<IEObjectDescription> iter = objects.iterator();
 					if (iter.hasNext()) {
 						if (result != null)
-							return getOuterScope().getContentByName(name);
+							return getOuterScope().getContentByName(qualifiedName);
 						result = iter.next();
 						if (iter.hasNext())
-							return getOuterScope().getContentByName(name);
+							return getOuterScope().getContentByName(qualifiedName);
 					}
 				}
 				if (result != null)
 					return result;
-				return getOuterScope().getContentByName(name);
+				return getOuterScope().getContentByName(qualifiedName);
 			}
 		};
 	}

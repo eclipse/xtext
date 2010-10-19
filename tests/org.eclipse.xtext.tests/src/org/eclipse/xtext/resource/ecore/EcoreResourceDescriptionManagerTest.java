@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ecore.EcoreResourceDescriptionManager;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
@@ -34,13 +35,13 @@ public class EcoreResourceDescriptionManagerTest extends TestCase {
 		EcoreResourceDescriptionManager underTest = new EcoreResourceDescriptionManager();
 		IResourceDescription description = underTest.getResourceDescription(EcorePackage.eINSTANCE.eResource());
 		
-		Map<String,IEObjectDescription> index = Maps.newHashMap();
+		Map<QualifiedName,IEObjectDescription> index = Maps.newHashMap();
 		for (IEObjectDescription ieObjectDescription : description.getExportedObjects()) {
 			index.put(ieObjectDescription.getName(), ieObjectDescription);
 		}
 		
-		assertEquals(EcorePackage.eINSTANCE, index.get("ecore").getEObjectOrProxy());
-		assertEquals(EcorePackage.Literals.ECLASS, index.get("EClass").getEObjectOrProxy());
+		assertEquals(EcorePackage.eINSTANCE, index.get(QualifiedName.create("ecore")).getEObjectOrProxy());
+		assertEquals(EcorePackage.Literals.ECLASS, index.get(QualifiedName.create("EClass")).getEObjectOrProxy());
 	}
 
 	public void testPerformance() throws Exception {
@@ -57,7 +58,7 @@ public class EcoreResourceDescriptionManagerTest extends TestCase {
 					if (next instanceof ENamedElement) {
 						String name = ((ENamedElement) next).getName();
 //						Iterable<IEObjectDescription> objects = 
-						description.getExportedObjects(next.eClass(), name);
+						description.getExportedObjects(next.eClass(), QualifiedName.create(name));
 //						assertFalse(name + " - " + uri + " - " + next, Iterables.isEmpty(objects));
 					}
 				}

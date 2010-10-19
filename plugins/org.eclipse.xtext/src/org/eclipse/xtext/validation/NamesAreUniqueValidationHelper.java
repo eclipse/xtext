@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.google.common.collect.ImmutableSet;
@@ -59,7 +60,7 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 		Iterator<IEObjectDescription> iter = descriptions.iterator();
 		if (!iter.hasNext())
 			return;
-		Map<EClass, Map<String, IEObjectDescription>> clusterToNames = Maps.newHashMap();
+		Map<EClass, Map<QualifiedName, IEObjectDescription>> clusterToNames = Maps.newHashMap();
 		while(iter.hasNext()) {
 			IEObjectDescription description = iter.next();
 			checkDescriptionForDuplicatedName(description, clusterToNames, acceptor);
@@ -70,13 +71,13 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 	
 	protected void checkDescriptionForDuplicatedName(
 			IEObjectDescription description,
-			Map<EClass, Map<String, IEObjectDescription>> clusterTypeToName,
+			Map<EClass, Map<QualifiedName, IEObjectDescription>> clusterTypeToName,
 			ValidationMessageAcceptor acceptor) {
 		EObject object = description.getEObjectOrProxy();
 		EClass eClass = object.eClass();
-		String qualifiedName = description.getName();
+		QualifiedName qualifiedName = description.getName();
 		EClass clusterType = getAssociatedClusterType(eClass);
-		Map<String, IEObjectDescription> nameToDescription = clusterTypeToName.get(clusterType);
+		Map<QualifiedName, IEObjectDescription> nameToDescription = clusterTypeToName.get(clusterType);
 		if (nameToDescription == null) {
 			nameToDescription = Maps.newHashMap();
 			nameToDescription.put(qualifiedName, description);

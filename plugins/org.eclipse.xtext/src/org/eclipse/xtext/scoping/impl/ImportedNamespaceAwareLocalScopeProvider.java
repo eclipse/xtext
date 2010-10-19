@@ -27,6 +27,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -47,82 +48,32 @@ import com.google.inject.Provider;
  * A local scope provider that understands namespace imports.
  * 
  * It scans model elements for an EAttribute <code>importedNamespace</code>. The value of this attribute is interpreted
- * as qualified name to be imported. Wildcards are supported (see {@link QualifiedName} for details). 
+ * as qualified name to be imported. Wildcards are supported (see {@link #getWildCard()} for details).
  * 
- * Imports are valid for all elements in the same container and their children.  
+ * Imports are valid for all elements in the same container and their children.
  * 
  * See http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping for details.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
-
-	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 * 
-	 */
-	public static class ImportNormalizer {
-		private final QualifiedName name;
-
-		public ImportNormalizer(QualifiedName importedNamespace) {
-			this.name = importedNamespace;
-		}
-
-		@Override
-		public int hashCode() {
-			return name.hashCode();
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			return obj instanceof ImportNormalizer && name.equals(((ImportNormalizer) obj).name);
-		}
-
-		public String shortToLongName(String shortName) {
-			if (!name.hasWildCard()) {
-				if (name.lastSegment().equals(shortName)) {
-					return name.toString();
-				}
-			} else {
-				return name.replaceWildcard(shortName).toString();
-			}
-			return null;
-		}
-
-		public String longToShortName(String from) {
-			if (!name.hasWildCard()) {
-				if (name.toString().equals(from)) {
-					return name.lastSegment();
-				}
-			} else {
-				QualifiedName fromName = new QualifiedName(from);
-				List<String> fromSegments = fromName.segments();
-				List<String> importSegments = name.segments();
-				if (importSegments.size() < fromSegments.size()) {
-					if (importSegments.equals(fromSegments.subList(0, importSegments.size()))) {
-						return new QualifiedName(fromSegments.subList(importSegments.size(), fromSegments.size()))
-								.toString();
-					}
-				}
-			}
-			return null;
-		}
-	}
 
 	@Inject
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
 
-	public void setCache(IResourceScopeCache cache) {
-		this.cache = cache;
-	}
-
 	@Inject
 	private IQualifiedNameProvider nameProvider;
 
-	public void setNameProvider(IQualifiedNameProvider nameProvider) {
-		this.nameProvider = nameProvider;
+	@Inject
+	public ImportedNamespaceAwareLocalScopeProvider() {
 	}
 
+	public ImportedNamespaceAwareLocalScopeProvider(IGlobalScopeProvider globalScopeProvider, IQualifiedNameProvider nameProvider) {
+		super(globalScopeProvider);
+		this.nameProvider = nameProvider;
+	}
+	
 	public IQualifiedNameProvider getNameProvider() {
 		return nameProvider;
 	}
@@ -154,20 +105,21 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 
 	protected boolean hasImports(final EObject context) {
-		return !getImportNormalizer(context).isEmpty();
+		return !getImportedNamespaceResolvers(context).isEmpty();
 	}
 
 	protected IScope getResourceScope(final IScope parent, final EObject context, final EReference reference) {
 		if (context.eResource() == null)
 			return parent;
-		return getScope(getKey(context.eResource(), reference), context, parent, new Provider<Map<String, IEObjectDescription>>() {
-			public Map<String, IEObjectDescription> get() {
-				return internalGetResourceScopeMap(parent, context, reference);
-			}
-		});
+		return getScope(getKey(context.eResource(), reference), context, parent,
+				new Provider<Map<QualifiedName, IEObjectDescription>>() {
+					public Map<QualifiedName, IEObjectDescription> get() {
+						return internalGetResourceScopeMap(parent, context, reference);
+					}
+				});
 	}
 
-	protected Map<String, IEObjectDescription> internalGetResourceScopeMap(IScope parent, final EObject context,
+	protected Map<QualifiedName, IEObjectDescription> internalGetResourceScopeMap(IScope parent, final EObject context,
 			final EReference reference) {
 		Iterable<EObject> contents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
@@ -182,16 +134,19 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 
 	protected IScope getLocalElements(final IScope parent, final EObject context, final EReference reference) {
-		return getScope(getKey(context, reference), context, parent, new Provider<Map<String, IEObjectDescription>>() {
-			public Map<String, IEObjectDescription> get() {
-				return internalGetLocalElementsMap(parent, context, reference);
-			}
-		});
+		return getScope(getKey(context, reference), context, parent,
+				new Provider<Map<QualifiedName, IEObjectDescription>>() {
+					public Map<QualifiedName, IEObjectDescription> get() {
+						return internalGetLocalElementsMap(parent, context, reference);
+					}
+				});
 	}
 
-	protected Map<String, IEObjectDescription> internalGetLocalElementsMap(final IScope parent, final EObject context,
-			final EReference reference) {
-		final String commonPrefix = nameProvider.getQualifiedName(context) + ".";
+	protected Map<QualifiedName, IEObjectDescription> internalGetLocalElementsMap(final IScope parent,
+			final EObject context, final EReference reference) {
+		QualifiedName qualifiedName = nameProvider.getQualifiedName(context);
+		final ImportNormalizer localNamespaceResolver = (qualifiedName != null) ? new ImportNormalizer(
+				qualifiedName, getWildCard()) : null;
 
 		Iterable<EObject> contents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
@@ -203,23 +158,21 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		// transform to IScopedElements
 		Function<EObject, IEObjectDescription> descriptionComputation = new Function<EObject, IEObjectDescription>() {
 			public IEObjectDescription apply(EObject from) {
-				final String fqn = nameProvider.getQualifiedName(from);
-				if (fqn == null)
+				final QualifiedName fullyQualifiedName = nameProvider.getQualifiedName(from);
+				if (fullyQualifiedName == null)
 					return null;
-				String name = fqn;
-				if (fqn.startsWith(commonPrefix)) {
-					name = fqn.substring(commonPrefix.length());
-				}
-				return new EObjectDescription(name, from, Collections.<String, String> emptyMap()) {
+				QualifiedName relativeName = (localNamespaceResolver != null) ? localNamespaceResolver
+						.deresolve(fullyQualifiedName) : fullyQualifiedName;
+				return new EObjectDescription(relativeName, from, Collections.<String, String> emptyMap()) {
 					@Override
-					public String getQualifiedName() {
-						return fqn;
+					public QualifiedName getQualifiedName() {
+						return fullyQualifiedName;
 					}
 				};
 			}
 		};
-		Iterable<IEObjectDescription> elements = Iterables.filter(Iterables.transform(contents, descriptionComputation),
-				Predicates.notNull());
+		Iterable<IEObjectDescription> elements = Iterables.filter(
+				Iterables.transform(contents, descriptionComputation), Predicates.notNull());
 		return toMap(elements);
 	}
 
@@ -236,67 +189,69 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		};
 	}
 
-	protected Set<ImportNormalizer> getImportNormalizer(final EObject context) {
-		return cache.get(Tuples.pair(context, "imports"), context.eResource(), new Provider<Set<ImportNormalizer>>() {
-
-			public Set<ImportNormalizer> get() {
-				return internalGetImportNormalizers(context);
-			}
-		});
+	protected Set<ImportNormalizer> getImportedNamespaceResolvers(final EObject context) {
+		return cache.get(Tuples.pair(context, "imports"), context.eResource(),
+				new Provider<Set<ImportNormalizer>>() {
+					public Set<ImportNormalizer> get() {
+						return internalGetImportedNamespaceResolvers(context);
+					}
+				});
 	}
 
-	protected Set<ImportNormalizer> internalGetImportNormalizers(final EObject context) {
-		Set<ImportNormalizer> namespaceImports = Sets.newLinkedHashSet();
+	protected Set<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context) {
+		Set<ImportNormalizer> importedNamespaceResolvers = Sets.newLinkedHashSet();
 		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class,
 				"importedNamespace");
 		EList<EObject> eContents = context.eContents();
 		// iterate over imports in reverse order see https://bugs.eclipse.org/bugs/show_bug.cgi?id=317971
-		for (int i=eContents.size()-1;i>=0;i--) {
+		for (int i = eContents.size() - 1; i >= 0; i--) {
 			EObject child = eContents.get(i);
 			String value = importResolver.getValue(child);
 			if (value != null) {
-				namespaceImports.add(createImportNormalizer(value));
+				importedNamespaceResolvers.add(createImportedNamespaceResolver(value));
 			}
-			
+
 		}
-		return namespaceImports;
+		return importedNamespaceResolvers;
 	}
 
-	protected ImportNormalizer createImportNormalizer(final String name) {
-		return new ImportNormalizer(new QualifiedName(name));
+	protected ImportNormalizer createImportedNamespaceResolver(final String namespace) {
+		return new ImportNormalizer(nameProvider.toValue(namespace), getWildCard());
 	}
 
 	protected IScope getImportedElements(final IScope parent, final IScope localElements, final EObject context,
 			final EReference reference) {
-		final Set<ImportNormalizer> normalizers = getImportNormalizer(context);
+		final Set<ImportNormalizer> namespaceResolvers = getImportedNamespaceResolvers(context);
 
 		return new AbstractScope() {
 
 			@Override
-			public IEObjectDescription getContentByName(String name) {
-				for (ImportNormalizer normalizer : normalizers) {
-					String shortToLongName = normalizer.shortToLongName(name);
-					if (shortToLongName != null) {
-						IEObjectDescription element = localElements.getContentByName(shortToLongName);
+			public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
+				for (ImportNormalizer namespaceResolver : namespaceResolvers) {
+					QualifiedName fqnCandidate = namespaceResolver.resolve(qualifiedName);
+					if (fqnCandidate != null) {
+						IEObjectDescription element = localElements.getContentByName(fqnCandidate);
 						if (element != null)
-							return new AliasedEObjectDescription(name, element);
+							return new AliasedEObjectDescription(qualifiedName, element);
 					}
 				}
-				return getOuterScope().getContentByName(name);
+				return getOuterScope().getContentByName(qualifiedName);
 			}
 
 			@Override
 			public IEObjectDescription getContentByEObject(EObject object) {
 				IEObjectDescription candidate = localElements.getContentByEObject(object);
-				if (candidate != null)
-					for (ImportNormalizer normalizer : normalizers) {
-						String longToShortName = normalizer.longToShortName(candidate.getQualifiedName());
-						if (longToShortName != null) {
-							IEObjectDescription element = getContentByName(longToShortName);
+				if (candidate != null) {
+					QualifiedName fullyQualifiedName = candidate.getQualifiedName();
+					for (ImportNormalizer namespaceResolver : namespaceResolvers) {
+						QualifiedName qualifiedName = namespaceResolver.deresolve(fullyQualifiedName);
+						if (qualifiedName != null) {
+							IEObjectDescription element = getContentByName(qualifiedName);
 							if (element != null && element.getEObjectOrProxy() == object)
-								return new AliasedEObjectDescription(longToShortName, candidate);
+								return new AliasedEObjectDescription(qualifiedName, candidate);
 						}
 					}
+				}
 				return getOuterScope().getContentByEObject(object);
 			}
 
@@ -304,10 +259,10 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 			protected Iterable<IEObjectDescription> internalGetContents() {
 				List<IEObjectDescription> importedElements = Lists.newArrayList();
 				for (IEObjectDescription desc : localElements.getAllContents()) {
-					for (ImportNormalizer normalizer : normalizers) {
-						final String newName = normalizer.longToShortName(desc.getName());
-						if (newName != null) {
-							importedElements.add(new AliasedEObjectDescription(newName, desc));
+					for (ImportNormalizer namespaceResolver : namespaceResolvers) {
+						QualifiedName relativeName = namespaceResolver.deresolve(desc.getName());
+						if (relativeName != null) {
+							importedElements.add(new AliasedEObjectDescription(relativeName, desc));
 						}
 					}
 				}
@@ -321,17 +276,18 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		};
 	}
 
-	protected IScope getScope(Object cacheKey, EObject eobject, IScope parentScope, Provider<Map<String, IEObjectDescription>> mapProvider) {
-		Map<String, IEObjectDescription> map = cache.get(cacheKey, eobject.eResource(), mapProvider);
+	protected IScope getScope(Object cacheKey, EObject eobject, IScope parentScope,
+			Provider<Map<QualifiedName, IEObjectDescription>> mapProvider) {
+		Map<QualifiedName, IEObjectDescription> map = cache.get(cacheKey, eobject.eResource(), mapProvider);
 		return map.isEmpty() ? parentScope : createMapBasedScope(parentScope, map);
 	}
 
-	protected IScope createMapBasedScope(IScope parentScope, Map<String, IEObjectDescription> map) {
+	protected IScope createMapBasedScope(IScope parentScope, Map<QualifiedName, IEObjectDescription> map) {
 		return new MapBasedScope(parentScope, map);
 	}
 
-	protected Map<String, IEObjectDescription> toMap(Iterable<IEObjectDescription> scopedElementsFor) {
-		Map<String, IEObjectDescription> result = Maps.newLinkedHashMap();
+	protected Map<QualifiedName, IEObjectDescription> toMap(Iterable<IEObjectDescription> scopedElementsFor) {
+		Map<QualifiedName, IEObjectDescription> result = Maps.newLinkedHashMap();
 		for (IEObjectDescription ieObjectDescription : scopedElementsFor) {
 			if (!result.containsKey(ieObjectDescription.getName()))
 				result.put(ieObjectDescription.getName(), ieObjectDescription);
@@ -339,4 +295,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		return result;
 	}
 
+	public String getWildCard() {
+		return "*";
+	}
 }

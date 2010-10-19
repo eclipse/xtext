@@ -10,6 +10,7 @@ package org.eclipse.xtext.scoping.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -58,8 +59,8 @@ public class FilteringScope implements IScope {
 		return filtered(delegate.getContents());
 	}
 
-	public IEObjectDescription getContentByName(String name) {
-		return filtered(delegate.getContentByName(name));
+	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
+		return filtered(delegate.getContentByName(qualifiedName));
 	}
 
 	public IEObjectDescription getContentByEObject(EObject object) {

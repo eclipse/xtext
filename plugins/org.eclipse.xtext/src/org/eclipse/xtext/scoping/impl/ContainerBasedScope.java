@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -39,22 +40,22 @@ public class ContainerBasedScope extends AbstractScope {
 	}
 
 	@Override
-	public IEObjectDescription getContentByName(String name) {
-		Iterable<IEObjectDescription> allDescriptions = findAllEObjectsByName(name);
+	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
+		Iterable<IEObjectDescription> allDescriptions = findAllEObjectsByName(qualifiedName);
 		Iterator<IEObjectDescription> iter = allDescriptions.iterator();
 		IEObjectDescription result = null;
 		while (iter.hasNext()) {
 			if (result != null)
-				return getOuterScope().getContentByName(name);
+				return getOuterScope().getContentByName(qualifiedName);
 			result = iter.next();
 		}
 		if (result != null)
 			return result;
-		return getOuterScope().getContentByName(name);
+		return getOuterScope().getContentByName(qualifiedName);
 	}
 
-	protected Iterable<IEObjectDescription> findAllEObjectsByName(String name) {
-		return container.findAllEObjects(reference.getEReferenceType(), name);
+	protected Iterable<IEObjectDescription> findAllEObjectsByName(QualifiedName qualifiedName) {
+		return container.findAllEObjects(reference.getEReferenceType(), qualifiedName);
 	}
 
 	@Override

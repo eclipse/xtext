@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource.ignorecase;
 import java.util.Collection;
 import java.util.Set;
 
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
@@ -22,7 +23,7 @@ import com.google.common.collect.Sets;
 public class IgnoreCaseResourceDescriptionManager extends DefaultResourceDescriptionManager {
 
 	@Override
-	protected void addExportedNames(Set<String> names, IResourceDescription resourceDescriptor) {
+	protected void addExportedNames(Set<QualifiedName> names, IResourceDescription resourceDescriptor) {
 		if (resourceDescriptor==null)
 			return;
 		Iterable<IEObjectDescription> iterable = resourceDescriptor.getExportedObjects();
@@ -32,10 +33,10 @@ public class IgnoreCaseResourceDescriptionManager extends DefaultResourceDescrip
 	}
 	
 	@Override
-	protected Collection<String> getImportedNames(IResourceDescription candidate) {
-		Collection<String> result = Sets.newHashSet();
-		for(String s: candidate.getImportedNames()) {
-			result.add(s.toLowerCase());
+	protected Collection<QualifiedName> getImportedNames(IResourceDescription candidate) {
+		Collection<QualifiedName> result = Sets.newHashSet();
+		for(QualifiedName importedNames: candidate.getImportedNames()) {
+			result.add(importedNames.toLowerCase());
 		}
 		return result;
 	}

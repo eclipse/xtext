@@ -10,6 +10,7 @@ package org.eclipse.xtext.scoping.impl;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -70,16 +71,16 @@ public class ResourceDescriptionBasedScope extends AbstractScope {
 	}
 	
 	@Override
-	public IEObjectDescription getContentByName(String name) {
+	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
 		// TODO: case allowDuplicates, see also impl in subclass
-		Iterable<IEObjectDescription> objects = description.getExportedObjects(type, name);
+		Iterable<IEObjectDescription> objects = description.getExportedObjects(type, qualifiedName);
 		Iterator<IEObjectDescription> iter = objects.iterator();
 		if (iter.hasNext()) {
 			IEObjectDescription result = iter.next();
 			if (!iter.hasNext())
 				return result;
 		}
-		return getOuterScope().getContentByName(name);
+		return getOuterScope().getContentByName(qualifiedName);
 	}
 
 }

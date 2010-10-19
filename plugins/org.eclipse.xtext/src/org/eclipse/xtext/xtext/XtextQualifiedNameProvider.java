@@ -7,22 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import org.eclipse.xtext.naming.IQualifiedNameSupport;
+import org.eclipse.xtext.naming.SimpleNameProvider;
 
 import com.google.inject.Singleton;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @Singleton
-public class XtextQualifiedNameSupport implements IQualifiedNameSupport {
+public class XtextQualifiedNameProvider extends SimpleNameProvider {
 
+	@Override
 	public String getDelimiter() {
 		return "::";
-	}
-
-	public String getWildCard() {
-		return null;
 	}
 
 }

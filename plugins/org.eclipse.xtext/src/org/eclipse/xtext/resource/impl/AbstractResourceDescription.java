@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
 
@@ -23,12 +24,12 @@ public abstract class AbstractResourceDescription implements IIgnoreCaseResource
 	
 	private EObjectDescriptionLookUp lookup;
 	
-	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name) {
-		return getLookUp().getExportedObjects(clazz, name);
+	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, QualifiedName qualifiedName) {
+		return getLookUp().getExportedObjects(clazz, qualifiedName);
 	}
 
-	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(EClass clazz, String name) {
-		return getLookUp().getExportedObjectsIgnoreCase(clazz, name);
+	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(EClass clazz, QualifiedName qualifiedName) {
+		return getLookUp().getExportedObjectsIgnoreCase(clazz, qualifiedName);
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz) {

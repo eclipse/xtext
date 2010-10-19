@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
@@ -58,8 +59,8 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 			@Override
 			public IResourceDescription getResourceDescription(Resource resource) {
 				DefaultResourceDescription resourceDescription = new DefaultResourceDescription(resource, new IQualifiedNameProvider.AbstractImpl() {
-					public String getQualifiedName(EObject obj) {
-						return SimpleAttributeResolver.NAME_RESOLVER.getValue(obj);
+					public QualifiedName getQualifiedName(EObject obj) {
+						return QualifiedName.create(SimpleAttributeResolver.NAME_RESOLVER.getValue(obj));
 					}
 				});
 				return resourceDescription;

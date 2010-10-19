@@ -9,6 +9,7 @@ package org.eclipse.xtext.scoping.impl;
 
 import java.util.Map;
 
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -18,9 +19,9 @@ import org.eclipse.xtext.scoping.IScope;
 public class MapBasedScope extends AbstractScope {
 
 	private IScope parent;
-	private Map<String,IEObjectDescription> descriptions;
+	private Map<QualifiedName, IEObjectDescription> descriptions;
 	
-	public MapBasedScope(IScope parent, Map<String, IEObjectDescription> descriptions) {
+	public MapBasedScope(IScope parent, Map<QualifiedName, IEObjectDescription> descriptions) {
 		this.parent = parent;
 		this.descriptions = descriptions;
 	}
@@ -31,13 +32,13 @@ public class MapBasedScope extends AbstractScope {
 	}
 
 	@Override
-	public IEObjectDescription getContentByName(String name) {
-		IEObjectDescription ieObjectDescription = getContentByNameImpl(name);
-		return ieObjectDescription!=null?ieObjectDescription:parent.getContentByName(name);
+	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
+		IEObjectDescription ieObjectDescription = getContentByNameImpl(qualifiedName);
+		return ieObjectDescription!=null?ieObjectDescription:parent.getContentByName(qualifiedName);
 	}
 
-	protected IEObjectDescription getContentByNameImpl(String name) {
-		return descriptions.get(name);
+	protected IEObjectDescription getContentByNameImpl(QualifiedName qualifiedName) {
+		return descriptions.get(qualifiedName);
 	}
 
 	public IScope getOuterScope() {
