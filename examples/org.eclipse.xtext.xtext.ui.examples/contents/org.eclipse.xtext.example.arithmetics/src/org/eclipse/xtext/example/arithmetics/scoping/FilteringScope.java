@@ -8,12 +8,17 @@
 package org.eclipse.xtext.example.arithmetics.scoping;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+/**
+ * @author Jan Koehnlein - introduced QualifiedName
+ */
+ 
 public class FilteringScope implements IScope {
 
 	private IScope delegate;
@@ -36,8 +41,8 @@ public class FilteringScope implements IScope {
 		return filter(delegate.getAllContents());
 	}
 
-	public IEObjectDescription getContentByName(String name) {
-		return filter(delegate.getContentByName(name));
+	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
+		return filter(delegate.getContentByName(qualifiedName));
 	}
 
 	public IEObjectDescription getContentByEObject(EObject object) {

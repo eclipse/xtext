@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScope;
+import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScope;
 
 /**
@@ -27,7 +28,7 @@ public class ClasspathBasedTypeScopeTest extends AbstractTypeScopeTest {
 		super.setUp();
 		factory = new ClasspathTypeProviderFactory(getClass().getClassLoader());
 		resourceSet = new ResourceSetImpl();
-		typeScope = new ClasspathBasedTypeScope(factory.createTypeProvider(resourceSet));
+		typeScope = new ClasspathBasedTypeScope(factory.createTypeProvider(resourceSet), new DefaultDeclarativeQualifiedNameProvider());
 	}
 	
 	public void testGetContents_01() {

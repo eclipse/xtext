@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.example.ecoredsl.EcoreDsl;
 import org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -32,6 +33,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public class EcoreDslScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
 
@@ -71,8 +73,8 @@ public class EcoreDslScopeProvider extends ImportedNamespaceAwareLocalScopeProvi
 				Iterables.filter(EPackage.Registry.INSTANCE.values(), EPackage.class),
 				new Function<Object, IEObjectDescription>() {
 					public IEObjectDescription apply(Object param) {
-						return EObjectDescription.create(valueConverterService.toString(((EPackage) param)
-								.getNsURI(), "STRING"), (EObject) param);
+						return EObjectDescription.create(QualifiedName.create(valueConverterService.toString(((EPackage) param)
+						.getNsURI(), "STRING")), ((EObject) param));
 					}
 				}));
 		return current;
@@ -82,7 +84,7 @@ public class EcoreDslScopeProvider extends ImportedNamespaceAwareLocalScopeProvi
 		return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(
 				classifiers, new Function<EClassifier, IEObjectDescription>() {
 					public IEObjectDescription apply(EClassifier param) {
-						return EObjectDescription.create(param.getName(), param);
+						return EObjectDescription.create(QualifiedName.create(param.getName()), param);
 					}
 				}));
 	}

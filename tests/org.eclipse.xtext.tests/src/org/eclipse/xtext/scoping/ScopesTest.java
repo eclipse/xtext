@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
@@ -24,6 +25,9 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  *
  */
 public class ScopesTest extends TestCase {
+	
+	private QualifiedName FOO = QualifiedName.create("Foo");
+	private QualifiedName BAR = QualifiedName.create("Bar");
 	
 	public void testSimple() throws Exception {
 		EAttribute attr = EcoreFactory.eINSTANCE.createEAttribute();
@@ -37,8 +41,8 @@ public class ScopesTest extends TestCase {
 		
 		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(list);
 		Iterator<IEObjectDescription> iterator = iterable.iterator();
-		assertEquals("Foo", iterator.next().getName());
-		assertEquals("Bar", iterator.next().getName());
+		assertEquals(FOO, iterator.next().getName());
+		assertEquals(BAR, iterator.next().getName());
 	}
 	
 	public void testWithNull() throws Exception {
@@ -54,8 +58,8 @@ public class ScopesTest extends TestCase {
 		
 		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(list);
 		Iterator<IEObjectDescription> iterator = iterable.iterator();
-		assertEquals("Foo", iterator.next().getName());
-		assertEquals("Bar", iterator.next().getName());
+		assertEquals(FOO, iterator.next().getName());
+		assertEquals(BAR, iterator.next().getName());
 		assertFalse(iterator.hasNext());
 	}
 	
@@ -73,10 +77,10 @@ public class ScopesTest extends TestCase {
 		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(list);
 		Iterator<IEObjectDescription> iterator = iterable.iterator();
 		IEObjectDescription next = iterator.next();
-		assertEquals("Foo", next.getName());
+		assertEquals(FOO, next.getName());
 		assertEquals(attr,next.getEObjectOrProxy());
 		next = iterator.next();
-		assertEquals("Bar", next.getName());
+		assertEquals(BAR, next.getName());
 		assertEquals(datatype,next.getEObjectOrProxy());
 		assertFalse(iterator.hasNext());
 	}

@@ -31,7 +31,7 @@ import com.google.common.collect.Iterables;
 public class JavaReflectAccessTest extends TestCase {
 	private ResourceSet resourceSet;
 	private ClasspathTypeProvider typeProvider;
-	
+
 	private JvmDeclaredType getType(Class<?> class1) {
 		return (JvmDeclaredType) typeProvider.findTypeByName(class1.getName());
 	}
@@ -42,44 +42,43 @@ public class JavaReflectAccessTest extends TestCase {
 		resourceSet = new ResourceSetImpl();
 		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet);
 	}
-	
+
 	@Override
 	protected void tearDown() throws Exception {
 		resourceSet = null;
 		typeProvider = null;
 		super.tearDown();
 	}
-	
+
 	public void testGetRawType_1() throws Exception {
 		JvmDeclaredType type = getType(String.class);
 		assertEquals(String.class, getJavaReflectAccess().getRawType(type));
 	}
-	
 
 	public void testGetRawType_2() throws Exception {
 		JvmDeclaredType type = getType(List.class);
 		assertEquals(List.class, getJavaReflectAccess().getRawType(type));
 	}
-	
+
 	public void testGetMethod_1() throws Exception {
 		JvmDeclaredType type = getType(List.class);
-		JvmMember addMethod = Iterables.find(type.getMembers(),new Predicate<JvmMember>() {
+		JvmMember addMethod = Iterables.find(type.getMembers(), new Predicate<JvmMember>() {
 			public boolean apply(JvmMember input) {
 				if (input instanceof JvmOperation) {
-					return input.getSimpleName().equals("add");
+					return input.getSimpleName().equals("add") && ((JvmOperation) input).getParameters().size() == 1;
 				}
 				return false;
 			}
 		});
-		
+
 		Method method = List.class.getDeclaredMethod("add", Object.class);
-		
-		assertEquals(method, getJavaReflectAccess().getMethod((JvmExecutable)addMethod));
+
+		assertEquals(method, getJavaReflectAccess().getMethod((JvmExecutable) addMethod));
 	}
-	
+
 	public void testGetMethod_2() throws Exception {
 		JvmDeclaredType type = getType(X.class);
-		JvmMember addMethod = Iterables.find(type.getMembers(),new Predicate<JvmMember>() {
+		JvmMember addMethod = Iterables.find(type.getMembers(), new Predicate<JvmMember>() {
 			public boolean apply(JvmMember input) {
 				if (input instanceof JvmOperation) {
 					return input.getSimpleName().equals("a");
@@ -87,15 +86,15 @@ public class JavaReflectAccessTest extends TestCase {
 				return false;
 			}
 		});
-		
+
 		Method method = X.class.getDeclaredMethod("a", Comparable.class, CharSequence.class);
-		
-		assertEquals(method, getJavaReflectAccess().getMethod((JvmExecutable)addMethod));
+
+		assertEquals(method, getJavaReflectAccess().getMethod((JvmExecutable) addMethod));
 	}
-	
+
 	public void testGetField_1() throws Exception {
 		JvmDeclaredType type = getType(Y.class);
-		JvmMember addMethod = Iterables.find(type.getMembers(),new Predicate<JvmMember>() {
+		JvmMember addMethod = Iterables.find(type.getMembers(), new Predicate<JvmMember>() {
 			public boolean apply(JvmMember input) {
 				if (input instanceof JvmField) {
 					return input.getSimpleName().equals("z");
@@ -103,10 +102,10 @@ public class JavaReflectAccessTest extends TestCase {
 				return false;
 			}
 		});
-		
+
 		Field field = Y.class.getDeclaredField("z");
-		
-		assertEquals(field, getJavaReflectAccess().getField((JvmField)addMethod));
+
+		assertEquals(field, getJavaReflectAccess().getField((JvmField) addMethod));
 	}
 
 	protected JavaReflectAccess getJavaReflectAccess() {
@@ -114,12 +113,12 @@ public class JavaReflectAccessTest extends TestCase {
 		javaReflectAccess.setClassLoader(getClass().getClassLoader());
 		return javaReflectAccess;
 	}
-	
+
 	public static class X<T extends Comparable<CharSequence>> {
 		public <T2 extends CharSequence> void a(T t, T2 t2) {
 		}
 	}
-	
+
 	public static class Y<T extends Comparable<CharSequence>> {
 		T z;
 	}

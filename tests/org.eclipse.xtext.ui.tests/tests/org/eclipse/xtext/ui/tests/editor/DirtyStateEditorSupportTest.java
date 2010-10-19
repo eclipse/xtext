@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IContainer.Manager;
@@ -244,7 +245,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		dirtyStateSupport.isEditingPossible(this);
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
-		exportedObjects = Lists.newArrayList(EObjectDescription.create("foo", EcoreFactory.eINSTANCE.createEClass()));
+		exportedObjects = Lists.newArrayList(EObjectDescription.create(QualifiedName.create("foo"), EcoreFactory.eINSTANCE.createEClass()));
 		dirtyStateSupport.modelChanged(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 		assertEquals(get(), dirtyStateManager.getContent(resourceURI));

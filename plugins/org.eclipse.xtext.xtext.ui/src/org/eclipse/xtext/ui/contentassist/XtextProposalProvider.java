@@ -43,7 +43,8 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
-import org.eclipse.xtext.naming.IQualifiedNameSupport;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -80,16 +81,16 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 
 		private String delimiter;
 
-		public ClassifierPrefixMatcher(PrefixMatcher delegate, IQualifiedNameSupport qualifiedNameSupport) {
+		public ClassifierPrefixMatcher(PrefixMatcher delegate, IQualifiedNameProvider qualifiedNameProvider) {
 			this.delegate = delegate;
-			this.delimiter = qualifiedNameSupport.getDelimiter();
+			this.delimiter = qualifiedNameProvider.getDelimiter();
 		}
 
 		@Override
 		public boolean isCandidateMatchingPrefix(String name, String prefix) {
 			if (delegate.isCandidateMatchingPrefix(name, prefix))
 				return true;
-			if (name.indexOf(delimiter) >= 0) {
+			if (!Strings.isEmpty(delimiter) && name.indexOf(delimiter) >= 0) {
 				String[] splitName = name.split(delimiter);
 				if (splitName.length == 1)
 					return false;
@@ -224,7 +225,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		if (features != null) {
 			Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory("ID", context);
 			for (EStructuralFeature feature : features) {
-				IEObjectDescription description = EObjectDescription.create(feature.getName(), feature);
+				IEObjectDescription description = EObjectDescription.create(QualifiedName.create(feature.getName()), feature);
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) factory.apply(description);
 				if (proposal != null)
 					proposal.setPriority(proposal.getPriority() * 2);
@@ -252,7 +253,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		Grammar grammar = GrammarUtil.getGrammar(model);
 		ContentAssistContext.Builder myContextBuilder = context.copy();
-		myContextBuilder.setMatcher(new ClassifierPrefixMatcher(context.getMatcher(), getQualifiedNameSupport()));
+		myContextBuilder.setMatcher(new ClassifierPrefixMatcher(context.getMatcher(), getQualifiedNameProvider()));
 		if (model instanceof TypeRef) {
 			CompositeNode node = NodeUtil.getNodeAdapter(model).getParserNode();
 			int offset = node.getOffset();
@@ -287,7 +288,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		String alias = declaration.getAlias();
 		String prefix = "";
 		if (!Strings.isEmpty(alias)) {
-			prefix = getValueConverter().toString(alias, "ID") + getQualifiedNameSupport().getDelimiter();
+			prefix = getValueConverter().toString(alias, "ID") + getQualifiedNameProvider().getDelimiter();
 		}
 		boolean createDatatypeProposals = !(model instanceof AbstractElement) && modelOrContainerIs(model, AbstractRule.class); 
 		boolean createEnumProposals = !(model instanceof AbstractElement) && modelOrContainerIs(model, EnumRule.class);
@@ -298,7 +299,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 					|| classifier instanceof EEnum && createEnumProposals
 					|| classifier instanceof EClass && createClassProposals) {
 				String proposalString = prefix + getValueConverter().toString(classifier.getName(), "ID");
-				IEObjectDescription description = EObjectDescription.create(proposalString, classifier);
+				IEObjectDescription description = EObjectDescription.create(QualifiedName.create(proposalString), classifier);
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) factory.apply(description);
 				if (proposal != null) {
 					if (!Strings.isEmpty(prefix))

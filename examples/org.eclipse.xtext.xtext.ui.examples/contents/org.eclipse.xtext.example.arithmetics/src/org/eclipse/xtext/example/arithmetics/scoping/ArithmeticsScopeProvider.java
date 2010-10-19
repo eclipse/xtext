@@ -15,6 +15,9 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
 import com.google.common.base.Predicate;
 
+/**
+ * @author Jan Koehnlein - introduced QualifiedName
+ */
 public class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {
 	
 	/**
@@ -26,7 +29,7 @@ public class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {
 		return new FilteringScope(scope,
 				new Predicate<IEObjectDescription>() {
 					public boolean apply(IEObjectDescription input) {
-						return input!=null && input.getName()!=null && input.getName().indexOf('.')==-1;
+						return input!=null && input.getName()!=null && input.getName().getSegmentCount()>1;
 					};
 				});
 	}

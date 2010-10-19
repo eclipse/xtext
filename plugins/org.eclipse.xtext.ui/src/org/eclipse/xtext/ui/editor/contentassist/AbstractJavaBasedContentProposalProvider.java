@@ -27,6 +27,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -48,53 +49,59 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractJavaBasedContentProposalProvider extends AbstractContentProposalProvider {
-	
+
 	private final static Logger log = Logger.getLogger(AbstractJavaBasedContentProposalProvider.class);
-	
+
 	protected class DefaultProposalCreator implements Function<IEObjectDescription, ICompletionProposal> {
-		
+
 		private final ContentAssistContext contentAssistContext;
 		private final String ruleName;
+		private final IQualifiedNameProvider qualifiedNameProvider;
 
-		protected DefaultProposalCreator(ContentAssistContext contentAssistContext, String ruleName) {
+		protected DefaultProposalCreator(ContentAssistContext contentAssistContext, String ruleName,
+				IQualifiedNameProvider qualifiedNameProvider) {
 			this.contentAssistContext = contentAssistContext;
 			this.ruleName = ruleName;
+			this.qualifiedNameProvider = qualifiedNameProvider;
 		}
 
 		public ICompletionProposal apply(IEObjectDescription candidate) {
 			if (candidate == null)
 				return null;
 			ICompletionProposal result = null;
-			String proposal = candidate.getName();
+			String proposal = qualifiedNameProvider.toString(candidate.getName());
 			if (ruleName != null) {
 				try {
 					proposal = getValueConverter().toString(proposal, ruleName);
 				} catch (ValueConverterException e) {
-					log.debug(e.getMessage(),e);
+					log.debug(e.getMessage(), e);
 					return null;
 				}
 			}
 			EObject objectOrProxy = candidate.getEObjectOrProxy();
-			StyledString displayString = getStyledDisplayString(objectOrProxy, candidate.getQualifiedName(), candidate.getName());
+			StyledString displayString = getStyledDisplayString(objectOrProxy,
+					qualifiedNameProvider.toString(candidate.getQualifiedName()),
+					qualifiedNameProvider.toString(candidate.getName()));
 			Image image = getImage(objectOrProxy);
 			result = createCompletionProposal(proposal, displayString, image, contentAssistContext);
-			getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());			
+			getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());
 			return result;
 		}
 
 	}
-	
+
 	public static class ReferenceProposalCreator {
-		
+
 		@Inject
 		private IScopeProvider scopeProvider;
-		
+
 		public void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
-				Predicate<IEObjectDescription> filter, Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
+				Predicate<IEObjectDescription> filter,
+				Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
 			if (model != null) {
 				IScope scope = getScopeProvider().getScope(model, reference);
 				Iterable<IEObjectDescription> candidates = scope.getAllContents();
-				for (IEObjectDescription candidate: candidates) {
+				for (IEObjectDescription candidate : candidates) {
 					if (!acceptor.canAcceptMoreProposals())
 						return;
 					if (filter.apply(candidate)) {
@@ -115,60 +122,66 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 
 	@Inject
 	private IScopeProvider scopeProvider;
-	
+
 	@Inject
 	private ReferenceProposalCreator crossReferenceProposalCreator;
 	
 	private final Map<String, PolymorphicDispatcher<Void>> dispatchers;
-	
+
 	protected AbstractJavaBasedContentProposalProvider() {
 		dispatchers = new HashMap<String, PolymorphicDispatcher<Void>>();
 	}
-	
+
 	@Override
-	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
-		ICompletionProposal proposal = createCompletionProposal(keyword.getValue(), getKeywordDisplayString(keyword), 
+	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor) {
+		ICompletionProposal proposal = createCompletionProposal(keyword.getValue(), getKeywordDisplayString(keyword),
 				getImage(keyword), contentAssistContext);
 		getPriorityHelper().adjustKeywordPriority(proposal, contentAssistContext.getPrefix());
 		acceptor.accept(proposal);
 	}
 
 	@Override
-	public void completeRuleCall(RuleCall ruleCall, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
+	public void completeRuleCall(RuleCall ruleCall, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor) {
 		AbstractRule calledRule = ruleCall.getRule();
-		String methodName = "complete_"+ calledRule.getName();
+		String methodName = "complete_" + calledRule.getName();
 		invokeMethod(methodName, acceptor, contentAssistContext.getCurrentModel(), ruleCall, contentAssistContext);
 	}
 
 	@Override
-	public void completeAssignment(Assignment assignment, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
+	public void completeAssignment(Assignment assignment, ContentAssistContext contentAssistContext,
+			ICompletionProposalAcceptor acceptor) {
 		ParserRule parserRule = GrammarUtil.containingParserRule(assignment);
-		String methodName = "complete"+ Strings.toFirstUpper(parserRule.getName()) + "_"+
-			Strings.toFirstUpper(assignment.getFeature());
+		String methodName = "complete" + Strings.toFirstUpper(parserRule.getName()) + "_"
+				+ Strings.toFirstUpper(assignment.getFeature());
 		invokeMethod(methodName, acceptor, contentAssistContext.getCurrentModel(), assignment, contentAssistContext);
 	}
 
 	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
-		lookupCrossReference(crossReference, contentAssistContext, acceptor, Predicates.<IEObjectDescription>alwaysTrue());
+		lookupCrossReference(crossReference, contentAssistContext, acceptor,
+				Predicates.<IEObjectDescription> alwaysTrue());
 	}
-	
+
 	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor, Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
-		lookupCrossReference(crossReference, contentAssistContext, acceptor, Predicates.<IEObjectDescription>alwaysTrue(), proposalFactory);
+		lookupCrossReference(crossReference, contentAssistContext, acceptor,
+				Predicates.<IEObjectDescription> alwaysTrue(), proposalFactory);
 	}
-	
+
 	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter) {
 		ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
 		if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
 			EReference ref = GrammarUtil.getReference(crossReference);
-			lookupCrossReference(crossReference, ref, contentAssistContext,	acceptor, filter);
+			lookupCrossReference(crossReference, ref, contentAssistContext, acceptor, filter);
 		}
 	}
-	
+
 	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
-			ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter, Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
+			ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter,
+			Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
 		ParserRule containingParserRule = GrammarUtil.containingParserRule(crossReference);
 		if (!GrammarUtil.isDatatypeRule(containingParserRule)) {
 			EReference ref = GrammarUtil.getReference(crossReference);
@@ -176,9 +189,9 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		}
 	}
 
-	protected void lookupCrossReference(CrossReference crossReference,
-			EReference reference, ContentAssistContext contentAssistContext,
-			ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter) {
+	protected void lookupCrossReference(CrossReference crossReference, EReference reference,
+			ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor,
+			Predicate<IEObjectDescription> filter) {
 		String ruleName = null;
 		if (crossReference.getTerminal() instanceof RuleCall) {
 			ruleName = ((RuleCall) crossReference.getTerminal()).getRule().getName();
@@ -186,18 +199,19 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		lookupCrossReference(contentAssistContext.getCurrentModel(), reference, acceptor, filter,
 				getProposalFactory(ruleName, contentAssistContext));
 	}
-	
+
 	protected void lookupCrossReference(EObject model, EReference reference, ICompletionProposalAcceptor acceptor,
 			Predicate<IEObjectDescription> filter, Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
 		crossReferenceProposalCreator.lookupCrossReference(model, reference, acceptor, filter, proposalFactory);
 	}
-	
-	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
-		return new DefaultProposalCreator(contentAssistContext, ruleName);
+
+	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName,
+			ContentAssistContext contentAssistContext) {
+		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameProvider());
 	}
-	
+
 	private Set<List<Object>> handledArguments;
-	
+
 	@Override
 	public void createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		try {
@@ -207,12 +221,13 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			handledArguments = null;
 		}
 	}
-	
+
 	protected void invokeMethod(String methodName, ICompletionProposalAcceptor acceptor, Object... params) {
 		PolymorphicDispatcher<Void> dispatcher = dispatchers.get(methodName);
 		if (dispatcher == null) {
 			ErrorHandler<Void> errorHandler = WarningErrorHandler.get(log);
-			dispatcher = new PolymorphicDispatcher<Void>(methodName, params.length + 1, params.length + 1, Collections.singletonList(this), errorHandler) {
+			dispatcher = new PolymorphicDispatcher<Void>(methodName, params.length + 1, params.length + 1,
+					Collections.singletonList(this), errorHandler) {
 				@Override
 				public Class<?> getDefaultClass(int paramIndex) {
 					if (paramIndex == 0)
@@ -245,5 +260,5 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 	public ReferenceProposalCreator getCrossReferenceProposalCreator() {
 		return crossReferenceProposalCreator;
 	}
-
+	
 }

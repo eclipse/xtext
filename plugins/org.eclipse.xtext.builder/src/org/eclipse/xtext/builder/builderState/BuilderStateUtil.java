@@ -10,12 +10,14 @@ package org.eclipse.xtext.builder.builderState;
 import org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl;
 import org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public class BuilderStateUtil {
 	
@@ -31,9 +33,9 @@ public class BuilderStateUtil {
 		for (IReferenceDescription iReferenceDescription : referenceDescriptions) {
 			description.getReferenceDescriptions().add(create(iReferenceDescription));
 		}
-		Iterable<String> names = desc.getImportedNames();
-		for (String string : names) {
-			description.getImportedNames().add(string);
+		Iterable<QualifiedName> importedNames = desc.getImportedNames();
+		for (QualifiedName importedName : importedNames) {
+			description.getImportedNames().add(importedName);
 		}
 		return description;
 	}

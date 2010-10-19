@@ -11,6 +11,7 @@
       ecorePackage="BuilderState.ecore#/">
     <genDataTypes ecoreDataType="BuilderState.ecore#//EURI"/>
     <genDataTypes ecoreDataType="BuilderState.ecore#//EStringArray"/>
+    <genDataTypes ecoreDataType="BuilderState.ecore#//QualifiedName"/>
     <genClasses ecoreClass="BuilderState.ecore#//ResourceDescription">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BuilderState.ecore#//ResourceDescription/URI"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BuilderState.ecore#//ResourceDescription/exportedObjects"/>

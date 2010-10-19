@@ -16,8 +16,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.templates.TemplateVariable;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+
+import com.google.inject.Inject;
 
 /**
  * Resolves a template variable to <code>EClass classes</code> which are visible in the current scope, and are
@@ -30,6 +33,9 @@ import org.eclipse.xtext.scoping.IScope;
 public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVariableResolver {
 	private static final Logger log = Logger.getLogger(CrossReferenceTemplateVariableResolver.class);
 
+	@Inject
+	private IQualifiedNameProvider qualifiedNameProvider;
+	
 	public CrossReferenceTemplateVariableResolver() {
 		super("CrossReference",  //$NON-NLS-1$
 				Messages.CrossReferenceTemplateVariableResolver_1);
@@ -57,7 +63,7 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 
 		List<String> names = new ArrayList<String>();
 		for (IEObjectDescription eObjectDescription : linkingCandidates) {
-			names.add(eObjectDescription.getName());
+			names.add(qualifiedNameProvider.toString(eObjectDescription.getName()));
 		}
 		return names;
 	}
