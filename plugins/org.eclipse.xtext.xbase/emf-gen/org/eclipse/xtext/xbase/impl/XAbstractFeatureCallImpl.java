@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
-import org.eclipse.xtext.common.types.JvmTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -94,7 +94,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<JvmTypeArgument> typeArguments;
+	protected EList<JvmTypeReference> typeArguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -189,11 +189,11 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<JvmTypeArgument> getTypeArguments()
+	public EList<JvmTypeReference> getTypeArguments()
 	{
 		if (typeArguments == null)
 		{
-			typeArguments = new EObjectContainmentEList<JvmTypeArgument>(JvmTypeArgument.class, this, XbasePackage.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS);
+			typeArguments = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, XbasePackage.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS);
 		}
 		return typeArguments;
 	}
@@ -253,7 +253,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS:
 				getTypeArguments().clear();
-				getTypeArguments().addAll((Collection<? extends JvmTypeArgument>)newValue);
+				getTypeArguments().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -168,6 +168,11 @@ public class JvmTypeAnnotationValueItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
 				 TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
+				 TypesFactory.eINSTANCE.createJvmWildcardTypeArgument()));
 	}
 
 }

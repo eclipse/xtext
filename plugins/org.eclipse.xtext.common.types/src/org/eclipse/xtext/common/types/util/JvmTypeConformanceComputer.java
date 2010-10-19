@@ -17,9 +17,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
-import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
@@ -81,8 +79,8 @@ public class JvmTypeConformanceComputer implements IJvmTypeConformanceComputer{
 
 		if (left.getArguments().size() == right.getArguments().size()) {
 			for (int i = 0; i < left.getArguments().size(); i++) {
-				JvmTypeArgument argumentA = left.getArguments().get(i);
-				JvmTypeArgument argumentB = right.getArguments().get(i);
+				JvmTypeReference argumentA = left.getArguments().get(i);
+				JvmTypeReference argumentB = right.getArguments().get(i);
 				if (!isAssignable(argumentA, argumentB))
 					return false;
 			}
@@ -91,24 +89,22 @@ public class JvmTypeConformanceComputer implements IJvmTypeConformanceComputer{
 		return false;
 	}
 
-	protected boolean isAssignable(JvmTypeArgument argumentA, JvmTypeArgument argumentB) {
-		JvmTypeReference upperA = getUpper(argumentA);
-		JvmTypeReference upperB = getUpper(argumentB);
-		JvmTypeReference lowerA = getLower(argumentA);
-		JvmTypeReference lowerB = getLower(argumentB);
-		JvmTypeReference refA = getRef(argumentA);
-		JvmTypeReference refB = getRef(argumentB);
-		if (isUnconstraintWildcard(argumentA)) {
+	protected boolean isAssignable(JvmTypeReference refA, JvmTypeReference refB) {
+		JvmTypeReference upperA = getUpper(refA);
+		JvmTypeReference upperB = getUpper(refB);
+		JvmTypeReference lowerA = getLower(refA);
+		JvmTypeReference lowerB = getLower(refB);
+		if (isUnconstraintWildcard(refA)) {
 			return true;
 		}
 		if (upperA != null) {
 			if (upperB != null) {
 				return isConformant(upperA, upperB);
-			} else if (refB != null) {
+			} else if (!(refB instanceof JvmWildcardTypeArgument)) {
 				return isConformant(upperA, refB);
 			}
-		} else if (refA != null) {
-			if (refB != null) {
+		} else if (!(refA instanceof JvmWildcardTypeArgument)) {
+			if (!(refB instanceof JvmWildcardTypeArgument)) {
 				return isConformant(refA, refB);
 			}
 		} else if (lowerA != null) {
@@ -119,19 +115,12 @@ public class JvmTypeConformanceComputer implements IJvmTypeConformanceComputer{
 		return false;
 	}
 
-	protected boolean isUnconstraintWildcard(JvmTypeArgument argumentA) {
+	protected boolean isUnconstraintWildcard(JvmTypeReference argumentA) {
 		return argumentA instanceof JvmWildcardTypeArgument
 				&& ((JvmWildcardTypeArgument) argumentA).getConstraints().isEmpty();
 	}
 
-	protected JvmTypeReference getRef(JvmTypeArgument argumentA) {
-		if (argumentA instanceof JvmReferenceTypeArgument) {
-			return ((JvmReferenceTypeArgument) argumentA).getTypeReference();
-		}
-		return null;
-	}
-
-	protected JvmTypeReference getLower(JvmTypeArgument argumentA) {
+	protected JvmTypeReference getLower(JvmTypeReference argumentA) {
 		if (argumentA instanceof JvmWildcardTypeArgument) {
 			EList<JvmTypeConstraint> list = ((JvmWildcardTypeArgument) argumentA).getConstraints();
 			for (JvmTypeConstraint constraint : list) {
@@ -143,7 +132,7 @@ public class JvmTypeConformanceComputer implements IJvmTypeConformanceComputer{
 		return null;
 	}
 
-	protected JvmTypeReference getUpper(JvmTypeArgument argumentA) {
+	protected JvmTypeReference getUpper(JvmTypeReference argumentA) {
 		if (argumentA instanceof JvmWildcardTypeArgument) {
 			EList<JvmTypeConstraint> list = ((JvmWildcardTypeArgument) argumentA).getConstraints();
 			for (JvmTypeConstraint constraint : list) {

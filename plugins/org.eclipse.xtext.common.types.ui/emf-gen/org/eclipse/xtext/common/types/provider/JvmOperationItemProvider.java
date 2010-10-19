@@ -250,6 +250,11 @@ public class JvmOperationItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_OPERATION__RETURN_TYPE,
 				 TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__RETURN_TYPE,
+				 TypesFactory.eINSTANCE.createJvmWildcardTypeArgument()));
 	}
 
 	/**

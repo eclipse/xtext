@@ -290,30 +290,13 @@ public class TypesSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.JVM_TYPE_ARGUMENT:
-			{
-				JvmTypeArgument jvmTypeArgument = (JvmTypeArgument)theEObject;
-				T result = caseJvmTypeArgument(jvmTypeArgument);
-				if (result == null) result = caseJvmIdentifyableElement(jvmTypeArgument);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case TypesPackage.JVM_WILDCARD_TYPE_ARGUMENT:
 			{
 				JvmWildcardTypeArgument jvmWildcardTypeArgument = (JvmWildcardTypeArgument)theEObject;
 				T result = caseJvmWildcardTypeArgument(jvmWildcardTypeArgument);
-				if (result == null) result = caseJvmTypeArgument(jvmWildcardTypeArgument);
 				if (result == null) result = caseJvmConstraintOwner(jvmWildcardTypeArgument);
+				if (result == null) result = caseJvmTypeReference(jvmWildcardTypeArgument);
 				if (result == null) result = caseJvmIdentifyableElement(jvmWildcardTypeArgument);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TypesPackage.JVM_REFERENCE_TYPE_ARGUMENT:
-			{
-				JvmReferenceTypeArgument jvmReferenceTypeArgument = (JvmReferenceTypeArgument)theEObject;
-				T result = caseJvmReferenceTypeArgument(jvmReferenceTypeArgument);
-				if (result == null) result = caseJvmTypeArgument(jvmReferenceTypeArgument);
-				if (result == null) result = caseJvmIdentifyableElement(jvmReferenceTypeArgument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -833,22 +816,6 @@ public class TypesSwitch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Type Argument</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Type Argument</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmTypeArgument(JvmTypeArgument object)
-	{
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Jvm Wildcard Type Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -860,22 +827,6 @@ public class TypesSwitch<T>
 	 * @generated
 	 */
 	public T caseJvmWildcardTypeArgument(JvmWildcardTypeArgument object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Reference Type Argument</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Reference Type Argument</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJvmReferenceTypeArgument(JvmReferenceTypeArgument object)
 	{
 		return null;
 	}

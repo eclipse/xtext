@@ -54,7 +54,7 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXBooleanLiteralAccess().getAlternatives(), "rule__XBooleanLiteral__Alternatives");
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getAlternatives_2(), "rule__XTryCatchFinallyExpression__Alternatives_2");
 					put(grammarAccess.getJvmTypeReferenceAccess().getAlternatives(), "rule__JvmTypeReference__Alternatives");
-					put(grammarAccess.getJvmTypeArgumentAccess().getAlternatives(), "rule__JvmTypeArgument__Alternatives");
+					put(grammarAccess.getJvmArgumentTypeReferenceAccess().getAlternatives(), "rule__JvmArgumentTypeReference__Alternatives");
 					put(grammarAccess.getJvmWildcardTypeArgumentAccess().getAlternatives_2(), "rule__JvmWildcardTypeArgument__Alternatives_2");
 					put(grammarAccess.getJvmTypeParameterAccess().getAlternatives_1(), "rule__JvmTypeParameter__Alternatives_1");
 					put(grammarAccess.getXAssignmentAccess().getGroup(), "rule__XAssignment__Group__0");
@@ -212,7 +212,6 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeAssignment_0(), "rule__JvmParameterizedTypeReference__TypeAssignment_0");
 					put(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsAssignment_1_1(), "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1");
 					put(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsAssignment_1_2_1(), "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1");
-					put(grammarAccess.getJvmReferenceTypeArgumentAccess().getTypeReferenceAssignment(), "rule__JvmReferenceTypeArgument__TypeReferenceAssignment");
 					put(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_0(), "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0");
 					put(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_1(), "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1");
 					put(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceAssignment_1(), "rule__JvmUpperBound__TypeReferenceAssignment_1");

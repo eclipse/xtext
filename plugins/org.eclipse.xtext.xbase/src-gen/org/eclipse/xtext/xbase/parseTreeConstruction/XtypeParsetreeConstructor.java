@@ -34,13 +34,12 @@ protected class ThisRootNode extends RootToken {
 			case 0: return new JvmTypeReference_Alternatives(this, this, 0, inst);
 			case 1: return new XFunctionTypeRef_Group(this, this, 1, inst);
 			case 2: return new JvmParameterizedTypeReference_Group(this, this, 2, inst);
-			case 3: return new JvmTypeArgument_Alternatives(this, this, 3, inst);
-			case 4: return new JvmReferenceTypeArgument_TypeReferenceAssignment(this, this, 4, inst);
-			case 5: return new JvmWildcardTypeArgument_Group(this, this, 5, inst);
-			case 6: return new JvmUpperBound_Group(this, this, 6, inst);
-			case 7: return new JvmUpperBoundAnded_Group(this, this, 7, inst);
-			case 8: return new JvmLowerBound_Group(this, this, 8, inst);
-			case 9: return new JvmTypeParameter_Group(this, this, 9, inst);
+			case 3: return new JvmArgumentTypeReference_Alternatives(this, this, 3, inst);
+			case 4: return new JvmWildcardTypeArgument_Group(this, this, 4, inst);
+			case 5: return new JvmUpperBound_Group(this, this, 5, inst);
+			case 6: return new JvmUpperBoundAnded_Group(this, this, 6, inst);
+			case 7: return new JvmLowerBound_Group(this, this, 7, inst);
+			case 8: return new JvmTypeParameter_Group(this, this, 8, inst);
 			default: return null;
 		}	
 	}	
@@ -477,11 +476,12 @@ protected class XFunctionTypeRef_ReturnTypeAssignment_2 extends AssignmentToken 
 /************ begin Rule JvmParameterizedTypeReference ****************
  *
  * JvmParameterizedTypeReference:
- * 	type=[JvmType|QualifiedName] ("<" arguments+=JvmTypeArgument ("," arguments+=JvmTypeArgument)* ">")?;
+ * 	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
+ * 	">")?;
  *
  **/
 
-// type=[JvmType|QualifiedName] ("<" arguments+=JvmTypeArgument ("," arguments+=JvmTypeArgument)* ">")?
+// type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">")?
 protected class JvmParameterizedTypeReference_Group extends GroupToken {
 	
 	public JvmParameterizedTypeReference_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -547,7 +547,7 @@ protected class JvmParameterizedTypeReference_TypeAssignment_0 extends Assignmen
 
 }
 
-// ("<" arguments+=JvmTypeArgument ("," arguments+=JvmTypeArgument)* ">")?
+// ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">")?
 protected class JvmParameterizedTypeReference_Group_1 extends GroupToken {
 	
 	public JvmParameterizedTypeReference_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -591,7 +591,7 @@ protected class JvmParameterizedTypeReference_LessThanSignKeyword_1_0 extends Ke
 
 }
 
-// arguments+=JvmTypeArgument
+// arguments+=JvmArgumentTypeReference
 protected class JvmParameterizedTypeReference_ArgumentsAssignment_1_1 extends AssignmentToken  {
 	
 	public JvmParameterizedTypeReference_ArgumentsAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -606,7 +606,7 @@ protected class JvmParameterizedTypeReference_ArgumentsAssignment_1_1 extends As
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new JvmTypeArgument_Alternatives(this, this, 0, inst);
+			case 0: return new JvmArgumentTypeReference_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -617,9 +617,9 @@ protected class JvmParameterizedTypeReference_ArgumentsAssignment_1_1 extends As
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("arguments");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getJvmTypeArgumentRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getJvmArgumentTypeReferenceRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmTypeArgumentParserRuleCall_1_1_0(); 
+				element = grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -637,7 +637,7 @@ protected class JvmParameterizedTypeReference_ArgumentsAssignment_1_1 extends As
 	}	
 }
 
-// ("," arguments+=JvmTypeArgument)*
+// ("," arguments+=JvmArgumentTypeReference)*
 protected class JvmParameterizedTypeReference_Group_1_2 extends GroupToken {
 	
 	public JvmParameterizedTypeReference_Group_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -682,7 +682,7 @@ protected class JvmParameterizedTypeReference_CommaKeyword_1_2_0 extends Keyword
 
 }
 
-// arguments+=JvmTypeArgument
+// arguments+=JvmArgumentTypeReference
 protected class JvmParameterizedTypeReference_ArgumentsAssignment_1_2_1 extends AssignmentToken  {
 	
 	public JvmParameterizedTypeReference_ArgumentsAssignment_1_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -697,7 +697,7 @@ protected class JvmParameterizedTypeReference_ArgumentsAssignment_1_2_1 extends 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new JvmTypeArgument_Alternatives(this, this, 0, inst);
+			case 0: return new JvmArgumentTypeReference_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -708,9 +708,9 @@ protected class JvmParameterizedTypeReference_ArgumentsAssignment_1_2_1 extends 
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("arguments");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getJvmTypeArgumentRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getJvmArgumentTypeReferenceRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmTypeArgumentParserRuleCall_1_2_1_0(); 
+				element = grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -757,69 +757,71 @@ protected class JvmParameterizedTypeReference_GreaterThanSignKeyword_1_3 extends
 /************ end Rule JvmParameterizedTypeReference ****************/
 
 
-/************ begin Rule JvmTypeArgument ****************
+/************ begin Rule JvmArgumentTypeReference ****************
  *
- * JvmTypeArgument:
- * 	JvmReferenceTypeArgument | JvmWildcardTypeArgument;
+ * JvmArgumentTypeReference returns JvmTypeReference:
+ * 	JvmTypeReference | JvmWildcardTypeArgument;
  *
  **/
 
-// JvmReferenceTypeArgument | JvmWildcardTypeArgument
-protected class JvmTypeArgument_Alternatives extends AlternativesToken {
+// JvmTypeReference | JvmWildcardTypeArgument
+protected class JvmArgumentTypeReference_Alternatives extends AlternativesToken {
 
-	public JvmTypeArgument_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public JvmArgumentTypeReference_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.getJvmTypeArgumentAccess().getAlternatives();
+		return grammarAccess.getJvmArgumentTypeReferenceAccess().getAlternatives();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new JvmTypeArgument_JvmReferenceTypeArgumentParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new JvmTypeArgument_JvmWildcardTypeArgumentParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new JvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new JvmArgumentTypeReference_JvmWildcardTypeArgumentParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getJvmReferenceTypeArgumentRule().getType().getClassifier() && 
-		   getEObject().eClass() != grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFunctionTypeRefRule().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
 	}
 
 }
 
-// JvmReferenceTypeArgument
-protected class JvmTypeArgument_JvmReferenceTypeArgumentParserRuleCall_0 extends RuleCallToken {
+// JvmTypeReference
+protected class JvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0 extends RuleCallToken {
 	
-	public JvmTypeArgument_JvmReferenceTypeArgumentParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public JvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getJvmTypeArgumentAccess().getJvmReferenceTypeArgumentParserRuleCall_0();
+		return grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmTypeReferenceParserRuleCall_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new JvmReferenceTypeArgument_TypeReferenceAssignment(this, this, 0, inst);
+			case 0: return new JvmTypeReference_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override
 	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getJvmReferenceTypeArgumentRule().getType().getClassifier())
+		if(getEObject().eClass() != grammarAccess.getJvmParameterizedTypeReferenceRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXFunctionTypeRefRule().getType().getClassifier())
 			return null;
-		if(checkForRecursion(JvmReferenceTypeArgument_TypeReferenceAssignment.class, eObjectConsumer)) return null;
+		if(checkForRecursion(JvmTypeReference_Alternatives.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
 	
@@ -832,15 +834,15 @@ protected class JvmTypeArgument_JvmReferenceTypeArgumentParserRuleCall_0 extends
 }
 
 // JvmWildcardTypeArgument
-protected class JvmTypeArgument_JvmWildcardTypeArgumentParserRuleCall_1 extends RuleCallToken {
+protected class JvmArgumentTypeReference_JvmWildcardTypeArgumentParserRuleCall_1 extends RuleCallToken {
 	
-	public JvmTypeArgument_JvmWildcardTypeArgumentParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public JvmArgumentTypeReference_JvmWildcardTypeArgumentParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getJvmTypeArgumentAccess().getJvmWildcardTypeArgumentParserRuleCall_1();
+		return grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeArgumentParserRuleCall_1();
 	}
 
     @Override
@@ -868,64 +870,7 @@ protected class JvmTypeArgument_JvmWildcardTypeArgumentParserRuleCall_1 extends 
 }
 
 
-/************ end Rule JvmTypeArgument ****************/
-
-
-/************ begin Rule JvmReferenceTypeArgument ****************
- *
- * JvmReferenceTypeArgument:
- * 	typeReference=JvmTypeReference;
- *
- **/
-
-// typeReference=JvmTypeReference
-protected class JvmReferenceTypeArgument_TypeReferenceAssignment extends AssignmentToken  {
-	
-	public JvmReferenceTypeArgument_TypeReferenceAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getJvmReferenceTypeArgumentAccess().getTypeReferenceAssignment();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new JvmTypeReference_Alternatives(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if(getEObject().eClass() != grammarAccess.getJvmReferenceTypeArgumentRule().getType().getClassifier())
-			return null;
-		if((value = eObjectConsumer.getConsumable("typeReference",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("typeReference");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
-				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getJvmReferenceTypeArgumentAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		if(value == inst.getEObject() && !inst.isConsumed()) return null;
-		switch(index) {
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
-		}	
-	}	
-}
-
-/************ end Rule JvmReferenceTypeArgument ****************/
+/************ end Rule JvmArgumentTypeReference ****************/
 
 
 /************ begin Rule JvmWildcardTypeArgument ****************

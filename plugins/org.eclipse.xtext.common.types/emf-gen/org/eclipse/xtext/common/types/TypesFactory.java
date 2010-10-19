@@ -143,15 +143,6 @@ public interface TypesFactory extends EFactory
 	JvmWildcardTypeArgument createJvmWildcardTypeArgument();
 
 	/**
-	 * Returns a new object of class '<em>Jvm Reference Type Argument</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Jvm Reference Type Argument</em>'.
-	 * @generated
-	 */
-	JvmReferenceTypeArgument createJvmReferenceTypeArgument();
-
-	/**
 	 * Returns a new object of class '<em>Jvm Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

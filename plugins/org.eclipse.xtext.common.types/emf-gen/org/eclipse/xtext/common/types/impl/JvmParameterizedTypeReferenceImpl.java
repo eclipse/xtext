@@ -17,12 +17,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -49,7 +49,7 @@ public class JvmParameterizedTypeReferenceImpl extends JvmTypeReferenceImpl impl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<JvmTypeArgument> arguments;
+	protected EList<JvmTypeReference> arguments;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
@@ -87,11 +87,11 @@ public class JvmParameterizedTypeReferenceImpl extends JvmTypeReferenceImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<JvmTypeArgument> getArguments()
+	public EList<JvmTypeReference> getArguments()
 	{
 		if (arguments == null)
 		{
-			arguments = new EObjectContainmentWithInverseEList<JvmTypeArgument>(JvmTypeArgument.class, this, TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS, TypesPackage.JVM_TYPE_ARGUMENT__DECLARATOR);
+			arguments = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS);
 		}
 		return arguments;
 	}
@@ -144,23 +144,6 @@ public class JvmParameterizedTypeReferenceImpl extends JvmTypeReferenceImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-	{
-		switch (featureID)
-		{
-			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getArguments()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -204,7 +187,7 @@ public class JvmParameterizedTypeReferenceImpl extends JvmTypeReferenceImpl impl
 		{
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS:
 				getArguments().clear();
-				getArguments().addAll((Collection<? extends JvmTypeArgument>)newValue);
+				getArguments().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE:
 				setType((JvmType)newValue);

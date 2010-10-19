@@ -8,7 +8,6 @@
 package org.eclipse.xtext.common.types.util;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +20,6 @@ import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
-import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
@@ -41,10 +38,10 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 	private JvmTypeConformanceComputer computer;
 	private DeclaredTypeFactory factory = new DeclaredTypeFactory(new ClassURIHelper());
 
-	protected JvmTypeReference ref(java.lang.reflect.Type type, JvmTypeArgument... arguments) {
+	protected JvmTypeReference ref(java.lang.reflect.Type type, JvmTypeReference... arguments) {
 		JvmTypeReference createTypeReference = factory.createTypeReference(type);
 		if (arguments.length > 0) {
-			for (JvmTypeArgument typeArgument : arguments) {
+			for (JvmTypeReference typeArgument : arguments) {
 				((JvmParameterizedTypeReference) createTypeReference).getArguments().add(typeArgument);
 			}
 		}
@@ -64,16 +61,6 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 			arrayType.setComponentType(array(typeRef, i - 1));
 		}
 		return result;
-	}
-
-	protected JvmReferenceTypeArgument arg(Type type) {
-		return arg(ref(type));
-	}
-
-	protected JvmReferenceTypeArgument arg(JvmTypeReference typeRef) {
-		JvmReferenceTypeArgument argument = TypesFactory.eINSTANCE.createJvmReferenceTypeArgument();
-		argument.setTypeReference(typeRef);
-		return argument;
 	}
 
 	protected JvmWildcardTypeArgument wc() {
@@ -139,7 +126,7 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 //		List zonk = null;
 //		foo = zonk; // ok
 //		zonk = foo; // ok
-		JvmTypeReference List_String = ref(List.class, arg(String.class));
+		JvmTypeReference List_String = ref(List.class, ref(String.class));
 		JvmTypeReference List_rawtype = ref(List.class);
 		assertTrue(computer.isConformant(List_String, List_rawtype));
 		assertTrue(computer.isConformant(List_rawtype, List_String));
@@ -182,7 +169,7 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 	 * List<?> <= List<CharSequence>
 	 */
 	public void testGenerics_UnconstraintWildcard_1() throws Exception {
-		JvmTypeReference List_CharSequence = ref(List.class, arg(CharSequence.class));
+		JvmTypeReference List_CharSequence = ref(List.class, ref(CharSequence.class));
 		JvmTypeReference List_of_wildcard = ref(List.class, wc());
 		assertTrue(computer.isConformant(List_of_wildcard, List_CharSequence));
 		assertFalse(computer.isConformant(List_CharSequence, List_of_wildcard));
@@ -208,29 +195,29 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 	}
 
 	public void testGenerics_1() throws Exception {
-		JvmTypeReference List_of_String = ref(List.class, arg(String.class));
+		JvmTypeReference List_of_String = ref(List.class, ref(String.class));
 		JvmTypeReference List_of_extends_String = ref(List.class, wc_extends(ref(String.class)));
 		assertTrue(computer.isConformant(List_of_extends_String, List_of_String));
 		assertFalse(computer.isConformant(List_of_String, List_of_extends_String));
 	}
 
 	public void testGenerics_2() throws Exception {
-		JvmTypeReference List_of_String = ref(List.class, arg(String.class));
-		JvmTypeReference Collection_of_String = ref(Collection.class, arg(String.class));
+		JvmTypeReference List_of_String = ref(List.class, ref(String.class));
+		JvmTypeReference Collection_of_String = ref(Collection.class, ref(String.class));
 		assertTrue(computer.isConformant(Collection_of_String, List_of_String));
 		assertFalse(computer.isConformant(List_of_String, Collection_of_String));
 	}
 
 	public void testGenerics_3() throws Exception {
-		JvmTypeReference Func_of_String_String = ref(Map.class, arg(String.class), arg(String.class));
-		JvmTypeReference Func_of_extends_String_String = ref(Map.class, wc_extends(ref(String.class)), arg(String.class));
+		JvmTypeReference Func_of_String_String = ref(Map.class, ref(String.class), ref(String.class));
+		JvmTypeReference Func_of_extends_String_String = ref(Map.class, wc_extends(ref(String.class)), ref(String.class));
 		assertTrue(computer.isConformant(Func_of_extends_String_String, Func_of_String_String));
 		assertFalse(computer.isConformant(Func_of_String_String, Func_of_extends_String_String));
 	}
 
 	public void testGenerics_4() throws Exception {
-		JvmTypeReference Func_of_String_String = ref(Map.class, arg(String.class), arg(String.class));
-		JvmTypeReference Func_of_extends_String_String = ref(Map.class, arg(String.class), arg(String.class));
+		JvmTypeReference Func_of_String_String = ref(Map.class, ref(String.class), ref(String.class));
+		JvmTypeReference Func_of_extends_String_String = ref(Map.class, ref(String.class), ref(String.class));
 		assertTrue(computer.isConformant(Func_of_extends_String_String, Func_of_String_String));
 		assertTrue(computer.isConformant(Func_of_String_String, Func_of_extends_String_String));
 	}

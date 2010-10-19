@@ -156,6 +156,11 @@ public class JvmTypeConstraintItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE,
 				 TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE,
+				 TypesFactory.eINSTANCE.createJvmWildcardTypeArgument()));
 	}
 
 }

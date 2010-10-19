@@ -8,7 +8,7 @@ package org.eclipse.xtext.xbase;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
-import org.eclipse.xtext.common.types.JvmTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,7 +90,7 @@ public interface XAbstractFeatureCall extends XExpression
 
 	/**
 	 * Returns the value of the '<em><b>Type Arguments</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeArgument}.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type Arguments</em>' containment reference list isn't clear,
@@ -102,6 +102,6 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<JvmTypeArgument> getTypeArguments();
+	EList<JvmTypeReference> getTypeArguments();
 
 } // XAbstractFeatureCall

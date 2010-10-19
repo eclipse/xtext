@@ -16,6 +16,6 @@ package org.eclipse.xtext.common.types;
  * @model
  * @generated
  */
-public interface JvmWildcardTypeArgument extends JvmTypeArgument, JvmConstraintOwner
+public interface JvmWildcardTypeArgument extends JvmConstraintOwner, JvmTypeReference
 {
 } // JvmWildcardTypeArgument

@@ -77,7 +77,7 @@ OpUnary:
 XMemberFeatureCall returns XExpression:
 	XPrimaryExpression
 	({XMemberFeatureCall.memberCallTarget=current} "." 
-		('<' typeArguments+=JvmTypeArgument (',' typeArguments+=JvmTypeArgument)* '>')?  
+		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
 		feature=[types::JvmIdentifyableElement] ('(' (memberCallArguments+=XExpression (','	memberCallArguments+=XExpression)*)? ')')?)*;
 
 XPrimaryExpression returns XExpression:
@@ -155,7 +155,7 @@ JvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=JvmTypeReference)? name=ID;
 
 XFeatureCall returns XFeatureCall:
-	('<' typeArguments+=JvmTypeArgument (',' typeArguments+=JvmTypeArgument)* '>')? 
+	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
 	feature=[types::JvmIdentifyableElement] ('(' (featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*)? ')')?;
 
 XConstructorCall:

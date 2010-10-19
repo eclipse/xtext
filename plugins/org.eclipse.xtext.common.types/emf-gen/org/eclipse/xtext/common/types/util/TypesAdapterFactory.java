@@ -178,19 +178,9 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 				return createJvmGenericArrayTypeReferenceAdapter();
 			}
 			@Override
-			public Adapter caseJvmTypeArgument(JvmTypeArgument object)
-			{
-				return createJvmTypeArgumentAdapter();
-			}
-			@Override
 			public Adapter caseJvmWildcardTypeArgument(JvmWildcardTypeArgument object)
 			{
 				return createJvmWildcardTypeArgumentAdapter();
-			}
-			@Override
-			public Adapter caseJvmReferenceTypeArgument(JvmReferenceTypeArgument object)
-			{
-				return createJvmReferenceTypeArgumentAdapter();
 			}
 			@Override
 			public Adapter caseJvmMember(JvmMember object)
@@ -625,21 +615,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmTypeArgument <em>Jvm Type Argument</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmTypeArgument
-	 * @generated
-	 */
-	public Adapter createJvmTypeArgumentAdapter()
-	{
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmWildcardTypeArgument <em>Jvm Wildcard Type Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -650,21 +625,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createJvmWildcardTypeArgumentAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmReferenceTypeArgument <em>Jvm Reference Type Argument</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmReferenceTypeArgument
-	 * @generated
-	 */
-	public Adapter createJvmReferenceTypeArgumentAdapter()
 	{
 		return null;
 	}

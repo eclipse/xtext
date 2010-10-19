@@ -402,31 +402,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmReferenceTypeArgument} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected JvmReferenceTypeArgumentItemProvider jvmReferenceTypeArgumentItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmReferenceTypeArgument}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createJvmReferenceTypeArgumentAdapter()
-	{
-		if (jvmReferenceTypeArgumentItemProvider == null)
-		{
-			jvmReferenceTypeArgumentItemProvider = new JvmReferenceTypeArgumentItemProvider(this);
-		}
-
-		return jvmReferenceTypeArgumentItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmField} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -975,7 +950,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (jvmParameterizedTypeReferenceItemProvider != null) jvmParameterizedTypeReferenceItemProvider.dispose();
 		if (jvmGenericArrayTypeReferenceItemProvider != null) jvmGenericArrayTypeReferenceItemProvider.dispose();
 		if (jvmWildcardTypeArgumentItemProvider != null) jvmWildcardTypeArgumentItemProvider.dispose();
-		if (jvmReferenceTypeArgumentItemProvider != null) jvmReferenceTypeArgumentItemProvider.dispose();
 		if (jvmFieldItemProvider != null) jvmFieldItemProvider.dispose();
 		if (jvmConstructorItemProvider != null) jvmConstructorItemProvider.dispose();
 		if (jvmOperationItemProvider != null) jvmOperationItemProvider.dispose();

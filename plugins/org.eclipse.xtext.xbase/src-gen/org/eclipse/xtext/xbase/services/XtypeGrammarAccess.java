@@ -106,18 +106,19 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cLessThanSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cArgumentsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cArgumentsJvmTypeArgumentParserRuleCall_1_1_0 = (RuleCall)cArgumentsAssignment_1_1.eContents().get(0);
+		private final RuleCall cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0 = (RuleCall)cArgumentsAssignment_1_1.eContents().get(0);
 		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
 		private final Keyword cCommaKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
 		private final Assignment cArgumentsAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
-		private final RuleCall cArgumentsJvmTypeArgumentParserRuleCall_1_2_1_0 = (RuleCall)cArgumentsAssignment_1_2_1.eContents().get(0);
+		private final RuleCall cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0 = (RuleCall)cArgumentsAssignment_1_2_1.eContents().get(0);
 		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
 		//JvmParameterizedTypeReference:
-		//	type=[JvmType|QualifiedName] ("<" arguments+=JvmTypeArgument ("," arguments+=JvmTypeArgument)* ">")?;
+		//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
+		//	">")?;
 		public ParserRule getRule() { return rule; }
 
-		//type=[JvmType|QualifiedName] ("<" arguments+=JvmTypeArgument ("," arguments+=JvmTypeArgument)* ">")?
+		//type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">")?
 		public Group getGroup() { return cGroup; }
 
 		//type=[JvmType|QualifiedName]
@@ -129,68 +130,52 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_0_0_1; }
 
-		//("<" arguments+=JvmTypeArgument ("," arguments+=JvmTypeArgument)* ">")?
+		//("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">")?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"<"
 		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
 
-		//arguments+=JvmTypeArgument
+		//arguments+=JvmArgumentTypeReference
 		public Assignment getArgumentsAssignment_1_1() { return cArgumentsAssignment_1_1; }
 
-		//JvmTypeArgument
-		public RuleCall getArgumentsJvmTypeArgumentParserRuleCall_1_1_0() { return cArgumentsJvmTypeArgumentParserRuleCall_1_1_0; }
+		//JvmArgumentTypeReference
+		public RuleCall getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0() { return cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0; }
 
-		//("," arguments+=JvmTypeArgument)*
+		//("," arguments+=JvmArgumentTypeReference)*
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
 		//","
 		public Keyword getCommaKeyword_1_2_0() { return cCommaKeyword_1_2_0; }
 
-		//arguments+=JvmTypeArgument
+		//arguments+=JvmArgumentTypeReference
 		public Assignment getArgumentsAssignment_1_2_1() { return cArgumentsAssignment_1_2_1; }
 
-		//JvmTypeArgument
-		public RuleCall getArgumentsJvmTypeArgumentParserRuleCall_1_2_1_0() { return cArgumentsJvmTypeArgumentParserRuleCall_1_2_1_0; }
+		//JvmArgumentTypeReference
+		public RuleCall getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0() { return cArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0; }
 
 		//">"
 		public Keyword getGreaterThanSignKeyword_1_3() { return cGreaterThanSignKeyword_1_3; }
 	}
 
-	public class JvmTypeArgumentElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "JvmTypeArgument");
+	public class JvmArgumentTypeReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "JvmArgumentTypeReference");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cJvmReferenceTypeArgumentParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cJvmTypeReferenceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cJvmWildcardTypeArgumentParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//JvmTypeArgument:
-		//	JvmReferenceTypeArgument | JvmWildcardTypeArgument;
+		//JvmArgumentTypeReference returns JvmTypeReference:
+		//	JvmTypeReference | JvmWildcardTypeArgument;
 		public ParserRule getRule() { return rule; }
 
-		//JvmReferenceTypeArgument | JvmWildcardTypeArgument
+		//JvmTypeReference | JvmWildcardTypeArgument
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//JvmReferenceTypeArgument
-		public RuleCall getJvmReferenceTypeArgumentParserRuleCall_0() { return cJvmReferenceTypeArgumentParserRuleCall_0; }
+		//JvmTypeReference
+		public RuleCall getJvmTypeReferenceParserRuleCall_0() { return cJvmTypeReferenceParserRuleCall_0; }
 
 		//JvmWildcardTypeArgument
 		public RuleCall getJvmWildcardTypeArgumentParserRuleCall_1() { return cJvmWildcardTypeArgumentParserRuleCall_1; }
-	}
-
-	public class JvmReferenceTypeArgumentElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "JvmReferenceTypeArgument");
-		private final Assignment cTypeReferenceAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cTypeReferenceJvmTypeReferenceParserRuleCall_0 = (RuleCall)cTypeReferenceAssignment.eContents().get(0);
-		
-		//JvmReferenceTypeArgument:
-		//	typeReference=JvmTypeReference;
-		public ParserRule getRule() { return rule; }
-
-		//typeReference=JvmTypeReference
-		public Assignment getTypeReferenceAssignment() { return cTypeReferenceAssignment; }
-
-		//JvmTypeReference
-		public RuleCall getTypeReferenceJvmTypeReferenceParserRuleCall_0() { return cTypeReferenceJvmTypeReferenceParserRuleCall_0; }
 	}
 
 	public class JvmWildcardTypeArgumentElements extends AbstractParserRuleElementFinder {
@@ -389,8 +374,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	private JvmTypeReferenceElements pJvmTypeReference;
 	private XFunctionTypeRefElements pXFunctionTypeRef;
 	private JvmParameterizedTypeReferenceElements pJvmParameterizedTypeReference;
-	private JvmTypeArgumentElements pJvmTypeArgument;
-	private JvmReferenceTypeArgumentElements pJvmReferenceTypeArgument;
+	private JvmArgumentTypeReferenceElements pJvmArgumentTypeReference;
 	private JvmWildcardTypeArgumentElements pJvmWildcardTypeArgument;
 	private JvmUpperBoundElements pJvmUpperBound;
 	private JvmUpperBoundAndedElements pJvmUpperBoundAnded;
@@ -440,7 +424,8 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//JvmParameterizedTypeReference:
-	//	type=[JvmType|QualifiedName] ("<" arguments+=JvmTypeArgument ("," arguments+=JvmTypeArgument)* ">")?;
+	//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
+	//	">")?;
 	public JvmParameterizedTypeReferenceElements getJvmParameterizedTypeReferenceAccess() {
 		return (pJvmParameterizedTypeReference != null) ? pJvmParameterizedTypeReference : (pJvmParameterizedTypeReference = new JvmParameterizedTypeReferenceElements());
 	}
@@ -449,24 +434,14 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		return getJvmParameterizedTypeReferenceAccess().getRule();
 	}
 
-	//JvmTypeArgument:
-	//	JvmReferenceTypeArgument | JvmWildcardTypeArgument;
-	public JvmTypeArgumentElements getJvmTypeArgumentAccess() {
-		return (pJvmTypeArgument != null) ? pJvmTypeArgument : (pJvmTypeArgument = new JvmTypeArgumentElements());
+	//JvmArgumentTypeReference returns JvmTypeReference:
+	//	JvmTypeReference | JvmWildcardTypeArgument;
+	public JvmArgumentTypeReferenceElements getJvmArgumentTypeReferenceAccess() {
+		return (pJvmArgumentTypeReference != null) ? pJvmArgumentTypeReference : (pJvmArgumentTypeReference = new JvmArgumentTypeReferenceElements());
 	}
 	
-	public ParserRule getJvmTypeArgumentRule() {
-		return getJvmTypeArgumentAccess().getRule();
-	}
-
-	//JvmReferenceTypeArgument:
-	//	typeReference=JvmTypeReference;
-	public JvmReferenceTypeArgumentElements getJvmReferenceTypeArgumentAccess() {
-		return (pJvmReferenceTypeArgument != null) ? pJvmReferenceTypeArgument : (pJvmReferenceTypeArgument = new JvmReferenceTypeArgumentElements());
-	}
-	
-	public ParserRule getJvmReferenceTypeArgumentRule() {
-		return getJvmReferenceTypeArgumentAccess().getRule();
+	public ParserRule getJvmArgumentTypeReferenceRule() {
+		return getJvmArgumentTypeReferenceAccess().getRule();
 	}
 
 	//JvmWildcardTypeArgument:

@@ -50,10 +50,8 @@ import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
-import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
@@ -388,7 +386,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 			result.setType(createProxy(erasure));
 			for (int i = 0; i < typeArguments.length; i++) {
-				JvmTypeArgument argument = createTypeArgument(typeArguments[i]);
+				JvmTypeReference argument = createTypeArgument(typeArguments[i]);
 				result.getArguments().add(argument);
 			}
 			return result;
@@ -405,7 +403,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		return result;
 	}
 
-	public JvmTypeArgument createTypeArgument(ITypeBinding argument) {
+	public JvmTypeReference createTypeArgument(ITypeBinding argument) {
 		if (argument.isWildcardType()) {
 			JvmWildcardTypeArgument result = TypesFactory.eINSTANCE.createJvmWildcardTypeArgument();
 			if (argument.getBound() == null) {
@@ -433,10 +431,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			}
 			return result;
 		} else {
-			JvmReferenceTypeArgument result = TypesFactory.eINSTANCE.createJvmReferenceTypeArgument();
-			JvmTypeReference typeReference = createTypeReference(argument);
-			result.setTypeReference(typeReference);
-			return result;
+			return createTypeReference(argument);
 		}
 	}
 

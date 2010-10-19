@@ -169,7 +169,7 @@
                 <type metamodel="/0/@metamodelDeclarations.1">
                   <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmType"/>
                 </type>
-                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.10"/>
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.9"/>
               </terminal>
             </elements>
           </elements>
@@ -798,7 +798,7 @@
             <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmType"/>
             </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.10"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.9"/>
           </terminal>
         </elements>
         <elements xsi:type="xtext:Keyword" value="."/>
@@ -913,7 +913,7 @@
             <type metamodel="/1/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmType"/>
             </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.10"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.9"/>
           </terminal>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
@@ -931,21 +931,13 @@
         </elements>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="JvmTypeArgument">
+    <rules xsi:type="xtext:ParserRule" name="JvmArgumentTypeReference">
       <type metamodel="/1/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmTypeArgument"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmTypeReference"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.4"/>
-        <elements xsi:type="xtext:RuleCall" rule="/1/@rules.5"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="JvmReferenceTypeArgument">
-      <type metamodel="/1/@metamodelDeclarations.1">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmReferenceTypeArgument"/>
-      </type>
-      <alternatives xsi:type="xtext:Assignment" feature="typeReference" operator="=">
-        <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="JvmWildcardTypeArgument">
@@ -961,10 +953,10 @@
         <elements xsi:type="xtext:Keyword" value="?"/>
         <elements xsi:type="xtext:Alternatives" cardinality="?">
           <elements xsi:type="xtext:Assignment" feature="constraints" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.6"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.5"/>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="constraints" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.8"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.7"/>
           </elements>
         </elements>
       </alternatives>
@@ -1013,14 +1005,14 @@
         <elements xsi:type="xtext:Alternatives" cardinality="?">
           <elements xsi:type="xtext:Group">
             <elements xsi:type="xtext:Assignment" feature="constraints" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.6"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.5"/>
             </elements>
             <elements xsi:type="xtext:Assignment" cardinality="*" feature="constraints" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.7"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.6"/>
             </elements>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="constraints" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.8"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.7"/>
           </elements>
         </elements>
       </alternatives>

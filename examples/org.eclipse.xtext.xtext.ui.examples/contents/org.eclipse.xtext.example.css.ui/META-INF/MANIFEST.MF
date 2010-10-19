@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.xtext.example.css;visibility:=reexport,
  org.eclipse.xtext.builder,
  org.eclipse.xtext.xbase;bundle-version="1.0.1",
  org.eclipse.xtext.xbase.ui;bundle-version="1.0.1",
- org.eclipse.xtext.common.types.ui
+ org.eclipse.xtext.common.types.ui,
+ org.antlr.runtime
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.example.css.ui.contentassist.antlr

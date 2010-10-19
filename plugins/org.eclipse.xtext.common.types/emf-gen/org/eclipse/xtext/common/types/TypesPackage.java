@@ -786,7 +786,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationTarget()
 	 * @generated
 	 */
-	int JVM_ANNOTATION_TARGET = 30;
+	int JVM_ANNOTATION_TARGET = 28;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -814,7 +814,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmMember()
 	 * @generated
 	 */
-	int JVM_MEMBER = 23;
+	int JVM_MEMBER = 21;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -869,7 +869,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmField()
 	 * @generated
 	 */
-	int JVM_FIELD = 25;
+	int JVM_FIELD = 23;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1237,34 +1237,6 @@ public interface TypesPackage extends EPackage
 	int JVM_GENERIC_ARRAY_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl <em>Jvm Type Argument</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeArgument()
-	 * @generated
-	 */
-	int JVM_TYPE_ARGUMENT = 20;
-
-	/**
-	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_TYPE_ARGUMENT__DECLARATOR = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Jvm Type Argument</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_TYPE_ARGUMENT_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl <em>Jvm Wildcard Type Argument</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1272,16 +1244,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmWildcardTypeArgument()
 	 * @generated
 	 */
-	int JVM_WILDCARD_TYPE_ARGUMENT = 21;
-
-	/**
-	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_WILDCARD_TYPE_ARGUMENT__DECLARATOR = JVM_TYPE_ARGUMENT__DECLARATOR;
+	int JVM_WILDCARD_TYPE_ARGUMENT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -1290,7 +1253,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_WILDCARD_TYPE_ARGUMENT__CONSTRAINTS = JVM_TYPE_ARGUMENT_FEATURE_COUNT + 0;
+	int JVM_WILDCARD_TYPE_ARGUMENT__CONSTRAINTS = JVM_CONSTRAINT_OWNER__CONSTRAINTS;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Wildcard Type Argument</em>' class.
@@ -1299,44 +1262,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_WILDCARD_TYPE_ARGUMENT_FEATURE_COUNT = JVM_TYPE_ARGUMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl <em>Jvm Reference Type Argument</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmReferenceTypeArgument()
-	 * @generated
-	 */
-	int JVM_REFERENCE_TYPE_ARGUMENT = 22;
-
-	/**
-	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_REFERENCE_TYPE_ARGUMENT__DECLARATOR = JVM_TYPE_ARGUMENT__DECLARATOR;
-
-	/**
-	 * The feature id for the '<em><b>Type Reference</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE = JVM_TYPE_ARGUMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Jvm Reference Type Argument</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_REFERENCE_TYPE_ARGUMENT_FEATURE_COUNT = JVM_TYPE_ARGUMENT_FEATURE_COUNT + 1;
+	int JVM_WILDCARD_TYPE_ARGUMENT_FEATURE_COUNT = JVM_CONSTRAINT_OWNER_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.
@@ -1346,7 +1272,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFeature()
 	 * @generated
 	 */
-	int JVM_FEATURE = 24;
+	int JVM_FEATURE = 22;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Feature</em>' class.
@@ -1365,7 +1291,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmExecutable()
 	 * @generated
 	 */
-	int JVM_EXECUTABLE = 26;
+	int JVM_EXECUTABLE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1447,7 +1373,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmConstructor()
 	 * @generated
 	 */
-	int JVM_CONSTRUCTOR = 27;
+	int JVM_CONSTRUCTOR = 25;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1529,7 +1455,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmOperation()
 	 * @generated
 	 */
-	int JVM_OPERATION = 28;
+	int JVM_OPERATION = 26;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1647,7 +1573,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFormalParameter()
 	 * @generated
 	 */
-	int JVM_FORMAL_PARAMETER = 29;
+	int JVM_FORMAL_PARAMETER = 27;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1693,7 +1619,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationReference()
 	 * @generated
 	 */
-	int JVM_ANNOTATION_REFERENCE = 31;
+	int JVM_ANNOTATION_REFERENCE = 29;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' reference.
@@ -1739,7 +1665,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationValue()
 	 * @generated
 	 */
-	int JVM_ANNOTATION_VALUE = 32;
+	int JVM_ANNOTATION_VALUE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1767,7 +1693,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmIntAnnotationValue()
 	 * @generated
 	 */
-	int JVM_INT_ANNOTATION_VALUE = 33;
+	int JVM_INT_ANNOTATION_VALUE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1804,7 +1730,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmBooleanAnnotationValue()
 	 * @generated
 	 */
-	int JVM_BOOLEAN_ANNOTATION_VALUE = 34;
+	int JVM_BOOLEAN_ANNOTATION_VALUE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1841,7 +1767,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmByteAnnotationValue()
 	 * @generated
 	 */
-	int JVM_BYTE_ANNOTATION_VALUE = 35;
+	int JVM_BYTE_ANNOTATION_VALUE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1878,7 +1804,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmShortAnnotationValue()
 	 * @generated
 	 */
-	int JVM_SHORT_ANNOTATION_VALUE = 36;
+	int JVM_SHORT_ANNOTATION_VALUE = 34;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1915,7 +1841,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmLongAnnotationValue()
 	 * @generated
 	 */
-	int JVM_LONG_ANNOTATION_VALUE = 37;
+	int JVM_LONG_ANNOTATION_VALUE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1952,7 +1878,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDoubleAnnotationValue()
 	 * @generated
 	 */
-	int JVM_DOUBLE_ANNOTATION_VALUE = 38;
+	int JVM_DOUBLE_ANNOTATION_VALUE = 36;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1989,7 +1915,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFloatAnnotationValue()
 	 * @generated
 	 */
-	int JVM_FLOAT_ANNOTATION_VALUE = 39;
+	int JVM_FLOAT_ANNOTATION_VALUE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2026,7 +1952,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCharAnnotationValue()
 	 * @generated
 	 */
-	int JVM_CHAR_ANNOTATION_VALUE = 40;
+	int JVM_CHAR_ANNOTATION_VALUE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2063,7 +1989,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmStringAnnotationValue()
 	 * @generated
 	 */
-	int JVM_STRING_ANNOTATION_VALUE = 41;
+	int JVM_STRING_ANNOTATION_VALUE = 39;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2100,7 +2026,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeAnnotationValue()
 	 * @generated
 	 */
-	int JVM_TYPE_ANNOTATION_VALUE = 42;
+	int JVM_TYPE_ANNOTATION_VALUE = 40;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2137,7 +2063,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationAnnotationValue()
 	 * @generated
 	 */
-	int JVM_ANNOTATION_ANNOTATION_VALUE = 43;
+	int JVM_ANNOTATION_ANNOTATION_VALUE = 41;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2183,7 +2109,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmEnumAnnotationValue()
 	 * @generated
 	 */
-	int JVM_ENUM_ANNOTATION_VALUE = 44;
+	int JVM_ENUM_ANNOTATION_VALUE = 42;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2220,7 +2146,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmVisibility()
 	 * @generated
 	 */
-	int JVM_VISIBILITY = 45;
+	int JVM_VISIBILITY = 43;
 
 	/**
 	 * The meta object id for the '<em>Iterable</em>' data type.
@@ -2230,7 +2156,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIterable()
 	 * @generated
 	 */
-	int ITERABLE = 46;
+	int ITERABLE = 44;
 
 
 	/**
@@ -2643,27 +2569,6 @@ public interface TypesPackage extends EPackage
 	EReference getJvmGenericArrayTypeReference_Type();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeArgument <em>Jvm Type Argument</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Jvm Type Argument</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmTypeArgument
-	 * @generated
-	 */
-	EClass getJvmTypeArgument();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmTypeArgument#getDeclarator <em>Declarator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Declarator</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmTypeArgument#getDeclarator()
-	 * @see #getJvmTypeArgument()
-	 * @generated
-	 */
-	EReference getJvmTypeArgument_Declarator();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmWildcardTypeArgument <em>Jvm Wildcard Type Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2672,27 +2577,6 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 */
 	EClass getJvmWildcardTypeArgument();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmReferenceTypeArgument <em>Jvm Reference Type Argument</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Jvm Reference Type Argument</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmReferenceTypeArgument
-	 * @generated
-	 */
-	EClass getJvmReferenceTypeArgument();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmReferenceTypeArgument#getTypeReference <em>Type Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Type Reference</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmReferenceTypeArgument#getTypeReference()
-	 * @see #getJvmReferenceTypeArgument()
-	 * @generated
-	 */
-	EReference getJvmReferenceTypeArgument_TypeReference();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmMember <em>Jvm Member</em>}'.
@@ -3652,24 +3536,6 @@ public interface TypesPackage extends EPackage
 		EReference JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE = eINSTANCE.getJvmGenericArrayTypeReference_Type();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl <em>Jvm Type Argument</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeArgument()
-		 * @generated
-		 */
-		EClass JVM_TYPE_ARGUMENT = eINSTANCE.getJvmTypeArgument();
-
-		/**
-		 * The meta object literal for the '<em><b>Declarator</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JVM_TYPE_ARGUMENT__DECLARATOR = eINSTANCE.getJvmTypeArgument_Declarator();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl <em>Jvm Wildcard Type Argument</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3678,24 +3544,6 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EClass JVM_WILDCARD_TYPE_ARGUMENT = eINSTANCE.getJvmWildcardTypeArgument();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl <em>Jvm Reference Type Argument</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmReferenceTypeArgument()
-		 * @generated
-		 */
-		EClass JVM_REFERENCE_TYPE_ARGUMENT = eINSTANCE.getJvmReferenceTypeArgument();
-
-		/**
-		 * The meta object literal for the '<em><b>Type Reference</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JVM_REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE = eINSTANCE.getJvmReferenceTypeArgument_TypeReference();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl <em>Jvm Member</em>}' class.

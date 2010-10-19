@@ -225,6 +225,11 @@ public class JvmFieldItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_FIELD__TYPE,
 				 TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_FIELD__TYPE,
+				 TypesFactory.eINSTANCE.createJvmWildcardTypeArgument()));
 	}
 
 }

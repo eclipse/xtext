@@ -28,8 +28,7 @@ public interface JvmParameterizedTypeReference extends JvmTypeReference
 {
 	/**
 	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeArgument}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.JvmTypeArgument#getDeclarator <em>Declarator</em>}'.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
@@ -38,11 +37,10 @@ public interface JvmParameterizedTypeReference extends JvmTypeReference
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Arguments</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmParameterizedTypeReference_Arguments()
-	 * @see org.eclipse.xtext.common.types.JvmTypeArgument#getDeclarator
-	 * @model opposite="declarator" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<JvmTypeArgument> getArguments();
+	EList<JvmTypeReference> getArguments();
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.

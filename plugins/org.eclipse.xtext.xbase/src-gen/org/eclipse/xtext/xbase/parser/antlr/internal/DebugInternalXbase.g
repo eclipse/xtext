@@ -132,8 +132,8 @@ ruleOpUnary :
 ruleXMemberFeatureCall :
 	ruleXPrimaryExpression (
 		'.' (
-			'<' ruleJvmTypeArgument (
-				',' ruleJvmTypeArgument
+			'<' ruleJvmArgumentTypeReference (
+				',' ruleJvmArgumentTypeReference
 			)* '>'
 		)? RULE_ID (
 			'(' (
@@ -257,8 +257,8 @@ ruleJvmFormalParameter :
 // Rule XFeatureCall
 ruleXFeatureCall :
 	(
-		'<' ruleJvmTypeArgument (
-			',' ruleJvmTypeArgument
+		'<' ruleJvmArgumentTypeReference (
+			',' ruleJvmArgumentTypeReference
 		)* '>'
 	)? RULE_ID (
 		'(' (
@@ -342,21 +342,16 @@ ruleXFunctionTypeRef :
 // Rule JvmParameterizedTypeReference
 ruleJvmParameterizedTypeReference :
 	ruleQualifiedName (
-		'<' ruleJvmTypeArgument (
-			',' ruleJvmTypeArgument
+		'<' ruleJvmArgumentTypeReference (
+			',' ruleJvmArgumentTypeReference
 		)* '>'
 	)?
 ;
 
-// Rule JvmTypeArgument
-ruleJvmTypeArgument :
-	ruleJvmReferenceTypeArgument |
+// Rule JvmArgumentTypeReference
+ruleJvmArgumentTypeReference :
+	ruleJvmTypeReference |
 	ruleJvmWildcardTypeArgument
-;
-
-// Rule JvmReferenceTypeArgument
-ruleJvmReferenceTypeArgument :
-	ruleJvmTypeReference
 ;
 
 // Rule JvmWildcardTypeArgument

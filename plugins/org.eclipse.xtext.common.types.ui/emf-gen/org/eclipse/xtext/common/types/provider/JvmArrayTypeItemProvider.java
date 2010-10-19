@@ -168,6 +168,11 @@ public class JvmArrayTypeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
 				 TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
+				 TypesFactory.eINSTANCE.createJvmWildcardTypeArgument()));
 	}
 
 }

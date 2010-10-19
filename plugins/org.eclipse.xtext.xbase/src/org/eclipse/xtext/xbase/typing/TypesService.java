@@ -60,7 +60,7 @@ public class TypesService implements ITypeConformanceComputer<JvmTypeReference>{
 		if (contentByName!=null) {
 			JvmParameterizedTypeReference simpleType = jvmTypes.createJvmTypeReference((JvmType) contentByName.getEObjectOrProxy());
 			for (JvmTypeReference xTypeRef : params) {
-				simpleType.getArguments().add(jvmTypes.createArgument(EcoreUtil2.clone(xTypeRef)));
+				simpleType.getArguments().add(EcoreUtil2.clone(xTypeRef));
 			}
 			return simpleType;
 		}
