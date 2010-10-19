@@ -8,26 +8,26 @@ package org.eclipse.xtext.common.types.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Jvm Wildcard Type Argument</b></em>'.
+ * An implementation of the model object '<em><b>Jvm Wildcard Type Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class JvmWildcardTypeArgumentImpl extends JvmConstraintOwnerImpl implements JvmWildcardTypeArgument
+public class JvmWildcardTypeReferenceImpl extends JvmConstraintOwnerImpl implements JvmWildcardTypeReference
 {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected JvmWildcardTypeArgumentImpl()
+	protected JvmWildcardTypeReferenceImpl()
 	{
 		super();
 	}
@@ -40,7 +40,7 @@ public class JvmWildcardTypeArgumentImpl extends JvmConstraintOwnerImpl implemen
 	@Override
 	protected EClass eStaticClass()
 	{
-		return TypesPackage.Literals.JVM_WILDCARD_TYPE_ARGUMENT;
+		return TypesPackage.Literals.JVM_WILDCARD_TYPE_REFERENCE;
 	}
 
 	/**
@@ -55,4 +55,4 @@ public class JvmWildcardTypeArgumentImpl extends JvmConstraintOwnerImpl implemen
 		throw new UnsupportedOperationException();
 	}
 
-} //JvmWildcardTypeArgumentImpl
+} //JvmWildcardTypeReferenceImpl

@@ -82,7 +82,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 			case TypesPackage.JVM_GENERIC_TYPE: return createJvmGenericType();
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE: return createJvmParameterizedTypeReference();
 			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE: return createJvmGenericArrayTypeReference();
-			case TypesPackage.JVM_WILDCARD_TYPE_ARGUMENT: return createJvmWildcardTypeArgument();
+			case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE: return createJvmWildcardTypeReference();
 			case TypesPackage.JVM_FIELD: return createJvmField();
 			case TypesPackage.JVM_CONSTRUCTOR: return createJvmConstructor();
 			case TypesPackage.JVM_OPERATION: return createJvmOperation();
@@ -280,10 +280,10 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmWildcardTypeArgument createJvmWildcardTypeArgument()
+	public JvmWildcardTypeReference createJvmWildcardTypeReference()
 	{
-		JvmWildcardTypeArgumentImplCustom jvmWildcardTypeArgument = new JvmWildcardTypeArgumentImplCustom();
-		return jvmWildcardTypeArgument;
+		JvmWildcardTypeReferenceImplCustom jvmWildcardTypeReference = new JvmWildcardTypeReferenceImplCustom();
+		return jvmWildcardTypeReference;
 	}
 
 	/**

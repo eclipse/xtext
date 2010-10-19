@@ -61,7 +61,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
-import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 
@@ -218,7 +218,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass jvmWildcardTypeArgumentEClass = null;
+	private EClass jvmWildcardTypeReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -846,9 +846,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getJvmWildcardTypeArgument()
+	public EClass getJvmWildcardTypeReference()
 	{
-		return jvmWildcardTypeArgumentEClass;
+		return jvmWildcardTypeReferenceEClass;
 	}
 
 	/**
@@ -1490,7 +1490,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmGenericArrayTypeReferenceEClass = createEClass(JVM_GENERIC_ARRAY_TYPE_REFERENCE);
 		createEReference(jvmGenericArrayTypeReferenceEClass, JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE);
 
-		jvmWildcardTypeArgumentEClass = createEClass(JVM_WILDCARD_TYPE_ARGUMENT);
+		jvmWildcardTypeReferenceEClass = createEClass(JVM_WILDCARD_TYPE_REFERENCE);
 
 		jvmMemberEClass = createEClass(JVM_MEMBER);
 		createEReference(jvmMemberEClass, JVM_MEMBER__DECLARING_TYPE);
@@ -1625,8 +1625,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmTypeReferenceEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
 		jvmParameterizedTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmGenericArrayTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
-		jvmWildcardTypeArgumentEClass.getESuperTypes().add(this.getJvmConstraintOwner());
-		jvmWildcardTypeArgumentEClass.getESuperTypes().add(this.getJvmTypeReference());
+		jvmWildcardTypeReferenceEClass.getESuperTypes().add(this.getJvmConstraintOwner());
+		jvmWildcardTypeReferenceEClass.getESuperTypes().add(this.getJvmTypeReference());
 		jvmMemberEClass.getESuperTypes().add(this.getJvmAnnotationTarget());
 		jvmMemberEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
 		jvmFeatureEClass.getESuperTypes().add(this.getJvmIdentifyableElement());
@@ -1739,7 +1739,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEClass(jvmGenericArrayTypeReferenceEClass, JvmGenericArrayTypeReference.class, "JvmGenericArrayTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmGenericArrayTypeReference_Type(), this.getJvmArrayType(), null, "type", null, 0, 1, JvmGenericArrayTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(jvmWildcardTypeArgumentEClass, JvmWildcardTypeArgument.class, "JvmWildcardTypeArgument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(jvmWildcardTypeReferenceEClass, JvmWildcardTypeReference.class, "JvmWildcardTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(jvmMemberEClass, JvmMember.class, "JvmMember", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmMember_DeclaringType(), this.getJvmDeclaredType(), this.getJvmDeclaredType_Members(), "declaringType", null, 0, 1, JvmMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

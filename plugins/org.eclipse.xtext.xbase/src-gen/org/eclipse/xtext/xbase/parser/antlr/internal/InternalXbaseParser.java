@@ -10725,23 +10725,23 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleJvmArgumentTypeReference"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4083:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeArgument_1= ruleJvmWildcardTypeArgument ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4083:1: ruleJvmArgumentTypeReference returns [EObject current=null] : (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) ;
     public final EObject ruleJvmArgumentTypeReference() throws RecognitionException {
         EObject current = null;
         int ruleJvmArgumentTypeReference_StartIndex = input.index();
         EObject this_JvmTypeReference_0 = null;
 
-        EObject this_JvmWildcardTypeArgument_1 = null;
+        EObject this_JvmWildcardTypeReference_1 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 96) ) { return current; }
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4088:6: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeArgument_1= ruleJvmWildcardTypeArgument ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4089:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeArgument_1= ruleJvmWildcardTypeArgument )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4088:6: ( (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4089:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4089:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeArgument_1= ruleJvmWildcardTypeArgument )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4089:1: (this_JvmTypeReference_0= ruleJvmTypeReference | this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference )
             int alt55=2;
             int LA55_0 = input.LA(1);
 
@@ -10787,7 +10787,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4103:2: this_JvmWildcardTypeArgument_1= ruleJvmWildcardTypeArgument
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4103:2: this_JvmWildcardTypeReference_1= ruleJvmWildcardTypeReference
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -10796,17 +10796,17 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
                        
-                              currentNode=createCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeArgumentParserRuleCall_1(), currentNode); 
+                              currentNode=createCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeReferenceParserRuleCall_1(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleJvmWildcardTypeArgument_in_ruleJvmArgumentTypeReference7776);
-                    this_JvmWildcardTypeArgument_1=ruleJvmWildcardTypeArgument();
+                    pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference7776);
+                    this_JvmWildcardTypeReference_1=ruleJvmWildcardTypeReference();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_JvmWildcardTypeArgument_1; 
+                              current = this_JvmWildcardTypeReference_1; 
                               currentNode = currentNode.getParent();
                           
                     }
@@ -10838,31 +10838,31 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleJvmArgumentTypeReference"
 
 
-    // $ANTLR start "entryRuleJvmWildcardTypeArgument"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4122:1: entryRuleJvmWildcardTypeArgument returns [EObject current=null] : iv_ruleJvmWildcardTypeArgument= ruleJvmWildcardTypeArgument EOF ;
-    public final EObject entryRuleJvmWildcardTypeArgument() throws RecognitionException {
+    // $ANTLR start "entryRuleJvmWildcardTypeReference"
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4122:1: entryRuleJvmWildcardTypeReference returns [EObject current=null] : iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF ;
+    public final EObject entryRuleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
-        int entryRuleJvmWildcardTypeArgument_StartIndex = input.index();
-        EObject iv_ruleJvmWildcardTypeArgument = null;
+        int entryRuleJvmWildcardTypeReference_StartIndex = input.index();
+        EObject iv_ruleJvmWildcardTypeReference = null;
 
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 97) ) { return current; }
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4123:2: (iv_ruleJvmWildcardTypeArgument= ruleJvmWildcardTypeArgument EOF )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4124:2: iv_ruleJvmWildcardTypeArgument= ruleJvmWildcardTypeArgument EOF
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4123:2: (iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4124:2: iv_ruleJvmWildcardTypeReference= ruleJvmWildcardTypeReference EOF
             {
             if ( state.backtracking==0 ) {
-               currentNode = createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentRule(), currentNode); 
+               currentNode = createCompositeNode(grammarAccess.getJvmWildcardTypeReferenceRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleJvmWildcardTypeArgument_in_entryRuleJvmWildcardTypeArgument7811);
-            iv_ruleJvmWildcardTypeArgument=ruleJvmWildcardTypeArgument();
+            pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference7811);
+            iv_ruleJvmWildcardTypeReference=ruleJvmWildcardTypeReference();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleJvmWildcardTypeArgument; 
+               current =iv_ruleJvmWildcardTypeReference; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeArgument7821); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference7821); if (state.failed) return current;
 
             }
 
@@ -10873,18 +10873,18 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                 appendSkippedTokens();
             } 
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 97, entryRuleJvmWildcardTypeArgument_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 97, entryRuleJvmWildcardTypeReference_StartIndex); }
         }
         return current;
     }
-    // $ANTLR end "entryRuleJvmWildcardTypeArgument"
+    // $ANTLR end "entryRuleJvmWildcardTypeReference"
 
 
-    // $ANTLR start "ruleJvmWildcardTypeArgument"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4131:1: ruleJvmWildcardTypeArgument returns [EObject current=null] : ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? ) ;
-    public final EObject ruleJvmWildcardTypeArgument() throws RecognitionException {
+    // $ANTLR start "ruleJvmWildcardTypeReference"
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4131:1: ruleJvmWildcardTypeReference returns [EObject current=null] : ( () otherlv_1= '?' ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )? ) ;
+    public final EObject ruleJvmWildcardTypeReference() throws RecognitionException {
         EObject current = null;
-        int ruleJvmWildcardTypeArgument_StartIndex = input.index();
+        int ruleJvmWildcardTypeReference_StartIndex = input.index();
         Token otherlv_1=null;
         EObject lv_constraints_2_0 = null;
 
@@ -10911,10 +10911,10 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             }
             if ( state.backtracking==0 ) {
                
-                      temp=factory.create(grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0().getType().getClassifier());
+                      temp=factory.create(grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0().getType().getClassifier());
                       current = temp; 
                       temp = null;
-                      CompositeNode newNode = createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0(), currentNode.getParent());
+                      CompositeNode newNode = createCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0(), currentNode.getParent());
                   newNode.getChildren().add(currentNode);
                   moveLookaheadInfo(currentNode, newNode);
                   currentNode = newNode; 
@@ -10924,10 +10924,10 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,60,FOLLOW_60_in_ruleJvmWildcardTypeArgument7870); if (state.failed) return current;
+            otherlv_1=(Token)match(input,60,FOLLOW_60_in_ruleJvmWildcardTypeReference7870); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	createLeafNode(otherlv_1, grammarAccess.getJvmWildcardTypeArgumentAccess().getQuestionMarkKeyword_1(), null);
+                  	createLeafNode(otherlv_1, grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1(), null);
                   
             }
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4155:1: ( ( (lv_constraints_2_0= ruleJvmUpperBound ) ) | ( (lv_constraints_3_0= ruleJvmLowerBound ) ) )?
@@ -10952,10 +10952,10 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        currentNode=createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0(), currentNode); 
+                      	        currentNode=createCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeArgument7892);
+                    pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference7892);
                     lv_constraints_2_0=ruleJvmUpperBound();
 
                     state._fsp--;
@@ -10963,7 +10963,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     if ( state.backtracking==0 ) {
 
                       	        if (current==null) {
-                      	            current = factory.create(grammarAccess.getJvmWildcardTypeArgumentRule().getType().getClassifier());
+                      	            current = factory.create(grammarAccess.getJvmWildcardTypeReferenceRule().getType().getClassifier());
                       	            associateNodeWithAstElement(currentNode.getParent(), current);
                       	        }
                       	        try {
@@ -10999,10 +10999,10 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        currentNode=createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0(), currentNode); 
+                      	        currentNode=createCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeArgument7919);
+                    pushFollow(FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference7919);
                     lv_constraints_3_0=ruleJvmLowerBound();
 
                     state._fsp--;
@@ -11010,7 +11010,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     if ( state.backtracking==0 ) {
 
                       	        if (current==null) {
-                      	            current = factory.create(grammarAccess.getJvmWildcardTypeArgumentRule().getType().getClassifier());
+                      	            current = factory.create(grammarAccess.getJvmWildcardTypeReferenceRule().getType().getClassifier());
                       	            associateNodeWithAstElement(currentNode.getParent(), current);
                       	        }
                       	        try {
@@ -11056,11 +11056,11 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                 appendSkippedTokens();
             } 
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 98, ruleJvmWildcardTypeArgument_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 98, ruleJvmWildcardTypeReference_StartIndex); }
         }
         return current;
     }
-    // $ANTLR end "ruleJvmWildcardTypeArgument"
+    // $ANTLR end "ruleJvmWildcardTypeReference"
 
 
     // $ANTLR start "entryRuleJvmUpperBound"
@@ -13814,12 +13814,12 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference7686 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference7696 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference7746 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeArgument_in_ruleJvmArgumentTypeReference7776 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeArgument_in_entryRuleJvmWildcardTypeArgument7811 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeArgument7821 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_60_in_ruleJvmWildcardTypeArgument7870 = new BitSet(new long[]{0xA000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeArgument7892 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeArgument7919 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference7776 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference7811 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference7821 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_60_in_ruleJvmWildcardTypeReference7870 = new BitSet(new long[]{0xA000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference7892 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference7919 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound7957 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBound7967 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_61_in_ruleJvmUpperBound8004 = new BitSet(new long[]{0x0800000200000010L});

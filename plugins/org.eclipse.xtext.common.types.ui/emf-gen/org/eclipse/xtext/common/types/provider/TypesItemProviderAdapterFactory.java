@@ -377,28 +377,28 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmWildcardTypeArgument} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmWildcardTypeReference} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected JvmWildcardTypeArgumentItemProvider jvmWildcardTypeArgumentItemProvider;
+	protected JvmWildcardTypeReferenceItemProvider jvmWildcardTypeReferenceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmWildcardTypeArgument}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmWildcardTypeReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createJvmWildcardTypeArgumentAdapter()
+	public Adapter createJvmWildcardTypeReferenceAdapter()
 	{
-		if (jvmWildcardTypeArgumentItemProvider == null)
+		if (jvmWildcardTypeReferenceItemProvider == null)
 		{
-			jvmWildcardTypeArgumentItemProvider = new JvmWildcardTypeArgumentItemProvider(this);
+			jvmWildcardTypeReferenceItemProvider = new JvmWildcardTypeReferenceItemProvider(this);
 		}
 
-		return jvmWildcardTypeArgumentItemProvider;
+		return jvmWildcardTypeReferenceItemProvider;
 	}
 
 	/**
@@ -949,7 +949,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (jvmGenericTypeItemProvider != null) jvmGenericTypeItemProvider.dispose();
 		if (jvmParameterizedTypeReferenceItemProvider != null) jvmParameterizedTypeReferenceItemProvider.dispose();
 		if (jvmGenericArrayTypeReferenceItemProvider != null) jvmGenericArrayTypeReferenceItemProvider.dispose();
-		if (jvmWildcardTypeArgumentItemProvider != null) jvmWildcardTypeArgumentItemProvider.dispose();
+		if (jvmWildcardTypeReferenceItemProvider != null) jvmWildcardTypeReferenceItemProvider.dispose();
 		if (jvmFieldItemProvider != null) jvmFieldItemProvider.dispose();
 		if (jvmConstructorItemProvider != null) jvmConstructorItemProvider.dispose();
 		if (jvmOperationItemProvider != null) jvmOperationItemProvider.dispose();

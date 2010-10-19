@@ -172,7 +172,7 @@ public class JvmArrayTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
-				 TypesFactory.eINSTANCE.createJvmWildcardTypeArgument()));
+				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
 	}
 
 }

@@ -56,7 +56,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 
@@ -405,7 +405,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 	public JvmTypeReference createTypeArgument(ITypeBinding argument) {
 		if (argument.isWildcardType()) {
-			JvmWildcardTypeArgument result = TypesFactory.eINSTANCE.createJvmWildcardTypeArgument();
+			JvmWildcardTypeReference result = TypesFactory.eINSTANCE.createJvmWildcardTypeReference();
 			if (argument.getBound() == null) {
 				JvmUpperBound upperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
 				JvmTypeReference reference = createTypeReference(Object.class.getName());

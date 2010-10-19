@@ -211,7 +211,7 @@ public class JvmFormalParameterItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
-				 TypesFactory.eINSTANCE.createJvmWildcardTypeArgument()));
+				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
 	}
 
 }

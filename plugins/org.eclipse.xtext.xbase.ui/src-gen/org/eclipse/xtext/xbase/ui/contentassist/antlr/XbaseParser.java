@@ -55,7 +55,7 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getAlternatives_2(), "rule__XTryCatchFinallyExpression__Alternatives_2");
 					put(grammarAccess.getJvmTypeReferenceAccess().getAlternatives(), "rule__JvmTypeReference__Alternatives");
 					put(grammarAccess.getJvmArgumentTypeReferenceAccess().getAlternatives(), "rule__JvmArgumentTypeReference__Alternatives");
-					put(grammarAccess.getJvmWildcardTypeArgumentAccess().getAlternatives_2(), "rule__JvmWildcardTypeArgument__Alternatives_2");
+					put(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2(), "rule__JvmWildcardTypeReference__Alternatives_2");
 					put(grammarAccess.getJvmTypeParameterAccess().getAlternatives_1(), "rule__JvmTypeParameter__Alternatives_1");
 					put(grammarAccess.getXAssignmentAccess().getGroup(), "rule__XAssignment__Group__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_1(), "rule__XAssignment__Group_1__0");
@@ -126,7 +126,7 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup(), "rule__JvmParameterizedTypeReference__Group__0");
 					put(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1(), "rule__JvmParameterizedTypeReference__Group_1__0");
 					put(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_2(), "rule__JvmParameterizedTypeReference__Group_1_2__0");
-					put(grammarAccess.getJvmWildcardTypeArgumentAccess().getGroup(), "rule__JvmWildcardTypeArgument__Group__0");
+					put(grammarAccess.getJvmWildcardTypeReferenceAccess().getGroup(), "rule__JvmWildcardTypeReference__Group__0");
 					put(grammarAccess.getJvmUpperBoundAccess().getGroup(), "rule__JvmUpperBound__Group__0");
 					put(grammarAccess.getJvmUpperBoundAndedAccess().getGroup(), "rule__JvmUpperBoundAnded__Group__0");
 					put(grammarAccess.getJvmLowerBoundAccess().getGroup(), "rule__JvmLowerBound__Group__0");
@@ -212,8 +212,8 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeAssignment_0(), "rule__JvmParameterizedTypeReference__TypeAssignment_0");
 					put(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsAssignment_1_1(), "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1");
 					put(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsAssignment_1_2_1(), "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1");
-					put(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_0(), "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0");
-					put(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_1(), "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1");
+					put(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_0(), "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0");
+					put(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_1(), "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1");
 					put(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceAssignment_1(), "rule__JvmUpperBound__TypeReferenceAssignment_1");
 					put(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceAssignment_1(), "rule__JvmUpperBoundAnded__TypeReferenceAssignment_1");
 					put(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceAssignment_1(), "rule__JvmLowerBound__TypeReferenceAssignment_1");

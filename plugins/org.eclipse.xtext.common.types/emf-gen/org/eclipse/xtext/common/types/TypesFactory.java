@@ -134,13 +134,13 @@ public interface TypesFactory extends EFactory
 	JvmGenericArrayTypeReference createJvmGenericArrayTypeReference();
 
 	/**
-	 * Returns a new object of class '<em>Jvm Wildcard Type Argument</em>'.
+	 * Returns a new object of class '<em>Jvm Wildcard Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Jvm Wildcard Type Argument</em>'.
+	 * @return a new object of class '<em>Jvm Wildcard Type Reference</em>'.
 	 * @generated
 	 */
-	JvmWildcardTypeArgument createJvmWildcardTypeArgument();
+	JvmWildcardTypeReference createJvmWildcardTypeReference();
 
 	/**
 	 * Returns a new object of class '<em>Jvm Field</em>'.

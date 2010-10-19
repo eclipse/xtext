@@ -290,13 +290,13 @@ public class TypesSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.JVM_WILDCARD_TYPE_ARGUMENT:
+			case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE:
 			{
-				JvmWildcardTypeArgument jvmWildcardTypeArgument = (JvmWildcardTypeArgument)theEObject;
-				T result = caseJvmWildcardTypeArgument(jvmWildcardTypeArgument);
-				if (result == null) result = caseJvmConstraintOwner(jvmWildcardTypeArgument);
-				if (result == null) result = caseJvmTypeReference(jvmWildcardTypeArgument);
-				if (result == null) result = caseJvmIdentifyableElement(jvmWildcardTypeArgument);
+				JvmWildcardTypeReference jvmWildcardTypeReference = (JvmWildcardTypeReference)theEObject;
+				T result = caseJvmWildcardTypeReference(jvmWildcardTypeReference);
+				if (result == null) result = caseJvmConstraintOwner(jvmWildcardTypeReference);
+				if (result == null) result = caseJvmTypeReference(jvmWildcardTypeReference);
+				if (result == null) result = caseJvmIdentifyableElement(jvmWildcardTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -816,17 +816,17 @@ public class TypesSwitch<T>
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Jvm Wildcard Type Argument</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Wildcard Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Jvm Wildcard Type Argument</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Wildcard Type Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseJvmWildcardTypeArgument(JvmWildcardTypeArgument object)
+	public T caseJvmWildcardTypeReference(JvmWildcardTypeReference object)
 	{
 		return null;
 	}

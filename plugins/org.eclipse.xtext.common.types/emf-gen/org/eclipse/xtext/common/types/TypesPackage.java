@@ -1237,14 +1237,14 @@ public interface TypesPackage extends EPackage
 	int JVM_GENERIC_ARRAY_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl <em>Jvm Wildcard Type Argument</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeReferenceImpl <em>Jvm Wildcard Type Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmWildcardTypeArgument()
+	 * @see org.eclipse.xtext.common.types.impl.JvmWildcardTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmWildcardTypeReference()
 	 * @generated
 	 */
-	int JVM_WILDCARD_TYPE_ARGUMENT = 20;
+	int JVM_WILDCARD_TYPE_REFERENCE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -1253,16 +1253,16 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_WILDCARD_TYPE_ARGUMENT__CONSTRAINTS = JVM_CONSTRAINT_OWNER__CONSTRAINTS;
+	int JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS = JVM_CONSTRAINT_OWNER__CONSTRAINTS;
 
 	/**
-	 * The number of structural features of the '<em>Jvm Wildcard Type Argument</em>' class.
+	 * The number of structural features of the '<em>Jvm Wildcard Type Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_WILDCARD_TYPE_ARGUMENT_FEATURE_COUNT = JVM_CONSTRAINT_OWNER_FEATURE_COUNT + 0;
+	int JVM_WILDCARD_TYPE_REFERENCE_FEATURE_COUNT = JVM_CONSTRAINT_OWNER_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.
@@ -2569,14 +2569,14 @@ public interface TypesPackage extends EPackage
 	EReference getJvmGenericArrayTypeReference_Type();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmWildcardTypeArgument <em>Jvm Wildcard Type Argument</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmWildcardTypeReference <em>Jvm Wildcard Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Jvm Wildcard Type Argument</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmWildcardTypeArgument
+	 * @return the meta object for class '<em>Jvm Wildcard Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmWildcardTypeReference
 	 * @generated
 	 */
-	EClass getJvmWildcardTypeArgument();
+	EClass getJvmWildcardTypeReference();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmMember <em>Jvm Member</em>}'.
@@ -3536,14 +3536,14 @@ public interface TypesPackage extends EPackage
 		EReference JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE = eINSTANCE.getJvmGenericArrayTypeReference_Type();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl <em>Jvm Wildcard Type Argument</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeReferenceImpl <em>Jvm Wildcard Type Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmWildcardTypeArgument()
+		 * @see org.eclipse.xtext.common.types.impl.JvmWildcardTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmWildcardTypeReference()
 		 * @generated
 		 */
-		EClass JVM_WILDCARD_TYPE_ARGUMENT = eINSTANCE.getJvmWildcardTypeArgument();
+		EClass JVM_WILDCARD_TYPE_REFERENCE = eINSTANCE.getJvmWildcardTypeReference();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl <em>Jvm Member</em>}' class.

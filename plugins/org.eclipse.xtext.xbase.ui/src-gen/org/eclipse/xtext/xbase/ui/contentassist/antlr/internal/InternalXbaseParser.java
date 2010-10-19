@@ -4469,27 +4469,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleJvmArgumentTypeReference"
 
 
-    // $ANTLR start "entryRuleJvmWildcardTypeArgument"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1411:1: entryRuleJvmWildcardTypeArgument : ruleJvmWildcardTypeArgument EOF ;
-    public final void entryRuleJvmWildcardTypeArgument() throws RecognitionException {
-        int entryRuleJvmWildcardTypeArgument_StartIndex = input.index();
+    // $ANTLR start "entryRuleJvmWildcardTypeReference"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1411:1: entryRuleJvmWildcardTypeReference : ruleJvmWildcardTypeReference EOF ;
+    public final void entryRuleJvmWildcardTypeReference() throws RecognitionException {
+        int entryRuleJvmWildcardTypeReference_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 97) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1412:1: ( ruleJvmWildcardTypeArgument EOF )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1413:1: ruleJvmWildcardTypeArgument EOF
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1412:1: ( ruleJvmWildcardTypeReference EOF )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1413:1: ruleJvmWildcardTypeReference EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentRule()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmWildcardTypeArgument_in_entryRuleJvmWildcardTypeArgument2957);
-            ruleJvmWildcardTypeArgument();
+            pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference2957);
+            ruleJvmWildcardTypeReference();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentRule()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeArgument2964); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference2964); if (state.failed) return ;
 
             }
 
@@ -4499,36 +4499,36 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 97, entryRuleJvmWildcardTypeArgument_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 97, entryRuleJvmWildcardTypeReference_StartIndex); }
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmWildcardTypeArgument"
+    // $ANTLR end "entryRuleJvmWildcardTypeReference"
 
 
-    // $ANTLR start "ruleJvmWildcardTypeArgument"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1420:1: ruleJvmWildcardTypeArgument : ( ( rule__JvmWildcardTypeArgument__Group__0 ) ) ;
-    public final void ruleJvmWildcardTypeArgument() throws RecognitionException {
-        int ruleJvmWildcardTypeArgument_StartIndex = input.index();
+    // $ANTLR start "ruleJvmWildcardTypeReference"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1420:1: ruleJvmWildcardTypeReference : ( ( rule__JvmWildcardTypeReference__Group__0 ) ) ;
+    public final void ruleJvmWildcardTypeReference() throws RecognitionException {
+        int ruleJvmWildcardTypeReference_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 98) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1424:2: ( ( ( rule__JvmWildcardTypeArgument__Group__0 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1425:1: ( ( rule__JvmWildcardTypeArgument__Group__0 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1424:2: ( ( ( rule__JvmWildcardTypeReference__Group__0 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1425:1: ( ( rule__JvmWildcardTypeReference__Group__0 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1425:1: ( ( rule__JvmWildcardTypeArgument__Group__0 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1426:1: ( rule__JvmWildcardTypeArgument__Group__0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1425:1: ( ( rule__JvmWildcardTypeReference__Group__0 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1426:1: ( rule__JvmWildcardTypeReference__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getGroup()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getGroup()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1427:1: ( rule__JvmWildcardTypeArgument__Group__0 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1427:2: rule__JvmWildcardTypeArgument__Group__0
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1427:1: ( rule__JvmWildcardTypeReference__Group__0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1427:2: rule__JvmWildcardTypeReference__Group__0
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__0_in_ruleJvmWildcardTypeArgument2990);
-            rule__JvmWildcardTypeArgument__Group__0();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__0_in_ruleJvmWildcardTypeReference2990);
+            rule__JvmWildcardTypeReference__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -4536,7 +4536,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getGroup()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getGroup()); 
             }
 
             }
@@ -4550,14 +4550,14 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 98, ruleJvmWildcardTypeArgument_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 98, ruleJvmWildcardTypeReference_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "ruleJvmWildcardTypeArgument"
+    // $ANTLR end "ruleJvmWildcardTypeReference"
 
 
     // $ANTLR start "entryRuleJvmUpperBound"
@@ -6932,7 +6932,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmArgumentTypeReference__Alternatives"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2095:1: rule__JvmArgumentTypeReference__Alternatives : ( ( ruleJvmTypeReference ) | ( ruleJvmWildcardTypeArgument ) );
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2095:1: rule__JvmArgumentTypeReference__Alternatives : ( ( ruleJvmTypeReference ) | ( ruleJvmWildcardTypeReference ) );
     public final void rule__JvmArgumentTypeReference__Alternatives() throws RecognitionException {
         int rule__JvmArgumentTypeReference__Alternatives_StartIndex = input.index();
 
@@ -6940,7 +6940,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 124) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2099:1: ( ( ruleJvmTypeReference ) | ( ruleJvmWildcardTypeArgument ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2099:1: ( ( ruleJvmTypeReference ) | ( ruleJvmWildcardTypeReference ) )
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -6982,21 +6982,21 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2106:6: ( ruleJvmWildcardTypeArgument )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2106:6: ( ruleJvmWildcardTypeReference )
                     {
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2106:6: ( ruleJvmWildcardTypeArgument )
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2107:1: ruleJvmWildcardTypeArgument
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2106:6: ( ruleJvmWildcardTypeReference )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2107:1: ruleJvmWildcardTypeReference
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeArgumentParserRuleCall_1()); 
+                       before(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeReferenceParserRuleCall_1()); 
                     }
-                    pushFollow(FOLLOW_ruleJvmWildcardTypeArgument_in_rule__JvmArgumentTypeReference__Alternatives4549);
-                    ruleJvmWildcardTypeArgument();
+                    pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_rule__JvmArgumentTypeReference__Alternatives4549);
+                    ruleJvmWildcardTypeReference();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeArgumentParserRuleCall_1()); 
+                       after(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeReferenceParserRuleCall_1()); 
                     }
 
                     }
@@ -7022,16 +7022,16 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__JvmArgumentTypeReference__Alternatives"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Alternatives_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2117:1: rule__JvmWildcardTypeArgument__Alternatives_2 : ( ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 ) ) | ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 ) ) );
-    public final void rule__JvmWildcardTypeArgument__Alternatives_2() throws RecognitionException {
-        int rule__JvmWildcardTypeArgument__Alternatives_2_StartIndex = input.index();
+    // $ANTLR start "rule__JvmWildcardTypeReference__Alternatives_2"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2117:1: rule__JvmWildcardTypeReference__Alternatives_2 : ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 ) ) | ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 ) ) );
+    public final void rule__JvmWildcardTypeReference__Alternatives_2() throws RecognitionException {
+        int rule__JvmWildcardTypeReference__Alternatives_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 125) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2121:1: ( ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 ) ) | ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2121:1: ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 ) ) | ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 ) ) )
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -7050,19 +7050,19 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             }
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2122:1: ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 ) )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2122:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 ) )
                     {
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2122:1: ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 ) )
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2123:1: ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2122:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 ) )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2123:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_0()); 
+                       before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_0()); 
                     }
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2124:1: ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 )
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2124:2: rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2124:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2124:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0
                     {
-                    pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0_in_rule__JvmWildcardTypeArgument__Alternatives_24581);
-                    rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0();
+                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_in_rule__JvmWildcardTypeReference__Alternatives_24581);
+                    rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -7070,7 +7070,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_0()); 
+                       after(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_0()); 
                     }
 
                     }
@@ -7079,19 +7079,19 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2128:6: ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 ) )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2128:6: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 ) )
                     {
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2128:6: ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 ) )
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2129:1: ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2128:6: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 ) )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2129:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_1()); 
+                       before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_1()); 
                     }
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2130:1: ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 )
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2130:2: rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2130:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 )
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:2130:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1
                     {
-                    pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1_in_rule__JvmWildcardTypeArgument__Alternatives_24599);
-                    rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1();
+                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_in_rule__JvmWildcardTypeReference__Alternatives_24599);
+                    rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -7099,7 +7099,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_1()); 
+                       after(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_1()); 
                     }
 
                     }
@@ -7115,14 +7115,14 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 125, rule__JvmWildcardTypeArgument__Alternatives_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 125, rule__JvmWildcardTypeReference__Alternatives_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Alternatives_2"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Alternatives_2"
 
 
     // $ANTLR start "rule__XAssignment__Group__0"
@@ -26050,25 +26050,25 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_2__1__Impl"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8581:1: rule__JvmWildcardTypeArgument__Group__0 : rule__JvmWildcardTypeArgument__Group__0__Impl rule__JvmWildcardTypeArgument__Group__1 ;
-    public final void rule__JvmWildcardTypeArgument__Group__0() throws RecognitionException {
-        int rule__JvmWildcardTypeArgument__Group__0_StartIndex = input.index();
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__0"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8581:1: rule__JvmWildcardTypeReference__Group__0 : rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 ;
+    public final void rule__JvmWildcardTypeReference__Group__0() throws RecognitionException {
+        int rule__JvmWildcardTypeReference__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 534) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8585:1: ( rule__JvmWildcardTypeArgument__Group__0__Impl rule__JvmWildcardTypeArgument__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8586:2: rule__JvmWildcardTypeArgument__Group__0__Impl rule__JvmWildcardTypeArgument__Group__1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8585:1: ( rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8586:2: rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__0__Impl_in_rule__JvmWildcardTypeArgument__Group__017287);
-            rule__JvmWildcardTypeArgument__Group__0__Impl();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__017287);
+            rule__JvmWildcardTypeReference__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__1_in_rule__JvmWildcardTypeArgument__Group__017290);
-            rule__JvmWildcardTypeArgument__Group__1();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__017290);
+            rule__JvmWildcardTypeReference__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -26081,20 +26081,20 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 534, rule__JvmWildcardTypeArgument__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 534, rule__JvmWildcardTypeReference__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__0"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__0"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8593:1: rule__JvmWildcardTypeArgument__Group__0__Impl : ( () ) ;
-    public final void rule__JvmWildcardTypeArgument__Group__0__Impl() throws RecognitionException {
-        int rule__JvmWildcardTypeArgument__Group__0__Impl_StartIndex = input.index();
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__0__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8593:1: rule__JvmWildcardTypeReference__Group__0__Impl : ( () ) ;
+    public final void rule__JvmWildcardTypeReference__Group__0__Impl() throws RecognitionException {
+        int rule__JvmWildcardTypeReference__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
@@ -26107,7 +26107,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8599:1: ()
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8600:1: ()
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8602:1: 
@@ -26115,7 +26115,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0()); 
             }
 
             }
@@ -26125,35 +26125,35 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 535, rule__JvmWildcardTypeArgument__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 535, rule__JvmWildcardTypeReference__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__0__Impl"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__0__Impl"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8612:1: rule__JvmWildcardTypeArgument__Group__1 : rule__JvmWildcardTypeArgument__Group__1__Impl rule__JvmWildcardTypeArgument__Group__2 ;
-    public final void rule__JvmWildcardTypeArgument__Group__1() throws RecognitionException {
-        int rule__JvmWildcardTypeArgument__Group__1_StartIndex = input.index();
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8612:1: rule__JvmWildcardTypeReference__Group__1 : rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 ;
+    public final void rule__JvmWildcardTypeReference__Group__1() throws RecognitionException {
+        int rule__JvmWildcardTypeReference__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 536) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8616:1: ( rule__JvmWildcardTypeArgument__Group__1__Impl rule__JvmWildcardTypeArgument__Group__2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8617:2: rule__JvmWildcardTypeArgument__Group__1__Impl rule__JvmWildcardTypeArgument__Group__2
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8616:1: ( rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8617:2: rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__1__Impl_in_rule__JvmWildcardTypeArgument__Group__117348);
-            rule__JvmWildcardTypeArgument__Group__1__Impl();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__117348);
+            rule__JvmWildcardTypeReference__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__2_in_rule__JvmWildcardTypeArgument__Group__117351);
-            rule__JvmWildcardTypeArgument__Group__2();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__117351);
+            rule__JvmWildcardTypeReference__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -26166,20 +26166,20 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 536, rule__JvmWildcardTypeArgument__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 536, rule__JvmWildcardTypeReference__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__1"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__1"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8624:1: rule__JvmWildcardTypeArgument__Group__1__Impl : ( '?' ) ;
-    public final void rule__JvmWildcardTypeArgument__Group__1__Impl() throws RecognitionException {
-        int rule__JvmWildcardTypeArgument__Group__1__Impl_StartIndex = input.index();
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__1__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8624:1: rule__JvmWildcardTypeReference__Group__1__Impl : ( '?' ) ;
+    public final void rule__JvmWildcardTypeReference__Group__1__Impl() throws RecognitionException {
+        int rule__JvmWildcardTypeReference__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
@@ -26192,11 +26192,11 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8630:1: '?'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getQuestionMarkKeyword_1()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1()); 
             }
-            match(input,59,FOLLOW_59_in_rule__JvmWildcardTypeArgument__Group__1__Impl17379); if (state.failed) return ;
+            match(input,59,FOLLOW_59_in_rule__JvmWildcardTypeReference__Group__1__Impl17379); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getQuestionMarkKeyword_1()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1()); 
             }
 
             }
@@ -26210,30 +26210,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 537, rule__JvmWildcardTypeArgument__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 537, rule__JvmWildcardTypeReference__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__1__Impl"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__1__Impl"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8643:1: rule__JvmWildcardTypeArgument__Group__2 : rule__JvmWildcardTypeArgument__Group__2__Impl ;
-    public final void rule__JvmWildcardTypeArgument__Group__2() throws RecognitionException {
-        int rule__JvmWildcardTypeArgument__Group__2_StartIndex = input.index();
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__2"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8643:1: rule__JvmWildcardTypeReference__Group__2 : rule__JvmWildcardTypeReference__Group__2__Impl ;
+    public final void rule__JvmWildcardTypeReference__Group__2() throws RecognitionException {
+        int rule__JvmWildcardTypeReference__Group__2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 538) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8647:1: ( rule__JvmWildcardTypeArgument__Group__2__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8648:2: rule__JvmWildcardTypeArgument__Group__2__Impl
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8647:1: ( rule__JvmWildcardTypeReference__Group__2__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8648:2: rule__JvmWildcardTypeReference__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__2__Impl_in_rule__JvmWildcardTypeArgument__Group__217410);
-            rule__JvmWildcardTypeArgument__Group__2__Impl();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__217410);
+            rule__JvmWildcardTypeReference__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -26246,35 +26246,35 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 538, rule__JvmWildcardTypeArgument__Group__2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 538, rule__JvmWildcardTypeReference__Group__2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__2"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__2"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__2__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8654:1: rule__JvmWildcardTypeArgument__Group__2__Impl : ( ( rule__JvmWildcardTypeArgument__Alternatives_2 )? ) ;
-    public final void rule__JvmWildcardTypeArgument__Group__2__Impl() throws RecognitionException {
-        int rule__JvmWildcardTypeArgument__Group__2__Impl_StartIndex = input.index();
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__2__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8654:1: rule__JvmWildcardTypeReference__Group__2__Impl : ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) ;
+    public final void rule__JvmWildcardTypeReference__Group__2__Impl() throws RecognitionException {
+        int rule__JvmWildcardTypeReference__Group__2__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 539) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8658:1: ( ( ( rule__JvmWildcardTypeArgument__Alternatives_2 )? ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8659:1: ( ( rule__JvmWildcardTypeArgument__Alternatives_2 )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8658:1: ( ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8659:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8659:1: ( ( rule__JvmWildcardTypeArgument__Alternatives_2 )? )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8660:1: ( rule__JvmWildcardTypeArgument__Alternatives_2 )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8659:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8660:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getAlternatives_2()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8661:1: ( rule__JvmWildcardTypeArgument__Alternatives_2 )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8661:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
             int alt58=2;
             int LA58_0 = input.LA(1);
 
@@ -26283,10 +26283,10 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             }
             switch (alt58) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8661:2: rule__JvmWildcardTypeArgument__Alternatives_2
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8661:2: rule__JvmWildcardTypeReference__Alternatives_2
                     {
-                    pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Alternatives_2_in_rule__JvmWildcardTypeArgument__Group__2__Impl17437);
-                    rule__JvmWildcardTypeArgument__Alternatives_2();
+                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl17437);
+                    rule__JvmWildcardTypeReference__Alternatives_2();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -26297,7 +26297,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getAlternatives_2()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2()); 
             }
 
             }
@@ -26311,14 +26311,14 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 539, rule__JvmWildcardTypeArgument__Group__2__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 539, rule__JvmWildcardTypeReference__Group__2__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__2__Impl"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__2__Impl"
 
 
     // $ANTLR start "rule__JvmUpperBound__Group__0"
@@ -31112,10 +31112,10 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10227:1: rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 : ( ruleJvmUpperBound ) ;
-    public final void rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0() throws RecognitionException {
-        int rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0_StartIndex = input.index();
+    // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10227:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 : ( ruleJvmUpperBound ) ;
+    public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0() throws RecognitionException {
+        int rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
@@ -31128,15 +31128,15 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10233:1: ruleJvmUpperBound
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_020636);
+            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_020636);
             ruleJvmUpperBound();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
             }
 
             }
@@ -31150,20 +31150,20 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 638, rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 638, rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0"
+    // $ANTLR end "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10242:1: rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 : ( ruleJvmLowerBound ) ;
-    public final void rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1() throws RecognitionException {
-        int rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1_StartIndex = input.index();
+    // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10242:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 : ( ruleJvmLowerBound ) ;
+    public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1() throws RecognitionException {
+        int rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
@@ -31176,15 +31176,15 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10248:1: ruleJvmLowerBound
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_120667);
+            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_120667);
             ruleJvmLowerBound();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
             }
 
             }
@@ -31198,14 +31198,14 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 639, rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 639, rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1"
+    // $ANTLR end "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1"
 
 
     // $ANTLR start "rule__JvmUpperBound__TypeReferenceAssignment_1"
@@ -32570,9 +32570,9 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference2897 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference2904 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmArgumentTypeReference__Alternatives_in_ruleJvmArgumentTypeReference2930 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeArgument_in_entryRuleJvmWildcardTypeArgument2957 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeArgument2964 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__0_in_ruleJvmWildcardTypeArgument2990 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference2957 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference2964 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__0_in_ruleJvmWildcardTypeReference2990 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound3017 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBound3024 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmUpperBound__Group__0_in_ruleJvmUpperBound3050 = new BitSet(new long[]{0x0000000000000002L});
@@ -32641,9 +32641,9 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_rule__JvmTypeReference__Alternatives4483 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_rule__JvmTypeReference__Alternatives4500 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmArgumentTypeReference__Alternatives4532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeArgument_in_rule__JvmArgumentTypeReference__Alternatives4549 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0_in_rule__JvmWildcardTypeArgument__Alternatives_24581 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1_in_rule__JvmWildcardTypeArgument__Alternatives_24599 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_rule__JvmArgumentTypeReference__Alternatives4549 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_in_rule__JvmWildcardTypeReference__Alternatives_24581 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_in_rule__JvmWildcardTypeReference__Alternatives_24599 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAssignment__Group__0__Impl_in_rule__XAssignment__Group__04631 = new BitSet(new long[]{0x0000000000006000L});
     public static final BitSet FOLLOW_rule__XAssignment__Group__1_in_rule__XAssignment__Group__04634 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXOrExpression_in_rule__XAssignment__Group__0__Impl4661 = new BitSet(new long[]{0x0000000000000002L});
@@ -33174,13 +33174,13 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_34_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl17195 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__117226 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl17253 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__0__Impl_in_rule__JvmWildcardTypeArgument__Group__017287 = new BitSet(new long[]{0x0C00000800000010L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__1_in_rule__JvmWildcardTypeArgument__Group__017290 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__1__Impl_in_rule__JvmWildcardTypeArgument__Group__117348 = new BitSet(new long[]{0x5000000000000000L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__2_in_rule__JvmWildcardTypeArgument__Group__117351 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_59_in_rule__JvmWildcardTypeArgument__Group__1__Impl17379 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__2__Impl_in_rule__JvmWildcardTypeArgument__Group__217410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Alternatives_2_in_rule__JvmWildcardTypeArgument__Group__2__Impl17437 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__017287 = new BitSet(new long[]{0x0C00000800000010L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__017290 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__117348 = new BitSet(new long[]{0x5000000000000000L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__117351 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_59_in_rule__JvmWildcardTypeReference__Group__1__Impl17379 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__217410 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl17437 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__017474 = new BitSet(new long[]{0x0400000800000010L});
     public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__017477 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_60_in_rule__JvmUpperBound__Group__0__Impl17505 = new BitSet(new long[]{0x0000000000000002L});
@@ -33284,8 +33284,8 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_020539 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_120574 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_120605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_020636 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_120667 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_020636 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_120667 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_120698 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_120729 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_120760 = new BitSet(new long[]{0x0000000000000002L});

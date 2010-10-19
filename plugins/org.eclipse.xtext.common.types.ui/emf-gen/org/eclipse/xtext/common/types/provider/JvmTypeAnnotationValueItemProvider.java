@@ -172,7 +172,7 @@ public class JvmTypeAnnotationValueItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
-				 TypesFactory.eINSTANCE.createJvmWildcardTypeArgument()));
+				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
 	}
 
 }

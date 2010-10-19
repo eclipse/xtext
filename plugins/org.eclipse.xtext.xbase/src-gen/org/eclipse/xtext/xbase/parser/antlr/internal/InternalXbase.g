@@ -4104,11 +4104,11 @@ ruleJvmArgumentTypeReference returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeArgumentParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeReferenceParserRuleCall_1(), currentNode); 
     }
-    this_JvmWildcardTypeArgument_1=ruleJvmWildcardTypeArgument
+    this_JvmWildcardTypeReference_1=ruleJvmWildcardTypeReference
     { 
-        $current = $this_JvmWildcardTypeArgument_1.current; 
+        $current = $this_JvmWildcardTypeReference_1.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -4118,17 +4118,17 @@ ruleJvmArgumentTypeReference returns [EObject current=null]
 
 
 
-// Entry rule entryRuleJvmWildcardTypeArgument
-entryRuleJvmWildcardTypeArgument returns [EObject current=null] 
+// Entry rule entryRuleJvmWildcardTypeReference
+entryRuleJvmWildcardTypeReference returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentRule(), currentNode); }
-	 iv_ruleJvmWildcardTypeArgument=ruleJvmWildcardTypeArgument 
-	 { $current=$iv_ruleJvmWildcardTypeArgument.current; } 
+	{ currentNode = createCompositeNode(grammarAccess.getJvmWildcardTypeReferenceRule(), currentNode); }
+	 iv_ruleJvmWildcardTypeReference=ruleJvmWildcardTypeReference 
+	 { $current=$iv_ruleJvmWildcardTypeReference.current; } 
 	 EOF 
 ;
 
-// Rule JvmWildcardTypeArgument
-ruleJvmWildcardTypeArgument returns [EObject current=null] 
+// Rule JvmWildcardTypeReference
+ruleJvmWildcardTypeReference returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -4139,10 +4139,10 @@ ruleJvmWildcardTypeArgument returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        temp=factory.create(grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0().getType().getClassifier());
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -4150,16 +4150,16 @@ ruleJvmWildcardTypeArgument returns [EObject current=null]
     }
 )	otherlv_1='?' 
     {
-    	createLeafNode(otherlv_1, grammarAccess.getJvmWildcardTypeArgumentAccess().getQuestionMarkKeyword_1(), null);
+    	createLeafNode(otherlv_1, grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1(), null);
     }
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0(), currentNode); 
 	    }
 		lv_constraints_2_0=ruleJvmUpperBound		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getJvmWildcardTypeArgumentRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getJvmWildcardTypeReferenceRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
@@ -4180,11 +4180,11 @@ ruleJvmWildcardTypeArgument returns [EObject current=null]
     |(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0(), currentNode); 
 	    }
 		lv_constraints_3_0=ruleJvmLowerBound		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getJvmWildcardTypeArgumentRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getJvmWildcardTypeReferenceRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {

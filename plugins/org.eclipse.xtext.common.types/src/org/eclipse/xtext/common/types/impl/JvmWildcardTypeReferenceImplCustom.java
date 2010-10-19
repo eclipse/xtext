@@ -12,7 +12,7 @@ import java.util.List;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 
-public class JvmWildcardTypeArgumentImplCustom extends JvmWildcardTypeArgumentImpl {
+public class JvmWildcardTypeReferenceImplCustom extends JvmWildcardTypeReferenceImpl {
 	static void appendConstraintsCanonicalName(StringBuilder result, List<JvmTypeConstraint> constraints) {
 		if (constraints == null || constraints.isEmpty())
 			return;

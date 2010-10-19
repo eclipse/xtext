@@ -229,7 +229,7 @@ public class JvmFieldItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_FIELD__TYPE,
-				 TypesFactory.eINSTANCE.createJvmWildcardTypeArgument()));
+				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
 	}
 
 }

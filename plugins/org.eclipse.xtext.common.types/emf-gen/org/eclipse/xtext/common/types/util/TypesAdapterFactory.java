@@ -178,9 +178,9 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 				return createJvmGenericArrayTypeReferenceAdapter();
 			}
 			@Override
-			public Adapter caseJvmWildcardTypeArgument(JvmWildcardTypeArgument object)
+			public Adapter caseJvmWildcardTypeReference(JvmWildcardTypeReference object)
 			{
-				return createJvmWildcardTypeArgumentAdapter();
+				return createJvmWildcardTypeReferenceAdapter();
 			}
 			@Override
 			public Adapter caseJvmMember(JvmMember object)
@@ -615,16 +615,16 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmWildcardTypeArgument <em>Jvm Wildcard Type Argument</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmWildcardTypeReference <em>Jvm Wildcard Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.JvmWildcardTypeArgument
+	 * @see org.eclipse.xtext.common.types.JvmWildcardTypeReference
 	 * @generated
 	 */
-	public Adapter createJvmWildcardTypeArgumentAdapter()
+	public Adapter createJvmWildcardTypeReferenceAdapter()
 	{
 		return null;
 	}

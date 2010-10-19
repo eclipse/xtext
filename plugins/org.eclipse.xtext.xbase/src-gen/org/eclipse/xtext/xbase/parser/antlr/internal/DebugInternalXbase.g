@@ -351,11 +351,11 @@ ruleJvmParameterizedTypeReference :
 // Rule JvmArgumentTypeReference
 ruleJvmArgumentTypeReference :
 	ruleJvmTypeReference |
-	ruleJvmWildcardTypeArgument
+	ruleJvmWildcardTypeReference
 ;
 
-// Rule JvmWildcardTypeArgument
-ruleJvmWildcardTypeArgument :
+// Rule JvmWildcardTypeReference
+ruleJvmWildcardTypeReference :
 	'?' (
 		ruleJvmUpperBound |
 		ruleJvmLowerBound

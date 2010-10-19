@@ -20,12 +20,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmWildcardTypeArgument} object.
+ * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmWildcardTypeReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmWildcardTypeArgumentItemProvider
+public class JvmWildcardTypeReferenceItemProvider
 	extends JvmConstraintOwnerItemProvider
 	implements
 		IEditingDomainItemProvider,
@@ -40,7 +40,7 @@ public class JvmWildcardTypeArgumentItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmWildcardTypeArgumentItemProvider(AdapterFactory adapterFactory)
+	public JvmWildcardTypeReferenceItemProvider(AdapterFactory adapterFactory)
 	{
 		super(adapterFactory);
 	}
@@ -63,7 +63,7 @@ public class JvmWildcardTypeArgumentItemProvider
 	}
 
 	/**
-	 * This returns JvmWildcardTypeArgument.gif.
+	 * This returns JvmWildcardTypeReference.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -71,7 +71,7 @@ public class JvmWildcardTypeArgumentItemProvider
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmWildcardTypeArgument"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmWildcardTypeReference"));
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class JvmWildcardTypeArgumentItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		return getString("_UI_JvmWildcardTypeArgument_type");
+		return getString("_UI_JvmWildcardTypeReference_type");
 	}
 
 	/**

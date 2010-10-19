@@ -21,10 +21,10 @@ JvmParameterizedTypeReference:
   type=[JvmType|QualifiedName] ('<' arguments+=JvmArgumentTypeReference (',' arguments+=JvmArgumentTypeReference)* '>')?;
 
 JvmArgumentTypeReference returns JvmTypeReference:
-	JvmTypeReference | JvmWildcardTypeArgument;
+	JvmTypeReference | JvmWildcardTypeReference;
 
-JvmWildcardTypeArgument:
-  {JvmWildcardTypeArgument} '?' (constraints+=JvmUpperBound | constraints+=JvmLowerBound)?;
+JvmWildcardTypeReference:
+  {JvmWildcardTypeReference} '?' (constraints+=JvmUpperBound | constraints+=JvmLowerBound)?;
   
 JvmUpperBound : 
  'extends' typeReference=JvmTypeReference;

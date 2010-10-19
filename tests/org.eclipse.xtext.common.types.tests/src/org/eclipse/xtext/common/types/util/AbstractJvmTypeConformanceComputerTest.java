@@ -22,7 +22,7 @@ import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
@@ -63,21 +63,21 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 		return result;
 	}
 
-	protected JvmWildcardTypeArgument wc() {
-		JvmWildcardTypeArgument result = TypesFactory.eINSTANCE.createJvmWildcardTypeArgument();
+	protected JvmWildcardTypeReference wc() {
+		JvmWildcardTypeReference result = TypesFactory.eINSTANCE.createJvmWildcardTypeReference();
 		return result;
 	}
 
-	protected JvmWildcardTypeArgument wc_extends(JvmTypeReference typeRef) {
-		JvmWildcardTypeArgument result = TypesFactory.eINSTANCE.createJvmWildcardTypeArgument();
+	protected JvmWildcardTypeReference wc_extends(JvmTypeReference typeRef) {
+		JvmWildcardTypeReference result = TypesFactory.eINSTANCE.createJvmWildcardTypeReference();
 		JvmUpperBound upperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
 		upperBound.setTypeReference(typeRef);
 		result.getConstraints().add(upperBound);
 		return result;
 	}
 
-	protected JvmWildcardTypeArgument wc_super(JvmTypeReference typeRef) {
-		JvmWildcardTypeArgument result = TypesFactory.eINSTANCE.createJvmWildcardTypeArgument();
+	protected JvmWildcardTypeReference wc_super(JvmTypeReference typeRef) {
+		JvmWildcardTypeReference result = TypesFactory.eINSTANCE.createJvmWildcardTypeReference();
 		JvmLowerBound lowerBound = TypesFactory.eINSTANCE.createJvmLowerBound();
 		lowerBound.setTypeReference(typeRef);
 		result.getConstraints().add(lowerBound);

@@ -197,7 +197,7 @@ public class JvmParameterizedTypeReferenceItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS,
-				 TypesFactory.eINSTANCE.createJvmWildcardTypeArgument()));
+				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
 	}
 
 }

@@ -5470,25 +5470,25 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleJvmArgumentTypeReference"
 
 
-    // $ANTLR start "entryRuleJvmWildcardTypeArgument"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1834:1: entryRuleJvmWildcardTypeArgument : ruleJvmWildcardTypeArgument EOF ;
-    public final void entryRuleJvmWildcardTypeArgument() throws RecognitionException {
+    // $ANTLR start "entryRuleJvmWildcardTypeReference"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1834:1: entryRuleJvmWildcardTypeReference : ruleJvmWildcardTypeReference EOF ;
+    public final void entryRuleJvmWildcardTypeReference() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1835:1: ( ruleJvmWildcardTypeArgument EOF )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1836:1: ruleJvmWildcardTypeArgument EOF
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1835:1: ( ruleJvmWildcardTypeReference EOF )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1836:1: ruleJvmWildcardTypeReference EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentRule()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceRule()); 
             }
-            pushFollow(FOLLOW_ruleJvmWildcardTypeArgument_in_entryRuleJvmWildcardTypeArgument3855);
-            ruleJvmWildcardTypeArgument();
+            pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference3855);
+            ruleJvmWildcardTypeReference();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentRule()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeArgument3862); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference3862); if (state.failed) return ;
 
             }
 
@@ -5501,30 +5501,30 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleJvmWildcardTypeArgument"
+    // $ANTLR end "entryRuleJvmWildcardTypeReference"
 
 
-    // $ANTLR start "ruleJvmWildcardTypeArgument"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1843:1: ruleJvmWildcardTypeArgument : ( ( rule__JvmWildcardTypeArgument__Group__0 ) ) ;
-    public final void ruleJvmWildcardTypeArgument() throws RecognitionException {
+    // $ANTLR start "ruleJvmWildcardTypeReference"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1843:1: ruleJvmWildcardTypeReference : ( ( rule__JvmWildcardTypeReference__Group__0 ) ) ;
+    public final void ruleJvmWildcardTypeReference() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1847:2: ( ( ( rule__JvmWildcardTypeArgument__Group__0 ) ) )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1848:1: ( ( rule__JvmWildcardTypeArgument__Group__0 ) )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1847:2: ( ( ( rule__JvmWildcardTypeReference__Group__0 ) ) )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1848:1: ( ( rule__JvmWildcardTypeReference__Group__0 ) )
             {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1848:1: ( ( rule__JvmWildcardTypeArgument__Group__0 ) )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1849:1: ( rule__JvmWildcardTypeArgument__Group__0 )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1848:1: ( ( rule__JvmWildcardTypeReference__Group__0 ) )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1849:1: ( rule__JvmWildcardTypeReference__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getGroup()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getGroup()); 
             }
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1850:1: ( rule__JvmWildcardTypeArgument__Group__0 )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1850:2: rule__JvmWildcardTypeArgument__Group__0
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1850:1: ( rule__JvmWildcardTypeReference__Group__0 )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:1850:2: rule__JvmWildcardTypeReference__Group__0
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__0_in_ruleJvmWildcardTypeArgument3888);
-            rule__JvmWildcardTypeArgument__Group__0();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__0_in_ruleJvmWildcardTypeReference3888);
+            rule__JvmWildcardTypeReference__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -5532,7 +5532,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getGroup()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getGroup()); 
             }
 
             }
@@ -5552,7 +5552,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleJvmWildcardTypeArgument"
+    // $ANTLR end "ruleJvmWildcardTypeReference"
 
 
     // $ANTLR start "entryRuleJvmUpperBound"
@@ -8346,13 +8346,13 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmArgumentTypeReference__Alternatives"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2635:1: rule__JvmArgumentTypeReference__Alternatives : ( ( ruleJvmTypeReference ) | ( ruleJvmWildcardTypeArgument ) );
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2635:1: rule__JvmArgumentTypeReference__Alternatives : ( ( ruleJvmTypeReference ) | ( ruleJvmWildcardTypeReference ) );
     public final void rule__JvmArgumentTypeReference__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2639:1: ( ( ruleJvmTypeReference ) | ( ruleJvmWildcardTypeArgument ) )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2639:1: ( ( ruleJvmTypeReference ) | ( ruleJvmWildcardTypeReference ) )
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -8394,21 +8394,21 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2646:6: ( ruleJvmWildcardTypeArgument )
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2646:6: ( ruleJvmWildcardTypeReference )
                     {
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2646:6: ( ruleJvmWildcardTypeArgument )
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2647:1: ruleJvmWildcardTypeArgument
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2646:6: ( ruleJvmWildcardTypeReference )
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2647:1: ruleJvmWildcardTypeReference
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeArgumentParserRuleCall_1()); 
+                       before(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeReferenceParserRuleCall_1()); 
                     }
-                    pushFollow(FOLLOW_ruleJvmWildcardTypeArgument_in_rule__JvmArgumentTypeReference__Alternatives5711);
-                    ruleJvmWildcardTypeArgument();
+                    pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_rule__JvmArgumentTypeReference__Alternatives5711);
+                    ruleJvmWildcardTypeReference();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeArgumentParserRuleCall_1()); 
+                       after(grammarAccess.getJvmArgumentTypeReferenceAccess().getJvmWildcardTypeReferenceParserRuleCall_1()); 
                     }
 
                     }
@@ -8433,14 +8433,14 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__JvmArgumentTypeReference__Alternatives"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Alternatives_2"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2657:1: rule__JvmWildcardTypeArgument__Alternatives_2 : ( ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 ) ) | ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 ) ) );
-    public final void rule__JvmWildcardTypeArgument__Alternatives_2() throws RecognitionException {
+    // $ANTLR start "rule__JvmWildcardTypeReference__Alternatives_2"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2657:1: rule__JvmWildcardTypeReference__Alternatives_2 : ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 ) ) | ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 ) ) );
+    public final void rule__JvmWildcardTypeReference__Alternatives_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2661:1: ( ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 ) ) | ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 ) ) )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2661:1: ( ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 ) ) | ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 ) ) )
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -8459,19 +8459,19 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             }
             switch (alt24) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2662:1: ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 ) )
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2662:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 ) )
                     {
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2662:1: ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 ) )
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2663:1: ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 )
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2662:1: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 ) )
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2663:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_0()); 
+                       before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_0()); 
                     }
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2664:1: ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 )
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2664:2: rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2664:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 )
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2664:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0
                     {
-                    pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0_in_rule__JvmWildcardTypeArgument__Alternatives_25743);
-                    rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0();
+                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_in_rule__JvmWildcardTypeReference__Alternatives_25743);
+                    rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -8479,7 +8479,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_0()); 
+                       after(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_0()); 
                     }
 
                     }
@@ -8488,19 +8488,19 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2668:6: ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 ) )
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2668:6: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 ) )
                     {
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2668:6: ( ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 ) )
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2669:1: ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 )
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2668:6: ( ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 ) )
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2669:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_1()); 
+                       before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_1()); 
                     }
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2670:1: ( rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 )
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2670:2: rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2670:1: ( rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 )
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2670:2: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1
                     {
-                    pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1_in_rule__JvmWildcardTypeArgument__Alternatives_25761);
-                    rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1();
+                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_in_rule__JvmWildcardTypeReference__Alternatives_25761);
+                    rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -8508,7 +8508,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsAssignment_2_1()); 
+                       after(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsAssignment_2_1()); 
                     }
 
                     }
@@ -8530,7 +8530,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Alternatives_2"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Alternatives_2"
 
 
     // $ANTLR start "rule__SizeUnit__Alternatives"
@@ -28575,23 +28575,23 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__JvmParameterizedTypeReference__Group_1_2__1__Impl"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__0"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9961:1: rule__JvmWildcardTypeArgument__Group__0 : rule__JvmWildcardTypeArgument__Group__0__Impl rule__JvmWildcardTypeArgument__Group__1 ;
-    public final void rule__JvmWildcardTypeArgument__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__0"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9961:1: rule__JvmWildcardTypeReference__Group__0 : rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 ;
+    public final void rule__JvmWildcardTypeReference__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9965:1: ( rule__JvmWildcardTypeArgument__Group__0__Impl rule__JvmWildcardTypeArgument__Group__1 )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9966:2: rule__JvmWildcardTypeArgument__Group__0__Impl rule__JvmWildcardTypeArgument__Group__1
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9965:1: ( rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9966:2: rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__0__Impl_in_rule__JvmWildcardTypeArgument__Group__020128);
-            rule__JvmWildcardTypeArgument__Group__0__Impl();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__020128);
+            rule__JvmWildcardTypeReference__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__1_in_rule__JvmWildcardTypeArgument__Group__020131);
-            rule__JvmWildcardTypeArgument__Group__1();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__020131);
+            rule__JvmWildcardTypeReference__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -28610,12 +28610,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__0"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__0"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__0__Impl"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9973:1: rule__JvmWildcardTypeArgument__Group__0__Impl : ( () ) ;
-    public final void rule__JvmWildcardTypeArgument__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__0__Impl"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9973:1: rule__JvmWildcardTypeReference__Group__0__Impl : ( () ) ;
+    public final void rule__JvmWildcardTypeReference__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -28627,7 +28627,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9979:1: ()
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9980:1: ()
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9982:1: 
@@ -28635,7 +28635,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getJvmWildcardTypeArgumentAction_0()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0()); 
             }
 
             }
@@ -28651,26 +28651,26 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__0__Impl"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__0__Impl"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__1"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9992:1: rule__JvmWildcardTypeArgument__Group__1 : rule__JvmWildcardTypeArgument__Group__1__Impl rule__JvmWildcardTypeArgument__Group__2 ;
-    public final void rule__JvmWildcardTypeArgument__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__1"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9992:1: rule__JvmWildcardTypeReference__Group__1 : rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 ;
+    public final void rule__JvmWildcardTypeReference__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9996:1: ( rule__JvmWildcardTypeArgument__Group__1__Impl rule__JvmWildcardTypeArgument__Group__2 )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9997:2: rule__JvmWildcardTypeArgument__Group__1__Impl rule__JvmWildcardTypeArgument__Group__2
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9996:1: ( rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9997:2: rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__1__Impl_in_rule__JvmWildcardTypeArgument__Group__120189);
-            rule__JvmWildcardTypeArgument__Group__1__Impl();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__120189);
+            rule__JvmWildcardTypeReference__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__2_in_rule__JvmWildcardTypeArgument__Group__120192);
-            rule__JvmWildcardTypeArgument__Group__2();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__120192);
+            rule__JvmWildcardTypeReference__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -28689,12 +28689,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__1"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__1"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__1__Impl"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10004:1: rule__JvmWildcardTypeArgument__Group__1__Impl : ( '?' ) ;
-    public final void rule__JvmWildcardTypeArgument__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__1__Impl"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10004:1: rule__JvmWildcardTypeReference__Group__1__Impl : ( '?' ) ;
+    public final void rule__JvmWildcardTypeReference__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -28706,11 +28706,11 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10010:1: '?'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getQuestionMarkKeyword_1()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1()); 
             }
-            match(input,65,FOLLOW_65_in_rule__JvmWildcardTypeArgument__Group__1__Impl20220); if (state.failed) return ;
+            match(input,65,FOLLOW_65_in_rule__JvmWildcardTypeReference__Group__1__Impl20220); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getQuestionMarkKeyword_1()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1()); 
             }
 
             }
@@ -28730,21 +28730,21 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__1__Impl"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__1__Impl"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__2"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10023:1: rule__JvmWildcardTypeArgument__Group__2 : rule__JvmWildcardTypeArgument__Group__2__Impl ;
-    public final void rule__JvmWildcardTypeArgument__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__2"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10023:1: rule__JvmWildcardTypeReference__Group__2 : rule__JvmWildcardTypeReference__Group__2__Impl ;
+    public final void rule__JvmWildcardTypeReference__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10027:1: ( rule__JvmWildcardTypeArgument__Group__2__Impl )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10028:2: rule__JvmWildcardTypeArgument__Group__2__Impl
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10027:1: ( rule__JvmWildcardTypeReference__Group__2__Impl )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10028:2: rule__JvmWildcardTypeReference__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Group__2__Impl_in_rule__JvmWildcardTypeArgument__Group__220251);
-            rule__JvmWildcardTypeArgument__Group__2__Impl();
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__220251);
+            rule__JvmWildcardTypeReference__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -28763,26 +28763,26 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__2"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__2"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__Group__2__Impl"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10034:1: rule__JvmWildcardTypeArgument__Group__2__Impl : ( ( rule__JvmWildcardTypeArgument__Alternatives_2 )? ) ;
-    public final void rule__JvmWildcardTypeArgument__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__JvmWildcardTypeReference__Group__2__Impl"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10034:1: rule__JvmWildcardTypeReference__Group__2__Impl : ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) ;
+    public final void rule__JvmWildcardTypeReference__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10038:1: ( ( ( rule__JvmWildcardTypeArgument__Alternatives_2 )? ) )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10039:1: ( ( rule__JvmWildcardTypeArgument__Alternatives_2 )? )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10038:1: ( ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10039:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
             {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10039:1: ( ( rule__JvmWildcardTypeArgument__Alternatives_2 )? )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10040:1: ( rule__JvmWildcardTypeArgument__Alternatives_2 )?
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10039:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10040:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getAlternatives_2()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2()); 
             }
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10041:1: ( rule__JvmWildcardTypeArgument__Alternatives_2 )?
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10041:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
             int alt68=2;
             int LA68_0 = input.LA(1);
 
@@ -28791,10 +28791,10 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             }
             switch (alt68) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10041:2: rule__JvmWildcardTypeArgument__Alternatives_2
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10041:2: rule__JvmWildcardTypeReference__Alternatives_2
                     {
-                    pushFollow(FOLLOW_rule__JvmWildcardTypeArgument__Alternatives_2_in_rule__JvmWildcardTypeArgument__Group__2__Impl20278);
-                    rule__JvmWildcardTypeArgument__Alternatives_2();
+                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl20278);
+                    rule__JvmWildcardTypeReference__Alternatives_2();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -28805,7 +28805,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getAlternatives_2()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2()); 
             }
 
             }
@@ -28825,7 +28825,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__Group__2__Impl"
+    // $ANTLR end "rule__JvmWildcardTypeReference__Group__2__Impl"
 
 
     // $ANTLR start "rule__JvmUpperBound__Group__0"
@@ -34580,9 +34580,9 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:12033:1: rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0 : ( ruleJvmUpperBound ) ;
-    public final void rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0() throws RecognitionException {
+    // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:12033:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 : ( ruleJvmUpperBound ) ;
+    public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -34594,15 +34594,15 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:12039:1: ruleJvmUpperBound
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_024499);
+            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_024499);
             ruleJvmUpperBound();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
             }
 
             }
@@ -34622,12 +34622,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0"
+    // $ANTLR end "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0"
 
 
-    // $ANTLR start "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:12048:1: rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1 : ( ruleJvmLowerBound ) ;
-    public final void rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1() throws RecognitionException {
+    // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:12048:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 : ( ruleJvmLowerBound ) ;
+    public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -34639,15 +34639,15 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:12054:1: ruleJvmLowerBound
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
+               before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_124530);
+            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_124530);
             ruleJvmLowerBound();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getJvmWildcardTypeArgumentAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
+               after(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
             }
 
             }
@@ -34667,7 +34667,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1"
+    // $ANTLR end "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1"
 
 
     // $ANTLR start "rule__JvmUpperBound__TypeReferenceAssignment_1"
@@ -36510,9 +36510,9 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference3795 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference3802 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmArgumentTypeReference__Alternatives_in_ruleJvmArgumentTypeReference3828 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeArgument_in_entryRuleJvmWildcardTypeArgument3855 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeArgument3862 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__0_in_ruleJvmWildcardTypeArgument3888 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference3855 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference3862 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__0_in_ruleJvmWildcardTypeReference3888 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound3915 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBound3922 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmUpperBound__Group__0_in_ruleJvmUpperBound3948 = new BitSet(new long[]{0x0000000000000002L});
@@ -36592,9 +36592,9 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_rule__JvmTypeReference__Alternatives5645 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_rule__JvmTypeReference__Alternatives5662 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmArgumentTypeReference__Alternatives5694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmWildcardTypeArgument_in_rule__JvmArgumentTypeReference__Alternatives5711 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_0_in_rule__JvmWildcardTypeArgument__Alternatives_25743 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_1_in_rule__JvmWildcardTypeArgument__Alternatives_25761 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_rule__JvmArgumentTypeReference__Alternatives5711 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_in_rule__JvmWildcardTypeReference__Alternatives_25743 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_in_rule__JvmWildcardTypeReference__Alternatives_25761 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_32_in_rule__SizeUnit__Alternatives5796 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_33_in_rule__SizeUnit__Alternatives5817 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_34_in_rule__SizeUnit__Alternatives5838 = new BitSet(new long[]{0x0000000000000002L});
@@ -37194,13 +37194,13 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_43_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl20036 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__120067 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl20094 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__0__Impl_in_rule__JvmWildcardTypeArgument__Group__020128 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__1_in_rule__JvmWildcardTypeArgument__Group__020131 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__1__Impl_in_rule__JvmWildcardTypeArgument__Group__120189 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000014L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__2_in_rule__JvmWildcardTypeArgument__Group__120192 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_65_in_rule__JvmWildcardTypeArgument__Group__1__Impl20220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Group__2__Impl_in_rule__JvmWildcardTypeArgument__Group__220251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeArgument__Alternatives_2_in_rule__JvmWildcardTypeArgument__Group__2__Impl20278 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__020128 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__020131 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__120189 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000014L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__120192 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_65_in_rule__JvmWildcardTypeReference__Group__1__Impl20220 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__220251 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl20278 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__020315 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
     public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__020318 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_66_in_rule__JvmUpperBound__Group__0__Impl20346 = new BitSet(new long[]{0x0000000000000002L});
@@ -37331,8 +37331,8 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_024402 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_124437 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_124468 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_024499 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeArgument__ConstraintsAssignment_2_124530 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_024499 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_124530 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_124561 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_124592 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_124623 = new BitSet(new long[]{0x0000000000000002L});
