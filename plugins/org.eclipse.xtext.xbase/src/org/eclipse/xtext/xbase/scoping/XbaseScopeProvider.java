@@ -27,12 +27,15 @@ import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
+import org.eclipse.xtext.scoping.impl.SingletonScope;
 import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -70,6 +73,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected IScope createFeatureCallScope(EObject context, EReference reference) {
+		if (context instanceof XAssignment) {
+			return createAssignmentFeatureScope((XAssignment)context);
+		}
 		if (context instanceof XMemberFeatureCall || context instanceof XBinaryOperation) {
 			final XAbstractFeatureCall call = (XAbstractFeatureCall) context;
 			XExpression target = call.getArguments().get(0);
@@ -102,6 +108,21 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			return localVariableScope;
 		}
 		return IScope.NULLSCOPE;
+	}
+
+	protected IScope createAssignmentFeatureScope(XAssignment context) {
+		XExpression assignable = context.getAssignable();
+		JvmTypeReference jvmTypeReference = typeResolver.getType(assignable, null);
+		IScope parent = IScope.NULLSCOPE;
+		if (jvmTypeReference != null) {
+			parent = createFeatureScopeForTypeRef(jvmTypeReference,
+					createCallableFeaturePredicate(context, null), IScope.NULLSCOPE);
+		}
+		if (assignable instanceof XFeatureCall && ((XFeatureCall) assignable).getFeature() instanceof XVariableDeclaration) {
+			return new SingletonScope(EObjectDescription.create("=", ((XFeatureCall) assignable).getFeature()), parent);
+		}
+		return parent;
+		
 	}
 
 	protected Predicate<EObject> createCallableFeaturePredicate(final XAbstractFeatureCall call,

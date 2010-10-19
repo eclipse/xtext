@@ -15,7 +15,7 @@ XExpression returns XExpression :
 	XAssignment;
 
 XAssignment returns XExpression :	
-	XOrExpression ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAssign] rightOperand=XAssignment)?;
+	XOrExpression ({XAssignment.assignable=current} feature=[types::JvmIdentifyableElement|OpAssign] value=XAssignment)?;
 
 OpAssign:
 	'=' | '+=';
@@ -142,7 +142,7 @@ XDoWhileExpression:
 
 XBlockExpression: {XBlockExpression}
 	'{'
-		(expressions+=XExpressionInsideBlock ';')*
+		(expressions+=XExpressionInsideBlock ';'?)*
 	'}';
 
 XExpressionInsideBlock returns XExpression:

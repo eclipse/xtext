@@ -12,14 +12,17 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.ReflectionUtil;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
@@ -47,10 +50,20 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	@Inject
 	private ClassLoader classLoader;
 	
-	private PolymorphicDispatcher<IEvaluationResult> dispatcher = createDispatcher();
+	private PolymorphicDispatcher<IEvaluationResult> evaluateDispatcher = createEvaluateDispatcher();
+	private PolymorphicDispatcher<IEvaluationResult> assignmentDispatcher = createAssignmentDispatcher();
+	private PolymorphicDispatcher<IEvaluationResult> featureCallDispatcher = createFeatureCallDispatcher();
 
-	protected PolymorphicDispatcher<IEvaluationResult> createDispatcher() {
+	protected PolymorphicDispatcher<IEvaluationResult> createEvaluateDispatcher() {
 		return PolymorphicDispatcher.createForSingleTarget("_evaluate", 2, 2, this);
+	}
+	
+	protected PolymorphicDispatcher<IEvaluationResult> createAssignmentDispatcher() {
+		return PolymorphicDispatcher.createForSingleTarget("_assignValue", 4, 4, this);
+	}
+	
+	protected PolymorphicDispatcher<IEvaluationResult> createFeatureCallDispatcher() {
+		return PolymorphicDispatcher.createForSingleTarget("_featureCall", 3, 3, this);
 	}
 	
 	public IEvaluationResult evaluate(XExpression expression) {
@@ -60,7 +73,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	public IEvaluationResult evaluate(XExpression expression, IEvaluationContext context) {
-		return dispatcher.invoke(expression, context);
+		return evaluateDispatcher.invoke(expression, context);
 	}
 	
 	public IEvaluationResult _evaluate(XNullLiteral literal, IEvaluationContext context) {
@@ -192,13 +205,36 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 	
-//	public IEvaluationResult _evaluate(XBinaryOperation assignment, IEvaluationContext context) {
-//		IEvaluationResult result = evaluate(variableDecl.getRight(), context);
-//		if (result.getException() != null)
-//			return result;
-//		context.newValue(variableDecl.getName(), result.getResult());
-//		return result;
-//	}
+	public IEvaluationResult _evaluate(XFeatureCall featureCall, IEvaluationContext context) {
+		return featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, context);
+	}
+	
+	public IEvaluationResult _featureCall(XVariableDeclaration variableDeclaration, XFeatureCall featureCall, IEvaluationContext context) {
+		Object value = context.getValue(variableDeclaration.getName());
+		return new DefaultEvaluationResult(value, null);
+	}
+	
+	public IEvaluationResult _evaluate(XAssignment assignment, IEvaluationContext context) {
+		IEvaluationResult value = evaluate(assignment.getValue(), context);
+		if (value.getException() != null)
+			return value;
+		IEvaluationResult assignable = evaluate(assignment.getAssignable(), context);
+		if (assignable.getException() != null)
+			return assignable;
+		IEvaluationResult assign = assignValue(assignment.getFeature(), assignable.getResult(), value.getResult(), context);
+		if (assign.getException() != null)
+			return assign;
+		return value;
+	}
+	
+	public IEvaluationResult assignValue(JvmIdentifyableElement feature, Object assignable, Object value, IEvaluationContext context) {
+		return assignmentDispatcher.invoke(feature, assignable, value, context);
+	}
+	
+	public IEvaluationResult _assignValue(XVariableDeclaration variable, Object assignable, Object value, IEvaluationContext context) {
+		context.assignValue(variable.getName(), value);
+		return DefaultEvaluationResult.NULL;
+	}
 	
 	public static class XbaseInterpreterSwitch extends XbaseSwitch<Void> {
 		

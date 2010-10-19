@@ -71,4 +71,21 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	public void testIfExpression_04() {
 		assertEvaluatesTo("else", "if (false) 'then' else 'else'");
 	}
+	
+	public void testVariableDeclaration_01() {
+		assertEvaluatesTo("literal", "{val x = 'literal'}");
+	}
+	
+	public void testFeatureCall_01() {
+		assertEvaluatesTo("literal", "{var x = 'literal' x}");
+	}
+	
+	public void testAssignment_01() {
+		assertEvaluatesTo("newValue", "{var x = 'literal' x = 'newValue'}");
+	}
+	
+	public void testAssignmentInBlock_01() {
+		assertEvaluatesTo("newValue", "{var x = 'literal' { x = 'newValue' } x }");
+	}
+	
 }

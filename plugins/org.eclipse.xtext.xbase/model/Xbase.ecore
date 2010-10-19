@@ -142,4 +142,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaredParam" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmFormalParameter"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XAssignment" eSuperTypes="#//XAbstractFeatureCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignable" eType="#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//XExpression"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>
