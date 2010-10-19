@@ -12,14 +12,14 @@ import junit.framework.TestCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmWildcardTypeArgumentTest extends TestCase {
+public class JvmWildcardTypeReferenceTest extends TestCase {
 
-	private JvmWildcardTypeArgument typeArgument;
+	private JvmWildcardTypeReference typeArgument;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		typeArgument = TypesFactory.eINSTANCE.createJvmWildcardTypeArgument();
+		typeArgument = TypesFactory.eINSTANCE.createJvmWildcardTypeReference();
 	}
 	
 	public void testCanonicalName_01() {

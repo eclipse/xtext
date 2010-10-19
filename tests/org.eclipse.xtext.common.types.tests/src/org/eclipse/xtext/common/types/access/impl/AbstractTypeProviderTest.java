@@ -60,7 +60,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
@@ -596,8 +596,8 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) paramType;
 		assertEquals(1, parameterized.getArguments().size());
 		JvmTypeReference typeParameter = parameterized.getArguments().get(0);
-		assertTrue(typeParameter instanceof JvmWildcardTypeArgument);
-		JvmWildcardTypeArgument wildcard = (JvmWildcardTypeArgument) typeParameter;
+		assertTrue(typeParameter instanceof JvmWildcardTypeReference);
+		JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) typeParameter;
 		assertEquals(1, wildcard.getConstraints().size());
 		assertTrue(wildcard.getConstraints().get(0) instanceof JvmUpperBound);
 		JvmUpperBound upperBound = (JvmUpperBound) wildcard.getConstraints().get(0);
@@ -631,8 +631,8 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) returnType;
 		assertEquals(1, parameterized.getArguments().size());
 		JvmTypeReference typeParameter = parameterized.getArguments().get(0);
-		assertTrue(typeParameter instanceof JvmWildcardTypeArgument);
-		JvmWildcardTypeArgument wildcard = (JvmWildcardTypeArgument) typeParameter;
+		assertTrue(typeParameter instanceof JvmWildcardTypeReference);
+		JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) typeParameter;
 		assertEquals(1, wildcard.getConstraints().size());
 		assertTrue(wildcard.getConstraints().get(0) instanceof JvmUpperBound);
 		JvmUpperBound upperBound = (JvmUpperBound) wildcard.getConstraints().get(0);
@@ -831,8 +831,8 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmParameterizedTypeReference listType = (JvmParameterizedTypeReference) listS;
 		assertEquals(1, listType.getArguments().size());
 		JvmTypeReference typeArgument = listType.getArguments().get(0);
-		assertTrue(typeArgument instanceof JvmWildcardTypeArgument);
-		JvmWildcardTypeArgument wildcardTypeArgument = (JvmWildcardTypeArgument) typeArgument;
+		assertTrue(typeArgument instanceof JvmWildcardTypeReference);
+		JvmWildcardTypeReference wildcardTypeArgument = (JvmWildcardTypeReference) typeArgument;
 		assertEquals("? extends S", wildcardTypeArgument.getCanonicalName());
 		assertEquals(1, wildcardTypeArgument.getConstraints().size());
 		JvmUpperBound upperBound = (JvmUpperBound) wildcardTypeArgument.getConstraints().get(0);
@@ -850,8 +850,8 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmParameterizedTypeReference listType = (JvmParameterizedTypeReference) listS;
 		assertEquals(1, listType.getArguments().size());
 		JvmTypeReference typeArgument = listType.getArguments().get(0);
-		assertTrue(typeArgument instanceof JvmWildcardTypeArgument);
-		JvmWildcardTypeArgument wildcardTypeArgument = (JvmWildcardTypeArgument) typeArgument;
+		assertTrue(typeArgument instanceof JvmWildcardTypeReference);
+		JvmWildcardTypeReference wildcardTypeArgument = (JvmWildcardTypeReference) typeArgument;
 		assertEquals("? extends java.lang.Object & super T", wildcardTypeArgument.getCanonicalName());
 		assertEquals(2, wildcardTypeArgument.getConstraints().size());
 		JvmUpperBound uperBound = (JvmUpperBound) wildcardTypeArgument.getConstraints().get(0);
@@ -891,8 +891,8 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmParameterizedTypeReference listType = (JvmParameterizedTypeReference) listZ;
 		assertEquals(1, listType.getArguments().size());
 		JvmTypeReference typeArgument = listType.getArguments().get(0);
-		assertTrue(typeArgument instanceof JvmWildcardTypeArgument);
-		JvmWildcardTypeArgument wildcardTypeArgument = (JvmWildcardTypeArgument) typeArgument;
+		assertTrue(typeArgument instanceof JvmWildcardTypeReference);
+		JvmWildcardTypeReference wildcardTypeArgument = (JvmWildcardTypeReference) typeArgument;
 		assertEquals("? extends java.lang.Object & super Z", wildcardTypeArgument.getCanonicalName());
 		assertEquals(2, wildcardTypeArgument.getConstraints().size());
 		JvmUpperBound upperBound = (JvmUpperBound) wildcardTypeArgument.getConstraints().get(0);
@@ -916,7 +916,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("java.util.Map<? extends java.lang.Object & super Z,? extends S>", mapType.getCanonicalName());
 		JvmParameterizedTypeReference parameterizedMapType = (JvmParameterizedTypeReference) mapType;
 		assertEquals(2, parameterizedMapType.getArguments().size());
-		JvmWildcardTypeArgument extendsS = (JvmWildcardTypeArgument) parameterizedMapType.getArguments().get(1);
+		JvmWildcardTypeReference extendsS = (JvmWildcardTypeReference) parameterizedMapType.getArguments().get(1);
 		assertEquals(1, extendsS.getConstraints().size());
 		JvmType s = type.getTypeParameters().get(0);
 		assertSame(s, extendsS.getConstraints().get(0).getTypeReference().getType());
@@ -993,9 +993,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmParameterizedTypeReference nestedListType = (JvmParameterizedTypeReference) typeArgument;
 		assertEquals(1, nestedListType.getArguments().size());
 		JvmTypeReference nestedArgument = nestedListType.getArguments().get(0);
-		assertTrue(nestedArgument instanceof JvmWildcardTypeArgument);
-		assertEquals(1, ((JvmWildcardTypeArgument) nestedArgument).getConstraints().size());
-		JvmUpperBound nestedUpperBound = (JvmUpperBound) ((JvmWildcardTypeArgument) nestedArgument).getConstraints().get(0);
+		assertTrue(nestedArgument instanceof JvmWildcardTypeReference);
+		assertEquals(1, ((JvmWildcardTypeReference) nestedArgument).getConstraints().size());
+		JvmUpperBound nestedUpperBound = (JvmUpperBound) ((JvmWildcardTypeReference) nestedArgument).getConstraints().get(0);
 		assertSame(typeParameterV, nestedUpperBound.getTypeReference().getType());
 	}
 
@@ -1089,8 +1089,8 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmParameterizedTypeReference listType = (JvmParameterizedTypeReference) listArrayType.getComponentType();
 		assertEquals(1, listType.getArguments().size());
 		JvmTypeReference typeArgument = listType.getArguments().get(0);
-		assertTrue(typeArgument instanceof JvmWildcardTypeArgument);
-		JvmWildcardTypeArgument wildcardTypeArgument = (JvmWildcardTypeArgument) typeArgument;
+		assertTrue(typeArgument instanceof JvmWildcardTypeReference);
+		JvmWildcardTypeReference wildcardTypeArgument = (JvmWildcardTypeReference) typeArgument;
 		assertEquals("? extends V", wildcardTypeArgument.getCanonicalName());
 		assertEquals(1, wildcardTypeArgument.getConstraints().size());
 		JvmUpperBound upperBound = (JvmUpperBound) wildcardTypeArgument.getConstraints().get(0);
@@ -1107,8 +1107,8 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmParameterizedTypeReference listType = (JvmParameterizedTypeReference) listV;
 		assertEquals(1, listType.getArguments().size());
 		JvmTypeReference typeArgument = listType.getArguments().get(0);
-		assertTrue(typeArgument instanceof JvmWildcardTypeArgument);
-		JvmWildcardTypeArgument wildcardTypeArgument = (JvmWildcardTypeArgument) typeArgument;
+		assertTrue(typeArgument instanceof JvmWildcardTypeReference);
+		JvmWildcardTypeReference wildcardTypeArgument = (JvmWildcardTypeReference) typeArgument;
 		assertEquals("? extends V[]", wildcardTypeArgument.getCanonicalName());
 		assertEquals(1, wildcardTypeArgument.getConstraints().size());
 		JvmUpperBound upperBound = (JvmUpperBound) wildcardTypeArgument.getConstraints().get(0);
