@@ -22,6 +22,16 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmDeclaredType" abstract="true" eSuperTypes="#//JvmComponentType #//JvmMember">
     <eOperations name="getPackageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getDeclaredOperations" lowerBound="1">
+      <eGenericType eClassifier="#//Iterable">
+        <eTypeArguments eClassifier="#//JvmOperation"/>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="getDeclaredFields" lowerBound="1">
+      <eGenericType eClassifier="#//Iterable">
+        <eTypeArguments eClassifier="#//JvmField"/>
+      </eGenericType>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superTypes" upperBound="-1"
         eType="#//JvmTypeReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"

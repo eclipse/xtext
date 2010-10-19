@@ -13,8 +13,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.JvmTypes;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.JvmTypesTypeProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
@@ -51,7 +52,7 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 	private TypesService typesService;
 
 	@Inject
-	private JvmTypes jvmTypes;
+	private TypesFactory factory;
 
 	@Inject
 	private TypeConverter typeConverter;
@@ -133,8 +134,9 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XTypeLiteral object, Context<JvmTypeReference> context) {
-		JvmTypeReference paramType = jvmTypes.createJvmTypeReference(object.getType());
-		return typesService.getTypeForName(JAVA_LANG_CLASS, object, paramType);
+		JvmParameterizedTypeReference typeRef = factory.createJvmParameterizedTypeReference();
+		typeRef.setType(object.getType());
+		return typesService.getTypeForName(JAVA_LANG_CLASS, object, typeRef);
 	}
 
 	protected JvmTypeReference _type(XInstanceOfExpression object, Context<JvmTypeReference> context) {

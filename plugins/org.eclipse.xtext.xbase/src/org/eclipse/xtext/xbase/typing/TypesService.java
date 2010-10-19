@@ -17,9 +17,9 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.JvmTypes;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -32,19 +32,19 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge
  */
-public class TypesService implements ITypeConformanceComputer<JvmTypeReference>{
-	
+public class TypesService implements ITypeConformanceComputer<JvmTypeReference> {
+
 	@Inject
 	private IScopeProvider scopeProvider;
-	
+
 	@Inject
 	private IJvmTypeConformanceComputer conformanceComputer;
-	
+
 	@Inject
-	private JvmTypes jvmTypes;
-	
+	private TypesFactory factory;
+
 	private final EReference syntheticReference;
-	
+
 	{
 		syntheticReference = EcoreFactory.eINSTANCE.createEReference();
 		syntheticReference.setEType(TypesPackage.eINSTANCE.getJvmType());
@@ -53,12 +53,13 @@ public class TypesService implements ITypeConformanceComputer<JvmTypeReference>{
 		syntheticContainer.setName("Synthetic_EClass");
 		syntheticContainer.getEStructuralFeatures().add(syntheticReference);
 	}
-	
-	public JvmTypeReference getTypeForName(String name, EObject context, JvmTypeReference...params) {
+
+	public JvmTypeReference getTypeForName(String name, EObject context, JvmTypeReference... params) {
 		IScope scope = scopeProvider.getScope(context, syntheticReference);
 		IEObjectDescription contentByName = scope.getContentByName(name);
-		if (contentByName!=null) {
-			JvmParameterizedTypeReference simpleType = jvmTypes.createJvmTypeReference((JvmType) contentByName.getEObjectOrProxy());
+		if (contentByName != null) {
+			JvmParameterizedTypeReference simpleType = factory.createJvmParameterizedTypeReference();
+			simpleType.setType((JvmType) contentByName.getEObjectOrProxy());
 			for (JvmTypeReference xTypeRef : params) {
 				simpleType.getArguments().add(EcoreUtil2.clone(xTypeRef));
 			}
@@ -75,8 +76,7 @@ public class TypesService implements ITypeConformanceComputer<JvmTypeReference>{
 		return conformanceComputer.isConformant(xTypeRef, xTypeRef1);
 	}
 
-	public XFunctionTypeRef createFunctionTypeRef(List<JvmTypeReference> parameterTypes,
-			JvmTypeReference returnType) {
+	public XFunctionTypeRef createFunctionTypeRef(List<JvmTypeReference> parameterTypes, JvmTypeReference returnType) {
 		XFunctionTypeRef ref = XtypeFactory.eINSTANCE.createXFunctionTypeRef();
 		for (JvmTypeReference xTypeRef : parameterTypes) {
 			ref.getParamTypes().add(EcoreUtil2.clone(xTypeRef));

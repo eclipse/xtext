@@ -20,7 +20,26 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * <p>
+ * Checks whether a given {@link org.eclipse.xtext.common.types.JvmIdentifyableElement}
+ * can possibly be called by a given {@link XAbstractFeatureCall}.
+ * </p>
+ * <p>
+ *  Note that the {@link XAbstractFeatureCall} not neccessarily needs to be complete.
+ *  Any guards for any missing information should be skipped. This ensures, that this predicate
+ *  can also be used in the context of content assist.
+ * </p>
+ * <p>
+ *  Taken from section <a href="http://java.sun.com/docs/books/jls/third_edition/html/expressions.html#316811">15.12.2.1 Identify Potentially Applicable Methods</a>
+ *  of the Java Language Specification, the following rules are applied:</p>
+ *  <ol>
+ *  <li>The arity of the member is lesser or equal to the arity of the method invocation.</li>
+ *  <li>If the member is a variable arity method with arity n, the arity of the method invocation is greater or equal to n-1.</li>
+ *  <li>If the member is a fixed arity method with arity n, the arity of the method invocation is equal to n.</li>
+ *  <li>If the method invocation includes explicit type parameters, and the member is a generic method, then the number of actual type parameters is equal to the number of formal type parameters.</li>
+ *  </ol>
+ *  
+ * @author Sven Efftinge
  */
 public class CallableFeaturePredicate {
 	

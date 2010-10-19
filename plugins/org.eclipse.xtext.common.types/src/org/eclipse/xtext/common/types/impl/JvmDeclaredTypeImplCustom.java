@@ -7,6 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmOperation;
+
+import com.google.common.collect.Iterables;
+
 
 
 public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
@@ -39,6 +44,16 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	@Override
 	public String getCanonicalName() {
 		return getFullyQualifiedName();
+	}
+	
+	@Override
+	public Iterable<JvmField> getDeclaredFields() {
+		return Iterables.filter(getMembers(), JvmField.class);
+	}
+	
+	@Override
+	public Iterable<JvmOperation> getDeclaredOperations() {
+		return Iterables.filter(getMembers(), JvmOperation.class);
 	}
 	
 }
