@@ -35,8 +35,8 @@ public class OperatorMapping {
 		map.put("!=", "notEquals");
 		map.put("<", "lessThan");
 		map.put("<=", "lessEqualsThan");
-		map.put(">", "greateThan");
-		map.put(">=", "greateEqualsThan");
+		map.put(">", "greaterThan");
+		map.put(">=", "greaterEqualsThan");
 		map.put("->", "mappedTo");
 		map.put("..", "upTo");
 		map.put("!", "not");

@@ -12,7 +12,7 @@ public abstract class JvmIdentifyableElementImplCustom extends JvmIdentifyableEl
 
 	@Override
 	public String toString() {
-		return getCanonicalName();
+		return String.valueOf(getCanonicalName());
 	}
 
 }

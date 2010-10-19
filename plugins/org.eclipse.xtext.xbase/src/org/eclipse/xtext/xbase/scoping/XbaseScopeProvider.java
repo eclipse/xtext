@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -118,8 +119,12 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			parent = createFeatureScopeForTypeRef(jvmTypeReference,
 					createCallableFeaturePredicate(context, null), IScope.NULLSCOPE);
 		}
-		if (assignable instanceof XFeatureCall && ((XFeatureCall) assignable).getFeature() instanceof XVariableDeclaration) {
-			return new SingletonScope(EObjectDescription.create("=", ((XFeatureCall) assignable).getFeature()), parent);
+		if (assignable instanceof XFeatureCall) {
+			XFeatureCall featureCall = (XFeatureCall) assignable;
+			if (featureCall.getFeature() instanceof XVariableDeclaration)
+				return new SingletonScope(EObjectDescription.create("=", featureCall.getFeature()), parent);
+			if (featureCall.getFeature() instanceof JvmFormalParameter)
+				return new SingletonScope(EObjectDescription.create("=", featureCall.getFeature()), parent);
 		}
 		return parent;
 		
@@ -148,6 +153,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			XBlockExpression block = (XBlockExpression) context.eContainer();
 			parentScope = createLocalVarScopeForBlock(block, block.getExpressions().indexOf(context), featurePredicate,
 					parentScope);
+		}
+		if (context.eContainer() instanceof XForLoopExpression) {
+			XForLoopExpression loop = (XForLoopExpression) context.eContainer();
+			parentScope = new SingletonScope(EObjectDescription.create(loop.getDeclaredParam().getName(), loop.getDeclaredParam()), parentScope);
 		}
 		if (context instanceof XClosure) {
 			parentScope = createLocalVarScopeForClosure((XClosure) context, featurePredicate, parentScope);

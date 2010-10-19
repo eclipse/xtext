@@ -115,7 +115,7 @@ XIfExpression:
 	('else' else=XExpression)?;
 
 XSwitchExpression:
-	'switch' switch=XExpression? '{'
+	'switch' switch=XExpressionInsideBlock? '{'
 	(cases+=XCasePart)+
 	('default' ':' (
 		default=XExpression ';' |
