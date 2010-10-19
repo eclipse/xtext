@@ -954,7 +954,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//JvmArgumentTypeReference returns JvmTypeReference:
-	//	JvmTypeReference | JvmWildcardTypeArgument;
+	//	JvmTypeReference | JvmWildcardTypeReference;
 	public XtypeGrammarAccess.JvmArgumentTypeReferenceElements getJvmArgumentTypeReferenceAccess() {
 		return gaXbase.getJvmArgumentTypeReferenceAccess();
 	}
@@ -963,14 +963,14 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		return getJvmArgumentTypeReferenceAccess().getRule();
 	}
 
-	//JvmWildcardTypeArgument:
-	//	{JvmWildcardTypeArgument} "?" (constraints+=JvmUpperBound | constraints+=JvmLowerBound)?;
-	public XtypeGrammarAccess.JvmWildcardTypeArgumentElements getJvmWildcardTypeArgumentAccess() {
-		return gaXbase.getJvmWildcardTypeArgumentAccess();
+	//JvmWildcardTypeReference:
+	//	{JvmWildcardTypeReference} "?" (constraints+=JvmUpperBound | constraints+=JvmLowerBound)?;
+	public XtypeGrammarAccess.JvmWildcardTypeReferenceElements getJvmWildcardTypeReferenceAccess() {
+		return gaXbase.getJvmWildcardTypeReferenceAccess();
 	}
 	
-	public ParserRule getJvmWildcardTypeArgumentRule() {
-		return getJvmWildcardTypeArgumentAccess().getRule();
+	public ParserRule getJvmWildcardTypeReferenceRule() {
+		return getJvmWildcardTypeReferenceAccess().getRule();
 	}
 
 	//JvmUpperBound:
