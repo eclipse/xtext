@@ -23,6 +23,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.xbase,
  org.eclipse.xtext.xbase.formatting,
  org.eclipse.xtext.xbase.impl,
+ org.eclipse.xtext.xbase.interpreter,
  org.eclipse.xtext.xbase.parseTreeConstruction,
  org.eclipse.xtext.xbase.parser.antlr,
  org.eclipse.xtext.xbase.parser.antlr.internal,
