@@ -28,7 +28,7 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JavaRefectAccessTest extends TestCase {
+public class JavaReflectAccessTest extends TestCase {
 	private ResourceSet resourceSet;
 	private ClasspathTypeProvider typeProvider;
 	
