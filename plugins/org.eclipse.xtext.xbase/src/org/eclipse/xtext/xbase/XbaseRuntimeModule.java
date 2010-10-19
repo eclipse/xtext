@@ -9,6 +9,10 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
+import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
+import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
+import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
+import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
 /**
@@ -21,5 +25,13 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	
 	public Class<? extends org.eclipse.xtext.typing.ITypeProvider<JvmTypeReference>> bindITypeProvider() {
 		return XbaseTypeProvider.class;
+	}
+	
+	public Class<? extends IExpressionInterpreter> bindInterpreter() {
+		return XbaseInterpreter.class;
+	}
+	
+	public Class<? extends IEvaluationContext> bindEvaluationContext() {
+		return DefaultEvaluationContext.class;
 	}
 }
