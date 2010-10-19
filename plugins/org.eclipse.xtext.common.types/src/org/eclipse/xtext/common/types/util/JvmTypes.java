@@ -8,9 +8,7 @@
 package org.eclipse.xtext.common.types.util;
 
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 
@@ -28,12 +26,6 @@ public class JvmTypes {
 		JvmParameterizedTypeReference typeRef = typesFactory.createJvmParameterizedTypeReference();
 		typeRef.setType(jvmType);
 		return typeRef;
-	}
-	
-	public JvmTypeArgument createArgument(JvmTypeReference typeRef) {
-		JvmReferenceTypeArgument argument = typesFactory.createJvmReferenceTypeArgument();
-		argument.setTypeReference(typeRef);
-		return argument;
 	}
 	
 	public boolean equals(JvmTypeReference ref1, JvmTypeReference ref2) {

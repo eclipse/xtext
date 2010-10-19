@@ -44,13 +44,11 @@ public class JvmParameterizedTypeReferenceTest extends TestCase {
 		JvmGenericType genericType = TypesFactory.eINSTANCE.createJvmGenericType();
 		genericType.setFullyQualifiedName("java.util.List");
 		parameterizedType.setType(genericType);
-		JvmReferenceTypeArgument argument = TypesFactory.eINSTANCE.createJvmReferenceTypeArgument();
 		JvmParameterizedTypeReference argumentReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		JvmGenericType argumentType = TypesFactory.eINSTANCE.createJvmGenericType();
 		argumentType.setFullyQualifiedName("java.lang.String");
 		argumentReference.setType(argumentType);
-		argument.setTypeReference(argumentReference);
-		parameterizedType.getArguments().add(argument);
+		parameterizedType.getArguments().add(argumentReference);
 		assertEquals("java.util.List<java.lang.String>", parameterizedType.getCanonicalName());
 	}
 	

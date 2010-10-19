@@ -7,18 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typing;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
-import org.eclipse.xtext.common.types.JvmTypeArgument;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
-import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
 
@@ -71,7 +63,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testClosure() throws Exception {
-		assertResolvedReturnType("(java.lang.String)=>java.lang.Boolean", "java.lang.String x| true");
+		assertResolvedReturnType("(java.lang.String) => java.lang.Boolean", "java.lang.String x| true");
 	}
 	
 	public void testFeatureCall() throws Exception {
@@ -101,60 +93,8 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	
-	protected String toString(JvmTypeArgument arg) {
-		if (arg instanceof JvmReferenceTypeArgument) {
-			return toString(((JvmReferenceTypeArgument)arg).getTypeReference());
-		} else if (arg instanceof JvmWildcardTypeArgument) {
-			JvmWildcardTypeArgument wcType = (JvmWildcardTypeArgument) arg;
-			String name="?";
-			EList<JvmTypeConstraint> constraints = wcType.getConstraints();
-			for (JvmTypeConstraint jvmTypeConstraint : constraints) {
-				if (jvmTypeConstraint instanceof JvmUpperBound) {
-					name+= " extends "+toString(jvmTypeConstraint.getTypeReference());
-				} else {
-					name+= " super "+toString(jvmTypeConstraint.getTypeReference());
-				}
-			}
-			return name;
-		}
-		throw new IllegalArgumentException();
-	}
-	
 	protected String toString(JvmTypeReference typeref) {
-		if (typeref instanceof XFunctionTypeRef) {
-			XFunctionTypeRef funcType = (XFunctionTypeRef) typeref;
-			EList<JvmTypeReference> paramTypes = funcType.getParamTypes();
-			String name = "";
-			int size = paramTypes.size();
-			for (int i=0;i<size;i++) {
-				if (i==0)
-					name+="(";
-				name+=toString(paramTypes.get(i));
-				if (i+1<size) {
-					name+=",";
-				} else {
-					name+=")";
-				}
-			}
-			return name+"=>"+toString(funcType.getReturnType());
-		} else if (typeref instanceof JvmParameterizedTypeReference) {
-			JvmParameterizedTypeReference xSimpleTypeRef = (JvmParameterizedTypeReference) typeref;
-			String name = xSimpleTypeRef.getType().getCanonicalName();
-			EList<JvmTypeArgument> typeParams = xSimpleTypeRef.getArguments();
-			int size = typeParams.size();
-			for (int i=0;i<size;i++) {
-				if (i==0)
-					name+="<";
-				name+=toString(typeParams.get(i));
-				if (i+1<size) {
-					name+=",";
-				} else {
-					name+=">";
-				}
-			}
-			return name;
-		} 
-		throw new IllegalArgumentException(typeref.toString());
+		return typeref.getCanonicalName();
 	}
 	
 	

@@ -9,7 +9,7 @@ package org.eclipse.xtext.common.types.impl;
 
 import java.util.List;
 
-import org.eclipse.xtext.common.types.JvmTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 public class JvmParameterizedTypeReferenceImplCustom extends JvmParameterizedTypeReferenceImpl {
 
@@ -28,11 +28,11 @@ public class JvmParameterizedTypeReferenceImplCustom extends JvmParameterizedTyp
 		return result;
 	}
 
-	void appendCanonicalArguments(StringBuilder result, List<JvmTypeArgument> arguments) {
+	void appendCanonicalArguments(StringBuilder result, List<JvmTypeReference> arguments) {
 		if (arguments == null || arguments.isEmpty())
 			return;
 		int wasLength = result.length();
-		for (JvmTypeArgument argument : arguments) {
+		for (JvmTypeReference argument : arguments) {
 			if (result.length() != wasLength)
 				result.append(",");
 			result.append(argument.getCanonicalName());

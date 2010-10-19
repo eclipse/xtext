@@ -42,8 +42,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
-import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -347,7 +345,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 			result.setType(createProxy(parameterizedType.getRawType()));
 			for (int i = 0; i < parameterizedType.getActualTypeArguments().length; i++) {
-				JvmTypeArgument argument = createTypeArgument(parameterizedType.getActualTypeArguments()[i],
+				JvmTypeReference argument = createTypeArgument(parameterizedType.getActualTypeArguments()[i],
 						parameterizedType.getRawType(), i);
 				result.getArguments().add(argument);
 			}
@@ -359,7 +357,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 	}
 
-	public JvmTypeArgument createTypeArgument(Type actualTypeArgument,
+	public JvmTypeReference createTypeArgument(Type actualTypeArgument,
 			Type rawType, int i) {
 		if (actualTypeArgument instanceof WildcardType) {
 			WildcardType wildcardType = (WildcardType) actualTypeArgument;
@@ -383,9 +381,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			return result;
 		}
 		else {
-			JvmReferenceTypeArgument result = TypesFactory.eINSTANCE.createJvmReferenceTypeArgument();
-			JvmTypeReference typeReference = createTypeReference(actualTypeArgument);
-			result.setTypeReference(typeReference);
+			JvmTypeReference result = createTypeReference(actualTypeArgument);
 			return result;
 		}
 	}

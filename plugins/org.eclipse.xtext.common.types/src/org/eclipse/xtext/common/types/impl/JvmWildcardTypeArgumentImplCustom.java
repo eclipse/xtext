@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.impl;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 
 public class JvmWildcardTypeArgumentImplCustom extends JvmWildcardTypeArgumentImpl {
@@ -32,6 +33,11 @@ public class JvmWildcardTypeArgumentImplCustom extends JvmWildcardTypeArgumentIm
 			return mutableResult.toString();
 		}
 		return "?";
+	}
+	
+	@Override
+	public JvmType getType() {
+		return null;
 	}
 
 }
