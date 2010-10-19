@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
@@ -31,7 +32,7 @@ public class URIBasedTestResourceDescription extends AbstractResourceDescription
 		return Collections.emptyList();
 	}
 	
-	public Iterable<String> getImportedNames() {
+	public Iterable<QualifiedName> getImportedNames() {
 		return Collections.emptyList();
 	}
 

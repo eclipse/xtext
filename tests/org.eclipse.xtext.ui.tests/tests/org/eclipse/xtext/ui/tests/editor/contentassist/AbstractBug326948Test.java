@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import junit.framework.Assert;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ISetup;

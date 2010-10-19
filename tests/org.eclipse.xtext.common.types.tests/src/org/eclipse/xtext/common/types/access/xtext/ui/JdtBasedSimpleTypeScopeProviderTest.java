@@ -19,6 +19,8 @@ import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScope;
 import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider;
+import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -42,8 +44,8 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 		super.setUp();
 		projectProvider = new MockJavaProjectProvider();
 		factory = new JdtTypeProviderFactory(projectProvider);
-		scopeProvider = new JdtBasedSimpleTypeScopeProvider();
-		scopeProvider.setTypeProviderFactory(factory);
+		DefaultDeclarativeQualifiedNameProvider qualifiedNameProvider = new DefaultDeclarativeQualifiedNameProvider();
+		scopeProvider = new JdtBasedSimpleTypeScopeProvider(factory, qualifiedNameProvider);
 		resourceSet = new ResourceSetImpl();
 		resource = new ResourceImpl();
 		resource.setURI(URI.createURI("http://does/not/exist.file"));
@@ -109,7 +111,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_01() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IEObjectDescription objectElement = scope.getContentByName(Object.class.getName());
+		IEObjectDescription objectElement = scope.getContentByName(QualifiedName.create(Object.class.getName()));
 		assertNotNull(objectElement);
 		assertEquals(1, resourceSet.eAdapters().size());
 	}
@@ -117,7 +119,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_02() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IEObjectDescription objectElement = scope.getContentByName(Object.class.getName());
+		IEObjectDescription objectElement = scope.getContentByName(QualifiedName.create(Object.class.getName()));
 		Resource objectResource = objectElement.getEObjectOrProxy().eResource();
 		assertTrue(objectResource.isLoaded());
 		int size = resourceSet.getResources().size();
@@ -131,7 +133,7 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_03() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IEObjectDescription objectElement = scope.getContentByName(Object.class.getName());
+		IEObjectDescription objectElement = scope.getContentByName(QualifiedName.create(Object.class.getName()));
 		Resource objectResource = objectElement.getEObjectOrProxy().eResource();
 		assertTrue(objectResource.isLoaded());
 		int adaptersSize = resourceSet.eAdapters().size();
@@ -144,8 +146,8 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 	public void testNotification_04() {
 		JdtBasedSimpleTypeScope scope = (JdtBasedSimpleTypeScope) scopeProvider.getScope(field, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		assertTrue(resourceSet.eAdapters().isEmpty());
-		IEObjectDescription objectElement = scope.getContentByName(Object.class.getName());
-		IEObjectDescription stringElement = scope.getContentByName(String.class.getName());
+		IEObjectDescription objectElement = scope.getContentByName(QualifiedName.create(Object.class.getName()));
+		IEObjectDescription stringElement = scope.getContentByName(QualifiedName.create(String.class.getName()));
 		Resource objectResource = objectElement.getEObjectOrProxy().eResource();
 		int size = resourceSet.getResources().size();
 		int adaptersSize = resourceSet.eAdapters().size();

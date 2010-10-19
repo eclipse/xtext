@@ -12,6 +12,7 @@ import junit.framework.TestCase;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.JvmVoid;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -25,14 +26,14 @@ public abstract class AbstractTypeScopeTest extends TestCase {
 	}
 	
 	public void testGetElementByName_01() {
-		IEObjectDescription objectElement = getTypeScope().getContentByName(Object.class.getName());
+		IEObjectDescription objectElement = getTypeScope().getContentByName(QualifiedName.create(Object.class.getName()));
 		assertNotNull(objectElement);
 		assertFalse(objectElement.getEObjectOrProxy().eIsProxy());
-		assertEquals("java.lang.Object", objectElement.getName());
+		assertEquals("java.lang.Object", objectElement.getName().toString());
 	}
 	
 	public void testGetElementByName_02() {
-		IEObjectDescription objectElement = getTypeScope().getContentByName(Object.class.getName() + "Foo");
+		IEObjectDescription objectElement = getTypeScope().getContentByName(QualifiedName.create(Object.class.getName() + "Foo"));
 		assertNull(objectElement);
 	}
 	
@@ -40,7 +41,7 @@ public abstract class AbstractTypeScopeTest extends TestCase {
 		JvmVoid voidType = TypesFactory.eINSTANCE.createJvmVoid();
 		IEObjectDescription element = getTypeScope().getContentByEObject(voidType);
 		assertNotNull(element);
-		assertEquals(voidType.getCanonicalName(), element.getName());
+		assertEquals(voidType.getCanonicalName(), element.getName().toString());
 	}
 	
 	public void testGetElementByInstance_02() {

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl;
 import org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -94,9 +95,9 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 		result.getReferenceDescriptions().add(createReferenceDescription(1));
 		result.getReferenceDescriptions().add(createReferenceDescription(2));
 		result.getReferenceDescriptions().add(createReferenceDescription(3));
-		result.getImportedNames().add("name1");
-		result.getImportedNames().add("name2");
-		result.getImportedNames().add("name3");
+		result.getImportedNames().add(createQualifiedName("name1"));
+		result.getImportedNames().add(createQualifiedName("name2"));
+		result.getImportedNames().add(createQualifiedName("name3"));
 		return result;
 	}
 	
@@ -104,7 +105,7 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 		EObjectDescriptionImpl result = (EObjectDescriptionImpl) BuilderStateFactory.eINSTANCE.createEObjectDescription();
 		result.setEClass(BuilderStatePackage.eINSTANCE.getEObjectDescription());
 		result.setFragment("newFragment" + idx);
-		result.setName("name" + idx);
+		result.setName(createQualifiedName("name" + idx));
 		return result;
 	}
 	
@@ -115,6 +116,10 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 		result.setSourceEObjectUri(URI.createFileURI(idx + "source.uri"));
 		result.setSourceEObjectUri(URI.createFileURI(idx + "target.uri"));
 		return result;
+	}
+	
+	public QualifiedName createQualifiedName(String qualifiedName) {
+		return QualifiedName.create(qualifiedName);
 	}
 	
 	/**

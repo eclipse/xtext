@@ -32,6 +32,7 @@ import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public class DomainmodelHyperlinkHelper extends HyperlinkHelper {
 
@@ -39,6 +40,9 @@ public class DomainmodelHyperlinkHelper extends HyperlinkHelper {
 	
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
+	
+	@Inject
+	private IQualifiedNameProvider qualifiedNameSupport;
 	
 	@Inject
 	private Provider<JdtHyperlink> jdtHyperlinkProvider;
@@ -55,19 +59,19 @@ public class DomainmodelHyperlinkHelper extends HyperlinkHelper {
 			if (!nodes.isEmpty()) {
 				AbstractNode node = nodes.get(0);
 				if (node.getOffset() <= offset && node.getOffset() + node.getLength() > offset) {
-					String qualifiedName = qualifiedNameProvider.getQualifiedName(eObject);
+					String qualifiedJavaName = qualifiedNameSupport.toString(qualifiedNameProvider.getQualifiedName(eObject));
 					if (resource.getResourceSet() instanceof XtextResourceSet) {
 						XtextResourceSet resourceSet = (XtextResourceSet) resource.getResourceSet();
 						Object uriContext = resourceSet.getClasspathURIContext();
 						if (uriContext instanceof IJavaProject) {
 							IJavaProject javaProject = (IJavaProject) uriContext;
 							try {
-								IType type = javaProject.findType(qualifiedName);
+								IType type = javaProject.findType(qualifiedJavaName);
 								if (type != null) {
 									JdtHyperlink hyperlink = jdtHyperlinkProvider.get();
 									hyperlink.setJavaElement(type);
 									hyperlink.setTypeLabel("Navigate to generated source code.");
-									hyperlink.setHyperlinkText("Go to type " + qualifiedName);
+									hyperlink.setHyperlinkText("Go to type " + qualifiedJavaName);
 									hyperlink.setHyperlinkRegion(new Region(node.getOffset(), node.getLength()));
 									acceptor.accept(hyperlink);
 								}

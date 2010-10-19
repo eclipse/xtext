@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
 
@@ -31,37 +32,17 @@ import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl#getFragment <em>Fragment</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl#getEClass <em>EClass</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl#getResourceDescriptor <em>Resource Descriptor</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl#getUserData <em>User Data</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class EObjectDescriptionImpl extends Container implements IEObjectDescription {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getFragment() <em>Fragment</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -103,6 +84,26 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	protected EMap<String, String> userData;
 
 	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final QualifiedName NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected QualifiedName name = NAME_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -126,7 +127,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
+	public QualifiedName getName() {
 		return name;
 	}
 
@@ -135,8 +136,8 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
+	public void setName(QualifiedName newName) {
+		QualifiedName oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.EOBJECT_DESCRIPTION__NAME, oldName, name));
@@ -311,7 +312,7 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public String getQualifiedName() {
+	public QualifiedName getQualifiedName() {
 		return getName();
 	}
 
@@ -369,8 +370,6 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case BuilderStatePackage.EOBJECT_DESCRIPTION__NAME:
-				return getName();
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__FRAGMENT:
 				return getFragment();
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__ECLASS:
@@ -381,6 +380,8 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__USER_DATA:
 				if (coreType) return getUserData();
 				else return getUserData().map();
+			case BuilderStatePackage.EOBJECT_DESCRIPTION__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -393,9 +394,6 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case BuilderStatePackage.EOBJECT_DESCRIPTION__NAME:
-				setName((String)newValue);
-				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__FRAGMENT:
 				setFragment((String)newValue);
 				return;
@@ -407,6 +405,9 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__USER_DATA:
 				((EStructuralFeature.Setting)getUserData()).set(newValue);
+				return;
+			case BuilderStatePackage.EOBJECT_DESCRIPTION__NAME:
+				setName((QualifiedName)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -420,9 +421,6 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case BuilderStatePackage.EOBJECT_DESCRIPTION__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__FRAGMENT:
 				setFragment(FRAGMENT_EDEFAULT);
 				return;
@@ -434,6 +432,9 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 				return;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__USER_DATA:
 				unsetUserData();
+				return;
+			case BuilderStatePackage.EOBJECT_DESCRIPTION__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -447,8 +448,6 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case BuilderStatePackage.EOBJECT_DESCRIPTION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__FRAGMENT:
 				return FRAGMENT_EDEFAULT == null ? fragment != null : !FRAGMENT_EDEFAULT.equals(fragment);
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__ECLASS:
@@ -457,6 +456,8 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 				return getResourceDescriptor() != null;
 			case BuilderStatePackage.EOBJECT_DESCRIPTION__USER_DATA:
 				return isSetUserData();
+			case BuilderStatePackage.EOBJECT_DESCRIPTION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -471,10 +472,10 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", fragment: ");
+		result.append(" (fragment: ");
 		result.append(fragment);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

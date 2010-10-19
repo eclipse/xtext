@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.Diagnostic;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -51,6 +52,9 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 
 	@Inject
 	private IScopeProvider scopeProvider;
+	
+	@Inject
+	private IQualifiedNameProvider qualifiedNameProvider;
 
 	private CrossReference findCrossReference(EObject context, AbstractNode node) {
 		if (node == null || context.equals(node.getElement()))
@@ -86,12 +90,13 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 				Set<String> qualifiedNames = Sets.newHashSet();
 				int addedDescriptions = 0;
 				for (IEObjectDescription referableElement : scope.getAllContents()) {
-					if (similarityMatcher.isSimilar(issueString, referableElement.getName())) {
+					String referableElementQualifiedName = qualifiedNameProvider.toString(referableElement.getQualifiedName());
+					if (similarityMatcher.isSimilar(issueString, qualifiedNameProvider.toString(referableElement.getName()))) {
 						addedDescriptions++;
 						createResolution(issueString, referableElement);
-						qualifiedNames.add(referableElement.getQualifiedName());
+						qualifiedNames.add(referableElementQualifiedName);
 					} else {
-						if (qualifiedNames.add(referableElement.getQualifiedName()))
+						if (qualifiedNames.add(referableElementQualifiedName))
 							discardedDescriptions.add(referableElement);
 					}
 				}
@@ -103,7 +108,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 			}
 			
 			public void createResolution(String issueString, IEObjectDescription solution) {
-				String replacement = solution.getName();
+				String replacement = qualifiedNameProvider.toString(solution.getName());
 				String replaceLabel = fixCrossReferenceLabel(issueString, replacement);
 				issueResolutionAcceptor.accept(issue, replaceLabel, replaceLabel, fixCrossReferenceImage(
 						issueString, replacement), new ReplaceModification(issue, replacement));

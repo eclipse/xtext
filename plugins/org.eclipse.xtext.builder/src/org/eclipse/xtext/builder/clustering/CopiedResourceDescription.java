@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -26,6 +27,7 @@ import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public class CopiedResourceDescription extends AbstractResourceDescription {
     
@@ -60,7 +62,7 @@ public class CopiedResourceDescription extends AbstractResourceDescription {
         return exported;
     }
 
-    public Iterable<String> getImportedNames() {
+    public Iterable<QualifiedName> getImportedNames() {
         throw new UnsupportedOperationException("getImportedNames()");
     }
 

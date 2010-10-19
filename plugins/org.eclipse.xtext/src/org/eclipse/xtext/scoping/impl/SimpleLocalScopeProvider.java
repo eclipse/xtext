@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -50,10 +51,10 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 	}
 
 	public IScope getScope(final EObject context, final EReference reference) {
-		Map<String, IEObjectDescription> map = cache.get(Tuples.pair(SimpleLocalScopeProvider.class.getName(),
-				reference), context.eResource(), new Provider<Map<String, IEObjectDescription>>() {
+		Map<QualifiedName, IEObjectDescription> map = cache.get(Tuples.pair(SimpleLocalScopeProvider.class.getName(),
+				reference), context.eResource(), new Provider<Map<QualifiedName, IEObjectDescription>>() {
 
-			public Map<String, IEObjectDescription> get() {
+			public Map<QualifiedName, IEObjectDescription> get() {
 				return toMap(context, reference);
 			}
 
@@ -62,25 +63,25 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 		return createMapBasedScope(globalScope, map);
 	}
 
-	protected IScope createMapBasedScope(IScope parent, Map<String, IEObjectDescription> map) {
+	protected IScope createMapBasedScope(IScope parent, Map<QualifiedName, IEObjectDescription> map) {
 		return new MapBasedScope(parent, map);
 	}
 
-	protected EObjectDescription createEObjectDescription(EObject next, String name) {
-		return new EObjectDescription(name, next, null);
+	protected IEObjectDescription createEObjectDescription(EObject next, QualifiedName qualifiedName) {
+		return EObjectDescription.create(qualifiedName, next, null);
 	}
 
-	protected Map<String, IEObjectDescription> toMap(final EObject context, final EReference reference) {
+	protected Map<QualifiedName, IEObjectDescription> toMap(final EObject context, final EReference reference) {
 		TreeIterator<EObject> iterator = context.eResource().getAllContents();
-		Map<String, IEObjectDescription> result = Maps.newLinkedHashMap();
+		Map<QualifiedName, IEObjectDescription> result = Maps.newLinkedHashMap();
 		while (iterator.hasNext()) {
 			EObject next = iterator.next();
 			if (reference.getEReferenceType().isInstance(next)) {
-				String name = nameProvider.getQualifiedName(next);
-				if (name != null && !result.containsKey(name)) {
-					EObjectDescription description = createEObjectDescription(next, name);
+				QualifiedName qualifiedName = nameProvider.getQualifiedName(next);
+				if (qualifiedName != null && !result.containsKey(qualifiedName)) {
+					IEObjectDescription description = createEObjectDescription(next, qualifiedName);
 					if (description != null)
-						result.put(name, description);
+						result.put(qualifiedName, description);
 				}
 			}
 		}

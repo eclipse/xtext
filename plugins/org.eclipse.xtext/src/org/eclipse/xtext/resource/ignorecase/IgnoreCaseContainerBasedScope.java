@@ -8,6 +8,7 @@
 package org.eclipse.xtext.resource.ignorecase;
 
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ContainerBasedScope;
@@ -22,8 +23,8 @@ public class IgnoreCaseContainerBasedScope extends ContainerBasedScope {
 	}
 
 	@Override
-	protected Iterable<IEObjectDescription> findAllEObjectsByName(String name) {
-		return getContainer().findAllEObjectsIgnoreCase(getReference().getEReferenceType(), name);
+	protected Iterable<IEObjectDescription> findAllEObjectsByName(QualifiedName qualifiedName) {
+		return getContainer().findAllEObjectsIgnoreCase(getReference().getEReferenceType(), qualifiedName);
 	}
 	
 	@Override

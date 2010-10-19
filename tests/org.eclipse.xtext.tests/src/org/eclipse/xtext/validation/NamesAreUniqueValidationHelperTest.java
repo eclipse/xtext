@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.Scopes;
@@ -215,7 +216,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractXtextTests imple
 	public void testErrorMessage_01() {
 		EClass eClass = createEClass();
 		eClass.setName("EClassName");
-		IEObjectDescription description = EObjectDescription.create(eClass.getName(), eClass);
+		IEObjectDescription description = EObjectDescription.create(QualifiedName.create(eClass.getName()), eClass);
 		String errorMessage = helper.getDuplicateNameErrorMessage(description, EcorePackage.Literals.ECLASSIFIER, EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 		assertEquals("Duplicate EClassifier 'EClassName'", errorMessage);
 	}
@@ -223,7 +224,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractXtextTests imple
 	public void testErrorMessage_02() {
 		EClass eClass = createEClass();
 		eClass.setName("EClassName");
-		IEObjectDescription description = EObjectDescription.create(eClass.getName(), eClass);
+		IEObjectDescription description = EObjectDescription.create(QualifiedName.create(eClass.getName()), eClass);
 		String errorMessage = helper.getDuplicateNameErrorMessage(description, EcorePackage.Literals.ECLASS, EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 		assertEquals("Duplicate EClass 'EClassName'", errorMessage);
 	}
@@ -234,7 +235,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractXtextTests imple
 		EAttribute attribute = EcoreFactory.eINSTANCE.createEAttribute();
 		attribute.setName("Attribute");
 		eClass.getEStructuralFeatures().add(attribute);
-		IEObjectDescription description = EObjectDescription.create(eClass.getName() + "." + attribute.getName(), attribute);
+		IEObjectDescription description = EObjectDescription.create(QualifiedName.create((eClass.getName() + "." + attribute.getName())), attribute);
 		String errorMessage = helper.getDuplicateNameErrorMessage(description, EcorePackage.Literals.EATTRIBUTE, EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 		assertEquals("Duplicate EAttribute 'Attribute' in EClass 'EClassName'", errorMessage);
 	}
@@ -245,9 +246,9 @@ public class NamesAreUniqueValidationHelperTest extends AbstractXtextTests imple
 		EAttribute attribute = EcoreFactory.eINSTANCE.createEAttribute();
 		attribute.setName("Attribute");
 		eClass.getEStructuralFeatures().add(attribute);
-		IEObjectDescription description = EObjectDescription.create(attribute.getName(), attribute);
+		IEObjectDescription description = EObjectDescription.create(QualifiedName.create(attribute.getName()), attribute);
 		String errorMessage = helper.getDuplicateNameErrorMessage(description, EcorePackage.Literals.EATTRIBUTE, EcorePackage.Literals.ENAMED_ELEMENT__NAME);
-		assertEquals("Duplicate EAttribute 'Attribute'", errorMessage);
+		assertEquals("Duplicate EAttribute 'Attribute' in EClass 'EClassName'", errorMessage);
 	}
 
 	private EClass createEClass() {

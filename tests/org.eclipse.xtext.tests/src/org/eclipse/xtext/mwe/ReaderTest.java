@@ -35,8 +35,9 @@ public class ReaderTest extends AbstractReaderTest {
 		reader.addRegister(new IndexTestLanguageStandaloneSetup());
 
 		SlotEntry entry = createSlotEntry();
-		entry.setName("foo.bar.Person");
+		entry.setName("foo:bar:Person");
 		entry.setFirstOnly(true);
+		entry.setNamespaceDelimiter(":");
 
 		reader.addLoad(entry);
 		WorkflowContext ctx = ctx();
@@ -52,10 +53,12 @@ public class ReaderTest extends AbstractReaderTest {
 		SlotEntry entry = createSlotEntry();
 		entry.setSlot("person");
 		entry.setName("foo.bar.Person");
+		entry.setNamespaceDelimiter(".");
 		entry.setFirstOnly(true);
 		SlotEntry entry2 = createSlotEntry();
 		entry2.setSlot("string");
 		entry2.setName("foo.bar.sub.String");
+		entry2.setNamespaceDelimiter(".");
 		entry2.setFirstOnly(true);
 		reader.addLoad(entry);
 		reader.addLoad(entry2);

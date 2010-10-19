@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -216,7 +217,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		return null;
 	}
 	
-	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name) {
+	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, QualifiedName qualifiedName) {
 		fail("Unexpected invocation");
 		return null;
 	}
@@ -230,7 +231,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		return Collections.emptyList();
 	}
 	
-	public Iterable<String> getImportedNames() {
+	public Iterable<QualifiedName> getImportedNames() {
 		fail("Unexpected invocation");
 		return null;
 	}

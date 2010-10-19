@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.xtext;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 
 import com.google.inject.Inject;
 
@@ -17,15 +18,19 @@ import com.google.inject.Inject;
  * A local scope provider for Java types on the classpath.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public class ClasspathBasedTypeScopeProvider extends AbstractTypeScopeProvider {
 	
 	@Inject
 	private ClasspathTypeProviderFactory typeProviderFactory;
 
+	@Inject 
+	private IQualifiedNameProvider qualifiedNameProvider;
+	
 	@Override
 	public ClasspathBasedTypeScope createTypeScope(IJvmTypeProvider typeProvider) {
-		return new ClasspathBasedTypeScope((ClasspathTypeProvider) typeProvider);
+		return new ClasspathBasedTypeScope((ClasspathTypeProvider) typeProvider, qualifiedNameProvider);
 	}
 
 	public void setTypeProviderFactory(ClasspathTypeProviderFactory typeProviderFactory) {

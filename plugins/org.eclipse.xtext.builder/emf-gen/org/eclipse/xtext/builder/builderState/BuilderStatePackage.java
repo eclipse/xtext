@@ -89,22 +89,22 @@ public interface BuilderStatePackage extends EPackage {
 	int RESOURCE_DESCRIPTION__EXPORTED_OBJECTS = 1;
 
 	/**
-	 * The feature id for the '<em><b>Imported Names</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_DESCRIPTION__IMPORTED_NAMES = 2;
-
-	/**
 	 * The feature id for the '<em><b>Reference Descriptions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS = 3;
+	int RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Imported Names</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_DESCRIPTION__IMPORTED_NAMES = 3;
 
 	/**
 	 * The number of structural features of the '<em>Resource Description</em>' class.
@@ -126,22 +126,13 @@ public interface BuilderStatePackage extends EPackage {
 	int EOBJECT_DESCRIPTION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOBJECT_DESCRIPTION__NAME = 0;
-
-	/**
 	 * The feature id for the '<em><b>Fragment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EOBJECT_DESCRIPTION__FRAGMENT = 1;
+	int EOBJECT_DESCRIPTION__FRAGMENT = 0;
 
 	/**
 	 * The feature id for the '<em><b>EClass</b></em>' reference.
@@ -150,7 +141,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EOBJECT_DESCRIPTION__ECLASS = 2;
+	int EOBJECT_DESCRIPTION__ECLASS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Resource Descriptor</b></em>' container reference.
@@ -159,7 +150,7 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR = 3;
+	int EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR = 2;
 
 	/**
 	 * The feature id for the '<em><b>User Data</b></em>' map.
@@ -168,7 +159,16 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EOBJECT_DESCRIPTION__USER_DATA = 4;
+	int EOBJECT_DESCRIPTION__USER_DATA = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOBJECT_DESCRIPTION__NAME = 4;
 
 	/**
 	 * The number of structural features of the '<em>EObject Description</em>' class.
@@ -299,6 +299,17 @@ public interface BuilderStatePackage extends EPackage {
 	 * @generated
 	 */
 	int ESTRING_ARRAY = 5;
+
+
+	/**
+	 * The meta object id for the '<em>Qualified Name</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.naming.QualifiedName
+	 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getQualifiedName()
+	 * @generated
+	 */
+	int QUALIFIED_NAME = 6;
 
 
 	/**
@@ -544,6 +555,17 @@ public interface BuilderStatePackage extends EPackage {
 	EDataType getEStringArray();
 
 	/**
+	 * Returns the meta object for data type '{@link org.eclipse.xtext.naming.QualifiedName <em>Qualified Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Qualified Name</em>'.
+	 * @see org.eclipse.xtext.naming.QualifiedName
+	 * @model instanceClass="org.eclipse.xtext.naming.QualifiedName"
+	 * @generated
+	 */
+	EDataType getQualifiedName();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -751,6 +773,16 @@ public interface BuilderStatePackage extends EPackage {
 		 * @generated
 		 */
 		EDataType ESTRING_ARRAY = eINSTANCE.getEStringArray();
+
+		/**
+		 * The meta object literal for the '<em>Qualified Name</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.naming.QualifiedName
+		 * @see org.eclipse.xtext.builder.builderState.impl.BuilderStatePackageImpl#getQualifiedName()
+		 * @generated
+		 */
+		EDataType QUALIFIED_NAME = eINSTANCE.getQualifiedName();
 
 	}
 

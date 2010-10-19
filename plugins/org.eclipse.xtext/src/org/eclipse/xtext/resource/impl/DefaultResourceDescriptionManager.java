@@ -14,6 +14,7 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.DescriptionUtils;
 import org.eclipse.xtext.resource.IContainer;
@@ -87,17 +88,17 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
 		if (!delta.haveEObjectDescriptionsChanged())
 			return false;
-		Set<String> names = Sets.newHashSet();
+		Set<QualifiedName> names = Sets.newHashSet();
 		addExportedNames(names,delta.getOld());
 		addExportedNames(names,delta.getNew());
 		return !Collections.disjoint(names, getImportedNames(candidate));
 	}
 
-	protected Collection<String> getImportedNames(IResourceDescription candidate) {
+	protected Collection<QualifiedName> getImportedNames(IResourceDescription candidate) {
 		return Lists.newArrayList(candidate.getImportedNames());
 	}
 
-	protected void addExportedNames(Set<String> names, IResourceDescription resourceDescriptor) {
+	protected void addExportedNames(Set<QualifiedName> names, IResourceDescription resourceDescriptor) {
 		if (resourceDescriptor==null)
 			return;
 		Iterable<IEObjectDescription> iterable = resourceDescriptor.getExportedObjects();

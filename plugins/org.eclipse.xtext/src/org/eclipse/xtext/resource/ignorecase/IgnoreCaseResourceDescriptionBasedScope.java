@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource.ignorecase;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ResourceDescriptionBasedScope;
@@ -24,15 +25,15 @@ public class IgnoreCaseResourceDescriptionBasedScope extends ResourceDescription
 	}
 	
 	@Override
-	public IEObjectDescription getContentByName(String name) {
-		Iterable<IEObjectDescription> objects = getDescription().getExportedObjectsIgnoreCase(getElementType(), name);
+	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
+		Iterable<IEObjectDescription> objects = getDescription().getExportedObjectsIgnoreCase(getElementType(), qualifiedName);
 		Iterator<IEObjectDescription> iter = objects.iterator();
 		if (iter.hasNext()) {
 			IEObjectDescription result = iter.next();
 			if (!iter.hasNext())
 				return result;
 		}
-		return getOuterScope().getContentByName(name);
+		return getOuterScope().getContentByName(qualifiedName);
 	}
 	
 	@Override

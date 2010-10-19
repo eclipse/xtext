@@ -8,6 +8,7 @@
 package org.eclipse.xtext.resource.ignorecase;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
@@ -16,6 +17,6 @@ import org.eclipse.xtext.resource.IResourceDescription;
  */
 public interface IIgnoreCaseResourceDescription extends IResourceDescription {
 
-	Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(EClass clazz, String name);
+	Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(EClass clazz, QualifiedName qualifiedName);
 	
 }

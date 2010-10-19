@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
@@ -36,8 +37,8 @@ import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getURI <em>URI</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getExportedObjects <em>Exported Objects</em>}</li>
- *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getImportedNames <em>Imported Names</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getReferenceDescriptions <em>Reference Descriptions</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getImportedNames <em>Imported Names</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,16 +76,6 @@ public class ResourceDescriptionImpl extends Container implements IIgnoreCaseRes
 	protected EList<IEObjectDescription> exportedObjects;
 
 	/**
-	 * The cached value of the '{@link #getImportedNames() <em>Imported Names</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getImportedNames()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> importedNames;
-
-	/**
 	 * The cached value of the '{@link #getReferenceDescriptions() <em>Reference Descriptions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,6 +84,16 @@ public class ResourceDescriptionImpl extends Container implements IIgnoreCaseRes
 	 * @ordered
 	 */
 	protected EList<IReferenceDescription> referenceDescriptions;
+
+	/**
+	 * The cached value of the '{@link #getImportedNames() <em>Imported Names</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImportedNames()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<QualifiedName> importedNames;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,9 +161,9 @@ public class ResourceDescriptionImpl extends Container implements IIgnoreCaseRes
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getImportedNames() {
+	public EList<QualifiedName> getImportedNames() {
 		if (importedNames == null) {
-			importedNames = new EDataTypeUniqueEList<String>(String.class, this, BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES);
+			importedNames = new EDataTypeUniqueEList<QualifiedName>(QualifiedName.class, this, BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES);
 		}
 		return importedNames;
 	}
@@ -179,6 +180,17 @@ public class ResourceDescriptionImpl extends Container implements IIgnoreCaseRes
 		return referenceDescriptions;
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<IEObjectDescription> getExportedObjects(EClass type, String name) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
 	private EObjectDescriptionLookUp getLookUp() {
 		if (lookUp == null) {
 			lookUp = new EObjectDescriptionLookUp(getExportedObjects());
@@ -186,12 +198,12 @@ public class ResourceDescriptionImpl extends Container implements IIgnoreCaseRes
 		return lookUp;
 	}
 
-	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
-		return getLookUp().getExportedObjects(clazz, name);
+	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final QualifiedName qualifiedName) {
+		return getLookUp().getExportedObjects(clazz, qualifiedName);
 	}
 	
-	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(final EClass clazz, final String name) {
-		return getLookUp().getExportedObjectsIgnoreCase(clazz, name);
+	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(final EClass clazz, final QualifiedName qualifiedName) {
+		return getLookUp().getExportedObjectsIgnoreCase(clazz, qualifiedName);
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz) {
@@ -245,10 +257,10 @@ public class ResourceDescriptionImpl extends Container implements IIgnoreCaseRes
 				return getURI();
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS:
 				return getExportedObjects();
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES:
-				return getImportedNames();
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS:
 				return getReferenceDescriptions();
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES:
+				return getImportedNames();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -269,13 +281,13 @@ public class ResourceDescriptionImpl extends Container implements IIgnoreCaseRes
 				getExportedObjects().clear();
 				getExportedObjects().addAll((Collection<? extends IEObjectDescription>)newValue);
 				return;
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES:
-				getImportedNames().clear();
-				getImportedNames().addAll((Collection<? extends String>)newValue);
-				return;
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS:
 				getReferenceDescriptions().clear();
 				getReferenceDescriptions().addAll((Collection<? extends IReferenceDescription>)newValue);
+				return;
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES:
+				getImportedNames().clear();
+				getImportedNames().addAll((Collection<? extends QualifiedName>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -295,11 +307,11 @@ public class ResourceDescriptionImpl extends Container implements IIgnoreCaseRes
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS:
 				getExportedObjects().clear();
 				return;
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES:
-				getImportedNames().clear();
-				return;
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS:
 				getReferenceDescriptions().clear();
+				return;
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES:
+				getImportedNames().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -317,10 +329,10 @@ public class ResourceDescriptionImpl extends Container implements IIgnoreCaseRes
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS:
 				return exportedObjects != null && !exportedObjects.isEmpty();
-			case BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES:
-				return importedNames != null && !importedNames.isEmpty();
 			case BuilderStatePackage.RESOURCE_DESCRIPTION__REFERENCE_DESCRIPTIONS:
 				return referenceDescriptions != null && !referenceDescriptions.isEmpty();
+			case BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES:
+				return importedNames != null && !importedNames.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

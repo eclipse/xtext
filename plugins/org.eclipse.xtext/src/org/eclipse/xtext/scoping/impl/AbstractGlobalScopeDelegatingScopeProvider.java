@@ -24,10 +24,14 @@ public abstract class AbstractGlobalScopeDelegatingScopeProvider extends Abstrac
 	@Inject
 	private IGlobalScopeProvider globalScopeProvider;
 
-	public void setGlobalScopeProvider(IGlobalScopeProvider globalScopeProvider) {
+	protected AbstractGlobalScopeDelegatingScopeProvider(IGlobalScopeProvider globalScopeProvider) {
 		this.globalScopeProvider = globalScopeProvider;
 	}
 
+	@Inject
+	public AbstractGlobalScopeDelegatingScopeProvider() {
+	}
+	
 	protected IScope getGlobalScope(final EObject context, final EReference reference) {
 		return wrap(globalScopeProvider.getScope(context, reference));
 	}

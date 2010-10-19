@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
@@ -54,12 +55,12 @@ public class ScopeTest extends TestCase {
 	}
 
 	public void testContentByName_existent() throws Exception {
-		String name = EcorePackage.eINSTANCE.getEAnnotation().getName();
-		assertEquals(name, scope.getContentByName(name).getName());
+		QualifiedName qualifiedName = QualifiedName.create(EcorePackage.eINSTANCE.getEAnnotation().getName());
+		assertEquals(qualifiedName, scope.getContentByName(qualifiedName).getName());
 	}
 
 	public void testContentByName_nonExistent() throws Exception {
-		assertNull(scope.getContentByName("unknown_name"));
+		assertNull(scope.getContentByName(QualifiedName.create("unknown_name")));
 	}
 
 	public void testContentByEObject_NotShadowed() throws Exception {
@@ -101,14 +102,14 @@ public class ScopeTest extends TestCase {
 	}
 
 	private AbstractScope getScopeWithSimpleNames(boolean thirdLevelElementsEnabled) {
-		String prefix = "prefix.";
-		String simpleName = "test";
-		Map<String, IEObjectDescription> mapFirstLevel = Maps.newHashMap();
-		mapFirstLevel.put(simpleName,new EObjectDescription(simpleName,EcorePackage.eINSTANCE.getEBigInteger(), null));
-		Map<String, IEObjectDescription> mapSecondLevel =  Maps.newHashMap();
-		mapSecondLevel.put(simpleName,new EObjectDescription(simpleName,EcorePackage.eINSTANCE.getEBigDecimal(), null));
-		Map<String, IEObjectDescription> thirdLevel =  Maps.newHashMap();
-		thirdLevel.put(prefix + simpleName,new EObjectDescription(prefix + simpleName,EcorePackage.eINSTANCE.getEBigDecimal(), null));
+		Map<QualifiedName, IEObjectDescription> mapFirstLevel = Maps.newHashMap();
+		QualifiedName simpleName = QualifiedName.create("test");
+		QualifiedName prefixedName = QualifiedName.create("prefix", "test");
+		mapFirstLevel.put(simpleName, EObjectDescription.create(simpleName,EcorePackage.eINSTANCE.getEBigInteger(), null));
+		Map<QualifiedName, IEObjectDescription> mapSecondLevel =  Maps.newHashMap();
+		mapSecondLevel.put(simpleName, EObjectDescription.create(simpleName,EcorePackage.eINSTANCE.getEBigDecimal(), null));
+		Map<QualifiedName, IEObjectDescription> thirdLevel =  Maps.newHashMap();
+		thirdLevel.put(prefixedName, EObjectDescription.create(prefixedName,EcorePackage.eINSTANCE.getEBigDecimal(), null));
 		MapBasedScope grandParent = new MapBasedScope(IScope.NULLSCOPE, thirdLevel);
 		MapBasedScope parent = new MapBasedScope(thirdLevelElementsEnabled?grandParent:IScope.NULLSCOPE, mapSecondLevel);
 		return new MapBasedScope(parent,mapFirstLevel);

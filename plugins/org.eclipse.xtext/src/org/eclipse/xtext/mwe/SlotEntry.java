@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -28,13 +30,17 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+/**
+ * @author Jan Koehnlein - introduced QualifiedName
+ */
 public class SlotEntry {
 	private String slot = "model";
 	private String name;
+	private String namespaceDelimiter = ".";
 	private String nsURI;
 	private String type;
 	private boolean firstOnly = false;
-	
+
 	private static final Logger log = Logger.getLogger(SlotEntry.class);
 
 	public void setType(String typeName) {
@@ -55,13 +61,21 @@ public class SlotEntry {
 	public String getSlot() {
 		return slot;
 	}
-	
+
+	public String getNamespaceDelimiter() {
+		return namespaceDelimiter;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	public void setSlot(String slot) {
 		this.slot = slot;
+	}
+
+	public void setNamespaceDelimiter(String namespaceDelimiter) {
+		this.namespaceDelimiter = namespaceDelimiter;
 	}
 
 	public void setFirstOnly(boolean firstOnly) {
@@ -75,7 +89,7 @@ public class SlotEntry {
 	public void put(WorkflowContext ctx, IResourceDescriptions resourceDescriptions, ResourceSet resourceSet) {
 		Set<EClass> eClasses = findEClasses(resourceSet, nsURI, type);
 		List<EObject> elements = findEObjectsOfType(eClasses, resourceDescriptions, resourceSet);
-		if(elements.isEmpty()) {
+		if (elements.isEmpty()) {
 			log.warn("Could not find any exported element of type '" + type + "' -> Slot '" + slot + "' is empty.");
 			ctx.set(slot, Collections.emptyList());
 		} else if (firstOnly) {
@@ -98,7 +112,7 @@ public class SlotEntry {
 		}
 		return elements;
 	}
-	
+
 	protected Set<EClass> findEClasses(ResourceSet resourceSet, String nsURI2, String typeName2) {
 		if (typeName2 == null)
 			return Collections.emptySet();
@@ -130,7 +144,11 @@ public class SlotEntry {
 			EClass eClass = iterator.next();
 			valid = valid || EcorePackage.Literals.EOBJECT == eClass || eClass.isSuperTypeOf(desc.getEClass());
 		}
-		return valid && (name == null || name.equals(desc.getName()));
+		if(name != null) {
+			QualifiedName qualifiedName = QualifiedName.create(name.split(Pattern.quote(getNamespaceDelimiter())));
+			return valid && (qualifiedName == null || qualifiedName.equals(desc.getName()));
+		} 
+		return valid;
 	}
 
 	protected EObject getEObject(IEObjectDescription description, ResourceSet resourceSet) {

@@ -22,15 +22,23 @@ import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
+/**
+ * @author Jan Koehnlein - introduced QualifiedName
+ */
 public class Generator implements IXtextBuilderParticipant {
 
+	@Inject
+	private IQualifiedNameProvider qualifiedNameProvider; 
+	
 	public void build(final IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		IJavaProject javaProject = JavaCore.create(context.getBuiltProject());
 		if (!javaProject.exists())
@@ -62,8 +70,8 @@ public class Generator implements IXtextBuilderParticipant {
 				Iterable<IEObjectDescription> iterable = delta.getOld().getExportedObjects(
 						DomainmodelPackage.Literals.ENTITY);
 				for (IEObjectDescription ieObjectDescription : iterable) {
-					String qualifiedName = ieObjectDescription.getQualifiedName();
-					IFile file = createFile(folder, qualifiedName);
+					String qualifiedJavaName = qualifiedNameProvider.toString(ieObjectDescription.getQualifiedName());
+					IFile file = createFile(folder, qualifiedJavaName);
 					if (file.exists()) {
 						file.delete(true, monitor);
 						context.needRebuild();
@@ -75,16 +83,16 @@ public class Generator implements IXtextBuilderParticipant {
 				if (delta.getOld() != null) {
 					Iterable<IEObjectDescription> oldOnes = delta.getOld().getExportedObjects(
 							DomainmodelPackage.Literals.ENTITY);
-					Set<String> names = Sets.newHashSet(Iterables.transform(newOnes,
+					Set<String> qualifiedJavaNames = Sets.newHashSet(Iterables.transform(newOnes,
 							new Function<IEObjectDescription, String>() {
 								public String apply(IEObjectDescription from) {
-									return from.getQualifiedName();
+									return qualifiedNameProvider.toString(from.getQualifiedName());
 								}
 							}));
 
 					for (IEObjectDescription descr : oldOnes) {
-						if (!names.contains(descr.getQualifiedName())) {
-							IFile file = createFile(folder, descr.getQualifiedName());
+						if (!qualifiedJavaNames.contains(descr.getQualifiedName())) {
+							IFile file = createFile(folder, qualifiedNameProvider.toString(descr.getQualifiedName()));
 							if (file.exists()) {
 								file.delete(true, monitor);
 								context.needRebuild();

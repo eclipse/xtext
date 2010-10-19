@@ -17,9 +17,13 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
+import org.eclipse.xtext.util.Strings;
+
+import com.google.common.collect.Iterables;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,6 +90,8 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 				return createEURIFromString(eDataType, initialValue);
 			case BuilderStatePackage.ESTRING_ARRAY:
 				return createEStringArrayFromString(eDataType, initialValue);
+			case BuilderStatePackage.QUALIFIED_NAME:
+				return createQualifiedNameFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -103,6 +109,8 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 				return convertEURIToString(eDataType, instanceValue);
 			case BuilderStatePackage.ESTRING_ARRAY:
 				return convertEStringArrayToString(eDataType, instanceValue);
+			case BuilderStatePackage.QUALIFIED_NAME:
+				return convertQualifiedNameToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -183,6 +191,24 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 */
 	public String convertEStringArrayToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public QualifiedName createQualifiedNameFromString(EDataType eDataType, String initialValue) {
+		return QualifiedName.create(Strings.unpack(initialValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String convertQualifiedNameToString(EDataType eDataType, Object instanceValue) {
+		return Strings.pack(Iterables.toArray(((QualifiedName) instanceValue).getSegments(), String.class)); 
 	}
 
 	/**

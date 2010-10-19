@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource.impl;
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseContainer;
@@ -34,26 +35,26 @@ public abstract class AbstractContainer implements IIgnoreCaseContainer {
 		}));
 	}
 
-	public Iterable<IEObjectDescription> findAllEObjects(final EClass type, final String name) {
+	public Iterable<IEObjectDescription> findAllEObjects(final EClass type, final QualifiedName qualifiedName) {
 		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
 				if (from != null)
-					return from.getExportedObjects(type, name);
+					return from.getExportedObjects(type, qualifiedName);
 				return Collections.emptyList();
 			}
 		}));
 	}
 	
-	public Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(final EClass type, final String name) {
+	public Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(final EClass type, final QualifiedName qualifiedName) {
 		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
 				if (from == null)
 					return Collections.emptyList();
 				if (from instanceof IIgnoreCaseResourceDescription)
-					return ((IIgnoreCaseResourceDescription) from).getExportedObjectsIgnoreCase(type, name);
+					return ((IIgnoreCaseResourceDescription) from).getExportedObjectsIgnoreCase(type, qualifiedName);
 				return Iterables.filter(from.getExportedObjects(type), new Predicate<IEObjectDescription>() {
 					public boolean apply(IEObjectDescription input) {
-						return name.equalsIgnoreCase(input.getName());
+						return qualifiedName.equalsIgnoreCase(input.getName());
 					}
 				});
 			}

@@ -10,6 +10,7 @@ package org.eclipse.xtext.scoping;
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
@@ -19,6 +20,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Holger Schill - Contribution to Bug 309764
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public interface IScope {
 	
@@ -47,7 +49,7 @@ public interface IScope {
 			return Collections.emptyList();
 		}
 
-		public IEObjectDescription getContentByName(String name) {
+		public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
 			return null;
 		}
     };
@@ -72,7 +74,7 @@ public interface IScope {
     /**
      * a deep search for the element with the given name
      */
-    IEObjectDescription getContentByName(String name);
+    IEObjectDescription getContentByName(QualifiedName qualifiedName);
     
     /**
      * @return an {@link IEObjectDescription} that represents the first element from {@link IScope#getAllContentsByEObject(EObject)} or null

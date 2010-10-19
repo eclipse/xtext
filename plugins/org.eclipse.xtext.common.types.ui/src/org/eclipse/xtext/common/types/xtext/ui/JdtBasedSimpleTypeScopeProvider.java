@@ -11,6 +11,7 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 
 import com.google.inject.Inject;
 
@@ -18,19 +19,28 @@ import com.google.inject.Inject;
  * A local scope provider for Java types based on Java projects.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public class JdtBasedSimpleTypeScopeProvider extends AbstractTypeScopeProvider {
 
 	@Inject
 	private JdtTypeProviderFactory typeProviderFactory;
 
-	@Override
-	public JdtBasedSimpleTypeScope createTypeScope(IJvmTypeProvider typeProvider) {
-		return new JdtBasedSimpleTypeScope((IJdtTypeProvider) typeProvider);
+	@Inject 
+	private IQualifiedNameProvider qualifiedNameProvider;
+	
+	@Inject
+	public JdtBasedSimpleTypeScopeProvider() {
 	}
 
-	public void setTypeProviderFactory(JdtTypeProviderFactory typeProviderFactory) {
+	public JdtBasedSimpleTypeScopeProvider(JdtTypeProviderFactory typeProviderFactory, IQualifiedNameProvider qualifiedNameProvider) {
 		this.typeProviderFactory = typeProviderFactory;
+		this.qualifiedNameProvider = qualifiedNameProvider;
+	}
+	
+	@Override
+	public JdtBasedSimpleTypeScope createTypeScope(IJvmTypeProvider typeProvider) {
+		return new JdtBasedSimpleTypeScope((IJdtTypeProvider) typeProvider, qualifiedNameProvider);
 	}
 
 	@Override

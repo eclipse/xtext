@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
@@ -69,7 +70,7 @@ public class BuilderUtil {
 		URI uri = URI.createURI("platform:/resource"+fileUri);
 		IResourceDescription description = descriptions.getResourceDescription(uri);
 		if (description!=null) {
-			return description.getExportedObjects(EcorePackage.Literals.EOBJECT, eObjectName).iterator().hasNext();
+			return description.getExportedObjects(EcorePackage.Literals.EOBJECT, QualifiedName.create(eObjectName)).iterator().hasNext();
 		}
 		return false;
 	}

@@ -9,6 +9,7 @@ package org.eclipse.xtext.resource.ignorecase;
 
 import java.util.Map;
 
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
@@ -21,10 +22,10 @@ import com.google.common.collect.Maps;
 public class IgnoreCaseImportedNamespaceAwareScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
 
 	@Override
-	protected Map<String, IEObjectDescription> toMap(Iterable<IEObjectDescription> scopedElementsFor) {
-		Map<String, IEObjectDescription> result = Maps.newHashMap();
+	protected Map<QualifiedName, IEObjectDescription> toMap(Iterable<IEObjectDescription> scopedElementsFor) {
+		Map<QualifiedName, IEObjectDescription> result = Maps.newHashMap();
 		for (IEObjectDescription ieObjectDescription : scopedElementsFor) {
-			String key = ieObjectDescription.getName().toLowerCase();
+			QualifiedName key = ieObjectDescription.getName().toLowerCase();
 			if (!result.containsKey(key))
 				result.put(key, ieObjectDescription);
 		}
@@ -32,7 +33,7 @@ public class IgnoreCaseImportedNamespaceAwareScopeProvider extends ImportedNames
 	}
 	
 	@Override
-	protected IScope createMapBasedScope(IScope parentScope, Map<String, IEObjectDescription> map) {
+	protected IScope createMapBasedScope(IScope parentScope, Map<QualifiedName, IEObjectDescription> map) {
 		return new IgnoreCaseMapBasedScope(parentScope, map);
 	}
 	

@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 
 import com.google.common.collect.ImmutableList;
@@ -23,6 +24,7 @@ import com.google.inject.ImplementedBy;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
+ * @author Jan Koehnlein
  */
 public interface IResourceDescription {
 
@@ -37,7 +39,7 @@ public interface IResourceDescription {
 	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given
 	 *         {@link EClass} and match the given name.
 	 */
-	Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name);
+	Iterable<IEObjectDescription> getExportedObjects(EClass clazz, QualifiedName qualifiedName);
 
 	/**
 	 * @return all {@link IEObjectDescription} from {@link #getExportedObjects()} which are instances of the given
@@ -53,7 +55,7 @@ public interface IResourceDescription {
 	/**
 	 * @return the list of names the described resource depends depends on.
 	 */
-	Iterable<String> getImportedNames();
+	Iterable<QualifiedName> getImportedNames();
 	
 	/**
 	 * @return the list of all references contained in the underlying resource.

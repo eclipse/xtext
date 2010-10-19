@@ -17,7 +17,8 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.naming.IQualifiedNameSupport;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.inject.Inject;
@@ -78,7 +79,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	private ILabelProvider labelProvider;
 	
 	@Inject
-	private IQualifiedNameSupport qualifiedNameSupport;
+	private IQualifiedNameProvider qualifiedNameProvider;
 	
 	@Inject
 	private IValueConverterService valueConverter;
@@ -191,8 +192,8 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 			else
 				return null;
 		}
-		String delimiter = qualifiedNameSupport.getDelimiter();
-		int idx = qualifiedName.lastIndexOf(delimiter);
+		String delimiter = qualifiedNameProvider.getDelimiter();
+		int idx = (Strings.isEmpty(delimiter)) ? -1 : qualifiedName.lastIndexOf(delimiter);
 		if (idx > 0) {
 			String lastSegment = qualifiedName.substring(idx + delimiter.length());
 			return lastSegment + " - " + qualifiedName;
@@ -235,12 +236,12 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		return priorities;
 	}
 
-	public void setQualifiedNameSupport(IQualifiedNameSupport qualifiedNameSupport) {
-		this.qualifiedNameSupport = qualifiedNameSupport;
+	public void setQualifiedNameProvider(IQualifiedNameProvider qualifiedNameProvider) {
+		this.qualifiedNameProvider = qualifiedNameProvider;
 	}
 
-	public IQualifiedNameSupport getQualifiedNameSupport() {
-		return qualifiedNameSupport;
+	public IQualifiedNameProvider getQualifiedNameProvider() {
+		return qualifiedNameProvider;
 	}
 
 	public void setLabelProvider(ILabelProvider labelProvider) {

@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -69,17 +70,17 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 	}
 	
 	@Override
-	public Iterable<IEObjectDescription> findAllEObjects(EClass type, String name) {
+	public Iterable<IEObjectDescription> findAllEObjects(EClass type, QualifiedName qualifiedName) {
 		if (state.getContents().isEmpty())
 			return Collections.emptyList();
-		return super.findAllEObjects(type, name);
+		return super.findAllEObjects(type, qualifiedName);
 	}
 	
 	@Override
-	public Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(EClass type, String name) {
+	public Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(EClass type, QualifiedName qualifiedName) {
 		if (state.getContents().isEmpty())
 			return Collections.emptyList();
-		return super.findAllEObjectsIgnoreCase(type, name);
+		return super.findAllEObjectsIgnoreCase(type, qualifiedName);
 	}
 
 }

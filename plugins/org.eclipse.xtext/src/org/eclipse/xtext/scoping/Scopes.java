@@ -12,7 +12,6 @@ import static com.google.common.collect.Iterables.*;
 
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
@@ -20,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
@@ -35,7 +35,7 @@ import com.google.common.collect.Maps;
  * This class contains static utility functions to create and work on {@link IScope} and {@link IScopedElement}
  * 
  * @author Sven Efftinge - Initial contribution and API
- * 
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public class Scopes {
 
@@ -59,14 +59,14 @@ public class Scopes {
 	 * creates a scope using {@link SimpleAttributeResolver#NAME_RESOLVER} to compute the names
 	 */
 	public static IScope scopeFor(Iterable<? extends EObject> elements, IScope outer) {
-		return scopeFor(elements, SimpleAttributeResolver.NAME_RESOLVER, outer);
+		return scopeFor(elements, QualifiedName.wrapper(SimpleAttributeResolver.NAME_RESOLVER), outer);
 	}
 
 	/**
 	 * creates a scope using the passed function to compute the names and sets the passed scope as the parent scope
 	 */
 	public static <T extends EObject> IScope scopeFor(Iterable<? extends T> elements,
-			final Function<T, String> nameComputation, IScope outer) {
+			final Function<T, QualifiedName> nameComputation, IScope outer) {
 		return new SimpleScope(outer, scopedElementsFor(elements, nameComputation));
 	}
 
@@ -76,7 +76,7 @@ public class Scopes {
 	 * filtered out.
 	 */
 	public static Iterable<IEObjectDescription> scopedElementsFor(Iterable<? extends EObject> elements) {
-		return scopedElementsFor(elements, SimpleAttributeResolver.NAME_RESOLVER);
+		return scopedElementsFor(elements, QualifiedName.wrapper(SimpleAttributeResolver.NAME_RESOLVER));
 	}
 
 	/**
@@ -85,13 +85,13 @@ public class Scopes {
 	 * filtered out.
 	 */
 	public static <T extends EObject> Iterable<IEObjectDescription> scopedElementsFor(Iterable<? extends T> elements,
-			final Function<T, String> nameComputation) {
+			final Function<T, QualifiedName> nameComputation) {
 		Iterable<IEObjectDescription> transformed = Iterables.transform(elements,
 				new Function<T, IEObjectDescription>() {
 					public IEObjectDescription apply(T from) {
-						String name = nameComputation.apply(from);
-						if (name != null)
-							return EObjectDescription.create(name, from);
+						QualifiedName qualifiedName = nameComputation.apply(from);
+						if (qualifiedName != null)
+							return EObjectDescription.create(qualifiedName, from);
 						return null;
 					}
 				});
@@ -111,7 +111,7 @@ public class Scopes {
 	 */
 	@Deprecated
 	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final EClass typeToFilter,
-			final Function<EObject, String> nameFunc) {
+			final Function<EObject, QualifiedName> nameFunc) {
 		return allInResource(resource, new Predicate<EObject>() {
 			public boolean apply(EObject input) {
 				return typeToFilter.isInstance(input);
@@ -131,7 +131,7 @@ public class Scopes {
 	 */
 	@Deprecated
 	public static Iterable<IEObjectDescription> allInResource(final Resource resource,
-			final Predicate<EObject> predicate, final Function<EObject, String> nameFunc) {
+			final Predicate<EObject> predicate, final Function<EObject, QualifiedName> nameFunc) {
 		return allInResource(resource, predicate, nameFunc, true);
 	}
 
@@ -145,7 +145,7 @@ public class Scopes {
 	 */
 	@Deprecated
 	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final Predicate<EObject> filter,
-			final Function<EObject, String> nameFunc, boolean skipDuplicates) {
+			final Function<EObject, QualifiedName> nameFunc, boolean skipDuplicates) {
 		if (resource != null) {
 
 			Iterable<EObject> iterable = new Iterable<EObject>() {
@@ -173,21 +173,21 @@ public class Scopes {
 	}
 
 	public static Iterable<IEObjectDescription> filterDuplicates(Iterable<IEObjectDescription> filtered) {
-		Map<String, IEObjectDescription> result = new LinkedHashMap<String, IEObjectDescription>();
+		Map<QualifiedName, IEObjectDescription> result = Maps.newLinkedHashMap();
 		for (IEObjectDescription e : filtered) {
-			String name = e.getName();
-			if (result.containsKey(name)) {
-				result.put(name, null);
+			QualifiedName qualifiedName = e.getName();
+			if (result.containsKey(qualifiedName)) {
+				result.put(qualifiedName, null);
 			} else {
-				result.put(name, e);
+				result.put(qualifiedName, e);
 			}
 		}
 		return Iterables.filter(result.values(), Predicates.notNull());
 	}
 
-	public static Map<String,IEObjectDescription> scopeToMap(IScope scope) {
-		return Maps.uniqueIndex(scope.getAllContents(),new Function<IEObjectDescription, String>() {
-			public String apply(IEObjectDescription from) {
+	public static Map<QualifiedName,IEObjectDescription> scopeToMap(IScope scope) {
+		return Maps.uniqueIndex(scope.getAllContents(),new Function<IEObjectDescription, QualifiedName>() {
+			public QualifiedName apply(IEObjectDescription from) {
 				return from.getName();
 			}
 		});

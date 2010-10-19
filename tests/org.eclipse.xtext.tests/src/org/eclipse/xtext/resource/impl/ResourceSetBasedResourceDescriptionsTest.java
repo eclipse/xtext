@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
@@ -50,14 +51,15 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 	protected void setUp() throws Exception {
 		super.setUp();
 		resourceSet = new ResourceSetImpl();
-		IQualifiedNameProvider qualifiedNameProvider = new IQualifiedNameProvider() {
-
-			public String getQualifiedName(EObject obj) {
-				return ((ENamedElement) obj).getName();
+		IQualifiedNameProvider qualifiedNameProvider = new IQualifiedNameProvider.AbstractImpl() {
+			
+			public QualifiedName getQualifiedName(EObject obj) {
+				return QualifiedName.create(((ENamedElement) obj).getName());
 			}
 
-			public String apply(EObject from) {
-				return ((ENamedElement) from).getName();
+			@Override
+			public QualifiedName apply(EObject from) {
+				return QualifiedName.create(((ENamedElement) from).getName());
 			}
 			
 		};
@@ -82,73 +84,73 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 	public void testEmptyResourceSet() {
 		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT);
 		assertTrue(Iterables.isEmpty(iterable));
-		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, "Zonk");
+		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, QualifiedName.create("Zonk"));
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 	
 	public void testOneElement_Mismatch() {
-		String name = "SomeName";
+		QualifiedName qualifiedName = QualifiedName.create("SomeName");
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
-		createNamedElement(name, type, resource);
+		createNamedElement(qualifiedName, type, resource);
 		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.ECLASS);
 		assertTrue(Iterables.isEmpty(iterable));
-		iterable = container.findAllEObjects(EcorePackage.Literals.ECLASS, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.ECLASS, qualifiedName);
 		assertTrue(Iterables.isEmpty(iterable));
-		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, "AnotherName");
+		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, QualifiedName.create("AnotherName"));
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 	
 	public void testOneElement_Match() {
-		String name = "SomeName";
+		QualifiedName qualifiedName = QualifiedName.create("SomeName");
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
-		ENamedElement element = createNamedElement(name, type, resource);
+		ENamedElement element = createNamedElement(qualifiedName, type, resource);
 		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
 		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, qualifiedName);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.findAllEObjects(EcorePackage.Literals.ENAMED_ELEMENT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.ENAMED_ELEMENT, qualifiedName);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, qualifiedName);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
 	}
 	
 	public void testTwoElements_OneMatch() {
-		String name = "SomeName";
+		QualifiedName qualifiedName = QualifiedName.create("SomeName");
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
-		ENamedElement element = createNamedElement(name, type, resource);
+		ENamedElement element = createNamedElement(qualifiedName, type, resource);
 		ENamedElement other = createNamedElement(null, EcorePackage.Literals.ECLASS, resource);
 		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
 		iterable = container.findAllEObjects(EcorePackage.Literals.ECLASSIFIER);
 		assertSame(other, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, qualifiedName);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.findAllEObjects(EcorePackage.Literals.ENAMED_ELEMENT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.ENAMED_ELEMENT, qualifiedName);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
-		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, qualifiedName);
 		assertSame(element, Iterables.getOnlyElement(iterable).getEObjectOrProxy());
 	}
 	
 	public void testTwoResources_TwoMatches() {
-		String name = "SomeName";
+		QualifiedName qualifiedName = QualifiedName.create("SomeName");
 		EClass type = EcorePackage.Literals.EPACKAGE;
 		Resource resource = createResource();
-		ENamedElement first = createNamedElement(name, type, resource);
+		ENamedElement first = createNamedElement(qualifiedName, type, resource);
 		resource = createResource();
-		ENamedElement second = createNamedElement(name, type, resource);
+		ENamedElement second = createNamedElement(qualifiedName, type, resource);
 		List<ENamedElement> expected = Lists.newArrayList(first, second);
 		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE);
 		checkFindAllEObjectsResult(expected, iterable);
-		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EPACKAGE, qualifiedName);
 		checkFindAllEObjectsResult(expected, iterable);
-		iterable = container.findAllEObjects(EcorePackage.Literals.ENAMED_ELEMENT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.ENAMED_ELEMENT, qualifiedName);
 		checkFindAllEObjectsResult(expected, iterable);
-		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, name);
+		iterable = container.findAllEObjects(EcorePackage.Literals.EOBJECT, qualifiedName);
 		checkFindAllEObjectsResult(expected, iterable);
 	}
 
@@ -175,10 +177,10 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		assertEquals(resourceCount*eClassCount, Iterables.size(iterable));
 	}
 
-	private ENamedElement createNamedElement(String name, EClass type, Resource resource) {
+	private ENamedElement createNamedElement(QualifiedName qualifiedName, EClass type, Resource resource) {
 		ENamedElement result = (ENamedElement) EcoreUtil.create(type);
-		if (name != null)
-			result.setName(name);
+		if (qualifiedName != null)
+			result.setName(qualifiedName.getFirstSegment());
 		else
 			result.setName("" + nameCount++);
 		if (resource != null)

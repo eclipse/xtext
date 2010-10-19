@@ -13,7 +13,7 @@ import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingService;
-import org.eclipse.xtext.naming.IQualifiedNameSupport;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
@@ -27,7 +27,7 @@ import org.eclipse.xtext.xtext.XtextFormatter;
 import org.eclipse.xtext.xtext.XtextFragmentProvider;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xtext.XtextLinkingService;
-import org.eclipse.xtext.xtext.XtextQualifiedNameSupport;
+import org.eclipse.xtext.xtext.XtextQualifiedNameProvider;
 import org.eclipse.xtext.xtext.XtextReferableElementsUnloader;
 import org.eclipse.xtext.xtext.XtextResourceDescriptionManager;
 import org.eclipse.xtext.xtext.XtextScopeProvider;
@@ -97,8 +97,9 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 		return XtextReferableElementsUnloader.class;
 	}
 	
-	public Class<? extends IQualifiedNameSupport> bindIQualifiedNameSupport() {
-		return XtextQualifiedNameSupport.class;
+	@Override
+	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return XtextQualifiedNameProvider.class;
 	}
 	
 	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
