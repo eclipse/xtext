@@ -3998,11 +3998,11 @@ rule__XAssignment__Group_1__0__Impl
     }
 :
 (
-{ before(grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_0()); }
+{ before(grammarAccess.getXAssignmentAccess().getXAssignmentAssignableAction_1_0()); }
 (
 
 )
-{ after(grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_0()); }
+{ after(grammarAccess.getXAssignmentAccess().getXAssignmentAssignableAction_1_0()); }
 )
 
 ;
@@ -4057,9 +4057,9 @@ rule__XAssignment__Group_1__2__Impl
     }
 :
 (
-{ before(grammarAccess.getXAssignmentAccess().getRightOperandAssignment_1_2()); }
-(rule__XAssignment__RightOperandAssignment_1_2)
-{ after(grammarAccess.getXAssignmentAccess().getRightOperandAssignment_1_2()); }
+{ before(grammarAccess.getXAssignmentAccess().getValueAssignment_1_2()); }
+(rule__XAssignment__ValueAssignment_1_2)
+{ after(grammarAccess.getXAssignmentAccess().getValueAssignment_1_2()); }
 )
 
 ;
@@ -8067,9 +8067,9 @@ rule__XBlockExpression__Group_2__1__Impl
 :
 (
 { before(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1()); }
-
+(
 	';' 
-
+)?
 { after(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1()); }
 )
 
@@ -11179,14 +11179,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__XAssignment__RightOperandAssignment_1_2
+rule__XAssignment__ValueAssignment_1_2
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getXAssignmentAccess().getRightOperandXAssignmentParserRuleCall_1_2_0()); }
-	ruleXAssignment{ after(grammarAccess.getXAssignmentAccess().getRightOperandXAssignmentParserRuleCall_1_2_0()); }
+{ before(grammarAccess.getXAssignmentAccess().getValueXAssignmentParserRuleCall_1_2_0()); }
+	ruleXAssignment{ after(grammarAccess.getXAssignmentAccess().getValueXAssignmentParserRuleCall_1_2_0()); }
 )
 
 ;

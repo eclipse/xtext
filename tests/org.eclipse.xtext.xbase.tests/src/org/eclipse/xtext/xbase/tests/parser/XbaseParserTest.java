@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.parser;
 
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -42,11 +43,11 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 public class XbaseParserTest extends AbstractXbaseTestCase {
 	
 	public void testAssignment_RightAssociativity() throws Exception {
-		XBinaryOperation ass = (XBinaryOperation) expression("foo = bar += baz");
+		XAssignment ass = (XAssignment) expression("foo = bar += baz");
 		assertEquals(2,ass.getArguments().size());
 		assertEquals("=", ass.getFeatureName());
 		assertEquals("foo", ((XFeatureCall)ass.getArguments().get(0)).getFeatureName());
-		ass = (XBinaryOperation) ass.getArguments().get(1);
+		ass = (XAssignment) ass.getArguments().get(1);
 		assertEquals(2,ass.getArguments().size());
 		assertEquals("+=", ass.getFeatureName());
 		assertEquals("bar", ((XFeatureCall)ass.getArguments().get(0)).getFeatureName());
@@ -322,6 +323,19 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertTrue(be.getExpressions().isEmpty());
 	}
 
+	public void testBlockExpression_3() throws Exception {
+		XBlockExpression be = (XBlockExpression) expression("{foo}");
+		assertEquals(1, be.getExpressions().size());
+		assertTrue(be.getExpressions().get(0) instanceof XFeatureCall);
+	}
+
+	public void testBlockExpression_4() throws Exception {
+		XBlockExpression be = (XBlockExpression) expression("{foo bar}");
+		assertEquals(2, be.getExpressions().size());
+		assertTrue(be.getExpressions().get(0) instanceof XFeatureCall);
+		assertTrue(be.getExpressions().get(1) instanceof XFeatureCall);
+	}
+	
 	public void testBlockExpression_withVariableDeclaration_0()
 			throws Exception {
 		XBlockExpression be = (XBlockExpression) expression("{val foo = bar;bar;}");
@@ -344,6 +358,26 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertFeatureCall("bar",vd.getRight());
 		assertNotNull(vd.getType());
 		assertFeatureCall("bar",be.getExpressions().get(1));
+	}
+	
+	public void testBlockExpression_withVariableDeclaration_2() throws Exception {
+		XBlockExpression be = (XBlockExpression) expression("{val foo = bar bar}");
+		assertEquals(2, be.getExpressions().size());
+		XVariableDeclaration vd = (XVariableDeclaration) be.getExpressions().get(0);
+		assertEquals("foo", vd.getName());
+		assertTrue(vd.getRight() instanceof XFeatureCall);
+		assertNull(vd.getType());
+		assertTrue(be.getExpressions().get(1) instanceof XFeatureCall);
+	}
+
+	public void testBlockExpression_withVariableDeclaration_3() throws Exception {
+		XBlockExpression be = (XBlockExpression) expression("{var MyType foo = bar bar}");
+		assertEquals(2, be.getExpressions().size());
+		XVariableDeclaration vd = (XVariableDeclaration) be.getExpressions().get(0);
+		assertEquals("foo", vd.getName());
+		assertFeatureCall("bar", vd.getRight());
+		assertNotNull(vd.getType());
+		assertFeatureCall("bar", be.getExpressions().get(1));
 	}
 
 	public void testConstructorCall_0() throws Exception {

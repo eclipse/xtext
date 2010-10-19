@@ -242,6 +242,15 @@ public interface XbaseFactory extends EFactory
 	XCatchClause createXCatchClause();
 
 	/**
+	 * Returns a new object of class '<em>XAssignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XAssignment</em>'.
+	 * @generated
+	 */
+	XAssignment createXAssignment();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

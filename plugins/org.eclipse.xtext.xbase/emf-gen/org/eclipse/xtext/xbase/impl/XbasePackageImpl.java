@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
@@ -244,6 +245,13 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * @generated
 	 */
 	private EClass xCatchClauseEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xAssignmentEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1051,6 +1059,36 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getXAssignment()
+	{
+		return xAssignmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXAssignment_Assignable()
+	{
+		return (EReference)xAssignmentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXAssignment_Value()
+	{
+		return (EReference)xAssignmentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XbaseFactory getXbaseFactory()
 	{
 		return (XbaseFactory)getEFactoryInstance();
@@ -1175,6 +1213,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xCatchClauseEClass = createEClass(XCATCH_CLAUSE);
 		createEReference(xCatchClauseEClass, XCATCH_CLAUSE__EXPRESSION);
 		createEReference(xCatchClauseEClass, XCATCH_CLAUSE__DECLARED_PARAM);
+
+		xAssignmentEClass = createEClass(XASSIGNMENT);
+		createEReference(xAssignmentEClass, XASSIGNMENT__ASSIGNABLE);
+		createEReference(xAssignmentEClass, XASSIGNMENT__VALUE);
 	}
 
 	/**
@@ -1234,6 +1276,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xInstanceOfExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xThrowExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xTryCatchFinallyExpressionEClass.getESuperTypes().add(this.getXExpression());
+		xAssignmentEClass.getESuperTypes().add(this.getXAbstractFeatureCall());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xExpressionEClass, XExpression.class, "XExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1335,6 +1378,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEClass(xCatchClauseEClass, XCatchClause.class, "XCatchClause", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXCatchClause_Expression(), this.getXExpression(), null, "expression", null, 0, 1, XCatchClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXCatchClause_DeclaredParam(), theTypesPackage.getJvmFormalParameter(), null, "declaredParam", null, 0, 1, XCatchClause.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xAssignmentEClass, XAssignment.class, "XAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXAssignment_Assignable(), this.getXExpression(), null, "assignable", null, 0, 1, XAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXAssignment_Value(), this.getXExpression(), null, "value", null, 0, 1, XAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

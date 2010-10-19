@@ -23,9 +23,9 @@
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
         <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Action" feature="leftOperand" operator="=">
+          <elements xsi:type="xtext:Action" feature="assignable" operator="=">
             <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XBinaryOperation"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XAssignment"/>
             </type>
           </elements>
           <elements xsi:type="xtext:Assignment" feature="feature" operator="=">
@@ -36,7 +36,7 @@
               <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
             </terminal>
           </elements>
-          <elements xsi:type="xtext:Assignment" feature="rightOperand" operator="=">
+          <elements xsi:type="xtext:Assignment" feature="value" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
           </elements>
         </elements>
@@ -626,7 +626,7 @@
           <elements xsi:type="xtext:Assignment" feature="expressions" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.31"/>
           </elements>
-          <elements xsi:type="xtext:Keyword" value=";"/>
+          <elements xsi:type="xtext:Keyword" cardinality="?" value=";"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>

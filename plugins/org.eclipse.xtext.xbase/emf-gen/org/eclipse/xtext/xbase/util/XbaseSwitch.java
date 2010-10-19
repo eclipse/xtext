@@ -317,6 +317,15 @@ public class XbaseSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XbasePackage.XASSIGNMENT:
+			{
+				XAssignment xAssignment = (XAssignment)theEObject;
+				T result = caseXAssignment(xAssignment);
+				if (result == null) result = caseXAbstractFeatureCall(xAssignment);
+				if (result == null) result = caseXExpression(xAssignment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -749,6 +758,22 @@ public class XbaseSwitch<T>
 	 * @generated
 	 */
 	public T caseXCatchClause(XCatchClause object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XAssignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XAssignment</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXAssignment(XAssignment object)
 	{
 		return null;
 	}

@@ -34,30 +34,28 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cXOrExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cXBinaryOperationLeftOperandAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cXAssignmentAssignableAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cFeatureAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final CrossReference cFeatureJvmIdentifyableElementCrossReference_1_1_0 = (CrossReference)cFeatureAssignment_1_1.eContents().get(0);
 		private final RuleCall cFeatureJvmIdentifyableElementOpAssignParserRuleCall_1_1_0_1 = (RuleCall)cFeatureJvmIdentifyableElementCrossReference_1_1_0.eContents().get(1);
-		private final Assignment cRightOperandAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cRightOperandXAssignmentParserRuleCall_1_2_0 = (RuleCall)cRightOperandAssignment_1_2.eContents().get(0);
+		private final Assignment cValueAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cValueXAssignmentParserRuleCall_1_2_0 = (RuleCall)cValueAssignment_1_2.eContents().get(0);
 		
 		//XAssignment returns XExpression:
-		//	XOrExpression ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAssign]
-		//	rightOperand=XAssignment)?;
+		//	XOrExpression ({XAssignment.assignable=current} feature=[types::JvmIdentifyableElement|OpAssign] value=XAssignment)?;
 		public ParserRule getRule() { return rule; }
 
-		//XOrExpression ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAssign]
-		//rightOperand=XAssignment)?
+		//XOrExpression ({XAssignment.assignable=current} feature=[types::JvmIdentifyableElement|OpAssign] value=XAssignment)?
 		public Group getGroup() { return cGroup; }
 
 		//XOrExpression
 		public RuleCall getXOrExpressionParserRuleCall_0() { return cXOrExpressionParserRuleCall_0; }
 
-		//({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAssign] rightOperand=XAssignment)?
+		//({XAssignment.assignable=current} feature=[types::JvmIdentifyableElement|OpAssign] value=XAssignment)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{XBinaryOperation.leftOperand=current}
-		public Action getXBinaryOperationLeftOperandAction_1_0() { return cXBinaryOperationLeftOperandAction_1_0; }
+		//{XAssignment.assignable=current}
+		public Action getXAssignmentAssignableAction_1_0() { return cXAssignmentAssignableAction_1_0; }
 
 		//feature=[types::JvmIdentifyableElement|OpAssign]
 		public Assignment getFeatureAssignment_1_1() { return cFeatureAssignment_1_1; }
@@ -68,11 +66,11 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//OpAssign
 		public RuleCall getFeatureJvmIdentifyableElementOpAssignParserRuleCall_1_1_0_1() { return cFeatureJvmIdentifyableElementOpAssignParserRuleCall_1_1_0_1; }
 
-		//rightOperand=XAssignment
-		public Assignment getRightOperandAssignment_1_2() { return cRightOperandAssignment_1_2; }
+		//value=XAssignment
+		public Assignment getValueAssignment_1_2() { return cValueAssignment_1_2; }
 
 		//XAssignment
-		public RuleCall getRightOperandXAssignmentParserRuleCall_1_2_0() { return cRightOperandXAssignmentParserRuleCall_1_2_0; }
+		public RuleCall getValueXAssignmentParserRuleCall_1_2_0() { return cValueXAssignmentParserRuleCall_1_2_0; }
 	}
 
 	public class OpAssignElements extends AbstractParserRuleElementFinder {
@@ -1343,10 +1341,10 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//XBlockExpression:
-		//	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";")* "}";
+		//	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";"?)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";")* "}"
+		//{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";"?)* "}"
 		public Group getGroup() { return cGroup; }
 
 		//{XBlockExpression}
@@ -1355,7 +1353,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//(expressions+=XExpressionInsideBlock ";")*
+		//(expressions+=XExpressionInsideBlock ";"?)*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//expressions+=XExpressionInsideBlock
@@ -1364,7 +1362,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//XExpressionInsideBlock
 		public RuleCall getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0() { return cExpressionsXExpressionInsideBlockParserRuleCall_2_0_0; }
 
-		//";"
+		//";"?
 		public Keyword getSemicolonKeyword_2_1() { return cSemicolonKeyword_2_1; }
 
 		//"}"
@@ -1967,8 +1965,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XAssignment returns XExpression:
-	//	XOrExpression ({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifyableElement|OpAssign]
-	//	rightOperand=XAssignment)?;
+	//	XOrExpression ({XAssignment.assignable=current} feature=[types::JvmIdentifyableElement|OpAssign] value=XAssignment)?;
 	public XAssignmentElements getXAssignmentAccess() {
 		return (pXAssignment != null) ? pXAssignment : (pXAssignment = new XAssignmentElements());
 	}
@@ -2272,7 +2269,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XBlockExpression:
-	//	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";")* "}";
+	//	{XBlockExpression} "{" (expressions+=XExpressionInsideBlock ";"?)* "}";
 	public XBlockExpressionElements getXBlockExpressionAccess() {
 		return (pXBlockExpression != null) ? pXBlockExpression : (pXBlockExpression = new XBlockExpressionElements());
 	}

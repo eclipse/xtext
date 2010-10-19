@@ -6188,11 +6188,11 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( (LA4_0==14) ) {
                 int LA4_1 = input.LA(2);
 
-                if ( (LA4_1==EOF||LA4_1==RULE_INT||(LA4_1>=11 && LA4_1<=13)||(LA4_1>=15 && LA4_1<=28)||LA4_1==35||(LA4_1>=38 && LA4_1<=39)||(LA4_1>=41 && LA4_1<=43)||LA4_1==45||LA4_1==48||LA4_1==53||(LA4_1>=62 && LA4_1<=63)||(LA4_1>=69 && LA4_1<=70)) ) {
-                    alt4=2;
-                }
-                else if ( ((LA4_1>=RULE_STRING && LA4_1<=RULE_ID)) ) {
+                if ( (synpred5_InternalXcss()) ) {
                     alt4=1;
+                }
+                else if ( (true) ) {
+                    alt4=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -11115,7 +11115,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3601:1: ()
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_0()); 
+               before(grammarAccess.getXAssignmentAccess().getXAssignmentAssignableAction_1_0()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3602:1: ()
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3604:1: 
@@ -11123,7 +11123,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_0()); 
+               after(grammarAccess.getXAssignmentAccess().getXAssignmentAssignableAction_1_0()); 
             }
 
             }
@@ -11265,26 +11265,26 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XAssignment__Group_1__2__Impl"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3654:1: rule__XAssignment__Group_1__2__Impl : ( ( rule__XAssignment__RightOperandAssignment_1_2 ) ) ;
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3654:1: rule__XAssignment__Group_1__2__Impl : ( ( rule__XAssignment__ValueAssignment_1_2 ) ) ;
     public final void rule__XAssignment__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3658:1: ( ( ( rule__XAssignment__RightOperandAssignment_1_2 ) ) )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3659:1: ( ( rule__XAssignment__RightOperandAssignment_1_2 ) )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3658:1: ( ( ( rule__XAssignment__ValueAssignment_1_2 ) ) )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3659:1: ( ( rule__XAssignment__ValueAssignment_1_2 ) )
             {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3659:1: ( ( rule__XAssignment__RightOperandAssignment_1_2 ) )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3660:1: ( rule__XAssignment__RightOperandAssignment_1_2 )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3659:1: ( ( rule__XAssignment__ValueAssignment_1_2 ) )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3660:1: ( rule__XAssignment__ValueAssignment_1_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXAssignmentAccess().getRightOperandAssignment_1_2()); 
+               before(grammarAccess.getXAssignmentAccess().getValueAssignment_1_2()); 
             }
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3661:1: ( rule__XAssignment__RightOperandAssignment_1_2 )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3661:2: rule__XAssignment__RightOperandAssignment_1_2
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3661:1: ( rule__XAssignment__ValueAssignment_1_2 )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:3661:2: rule__XAssignment__ValueAssignment_1_2
             {
-            pushFollow(FOLLOW_rule__XAssignment__RightOperandAssignment_1_2_in_rule__XAssignment__Group_1__2__Impl7741);
-            rule__XAssignment__RightOperandAssignment_1_2();
+            pushFollow(FOLLOW_rule__XAssignment__ValueAssignment_1_2_in_rule__XAssignment__Group_1__2__Impl7741);
+            rule__XAssignment__ValueAssignment_1_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -11292,7 +11292,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXAssignmentAccess().getRightOperandAssignment_1_2()); 
+               after(grammarAccess.getXAssignmentAccess().getValueAssignment_1_2()); 
             }
 
             }
@@ -12790,7 +12790,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             do {
                 int alt34=2;
                 switch ( input.LA(1) ) {
-                case 41:
+                case 20:
                     {
                     int LA34_2 = input.LA(2);
 
@@ -12801,7 +12801,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
 
                     }
                     break;
-                case 17:
+                case 41:
                     {
                     int LA34_3 = input.LA(2);
 
@@ -12812,7 +12812,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
 
                     }
                     break;
-                case 18:
+                case 17:
                     {
                     int LA34_4 = input.LA(2);
 
@@ -12823,7 +12823,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
 
                     }
                     break;
-                case 19:
+                case 18:
                     {
                     int LA34_5 = input.LA(2);
 
@@ -12834,7 +12834,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
 
                     }
                     break;
-                case 20:
+                case 19:
                     {
                     int LA34_6 = input.LA(2);
 
@@ -13974,7 +13974,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                 int alt36=2;
                 int LA36_0 = input.LA(1);
 
-                if ( (LA36_0==23) ) {
+                if ( (LA36_0==24) ) {
                     int LA36_2 = input.LA(2);
 
                     if ( (synpred61_InternalXcss()) ) {
@@ -13983,7 +13983,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
 
 
                 }
-                else if ( (LA36_0==24) ) {
+                else if ( (LA36_0==23) ) {
                     int LA36_3 = input.LA(2);
 
                     if ( (synpred61_InternalXcss()) ) {
@@ -15607,11 +15607,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:5151:1: ( rule__XMemberFeatureCall__Group_1_4__0 )?
             int alt40=2;
-            int LA40_0 = input.LA(1);
-
-            if ( (LA40_0==44) ) {
-                alt40=1;
-            }
+            alt40 = dfa40.predict(input);
             switch (alt40) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:5151:2: rule__XMemberFeatureCall__Group_1_4__0
@@ -22307,22 +22303,39 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XBlockExpression__Group_2__1__Impl"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7663:1: rule__XBlockExpression__Group_2__1__Impl : ( ';' ) ;
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7663:1: rule__XBlockExpression__Group_2__1__Impl : ( ( ';' )? ) ;
     public final void rule__XBlockExpression__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7667:1: ( ( ';' ) )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7668:1: ( ';' )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7667:1: ( ( ( ';' )? ) )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7668:1: ( ( ';' )? )
             {
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7668:1: ( ';' )
-            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7669:1: ';'
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7668:1: ( ( ';' )? )
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7669:1: ( ';' )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1()); 
             }
-            match(input,39,FOLLOW_39_in_rule__XBlockExpression__Group_2__1__Impl15616); if (state.failed) return ;
+            // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7670:1: ( ';' )?
+            int alt53=2;
+            int LA53_0 = input.LA(1);
+
+            if ( (LA53_0==39) ) {
+                alt53=1;
+            }
+            switch (alt53) {
+                case 1 :
+                    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7671:2: ';'
+                    {
+                    match(input,39,FOLLOW_39_in_rule__XBlockExpression__Group_2__1__Impl15617); if (state.failed) return ;
+
+                    }
+                    break;
+
+            }
+
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1()); 
             }
@@ -22357,12 +22370,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7690:1: ( rule__XVariableDeclaration__Group__0__Impl rule__XVariableDeclaration__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7691:2: rule__XVariableDeclaration__Group__0__Impl rule__XVariableDeclaration__Group__1
             {
-            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__0__Impl_in_rule__XVariableDeclaration__Group__015651);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__0__Impl_in_rule__XVariableDeclaration__Group__015654);
             rule__XVariableDeclaration__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__1_in_rule__XVariableDeclaration__Group__015654);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__1_in_rule__XVariableDeclaration__Group__015657);
             rule__XVariableDeclaration__Group__1();
 
             state._fsp--;
@@ -22404,7 +22417,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7705:1: ( rule__XVariableDeclaration__Alternatives_0 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7705:2: rule__XVariableDeclaration__Alternatives_0
             {
-            pushFollow(FOLLOW_rule__XVariableDeclaration__Alternatives_0_in_rule__XVariableDeclaration__Group__0__Impl15681);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__Alternatives_0_in_rule__XVariableDeclaration__Group__0__Impl15684);
             rule__XVariableDeclaration__Alternatives_0();
 
             state._fsp--;
@@ -22446,12 +22459,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7719:1: ( rule__XVariableDeclaration__Group__1__Impl rule__XVariableDeclaration__Group__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7720:2: rule__XVariableDeclaration__Group__1__Impl rule__XVariableDeclaration__Group__2
             {
-            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__1__Impl_in_rule__XVariableDeclaration__Group__115711);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__1__Impl_in_rule__XVariableDeclaration__Group__115714);
             rule__XVariableDeclaration__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__2_in_rule__XVariableDeclaration__Group__115714);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__2_in_rule__XVariableDeclaration__Group__115717);
             rule__XVariableDeclaration__Group__2();
 
             state._fsp--;
@@ -22491,24 +22504,24 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXVariableDeclarationAccess().getTypeAssignment_1()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7734:1: ( rule__XVariableDeclaration__TypeAssignment_1 )?
-            int alt53=2;
-            int LA53_0 = input.LA(1);
+            int alt54=2;
+            int LA54_0 = input.LA(1);
 
-            if ( (LA53_0==RULE_ID) ) {
-                int LA53_1 = input.LA(2);
+            if ( (LA54_0==RULE_ID) ) {
+                int LA54_1 = input.LA(2);
 
-                if ( (LA53_1==RULE_ID||LA53_1==20||LA53_1==42) ) {
-                    alt53=1;
+                if ( (LA54_1==RULE_ID||LA54_1==20||LA54_1==42) ) {
+                    alt54=1;
                 }
             }
-            else if ( (LA53_0==44||LA53_0==64) ) {
-                alt53=1;
+            else if ( (LA54_0==44||LA54_0==64) ) {
+                alt54=1;
             }
-            switch (alt53) {
+            switch (alt54) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7734:2: rule__XVariableDeclaration__TypeAssignment_1
                     {
-                    pushFollow(FOLLOW_rule__XVariableDeclaration__TypeAssignment_1_in_rule__XVariableDeclaration__Group__1__Impl15741);
+                    pushFollow(FOLLOW_rule__XVariableDeclaration__TypeAssignment_1_in_rule__XVariableDeclaration__Group__1__Impl15744);
                     rule__XVariableDeclaration__TypeAssignment_1();
 
                     state._fsp--;
@@ -22553,12 +22566,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7748:1: ( rule__XVariableDeclaration__Group__2__Impl rule__XVariableDeclaration__Group__3 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7749:2: rule__XVariableDeclaration__Group__2__Impl rule__XVariableDeclaration__Group__3
             {
-            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__2__Impl_in_rule__XVariableDeclaration__Group__215772);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__2__Impl_in_rule__XVariableDeclaration__Group__215775);
             rule__XVariableDeclaration__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__3_in_rule__XVariableDeclaration__Group__215775);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__3_in_rule__XVariableDeclaration__Group__215778);
             rule__XVariableDeclaration__Group__3();
 
             state._fsp--;
@@ -22600,7 +22613,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7763:1: ( rule__XVariableDeclaration__NameAssignment_2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7763:2: rule__XVariableDeclaration__NameAssignment_2
             {
-            pushFollow(FOLLOW_rule__XVariableDeclaration__NameAssignment_2_in_rule__XVariableDeclaration__Group__2__Impl15802);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__NameAssignment_2_in_rule__XVariableDeclaration__Group__2__Impl15805);
             rule__XVariableDeclaration__NameAssignment_2();
 
             state._fsp--;
@@ -22642,12 +22655,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7777:1: ( rule__XVariableDeclaration__Group__3__Impl rule__XVariableDeclaration__Group__4 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7778:2: rule__XVariableDeclaration__Group__3__Impl rule__XVariableDeclaration__Group__4
             {
-            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__3__Impl_in_rule__XVariableDeclaration__Group__315832);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__3__Impl_in_rule__XVariableDeclaration__Group__315835);
             rule__XVariableDeclaration__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__4_in_rule__XVariableDeclaration__Group__315835);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__4_in_rule__XVariableDeclaration__Group__315838);
             rule__XVariableDeclaration__Group__4();
 
             state._fsp--;
@@ -22686,7 +22699,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_3()); 
             }
-            match(input,55,FOLLOW_55_in_rule__XVariableDeclaration__Group__3__Impl15863); if (state.failed) return ;
+            match(input,55,FOLLOW_55_in_rule__XVariableDeclaration__Group__3__Impl15866); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXVariableDeclarationAccess().getEqualsSignKeyword_3()); 
             }
@@ -22721,7 +22734,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7808:1: ( rule__XVariableDeclaration__Group__4__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7809:2: rule__XVariableDeclaration__Group__4__Impl
             {
-            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__4__Impl_in_rule__XVariableDeclaration__Group__415894);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__Group__4__Impl_in_rule__XVariableDeclaration__Group__415897);
             rule__XVariableDeclaration__Group__4__Impl();
 
             state._fsp--;
@@ -22763,7 +22776,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7822:1: ( rule__XVariableDeclaration__RightAssignment_4 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7822:2: rule__XVariableDeclaration__RightAssignment_4
             {
-            pushFollow(FOLLOW_rule__XVariableDeclaration__RightAssignment_4_in_rule__XVariableDeclaration__Group__4__Impl15921);
+            pushFollow(FOLLOW_rule__XVariableDeclaration__RightAssignment_4_in_rule__XVariableDeclaration__Group__4__Impl15924);
             rule__XVariableDeclaration__RightAssignment_4();
 
             state._fsp--;
@@ -22805,12 +22818,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7846:1: ( rule__JvmFormalParameter__Group__0__Impl rule__JvmFormalParameter__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7847:2: rule__JvmFormalParameter__Group__0__Impl rule__JvmFormalParameter__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmFormalParameter__Group__0__Impl_in_rule__JvmFormalParameter__Group__015961);
+            pushFollow(FOLLOW_rule__JvmFormalParameter__Group__0__Impl_in_rule__JvmFormalParameter__Group__015964);
             rule__JvmFormalParameter__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmFormalParameter__Group__1_in_rule__JvmFormalParameter__Group__015964);
+            pushFollow(FOLLOW_rule__JvmFormalParameter__Group__1_in_rule__JvmFormalParameter__Group__015967);
             rule__JvmFormalParameter__Group__1();
 
             state._fsp--;
@@ -22850,24 +22863,24 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getJvmFormalParameterAccess().getParameterTypeAssignment_0()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7861:1: ( rule__JvmFormalParameter__ParameterTypeAssignment_0 )?
-            int alt54=2;
-            int LA54_0 = input.LA(1);
+            int alt55=2;
+            int LA55_0 = input.LA(1);
 
-            if ( (LA54_0==RULE_ID) ) {
-                int LA54_1 = input.LA(2);
+            if ( (LA55_0==RULE_ID) ) {
+                int LA55_1 = input.LA(2);
 
-                if ( (LA54_1==RULE_ID||LA54_1==20||LA54_1==42) ) {
-                    alt54=1;
+                if ( (LA55_1==RULE_ID||LA55_1==20||LA55_1==42) ) {
+                    alt55=1;
                 }
             }
-            else if ( (LA54_0==44||LA54_0==64) ) {
-                alt54=1;
+            else if ( (LA55_0==44||LA55_0==64) ) {
+                alt55=1;
             }
-            switch (alt54) {
+            switch (alt55) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7861:2: rule__JvmFormalParameter__ParameterTypeAssignment_0
                     {
-                    pushFollow(FOLLOW_rule__JvmFormalParameter__ParameterTypeAssignment_0_in_rule__JvmFormalParameter__Group__0__Impl15991);
+                    pushFollow(FOLLOW_rule__JvmFormalParameter__ParameterTypeAssignment_0_in_rule__JvmFormalParameter__Group__0__Impl15994);
                     rule__JvmFormalParameter__ParameterTypeAssignment_0();
 
                     state._fsp--;
@@ -22912,7 +22925,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7875:1: ( rule__JvmFormalParameter__Group__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7876:2: rule__JvmFormalParameter__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmFormalParameter__Group__1__Impl_in_rule__JvmFormalParameter__Group__116022);
+            pushFollow(FOLLOW_rule__JvmFormalParameter__Group__1__Impl_in_rule__JvmFormalParameter__Group__116025);
             rule__JvmFormalParameter__Group__1__Impl();
 
             state._fsp--;
@@ -22954,7 +22967,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7889:1: ( rule__JvmFormalParameter__NameAssignment_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7889:2: rule__JvmFormalParameter__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__JvmFormalParameter__NameAssignment_1_in_rule__JvmFormalParameter__Group__1__Impl16049);
+            pushFollow(FOLLOW_rule__JvmFormalParameter__NameAssignment_1_in_rule__JvmFormalParameter__Group__1__Impl16052);
             rule__JvmFormalParameter__NameAssignment_1();
 
             state._fsp--;
@@ -22996,12 +23009,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7907:1: ( rule__XFeatureCall__Group__0__Impl rule__XFeatureCall__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7908:2: rule__XFeatureCall__Group__0__Impl rule__XFeatureCall__Group__1
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group__0__Impl_in_rule__XFeatureCall__Group__016083);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group__0__Impl_in_rule__XFeatureCall__Group__016086);
             rule__XFeatureCall__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFeatureCall__Group__1_in_rule__XFeatureCall__Group__016086);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group__1_in_rule__XFeatureCall__Group__016089);
             rule__XFeatureCall__Group__1();
 
             state._fsp--;
@@ -23041,17 +23054,17 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXFeatureCallAccess().getGroup_0()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7922:1: ( rule__XFeatureCall__Group_0__0 )?
-            int alt55=2;
-            int LA55_0 = input.LA(1);
+            int alt56=2;
+            int LA56_0 = input.LA(1);
 
-            if ( (LA55_0==20) ) {
-                alt55=1;
+            if ( (LA56_0==20) ) {
+                alt56=1;
             }
-            switch (alt55) {
+            switch (alt56) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7922:2: rule__XFeatureCall__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__XFeatureCall__Group_0__0_in_rule__XFeatureCall__Group__0__Impl16113);
+                    pushFollow(FOLLOW_rule__XFeatureCall__Group_0__0_in_rule__XFeatureCall__Group__0__Impl16116);
                     rule__XFeatureCall__Group_0__0();
 
                     state._fsp--;
@@ -23096,12 +23109,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7936:1: ( rule__XFeatureCall__Group__1__Impl rule__XFeatureCall__Group__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7937:2: rule__XFeatureCall__Group__1__Impl rule__XFeatureCall__Group__2
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group__1__Impl_in_rule__XFeatureCall__Group__116144);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group__1__Impl_in_rule__XFeatureCall__Group__116147);
             rule__XFeatureCall__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFeatureCall__Group__2_in_rule__XFeatureCall__Group__116147);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group__2_in_rule__XFeatureCall__Group__116150);
             rule__XFeatureCall__Group__2();
 
             state._fsp--;
@@ -23143,7 +23156,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7951:1: ( rule__XFeatureCall__FeatureAssignment_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7951:2: rule__XFeatureCall__FeatureAssignment_1
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__FeatureAssignment_1_in_rule__XFeatureCall__Group__1__Impl16174);
+            pushFollow(FOLLOW_rule__XFeatureCall__FeatureAssignment_1_in_rule__XFeatureCall__Group__1__Impl16177);
             rule__XFeatureCall__FeatureAssignment_1();
 
             state._fsp--;
@@ -23185,7 +23198,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7965:1: ( rule__XFeatureCall__Group__2__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7966:2: rule__XFeatureCall__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group__2__Impl_in_rule__XFeatureCall__Group__216204);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group__2__Impl_in_rule__XFeatureCall__Group__216207);
             rule__XFeatureCall__Group__2__Impl();
 
             state._fsp--;
@@ -23225,17 +23238,13 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXFeatureCallAccess().getGroup_2()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7979:1: ( rule__XFeatureCall__Group_2__0 )?
-            int alt56=2;
-            int LA56_0 = input.LA(1);
-
-            if ( (LA56_0==44) ) {
-                alt56=1;
-            }
-            switch (alt56) {
+            int alt57=2;
+            alt57 = dfa57.predict(input);
+            switch (alt57) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7979:2: rule__XFeatureCall__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__XFeatureCall__Group_2__0_in_rule__XFeatureCall__Group__2__Impl16231);
+                    pushFollow(FOLLOW_rule__XFeatureCall__Group_2__0_in_rule__XFeatureCall__Group__2__Impl16234);
                     rule__XFeatureCall__Group_2__0();
 
                     state._fsp--;
@@ -23280,12 +23289,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7999:1: ( rule__XFeatureCall__Group_0__0__Impl rule__XFeatureCall__Group_0__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8000:2: rule__XFeatureCall__Group_0__0__Impl rule__XFeatureCall__Group_0__1
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__0__Impl_in_rule__XFeatureCall__Group_0__016268);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__0__Impl_in_rule__XFeatureCall__Group_0__016271);
             rule__XFeatureCall__Group_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__1_in_rule__XFeatureCall__Group_0__016271);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__1_in_rule__XFeatureCall__Group_0__016274);
             rule__XFeatureCall__Group_0__1();
 
             state._fsp--;
@@ -23324,7 +23333,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getLessThanSignKeyword_0_0()); 
             }
-            match(input,20,FOLLOW_20_in_rule__XFeatureCall__Group_0__0__Impl16299); if (state.failed) return ;
+            match(input,20,FOLLOW_20_in_rule__XFeatureCall__Group_0__0__Impl16302); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFeatureCallAccess().getLessThanSignKeyword_0_0()); 
             }
@@ -23359,12 +23368,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8030:1: ( rule__XFeatureCall__Group_0__1__Impl rule__XFeatureCall__Group_0__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8031:2: rule__XFeatureCall__Group_0__1__Impl rule__XFeatureCall__Group_0__2
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__1__Impl_in_rule__XFeatureCall__Group_0__116330);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__1__Impl_in_rule__XFeatureCall__Group_0__116333);
             rule__XFeatureCall__Group_0__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__2_in_rule__XFeatureCall__Group_0__116333);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__2_in_rule__XFeatureCall__Group_0__116336);
             rule__XFeatureCall__Group_0__2();
 
             state._fsp--;
@@ -23406,7 +23415,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8045:1: ( rule__XFeatureCall__TypeArgumentsAssignment_0_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8045:2: rule__XFeatureCall__TypeArgumentsAssignment_0_1
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__TypeArgumentsAssignment_0_1_in_rule__XFeatureCall__Group_0__1__Impl16360);
+            pushFollow(FOLLOW_rule__XFeatureCall__TypeArgumentsAssignment_0_1_in_rule__XFeatureCall__Group_0__1__Impl16363);
             rule__XFeatureCall__TypeArgumentsAssignment_0_1();
 
             state._fsp--;
@@ -23448,12 +23457,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8059:1: ( rule__XFeatureCall__Group_0__2__Impl rule__XFeatureCall__Group_0__3 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8060:2: rule__XFeatureCall__Group_0__2__Impl rule__XFeatureCall__Group_0__3
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__2__Impl_in_rule__XFeatureCall__Group_0__216390);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__2__Impl_in_rule__XFeatureCall__Group_0__216393);
             rule__XFeatureCall__Group_0__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__3_in_rule__XFeatureCall__Group_0__216393);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__3_in_rule__XFeatureCall__Group_0__216396);
             rule__XFeatureCall__Group_0__3();
 
             state._fsp--;
@@ -23493,21 +23502,21 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXFeatureCallAccess().getGroup_0_2()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8074:1: ( rule__XFeatureCall__Group_0_2__0 )*
-            loop57:
+            loop58:
             do {
-                int alt57=2;
-                int LA57_0 = input.LA(1);
+                int alt58=2;
+                int LA58_0 = input.LA(1);
 
-                if ( (LA57_0==43) ) {
-                    alt57=1;
+                if ( (LA58_0==43) ) {
+                    alt58=1;
                 }
 
 
-                switch (alt57) {
+                switch (alt58) {
             	case 1 :
             	    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8074:2: rule__XFeatureCall__Group_0_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__XFeatureCall__Group_0_2__0_in_rule__XFeatureCall__Group_0__2__Impl16420);
+            	    pushFollow(FOLLOW_rule__XFeatureCall__Group_0_2__0_in_rule__XFeatureCall__Group_0__2__Impl16423);
             	    rule__XFeatureCall__Group_0_2__0();
 
             	    state._fsp--;
@@ -23517,7 +23526,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop57;
+            	    break loop58;
                 }
             } while (true);
 
@@ -23555,7 +23564,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8088:1: ( rule__XFeatureCall__Group_0__3__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8089:2: rule__XFeatureCall__Group_0__3__Impl
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__3__Impl_in_rule__XFeatureCall__Group_0__316451);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_0__3__Impl_in_rule__XFeatureCall__Group_0__316454);
             rule__XFeatureCall__Group_0__3__Impl();
 
             state._fsp--;
@@ -23594,7 +23603,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getGreaterThanSignKeyword_0_3()); 
             }
-            match(input,19,FOLLOW_19_in_rule__XFeatureCall__Group_0__3__Impl16479); if (state.failed) return ;
+            match(input,19,FOLLOW_19_in_rule__XFeatureCall__Group_0__3__Impl16482); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFeatureCallAccess().getGreaterThanSignKeyword_0_3()); 
             }
@@ -23629,12 +23638,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8126:1: ( rule__XFeatureCall__Group_0_2__0__Impl rule__XFeatureCall__Group_0_2__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8127:2: rule__XFeatureCall__Group_0_2__0__Impl rule__XFeatureCall__Group_0_2__1
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_0_2__0__Impl_in_rule__XFeatureCall__Group_0_2__016518);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_0_2__0__Impl_in_rule__XFeatureCall__Group_0_2__016521);
             rule__XFeatureCall__Group_0_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_0_2__1_in_rule__XFeatureCall__Group_0_2__016521);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_0_2__1_in_rule__XFeatureCall__Group_0_2__016524);
             rule__XFeatureCall__Group_0_2__1();
 
             state._fsp--;
@@ -23673,7 +23682,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getCommaKeyword_0_2_0()); 
             }
-            match(input,43,FOLLOW_43_in_rule__XFeatureCall__Group_0_2__0__Impl16549); if (state.failed) return ;
+            match(input,43,FOLLOW_43_in_rule__XFeatureCall__Group_0_2__0__Impl16552); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFeatureCallAccess().getCommaKeyword_0_2_0()); 
             }
@@ -23708,7 +23717,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8157:1: ( rule__XFeatureCall__Group_0_2__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8158:2: rule__XFeatureCall__Group_0_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_0_2__1__Impl_in_rule__XFeatureCall__Group_0_2__116580);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_0_2__1__Impl_in_rule__XFeatureCall__Group_0_2__116583);
             rule__XFeatureCall__Group_0_2__1__Impl();
 
             state._fsp--;
@@ -23750,7 +23759,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8171:1: ( rule__XFeatureCall__TypeArgumentsAssignment_0_2_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8171:2: rule__XFeatureCall__TypeArgumentsAssignment_0_2_1
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__TypeArgumentsAssignment_0_2_1_in_rule__XFeatureCall__Group_0_2__1__Impl16607);
+            pushFollow(FOLLOW_rule__XFeatureCall__TypeArgumentsAssignment_0_2_1_in_rule__XFeatureCall__Group_0_2__1__Impl16610);
             rule__XFeatureCall__TypeArgumentsAssignment_0_2_1();
 
             state._fsp--;
@@ -23792,12 +23801,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8189:1: ( rule__XFeatureCall__Group_2__0__Impl rule__XFeatureCall__Group_2__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8190:2: rule__XFeatureCall__Group_2__0__Impl rule__XFeatureCall__Group_2__1
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_2__0__Impl_in_rule__XFeatureCall__Group_2__016641);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_2__0__Impl_in_rule__XFeatureCall__Group_2__016644);
             rule__XFeatureCall__Group_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_2__1_in_rule__XFeatureCall__Group_2__016644);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_2__1_in_rule__XFeatureCall__Group_2__016647);
             rule__XFeatureCall__Group_2__1();
 
             state._fsp--;
@@ -23836,7 +23845,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getLeftParenthesisKeyword_2_0()); 
             }
-            match(input,44,FOLLOW_44_in_rule__XFeatureCall__Group_2__0__Impl16672); if (state.failed) return ;
+            match(input,44,FOLLOW_44_in_rule__XFeatureCall__Group_2__0__Impl16675); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFeatureCallAccess().getLeftParenthesisKeyword_2_0()); 
             }
@@ -23871,12 +23880,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8220:1: ( rule__XFeatureCall__Group_2__1__Impl rule__XFeatureCall__Group_2__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8221:2: rule__XFeatureCall__Group_2__1__Impl rule__XFeatureCall__Group_2__2
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_2__1__Impl_in_rule__XFeatureCall__Group_2__116703);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_2__1__Impl_in_rule__XFeatureCall__Group_2__116706);
             rule__XFeatureCall__Group_2__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_2__2_in_rule__XFeatureCall__Group_2__116706);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_2__2_in_rule__XFeatureCall__Group_2__116709);
             rule__XFeatureCall__Group_2__2();
 
             state._fsp--;
@@ -23916,17 +23925,17 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXFeatureCallAccess().getGroup_2_1()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8235:1: ( rule__XFeatureCall__Group_2_1__0 )?
-            int alt58=2;
-            int LA58_0 = input.LA(1);
+            int alt59=2;
+            int LA59_0 = input.LA(1);
 
-            if ( ((LA58_0>=RULE_STRING && LA58_0<=RULE_INT)||LA58_0==14||LA58_0==20||(LA58_0>=23 && LA58_0<=24)||LA58_0==29||LA58_0==35||LA58_0==40||LA58_0==44||(LA58_0>=46 && LA58_0<=47)||LA58_0==49||(LA58_0>=52 && LA58_0<=54)||(LA58_0>=56 && LA58_0<=58)||(LA58_0>=60 && LA58_0<=61)||LA58_0==64||LA58_0==71) ) {
-                alt58=1;
+            if ( ((LA59_0>=RULE_STRING && LA59_0<=RULE_INT)||LA59_0==14||LA59_0==20||(LA59_0>=23 && LA59_0<=24)||LA59_0==29||LA59_0==35||LA59_0==40||LA59_0==44||(LA59_0>=46 && LA59_0<=47)||LA59_0==49||(LA59_0>=52 && LA59_0<=54)||(LA59_0>=56 && LA59_0<=58)||(LA59_0>=60 && LA59_0<=61)||LA59_0==64||LA59_0==71) ) {
+                alt59=1;
             }
-            switch (alt58) {
+            switch (alt59) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8235:2: rule__XFeatureCall__Group_2_1__0
                     {
-                    pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1__0_in_rule__XFeatureCall__Group_2__1__Impl16733);
+                    pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1__0_in_rule__XFeatureCall__Group_2__1__Impl16736);
                     rule__XFeatureCall__Group_2_1__0();
 
                     state._fsp--;
@@ -23971,7 +23980,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8249:1: ( rule__XFeatureCall__Group_2__2__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8250:2: rule__XFeatureCall__Group_2__2__Impl
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_2__2__Impl_in_rule__XFeatureCall__Group_2__216764);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_2__2__Impl_in_rule__XFeatureCall__Group_2__216767);
             rule__XFeatureCall__Group_2__2__Impl();
 
             state._fsp--;
@@ -24010,7 +24019,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getRightParenthesisKeyword_2_2()); 
             }
-            match(input,45,FOLLOW_45_in_rule__XFeatureCall__Group_2__2__Impl16792); if (state.failed) return ;
+            match(input,45,FOLLOW_45_in_rule__XFeatureCall__Group_2__2__Impl16795); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFeatureCallAccess().getRightParenthesisKeyword_2_2()); 
             }
@@ -24045,12 +24054,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8285:1: ( rule__XFeatureCall__Group_2_1__0__Impl rule__XFeatureCall__Group_2_1__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8286:2: rule__XFeatureCall__Group_2_1__0__Impl rule__XFeatureCall__Group_2_1__1
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1__0__Impl_in_rule__XFeatureCall__Group_2_1__016829);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1__0__Impl_in_rule__XFeatureCall__Group_2_1__016832);
             rule__XFeatureCall__Group_2_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1__1_in_rule__XFeatureCall__Group_2_1__016832);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1__1_in_rule__XFeatureCall__Group_2_1__016835);
             rule__XFeatureCall__Group_2_1__1();
 
             state._fsp--;
@@ -24092,7 +24101,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8300:1: ( rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8300:2: rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0_in_rule__XFeatureCall__Group_2_1__0__Impl16859);
+            pushFollow(FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0_in_rule__XFeatureCall__Group_2_1__0__Impl16862);
             rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0();
 
             state._fsp--;
@@ -24134,7 +24143,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8314:1: ( rule__XFeatureCall__Group_2_1__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8315:2: rule__XFeatureCall__Group_2_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1__1__Impl_in_rule__XFeatureCall__Group_2_1__116889);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1__1__Impl_in_rule__XFeatureCall__Group_2_1__116892);
             rule__XFeatureCall__Group_2_1__1__Impl();
 
             state._fsp--;
@@ -24174,21 +24183,21 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXFeatureCallAccess().getGroup_2_1_1()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8328:1: ( rule__XFeatureCall__Group_2_1_1__0 )*
-            loop59:
+            loop60:
             do {
-                int alt59=2;
-                int LA59_0 = input.LA(1);
+                int alt60=2;
+                int LA60_0 = input.LA(1);
 
-                if ( (LA59_0==43) ) {
-                    alt59=1;
+                if ( (LA60_0==43) ) {
+                    alt60=1;
                 }
 
 
-                switch (alt59) {
+                switch (alt60) {
             	case 1 :
             	    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8328:2: rule__XFeatureCall__Group_2_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1_1__0_in_rule__XFeatureCall__Group_2_1__1__Impl16916);
+            	    pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1_1__0_in_rule__XFeatureCall__Group_2_1__1__Impl16919);
             	    rule__XFeatureCall__Group_2_1_1__0();
 
             	    state._fsp--;
@@ -24198,7 +24207,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop59;
+            	    break loop60;
                 }
             } while (true);
 
@@ -24236,12 +24245,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8346:1: ( rule__XFeatureCall__Group_2_1_1__0__Impl rule__XFeatureCall__Group_2_1_1__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8347:2: rule__XFeatureCall__Group_2_1_1__0__Impl rule__XFeatureCall__Group_2_1_1__1
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1_1__0__Impl_in_rule__XFeatureCall__Group_2_1_1__016951);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1_1__0__Impl_in_rule__XFeatureCall__Group_2_1_1__016954);
             rule__XFeatureCall__Group_2_1_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1_1__1_in_rule__XFeatureCall__Group_2_1_1__016954);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1_1__1_in_rule__XFeatureCall__Group_2_1_1__016957);
             rule__XFeatureCall__Group_2_1_1__1();
 
             state._fsp--;
@@ -24280,7 +24289,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getCommaKeyword_2_1_1_0()); 
             }
-            match(input,43,FOLLOW_43_in_rule__XFeatureCall__Group_2_1_1__0__Impl16982); if (state.failed) return ;
+            match(input,43,FOLLOW_43_in_rule__XFeatureCall__Group_2_1_1__0__Impl16985); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFeatureCallAccess().getCommaKeyword_2_1_1_0()); 
             }
@@ -24315,7 +24324,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8377:1: ( rule__XFeatureCall__Group_2_1_1__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8378:2: rule__XFeatureCall__Group_2_1_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1_1__1__Impl_in_rule__XFeatureCall__Group_2_1_1__117013);
+            pushFollow(FOLLOW_rule__XFeatureCall__Group_2_1_1__1__Impl_in_rule__XFeatureCall__Group_2_1_1__117016);
             rule__XFeatureCall__Group_2_1_1__1__Impl();
 
             state._fsp--;
@@ -24357,7 +24366,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8391:1: ( rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8391:2: rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1
             {
-            pushFollow(FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1_in_rule__XFeatureCall__Group_2_1_1__1__Impl17040);
+            pushFollow(FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1_in_rule__XFeatureCall__Group_2_1_1__1__Impl17043);
             rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1();
 
             state._fsp--;
@@ -24399,12 +24408,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8409:1: ( rule__XConstructorCall__Group__0__Impl rule__XConstructorCall__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8410:2: rule__XConstructorCall__Group__0__Impl rule__XConstructorCall__Group__1
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group__0__Impl_in_rule__XConstructorCall__Group__017074);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__0__Impl_in_rule__XConstructorCall__Group__017077);
             rule__XConstructorCall__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XConstructorCall__Group__1_in_rule__XConstructorCall__Group__017077);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__1_in_rule__XConstructorCall__Group__017080);
             rule__XConstructorCall__Group__1();
 
             state._fsp--;
@@ -24443,7 +24452,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getNewKeyword_0()); 
             }
-            match(input,56,FOLLOW_56_in_rule__XConstructorCall__Group__0__Impl17105); if (state.failed) return ;
+            match(input,56,FOLLOW_56_in_rule__XConstructorCall__Group__0__Impl17108); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXConstructorCallAccess().getNewKeyword_0()); 
             }
@@ -24478,12 +24487,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8440:1: ( rule__XConstructorCall__Group__1__Impl rule__XConstructorCall__Group__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8441:2: rule__XConstructorCall__Group__1__Impl rule__XConstructorCall__Group__2
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group__1__Impl_in_rule__XConstructorCall__Group__117136);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__1__Impl_in_rule__XConstructorCall__Group__117139);
             rule__XConstructorCall__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XConstructorCall__Group__2_in_rule__XConstructorCall__Group__117139);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__2_in_rule__XConstructorCall__Group__117142);
             rule__XConstructorCall__Group__2();
 
             state._fsp--;
@@ -24525,7 +24534,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8455:1: ( rule__XConstructorCall__TypeAssignment_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8455:2: rule__XConstructorCall__TypeAssignment_1
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__TypeAssignment_1_in_rule__XConstructorCall__Group__1__Impl17166);
+            pushFollow(FOLLOW_rule__XConstructorCall__TypeAssignment_1_in_rule__XConstructorCall__Group__1__Impl17169);
             rule__XConstructorCall__TypeAssignment_1();
 
             state._fsp--;
@@ -24567,12 +24576,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8469:1: ( rule__XConstructorCall__Group__2__Impl rule__XConstructorCall__Group__3 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8470:2: rule__XConstructorCall__Group__2__Impl rule__XConstructorCall__Group__3
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group__2__Impl_in_rule__XConstructorCall__Group__217196);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__2__Impl_in_rule__XConstructorCall__Group__217199);
             rule__XConstructorCall__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XConstructorCall__Group__3_in_rule__XConstructorCall__Group__217199);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__3_in_rule__XConstructorCall__Group__217202);
             rule__XConstructorCall__Group__3();
 
             state._fsp--;
@@ -24611,7 +24620,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_2()); 
             }
-            match(input,44,FOLLOW_44_in_rule__XConstructorCall__Group__2__Impl17227); if (state.failed) return ;
+            match(input,44,FOLLOW_44_in_rule__XConstructorCall__Group__2__Impl17230); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_2()); 
             }
@@ -24646,12 +24655,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8500:1: ( rule__XConstructorCall__Group__3__Impl rule__XConstructorCall__Group__4 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8501:2: rule__XConstructorCall__Group__3__Impl rule__XConstructorCall__Group__4
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group__3__Impl_in_rule__XConstructorCall__Group__317258);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__3__Impl_in_rule__XConstructorCall__Group__317261);
             rule__XConstructorCall__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XConstructorCall__Group__4_in_rule__XConstructorCall__Group__317261);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__4_in_rule__XConstructorCall__Group__317264);
             rule__XConstructorCall__Group__4();
 
             state._fsp--;
@@ -24691,17 +24700,17 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXConstructorCallAccess().getGroup_3()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8515:1: ( rule__XConstructorCall__Group_3__0 )?
-            int alt60=2;
-            int LA60_0 = input.LA(1);
+            int alt61=2;
+            int LA61_0 = input.LA(1);
 
-            if ( ((LA60_0>=RULE_STRING && LA60_0<=RULE_INT)||LA60_0==14||LA60_0==20||(LA60_0>=23 && LA60_0<=24)||LA60_0==29||LA60_0==35||LA60_0==40||LA60_0==44||(LA60_0>=46 && LA60_0<=47)||LA60_0==49||(LA60_0>=52 && LA60_0<=54)||(LA60_0>=56 && LA60_0<=58)||(LA60_0>=60 && LA60_0<=61)||LA60_0==64||LA60_0==71) ) {
-                alt60=1;
+            if ( ((LA61_0>=RULE_STRING && LA61_0<=RULE_INT)||LA61_0==14||LA61_0==20||(LA61_0>=23 && LA61_0<=24)||LA61_0==29||LA61_0==35||LA61_0==40||LA61_0==44||(LA61_0>=46 && LA61_0<=47)||LA61_0==49||(LA61_0>=52 && LA61_0<=54)||(LA61_0>=56 && LA61_0<=58)||(LA61_0>=60 && LA61_0<=61)||LA61_0==64||LA61_0==71) ) {
+                alt61=1;
             }
-            switch (alt60) {
+            switch (alt61) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8515:2: rule__XConstructorCall__Group_3__0
                     {
-                    pushFollow(FOLLOW_rule__XConstructorCall__Group_3__0_in_rule__XConstructorCall__Group__3__Impl17288);
+                    pushFollow(FOLLOW_rule__XConstructorCall__Group_3__0_in_rule__XConstructorCall__Group__3__Impl17291);
                     rule__XConstructorCall__Group_3__0();
 
                     state._fsp--;
@@ -24746,7 +24755,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8529:1: ( rule__XConstructorCall__Group__4__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8530:2: rule__XConstructorCall__Group__4__Impl
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group__4__Impl_in_rule__XConstructorCall__Group__417319);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__4__Impl_in_rule__XConstructorCall__Group__417322);
             rule__XConstructorCall__Group__4__Impl();
 
             state._fsp--;
@@ -24785,7 +24794,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_4()); 
             }
-            match(input,45,FOLLOW_45_in_rule__XConstructorCall__Group__4__Impl17347); if (state.failed) return ;
+            match(input,45,FOLLOW_45_in_rule__XConstructorCall__Group__4__Impl17350); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_4()); 
             }
@@ -24820,12 +24829,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8569:1: ( rule__XConstructorCall__Group_3__0__Impl rule__XConstructorCall__Group_3__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8570:2: rule__XConstructorCall__Group_3__0__Impl rule__XConstructorCall__Group_3__1
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3__0__Impl_in_rule__XConstructorCall__Group_3__017388);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_3__0__Impl_in_rule__XConstructorCall__Group_3__017391);
             rule__XConstructorCall__Group_3__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3__1_in_rule__XConstructorCall__Group_3__017391);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_3__1_in_rule__XConstructorCall__Group_3__017394);
             rule__XConstructorCall__Group_3__1();
 
             state._fsp--;
@@ -24867,7 +24876,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8584:1: ( rule__XConstructorCall__ArgumentsAssignment_3_0 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8584:2: rule__XConstructorCall__ArgumentsAssignment_3_0
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_0_in_rule__XConstructorCall__Group_3__0__Impl17418);
+            pushFollow(FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_0_in_rule__XConstructorCall__Group_3__0__Impl17421);
             rule__XConstructorCall__ArgumentsAssignment_3_0();
 
             state._fsp--;
@@ -24909,7 +24918,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8598:1: ( rule__XConstructorCall__Group_3__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8599:2: rule__XConstructorCall__Group_3__1__Impl
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3__1__Impl_in_rule__XConstructorCall__Group_3__117448);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_3__1__Impl_in_rule__XConstructorCall__Group_3__117451);
             rule__XConstructorCall__Group_3__1__Impl();
 
             state._fsp--;
@@ -24949,21 +24958,21 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXConstructorCallAccess().getGroup_3_1()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8612:1: ( rule__XConstructorCall__Group_3_1__0 )*
-            loop61:
+            loop62:
             do {
-                int alt61=2;
-                int LA61_0 = input.LA(1);
+                int alt62=2;
+                int LA62_0 = input.LA(1);
 
-                if ( (LA61_0==43) ) {
-                    alt61=1;
+                if ( (LA62_0==43) ) {
+                    alt62=1;
                 }
 
 
-                switch (alt61) {
+                switch (alt62) {
             	case 1 :
             	    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8612:2: rule__XConstructorCall__Group_3_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__0_in_rule__XConstructorCall__Group_3__1__Impl17475);
+            	    pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__0_in_rule__XConstructorCall__Group_3__1__Impl17478);
             	    rule__XConstructorCall__Group_3_1__0();
 
             	    state._fsp--;
@@ -24973,7 +24982,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop61;
+            	    break loop62;
                 }
             } while (true);
 
@@ -25011,12 +25020,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8630:1: ( rule__XConstructorCall__Group_3_1__0__Impl rule__XConstructorCall__Group_3_1__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8631:2: rule__XConstructorCall__Group_3_1__0__Impl rule__XConstructorCall__Group_3_1__1
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__0__Impl_in_rule__XConstructorCall__Group_3_1__017510);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__0__Impl_in_rule__XConstructorCall__Group_3_1__017513);
             rule__XConstructorCall__Group_3_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__1_in_rule__XConstructorCall__Group_3_1__017513);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__1_in_rule__XConstructorCall__Group_3_1__017516);
             rule__XConstructorCall__Group_3_1__1();
 
             state._fsp--;
@@ -25055,7 +25064,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getCommaKeyword_3_1_0()); 
             }
-            match(input,43,FOLLOW_43_in_rule__XConstructorCall__Group_3_1__0__Impl17541); if (state.failed) return ;
+            match(input,43,FOLLOW_43_in_rule__XConstructorCall__Group_3_1__0__Impl17544); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXConstructorCallAccess().getCommaKeyword_3_1_0()); 
             }
@@ -25090,7 +25099,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8661:1: ( rule__XConstructorCall__Group_3_1__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8662:2: rule__XConstructorCall__Group_3_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__1__Impl_in_rule__XConstructorCall__Group_3_1__117572);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__1__Impl_in_rule__XConstructorCall__Group_3_1__117575);
             rule__XConstructorCall__Group_3_1__1__Impl();
 
             state._fsp--;
@@ -25132,7 +25141,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8675:1: ( rule__XConstructorCall__ArgumentsAssignment_3_1_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8675:2: rule__XConstructorCall__ArgumentsAssignment_3_1_1
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_1_1_in_rule__XConstructorCall__Group_3_1__1__Impl17599);
+            pushFollow(FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_1_1_in_rule__XConstructorCall__Group_3_1__1__Impl17602);
             rule__XConstructorCall__ArgumentsAssignment_3_1_1();
 
             state._fsp--;
@@ -25174,12 +25183,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8693:1: ( rule__XBooleanLiteral__Group_0__0__Impl rule__XBooleanLiteral__Group_0__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8694:2: rule__XBooleanLiteral__Group_0__0__Impl rule__XBooleanLiteral__Group_0__1
             {
-            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__0__Impl_in_rule__XBooleanLiteral__Group_0__017633);
+            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__0__Impl_in_rule__XBooleanLiteral__Group_0__017636);
             rule__XBooleanLiteral__Group_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__1_in_rule__XBooleanLiteral__Group_0__017636);
+            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__1_in_rule__XBooleanLiteral__Group_0__017639);
             rule__XBooleanLiteral__Group_0__1();
 
             state._fsp--;
@@ -25253,7 +25262,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8724:1: ( rule__XBooleanLiteral__Group_0__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8725:2: rule__XBooleanLiteral__Group_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__1__Impl_in_rule__XBooleanLiteral__Group_0__117694);
+            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__1__Impl_in_rule__XBooleanLiteral__Group_0__117697);
             rule__XBooleanLiteral__Group_0__1__Impl();
 
             state._fsp--;
@@ -25292,7 +25301,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBooleanLiteralAccess().getFalseKeyword_0_1()); 
             }
-            match(input,57,FOLLOW_57_in_rule__XBooleanLiteral__Group_0__1__Impl17722); if (state.failed) return ;
+            match(input,57,FOLLOW_57_in_rule__XBooleanLiteral__Group_0__1__Impl17725); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXBooleanLiteralAccess().getFalseKeyword_0_1()); 
             }
@@ -25327,12 +25336,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8758:1: ( rule__XNullLiteral__Group__0__Impl rule__XNullLiteral__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8759:2: rule__XNullLiteral__Group__0__Impl rule__XNullLiteral__Group__1
             {
-            pushFollow(FOLLOW_rule__XNullLiteral__Group__0__Impl_in_rule__XNullLiteral__Group__017757);
+            pushFollow(FOLLOW_rule__XNullLiteral__Group__0__Impl_in_rule__XNullLiteral__Group__017760);
             rule__XNullLiteral__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XNullLiteral__Group__1_in_rule__XNullLiteral__Group__017760);
+            pushFollow(FOLLOW_rule__XNullLiteral__Group__1_in_rule__XNullLiteral__Group__017763);
             rule__XNullLiteral__Group__1();
 
             state._fsp--;
@@ -25406,7 +25415,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8789:1: ( rule__XNullLiteral__Group__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8790:2: rule__XNullLiteral__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__XNullLiteral__Group__1__Impl_in_rule__XNullLiteral__Group__117818);
+            pushFollow(FOLLOW_rule__XNullLiteral__Group__1__Impl_in_rule__XNullLiteral__Group__117821);
             rule__XNullLiteral__Group__1__Impl();
 
             state._fsp--;
@@ -25445,7 +25454,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXNullLiteralAccess().getNullKeyword_1()); 
             }
-            match(input,58,FOLLOW_58_in_rule__XNullLiteral__Group__1__Impl17846); if (state.failed) return ;
+            match(input,58,FOLLOW_58_in_rule__XNullLiteral__Group__1__Impl17849); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXNullLiteralAccess().getNullKeyword_1()); 
             }
@@ -25480,12 +25489,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8823:1: ( rule__XTypeLiteral__Group__0__Impl rule__XTypeLiteral__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8824:2: rule__XTypeLiteral__Group__0__Impl rule__XTypeLiteral__Group__1
             {
-            pushFollow(FOLLOW_rule__XTypeLiteral__Group__0__Impl_in_rule__XTypeLiteral__Group__017881);
+            pushFollow(FOLLOW_rule__XTypeLiteral__Group__0__Impl_in_rule__XTypeLiteral__Group__017884);
             rule__XTypeLiteral__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTypeLiteral__Group__1_in_rule__XTypeLiteral__Group__017884);
+            pushFollow(FOLLOW_rule__XTypeLiteral__Group__1_in_rule__XTypeLiteral__Group__017887);
             rule__XTypeLiteral__Group__1();
 
             state._fsp--;
@@ -25527,7 +25536,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8838:1: ( rule__XTypeLiteral__TypeAssignment_0 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8838:2: rule__XTypeLiteral__TypeAssignment_0
             {
-            pushFollow(FOLLOW_rule__XTypeLiteral__TypeAssignment_0_in_rule__XTypeLiteral__Group__0__Impl17911);
+            pushFollow(FOLLOW_rule__XTypeLiteral__TypeAssignment_0_in_rule__XTypeLiteral__Group__0__Impl17914);
             rule__XTypeLiteral__TypeAssignment_0();
 
             state._fsp--;
@@ -25569,12 +25578,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8852:1: ( rule__XTypeLiteral__Group__1__Impl rule__XTypeLiteral__Group__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8853:2: rule__XTypeLiteral__Group__1__Impl rule__XTypeLiteral__Group__2
             {
-            pushFollow(FOLLOW_rule__XTypeLiteral__Group__1__Impl_in_rule__XTypeLiteral__Group__117941);
+            pushFollow(FOLLOW_rule__XTypeLiteral__Group__1__Impl_in_rule__XTypeLiteral__Group__117944);
             rule__XTypeLiteral__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTypeLiteral__Group__2_in_rule__XTypeLiteral__Group__117944);
+            pushFollow(FOLLOW_rule__XTypeLiteral__Group__2_in_rule__XTypeLiteral__Group__117947);
             rule__XTypeLiteral__Group__2();
 
             state._fsp--;
@@ -25613,7 +25622,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getFullStopKeyword_1()); 
             }
-            match(input,42,FOLLOW_42_in_rule__XTypeLiteral__Group__1__Impl17972); if (state.failed) return ;
+            match(input,42,FOLLOW_42_in_rule__XTypeLiteral__Group__1__Impl17975); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXTypeLiteralAccess().getFullStopKeyword_1()); 
             }
@@ -25648,7 +25657,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8883:1: ( rule__XTypeLiteral__Group__2__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8884:2: rule__XTypeLiteral__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__XTypeLiteral__Group__2__Impl_in_rule__XTypeLiteral__Group__218003);
+            pushFollow(FOLLOW_rule__XTypeLiteral__Group__2__Impl_in_rule__XTypeLiteral__Group__218006);
             rule__XTypeLiteral__Group__2__Impl();
 
             state._fsp--;
@@ -25687,7 +25696,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getClassKeyword_2()); 
             }
-            match(input,59,FOLLOW_59_in_rule__XTypeLiteral__Group__2__Impl18031); if (state.failed) return ;
+            match(input,59,FOLLOW_59_in_rule__XTypeLiteral__Group__2__Impl18034); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXTypeLiteralAccess().getClassKeyword_2()); 
             }
@@ -25722,12 +25731,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8919:1: ( rule__XThrowExpression__Group__0__Impl rule__XThrowExpression__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8920:2: rule__XThrowExpression__Group__0__Impl rule__XThrowExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__XThrowExpression__Group__0__Impl_in_rule__XThrowExpression__Group__018068);
+            pushFollow(FOLLOW_rule__XThrowExpression__Group__0__Impl_in_rule__XThrowExpression__Group__018071);
             rule__XThrowExpression__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XThrowExpression__Group__1_in_rule__XThrowExpression__Group__018071);
+            pushFollow(FOLLOW_rule__XThrowExpression__Group__1_in_rule__XThrowExpression__Group__018074);
             rule__XThrowExpression__Group__1();
 
             state._fsp--;
@@ -25766,7 +25775,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXThrowExpressionAccess().getThrowKeyword_0()); 
             }
-            match(input,60,FOLLOW_60_in_rule__XThrowExpression__Group__0__Impl18099); if (state.failed) return ;
+            match(input,60,FOLLOW_60_in_rule__XThrowExpression__Group__0__Impl18102); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXThrowExpressionAccess().getThrowKeyword_0()); 
             }
@@ -25801,7 +25810,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8950:1: ( rule__XThrowExpression__Group__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8951:2: rule__XThrowExpression__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__XThrowExpression__Group__1__Impl_in_rule__XThrowExpression__Group__118130);
+            pushFollow(FOLLOW_rule__XThrowExpression__Group__1__Impl_in_rule__XThrowExpression__Group__118133);
             rule__XThrowExpression__Group__1__Impl();
 
             state._fsp--;
@@ -25843,7 +25852,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8964:1: ( rule__XThrowExpression__ExpressionAssignment_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8964:2: rule__XThrowExpression__ExpressionAssignment_1
             {
-            pushFollow(FOLLOW_rule__XThrowExpression__ExpressionAssignment_1_in_rule__XThrowExpression__Group__1__Impl18157);
+            pushFollow(FOLLOW_rule__XThrowExpression__ExpressionAssignment_1_in_rule__XThrowExpression__Group__1__Impl18160);
             rule__XThrowExpression__ExpressionAssignment_1();
 
             state._fsp--;
@@ -25885,12 +25894,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8982:1: ( rule__XTryCatchFinallyExpression__Group__0__Impl rule__XTryCatchFinallyExpression__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:8983:2: rule__XTryCatchFinallyExpression__Group__0__Impl rule__XTryCatchFinallyExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__0__Impl_in_rule__XTryCatchFinallyExpression__Group__018191);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__0__Impl_in_rule__XTryCatchFinallyExpression__Group__018194);
             rule__XTryCatchFinallyExpression__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__1_in_rule__XTryCatchFinallyExpression__Group__018194);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__1_in_rule__XTryCatchFinallyExpression__Group__018197);
             rule__XTryCatchFinallyExpression__Group__1();
 
             state._fsp--;
@@ -25929,7 +25938,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getTryKeyword_0()); 
             }
-            match(input,61,FOLLOW_61_in_rule__XTryCatchFinallyExpression__Group__0__Impl18222); if (state.failed) return ;
+            match(input,61,FOLLOW_61_in_rule__XTryCatchFinallyExpression__Group__0__Impl18225); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXTryCatchFinallyExpressionAccess().getTryKeyword_0()); 
             }
@@ -25964,12 +25973,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9013:1: ( rule__XTryCatchFinallyExpression__Group__1__Impl rule__XTryCatchFinallyExpression__Group__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9014:2: rule__XTryCatchFinallyExpression__Group__1__Impl rule__XTryCatchFinallyExpression__Group__2
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__1__Impl_in_rule__XTryCatchFinallyExpression__Group__118253);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__1__Impl_in_rule__XTryCatchFinallyExpression__Group__118256);
             rule__XTryCatchFinallyExpression__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__2_in_rule__XTryCatchFinallyExpression__Group__118256);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__2_in_rule__XTryCatchFinallyExpression__Group__118259);
             rule__XTryCatchFinallyExpression__Group__2();
 
             state._fsp--;
@@ -26011,7 +26020,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9028:1: ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9028:2: rule__XTryCatchFinallyExpression__ExpressionAssignment_1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__ExpressionAssignment_1_in_rule__XTryCatchFinallyExpression__Group__1__Impl18283);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__ExpressionAssignment_1_in_rule__XTryCatchFinallyExpression__Group__1__Impl18286);
             rule__XTryCatchFinallyExpression__ExpressionAssignment_1();
 
             state._fsp--;
@@ -26053,7 +26062,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9042:1: ( rule__XTryCatchFinallyExpression__Group__2__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9043:2: rule__XTryCatchFinallyExpression__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__2__Impl_in_rule__XTryCatchFinallyExpression__Group__218313);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__2__Impl_in_rule__XTryCatchFinallyExpression__Group__218316);
             rule__XTryCatchFinallyExpression__Group__2__Impl();
 
             state._fsp--;
@@ -26095,7 +26104,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9056:1: ( rule__XTryCatchFinallyExpression__Alternatives_2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9056:2: rule__XTryCatchFinallyExpression__Alternatives_2
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Alternatives_2_in_rule__XTryCatchFinallyExpression__Group__2__Impl18340);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Alternatives_2_in_rule__XTryCatchFinallyExpression__Group__2__Impl18343);
             rule__XTryCatchFinallyExpression__Alternatives_2();
 
             state._fsp--;
@@ -26137,12 +26146,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9076:1: ( rule__XTryCatchFinallyExpression__Group_2_0__0__Impl rule__XTryCatchFinallyExpression__Group_2_0__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9077:2: rule__XTryCatchFinallyExpression__Group_2_0__0__Impl rule__XTryCatchFinallyExpression__Group_2_0__1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__018376);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__018379);
             rule__XTryCatchFinallyExpression__Group_2_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1_in_rule__XTryCatchFinallyExpression__Group_2_0__018379);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1_in_rule__XTryCatchFinallyExpression__Group_2_0__018382);
             rule__XTryCatchFinallyExpression__Group_2_0__1();
 
             state._fsp--;
@@ -26187,7 +26196,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9092:1: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9092:2: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl18408);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl18411);
             rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0();
 
             state._fsp--;
@@ -26208,27 +26217,27 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesAssignment_2_0_0()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9097:1: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )*
-            loop62:
+            loop63:
             do {
-                int alt62=2;
-                int LA62_0 = input.LA(1);
+                int alt63=2;
+                int LA63_0 = input.LA(1);
 
-                if ( (LA62_0==63) ) {
-                    int LA62_2 = input.LA(2);
+                if ( (LA63_0==63) ) {
+                    int LA63_2 = input.LA(2);
 
-                    if ( (synpred87_InternalXcss()) ) {
-                        alt62=1;
+                    if ( (synpred88_InternalXcss()) ) {
+                        alt63=1;
                     }
 
 
                 }
 
 
-                switch (alt62) {
+                switch (alt63) {
             	case 1 :
             	    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9097:2: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0
             	    {
-            	    pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl18420);
+            	    pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl18423);
             	    rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0();
 
             	    state._fsp--;
@@ -26238,7 +26247,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop62;
+            	    break loop63;
                 }
             } while (true);
 
@@ -26279,7 +26288,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9112:1: ( rule__XTryCatchFinallyExpression__Group_2_0__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9113:2: rule__XTryCatchFinallyExpression__Group_2_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__118453);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__118456);
             rule__XTryCatchFinallyExpression__Group_2_0__1__Impl();
 
             state._fsp--;
@@ -26319,21 +26328,21 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_2_0_1()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9126:1: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )?
-            int alt63=2;
-            int LA63_0 = input.LA(1);
+            int alt64=2;
+            int LA64_0 = input.LA(1);
 
-            if ( (LA63_0==62) ) {
-                int LA63_1 = input.LA(2);
+            if ( (LA64_0==62) ) {
+                int LA64_1 = input.LA(2);
 
-                if ( (synpred88_InternalXcss()) ) {
-                    alt63=1;
+                if ( (synpred89_InternalXcss()) ) {
+                    alt64=1;
                 }
             }
-            switch (alt63) {
+            switch (alt64) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9126:2: rule__XTryCatchFinallyExpression__Group_2_0_1__0
                     {
-                    pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl18480);
+                    pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl18483);
                     rule__XTryCatchFinallyExpression__Group_2_0_1__0();
 
                     state._fsp--;
@@ -26378,12 +26387,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9144:1: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_0_1__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9145:2: rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_0_1__1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__018515);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__018518);
             rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__018518);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__018521);
             rule__XTryCatchFinallyExpression__Group_2_0_1__1();
 
             state._fsp--;
@@ -26422,7 +26431,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_0_1_0()); 
             }
-            match(input,62,FOLLOW_62_in_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl18546); if (state.failed) return ;
+            match(input,62,FOLLOW_62_in_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl18549); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_0_1_0()); 
             }
@@ -26457,7 +26466,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9175:1: ( rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9176:2: rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__118577);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__118580);
             rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl();
 
             state._fsp--;
@@ -26499,7 +26508,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9189:1: ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9189:2: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl18604);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl18607);
             rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1();
 
             state._fsp--;
@@ -26541,12 +26550,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9207:1: ( rule__XTryCatchFinallyExpression__Group_2_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_1__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9208:2: rule__XTryCatchFinallyExpression__Group_2_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_1__1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__018638);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__018641);
             rule__XTryCatchFinallyExpression__Group_2_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1_in_rule__XTryCatchFinallyExpression__Group_2_1__018641);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1_in_rule__XTryCatchFinallyExpression__Group_2_1__018644);
             rule__XTryCatchFinallyExpression__Group_2_1__1();
 
             state._fsp--;
@@ -26585,7 +26594,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_1_0()); 
             }
-            match(input,62,FOLLOW_62_in_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl18669); if (state.failed) return ;
+            match(input,62,FOLLOW_62_in_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl18672); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_1_0()); 
             }
@@ -26620,7 +26629,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9238:1: ( rule__XTryCatchFinallyExpression__Group_2_1__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9239:2: rule__XTryCatchFinallyExpression__Group_2_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__118700);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__118703);
             rule__XTryCatchFinallyExpression__Group_2_1__1__Impl();
 
             state._fsp--;
@@ -26662,7 +26671,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9252:1: ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9252:2: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1_in_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl18727);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1_in_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl18730);
             rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1();
 
             state._fsp--;
@@ -26704,12 +26713,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9270:1: ( rule__XCatchClause__Group__0__Impl rule__XCatchClause__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9271:2: rule__XCatchClause__Group__0__Impl rule__XCatchClause__Group__1
             {
-            pushFollow(FOLLOW_rule__XCatchClause__Group__0__Impl_in_rule__XCatchClause__Group__018761);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__0__Impl_in_rule__XCatchClause__Group__018764);
             rule__XCatchClause__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XCatchClause__Group__1_in_rule__XCatchClause__Group__018764);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__1_in_rule__XCatchClause__Group__018767);
             rule__XCatchClause__Group__1();
 
             state._fsp--;
@@ -26748,7 +26757,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getCatchKeyword_0()); 
             }
-            match(input,63,FOLLOW_63_in_rule__XCatchClause__Group__0__Impl18792); if (state.failed) return ;
+            match(input,63,FOLLOW_63_in_rule__XCatchClause__Group__0__Impl18795); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXCatchClauseAccess().getCatchKeyword_0()); 
             }
@@ -26783,12 +26792,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9301:1: ( rule__XCatchClause__Group__1__Impl rule__XCatchClause__Group__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9302:2: rule__XCatchClause__Group__1__Impl rule__XCatchClause__Group__2
             {
-            pushFollow(FOLLOW_rule__XCatchClause__Group__1__Impl_in_rule__XCatchClause__Group__118823);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__1__Impl_in_rule__XCatchClause__Group__118826);
             rule__XCatchClause__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XCatchClause__Group__2_in_rule__XCatchClause__Group__118826);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__2_in_rule__XCatchClause__Group__118829);
             rule__XCatchClause__Group__2();
 
             state._fsp--;
@@ -26827,7 +26836,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getLeftParenthesisKeyword_1()); 
             }
-            match(input,44,FOLLOW_44_in_rule__XCatchClause__Group__1__Impl18854); if (state.failed) return ;
+            match(input,44,FOLLOW_44_in_rule__XCatchClause__Group__1__Impl18857); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXCatchClauseAccess().getLeftParenthesisKeyword_1()); 
             }
@@ -26862,12 +26871,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9332:1: ( rule__XCatchClause__Group__2__Impl rule__XCatchClause__Group__3 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9333:2: rule__XCatchClause__Group__2__Impl rule__XCatchClause__Group__3
             {
-            pushFollow(FOLLOW_rule__XCatchClause__Group__2__Impl_in_rule__XCatchClause__Group__218885);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__2__Impl_in_rule__XCatchClause__Group__218888);
             rule__XCatchClause__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XCatchClause__Group__3_in_rule__XCatchClause__Group__218888);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__3_in_rule__XCatchClause__Group__218891);
             rule__XCatchClause__Group__3();
 
             state._fsp--;
@@ -26909,7 +26918,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9347:1: ( rule__XCatchClause__DeclaredParamAssignment_2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9347:2: rule__XCatchClause__DeclaredParamAssignment_2
             {
-            pushFollow(FOLLOW_rule__XCatchClause__DeclaredParamAssignment_2_in_rule__XCatchClause__Group__2__Impl18915);
+            pushFollow(FOLLOW_rule__XCatchClause__DeclaredParamAssignment_2_in_rule__XCatchClause__Group__2__Impl18918);
             rule__XCatchClause__DeclaredParamAssignment_2();
 
             state._fsp--;
@@ -26951,12 +26960,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9361:1: ( rule__XCatchClause__Group__3__Impl rule__XCatchClause__Group__4 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9362:2: rule__XCatchClause__Group__3__Impl rule__XCatchClause__Group__4
             {
-            pushFollow(FOLLOW_rule__XCatchClause__Group__3__Impl_in_rule__XCatchClause__Group__318945);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__3__Impl_in_rule__XCatchClause__Group__318948);
             rule__XCatchClause__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XCatchClause__Group__4_in_rule__XCatchClause__Group__318948);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__4_in_rule__XCatchClause__Group__318951);
             rule__XCatchClause__Group__4();
 
             state._fsp--;
@@ -26995,7 +27004,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getRightParenthesisKeyword_3()); 
             }
-            match(input,45,FOLLOW_45_in_rule__XCatchClause__Group__3__Impl18976); if (state.failed) return ;
+            match(input,45,FOLLOW_45_in_rule__XCatchClause__Group__3__Impl18979); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXCatchClauseAccess().getRightParenthesisKeyword_3()); 
             }
@@ -27030,7 +27039,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9392:1: ( rule__XCatchClause__Group__4__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9393:2: rule__XCatchClause__Group__4__Impl
             {
-            pushFollow(FOLLOW_rule__XCatchClause__Group__4__Impl_in_rule__XCatchClause__Group__419007);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__4__Impl_in_rule__XCatchClause__Group__419010);
             rule__XCatchClause__Group__4__Impl();
 
             state._fsp--;
@@ -27072,7 +27081,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9406:1: ( rule__XCatchClause__ExpressionAssignment_4 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9406:2: rule__XCatchClause__ExpressionAssignment_4
             {
-            pushFollow(FOLLOW_rule__XCatchClause__ExpressionAssignment_4_in_rule__XCatchClause__Group__4__Impl19034);
+            pushFollow(FOLLOW_rule__XCatchClause__ExpressionAssignment_4_in_rule__XCatchClause__Group__4__Impl19037);
             rule__XCatchClause__ExpressionAssignment_4();
 
             state._fsp--;
@@ -27114,12 +27123,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9430:1: ( rule__XFunctionTypeRef__Group__0__Impl rule__XFunctionTypeRef__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9431:2: rule__XFunctionTypeRef__Group__0__Impl rule__XFunctionTypeRef__Group__1
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__0__Impl_in_rule__XFunctionTypeRef__Group__019074);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__0__Impl_in_rule__XFunctionTypeRef__Group__019077);
             rule__XFunctionTypeRef__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__1_in_rule__XFunctionTypeRef__Group__019077);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__1_in_rule__XFunctionTypeRef__Group__019080);
             rule__XFunctionTypeRef__Group__1();
 
             state._fsp--;
@@ -27159,17 +27168,17 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXFunctionTypeRefAccess().getGroup_0()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9445:1: ( rule__XFunctionTypeRef__Group_0__0 )?
-            int alt64=2;
-            int LA64_0 = input.LA(1);
+            int alt65=2;
+            int LA65_0 = input.LA(1);
 
-            if ( (LA64_0==44) ) {
-                alt64=1;
+            if ( (LA65_0==44) ) {
+                alt65=1;
             }
-            switch (alt64) {
+            switch (alt65) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9445:2: rule__XFunctionTypeRef__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__0_in_rule__XFunctionTypeRef__Group__0__Impl19104);
+                    pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__0_in_rule__XFunctionTypeRef__Group__0__Impl19107);
                     rule__XFunctionTypeRef__Group_0__0();
 
                     state._fsp--;
@@ -27214,12 +27223,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9459:1: ( rule__XFunctionTypeRef__Group__1__Impl rule__XFunctionTypeRef__Group__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9460:2: rule__XFunctionTypeRef__Group__1__Impl rule__XFunctionTypeRef__Group__2
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__1__Impl_in_rule__XFunctionTypeRef__Group__119135);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__1__Impl_in_rule__XFunctionTypeRef__Group__119138);
             rule__XFunctionTypeRef__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__2_in_rule__XFunctionTypeRef__Group__119138);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__2_in_rule__XFunctionTypeRef__Group__119141);
             rule__XFunctionTypeRef__Group__2();
 
             state._fsp--;
@@ -27258,7 +27267,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getEqualsSignGreaterThanSignKeyword_1()); 
             }
-            match(input,64,FOLLOW_64_in_rule__XFunctionTypeRef__Group__1__Impl19166); if (state.failed) return ;
+            match(input,64,FOLLOW_64_in_rule__XFunctionTypeRef__Group__1__Impl19169); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFunctionTypeRefAccess().getEqualsSignGreaterThanSignKeyword_1()); 
             }
@@ -27293,7 +27302,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9490:1: ( rule__XFunctionTypeRef__Group__2__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9491:2: rule__XFunctionTypeRef__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__2__Impl_in_rule__XFunctionTypeRef__Group__219197);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__2__Impl_in_rule__XFunctionTypeRef__Group__219200);
             rule__XFunctionTypeRef__Group__2__Impl();
 
             state._fsp--;
@@ -27335,7 +27344,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9504:1: ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9504:2: rule__XFunctionTypeRef__ReturnTypeAssignment_2
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__ReturnTypeAssignment_2_in_rule__XFunctionTypeRef__Group__2__Impl19224);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__ReturnTypeAssignment_2_in_rule__XFunctionTypeRef__Group__2__Impl19227);
             rule__XFunctionTypeRef__ReturnTypeAssignment_2();
 
             state._fsp--;
@@ -27377,12 +27386,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9524:1: ( rule__XFunctionTypeRef__Group_0__0__Impl rule__XFunctionTypeRef__Group_0__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9525:2: rule__XFunctionTypeRef__Group_0__0__Impl rule__XFunctionTypeRef__Group_0__1
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__0__Impl_in_rule__XFunctionTypeRef__Group_0__019260);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__0__Impl_in_rule__XFunctionTypeRef__Group_0__019263);
             rule__XFunctionTypeRef__Group_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__1_in_rule__XFunctionTypeRef__Group_0__019263);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__1_in_rule__XFunctionTypeRef__Group_0__019266);
             rule__XFunctionTypeRef__Group_0__1();
 
             state._fsp--;
@@ -27421,7 +27430,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getLeftParenthesisKeyword_0_0()); 
             }
-            match(input,44,FOLLOW_44_in_rule__XFunctionTypeRef__Group_0__0__Impl19291); if (state.failed) return ;
+            match(input,44,FOLLOW_44_in_rule__XFunctionTypeRef__Group_0__0__Impl19294); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFunctionTypeRefAccess().getLeftParenthesisKeyword_0_0()); 
             }
@@ -27456,12 +27465,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9555:1: ( rule__XFunctionTypeRef__Group_0__1__Impl rule__XFunctionTypeRef__Group_0__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9556:2: rule__XFunctionTypeRef__Group_0__1__Impl rule__XFunctionTypeRef__Group_0__2
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__1__Impl_in_rule__XFunctionTypeRef__Group_0__119322);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__1__Impl_in_rule__XFunctionTypeRef__Group_0__119325);
             rule__XFunctionTypeRef__Group_0__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__2_in_rule__XFunctionTypeRef__Group_0__119325);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__2_in_rule__XFunctionTypeRef__Group_0__119328);
             rule__XFunctionTypeRef__Group_0__2();
 
             state._fsp--;
@@ -27503,7 +27512,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9570:1: ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9570:2: rule__XFunctionTypeRef__ParamTypesAssignment_0_1
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_in_rule__XFunctionTypeRef__Group_0__1__Impl19352);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_in_rule__XFunctionTypeRef__Group_0__1__Impl19355);
             rule__XFunctionTypeRef__ParamTypesAssignment_0_1();
 
             state._fsp--;
@@ -27545,12 +27554,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9584:1: ( rule__XFunctionTypeRef__Group_0__2__Impl rule__XFunctionTypeRef__Group_0__3 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9585:2: rule__XFunctionTypeRef__Group_0__2__Impl rule__XFunctionTypeRef__Group_0__3
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__2__Impl_in_rule__XFunctionTypeRef__Group_0__219382);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__2__Impl_in_rule__XFunctionTypeRef__Group_0__219385);
             rule__XFunctionTypeRef__Group_0__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__3_in_rule__XFunctionTypeRef__Group_0__219385);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__3_in_rule__XFunctionTypeRef__Group_0__219388);
             rule__XFunctionTypeRef__Group_0__3();
 
             state._fsp--;
@@ -27590,21 +27599,21 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getXFunctionTypeRefAccess().getGroup_0_2()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9599:1: ( rule__XFunctionTypeRef__Group_0_2__0 )*
-            loop65:
+            loop66:
             do {
-                int alt65=2;
-                int LA65_0 = input.LA(1);
+                int alt66=2;
+                int LA66_0 = input.LA(1);
 
-                if ( (LA65_0==43) ) {
-                    alt65=1;
+                if ( (LA66_0==43) ) {
+                    alt66=1;
                 }
 
 
-                switch (alt65) {
+                switch (alt66) {
             	case 1 :
             	    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9599:2: rule__XFunctionTypeRef__Group_0_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__0_in_rule__XFunctionTypeRef__Group_0__2__Impl19412);
+            	    pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__0_in_rule__XFunctionTypeRef__Group_0__2__Impl19415);
             	    rule__XFunctionTypeRef__Group_0_2__0();
 
             	    state._fsp--;
@@ -27614,7 +27623,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop65;
+            	    break loop66;
                 }
             } while (true);
 
@@ -27652,7 +27661,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9613:1: ( rule__XFunctionTypeRef__Group_0__3__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9614:2: rule__XFunctionTypeRef__Group_0__3__Impl
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__3__Impl_in_rule__XFunctionTypeRef__Group_0__319443);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__3__Impl_in_rule__XFunctionTypeRef__Group_0__319446);
             rule__XFunctionTypeRef__Group_0__3__Impl();
 
             state._fsp--;
@@ -27691,7 +27700,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getRightParenthesisKeyword_0_3()); 
             }
-            match(input,45,FOLLOW_45_in_rule__XFunctionTypeRef__Group_0__3__Impl19471); if (state.failed) return ;
+            match(input,45,FOLLOW_45_in_rule__XFunctionTypeRef__Group_0__3__Impl19474); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFunctionTypeRefAccess().getRightParenthesisKeyword_0_3()); 
             }
@@ -27726,12 +27735,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9651:1: ( rule__XFunctionTypeRef__Group_0_2__0__Impl rule__XFunctionTypeRef__Group_0_2__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9652:2: rule__XFunctionTypeRef__Group_0_2__0__Impl rule__XFunctionTypeRef__Group_0_2__1
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__0__Impl_in_rule__XFunctionTypeRef__Group_0_2__019510);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__0__Impl_in_rule__XFunctionTypeRef__Group_0_2__019513);
             rule__XFunctionTypeRef__Group_0_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__1_in_rule__XFunctionTypeRef__Group_0_2__019513);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__1_in_rule__XFunctionTypeRef__Group_0_2__019516);
             rule__XFunctionTypeRef__Group_0_2__1();
 
             state._fsp--;
@@ -27770,7 +27779,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getCommaKeyword_0_2_0()); 
             }
-            match(input,43,FOLLOW_43_in_rule__XFunctionTypeRef__Group_0_2__0__Impl19541); if (state.failed) return ;
+            match(input,43,FOLLOW_43_in_rule__XFunctionTypeRef__Group_0_2__0__Impl19544); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFunctionTypeRefAccess().getCommaKeyword_0_2_0()); 
             }
@@ -27805,7 +27814,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9682:1: ( rule__XFunctionTypeRef__Group_0_2__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9683:2: rule__XFunctionTypeRef__Group_0_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__1__Impl_in_rule__XFunctionTypeRef__Group_0_2__119572);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__1__Impl_in_rule__XFunctionTypeRef__Group_0_2__119575);
             rule__XFunctionTypeRef__Group_0_2__1__Impl();
 
             state._fsp--;
@@ -27847,7 +27856,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9696:1: ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9696:2: rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_in_rule__XFunctionTypeRef__Group_0_2__1__Impl19599);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_in_rule__XFunctionTypeRef__Group_0_2__1__Impl19602);
             rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1();
 
             state._fsp--;
@@ -27889,12 +27898,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9714:1: ( rule__JvmParameterizedTypeReference__Group__0__Impl rule__JvmParameterizedTypeReference__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9715:2: rule__JvmParameterizedTypeReference__Group__0__Impl rule__JvmParameterizedTypeReference__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__0__Impl_in_rule__JvmParameterizedTypeReference__Group__019633);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__0__Impl_in_rule__JvmParameterizedTypeReference__Group__019636);
             rule__JvmParameterizedTypeReference__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__1_in_rule__JvmParameterizedTypeReference__Group__019636);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__1_in_rule__JvmParameterizedTypeReference__Group__019639);
             rule__JvmParameterizedTypeReference__Group__1();
 
             state._fsp--;
@@ -27936,7 +27945,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9729:1: ( rule__JvmParameterizedTypeReference__TypeAssignment_0 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9729:2: rule__JvmParameterizedTypeReference__TypeAssignment_0
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__TypeAssignment_0_in_rule__JvmParameterizedTypeReference__Group__0__Impl19663);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__TypeAssignment_0_in_rule__JvmParameterizedTypeReference__Group__0__Impl19666);
             rule__JvmParameterizedTypeReference__TypeAssignment_0();
 
             state._fsp--;
@@ -27978,7 +27987,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9743:1: ( rule__JvmParameterizedTypeReference__Group__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9744:2: rule__JvmParameterizedTypeReference__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__1__Impl_in_rule__JvmParameterizedTypeReference__Group__119693);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__1__Impl_in_rule__JvmParameterizedTypeReference__Group__119696);
             rule__JvmParameterizedTypeReference__Group__1__Impl();
 
             state._fsp--;
@@ -28018,17 +28027,17 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9757:1: ( rule__JvmParameterizedTypeReference__Group_1__0 )?
-            int alt66=2;
-            int LA66_0 = input.LA(1);
+            int alt67=2;
+            int LA67_0 = input.LA(1);
 
-            if ( (LA66_0==20) ) {
-                alt66=1;
+            if ( (LA67_0==20) ) {
+                alt67=1;
             }
-            switch (alt66) {
+            switch (alt67) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9757:2: rule__JvmParameterizedTypeReference__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0_in_rule__JvmParameterizedTypeReference__Group__1__Impl19720);
+                    pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0_in_rule__JvmParameterizedTypeReference__Group__1__Impl19723);
                     rule__JvmParameterizedTypeReference__Group_1__0();
 
                     state._fsp--;
@@ -28073,12 +28082,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9775:1: ( rule__JvmParameterizedTypeReference__Group_1__0__Impl rule__JvmParameterizedTypeReference__Group_1__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9776:2: rule__JvmParameterizedTypeReference__Group_1__0__Impl rule__JvmParameterizedTypeReference__Group_1__1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1__019755);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1__019758);
             rule__JvmParameterizedTypeReference__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1_in_rule__JvmParameterizedTypeReference__Group_1__019758);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1_in_rule__JvmParameterizedTypeReference__Group_1__019761);
             rule__JvmParameterizedTypeReference__Group_1__1();
 
             state._fsp--;
@@ -28117,7 +28126,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_0()); 
             }
-            match(input,20,FOLLOW_20_in_rule__JvmParameterizedTypeReference__Group_1__0__Impl19786); if (state.failed) return ;
+            match(input,20,FOLLOW_20_in_rule__JvmParameterizedTypeReference__Group_1__0__Impl19789); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_0()); 
             }
@@ -28152,12 +28161,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9806:1: ( rule__JvmParameterizedTypeReference__Group_1__1__Impl rule__JvmParameterizedTypeReference__Group_1__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9807:2: rule__JvmParameterizedTypeReference__Group_1__1__Impl rule__JvmParameterizedTypeReference__Group_1__2
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1__119817);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1__119820);
             rule__JvmParameterizedTypeReference__Group_1__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2_in_rule__JvmParameterizedTypeReference__Group_1__119820);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2_in_rule__JvmParameterizedTypeReference__Group_1__119823);
             rule__JvmParameterizedTypeReference__Group_1__2();
 
             state._fsp--;
@@ -28199,7 +28208,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9821:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9821:2: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1_in_rule__JvmParameterizedTypeReference__Group_1__1__Impl19847);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1_in_rule__JvmParameterizedTypeReference__Group_1__1__Impl19850);
             rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1();
 
             state._fsp--;
@@ -28241,12 +28250,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9835:1: ( rule__JvmParameterizedTypeReference__Group_1__2__Impl rule__JvmParameterizedTypeReference__Group_1__3 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9836:2: rule__JvmParameterizedTypeReference__Group_1__2__Impl rule__JvmParameterizedTypeReference__Group_1__3
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1__219877);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1__219880);
             rule__JvmParameterizedTypeReference__Group_1__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3_in_rule__JvmParameterizedTypeReference__Group_1__219880);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3_in_rule__JvmParameterizedTypeReference__Group_1__219883);
             rule__JvmParameterizedTypeReference__Group_1__3();
 
             state._fsp--;
@@ -28286,21 +28295,21 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_2()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9850:1: ( rule__JvmParameterizedTypeReference__Group_1_2__0 )*
-            loop67:
+            loop68:
             do {
-                int alt67=2;
-                int LA67_0 = input.LA(1);
+                int alt68=2;
+                int LA68_0 = input.LA(1);
 
-                if ( (LA67_0==43) ) {
-                    alt67=1;
+                if ( (LA68_0==43) ) {
+                    alt68=1;
                 }
 
 
-                switch (alt67) {
+                switch (alt68) {
             	case 1 :
             	    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9850:2: rule__JvmParameterizedTypeReference__Group_1_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0_in_rule__JvmParameterizedTypeReference__Group_1__2__Impl19907);
+            	    pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0_in_rule__JvmParameterizedTypeReference__Group_1__2__Impl19910);
             	    rule__JvmParameterizedTypeReference__Group_1_2__0();
 
             	    state._fsp--;
@@ -28310,7 +28319,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop67;
+            	    break loop68;
                 }
             } while (true);
 
@@ -28348,7 +28357,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9864:1: ( rule__JvmParameterizedTypeReference__Group_1__3__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9865:2: rule__JvmParameterizedTypeReference__Group_1__3__Impl
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1__319938);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1__319941);
             rule__JvmParameterizedTypeReference__Group_1__3__Impl();
 
             state._fsp--;
@@ -28387,7 +28396,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3()); 
             }
-            match(input,19,FOLLOW_19_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl19966); if (state.failed) return ;
+            match(input,19,FOLLOW_19_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl19969); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3()); 
             }
@@ -28422,12 +28431,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9902:1: ( rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9903:2: rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__020005);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__020008);
             rule__JvmParameterizedTypeReference__Group_1_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__020008);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__020011);
             rule__JvmParameterizedTypeReference__Group_1_2__1();
 
             state._fsp--;
@@ -28466,7 +28475,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0()); 
             }
-            match(input,43,FOLLOW_43_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl20036); if (state.failed) return ;
+            match(input,43,FOLLOW_43_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl20039); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0()); 
             }
@@ -28501,7 +28510,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9933:1: ( rule__JvmParameterizedTypeReference__Group_1_2__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9934:2: rule__JvmParameterizedTypeReference__Group_1_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__120067);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__120070);
             rule__JvmParameterizedTypeReference__Group_1_2__1__Impl();
 
             state._fsp--;
@@ -28543,7 +28552,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9947:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9947:2: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl20094);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl20097);
             rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1();
 
             state._fsp--;
@@ -28585,12 +28594,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9965:1: ( rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9966:2: rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__020128);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__020131);
             rule__JvmWildcardTypeReference__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__020131);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__020134);
             rule__JvmWildcardTypeReference__Group__1();
 
             state._fsp--;
@@ -28664,12 +28673,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9996:1: ( rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9997:2: rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__120189);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__120192);
             rule__JvmWildcardTypeReference__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__120192);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__120195);
             rule__JvmWildcardTypeReference__Group__2();
 
             state._fsp--;
@@ -28708,7 +28717,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1()); 
             }
-            match(input,65,FOLLOW_65_in_rule__JvmWildcardTypeReference__Group__1__Impl20220); if (state.failed) return ;
+            match(input,65,FOLLOW_65_in_rule__JvmWildcardTypeReference__Group__1__Impl20223); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1()); 
             }
@@ -28743,7 +28752,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10027:1: ( rule__JvmWildcardTypeReference__Group__2__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10028:2: rule__JvmWildcardTypeReference__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__220251);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__220254);
             rule__JvmWildcardTypeReference__Group__2__Impl();
 
             state._fsp--;
@@ -28783,17 +28792,17 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10041:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
-            int alt68=2;
-            int LA68_0 = input.LA(1);
+            int alt69=2;
+            int LA69_0 = input.LA(1);
 
-            if ( (LA68_0==66||LA68_0==68) ) {
-                alt68=1;
+            if ( (LA69_0==66||LA69_0==68) ) {
+                alt69=1;
             }
-            switch (alt68) {
+            switch (alt69) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10041:2: rule__JvmWildcardTypeReference__Alternatives_2
                     {
-                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl20278);
+                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl20281);
                     rule__JvmWildcardTypeReference__Alternatives_2();
 
                     state._fsp--;
@@ -28838,12 +28847,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10061:1: ( rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10062:2: rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__020315);
+            pushFollow(FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__020318);
             rule__JvmUpperBound__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__020318);
+            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__020321);
             rule__JvmUpperBound__Group__1();
 
             state._fsp--;
@@ -28882,7 +28891,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0()); 
             }
-            match(input,66,FOLLOW_66_in_rule__JvmUpperBound__Group__0__Impl20346); if (state.failed) return ;
+            match(input,66,FOLLOW_66_in_rule__JvmUpperBound__Group__0__Impl20349); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0()); 
             }
@@ -28917,7 +28926,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10092:1: ( rule__JvmUpperBound__Group__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10093:2: rule__JvmUpperBound__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__120377);
+            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__120380);
             rule__JvmUpperBound__Group__1__Impl();
 
             state._fsp--;
@@ -28959,7 +28968,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10106:1: ( rule__JvmUpperBound__TypeReferenceAssignment_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10106:2: rule__JvmUpperBound__TypeReferenceAssignment_1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl20404);
+            pushFollow(FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl20407);
             rule__JvmUpperBound__TypeReferenceAssignment_1();
 
             state._fsp--;
@@ -29001,12 +29010,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10124:1: ( rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10125:2: rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__020438);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__020441);
             rule__JvmUpperBoundAnded__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__020441);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__020444);
             rule__JvmUpperBoundAnded__Group__1();
 
             state._fsp--;
@@ -29045,7 +29054,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0()); 
             }
-            match(input,67,FOLLOW_67_in_rule__JvmUpperBoundAnded__Group__0__Impl20469); if (state.failed) return ;
+            match(input,67,FOLLOW_67_in_rule__JvmUpperBoundAnded__Group__0__Impl20472); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0()); 
             }
@@ -29080,7 +29089,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10155:1: ( rule__JvmUpperBoundAnded__Group__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10156:2: rule__JvmUpperBoundAnded__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__120500);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__120503);
             rule__JvmUpperBoundAnded__Group__1__Impl();
 
             state._fsp--;
@@ -29122,7 +29131,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10169:1: ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10169:2: rule__JvmUpperBoundAnded__TypeReferenceAssignment_1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl20527);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl20530);
             rule__JvmUpperBoundAnded__TypeReferenceAssignment_1();
 
             state._fsp--;
@@ -29164,12 +29173,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10187:1: ( rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10188:2: rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__020561);
+            pushFollow(FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__020564);
             rule__JvmLowerBound__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__020564);
+            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__020567);
             rule__JvmLowerBound__Group__1();
 
             state._fsp--;
@@ -29208,7 +29217,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0()); 
             }
-            match(input,68,FOLLOW_68_in_rule__JvmLowerBound__Group__0__Impl20592); if (state.failed) return ;
+            match(input,68,FOLLOW_68_in_rule__JvmLowerBound__Group__0__Impl20595); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0()); 
             }
@@ -29243,7 +29252,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10218:1: ( rule__JvmLowerBound__Group__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10219:2: rule__JvmLowerBound__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__120623);
+            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__120626);
             rule__JvmLowerBound__Group__1__Impl();
 
             state._fsp--;
@@ -29285,7 +29294,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10232:1: ( rule__JvmLowerBound__TypeReferenceAssignment_1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10232:2: rule__JvmLowerBound__TypeReferenceAssignment_1
             {
-            pushFollow(FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl20650);
+            pushFollow(FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl20653);
             rule__JvmLowerBound__TypeReferenceAssignment_1();
 
             state._fsp--;
@@ -29327,12 +29336,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10252:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10253:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__020686);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__020689);
             rule__QualifiedName__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__020689);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__020692);
             rule__QualifiedName__Group__1();
 
             state._fsp--;
@@ -29371,7 +29380,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl20716); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl20719); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
             }
@@ -29406,7 +29415,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10281:1: ( rule__QualifiedName__Group__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10282:2: rule__QualifiedName__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__120745);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__120748);
             rule__QualifiedName__Group__1__Impl();
 
             state._fsp--;
@@ -29446,19 +29455,19 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                before(grammarAccess.getQualifiedNameAccess().getGroup_1()); 
             }
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10295:1: ( rule__QualifiedName__Group_1__0 )*
-            loop69:
+            loop70:
             do {
-                int alt69=2;
-                int LA69_0 = input.LA(1);
+                int alt70=2;
+                int LA70_0 = input.LA(1);
 
-                if ( (LA69_0==42) ) {
-                    int LA69_2 = input.LA(2);
+                if ( (LA70_0==42) ) {
+                    int LA70_2 = input.LA(2);
 
-                    if ( (LA69_2==RULE_ID) ) {
-                        int LA69_3 = input.LA(3);
+                    if ( (LA70_2==RULE_ID) ) {
+                        int LA70_3 = input.LA(3);
 
-                        if ( (synpred94_InternalXcss()) ) {
-                            alt69=1;
+                        if ( (synpred95_InternalXcss()) ) {
+                            alt70=1;
                         }
 
 
@@ -29468,11 +29477,11 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                 }
 
 
-                switch (alt69) {
+                switch (alt70) {
             	case 1 :
             	    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10295:2: rule__QualifiedName__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl20772);
+            	    pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl20775);
             	    rule__QualifiedName__Group_1__0();
 
             	    state._fsp--;
@@ -29482,7 +29491,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop69;
+            	    break loop70;
                 }
             } while (true);
 
@@ -29520,12 +29529,12 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10313:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10314:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__020807);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__020810);
             rule__QualifiedName__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__020810);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__020813);
             rule__QualifiedName__Group_1__1();
 
             state._fsp--;
@@ -29564,7 +29573,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
             }
-            match(input,42,FOLLOW_42_in_rule__QualifiedName__Group_1__0__Impl20838); if (state.failed) return ;
+            match(input,42,FOLLOW_42_in_rule__QualifiedName__Group_1__0__Impl20841); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
             }
@@ -29599,7 +29608,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10344:1: ( rule__QualifiedName__Group_1__1__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10345:2: rule__QualifiedName__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__120869);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__120872);
             rule__QualifiedName__Group_1__1__Impl();
 
             state._fsp--;
@@ -29638,7 +29647,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl20896); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl20899); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1()); 
             }
@@ -29675,23 +29684,61 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10379:2: ( rule__FontLiteral__UnorderedGroup_2__0 )?
             {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10379:2: ( rule__FontLiteral__UnorderedGroup_2__0 )?
-            int alt70=2;
-            int LA70_0 = input.LA(1);
+            int alt71=2;
+            int LA71_0 = input.LA(1);
 
-            if ( LA70_0 ==69 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 0) ) {
-                alt70=1;
+            if ( LA71_0 ==69 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 0) ) {
+                alt71=1;
             }
-            else if ( LA70_0 ==70 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1) ) {
-                alt70=1;
+            else if ( LA71_0 ==70 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1) ) {
+                alt71=1;
             }
-            else if ( LA70_0 ==RULE_INT && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
-                alt70=1;
+            else if ( (LA71_0==RULE_INT) ) {
+                switch ( input.LA(2) ) {
+                    case 32:
+                        {
+                        int LA71_5 = input.LA(3);
+
+                        if ( synpred96_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt71=1;
+                        }
+                        }
+                        break;
+                    case 33:
+                        {
+                        int LA71_6 = input.LA(3);
+
+                        if ( synpred96_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt71=1;
+                        }
+                        }
+                        break;
+                    case 34:
+                        {
+                        int LA71_7 = input.LA(3);
+
+                        if ( synpred96_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt71=1;
+                        }
+                        }
+                        break;
+                    case 28:
+                        {
+                        int LA71_8 = input.LA(3);
+
+                        if ( synpred96_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt71=1;
+                        }
+                        }
+                        break;
+                }
+
             }
-            switch (alt70) {
+            switch (alt71) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:0:0: rule__FontLiteral__UnorderedGroup_2__0
                     {
-                    pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__0_in_rule__FontLiteral__UnorderedGroup_220930);
+                    pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__0_in_rule__FontLiteral__UnorderedGroup_220933);
                     rule__FontLiteral__UnorderedGroup_2__0();
 
                     state._fsp--;
@@ -29733,26 +29780,26 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10395:3: ( ({...}? => ( ( ( rule__FontLiteral__ItalicAssignment_2_0 ) ) ) ) | ({...}? => ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) ) ) | ({...}? => ( ( ( rule__FontLiteral__SizeAssignment_2_2 ) ) ) ) )
             {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10395:3: ( ({...}? => ( ( ( rule__FontLiteral__ItalicAssignment_2_0 ) ) ) ) | ({...}? => ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) ) ) | ({...}? => ( ( ( rule__FontLiteral__SizeAssignment_2_2 ) ) ) ) )
-            int alt71=3;
-            int LA71_0 = input.LA(1);
+            int alt72=3;
+            int LA72_0 = input.LA(1);
 
-            if ( LA71_0 ==69 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 0) ) {
-                alt71=1;
+            if ( LA72_0 ==69 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 0) ) {
+                alt72=1;
             }
-            else if ( LA71_0 ==70 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1) ) {
-                alt71=2;
+            else if ( LA72_0 ==70 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1) ) {
+                alt72=2;
             }
-            else if ( LA71_0 ==RULE_INT && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
-                alt71=3;
+            else if ( LA72_0 ==RULE_INT && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                alt72=3;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 71, 0, input);
+                    new NoViableAltException("", 72, 0, input);
 
                 throw nvae;
             }
-            switch (alt71) {
+            switch (alt72) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10397:4: ({...}? => ( ( ( rule__FontLiteral__ItalicAssignment_2_0 ) ) ) )
                     {
@@ -29777,7 +29824,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10408:7: ( rule__FontLiteral__ItalicAssignment_2_0 )
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10408:8: rule__FontLiteral__ItalicAssignment_2_0
                     {
-                    pushFollow(FOLLOW_rule__FontLiteral__ItalicAssignment_2_0_in_rule__FontLiteral__UnorderedGroup_2__Impl21017);
+                    pushFollow(FOLLOW_rule__FontLiteral__ItalicAssignment_2_0_in_rule__FontLiteral__UnorderedGroup_2__Impl21020);
                     rule__FontLiteral__ItalicAssignment_2_0();
 
                     state._fsp--;
@@ -29824,7 +29871,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10425:7: ( rule__FontLiteral__BoldAssignment_2_1 )
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10425:8: rule__FontLiteral__BoldAssignment_2_1
                     {
-                    pushFollow(FOLLOW_rule__FontLiteral__BoldAssignment_2_1_in_rule__FontLiteral__UnorderedGroup_2__Impl21108);
+                    pushFollow(FOLLOW_rule__FontLiteral__BoldAssignment_2_1_in_rule__FontLiteral__UnorderedGroup_2__Impl21111);
                     rule__FontLiteral__BoldAssignment_2_1();
 
                     state._fsp--;
@@ -29871,7 +29918,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10442:7: ( rule__FontLiteral__SizeAssignment_2_2 )
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10442:8: rule__FontLiteral__SizeAssignment_2_2
                     {
-                    pushFollow(FOLLOW_rule__FontLiteral__SizeAssignment_2_2_in_rule__FontLiteral__UnorderedGroup_2__Impl21199);
+                    pushFollow(FOLLOW_rule__FontLiteral__SizeAssignment_2_2_in_rule__FontLiteral__UnorderedGroup_2__Impl21202);
                     rule__FontLiteral__SizeAssignment_2_2();
 
                     state._fsp--;
@@ -29927,29 +29974,67 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10461:1: ( rule__FontLiteral__UnorderedGroup_2__Impl ( rule__FontLiteral__UnorderedGroup_2__1 )? )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10462:2: rule__FontLiteral__UnorderedGroup_2__Impl ( rule__FontLiteral__UnorderedGroup_2__1 )?
             {
-            pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__021258);
+            pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__021261);
             rule__FontLiteral__UnorderedGroup_2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10463:2: ( rule__FontLiteral__UnorderedGroup_2__1 )?
-            int alt72=2;
-            int LA72_0 = input.LA(1);
+            int alt73=2;
+            int LA73_0 = input.LA(1);
 
-            if ( LA72_0 ==69 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 0) ) {
-                alt72=1;
+            if ( LA73_0 ==69 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 0) ) {
+                alt73=1;
             }
-            else if ( LA72_0 ==70 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1) ) {
-                alt72=1;
+            else if ( LA73_0 ==70 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1) ) {
+                alt73=1;
             }
-            else if ( LA72_0 ==RULE_INT && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
-                alt72=1;
+            else if ( (LA73_0==RULE_INT) ) {
+                switch ( input.LA(2) ) {
+                    case 32:
+                        {
+                        int LA73_5 = input.LA(3);
+
+                        if ( synpred99_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt73=1;
+                        }
+                        }
+                        break;
+                    case 33:
+                        {
+                        int LA73_6 = input.LA(3);
+
+                        if ( synpred99_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt73=1;
+                        }
+                        }
+                        break;
+                    case 34:
+                        {
+                        int LA73_7 = input.LA(3);
+
+                        if ( synpred99_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt73=1;
+                        }
+                        }
+                        break;
+                    case 28:
+                        {
+                        int LA73_8 = input.LA(3);
+
+                        if ( synpred99_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt73=1;
+                        }
+                        }
+                        break;
+                }
+
             }
-            switch (alt72) {
+            switch (alt73) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:0:0: rule__FontLiteral__UnorderedGroup_2__1
                     {
-                    pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__1_in_rule__FontLiteral__UnorderedGroup_2__021261);
+                    pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__1_in_rule__FontLiteral__UnorderedGroup_2__021264);
                     rule__FontLiteral__UnorderedGroup_2__1();
 
                     state._fsp--;
@@ -29988,29 +30073,67 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10474:1: ( rule__FontLiteral__UnorderedGroup_2__Impl ( rule__FontLiteral__UnorderedGroup_2__2 )? )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10475:2: rule__FontLiteral__UnorderedGroup_2__Impl ( rule__FontLiteral__UnorderedGroup_2__2 )?
             {
-            pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__121286);
+            pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__121289);
             rule__FontLiteral__UnorderedGroup_2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10476:2: ( rule__FontLiteral__UnorderedGroup_2__2 )?
-            int alt73=2;
-            int LA73_0 = input.LA(1);
+            int alt74=2;
+            int LA74_0 = input.LA(1);
 
-            if ( LA73_0 ==69 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 0) ) {
-                alt73=1;
+            if ( LA74_0 ==69 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 0) ) {
+                alt74=1;
             }
-            else if ( LA73_0 ==70 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1) ) {
-                alt73=1;
+            else if ( LA74_0 ==70 && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1) ) {
+                alt74=1;
             }
-            else if ( LA73_0 ==RULE_INT && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
-                alt73=1;
+            else if ( (LA74_0==RULE_INT) ) {
+                switch ( input.LA(2) ) {
+                    case 32:
+                        {
+                        int LA74_5 = input.LA(3);
+
+                        if ( synpred100_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt74=1;
+                        }
+                        }
+                        break;
+                    case 33:
+                        {
+                        int LA74_6 = input.LA(3);
+
+                        if ( synpred100_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt74=1;
+                        }
+                        }
+                        break;
+                    case 34:
+                        {
+                        int LA74_7 = input.LA(3);
+
+                        if ( synpred100_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt74=1;
+                        }
+                        }
+                        break;
+                    case 28:
+                        {
+                        int LA74_8 = input.LA(3);
+
+                        if ( synpred100_InternalXcss() && getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 2) ) {
+                            alt74=1;
+                        }
+                        }
+                        break;
+                }
+
             }
-            switch (alt73) {
+            switch (alt74) {
                 case 1 :
                     // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:0:0: rule__FontLiteral__UnorderedGroup_2__2
                     {
-                    pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__2_in_rule__FontLiteral__UnorderedGroup_2__121289);
+                    pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__2_in_rule__FontLiteral__UnorderedGroup_2__121292);
                     rule__FontLiteral__UnorderedGroup_2__2();
 
                     state._fsp--;
@@ -30049,7 +30172,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10487:1: ( rule__FontLiteral__UnorderedGroup_2__Impl )
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10488:2: rule__FontLiteral__UnorderedGroup_2__Impl
             {
-            pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__221314);
+            pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__221317);
             rule__FontLiteral__UnorderedGroup_2__Impl();
 
             state._fsp--;
@@ -30088,7 +30211,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStyleSheetAccess().getRulesStyleRuleParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleStyleRule_in_rule__StyleSheet__RulesAssignment21348);
+            pushFollow(FOLLOW_ruleStyleRule_in_rule__StyleSheet__RulesAssignment21351);
             ruleStyleRule();
 
             state._fsp--;
@@ -30133,7 +30256,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStyleRuleAccess().getSelectorsSelectorParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleSelector_in_rule__StyleRule__SelectorsAssignment_021379);
+            pushFollow(FOLLOW_ruleSelector_in_rule__StyleRule__SelectorsAssignment_021382);
             ruleSelector();
 
             state._fsp--;
@@ -30178,7 +30301,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStyleRuleAccess().getSettingsSettingParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleSetting_in_rule__StyleRule__SettingsAssignment_221410);
+            pushFollow(FOLLOW_ruleSetting_in_rule__StyleRule__SettingsAssignment_221413);
             ruleSetting();
 
             state._fsp--;
@@ -30223,7 +30346,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSelectorAccess().getFilterFilterParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleFilter_in_rule__Selector__FilterAssignment_121441);
+            pushFollow(FOLLOW_ruleFilter_in_rule__Selector__FilterAssignment_121444);
             ruleFilter();
 
             state._fsp--;
@@ -30274,7 +30397,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTypeSelectorAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__TypeSelector__TypeAssignment21476);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__TypeSelector__TypeAssignment21479);
             ruleQualifiedName();
 
             state._fsp--;
@@ -30325,7 +30448,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFilterAccess().getConditionXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__Filter__ConditionAssignment_121511);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__Filter__ConditionAssignment_121514);
             ruleXExpression();
 
             state._fsp--;
@@ -30370,7 +30493,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSettingAccess().getParamsFeatureReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleFeatureReference_in_rule__Setting__ParamsAssignment_121542);
+            pushFollow(FOLLOW_ruleFeatureReference_in_rule__Setting__ParamsAssignment_121545);
             ruleFeatureReference();
 
             state._fsp--;
@@ -30421,7 +30544,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSettingAccess().getFeatureJvmIdentifyableElementOpAssignParserRuleCall_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpAssign_in_rule__Setting__FeatureAssignment_221577);
+            pushFollow(FOLLOW_ruleOpAssign_in_rule__Setting__FeatureAssignment_221580);
             ruleOpAssign();
 
             state._fsp--;
@@ -30472,7 +30595,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSettingAccess().getParamsXExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__Setting__ParamsAssignment_321612);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__Setting__ParamsAssignment_321615);
             ruleXExpression();
 
             state._fsp--;
@@ -30523,7 +30646,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFeatureReferenceAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FeatureReference__FeatureAssignment21647); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FeatureReference__FeatureAssignment21650); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFeatureReferenceAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_0_1()); 
             }
@@ -30570,7 +30693,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFontLiteralAccess().getNameStringOrIDParserRuleCall_1_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleStringOrID_in_rule__FontLiteral__NameAssignment_1_0_121682);
+            pushFollow(FOLLOW_ruleStringOrID_in_rule__FontLiteral__NameAssignment_1_0_121685);
             ruleStringOrID();
 
             state._fsp--;
@@ -30621,7 +30744,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFontLiteralAccess().getItalicIKeyword_2_0_0()); 
             }
-            match(input,69,FOLLOW_69_in_rule__FontLiteral__ItalicAssignment_2_021718); if (state.failed) return ;
+            match(input,69,FOLLOW_69_in_rule__FontLiteral__ItalicAssignment_2_021721); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFontLiteralAccess().getItalicIKeyword_2_0_0()); 
             }
@@ -30674,7 +30797,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFontLiteralAccess().getBoldBKeyword_2_1_0()); 
             }
-            match(input,70,FOLLOW_70_in_rule__FontLiteral__BoldAssignment_2_121762); if (state.failed) return ;
+            match(input,70,FOLLOW_70_in_rule__FontLiteral__BoldAssignment_2_121765); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getFontLiteralAccess().getBoldBKeyword_2_1_0()); 
             }
@@ -30721,7 +30844,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getFontLiteralAccess().getSizeSizeLiteralParserRuleCall_2_2_0()); 
             }
-            pushFollow(FOLLOW_ruleSizeLiteral_in_rule__FontLiteral__SizeAssignment_2_221801);
+            pushFollow(FOLLOW_ruleSizeLiteral_in_rule__FontLiteral__SizeAssignment_2_221804);
             ruleSizeLiteral();
 
             state._fsp--;
@@ -30766,7 +30889,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getColorConstantAccess().getNameIDTerminalRuleCall_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ColorConstant__NameAssignment21832); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ColorConstant__NameAssignment21835); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getColorConstantAccess().getNameIDTerminalRuleCall_0()); 
             }
@@ -30807,7 +30930,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRGBAccess().getColorINTTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__RGB__ColorAssignment_121863); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__RGB__ColorAssignment_121866); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRGBAccess().getColorINTTerminalRuleCall_1_0()); 
             }
@@ -30848,7 +30971,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSizeLiteralAccess().getValueINTTerminalRuleCall_0_0()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__SizeLiteral__ValueAssignment_021894); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__SizeLiteral__ValueAssignment_021897); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSizeLiteralAccess().getValueINTTerminalRuleCall_0_0()); 
             }
@@ -30889,7 +31012,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSizeLiteralAccess().getUnitSizeUnitEnumRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleSizeUnit_in_rule__SizeLiteral__UnitAssignment_121925);
+            pushFollow(FOLLOW_ruleSizeUnit_in_rule__SizeLiteral__UnitAssignment_121928);
             ruleSizeUnit();
 
             state._fsp--;
@@ -30940,7 +31063,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementOpAssignParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpAssign_in_rule__XAssignment__FeatureAssignment_1_121960);
+            pushFollow(FOLLOW_ruleOpAssign_in_rule__XAssignment__FeatureAssignment_1_121963);
             ruleOpAssign();
 
             state._fsp--;
@@ -30975,9 +31098,9 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__XAssignment__FeatureAssignment_1_1"
 
 
-    // $ANTLR start "rule__XAssignment__RightOperandAssignment_1_2"
-    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10818:1: rule__XAssignment__RightOperandAssignment_1_2 : ( ruleXAssignment ) ;
-    public final void rule__XAssignment__RightOperandAssignment_1_2() throws RecognitionException {
+    // $ANTLR start "rule__XAssignment__ValueAssignment_1_2"
+    // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10818:1: rule__XAssignment__ValueAssignment_1_2 : ( ruleXAssignment ) ;
+    public final void rule__XAssignment__ValueAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -30989,15 +31112,15 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10824:1: ruleXAssignment
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXAssignmentAccess().getRightOperandXAssignmentParserRuleCall_1_2_0()); 
+               before(grammarAccess.getXAssignmentAccess().getValueXAssignmentParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__RightOperandAssignment_1_221995);
+            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_1_221998);
             ruleXAssignment();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXAssignmentAccess().getRightOperandXAssignmentParserRuleCall_1_2_0()); 
+               after(grammarAccess.getXAssignmentAccess().getValueXAssignmentParserRuleCall_1_2_0()); 
             }
 
             }
@@ -31017,7 +31140,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__XAssignment__RightOperandAssignment_1_2"
+    // $ANTLR end "rule__XAssignment__ValueAssignment_1_2"
 
 
     // $ANTLR start "rule__XOrExpression__FeatureAssignment_1_1"
@@ -31042,7 +31165,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifyableElementOpOrParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_122030);
+            pushFollow(FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_122033);
             ruleOpOr();
 
             state._fsp--;
@@ -31093,7 +31216,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOrExpressionAccess().getRightOperandXAndExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_222065);
+            pushFollow(FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_222068);
             ruleXAndExpression();
 
             state._fsp--;
@@ -31144,7 +31267,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifyableElementOpAndParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_122100);
+            pushFollow(FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_122103);
             ruleOpAnd();
 
             state._fsp--;
@@ -31195,7 +31318,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAndExpressionAccess().getRightOperandXEqualityExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_222135);
+            pushFollow(FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_222138);
             ruleXEqualityExpression();
 
             state._fsp--;
@@ -31246,7 +31369,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifyableElementOpEqualityParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_122170);
+            pushFollow(FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_122173);
             ruleOpEquality();
 
             state._fsp--;
@@ -31297,7 +31420,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXEqualityExpressionAccess().getRightOperandXRelationalExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_222205);
+            pushFollow(FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_222208);
             ruleXRelationalExpression();
 
             state._fsp--;
@@ -31348,7 +31471,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeQualifiedNameParserRuleCall_1_0_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XRelationalExpression__TypeAssignment_1_0_222240);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XRelationalExpression__TypeAssignment_1_0_222243);
             ruleQualifiedName();
 
             state._fsp--;
@@ -31405,7 +31528,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifyableElementOpCompareParserRuleCall_1_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_122279);
+            pushFollow(FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_122282);
             ruleOpCompare();
 
             state._fsp--;
@@ -31456,7 +31579,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getRightOperandXOtherOperatorExpressionParserRuleCall_1_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_222314);
+            pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_222317);
             ruleXOtherOperatorExpression();
 
             state._fsp--;
@@ -31507,7 +31630,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifyableElementOpOtherParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_122349);
+            pushFollow(FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_122352);
             ruleOpOther();
 
             state._fsp--;
@@ -31558,7 +31681,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOtherOperatorExpressionAccess().getRightOperandXAdditiveExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_222384);
+            pushFollow(FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_222387);
             ruleXAdditiveExpression();
 
             state._fsp--;
@@ -31609,7 +31732,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifyableElementOpAddParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_122419);
+            pushFollow(FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_122422);
             ruleOpAdd();
 
             state._fsp--;
@@ -31660,7 +31783,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAdditiveExpressionAccess().getRightOperandXMultiplicativeExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_222454);
+            pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_222457);
             ruleXMultiplicativeExpression();
 
             state._fsp--;
@@ -31711,7 +31834,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifyableElementOpMultiParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_122489);
+            pushFollow(FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_122492);
             ruleOpMulti();
 
             state._fsp--;
@@ -31762,7 +31885,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMultiplicativeExpressionAccess().getRightOperandXUnaryOperationParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_222524);
+            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_222527);
             ruleXUnaryOperation();
 
             state._fsp--;
@@ -31813,7 +31936,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifyableElementOpUnaryParserRuleCall_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_122559);
+            pushFollow(FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_122562);
             ruleOpUnary();
 
             state._fsp--;
@@ -31864,7 +31987,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXUnaryOperationAccess().getOperandXMemberFeatureCallParserRuleCall_0_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXMemberFeatureCall_in_rule__XUnaryOperation__OperandAssignment_0_222594);
+            pushFollow(FOLLOW_ruleXMemberFeatureCall_in_rule__XUnaryOperation__OperandAssignment_0_222597);
             ruleXMemberFeatureCall();
 
             state._fsp--;
@@ -31909,7 +32032,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_122625);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_122628);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -31954,7 +32077,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_122656);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_122659);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -32005,7 +32128,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_1_3_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XMemberFeatureCall__FeatureAssignment_1_322691); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XMemberFeatureCall__FeatureAssignment_1_322694); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_1_3_0_1()); 
             }
@@ -32052,7 +32175,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXExpressionParserRuleCall_1_4_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_022726);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_022729);
             ruleXExpression();
 
             state._fsp--;
@@ -32097,7 +32220,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXExpressionParserRuleCall_1_4_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_122757);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_122760);
             ruleXExpression();
 
             state._fsp--;
@@ -32142,7 +32265,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_022788);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_022791);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -32187,7 +32310,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_1_122819);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_1_122822);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -32232,7 +32355,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getExpressionXExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XClosure__ExpressionAssignment_322850);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XClosure__ExpressionAssignment_322853);
             ruleXExpression();
 
             state._fsp--;
@@ -32277,7 +32400,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCastedExpressionAccess().getTypeJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_122881);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_122884);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -32322,7 +32445,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCastedExpressionAccess().getTargetXMemberFeatureCallParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXMemberFeatureCall_in_rule__XCastedExpression__TargetAssignment_322912);
+            pushFollow(FOLLOW_ruleXMemberFeatureCall_in_rule__XCastedExpression__TargetAssignment_322915);
             ruleXMemberFeatureCall();
 
             state._fsp--;
@@ -32367,7 +32490,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getIfXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_222943);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_222946);
             ruleXExpression();
 
             state._fsp--;
@@ -32412,7 +32535,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getThenXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_422974);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_422977);
             ruleXExpression();
 
             state._fsp--;
@@ -32457,7 +32580,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getElseXExpressionParserRuleCall_5_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_5_123005);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_5_123008);
             ruleXExpression();
 
             state._fsp--;
@@ -32502,7 +32625,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getSwitchXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_123036);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_123039);
             ruleXExpression();
 
             state._fsp--;
@@ -32547,7 +32670,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getCasesXCasePartParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_323067);
+            pushFollow(FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_323070);
             ruleXCasePart();
 
             state._fsp--;
@@ -32592,7 +32715,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getDefaultXExpressionParserRuleCall_4_2_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_0_023098);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_0_023101);
             ruleXExpression();
 
             state._fsp--;
@@ -32637,7 +32760,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getDefaultXBlockExpressionParserRuleCall_4_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXBlockExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_123129);
+            pushFollow(FOLLOW_ruleXBlockExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_123132);
             ruleXBlockExpression();
 
             state._fsp--;
@@ -32682,7 +32805,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getTypeGuardJvmTypeReferenceParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_023160);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_023163);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -32727,7 +32850,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getCaseXExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_123191);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_123194);
             ruleXExpression();
 
             state._fsp--;
@@ -32772,7 +32895,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getThenXExpressionParserRuleCall_3_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_023222);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_023225);
             ruleXExpression();
 
             state._fsp--;
@@ -32817,7 +32940,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getThenXBlockExpressionParserRuleCall_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXBlockExpression_in_rule__XCasePart__ThenAssignment_3_123253);
+            pushFollow(FOLLOW_ruleXBlockExpression_in_rule__XCasePart__ThenAssignment_3_123256);
             ruleXBlockExpression();
 
             state._fsp--;
@@ -32862,7 +32985,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getDeclaredParamJvmFormalParameterParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_223284);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_223287);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -32907,7 +33030,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getForExpressionXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_423315);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_423318);
             ruleXExpression();
 
             state._fsp--;
@@ -32952,7 +33075,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getEachExpressionXExpressionParserRuleCall_6_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_623346);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_623349);
             ruleXExpression();
 
             state._fsp--;
@@ -32997,7 +33120,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXWhileExpressionAccess().getPredicateXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_223377);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_223380);
             ruleXExpression();
 
             state._fsp--;
@@ -33042,7 +33165,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXWhileExpressionAccess().getBodyXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_423408);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_423411);
             ruleXExpression();
 
             state._fsp--;
@@ -33087,7 +33210,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXDoWhileExpressionAccess().getBodyXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_123439);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_123442);
             ruleXExpression();
 
             state._fsp--;
@@ -33132,7 +33255,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXDoWhileExpressionAccess().getPredicateXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_423470);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_423473);
             ruleXExpression();
 
             state._fsp--;
@@ -33177,7 +33300,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_023501);
+            pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_023504);
             ruleXExpressionInsideBlock();
 
             state._fsp--;
@@ -33222,7 +33345,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getTypeJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_123532);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_123535);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -33267,7 +33390,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XVariableDeclaration__NameAssignment_223563); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XVariableDeclaration__NameAssignment_223566); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_0()); 
             }
@@ -33308,7 +33431,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getRightXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_423594);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_423597);
             ruleXExpression();
 
             state._fsp--;
@@ -33353,7 +33476,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmFormalParameterAccess().getParameterTypeJvmTypeReferenceParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_023625);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_023628);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -33398,7 +33521,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmFormalParameterAccess().getNameIDTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__JvmFormalParameter__NameAssignment_123656); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__JvmFormalParameter__NameAssignment_123659); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmFormalParameterAccess().getNameIDTerminalRuleCall_1_0()); 
             }
@@ -33439,7 +33562,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_123687);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_123690);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -33484,7 +33607,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_0_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_2_123718);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_2_123721);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -33535,7 +33658,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_1_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XFeatureCall__FeatureAssignment_123753); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XFeatureCall__FeatureAssignment_123756); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_1_0_1()); 
             }
@@ -33582,7 +33705,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXExpressionParserRuleCall_2_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_023788);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_023791);
             ruleXExpression();
 
             state._fsp--;
@@ -33627,7 +33750,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXExpressionParserRuleCall_2_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_123819);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_123822);
             ruleXExpression();
 
             state._fsp--;
@@ -33672,7 +33795,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getTypeJvmParameterizedTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_rule__XConstructorCall__TypeAssignment_123850);
+            pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_rule__XConstructorCall__TypeAssignment_123853);
             ruleJvmParameterizedTypeReference();
 
             state._fsp--;
@@ -33717,7 +33840,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_3_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_023881);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_023884);
             ruleXExpression();
 
             state._fsp--;
@@ -33762,7 +33885,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_1_123912);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_1_123915);
             ruleXExpression();
 
             state._fsp--;
@@ -33813,7 +33936,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_0()); 
             }
-            match(input,71,FOLLOW_71_in_rule__XBooleanLiteral__IsTrueAssignment_123948); if (state.failed) return ;
+            match(input,71,FOLLOW_71_in_rule__XBooleanLiteral__IsTrueAssignment_123951); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_0()); 
             }
@@ -33860,7 +33983,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIntLiteralAccess().getValueINTTerminalRuleCall_0()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__XIntLiteral__ValueAssignment23987); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__XIntLiteral__ValueAssignment23990); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXIntLiteralAccess().getValueINTTerminalRuleCall_0()); 
             }
@@ -33901,7 +34024,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_0()); 
             }
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment24018); if (state.failed) return ;
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment24021); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_0()); 
             }
@@ -33948,7 +34071,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_024053);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_024056);
             ruleQualifiedName();
 
             state._fsp--;
@@ -33999,7 +34122,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXThrowExpressionAccess().getExpressionXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_124088);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_124091);
             ruleXExpression();
 
             state._fsp--;
@@ -34044,7 +34167,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getExpressionXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_124119);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_124122);
             ruleXExpression();
 
             state._fsp--;
@@ -34089,7 +34212,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesXCatchClauseParserRuleCall_2_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_024150);
+            pushFollow(FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_024153);
             ruleXCatchClause();
 
             state._fsp--;
@@ -34134,7 +34257,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_2_0_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_124181);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_124184);
             ruleXExpression();
 
             state._fsp--;
@@ -34179,7 +34302,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_2_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_124212);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_124215);
             ruleXExpression();
 
             state._fsp--;
@@ -34224,7 +34347,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getDeclaredParamJvmFormalParameterParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_224243);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_224246);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -34269,7 +34392,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getExpressionXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_424274);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_424277);
             ruleXExpression();
 
             state._fsp--;
@@ -34314,7 +34437,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_124305);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_124308);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -34359,7 +34482,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_124336);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_124339);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -34404,7 +34527,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeReferenceParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_224367);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_224370);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -34455,7 +34578,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_024402);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_024405);
             ruleQualifiedName();
 
             state._fsp--;
@@ -34506,7 +34629,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_124437);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_124440);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -34551,7 +34674,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_124468);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_124471);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -34596,7 +34719,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_024499);
+            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_024502);
             ruleJvmUpperBound();
 
             state._fsp--;
@@ -34641,7 +34764,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_124530);
+            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_124533);
             ruleJvmLowerBound();
 
             state._fsp--;
@@ -34686,7 +34809,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_124561);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_124564);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -34731,7 +34854,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_124592);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_124595);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -34776,7 +34899,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_124623);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_124626);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -34851,6 +34974,36 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
     }
     // $ANTLR end synpred4_InternalXcss
+
+    // $ANTLR start synpred5_InternalXcss
+    public final void synpred5_InternalXcss_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2050:1: ( ( ( rule__FontLiteral__Group_1_0__0 ) ) )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2050:1: ( ( rule__FontLiteral__Group_1_0__0 ) )
+        {
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2050:1: ( ( rule__FontLiteral__Group_1_0__0 ) )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2051:1: ( rule__FontLiteral__Group_1_0__0 )
+        {
+        if ( state.backtracking==0 ) {
+           before(grammarAccess.getFontLiteralAccess().getGroup_1_0()); 
+        }
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2052:1: ( rule__FontLiteral__Group_1_0__0 )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:2052:2: rule__FontLiteral__Group_1_0__0
+        {
+        pushFollow(FOLLOW_rule__FontLiteral__Group_1_0__0_in_synpred5_InternalXcss4317);
+        rule__FontLiteral__Group_1_0__0();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+
+
+        }
+
+
+        }
+    }
+    // $ANTLR end synpred5_InternalXcss
 
     // $ANTLR start synpred8_InternalXcss
     public final void synpred8_InternalXcss_fragment() throws RecognitionException {   
@@ -35215,6 +35368,21 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     }
     // $ANTLR end synpred63_InternalXcss
 
+    // $ANTLR start synpred65_InternalXcss
+    public final void synpred65_InternalXcss_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:5151:2: ( rule__XMemberFeatureCall__Group_1_4__0 )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:5151:2: rule__XMemberFeatureCall__Group_1_4__0
+        {
+        pushFollow(FOLLOW_rule__XMemberFeatureCall__Group_1_4__0_in_synpred65_InternalXcss10674);
+        rule__XMemberFeatureCall__Group_1_4__0();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred65_InternalXcss
+
     // $ANTLR start synpred71_InternalXcss
     public final void synpred71_InternalXcss_fragment() throws RecognitionException {   
         // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:6224:2: ( rule__XIfExpression__Group_5__0 )
@@ -35245,28 +35413,28 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     }
     // $ANTLR end synpred72_InternalXcss
 
-    // $ANTLR start synpred87_InternalXcss
-    public final void synpred87_InternalXcss_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9097:2: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9097:2: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0
+    // $ANTLR start synpred82_InternalXcss
+    public final void synpred82_InternalXcss_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7979:2: ( rule__XFeatureCall__Group_2__0 )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:7979:2: rule__XFeatureCall__Group_2__0
         {
-        pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_synpred87_InternalXcss18420);
-        rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0();
+        pushFollow(FOLLOW_rule__XFeatureCall__Group_2__0_in_synpred82_InternalXcss16234);
+        rule__XFeatureCall__Group_2__0();
 
         state._fsp--;
         if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred87_InternalXcss
+    // $ANTLR end synpred82_InternalXcss
 
     // $ANTLR start synpred88_InternalXcss
     public final void synpred88_InternalXcss_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9126:2: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9126:2: rule__XTryCatchFinallyExpression__Group_2_0_1__0
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9097:2: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9097:2: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0
         {
-        pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_synpred88_InternalXcss18480);
-        rule__XTryCatchFinallyExpression__Group_2_0_1__0();
+        pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_synpred88_InternalXcss18423);
+        rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0();
 
         state._fsp--;
         if (state.failed) return ;
@@ -35275,28 +35443,28 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     }
     // $ANTLR end synpred88_InternalXcss
 
-    // $ANTLR start synpred94_InternalXcss
-    public final void synpred94_InternalXcss_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10295:2: ( rule__QualifiedName__Group_1__0 )
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10295:2: rule__QualifiedName__Group_1__0
+    // $ANTLR start synpred89_InternalXcss
+    public final void synpred89_InternalXcss_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9126:2: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:9126:2: rule__XTryCatchFinallyExpression__Group_2_0_1__0
         {
-        pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_synpred94_InternalXcss20772);
-        rule__QualifiedName__Group_1__0();
+        pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_synpred89_InternalXcss18483);
+        rule__XTryCatchFinallyExpression__Group_2_0_1__0();
 
         state._fsp--;
         if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred94_InternalXcss
+    // $ANTLR end synpred89_InternalXcss
 
     // $ANTLR start synpred95_InternalXcss
     public final void synpred95_InternalXcss_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10379:2: ( rule__FontLiteral__UnorderedGroup_2__0 )
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10379:2: rule__FontLiteral__UnorderedGroup_2__0
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10295:2: ( rule__QualifiedName__Group_1__0 )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10295:2: rule__QualifiedName__Group_1__0
         {
-        pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__0_in_synpred95_InternalXcss20930);
-        rule__FontLiteral__UnorderedGroup_2__0();
+        pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_synpred95_InternalXcss20775);
+        rule__QualifiedName__Group_1__0();
 
         state._fsp--;
         if (state.failed) return ;
@@ -35307,6 +35475,21 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
 
     // $ANTLR start synpred96_InternalXcss
     public final void synpred96_InternalXcss_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10379:2: ( rule__FontLiteral__UnorderedGroup_2__0 )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10379:2: rule__FontLiteral__UnorderedGroup_2__0
+        {
+        pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__0_in_synpred96_InternalXcss20933);
+        rule__FontLiteral__UnorderedGroup_2__0();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred96_InternalXcss
+
+    // $ANTLR start synpred97_InternalXcss
+    public final void synpred97_InternalXcss_fragment() throws RecognitionException {   
         // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10397:4: ( ({...}? => ( ( ( rule__FontLiteral__ItalicAssignment_2_0 ) ) ) ) )
         // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10397:4: ({...}? => ( ( ( rule__FontLiteral__ItalicAssignment_2_0 ) ) ) )
         {
@@ -35315,7 +35498,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
-            throw new FailedPredicateException(input, "synpred96_InternalXcss", "getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 0)");
+            throw new FailedPredicateException(input, "synpred97_InternalXcss", "getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 0)");
         }
         // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10398:108: ( ( ( rule__FontLiteral__ItalicAssignment_2_0 ) ) )
         // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10399:6: ( ( rule__FontLiteral__ItalicAssignment_2_0 ) )
@@ -35330,55 +35513,8 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10408:7: ( rule__FontLiteral__ItalicAssignment_2_0 )
         // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10408:8: rule__FontLiteral__ItalicAssignment_2_0
         {
-        pushFollow(FOLLOW_rule__FontLiteral__ItalicAssignment_2_0_in_synpred96_InternalXcss21017);
+        pushFollow(FOLLOW_rule__FontLiteral__ItalicAssignment_2_0_in_synpred97_InternalXcss21020);
         rule__FontLiteral__ItalicAssignment_2_0();
-
-        state._fsp--;
-        if (state.failed) return ;
-
-        }
-
-
-        }
-
-
-        }
-
-
-        }
-
-
-        }
-    }
-    // $ANTLR end synpred96_InternalXcss
-
-    // $ANTLR start synpred97_InternalXcss
-    public final void synpred97_InternalXcss_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10414:4: ( ({...}? => ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) ) ) )
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10414:4: ({...}? => ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) ) )
-        {
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10414:4: ({...}? => ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) ) )
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10415:5: {...}? => ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) )
-        {
-        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1) ) {
-            if (state.backtracking>0) {state.failed=true; return ;}
-            throw new FailedPredicateException(input, "synpred97_InternalXcss", "getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1)");
-        }
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10415:108: ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) )
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10416:6: ( ( rule__FontLiteral__BoldAssignment_2_1 ) )
-        {
-        getUnorderedGroupHelper().select(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1);
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10422:6: ( ( rule__FontLiteral__BoldAssignment_2_1 ) )
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10424:7: ( rule__FontLiteral__BoldAssignment_2_1 )
-        {
-        if ( state.backtracking==0 ) {
-           before(grammarAccess.getFontLiteralAccess().getBoldAssignment_2_1()); 
-        }
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10425:7: ( rule__FontLiteral__BoldAssignment_2_1 )
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10425:8: rule__FontLiteral__BoldAssignment_2_1
-        {
-        pushFollow(FOLLOW_rule__FontLiteral__BoldAssignment_2_1_in_synpred97_InternalXcss21108);
-        rule__FontLiteral__BoldAssignment_2_1();
 
         state._fsp--;
         if (state.failed) return ;
@@ -35401,14 +35537,46 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
 
     // $ANTLR start synpred98_InternalXcss
     public final void synpred98_InternalXcss_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10463:2: ( rule__FontLiteral__UnorderedGroup_2__1 )
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10463:2: rule__FontLiteral__UnorderedGroup_2__1
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10414:4: ( ({...}? => ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) ) ) )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10414:4: ({...}? => ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) ) )
         {
-        pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__1_in_synpred98_InternalXcss21261);
-        rule__FontLiteral__UnorderedGroup_2__1();
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10414:4: ({...}? => ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) ) )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10415:5: {...}? => ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) )
+        {
+        if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred98_InternalXcss", "getUnorderedGroupHelper().canSelect(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1)");
+        }
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10415:108: ( ( ( rule__FontLiteral__BoldAssignment_2_1 ) ) )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10416:6: ( ( rule__FontLiteral__BoldAssignment_2_1 ) )
+        {
+        getUnorderedGroupHelper().select(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), 1);
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10422:6: ( ( rule__FontLiteral__BoldAssignment_2_1 ) )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10424:7: ( rule__FontLiteral__BoldAssignment_2_1 )
+        {
+        if ( state.backtracking==0 ) {
+           before(grammarAccess.getFontLiteralAccess().getBoldAssignment_2_1()); 
+        }
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10425:7: ( rule__FontLiteral__BoldAssignment_2_1 )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10425:8: rule__FontLiteral__BoldAssignment_2_1
+        {
+        pushFollow(FOLLOW_rule__FontLiteral__BoldAssignment_2_1_in_synpred98_InternalXcss21111);
+        rule__FontLiteral__BoldAssignment_2_1();
 
         state._fsp--;
         if (state.failed) return ;
+
+        }
+
+
+        }
+
+
+        }
+
+
+        }
+
 
         }
     }
@@ -35416,11 +35584,11 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
 
     // $ANTLR start synpred99_InternalXcss
     public final void synpred99_InternalXcss_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10476:2: ( rule__FontLiteral__UnorderedGroup_2__2 )
-        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10476:2: rule__FontLiteral__UnorderedGroup_2__2
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10463:2: ( rule__FontLiteral__UnorderedGroup_2__1 )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10463:2: rule__FontLiteral__UnorderedGroup_2__1
         {
-        pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__2_in_synpred99_InternalXcss21289);
-        rule__FontLiteral__UnorderedGroup_2__2();
+        pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__1_in_synpred99_InternalXcss21264);
+        rule__FontLiteral__UnorderedGroup_2__1();
 
         state._fsp--;
         if (state.failed) return ;
@@ -35428,6 +35596,21 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         }
     }
     // $ANTLR end synpred99_InternalXcss
+
+    // $ANTLR start synpred100_InternalXcss
+    public final void synpred100_InternalXcss_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10476:2: ( rule__FontLiteral__UnorderedGroup_2__2 )
+        // ../org.eclipse.xtext.example.css.ui/src-gen/org/eclipse/xtext/example/css/ui/contentassist/antlr/internal/InternalXcss.g:10476:2: rule__FontLiteral__UnorderedGroup_2__2
+        {
+        pushFollow(FOLLOW_rule__FontLiteral__UnorderedGroup_2__2_in_synpred100_InternalXcss21292);
+        rule__FontLiteral__UnorderedGroup_2__2();
+
+        state._fsp--;
+        if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred100_InternalXcss
 
     // Delegated rules
 
@@ -35464,6 +35647,20 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         int start = input.mark();
         try {
             synpred88_InternalXcss_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred5_InternalXcss() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred5_InternalXcss_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -35515,11 +35712,11 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred61_InternalXcss() {
+    public final boolean synpred65_InternalXcss() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred61_InternalXcss_fragment(); // can never throw exception
+            synpred65_InternalXcss_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -35529,11 +35726,11 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred87_InternalXcss() {
+    public final boolean synpred61_InternalXcss() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred87_InternalXcss_fragment(); // can never throw exception
+            synpred61_InternalXcss_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -35655,11 +35852,11 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred72_InternalXcss() {
+    public final boolean synpred100_InternalXcss() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred72_InternalXcss_fragment(); // can never throw exception
+            synpred100_InternalXcss_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -35669,11 +35866,11 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred94_InternalXcss() {
+    public final boolean synpred72_InternalXcss() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred94_InternalXcss_fragment(); // can never throw exception
+            synpred72_InternalXcss_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -35725,6 +35922,20 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
+    public final boolean synpred82_InternalXcss() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred82_InternalXcss_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred23_InternalXcss() {
         state.backtracking++;
         int start = input.mark();
@@ -35758,6 +35969,20 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
         int start = input.mark();
         try {
             synpred57_InternalXcss_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred89_InternalXcss() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred89_InternalXcss_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -35856,7 +36081,9 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     protected DFA7 dfa7 = new DFA7(this);
     protected DFA16 dfa16 = new DFA16(this);
     protected DFA17 dfa17 = new DFA17(this);
+    protected DFA40 dfa40 = new DFA40(this);
     protected DFA47 dfa47 = new DFA47(this);
+    protected DFA57 dfa57 = new DFA57(this);
     static final String DFA7_eotS =
         "\33\uffff";
     static final String DFA7_eofS =
@@ -36217,6 +36444,134 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             throw nvae;
         }
     }
+    static final String DFA40_eotS =
+        "\65\uffff";
+    static final String DFA40_eofS =
+        "\1\2\64\uffff";
+    static final String DFA40_minS =
+        "\1\4\1\0\63\uffff";
+    static final String DFA40_maxS =
+        "\1\107\1\0\63\uffff";
+    static final String DFA40_acceptS =
+        "\2\uffff\1\2\61\uffff\1\1";
+    static final String DFA40_specialS =
+        "\1\uffff\1\0\63\uffff}>";
+    static final String[] DFA40_transitionS = {
+            "\3\2\4\uffff\25\2\3\uffff\2\2\1\uffff\6\2\1\1\5\2\2\uffff\3"+
+            "\2\1\uffff\3\2\1\uffff\5\2\6\uffff\1\2",
+            "\1\uffff",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] DFA40_eot = DFA.unpackEncodedString(DFA40_eotS);
+    static final short[] DFA40_eof = DFA.unpackEncodedString(DFA40_eofS);
+    static final char[] DFA40_min = DFA.unpackEncodedStringToUnsignedChars(DFA40_minS);
+    static final char[] DFA40_max = DFA.unpackEncodedStringToUnsignedChars(DFA40_maxS);
+    static final short[] DFA40_accept = DFA.unpackEncodedString(DFA40_acceptS);
+    static final short[] DFA40_special = DFA.unpackEncodedString(DFA40_specialS);
+    static final short[][] DFA40_transition;
+
+    static {
+        int numStates = DFA40_transitionS.length;
+        DFA40_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA40_transition[i] = DFA.unpackEncodedString(DFA40_transitionS[i]);
+        }
+    }
+
+    class DFA40 extends DFA {
+
+        public DFA40(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 40;
+            this.eot = DFA40_eot;
+            this.eof = DFA40_eof;
+            this.min = DFA40_min;
+            this.max = DFA40_max;
+            this.accept = DFA40_accept;
+            this.special = DFA40_special;
+            this.transition = DFA40_transition;
+        }
+        public String getDescription() {
+            return "5151:1: ( rule__XMemberFeatureCall__Group_1_4__0 )?";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            TokenStream input = (TokenStream)_input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 : 
+                        int LA40_1 = input.LA(1);
+
+                         
+                        int index40_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred65_InternalXcss()) ) {s = 52;}
+
+                        else if ( (true) ) {s = 2;}
+
+                         
+                        input.seek(index40_1);
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            if (state.backtracking>0) {state.failed=true; return -1;}
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 40, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
     static final String DFA47_eotS =
         "\32\uffff";
     static final String DFA47_eofS =
@@ -36315,6 +36670,134 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
                 new NoViableAltException(getDescription(), 47, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
+    static final String DFA57_eotS =
+        "\65\uffff";
+    static final String DFA57_eofS =
+        "\1\2\64\uffff";
+    static final String DFA57_minS =
+        "\1\4\1\0\63\uffff";
+    static final String DFA57_maxS =
+        "\1\107\1\0\63\uffff";
+    static final String DFA57_acceptS =
+        "\2\uffff\1\2\61\uffff\1\1";
+    static final String DFA57_specialS =
+        "\1\uffff\1\0\63\uffff}>";
+    static final String[] DFA57_transitionS = {
+            "\3\2\4\uffff\25\2\3\uffff\2\2\1\uffff\6\2\1\1\5\2\2\uffff\3"+
+            "\2\1\uffff\3\2\1\uffff\5\2\6\uffff\1\2",
+            "\1\uffff",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] DFA57_eot = DFA.unpackEncodedString(DFA57_eotS);
+    static final short[] DFA57_eof = DFA.unpackEncodedString(DFA57_eofS);
+    static final char[] DFA57_min = DFA.unpackEncodedStringToUnsignedChars(DFA57_minS);
+    static final char[] DFA57_max = DFA.unpackEncodedStringToUnsignedChars(DFA57_maxS);
+    static final short[] DFA57_accept = DFA.unpackEncodedString(DFA57_acceptS);
+    static final short[] DFA57_special = DFA.unpackEncodedString(DFA57_specialS);
+    static final short[][] DFA57_transition;
+
+    static {
+        int numStates = DFA57_transitionS.length;
+        DFA57_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA57_transition[i] = DFA.unpackEncodedString(DFA57_transitionS[i]);
+        }
+    }
+
+    class DFA57 extends DFA {
+
+        public DFA57(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 57;
+            this.eot = DFA57_eot;
+            this.eof = DFA57_eof;
+            this.min = DFA57_min;
+            this.max = DFA57_max;
+            this.accept = DFA57_accept;
+            this.special = DFA57_special;
+            this.transition = DFA57_transition;
+        }
+        public String getDescription() {
+            return "7979:1: ( rule__XFeatureCall__Group_2__0 )?";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            TokenStream input = (TokenStream)_input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 : 
+                        int LA57_1 = input.LA(1);
+
+                         
+                        int index57_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred82_InternalXcss()) ) {s = 52;}
+
+                        else if ( (true) ) {s = 2;}
+
+                         
+                        input.seek(index57_1);
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            if (state.backtracking>0) {state.failed=true; return -1;}
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 57, _s, input);
             error(nvae);
             throw nvae;
         }
@@ -36675,7 +37158,7 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XAssignment__Group_1__2_in_rule__XAssignment__Group_1__17657 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAssignment__FeatureAssignment_1_1_in_rule__XAssignment__Group_1__1__Impl7684 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAssignment__Group_1__2__Impl_in_rule__XAssignment__Group_1__27714 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XAssignment__RightOperandAssignment_1_2_in_rule__XAssignment__Group_1__2__Impl7741 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XAssignment__ValueAssignment_1_2_in_rule__XAssignment__Group_1__2__Impl7741 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XOrExpression__Group__0__Impl_in_rule__XOrExpression__Group__07777 = new BitSet(new long[]{0x0000000000001000L});
     public static final BitSet FOLLOW_rule__XOrExpression__Group__1_in_rule__XOrExpression__Group__07780 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAndExpression_in_rule__XOrExpression__Group__0__Impl7807 = new BitSet(new long[]{0x0000000000000002L});
@@ -37004,340 +37487,341 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XBlockExpression__Group_2__1_in_rule__XBlockExpression__Group_2__015531 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XBlockExpression__ExpressionsAssignment_2_0_in_rule__XBlockExpression__Group_2__0__Impl15558 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XBlockExpression__Group_2__1__Impl_in_rule__XBlockExpression__Group_2__115588 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_rule__XBlockExpression__Group_2__1__Impl15616 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__0__Impl_in_rule__XVariableDeclaration__Group__015651 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__1_in_rule__XVariableDeclaration__Group__015654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Alternatives_0_in_rule__XVariableDeclaration__Group__0__Impl15681 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__1__Impl_in_rule__XVariableDeclaration__Group__115711 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__2_in_rule__XVariableDeclaration__Group__115714 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__TypeAssignment_1_in_rule__XVariableDeclaration__Group__1__Impl15741 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__2__Impl_in_rule__XVariableDeclaration__Group__215772 = new BitSet(new long[]{0x0080000000000000L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__3_in_rule__XVariableDeclaration__Group__215775 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__NameAssignment_2_in_rule__XVariableDeclaration__Group__2__Impl15802 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__3__Impl_in_rule__XVariableDeclaration__Group__315832 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__4_in_rule__XVariableDeclaration__Group__315835 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_rule__XVariableDeclaration__Group__3__Impl15863 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__4__Impl_in_rule__XVariableDeclaration__Group__415894 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XVariableDeclaration__RightAssignment_4_in_rule__XVariableDeclaration__Group__4__Impl15921 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmFormalParameter__Group__0__Impl_in_rule__JvmFormalParameter__Group__015961 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
-    public static final BitSet FOLLOW_rule__JvmFormalParameter__Group__1_in_rule__JvmFormalParameter__Group__015964 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmFormalParameter__ParameterTypeAssignment_0_in_rule__JvmFormalParameter__Group__0__Impl15991 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmFormalParameter__Group__1__Impl_in_rule__JvmFormalParameter__Group__116022 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmFormalParameter__NameAssignment_1_in_rule__JvmFormalParameter__Group__1__Impl16049 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group__0__Impl_in_rule__XFeatureCall__Group__016083 = new BitSet(new long[]{0x0000000000100020L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group__1_in_rule__XFeatureCall__Group__016086 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__0_in_rule__XFeatureCall__Group__0__Impl16113 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group__1__Impl_in_rule__XFeatureCall__Group__116144 = new BitSet(new long[]{0x0000100000000000L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group__2_in_rule__XFeatureCall__Group__116147 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__FeatureAssignment_1_in_rule__XFeatureCall__Group__1__Impl16174 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group__2__Impl_in_rule__XFeatureCall__Group__216204 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__0_in_rule__XFeatureCall__Group__2__Impl16231 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__0__Impl_in_rule__XFeatureCall__Group_0__016268 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__1_in_rule__XFeatureCall__Group_0__016271 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__XFeatureCall__Group_0__0__Impl16299 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__1__Impl_in_rule__XFeatureCall__Group_0__116330 = new BitSet(new long[]{0x0000080000080000L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__2_in_rule__XFeatureCall__Group_0__116333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__TypeArgumentsAssignment_0_1_in_rule__XFeatureCall__Group_0__1__Impl16360 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__2__Impl_in_rule__XFeatureCall__Group_0__216390 = new BitSet(new long[]{0x0000080000080000L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__3_in_rule__XFeatureCall__Group_0__216393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0_2__0_in_rule__XFeatureCall__Group_0__2__Impl16420 = new BitSet(new long[]{0x0000080000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__3__Impl_in_rule__XFeatureCall__Group_0__316451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__XFeatureCall__Group_0__3__Impl16479 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0_2__0__Impl_in_rule__XFeatureCall__Group_0_2__016518 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0_2__1_in_rule__XFeatureCall__Group_0_2__016521 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__XFeatureCall__Group_0_2__0__Impl16549 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0_2__1__Impl_in_rule__XFeatureCall__Group_0_2__116580 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__TypeArgumentsAssignment_0_2_1_in_rule__XFeatureCall__Group_0_2__1__Impl16607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__0__Impl_in_rule__XFeatureCall__Group_2__016641 = new BitSet(new long[]{0x3772F10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__1_in_rule__XFeatureCall__Group_2__016644 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_rule__XFeatureCall__Group_2__0__Impl16672 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__1__Impl_in_rule__XFeatureCall__Group_2__116703 = new BitSet(new long[]{0x3772F10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__2_in_rule__XFeatureCall__Group_2__116706 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1__0_in_rule__XFeatureCall__Group_2__1__Impl16733 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__2__Impl_in_rule__XFeatureCall__Group_2__216764 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__XFeatureCall__Group_2__2__Impl16792 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1__0__Impl_in_rule__XFeatureCall__Group_2_1__016829 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1__1_in_rule__XFeatureCall__Group_2_1__016832 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0_in_rule__XFeatureCall__Group_2_1__0__Impl16859 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1__1__Impl_in_rule__XFeatureCall__Group_2_1__116889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1_1__0_in_rule__XFeatureCall__Group_2_1__1__Impl16916 = new BitSet(new long[]{0x0000080000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1_1__0__Impl_in_rule__XFeatureCall__Group_2_1_1__016951 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1_1__1_in_rule__XFeatureCall__Group_2_1_1__016954 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__XFeatureCall__Group_2_1_1__0__Impl16982 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1_1__1__Impl_in_rule__XFeatureCall__Group_2_1_1__117013 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1_in_rule__XFeatureCall__Group_2_1_1__1__Impl17040 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__0__Impl_in_rule__XConstructorCall__Group__017074 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__1_in_rule__XConstructorCall__Group__017077 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_rule__XConstructorCall__Group__0__Impl17105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__1__Impl_in_rule__XConstructorCall__Group__117136 = new BitSet(new long[]{0x0000100000000000L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__2_in_rule__XConstructorCall__Group__117139 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__TypeAssignment_1_in_rule__XConstructorCall__Group__1__Impl17166 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__2__Impl_in_rule__XConstructorCall__Group__217196 = new BitSet(new long[]{0x3772F10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__3_in_rule__XConstructorCall__Group__217199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_rule__XConstructorCall__Group__2__Impl17227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__3__Impl_in_rule__XConstructorCall__Group__317258 = new BitSet(new long[]{0x3772F10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__4_in_rule__XConstructorCall__Group__317261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__0_in_rule__XConstructorCall__Group__3__Impl17288 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__4__Impl_in_rule__XConstructorCall__Group__417319 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__XConstructorCall__Group__4__Impl17347 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__0__Impl_in_rule__XConstructorCall__Group_3__017388 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__1_in_rule__XConstructorCall__Group_3__017391 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_0_in_rule__XConstructorCall__Group_3__0__Impl17418 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__1__Impl_in_rule__XConstructorCall__Group_3__117448 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__0_in_rule__XConstructorCall__Group_3__1__Impl17475 = new BitSet(new long[]{0x0000080000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__0__Impl_in_rule__XConstructorCall__Group_3_1__017510 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__1_in_rule__XConstructorCall__Group_3_1__017513 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__XConstructorCall__Group_3_1__0__Impl17541 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__1__Impl_in_rule__XConstructorCall__Group_3_1__117572 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_1_1_in_rule__XConstructorCall__Group_3_1__1__Impl17599 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__0__Impl_in_rule__XBooleanLiteral__Group_0__017633 = new BitSet(new long[]{0x0200000000000000L});
-    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__1_in_rule__XBooleanLiteral__Group_0__017636 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__1__Impl_in_rule__XBooleanLiteral__Group_0__117694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_57_in_rule__XBooleanLiteral__Group_0__1__Impl17722 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XNullLiteral__Group__0__Impl_in_rule__XNullLiteral__Group__017757 = new BitSet(new long[]{0x0400000000000000L});
-    public static final BitSet FOLLOW_rule__XNullLiteral__Group__1_in_rule__XNullLiteral__Group__017760 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XNullLiteral__Group__1__Impl_in_rule__XNullLiteral__Group__117818 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_58_in_rule__XNullLiteral__Group__1__Impl17846 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__0__Impl_in_rule__XTypeLiteral__Group__017881 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__1_in_rule__XTypeLiteral__Group__017884 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__TypeAssignment_0_in_rule__XTypeLiteral__Group__0__Impl17911 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__1__Impl_in_rule__XTypeLiteral__Group__117941 = new BitSet(new long[]{0x0800000000000000L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__2_in_rule__XTypeLiteral__Group__117944 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__XTypeLiteral__Group__1__Impl17972 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__2__Impl_in_rule__XTypeLiteral__Group__218003 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_59_in_rule__XTypeLiteral__Group__2__Impl18031 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XThrowExpression__Group__0__Impl_in_rule__XThrowExpression__Group__018068 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XThrowExpression__Group__1_in_rule__XThrowExpression__Group__018071 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_60_in_rule__XThrowExpression__Group__0__Impl18099 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XThrowExpression__Group__1__Impl_in_rule__XThrowExpression__Group__118130 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XThrowExpression__ExpressionAssignment_1_in_rule__XThrowExpression__Group__1__Impl18157 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__0__Impl_in_rule__XTryCatchFinallyExpression__Group__018191 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__1_in_rule__XTryCatchFinallyExpression__Group__018194 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_61_in_rule__XTryCatchFinallyExpression__Group__0__Impl18222 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__1__Impl_in_rule__XTryCatchFinallyExpression__Group__118253 = new BitSet(new long[]{0xC000000000000000L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__2_in_rule__XTryCatchFinallyExpression__Group__118256 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__ExpressionAssignment_1_in_rule__XTryCatchFinallyExpression__Group__1__Impl18283 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__2__Impl_in_rule__XTryCatchFinallyExpression__Group__218313 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Alternatives_2_in_rule__XTryCatchFinallyExpression__Group__2__Impl18340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__018376 = new BitSet(new long[]{0x4000000000000000L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1_in_rule__XTryCatchFinallyExpression__Group_2_0__018379 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl18408 = new BitSet(new long[]{0x8000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl18420 = new BitSet(new long[]{0x8000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__118453 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl18480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__018515 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__018518 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_62_in_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl18546 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__118577 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl18604 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__018638 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1_in_rule__XTryCatchFinallyExpression__Group_2_1__018641 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_62_in_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl18669 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__118700 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1_in_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl18727 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__0__Impl_in_rule__XCatchClause__Group__018761 = new BitSet(new long[]{0x0000100000000000L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__1_in_rule__XCatchClause__Group__018764 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_63_in_rule__XCatchClause__Group__0__Impl18792 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__1__Impl_in_rule__XCatchClause__Group__118823 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__2_in_rule__XCatchClause__Group__118826 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_rule__XCatchClause__Group__1__Impl18854 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__2__Impl_in_rule__XCatchClause__Group__218885 = new BitSet(new long[]{0x0000200000000000L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__3_in_rule__XCatchClause__Group__218888 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__DeclaredParamAssignment_2_in_rule__XCatchClause__Group__2__Impl18915 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__3__Impl_in_rule__XCatchClause__Group__318945 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__4_in_rule__XCatchClause__Group__318948 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__XCatchClause__Group__3__Impl18976 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__4__Impl_in_rule__XCatchClause__Group__419007 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__ExpressionAssignment_4_in_rule__XCatchClause__Group__4__Impl19034 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__0__Impl_in_rule__XFunctionTypeRef__Group__019074 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__1_in_rule__XFunctionTypeRef__Group__019077 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__0_in_rule__XFunctionTypeRef__Group__0__Impl19104 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__1__Impl_in_rule__XFunctionTypeRef__Group__119135 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__2_in_rule__XFunctionTypeRef__Group__119138 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_64_in_rule__XFunctionTypeRef__Group__1__Impl19166 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__2__Impl_in_rule__XFunctionTypeRef__Group__219197 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ReturnTypeAssignment_2_in_rule__XFunctionTypeRef__Group__2__Impl19224 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__0__Impl_in_rule__XFunctionTypeRef__Group_0__019260 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__1_in_rule__XFunctionTypeRef__Group_0__019263 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_rule__XFunctionTypeRef__Group_0__0__Impl19291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__1__Impl_in_rule__XFunctionTypeRef__Group_0__119322 = new BitSet(new long[]{0x0000280000000000L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__2_in_rule__XFunctionTypeRef__Group_0__119325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_in_rule__XFunctionTypeRef__Group_0__1__Impl19352 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__2__Impl_in_rule__XFunctionTypeRef__Group_0__219382 = new BitSet(new long[]{0x0000280000000000L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__3_in_rule__XFunctionTypeRef__Group_0__219385 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__0_in_rule__XFunctionTypeRef__Group_0__2__Impl19412 = new BitSet(new long[]{0x0000080000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__3__Impl_in_rule__XFunctionTypeRef__Group_0__319443 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__XFunctionTypeRef__Group_0__3__Impl19471 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__0__Impl_in_rule__XFunctionTypeRef__Group_0_2__019510 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__1_in_rule__XFunctionTypeRef__Group_0_2__019513 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__XFunctionTypeRef__Group_0_2__0__Impl19541 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__1__Impl_in_rule__XFunctionTypeRef__Group_0_2__119572 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_in_rule__XFunctionTypeRef__Group_0_2__1__Impl19599 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__0__Impl_in_rule__JvmParameterizedTypeReference__Group__019633 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__1_in_rule__JvmParameterizedTypeReference__Group__019636 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__TypeAssignment_0_in_rule__JvmParameterizedTypeReference__Group__0__Impl19663 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__1__Impl_in_rule__JvmParameterizedTypeReference__Group__119693 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0_in_rule__JvmParameterizedTypeReference__Group__1__Impl19720 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1__019755 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1_in_rule__JvmParameterizedTypeReference__Group_1__019758 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__JvmParameterizedTypeReference__Group_1__0__Impl19786 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1__119817 = new BitSet(new long[]{0x0000080000080000L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2_in_rule__JvmParameterizedTypeReference__Group_1__119820 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1_in_rule__JvmParameterizedTypeReference__Group_1__1__Impl19847 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1__219877 = new BitSet(new long[]{0x0000080000080000L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3_in_rule__JvmParameterizedTypeReference__Group_1__219880 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0_in_rule__JvmParameterizedTypeReference__Group_1__2__Impl19907 = new BitSet(new long[]{0x0000080000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1__319938 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl19966 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__020005 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__020008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl20036 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__120067 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl20094 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__020128 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__020131 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__120189 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000014L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__120192 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_65_in_rule__JvmWildcardTypeReference__Group__1__Impl20220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__220251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl20278 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__020315 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__020318 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_66_in_rule__JvmUpperBound__Group__0__Impl20346 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__120377 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl20404 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__020438 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__020441 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_67_in_rule__JvmUpperBoundAnded__Group__0__Impl20469 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__120500 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl20527 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__020561 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__020564 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_68_in_rule__JvmLowerBound__Group__0__Impl20592 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__120623 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl20650 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__020686 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__020689 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl20716 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__120745 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl20772 = new BitSet(new long[]{0x0000040000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__020807 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__020810 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__QualifiedName__Group_1__0__Impl20838 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__120869 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl20896 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__0_in_rule__FontLiteral__UnorderedGroup_220930 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__ItalicAssignment_2_0_in_rule__FontLiteral__UnorderedGroup_2__Impl21017 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__BoldAssignment_2_1_in_rule__FontLiteral__UnorderedGroup_2__Impl21108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__SizeAssignment_2_2_in_rule__FontLiteral__UnorderedGroup_2__Impl21199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__021258 = new BitSet(new long[]{0x0000010000004072L,0x0000000000000060L});
-    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__1_in_rule__FontLiteral__UnorderedGroup_2__021261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__121286 = new BitSet(new long[]{0x0000010000004072L,0x0000000000000060L});
-    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__2_in_rule__FontLiteral__UnorderedGroup_2__121289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__221314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStyleRule_in_rule__StyleSheet__RulesAssignment21348 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSelector_in_rule__StyleRule__SelectorsAssignment_021379 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSetting_in_rule__StyleRule__SettingsAssignment_221410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFilter_in_rule__Selector__FilterAssignment_121441 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__TypeSelector__TypeAssignment21476 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__Filter__ConditionAssignment_121511 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFeatureReference_in_rule__Setting__ParamsAssignment_121542 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpAssign_in_rule__Setting__FeatureAssignment_221577 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__Setting__ParamsAssignment_321612 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__FeatureReference__FeatureAssignment21647 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStringOrID_in_rule__FontLiteral__NameAssignment_1_0_121682 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_69_in_rule__FontLiteral__ItalicAssignment_2_021718 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_70_in_rule__FontLiteral__BoldAssignment_2_121762 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSizeLiteral_in_rule__FontLiteral__SizeAssignment_2_221801 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__ColorConstant__NameAssignment21832 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__RGB__ColorAssignment_121863 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__SizeLiteral__ValueAssignment_021894 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSizeUnit_in_rule__SizeLiteral__UnitAssignment_121925 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpAssign_in_rule__XAssignment__FeatureAssignment_1_121960 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__RightOperandAssignment_1_221995 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_122030 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_222065 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_122100 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_222135 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_122170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_222205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XRelationalExpression__TypeAssignment_1_0_222240 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_122279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_222314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_122349 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_222384 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_122419 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_222454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_122489 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_222524 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_122559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_rule__XUnaryOperation__OperandAssignment_0_222594 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_122625 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_122656 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__XMemberFeatureCall__FeatureAssignment_1_322691 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_022726 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_122757 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_022788 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_1_122819 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XClosure__ExpressionAssignment_322850 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_122881 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_rule__XCastedExpression__TargetAssignment_322912 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_222943 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_422974 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_5_123005 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_123036 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_323067 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_0_023098 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXBlockExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_123129 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_023160 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_123191 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_023222 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXBlockExpression_in_rule__XCasePart__ThenAssignment_3_123253 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_223284 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_423315 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_623346 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_223377 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_423408 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_123439 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_423470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_023501 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_123532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__XVariableDeclaration__NameAssignment_223563 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_423594 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_023625 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__JvmFormalParameter__NameAssignment_123656 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_123687 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_2_123718 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__XFeatureCall__FeatureAssignment_123753 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_023788 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_123819 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_rule__XConstructorCall__TypeAssignment_123850 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_023881 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_1_123912 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_71_in_rule__XBooleanLiteral__IsTrueAssignment_123948 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__XIntLiteral__ValueAssignment23987 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment24018 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_024053 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_124088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_124119 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_024150 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_124181 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_124212 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_224243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_424274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_124305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_124336 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_224367 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_024402 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_124437 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_124468 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_024499 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_124530 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_124561 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_124592 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_124623 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_rule__XBlockExpression__Group_2__1__Impl15617 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__0__Impl_in_rule__XVariableDeclaration__Group__015654 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__1_in_rule__XVariableDeclaration__Group__015657 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Alternatives_0_in_rule__XVariableDeclaration__Group__0__Impl15684 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__1__Impl_in_rule__XVariableDeclaration__Group__115714 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__2_in_rule__XVariableDeclaration__Group__115717 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__TypeAssignment_1_in_rule__XVariableDeclaration__Group__1__Impl15744 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__2__Impl_in_rule__XVariableDeclaration__Group__215775 = new BitSet(new long[]{0x0080000000000000L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__3_in_rule__XVariableDeclaration__Group__215778 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__NameAssignment_2_in_rule__XVariableDeclaration__Group__2__Impl15805 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__3__Impl_in_rule__XVariableDeclaration__Group__315835 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__4_in_rule__XVariableDeclaration__Group__315838 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_rule__XVariableDeclaration__Group__3__Impl15866 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__Group__4__Impl_in_rule__XVariableDeclaration__Group__415897 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XVariableDeclaration__RightAssignment_4_in_rule__XVariableDeclaration__Group__4__Impl15924 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmFormalParameter__Group__0__Impl_in_rule__JvmFormalParameter__Group__015964 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_rule__JvmFormalParameter__Group__1_in_rule__JvmFormalParameter__Group__015967 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmFormalParameter__ParameterTypeAssignment_0_in_rule__JvmFormalParameter__Group__0__Impl15994 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmFormalParameter__Group__1__Impl_in_rule__JvmFormalParameter__Group__116025 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmFormalParameter__NameAssignment_1_in_rule__JvmFormalParameter__Group__1__Impl16052 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group__0__Impl_in_rule__XFeatureCall__Group__016086 = new BitSet(new long[]{0x0000000000100020L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group__1_in_rule__XFeatureCall__Group__016089 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__0_in_rule__XFeatureCall__Group__0__Impl16116 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group__1__Impl_in_rule__XFeatureCall__Group__116147 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group__2_in_rule__XFeatureCall__Group__116150 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__FeatureAssignment_1_in_rule__XFeatureCall__Group__1__Impl16177 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group__2__Impl_in_rule__XFeatureCall__Group__216207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__0_in_rule__XFeatureCall__Group__2__Impl16234 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__0__Impl_in_rule__XFeatureCall__Group_0__016271 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__1_in_rule__XFeatureCall__Group_0__016274 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__XFeatureCall__Group_0__0__Impl16302 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__1__Impl_in_rule__XFeatureCall__Group_0__116333 = new BitSet(new long[]{0x0000080000080000L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__2_in_rule__XFeatureCall__Group_0__116336 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__TypeArgumentsAssignment_0_1_in_rule__XFeatureCall__Group_0__1__Impl16363 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__2__Impl_in_rule__XFeatureCall__Group_0__216393 = new BitSet(new long[]{0x0000080000080000L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__3_in_rule__XFeatureCall__Group_0__216396 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0_2__0_in_rule__XFeatureCall__Group_0__2__Impl16423 = new BitSet(new long[]{0x0000080000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0__3__Impl_in_rule__XFeatureCall__Group_0__316454 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__XFeatureCall__Group_0__3__Impl16482 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0_2__0__Impl_in_rule__XFeatureCall__Group_0_2__016521 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0_2__1_in_rule__XFeatureCall__Group_0_2__016524 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__XFeatureCall__Group_0_2__0__Impl16552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_0_2__1__Impl_in_rule__XFeatureCall__Group_0_2__116583 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__TypeArgumentsAssignment_0_2_1_in_rule__XFeatureCall__Group_0_2__1__Impl16610 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__0__Impl_in_rule__XFeatureCall__Group_2__016644 = new BitSet(new long[]{0x3772F10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__1_in_rule__XFeatureCall__Group_2__016647 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_rule__XFeatureCall__Group_2__0__Impl16675 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__1__Impl_in_rule__XFeatureCall__Group_2__116706 = new BitSet(new long[]{0x3772F10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__2_in_rule__XFeatureCall__Group_2__116709 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1__0_in_rule__XFeatureCall__Group_2__1__Impl16736 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__2__Impl_in_rule__XFeatureCall__Group_2__216767 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_rule__XFeatureCall__Group_2__2__Impl16795 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1__0__Impl_in_rule__XFeatureCall__Group_2_1__016832 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1__1_in_rule__XFeatureCall__Group_2_1__016835 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0_in_rule__XFeatureCall__Group_2_1__0__Impl16862 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1__1__Impl_in_rule__XFeatureCall__Group_2_1__116892 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1_1__0_in_rule__XFeatureCall__Group_2_1__1__Impl16919 = new BitSet(new long[]{0x0000080000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1_1__0__Impl_in_rule__XFeatureCall__Group_2_1_1__016954 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1_1__1_in_rule__XFeatureCall__Group_2_1_1__016957 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__XFeatureCall__Group_2_1_1__0__Impl16985 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2_1_1__1__Impl_in_rule__XFeatureCall__Group_2_1_1__117016 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1_in_rule__XFeatureCall__Group_2_1_1__1__Impl17043 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__0__Impl_in_rule__XConstructorCall__Group__017077 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__1_in_rule__XConstructorCall__Group__017080 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_rule__XConstructorCall__Group__0__Impl17108 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__1__Impl_in_rule__XConstructorCall__Group__117139 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__2_in_rule__XConstructorCall__Group__117142 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__TypeAssignment_1_in_rule__XConstructorCall__Group__1__Impl17169 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__2__Impl_in_rule__XConstructorCall__Group__217199 = new BitSet(new long[]{0x3772F10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__3_in_rule__XConstructorCall__Group__217202 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_rule__XConstructorCall__Group__2__Impl17230 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__3__Impl_in_rule__XConstructorCall__Group__317261 = new BitSet(new long[]{0x3772F10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__4_in_rule__XConstructorCall__Group__317264 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__0_in_rule__XConstructorCall__Group__3__Impl17291 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__4__Impl_in_rule__XConstructorCall__Group__417322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_rule__XConstructorCall__Group__4__Impl17350 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__0__Impl_in_rule__XConstructorCall__Group_3__017391 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__1_in_rule__XConstructorCall__Group_3__017394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_0_in_rule__XConstructorCall__Group_3__0__Impl17421 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__1__Impl_in_rule__XConstructorCall__Group_3__117451 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__0_in_rule__XConstructorCall__Group_3__1__Impl17478 = new BitSet(new long[]{0x0000080000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__0__Impl_in_rule__XConstructorCall__Group_3_1__017513 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__1_in_rule__XConstructorCall__Group_3_1__017516 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__XConstructorCall__Group_3_1__0__Impl17544 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__1__Impl_in_rule__XConstructorCall__Group_3_1__117575 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_1_1_in_rule__XConstructorCall__Group_3_1__1__Impl17602 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__0__Impl_in_rule__XBooleanLiteral__Group_0__017636 = new BitSet(new long[]{0x0200000000000000L});
+    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__1_in_rule__XBooleanLiteral__Group_0__017639 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__1__Impl_in_rule__XBooleanLiteral__Group_0__117697 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_57_in_rule__XBooleanLiteral__Group_0__1__Impl17725 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XNullLiteral__Group__0__Impl_in_rule__XNullLiteral__Group__017760 = new BitSet(new long[]{0x0400000000000000L});
+    public static final BitSet FOLLOW_rule__XNullLiteral__Group__1_in_rule__XNullLiteral__Group__017763 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XNullLiteral__Group__1__Impl_in_rule__XNullLiteral__Group__117821 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_58_in_rule__XNullLiteral__Group__1__Impl17849 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__0__Impl_in_rule__XTypeLiteral__Group__017884 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__1_in_rule__XTypeLiteral__Group__017887 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__TypeAssignment_0_in_rule__XTypeLiteral__Group__0__Impl17914 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__1__Impl_in_rule__XTypeLiteral__Group__117944 = new BitSet(new long[]{0x0800000000000000L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__2_in_rule__XTypeLiteral__Group__117947 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_rule__XTypeLiteral__Group__1__Impl17975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__2__Impl_in_rule__XTypeLiteral__Group__218006 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_59_in_rule__XTypeLiteral__Group__2__Impl18034 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XThrowExpression__Group__0__Impl_in_rule__XThrowExpression__Group__018071 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XThrowExpression__Group__1_in_rule__XThrowExpression__Group__018074 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_60_in_rule__XThrowExpression__Group__0__Impl18102 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XThrowExpression__Group__1__Impl_in_rule__XThrowExpression__Group__118133 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XThrowExpression__ExpressionAssignment_1_in_rule__XThrowExpression__Group__1__Impl18160 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__0__Impl_in_rule__XTryCatchFinallyExpression__Group__018194 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__1_in_rule__XTryCatchFinallyExpression__Group__018197 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_61_in_rule__XTryCatchFinallyExpression__Group__0__Impl18225 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__1__Impl_in_rule__XTryCatchFinallyExpression__Group__118256 = new BitSet(new long[]{0xC000000000000000L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__2_in_rule__XTryCatchFinallyExpression__Group__118259 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__ExpressionAssignment_1_in_rule__XTryCatchFinallyExpression__Group__1__Impl18286 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__2__Impl_in_rule__XTryCatchFinallyExpression__Group__218316 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Alternatives_2_in_rule__XTryCatchFinallyExpression__Group__2__Impl18343 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__018379 = new BitSet(new long[]{0x4000000000000000L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1_in_rule__XTryCatchFinallyExpression__Group_2_0__018382 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl18411 = new BitSet(new long[]{0x8000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl18423 = new BitSet(new long[]{0x8000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__118456 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl18483 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__018518 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__018521 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_62_in_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl18549 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__118580 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl18607 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__018641 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1_in_rule__XTryCatchFinallyExpression__Group_2_1__018644 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_62_in_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl18672 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__118703 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1_in_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl18730 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__0__Impl_in_rule__XCatchClause__Group__018764 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__1_in_rule__XCatchClause__Group__018767 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_63_in_rule__XCatchClause__Group__0__Impl18795 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__1__Impl_in_rule__XCatchClause__Group__118826 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__2_in_rule__XCatchClause__Group__118829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_rule__XCatchClause__Group__1__Impl18857 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__2__Impl_in_rule__XCatchClause__Group__218888 = new BitSet(new long[]{0x0000200000000000L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__3_in_rule__XCatchClause__Group__218891 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__DeclaredParamAssignment_2_in_rule__XCatchClause__Group__2__Impl18918 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__3__Impl_in_rule__XCatchClause__Group__318948 = new BitSet(new long[]{0x3772D10821904070L,0x0000000000000081L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__4_in_rule__XCatchClause__Group__318951 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_rule__XCatchClause__Group__3__Impl18979 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__4__Impl_in_rule__XCatchClause__Group__419010 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__ExpressionAssignment_4_in_rule__XCatchClause__Group__4__Impl19037 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__0__Impl_in_rule__XFunctionTypeRef__Group__019077 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__1_in_rule__XFunctionTypeRef__Group__019080 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__0_in_rule__XFunctionTypeRef__Group__0__Impl19107 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__1__Impl_in_rule__XFunctionTypeRef__Group__119138 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__2_in_rule__XFunctionTypeRef__Group__119141 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_64_in_rule__XFunctionTypeRef__Group__1__Impl19169 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__2__Impl_in_rule__XFunctionTypeRef__Group__219200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ReturnTypeAssignment_2_in_rule__XFunctionTypeRef__Group__2__Impl19227 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__0__Impl_in_rule__XFunctionTypeRef__Group_0__019263 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__1_in_rule__XFunctionTypeRef__Group_0__019266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_rule__XFunctionTypeRef__Group_0__0__Impl19294 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__1__Impl_in_rule__XFunctionTypeRef__Group_0__119325 = new BitSet(new long[]{0x0000280000000000L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__2_in_rule__XFunctionTypeRef__Group_0__119328 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_in_rule__XFunctionTypeRef__Group_0__1__Impl19355 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__2__Impl_in_rule__XFunctionTypeRef__Group_0__219385 = new BitSet(new long[]{0x0000280000000000L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__3_in_rule__XFunctionTypeRef__Group_0__219388 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__0_in_rule__XFunctionTypeRef__Group_0__2__Impl19415 = new BitSet(new long[]{0x0000080000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__3__Impl_in_rule__XFunctionTypeRef__Group_0__319446 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_rule__XFunctionTypeRef__Group_0__3__Impl19474 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__0__Impl_in_rule__XFunctionTypeRef__Group_0_2__019513 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__1_in_rule__XFunctionTypeRef__Group_0_2__019516 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__XFunctionTypeRef__Group_0_2__0__Impl19544 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__1__Impl_in_rule__XFunctionTypeRef__Group_0_2__119575 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_in_rule__XFunctionTypeRef__Group_0_2__1__Impl19602 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__0__Impl_in_rule__JvmParameterizedTypeReference__Group__019636 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__1_in_rule__JvmParameterizedTypeReference__Group__019639 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__TypeAssignment_0_in_rule__JvmParameterizedTypeReference__Group__0__Impl19666 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__1__Impl_in_rule__JvmParameterizedTypeReference__Group__119696 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0_in_rule__JvmParameterizedTypeReference__Group__1__Impl19723 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1__019758 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1_in_rule__JvmParameterizedTypeReference__Group_1__019761 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__JvmParameterizedTypeReference__Group_1__0__Impl19789 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1__119820 = new BitSet(new long[]{0x0000080000080000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2_in_rule__JvmParameterizedTypeReference__Group_1__119823 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1_in_rule__JvmParameterizedTypeReference__Group_1__1__Impl19850 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1__219880 = new BitSet(new long[]{0x0000080000080000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3_in_rule__JvmParameterizedTypeReference__Group_1__219883 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0_in_rule__JvmParameterizedTypeReference__Group_1__2__Impl19910 = new BitSet(new long[]{0x0000080000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1__319941 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl19969 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__020008 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__020011 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl20039 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__120070 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl20097 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__020131 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000003L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__020134 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__120192 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000014L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__120195 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_65_in_rule__JvmWildcardTypeReference__Group__1__Impl20223 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__220254 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl20281 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__020318 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__020321 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_66_in_rule__JvmUpperBound__Group__0__Impl20349 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__120380 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl20407 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__020441 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__020444 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_67_in_rule__JvmUpperBoundAnded__Group__0__Impl20472 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__120503 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl20530 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__020564 = new BitSet(new long[]{0x0000100000000020L,0x0000000000000001L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__020567 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_68_in_rule__JvmLowerBound__Group__0__Impl20595 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__120626 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl20653 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__020689 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__020692 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl20719 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__120748 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl20775 = new BitSet(new long[]{0x0000040000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__020810 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__020813 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_rule__QualifiedName__Group_1__0__Impl20841 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__120872 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl20899 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__0_in_rule__FontLiteral__UnorderedGroup_220933 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__ItalicAssignment_2_0_in_rule__FontLiteral__UnorderedGroup_2__Impl21020 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__BoldAssignment_2_1_in_rule__FontLiteral__UnorderedGroup_2__Impl21111 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__SizeAssignment_2_2_in_rule__FontLiteral__UnorderedGroup_2__Impl21202 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__021261 = new BitSet(new long[]{0x0000010000004072L,0x0000000000000060L});
+    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__1_in_rule__FontLiteral__UnorderedGroup_2__021264 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__121289 = new BitSet(new long[]{0x0000010000004072L,0x0000000000000060L});
+    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__2_in_rule__FontLiteral__UnorderedGroup_2__121292 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__Impl_in_rule__FontLiteral__UnorderedGroup_2__221317 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStyleRule_in_rule__StyleSheet__RulesAssignment21351 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSelector_in_rule__StyleRule__SelectorsAssignment_021382 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSetting_in_rule__StyleRule__SettingsAssignment_221413 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFilter_in_rule__Selector__FilterAssignment_121444 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__TypeSelector__TypeAssignment21479 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__Filter__ConditionAssignment_121514 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFeatureReference_in_rule__Setting__ParamsAssignment_121545 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpAssign_in_rule__Setting__FeatureAssignment_221580 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__Setting__ParamsAssignment_321615 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__FeatureReference__FeatureAssignment21650 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStringOrID_in_rule__FontLiteral__NameAssignment_1_0_121685 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_69_in_rule__FontLiteral__ItalicAssignment_2_021721 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_70_in_rule__FontLiteral__BoldAssignment_2_121765 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSizeLiteral_in_rule__FontLiteral__SizeAssignment_2_221804 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__ColorConstant__NameAssignment21835 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__RGB__ColorAssignment_121866 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__SizeLiteral__ValueAssignment_021897 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSizeUnit_in_rule__SizeLiteral__UnitAssignment_121928 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpAssign_in_rule__XAssignment__FeatureAssignment_1_121963 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_1_221998 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_122033 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_222068 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_122103 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_222138 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_122173 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_222208 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XRelationalExpression__TypeAssignment_1_0_222243 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_122282 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_222317 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_122352 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_222387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_122422 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_222457 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_122492 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_222527 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_122562 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_rule__XUnaryOperation__OperandAssignment_0_222597 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_122628 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_122659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__XMemberFeatureCall__FeatureAssignment_1_322694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_022729 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_122760 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_022791 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_1_122822 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XClosure__ExpressionAssignment_322853 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_122884 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_rule__XCastedExpression__TargetAssignment_322915 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_222946 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_422977 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_5_123008 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_123039 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_323070 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_0_023101 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXBlockExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_123132 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_023163 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_123194 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_023225 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXBlockExpression_in_rule__XCasePart__ThenAssignment_3_123256 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_223287 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_423318 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_623349 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_223380 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_423411 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_123442 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_423473 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_023504 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_123535 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__XVariableDeclaration__NameAssignment_223566 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_423597 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_023628 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__JvmFormalParameter__NameAssignment_123659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_123690 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_2_123721 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__XFeatureCall__FeatureAssignment_123756 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_023791 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_123822 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_rule__XConstructorCall__TypeAssignment_123853 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_023884 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_1_123915 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_71_in_rule__XBooleanLiteral__IsTrueAssignment_123951 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__XIntLiteral__ValueAssignment23990 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment24021 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_024056 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_124091 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_124122 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_024153 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_124184 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_124215 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_224246 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_424277 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_124308 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_124339 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_224370 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_024405 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_124440 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_124471 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_024502 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_124533 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_124564 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_124595 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_124626 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFontLiteral_in_synpred3_InternalXcss4251 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleColorLiteral_in_synpred4_InternalXcss4268 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__Group_1_0__0_in_synpred5_InternalXcss4317 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleCssLiterals_in_synpred8_InternalXcss4468 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXClosure_in_synpred9_InternalXcss4485 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXIntLiteral_in_synpred11_InternalXcss4519 = new BitSet(new long[]{0x0000000000000002L});
@@ -37356,15 +37840,17 @@ public class InternalXcssParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XAdditiveExpression__Group_1__0_in_synpred61_InternalXcss9574 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMultiplicativeExpression__Group_1__0_in_synpred62_InternalXcss9879 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1__0_in_synpred63_InternalXcss10368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XMemberFeatureCall__Group_1_4__0_in_synpred65_InternalXcss10674 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIfExpression__Group_5__0_in_synpred71_InternalXcss12783 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__SwitchAssignment_1_in_synpred72_InternalXcss13041 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_synpred87_InternalXcss18420 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_synpred88_InternalXcss18480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_synpred94_InternalXcss20772 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__0_in_synpred95_InternalXcss20930 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__ItalicAssignment_2_0_in_synpred96_InternalXcss21017 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__BoldAssignment_2_1_in_synpred97_InternalXcss21108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__1_in_synpred98_InternalXcss21261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__2_in_synpred99_InternalXcss21289 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__0_in_synpred82_InternalXcss16234 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_synpred88_InternalXcss18423 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_synpred89_InternalXcss18483 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_synpred95_InternalXcss20775 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__0_in_synpred96_InternalXcss20933 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__ItalicAssignment_2_0_in_synpred97_InternalXcss21020 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__BoldAssignment_2_1_in_synpred98_InternalXcss21111 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__1_in_synpred99_InternalXcss21264 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FontLiteral__UnorderedGroup_2__2_in_synpred100_InternalXcss21292 = new BitSet(new long[]{0x0000000000000002L});
 
 }

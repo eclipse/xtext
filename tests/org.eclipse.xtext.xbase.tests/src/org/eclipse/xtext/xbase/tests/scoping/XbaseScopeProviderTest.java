@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.scoping;
 
-import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -19,9 +20,18 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
  */
 public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 	
-	public void testBinaryOperation_1() throws Exception {
-		XBinaryOperation bop = (XBinaryOperation) expression("new java.util.List<String>() += 'foo'");
-		assertEquals("java.util.List.add(E)",bop.getFeature().getCanonicalName());
+	public void testAssignment_1() throws Exception {
+		XAssignment assignment = (XAssignment) expression("new java.util.List<String>() += 'foo'");
+		assertEquals("java.util.List.add(E)",assignment.getFeature().getCanonicalName());
+	}
+	
+	public void testLocalVarAssignment_1() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var x = ''; x = '' }");
+		XAssignment assignment = (XAssignment) block.getExpressions().get(1);
+		assertTrue(String.valueOf(assignment.getAssignable()), assignment.getAssignable() instanceof XFeatureCall);
+		assertTrue(String.valueOf(((XAbstractFeatureCall) assignment.getAssignable()).getFeature()), assignment.getAssignable() instanceof XFeatureCall);
+		assertTrue(String.valueOf(assignment.getFeature()), assignment.getFeature() instanceof XVariableDeclaration);
+		assertSame(assignment.getFeature(), ((XAbstractFeatureCall) assignment.getAssignable()).getFeature());
 	}
 	
 	public void testImplicitThis_1() throws Exception {

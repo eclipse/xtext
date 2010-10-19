@@ -1166,6 +1166,79 @@ public interface XbasePackage extends EPackage
 	 */
 	int XCATCH_CLAUSE_FEATURE_COUNT = 2;
 
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl <em>XAssignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XAssignmentImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAssignment()
+	 * @generated
+	 */
+	int XASSIGNMENT = 27;
+
+	/**
+	 * The feature id for the '<em><b>Feature Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__FEATURE_NAME = XABSTRACT_FEATURE_CALL__FEATURE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__ARGUMENTS = XABSTRACT_FEATURE_CALL__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__FEATURE = XABSTRACT_FEATURE_CALL__FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__TYPE_ARGUMENTS = XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Assignable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__ASSIGNABLE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT__VALUE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>XAssignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XASSIGNMENT_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XExpression <em>XExpression</em>}'.
@@ -1944,6 +2017,38 @@ public interface XbasePackage extends EPackage
 	EReference getXCatchClause_DeclaredParam();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XAssignment <em>XAssignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XAssignment</em>'.
+	 * @see org.eclipse.xtext.xbase.XAssignment
+	 * @generated
+	 */
+	EClass getXAssignment();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XAssignment#getAssignable <em>Assignable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Assignable</em>'.
+	 * @see org.eclipse.xtext.xbase.XAssignment#getAssignable()
+	 * @see #getXAssignment()
+	 * @generated
+	 */
+	EReference getXAssignment_Assignable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XAssignment#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see org.eclipse.xtext.xbase.XAssignment#getValue()
+	 * @see #getXAssignment()
+	 * @generated
+	 */
+	EReference getXAssignment_Value();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2603,6 +2708,32 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XCATCH_CLAUSE__DECLARED_PARAM = eINSTANCE.getXCatchClause_DeclaredParam();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl <em>XAssignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XAssignmentImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXAssignment()
+		 * @generated
+		 */
+		EClass XASSIGNMENT = eINSTANCE.getXAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Assignable</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XASSIGNMENT__ASSIGNABLE = eINSTANCE.getXAssignment_Assignable();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XASSIGNMENT__VALUE = eINSTANCE.getXAssignment_Value();
 
 	}
 

@@ -142,15 +142,15 @@ ruleXAssignment returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        temp=factory.create(grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getXAssignmentAccess().getXAssignmentAssignableAction_1_0().getType().getClassifier());
         try {
-        	factory.set(temp, "leftOperand", $current, null /*ParserRule*/, currentNode);
+        	factory.set(temp, "assignable", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
         	handleValueConverterException(vce);
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getXAssignmentAccess().getXAssignmentAssignableAction_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -178,9 +178,9 @@ ruleXAssignment returns [EObject current=null]
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXAssignmentAccess().getRightOperandXAssignmentParserRuleCall_1_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXAssignmentAccess().getValueXAssignmentParserRuleCall_1_2_0(), currentNode); 
 	    }
-		lv_rightOperand_3_0=ruleXAssignment		{
+		lv_value_3_0=ruleXAssignment		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXAssignmentRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -188,8 +188,8 @@ ruleXAssignment returns [EObject current=null]
 	        try {
 	       		set(
 	       			$current, 
-	       			"rightOperand",
-	        		lv_rightOperand_3_0, 
+	       			"value",
+	        		lv_value_3_0, 
 	        		"XAssignment", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2782,11 +2782,11 @@ ruleXBlockExpression returns [EObject current=null]
 	    }
 
 )
-)	otherlv_3=';' 
+)(	otherlv_3=';' 
     {
     	createLeafNode(otherlv_3, grammarAccess.getXBlockExpressionAccess().getSemicolonKeyword_2_1(), null);
     }
-)*	otherlv_4='}' 
+)?)*	otherlv_4='}' 
     {
     	createLeafNode(otherlv_4, grammarAccess.getXBlockExpressionAccess().getRightCurlyBracketKeyword_3(), null);
     }
