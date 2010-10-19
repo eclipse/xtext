@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
@@ -32,6 +33,7 @@ import com.google.common.collect.Iterables;
  * Abstract super class of all local scope providers that allow references to Java types.
  *  
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 
@@ -61,7 +63,7 @@ public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 
 	public abstract IJvmTypeProvider.Factory getTypeProviderFactory();
 	
-	public IScope createMemberScope(JvmType containerType, Predicate<JvmMember> filter, Function<JvmMember, String> names, IScope outer) {
+	public IScope createMemberScope(JvmType containerType, Predicate<JvmMember> filter, Function<JvmMember, QualifiedName> names, IScope outer) {
 		if (containerType == null || containerType.eIsProxy())
 			return outer;		
 		if (containerType instanceof JvmDeclaredType) {

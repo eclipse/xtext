@@ -11,6 +11,7 @@ package org.eclipse.xtext.linking.lazy;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -29,7 +30,7 @@ public class LazyLinkingTestLanguageScopeProvider extends AbstractDeclarativeSco
 	public IScope scope_Property(Type t, EReference ref) {
 		return new SimpleScope(Iterables.transform(t.getExtends().getProperties(), new Function<Property, IEObjectDescription>(){
 			public IEObjectDescription apply(Property param) {
-				return EObjectDescription.create(param.getName(), param);
+				return EObjectDescription.create(QualifiedName.create(param.getName()), param);
 			}
 		}));
 	}

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.StringInputStream;
@@ -39,12 +40,12 @@ public class Bug318343Test extends AbstractXtextTests {
 
 	public void testScopeContainsT1() throws Exception {
 		IScope scope = globalScopeProvider.getScope(resource2.getContents().get(0), LangATestLanguagePackage.Literals.TYPE__EXTENDS);
-		assertNotNull(scope.getContentByName("t1"));
+		assertNotNull(scope.getContentByName(QualifiedName.create("t1")));
 	}
 	
 	public void testScopeContainsNotT2() throws Exception {
 		IScope scope = globalScopeProvider.getScope(resource2.getContents().get(0), LangATestLanguagePackage.Literals.TYPE__EXTENDS);
-		assertNull(scope.getContentByName("t2"));
+		assertNull(scope.getContentByName(QualifiedName.create("t2")));
 	}
 	@Override
 	protected void tearDown() throws Exception {

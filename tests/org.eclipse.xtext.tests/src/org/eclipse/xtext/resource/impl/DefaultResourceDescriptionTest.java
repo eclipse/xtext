@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.google.common.collect.Lists;
@@ -58,9 +59,9 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 		resource.getContents().add(pack);
 
 		delegate = new IQualifiedNameProvider.AbstractImpl() {
-			public String getQualifiedName(EObject obj) {
+			public QualifiedName getQualifiedName(EObject obj) {
 				if (obj instanceof ENamedElement)
-					return ((ENamedElement) obj).getName();
+					return QualifiedName.create(((ENamedElement) obj).getName());
 				return null;
 			}
 		};
@@ -68,9 +69,9 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 
 	public void testGetExportedObject_1() throws Exception {
 		delegate = new IQualifiedNameProvider.AbstractImpl() {
-			public String getQualifiedName(EObject obj) {
+			public QualifiedName getQualifiedName(EObject obj) {
 				if (obj instanceof EPackage)
-					return ((EPackage) obj).getName();
+					return QualifiedName.create(((EPackage) obj).getName());
 				return null;
 			}
 		};
@@ -78,15 +79,15 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 		Iterable<IEObjectDescription> iterable = description.getExportedObjects();
 		ArrayList<IEObjectDescription> list = Lists.newArrayList(iterable);
 		assertEquals(1, list.size());
-		assertEquals(pack.getName(), list.get(0).getName());
+		assertEquals(pack.getName(), list.get(0).getName().toString());
 		assertEquals(pack, list.get(0).getEObjectOrProxy());
 	}
 
 	public void testGetExportedObject_2() throws Exception {
 		delegate = new IQualifiedNameProvider.AbstractImpl() {
-			public String getQualifiedName(EObject obj) {
+			public QualifiedName getQualifiedName(EObject obj) {
 				if (obj instanceof EClassifier)
-					return ((EClassifier) obj).getName();
+					return QualifiedName.create(((EClassifier) obj).getName());
 				return null;
 			}
 		};
@@ -94,9 +95,9 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 		Iterable<IEObjectDescription> iterable = description.getExportedObjects();
 		ArrayList<IEObjectDescription> list = Lists.newArrayList(iterable);
 		assertEquals(2, list.size());
-		assertEquals(eClass.getName(), list.get(0).getName());
+		assertEquals(eClass.getName(), list.get(0).getName().toString());
 		assertEquals(eClass, list.get(0).getEObjectOrProxy());
-		assertEquals(dtype.getName(), list.get(1).getName());
+		assertEquals(dtype.getName(), list.get(1).getName().toString());
 		assertEquals(dtype, list.get(1).getEObjectOrProxy());
 	}
 
@@ -104,24 +105,24 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 		Iterable<IEObjectDescription> iterable = description.getExportedObjects();
 		ArrayList<IEObjectDescription> list = Lists.newArrayList(iterable);
 		assertEquals(3, list.size());
-		assertEquals(pack.getName(), list.get(0).getName());
+		assertEquals(pack.getName(), list.get(0).getName().toString());
 		assertEquals(pack, list.get(0).getEObjectOrProxy());
-		assertEquals(eClass.getName(), list.get(1).getName());
+		assertEquals(eClass.getName(), list.get(1).getName().toString());
 		assertEquals(eClass, list.get(1).getEObjectOrProxy());
-		assertEquals(dtype.getName(), list.get(2).getName());
+		assertEquals(dtype.getName(), list.get(2).getName().toString());
 		assertEquals(dtype, list.get(2).getEObjectOrProxy());
 	}
 
 	public void testGetExportedEObjects_EClass_String() throws Exception {
-		assertContains(description.getExportedObjects(pack.eClass(), pack.getName()), pack);
-		assertContains(description.getExportedObjects(pack.eClass(), "foo"));
-		assertContains(description.getExportedObjects(eClass.eClass(), "foo"));
+		assertContains(description.getExportedObjects(pack.eClass(), QualifiedName.create(pack.getName())), pack);
+		assertContains(description.getExportedObjects(pack.eClass(), QualifiedName.create("foo")));
+		assertContains(description.getExportedObjects(eClass.eClass(), QualifiedName.create("foo")));
 	}
 	
 	public void testGetExportedEObjectsIgnoreCase() throws Exception {
-		assertContains(description.getExportedObjectsIgnoreCase(pack.eClass(), pack.getName().toUpperCase()), pack);
-		assertContains(description.getExportedObjectsIgnoreCase(pack.eClass(), "foo".toUpperCase()));
-		assertContains(description.getExportedObjectsIgnoreCase(eClass.eClass(), "foo".toUpperCase()));
+		assertContains(description.getExportedObjectsIgnoreCase(pack.eClass(), QualifiedName.create(pack.getName().toUpperCase())), pack);
+		assertContains(description.getExportedObjectsIgnoreCase(pack.eClass(), QualifiedName.create("foo").toUpperCase()));
+		assertContains(description.getExportedObjectsIgnoreCase(eClass.eClass(), QualifiedName.create("foo").toUpperCase()));
 	}
 	
 	public void testGetExportedEObjects_EClass() throws Exception {
@@ -151,12 +152,24 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 		assertEquals(collection.size(),expectedContents.length);
 	}
 
-	public String getQualifiedName(EObject obj) {
+	public QualifiedName getQualifiedName(EObject obj) {
 		return delegate.getQualifiedName(obj);
 	}
 
-	public String apply(EObject from) {
+	public QualifiedName apply(EObject from) {
 		return delegate.apply(from);
+	}
+
+	public String getDelimiter() {
+		return delegate.getDelimiter();
+	}
+
+	public QualifiedName toValue(String qualifiedNameAsString) {
+		return delegate.toValue(qualifiedNameAsString);
+	}
+
+	public String toString(QualifiedName qualifiedName) {
+		return delegate.toString();
 	}
 
 }

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -25,20 +26,19 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public class EcoreResourceDescription extends AbstractResourceDescription {
 	
 	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 * 
 	 * TODO : come up with a better qualified name contract for ecore.
 	 * TODO : export epackages with their nsURI as well.
-	 * 
+	 * TODO : ponder what is a qualified name for an ecore element?
 	 */
 	private static final class Switch extends EcoreSwitch<IEObjectDescription> {
 		@Override
 		public IEObjectDescription caseENamedElement(ENamedElement object) {
-			return new EObjectDescription(object.getName(), object, null);
+			return EObjectDescription.create(QualifiedName.create(object.getName()), object, null);
 		}
 	}
 
@@ -65,7 +65,7 @@ public class EcoreResourceDescription extends AbstractResourceDescription {
 		return result;
 	}
 
-	public Iterable<String> getImportedNames() {
+	public Iterable<QualifiedName> getImportedNames() {
 		return Collections.emptyList();
 	}
 

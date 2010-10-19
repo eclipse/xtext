@@ -8,14 +8,16 @@
 package org.eclipse.xtext.common.types.xtext;
 
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein - introduced QualifiedName
  */
 public class ClasspathBasedTypeScope extends AbstractTypeScope {
 
-	public ClasspathBasedTypeScope(ClasspathTypeProvider typeProvider) {
-		super(typeProvider);
+	public ClasspathBasedTypeScope(ClasspathTypeProvider typeProvider, IQualifiedNameProvider qualifiedNameProvider) {
+		super(typeProvider, qualifiedNameProvider);
 	}
 	
 }
