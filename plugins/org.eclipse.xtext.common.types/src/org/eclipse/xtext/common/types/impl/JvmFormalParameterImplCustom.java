@@ -13,7 +13,7 @@ public class JvmFormalParameterImplCustom extends JvmFormalParameterImpl {
 	public String getCanonicalName() {
 		if (parameterType != null)
 			return getParameterType().getCanonicalName();
-		return getName();
+		return null;
 	}
 
 }
