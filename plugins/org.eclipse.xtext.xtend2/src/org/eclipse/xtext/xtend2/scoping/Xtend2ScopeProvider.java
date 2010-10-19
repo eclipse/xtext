@@ -9,7 +9,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.util.JvmTypes;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -32,13 +33,15 @@ import com.google.inject.Inject;
 public class Xtend2ScopeProvider extends XbaseScopeProvider {
 
 	@Inject
-	private JvmTypes jvmTypes;
+	private TypesFactory factory;
 	
 	@Override
 	protected IScope createLocalVarScope(EObject context, EReference reference, Predicate<EObject> featurePredicate, IScope parent) {
 		if (context instanceof XtendClass) {
 			XtendClass clazz = (XtendClass) context;
-			return createFeatureScopeForTypeRef(jvmTypes.createJvmTypeReference(clazz), featurePredicate, IScope.NULLSCOPE);
+			JvmParameterizedTypeReference typeReference = factory.createJvmParameterizedTypeReference();
+			typeReference.setType(clazz);
+			return createFeatureScopeForTypeRef(typeReference, featurePredicate, IScope.NULLSCOPE);
 		} else if  (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
 			EList<JvmFormalParameter> list = func.getParameters();
