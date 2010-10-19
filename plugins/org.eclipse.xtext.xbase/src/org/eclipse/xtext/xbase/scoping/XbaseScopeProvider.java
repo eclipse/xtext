@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -157,6 +158,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (context.eContainer() instanceof XForLoopExpression) {
 			XForLoopExpression loop = (XForLoopExpression) context.eContainer();
 			parentScope = new SingletonScope(EObjectDescription.create(loop.getDeclaredParam().getName(), loop.getDeclaredParam()), parentScope);
+		}
+		if (context.eContainer() instanceof XCatchClause) {
+			XCatchClause catchClause = (XCatchClause) context.eContainer();
+			parentScope = new SingletonScope(EObjectDescription.create(catchClause.getDeclaredParam().getName(), catchClause.getDeclaredParam()), parentScope);
 		}
 		if (context instanceof XClosure) {
 			parentScope = createLocalVarScopeForClosure((XClosure) context, featurePredicate, parentScope);

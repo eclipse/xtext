@@ -43,4 +43,16 @@ public abstract class AbstractXbaseInterpreterTest extends AbstractXbaseTestCase
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public void assertEvaluatesWithException(Class<? extends Throwable> expectatedException, String model) {
+		try {
+			XExpression expression = expression(model);
+			IEvaluationResult result = interpreter.evaluate(expression);
+			assertTrue("Expected " + expectatedException.getSimpleName() + " but got: " + result.getException(), expectatedException.isInstance(result.getException()));
+		} catch(Exception e) {
+			if (e instanceof RuntimeException)
+				throw (RuntimeException)e;
+			throw new RuntimeException(e);
+		}
+	}
 }
