@@ -10,13 +10,8 @@ package org.eclipse.xtext.xbase.tests.testdata;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class FieldAccess {
+public class ExceptionSubclass extends Exception {
 
-	public String stringField;
-	public String finalField;
-	
-	public FieldAccess() {
-		finalField = "finalField";
-	}
-	
+	private static final long serialVersionUID = 1L;
+
 }

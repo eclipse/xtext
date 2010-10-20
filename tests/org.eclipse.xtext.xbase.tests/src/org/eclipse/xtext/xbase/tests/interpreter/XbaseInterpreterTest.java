@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.tests.interpreter;
 import java.util.Collections;
 import java.util.Stack;
 
+import org.eclipse.xtext.xbase.tests.testdata.ExceptionSubclass;
+
 import com.google.inject.internal.Lists;
 
 /**
@@ -122,6 +124,10 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 //				"}");
 //	}
 
+	public void testForLoop_03() {
+		assertEvaluatesWithException(ClassCastException.class, "for(x: 'abc') null");
+	}
+	
 	public void testWhileLoop_01() {
 		assertEvaluatesTo("newValue", 
 				"{\n" +
@@ -202,6 +208,11 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 				"  var fieldAccess = new org.eclipse.xtext.xbase.tests.testdata.FieldAccess()" +
 				"  fieldAccess.stringField" +
 				"}");
+	}
+	
+	public void testMemberFeatureCall_07() {
+		assertEvaluatesTo("finalField", 
+				"new org.eclipse.xtext.xbase.tests.testdata.FieldAccess().finalField");
 	}
 	
 	public void testSwitchExpression_01() {
@@ -299,4 +310,15 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 		assertEvaluatesTo(new Stack<Object>(), "new java.util.Stack()");
 	}
 	
+	public void testThrowExpression_01() {
+		assertEvaluatesWithException(ExceptionSubclass.class, "throw new org.eclipse.xtext.xbase.tests.testdata.ExceptionSubclass()");
+	}
+	
+	public void testThrowExpression_02() {
+		assertEvaluatesWithException(ClassCastException.class, "throw 'literal'");
+	}
+	
+	public void testThrowExpression_03() {
+		assertEvaluatesWithException(NullPointerException.class, "throw null");
+	}
 }

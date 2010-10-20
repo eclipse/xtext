@@ -48,6 +48,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -243,6 +244,19 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			return new DefaultEvaluationResult(null, e);
 		}
 		return result;
+	}
+	
+	public IEvaluationResult _evaluateThrowExpression(XThrowExpression throwExpression, IEvaluationContext context) {
+		IEvaluationResult thrown = evaluate(throwExpression.getExpression(), context);
+		if (thrown.getException() != null)
+			return thrown;
+		if (thrown.getResult() == null) {
+			return createNullPointerResult(throwExpression, "throwable expression evaluated to 'null'");
+		}
+		if (!(thrown.getResult() instanceof Throwable)) {
+			return createClassCastResult(throwExpression.getExpression(), thrown, Throwable.class);
+		}
+		return new DefaultEvaluationResult(null, (Throwable)thrown.getResult());
 	}
 	
 	public IEvaluationResult _evaluateTryCatchFinallyExpression(XTryCatchFinallyExpression tryCatchFinally, IEvaluationContext context) {
