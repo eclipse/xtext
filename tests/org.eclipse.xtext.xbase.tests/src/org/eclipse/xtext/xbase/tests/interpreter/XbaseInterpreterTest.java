@@ -403,6 +403,40 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 				"  java.lang.Character c1, c2, c3, c4, c5, c6, c7|c1, 'abcdefg'.toCharArray)");
 	}
 	
+	public void testClosure_12() {
+		assertEvaluatesTo("literal", 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().useProvider(|'literal')");
+	}
+	
+	public void testClosure_13() {
+		assertEvaluatesTo("literal", 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().useSupplier(|'literal')");
+	}
+	
+	public void testClosure_14() {
+		assertEvaluatesTo("LITERAL", 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().useGoogleCollectFunction(java.lang.String s|s.toUpperCase, 'literal')");
+	}
+	
+	public void testClosure_15() {
+		assertEvaluatesTo(Boolean.TRUE, 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().useGoogleCollectPredicate(java.lang.String s|'literal'.equals(s), 'literal')");
+	}
+	
+	public void testClosure_16() {
+		assertEvaluatesTo(Boolean.FALSE, 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().useGoogleCollectPredicate(java.lang.String s|'literal'.equals(s), 'false')");
+	}
+	
+	public void testClosure_17() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var client = new org.eclipse.xtext.xbase.tests.testdata.ClosureClient()" +
+				"  var fun = client.getIdentityFunction" +
+				"  client.useGoogleCollectFunction(fun, 'literal')" +
+				"}");
+	}
+	
 	public void testArrayConversion_01() {
 		assertEvaluatesTo("LITERAL", 
 				"{" +

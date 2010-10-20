@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.interpreter.impl;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -21,7 +20,7 @@ import org.eclipse.xtext.xbase.lib.Functions.FunctionX;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClosureInvocationHandler implements InvocationHandler {
+public class ClosureInvocationHandler extends AbstractClosureInvocationHandler {
 
 	private final IExpressionInterpreter interpreter;
 
@@ -35,17 +34,8 @@ public class ClosureInvocationHandler implements InvocationHandler {
 		this.interpreter = interpreter;
 	}
 	
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		if (isEquals(method)) {
-			return proxy == args[0];
-		}
-		if (isHashCode(method)) {
-			return System.identityHashCode(proxy);
-		}
-		if (isToString(method)) {
-			Class<?> interfaceType = proxy.getClass().getInterfaces()[0];
-			return "Proxy for " + interfaceType.getName() + ": "+ closure.toString();
-		}
+	@Override
+	protected Object doInvoke(Method method, Object[] args) throws Throwable {
 		IEvaluationContext forkedContext = context.fork();
 		if (args != null) {
 			if (!FunctionX.class.equals(method.getDeclaringClass())) {
@@ -70,21 +60,11 @@ public class ClosureInvocationHandler implements InvocationHandler {
 			i++;
 		}
 	}
-
-	protected boolean isHashCode(Method method) {
-		return "hashCode".equals(method.getName()) 
-			&& method.getParameterTypes().length == 0;
-	}
 	
-	protected boolean isToString(Method method) {
-		return "toString".equals(method.getName()) 
-			&& method.getParameterTypes().length == 0;
-	}
-
-	protected boolean isEquals(Method method) {
-		return "equals".equals(method.getName())
-			&& method.getParameterTypes().length == 1
-			&& Object.class.equals(method.getParameterTypes()[0]);
+	@Override
+	protected String proxyToString(Object proxy) {
+		Class<?> interfaceType = proxy.getClass().getInterfaces()[0];
+		return "Proxy for " + interfaceType.getName() + ": "+ closure.toString();
 	}
 
 }
