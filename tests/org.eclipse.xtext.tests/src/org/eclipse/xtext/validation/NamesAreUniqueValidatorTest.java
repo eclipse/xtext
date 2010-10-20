@@ -59,7 +59,7 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 			@Override
 			public IResourceDescription getResourceDescription(Resource resource) {
 				DefaultResourceDescription resourceDescription = new DefaultResourceDescription(resource, new IQualifiedNameProvider.AbstractImpl() {
-					public QualifiedName getQualifiedName(EObject obj) {
+					public QualifiedName getFullyQualifiedName(EObject obj) {
 						return QualifiedName.create(SimpleAttributeResolver.NAME_RESOLVER.getValue(obj));
 					}
 				});

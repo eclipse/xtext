@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.namespace.QName;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -21,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
@@ -51,7 +54,8 @@ import com.google.inject.Inject;
  */
 public class XbaseScopeProvider extends XtypeScopeProvider {
 
-	public static final String THIS = "this";
+	public static final QualifiedName THIS = QualifiedName.create("this");
+	public static final QualifiedName EQUALS = QualifiedName.create("=");
 
 	@Inject
 	private OperatorMapping operatorMapping;
@@ -93,7 +97,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			
 			Predicate<EObject> featurePredicate = createCallableFeaturePredicate(call, null);
 			IScope parentScope = createLocalVarScope(context.eContainer(), reference, featurePredicate);
-			Map<String, IEObjectDescription> implicitThisScope = Maps.newHashMap();
+			Map<QualifiedName, IEObjectDescription> implicitThisScope = Maps.newHashMap();
 			IScope localVariableScope = createLocalVarScope(context, reference, featurePredicate, new MapBasedScope(
 					parentScope, implicitThisScope));
 			IEObjectDescription thisVariable = localVariableScope.getContentByName(THIS);
@@ -123,9 +127,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (assignable instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) assignable;
 			if (featureCall.getFeature() instanceof XVariableDeclaration)
-				return new SingletonScope(EObjectDescription.create("=", featureCall.getFeature()), parent);
+				return new SingletonScope(EObjectDescription.create(EQUALS, featureCall.getFeature()), parent);
 			if (featureCall.getFeature() instanceof JvmFormalParameter)
-				return new SingletonScope(EObjectDescription.create("=", featureCall.getFeature()), parent);
+				return new SingletonScope(EObjectDescription.create(EQUALS, featureCall.getFeature()), parent);
 		}
 		return parent;
 		
@@ -171,7 +175,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	protected IScope createLocalVarScopeForBlock(XBlockExpression block, int indexOfContextExpressionInBlock,
 			Predicate<EObject> featurePredicate, IScope parentScope) {
-		Map<String, IEObjectDescription> vars = Maps.newHashMap();
+		Map<QualifiedName, IEObjectDescription> vars = Maps.newHashMap();
 		for (int i = 0; i < indexOfContextExpressionInBlock; i++) {
 			XExpression expression = block.getExpressions().get(i);
 			if (expression instanceof XVariableDeclaration) {
@@ -190,7 +194,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected IScope createLocalVarScopeForClosure(XClosure closure, Predicate<EObject> featurePredicate,
 			IScope parentScope) {
 		EList<JvmFormalParameter> params = closure.getFormalParameters();
-		Map<String, IEObjectDescription> descriptions = Maps.newHashMap();
+		Map<QualifiedName, IEObjectDescription> descriptions = Maps.newHashMap();
 		for (JvmFormalParameter p : params) {
 			if (featurePredicate.apply(p)) {
 				EObjectDescription desc = createEObjectDescription(p);
@@ -211,13 +215,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				parent = createFeatureScopeForTypeRef(jvmTypeReference, featurePredicate, parent);
 			}
 		}
-		HashMap<String, IEObjectDescription> map = createFeatureMap(jvmTypeRef, featurePredicate);
+		HashMap<QualifiedName, IEObjectDescription> map = createFeatureMap(jvmTypeRef, featurePredicate);
 		return new MapBasedScope(parent, map);
 	}
 
-	protected HashMap<String, IEObjectDescription> createFeatureMap(JvmTypeReference jvmTypeRef,
+	protected HashMap<QualifiedName, IEObjectDescription> createFeatureMap(JvmTypeReference jvmTypeRef,
 			Predicate<EObject> featurePredicate) {
-		HashMap<String, IEObjectDescription> map = Maps.newHashMap();
+		HashMap<QualifiedName, IEObjectDescription> map = Maps.newHashMap();
 		if (jvmTypeRef.getType() instanceof JvmGenericType) {
 			JvmGenericType genType = (JvmGenericType) jvmTypeRef.getType();
 			List<JvmFeature> features = EcoreUtil2.typeSelect(genType.getMembers(), JvmFeature.class);

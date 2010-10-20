@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import org.eclipse.xtext.naming.SimpleNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 
 import com.google.inject.Singleton;
 
@@ -15,7 +15,7 @@ import com.google.inject.Singleton;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @Singleton
-public class XtextQualifiedNameProvider extends SimpleNameProvider {
+public class XtextQualifiedNameConverter extends IQualifiedNameConverter.DefaultImpl {
 
 	@Override
 	public String getDelimiter() {

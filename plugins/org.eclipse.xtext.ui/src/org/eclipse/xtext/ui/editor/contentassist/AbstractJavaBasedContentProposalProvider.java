@@ -27,7 +27,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -56,20 +56,20 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 
 		private final ContentAssistContext contentAssistContext;
 		private final String ruleName;
-		private final IQualifiedNameProvider qualifiedNameProvider;
+		private final IQualifiedNameConverter qualifiedNameConverter;
 
 		protected DefaultProposalCreator(ContentAssistContext contentAssistContext, String ruleName,
-				IQualifiedNameProvider qualifiedNameProvider) {
+				IQualifiedNameConverter qualifiedNameConverter) {
 			this.contentAssistContext = contentAssistContext;
 			this.ruleName = ruleName;
-			this.qualifiedNameProvider = qualifiedNameProvider;
+			this.qualifiedNameConverter = qualifiedNameConverter;
 		}
 
 		public ICompletionProposal apply(IEObjectDescription candidate) {
 			if (candidate == null)
 				return null;
 			ICompletionProposal result = null;
-			String proposal = qualifiedNameProvider.toString(candidate.getName());
+			String proposal = qualifiedNameConverter.toString(candidate.getName());
 			if (ruleName != null) {
 				try {
 					proposal = getValueConverter().toString(proposal, ruleName);
@@ -80,8 +80,8 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			}
 			EObject objectOrProxy = candidate.getEObjectOrProxy();
 			StyledString displayString = getStyledDisplayString(objectOrProxy,
-					qualifiedNameProvider.toString(candidate.getQualifiedName()),
-					qualifiedNameProvider.toString(candidate.getName()));
+					qualifiedNameConverter.toString(candidate.getQualifiedName()),
+					qualifiedNameConverter.toString(candidate.getName()));
 			Image image = getImage(objectOrProxy);
 			result = createCompletionProposal(proposal, displayString, image, contentAssistContext);
 			getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());
@@ -207,7 +207,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName,
 			ContentAssistContext contentAssistContext) {
-		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameProvider());
+		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter());
 	}
 
 	private Set<List<Object>> handledArguments;

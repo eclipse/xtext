@@ -22,7 +22,7 @@ import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
@@ -37,7 +37,7 @@ import com.google.inject.Inject;
 public class Generator implements IXtextBuilderParticipant {
 
 	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider; 
+	private IQualifiedNameConverter qualifiedNameConverter; 
 	
 	public void build(final IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		IJavaProject javaProject = JavaCore.create(context.getBuiltProject());
@@ -70,7 +70,7 @@ public class Generator implements IXtextBuilderParticipant {
 				Iterable<IEObjectDescription> iterable = delta.getOld().getExportedObjects(
 						DomainmodelPackage.Literals.ENTITY);
 				for (IEObjectDescription ieObjectDescription : iterable) {
-					String qualifiedJavaName = qualifiedNameProvider.toString(ieObjectDescription.getQualifiedName());
+					String qualifiedJavaName = qualifiedNameConverter.toString(ieObjectDescription.getQualifiedName());
 					IFile file = createFile(folder, qualifiedJavaName);
 					if (file.exists()) {
 						file.delete(true, monitor);
@@ -86,13 +86,13 @@ public class Generator implements IXtextBuilderParticipant {
 					Set<String> qualifiedJavaNames = Sets.newHashSet(Iterables.transform(newOnes,
 							new Function<IEObjectDescription, String>() {
 								public String apply(IEObjectDescription from) {
-									return qualifiedNameProvider.toString(from.getQualifiedName());
+									return qualifiedNameConverter.toString(from.getQualifiedName());
 								}
 							}));
 
 					for (IEObjectDescription descr : oldOnes) {
 						if (!qualifiedJavaNames.contains(descr.getQualifiedName())) {
-							IFile file = createFile(folder, qualifiedNameProvider.toString(descr.getQualifiedName()));
+							IFile file = createFile(folder, qualifiedNameConverter.toString(descr.getQualifiedName()));
 							if (file.exists()) {
 								file.delete(true, monitor);
 								context.needRebuild();

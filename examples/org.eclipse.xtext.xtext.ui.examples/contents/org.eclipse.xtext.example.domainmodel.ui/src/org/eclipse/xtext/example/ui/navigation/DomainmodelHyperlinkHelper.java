@@ -18,6 +18,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHyperlink;
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.Entity;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -42,7 +43,7 @@ public class DomainmodelHyperlinkHelper extends HyperlinkHelper {
 	private IQualifiedNameProvider qualifiedNameProvider;
 	
 	@Inject
-	private IQualifiedNameProvider qualifiedNameSupport;
+	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	@Inject
 	private Provider<JdtHyperlink> jdtHyperlinkProvider;
@@ -59,7 +60,7 @@ public class DomainmodelHyperlinkHelper extends HyperlinkHelper {
 			if (!nodes.isEmpty()) {
 				AbstractNode node = nodes.get(0);
 				if (node.getOffset() <= offset && node.getOffset() + node.getLength() > offset) {
-					String qualifiedJavaName = qualifiedNameSupport.toString(qualifiedNameProvider.getQualifiedName(eObject));
+					String qualifiedJavaName = qualifiedNameConverter.toString(qualifiedNameProvider.getFullyQualifiedName(eObject));
 					if (resource.getResourceSet() instanceof XtextResourceSet) {
 						XtextResourceSet resourceSet = (XtextResourceSet) resource.getResourceSet();
 						Object uriContext = resourceSet.getClasspathURIContext();

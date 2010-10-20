@@ -77,7 +77,7 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 		while (iterator.hasNext()) {
 			EObject next = iterator.next();
 			if (reference.getEReferenceType().isInstance(next)) {
-				QualifiedName qualifiedName = nameProvider.getQualifiedName(next);
+				QualifiedName qualifiedName = nameProvider.getFullyQualifiedName(next);
 				if (qualifiedName != null && !result.containsKey(qualifiedName)) {
 					IEObjectDescription description = createEObjectDescription(next, qualifiedName);
 					if (description != null)

@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -45,7 +46,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		} else if  (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
 			EList<JvmFormalParameter> list = func.getParameters();
-			Map<String,IEObjectDescription> map = Maps.newHashMap();
+			Map<QualifiedName,IEObjectDescription> map = Maps.newHashMap();
 			for (JvmFormalParameter jvmFormalParameter : list) {
 				IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);
 				map.put(desc.getName(),desc);
@@ -56,6 +57,6 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	}
 
 	protected IEObjectDescription createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {
-		return new EObjectDescription(jvmFormalParameter.getName(), jvmFormalParameter, null);
+		return EObjectDescription.create(QualifiedName.create(jvmFormalParameter.getName()), jvmFormalParameter, null);
 	}
 }

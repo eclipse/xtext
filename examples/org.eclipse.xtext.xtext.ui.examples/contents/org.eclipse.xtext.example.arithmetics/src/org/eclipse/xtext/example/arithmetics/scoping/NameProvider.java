@@ -14,8 +14,11 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.arithmetics.util.ArithmeticsSwitch;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+
+import com.google.inject.Inject;
 
 /**
  * changes the exported name of a function to be the signature and not just the simple name.
@@ -24,9 +27,12 @@ import org.eclipse.xtext.naming.QualifiedName;
  * @author Jan Koehnlein - introduced QualifiedName
  */
 public class NameProvider extends IQualifiedNameProvider.AbstractImpl {
-
-	public QualifiedName getQualifiedName(EObject obj) {
-		return toValue(new ArithmeticsSwitch<String>() {
+	
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
+	
+	public QualifiedName getFullyQualifiedName(EObject obj) {
+		return qualifiedNameConverter.toQualifiedName(new ArithmeticsSwitch<String>() {
 
 			public String caseModule(Module object) {
 				return object.getName();

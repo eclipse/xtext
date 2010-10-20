@@ -17,8 +17,8 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.inject.Inject;
@@ -70,23 +70,23 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 			doSwitch(element);
 		}
 	}
-	
+
 	@Inject
 	private IContentProposalPriorities priorities;
 
 	@Inject
 	@ContentProposalLabelProvider
 	private ILabelProvider labelProvider;
-	
+
 	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
-	
+	private IQualifiedNameConverter qualifiedNameConverter;
+
 	@Inject
 	private IValueConverterService valueConverter;
-	
+
 	@Inject
 	private IProposalConflictHelper conflictHelper;
-	
+
 	public static class NullSafeCompletionProposalAcceptor extends ICompletionProposalAcceptor.Delegate {
 
 		public NullSafeCompletionProposalAcceptor(ICompletionProposalAcceptor delegate) {
@@ -117,25 +117,27 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	public abstract void completeAssignment(Assignment object, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor);
 
-	public IFollowElementAcceptor createSelector(ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
+	public IFollowElementAcceptor createSelector(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		return new DefaultContentAssistProcessorSwitch(context, acceptor);
 	}
-	
+
 	public ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, new StyledString(displayString), image, getPriorityHelper().getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
+		return createCompletionProposal(proposal, new StyledString(displayString), image, getPriorityHelper()
+				.getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
 	}
-	
+
 	protected ICompletionProposal createCompletionProposal(String proposal, ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, null, null, getPriorityHelper().getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
+		return createCompletionProposal(proposal, null, null, getPriorityHelper().getDefaultPriority(),
+				contentAssistContext.getPrefix(), contentAssistContext);
 	}
-	
+
 	public ICompletionProposal createCompletionProposal(String proposal, StyledString displayString, Image image,
 			ContentAssistContext contentAssistContext) {
-		return createCompletionProposal(proposal, displayString, image, getPriorityHelper().getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
+		return createCompletionProposal(proposal, displayString, image, getPriorityHelper().getDefaultPriority(),
+				contentAssistContext.getPrefix(), contentAssistContext);
 	}
-	
+
 	/**
 	 * @see #isValidProposal(String, String, ContentAssistContext)
 	 * @see #doCreateProposal(String, String, Image, int, ContentAssistContext)
@@ -162,7 +164,8 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 			int priority, ContentAssistContext context) {
 		int replacementOffset = context.getReplaceRegion().getOffset();
 		int replacementLength = context.getReplaceRegion().getLength();
-		ConfigurableCompletionProposal result = doCreateProposal(proposal, displayString, image, replacementOffset, replacementLength);
+		ConfigurableCompletionProposal result = doCreateProposal(proposal, displayString, image, replacementOffset,
+				replacementLength);
 		result.setPriority(priority);
 		result.setMatcher(context.getMatcher());
 		result.setReplaceContextLength(context.getReplaceContextLength());
@@ -171,35 +174,32 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 
 	protected ConfigurableCompletionProposal doCreateProposal(String proposal, StyledString displayString, Image image,
 			int replacementOffset, int replacementLength) {
-		return new ConfigurableCompletionProposal(proposal, replacementOffset, replacementLength, 
-				proposal.length(), image, displayString, null, null);
+		return new ConfigurableCompletionProposal(proposal, replacementOffset, replacementLength, proposal.length(),
+				image, displayString, null, null);
 	}
-	
+
 	protected StyledString getKeywordDisplayString(Keyword keyword) {
 		return new StyledString(keyword.getValue());
 	}
-	
+
 	protected StyledString getStyledDisplayString(EObject element, String qualifiedName, String shortName) {
 		return new StyledString(getDisplayString(element, qualifiedName, shortName));
 	}
-	
-	protected String getDisplayString(EObject element, String qualifiedName, String shortName) {
-		if (qualifiedName == null)
-			qualifiedName = shortName;
-		if (qualifiedName == null) {
+
+	protected String getDisplayString(EObject element, String qualifiedNameAsString, String shortName) {
+		if (qualifiedNameAsString == null)
+			qualifiedNameAsString = shortName;
+		if (qualifiedNameAsString == null) {
 			if (element != null)
-				qualifiedName = labelProvider.getText(element);
+				qualifiedNameAsString = labelProvider.getText(element);
 			else
 				return null;
 		}
-		String delimiter = qualifiedNameProvider.getDelimiter();
-		int idx = (Strings.isEmpty(delimiter)) ? -1 : qualifiedName.lastIndexOf(delimiter);
-		if (idx > 0) {
-			String lastSegment = qualifiedName.substring(idx + delimiter.length());
-			return lastSegment + " - " + qualifiedName;
-		} else {
-			return qualifiedName;
+		QualifiedName qualifiedName = qualifiedNameConverter.toQualifiedName(qualifiedNameAsString);		
+		if(qualifiedName.getSegmentCount() >1) {
+			return qualifiedName.getLastSegment() + " - " + qualifiedNameAsString;
 		}
+		return qualifiedNameAsString;
 	}
 
 	public void setValueConverter(IValueConverterService valueConverter) {
@@ -209,13 +209,14 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	public IValueConverterService getValueConverter() {
 		return valueConverter;
 	}
-	
+
 	/**
-     * Returns the image for the label of the given element.
-     *
-     * @param element the element for which to provide the label image
-     * @return the image used to label the element, or <code>null</code> if there is no image for the given object
-     */
+	 * Returns the image for the label of the given element.
+	 * 
+	 * @param element
+	 *            the element for which to provide the label image
+	 * @return the image used to label the element, or <code>null</code> if there is no image for the given object
+	 */
 	protected Image getImage(EObject eObject) {
 		return labelProvider.getImage(eObject);
 	}
@@ -236,12 +237,8 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		return priorities;
 	}
 
-	public void setQualifiedNameProvider(IQualifiedNameProvider qualifiedNameProvider) {
-		this.qualifiedNameProvider = qualifiedNameProvider;
-	}
-
-	public IQualifiedNameProvider getQualifiedNameProvider() {
-		return qualifiedNameProvider;
+	public IQualifiedNameConverter getQualifiedNameConverter() {
+		return qualifiedNameConverter;
 	}
 
 	public void setLabelProvider(ILabelProvider labelProvider) {
@@ -251,5 +248,5 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	public ILabelProvider getLabelProvider() {
 		return labelProvider;
 	}
-	
+
 }

@@ -7,13 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping;
 
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
+
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge
  */
 public class OperatorMapping {
+	
+	@Inject
+	private IQualifiedNameProvider qualifiedNameProvider; 
 	
 	private BiMap<String, String> map = HashBiMap.create();
 	
@@ -42,6 +49,11 @@ public class OperatorMapping {
 		map.put("!", "not");
 	}
 	
+	public String getMethodName(QualifiedName operator) {
+		return qualifiedNameProvider.toString(operator);
+	}
+	
+	// TODO: remove this method?
 	public String getMethodName(String operator) {
 		return map.get(operator);
 	}

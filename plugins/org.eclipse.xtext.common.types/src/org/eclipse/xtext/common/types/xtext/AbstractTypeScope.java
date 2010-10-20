@@ -12,7 +12,7 @@ import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -27,11 +27,11 @@ public abstract class AbstractTypeScope extends AbstractScope {
 
 	private final IJvmTypeProvider typeProvider;
 
-	private final IQualifiedNameProvider qualifiedNameProvider;
+	private final IQualifiedNameConverter qualifiedNameConverter;
 	
-	public AbstractTypeScope(IJvmTypeProvider typeProvider, IQualifiedNameProvider qualifiedNameProvider) {
+	public AbstractTypeScope(IJvmTypeProvider typeProvider, IQualifiedNameConverter qualifiedNameConverter) {
 		this.typeProvider = typeProvider;
-		this.qualifiedNameProvider = qualifiedNameProvider;
+		this.qualifiedNameConverter = qualifiedNameConverter;
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	@Override
 	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
 		try {
-			JvmType type = typeProvider.findTypeByName(qualifiedNameProvider.toString(qualifiedName));
+			JvmType type = typeProvider.findTypeByName(qualifiedNameConverter.toString(qualifiedName));
 			if (type == null)
 				return null;
 			return EObjectDescription.create(qualifiedName, type);
@@ -54,7 +54,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	@Override
 	public IEObjectDescription getContentByEObject(EObject object) {
 		if (object instanceof JvmIdentifyableElement) {
-			return EObjectDescription.create(qualifiedNameProvider.toValue(((JvmIdentifyableElement) object).getCanonicalName()), object);
+			return EObjectDescription.create(qualifiedNameConverter.toQualifiedName(((JvmIdentifyableElement) object).getCanonicalName()), object);
 		}
 		return null;
 	}
@@ -67,8 +67,8 @@ public abstract class AbstractTypeScope extends AbstractScope {
 		return typeProvider;
 	}
 	
-	public IQualifiedNameProvider getQualifiedNameProvider() {
-		return qualifiedNameProvider;
+	public IQualifiedNameConverter getQualifiedNameConverter() {
+		return qualifiedNameConverter;
 	}
 
 }

@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.templates.TemplateVariable;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -34,7 +34,7 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 	private static final Logger log = Logger.getLogger(CrossReferenceTemplateVariableResolver.class);
 
 	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
+	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	public CrossReferenceTemplateVariableResolver() {
 		super("CrossReference",  //$NON-NLS-1$
@@ -63,7 +63,7 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 
 		List<String> names = new ArrayList<String>();
 		for (IEObjectDescription eObjectDescription : linkingCandidates) {
-			names.add(qualifiedNameProvider.toString(eObjectDescription.getName()));
+			names.add(qualifiedNameConverter.toString(eObjectDescription.getName()));
 		}
 		return names;
 	}

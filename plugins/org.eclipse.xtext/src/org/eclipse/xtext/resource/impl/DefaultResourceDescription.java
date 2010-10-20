@@ -87,7 +87,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	protected IEObjectDescription createIEObjectDescription(EObject from) {
 		if (nameProvider == null)
 			return null;
-		QualifiedName qualifiedName = nameProvider.getQualifiedName(from);
+		QualifiedName qualifiedName = nameProvider.getFullyQualifiedName(from);
 		if (qualifiedName != null) {
 			return EObjectDescription.create(qualifiedName, from);
 		}

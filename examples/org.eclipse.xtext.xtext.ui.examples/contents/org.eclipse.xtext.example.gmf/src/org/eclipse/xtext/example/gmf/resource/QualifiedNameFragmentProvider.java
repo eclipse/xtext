@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IFragmentProvider;
@@ -27,9 +28,12 @@ public class QualifiedNameFragmentProvider implements IFragmentProvider {
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
 
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
+
 	public String getFragment(EObject obj, Fallback fallback) {
-		QualifiedName qualifiedName = qualifiedNameProvider.getQualifiedName(obj);
-		return qualifiedName != null ? qualifiedNameProvider.toString(qualifiedName) : fallback.getFragment(obj);
+		QualifiedName qualifiedName = qualifiedNameProvider.getFullyQualifiedName(obj);
+		return qualifiedName != null ? qualifiedNameConverter.toString(qualifiedName) : fallback.getFragment(obj);
 	}
 
 	public EObject getEObject(Resource resource, String fragment,

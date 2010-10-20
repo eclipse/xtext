@@ -32,7 +32,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -65,28 +65,28 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	private IScopeProvider scopeProvider;
 	
 	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
+	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	public static class FQNShortener extends ReplacementTextApplier {
 		private final IScope scope;
 		private final Resource context;
-		private final IQualifiedNameProvider qualifiedNameProvider;
+		private final IQualifiedNameConverter qualifiedNameConverter;
 		
-		public FQNShortener(Resource context, IScope scope, IQualifiedNameProvider qualifiedNameProvider) {
+		public FQNShortener(Resource context, IScope scope, IQualifiedNameConverter qualifiedNameConverter) {
 			this.context = context;
 			this.scope = scope;
-			this.qualifiedNameProvider = qualifiedNameProvider;
+			this.qualifiedNameConverter = qualifiedNameConverter;
 		}
 		
 		protected String applyValueConverter(QualifiedName qualifiedName) {
-			return qualifiedNameProvider.toString(qualifiedName);
+			return qualifiedNameConverter.toString(qualifiedName);
 		}
 		
 		@Override
 		public String getActualReplacementString(ConfigurableCompletionProposal proposal) {
 			String replacementString = proposal.getReplacementString();
 			if (scope != null) {
-				IEObjectDescription element = scope.getContentByName(qualifiedNameProvider.toValue(replacementString));
+				IEObjectDescription element = scope.getContentByName(qualifiedNameConverter.toQualifiedName(replacementString));
 				if (element != null) {
 					EObject resolved = EcoreUtil.resolve(element.getEObjectOrProxy(), context);
 					if (!resolved.eIsProxy()) {
@@ -171,7 +171,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		if (context.getCurrentModel() != null) {
 			typeScope = scopeProvider.getScope(context.getCurrentModel(), typeReference);
 		}
-		final IReplacementTextApplier textApplier = new FQNShortener(context.getResource(), typeScope, qualifiedNameProvider);
+		final IReplacementTextApplier textApplier = new FQNShortener(context.getResource(), typeScope, qualifiedNameConverter);
 		final ICompletionProposalAcceptor scopeAware = new ICompletionProposalAcceptor.Delegate(acceptor) {
 			@Override
 			public void accept(ICompletionProposal proposal) {
