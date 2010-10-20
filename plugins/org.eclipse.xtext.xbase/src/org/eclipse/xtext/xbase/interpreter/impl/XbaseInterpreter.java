@@ -43,6 +43,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
+import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
@@ -410,11 +411,29 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 	
 	public IEvaluationResult _evaluateBinaryOperation(XBinaryOperation operation, IEvaluationContext context) {
-		IEvaluationResult leftOperand = evaluate(operation.getLeftOperand());
+		IEvaluationResult leftOperand = evaluate(operation.getLeftOperand(), context);
 		if (leftOperand.getException() != null)
 			return leftOperand;
 		IEvaluationResult result = featureCallDispatcher.invoke(operation.getFeature(), operation, leftOperand.getResult(), context);
 		return result;
+	}
+	
+	public IEvaluationResult _evaluateInstanceOf(XInstanceOfExpression instanceOf, IEvaluationContext context) {
+		IEvaluationResult instance = evaluate(instanceOf.getExpression(), context);
+		if (instance.getException() != null)
+			return instance;
+		if (instance.getResult() == null)
+			return new DefaultEvaluationResult(Boolean.FALSE, null);
+		
+		Class<?> expectedType = null;
+		try {
+			expectedType = Class.forName(instanceOf.getType().getCanonicalName(), false, classLoader);
+		} catch(ClassNotFoundException cnfe) {
+			expectedType = Primitives.forName(instanceOf.getType().getCanonicalName());
+			if (expectedType == null)
+				return new DefaultEvaluationResult(null, cnfe);
+		}
+		return new DefaultEvaluationResult(expectedType.isInstance(instance.getResult()), null);
 	}
 	
 	public IEvaluationResult _evaluateVariableDeclaration(XVariableDeclaration variableDecl, IEvaluationContext context) {
