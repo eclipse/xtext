@@ -14,22 +14,24 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
-import java.util.Arrays;
+import java.util.AbstractList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.eclipse.xtext.util.ReflectionUtil;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -83,6 +85,87 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			return param.getName().startsWith(methodName) && param.getParameterTypes().length >= minParams
 					&& param.getParameterTypes().length <= maxParams;
 		}
+	}
+	
+	protected static class WrappedArray<T> extends AbstractList<T> {
+
+		protected static <T> WrappedArray<T> create(T[] array) {
+			return new WrappedArray<T>(array);
+		}
+		
+		private T[] array;
+
+		protected WrappedArray(T[] array) {
+			this.array = array;
+		}
+
+		@Override
+		public T get(int index) {
+			return array[index];
+		}
+		
+		@Override
+		public T set(int index, T element) {
+			T old = array[index];
+			array[index] = element;
+			modCount++;
+			return old;
+		}
+
+		@Override
+		public int size() {
+			return array.length;
+		}
+		
+		@Override
+		public Object[] toArray() {
+			return array.clone();
+		}
+		
+		public T[] internalToArray() {
+			modCount++;
+			return array;
+		}
+		
+	}
+	
+	protected static class WrappedPrimitiveArray extends AbstractList<Object> {
+
+		protected static WrappedPrimitiveArray create(Object array) {
+			return new WrappedPrimitiveArray(array);
+		}
+		
+		private Object array;
+		private int size;
+
+		protected WrappedPrimitiveArray(Object array) {
+			this.array = array;
+			this.size = Array.getLength(array);
+		}
+
+		@Override
+		public Object get(int index) {
+			return Array.get(array, index);
+		}
+		
+		@Override
+		public Object set(int index, Object element) {
+			Object old = get(index);
+			Array.set(array, index, element);
+			modCount++;
+			return old;
+		}
+
+		@Override
+		public int size() {
+			return size;
+		}
+		
+		public Object internalToArray() {
+			modCount++;
+			return array;
+		}
+		
 	}
 	
 	@Inject
@@ -329,19 +412,25 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 	
+	protected Object unwrapArray(Object value, JvmTypeReference expectedType) {
+		if (expectedType.getType() instanceof JvmArrayType) {
+			if (value instanceof WrappedArray<?>)
+				return ((WrappedArray<?>) value).internalToArray();
+			if (value instanceof WrappedPrimitiveArray)
+				return ((WrappedPrimitiveArray) value).internalToArray();
+		}
+		return value;
+	}
+	
 	protected IEvaluationResult wrapArray(IEvaluationResult original, Object array) {
 		Class<?> arrayClass = array.getClass();
 		if (arrayClass.isArray()) {
 			if (arrayClass.getComponentType().isPrimitive()) {
-				Class<?> objectType = ReflectionUtil.getObjectType(arrayClass.getComponentType());
-				int length = Array.getLength(array);
-				Object[] wrapMe = (Object[]) Array.newInstance(objectType, length);
-				for(int i = 0; i < length; i++) {
-					wrapMe[i] = Array.get(array, i);
-				}
-				return new DefaultEvaluationResult(Arrays.asList(wrapMe), null);
+				WrappedPrimitiveArray result = WrappedPrimitiveArray.create(array);
+				return new DefaultEvaluationResult(result, null);
 			}
-			return new DefaultEvaluationResult(Arrays.asList((Object[])array), null);
+			WrappedArray<Object> result = WrappedArray.create((Object[])array);
+			return new DefaultEvaluationResult(result, null);
 		}
 		return original;
 	}
@@ -401,13 +490,10 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	public IEvaluationResult _evaluateConstructorCall(XConstructorCall constructorCall, IEvaluationContext context) {
 		List<Object> arguments = Lists.newArrayList();
-		for(XExpression arg: constructorCall.getArguments()) {
-			IEvaluationResult argResult = evaluate(arg, context);
-			if (argResult.getException() != null)
-				return argResult;
-			arguments.add(argResult.getResult());
-		}
 		JvmConstructor jvmConstructor = constructorCall.getConstructor();
+		IEvaluationResult argumentException = evaluateArgumentExpressions(jvmConstructor, constructorCall.getArguments(), arguments, context);
+		if (argumentException != null && argumentException.getException() != null)
+			return argumentException;
 		Constructor<?> constructor = javaReflectAccess.getConstructor(jvmConstructor);
 		try {
 			if (constructor == null)
@@ -483,13 +569,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 	
 	public IEvaluationResult _featureCallOperation(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
-		List<Object> arguments = Lists.newArrayList();
-		for(XExpression arg: featureCall.getArguments().subList(1, featureCall.getArguments().size())) {
-			IEvaluationResult argResult = evaluate(arg, context);
-			if (argResult.getException() != null)
-				return argResult;
-			arguments.add(argResult.getResult());
-		}
+		List<XExpression> operationArguments = featureCall.getArguments().subList(1, featureCall.getArguments().size());
+		List<Object> argumentValues = Lists.newArrayList();
+		IEvaluationResult argumentException = evaluateArgumentExpressions(operation, operationArguments, argumentValues, context);
+		if (argumentException != null && argumentException.getException() != null)
+			return argumentException;
 		Method method = javaReflectAccess.getMethod(operation);
 		try {
 			if (method == null) {
@@ -499,11 +583,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			if (!Modifier.isStatic(method.getModifiers())) {
 				if (receiver == null)
 					return new DefaultEvaluationResult(null, new NullPointerException("Cannot invoke instance method: " + operation.getCanonicalName() + " without receiver"));
-				Object result = method.invoke(receiver, arguments.toArray(new Object[arguments.size()]));
+				Object result = method.invoke(receiver, argumentValues.toArray(new Object[argumentValues.size()]));
 				return new DefaultEvaluationResult(result, null);
 			} else {
-				arguments.add(0, receiver);
-				Object result = method.invoke(null, arguments.toArray(new Object[arguments.size()]));
+				argumentValues.add(0, receiver);
+				Object result = method.invoke(null, argumentValues.toArray(new Object[argumentValues.size()]));
 				return new DefaultEvaluationResult(result, null);
 			}
 		} catch(InvocationTargetException targetException) {
@@ -512,7 +596,20 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			throw new IllegalStateException("Could not invoke method: " + operation.getFullyQualifiedName() + " on instance: " + receiver, e);
 		}
 	}
-	
+
+	protected IEvaluationResult evaluateArgumentExpressions(JvmExecutable executable, List<XExpression> expressions, List<Object> result,
+			IEvaluationContext context) {
+		int i = 0;
+		for(XExpression arg: expressions) {
+			IEvaluationResult argResult = evaluate(arg, context);
+			if (argResult.getException() != null)
+				return argResult;
+			result.add(unwrapArray(argResult.getResult(), executable.getParameters().get(i).getParameterType()));
+			i++;
+		}
+		return null;
+	}
+
 	public IEvaluationResult _featureCallField(JvmField jvmField, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		if (receiver == null)
 			return new DefaultEvaluationResult(null, new NullPointerException("Cannot access field: " + jvmField.getCanonicalName() + " on null instance"));

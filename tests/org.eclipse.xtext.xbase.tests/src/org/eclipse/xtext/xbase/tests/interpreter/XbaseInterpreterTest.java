@@ -402,4 +402,54 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().invokeX(" +
 				"  java.lang.Character c1, c2, c3, c4, c5, c6, c7|c1, 'abcdefg'.toCharArray)");
 	}
+	
+	public void testArrayConversion_01() {
+		assertEvaluatesTo("LITERAL", 
+				"{" +
+				"  var client = new org.eclipse.xtext.xbase.tests.testdata.ArrayClient()" +
+				"  var stringArray = client.toStringArray('literal', 'other')" +
+				"  client.inplaceToUpperCase(stringArray)" +
+				"  stringArray.get(0)" +
+				"}");
+	}
+	
+	public void testArrayConversion_02() {
+		assertEvaluatesTo("OTHER", 
+				"{" +
+				"  var client = new org.eclipse.xtext.xbase.tests.testdata.ArrayClient()" +
+				"  var stringArray = client.toStringArray('literal', 'other')" +
+				"  client.inplaceToUpperCase(stringArray)" +
+				"  stringArray.get(1)" +
+				"}");
+	}
+	
+	public void testArrayConversion_03() {
+		assertEvaluatesTo(new Integer(42), 
+				"{" +
+				"  var client = new org.eclipse.xtext.xbase.tests.testdata.ArrayClient()" +
+				"  var intArray = client.toIntArray(32, 7)" +
+				"  client.inplaceAdd10(intArray)" +
+				"  intArray.get(0)" +
+				"}");
+	}
+	
+	public void testArrayConversion_04() {
+		assertEvaluatesTo(new Integer(17), 
+				"{" +
+				"  var client = new org.eclipse.xtext.xbase.tests.testdata.ArrayClient()" +
+				"  var intArray = client.toIntArray(32, 7)" +
+				"  client.inplaceAdd10(intArray)" +
+				"  intArray.get(1)" +
+				"}");
+	}
+	
+	public void testArrayConversion_05() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var client = new org.eclipse.xtext.xbase.tests.testdata.ArrayClient()" +
+				"  var stringArray = client.toStringArray('literal', 'other')" +
+				"  client.inplaceSwap(stringArray)" +
+				"  stringArray.get(1)" +
+				"}");
+	}
 }
