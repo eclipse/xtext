@@ -59,7 +59,7 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 		resource.getContents().add(pack);
 
 		delegate = new IQualifiedNameProvider.AbstractImpl() {
-			public QualifiedName getQualifiedName(EObject obj) {
+			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof ENamedElement)
 					return QualifiedName.create(((ENamedElement) obj).getName());
 				return null;
@@ -69,7 +69,7 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 
 	public void testGetExportedObject_1() throws Exception {
 		delegate = new IQualifiedNameProvider.AbstractImpl() {
-			public QualifiedName getQualifiedName(EObject obj) {
+			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof EPackage)
 					return QualifiedName.create(((EPackage) obj).getName());
 				return null;
@@ -85,7 +85,7 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 
 	public void testGetExportedObject_2() throws Exception {
 		delegate = new IQualifiedNameProvider.AbstractImpl() {
-			public QualifiedName getQualifiedName(EObject obj) {
+			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof EClassifier)
 					return QualifiedName.create(((EClassifier) obj).getName());
 				return null;
@@ -152,24 +152,12 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 		assertEquals(collection.size(),expectedContents.length);
 	}
 
-	public QualifiedName getQualifiedName(EObject obj) {
-		return delegate.getQualifiedName(obj);
+	public QualifiedName getFullyQualifiedName(EObject obj) {
+		return delegate.getFullyQualifiedName(obj);
 	}
 
 	public QualifiedName apply(EObject from) {
 		return delegate.apply(from);
-	}
-
-	public String getDelimiter() {
-		return delegate.getDelimiter();
-	}
-
-	public QualifiedName toValue(String qualifiedNameAsString) {
-		return delegate.toValue(qualifiedNameAsString);
-	}
-
-	public String toString(QualifiedName qualifiedName) {
-		return delegate.toString();
 	}
 
 }

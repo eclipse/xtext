@@ -42,6 +42,9 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 	}; 
 	
 	@Inject
+	private IQualifiedNameConverter converter;
+	
+	@Inject
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
 	
 	private Function<EObject, String> resolver = SimpleAttributeResolver.newResolver(String.class, "name");
@@ -50,29 +53,30 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 		return resolver;
 	}
 
-	public QualifiedName getQualifiedName(final EObject obj) {
+	public QualifiedName getFullyQualifiedName(final EObject obj) {
 		return cache.get(Tuples.pair(obj, "fqn"), obj.eResource(), new Provider<QualifiedName>(){
 
 			public QualifiedName get() {
 				EObject temp = obj;
-				QualifiedName name = qualifiedName.invoke(temp);
-				if (name!=null)
-					return name;
-				String value = getResolver().apply(temp);
-				if (value == null)
+				QualifiedName qualifiedNameFromDispatcher = qualifiedName.invoke(temp);
+				if (qualifiedNameFromDispatcher!=null)
+					return qualifiedNameFromDispatcher;
+				String name = getResolver().apply(temp);
+				if (name == null)
 					return null;
-				QualifiedName qualifiedName = toValue(value);
+				QualifiedName qualifiedNameFromConverter = converter.toQualifiedName(name);
 				while (temp.eContainer() != null) {
 					temp = temp.eContainer();
-					QualifiedName parentsName = getQualifiedName(temp);
-					if (parentsName != null)
-						return parentsName.append(qualifiedName);
+					QualifiedName parentsQualifiedName = getFullyQualifiedName(temp);
+					if (parentsQualifiedName != null)
+						return parentsQualifiedName.append(qualifiedNameFromConverter);
 				}
-				return qualifiedName;
+				return qualifiedNameFromConverter;
 			}
-			
 		});
-		
 	}
 
+	protected IQualifiedNameConverter getConverter() {
+		return converter;
+	}
 }

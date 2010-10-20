@@ -12,17 +12,17 @@ import junit.framework.TestCase;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class DeclarativeQualifiedNameProviderTest extends TestCase {
+public class DeclarativeQualifiedNameConverterTest extends TestCase {
 
-	public void testQualifiedNameSupport() throws Exception {
-		DefaultDeclarativeQualifiedNameProvider qualifiedNameProvider = new DefaultDeclarativeQualifiedNameProvider() {
+	public void testQualifiedNameConverter() throws Exception {
+		IQualifiedNameConverter qualifiedNameConverter = new IQualifiedNameConverter.DefaultImpl() {
 			@Override
 			public String getDelimiter() {
 				return "!";
 			}
 		};
 		QualifiedName qn = QualifiedName.create("foo", "bar", "baz");
-		assertEquals("foo!bar!baz", qualifiedNameProvider.toString(qn));
-		assertEquals(qn, qualifiedNameProvider.toValue("foo!bar!baz"));
+		assertEquals("foo!bar!baz", qualifiedNameConverter.toString(qn));
+		assertEquals(qn, qualifiedNameConverter.toQualifiedName("foo!bar!baz"));
 	}
 }

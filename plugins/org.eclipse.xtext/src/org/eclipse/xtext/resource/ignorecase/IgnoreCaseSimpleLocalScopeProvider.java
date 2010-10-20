@@ -31,7 +31,7 @@ public class IgnoreCaseSimpleLocalScopeProvider extends SimpleLocalScopeProvider
 		while (iterator.hasNext()) {
 			EObject next = iterator.next();
 			if (reference.getEReferenceType().isInstance(next)) {
-				QualifiedName qualifiedName = getNameProvider().getQualifiedName(next);
+				QualifiedName qualifiedName = getNameProvider().getFullyQualifiedName(next);
 				QualifiedName key = qualifiedName.toLowerCase();
 				if (key != null && !result.containsKey(key)) {
 					IEObjectDescription description = createEObjectDescription(next, qualifiedName);

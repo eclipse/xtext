@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -63,19 +64,24 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
 
 	@Inject
-	private IQualifiedNameProvider nameProvider;
+	private IQualifiedNameProvider qualifiedNameProvider;
+
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
 
 	@Inject
 	public ImportedNamespaceAwareLocalScopeProvider() {
 	}
 
-	public ImportedNamespaceAwareLocalScopeProvider(IGlobalScopeProvider globalScopeProvider, IQualifiedNameProvider nameProvider) {
+	public ImportedNamespaceAwareLocalScopeProvider(IGlobalScopeProvider globalScopeProvider,
+			IQualifiedNameProvider qualifiedNameProvider, IQualifiedNameConverter qualifiedNameConverter) {
 		super(globalScopeProvider);
-		this.nameProvider = nameProvider;
+		this.qualifiedNameProvider = qualifiedNameProvider;
+		this.qualifiedNameConverter = qualifiedNameConverter;
 	}
-	
-	public IQualifiedNameProvider getNameProvider() {
-		return nameProvider;
+
+	public IQualifiedNameProvider getQualifiedNameProvider() {
+		return qualifiedNameProvider;
 	}
 
 	public IScope getScope(EObject context, EReference reference) {
@@ -98,7 +104,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 			result = getImportedElements(result, localElements, context, reference);
 		}
 		// local scope
-		if (nameProvider.getQualifiedName(context) != null) {
+		if (qualifiedNameProvider.getFullyQualifiedName(context) != null) {
 			result = getLocalElements(result, context, reference);
 		}
 		return result;
@@ -130,7 +136,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 			}
 		};
 		contents = Iterables.filter(contents, typeFilter(reference.getEReferenceType()));
-		return toMap(Scopes.scopedElementsFor(contents, nameProvider));
+		return toMap(Scopes.scopedElementsFor(contents, qualifiedNameProvider));
 	}
 
 	protected IScope getLocalElements(final IScope parent, final EObject context, final EReference reference) {
@@ -144,9 +150,9 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 
 	protected Map<QualifiedName, IEObjectDescription> internalGetLocalElementsMap(final IScope parent,
 			final EObject context, final EReference reference) {
-		QualifiedName qualifiedName = nameProvider.getQualifiedName(context);
-		final ImportNormalizer localNamespaceResolver = (qualifiedName != null) ? new ImportNormalizer(
-				qualifiedName, getWildCard()) : null;
+		QualifiedName qualifiedName = qualifiedNameProvider.getFullyQualifiedName(context);
+		final ImportNormalizer localNamespaceResolver = (qualifiedName != null) ? new ImportNormalizer(qualifiedName,
+				getWildCard()) : null;
 
 		Iterable<EObject> contents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
@@ -158,7 +164,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		// transform to IScopedElements
 		Function<EObject, IEObjectDescription> descriptionComputation = new Function<EObject, IEObjectDescription>() {
 			public IEObjectDescription apply(EObject from) {
-				final QualifiedName fullyQualifiedName = nameProvider.getQualifiedName(from);
+				final QualifiedName fullyQualifiedName = qualifiedNameProvider.getFullyQualifiedName(from);
 				if (fullyQualifiedName == null)
 					return null;
 				QualifiedName relativeName = (localNamespaceResolver != null) ? localNamespaceResolver
@@ -190,12 +196,11 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 
 	protected Set<ImportNormalizer> getImportedNamespaceResolvers(final EObject context) {
-		return cache.get(Tuples.pair(context, "imports"), context.eResource(),
-				new Provider<Set<ImportNormalizer>>() {
-					public Set<ImportNormalizer> get() {
-						return internalGetImportedNamespaceResolvers(context);
-					}
-				});
+		return cache.get(Tuples.pair(context, "imports"), context.eResource(), new Provider<Set<ImportNormalizer>>() {
+			public Set<ImportNormalizer> get() {
+				return internalGetImportedNamespaceResolvers(context);
+			}
+		});
 	}
 
 	protected Set<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context) {
@@ -216,7 +221,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 
 	protected ImportNormalizer createImportedNamespaceResolver(final String namespace) {
-		return new ImportNormalizer(nameProvider.toValue(namespace), getWildCard());
+		return new ImportNormalizer(qualifiedNameConverter.toQualifiedName(namespace), getWildCard());
 	}
 
 	protected IScope getImportedElements(final IScope parent, final IScope localElements, final EObject context,
