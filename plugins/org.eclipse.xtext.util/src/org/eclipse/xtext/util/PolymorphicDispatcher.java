@@ -34,8 +34,6 @@ public class PolymorphicDispatcher<RT> {
 	private final List<? extends Object> targets;
 	private final Predicate<Method> methodFilter;
 
-	// private final Comparator<MethodDesc> comparator;
-
 	public static class DefaultErrorHandler<RT> implements ErrorHandler<RT> {
 		public RT handle(Object[] params, Throwable e) {
 			return Exceptions.throwUncheckedException(e);
@@ -72,15 +70,15 @@ public class PolymorphicDispatcher<RT> {
 		}
 	}
 
-	static class MethodNameFilter implements Predicate<Method> {
+	public static class MethodNameFilter implements Predicate<Method> {
 
-		private final int maxParams;
+		protected final int maxParams;
 
-		private final String methodName;
+		protected final String methodName;
 
-		private final int minParams;
+		protected final int minParams;
 
-		private MethodNameFilter(String methodName, int minParams, int maxParams) {
+		public MethodNameFilter(String methodName, int minParams, int maxParams) {
 			this.maxParams = maxParams;
 			this.methodName = methodName;
 			this.minParams = minParams;
@@ -121,6 +119,10 @@ public class PolymorphicDispatcher<RT> {
 
 	public static <T> PolymorphicDispatcher<T> createForSingleTarget(final String methodName, int min, int max, final Object singleTarget) {
 		return new PolymorphicDispatcher<T>(methodName, min, max, Collections.singletonList(singleTarget));
+	}
+	
+	public static <T> PolymorphicDispatcher<T> createForSingleTarget(Predicate<Method> methodFilter, Object singleTarget) {
+		return new PolymorphicDispatcher<T>(Collections.singletonList(singleTarget), methodFilter);
 	}
 
 	public static <T> PolymorphicDispatcher<T> createForVarTarget(final String methodName, final Object... targets) {
