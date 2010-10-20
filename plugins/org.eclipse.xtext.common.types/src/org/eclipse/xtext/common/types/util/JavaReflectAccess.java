@@ -20,13 +20,12 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.access.impl.Primitives;
+import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -39,6 +38,8 @@ public class JavaReflectAccess {
 	private final static Logger log = Logger.getLogger(JavaReflectAccess.class);
 
 	private ClassLoader classLoader = getClass().getClassLoader();
+	
+	private ClassFinder classFinder;
 
 	@Inject(optional=true)
 	public void setClassLoader(ClassLoader classlaoder) {
@@ -113,9 +114,7 @@ public class JavaReflectAccess {
 			return Object.class;
 		}
 		try {
-			if (type instanceof JvmPrimitiveType)
-				return Primitives.forName(type.getCanonicalName());
-			return classLoader.loadClass(type.getCanonicalName());
+			return getClassFinder().forName(type.getCanonicalName());
 		} catch (ClassNotFoundException e) {
 			if (log.isDebugEnabled())
 				log.debug(e.getMessage(), e);
@@ -133,7 +132,14 @@ public class JavaReflectAccess {
 	}
 
 	private Class<?> getRawType(JvmTypeReference ref) {
-		return getRawType(ref.getType());
+		Class<?> result = getRawType(ref.getType());
+		return result;
 	}
 
+	public ClassFinder getClassFinder() {
+		if (classFinder == null)
+			classFinder = new ClassFinder(classLoader);
+		return classFinder;
+	}
+	
 }
