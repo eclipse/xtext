@@ -18,6 +18,7 @@ import java.lang.reflect.Proxy;
 import java.util.AbstractList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.RandomAccess;
 
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -90,7 +91,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 	
-	protected static class WrappedArray<T> extends AbstractList<T> {
+	protected static class WrappedArray<T> extends AbstractList<T> implements RandomAccess {
 
 		protected static <T> WrappedArray<T> create(T[] array) {
 			return new WrappedArray<T>(array);
@@ -132,7 +133,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		
 	}
 	
-	protected static class WrappedPrimitiveArray extends AbstractList<Object> {
+	protected static class WrappedPrimitiveArray extends AbstractList<Object> implements RandomAccess {
 
 		protected static WrappedPrimitiveArray create(Object array) {
 			return new WrappedPrimitiveArray(array);
