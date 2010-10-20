@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -127,6 +128,17 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				return new SingletonScope(EObjectDescription.create(EQUALS, featureCall.getFeature()), parent);
 			if (featureCall.getFeature() instanceof JvmFormalParameter)
 				return new SingletonScope(EObjectDescription.create(EQUALS, featureCall.getFeature()), parent);
+			if (featureCall.getFeature() instanceof JvmField) {
+				if (!((JvmField) featureCall.getFeature()).isFinal())
+					return new SingletonScope(EObjectDescription.create(EQUALS, featureCall.getFeature()), parent);
+			}
+		}
+		if (assignable instanceof XMemberFeatureCall) {
+			XMemberFeatureCall featureCall = (XMemberFeatureCall) assignable;
+			if (featureCall.getFeature() instanceof JvmField) {
+				if (!((JvmField) featureCall.getFeature()).isFinal())
+					return new SingletonScope(EObjectDescription.create(EQUALS, featureCall.getFeature()), parent);
+			}
 		}
 		return parent;
 		
