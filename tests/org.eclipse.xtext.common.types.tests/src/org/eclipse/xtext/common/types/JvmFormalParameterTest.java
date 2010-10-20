@@ -40,4 +40,8 @@ public class JvmFormalParameterTest extends TestCase {
 		formalParameter.setParameterType(typeReference);
 		assertEquals("T", formalParameter.getCanonicalName());
 	}
+	
+	public void testToString_01() {
+		assertNotNull("toString() should not throw NPE and not return null", formalParameter.toString());
+	}
 }

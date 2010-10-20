@@ -7,12 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-
 public abstract class JvmIdentifyableElementImplCustom extends JvmIdentifyableElementImpl {
 
 	@Override
 	public String toString() {
-		return String.valueOf(getCanonicalName());
+		StringBuilder result = new StringBuilder(eClass().getName());
+		result.append(": ");
+		if (eIsProxy()) {
+			result.append(" (eProxyURI: ");
+			result.append(eProxyURI());
+			result.append(')');
+		} else {
+			result.append(getCanonicalName());
+		}
+		return result.toString();
 	}
-
 }
