@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -15,9 +16,10 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
@@ -72,8 +74,7 @@ public class JavaReflectAccessTest extends TestCase {
 		});
 
 		Method method = List.class.getDeclaredMethod("add", Object.class);
-
-		assertEquals(method, getJavaReflectAccess().getMethod((JvmExecutable) addMethod));
+		assertEquals(method, getJavaReflectAccess().getMethod((JvmOperation)addMethod));
 	}
 
 	public void testGetMethod_2() throws Exception {
@@ -88,8 +89,29 @@ public class JavaReflectAccessTest extends TestCase {
 		});
 
 		Method method = X.class.getDeclaredMethod("a", Comparable.class, CharSequence.class);
-
-		assertEquals(method, getJavaReflectAccess().getMethod((JvmExecutable) addMethod));
+		assertEquals(method, getJavaReflectAccess().getMethod((JvmOperation)addMethod));
+	}
+	
+	public void testGetConstructor_1() throws Exception {
+		JvmGenericType type = (JvmGenericType) getType(X.class);
+		JvmMember firstConstructor = Iterables.find(type.getDeclaredConstructors(),new Predicate<JvmConstructor>() {
+			public boolean apply(JvmConstructor input) {
+				return input.getParameters().size() == 1;
+			}
+		});
+		Constructor<?> expectation = X.class.getDeclaredConstructor(int.class);
+		assertEquals(expectation, getJavaReflectAccess().getConstructor((JvmConstructor)firstConstructor));
+	}
+	
+	public void testGetConstructor_2() throws Exception {
+		JvmGenericType type = (JvmGenericType) getType(X.class);
+		JvmMember secondConstructor = Iterables.find(type.getDeclaredConstructors(),new Predicate<JvmConstructor>() {
+			public boolean apply(JvmConstructor input) {
+				return input.getParameters().size() == 2;
+			}
+		});
+		Constructor<?> expectation = X.class.getDeclaredConstructor(Object.class, List.class);
+		assertEquals(expectation, getJavaReflectAccess().getConstructor((JvmConstructor)secondConstructor));
 	}
 
 	public void testGetField_1() throws Exception {
@@ -115,6 +137,8 @@ public class JavaReflectAccessTest extends TestCase {
 	}
 
 	public static class X<T extends Comparable<CharSequence>> {
+		public X(int i) {}
+		public X(Object o, List<String> list) {}
 		public <T2 extends CharSequence> void a(T t, T2 t2) {
 		}
 	}
