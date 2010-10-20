@@ -8,7 +8,7 @@
 package org.eclipse.xtext.common.types.xtext;
 
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -16,8 +16,8 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
  */
 public class ClasspathBasedTypeScope extends AbstractTypeScope {
 
-	public ClasspathBasedTypeScope(ClasspathTypeProvider typeProvider, IQualifiedNameProvider qualifiedNameProvider) {
-		super(typeProvider, qualifiedNameProvider);
+	public ClasspathBasedTypeScope(ClasspathTypeProvider typeProvider, IQualifiedNameConverter qualifiedNameConverter) {
+		super(typeProvider, qualifiedNameConverter);
 	}
 	
 }

@@ -10,7 +10,7 @@ package org.eclipse.xtext.common.types.xtext;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 
 import com.google.inject.Inject;
 
@@ -26,11 +26,11 @@ public class ClasspathBasedTypeScopeProvider extends AbstractTypeScopeProvider {
 	private ClasspathTypeProviderFactory typeProviderFactory;
 
 	@Inject 
-	private IQualifiedNameProvider qualifiedNameProvider;
+	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	@Override
 	public ClasspathBasedTypeScope createTypeScope(IJvmTypeProvider typeProvider) {
-		return new ClasspathBasedTypeScope((ClasspathTypeProvider) typeProvider, qualifiedNameProvider);
+		return new ClasspathBasedTypeScope((ClasspathTypeProvider) typeProvider, qualifiedNameConverter);
 	}
 
 	public void setTypeProviderFactory(ClasspathTypeProviderFactory typeProviderFactory) {

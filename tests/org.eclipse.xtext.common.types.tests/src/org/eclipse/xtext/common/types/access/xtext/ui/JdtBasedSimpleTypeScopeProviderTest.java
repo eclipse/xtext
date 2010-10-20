@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.xtext.ui;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -19,12 +21,10 @@ import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScope;
 import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider;
-import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-
-import junit.framework.TestCase;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -44,8 +44,8 @@ public class JdtBasedSimpleTypeScopeProviderTest extends TestCase {
 		super.setUp();
 		projectProvider = new MockJavaProjectProvider();
 		factory = new JdtTypeProviderFactory(projectProvider);
-		DefaultDeclarativeQualifiedNameProvider qualifiedNameProvider = new DefaultDeclarativeQualifiedNameProvider();
-		scopeProvider = new JdtBasedSimpleTypeScopeProvider(factory, qualifiedNameProvider);
+		IQualifiedNameConverter qualifiedNameConverter = new IQualifiedNameConverter.DefaultImpl();
+		scopeProvider = new JdtBasedSimpleTypeScopeProvider(factory, qualifiedNameConverter);
 		resourceSet = new ResourceSetImpl();
 		resource = new ResourceImpl();
 		resource.setURI(URI.createURI("http://does/not/exist.file"));

@@ -53,7 +53,7 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		resourceSet = new ResourceSetImpl();
 		IQualifiedNameProvider qualifiedNameProvider = new IQualifiedNameProvider.AbstractImpl() {
 			
-			public QualifiedName getQualifiedName(EObject obj) {
+			public QualifiedName getFullyQualifiedName(EObject obj) {
 				return QualifiedName.create(((ENamedElement) obj).getName());
 			}
 

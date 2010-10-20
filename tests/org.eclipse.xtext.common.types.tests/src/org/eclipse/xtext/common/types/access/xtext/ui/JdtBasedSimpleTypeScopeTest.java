@@ -15,7 +15,7 @@ import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.xtext.AbstractTypeScopeTest;
 import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScope;
-import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -38,7 +38,7 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 		projectProvider = new MockJavaProjectProvider();
 		factory = new JdtTypeProviderFactory(projectProvider);
 		resourceSet = new ResourceSetImpl();
-		typeScope = new JdtBasedSimpleTypeScope(factory.createTypeProvider(resourceSet), new DefaultDeclarativeQualifiedNameProvider());
+		typeScope = new JdtBasedSimpleTypeScope(factory.createTypeProvider(resourceSet), new IQualifiedNameConverter.DefaultImpl());
 	}
 	
 	public void testGetContents_01() {
