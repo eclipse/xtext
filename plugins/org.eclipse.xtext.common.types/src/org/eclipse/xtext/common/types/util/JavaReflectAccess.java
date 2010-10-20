@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -44,7 +46,7 @@ public class JavaReflectAccess {
 	}
 
 	/**
-	 * @return the {@link java.lang.reflect.Field} corresponding to the given {@link JvmField}
+	 * @return the {@link java.lang.reflect.Field} corresponding to the given {@link JvmField} or <code>null</code>.
 	 */
 	public Field getField(JvmField field) {
 		Class<?> class1 = getRawType(field.getDeclaringType());
@@ -60,28 +62,41 @@ public class JavaReflectAccess {
 	}
 
 	/**
-	 * @return the {@link Method} corresponding to the given {@link JvmExecutable}
+	 * @return the {@link Method} corresponding to the given {@link JvmOperation} or <code>null</code>.
 	 */
-	public Method getMethod(JvmExecutable exe) {
-		Class<?> class1 = getRawType(exe.getDeclaringType());
-		if (class1 == null)
+	public Method getMethod(JvmOperation operation) {
+		Class<?> declaringType = getRawType(operation.getDeclaringType());
+		if (declaringType == null)
 			return null;
-		if (exe instanceof JvmOperation) {
-			Class<?>[] paramTypes = getParamTypes(exe);
-			try {
-				return class1.getDeclaredMethod(exe.getSimpleName(), paramTypes);
-			} catch (Exception e) {
-				if (log.isDebugEnabled())
-					log.debug(e.getMessage(), e);
-			}
-		} else {
-			throw new UnsupportedOperationException();
+		Class<?>[] paramTypes = getParamTypes(operation);
+		try {
+			return declaringType.getDeclaredMethod(operation.getSimpleName(), paramTypes);
+		} catch (Exception e) {
+			if (log.isDebugEnabled())
+				log.debug(e.getMessage(), e);
 		}
 		return null;
 	}
 	
 	/**
-	 * @return the {@link Class} corresponding to the given {@link JvmType}
+	 * @return the {@link Constructor} corresponding to the given {@link JvmConstructor} or <code>null</code>.
+	 */
+	public Constructor<?> getConstructor(JvmConstructor operation) {
+		Class<?> declaringType = getRawType(operation.getDeclaringType());
+		if (declaringType == null)
+			return null;
+		Class<?>[] paramTypes = getParamTypes(operation);
+		try {
+			return declaringType.getDeclaredConstructor(paramTypes);
+		} catch (Exception e) {
+			if (log.isDebugEnabled())
+				log.debug(e.getMessage(), e);
+		}
+		return null;
+	}
+	
+	/**
+	 * @return the {@link Class} corresponding to the given {@link JvmType} or <code>null</code>.
 	 */
 	public Class<?> getRawType(JvmType type) {
 		if (type.eIsProxy()) {
@@ -108,8 +123,8 @@ public class JavaReflectAccess {
 		return null;
 	}
 
-	private Class<?>[] getParamTypes(JvmExecutable exe) {
-		EList<JvmFormalParameter> parameters = ((JvmOperation) exe).getParameters();
+	protected Class<?>[] getParamTypes(JvmExecutable exe) {
+		EList<JvmFormalParameter> parameters = exe.getParameters();
 		List<Class<?>> result = Lists.newArrayList();
 		for (JvmFormalParameter p : parameters) {
 			result.add(getRawType(p.getParameterType()));
