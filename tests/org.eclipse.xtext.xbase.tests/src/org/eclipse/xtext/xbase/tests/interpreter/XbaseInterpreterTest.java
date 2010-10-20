@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.tests.interpreter;
 
 import java.util.Collections;
+import java.util.Stack;
 
 import com.google.inject.internal.Lists;
 
@@ -251,5 +252,21 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	
 	public void testTryFinally_02() {
 		assertEvaluatesTo("finally", "{ var x = 'foo' try 'literal' finally x = 'finally' x }");
+	}
+	
+	public void testConstructor_01() {
+		assertEvaluatesTo(Boolean.TRUE, "new java.io.StringReader('literal').markSupported");
+	}
+	
+	public void testConstructor_02() {
+		assertEvaluatesTo(new Character('a'), "new java.lang.Character('abc'.charAt(0))");
+	}
+	
+	public void testConstructor_03() {
+		assertEvaluatesTo("source", "new java.util.EventObject('source').getSource");
+	}
+	
+	public void testConstructor_04() {
+		assertEvaluatesTo(new Stack<Object>(), "new java.util.Stack()");
 	}
 }
