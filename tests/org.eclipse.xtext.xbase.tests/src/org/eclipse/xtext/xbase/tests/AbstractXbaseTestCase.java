@@ -20,6 +20,7 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -28,7 +29,17 @@ import com.google.inject.Injector;
  */
 public abstract class AbstractXbaseTestCase extends TestCase {
 
-	static Injector injector = new XbaseStandaloneSetup().createInjectorAndDoEMFRegistration();
+	static Injector injector = new XbaseStandaloneSetup() {
+		@Override
+		public Injector createInjector() {
+			return Guice.createInjector(new org.eclipse.xtext.xbase.XbaseRuntimeModule() {
+				@Override
+				public ClassLoader bindClassLoaderToInstance() {
+					return AbstractXbaseTestCase.class.getClassLoader();
+				}
+			});
+		}
+	}.createInjectorAndDoEMFRegistration();
 
 	@Override
 	protected void setUp() throws Exception {

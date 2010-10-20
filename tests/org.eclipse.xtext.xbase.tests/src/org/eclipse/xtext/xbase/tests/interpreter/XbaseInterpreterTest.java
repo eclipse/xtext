@@ -175,6 +175,35 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 		assertEvaluatesTo("literal", "'literal'.toUpperCase().toLowerCase()");
 	}
 	
+	public void testMemberFeatureCall_03() {
+		assertEvaluatesTo("source", "new java.util.EventObject('source').source");
+	}
+	
+	public void testMemberFeatureCall_04() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var fieldAccess = new org.eclipse.xtext.xbase.tests.testdata.FieldAccess()" +
+				"  fieldAccess.stringField = 'literal'" +
+				"}");
+	}
+	
+	public void testMemberFeatureCall_05() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var fieldAccess = new org.eclipse.xtext.xbase.tests.testdata.FieldAccess()" +
+				"  fieldAccess.stringField = 'literal'" +
+				"  fieldAccess.stringField" +
+				"}");
+	}
+	
+	public void testMemberFeatureCall_06() {
+		assertEvaluatesTo(null, 
+				"{" +
+				"  var fieldAccess = new org.eclipse.xtext.xbase.tests.testdata.FieldAccess()" +
+				"  fieldAccess.stringField" +
+				"}");
+	}
+	
 	public void testSwitchExpression_01() {
 		assertEvaluatesTo(null, "switch true { case false: 'literal'; }");
 	}
@@ -269,4 +298,5 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	public void testConstructor_04() {
 		assertEvaluatesTo(new Stack<Object>(), "new java.util.Stack()");
 	}
+	
 }

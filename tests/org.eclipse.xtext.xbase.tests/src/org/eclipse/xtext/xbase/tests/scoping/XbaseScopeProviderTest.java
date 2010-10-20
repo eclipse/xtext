@@ -56,6 +56,28 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("java.util.ArrayList.size",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
 	}
 	
+	public void testImplicitThis_3() throws Exception {
+		XBlockExpression bop = (XBlockExpression) expression(
+				"{ " +
+				"	val java.util.List this = new java.util.ArrayList<String>(); " +
+				"	size;" +
+				"}");
+//		TODO: fix expectation
+//		assertEquals("java.util.List.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
+		assertEquals("java.util.ArrayList.size",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
+	}
+	
+	public void testImplicitThis_4() throws Exception {
+		XBlockExpression bop = (XBlockExpression) expression(
+				"{ " +
+				"	val java.util.List this = new java.util.ArrayList<String>(); " +
+				"	size();" +
+				"}");
+//		TODO: fix expectation
+//		assertEquals("java.util.List.size()",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
+		assertEquals("java.util.ArrayList.size",((XFeatureCall)bop.getExpressions().get(1)).getFeature().getCanonicalName());
+	}
+	
 	public void testShadowing_1() throws Exception {
 		XBlockExpression bop = (XBlockExpression) expression(
 				"{ " +

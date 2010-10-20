@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.interpreter.impl;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -17,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -458,17 +460,29 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 	
+	public IEvaluationResult _featureCallField(JvmField jvmField, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+		if (receiver == null)
+			return new DefaultEvaluationResult(null, new NullPointerException("Cannot access field: " + jvmField.getCanonicalName() + " on null instance"));
+		
+		Field field = javaReflectAccess.getField(jvmField);
+		try {
+			if (field == null) {
+				throw new NoSuchFieldException("Could not find field " + jvmField.getFullyQualifiedName());
+			}
+			field.setAccessible(true);
+			Object result = field.get(receiver);
+			return new DefaultEvaluationResult(result, null);
+		} catch(Exception e) {
+			throw new IllegalStateException("Could not access field: " + jvmField.getFullyQualifiedName() + " on instance: " + receiver, e);
+		}
+	}
+	
 	public IEvaluationResult _evaluateAssignment(XAssignment assignment, IEvaluationContext context) {
 		IEvaluationResult value = evaluate(assignment.getValue(), context);
 		if (value.getException() != null)
 			return value;
-		IEvaluationResult assignable = evaluate(assignment.getAssignable(), context);
-		if (assignable.getException() != null)
-			return assignable;
-		IEvaluationResult assign = assignValue(assignment.getFeature(), assignable.getResult(), value.getResult(), context);
-		if (assign.getException() != null)
-			return assign;
-		return value;
+		IEvaluationResult assign = assignValue(assignment.getFeature(), assignment.getAssignable(), value.getResult(), context);
+		return assign;
 	}
 	
 	public IEvaluationResult assignValue(JvmIdentifyableElement feature, Object assignable, Object value, IEvaluationContext context) {
@@ -477,6 +491,27 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	public IEvaluationResult _assignValueToDeclaredVariable(XVariableDeclaration variable, Object assignable, Object value, IEvaluationContext context) {
 		context.assignValue(QualifiedName.create(variable.getName()), value);
-		return DefaultEvaluationResult.NULL;
+		return new DefaultEvaluationResult(value, null);
+	}
+	
+	public IEvaluationResult _assignValueToField(JvmField jvmField, XMemberFeatureCall assignable, Object value, IEvaluationContext context) {
+		IEvaluationResult target = evaluate(assignable.getMemberCallTarget(), context);
+		if (target.getException() != null)
+			return target;
+		Object receiver = target.getResult();
+		if (receiver == null)
+			return new DefaultEvaluationResult(null, new NullPointerException("Cannot access field: " + jvmField.getCanonicalName() + " on null instance"));
+		
+		Field field = javaReflectAccess.getField(jvmField);
+		try {
+			if (field == null) {
+				throw new NoSuchFieldException("Could not find field " + jvmField.getFullyQualifiedName());
+			}
+			field.setAccessible(true);
+			field.set(receiver, value);
+			return new DefaultEvaluationResult(value, null);
+		} catch(Exception e) {
+			throw new IllegalStateException("Could not access field: " + jvmField.getFullyQualifiedName() + " on instance: " + receiver, e);
+		}
 	}
 }
