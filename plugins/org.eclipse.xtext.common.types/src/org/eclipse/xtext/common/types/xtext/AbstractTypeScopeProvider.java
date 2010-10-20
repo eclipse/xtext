@@ -47,6 +47,9 @@ public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 		if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_TYPE, referenceType)) {
 			IJvmTypeProvider typeProvider = getTypeProvider(resourceSet);
 			return createTypeScope(typeProvider);
+		} else if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_CONSTRUCTOR, referenceType)) {
+			IJvmTypeProvider typeProvider = getTypeProvider(resourceSet);
+			return createConstructorScope(typeProvider);
 		} else {
 			return IScope.NULLSCOPE;
 		}
@@ -61,6 +64,8 @@ public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 
 	public abstract AbstractTypeScope createTypeScope(IJvmTypeProvider typeProvider);
 
+	public abstract AbstractConstructorScope createConstructorScope(IJvmTypeProvider typeProvider);
+	
 	public abstract IJvmTypeProvider.Factory getTypeProviderFactory();
 	
 	public IScope createMemberScope(JvmType containerType, Predicate<JvmMember> filter, Function<JvmMember, QualifiedName> names, IScope outer) {

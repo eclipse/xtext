@@ -37,6 +37,13 @@ public abstract class AbstractTypeScopeTest extends TestCase {
 		assertNull(objectElement);
 	}
 	
+	public void testGetElementByName_03() {
+		IEObjectDescription objectElement = getTypeScope().getContentByName(QualifiedName.create(int.class.getName()));
+		assertNotNull(objectElement);
+		assertFalse(objectElement.getEObjectOrProxy().eIsProxy());
+		assertEquals(QualifiedName.create("int"), objectElement.getName());
+	}
+	
 	public void testGetElementByInstance_01() {
 		JvmVoid voidType = TypesFactory.eINSTANCE.createJvmVoid();
 		IEObjectDescription element = getTypeScope().getContentByEObject(voidType);

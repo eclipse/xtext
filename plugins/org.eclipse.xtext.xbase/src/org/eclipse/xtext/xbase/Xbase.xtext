@@ -159,7 +159,9 @@ XFeatureCall returns XFeatureCall:
 	feature=[types::JvmIdentifyableElement] ('(' (featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*)? ')')?;
 
 XConstructorCall:
-	'new' type=JvmParameterizedTypeReference '(' (arguments+=XExpression (',' arguments+=XExpression)*)? ')';
+	'new' constructor=[types::JvmConstructor|QualifiedName] 
+	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?
+	'(' (arguments+=XExpression (',' arguments+=XExpression)*)? ')';
 
 XBooleanLiteral:
 	{XBooleanLiteral} 'false' | isTrue?='true';

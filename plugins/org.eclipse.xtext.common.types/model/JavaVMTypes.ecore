@@ -83,6 +83,11 @@
       </eGenericType>
     </eOperations>
     <eOperations name="isInstantiateable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getDeclaredConstructors" lowerBound="1">
+      <eGenericType eClassifier="#//Iterable">
+        <eTypeArguments eClassifier="#//JvmConstructor"/>
+      </eGenericType>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmTypeReference" abstract="true" eSuperTypes="#//JvmIdentifyableElement">

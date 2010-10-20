@@ -22,12 +22,17 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class TypesAwareDefaultGlobalScopeProvider extends DefaultGlobalScopeProvider {
+	
 	@Inject
 	private AbstractTypeScopeProvider typeScopeProvider;
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(getEReferenceType(context, reference))) {
+		EClass referenceType = getEReferenceType(context, reference);
+		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(referenceType)) {
+			return typeScopeProvider.getScope(context, reference);
+		}
+		if (TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf(referenceType)) {
 			return typeScopeProvider.getScope(context, reference);
 		}
 		return super.getScope(context, reference);
@@ -36,4 +41,5 @@ public class TypesAwareDefaultGlobalScopeProvider extends DefaultGlobalScopeProv
 	protected EClass getEReferenceType(EObject context, EReference reference) {
 		return reference.getEReferenceType();
 	}
+	
 }

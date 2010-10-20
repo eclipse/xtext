@@ -12,10 +12,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 
 import com.google.common.collect.Iterables;
 
-
-
 public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
-
 
 	@Override
 	public String getSimpleName() {
@@ -28,8 +25,6 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		int dotIdx = fullyQualifiedName.lastIndexOf('.');
 		return fullyQualifiedName.substring(dotIdx + 1);
 	}
-
-
 
 	@Override
 	public String getPackageName() {

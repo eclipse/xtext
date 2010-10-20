@@ -29,7 +29,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 
 	private final IQualifiedNameConverter qualifiedNameConverter;
 	
-	public AbstractTypeScope(IJvmTypeProvider typeProvider, IQualifiedNameConverter qualifiedNameConverter) {
+	protected AbstractTypeScope(IJvmTypeProvider typeProvider, IQualifiedNameConverter qualifiedNameConverter) {
 		this.typeProvider = typeProvider;
 		this.qualifiedNameConverter = qualifiedNameConverter;
 	}

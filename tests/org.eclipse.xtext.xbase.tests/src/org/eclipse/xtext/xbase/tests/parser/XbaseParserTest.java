@@ -381,25 +381,26 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testConstructorCall_0() throws Exception {
-		XConstructorCall cc = (XConstructorCall) expression("new Foo()");
-		assertNotNull(cc.getType());
+		XConstructorCall cc = (XConstructorCall) expression("new java.util.ArrayList()");
+		assertNotNull(cc.getConstructor());
+		assertFalse(cc.getConstructor().eIsProxy());
 		assertEquals(0, cc.getArguments().size());
 	}
 
 	public void testConstructorCall_1() throws Exception {
-		XConstructorCall cc = (XConstructorCall) expression("new Foo(0,1,2)");
-		assertNotNull(cc.getType());
-		assertEquals(3, cc.getArguments().size());
-		for (int i = 0; i < 3; i++)
-			assertEquals(i, ((XIntLiteral) cc.getArguments().get(i)).getValue());
+		XConstructorCall cc = (XConstructorCall) expression("new java.util.ArrayList(1)");
+		assertNotNull(cc.getConstructor());
+		assertFalse(cc.getConstructor().eIsProxy());
+		assertEquals(1, cc.getArguments().size());
+		assertEquals(1, ((XIntLiteral) cc.getArguments().get(0)).getValue());
 	}
 
 	public void testConstructorCall_2() throws Exception {
-		XConstructorCall cc = (XConstructorCall) expression("new Foo<String>(0,1,2)");
-		assertNotNull(cc.getType());
-		assertEquals(3, cc.getArguments().size());
-		for (int i = 0; i < 3; i++)
-			assertEquals(i, ((XIntLiteral) cc.getArguments().get(i)).getValue());
+		XConstructorCall cc = (XConstructorCall) expression("new java.util.ArrayList<java.lang.String>(13)");
+		assertNotNull(cc.getConstructor());
+		assertFalse(cc.getConstructor().eIsProxy());
+		assertEquals(1, cc.getArguments().size());
+		assertEquals(13, ((XIntLiteral) cc.getArguments().get(0)).getValue());
 	}
 	
 	public void testForLoopExpression() throws Exception {
