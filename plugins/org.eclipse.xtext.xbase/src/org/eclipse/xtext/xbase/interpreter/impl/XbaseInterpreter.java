@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -58,6 +60,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 
 import com.google.common.collect.Lists;
@@ -150,6 +153,23 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				return new DefaultEvaluationResult(primitive, null);
 			return new DefaultEvaluationResult(null, cnfe);
 		}
+	}
+	
+	public IEvaluationResult _evaluateClosure(XClosure closure, IEvaluationContext context) {
+		Class<?> functionIntf = null;
+		switch(closure.getFormalParameters().size()) {
+			case 0:  functionIntf = Functions.Function0.class; break;
+			case 1:  functionIntf = Functions.Function1.class; break;
+			case 2:  functionIntf = Functions.Function2.class; break;
+			case 3:  functionIntf = Functions.Function3.class; break;
+			case 4:  functionIntf = Functions.Function4.class; break;
+			case 5:  functionIntf = Functions.Function5.class; break;
+			case 6:  functionIntf = Functions.Function6.class; break;
+			default: functionIntf = Functions.FunctionX.class;
+		}
+		ClosureInvocationHandler invocationHandler = new ClosureInvocationHandler(closure, context, this);
+		Object proxy = Proxy.newProxyInstance(classLoader, new Class<?>[] { functionIntf }, invocationHandler);
+		return new DefaultEvaluationResult(proxy, null);
 	}
 	
 	public IEvaluationResult _evaluateBlockExpression(XBlockExpression literal, IEvaluationContext context) {
