@@ -341,4 +341,65 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	public void testInstanceOf_04() {
 		assertEvaluatesTo(Boolean.FALSE, "null instanceof java.lang.Boolean");
 	}
+	
+	public void testClosure_01() {
+		assertEvaluatesTo("literal", "new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().invoke0(|'literal')");
+	}
+	
+	public void testClosure_02() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var result = 'literal'" +
+				"  new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().invoke0(|result)" +
+				"}");
+	}
+	
+	public void testClosure_03() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var closure = |'literal'" +
+				"  new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().invoke0(closure)" +
+				"}");
+	}
+	
+	public void testClosure_05() {
+		assertEvaluatesTo("LITERAL", 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().invoke1(java.lang.String s|s.toUpperCase, 'literal')");
+	}
+	
+	public void testClosure_06() {
+		assertEvaluatesTo("LITERAL", 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().invoke2(" +
+				"  p1, java.lang.String s|s.toUpperCase, null, 'literal')");
+	}
+	
+	public void testClosure_07() {
+		assertEvaluatesTo("LITERAL", 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().invoke3(" +
+				"  p1, p2, java.lang.String s|s.toUpperCase, null, null, 'literal')");
+	}
+	
+	public void testClosure_08() {
+		assertEvaluatesTo("LITERAL", 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().invoke4(" +
+				"  p1, p2, p3, java.lang.String s|s.toUpperCase, null, null, null, 'literal')");
+	}
+	
+	public void testClosure_09() {
+		assertEvaluatesTo("LITERAL", 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().invoke5(" +
+				"  p1, p2, p3, p4, java.lang.String s|s.toUpperCase, null, null, null, null, 'literal')");
+	}
+	
+	public void testClosure_10() {
+		assertEvaluatesTo("LITERAL", 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().invoke6(" +
+				"  p1, p2, p3, p4, p5, java.lang.String s|s.toUpperCase, null, null, null, null, null, 'literal')");
+	}
+	
+	public void testClosure_11() {
+		assertEvaluatesTo(new Character('a'), 
+				"new org.eclipse.xtext.xbase.tests.testdata.ClosureClient().invokeX(" +
+				"  java.lang.Character c1, c2, c3, c4, c5, c6, c7|c1, 'abcdefg'.toCharArray)");
+	}
 }
