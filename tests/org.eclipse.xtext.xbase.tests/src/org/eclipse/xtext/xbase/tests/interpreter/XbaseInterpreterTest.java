@@ -263,6 +263,10 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 		assertEvaluatesWithException(ClassCastException.class, "(java.lang.Integer) 'literal'");
 	}
 	
+	public void testCastedExpression_03() {
+		assertEvaluatesTo(null, "(java.lang.Integer) null");
+	}
+	
 	public void testTryCatch_01() {
 		assertEvaluatesTo("caught", "try { (java.lang.Boolean) 'literal' } catch(java.lang.ClassCastException e) {'caught'}");
 	}
@@ -276,13 +280,13 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	}
 	
 	public void testTryCatch_04() {
-		assertEvaluatesWithException(NullPointerException.class, "try { (java.lang.Boolean) 'literal' } catch(java.lang.ClassCastException e) e == null");
+		assertEvaluatesWithException(NullPointerException.class, "try { (java.lang.Boolean) 'literal' } catch(java.lang.ClassCastException e) null == e");
 	}
 	
 	public void testTryCatch_05() {
 		assertEvaluatesWithException(NullPointerException.class, 
 				"try (java.lang.Boolean) 'literal' " +
-				"  catch(java.lang.ClassCastException e) e == null // throw new NullPointerException()" +
+				"  catch(java.lang.ClassCastException e) null == e // throw new NullPointerException()" +
 				"  catch(java.lang.NullPointerException e) 'dont catch subsequent exceptions'");
 	}
 	
@@ -320,5 +324,21 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	
 	public void testThrowExpression_03() {
 		assertEvaluatesWithException(NullPointerException.class, "throw null");
+	}
+	
+	public void testInstanceOf_01() {
+		assertEvaluatesTo(Boolean.TRUE, "'literal' instanceof java.lang.String");
+	}
+	
+	public void testInstanceOf_02() {
+		assertEvaluatesTo(Boolean.TRUE, "'literal' instanceof java.lang.CharSequence");
+	}
+	
+	public void testInstanceOf_03() {
+		assertEvaluatesTo(Boolean.FALSE, "'literal' instanceof java.lang.Boolean");
+	}
+	
+	public void testInstanceOf_04() {
+		assertEvaluatesTo(Boolean.FALSE, "null instanceof java.lang.Boolean");
 	}
 }
