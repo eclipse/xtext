@@ -195,7 +195,7 @@ ruleXIfExpression :
 
 // Rule XSwitchExpression
 ruleXSwitchExpression :
-	'switch' ruleXExpression? '{' ruleXCasePart+ (
+	'switch' ruleXExpressionInsideBlock? '{' ruleXCasePart+ (
 		'default' ':' (
 			ruleXExpression ';' |
 			ruleXBlockExpression
@@ -271,7 +271,11 @@ ruleXFeatureCall :
 
 // Rule XConstructorCall
 ruleXConstructorCall :
-	'new' ruleJvmParameterizedTypeReference '(' (
+	'new' ruleQualifiedName (
+		'<' ruleJvmArgumentTypeReference (
+			',' ruleJvmArgumentTypeReference
+		)* '>'
+	)? '(' (
 		ruleXExpression (
 			',' ruleXExpression
 		)*

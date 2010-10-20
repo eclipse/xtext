@@ -209,4 +209,13 @@ public class JvmGenericTypeTest extends TestCase {
 		assertTrue(Iterables.isEmpty(classes));
 	}
 	
+	public void testGetDeclaredConstructors_01() {
+		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
+		JvmField field = TypesFactory.eINSTANCE.createJvmField();
+		JvmOperation operation = TypesFactory.eINSTANCE.createJvmOperation();
+		genericType.getMembers().add(field);
+		genericType.getMembers().add(constructor);
+		genericType.getMembers().add(operation);
+		assertEquals(constructor, Iterables.getOnlyElement(genericType.getDeclaredConstructors()));
+	}
 }

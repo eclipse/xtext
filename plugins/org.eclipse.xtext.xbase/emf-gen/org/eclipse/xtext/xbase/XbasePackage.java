@@ -493,13 +493,13 @@ public interface XbasePackage extends EPackage
 	int XCONSTRUCTOR_CALL = 9;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Constructor</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCONSTRUCTOR_CALL__TYPE = XEXPRESSION_FEATURE_COUNT + 0;
+	int XCONSTRUCTOR_CALL__CONSTRUCTOR = XEXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -511,13 +511,22 @@ public interface XbasePackage extends EPackage
 	int XCONSTRUCTOR_CALL__ARGUMENTS = XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCONSTRUCTOR_CALL__TYPE_ARGUMENTS = XEXPRESSION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>XConstructor Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XCONSTRUCTOR_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 2;
+	int XCONSTRUCTOR_CALL_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl <em>XBoolean Literal</em>}' class.
@@ -1561,15 +1570,15 @@ public interface XbasePackage extends EPackage
 	EClass getXConstructorCall();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XConstructorCall#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XConstructorCall#getConstructor <em>Constructor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see org.eclipse.xtext.xbase.XConstructorCall#getType()
+	 * @return the meta object for the reference '<em>Constructor</em>'.
+	 * @see org.eclipse.xtext.xbase.XConstructorCall#getConstructor()
 	 * @see #getXConstructorCall()
 	 * @generated
 	 */
-	EReference getXConstructorCall_Type();
+	EReference getXConstructorCall_Constructor();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XConstructorCall#getArguments <em>Arguments</em>}'.
@@ -1581,6 +1590,17 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXConstructorCall_Arguments();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XConstructorCall#getTypeArguments <em>Type Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Type Arguments</em>'.
+	 * @see org.eclipse.xtext.xbase.XConstructorCall#getTypeArguments()
+	 * @see #getXConstructorCall()
+	 * @generated
+	 */
+	EReference getXConstructorCall_TypeArguments();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XBooleanLiteral <em>XBoolean Literal</em>}'.
@@ -2332,12 +2352,12 @@ public interface XbasePackage extends EPackage
 		EClass XCONSTRUCTOR_CALL = eINSTANCE.getXConstructorCall();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Constructor</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XCONSTRUCTOR_CALL__TYPE = eINSTANCE.getXConstructorCall_Type();
+		EReference XCONSTRUCTOR_CALL__CONSTRUCTOR = eINSTANCE.getXConstructorCall_Constructor();
 
 		/**
 		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
@@ -2346,6 +2366,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XCONSTRUCTOR_CALL__ARGUMENTS = eINSTANCE.getXConstructorCall_Arguments();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Arguments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCONSTRUCTOR_CALL__TYPE_ARGUMENTS = eINSTANCE.getXConstructorCall_TypeArguments();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl <em>XBoolean Literal</em>}' class.

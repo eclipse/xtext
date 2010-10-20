@@ -32,6 +32,12 @@ public class ClasspathBasedTypeScopeProvider extends AbstractTypeScopeProvider {
 	public ClasspathBasedTypeScope createTypeScope(IJvmTypeProvider typeProvider) {
 		return new ClasspathBasedTypeScope((ClasspathTypeProvider) typeProvider, qualifiedNameConverter);
 	}
+	
+	@Override
+	public AbstractConstructorScope createConstructorScope(IJvmTypeProvider typeProvider) {
+		ClasspathBasedTypeScope typeScope = createTypeScope(typeProvider);
+		return new ClasspathBasedConstructorScope(typeScope);
+	}
 
 	public void setTypeProviderFactory(ClasspathTypeProviderFactory typeProviderFactory) {
 		this.typeProviderFactory = typeProviderFactory;

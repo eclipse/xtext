@@ -1740,6 +1740,12 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		addEOperation(jvmGenericTypeEClass, ecorePackage.getEBoolean(), "isInstantiateable", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(jvmGenericTypeEClass, null, "getDeclaredConstructors", 1, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(this.getIterable());
+		g2 = createEGenericType(this.getJvmConstructor());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		initEClass(jvmTypeReferenceEClass, JvmTypeReference.class, "JvmTypeReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		addEOperation(jvmTypeReferenceEClass, this.getJvmType(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);

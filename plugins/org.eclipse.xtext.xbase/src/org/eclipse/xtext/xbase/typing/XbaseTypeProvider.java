@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -108,7 +110,13 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XConstructorCall object, Context<JvmTypeReference> context) {
-		return object.getType();
+		JvmConstructor constructor = object.getConstructor();
+		JvmParameterizedTypeReference result = factory.createJvmParameterizedTypeReference();
+		result.setType(constructor.getDeclaringType());
+		for(JvmTypeReference argument: object.getTypeArguments()) {
+			result.getArguments().add(EcoreUtil2.clone(argument));
+		}
+		return result;
 	}
 
 	protected JvmTypeReference _type(XBooleanLiteral object, Context<JvmTypeReference> context) {

@@ -75,4 +75,12 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	 */
 	boolean isInstantiateable();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" dataType="org.eclipse.xtext.common.types.Iterable<org.eclipse.xtext.common.types.JvmConstructor>" required="true"
+	 * @generated
+	 */
+	Iterable<JvmConstructor> getDeclaredConstructors();
+
 } // JvmGenericType

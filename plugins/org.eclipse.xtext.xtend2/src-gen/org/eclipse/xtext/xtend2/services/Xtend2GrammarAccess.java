@@ -728,7 +728,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XSwitchExpression:
-	//	"switch" switch=XExpression? "{" cases+=XCasePart+ ("default" ":" (default=XExpression ";" |
+	//	"switch" switch=XExpressionInsideBlock? "{" cases+=XCasePart+ ("default" ":" (default=XExpression ";" |
 	//	default=XBlockExpression))? "}";
 	public XbaseGrammarAccess.XSwitchExpressionElements getXSwitchExpressionAccess() {
 		return gaXbase.getXSwitchExpressionAccess();
@@ -831,7 +831,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XConstructorCall:
-	//	"new" type=JvmParameterizedTypeReference "(" (arguments+=XExpression ("," arguments+=XExpression)*)? ")";
+	//	"new" constructor=[types::JvmConstructor|QualifiedName] ("<" typeArguments+=JvmArgumentTypeReference (","
+	//	typeArguments+=JvmArgumentTypeReference)* ">")? "(" (arguments+=XExpression ("," arguments+=XExpression)*)? ")";
 	public XbaseGrammarAccess.XConstructorCallElements getXConstructorCallAccess() {
 		return gaXbase.getXConstructorCallAccess();
 	}

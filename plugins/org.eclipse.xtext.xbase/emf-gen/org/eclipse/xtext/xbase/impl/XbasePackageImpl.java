@@ -629,7 +629,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXConstructorCall_Type()
+	public EReference getXConstructorCall_Constructor()
 	{
 		return (EReference)xConstructorCallEClass.getEStructuralFeatures().get(0);
 	}
@@ -642,6 +642,16 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	public EReference getXConstructorCall_Arguments()
 	{
 		return (EReference)xConstructorCallEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXConstructorCall_TypeArguments()
+	{
+		return (EReference)xConstructorCallEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1153,8 +1163,9 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		createEReference(xFeatureCallEClass, XFEATURE_CALL__FEATURE_CALL_ARGUMENTS);
 
 		xConstructorCallEClass = createEClass(XCONSTRUCTOR_CALL);
-		createEReference(xConstructorCallEClass, XCONSTRUCTOR_CALL__TYPE);
+		createEReference(xConstructorCallEClass, XCONSTRUCTOR_CALL__CONSTRUCTOR);
 		createEReference(xConstructorCallEClass, XCONSTRUCTOR_CALL__ARGUMENTS);
+		createEReference(xConstructorCallEClass, XCONSTRUCTOR_CALL__TYPE_ARGUMENTS);
 
 		xBooleanLiteralEClass = createEClass(XBOOLEAN_LITERAL);
 		createEAttribute(xBooleanLiteralEClass, XBOOLEAN_LITERAL__IS_TRUE);
@@ -1318,8 +1329,9 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEReference(getXFeatureCall_FeatureCallArguments(), this.getXExpression(), null, "featureCallArguments", null, 0, -1, XFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xConstructorCallEClass, XConstructorCall.class, "XConstructorCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getXConstructorCall_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, XConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXConstructorCall_Constructor(), theTypesPackage.getJvmConstructor(), null, "constructor", null, 0, 1, XConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXConstructorCall_Arguments(), this.getXExpression(), null, "arguments", null, 0, -1, XConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXConstructorCall_TypeArguments(), theTypesPackage.getJvmTypeReference(), null, "typeArguments", null, 0, -1, XConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xBooleanLiteralEClass, XBooleanLiteral.class, "XBooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXBooleanLiteral_IsTrue(), ecorePackage.getEBoolean(), "isTrue", null, 0, 1, XBooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

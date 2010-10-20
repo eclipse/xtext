@@ -97,7 +97,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         }
         public InternalXbaseParser(TokenStream input, RecognizerSharedState state) {
             super(input, state);
-            this.state.ruleMemo = new HashMap[723+1];
+            this.state.ruleMemo = new HashMap[741+1];
              
              
         }
@@ -21706,7 +21706,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XConstructorCall__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7068:1: rule__XConstructorCall__Group__1__Impl : ( ( rule__XConstructorCall__TypeAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7068:1: rule__XConstructorCall__Group__1__Impl : ( ( rule__XConstructorCall__ConstructorAssignment_1 ) ) ;
     public final void rule__XConstructorCall__Group__1__Impl() throws RecognitionException {
         int rule__XConstructorCall__Group__1__Impl_StartIndex = input.index();
 
@@ -21714,20 +21714,20 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 439) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7072:1: ( ( ( rule__XConstructorCall__TypeAssignment_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7073:1: ( ( rule__XConstructorCall__TypeAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7072:1: ( ( ( rule__XConstructorCall__ConstructorAssignment_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7073:1: ( ( rule__XConstructorCall__ConstructorAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7073:1: ( ( rule__XConstructorCall__TypeAssignment_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7074:1: ( rule__XConstructorCall__TypeAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7073:1: ( ( rule__XConstructorCall__ConstructorAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7074:1: ( rule__XConstructorCall__ConstructorAssignment_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getTypeAssignment_1()); 
+               before(grammarAccess.getXConstructorCallAccess().getConstructorAssignment_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7075:1: ( rule__XConstructorCall__TypeAssignment_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7075:2: rule__XConstructorCall__TypeAssignment_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7075:1: ( rule__XConstructorCall__ConstructorAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7075:2: rule__XConstructorCall__ConstructorAssignment_1
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__TypeAssignment_1_in_rule__XConstructorCall__Group__1__Impl14328);
-            rule__XConstructorCall__TypeAssignment_1();
+            pushFollow(FOLLOW_rule__XConstructorCall__ConstructorAssignment_1_in_rule__XConstructorCall__Group__1__Impl14328);
+            rule__XConstructorCall__ConstructorAssignment_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -21735,7 +21735,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getTypeAssignment_1()); 
+               after(grammarAccess.getXConstructorCallAccess().getConstructorAssignment_1()); 
             }
 
             }
@@ -21801,7 +21801,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XConstructorCall__Group__2__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7097:1: rule__XConstructorCall__Group__2__Impl : ( '(' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7097:1: rule__XConstructorCall__Group__2__Impl : ( ( rule__XConstructorCall__Group_2__0 )? ) ;
     public final void rule__XConstructorCall__Group__2__Impl() throws RecognitionException {
         int rule__XConstructorCall__Group__2__Impl_StartIndex = input.index();
 
@@ -21809,18 +21809,39 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 441) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7101:1: ( ( '(' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7102:1: ( '(' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7101:1: ( ( ( rule__XConstructorCall__Group_2__0 )? ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7102:1: ( ( rule__XConstructorCall__Group_2__0 )? )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7102:1: ( '(' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7103:1: '('
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7102:1: ( ( rule__XConstructorCall__Group_2__0 )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7103:1: ( rule__XConstructorCall__Group_2__0 )?
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_2()); 
+               before(grammarAccess.getXConstructorCallAccess().getGroup_2()); 
             }
-            match(input,35,FOLLOW_35_in_rule__XConstructorCall__Group__2__Impl14389); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7104:1: ( rule__XConstructorCall__Group_2__0 )?
+            int alt51=2;
+            int LA51_0 = input.LA(1);
+
+            if ( (LA51_0==20) ) {
+                alt51=1;
+            }
+            switch (alt51) {
+                case 1 :
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7104:2: rule__XConstructorCall__Group_2__0
+                    {
+                    pushFollow(FOLLOW_rule__XConstructorCall__Group_2__0_in_rule__XConstructorCall__Group__2__Impl14388);
+                    rule__XConstructorCall__Group_2__0();
+
+                    state._fsp--;
+                    if (state.failed) return ;
+
+                    }
+                    break;
+
+            }
+
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_2()); 
+               after(grammarAccess.getXConstructorCallAccess().getGroup_2()); 
             }
 
             }
@@ -21845,7 +21866,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XConstructorCall__Group__3"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7116:1: rule__XConstructorCall__Group__3 : rule__XConstructorCall__Group__3__Impl rule__XConstructorCall__Group__4 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7114:1: rule__XConstructorCall__Group__3 : rule__XConstructorCall__Group__3__Impl rule__XConstructorCall__Group__4 ;
     public final void rule__XConstructorCall__Group__3() throws RecognitionException {
         int rule__XConstructorCall__Group__3_StartIndex = input.index();
 
@@ -21853,15 +21874,15 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 442) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7120:1: ( rule__XConstructorCall__Group__3__Impl rule__XConstructorCall__Group__4 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7121:2: rule__XConstructorCall__Group__3__Impl rule__XConstructorCall__Group__4
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7118:1: ( rule__XConstructorCall__Group__3__Impl rule__XConstructorCall__Group__4 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7119:2: rule__XConstructorCall__Group__3__Impl rule__XConstructorCall__Group__4
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group__3__Impl_in_rule__XConstructorCall__Group__314420);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__3__Impl_in_rule__XConstructorCall__Group__314419);
             rule__XConstructorCall__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XConstructorCall__Group__4_in_rule__XConstructorCall__Group__314423);
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__4_in_rule__XConstructorCall__Group__314422);
             rule__XConstructorCall__Group__4();
 
             state._fsp--;
@@ -21886,7 +21907,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XConstructorCall__Group__3__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7128:1: rule__XConstructorCall__Group__3__Impl : ( ( rule__XConstructorCall__Group_3__0 )? ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7126:1: rule__XConstructorCall__Group__3__Impl : ( '(' ) ;
     public final void rule__XConstructorCall__Group__3__Impl() throws RecognitionException {
         int rule__XConstructorCall__Group__3__Impl_StartIndex = input.index();
 
@@ -21894,39 +21915,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 443) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7132:1: ( ( ( rule__XConstructorCall__Group_3__0 )? ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7133:1: ( ( rule__XConstructorCall__Group_3__0 )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7130:1: ( ( '(' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7131:1: ( '(' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7133:1: ( ( rule__XConstructorCall__Group_3__0 )? )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7134:1: ( rule__XConstructorCall__Group_3__0 )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7131:1: ( '(' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7132:1: '('
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getGroup_3()); 
+               before(grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_3()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7135:1: ( rule__XConstructorCall__Group_3__0 )?
-            int alt51=2;
-            int LA51_0 = input.LA(1);
-
-            if ( ((LA51_0>=RULE_ID && LA51_0<=RULE_STRING)||LA51_0==20||(LA51_0>=23 && LA51_0<=24)||LA51_0==29||LA51_0==35||(LA51_0>=37 && LA51_0<=38)||(LA51_0>=40 && LA51_0<=41)||(LA51_0>=47 && LA51_0<=52)||(LA51_0>=54 && LA51_0<=55)||LA51_0==58||LA51_0==63) ) {
-                alt51=1;
-            }
-            switch (alt51) {
-                case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7135:2: rule__XConstructorCall__Group_3__0
-                    {
-                    pushFollow(FOLLOW_rule__XConstructorCall__Group_3__0_in_rule__XConstructorCall__Group__3__Impl14450);
-                    rule__XConstructorCall__Group_3__0();
-
-                    state._fsp--;
-                    if (state.failed) return ;
-
-                    }
-                    break;
-
-            }
-
+            match(input,35,FOLLOW_35_in_rule__XConstructorCall__Group__3__Impl14450); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getGroup_3()); 
+               after(grammarAccess.getXConstructorCallAccess().getLeftParenthesisKeyword_3()); 
             }
 
             }
@@ -21951,7 +21951,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XConstructorCall__Group__4"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7145:1: rule__XConstructorCall__Group__4 : rule__XConstructorCall__Group__4__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7145:1: rule__XConstructorCall__Group__4 : rule__XConstructorCall__Group__4__Impl rule__XConstructorCall__Group__5 ;
     public final void rule__XConstructorCall__Group__4() throws RecognitionException {
         int rule__XConstructorCall__Group__4_StartIndex = input.index();
 
@@ -21959,11 +21959,16 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 444) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7149:1: ( rule__XConstructorCall__Group__4__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7150:2: rule__XConstructorCall__Group__4__Impl
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7149:1: ( rule__XConstructorCall__Group__4__Impl rule__XConstructorCall__Group__5 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7150:2: rule__XConstructorCall__Group__4__Impl rule__XConstructorCall__Group__5
             {
             pushFollow(FOLLOW_rule__XConstructorCall__Group__4__Impl_in_rule__XConstructorCall__Group__414481);
             rule__XConstructorCall__Group__4__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__5_in_rule__XConstructorCall__Group__414484);
+            rule__XConstructorCall__Group__5();
 
             state._fsp--;
             if (state.failed) return ;
@@ -21987,7 +21992,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XConstructorCall__Group__4__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7156:1: rule__XConstructorCall__Group__4__Impl : ( ')' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7157:1: rule__XConstructorCall__Group__4__Impl : ( ( rule__XConstructorCall__Group_4__0 )? ) ;
     public final void rule__XConstructorCall__Group__4__Impl() throws RecognitionException {
         int rule__XConstructorCall__Group__4__Impl_StartIndex = input.index();
 
@@ -21995,18 +22000,39 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 445) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7160:1: ( ( ')' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7161:1: ( ')' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7161:1: ( ( ( rule__XConstructorCall__Group_4__0 )? ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7162:1: ( ( rule__XConstructorCall__Group_4__0 )? )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7161:1: ( ')' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7162:1: ')'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7162:1: ( ( rule__XConstructorCall__Group_4__0 )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7163:1: ( rule__XConstructorCall__Group_4__0 )?
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_4()); 
+               before(grammarAccess.getXConstructorCallAccess().getGroup_4()); 
             }
-            match(input,36,FOLLOW_36_in_rule__XConstructorCall__Group__4__Impl14509); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7164:1: ( rule__XConstructorCall__Group_4__0 )?
+            int alt52=2;
+            int LA52_0 = input.LA(1);
+
+            if ( ((LA52_0>=RULE_ID && LA52_0<=RULE_STRING)||LA52_0==20||(LA52_0>=23 && LA52_0<=24)||LA52_0==29||LA52_0==35||(LA52_0>=37 && LA52_0<=38)||(LA52_0>=40 && LA52_0<=41)||(LA52_0>=47 && LA52_0<=52)||(LA52_0>=54 && LA52_0<=55)||LA52_0==58||LA52_0==63) ) {
+                alt52=1;
+            }
+            switch (alt52) {
+                case 1 :
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7164:2: rule__XConstructorCall__Group_4__0
+                    {
+                    pushFollow(FOLLOW_rule__XConstructorCall__Group_4__0_in_rule__XConstructorCall__Group__4__Impl14511);
+                    rule__XConstructorCall__Group_4__0();
+
+                    state._fsp--;
+                    if (state.failed) return ;
+
+                    }
+                    break;
+
+            }
+
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_4()); 
+               after(grammarAccess.getXConstructorCallAccess().getGroup_4()); 
             }
 
             }
@@ -22030,25 +22056,20 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__XConstructorCall__Group__4__Impl"
 
 
-    // $ANTLR start "rule__XConstructorCall__Group_3__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7185:1: rule__XConstructorCall__Group_3__0 : rule__XConstructorCall__Group_3__0__Impl rule__XConstructorCall__Group_3__1 ;
-    public final void rule__XConstructorCall__Group_3__0() throws RecognitionException {
-        int rule__XConstructorCall__Group_3__0_StartIndex = input.index();
+    // $ANTLR start "rule__XConstructorCall__Group__5"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7174:1: rule__XConstructorCall__Group__5 : rule__XConstructorCall__Group__5__Impl ;
+    public final void rule__XConstructorCall__Group__5() throws RecognitionException {
+        int rule__XConstructorCall__Group__5_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 446) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7189:1: ( rule__XConstructorCall__Group_3__0__Impl rule__XConstructorCall__Group_3__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7190:2: rule__XConstructorCall__Group_3__0__Impl rule__XConstructorCall__Group_3__1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7178:1: ( rule__XConstructorCall__Group__5__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7179:2: rule__XConstructorCall__Group__5__Impl
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3__0__Impl_in_rule__XConstructorCall__Group_3__014550);
-            rule__XConstructorCall__Group_3__0__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3__1_in_rule__XConstructorCall__Group_3__014553);
-            rule__XConstructorCall__Group_3__1();
+            pushFollow(FOLLOW_rule__XConstructorCall__Group__5__Impl_in_rule__XConstructorCall__Group__514542);
+            rule__XConstructorCall__Group__5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -22061,47 +22082,37 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 446, rule__XConstructorCall__Group_3__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 446, rule__XConstructorCall__Group__5_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__XConstructorCall__Group_3__0"
+    // $ANTLR end "rule__XConstructorCall__Group__5"
 
 
-    // $ANTLR start "rule__XConstructorCall__Group_3__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7197:1: rule__XConstructorCall__Group_3__0__Impl : ( ( rule__XConstructorCall__ArgumentsAssignment_3_0 ) ) ;
-    public final void rule__XConstructorCall__Group_3__0__Impl() throws RecognitionException {
-        int rule__XConstructorCall__Group_3__0__Impl_StartIndex = input.index();
+    // $ANTLR start "rule__XConstructorCall__Group__5__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7185:1: rule__XConstructorCall__Group__5__Impl : ( ')' ) ;
+    public final void rule__XConstructorCall__Group__5__Impl() throws RecognitionException {
+        int rule__XConstructorCall__Group__5__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 447) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7201:1: ( ( ( rule__XConstructorCall__ArgumentsAssignment_3_0 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7202:1: ( ( rule__XConstructorCall__ArgumentsAssignment_3_0 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7189:1: ( ( ')' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7190:1: ( ')' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7202:1: ( ( rule__XConstructorCall__ArgumentsAssignment_3_0 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7203:1: ( rule__XConstructorCall__ArgumentsAssignment_3_0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7190:1: ( ')' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7191:1: ')'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_3_0()); 
+               before(grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_5()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7204:1: ( rule__XConstructorCall__ArgumentsAssignment_3_0 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7204:2: rule__XConstructorCall__ArgumentsAssignment_3_0
-            {
-            pushFollow(FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_0_in_rule__XConstructorCall__Group_3__0__Impl14580);
-            rule__XConstructorCall__ArgumentsAssignment_3_0();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
+            match(input,36,FOLLOW_36_in_rule__XConstructorCall__Group__5__Impl14570); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_3_0()); 
+               after(grammarAccess.getXConstructorCallAccess().getRightParenthesisKeyword_5()); 
             }
 
             }
@@ -22115,30 +22126,35 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 447, rule__XConstructorCall__Group_3__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 447, rule__XConstructorCall__Group__5__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__XConstructorCall__Group_3__0__Impl"
+    // $ANTLR end "rule__XConstructorCall__Group__5__Impl"
 
 
-    // $ANTLR start "rule__XConstructorCall__Group_3__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7214:1: rule__XConstructorCall__Group_3__1 : rule__XConstructorCall__Group_3__1__Impl ;
-    public final void rule__XConstructorCall__Group_3__1() throws RecognitionException {
-        int rule__XConstructorCall__Group_3__1_StartIndex = input.index();
+    // $ANTLR start "rule__XConstructorCall__Group_2__0"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7216:1: rule__XConstructorCall__Group_2__0 : rule__XConstructorCall__Group_2__0__Impl rule__XConstructorCall__Group_2__1 ;
+    public final void rule__XConstructorCall__Group_2__0() throws RecognitionException {
+        int rule__XConstructorCall__Group_2__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 448) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7218:1: ( rule__XConstructorCall__Group_3__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7219:2: rule__XConstructorCall__Group_3__1__Impl
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7220:1: ( rule__XConstructorCall__Group_2__0__Impl rule__XConstructorCall__Group_2__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7221:2: rule__XConstructorCall__Group_2__0__Impl rule__XConstructorCall__Group_2__1
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3__1__Impl_in_rule__XConstructorCall__Group_3__114610);
-            rule__XConstructorCall__Group_3__1__Impl();
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_2__0__Impl_in_rule__XConstructorCall__Group_2__014613);
+            rule__XConstructorCall__Group_2__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_2__1_in_rule__XConstructorCall__Group_2__014616);
+            rule__XConstructorCall__Group_2__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -22151,51 +22167,231 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 448, rule__XConstructorCall__Group_3__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 448, rule__XConstructorCall__Group_2__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__XConstructorCall__Group_3__1"
+    // $ANTLR end "rule__XConstructorCall__Group_2__0"
 
 
-    // $ANTLR start "rule__XConstructorCall__Group_3__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7225:1: rule__XConstructorCall__Group_3__1__Impl : ( ( rule__XConstructorCall__Group_3_1__0 )* ) ;
-    public final void rule__XConstructorCall__Group_3__1__Impl() throws RecognitionException {
-        int rule__XConstructorCall__Group_3__1__Impl_StartIndex = input.index();
+    // $ANTLR start "rule__XConstructorCall__Group_2__0__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7228:1: rule__XConstructorCall__Group_2__0__Impl : ( '<' ) ;
+    public final void rule__XConstructorCall__Group_2__0__Impl() throws RecognitionException {
+        int rule__XConstructorCall__Group_2__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 449) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7229:1: ( ( ( rule__XConstructorCall__Group_3_1__0 )* ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7230:1: ( ( rule__XConstructorCall__Group_3_1__0 )* )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7232:1: ( ( '<' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7233:1: ( '<' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7230:1: ( ( rule__XConstructorCall__Group_3_1__0 )* )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7231:1: ( rule__XConstructorCall__Group_3_1__0 )*
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7233:1: ( '<' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7234:1: '<'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getGroup_3_1()); 
+               before(grammarAccess.getXConstructorCallAccess().getLessThanSignKeyword_2_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7232:1: ( rule__XConstructorCall__Group_3_1__0 )*
-            loop52:
-            do {
-                int alt52=2;
-                int LA52_0 = input.LA(1);
+            match(input,20,FOLLOW_20_in_rule__XConstructorCall__Group_2__0__Impl14644); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXConstructorCallAccess().getLessThanSignKeyword_2_0()); 
+            }
 
-                if ( (LA52_0==34) ) {
-                    alt52=1;
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 449, rule__XConstructorCall__Group_2__0__Impl_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_2__0__Impl"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_2__1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7247:1: rule__XConstructorCall__Group_2__1 : rule__XConstructorCall__Group_2__1__Impl rule__XConstructorCall__Group_2__2 ;
+    public final void rule__XConstructorCall__Group_2__1() throws RecognitionException {
+        int rule__XConstructorCall__Group_2__1_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 450) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7251:1: ( rule__XConstructorCall__Group_2__1__Impl rule__XConstructorCall__Group_2__2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7252:2: rule__XConstructorCall__Group_2__1__Impl rule__XConstructorCall__Group_2__2
+            {
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_2__1__Impl_in_rule__XConstructorCall__Group_2__114675);
+            rule__XConstructorCall__Group_2__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_2__2_in_rule__XConstructorCall__Group_2__114678);
+            rule__XConstructorCall__Group_2__2();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 450, rule__XConstructorCall__Group_2__1_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_2__1"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_2__1__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7259:1: rule__XConstructorCall__Group_2__1__Impl : ( ( rule__XConstructorCall__TypeArgumentsAssignment_2_1 ) ) ;
+    public final void rule__XConstructorCall__Group_2__1__Impl() throws RecognitionException {
+        int rule__XConstructorCall__Group_2__1__Impl_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 451) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7263:1: ( ( ( rule__XConstructorCall__TypeArgumentsAssignment_2_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7264:1: ( ( rule__XConstructorCall__TypeArgumentsAssignment_2_1 ) )
+            {
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7264:1: ( ( rule__XConstructorCall__TypeArgumentsAssignment_2_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7265:1: ( rule__XConstructorCall__TypeArgumentsAssignment_2_1 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXConstructorCallAccess().getTypeArgumentsAssignment_2_1()); 
+            }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7266:1: ( rule__XConstructorCall__TypeArgumentsAssignment_2_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7266:2: rule__XConstructorCall__TypeArgumentsAssignment_2_1
+            {
+            pushFollow(FOLLOW_rule__XConstructorCall__TypeArgumentsAssignment_2_1_in_rule__XConstructorCall__Group_2__1__Impl14705);
+            rule__XConstructorCall__TypeArgumentsAssignment_2_1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXConstructorCallAccess().getTypeArgumentsAssignment_2_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 451, rule__XConstructorCall__Group_2__1__Impl_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_2__1__Impl"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_2__2"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7276:1: rule__XConstructorCall__Group_2__2 : rule__XConstructorCall__Group_2__2__Impl rule__XConstructorCall__Group_2__3 ;
+    public final void rule__XConstructorCall__Group_2__2() throws RecognitionException {
+        int rule__XConstructorCall__Group_2__2_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 452) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7280:1: ( rule__XConstructorCall__Group_2__2__Impl rule__XConstructorCall__Group_2__3 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7281:2: rule__XConstructorCall__Group_2__2__Impl rule__XConstructorCall__Group_2__3
+            {
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_2__2__Impl_in_rule__XConstructorCall__Group_2__214735);
+            rule__XConstructorCall__Group_2__2__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_2__3_in_rule__XConstructorCall__Group_2__214738);
+            rule__XConstructorCall__Group_2__3();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 452, rule__XConstructorCall__Group_2__2_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_2__2"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_2__2__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7288:1: rule__XConstructorCall__Group_2__2__Impl : ( ( rule__XConstructorCall__Group_2_2__0 )* ) ;
+    public final void rule__XConstructorCall__Group_2__2__Impl() throws RecognitionException {
+        int rule__XConstructorCall__Group_2__2__Impl_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 453) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7292:1: ( ( ( rule__XConstructorCall__Group_2_2__0 )* ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7293:1: ( ( rule__XConstructorCall__Group_2_2__0 )* )
+            {
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7293:1: ( ( rule__XConstructorCall__Group_2_2__0 )* )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7294:1: ( rule__XConstructorCall__Group_2_2__0 )*
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXConstructorCallAccess().getGroup_2_2()); 
+            }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7295:1: ( rule__XConstructorCall__Group_2_2__0 )*
+            loop53:
+            do {
+                int alt53=2;
+                int LA53_0 = input.LA(1);
+
+                if ( (LA53_0==34) ) {
+                    alt53=1;
                 }
 
 
-                switch (alt52) {
+                switch (alt53) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7232:2: rule__XConstructorCall__Group_3_1__0
+            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7295:2: rule__XConstructorCall__Group_2_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__0_in_rule__XConstructorCall__Group_3__1__Impl14637);
-            	    rule__XConstructorCall__Group_3_1__0();
+            	    pushFollow(FOLLOW_rule__XConstructorCall__Group_2_2__0_in_rule__XConstructorCall__Group_2__2__Impl14765);
+            	    rule__XConstructorCall__Group_2_2__0();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -22204,12 +22400,12 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop52;
+            	    break loop53;
                 }
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getGroup_3_1()); 
+               after(grammarAccess.getXConstructorCallAccess().getGroup_2_2()); 
             }
 
             }
@@ -22223,35 +22419,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 449, rule__XConstructorCall__Group_3__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 453, rule__XConstructorCall__Group_2__2__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__XConstructorCall__Group_3__1__Impl"
+    // $ANTLR end "rule__XConstructorCall__Group_2__2__Impl"
 
 
-    // $ANTLR start "rule__XConstructorCall__Group_3_1__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7246:1: rule__XConstructorCall__Group_3_1__0 : rule__XConstructorCall__Group_3_1__0__Impl rule__XConstructorCall__Group_3_1__1 ;
-    public final void rule__XConstructorCall__Group_3_1__0() throws RecognitionException {
-        int rule__XConstructorCall__Group_3_1__0_StartIndex = input.index();
+    // $ANTLR start "rule__XConstructorCall__Group_2__3"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7305:1: rule__XConstructorCall__Group_2__3 : rule__XConstructorCall__Group_2__3__Impl ;
+    public final void rule__XConstructorCall__Group_2__3() throws RecognitionException {
+        int rule__XConstructorCall__Group_2__3_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 450) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7250:1: ( rule__XConstructorCall__Group_3_1__0__Impl rule__XConstructorCall__Group_3_1__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7251:2: rule__XConstructorCall__Group_3_1__0__Impl rule__XConstructorCall__Group_3_1__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 454) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7309:1: ( rule__XConstructorCall__Group_2__3__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7310:2: rule__XConstructorCall__Group_2__3__Impl
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__0__Impl_in_rule__XConstructorCall__Group_3_1__014672);
-            rule__XConstructorCall__Group_3_1__0__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__1_in_rule__XConstructorCall__Group_3_1__014675);
-            rule__XConstructorCall__Group_3_1__1();
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_2__3__Impl_in_rule__XConstructorCall__Group_2__314796);
+            rule__XConstructorCall__Group_2__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -22264,37 +22455,37 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 450, rule__XConstructorCall__Group_3_1__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 454, rule__XConstructorCall__Group_2__3_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__XConstructorCall__Group_3_1__0"
+    // $ANTLR end "rule__XConstructorCall__Group_2__3"
 
 
-    // $ANTLR start "rule__XConstructorCall__Group_3_1__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7258:1: rule__XConstructorCall__Group_3_1__0__Impl : ( ',' ) ;
-    public final void rule__XConstructorCall__Group_3_1__0__Impl() throws RecognitionException {
-        int rule__XConstructorCall__Group_3_1__0__Impl_StartIndex = input.index();
+    // $ANTLR start "rule__XConstructorCall__Group_2__3__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7316:1: rule__XConstructorCall__Group_2__3__Impl : ( '>' ) ;
+    public final void rule__XConstructorCall__Group_2__3__Impl() throws RecognitionException {
+        int rule__XConstructorCall__Group_2__3__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 451) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7262:1: ( ( ',' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7263:1: ( ',' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 455) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7320:1: ( ( '>' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7321:1: ( '>' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7263:1: ( ',' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7264:1: ','
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7321:1: ( '>' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7322:1: '>'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getCommaKeyword_3_1_0()); 
+               before(grammarAccess.getXConstructorCallAccess().getGreaterThanSignKeyword_2_3()); 
             }
-            match(input,34,FOLLOW_34_in_rule__XConstructorCall__Group_3_1__0__Impl14703); if (state.failed) return ;
+            match(input,19,FOLLOW_19_in_rule__XConstructorCall__Group_2__3__Impl14824); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getCommaKeyword_3_1_0()); 
+               after(grammarAccess.getXConstructorCallAccess().getGreaterThanSignKeyword_2_3()); 
             }
 
             }
@@ -22308,30 +22499,35 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 451, rule__XConstructorCall__Group_3_1__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 455, rule__XConstructorCall__Group_2__3__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__XConstructorCall__Group_3_1__0__Impl"
+    // $ANTLR end "rule__XConstructorCall__Group_2__3__Impl"
 
 
-    // $ANTLR start "rule__XConstructorCall__Group_3_1__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7277:1: rule__XConstructorCall__Group_3_1__1 : rule__XConstructorCall__Group_3_1__1__Impl ;
-    public final void rule__XConstructorCall__Group_3_1__1() throws RecognitionException {
-        int rule__XConstructorCall__Group_3_1__1_StartIndex = input.index();
+    // $ANTLR start "rule__XConstructorCall__Group_2_2__0"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7343:1: rule__XConstructorCall__Group_2_2__0 : rule__XConstructorCall__Group_2_2__0__Impl rule__XConstructorCall__Group_2_2__1 ;
+    public final void rule__XConstructorCall__Group_2_2__0() throws RecognitionException {
+        int rule__XConstructorCall__Group_2_2__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 452) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7281:1: ( rule__XConstructorCall__Group_3_1__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7282:2: rule__XConstructorCall__Group_3_1__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 456) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7347:1: ( rule__XConstructorCall__Group_2_2__0__Impl rule__XConstructorCall__Group_2_2__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7348:2: rule__XConstructorCall__Group_2_2__0__Impl rule__XConstructorCall__Group_2_2__1
             {
-            pushFollow(FOLLOW_rule__XConstructorCall__Group_3_1__1__Impl_in_rule__XConstructorCall__Group_3_1__114734);
-            rule__XConstructorCall__Group_3_1__1__Impl();
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_2_2__0__Impl_in_rule__XConstructorCall__Group_2_2__014863);
+            rule__XConstructorCall__Group_2_2__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_2_2__1_in_rule__XConstructorCall__Group_2_2__014866);
+            rule__XConstructorCall__Group_2_2__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -22344,47 +22540,37 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 452, rule__XConstructorCall__Group_3_1__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 456, rule__XConstructorCall__Group_2_2__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__XConstructorCall__Group_3_1__1"
+    // $ANTLR end "rule__XConstructorCall__Group_2_2__0"
 
 
-    // $ANTLR start "rule__XConstructorCall__Group_3_1__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7288:1: rule__XConstructorCall__Group_3_1__1__Impl : ( ( rule__XConstructorCall__ArgumentsAssignment_3_1_1 ) ) ;
-    public final void rule__XConstructorCall__Group_3_1__1__Impl() throws RecognitionException {
-        int rule__XConstructorCall__Group_3_1__1__Impl_StartIndex = input.index();
+    // $ANTLR start "rule__XConstructorCall__Group_2_2__0__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7355:1: rule__XConstructorCall__Group_2_2__0__Impl : ( ',' ) ;
+    public final void rule__XConstructorCall__Group_2_2__0__Impl() throws RecognitionException {
+        int rule__XConstructorCall__Group_2_2__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 453) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7292:1: ( ( ( rule__XConstructorCall__ArgumentsAssignment_3_1_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7293:1: ( ( rule__XConstructorCall__ArgumentsAssignment_3_1_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 457) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7359:1: ( ( ',' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7360:1: ( ',' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7293:1: ( ( rule__XConstructorCall__ArgumentsAssignment_3_1_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7294:1: ( rule__XConstructorCall__ArgumentsAssignment_3_1_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7360:1: ( ',' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7361:1: ','
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_3_1_1()); 
+               before(grammarAccess.getXConstructorCallAccess().getCommaKeyword_2_2_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7295:1: ( rule__XConstructorCall__ArgumentsAssignment_3_1_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7295:2: rule__XConstructorCall__ArgumentsAssignment_3_1_1
-            {
-            pushFollow(FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_1_1_in_rule__XConstructorCall__Group_3_1__1__Impl14761);
-            rule__XConstructorCall__ArgumentsAssignment_3_1_1();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
+            match(input,34,FOLLOW_34_in_rule__XConstructorCall__Group_2_2__0__Impl14894); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_3_1_1()); 
+               after(grammarAccess.getXConstructorCallAccess().getCommaKeyword_2_2_0()); 
             }
 
             }
@@ -22398,34 +22584,502 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 453, rule__XConstructorCall__Group_3_1__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 457, rule__XConstructorCall__Group_2_2__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__XConstructorCall__Group_3_1__1__Impl"
+    // $ANTLR end "rule__XConstructorCall__Group_2_2__0__Impl"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_2_2__1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7374:1: rule__XConstructorCall__Group_2_2__1 : rule__XConstructorCall__Group_2_2__1__Impl ;
+    public final void rule__XConstructorCall__Group_2_2__1() throws RecognitionException {
+        int rule__XConstructorCall__Group_2_2__1_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 458) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7378:1: ( rule__XConstructorCall__Group_2_2__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7379:2: rule__XConstructorCall__Group_2_2__1__Impl
+            {
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_2_2__1__Impl_in_rule__XConstructorCall__Group_2_2__114925);
+            rule__XConstructorCall__Group_2_2__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 458, rule__XConstructorCall__Group_2_2__1_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_2_2__1"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_2_2__1__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7385:1: rule__XConstructorCall__Group_2_2__1__Impl : ( ( rule__XConstructorCall__TypeArgumentsAssignment_2_2_1 ) ) ;
+    public final void rule__XConstructorCall__Group_2_2__1__Impl() throws RecognitionException {
+        int rule__XConstructorCall__Group_2_2__1__Impl_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 459) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7389:1: ( ( ( rule__XConstructorCall__TypeArgumentsAssignment_2_2_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7390:1: ( ( rule__XConstructorCall__TypeArgumentsAssignment_2_2_1 ) )
+            {
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7390:1: ( ( rule__XConstructorCall__TypeArgumentsAssignment_2_2_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7391:1: ( rule__XConstructorCall__TypeArgumentsAssignment_2_2_1 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXConstructorCallAccess().getTypeArgumentsAssignment_2_2_1()); 
+            }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7392:1: ( rule__XConstructorCall__TypeArgumentsAssignment_2_2_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7392:2: rule__XConstructorCall__TypeArgumentsAssignment_2_2_1
+            {
+            pushFollow(FOLLOW_rule__XConstructorCall__TypeArgumentsAssignment_2_2_1_in_rule__XConstructorCall__Group_2_2__1__Impl14952);
+            rule__XConstructorCall__TypeArgumentsAssignment_2_2_1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXConstructorCallAccess().getTypeArgumentsAssignment_2_2_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 459, rule__XConstructorCall__Group_2_2__1__Impl_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_2_2__1__Impl"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_4__0"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7406:1: rule__XConstructorCall__Group_4__0 : rule__XConstructorCall__Group_4__0__Impl rule__XConstructorCall__Group_4__1 ;
+    public final void rule__XConstructorCall__Group_4__0() throws RecognitionException {
+        int rule__XConstructorCall__Group_4__0_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 460) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7410:1: ( rule__XConstructorCall__Group_4__0__Impl rule__XConstructorCall__Group_4__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7411:2: rule__XConstructorCall__Group_4__0__Impl rule__XConstructorCall__Group_4__1
+            {
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_4__0__Impl_in_rule__XConstructorCall__Group_4__014986);
+            rule__XConstructorCall__Group_4__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_4__1_in_rule__XConstructorCall__Group_4__014989);
+            rule__XConstructorCall__Group_4__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 460, rule__XConstructorCall__Group_4__0_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_4__0"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_4__0__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7418:1: rule__XConstructorCall__Group_4__0__Impl : ( ( rule__XConstructorCall__ArgumentsAssignment_4_0 ) ) ;
+    public final void rule__XConstructorCall__Group_4__0__Impl() throws RecognitionException {
+        int rule__XConstructorCall__Group_4__0__Impl_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 461) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7422:1: ( ( ( rule__XConstructorCall__ArgumentsAssignment_4_0 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7423:1: ( ( rule__XConstructorCall__ArgumentsAssignment_4_0 ) )
+            {
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7423:1: ( ( rule__XConstructorCall__ArgumentsAssignment_4_0 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7424:1: ( rule__XConstructorCall__ArgumentsAssignment_4_0 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_0()); 
+            }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7425:1: ( rule__XConstructorCall__ArgumentsAssignment_4_0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7425:2: rule__XConstructorCall__ArgumentsAssignment_4_0
+            {
+            pushFollow(FOLLOW_rule__XConstructorCall__ArgumentsAssignment_4_0_in_rule__XConstructorCall__Group_4__0__Impl15016);
+            rule__XConstructorCall__ArgumentsAssignment_4_0();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 461, rule__XConstructorCall__Group_4__0__Impl_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_4__0__Impl"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_4__1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7435:1: rule__XConstructorCall__Group_4__1 : rule__XConstructorCall__Group_4__1__Impl ;
+    public final void rule__XConstructorCall__Group_4__1() throws RecognitionException {
+        int rule__XConstructorCall__Group_4__1_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 462) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7439:1: ( rule__XConstructorCall__Group_4__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7440:2: rule__XConstructorCall__Group_4__1__Impl
+            {
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_4__1__Impl_in_rule__XConstructorCall__Group_4__115046);
+            rule__XConstructorCall__Group_4__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 462, rule__XConstructorCall__Group_4__1_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_4__1"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_4__1__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7446:1: rule__XConstructorCall__Group_4__1__Impl : ( ( rule__XConstructorCall__Group_4_1__0 )* ) ;
+    public final void rule__XConstructorCall__Group_4__1__Impl() throws RecognitionException {
+        int rule__XConstructorCall__Group_4__1__Impl_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 463) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7450:1: ( ( ( rule__XConstructorCall__Group_4_1__0 )* ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7451:1: ( ( rule__XConstructorCall__Group_4_1__0 )* )
+            {
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7451:1: ( ( rule__XConstructorCall__Group_4_1__0 )* )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7452:1: ( rule__XConstructorCall__Group_4_1__0 )*
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXConstructorCallAccess().getGroup_4_1()); 
+            }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7453:1: ( rule__XConstructorCall__Group_4_1__0 )*
+            loop54:
+            do {
+                int alt54=2;
+                int LA54_0 = input.LA(1);
+
+                if ( (LA54_0==34) ) {
+                    alt54=1;
+                }
+
+
+                switch (alt54) {
+            	case 1 :
+            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7453:2: rule__XConstructorCall__Group_4_1__0
+            	    {
+            	    pushFollow(FOLLOW_rule__XConstructorCall__Group_4_1__0_in_rule__XConstructorCall__Group_4__1__Impl15073);
+            	    rule__XConstructorCall__Group_4_1__0();
+
+            	    state._fsp--;
+            	    if (state.failed) return ;
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop54;
+                }
+            } while (true);
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXConstructorCallAccess().getGroup_4_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 463, rule__XConstructorCall__Group_4__1__Impl_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_4__1__Impl"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_4_1__0"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7467:1: rule__XConstructorCall__Group_4_1__0 : rule__XConstructorCall__Group_4_1__0__Impl rule__XConstructorCall__Group_4_1__1 ;
+    public final void rule__XConstructorCall__Group_4_1__0() throws RecognitionException {
+        int rule__XConstructorCall__Group_4_1__0_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 464) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7471:1: ( rule__XConstructorCall__Group_4_1__0__Impl rule__XConstructorCall__Group_4_1__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7472:2: rule__XConstructorCall__Group_4_1__0__Impl rule__XConstructorCall__Group_4_1__1
+            {
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_4_1__0__Impl_in_rule__XConstructorCall__Group_4_1__015108);
+            rule__XConstructorCall__Group_4_1__0__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_4_1__1_in_rule__XConstructorCall__Group_4_1__015111);
+            rule__XConstructorCall__Group_4_1__1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 464, rule__XConstructorCall__Group_4_1__0_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_4_1__0"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_4_1__0__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7479:1: rule__XConstructorCall__Group_4_1__0__Impl : ( ',' ) ;
+    public final void rule__XConstructorCall__Group_4_1__0__Impl() throws RecognitionException {
+        int rule__XConstructorCall__Group_4_1__0__Impl_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 465) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7483:1: ( ( ',' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7484:1: ( ',' )
+            {
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7484:1: ( ',' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7485:1: ','
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXConstructorCallAccess().getCommaKeyword_4_1_0()); 
+            }
+            match(input,34,FOLLOW_34_in_rule__XConstructorCall__Group_4_1__0__Impl15139); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXConstructorCallAccess().getCommaKeyword_4_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 465, rule__XConstructorCall__Group_4_1__0__Impl_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_4_1__0__Impl"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_4_1__1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7498:1: rule__XConstructorCall__Group_4_1__1 : rule__XConstructorCall__Group_4_1__1__Impl ;
+    public final void rule__XConstructorCall__Group_4_1__1() throws RecognitionException {
+        int rule__XConstructorCall__Group_4_1__1_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 466) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7502:1: ( rule__XConstructorCall__Group_4_1__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7503:2: rule__XConstructorCall__Group_4_1__1__Impl
+            {
+            pushFollow(FOLLOW_rule__XConstructorCall__Group_4_1__1__Impl_in_rule__XConstructorCall__Group_4_1__115170);
+            rule__XConstructorCall__Group_4_1__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 466, rule__XConstructorCall__Group_4_1__1_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_4_1__1"
+
+
+    // $ANTLR start "rule__XConstructorCall__Group_4_1__1__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7509:1: rule__XConstructorCall__Group_4_1__1__Impl : ( ( rule__XConstructorCall__ArgumentsAssignment_4_1_1 ) ) ;
+    public final void rule__XConstructorCall__Group_4_1__1__Impl() throws RecognitionException {
+        int rule__XConstructorCall__Group_4_1__1__Impl_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 467) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7513:1: ( ( ( rule__XConstructorCall__ArgumentsAssignment_4_1_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7514:1: ( ( rule__XConstructorCall__ArgumentsAssignment_4_1_1 ) )
+            {
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7514:1: ( ( rule__XConstructorCall__ArgumentsAssignment_4_1_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7515:1: ( rule__XConstructorCall__ArgumentsAssignment_4_1_1 )
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_1_1()); 
+            }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7516:1: ( rule__XConstructorCall__ArgumentsAssignment_4_1_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7516:2: rule__XConstructorCall__ArgumentsAssignment_4_1_1
+            {
+            pushFollow(FOLLOW_rule__XConstructorCall__ArgumentsAssignment_4_1_1_in_rule__XConstructorCall__Group_4_1__1__Impl15197);
+            rule__XConstructorCall__ArgumentsAssignment_4_1_1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_1_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 467, rule__XConstructorCall__Group_4_1__1__Impl_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__Group_4_1__1__Impl"
 
 
     // $ANTLR start "rule__XBooleanLiteral__Group_0__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7309:1: rule__XBooleanLiteral__Group_0__0 : rule__XBooleanLiteral__Group_0__0__Impl rule__XBooleanLiteral__Group_0__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7530:1: rule__XBooleanLiteral__Group_0__0 : rule__XBooleanLiteral__Group_0__0__Impl rule__XBooleanLiteral__Group_0__1 ;
     public final void rule__XBooleanLiteral__Group_0__0() throws RecognitionException {
         int rule__XBooleanLiteral__Group_0__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 454) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7313:1: ( rule__XBooleanLiteral__Group_0__0__Impl rule__XBooleanLiteral__Group_0__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7314:2: rule__XBooleanLiteral__Group_0__0__Impl rule__XBooleanLiteral__Group_0__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 468) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7534:1: ( rule__XBooleanLiteral__Group_0__0__Impl rule__XBooleanLiteral__Group_0__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7535:2: rule__XBooleanLiteral__Group_0__0__Impl rule__XBooleanLiteral__Group_0__1
             {
-            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__0__Impl_in_rule__XBooleanLiteral__Group_0__014795);
+            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__0__Impl_in_rule__XBooleanLiteral__Group_0__015231);
             rule__XBooleanLiteral__Group_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__1_in_rule__XBooleanLiteral__Group_0__014798);
+            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__1_in_rule__XBooleanLiteral__Group_0__015234);
             rule__XBooleanLiteral__Group_0__1();
 
             state._fsp--;
@@ -22439,7 +23093,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 454, rule__XBooleanLiteral__Group_0__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 468, rule__XBooleanLiteral__Group_0__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22450,25 +23104,25 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XBooleanLiteral__Group_0__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7321:1: rule__XBooleanLiteral__Group_0__0__Impl : ( () ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7542:1: rule__XBooleanLiteral__Group_0__0__Impl : ( () ) ;
     public final void rule__XBooleanLiteral__Group_0__0__Impl() throws RecognitionException {
         int rule__XBooleanLiteral__Group_0__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 455) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7325:1: ( ( () ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7326:1: ( () )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 469) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7546:1: ( ( () ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7547:1: ( () )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7326:1: ( () )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7327:1: ()
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7547:1: ( () )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7548:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBooleanLiteralAccess().getXBooleanLiteralAction_0_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7328:1: ()
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7330:1: 
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7549:1: ()
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7551:1: 
             {
             }
 
@@ -22483,7 +23137,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 455, rule__XBooleanLiteral__Group_0__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 469, rule__XBooleanLiteral__Group_0__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22494,18 +23148,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XBooleanLiteral__Group_0__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7340:1: rule__XBooleanLiteral__Group_0__1 : rule__XBooleanLiteral__Group_0__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7561:1: rule__XBooleanLiteral__Group_0__1 : rule__XBooleanLiteral__Group_0__1__Impl ;
     public final void rule__XBooleanLiteral__Group_0__1() throws RecognitionException {
         int rule__XBooleanLiteral__Group_0__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 456) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7344:1: ( rule__XBooleanLiteral__Group_0__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7345:2: rule__XBooleanLiteral__Group_0__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 470) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7565:1: ( rule__XBooleanLiteral__Group_0__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7566:2: rule__XBooleanLiteral__Group_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__1__Impl_in_rule__XBooleanLiteral__Group_0__114856);
+            pushFollow(FOLLOW_rule__XBooleanLiteral__Group_0__1__Impl_in_rule__XBooleanLiteral__Group_0__115292);
             rule__XBooleanLiteral__Group_0__1__Impl();
 
             state._fsp--;
@@ -22519,7 +23173,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 456, rule__XBooleanLiteral__Group_0__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 470, rule__XBooleanLiteral__Group_0__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22530,24 +23184,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XBooleanLiteral__Group_0__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7351:1: rule__XBooleanLiteral__Group_0__1__Impl : ( 'false' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7572:1: rule__XBooleanLiteral__Group_0__1__Impl : ( 'false' ) ;
     public final void rule__XBooleanLiteral__Group_0__1__Impl() throws RecognitionException {
         int rule__XBooleanLiteral__Group_0__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 457) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7355:1: ( ( 'false' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7356:1: ( 'false' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 471) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7576:1: ( ( 'false' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7577:1: ( 'false' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7356:1: ( 'false' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7357:1: 'false'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7577:1: ( 'false' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7578:1: 'false'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBooleanLiteralAccess().getFalseKeyword_0_1()); 
             }
-            match(input,51,FOLLOW_51_in_rule__XBooleanLiteral__Group_0__1__Impl14884); if (state.failed) return ;
+            match(input,51,FOLLOW_51_in_rule__XBooleanLiteral__Group_0__1__Impl15320); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXBooleanLiteralAccess().getFalseKeyword_0_1()); 
             }
@@ -22563,7 +23217,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 457, rule__XBooleanLiteral__Group_0__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 471, rule__XBooleanLiteral__Group_0__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22574,23 +23228,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XNullLiteral__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7374:1: rule__XNullLiteral__Group__0 : rule__XNullLiteral__Group__0__Impl rule__XNullLiteral__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7595:1: rule__XNullLiteral__Group__0 : rule__XNullLiteral__Group__0__Impl rule__XNullLiteral__Group__1 ;
     public final void rule__XNullLiteral__Group__0() throws RecognitionException {
         int rule__XNullLiteral__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 458) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7378:1: ( rule__XNullLiteral__Group__0__Impl rule__XNullLiteral__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7379:2: rule__XNullLiteral__Group__0__Impl rule__XNullLiteral__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 472) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7599:1: ( rule__XNullLiteral__Group__0__Impl rule__XNullLiteral__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7600:2: rule__XNullLiteral__Group__0__Impl rule__XNullLiteral__Group__1
             {
-            pushFollow(FOLLOW_rule__XNullLiteral__Group__0__Impl_in_rule__XNullLiteral__Group__014919);
+            pushFollow(FOLLOW_rule__XNullLiteral__Group__0__Impl_in_rule__XNullLiteral__Group__015355);
             rule__XNullLiteral__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XNullLiteral__Group__1_in_rule__XNullLiteral__Group__014922);
+            pushFollow(FOLLOW_rule__XNullLiteral__Group__1_in_rule__XNullLiteral__Group__015358);
             rule__XNullLiteral__Group__1();
 
             state._fsp--;
@@ -22604,7 +23258,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 458, rule__XNullLiteral__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 472, rule__XNullLiteral__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22615,25 +23269,25 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XNullLiteral__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7386:1: rule__XNullLiteral__Group__0__Impl : ( () ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7607:1: rule__XNullLiteral__Group__0__Impl : ( () ) ;
     public final void rule__XNullLiteral__Group__0__Impl() throws RecognitionException {
         int rule__XNullLiteral__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 459) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7390:1: ( ( () ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7391:1: ( () )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 473) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7611:1: ( ( () ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7612:1: ( () )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7391:1: ( () )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7392:1: ()
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7612:1: ( () )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7613:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXNullLiteralAccess().getXNullLiteralAction_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7393:1: ()
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7395:1: 
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7614:1: ()
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7616:1: 
             {
             }
 
@@ -22648,7 +23302,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 459, rule__XNullLiteral__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 473, rule__XNullLiteral__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22659,18 +23313,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XNullLiteral__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7405:1: rule__XNullLiteral__Group__1 : rule__XNullLiteral__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7626:1: rule__XNullLiteral__Group__1 : rule__XNullLiteral__Group__1__Impl ;
     public final void rule__XNullLiteral__Group__1() throws RecognitionException {
         int rule__XNullLiteral__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 460) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7409:1: ( rule__XNullLiteral__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7410:2: rule__XNullLiteral__Group__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 474) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7630:1: ( rule__XNullLiteral__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7631:2: rule__XNullLiteral__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__XNullLiteral__Group__1__Impl_in_rule__XNullLiteral__Group__114980);
+            pushFollow(FOLLOW_rule__XNullLiteral__Group__1__Impl_in_rule__XNullLiteral__Group__115416);
             rule__XNullLiteral__Group__1__Impl();
 
             state._fsp--;
@@ -22684,7 +23338,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 460, rule__XNullLiteral__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 474, rule__XNullLiteral__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22695,24 +23349,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XNullLiteral__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7416:1: rule__XNullLiteral__Group__1__Impl : ( 'null' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7637:1: rule__XNullLiteral__Group__1__Impl : ( 'null' ) ;
     public final void rule__XNullLiteral__Group__1__Impl() throws RecognitionException {
         int rule__XNullLiteral__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 461) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7420:1: ( ( 'null' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7421:1: ( 'null' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 475) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7641:1: ( ( 'null' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7642:1: ( 'null' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7421:1: ( 'null' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7422:1: 'null'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7642:1: ( 'null' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7643:1: 'null'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXNullLiteralAccess().getNullKeyword_1()); 
             }
-            match(input,52,FOLLOW_52_in_rule__XNullLiteral__Group__1__Impl15008); if (state.failed) return ;
+            match(input,52,FOLLOW_52_in_rule__XNullLiteral__Group__1__Impl15444); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXNullLiteralAccess().getNullKeyword_1()); 
             }
@@ -22728,7 +23382,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 461, rule__XNullLiteral__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 475, rule__XNullLiteral__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22739,23 +23393,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTypeLiteral__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7439:1: rule__XTypeLiteral__Group__0 : rule__XTypeLiteral__Group__0__Impl rule__XTypeLiteral__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7660:1: rule__XTypeLiteral__Group__0 : rule__XTypeLiteral__Group__0__Impl rule__XTypeLiteral__Group__1 ;
     public final void rule__XTypeLiteral__Group__0() throws RecognitionException {
         int rule__XTypeLiteral__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 462) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7443:1: ( rule__XTypeLiteral__Group__0__Impl rule__XTypeLiteral__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7444:2: rule__XTypeLiteral__Group__0__Impl rule__XTypeLiteral__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 476) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7664:1: ( rule__XTypeLiteral__Group__0__Impl rule__XTypeLiteral__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7665:2: rule__XTypeLiteral__Group__0__Impl rule__XTypeLiteral__Group__1
             {
-            pushFollow(FOLLOW_rule__XTypeLiteral__Group__0__Impl_in_rule__XTypeLiteral__Group__015043);
+            pushFollow(FOLLOW_rule__XTypeLiteral__Group__0__Impl_in_rule__XTypeLiteral__Group__015479);
             rule__XTypeLiteral__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTypeLiteral__Group__1_in_rule__XTypeLiteral__Group__015046);
+            pushFollow(FOLLOW_rule__XTypeLiteral__Group__1_in_rule__XTypeLiteral__Group__015482);
             rule__XTypeLiteral__Group__1();
 
             state._fsp--;
@@ -22769,7 +23423,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 462, rule__XTypeLiteral__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 476, rule__XTypeLiteral__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22780,27 +23434,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTypeLiteral__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7451:1: rule__XTypeLiteral__Group__0__Impl : ( ( rule__XTypeLiteral__TypeAssignment_0 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7672:1: rule__XTypeLiteral__Group__0__Impl : ( ( rule__XTypeLiteral__TypeAssignment_0 ) ) ;
     public final void rule__XTypeLiteral__Group__0__Impl() throws RecognitionException {
         int rule__XTypeLiteral__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 463) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7455:1: ( ( ( rule__XTypeLiteral__TypeAssignment_0 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7456:1: ( ( rule__XTypeLiteral__TypeAssignment_0 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 477) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7676:1: ( ( ( rule__XTypeLiteral__TypeAssignment_0 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7677:1: ( ( rule__XTypeLiteral__TypeAssignment_0 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7456:1: ( ( rule__XTypeLiteral__TypeAssignment_0 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7457:1: ( rule__XTypeLiteral__TypeAssignment_0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7677:1: ( ( rule__XTypeLiteral__TypeAssignment_0 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7678:1: ( rule__XTypeLiteral__TypeAssignment_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getTypeAssignment_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7458:1: ( rule__XTypeLiteral__TypeAssignment_0 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7458:2: rule__XTypeLiteral__TypeAssignment_0
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7679:1: ( rule__XTypeLiteral__TypeAssignment_0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7679:2: rule__XTypeLiteral__TypeAssignment_0
             {
-            pushFollow(FOLLOW_rule__XTypeLiteral__TypeAssignment_0_in_rule__XTypeLiteral__Group__0__Impl15073);
+            pushFollow(FOLLOW_rule__XTypeLiteral__TypeAssignment_0_in_rule__XTypeLiteral__Group__0__Impl15509);
             rule__XTypeLiteral__TypeAssignment_0();
 
             state._fsp--;
@@ -22823,7 +23477,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 463, rule__XTypeLiteral__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 477, rule__XTypeLiteral__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22834,23 +23488,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTypeLiteral__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7468:1: rule__XTypeLiteral__Group__1 : rule__XTypeLiteral__Group__1__Impl rule__XTypeLiteral__Group__2 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7689:1: rule__XTypeLiteral__Group__1 : rule__XTypeLiteral__Group__1__Impl rule__XTypeLiteral__Group__2 ;
     public final void rule__XTypeLiteral__Group__1() throws RecognitionException {
         int rule__XTypeLiteral__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 464) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7472:1: ( rule__XTypeLiteral__Group__1__Impl rule__XTypeLiteral__Group__2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7473:2: rule__XTypeLiteral__Group__1__Impl rule__XTypeLiteral__Group__2
+            if ( state.backtracking>0 && alreadyParsedRule(input, 478) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7693:1: ( rule__XTypeLiteral__Group__1__Impl rule__XTypeLiteral__Group__2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7694:2: rule__XTypeLiteral__Group__1__Impl rule__XTypeLiteral__Group__2
             {
-            pushFollow(FOLLOW_rule__XTypeLiteral__Group__1__Impl_in_rule__XTypeLiteral__Group__115103);
+            pushFollow(FOLLOW_rule__XTypeLiteral__Group__1__Impl_in_rule__XTypeLiteral__Group__115539);
             rule__XTypeLiteral__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTypeLiteral__Group__2_in_rule__XTypeLiteral__Group__115106);
+            pushFollow(FOLLOW_rule__XTypeLiteral__Group__2_in_rule__XTypeLiteral__Group__115542);
             rule__XTypeLiteral__Group__2();
 
             state._fsp--;
@@ -22864,7 +23518,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 464, rule__XTypeLiteral__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 478, rule__XTypeLiteral__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22875,24 +23529,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTypeLiteral__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7480:1: rule__XTypeLiteral__Group__1__Impl : ( '.' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7701:1: rule__XTypeLiteral__Group__1__Impl : ( '.' ) ;
     public final void rule__XTypeLiteral__Group__1__Impl() throws RecognitionException {
         int rule__XTypeLiteral__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 465) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7484:1: ( ( '.' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7485:1: ( '.' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 479) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7705:1: ( ( '.' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7706:1: ( '.' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7485:1: ( '.' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7486:1: '.'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7706:1: ( '.' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7707:1: '.'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getFullStopKeyword_1()); 
             }
-            match(input,33,FOLLOW_33_in_rule__XTypeLiteral__Group__1__Impl15134); if (state.failed) return ;
+            match(input,33,FOLLOW_33_in_rule__XTypeLiteral__Group__1__Impl15570); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXTypeLiteralAccess().getFullStopKeyword_1()); 
             }
@@ -22908,7 +23562,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 465, rule__XTypeLiteral__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 479, rule__XTypeLiteral__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22919,18 +23573,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTypeLiteral__Group__2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7499:1: rule__XTypeLiteral__Group__2 : rule__XTypeLiteral__Group__2__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7720:1: rule__XTypeLiteral__Group__2 : rule__XTypeLiteral__Group__2__Impl ;
     public final void rule__XTypeLiteral__Group__2() throws RecognitionException {
         int rule__XTypeLiteral__Group__2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 466) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7503:1: ( rule__XTypeLiteral__Group__2__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7504:2: rule__XTypeLiteral__Group__2__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 480) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7724:1: ( rule__XTypeLiteral__Group__2__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7725:2: rule__XTypeLiteral__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__XTypeLiteral__Group__2__Impl_in_rule__XTypeLiteral__Group__215165);
+            pushFollow(FOLLOW_rule__XTypeLiteral__Group__2__Impl_in_rule__XTypeLiteral__Group__215601);
             rule__XTypeLiteral__Group__2__Impl();
 
             state._fsp--;
@@ -22944,7 +23598,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 466, rule__XTypeLiteral__Group__2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 480, rule__XTypeLiteral__Group__2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22955,24 +23609,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTypeLiteral__Group__2__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7510:1: rule__XTypeLiteral__Group__2__Impl : ( 'class' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7731:1: rule__XTypeLiteral__Group__2__Impl : ( 'class' ) ;
     public final void rule__XTypeLiteral__Group__2__Impl() throws RecognitionException {
         int rule__XTypeLiteral__Group__2__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 467) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7514:1: ( ( 'class' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7515:1: ( 'class' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 481) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7735:1: ( ( 'class' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7736:1: ( 'class' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7515:1: ( 'class' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7516:1: 'class'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7736:1: ( 'class' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7737:1: 'class'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getClassKeyword_2()); 
             }
-            match(input,53,FOLLOW_53_in_rule__XTypeLiteral__Group__2__Impl15193); if (state.failed) return ;
+            match(input,53,FOLLOW_53_in_rule__XTypeLiteral__Group__2__Impl15629); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXTypeLiteralAccess().getClassKeyword_2()); 
             }
@@ -22988,7 +23642,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 467, rule__XTypeLiteral__Group__2__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 481, rule__XTypeLiteral__Group__2__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -22999,23 +23653,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XThrowExpression__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7535:1: rule__XThrowExpression__Group__0 : rule__XThrowExpression__Group__0__Impl rule__XThrowExpression__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7756:1: rule__XThrowExpression__Group__0 : rule__XThrowExpression__Group__0__Impl rule__XThrowExpression__Group__1 ;
     public final void rule__XThrowExpression__Group__0() throws RecognitionException {
         int rule__XThrowExpression__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 468) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7539:1: ( rule__XThrowExpression__Group__0__Impl rule__XThrowExpression__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7540:2: rule__XThrowExpression__Group__0__Impl rule__XThrowExpression__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 482) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7760:1: ( rule__XThrowExpression__Group__0__Impl rule__XThrowExpression__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7761:2: rule__XThrowExpression__Group__0__Impl rule__XThrowExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__XThrowExpression__Group__0__Impl_in_rule__XThrowExpression__Group__015230);
+            pushFollow(FOLLOW_rule__XThrowExpression__Group__0__Impl_in_rule__XThrowExpression__Group__015666);
             rule__XThrowExpression__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XThrowExpression__Group__1_in_rule__XThrowExpression__Group__015233);
+            pushFollow(FOLLOW_rule__XThrowExpression__Group__1_in_rule__XThrowExpression__Group__015669);
             rule__XThrowExpression__Group__1();
 
             state._fsp--;
@@ -23029,7 +23683,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 468, rule__XThrowExpression__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 482, rule__XThrowExpression__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23040,24 +23694,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XThrowExpression__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7547:1: rule__XThrowExpression__Group__0__Impl : ( 'throw' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7768:1: rule__XThrowExpression__Group__0__Impl : ( 'throw' ) ;
     public final void rule__XThrowExpression__Group__0__Impl() throws RecognitionException {
         int rule__XThrowExpression__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 469) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7551:1: ( ( 'throw' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7552:1: ( 'throw' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 483) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7772:1: ( ( 'throw' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7773:1: ( 'throw' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7552:1: ( 'throw' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7553:1: 'throw'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7773:1: ( 'throw' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7774:1: 'throw'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXThrowExpressionAccess().getThrowKeyword_0()); 
             }
-            match(input,54,FOLLOW_54_in_rule__XThrowExpression__Group__0__Impl15261); if (state.failed) return ;
+            match(input,54,FOLLOW_54_in_rule__XThrowExpression__Group__0__Impl15697); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXThrowExpressionAccess().getThrowKeyword_0()); 
             }
@@ -23073,7 +23727,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 469, rule__XThrowExpression__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 483, rule__XThrowExpression__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23084,18 +23738,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XThrowExpression__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7566:1: rule__XThrowExpression__Group__1 : rule__XThrowExpression__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7787:1: rule__XThrowExpression__Group__1 : rule__XThrowExpression__Group__1__Impl ;
     public final void rule__XThrowExpression__Group__1() throws RecognitionException {
         int rule__XThrowExpression__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 470) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7570:1: ( rule__XThrowExpression__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7571:2: rule__XThrowExpression__Group__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 484) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7791:1: ( rule__XThrowExpression__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7792:2: rule__XThrowExpression__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__XThrowExpression__Group__1__Impl_in_rule__XThrowExpression__Group__115292);
+            pushFollow(FOLLOW_rule__XThrowExpression__Group__1__Impl_in_rule__XThrowExpression__Group__115728);
             rule__XThrowExpression__Group__1__Impl();
 
             state._fsp--;
@@ -23109,7 +23763,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 470, rule__XThrowExpression__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 484, rule__XThrowExpression__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23120,27 +23774,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XThrowExpression__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7577:1: rule__XThrowExpression__Group__1__Impl : ( ( rule__XThrowExpression__ExpressionAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7798:1: rule__XThrowExpression__Group__1__Impl : ( ( rule__XThrowExpression__ExpressionAssignment_1 ) ) ;
     public final void rule__XThrowExpression__Group__1__Impl() throws RecognitionException {
         int rule__XThrowExpression__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 471) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7581:1: ( ( ( rule__XThrowExpression__ExpressionAssignment_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7582:1: ( ( rule__XThrowExpression__ExpressionAssignment_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 485) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7802:1: ( ( ( rule__XThrowExpression__ExpressionAssignment_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7803:1: ( ( rule__XThrowExpression__ExpressionAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7582:1: ( ( rule__XThrowExpression__ExpressionAssignment_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7583:1: ( rule__XThrowExpression__ExpressionAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7803:1: ( ( rule__XThrowExpression__ExpressionAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7804:1: ( rule__XThrowExpression__ExpressionAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXThrowExpressionAccess().getExpressionAssignment_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7584:1: ( rule__XThrowExpression__ExpressionAssignment_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7584:2: rule__XThrowExpression__ExpressionAssignment_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7805:1: ( rule__XThrowExpression__ExpressionAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7805:2: rule__XThrowExpression__ExpressionAssignment_1
             {
-            pushFollow(FOLLOW_rule__XThrowExpression__ExpressionAssignment_1_in_rule__XThrowExpression__Group__1__Impl15319);
+            pushFollow(FOLLOW_rule__XThrowExpression__ExpressionAssignment_1_in_rule__XThrowExpression__Group__1__Impl15755);
             rule__XThrowExpression__ExpressionAssignment_1();
 
             state._fsp--;
@@ -23163,7 +23817,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 471, rule__XThrowExpression__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 485, rule__XThrowExpression__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23174,23 +23828,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7598:1: rule__XTryCatchFinallyExpression__Group__0 : rule__XTryCatchFinallyExpression__Group__0__Impl rule__XTryCatchFinallyExpression__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7819:1: rule__XTryCatchFinallyExpression__Group__0 : rule__XTryCatchFinallyExpression__Group__0__Impl rule__XTryCatchFinallyExpression__Group__1 ;
     public final void rule__XTryCatchFinallyExpression__Group__0() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 472) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7602:1: ( rule__XTryCatchFinallyExpression__Group__0__Impl rule__XTryCatchFinallyExpression__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7603:2: rule__XTryCatchFinallyExpression__Group__0__Impl rule__XTryCatchFinallyExpression__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 486) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7823:1: ( rule__XTryCatchFinallyExpression__Group__0__Impl rule__XTryCatchFinallyExpression__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7824:2: rule__XTryCatchFinallyExpression__Group__0__Impl rule__XTryCatchFinallyExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__0__Impl_in_rule__XTryCatchFinallyExpression__Group__015353);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__0__Impl_in_rule__XTryCatchFinallyExpression__Group__015789);
             rule__XTryCatchFinallyExpression__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__1_in_rule__XTryCatchFinallyExpression__Group__015356);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__1_in_rule__XTryCatchFinallyExpression__Group__015792);
             rule__XTryCatchFinallyExpression__Group__1();
 
             state._fsp--;
@@ -23204,7 +23858,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 472, rule__XTryCatchFinallyExpression__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 486, rule__XTryCatchFinallyExpression__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23215,24 +23869,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7610:1: rule__XTryCatchFinallyExpression__Group__0__Impl : ( 'try' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7831:1: rule__XTryCatchFinallyExpression__Group__0__Impl : ( 'try' ) ;
     public final void rule__XTryCatchFinallyExpression__Group__0__Impl() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 473) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7614:1: ( ( 'try' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7615:1: ( 'try' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 487) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7835:1: ( ( 'try' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7836:1: ( 'try' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7615:1: ( 'try' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7616:1: 'try'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7836:1: ( 'try' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7837:1: 'try'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getTryKeyword_0()); 
             }
-            match(input,55,FOLLOW_55_in_rule__XTryCatchFinallyExpression__Group__0__Impl15384); if (state.failed) return ;
+            match(input,55,FOLLOW_55_in_rule__XTryCatchFinallyExpression__Group__0__Impl15820); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXTryCatchFinallyExpressionAccess().getTryKeyword_0()); 
             }
@@ -23248,7 +23902,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 473, rule__XTryCatchFinallyExpression__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 487, rule__XTryCatchFinallyExpression__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23259,23 +23913,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7629:1: rule__XTryCatchFinallyExpression__Group__1 : rule__XTryCatchFinallyExpression__Group__1__Impl rule__XTryCatchFinallyExpression__Group__2 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7850:1: rule__XTryCatchFinallyExpression__Group__1 : rule__XTryCatchFinallyExpression__Group__1__Impl rule__XTryCatchFinallyExpression__Group__2 ;
     public final void rule__XTryCatchFinallyExpression__Group__1() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 474) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7633:1: ( rule__XTryCatchFinallyExpression__Group__1__Impl rule__XTryCatchFinallyExpression__Group__2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7634:2: rule__XTryCatchFinallyExpression__Group__1__Impl rule__XTryCatchFinallyExpression__Group__2
+            if ( state.backtracking>0 && alreadyParsedRule(input, 488) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7854:1: ( rule__XTryCatchFinallyExpression__Group__1__Impl rule__XTryCatchFinallyExpression__Group__2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7855:2: rule__XTryCatchFinallyExpression__Group__1__Impl rule__XTryCatchFinallyExpression__Group__2
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__1__Impl_in_rule__XTryCatchFinallyExpression__Group__115415);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__1__Impl_in_rule__XTryCatchFinallyExpression__Group__115851);
             rule__XTryCatchFinallyExpression__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__2_in_rule__XTryCatchFinallyExpression__Group__115418);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__2_in_rule__XTryCatchFinallyExpression__Group__115854);
             rule__XTryCatchFinallyExpression__Group__2();
 
             state._fsp--;
@@ -23289,7 +23943,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 474, rule__XTryCatchFinallyExpression__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 488, rule__XTryCatchFinallyExpression__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23300,27 +23954,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7641:1: rule__XTryCatchFinallyExpression__Group__1__Impl : ( ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7862:1: rule__XTryCatchFinallyExpression__Group__1__Impl : ( ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 ) ) ;
     public final void rule__XTryCatchFinallyExpression__Group__1__Impl() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 475) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7645:1: ( ( ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7646:1: ( ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 489) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7866:1: ( ( ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7867:1: ( ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7646:1: ( ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7647:1: ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7867:1: ( ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7868:1: ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getExpressionAssignment_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7648:1: ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7648:2: rule__XTryCatchFinallyExpression__ExpressionAssignment_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7869:1: ( rule__XTryCatchFinallyExpression__ExpressionAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7869:2: rule__XTryCatchFinallyExpression__ExpressionAssignment_1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__ExpressionAssignment_1_in_rule__XTryCatchFinallyExpression__Group__1__Impl15445);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__ExpressionAssignment_1_in_rule__XTryCatchFinallyExpression__Group__1__Impl15881);
             rule__XTryCatchFinallyExpression__ExpressionAssignment_1();
 
             state._fsp--;
@@ -23343,7 +23997,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 475, rule__XTryCatchFinallyExpression__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 489, rule__XTryCatchFinallyExpression__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23354,18 +24008,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group__2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7658:1: rule__XTryCatchFinallyExpression__Group__2 : rule__XTryCatchFinallyExpression__Group__2__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7879:1: rule__XTryCatchFinallyExpression__Group__2 : rule__XTryCatchFinallyExpression__Group__2__Impl ;
     public final void rule__XTryCatchFinallyExpression__Group__2() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group__2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 476) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7662:1: ( rule__XTryCatchFinallyExpression__Group__2__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7663:2: rule__XTryCatchFinallyExpression__Group__2__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 490) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7883:1: ( rule__XTryCatchFinallyExpression__Group__2__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7884:2: rule__XTryCatchFinallyExpression__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__2__Impl_in_rule__XTryCatchFinallyExpression__Group__215475);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group__2__Impl_in_rule__XTryCatchFinallyExpression__Group__215911);
             rule__XTryCatchFinallyExpression__Group__2__Impl();
 
             state._fsp--;
@@ -23379,7 +24033,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 476, rule__XTryCatchFinallyExpression__Group__2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 490, rule__XTryCatchFinallyExpression__Group__2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23390,27 +24044,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group__2__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7669:1: rule__XTryCatchFinallyExpression__Group__2__Impl : ( ( rule__XTryCatchFinallyExpression__Alternatives_2 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7890:1: rule__XTryCatchFinallyExpression__Group__2__Impl : ( ( rule__XTryCatchFinallyExpression__Alternatives_2 ) ) ;
     public final void rule__XTryCatchFinallyExpression__Group__2__Impl() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group__2__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 477) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7673:1: ( ( ( rule__XTryCatchFinallyExpression__Alternatives_2 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7674:1: ( ( rule__XTryCatchFinallyExpression__Alternatives_2 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 491) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7894:1: ( ( ( rule__XTryCatchFinallyExpression__Alternatives_2 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7895:1: ( ( rule__XTryCatchFinallyExpression__Alternatives_2 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7674:1: ( ( rule__XTryCatchFinallyExpression__Alternatives_2 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7675:1: ( rule__XTryCatchFinallyExpression__Alternatives_2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7895:1: ( ( rule__XTryCatchFinallyExpression__Alternatives_2 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7896:1: ( rule__XTryCatchFinallyExpression__Alternatives_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getAlternatives_2()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7676:1: ( rule__XTryCatchFinallyExpression__Alternatives_2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7676:2: rule__XTryCatchFinallyExpression__Alternatives_2
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7897:1: ( rule__XTryCatchFinallyExpression__Alternatives_2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7897:2: rule__XTryCatchFinallyExpression__Alternatives_2
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Alternatives_2_in_rule__XTryCatchFinallyExpression__Group__2__Impl15502);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Alternatives_2_in_rule__XTryCatchFinallyExpression__Group__2__Impl15938);
             rule__XTryCatchFinallyExpression__Alternatives_2();
 
             state._fsp--;
@@ -23433,7 +24087,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 477, rule__XTryCatchFinallyExpression__Group__2__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 491, rule__XTryCatchFinallyExpression__Group__2__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23444,23 +24098,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_0__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7692:1: rule__XTryCatchFinallyExpression__Group_2_0__0 : rule__XTryCatchFinallyExpression__Group_2_0__0__Impl rule__XTryCatchFinallyExpression__Group_2_0__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7913:1: rule__XTryCatchFinallyExpression__Group_2_0__0 : rule__XTryCatchFinallyExpression__Group_2_0__0__Impl rule__XTryCatchFinallyExpression__Group_2_0__1 ;
     public final void rule__XTryCatchFinallyExpression__Group_2_0__0() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_0__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 478) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7696:1: ( rule__XTryCatchFinallyExpression__Group_2_0__0__Impl rule__XTryCatchFinallyExpression__Group_2_0__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7697:2: rule__XTryCatchFinallyExpression__Group_2_0__0__Impl rule__XTryCatchFinallyExpression__Group_2_0__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 492) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7917:1: ( rule__XTryCatchFinallyExpression__Group_2_0__0__Impl rule__XTryCatchFinallyExpression__Group_2_0__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7918:2: rule__XTryCatchFinallyExpression__Group_2_0__0__Impl rule__XTryCatchFinallyExpression__Group_2_0__1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__015538);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__015974);
             rule__XTryCatchFinallyExpression__Group_2_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1_in_rule__XTryCatchFinallyExpression__Group_2_0__015541);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1_in_rule__XTryCatchFinallyExpression__Group_2_0__015977);
             rule__XTryCatchFinallyExpression__Group_2_0__1();
 
             state._fsp--;
@@ -23474,7 +24128,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 478, rule__XTryCatchFinallyExpression__Group_2_0__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 492, rule__XTryCatchFinallyExpression__Group_2_0__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23485,30 +24139,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_0__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7704:1: rule__XTryCatchFinallyExpression__Group_2_0__0__Impl : ( ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) ) ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7925:1: rule__XTryCatchFinallyExpression__Group_2_0__0__Impl : ( ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) ) ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* ) ) ;
     public final void rule__XTryCatchFinallyExpression__Group_2_0__0__Impl() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_0__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 479) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7708:1: ( ( ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) ) ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7709:1: ( ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) ) ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 493) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7929:1: ( ( ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) ) ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7930:1: ( ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) ) ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7709:1: ( ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) ) ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7710:1: ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) ) ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7930:1: ( ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) ) ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7931:1: ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) ) ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7710:1: ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7711:1: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7931:1: ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7932:1: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesAssignment_2_0_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7712:1: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7712:2: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7933:1: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7933:2: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl15570);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl16006);
             rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0();
 
             state._fsp--;
@@ -23522,34 +24176,34 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7715:1: ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7716:1: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )*
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7936:1: ( ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )* )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7937:1: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesAssignment_2_0_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7717:1: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )*
-            loop53:
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7938:1: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )*
+            loop55:
             do {
-                int alt53=2;
-                int LA53_0 = input.LA(1);
+                int alt55=2;
+                int LA55_0 = input.LA(1);
 
-                if ( (LA53_0==57) ) {
-                    int LA53_2 = input.LA(2);
+                if ( (LA55_0==57) ) {
+                    int LA55_2 = input.LA(2);
 
-                    if ( (synpred74_InternalXbase()) ) {
-                        alt53=1;
+                    if ( (synpred76_InternalXbase()) ) {
+                        alt55=1;
                     }
 
 
                 }
 
 
-                switch (alt53) {
+                switch (alt55) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7717:2: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0
+            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7938:2: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0
             	    {
-            	    pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl15582);
+            	    pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl16018);
             	    rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0();
 
             	    state._fsp--;
@@ -23559,7 +24213,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop53;
+            	    break loop55;
                 }
             } while (true);
 
@@ -23581,7 +24235,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 479, rule__XTryCatchFinallyExpression__Group_2_0__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 493, rule__XTryCatchFinallyExpression__Group_2_0__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23592,18 +24246,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_0__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7728:1: rule__XTryCatchFinallyExpression__Group_2_0__1 : rule__XTryCatchFinallyExpression__Group_2_0__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7949:1: rule__XTryCatchFinallyExpression__Group_2_0__1 : rule__XTryCatchFinallyExpression__Group_2_0__1__Impl ;
     public final void rule__XTryCatchFinallyExpression__Group_2_0__1() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_0__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 480) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7732:1: ( rule__XTryCatchFinallyExpression__Group_2_0__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7733:2: rule__XTryCatchFinallyExpression__Group_2_0__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 494) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7953:1: ( rule__XTryCatchFinallyExpression__Group_2_0__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7954:2: rule__XTryCatchFinallyExpression__Group_2_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__115615);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__116051);
             rule__XTryCatchFinallyExpression__Group_2_0__1__Impl();
 
             state._fsp--;
@@ -23617,7 +24271,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 480, rule__XTryCatchFinallyExpression__Group_2_0__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 494, rule__XTryCatchFinallyExpression__Group_2_0__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23628,39 +24282,39 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_0__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7739:1: rule__XTryCatchFinallyExpression__Group_2_0__1__Impl : ( ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )? ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7960:1: rule__XTryCatchFinallyExpression__Group_2_0__1__Impl : ( ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )? ) ;
     public final void rule__XTryCatchFinallyExpression__Group_2_0__1__Impl() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_0__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 481) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7743:1: ( ( ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )? ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7744:1: ( ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )? )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 495) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7964:1: ( ( ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )? ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7965:1: ( ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )? )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7744:1: ( ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )? )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7745:1: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7965:1: ( ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7966:1: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getGroup_2_0_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7746:1: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )?
-            int alt54=2;
-            int LA54_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7967:1: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )?
+            int alt56=2;
+            int LA56_0 = input.LA(1);
 
-            if ( (LA54_0==56) ) {
-                int LA54_1 = input.LA(2);
+            if ( (LA56_0==56) ) {
+                int LA56_1 = input.LA(2);
 
-                if ( (synpred75_InternalXbase()) ) {
-                    alt54=1;
+                if ( (synpred77_InternalXbase()) ) {
+                    alt56=1;
                 }
             }
-            switch (alt54) {
+            switch (alt56) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7746:2: rule__XTryCatchFinallyExpression__Group_2_0_1__0
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7967:2: rule__XTryCatchFinallyExpression__Group_2_0_1__0
                     {
-                    pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl15642);
+                    pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl16078);
                     rule__XTryCatchFinallyExpression__Group_2_0_1__0();
 
                     state._fsp--;
@@ -23686,7 +24340,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 481, rule__XTryCatchFinallyExpression__Group_2_0__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 495, rule__XTryCatchFinallyExpression__Group_2_0__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23697,23 +24351,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_0_1__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7760:1: rule__XTryCatchFinallyExpression__Group_2_0_1__0 : rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_0_1__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7981:1: rule__XTryCatchFinallyExpression__Group_2_0_1__0 : rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_0_1__1 ;
     public final void rule__XTryCatchFinallyExpression__Group_2_0_1__0() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_0_1__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 482) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7764:1: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_0_1__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7765:2: rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_0_1__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 496) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7985:1: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_0_1__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7986:2: rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_0_1__1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__015677);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__016113);
             rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__015680);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__016116);
             rule__XTryCatchFinallyExpression__Group_2_0_1__1();
 
             state._fsp--;
@@ -23727,7 +24381,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 482, rule__XTryCatchFinallyExpression__Group_2_0_1__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 496, rule__XTryCatchFinallyExpression__Group_2_0_1__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23738,24 +24392,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7772:1: rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl : ( 'finally' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7993:1: rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl : ( 'finally' ) ;
     public final void rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 483) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7776:1: ( ( 'finally' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7777:1: ( 'finally' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 497) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7997:1: ( ( 'finally' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7998:1: ( 'finally' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7777:1: ( 'finally' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7778:1: 'finally'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7998:1: ( 'finally' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7999:1: 'finally'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_0_1_0()); 
             }
-            match(input,56,FOLLOW_56_in_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl15708); if (state.failed) return ;
+            match(input,56,FOLLOW_56_in_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl16144); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_0_1_0()); 
             }
@@ -23771,7 +24425,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 483, rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 497, rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23782,18 +24436,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_0_1__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7791:1: rule__XTryCatchFinallyExpression__Group_2_0_1__1 : rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8012:1: rule__XTryCatchFinallyExpression__Group_2_0_1__1 : rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl ;
     public final void rule__XTryCatchFinallyExpression__Group_2_0_1__1() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_0_1__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 484) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7795:1: ( rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7796:2: rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 498) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8016:1: ( rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8017:2: rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__115739);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__116175);
             rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl();
 
             state._fsp--;
@@ -23807,7 +24461,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 484, rule__XTryCatchFinallyExpression__Group_2_0_1__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 498, rule__XTryCatchFinallyExpression__Group_2_0_1__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23818,27 +24472,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7802:1: rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl : ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8023:1: rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl : ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 ) ) ;
     public final void rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 485) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7806:1: ( ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7807:1: ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 499) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8027:1: ( ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8028:1: ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7807:1: ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7808:1: ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8028:1: ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8029:1: ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionAssignment_2_0_1_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7809:1: ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7809:2: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8030:1: ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8030:2: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl15766);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl16202);
             rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1();
 
             state._fsp--;
@@ -23861,7 +24515,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 485, rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 499, rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23872,23 +24526,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_1__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7823:1: rule__XTryCatchFinallyExpression__Group_2_1__0 : rule__XTryCatchFinallyExpression__Group_2_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_1__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8044:1: rule__XTryCatchFinallyExpression__Group_2_1__0 : rule__XTryCatchFinallyExpression__Group_2_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_1__1 ;
     public final void rule__XTryCatchFinallyExpression__Group_2_1__0() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_1__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 486) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7827:1: ( rule__XTryCatchFinallyExpression__Group_2_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_1__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7828:2: rule__XTryCatchFinallyExpression__Group_2_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_1__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 500) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8048:1: ( rule__XTryCatchFinallyExpression__Group_2_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_1__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8049:2: rule__XTryCatchFinallyExpression__Group_2_1__0__Impl rule__XTryCatchFinallyExpression__Group_2_1__1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__015800);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__016236);
             rule__XTryCatchFinallyExpression__Group_2_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1_in_rule__XTryCatchFinallyExpression__Group_2_1__015803);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1_in_rule__XTryCatchFinallyExpression__Group_2_1__016239);
             rule__XTryCatchFinallyExpression__Group_2_1__1();
 
             state._fsp--;
@@ -23902,7 +24556,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 486, rule__XTryCatchFinallyExpression__Group_2_1__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 500, rule__XTryCatchFinallyExpression__Group_2_1__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23913,24 +24567,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_1__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7835:1: rule__XTryCatchFinallyExpression__Group_2_1__0__Impl : ( 'finally' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8056:1: rule__XTryCatchFinallyExpression__Group_2_1__0__Impl : ( 'finally' ) ;
     public final void rule__XTryCatchFinallyExpression__Group_2_1__0__Impl() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_1__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 487) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7839:1: ( ( 'finally' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7840:1: ( 'finally' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 501) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8060:1: ( ( 'finally' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8061:1: ( 'finally' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7840:1: ( 'finally' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7841:1: 'finally'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8061:1: ( 'finally' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8062:1: 'finally'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_1_0()); 
             }
-            match(input,56,FOLLOW_56_in_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl15831); if (state.failed) return ;
+            match(input,56,FOLLOW_56_in_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl16267); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyKeyword_2_1_0()); 
             }
@@ -23946,7 +24600,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 487, rule__XTryCatchFinallyExpression__Group_2_1__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 501, rule__XTryCatchFinallyExpression__Group_2_1__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23957,18 +24611,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_1__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7854:1: rule__XTryCatchFinallyExpression__Group_2_1__1 : rule__XTryCatchFinallyExpression__Group_2_1__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8075:1: rule__XTryCatchFinallyExpression__Group_2_1__1 : rule__XTryCatchFinallyExpression__Group_2_1__1__Impl ;
     public final void rule__XTryCatchFinallyExpression__Group_2_1__1() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_1__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 488) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7858:1: ( rule__XTryCatchFinallyExpression__Group_2_1__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7859:2: rule__XTryCatchFinallyExpression__Group_2_1__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 502) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8079:1: ( rule__XTryCatchFinallyExpression__Group_2_1__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8080:2: rule__XTryCatchFinallyExpression__Group_2_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__115862);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__116298);
             rule__XTryCatchFinallyExpression__Group_2_1__1__Impl();
 
             state._fsp--;
@@ -23982,7 +24636,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 488, rule__XTryCatchFinallyExpression__Group_2_1__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 502, rule__XTryCatchFinallyExpression__Group_2_1__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -23993,27 +24647,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__Group_2_1__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7865:1: rule__XTryCatchFinallyExpression__Group_2_1__1__Impl : ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8086:1: rule__XTryCatchFinallyExpression__Group_2_1__1__Impl : ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 ) ) ;
     public final void rule__XTryCatchFinallyExpression__Group_2_1__1__Impl() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__Group_2_1__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 489) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7869:1: ( ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7870:1: ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 503) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8090:1: ( ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8091:1: ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7870:1: ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7871:1: ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8091:1: ( ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8092:1: ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionAssignment_2_1_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7872:1: ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7872:2: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8093:1: ( rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8093:2: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1
             {
-            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1_in_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl15889);
+            pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1_in_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl16325);
             rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1();
 
             state._fsp--;
@@ -24036,7 +24690,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 489, rule__XTryCatchFinallyExpression__Group_2_1__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 503, rule__XTryCatchFinallyExpression__Group_2_1__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24047,23 +24701,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7886:1: rule__XCatchClause__Group__0 : rule__XCatchClause__Group__0__Impl rule__XCatchClause__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8107:1: rule__XCatchClause__Group__0 : rule__XCatchClause__Group__0__Impl rule__XCatchClause__Group__1 ;
     public final void rule__XCatchClause__Group__0() throws RecognitionException {
         int rule__XCatchClause__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 490) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7890:1: ( rule__XCatchClause__Group__0__Impl rule__XCatchClause__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7891:2: rule__XCatchClause__Group__0__Impl rule__XCatchClause__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 504) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8111:1: ( rule__XCatchClause__Group__0__Impl rule__XCatchClause__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8112:2: rule__XCatchClause__Group__0__Impl rule__XCatchClause__Group__1
             {
-            pushFollow(FOLLOW_rule__XCatchClause__Group__0__Impl_in_rule__XCatchClause__Group__015923);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__0__Impl_in_rule__XCatchClause__Group__016359);
             rule__XCatchClause__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XCatchClause__Group__1_in_rule__XCatchClause__Group__015926);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__1_in_rule__XCatchClause__Group__016362);
             rule__XCatchClause__Group__1();
 
             state._fsp--;
@@ -24077,7 +24731,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 490, rule__XCatchClause__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 504, rule__XCatchClause__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24088,24 +24742,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7898:1: rule__XCatchClause__Group__0__Impl : ( 'catch' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8119:1: rule__XCatchClause__Group__0__Impl : ( 'catch' ) ;
     public final void rule__XCatchClause__Group__0__Impl() throws RecognitionException {
         int rule__XCatchClause__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 491) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7902:1: ( ( 'catch' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7903:1: ( 'catch' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 505) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8123:1: ( ( 'catch' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8124:1: ( 'catch' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7903:1: ( 'catch' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7904:1: 'catch'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8124:1: ( 'catch' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8125:1: 'catch'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getCatchKeyword_0()); 
             }
-            match(input,57,FOLLOW_57_in_rule__XCatchClause__Group__0__Impl15954); if (state.failed) return ;
+            match(input,57,FOLLOW_57_in_rule__XCatchClause__Group__0__Impl16390); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXCatchClauseAccess().getCatchKeyword_0()); 
             }
@@ -24121,7 +24775,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 491, rule__XCatchClause__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 505, rule__XCatchClause__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24132,23 +24786,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7917:1: rule__XCatchClause__Group__1 : rule__XCatchClause__Group__1__Impl rule__XCatchClause__Group__2 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8138:1: rule__XCatchClause__Group__1 : rule__XCatchClause__Group__1__Impl rule__XCatchClause__Group__2 ;
     public final void rule__XCatchClause__Group__1() throws RecognitionException {
         int rule__XCatchClause__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 492) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7921:1: ( rule__XCatchClause__Group__1__Impl rule__XCatchClause__Group__2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7922:2: rule__XCatchClause__Group__1__Impl rule__XCatchClause__Group__2
+            if ( state.backtracking>0 && alreadyParsedRule(input, 506) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8142:1: ( rule__XCatchClause__Group__1__Impl rule__XCatchClause__Group__2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8143:2: rule__XCatchClause__Group__1__Impl rule__XCatchClause__Group__2
             {
-            pushFollow(FOLLOW_rule__XCatchClause__Group__1__Impl_in_rule__XCatchClause__Group__115985);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__1__Impl_in_rule__XCatchClause__Group__116421);
             rule__XCatchClause__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XCatchClause__Group__2_in_rule__XCatchClause__Group__115988);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__2_in_rule__XCatchClause__Group__116424);
             rule__XCatchClause__Group__2();
 
             state._fsp--;
@@ -24162,7 +24816,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 492, rule__XCatchClause__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 506, rule__XCatchClause__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24173,24 +24827,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7929:1: rule__XCatchClause__Group__1__Impl : ( '(' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8150:1: rule__XCatchClause__Group__1__Impl : ( '(' ) ;
     public final void rule__XCatchClause__Group__1__Impl() throws RecognitionException {
         int rule__XCatchClause__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 493) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7933:1: ( ( '(' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7934:1: ( '(' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 507) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8154:1: ( ( '(' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8155:1: ( '(' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7934:1: ( '(' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7935:1: '('
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8155:1: ( '(' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8156:1: '('
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getLeftParenthesisKeyword_1()); 
             }
-            match(input,35,FOLLOW_35_in_rule__XCatchClause__Group__1__Impl16016); if (state.failed) return ;
+            match(input,35,FOLLOW_35_in_rule__XCatchClause__Group__1__Impl16452); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXCatchClauseAccess().getLeftParenthesisKeyword_1()); 
             }
@@ -24206,7 +24860,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 493, rule__XCatchClause__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 507, rule__XCatchClause__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24217,23 +24871,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__Group__2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7948:1: rule__XCatchClause__Group__2 : rule__XCatchClause__Group__2__Impl rule__XCatchClause__Group__3 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8169:1: rule__XCatchClause__Group__2 : rule__XCatchClause__Group__2__Impl rule__XCatchClause__Group__3 ;
     public final void rule__XCatchClause__Group__2() throws RecognitionException {
         int rule__XCatchClause__Group__2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 494) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7952:1: ( rule__XCatchClause__Group__2__Impl rule__XCatchClause__Group__3 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7953:2: rule__XCatchClause__Group__2__Impl rule__XCatchClause__Group__3
+            if ( state.backtracking>0 && alreadyParsedRule(input, 508) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8173:1: ( rule__XCatchClause__Group__2__Impl rule__XCatchClause__Group__3 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8174:2: rule__XCatchClause__Group__2__Impl rule__XCatchClause__Group__3
             {
-            pushFollow(FOLLOW_rule__XCatchClause__Group__2__Impl_in_rule__XCatchClause__Group__216047);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__2__Impl_in_rule__XCatchClause__Group__216483);
             rule__XCatchClause__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XCatchClause__Group__3_in_rule__XCatchClause__Group__216050);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__3_in_rule__XCatchClause__Group__216486);
             rule__XCatchClause__Group__3();
 
             state._fsp--;
@@ -24247,7 +24901,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 494, rule__XCatchClause__Group__2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 508, rule__XCatchClause__Group__2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24258,27 +24912,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__Group__2__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7960:1: rule__XCatchClause__Group__2__Impl : ( ( rule__XCatchClause__DeclaredParamAssignment_2 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8181:1: rule__XCatchClause__Group__2__Impl : ( ( rule__XCatchClause__DeclaredParamAssignment_2 ) ) ;
     public final void rule__XCatchClause__Group__2__Impl() throws RecognitionException {
         int rule__XCatchClause__Group__2__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 495) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7964:1: ( ( ( rule__XCatchClause__DeclaredParamAssignment_2 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7965:1: ( ( rule__XCatchClause__DeclaredParamAssignment_2 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 509) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8185:1: ( ( ( rule__XCatchClause__DeclaredParamAssignment_2 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8186:1: ( ( rule__XCatchClause__DeclaredParamAssignment_2 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7965:1: ( ( rule__XCatchClause__DeclaredParamAssignment_2 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7966:1: ( rule__XCatchClause__DeclaredParamAssignment_2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8186:1: ( ( rule__XCatchClause__DeclaredParamAssignment_2 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8187:1: ( rule__XCatchClause__DeclaredParamAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getDeclaredParamAssignment_2()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7967:1: ( rule__XCatchClause__DeclaredParamAssignment_2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7967:2: rule__XCatchClause__DeclaredParamAssignment_2
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8188:1: ( rule__XCatchClause__DeclaredParamAssignment_2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8188:2: rule__XCatchClause__DeclaredParamAssignment_2
             {
-            pushFollow(FOLLOW_rule__XCatchClause__DeclaredParamAssignment_2_in_rule__XCatchClause__Group__2__Impl16077);
+            pushFollow(FOLLOW_rule__XCatchClause__DeclaredParamAssignment_2_in_rule__XCatchClause__Group__2__Impl16513);
             rule__XCatchClause__DeclaredParamAssignment_2();
 
             state._fsp--;
@@ -24301,7 +24955,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 495, rule__XCatchClause__Group__2__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 509, rule__XCatchClause__Group__2__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24312,23 +24966,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__Group__3"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7977:1: rule__XCatchClause__Group__3 : rule__XCatchClause__Group__3__Impl rule__XCatchClause__Group__4 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8198:1: rule__XCatchClause__Group__3 : rule__XCatchClause__Group__3__Impl rule__XCatchClause__Group__4 ;
     public final void rule__XCatchClause__Group__3() throws RecognitionException {
         int rule__XCatchClause__Group__3_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 496) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7981:1: ( rule__XCatchClause__Group__3__Impl rule__XCatchClause__Group__4 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7982:2: rule__XCatchClause__Group__3__Impl rule__XCatchClause__Group__4
+            if ( state.backtracking>0 && alreadyParsedRule(input, 510) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8202:1: ( rule__XCatchClause__Group__3__Impl rule__XCatchClause__Group__4 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8203:2: rule__XCatchClause__Group__3__Impl rule__XCatchClause__Group__4
             {
-            pushFollow(FOLLOW_rule__XCatchClause__Group__3__Impl_in_rule__XCatchClause__Group__316107);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__3__Impl_in_rule__XCatchClause__Group__316543);
             rule__XCatchClause__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XCatchClause__Group__4_in_rule__XCatchClause__Group__316110);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__4_in_rule__XCatchClause__Group__316546);
             rule__XCatchClause__Group__4();
 
             state._fsp--;
@@ -24342,7 +24996,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 496, rule__XCatchClause__Group__3_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 510, rule__XCatchClause__Group__3_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24353,24 +25007,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__Group__3__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7989:1: rule__XCatchClause__Group__3__Impl : ( ')' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8210:1: rule__XCatchClause__Group__3__Impl : ( ')' ) ;
     public final void rule__XCatchClause__Group__3__Impl() throws RecognitionException {
         int rule__XCatchClause__Group__3__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 497) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7993:1: ( ( ')' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7994:1: ( ')' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 511) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8214:1: ( ( ')' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8215:1: ( ')' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7994:1: ( ')' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7995:1: ')'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8215:1: ( ')' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8216:1: ')'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getRightParenthesisKeyword_3()); 
             }
-            match(input,36,FOLLOW_36_in_rule__XCatchClause__Group__3__Impl16138); if (state.failed) return ;
+            match(input,36,FOLLOW_36_in_rule__XCatchClause__Group__3__Impl16574); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXCatchClauseAccess().getRightParenthesisKeyword_3()); 
             }
@@ -24386,7 +25040,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 497, rule__XCatchClause__Group__3__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 511, rule__XCatchClause__Group__3__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24397,18 +25051,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__Group__4"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8008:1: rule__XCatchClause__Group__4 : rule__XCatchClause__Group__4__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8229:1: rule__XCatchClause__Group__4 : rule__XCatchClause__Group__4__Impl ;
     public final void rule__XCatchClause__Group__4() throws RecognitionException {
         int rule__XCatchClause__Group__4_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 498) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8012:1: ( rule__XCatchClause__Group__4__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8013:2: rule__XCatchClause__Group__4__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 512) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8233:1: ( rule__XCatchClause__Group__4__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8234:2: rule__XCatchClause__Group__4__Impl
             {
-            pushFollow(FOLLOW_rule__XCatchClause__Group__4__Impl_in_rule__XCatchClause__Group__416169);
+            pushFollow(FOLLOW_rule__XCatchClause__Group__4__Impl_in_rule__XCatchClause__Group__416605);
             rule__XCatchClause__Group__4__Impl();
 
             state._fsp--;
@@ -24422,7 +25076,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 498, rule__XCatchClause__Group__4_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 512, rule__XCatchClause__Group__4_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24433,27 +25087,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__Group__4__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8019:1: rule__XCatchClause__Group__4__Impl : ( ( rule__XCatchClause__ExpressionAssignment_4 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8240:1: rule__XCatchClause__Group__4__Impl : ( ( rule__XCatchClause__ExpressionAssignment_4 ) ) ;
     public final void rule__XCatchClause__Group__4__Impl() throws RecognitionException {
         int rule__XCatchClause__Group__4__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 499) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8023:1: ( ( ( rule__XCatchClause__ExpressionAssignment_4 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8024:1: ( ( rule__XCatchClause__ExpressionAssignment_4 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 513) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8244:1: ( ( ( rule__XCatchClause__ExpressionAssignment_4 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8245:1: ( ( rule__XCatchClause__ExpressionAssignment_4 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8024:1: ( ( rule__XCatchClause__ExpressionAssignment_4 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8025:1: ( rule__XCatchClause__ExpressionAssignment_4 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8245:1: ( ( rule__XCatchClause__ExpressionAssignment_4 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8246:1: ( rule__XCatchClause__ExpressionAssignment_4 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getExpressionAssignment_4()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8026:1: ( rule__XCatchClause__ExpressionAssignment_4 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8026:2: rule__XCatchClause__ExpressionAssignment_4
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8247:1: ( rule__XCatchClause__ExpressionAssignment_4 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8247:2: rule__XCatchClause__ExpressionAssignment_4
             {
-            pushFollow(FOLLOW_rule__XCatchClause__ExpressionAssignment_4_in_rule__XCatchClause__Group__4__Impl16196);
+            pushFollow(FOLLOW_rule__XCatchClause__ExpressionAssignment_4_in_rule__XCatchClause__Group__4__Impl16632);
             rule__XCatchClause__ExpressionAssignment_4();
 
             state._fsp--;
@@ -24476,7 +25130,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 499, rule__XCatchClause__Group__4__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 513, rule__XCatchClause__Group__4__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24487,23 +25141,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8046:1: rule__XFunctionTypeRef__Group__0 : rule__XFunctionTypeRef__Group__0__Impl rule__XFunctionTypeRef__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8267:1: rule__XFunctionTypeRef__Group__0 : rule__XFunctionTypeRef__Group__0__Impl rule__XFunctionTypeRef__Group__1 ;
     public final void rule__XFunctionTypeRef__Group__0() throws RecognitionException {
         int rule__XFunctionTypeRef__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 500) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8050:1: ( rule__XFunctionTypeRef__Group__0__Impl rule__XFunctionTypeRef__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8051:2: rule__XFunctionTypeRef__Group__0__Impl rule__XFunctionTypeRef__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 514) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8271:1: ( rule__XFunctionTypeRef__Group__0__Impl rule__XFunctionTypeRef__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8272:2: rule__XFunctionTypeRef__Group__0__Impl rule__XFunctionTypeRef__Group__1
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__0__Impl_in_rule__XFunctionTypeRef__Group__016236);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__0__Impl_in_rule__XFunctionTypeRef__Group__016672);
             rule__XFunctionTypeRef__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__1_in_rule__XFunctionTypeRef__Group__016239);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__1_in_rule__XFunctionTypeRef__Group__016675);
             rule__XFunctionTypeRef__Group__1();
 
             state._fsp--;
@@ -24517,7 +25171,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 500, rule__XFunctionTypeRef__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 514, rule__XFunctionTypeRef__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24528,35 +25182,35 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8058:1: rule__XFunctionTypeRef__Group__0__Impl : ( ( rule__XFunctionTypeRef__Group_0__0 )? ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8279:1: rule__XFunctionTypeRef__Group__0__Impl : ( ( rule__XFunctionTypeRef__Group_0__0 )? ) ;
     public final void rule__XFunctionTypeRef__Group__0__Impl() throws RecognitionException {
         int rule__XFunctionTypeRef__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 501) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8062:1: ( ( ( rule__XFunctionTypeRef__Group_0__0 )? ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8063:1: ( ( rule__XFunctionTypeRef__Group_0__0 )? )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 515) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8283:1: ( ( ( rule__XFunctionTypeRef__Group_0__0 )? ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8284:1: ( ( rule__XFunctionTypeRef__Group_0__0 )? )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8063:1: ( ( rule__XFunctionTypeRef__Group_0__0 )? )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8064:1: ( rule__XFunctionTypeRef__Group_0__0 )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8284:1: ( ( rule__XFunctionTypeRef__Group_0__0 )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8285:1: ( rule__XFunctionTypeRef__Group_0__0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getGroup_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8065:1: ( rule__XFunctionTypeRef__Group_0__0 )?
-            int alt55=2;
-            int LA55_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8286:1: ( rule__XFunctionTypeRef__Group_0__0 )?
+            int alt57=2;
+            int LA57_0 = input.LA(1);
 
-            if ( (LA55_0==35) ) {
-                alt55=1;
+            if ( (LA57_0==35) ) {
+                alt57=1;
             }
-            switch (alt55) {
+            switch (alt57) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8065:2: rule__XFunctionTypeRef__Group_0__0
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8286:2: rule__XFunctionTypeRef__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__0_in_rule__XFunctionTypeRef__Group__0__Impl16266);
+                    pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__0_in_rule__XFunctionTypeRef__Group__0__Impl16702);
                     rule__XFunctionTypeRef__Group_0__0();
 
                     state._fsp--;
@@ -24582,7 +25236,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 501, rule__XFunctionTypeRef__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 515, rule__XFunctionTypeRef__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24593,23 +25247,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8075:1: rule__XFunctionTypeRef__Group__1 : rule__XFunctionTypeRef__Group__1__Impl rule__XFunctionTypeRef__Group__2 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8296:1: rule__XFunctionTypeRef__Group__1 : rule__XFunctionTypeRef__Group__1__Impl rule__XFunctionTypeRef__Group__2 ;
     public final void rule__XFunctionTypeRef__Group__1() throws RecognitionException {
         int rule__XFunctionTypeRef__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 502) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8079:1: ( rule__XFunctionTypeRef__Group__1__Impl rule__XFunctionTypeRef__Group__2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8080:2: rule__XFunctionTypeRef__Group__1__Impl rule__XFunctionTypeRef__Group__2
+            if ( state.backtracking>0 && alreadyParsedRule(input, 516) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8300:1: ( rule__XFunctionTypeRef__Group__1__Impl rule__XFunctionTypeRef__Group__2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8301:2: rule__XFunctionTypeRef__Group__1__Impl rule__XFunctionTypeRef__Group__2
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__1__Impl_in_rule__XFunctionTypeRef__Group__116297);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__1__Impl_in_rule__XFunctionTypeRef__Group__116733);
             rule__XFunctionTypeRef__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__2_in_rule__XFunctionTypeRef__Group__116300);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__2_in_rule__XFunctionTypeRef__Group__116736);
             rule__XFunctionTypeRef__Group__2();
 
             state._fsp--;
@@ -24623,7 +25277,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 502, rule__XFunctionTypeRef__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 516, rule__XFunctionTypeRef__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24634,24 +25288,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8087:1: rule__XFunctionTypeRef__Group__1__Impl : ( '=>' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8308:1: rule__XFunctionTypeRef__Group__1__Impl : ( '=>' ) ;
     public final void rule__XFunctionTypeRef__Group__1__Impl() throws RecognitionException {
         int rule__XFunctionTypeRef__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 503) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8091:1: ( ( '=>' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8092:1: ( '=>' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 517) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8312:1: ( ( '=>' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8313:1: ( '=>' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8092:1: ( '=>' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8093:1: '=>'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8313:1: ( '=>' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8314:1: '=>'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getEqualsSignGreaterThanSignKeyword_1()); 
             }
-            match(input,58,FOLLOW_58_in_rule__XFunctionTypeRef__Group__1__Impl16328); if (state.failed) return ;
+            match(input,58,FOLLOW_58_in_rule__XFunctionTypeRef__Group__1__Impl16764); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFunctionTypeRefAccess().getEqualsSignGreaterThanSignKeyword_1()); 
             }
@@ -24667,7 +25321,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 503, rule__XFunctionTypeRef__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 517, rule__XFunctionTypeRef__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24678,18 +25332,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group__2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8106:1: rule__XFunctionTypeRef__Group__2 : rule__XFunctionTypeRef__Group__2__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8327:1: rule__XFunctionTypeRef__Group__2 : rule__XFunctionTypeRef__Group__2__Impl ;
     public final void rule__XFunctionTypeRef__Group__2() throws RecognitionException {
         int rule__XFunctionTypeRef__Group__2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 504) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8110:1: ( rule__XFunctionTypeRef__Group__2__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8111:2: rule__XFunctionTypeRef__Group__2__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 518) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8331:1: ( rule__XFunctionTypeRef__Group__2__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8332:2: rule__XFunctionTypeRef__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__2__Impl_in_rule__XFunctionTypeRef__Group__216359);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group__2__Impl_in_rule__XFunctionTypeRef__Group__216795);
             rule__XFunctionTypeRef__Group__2__Impl();
 
             state._fsp--;
@@ -24703,7 +25357,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 504, rule__XFunctionTypeRef__Group__2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 518, rule__XFunctionTypeRef__Group__2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24714,27 +25368,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group__2__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8117:1: rule__XFunctionTypeRef__Group__2__Impl : ( ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8338:1: rule__XFunctionTypeRef__Group__2__Impl : ( ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 ) ) ;
     public final void rule__XFunctionTypeRef__Group__2__Impl() throws RecognitionException {
         int rule__XFunctionTypeRef__Group__2__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 505) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8121:1: ( ( ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8122:1: ( ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 519) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8342:1: ( ( ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8343:1: ( ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8122:1: ( ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8123:1: ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8343:1: ( ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8344:1: ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeAssignment_2()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8124:1: ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8124:2: rule__XFunctionTypeRef__ReturnTypeAssignment_2
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8345:1: ( rule__XFunctionTypeRef__ReturnTypeAssignment_2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8345:2: rule__XFunctionTypeRef__ReturnTypeAssignment_2
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__ReturnTypeAssignment_2_in_rule__XFunctionTypeRef__Group__2__Impl16386);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__ReturnTypeAssignment_2_in_rule__XFunctionTypeRef__Group__2__Impl16822);
             rule__XFunctionTypeRef__ReturnTypeAssignment_2();
 
             state._fsp--;
@@ -24757,7 +25411,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 505, rule__XFunctionTypeRef__Group__2__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 519, rule__XFunctionTypeRef__Group__2__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24768,23 +25422,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8140:1: rule__XFunctionTypeRef__Group_0__0 : rule__XFunctionTypeRef__Group_0__0__Impl rule__XFunctionTypeRef__Group_0__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8361:1: rule__XFunctionTypeRef__Group_0__0 : rule__XFunctionTypeRef__Group_0__0__Impl rule__XFunctionTypeRef__Group_0__1 ;
     public final void rule__XFunctionTypeRef__Group_0__0() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 506) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8144:1: ( rule__XFunctionTypeRef__Group_0__0__Impl rule__XFunctionTypeRef__Group_0__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8145:2: rule__XFunctionTypeRef__Group_0__0__Impl rule__XFunctionTypeRef__Group_0__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 520) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8365:1: ( rule__XFunctionTypeRef__Group_0__0__Impl rule__XFunctionTypeRef__Group_0__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8366:2: rule__XFunctionTypeRef__Group_0__0__Impl rule__XFunctionTypeRef__Group_0__1
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__0__Impl_in_rule__XFunctionTypeRef__Group_0__016422);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__0__Impl_in_rule__XFunctionTypeRef__Group_0__016858);
             rule__XFunctionTypeRef__Group_0__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__1_in_rule__XFunctionTypeRef__Group_0__016425);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__1_in_rule__XFunctionTypeRef__Group_0__016861);
             rule__XFunctionTypeRef__Group_0__1();
 
             state._fsp--;
@@ -24798,7 +25452,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 506, rule__XFunctionTypeRef__Group_0__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 520, rule__XFunctionTypeRef__Group_0__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24809,24 +25463,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8152:1: rule__XFunctionTypeRef__Group_0__0__Impl : ( '(' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8373:1: rule__XFunctionTypeRef__Group_0__0__Impl : ( '(' ) ;
     public final void rule__XFunctionTypeRef__Group_0__0__Impl() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 507) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8156:1: ( ( '(' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8157:1: ( '(' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 521) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8377:1: ( ( '(' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8378:1: ( '(' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8157:1: ( '(' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8158:1: '('
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8378:1: ( '(' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8379:1: '('
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getLeftParenthesisKeyword_0_0()); 
             }
-            match(input,35,FOLLOW_35_in_rule__XFunctionTypeRef__Group_0__0__Impl16453); if (state.failed) return ;
+            match(input,35,FOLLOW_35_in_rule__XFunctionTypeRef__Group_0__0__Impl16889); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFunctionTypeRefAccess().getLeftParenthesisKeyword_0_0()); 
             }
@@ -24842,7 +25496,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 507, rule__XFunctionTypeRef__Group_0__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 521, rule__XFunctionTypeRef__Group_0__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24853,23 +25507,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8171:1: rule__XFunctionTypeRef__Group_0__1 : rule__XFunctionTypeRef__Group_0__1__Impl rule__XFunctionTypeRef__Group_0__2 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8392:1: rule__XFunctionTypeRef__Group_0__1 : rule__XFunctionTypeRef__Group_0__1__Impl rule__XFunctionTypeRef__Group_0__2 ;
     public final void rule__XFunctionTypeRef__Group_0__1() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 508) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8175:1: ( rule__XFunctionTypeRef__Group_0__1__Impl rule__XFunctionTypeRef__Group_0__2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8176:2: rule__XFunctionTypeRef__Group_0__1__Impl rule__XFunctionTypeRef__Group_0__2
+            if ( state.backtracking>0 && alreadyParsedRule(input, 522) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8396:1: ( rule__XFunctionTypeRef__Group_0__1__Impl rule__XFunctionTypeRef__Group_0__2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8397:2: rule__XFunctionTypeRef__Group_0__1__Impl rule__XFunctionTypeRef__Group_0__2
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__1__Impl_in_rule__XFunctionTypeRef__Group_0__116484);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__1__Impl_in_rule__XFunctionTypeRef__Group_0__116920);
             rule__XFunctionTypeRef__Group_0__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__2_in_rule__XFunctionTypeRef__Group_0__116487);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__2_in_rule__XFunctionTypeRef__Group_0__116923);
             rule__XFunctionTypeRef__Group_0__2();
 
             state._fsp--;
@@ -24883,7 +25537,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 508, rule__XFunctionTypeRef__Group_0__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 522, rule__XFunctionTypeRef__Group_0__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24894,27 +25548,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8183:1: rule__XFunctionTypeRef__Group_0__1__Impl : ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8404:1: rule__XFunctionTypeRef__Group_0__1__Impl : ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 ) ) ;
     public final void rule__XFunctionTypeRef__Group_0__1__Impl() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 509) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8187:1: ( ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8188:1: ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 523) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8408:1: ( ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8409:1: ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8188:1: ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8189:1: ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8409:1: ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8410:1: ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesAssignment_0_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8190:1: ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8190:2: rule__XFunctionTypeRef__ParamTypesAssignment_0_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8411:1: ( rule__XFunctionTypeRef__ParamTypesAssignment_0_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8411:2: rule__XFunctionTypeRef__ParamTypesAssignment_0_1
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_in_rule__XFunctionTypeRef__Group_0__1__Impl16514);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_in_rule__XFunctionTypeRef__Group_0__1__Impl16950);
             rule__XFunctionTypeRef__ParamTypesAssignment_0_1();
 
             state._fsp--;
@@ -24937,7 +25591,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 509, rule__XFunctionTypeRef__Group_0__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 523, rule__XFunctionTypeRef__Group_0__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24948,23 +25602,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0__2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8200:1: rule__XFunctionTypeRef__Group_0__2 : rule__XFunctionTypeRef__Group_0__2__Impl rule__XFunctionTypeRef__Group_0__3 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8421:1: rule__XFunctionTypeRef__Group_0__2 : rule__XFunctionTypeRef__Group_0__2__Impl rule__XFunctionTypeRef__Group_0__3 ;
     public final void rule__XFunctionTypeRef__Group_0__2() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0__2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 510) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8204:1: ( rule__XFunctionTypeRef__Group_0__2__Impl rule__XFunctionTypeRef__Group_0__3 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8205:2: rule__XFunctionTypeRef__Group_0__2__Impl rule__XFunctionTypeRef__Group_0__3
+            if ( state.backtracking>0 && alreadyParsedRule(input, 524) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8425:1: ( rule__XFunctionTypeRef__Group_0__2__Impl rule__XFunctionTypeRef__Group_0__3 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8426:2: rule__XFunctionTypeRef__Group_0__2__Impl rule__XFunctionTypeRef__Group_0__3
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__2__Impl_in_rule__XFunctionTypeRef__Group_0__216544);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__2__Impl_in_rule__XFunctionTypeRef__Group_0__216980);
             rule__XFunctionTypeRef__Group_0__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__3_in_rule__XFunctionTypeRef__Group_0__216547);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__3_in_rule__XFunctionTypeRef__Group_0__216983);
             rule__XFunctionTypeRef__Group_0__3();
 
             state._fsp--;
@@ -24978,7 +25632,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 510, rule__XFunctionTypeRef__Group_0__2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 524, rule__XFunctionTypeRef__Group_0__2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -24989,39 +25643,39 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0__2__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8212:1: rule__XFunctionTypeRef__Group_0__2__Impl : ( ( rule__XFunctionTypeRef__Group_0_2__0 )* ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8433:1: rule__XFunctionTypeRef__Group_0__2__Impl : ( ( rule__XFunctionTypeRef__Group_0_2__0 )* ) ;
     public final void rule__XFunctionTypeRef__Group_0__2__Impl() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0__2__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 511) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8216:1: ( ( ( rule__XFunctionTypeRef__Group_0_2__0 )* ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8217:1: ( ( rule__XFunctionTypeRef__Group_0_2__0 )* )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 525) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8437:1: ( ( ( rule__XFunctionTypeRef__Group_0_2__0 )* ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8438:1: ( ( rule__XFunctionTypeRef__Group_0_2__0 )* )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8217:1: ( ( rule__XFunctionTypeRef__Group_0_2__0 )* )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8218:1: ( rule__XFunctionTypeRef__Group_0_2__0 )*
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8438:1: ( ( rule__XFunctionTypeRef__Group_0_2__0 )* )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8439:1: ( rule__XFunctionTypeRef__Group_0_2__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getGroup_0_2()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8219:1: ( rule__XFunctionTypeRef__Group_0_2__0 )*
-            loop56:
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8440:1: ( rule__XFunctionTypeRef__Group_0_2__0 )*
+            loop58:
             do {
-                int alt56=2;
-                int LA56_0 = input.LA(1);
+                int alt58=2;
+                int LA58_0 = input.LA(1);
 
-                if ( (LA56_0==34) ) {
-                    alt56=1;
+                if ( (LA58_0==34) ) {
+                    alt58=1;
                 }
 
 
-                switch (alt56) {
+                switch (alt58) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8219:2: rule__XFunctionTypeRef__Group_0_2__0
+            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8440:2: rule__XFunctionTypeRef__Group_0_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__0_in_rule__XFunctionTypeRef__Group_0__2__Impl16574);
+            	    pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__0_in_rule__XFunctionTypeRef__Group_0__2__Impl17010);
             	    rule__XFunctionTypeRef__Group_0_2__0();
 
             	    state._fsp--;
@@ -25031,7 +25685,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop56;
+            	    break loop58;
                 }
             } while (true);
 
@@ -25050,7 +25704,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 511, rule__XFunctionTypeRef__Group_0__2__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 525, rule__XFunctionTypeRef__Group_0__2__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25061,18 +25715,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0__3"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8229:1: rule__XFunctionTypeRef__Group_0__3 : rule__XFunctionTypeRef__Group_0__3__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8450:1: rule__XFunctionTypeRef__Group_0__3 : rule__XFunctionTypeRef__Group_0__3__Impl ;
     public final void rule__XFunctionTypeRef__Group_0__3() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0__3_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 512) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8233:1: ( rule__XFunctionTypeRef__Group_0__3__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8234:2: rule__XFunctionTypeRef__Group_0__3__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 526) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8454:1: ( rule__XFunctionTypeRef__Group_0__3__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8455:2: rule__XFunctionTypeRef__Group_0__3__Impl
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__3__Impl_in_rule__XFunctionTypeRef__Group_0__316605);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0__3__Impl_in_rule__XFunctionTypeRef__Group_0__317041);
             rule__XFunctionTypeRef__Group_0__3__Impl();
 
             state._fsp--;
@@ -25086,7 +25740,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 512, rule__XFunctionTypeRef__Group_0__3_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 526, rule__XFunctionTypeRef__Group_0__3_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25097,24 +25751,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0__3__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8240:1: rule__XFunctionTypeRef__Group_0__3__Impl : ( ')' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8461:1: rule__XFunctionTypeRef__Group_0__3__Impl : ( ')' ) ;
     public final void rule__XFunctionTypeRef__Group_0__3__Impl() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0__3__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 513) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8244:1: ( ( ')' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8245:1: ( ')' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 527) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8465:1: ( ( ')' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8466:1: ( ')' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8245:1: ( ')' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8246:1: ')'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8466:1: ( ')' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8467:1: ')'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getRightParenthesisKeyword_0_3()); 
             }
-            match(input,36,FOLLOW_36_in_rule__XFunctionTypeRef__Group_0__3__Impl16633); if (state.failed) return ;
+            match(input,36,FOLLOW_36_in_rule__XFunctionTypeRef__Group_0__3__Impl17069); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFunctionTypeRefAccess().getRightParenthesisKeyword_0_3()); 
             }
@@ -25130,7 +25784,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 513, rule__XFunctionTypeRef__Group_0__3__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 527, rule__XFunctionTypeRef__Group_0__3__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25141,23 +25795,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0_2__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8267:1: rule__XFunctionTypeRef__Group_0_2__0 : rule__XFunctionTypeRef__Group_0_2__0__Impl rule__XFunctionTypeRef__Group_0_2__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8488:1: rule__XFunctionTypeRef__Group_0_2__0 : rule__XFunctionTypeRef__Group_0_2__0__Impl rule__XFunctionTypeRef__Group_0_2__1 ;
     public final void rule__XFunctionTypeRef__Group_0_2__0() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0_2__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 514) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8271:1: ( rule__XFunctionTypeRef__Group_0_2__0__Impl rule__XFunctionTypeRef__Group_0_2__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8272:2: rule__XFunctionTypeRef__Group_0_2__0__Impl rule__XFunctionTypeRef__Group_0_2__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 528) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8492:1: ( rule__XFunctionTypeRef__Group_0_2__0__Impl rule__XFunctionTypeRef__Group_0_2__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8493:2: rule__XFunctionTypeRef__Group_0_2__0__Impl rule__XFunctionTypeRef__Group_0_2__1
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__0__Impl_in_rule__XFunctionTypeRef__Group_0_2__016672);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__0__Impl_in_rule__XFunctionTypeRef__Group_0_2__017108);
             rule__XFunctionTypeRef__Group_0_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__1_in_rule__XFunctionTypeRef__Group_0_2__016675);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__1_in_rule__XFunctionTypeRef__Group_0_2__017111);
             rule__XFunctionTypeRef__Group_0_2__1();
 
             state._fsp--;
@@ -25171,7 +25825,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 514, rule__XFunctionTypeRef__Group_0_2__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 528, rule__XFunctionTypeRef__Group_0_2__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25182,24 +25836,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0_2__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8279:1: rule__XFunctionTypeRef__Group_0_2__0__Impl : ( ',' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8500:1: rule__XFunctionTypeRef__Group_0_2__0__Impl : ( ',' ) ;
     public final void rule__XFunctionTypeRef__Group_0_2__0__Impl() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0_2__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 515) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8283:1: ( ( ',' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8284:1: ( ',' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 529) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8504:1: ( ( ',' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8505:1: ( ',' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8284:1: ( ',' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8285:1: ','
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8505:1: ( ',' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8506:1: ','
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getCommaKeyword_0_2_0()); 
             }
-            match(input,34,FOLLOW_34_in_rule__XFunctionTypeRef__Group_0_2__0__Impl16703); if (state.failed) return ;
+            match(input,34,FOLLOW_34_in_rule__XFunctionTypeRef__Group_0_2__0__Impl17139); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFunctionTypeRefAccess().getCommaKeyword_0_2_0()); 
             }
@@ -25215,7 +25869,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 515, rule__XFunctionTypeRef__Group_0_2__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 529, rule__XFunctionTypeRef__Group_0_2__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25226,18 +25880,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0_2__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8298:1: rule__XFunctionTypeRef__Group_0_2__1 : rule__XFunctionTypeRef__Group_0_2__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8519:1: rule__XFunctionTypeRef__Group_0_2__1 : rule__XFunctionTypeRef__Group_0_2__1__Impl ;
     public final void rule__XFunctionTypeRef__Group_0_2__1() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0_2__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 516) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8302:1: ( rule__XFunctionTypeRef__Group_0_2__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8303:2: rule__XFunctionTypeRef__Group_0_2__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 530) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8523:1: ( rule__XFunctionTypeRef__Group_0_2__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8524:2: rule__XFunctionTypeRef__Group_0_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__1__Impl_in_rule__XFunctionTypeRef__Group_0_2__116734);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__Group_0_2__1__Impl_in_rule__XFunctionTypeRef__Group_0_2__117170);
             rule__XFunctionTypeRef__Group_0_2__1__Impl();
 
             state._fsp--;
@@ -25251,7 +25905,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 516, rule__XFunctionTypeRef__Group_0_2__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 530, rule__XFunctionTypeRef__Group_0_2__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25262,27 +25916,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__Group_0_2__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8309:1: rule__XFunctionTypeRef__Group_0_2__1__Impl : ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8530:1: rule__XFunctionTypeRef__Group_0_2__1__Impl : ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 ) ) ;
     public final void rule__XFunctionTypeRef__Group_0_2__1__Impl() throws RecognitionException {
         int rule__XFunctionTypeRef__Group_0_2__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 517) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8313:1: ( ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8314:1: ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 531) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8534:1: ( ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8535:1: ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8314:1: ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8315:1: ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8535:1: ( ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8536:1: ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesAssignment_0_2_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8316:1: ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8316:2: rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8537:1: ( rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8537:2: rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1
             {
-            pushFollow(FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_in_rule__XFunctionTypeRef__Group_0_2__1__Impl16761);
+            pushFollow(FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_in_rule__XFunctionTypeRef__Group_0_2__1__Impl17197);
             rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1();
 
             state._fsp--;
@@ -25305,7 +25959,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 517, rule__XFunctionTypeRef__Group_0_2__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 531, rule__XFunctionTypeRef__Group_0_2__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25316,23 +25970,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8330:1: rule__JvmParameterizedTypeReference__Group__0 : rule__JvmParameterizedTypeReference__Group__0__Impl rule__JvmParameterizedTypeReference__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8551:1: rule__JvmParameterizedTypeReference__Group__0 : rule__JvmParameterizedTypeReference__Group__0__Impl rule__JvmParameterizedTypeReference__Group__1 ;
     public final void rule__JvmParameterizedTypeReference__Group__0() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 518) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8334:1: ( rule__JvmParameterizedTypeReference__Group__0__Impl rule__JvmParameterizedTypeReference__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8335:2: rule__JvmParameterizedTypeReference__Group__0__Impl rule__JvmParameterizedTypeReference__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 532) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8555:1: ( rule__JvmParameterizedTypeReference__Group__0__Impl rule__JvmParameterizedTypeReference__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8556:2: rule__JvmParameterizedTypeReference__Group__0__Impl rule__JvmParameterizedTypeReference__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__0__Impl_in_rule__JvmParameterizedTypeReference__Group__016795);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__0__Impl_in_rule__JvmParameterizedTypeReference__Group__017231);
             rule__JvmParameterizedTypeReference__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__1_in_rule__JvmParameterizedTypeReference__Group__016798);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__1_in_rule__JvmParameterizedTypeReference__Group__017234);
             rule__JvmParameterizedTypeReference__Group__1();
 
             state._fsp--;
@@ -25346,7 +26000,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 518, rule__JvmParameterizedTypeReference__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 532, rule__JvmParameterizedTypeReference__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25357,27 +26011,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8342:1: rule__JvmParameterizedTypeReference__Group__0__Impl : ( ( rule__JvmParameterizedTypeReference__TypeAssignment_0 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8563:1: rule__JvmParameterizedTypeReference__Group__0__Impl : ( ( rule__JvmParameterizedTypeReference__TypeAssignment_0 ) ) ;
     public final void rule__JvmParameterizedTypeReference__Group__0__Impl() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 519) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8346:1: ( ( ( rule__JvmParameterizedTypeReference__TypeAssignment_0 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8347:1: ( ( rule__JvmParameterizedTypeReference__TypeAssignment_0 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 533) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8567:1: ( ( ( rule__JvmParameterizedTypeReference__TypeAssignment_0 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8568:1: ( ( rule__JvmParameterizedTypeReference__TypeAssignment_0 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8347:1: ( ( rule__JvmParameterizedTypeReference__TypeAssignment_0 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8348:1: ( rule__JvmParameterizedTypeReference__TypeAssignment_0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8568:1: ( ( rule__JvmParameterizedTypeReference__TypeAssignment_0 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8569:1: ( rule__JvmParameterizedTypeReference__TypeAssignment_0 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeAssignment_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8349:1: ( rule__JvmParameterizedTypeReference__TypeAssignment_0 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8349:2: rule__JvmParameterizedTypeReference__TypeAssignment_0
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8570:1: ( rule__JvmParameterizedTypeReference__TypeAssignment_0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8570:2: rule__JvmParameterizedTypeReference__TypeAssignment_0
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__TypeAssignment_0_in_rule__JvmParameterizedTypeReference__Group__0__Impl16825);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__TypeAssignment_0_in_rule__JvmParameterizedTypeReference__Group__0__Impl17261);
             rule__JvmParameterizedTypeReference__TypeAssignment_0();
 
             state._fsp--;
@@ -25400,7 +26054,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 519, rule__JvmParameterizedTypeReference__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 533, rule__JvmParameterizedTypeReference__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25411,18 +26065,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8359:1: rule__JvmParameterizedTypeReference__Group__1 : rule__JvmParameterizedTypeReference__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8580:1: rule__JvmParameterizedTypeReference__Group__1 : rule__JvmParameterizedTypeReference__Group__1__Impl ;
     public final void rule__JvmParameterizedTypeReference__Group__1() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 520) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8363:1: ( rule__JvmParameterizedTypeReference__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8364:2: rule__JvmParameterizedTypeReference__Group__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 534) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8584:1: ( rule__JvmParameterizedTypeReference__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8585:2: rule__JvmParameterizedTypeReference__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__1__Impl_in_rule__JvmParameterizedTypeReference__Group__116855);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group__1__Impl_in_rule__JvmParameterizedTypeReference__Group__117291);
             rule__JvmParameterizedTypeReference__Group__1__Impl();
 
             state._fsp--;
@@ -25436,7 +26090,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 520, rule__JvmParameterizedTypeReference__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 534, rule__JvmParameterizedTypeReference__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25447,35 +26101,35 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8370:1: rule__JvmParameterizedTypeReference__Group__1__Impl : ( ( rule__JvmParameterizedTypeReference__Group_1__0 )? ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8591:1: rule__JvmParameterizedTypeReference__Group__1__Impl : ( ( rule__JvmParameterizedTypeReference__Group_1__0 )? ) ;
     public final void rule__JvmParameterizedTypeReference__Group__1__Impl() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 521) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8374:1: ( ( ( rule__JvmParameterizedTypeReference__Group_1__0 )? ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8375:1: ( ( rule__JvmParameterizedTypeReference__Group_1__0 )? )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 535) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8595:1: ( ( ( rule__JvmParameterizedTypeReference__Group_1__0 )? ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8596:1: ( ( rule__JvmParameterizedTypeReference__Group_1__0 )? )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8375:1: ( ( rule__JvmParameterizedTypeReference__Group_1__0 )? )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8376:1: ( rule__JvmParameterizedTypeReference__Group_1__0 )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8596:1: ( ( rule__JvmParameterizedTypeReference__Group_1__0 )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8597:1: ( rule__JvmParameterizedTypeReference__Group_1__0 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8377:1: ( rule__JvmParameterizedTypeReference__Group_1__0 )?
-            int alt57=2;
-            int LA57_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8598:1: ( rule__JvmParameterizedTypeReference__Group_1__0 )?
+            int alt59=2;
+            int LA59_0 = input.LA(1);
 
-            if ( (LA57_0==20) ) {
-                alt57=1;
+            if ( (LA59_0==20) ) {
+                alt59=1;
             }
-            switch (alt57) {
+            switch (alt59) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8377:2: rule__JvmParameterizedTypeReference__Group_1__0
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8598:2: rule__JvmParameterizedTypeReference__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0_in_rule__JvmParameterizedTypeReference__Group__1__Impl16882);
+                    pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0_in_rule__JvmParameterizedTypeReference__Group__1__Impl17318);
                     rule__JvmParameterizedTypeReference__Group_1__0();
 
                     state._fsp--;
@@ -25501,7 +26155,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 521, rule__JvmParameterizedTypeReference__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 535, rule__JvmParameterizedTypeReference__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25512,23 +26166,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8391:1: rule__JvmParameterizedTypeReference__Group_1__0 : rule__JvmParameterizedTypeReference__Group_1__0__Impl rule__JvmParameterizedTypeReference__Group_1__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8612:1: rule__JvmParameterizedTypeReference__Group_1__0 : rule__JvmParameterizedTypeReference__Group_1__0__Impl rule__JvmParameterizedTypeReference__Group_1__1 ;
     public final void rule__JvmParameterizedTypeReference__Group_1__0() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 522) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8395:1: ( rule__JvmParameterizedTypeReference__Group_1__0__Impl rule__JvmParameterizedTypeReference__Group_1__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8396:2: rule__JvmParameterizedTypeReference__Group_1__0__Impl rule__JvmParameterizedTypeReference__Group_1__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 536) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8616:1: ( rule__JvmParameterizedTypeReference__Group_1__0__Impl rule__JvmParameterizedTypeReference__Group_1__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8617:2: rule__JvmParameterizedTypeReference__Group_1__0__Impl rule__JvmParameterizedTypeReference__Group_1__1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1__016917);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1__017353);
             rule__JvmParameterizedTypeReference__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1_in_rule__JvmParameterizedTypeReference__Group_1__016920);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1_in_rule__JvmParameterizedTypeReference__Group_1__017356);
             rule__JvmParameterizedTypeReference__Group_1__1();
 
             state._fsp--;
@@ -25542,7 +26196,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 522, rule__JvmParameterizedTypeReference__Group_1__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 536, rule__JvmParameterizedTypeReference__Group_1__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25553,24 +26207,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8403:1: rule__JvmParameterizedTypeReference__Group_1__0__Impl : ( '<' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8624:1: rule__JvmParameterizedTypeReference__Group_1__0__Impl : ( '<' ) ;
     public final void rule__JvmParameterizedTypeReference__Group_1__0__Impl() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 523) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8407:1: ( ( '<' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8408:1: ( '<' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 537) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8628:1: ( ( '<' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8629:1: ( '<' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8408:1: ( '<' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8409:1: '<'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8629:1: ( '<' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8630:1: '<'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_0()); 
             }
-            match(input,20,FOLLOW_20_in_rule__JvmParameterizedTypeReference__Group_1__0__Impl16948); if (state.failed) return ;
+            match(input,20,FOLLOW_20_in_rule__JvmParameterizedTypeReference__Group_1__0__Impl17384); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getLessThanSignKeyword_1_0()); 
             }
@@ -25586,7 +26240,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 523, rule__JvmParameterizedTypeReference__Group_1__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 537, rule__JvmParameterizedTypeReference__Group_1__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25597,23 +26251,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8422:1: rule__JvmParameterizedTypeReference__Group_1__1 : rule__JvmParameterizedTypeReference__Group_1__1__Impl rule__JvmParameterizedTypeReference__Group_1__2 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8643:1: rule__JvmParameterizedTypeReference__Group_1__1 : rule__JvmParameterizedTypeReference__Group_1__1__Impl rule__JvmParameterizedTypeReference__Group_1__2 ;
     public final void rule__JvmParameterizedTypeReference__Group_1__1() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 524) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8426:1: ( rule__JvmParameterizedTypeReference__Group_1__1__Impl rule__JvmParameterizedTypeReference__Group_1__2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8427:2: rule__JvmParameterizedTypeReference__Group_1__1__Impl rule__JvmParameterizedTypeReference__Group_1__2
+            if ( state.backtracking>0 && alreadyParsedRule(input, 538) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8647:1: ( rule__JvmParameterizedTypeReference__Group_1__1__Impl rule__JvmParameterizedTypeReference__Group_1__2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8648:2: rule__JvmParameterizedTypeReference__Group_1__1__Impl rule__JvmParameterizedTypeReference__Group_1__2
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1__116979);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1__117415);
             rule__JvmParameterizedTypeReference__Group_1__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2_in_rule__JvmParameterizedTypeReference__Group_1__116982);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2_in_rule__JvmParameterizedTypeReference__Group_1__117418);
             rule__JvmParameterizedTypeReference__Group_1__2();
 
             state._fsp--;
@@ -25627,7 +26281,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 524, rule__JvmParameterizedTypeReference__Group_1__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 538, rule__JvmParameterizedTypeReference__Group_1__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25638,27 +26292,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8434:1: rule__JvmParameterizedTypeReference__Group_1__1__Impl : ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8655:1: rule__JvmParameterizedTypeReference__Group_1__1__Impl : ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 ) ) ;
     public final void rule__JvmParameterizedTypeReference__Group_1__1__Impl() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 525) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8438:1: ( ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8439:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 539) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8659:1: ( ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8660:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8439:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8440:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8660:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8661:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsAssignment_1_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8441:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8441:2: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8662:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8662:2: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1_in_rule__JvmParameterizedTypeReference__Group_1__1__Impl17009);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1_in_rule__JvmParameterizedTypeReference__Group_1__1__Impl17445);
             rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1();
 
             state._fsp--;
@@ -25681,7 +26335,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 525, rule__JvmParameterizedTypeReference__Group_1__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 539, rule__JvmParameterizedTypeReference__Group_1__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25692,23 +26346,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8451:1: rule__JvmParameterizedTypeReference__Group_1__2 : rule__JvmParameterizedTypeReference__Group_1__2__Impl rule__JvmParameterizedTypeReference__Group_1__3 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8672:1: rule__JvmParameterizedTypeReference__Group_1__2 : rule__JvmParameterizedTypeReference__Group_1__2__Impl rule__JvmParameterizedTypeReference__Group_1__3 ;
     public final void rule__JvmParameterizedTypeReference__Group_1__2() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1__2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 526) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8455:1: ( rule__JvmParameterizedTypeReference__Group_1__2__Impl rule__JvmParameterizedTypeReference__Group_1__3 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8456:2: rule__JvmParameterizedTypeReference__Group_1__2__Impl rule__JvmParameterizedTypeReference__Group_1__3
+            if ( state.backtracking>0 && alreadyParsedRule(input, 540) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8676:1: ( rule__JvmParameterizedTypeReference__Group_1__2__Impl rule__JvmParameterizedTypeReference__Group_1__3 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8677:2: rule__JvmParameterizedTypeReference__Group_1__2__Impl rule__JvmParameterizedTypeReference__Group_1__3
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1__217039);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1__217475);
             rule__JvmParameterizedTypeReference__Group_1__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3_in_rule__JvmParameterizedTypeReference__Group_1__217042);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3_in_rule__JvmParameterizedTypeReference__Group_1__217478);
             rule__JvmParameterizedTypeReference__Group_1__3();
 
             state._fsp--;
@@ -25722,7 +26376,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 526, rule__JvmParameterizedTypeReference__Group_1__2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 540, rule__JvmParameterizedTypeReference__Group_1__2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25733,39 +26387,39 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__2__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8463:1: rule__JvmParameterizedTypeReference__Group_1__2__Impl : ( ( rule__JvmParameterizedTypeReference__Group_1_2__0 )* ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8684:1: rule__JvmParameterizedTypeReference__Group_1__2__Impl : ( ( rule__JvmParameterizedTypeReference__Group_1_2__0 )* ) ;
     public final void rule__JvmParameterizedTypeReference__Group_1__2__Impl() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1__2__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 527) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8467:1: ( ( ( rule__JvmParameterizedTypeReference__Group_1_2__0 )* ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8468:1: ( ( rule__JvmParameterizedTypeReference__Group_1_2__0 )* )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 541) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8688:1: ( ( ( rule__JvmParameterizedTypeReference__Group_1_2__0 )* ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8689:1: ( ( rule__JvmParameterizedTypeReference__Group_1_2__0 )* )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8468:1: ( ( rule__JvmParameterizedTypeReference__Group_1_2__0 )* )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8469:1: ( rule__JvmParameterizedTypeReference__Group_1_2__0 )*
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8689:1: ( ( rule__JvmParameterizedTypeReference__Group_1_2__0 )* )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8690:1: ( rule__JvmParameterizedTypeReference__Group_1_2__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGroup_1_2()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8470:1: ( rule__JvmParameterizedTypeReference__Group_1_2__0 )*
-            loop58:
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8691:1: ( rule__JvmParameterizedTypeReference__Group_1_2__0 )*
+            loop60:
             do {
-                int alt58=2;
-                int LA58_0 = input.LA(1);
+                int alt60=2;
+                int LA60_0 = input.LA(1);
 
-                if ( (LA58_0==34) ) {
-                    alt58=1;
+                if ( (LA60_0==34) ) {
+                    alt60=1;
                 }
 
 
-                switch (alt58) {
+                switch (alt60) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8470:2: rule__JvmParameterizedTypeReference__Group_1_2__0
+            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8691:2: rule__JvmParameterizedTypeReference__Group_1_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0_in_rule__JvmParameterizedTypeReference__Group_1__2__Impl17069);
+            	    pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0_in_rule__JvmParameterizedTypeReference__Group_1__2__Impl17505);
             	    rule__JvmParameterizedTypeReference__Group_1_2__0();
 
             	    state._fsp--;
@@ -25775,7 +26429,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop58;
+            	    break loop60;
                 }
             } while (true);
 
@@ -25794,7 +26448,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 527, rule__JvmParameterizedTypeReference__Group_1__2__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 541, rule__JvmParameterizedTypeReference__Group_1__2__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25805,18 +26459,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__3"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8480:1: rule__JvmParameterizedTypeReference__Group_1__3 : rule__JvmParameterizedTypeReference__Group_1__3__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8701:1: rule__JvmParameterizedTypeReference__Group_1__3 : rule__JvmParameterizedTypeReference__Group_1__3__Impl ;
     public final void rule__JvmParameterizedTypeReference__Group_1__3() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1__3_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 528) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8484:1: ( rule__JvmParameterizedTypeReference__Group_1__3__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8485:2: rule__JvmParameterizedTypeReference__Group_1__3__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 542) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8705:1: ( rule__JvmParameterizedTypeReference__Group_1__3__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8706:2: rule__JvmParameterizedTypeReference__Group_1__3__Impl
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1__317100);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1__317536);
             rule__JvmParameterizedTypeReference__Group_1__3__Impl();
 
             state._fsp--;
@@ -25830,7 +26484,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 528, rule__JvmParameterizedTypeReference__Group_1__3_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 542, rule__JvmParameterizedTypeReference__Group_1__3_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25841,24 +26495,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1__3__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8491:1: rule__JvmParameterizedTypeReference__Group_1__3__Impl : ( '>' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8712:1: rule__JvmParameterizedTypeReference__Group_1__3__Impl : ( '>' ) ;
     public final void rule__JvmParameterizedTypeReference__Group_1__3__Impl() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1__3__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 529) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8495:1: ( ( '>' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8496:1: ( '>' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 543) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8716:1: ( ( '>' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8717:1: ( '>' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8496:1: ( '>' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8497:1: '>'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8717:1: ( '>' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8718:1: '>'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3()); 
             }
-            match(input,19,FOLLOW_19_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl17128); if (state.failed) return ;
+            match(input,19,FOLLOW_19_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl17564); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getGreaterThanSignKeyword_1_3()); 
             }
@@ -25874,7 +26528,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 529, rule__JvmParameterizedTypeReference__Group_1__3__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 543, rule__JvmParameterizedTypeReference__Group_1__3__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25885,23 +26539,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_2__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8518:1: rule__JvmParameterizedTypeReference__Group_1_2__0 : rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8739:1: rule__JvmParameterizedTypeReference__Group_1_2__0 : rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1 ;
     public final void rule__JvmParameterizedTypeReference__Group_1_2__0() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1_2__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 530) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8522:1: ( rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8523:2: rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 544) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8743:1: ( rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8744:2: rule__JvmParameterizedTypeReference__Group_1_2__0__Impl rule__JvmParameterizedTypeReference__Group_1_2__1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__017167);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__017603);
             rule__JvmParameterizedTypeReference__Group_1_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__017170);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__017606);
             rule__JvmParameterizedTypeReference__Group_1_2__1();
 
             state._fsp--;
@@ -25915,7 +26569,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 530, rule__JvmParameterizedTypeReference__Group_1_2__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 544, rule__JvmParameterizedTypeReference__Group_1_2__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25926,24 +26580,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_2__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8530:1: rule__JvmParameterizedTypeReference__Group_1_2__0__Impl : ( ',' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8751:1: rule__JvmParameterizedTypeReference__Group_1_2__0__Impl : ( ',' ) ;
     public final void rule__JvmParameterizedTypeReference__Group_1_2__0__Impl() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 531) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8534:1: ( ( ',' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8535:1: ( ',' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 545) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8755:1: ( ( ',' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8756:1: ( ',' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8535:1: ( ',' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8536:1: ','
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8756:1: ( ',' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8757:1: ','
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0()); 
             }
-            match(input,34,FOLLOW_34_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl17198); if (state.failed) return ;
+            match(input,34,FOLLOW_34_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl17634); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0()); 
             }
@@ -25959,7 +26613,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 531, rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 545, rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -25970,18 +26624,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_2__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8549:1: rule__JvmParameterizedTypeReference__Group_1_2__1 : rule__JvmParameterizedTypeReference__Group_1_2__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8770:1: rule__JvmParameterizedTypeReference__Group_1_2__1 : rule__JvmParameterizedTypeReference__Group_1_2__1__Impl ;
     public final void rule__JvmParameterizedTypeReference__Group_1_2__1() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1_2__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 532) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8553:1: ( rule__JvmParameterizedTypeReference__Group_1_2__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8554:2: rule__JvmParameterizedTypeReference__Group_1_2__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 546) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8774:1: ( rule__JvmParameterizedTypeReference__Group_1_2__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8775:2: rule__JvmParameterizedTypeReference__Group_1_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__117229);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__117665);
             rule__JvmParameterizedTypeReference__Group_1_2__1__Impl();
 
             state._fsp--;
@@ -25995,7 +26649,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 532, rule__JvmParameterizedTypeReference__Group_1_2__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 546, rule__JvmParameterizedTypeReference__Group_1_2__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26006,27 +26660,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__Group_1_2__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8560:1: rule__JvmParameterizedTypeReference__Group_1_2__1__Impl : ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8781:1: rule__JvmParameterizedTypeReference__Group_1_2__1__Impl : ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) ) ;
     public final void rule__JvmParameterizedTypeReference__Group_1_2__1__Impl() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 533) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8564:1: ( ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8565:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 547) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8785:1: ( ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8786:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8565:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8566:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8786:1: ( ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8787:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsAssignment_1_2_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8567:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8567:2: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8788:1: ( rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8788:2: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1
             {
-            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl17256);
+            pushFollow(FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl17692);
             rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1();
 
             state._fsp--;
@@ -26049,7 +26703,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 533, rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 547, rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26060,23 +26714,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8581:1: rule__JvmWildcardTypeReference__Group__0 : rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8802:1: rule__JvmWildcardTypeReference__Group__0 : rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 ;
     public final void rule__JvmWildcardTypeReference__Group__0() throws RecognitionException {
         int rule__JvmWildcardTypeReference__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 534) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8585:1: ( rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8586:2: rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 548) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8806:1: ( rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8807:2: rule__JvmWildcardTypeReference__Group__0__Impl rule__JvmWildcardTypeReference__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__017290);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__017726);
             rule__JvmWildcardTypeReference__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__017293);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__017729);
             rule__JvmWildcardTypeReference__Group__1();
 
             state._fsp--;
@@ -26090,7 +26744,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 534, rule__JvmWildcardTypeReference__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 548, rule__JvmWildcardTypeReference__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26101,25 +26755,25 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8593:1: rule__JvmWildcardTypeReference__Group__0__Impl : ( () ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8814:1: rule__JvmWildcardTypeReference__Group__0__Impl : ( () ) ;
     public final void rule__JvmWildcardTypeReference__Group__0__Impl() throws RecognitionException {
         int rule__JvmWildcardTypeReference__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 535) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8597:1: ( ( () ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8598:1: ( () )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 549) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8818:1: ( ( () ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8819:1: ( () )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8598:1: ( () )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8599:1: ()
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8819:1: ( () )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8820:1: ()
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getJvmWildcardTypeReferenceAction_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8600:1: ()
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8602:1: 
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8821:1: ()
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8823:1: 
             {
             }
 
@@ -26134,7 +26788,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 535, rule__JvmWildcardTypeReference__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 549, rule__JvmWildcardTypeReference__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26145,23 +26799,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8612:1: rule__JvmWildcardTypeReference__Group__1 : rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8833:1: rule__JvmWildcardTypeReference__Group__1 : rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 ;
     public final void rule__JvmWildcardTypeReference__Group__1() throws RecognitionException {
         int rule__JvmWildcardTypeReference__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 536) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8616:1: ( rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8617:2: rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2
+            if ( state.backtracking>0 && alreadyParsedRule(input, 550) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8837:1: ( rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8838:2: rule__JvmWildcardTypeReference__Group__1__Impl rule__JvmWildcardTypeReference__Group__2
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__117351);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__117787);
             rule__JvmWildcardTypeReference__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__117354);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__117790);
             rule__JvmWildcardTypeReference__Group__2();
 
             state._fsp--;
@@ -26175,7 +26829,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 536, rule__JvmWildcardTypeReference__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 550, rule__JvmWildcardTypeReference__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26186,24 +26840,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8624:1: rule__JvmWildcardTypeReference__Group__1__Impl : ( '?' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8845:1: rule__JvmWildcardTypeReference__Group__1__Impl : ( '?' ) ;
     public final void rule__JvmWildcardTypeReference__Group__1__Impl() throws RecognitionException {
         int rule__JvmWildcardTypeReference__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 537) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8628:1: ( ( '?' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8629:1: ( '?' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 551) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8849:1: ( ( '?' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8850:1: ( '?' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8629:1: ( '?' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8630:1: '?'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8850:1: ( '?' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8851:1: '?'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1()); 
             }
-            match(input,59,FOLLOW_59_in_rule__JvmWildcardTypeReference__Group__1__Impl17382); if (state.failed) return ;
+            match(input,59,FOLLOW_59_in_rule__JvmWildcardTypeReference__Group__1__Impl17818); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmWildcardTypeReferenceAccess().getQuestionMarkKeyword_1()); 
             }
@@ -26219,7 +26873,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 537, rule__JvmWildcardTypeReference__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 551, rule__JvmWildcardTypeReference__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26230,18 +26884,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8643:1: rule__JvmWildcardTypeReference__Group__2 : rule__JvmWildcardTypeReference__Group__2__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8864:1: rule__JvmWildcardTypeReference__Group__2 : rule__JvmWildcardTypeReference__Group__2__Impl ;
     public final void rule__JvmWildcardTypeReference__Group__2() throws RecognitionException {
         int rule__JvmWildcardTypeReference__Group__2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 538) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8647:1: ( rule__JvmWildcardTypeReference__Group__2__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8648:2: rule__JvmWildcardTypeReference__Group__2__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 552) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8868:1: ( rule__JvmWildcardTypeReference__Group__2__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8869:2: rule__JvmWildcardTypeReference__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__217413);
+            pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__217849);
             rule__JvmWildcardTypeReference__Group__2__Impl();
 
             state._fsp--;
@@ -26255,7 +26909,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 538, rule__JvmWildcardTypeReference__Group__2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 552, rule__JvmWildcardTypeReference__Group__2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26266,35 +26920,35 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__Group__2__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8654:1: rule__JvmWildcardTypeReference__Group__2__Impl : ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8875:1: rule__JvmWildcardTypeReference__Group__2__Impl : ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) ;
     public final void rule__JvmWildcardTypeReference__Group__2__Impl() throws RecognitionException {
         int rule__JvmWildcardTypeReference__Group__2__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 539) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8658:1: ( ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8659:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 553) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8879:1: ( ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8880:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8659:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8660:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8880:1: ( ( rule__JvmWildcardTypeReference__Alternatives_2 )? )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8881:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8661:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
-            int alt59=2;
-            int LA59_0 = input.LA(1);
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8882:1: ( rule__JvmWildcardTypeReference__Alternatives_2 )?
+            int alt61=2;
+            int LA61_0 = input.LA(1);
 
-            if ( (LA59_0==60||LA59_0==62) ) {
-                alt59=1;
+            if ( (LA61_0==60||LA61_0==62) ) {
+                alt61=1;
             }
-            switch (alt59) {
+            switch (alt61) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8661:2: rule__JvmWildcardTypeReference__Alternatives_2
+                    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8882:2: rule__JvmWildcardTypeReference__Alternatives_2
                     {
-                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl17440);
+                    pushFollow(FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl17876);
                     rule__JvmWildcardTypeReference__Alternatives_2();
 
                     state._fsp--;
@@ -26320,7 +26974,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 539, rule__JvmWildcardTypeReference__Group__2__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 553, rule__JvmWildcardTypeReference__Group__2__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26331,23 +26985,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmUpperBound__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8677:1: rule__JvmUpperBound__Group__0 : rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8898:1: rule__JvmUpperBound__Group__0 : rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1 ;
     public final void rule__JvmUpperBound__Group__0() throws RecognitionException {
         int rule__JvmUpperBound__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 540) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8681:1: ( rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8682:2: rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 554) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8902:1: ( rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8903:2: rule__JvmUpperBound__Group__0__Impl rule__JvmUpperBound__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__017477);
+            pushFollow(FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__017913);
             rule__JvmUpperBound__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__017480);
+            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__017916);
             rule__JvmUpperBound__Group__1();
 
             state._fsp--;
@@ -26361,7 +27015,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 540, rule__JvmUpperBound__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 554, rule__JvmUpperBound__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26372,24 +27026,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmUpperBound__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8689:1: rule__JvmUpperBound__Group__0__Impl : ( 'extends' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8910:1: rule__JvmUpperBound__Group__0__Impl : ( 'extends' ) ;
     public final void rule__JvmUpperBound__Group__0__Impl() throws RecognitionException {
         int rule__JvmUpperBound__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 541) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8693:1: ( ( 'extends' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8694:1: ( 'extends' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 555) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8914:1: ( ( 'extends' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8915:1: ( 'extends' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8694:1: ( 'extends' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8695:1: 'extends'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8915:1: ( 'extends' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8916:1: 'extends'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0()); 
             }
-            match(input,60,FOLLOW_60_in_rule__JvmUpperBound__Group__0__Impl17508); if (state.failed) return ;
+            match(input,60,FOLLOW_60_in_rule__JvmUpperBound__Group__0__Impl17944); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0()); 
             }
@@ -26405,7 +27059,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 541, rule__JvmUpperBound__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 555, rule__JvmUpperBound__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26416,18 +27070,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmUpperBound__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8708:1: rule__JvmUpperBound__Group__1 : rule__JvmUpperBound__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8929:1: rule__JvmUpperBound__Group__1 : rule__JvmUpperBound__Group__1__Impl ;
     public final void rule__JvmUpperBound__Group__1() throws RecognitionException {
         int rule__JvmUpperBound__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 542) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8712:1: ( rule__JvmUpperBound__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8713:2: rule__JvmUpperBound__Group__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 556) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8933:1: ( rule__JvmUpperBound__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8934:2: rule__JvmUpperBound__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__117539);
+            pushFollow(FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__117975);
             rule__JvmUpperBound__Group__1__Impl();
 
             state._fsp--;
@@ -26441,7 +27095,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 542, rule__JvmUpperBound__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 556, rule__JvmUpperBound__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26452,27 +27106,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmUpperBound__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8719:1: rule__JvmUpperBound__Group__1__Impl : ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8940:1: rule__JvmUpperBound__Group__1__Impl : ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) ) ;
     public final void rule__JvmUpperBound__Group__1__Impl() throws RecognitionException {
         int rule__JvmUpperBound__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 543) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8723:1: ( ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8724:1: ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 557) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8944:1: ( ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8945:1: ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8724:1: ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8725:1: ( rule__JvmUpperBound__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8945:1: ( ( rule__JvmUpperBound__TypeReferenceAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8946:1: ( rule__JvmUpperBound__TypeReferenceAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceAssignment_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8726:1: ( rule__JvmUpperBound__TypeReferenceAssignment_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8726:2: rule__JvmUpperBound__TypeReferenceAssignment_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8947:1: ( rule__JvmUpperBound__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8947:2: rule__JvmUpperBound__TypeReferenceAssignment_1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl17566);
+            pushFollow(FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl18002);
             rule__JvmUpperBound__TypeReferenceAssignment_1();
 
             state._fsp--;
@@ -26495,7 +27149,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 543, rule__JvmUpperBound__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 557, rule__JvmUpperBound__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26506,23 +27160,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmUpperBoundAnded__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8740:1: rule__JvmUpperBoundAnded__Group__0 : rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8961:1: rule__JvmUpperBoundAnded__Group__0 : rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1 ;
     public final void rule__JvmUpperBoundAnded__Group__0() throws RecognitionException {
         int rule__JvmUpperBoundAnded__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 544) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8744:1: ( rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8745:2: rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 558) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8965:1: ( rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8966:2: rule__JvmUpperBoundAnded__Group__0__Impl rule__JvmUpperBoundAnded__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__017600);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__018036);
             rule__JvmUpperBoundAnded__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__017603);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__018039);
             rule__JvmUpperBoundAnded__Group__1();
 
             state._fsp--;
@@ -26536,7 +27190,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 544, rule__JvmUpperBoundAnded__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 558, rule__JvmUpperBoundAnded__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26547,24 +27201,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmUpperBoundAnded__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8752:1: rule__JvmUpperBoundAnded__Group__0__Impl : ( '&' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8973:1: rule__JvmUpperBoundAnded__Group__0__Impl : ( '&' ) ;
     public final void rule__JvmUpperBoundAnded__Group__0__Impl() throws RecognitionException {
         int rule__JvmUpperBoundAnded__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 545) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8756:1: ( ( '&' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8757:1: ( '&' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 559) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8977:1: ( ( '&' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8978:1: ( '&' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8757:1: ( '&' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8758:1: '&'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8978:1: ( '&' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8979:1: '&'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0()); 
             }
-            match(input,61,FOLLOW_61_in_rule__JvmUpperBoundAnded__Group__0__Impl17631); if (state.failed) return ;
+            match(input,61,FOLLOW_61_in_rule__JvmUpperBoundAnded__Group__0__Impl18067); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0()); 
             }
@@ -26580,7 +27234,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 545, rule__JvmUpperBoundAnded__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 559, rule__JvmUpperBoundAnded__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26591,18 +27245,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmUpperBoundAnded__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8771:1: rule__JvmUpperBoundAnded__Group__1 : rule__JvmUpperBoundAnded__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8992:1: rule__JvmUpperBoundAnded__Group__1 : rule__JvmUpperBoundAnded__Group__1__Impl ;
     public final void rule__JvmUpperBoundAnded__Group__1() throws RecognitionException {
         int rule__JvmUpperBoundAnded__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 546) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8775:1: ( rule__JvmUpperBoundAnded__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8776:2: rule__JvmUpperBoundAnded__Group__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 560) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8996:1: ( rule__JvmUpperBoundAnded__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8997:2: rule__JvmUpperBoundAnded__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__117662);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__118098);
             rule__JvmUpperBoundAnded__Group__1__Impl();
 
             state._fsp--;
@@ -26616,7 +27270,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 546, rule__JvmUpperBoundAnded__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 560, rule__JvmUpperBoundAnded__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26627,27 +27281,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmUpperBoundAnded__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8782:1: rule__JvmUpperBoundAnded__Group__1__Impl : ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9003:1: rule__JvmUpperBoundAnded__Group__1__Impl : ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) ) ;
     public final void rule__JvmUpperBoundAnded__Group__1__Impl() throws RecognitionException {
         int rule__JvmUpperBoundAnded__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 547) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8786:1: ( ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8787:1: ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 561) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9007:1: ( ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9008:1: ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8787:1: ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8788:1: ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9008:1: ( ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9009:1: ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceAssignment_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8789:1: ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8789:2: rule__JvmUpperBoundAnded__TypeReferenceAssignment_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9010:1: ( rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9010:2: rule__JvmUpperBoundAnded__TypeReferenceAssignment_1
             {
-            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl17689);
+            pushFollow(FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl18125);
             rule__JvmUpperBoundAnded__TypeReferenceAssignment_1();
 
             state._fsp--;
@@ -26670,7 +27324,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 547, rule__JvmUpperBoundAnded__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 561, rule__JvmUpperBoundAnded__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26681,23 +27335,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmLowerBound__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8803:1: rule__JvmLowerBound__Group__0 : rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9024:1: rule__JvmLowerBound__Group__0 : rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1 ;
     public final void rule__JvmLowerBound__Group__0() throws RecognitionException {
         int rule__JvmLowerBound__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 548) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8807:1: ( rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8808:2: rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 562) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9028:1: ( rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9029:2: rule__JvmLowerBound__Group__0__Impl rule__JvmLowerBound__Group__1
             {
-            pushFollow(FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__017723);
+            pushFollow(FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__018159);
             rule__JvmLowerBound__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__017726);
+            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__018162);
             rule__JvmLowerBound__Group__1();
 
             state._fsp--;
@@ -26711,7 +27365,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 548, rule__JvmLowerBound__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 562, rule__JvmLowerBound__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26722,24 +27376,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmLowerBound__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8815:1: rule__JvmLowerBound__Group__0__Impl : ( 'super' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9036:1: rule__JvmLowerBound__Group__0__Impl : ( 'super' ) ;
     public final void rule__JvmLowerBound__Group__0__Impl() throws RecognitionException {
         int rule__JvmLowerBound__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 549) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8819:1: ( ( 'super' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8820:1: ( 'super' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 563) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9040:1: ( ( 'super' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9041:1: ( 'super' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8820:1: ( 'super' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8821:1: 'super'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9041:1: ( 'super' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9042:1: 'super'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0()); 
             }
-            match(input,62,FOLLOW_62_in_rule__JvmLowerBound__Group__0__Impl17754); if (state.failed) return ;
+            match(input,62,FOLLOW_62_in_rule__JvmLowerBound__Group__0__Impl18190); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0()); 
             }
@@ -26755,7 +27409,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 549, rule__JvmLowerBound__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 563, rule__JvmLowerBound__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26766,18 +27420,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmLowerBound__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8834:1: rule__JvmLowerBound__Group__1 : rule__JvmLowerBound__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9055:1: rule__JvmLowerBound__Group__1 : rule__JvmLowerBound__Group__1__Impl ;
     public final void rule__JvmLowerBound__Group__1() throws RecognitionException {
         int rule__JvmLowerBound__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 550) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8838:1: ( rule__JvmLowerBound__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8839:2: rule__JvmLowerBound__Group__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 564) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9059:1: ( rule__JvmLowerBound__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9060:2: rule__JvmLowerBound__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__117785);
+            pushFollow(FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__118221);
             rule__JvmLowerBound__Group__1__Impl();
 
             state._fsp--;
@@ -26791,7 +27445,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 550, rule__JvmLowerBound__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 564, rule__JvmLowerBound__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26802,27 +27456,27 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmLowerBound__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8845:1: rule__JvmLowerBound__Group__1__Impl : ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9066:1: rule__JvmLowerBound__Group__1__Impl : ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) ) ;
     public final void rule__JvmLowerBound__Group__1__Impl() throws RecognitionException {
         int rule__JvmLowerBound__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 551) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8849:1: ( ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8850:1: ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 565) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9070:1: ( ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9071:1: ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8850:1: ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8851:1: ( rule__JvmLowerBound__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9071:1: ( ( rule__JvmLowerBound__TypeReferenceAssignment_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9072:1: ( rule__JvmLowerBound__TypeReferenceAssignment_1 )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceAssignment_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8852:1: ( rule__JvmLowerBound__TypeReferenceAssignment_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8852:2: rule__JvmLowerBound__TypeReferenceAssignment_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9073:1: ( rule__JvmLowerBound__TypeReferenceAssignment_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9073:2: rule__JvmLowerBound__TypeReferenceAssignment_1
             {
-            pushFollow(FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl17812);
+            pushFollow(FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl18248);
             rule__JvmLowerBound__TypeReferenceAssignment_1();
 
             state._fsp--;
@@ -26845,7 +27499,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 551, rule__JvmLowerBound__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 565, rule__JvmLowerBound__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26856,23 +27510,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8868:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9089:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
     public final void rule__QualifiedName__Group__0() throws RecognitionException {
         int rule__QualifiedName__Group__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 552) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8872:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8873:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 566) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9093:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9094:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__017848);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__018284);
             rule__QualifiedName__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__017851);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__018287);
             rule__QualifiedName__Group__1();
 
             state._fsp--;
@@ -26886,7 +27540,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 552, rule__QualifiedName__Group__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 566, rule__QualifiedName__Group__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26897,24 +27551,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8880:1: rule__QualifiedName__Group__0__Impl : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9101:1: rule__QualifiedName__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__QualifiedName__Group__0__Impl() throws RecognitionException {
         int rule__QualifiedName__Group__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 553) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8884:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8885:1: ( RULE_ID )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 567) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9105:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9106:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8885:1: ( RULE_ID )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8886:1: RULE_ID
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9106:1: ( RULE_ID )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9107:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl17878); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl18314); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
             }
@@ -26930,7 +27584,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 553, rule__QualifiedName__Group__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 567, rule__QualifiedName__Group__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26941,18 +27595,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8897:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9118:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
     public final void rule__QualifiedName__Group__1() throws RecognitionException {
         int rule__QualifiedName__Group__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 554) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8901:1: ( rule__QualifiedName__Group__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8902:2: rule__QualifiedName__Group__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 568) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9122:1: ( rule__QualifiedName__Group__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9123:2: rule__QualifiedName__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__117907);
+            pushFollow(FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__118343);
             rule__QualifiedName__Group__1__Impl();
 
             state._fsp--;
@@ -26966,7 +27620,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 554, rule__QualifiedName__Group__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 568, rule__QualifiedName__Group__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -26977,37 +27631,37 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8908:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9129:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
     public final void rule__QualifiedName__Group__1__Impl() throws RecognitionException {
         int rule__QualifiedName__Group__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 555) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8912:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8913:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 569) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9133:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9134:1: ( ( rule__QualifiedName__Group_1__0 )* )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8913:1: ( ( rule__QualifiedName__Group_1__0 )* )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8914:1: ( rule__QualifiedName__Group_1__0 )*
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9134:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9135:1: ( rule__QualifiedName__Group_1__0 )*
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getGroup_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8915:1: ( rule__QualifiedName__Group_1__0 )*
-            loop60:
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9136:1: ( rule__QualifiedName__Group_1__0 )*
+            loop62:
             do {
-                int alt60=2;
-                int LA60_0 = input.LA(1);
+                int alt62=2;
+                int LA62_0 = input.LA(1);
 
-                if ( (LA60_0==33) ) {
-                    int LA60_2 = input.LA(2);
+                if ( (LA62_0==33) ) {
+                    int LA62_2 = input.LA(2);
 
-                    if ( (LA60_2==RULE_ID) ) {
-                        int LA60_3 = input.LA(3);
+                    if ( (LA62_2==RULE_ID) ) {
+                        int LA62_3 = input.LA(3);
 
-                        if ( (synpred81_InternalXbase()) ) {
-                            alt60=1;
+                        if ( (synpred83_InternalXbase()) ) {
+                            alt62=1;
                         }
 
 
@@ -27017,11 +27671,11 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
                 }
 
 
-                switch (alt60) {
+                switch (alt62) {
             	case 1 :
-            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8915:2: rule__QualifiedName__Group_1__0
+            	    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9136:2: rule__QualifiedName__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl17934);
+            	    pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl18370);
             	    rule__QualifiedName__Group_1__0();
 
             	    state._fsp--;
@@ -27031,7 +27685,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop60;
+            	    break loop62;
                 }
             } while (true);
 
@@ -27050,7 +27704,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 555, rule__QualifiedName__Group__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 569, rule__QualifiedName__Group__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27061,23 +27715,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8929:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9150:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
     public final void rule__QualifiedName__Group_1__0() throws RecognitionException {
         int rule__QualifiedName__Group_1__0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 556) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8933:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8934:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
+            if ( state.backtracking>0 && alreadyParsedRule(input, 570) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9154:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9155:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__017969);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__018405);
             rule__QualifiedName__Group_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__017972);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__018408);
             rule__QualifiedName__Group_1__1();
 
             state._fsp--;
@@ -27091,7 +27745,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 556, rule__QualifiedName__Group_1__0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 570, rule__QualifiedName__Group_1__0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27102,24 +27756,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8941:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9162:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
     public final void rule__QualifiedName__Group_1__0__Impl() throws RecognitionException {
         int rule__QualifiedName__Group_1__0__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 557) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8945:1: ( ( '.' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8946:1: ( '.' )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 571) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9166:1: ( ( '.' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9167:1: ( '.' )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8946:1: ( '.' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8947:1: '.'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9167:1: ( '.' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9168:1: '.'
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
             }
-            match(input,33,FOLLOW_33_in_rule__QualifiedName__Group_1__0__Impl18000); if (state.failed) return ;
+            match(input,33,FOLLOW_33_in_rule__QualifiedName__Group_1__0__Impl18436); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
             }
@@ -27135,7 +27789,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 557, rule__QualifiedName__Group_1__0__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 571, rule__QualifiedName__Group_1__0__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27146,18 +27800,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8960:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9181:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
     public final void rule__QualifiedName__Group_1__1() throws RecognitionException {
         int rule__QualifiedName__Group_1__1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 558) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8964:1: ( rule__QualifiedName__Group_1__1__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8965:2: rule__QualifiedName__Group_1__1__Impl
+            if ( state.backtracking>0 && alreadyParsedRule(input, 572) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9185:1: ( rule__QualifiedName__Group_1__1__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9186:2: rule__QualifiedName__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__118031);
+            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__118467);
             rule__QualifiedName__Group_1__1__Impl();
 
             state._fsp--;
@@ -27171,7 +27825,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 558, rule__QualifiedName__Group_1__1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 572, rule__QualifiedName__Group_1__1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27182,24 +27836,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8971:1: rule__QualifiedName__Group_1__1__Impl : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9192:1: rule__QualifiedName__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__QualifiedName__Group_1__1__Impl() throws RecognitionException {
         int rule__QualifiedName__Group_1__1__Impl_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 559) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8975:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8976:1: ( RULE_ID )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 573) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9196:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9197:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8976:1: ( RULE_ID )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8977:1: RULE_ID
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9197:1: ( RULE_ID )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9198:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl18058); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl18494); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1()); 
             }
@@ -27215,7 +27869,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 559, rule__QualifiedName__Group_1__1__Impl_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 573, rule__QualifiedName__Group_1__1__Impl_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27226,30 +27880,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XAssignment__FeatureAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8993:1: rule__XAssignment__FeatureAssignment_1_1 : ( ( ruleOpAssign ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9214:1: rule__XAssignment__FeatureAssignment_1_1 : ( ( ruleOpAssign ) ) ;
     public final void rule__XAssignment__FeatureAssignment_1_1() throws RecognitionException {
         int rule__XAssignment__FeatureAssignment_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 560) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8997:1: ( ( ( ruleOpAssign ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8998:1: ( ( ruleOpAssign ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 574) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9218:1: ( ( ( ruleOpAssign ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9219:1: ( ( ruleOpAssign ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8998:1: ( ( ruleOpAssign ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8999:1: ( ruleOpAssign )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9219:1: ( ( ruleOpAssign ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9220:1: ( ruleOpAssign )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9000:1: ( ruleOpAssign )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9001:1: ruleOpAssign
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9221:1: ( ruleOpAssign )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9222:1: ruleOpAssign
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifyableElementOpAssignParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpAssign_in_rule__XAssignment__FeatureAssignment_1_118100);
+            pushFollow(FOLLOW_ruleOpAssign_in_rule__XAssignment__FeatureAssignment_1_118536);
             ruleOpAssign();
 
             state._fsp--;
@@ -27275,7 +27929,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 560, rule__XAssignment__FeatureAssignment_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 574, rule__XAssignment__FeatureAssignment_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27286,24 +27940,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XAssignment__ValueAssignment_1_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9012:1: rule__XAssignment__ValueAssignment_1_2 : ( ruleXAssignment ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9233:1: rule__XAssignment__ValueAssignment_1_2 : ( ruleXAssignment ) ;
     public final void rule__XAssignment__ValueAssignment_1_2() throws RecognitionException {
         int rule__XAssignment__ValueAssignment_1_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 561) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9016:1: ( ( ruleXAssignment ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9017:1: ( ruleXAssignment )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 575) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9237:1: ( ( ruleXAssignment ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9238:1: ( ruleXAssignment )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9017:1: ( ruleXAssignment )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9018:1: ruleXAssignment
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9238:1: ( ruleXAssignment )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9239:1: ruleXAssignment
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAssignmentAccess().getValueXAssignmentParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_1_218135);
+            pushFollow(FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_1_218571);
             ruleXAssignment();
 
             state._fsp--;
@@ -27323,7 +27977,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 561, rule__XAssignment__ValueAssignment_1_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 575, rule__XAssignment__ValueAssignment_1_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27334,30 +27988,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XOrExpression__FeatureAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9027:1: rule__XOrExpression__FeatureAssignment_1_1 : ( ( ruleOpOr ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9248:1: rule__XOrExpression__FeatureAssignment_1_1 : ( ( ruleOpOr ) ) ;
     public final void rule__XOrExpression__FeatureAssignment_1_1() throws RecognitionException {
         int rule__XOrExpression__FeatureAssignment_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 562) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9031:1: ( ( ( ruleOpOr ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9032:1: ( ( ruleOpOr ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 576) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9252:1: ( ( ( ruleOpOr ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9253:1: ( ( ruleOpOr ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9032:1: ( ( ruleOpOr ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9033:1: ( ruleOpOr )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9253:1: ( ( ruleOpOr ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9254:1: ( ruleOpOr )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9034:1: ( ruleOpOr )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9035:1: ruleOpOr
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9255:1: ( ruleOpOr )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9256:1: ruleOpOr
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOrExpressionAccess().getFeatureJvmIdentifyableElementOpOrParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_118170);
+            pushFollow(FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_118606);
             ruleOpOr();
 
             state._fsp--;
@@ -27383,7 +28037,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 562, rule__XOrExpression__FeatureAssignment_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 576, rule__XOrExpression__FeatureAssignment_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27394,24 +28048,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XOrExpression__RightOperandAssignment_1_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9046:1: rule__XOrExpression__RightOperandAssignment_1_2 : ( ruleXAndExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9267:1: rule__XOrExpression__RightOperandAssignment_1_2 : ( ruleXAndExpression ) ;
     public final void rule__XOrExpression__RightOperandAssignment_1_2() throws RecognitionException {
         int rule__XOrExpression__RightOperandAssignment_1_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 563) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9050:1: ( ( ruleXAndExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9051:1: ( ruleXAndExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 577) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9271:1: ( ( ruleXAndExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9272:1: ( ruleXAndExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9051:1: ( ruleXAndExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9052:1: ruleXAndExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9272:1: ( ruleXAndExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9273:1: ruleXAndExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOrExpressionAccess().getRightOperandXAndExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_218205);
+            pushFollow(FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_218641);
             ruleXAndExpression();
 
             state._fsp--;
@@ -27431,7 +28085,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 563, rule__XOrExpression__RightOperandAssignment_1_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 577, rule__XOrExpression__RightOperandAssignment_1_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27442,30 +28096,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XAndExpression__FeatureAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9061:1: rule__XAndExpression__FeatureAssignment_1_1 : ( ( ruleOpAnd ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9282:1: rule__XAndExpression__FeatureAssignment_1_1 : ( ( ruleOpAnd ) ) ;
     public final void rule__XAndExpression__FeatureAssignment_1_1() throws RecognitionException {
         int rule__XAndExpression__FeatureAssignment_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 564) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9065:1: ( ( ( ruleOpAnd ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9066:1: ( ( ruleOpAnd ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 578) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9286:1: ( ( ( ruleOpAnd ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9287:1: ( ( ruleOpAnd ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9066:1: ( ( ruleOpAnd ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9067:1: ( ruleOpAnd )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9287:1: ( ( ruleOpAnd ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9288:1: ( ruleOpAnd )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9068:1: ( ruleOpAnd )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9069:1: ruleOpAnd
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9289:1: ( ruleOpAnd )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9290:1: ruleOpAnd
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAndExpressionAccess().getFeatureJvmIdentifyableElementOpAndParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_118240);
+            pushFollow(FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_118676);
             ruleOpAnd();
 
             state._fsp--;
@@ -27491,7 +28145,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 564, rule__XAndExpression__FeatureAssignment_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 578, rule__XAndExpression__FeatureAssignment_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27502,24 +28156,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XAndExpression__RightOperandAssignment_1_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9080:1: rule__XAndExpression__RightOperandAssignment_1_2 : ( ruleXEqualityExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9301:1: rule__XAndExpression__RightOperandAssignment_1_2 : ( ruleXEqualityExpression ) ;
     public final void rule__XAndExpression__RightOperandAssignment_1_2() throws RecognitionException {
         int rule__XAndExpression__RightOperandAssignment_1_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 565) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9084:1: ( ( ruleXEqualityExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9085:1: ( ruleXEqualityExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 579) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9305:1: ( ( ruleXEqualityExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9306:1: ( ruleXEqualityExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9085:1: ( ruleXEqualityExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9086:1: ruleXEqualityExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9306:1: ( ruleXEqualityExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9307:1: ruleXEqualityExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAndExpressionAccess().getRightOperandXEqualityExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_218275);
+            pushFollow(FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_218711);
             ruleXEqualityExpression();
 
             state._fsp--;
@@ -27539,7 +28193,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 565, rule__XAndExpression__RightOperandAssignment_1_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 579, rule__XAndExpression__RightOperandAssignment_1_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27550,30 +28204,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XEqualityExpression__FeatureAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9095:1: rule__XEqualityExpression__FeatureAssignment_1_1 : ( ( ruleOpEquality ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9316:1: rule__XEqualityExpression__FeatureAssignment_1_1 : ( ( ruleOpEquality ) ) ;
     public final void rule__XEqualityExpression__FeatureAssignment_1_1() throws RecognitionException {
         int rule__XEqualityExpression__FeatureAssignment_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 566) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9099:1: ( ( ( ruleOpEquality ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9100:1: ( ( ruleOpEquality ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 580) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9320:1: ( ( ( ruleOpEquality ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9321:1: ( ( ruleOpEquality ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9100:1: ( ( ruleOpEquality ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9101:1: ( ruleOpEquality )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9321:1: ( ( ruleOpEquality ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9322:1: ( ruleOpEquality )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9102:1: ( ruleOpEquality )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9103:1: ruleOpEquality
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9323:1: ( ruleOpEquality )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9324:1: ruleOpEquality
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXEqualityExpressionAccess().getFeatureJvmIdentifyableElementOpEqualityParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_118310);
+            pushFollow(FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_118746);
             ruleOpEquality();
 
             state._fsp--;
@@ -27599,7 +28253,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 566, rule__XEqualityExpression__FeatureAssignment_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 580, rule__XEqualityExpression__FeatureAssignment_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27610,24 +28264,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XEqualityExpression__RightOperandAssignment_1_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9114:1: rule__XEqualityExpression__RightOperandAssignment_1_2 : ( ruleXRelationalExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9335:1: rule__XEqualityExpression__RightOperandAssignment_1_2 : ( ruleXRelationalExpression ) ;
     public final void rule__XEqualityExpression__RightOperandAssignment_1_2() throws RecognitionException {
         int rule__XEqualityExpression__RightOperandAssignment_1_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 567) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9118:1: ( ( ruleXRelationalExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9119:1: ( ruleXRelationalExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 581) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9339:1: ( ( ruleXRelationalExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9340:1: ( ruleXRelationalExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9119:1: ( ruleXRelationalExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9120:1: ruleXRelationalExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9340:1: ( ruleXRelationalExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9341:1: ruleXRelationalExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXEqualityExpressionAccess().getRightOperandXRelationalExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_218345);
+            pushFollow(FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_218781);
             ruleXRelationalExpression();
 
             state._fsp--;
@@ -27647,7 +28301,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 567, rule__XEqualityExpression__RightOperandAssignment_1_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 581, rule__XEqualityExpression__RightOperandAssignment_1_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27658,30 +28312,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XRelationalExpression__TypeAssignment_1_0_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9129:1: rule__XRelationalExpression__TypeAssignment_1_0_2 : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9350:1: rule__XRelationalExpression__TypeAssignment_1_0_2 : ( ( ruleQualifiedName ) ) ;
     public final void rule__XRelationalExpression__TypeAssignment_1_0_2() throws RecognitionException {
         int rule__XRelationalExpression__TypeAssignment_1_0_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 568) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9133:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9134:1: ( ( ruleQualifiedName ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 582) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9354:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9355:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9134:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9135:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9355:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9356:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeCrossReference_1_0_2_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9136:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9137:1: ruleQualifiedName
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9357:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9358:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeQualifiedNameParserRuleCall_1_0_2_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XRelationalExpression__TypeAssignment_1_0_218380);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XRelationalExpression__TypeAssignment_1_0_218816);
             ruleQualifiedName();
 
             state._fsp--;
@@ -27707,7 +28361,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 568, rule__XRelationalExpression__TypeAssignment_1_0_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 582, rule__XRelationalExpression__TypeAssignment_1_0_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27718,30 +28372,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XRelationalExpression__FeatureAssignment_1_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9148:1: rule__XRelationalExpression__FeatureAssignment_1_1_1 : ( ( ruleOpCompare ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9369:1: rule__XRelationalExpression__FeatureAssignment_1_1_1 : ( ( ruleOpCompare ) ) ;
     public final void rule__XRelationalExpression__FeatureAssignment_1_1_1() throws RecognitionException {
         int rule__XRelationalExpression__FeatureAssignment_1_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 569) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9152:1: ( ( ( ruleOpCompare ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9153:1: ( ( ruleOpCompare ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 583) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9373:1: ( ( ( ruleOpCompare ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9374:1: ( ( ruleOpCompare ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9153:1: ( ( ruleOpCompare ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9154:1: ( ruleOpCompare )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9374:1: ( ( ruleOpCompare ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9375:1: ( ruleOpCompare )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9155:1: ( ruleOpCompare )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9156:1: ruleOpCompare
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9376:1: ( ruleOpCompare )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9377:1: ruleOpCompare
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getFeatureJvmIdentifyableElementOpCompareParserRuleCall_1_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_118419);
+            pushFollow(FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_118855);
             ruleOpCompare();
 
             state._fsp--;
@@ -27767,7 +28421,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 569, rule__XRelationalExpression__FeatureAssignment_1_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 583, rule__XRelationalExpression__FeatureAssignment_1_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27778,24 +28432,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XRelationalExpression__RightOperandAssignment_1_1_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9167:1: rule__XRelationalExpression__RightOperandAssignment_1_1_2 : ( ruleXOtherOperatorExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9388:1: rule__XRelationalExpression__RightOperandAssignment_1_1_2 : ( ruleXOtherOperatorExpression ) ;
     public final void rule__XRelationalExpression__RightOperandAssignment_1_1_2() throws RecognitionException {
         int rule__XRelationalExpression__RightOperandAssignment_1_1_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 570) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9171:1: ( ( ruleXOtherOperatorExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9172:1: ( ruleXOtherOperatorExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 584) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9392:1: ( ( ruleXOtherOperatorExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9393:1: ( ruleXOtherOperatorExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9172:1: ( ruleXOtherOperatorExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9173:1: ruleXOtherOperatorExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9393:1: ( ruleXOtherOperatorExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9394:1: ruleXOtherOperatorExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXRelationalExpressionAccess().getRightOperandXOtherOperatorExpressionParserRuleCall_1_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_218454);
+            pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_218890);
             ruleXOtherOperatorExpression();
 
             state._fsp--;
@@ -27815,7 +28469,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 570, rule__XRelationalExpression__RightOperandAssignment_1_1_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 584, rule__XRelationalExpression__RightOperandAssignment_1_1_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27826,30 +28480,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XOtherOperatorExpression__FeatureAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9182:1: rule__XOtherOperatorExpression__FeatureAssignment_1_1 : ( ( ruleOpOther ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9403:1: rule__XOtherOperatorExpression__FeatureAssignment_1_1 : ( ( ruleOpOther ) ) ;
     public final void rule__XOtherOperatorExpression__FeatureAssignment_1_1() throws RecognitionException {
         int rule__XOtherOperatorExpression__FeatureAssignment_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 571) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9186:1: ( ( ( ruleOpOther ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9187:1: ( ( ruleOpOther ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 585) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9407:1: ( ( ( ruleOpOther ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9408:1: ( ( ruleOpOther ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9187:1: ( ( ruleOpOther ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9188:1: ( ruleOpOther )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9408:1: ( ( ruleOpOther ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9409:1: ( ruleOpOther )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9189:1: ( ruleOpOther )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9190:1: ruleOpOther
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9410:1: ( ruleOpOther )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9411:1: ruleOpOther
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOtherOperatorExpressionAccess().getFeatureJvmIdentifyableElementOpOtherParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_118489);
+            pushFollow(FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_118925);
             ruleOpOther();
 
             state._fsp--;
@@ -27875,7 +28529,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 571, rule__XOtherOperatorExpression__FeatureAssignment_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 585, rule__XOtherOperatorExpression__FeatureAssignment_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27886,24 +28540,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XOtherOperatorExpression__RightOperandAssignment_1_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9201:1: rule__XOtherOperatorExpression__RightOperandAssignment_1_2 : ( ruleXAdditiveExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9422:1: rule__XOtherOperatorExpression__RightOperandAssignment_1_2 : ( ruleXAdditiveExpression ) ;
     public final void rule__XOtherOperatorExpression__RightOperandAssignment_1_2() throws RecognitionException {
         int rule__XOtherOperatorExpression__RightOperandAssignment_1_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 572) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9205:1: ( ( ruleXAdditiveExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9206:1: ( ruleXAdditiveExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 586) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9426:1: ( ( ruleXAdditiveExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9427:1: ( ruleXAdditiveExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9206:1: ( ruleXAdditiveExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9207:1: ruleXAdditiveExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9427:1: ( ruleXAdditiveExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9428:1: ruleXAdditiveExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXOtherOperatorExpressionAccess().getRightOperandXAdditiveExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_218524);
+            pushFollow(FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_218960);
             ruleXAdditiveExpression();
 
             state._fsp--;
@@ -27923,7 +28577,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 572, rule__XOtherOperatorExpression__RightOperandAssignment_1_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 586, rule__XOtherOperatorExpression__RightOperandAssignment_1_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27934,30 +28588,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XAdditiveExpression__FeatureAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9216:1: rule__XAdditiveExpression__FeatureAssignment_1_1 : ( ( ruleOpAdd ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9437:1: rule__XAdditiveExpression__FeatureAssignment_1_1 : ( ( ruleOpAdd ) ) ;
     public final void rule__XAdditiveExpression__FeatureAssignment_1_1() throws RecognitionException {
         int rule__XAdditiveExpression__FeatureAssignment_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 573) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9220:1: ( ( ( ruleOpAdd ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9221:1: ( ( ruleOpAdd ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 587) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9441:1: ( ( ( ruleOpAdd ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9442:1: ( ( ruleOpAdd ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9221:1: ( ( ruleOpAdd ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9222:1: ( ruleOpAdd )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9442:1: ( ( ruleOpAdd ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9443:1: ( ruleOpAdd )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9223:1: ( ruleOpAdd )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9224:1: ruleOpAdd
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9444:1: ( ruleOpAdd )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9445:1: ruleOpAdd
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAdditiveExpressionAccess().getFeatureJvmIdentifyableElementOpAddParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_118559);
+            pushFollow(FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_118995);
             ruleOpAdd();
 
             state._fsp--;
@@ -27983,7 +28637,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 573, rule__XAdditiveExpression__FeatureAssignment_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 587, rule__XAdditiveExpression__FeatureAssignment_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -27994,24 +28648,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XAdditiveExpression__RightOperandAssignment_1_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9235:1: rule__XAdditiveExpression__RightOperandAssignment_1_2 : ( ruleXMultiplicativeExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9456:1: rule__XAdditiveExpression__RightOperandAssignment_1_2 : ( ruleXMultiplicativeExpression ) ;
     public final void rule__XAdditiveExpression__RightOperandAssignment_1_2() throws RecognitionException {
         int rule__XAdditiveExpression__RightOperandAssignment_1_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 574) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9239:1: ( ( ruleXMultiplicativeExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9240:1: ( ruleXMultiplicativeExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 588) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9460:1: ( ( ruleXMultiplicativeExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9461:1: ( ruleXMultiplicativeExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9240:1: ( ruleXMultiplicativeExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9241:1: ruleXMultiplicativeExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9461:1: ( ruleXMultiplicativeExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9462:1: ruleXMultiplicativeExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXAdditiveExpressionAccess().getRightOperandXMultiplicativeExpressionParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_218594);
+            pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_219030);
             ruleXMultiplicativeExpression();
 
             state._fsp--;
@@ -28031,7 +28685,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 574, rule__XAdditiveExpression__RightOperandAssignment_1_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 588, rule__XAdditiveExpression__RightOperandAssignment_1_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28042,30 +28696,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XMultiplicativeExpression__FeatureAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9250:1: rule__XMultiplicativeExpression__FeatureAssignment_1_1 : ( ( ruleOpMulti ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9471:1: rule__XMultiplicativeExpression__FeatureAssignment_1_1 : ( ( ruleOpMulti ) ) ;
     public final void rule__XMultiplicativeExpression__FeatureAssignment_1_1() throws RecognitionException {
         int rule__XMultiplicativeExpression__FeatureAssignment_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 575) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9254:1: ( ( ( ruleOpMulti ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9255:1: ( ( ruleOpMulti ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 589) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9475:1: ( ( ( ruleOpMulti ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9476:1: ( ( ruleOpMulti ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9255:1: ( ( ruleOpMulti ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9256:1: ( ruleOpMulti )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9476:1: ( ( ruleOpMulti ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9477:1: ( ruleOpMulti )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifyableElementCrossReference_1_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9257:1: ( ruleOpMulti )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9258:1: ruleOpMulti
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9478:1: ( ruleOpMulti )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9479:1: ruleOpMulti
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMultiplicativeExpressionAccess().getFeatureJvmIdentifyableElementOpMultiParserRuleCall_1_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_118629);
+            pushFollow(FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_119065);
             ruleOpMulti();
 
             state._fsp--;
@@ -28091,7 +28745,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 575, rule__XMultiplicativeExpression__FeatureAssignment_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 589, rule__XMultiplicativeExpression__FeatureAssignment_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28102,24 +28756,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XMultiplicativeExpression__RightOperandAssignment_1_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9269:1: rule__XMultiplicativeExpression__RightOperandAssignment_1_2 : ( ruleXUnaryOperation ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9490:1: rule__XMultiplicativeExpression__RightOperandAssignment_1_2 : ( ruleXUnaryOperation ) ;
     public final void rule__XMultiplicativeExpression__RightOperandAssignment_1_2() throws RecognitionException {
         int rule__XMultiplicativeExpression__RightOperandAssignment_1_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 576) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9273:1: ( ( ruleXUnaryOperation ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9274:1: ( ruleXUnaryOperation )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 590) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9494:1: ( ( ruleXUnaryOperation ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9495:1: ( ruleXUnaryOperation )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9274:1: ( ruleXUnaryOperation )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9275:1: ruleXUnaryOperation
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9495:1: ( ruleXUnaryOperation )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9496:1: ruleXUnaryOperation
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMultiplicativeExpressionAccess().getRightOperandXUnaryOperationParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_218664);
+            pushFollow(FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_219100);
             ruleXUnaryOperation();
 
             state._fsp--;
@@ -28139,7 +28793,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 576, rule__XMultiplicativeExpression__RightOperandAssignment_1_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 590, rule__XMultiplicativeExpression__RightOperandAssignment_1_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28150,30 +28804,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XUnaryOperation__FeatureAssignment_0_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9284:1: rule__XUnaryOperation__FeatureAssignment_0_1 : ( ( ruleOpUnary ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9505:1: rule__XUnaryOperation__FeatureAssignment_0_1 : ( ( ruleOpUnary ) ) ;
     public final void rule__XUnaryOperation__FeatureAssignment_0_1() throws RecognitionException {
         int rule__XUnaryOperation__FeatureAssignment_0_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 577) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9288:1: ( ( ( ruleOpUnary ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9289:1: ( ( ruleOpUnary ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 591) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9509:1: ( ( ( ruleOpUnary ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9510:1: ( ( ruleOpUnary ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9289:1: ( ( ruleOpUnary ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9290:1: ( ruleOpUnary )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9510:1: ( ( ruleOpUnary ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9511:1: ( ruleOpUnary )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifyableElementCrossReference_0_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9291:1: ( ruleOpUnary )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9292:1: ruleOpUnary
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9512:1: ( ruleOpUnary )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9513:1: ruleOpUnary
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXUnaryOperationAccess().getFeatureJvmIdentifyableElementOpUnaryParserRuleCall_0_1_0_1()); 
             }
-            pushFollow(FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_118699);
+            pushFollow(FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_119135);
             ruleOpUnary();
 
             state._fsp--;
@@ -28199,7 +28853,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 577, rule__XUnaryOperation__FeatureAssignment_0_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 591, rule__XUnaryOperation__FeatureAssignment_0_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28210,24 +28864,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XUnaryOperation__OperandAssignment_0_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9303:1: rule__XUnaryOperation__OperandAssignment_0_2 : ( ruleXMemberFeatureCall ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9524:1: rule__XUnaryOperation__OperandAssignment_0_2 : ( ruleXMemberFeatureCall ) ;
     public final void rule__XUnaryOperation__OperandAssignment_0_2() throws RecognitionException {
         int rule__XUnaryOperation__OperandAssignment_0_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 578) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9307:1: ( ( ruleXMemberFeatureCall ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9308:1: ( ruleXMemberFeatureCall )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 592) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9528:1: ( ( ruleXMemberFeatureCall ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9529:1: ( ruleXMemberFeatureCall )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9308:1: ( ruleXMemberFeatureCall )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9309:1: ruleXMemberFeatureCall
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9529:1: ( ruleXMemberFeatureCall )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9530:1: ruleXMemberFeatureCall
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXUnaryOperationAccess().getOperandXMemberFeatureCallParserRuleCall_0_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXMemberFeatureCall_in_rule__XUnaryOperation__OperandAssignment_0_218734);
+            pushFollow(FOLLOW_ruleXMemberFeatureCall_in_rule__XUnaryOperation__OperandAssignment_0_219170);
             ruleXMemberFeatureCall();
 
             state._fsp--;
@@ -28247,7 +28901,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 578, rule__XUnaryOperation__OperandAssignment_0_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 592, rule__XUnaryOperation__OperandAssignment_0_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28258,24 +28912,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9318:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9539:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_1() throws RecognitionException {
         int rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 579) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9322:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9323:1: ( ruleJvmArgumentTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 593) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9543:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9544:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9323:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9324:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9544:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9545:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_118765);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_119201);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -28295,7 +28949,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 579, rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 593, rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28306,24 +28960,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9333:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9554:1: rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_1() throws RecognitionException {
         int rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 580) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9337:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9338:1: ( ruleJvmArgumentTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 594) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9558:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9559:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9338:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9339:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9559:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9560:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_118796);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_119232);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -28343,7 +28997,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 580, rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 594, rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28354,30 +29008,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XMemberFeatureCall__FeatureAssignment_1_3"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9348:1: rule__XMemberFeatureCall__FeatureAssignment_1_3 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9569:1: rule__XMemberFeatureCall__FeatureAssignment_1_3 : ( ( RULE_ID ) ) ;
     public final void rule__XMemberFeatureCall__FeatureAssignment_1_3() throws RecognitionException {
         int rule__XMemberFeatureCall__FeatureAssignment_1_3_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 581) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9352:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9353:1: ( ( RULE_ID ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 595) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9573:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9574:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9353:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9354:1: ( RULE_ID )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9574:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9575:1: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_1_3_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9355:1: ( RULE_ID )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9356:1: RULE_ID
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9576:1: ( RULE_ID )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9577:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_1_3_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XMemberFeatureCall__FeatureAssignment_1_318831); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XMemberFeatureCall__FeatureAssignment_1_319267); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_1_3_0_1()); 
             }
@@ -28399,7 +29053,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 581, rule__XMemberFeatureCall__FeatureAssignment_1_3_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 595, rule__XMemberFeatureCall__FeatureAssignment_1_3_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28410,24 +29064,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9367:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_0 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9588:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_0 : ( ruleXExpression ) ;
     public final void rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_0() throws RecognitionException {
         int rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 582) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9371:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9372:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 596) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9592:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9593:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9372:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9373:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9593:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9594:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXExpressionParserRuleCall_1_4_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_018866);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_019302);
             ruleXExpression();
 
             state._fsp--;
@@ -28447,7 +29101,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 582, rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 596, rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28458,24 +29112,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9382:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9603:1: rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_1 : ( ruleXExpression ) ;
     public final void rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_1() throws RecognitionException {
         int rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 583) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9386:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9387:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 597) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9607:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9608:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9387:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9388:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9608:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9609:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXExpressionParserRuleCall_1_4_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_118897);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_119333);
             ruleXExpression();
 
             state._fsp--;
@@ -28495,7 +29149,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 583, rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 597, rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28506,24 +29160,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XClosure__FormalParametersAssignment_1_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9397:1: rule__XClosure__FormalParametersAssignment_1_0 : ( ruleJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9618:1: rule__XClosure__FormalParametersAssignment_1_0 : ( ruleJvmFormalParameter ) ;
     public final void rule__XClosure__FormalParametersAssignment_1_0() throws RecognitionException {
         int rule__XClosure__FormalParametersAssignment_1_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 584) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9401:1: ( ( ruleJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9402:1: ( ruleJvmFormalParameter )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 598) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9622:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9623:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9402:1: ( ruleJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9403:1: ruleJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9623:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9624:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_018928);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_019364);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -28543,7 +29197,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 584, rule__XClosure__FormalParametersAssignment_1_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 598, rule__XClosure__FormalParametersAssignment_1_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28554,24 +29208,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XClosure__FormalParametersAssignment_1_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9412:1: rule__XClosure__FormalParametersAssignment_1_1_1 : ( ruleJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9633:1: rule__XClosure__FormalParametersAssignment_1_1_1 : ( ruleJvmFormalParameter ) ;
     public final void rule__XClosure__FormalParametersAssignment_1_1_1() throws RecognitionException {
         int rule__XClosure__FormalParametersAssignment_1_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 585) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9416:1: ( ( ruleJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9417:1: ( ruleJvmFormalParameter )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 599) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9637:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9638:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9417:1: ( ruleJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9418:1: ruleJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9638:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9639:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getFormalParametersJvmFormalParameterParserRuleCall_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_1_118959);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_1_119395);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -28591,7 +29245,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 585, rule__XClosure__FormalParametersAssignment_1_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 599, rule__XClosure__FormalParametersAssignment_1_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28602,24 +29256,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XClosure__ExpressionAssignment_3"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9427:1: rule__XClosure__ExpressionAssignment_3 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9648:1: rule__XClosure__ExpressionAssignment_3 : ( ruleXExpression ) ;
     public final void rule__XClosure__ExpressionAssignment_3() throws RecognitionException {
         int rule__XClosure__ExpressionAssignment_3_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 586) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9431:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9432:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 600) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9652:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9653:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9432:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9433:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9653:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9654:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXClosureAccess().getExpressionXExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XClosure__ExpressionAssignment_318990);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XClosure__ExpressionAssignment_319426);
             ruleXExpression();
 
             state._fsp--;
@@ -28639,7 +29293,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 586, rule__XClosure__ExpressionAssignment_3_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 600, rule__XClosure__ExpressionAssignment_3_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28650,24 +29304,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCastedExpression__TypeAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9442:1: rule__XCastedExpression__TypeAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9663:1: rule__XCastedExpression__TypeAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XCastedExpression__TypeAssignment_1() throws RecognitionException {
         int rule__XCastedExpression__TypeAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 587) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9446:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9447:1: ( ruleJvmTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 601) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9667:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9668:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9447:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9448:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9668:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9669:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCastedExpressionAccess().getTypeJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_119021);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_119457);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -28687,7 +29341,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 587, rule__XCastedExpression__TypeAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 601, rule__XCastedExpression__TypeAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28698,24 +29352,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCastedExpression__TargetAssignment_3"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9457:1: rule__XCastedExpression__TargetAssignment_3 : ( ruleXMemberFeatureCall ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9678:1: rule__XCastedExpression__TargetAssignment_3 : ( ruleXMemberFeatureCall ) ;
     public final void rule__XCastedExpression__TargetAssignment_3() throws RecognitionException {
         int rule__XCastedExpression__TargetAssignment_3_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 588) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9461:1: ( ( ruleXMemberFeatureCall ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9462:1: ( ruleXMemberFeatureCall )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 602) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9682:1: ( ( ruleXMemberFeatureCall ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9683:1: ( ruleXMemberFeatureCall )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9462:1: ( ruleXMemberFeatureCall )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9463:1: ruleXMemberFeatureCall
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9683:1: ( ruleXMemberFeatureCall )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9684:1: ruleXMemberFeatureCall
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCastedExpressionAccess().getTargetXMemberFeatureCallParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXMemberFeatureCall_in_rule__XCastedExpression__TargetAssignment_319052);
+            pushFollow(FOLLOW_ruleXMemberFeatureCall_in_rule__XCastedExpression__TargetAssignment_319488);
             ruleXMemberFeatureCall();
 
             state._fsp--;
@@ -28735,7 +29389,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 588, rule__XCastedExpression__TargetAssignment_3_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 602, rule__XCastedExpression__TargetAssignment_3_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28746,24 +29400,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XIfExpression__IfAssignment_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9472:1: rule__XIfExpression__IfAssignment_2 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9693:1: rule__XIfExpression__IfAssignment_2 : ( ruleXExpression ) ;
     public final void rule__XIfExpression__IfAssignment_2() throws RecognitionException {
         int rule__XIfExpression__IfAssignment_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 589) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9476:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9477:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 603) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9697:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9698:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9477:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9478:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9698:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9699:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getIfXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_219083);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_219519);
             ruleXExpression();
 
             state._fsp--;
@@ -28783,7 +29437,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 589, rule__XIfExpression__IfAssignment_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 603, rule__XIfExpression__IfAssignment_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28794,24 +29448,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XIfExpression__ThenAssignment_4"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9487:1: rule__XIfExpression__ThenAssignment_4 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9708:1: rule__XIfExpression__ThenAssignment_4 : ( ruleXExpression ) ;
     public final void rule__XIfExpression__ThenAssignment_4() throws RecognitionException {
         int rule__XIfExpression__ThenAssignment_4_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 590) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9491:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9492:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 604) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9712:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9713:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9492:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9493:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9713:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9714:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getThenXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_419114);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_419550);
             ruleXExpression();
 
             state._fsp--;
@@ -28831,7 +29485,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 590, rule__XIfExpression__ThenAssignment_4_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 604, rule__XIfExpression__ThenAssignment_4_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28842,24 +29496,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XIfExpression__ElseAssignment_5_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9502:1: rule__XIfExpression__ElseAssignment_5_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9723:1: rule__XIfExpression__ElseAssignment_5_1 : ( ruleXExpression ) ;
     public final void rule__XIfExpression__ElseAssignment_5_1() throws RecognitionException {
         int rule__XIfExpression__ElseAssignment_5_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 591) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9506:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9507:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 605) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9727:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9728:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9507:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9508:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9728:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9729:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIfExpressionAccess().getElseXExpressionParserRuleCall_5_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_5_119145);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_5_119581);
             ruleXExpression();
 
             state._fsp--;
@@ -28879,7 +29533,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 591, rule__XIfExpression__ElseAssignment_5_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 605, rule__XIfExpression__ElseAssignment_5_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28890,30 +29544,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XSwitchExpression__SwitchAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9517:1: rule__XSwitchExpression__SwitchAssignment_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9738:1: rule__XSwitchExpression__SwitchAssignment_1 : ( ruleXExpressionInsideBlock ) ;
     public final void rule__XSwitchExpression__SwitchAssignment_1() throws RecognitionException {
         int rule__XSwitchExpression__SwitchAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 592) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9521:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9522:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 606) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9742:1: ( ( ruleXExpressionInsideBlock ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9743:1: ( ruleXExpressionInsideBlock )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9522:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9523:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9743:1: ( ruleXExpressionInsideBlock )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9744:1: ruleXExpressionInsideBlock
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXSwitchExpressionAccess().getSwitchXExpressionParserRuleCall_1_0()); 
+               before(grammarAccess.getXSwitchExpressionAccess().getSwitchXExpressionInsideBlockParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_119176);
-            ruleXExpression();
+            pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_rule__XSwitchExpression__SwitchAssignment_119612);
+            ruleXExpressionInsideBlock();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXSwitchExpressionAccess().getSwitchXExpressionParserRuleCall_1_0()); 
+               after(grammarAccess.getXSwitchExpressionAccess().getSwitchXExpressionInsideBlockParserRuleCall_1_0()); 
             }
 
             }
@@ -28927,7 +29581,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 592, rule__XSwitchExpression__SwitchAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 606, rule__XSwitchExpression__SwitchAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28938,24 +29592,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XSwitchExpression__CasesAssignment_3"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9532:1: rule__XSwitchExpression__CasesAssignment_3 : ( ruleXCasePart ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9753:1: rule__XSwitchExpression__CasesAssignment_3 : ( ruleXCasePart ) ;
     public final void rule__XSwitchExpression__CasesAssignment_3() throws RecognitionException {
         int rule__XSwitchExpression__CasesAssignment_3_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 593) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9536:1: ( ( ruleXCasePart ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9537:1: ( ruleXCasePart )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 607) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9757:1: ( ( ruleXCasePart ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9758:1: ( ruleXCasePart )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9537:1: ( ruleXCasePart )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9538:1: ruleXCasePart
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9758:1: ( ruleXCasePart )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9759:1: ruleXCasePart
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getCasesXCasePartParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_319207);
+            pushFollow(FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_319643);
             ruleXCasePart();
 
             state._fsp--;
@@ -28975,7 +29629,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 593, rule__XSwitchExpression__CasesAssignment_3_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 607, rule__XSwitchExpression__CasesAssignment_3_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -28986,24 +29640,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XSwitchExpression__DefaultAssignment_4_2_0_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9547:1: rule__XSwitchExpression__DefaultAssignment_4_2_0_0 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9768:1: rule__XSwitchExpression__DefaultAssignment_4_2_0_0 : ( ruleXExpression ) ;
     public final void rule__XSwitchExpression__DefaultAssignment_4_2_0_0() throws RecognitionException {
         int rule__XSwitchExpression__DefaultAssignment_4_2_0_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 594) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9551:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9552:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 608) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9772:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9773:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9552:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9553:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9773:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9774:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getDefaultXExpressionParserRuleCall_4_2_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_0_019238);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_0_019674);
             ruleXExpression();
 
             state._fsp--;
@@ -29023,7 +29677,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 594, rule__XSwitchExpression__DefaultAssignment_4_2_0_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 608, rule__XSwitchExpression__DefaultAssignment_4_2_0_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29034,24 +29688,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XSwitchExpression__DefaultAssignment_4_2_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9562:1: rule__XSwitchExpression__DefaultAssignment_4_2_1 : ( ruleXBlockExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9783:1: rule__XSwitchExpression__DefaultAssignment_4_2_1 : ( ruleXBlockExpression ) ;
     public final void rule__XSwitchExpression__DefaultAssignment_4_2_1() throws RecognitionException {
         int rule__XSwitchExpression__DefaultAssignment_4_2_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 595) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9566:1: ( ( ruleXBlockExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9567:1: ( ruleXBlockExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 609) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9787:1: ( ( ruleXBlockExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9788:1: ( ruleXBlockExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9567:1: ( ruleXBlockExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9568:1: ruleXBlockExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9788:1: ( ruleXBlockExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9789:1: ruleXBlockExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXSwitchExpressionAccess().getDefaultXBlockExpressionParserRuleCall_4_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXBlockExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_119269);
+            pushFollow(FOLLOW_ruleXBlockExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_119705);
             ruleXBlockExpression();
 
             state._fsp--;
@@ -29071,7 +29725,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 595, rule__XSwitchExpression__DefaultAssignment_4_2_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 609, rule__XSwitchExpression__DefaultAssignment_4_2_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29082,24 +29736,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCasePart__TypeGuardAssignment_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9577:1: rule__XCasePart__TypeGuardAssignment_0 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9798:1: rule__XCasePart__TypeGuardAssignment_0 : ( ruleJvmTypeReference ) ;
     public final void rule__XCasePart__TypeGuardAssignment_0() throws RecognitionException {
         int rule__XCasePart__TypeGuardAssignment_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 596) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9581:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9582:1: ( ruleJvmTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 610) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9802:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9803:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9582:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9583:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9803:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9804:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getTypeGuardJvmTypeReferenceParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_019300);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_019736);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -29119,7 +29773,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 596, rule__XCasePart__TypeGuardAssignment_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 610, rule__XCasePart__TypeGuardAssignment_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29130,24 +29784,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCasePart__CaseAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9592:1: rule__XCasePart__CaseAssignment_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9813:1: rule__XCasePart__CaseAssignment_1_1 : ( ruleXExpression ) ;
     public final void rule__XCasePart__CaseAssignment_1_1() throws RecognitionException {
         int rule__XCasePart__CaseAssignment_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 597) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9596:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9597:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 611) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9817:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9818:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9597:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9598:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9818:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9819:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getCaseXExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_119331);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_119767);
             ruleXExpression();
 
             state._fsp--;
@@ -29167,7 +29821,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 597, rule__XCasePart__CaseAssignment_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 611, rule__XCasePart__CaseAssignment_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29178,24 +29832,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCasePart__ThenAssignment_3_0_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9607:1: rule__XCasePart__ThenAssignment_3_0_0 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9828:1: rule__XCasePart__ThenAssignment_3_0_0 : ( ruleXExpression ) ;
     public final void rule__XCasePart__ThenAssignment_3_0_0() throws RecognitionException {
         int rule__XCasePart__ThenAssignment_3_0_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 598) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9611:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9612:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 612) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9832:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9833:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9612:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9613:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9833:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9834:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getThenXExpressionParserRuleCall_3_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_019362);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_019798);
             ruleXExpression();
 
             state._fsp--;
@@ -29215,7 +29869,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 598, rule__XCasePart__ThenAssignment_3_0_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 612, rule__XCasePart__ThenAssignment_3_0_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29226,24 +29880,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCasePart__ThenAssignment_3_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9622:1: rule__XCasePart__ThenAssignment_3_1 : ( ruleXBlockExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9843:1: rule__XCasePart__ThenAssignment_3_1 : ( ruleXBlockExpression ) ;
     public final void rule__XCasePart__ThenAssignment_3_1() throws RecognitionException {
         int rule__XCasePart__ThenAssignment_3_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 599) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9626:1: ( ( ruleXBlockExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9627:1: ( ruleXBlockExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 613) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9847:1: ( ( ruleXBlockExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9848:1: ( ruleXBlockExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9627:1: ( ruleXBlockExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9628:1: ruleXBlockExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9848:1: ( ruleXBlockExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9849:1: ruleXBlockExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCasePartAccess().getThenXBlockExpressionParserRuleCall_3_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXBlockExpression_in_rule__XCasePart__ThenAssignment_3_119393);
+            pushFollow(FOLLOW_ruleXBlockExpression_in_rule__XCasePart__ThenAssignment_3_119829);
             ruleXBlockExpression();
 
             state._fsp--;
@@ -29263,7 +29917,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 599, rule__XCasePart__ThenAssignment_3_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 613, rule__XCasePart__ThenAssignment_3_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29274,24 +29928,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XForLoopExpression__DeclaredParamAssignment_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9637:1: rule__XForLoopExpression__DeclaredParamAssignment_2 : ( ruleJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9858:1: rule__XForLoopExpression__DeclaredParamAssignment_2 : ( ruleJvmFormalParameter ) ;
     public final void rule__XForLoopExpression__DeclaredParamAssignment_2() throws RecognitionException {
         int rule__XForLoopExpression__DeclaredParamAssignment_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 600) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9641:1: ( ( ruleJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9642:1: ( ruleJvmFormalParameter )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 614) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9862:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9863:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9642:1: ( ruleJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9643:1: ruleJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9863:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9864:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getDeclaredParamJvmFormalParameterParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_219424);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_219860);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -29311,7 +29965,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 600, rule__XForLoopExpression__DeclaredParamAssignment_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 614, rule__XForLoopExpression__DeclaredParamAssignment_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29322,24 +29976,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XForLoopExpression__ForExpressionAssignment_4"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9652:1: rule__XForLoopExpression__ForExpressionAssignment_4 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9873:1: rule__XForLoopExpression__ForExpressionAssignment_4 : ( ruleXExpression ) ;
     public final void rule__XForLoopExpression__ForExpressionAssignment_4() throws RecognitionException {
         int rule__XForLoopExpression__ForExpressionAssignment_4_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 601) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9656:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9657:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 615) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9877:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9878:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9657:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9658:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9878:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9879:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getForExpressionXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_419455);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_419891);
             ruleXExpression();
 
             state._fsp--;
@@ -29359,7 +30013,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 601, rule__XForLoopExpression__ForExpressionAssignment_4_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 615, rule__XForLoopExpression__ForExpressionAssignment_4_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29370,24 +30024,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XForLoopExpression__EachExpressionAssignment_6"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9667:1: rule__XForLoopExpression__EachExpressionAssignment_6 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9888:1: rule__XForLoopExpression__EachExpressionAssignment_6 : ( ruleXExpression ) ;
     public final void rule__XForLoopExpression__EachExpressionAssignment_6() throws RecognitionException {
         int rule__XForLoopExpression__EachExpressionAssignment_6_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 602) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9671:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9672:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 616) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9892:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9893:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9672:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9673:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9893:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9894:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXForLoopExpressionAccess().getEachExpressionXExpressionParserRuleCall_6_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_619486);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_619922);
             ruleXExpression();
 
             state._fsp--;
@@ -29407,7 +30061,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 602, rule__XForLoopExpression__EachExpressionAssignment_6_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 616, rule__XForLoopExpression__EachExpressionAssignment_6_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29418,24 +30072,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XWhileExpression__PredicateAssignment_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9682:1: rule__XWhileExpression__PredicateAssignment_2 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9903:1: rule__XWhileExpression__PredicateAssignment_2 : ( ruleXExpression ) ;
     public final void rule__XWhileExpression__PredicateAssignment_2() throws RecognitionException {
         int rule__XWhileExpression__PredicateAssignment_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 603) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9686:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9687:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 617) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9907:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9908:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9687:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9688:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9908:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9909:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXWhileExpressionAccess().getPredicateXExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_219517);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_219953);
             ruleXExpression();
 
             state._fsp--;
@@ -29455,7 +30109,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 603, rule__XWhileExpression__PredicateAssignment_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 617, rule__XWhileExpression__PredicateAssignment_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29466,24 +30120,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XWhileExpression__BodyAssignment_4"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9697:1: rule__XWhileExpression__BodyAssignment_4 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9918:1: rule__XWhileExpression__BodyAssignment_4 : ( ruleXExpression ) ;
     public final void rule__XWhileExpression__BodyAssignment_4() throws RecognitionException {
         int rule__XWhileExpression__BodyAssignment_4_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 604) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9701:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9702:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 618) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9922:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9923:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9702:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9703:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9923:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9924:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXWhileExpressionAccess().getBodyXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_419548);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_419984);
             ruleXExpression();
 
             state._fsp--;
@@ -29503,7 +30157,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 604, rule__XWhileExpression__BodyAssignment_4_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 618, rule__XWhileExpression__BodyAssignment_4_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29514,24 +30168,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XDoWhileExpression__BodyAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9712:1: rule__XDoWhileExpression__BodyAssignment_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9933:1: rule__XDoWhileExpression__BodyAssignment_1 : ( ruleXExpression ) ;
     public final void rule__XDoWhileExpression__BodyAssignment_1() throws RecognitionException {
         int rule__XDoWhileExpression__BodyAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 605) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9716:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9717:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 619) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9937:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9938:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9717:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9718:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9938:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9939:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXDoWhileExpressionAccess().getBodyXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_119579);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_120015);
             ruleXExpression();
 
             state._fsp--;
@@ -29551,7 +30205,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 605, rule__XDoWhileExpression__BodyAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 619, rule__XDoWhileExpression__BodyAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29562,24 +30216,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XDoWhileExpression__PredicateAssignment_4"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9727:1: rule__XDoWhileExpression__PredicateAssignment_4 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9948:1: rule__XDoWhileExpression__PredicateAssignment_4 : ( ruleXExpression ) ;
     public final void rule__XDoWhileExpression__PredicateAssignment_4() throws RecognitionException {
         int rule__XDoWhileExpression__PredicateAssignment_4_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 606) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9731:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9732:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 620) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9952:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9953:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9732:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9733:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9953:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9954:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXDoWhileExpressionAccess().getPredicateXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_419610);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_420046);
             ruleXExpression();
 
             state._fsp--;
@@ -29599,7 +30253,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 606, rule__XDoWhileExpression__PredicateAssignment_4_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 620, rule__XDoWhileExpression__PredicateAssignment_4_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29610,24 +30264,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XBlockExpression__ExpressionsAssignment_2_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9742:1: rule__XBlockExpression__ExpressionsAssignment_2_0 : ( ruleXExpressionInsideBlock ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9963:1: rule__XBlockExpression__ExpressionsAssignment_2_0 : ( ruleXExpressionInsideBlock ) ;
     public final void rule__XBlockExpression__ExpressionsAssignment_2_0() throws RecognitionException {
         int rule__XBlockExpression__ExpressionsAssignment_2_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 607) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9746:1: ( ( ruleXExpressionInsideBlock ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9747:1: ( ruleXExpressionInsideBlock )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 621) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9967:1: ( ( ruleXExpressionInsideBlock ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9968:1: ( ruleXExpressionInsideBlock )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9747:1: ( ruleXExpressionInsideBlock )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9748:1: ruleXExpressionInsideBlock
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9968:1: ( ruleXExpressionInsideBlock )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9969:1: ruleXExpressionInsideBlock
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBlockExpressionAccess().getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_019641);
+            pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_020077);
             ruleXExpressionInsideBlock();
 
             state._fsp--;
@@ -29647,7 +30301,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 607, rule__XBlockExpression__ExpressionsAssignment_2_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 621, rule__XBlockExpression__ExpressionsAssignment_2_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29658,24 +30312,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XVariableDeclaration__TypeAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9757:1: rule__XVariableDeclaration__TypeAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9978:1: rule__XVariableDeclaration__TypeAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XVariableDeclaration__TypeAssignment_1() throws RecognitionException {
         int rule__XVariableDeclaration__TypeAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 608) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9761:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9762:1: ( ruleJvmTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 622) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9982:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9983:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9762:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9763:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9983:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9984:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getTypeJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_119672);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_120108);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -29695,7 +30349,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 608, rule__XVariableDeclaration__TypeAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 622, rule__XVariableDeclaration__TypeAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29706,24 +30360,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XVariableDeclaration__NameAssignment_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9772:1: rule__XVariableDeclaration__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9993:1: rule__XVariableDeclaration__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__XVariableDeclaration__NameAssignment_2() throws RecognitionException {
         int rule__XVariableDeclaration__NameAssignment_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 609) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9776:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9777:1: ( RULE_ID )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 623) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9997:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9998:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9777:1: ( RULE_ID )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9778:1: RULE_ID
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9998:1: ( RULE_ID )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9999:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XVariableDeclaration__NameAssignment_219703); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XVariableDeclaration__NameAssignment_220139); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_0()); 
             }
@@ -29739,7 +30393,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 609, rule__XVariableDeclaration__NameAssignment_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 623, rule__XVariableDeclaration__NameAssignment_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29750,24 +30404,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XVariableDeclaration__RightAssignment_4"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9787:1: rule__XVariableDeclaration__RightAssignment_4 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10008:1: rule__XVariableDeclaration__RightAssignment_4 : ( ruleXExpression ) ;
     public final void rule__XVariableDeclaration__RightAssignment_4() throws RecognitionException {
         int rule__XVariableDeclaration__RightAssignment_4_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 610) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9791:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9792:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 624) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10012:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10013:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9792:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9793:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10013:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10014:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXVariableDeclarationAccess().getRightXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_419734);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_420170);
             ruleXExpression();
 
             state._fsp--;
@@ -29787,7 +30441,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 610, rule__XVariableDeclaration__RightAssignment_4_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 624, rule__XVariableDeclaration__RightAssignment_4_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29798,24 +30452,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmFormalParameter__ParameterTypeAssignment_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9802:1: rule__JvmFormalParameter__ParameterTypeAssignment_0 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10023:1: rule__JvmFormalParameter__ParameterTypeAssignment_0 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmFormalParameter__ParameterTypeAssignment_0() throws RecognitionException {
         int rule__JvmFormalParameter__ParameterTypeAssignment_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 611) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9806:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9807:1: ( ruleJvmTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 625) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10027:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10028:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9807:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9808:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10028:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10029:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmFormalParameterAccess().getParameterTypeJvmTypeReferenceParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_019765);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_020201);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -29835,7 +30489,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 611, rule__JvmFormalParameter__ParameterTypeAssignment_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 625, rule__JvmFormalParameter__ParameterTypeAssignment_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29846,24 +30500,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmFormalParameter__NameAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9817:1: rule__JvmFormalParameter__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10038:1: rule__JvmFormalParameter__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__JvmFormalParameter__NameAssignment_1() throws RecognitionException {
         int rule__JvmFormalParameter__NameAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 612) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9821:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9822:1: ( RULE_ID )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 626) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10042:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10043:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9822:1: ( RULE_ID )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9823:1: RULE_ID
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10043:1: ( RULE_ID )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10044:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmFormalParameterAccess().getNameIDTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__JvmFormalParameter__NameAssignment_119796); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__JvmFormalParameter__NameAssignment_120232); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getJvmFormalParameterAccess().getNameIDTerminalRuleCall_1_0()); 
             }
@@ -29879,7 +30533,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 612, rule__JvmFormalParameter__NameAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 626, rule__JvmFormalParameter__NameAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29890,24 +30544,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFeatureCall__TypeArgumentsAssignment_0_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9832:1: rule__XFeatureCall__TypeArgumentsAssignment_0_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10053:1: rule__XFeatureCall__TypeArgumentsAssignment_0_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XFeatureCall__TypeArgumentsAssignment_0_1() throws RecognitionException {
         int rule__XFeatureCall__TypeArgumentsAssignment_0_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 613) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9836:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9837:1: ( ruleJvmArgumentTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 627) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10057:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10058:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9837:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9838:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10058:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10059:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_119827);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_120263);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -29927,7 +30581,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 613, rule__XFeatureCall__TypeArgumentsAssignment_0_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 627, rule__XFeatureCall__TypeArgumentsAssignment_0_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29938,24 +30592,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFeatureCall__TypeArgumentsAssignment_0_2_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9847:1: rule__XFeatureCall__TypeArgumentsAssignment_0_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10068:1: rule__XFeatureCall__TypeArgumentsAssignment_0_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__XFeatureCall__TypeArgumentsAssignment_0_2_1() throws RecognitionException {
         int rule__XFeatureCall__TypeArgumentsAssignment_0_2_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 614) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9851:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9852:1: ( ruleJvmArgumentTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 628) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10072:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10073:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9852:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9853:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10073:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10074:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_0_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_2_119858);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_2_120294);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -29975,7 +30629,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 614, rule__XFeatureCall__TypeArgumentsAssignment_0_2_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 628, rule__XFeatureCall__TypeArgumentsAssignment_0_2_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -29986,30 +30640,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9862:1: rule__XFeatureCall__FeatureAssignment_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10083:1: rule__XFeatureCall__FeatureAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__XFeatureCall__FeatureAssignment_1() throws RecognitionException {
         int rule__XFeatureCall__FeatureAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 615) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9866:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9867:1: ( ( RULE_ID ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 629) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10087:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10088:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9867:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9868:1: ( RULE_ID )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10088:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10089:1: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementCrossReference_1_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9869:1: ( RULE_ID )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9870:1: RULE_ID
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10090:1: ( RULE_ID )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10091:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_1_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XFeatureCall__FeatureAssignment_119893); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__XFeatureCall__FeatureAssignment_120329); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifyableElementIDTerminalRuleCall_1_0_1()); 
             }
@@ -30031,7 +30685,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 615, rule__XFeatureCall__FeatureAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 629, rule__XFeatureCall__FeatureAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30042,24 +30696,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9881:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10102:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0 : ( ruleXExpression ) ;
     public final void rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0() throws RecognitionException {
         int rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 616) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9885:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9886:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 630) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10106:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10107:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9886:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9887:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10107:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10108:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXExpressionParserRuleCall_2_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_019928);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_020364);
             ruleXExpression();
 
             state._fsp--;
@@ -30079,7 +30733,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 616, rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 630, rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30090,24 +30744,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9896:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10117:1: rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1 : ( ruleXExpression ) ;
     public final void rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1() throws RecognitionException {
         int rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 617) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9900:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9901:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 631) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10121:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10122:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9901:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9902:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10122:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10123:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXExpressionParserRuleCall_2_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_119959);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_120395);
             ruleXExpression();
 
             state._fsp--;
@@ -30127,7 +30781,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 617, rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 631, rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30137,31 +30791,43 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1"
 
 
-    // $ANTLR start "rule__XConstructorCall__TypeAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9911:1: rule__XConstructorCall__TypeAssignment_1 : ( ruleJvmParameterizedTypeReference ) ;
-    public final void rule__XConstructorCall__TypeAssignment_1() throws RecognitionException {
-        int rule__XConstructorCall__TypeAssignment_1_StartIndex = input.index();
+    // $ANTLR start "rule__XConstructorCall__ConstructorAssignment_1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10132:1: rule__XConstructorCall__ConstructorAssignment_1 : ( ( ruleQualifiedName ) ) ;
+    public final void rule__XConstructorCall__ConstructorAssignment_1() throws RecognitionException {
+        int rule__XConstructorCall__ConstructorAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 618) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9915:1: ( ( ruleJvmParameterizedTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9916:1: ( ruleJvmParameterizedTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 632) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10136:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10137:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9916:1: ( ruleJvmParameterizedTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9917:1: ruleJvmParameterizedTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10137:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10138:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getTypeJvmParameterizedTypeReferenceParserRuleCall_1_0()); 
+               before(grammarAccess.getXConstructorCallAccess().getConstructorJvmConstructorCrossReference_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_rule__XConstructorCall__TypeAssignment_119990);
-            ruleJvmParameterizedTypeReference();
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10139:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10140:1: ruleQualifiedName
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXConstructorCallAccess().getConstructorJvmConstructorQualifiedNameParserRuleCall_1_0_1()); 
+            }
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XConstructorCall__ConstructorAssignment_120430);
+            ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getTypeJvmParameterizedTypeReferenceParserRuleCall_1_0()); 
+               after(grammarAccess.getXConstructorCallAccess().getConstructorJvmConstructorQualifiedNameParserRuleCall_1_0_1()); 
+            }
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXConstructorCallAccess().getConstructorJvmConstructorCrossReference_1_0()); 
             }
 
             }
@@ -30175,41 +30841,137 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 618, rule__XConstructorCall__TypeAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 632, rule__XConstructorCall__ConstructorAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__XConstructorCall__TypeAssignment_1"
+    // $ANTLR end "rule__XConstructorCall__ConstructorAssignment_1"
 
 
-    // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_3_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9926:1: rule__XConstructorCall__ArgumentsAssignment_3_0 : ( ruleXExpression ) ;
-    public final void rule__XConstructorCall__ArgumentsAssignment_3_0() throws RecognitionException {
-        int rule__XConstructorCall__ArgumentsAssignment_3_0_StartIndex = input.index();
+    // $ANTLR start "rule__XConstructorCall__TypeArgumentsAssignment_2_1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10151:1: rule__XConstructorCall__TypeArgumentsAssignment_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    public final void rule__XConstructorCall__TypeArgumentsAssignment_2_1() throws RecognitionException {
+        int rule__XConstructorCall__TypeArgumentsAssignment_2_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 619) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9930:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9931:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 633) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10155:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10156:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9931:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9932:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10156:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10157:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_3_0_0()); 
+               before(grammarAccess.getXConstructorCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_020021);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_2_120465);
+            ruleJvmArgumentTypeReference();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXConstructorCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_2_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 633, rule__XConstructorCall__TypeArgumentsAssignment_2_1_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__TypeArgumentsAssignment_2_1"
+
+
+    // $ANTLR start "rule__XConstructorCall__TypeArgumentsAssignment_2_2_1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10166:1: rule__XConstructorCall__TypeArgumentsAssignment_2_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    public final void rule__XConstructorCall__TypeArgumentsAssignment_2_2_1() throws RecognitionException {
+        int rule__XConstructorCall__TypeArgumentsAssignment_2_2_1_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 634) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10170:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10171:1: ( ruleJvmArgumentTypeReference )
+            {
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10171:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10172:1: ruleJvmArgumentTypeReference
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXConstructorCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_2_2_1_0()); 
+            }
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_2_2_120496);
+            ruleJvmArgumentTypeReference();
+
+            state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getXConstructorCallAccess().getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_2_2_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+            if ( state.backtracking>0 ) { memoize(input, 634, rule__XConstructorCall__TypeArgumentsAssignment_2_2_1_StartIndex); }
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__XConstructorCall__TypeArgumentsAssignment_2_2_1"
+
+
+    // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_4_0"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10181:1: rule__XConstructorCall__ArgumentsAssignment_4_0 : ( ruleXExpression ) ;
+    public final void rule__XConstructorCall__ArgumentsAssignment_4_0() throws RecognitionException {
+        int rule__XConstructorCall__ArgumentsAssignment_4_0_StartIndex = input.index();
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            if ( state.backtracking>0 && alreadyParsedRule(input, 635) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10185:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10186:1: ( ruleXExpression )
+            {
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10186:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10187:1: ruleXExpression
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_0_0()); 
+            }
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_020527);
             ruleXExpression();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_3_0_0()); 
+               after(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_0_0()); 
             }
 
             }
@@ -30223,41 +30985,41 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 619, rule__XConstructorCall__ArgumentsAssignment_3_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 635, rule__XConstructorCall__ArgumentsAssignment_4_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__XConstructorCall__ArgumentsAssignment_3_0"
+    // $ANTLR end "rule__XConstructorCall__ArgumentsAssignment_4_0"
 
 
-    // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_3_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9941:1: rule__XConstructorCall__ArgumentsAssignment_3_1_1 : ( ruleXExpression ) ;
-    public final void rule__XConstructorCall__ArgumentsAssignment_3_1_1() throws RecognitionException {
-        int rule__XConstructorCall__ArgumentsAssignment_3_1_1_StartIndex = input.index();
+    // $ANTLR start "rule__XConstructorCall__ArgumentsAssignment_4_1_1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10196:1: rule__XConstructorCall__ArgumentsAssignment_4_1_1 : ( ruleXExpression ) ;
+    public final void rule__XConstructorCall__ArgumentsAssignment_4_1_1() throws RecognitionException {
+        int rule__XConstructorCall__ArgumentsAssignment_4_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 620) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9945:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9946:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 636) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10200:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10201:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9946:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9947:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10201:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10202:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_3_1_1_0()); 
+               before(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_1_120052);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_120558);
             ruleXExpression();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_3_1_1_0()); 
+               after(grammarAccess.getXConstructorCallAccess().getArgumentsXExpressionParserRuleCall_4_1_1_0()); 
             }
 
             }
@@ -30271,41 +31033,41 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 620, rule__XConstructorCall__ArgumentsAssignment_3_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 636, rule__XConstructorCall__ArgumentsAssignment_4_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
         }
         return ;
     }
-    // $ANTLR end "rule__XConstructorCall__ArgumentsAssignment_3_1_1"
+    // $ANTLR end "rule__XConstructorCall__ArgumentsAssignment_4_1_1"
 
 
     // $ANTLR start "rule__XBooleanLiteral__IsTrueAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9956:1: rule__XBooleanLiteral__IsTrueAssignment_1 : ( ( 'true' ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10211:1: rule__XBooleanLiteral__IsTrueAssignment_1 : ( ( 'true' ) ) ;
     public final void rule__XBooleanLiteral__IsTrueAssignment_1() throws RecognitionException {
         int rule__XBooleanLiteral__IsTrueAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 621) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9960:1: ( ( ( 'true' ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9961:1: ( ( 'true' ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 637) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10215:1: ( ( ( 'true' ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10216:1: ( ( 'true' ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9961:1: ( ( 'true' ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9962:1: ( 'true' )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_0()); 
-            }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9963:1: ( 'true' )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9964:1: 'true'
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10216:1: ( ( 'true' ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10217:1: ( 'true' )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_0()); 
             }
-            match(input,63,FOLLOW_63_in_rule__XBooleanLiteral__IsTrueAssignment_120088); if (state.failed) return ;
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10218:1: ( 'true' )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10219:1: 'true'
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_0()); 
+            }
+            match(input,63,FOLLOW_63_in_rule__XBooleanLiteral__IsTrueAssignment_120594); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXBooleanLiteralAccess().getIsTrueTrueKeyword_1_0()); 
             }
@@ -30327,7 +31089,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 621, rule__XBooleanLiteral__IsTrueAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 637, rule__XBooleanLiteral__IsTrueAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30338,24 +31100,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XIntLiteral__ValueAssignment"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9979:1: rule__XIntLiteral__ValueAssignment : ( RULE_INT ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10234:1: rule__XIntLiteral__ValueAssignment : ( RULE_INT ) ;
     public final void rule__XIntLiteral__ValueAssignment() throws RecognitionException {
         int rule__XIntLiteral__ValueAssignment_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 622) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9983:1: ( ( RULE_INT ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9984:1: ( RULE_INT )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 638) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10238:1: ( ( RULE_INT ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10239:1: ( RULE_INT )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9984:1: ( RULE_INT )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9985:1: RULE_INT
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10239:1: ( RULE_INT )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10240:1: RULE_INT
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXIntLiteralAccess().getValueINTTerminalRuleCall_0()); 
             }
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__XIntLiteral__ValueAssignment20127); if (state.failed) return ;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__XIntLiteral__ValueAssignment20633); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXIntLiteralAccess().getValueINTTerminalRuleCall_0()); 
             }
@@ -30371,7 +31133,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 622, rule__XIntLiteral__ValueAssignment_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 638, rule__XIntLiteral__ValueAssignment_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30382,24 +31144,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XStringLiteral__ValueAssignment"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9994:1: rule__XStringLiteral__ValueAssignment : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10249:1: rule__XStringLiteral__ValueAssignment : ( RULE_STRING ) ;
     public final void rule__XStringLiteral__ValueAssignment() throws RecognitionException {
         int rule__XStringLiteral__ValueAssignment_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 623) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9998:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9999:1: ( RULE_STRING )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 639) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10253:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10254:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9999:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10000:1: RULE_STRING
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10254:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10255:1: RULE_STRING
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_0()); 
             }
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment20158); if (state.failed) return ;
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment20664); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_0()); 
             }
@@ -30415,7 +31177,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 623, rule__XStringLiteral__ValueAssignment_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 639, rule__XStringLiteral__ValueAssignment_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30426,30 +31188,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTypeLiteral__TypeAssignment_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10009:1: rule__XTypeLiteral__TypeAssignment_0 : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10264:1: rule__XTypeLiteral__TypeAssignment_0 : ( ( ruleQualifiedName ) ) ;
     public final void rule__XTypeLiteral__TypeAssignment_0() throws RecognitionException {
         int rule__XTypeLiteral__TypeAssignment_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 624) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10013:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10014:1: ( ( ruleQualifiedName ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 640) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10268:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10269:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10014:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10015:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10269:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10270:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeCrossReference_0_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10016:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10017:1: ruleQualifiedName
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10271:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10272:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_020193);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_020699);
             ruleQualifiedName();
 
             state._fsp--;
@@ -30475,7 +31237,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 624, rule__XTypeLiteral__TypeAssignment_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 640, rule__XTypeLiteral__TypeAssignment_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30486,24 +31248,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XThrowExpression__ExpressionAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10028:1: rule__XThrowExpression__ExpressionAssignment_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10283:1: rule__XThrowExpression__ExpressionAssignment_1 : ( ruleXExpression ) ;
     public final void rule__XThrowExpression__ExpressionAssignment_1() throws RecognitionException {
         int rule__XThrowExpression__ExpressionAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 625) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10032:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10033:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 641) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10287:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10288:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10033:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10034:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10288:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10289:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXThrowExpressionAccess().getExpressionXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_120228);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_120734);
             ruleXExpression();
 
             state._fsp--;
@@ -30523,7 +31285,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 625, rule__XThrowExpression__ExpressionAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 641, rule__XThrowExpression__ExpressionAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30534,24 +31296,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__ExpressionAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10043:1: rule__XTryCatchFinallyExpression__ExpressionAssignment_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10298:1: rule__XTryCatchFinallyExpression__ExpressionAssignment_1 : ( ruleXExpression ) ;
     public final void rule__XTryCatchFinallyExpression__ExpressionAssignment_1() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__ExpressionAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 626) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10047:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10048:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 642) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10302:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10303:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10048:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10049:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10303:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10304:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getExpressionXExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_120259);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_120765);
             ruleXExpression();
 
             state._fsp--;
@@ -30571,7 +31333,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 626, rule__XTryCatchFinallyExpression__ExpressionAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 642, rule__XTryCatchFinallyExpression__ExpressionAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30582,24 +31344,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10058:1: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 : ( ruleXCatchClause ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10313:1: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 : ( ruleXCatchClause ) ;
     public final void rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 627) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10062:1: ( ( ruleXCatchClause ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10063:1: ( ruleXCatchClause )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 643) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10317:1: ( ( ruleXCatchClause ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10318:1: ( ruleXCatchClause )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10063:1: ( ruleXCatchClause )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10064:1: ruleXCatchClause
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10318:1: ( ruleXCatchClause )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10319:1: ruleXCatchClause
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getCatchClausesXCatchClauseParserRuleCall_2_0_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_020290);
+            pushFollow(FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_020796);
             ruleXCatchClause();
 
             state._fsp--;
@@ -30619,7 +31381,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 627, rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 643, rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30630,24 +31392,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10073:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10328:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1 : ( ruleXExpression ) ;
     public final void rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 628) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10077:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10078:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 644) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10332:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10333:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10078:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10079:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10333:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10334:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_2_0_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_120321);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_120827);
             ruleXExpression();
 
             state._fsp--;
@@ -30667,7 +31429,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 628, rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 644, rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30678,24 +31440,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10088:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10343:1: rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1 : ( ruleXExpression ) ;
     public final void rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1() throws RecognitionException {
         int rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 629) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10092:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10093:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 645) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10347:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10348:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10093:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10094:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10348:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10349:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXTryCatchFinallyExpressionAccess().getFinallyExpressionXExpressionParserRuleCall_2_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_120352);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_120858);
             ruleXExpression();
 
             state._fsp--;
@@ -30715,7 +31477,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 629, rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 645, rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30726,24 +31488,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__DeclaredParamAssignment_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10103:1: rule__XCatchClause__DeclaredParamAssignment_2 : ( ruleJvmFormalParameter ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10358:1: rule__XCatchClause__DeclaredParamAssignment_2 : ( ruleJvmFormalParameter ) ;
     public final void rule__XCatchClause__DeclaredParamAssignment_2() throws RecognitionException {
         int rule__XCatchClause__DeclaredParamAssignment_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 630) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10107:1: ( ( ruleJvmFormalParameter ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10108:1: ( ruleJvmFormalParameter )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 646) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10362:1: ( ( ruleJvmFormalParameter ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10363:1: ( ruleJvmFormalParameter )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10108:1: ( ruleJvmFormalParameter )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10109:1: ruleJvmFormalParameter
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10363:1: ( ruleJvmFormalParameter )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10364:1: ruleJvmFormalParameter
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getDeclaredParamJvmFormalParameterParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_220383);
+            pushFollow(FOLLOW_ruleJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_220889);
             ruleJvmFormalParameter();
 
             state._fsp--;
@@ -30763,7 +31525,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 630, rule__XCatchClause__DeclaredParamAssignment_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 646, rule__XCatchClause__DeclaredParamAssignment_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30774,24 +31536,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XCatchClause__ExpressionAssignment_4"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10118:1: rule__XCatchClause__ExpressionAssignment_4 : ( ruleXExpression ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10373:1: rule__XCatchClause__ExpressionAssignment_4 : ( ruleXExpression ) ;
     public final void rule__XCatchClause__ExpressionAssignment_4() throws RecognitionException {
         int rule__XCatchClause__ExpressionAssignment_4_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 631) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10122:1: ( ( ruleXExpression ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10123:1: ( ruleXExpression )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 647) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10377:1: ( ( ruleXExpression ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10378:1: ( ruleXExpression )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10123:1: ( ruleXExpression )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10124:1: ruleXExpression
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10378:1: ( ruleXExpression )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10379:1: ruleXExpression
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXCatchClauseAccess().getExpressionXExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_420414);
+            pushFollow(FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_420920);
             ruleXExpression();
 
             state._fsp--;
@@ -30811,7 +31573,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 631, rule__XCatchClause__ExpressionAssignment_4_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 647, rule__XCatchClause__ExpressionAssignment_4_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30822,24 +31584,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__ParamTypesAssignment_0_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10133:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10388:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ParamTypesAssignment_0_1() throws RecognitionException {
         int rule__XFunctionTypeRef__ParamTypesAssignment_0_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 632) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10137:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10138:1: ( ruleJvmTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 648) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10392:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10393:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10138:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10139:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10393:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10394:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_120445);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_120951);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -30859,7 +31621,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 632, rule__XFunctionTypeRef__ParamTypesAssignment_0_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 648, rule__XFunctionTypeRef__ParamTypesAssignment_0_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30870,24 +31632,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10148:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10403:1: rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1() throws RecognitionException {
         int rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 633) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10152:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10153:1: ( ruleJvmTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 649) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10407:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10408:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10153:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10154:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10408:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10409:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getParamTypesJvmTypeReferenceParserRuleCall_0_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_120476);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_120982);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -30907,7 +31669,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 633, rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 649, rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30918,24 +31680,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XFunctionTypeRef__ReturnTypeAssignment_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10163:1: rule__XFunctionTypeRef__ReturnTypeAssignment_2 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10418:1: rule__XFunctionTypeRef__ReturnTypeAssignment_2 : ( ruleJvmTypeReference ) ;
     public final void rule__XFunctionTypeRef__ReturnTypeAssignment_2() throws RecognitionException {
         int rule__XFunctionTypeRef__ReturnTypeAssignment_2_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 634) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10167:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10168:1: ( ruleJvmTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 650) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10422:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10423:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10168:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10169:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10423:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10424:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXFunctionTypeRefAccess().getReturnTypeJvmTypeReferenceParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_220507);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_221013);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -30955,7 +31717,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 634, rule__XFunctionTypeRef__ReturnTypeAssignment_2_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 650, rule__XFunctionTypeRef__ReturnTypeAssignment_2_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -30966,30 +31728,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__TypeAssignment_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10178:1: rule__JvmParameterizedTypeReference__TypeAssignment_0 : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10433:1: rule__JvmParameterizedTypeReference__TypeAssignment_0 : ( ( ruleQualifiedName ) ) ;
     public final void rule__JvmParameterizedTypeReference__TypeAssignment_0() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__TypeAssignment_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 635) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10182:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10183:1: ( ( ruleQualifiedName ) )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 651) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10437:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10438:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10183:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10184:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10438:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10439:1: ( ruleQualifiedName )
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeCrossReference_0_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10185:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10186:1: ruleQualifiedName
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10440:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10441:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_020542);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_021048);
             ruleQualifiedName();
 
             state._fsp--;
@@ -31015,7 +31777,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 635, rule__JvmParameterizedTypeReference__TypeAssignment_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 651, rule__JvmParameterizedTypeReference__TypeAssignment_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -31026,24 +31788,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10197:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10452:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 636) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10201:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10202:1: ( ruleJvmArgumentTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 652) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10456:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10457:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10202:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10203:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10457:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10458:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_120577);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_121083);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -31063,7 +31825,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 636, rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 652, rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -31074,24 +31836,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10212:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10467:1: rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1 : ( ruleJvmArgumentTypeReference ) ;
     public final void rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1() throws RecognitionException {
         int rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 637) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10216:1: ( ( ruleJvmArgumentTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10217:1: ( ruleJvmArgumentTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 653) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10471:1: ( ( ruleJvmArgumentTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10472:1: ( ruleJvmArgumentTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10217:1: ( ruleJvmArgumentTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10218:1: ruleJvmArgumentTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10472:1: ( ruleJvmArgumentTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10473:1: ruleJvmArgumentTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmParameterizedTypeReferenceAccess().getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_120608);
+            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_121114);
             ruleJvmArgumentTypeReference();
 
             state._fsp--;
@@ -31111,7 +31873,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 637, rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 653, rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -31122,24 +31884,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10227:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 : ( ruleJvmUpperBound ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10482:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0 : ( ruleJvmUpperBound ) ;
     public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0() throws RecognitionException {
         int rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 638) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10231:1: ( ( ruleJvmUpperBound ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10232:1: ( ruleJvmUpperBound )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 654) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10486:1: ( ( ruleJvmUpperBound ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10487:1: ( ruleJvmUpperBound )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10232:1: ( ruleJvmUpperBound )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10233:1: ruleJvmUpperBound
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10487:1: ( ruleJvmUpperBound )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10488:1: ruleJvmUpperBound
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmUpperBoundParserRuleCall_2_0_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_020639);
+            pushFollow(FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_021145);
             ruleJvmUpperBound();
 
             state._fsp--;
@@ -31159,7 +31921,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 638, rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 654, rule__JvmWildcardTypeReference__ConstraintsAssignment_2_0_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -31170,24 +31932,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10242:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 : ( ruleJvmLowerBound ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10497:1: rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1 : ( ruleJvmLowerBound ) ;
     public final void rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1() throws RecognitionException {
         int rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 639) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10246:1: ( ( ruleJvmLowerBound ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10247:1: ( ruleJvmLowerBound )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 655) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10501:1: ( ( ruleJvmLowerBound ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10502:1: ( ruleJvmLowerBound )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10247:1: ( ruleJvmLowerBound )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10248:1: ruleJvmLowerBound
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10502:1: ( ruleJvmLowerBound )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10503:1: ruleJvmLowerBound
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmWildcardTypeReferenceAccess().getConstraintsJvmLowerBoundParserRuleCall_2_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_120670);
+            pushFollow(FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_121176);
             ruleJvmLowerBound();
 
             state._fsp--;
@@ -31207,7 +31969,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 639, rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 655, rule__JvmWildcardTypeReference__ConstraintsAssignment_2_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -31218,24 +31980,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmUpperBound__TypeReferenceAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10257:1: rule__JvmUpperBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10512:1: rule__JvmUpperBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmUpperBound__TypeReferenceAssignment_1() throws RecognitionException {
         int rule__JvmUpperBound__TypeReferenceAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 640) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10261:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10262:1: ( ruleJvmTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 656) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10516:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10517:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10262:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10263:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10517:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10518:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_120701);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_121207);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -31255,7 +32017,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 640, rule__JvmUpperBound__TypeReferenceAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 656, rule__JvmUpperBound__TypeReferenceAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -31266,24 +32028,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmUpperBoundAnded__TypeReferenceAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10272:1: rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10527:1: rule__JvmUpperBoundAnded__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmUpperBoundAnded__TypeReferenceAssignment_1() throws RecognitionException {
         int rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 641) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10276:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10277:1: ( ruleJvmTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 657) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10531:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10532:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10277:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10278:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10532:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10533:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmUpperBoundAndedAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_120732);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_121238);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -31303,7 +32065,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 641, rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 657, rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -31314,24 +32076,24 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__JvmLowerBound__TypeReferenceAssignment_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10287:1: rule__JvmLowerBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10542:1: rule__JvmLowerBound__TypeReferenceAssignment_1 : ( ruleJvmTypeReference ) ;
     public final void rule__JvmLowerBound__TypeReferenceAssignment_1() throws RecognitionException {
         int rule__JvmLowerBound__TypeReferenceAssignment_1_StartIndex = input.index();
 
         		int stackSize = keepStackSize();
             
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 642) ) { return ; }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10291:1: ( ( ruleJvmTypeReference ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10292:1: ( ruleJvmTypeReference )
+            if ( state.backtracking>0 && alreadyParsedRule(input, 658) ) { return ; }
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10546:1: ( ( ruleJvmTypeReference ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10547:1: ( ruleJvmTypeReference )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10292:1: ( ruleJvmTypeReference )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10293:1: ruleJvmTypeReference
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10547:1: ( ruleJvmTypeReference )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:10548:1: ruleJvmTypeReference
             {
             if ( state.backtracking==0 ) {
                before(grammarAccess.getJvmLowerBoundAccess().getTypeReferenceJvmTypeReferenceParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_120763);
+            pushFollow(FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_121269);
             ruleJvmTypeReference();
 
             state._fsp--;
@@ -31351,7 +32113,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             recover(input,re);
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 642, rule__JvmLowerBound__TypeReferenceAssignment_1_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 658, rule__JvmLowerBound__TypeReferenceAssignment_1_StartIndex); }
 
             	restoreStackSize(stackSize);
 
@@ -31711,12 +32473,12 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     }
     // $ANTLR end synpred68_InternalXbase
 
-    // $ANTLR start synpred74_InternalXbase
-    public final void synpred74_InternalXbase_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7717:2: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )
-        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7717:2: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0
+    // $ANTLR start synpred76_InternalXbase
+    public final void synpred76_InternalXbase_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7938:2: ( rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0 )
+        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7938:2: rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0
         {
-        pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_synpred74_InternalXbase15582);
+        pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_synpred76_InternalXbase16018);
         rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0();
 
         state._fsp--;
@@ -31724,14 +32486,14 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
         }
     }
-    // $ANTLR end synpred74_InternalXbase
+    // $ANTLR end synpred76_InternalXbase
 
-    // $ANTLR start synpred75_InternalXbase
-    public final void synpred75_InternalXbase_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7746:2: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )
-        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7746:2: rule__XTryCatchFinallyExpression__Group_2_0_1__0
+    // $ANTLR start synpred77_InternalXbase
+    public final void synpred77_InternalXbase_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7967:2: ( rule__XTryCatchFinallyExpression__Group_2_0_1__0 )
+        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:7967:2: rule__XTryCatchFinallyExpression__Group_2_0_1__0
         {
-        pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_synpred75_InternalXbase15642);
+        pushFollow(FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_synpred77_InternalXbase16078);
         rule__XTryCatchFinallyExpression__Group_2_0_1__0();
 
         state._fsp--;
@@ -31739,14 +32501,14 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
         }
     }
-    // $ANTLR end synpred75_InternalXbase
+    // $ANTLR end synpred77_InternalXbase
 
-    // $ANTLR start synpred81_InternalXbase
-    public final void synpred81_InternalXbase_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8915:2: ( rule__QualifiedName__Group_1__0 )
-        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:8915:2: rule__QualifiedName__Group_1__0
+    // $ANTLR start synpred83_InternalXbase
+    public final void synpred83_InternalXbase_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9136:2: ( rule__QualifiedName__Group_1__0 )
+        // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:9136:2: rule__QualifiedName__Group_1__0
         {
-        pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_synpred81_InternalXbase17934);
+        pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_synpred83_InternalXbase18370);
         rule__QualifiedName__Group_1__0();
 
         state._fsp--;
@@ -31754,7 +32516,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
         }
     }
-    // $ANTLR end synpred81_InternalXbase
+    // $ANTLR end synpred83_InternalXbase
 
     // Delegated rules
 
@@ -31791,20 +32553,6 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         int start = input.mark();
         try {
             synpred24_InternalXbase_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred75_InternalXbase() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred75_InternalXbase_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -31856,20 +32604,6 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred74_InternalXbase() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred74_InternalXbase_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
     public final boolean synpred43_InternalXbase() {
         state.backtracking++;
         int start = input.mark();
@@ -31912,11 +32646,39 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
+    public final boolean synpred77_InternalXbase() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred77_InternalXbase_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred20_InternalXbase() {
         state.backtracking++;
         int start = input.mark();
         try {
             synpred20_InternalXbase_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred83_InternalXbase() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred83_InternalXbase_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -32010,11 +32772,11 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred81_InternalXbase() {
+    public final boolean synpred76_InternalXbase() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred81_InternalXbase_fragment(); // can never throw exception
+            synpred76_InternalXbase_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -32521,21 +33283,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         }
     }
     static final String DFA37_eotS =
-        "\30\uffff";
+        "\32\uffff";
     static final String DFA37_eofS =
-        "\30\uffff";
+        "\32\uffff";
     static final String DFA37_minS =
-        "\1\4\15\uffff\1\0\11\uffff";
+        "\1\4\17\uffff\1\0\11\uffff";
     static final String DFA37_maxS =
-        "\1\77\15\uffff\1\0\11\uffff";
+        "\1\77\17\uffff\1\0\11\uffff";
     static final String DFA37_acceptS =
-        "\1\uffff\1\1\25\uffff\1\2";
+        "\1\uffff\1\1\27\uffff\1\2";
     static final String DFA37_specialS =
-        "\16\uffff\1\0\11\uffff}>";
+        "\20\uffff\1\0\11\uffff}>";
     static final String[] DFA37_transitionS = {
-            "\3\1\15\uffff\1\1\2\uffff\2\1\4\uffff\1\1\5\uffff\1\1\1\uffff"+
-            "\2\1\1\uffff\1\1\1\16\5\uffff\6\1\1\uffff\2\1\2\uffff\1\1\4"+
+            "\3\1\15\uffff\1\1\2\uffff\2\1\4\uffff\3\1\3\uffff\1\1\1\uffff"+
+            "\2\1\1\uffff\1\1\1\20\5\uffff\6\1\1\uffff\2\1\2\uffff\1\1\4"+
             "\uffff\1\1",
+            "",
+            "",
             "",
             "",
             "",
@@ -32598,18 +33362,18 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA37_14 = input.LA(1);
+                        int LA37_16 = input.LA(1);
 
                          
-                        int index37_14 = input.index();
+                        int index37_16 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred58_InternalXbase()) ) {s = 1;}
 
-                        else if ( (true) ) {s = 23;}
+                        else if ( (true) ) {s = 25;}
 
                          
-                        input.seek(index37_14);
+                        input.seek(index37_16);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -33190,10 +33954,10 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_39_in_rule__XIfExpression__Group_5__0__Impl10016 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIfExpression__Group_5__1__Impl_in_rule__XIfExpression__Group_5__110047 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XIfExpression__ElseAssignment_5_1_in_rule__XIfExpression__Group_5__1__Impl10074 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group__0__Impl_in_rule__XSwitchExpression__Group__010108 = new BitSet(new long[]{0x84DF836821900070L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group__0__Impl_in_rule__XSwitchExpression__Group__010108 = new BitSet(new long[]{0x84DF8368E1900070L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group__1_in_rule__XSwitchExpression__Group__010111 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_40_in_rule__XSwitchExpression__Group__0__Impl10139 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XSwitchExpression__Group__1__Impl_in_rule__XSwitchExpression__Group__110170 = new BitSet(new long[]{0x84DF836821900070L});
+    public static final BitSet FOLLOW_rule__XSwitchExpression__Group__1__Impl_in_rule__XSwitchExpression__Group__110170 = new BitSet(new long[]{0x84DF8368E1900070L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group__2_in_rule__XSwitchExpression__Group__110173 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__SwitchAssignment_1_in_rule__XSwitchExpression__Group__1__Impl10200 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__Group__2__Impl_in_rule__XSwitchExpression__Group__210231 = new BitSet(new long[]{0x0400500800000010L});
@@ -33372,246 +34136,267 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XConstructorCall__Group__0__Impl_in_rule__XConstructorCall__Group__014236 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group__1_in_rule__XConstructorCall__Group__014239 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_50_in_rule__XConstructorCall__Group__0__Impl14267 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__1__Impl_in_rule__XConstructorCall__Group__114298 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__1__Impl_in_rule__XConstructorCall__Group__114298 = new BitSet(new long[]{0x0000000800100000L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group__2_in_rule__XConstructorCall__Group__114301 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__TypeAssignment_1_in_rule__XConstructorCall__Group__1__Impl14328 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__2__Impl_in_rule__XConstructorCall__Group__214358 = new BitSet(new long[]{0x84DF837821900070L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__ConstructorAssignment_1_in_rule__XConstructorCall__Group__1__Impl14328 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__2__Impl_in_rule__XConstructorCall__Group__214358 = new BitSet(new long[]{0x0000000800100000L});
     public static final BitSet FOLLOW_rule__XConstructorCall__Group__3_in_rule__XConstructorCall__Group__214361 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__XConstructorCall__Group__2__Impl14389 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__3__Impl_in_rule__XConstructorCall__Group__314420 = new BitSet(new long[]{0x84DF837821900070L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__4_in_rule__XConstructorCall__Group__314423 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__0_in_rule__XConstructorCall__Group__3__Impl14450 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group__4__Impl_in_rule__XConstructorCall__Group__414481 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__XConstructorCall__Group__4__Impl14509 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__0__Impl_in_rule__XConstructorCall__Group_3__014550 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__1_in_rule__XConstructorCall__Group_3__014553 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_0_in_rule__XConstructorCall__Group_3__0__Impl14580 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3__1__Impl_in_rule__XConstructorCall__Group_3__114610 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__0_in_rule__XConstructorCall__Group_3__1__Impl14637 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__0__Impl_in_rule__XConstructorCall__Group_3_1__014672 = new BitSet(new long[]{0x84DF836821900070L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__1_in_rule__XConstructorCall__Group_3_1__014675 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__XConstructorCall__Group_3_1__0__Impl14703 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__Group_3_1__1__Impl_in_rule__XConstructorCall__Group_3_1__114734 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_3_1_1_in_rule__XConstructorCall__Group_3_1__1__Impl14761 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__0__Impl_in_rule__XBooleanLiteral__Group_0__014795 = new BitSet(new long[]{0x0008000000000000L});
-    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__1_in_rule__XBooleanLiteral__Group_0__014798 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__1__Impl_in_rule__XBooleanLiteral__Group_0__114856 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_rule__XBooleanLiteral__Group_0__1__Impl14884 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XNullLiteral__Group__0__Impl_in_rule__XNullLiteral__Group__014919 = new BitSet(new long[]{0x0010000000000000L});
-    public static final BitSet FOLLOW_rule__XNullLiteral__Group__1_in_rule__XNullLiteral__Group__014922 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XNullLiteral__Group__1__Impl_in_rule__XNullLiteral__Group__114980 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_rule__XNullLiteral__Group__1__Impl15008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__0__Impl_in_rule__XTypeLiteral__Group__015043 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__1_in_rule__XTypeLiteral__Group__015046 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__TypeAssignment_0_in_rule__XTypeLiteral__Group__0__Impl15073 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__1__Impl_in_rule__XTypeLiteral__Group__115103 = new BitSet(new long[]{0x0020000000000000L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__2_in_rule__XTypeLiteral__Group__115106 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_rule__XTypeLiteral__Group__1__Impl15134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__2__Impl_in_rule__XTypeLiteral__Group__215165 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_rule__XTypeLiteral__Group__2__Impl15193 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XThrowExpression__Group__0__Impl_in_rule__XThrowExpression__Group__015230 = new BitSet(new long[]{0x84DF836821900070L});
-    public static final BitSet FOLLOW_rule__XThrowExpression__Group__1_in_rule__XThrowExpression__Group__015233 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_rule__XThrowExpression__Group__0__Impl15261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XThrowExpression__Group__1__Impl_in_rule__XThrowExpression__Group__115292 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XThrowExpression__ExpressionAssignment_1_in_rule__XThrowExpression__Group__1__Impl15319 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__0__Impl_in_rule__XTryCatchFinallyExpression__Group__015353 = new BitSet(new long[]{0x84DF836821900070L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__1_in_rule__XTryCatchFinallyExpression__Group__015356 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_rule__XTryCatchFinallyExpression__Group__0__Impl15384 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__1__Impl_in_rule__XTryCatchFinallyExpression__Group__115415 = new BitSet(new long[]{0x0300000000000000L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__2_in_rule__XTryCatchFinallyExpression__Group__115418 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__ExpressionAssignment_1_in_rule__XTryCatchFinallyExpression__Group__1__Impl15445 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__2__Impl_in_rule__XTryCatchFinallyExpression__Group__215475 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Alternatives_2_in_rule__XTryCatchFinallyExpression__Group__2__Impl15502 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__015538 = new BitSet(new long[]{0x0100000000000000L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1_in_rule__XTryCatchFinallyExpression__Group_2_0__015541 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl15570 = new BitSet(new long[]{0x0200000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl15582 = new BitSet(new long[]{0x0200000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__115615 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl15642 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__015677 = new BitSet(new long[]{0x84DF836821900070L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__015680 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl15708 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__115739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl15766 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__015800 = new BitSet(new long[]{0x84DF836821900070L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1_in_rule__XTryCatchFinallyExpression__Group_2_1__015803 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl15831 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__115862 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1_in_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl15889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__0__Impl_in_rule__XCatchClause__Group__015923 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__1_in_rule__XCatchClause__Group__015926 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_57_in_rule__XCatchClause__Group__0__Impl15954 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__1__Impl_in_rule__XCatchClause__Group__115985 = new BitSet(new long[]{0x0400000800000010L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__2_in_rule__XCatchClause__Group__115988 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__XCatchClause__Group__1__Impl16016 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__2__Impl_in_rule__XCatchClause__Group__216047 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__3_in_rule__XCatchClause__Group__216050 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__DeclaredParamAssignment_2_in_rule__XCatchClause__Group__2__Impl16077 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__3__Impl_in_rule__XCatchClause__Group__316107 = new BitSet(new long[]{0x84DF836821900070L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__4_in_rule__XCatchClause__Group__316110 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__XCatchClause__Group__3__Impl16138 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__Group__4__Impl_in_rule__XCatchClause__Group__416169 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XCatchClause__ExpressionAssignment_4_in_rule__XCatchClause__Group__4__Impl16196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__0__Impl_in_rule__XFunctionTypeRef__Group__016236 = new BitSet(new long[]{0x0400000800000010L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__1_in_rule__XFunctionTypeRef__Group__016239 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__0_in_rule__XFunctionTypeRef__Group__0__Impl16266 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__1__Impl_in_rule__XFunctionTypeRef__Group__116297 = new BitSet(new long[]{0x0400000800000010L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__2_in_rule__XFunctionTypeRef__Group__116300 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_58_in_rule__XFunctionTypeRef__Group__1__Impl16328 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__2__Impl_in_rule__XFunctionTypeRef__Group__216359 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ReturnTypeAssignment_2_in_rule__XFunctionTypeRef__Group__2__Impl16386 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__0__Impl_in_rule__XFunctionTypeRef__Group_0__016422 = new BitSet(new long[]{0x0400000800000010L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__1_in_rule__XFunctionTypeRef__Group_0__016425 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__XFunctionTypeRef__Group_0__0__Impl16453 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__1__Impl_in_rule__XFunctionTypeRef__Group_0__116484 = new BitSet(new long[]{0x0000001400000000L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__2_in_rule__XFunctionTypeRef__Group_0__116487 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_in_rule__XFunctionTypeRef__Group_0__1__Impl16514 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__2__Impl_in_rule__XFunctionTypeRef__Group_0__216544 = new BitSet(new long[]{0x0000001400000000L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__3_in_rule__XFunctionTypeRef__Group_0__216547 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__0_in_rule__XFunctionTypeRef__Group_0__2__Impl16574 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__3__Impl_in_rule__XFunctionTypeRef__Group_0__316605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__XFunctionTypeRef__Group_0__3__Impl16633 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__0__Impl_in_rule__XFunctionTypeRef__Group_0_2__016672 = new BitSet(new long[]{0x0400000800000010L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__1_in_rule__XFunctionTypeRef__Group_0_2__016675 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__XFunctionTypeRef__Group_0_2__0__Impl16703 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__1__Impl_in_rule__XFunctionTypeRef__Group_0_2__116734 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_in_rule__XFunctionTypeRef__Group_0_2__1__Impl16761 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__0__Impl_in_rule__JvmParameterizedTypeReference__Group__016795 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__1_in_rule__JvmParameterizedTypeReference__Group__016798 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__TypeAssignment_0_in_rule__JvmParameterizedTypeReference__Group__0__Impl16825 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__1__Impl_in_rule__JvmParameterizedTypeReference__Group__116855 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0_in_rule__JvmParameterizedTypeReference__Group__1__Impl16882 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1__016917 = new BitSet(new long[]{0x0C00000800000010L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1_in_rule__JvmParameterizedTypeReference__Group_1__016920 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__JvmParameterizedTypeReference__Group_1__0__Impl16948 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1__116979 = new BitSet(new long[]{0x0000000400080000L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2_in_rule__JvmParameterizedTypeReference__Group_1__116982 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1_in_rule__JvmParameterizedTypeReference__Group_1__1__Impl17009 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1__217039 = new BitSet(new long[]{0x0000000400080000L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3_in_rule__JvmParameterizedTypeReference__Group_1__217042 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0_in_rule__JvmParameterizedTypeReference__Group_1__2__Impl17069 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1__317100 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl17128 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__017167 = new BitSet(new long[]{0x0C00000800000010L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__017170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl17198 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__117229 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl17256 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__017290 = new BitSet(new long[]{0x0C00000800000010L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__017293 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__117351 = new BitSet(new long[]{0x5000000000000000L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__117354 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_59_in_rule__JvmWildcardTypeReference__Group__1__Impl17382 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__217413 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl17440 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__017477 = new BitSet(new long[]{0x0400000800000010L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__017480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_60_in_rule__JvmUpperBound__Group__0__Impl17508 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__117539 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl17566 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__017600 = new BitSet(new long[]{0x0400000800000010L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__017603 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_61_in_rule__JvmUpperBoundAnded__Group__0__Impl17631 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__117662 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl17689 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__017723 = new BitSet(new long[]{0x0400000800000010L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__017726 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_62_in_rule__JvmLowerBound__Group__0__Impl17754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__117785 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl17812 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__017848 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__017851 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl17878 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__117907 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl17934 = new BitSet(new long[]{0x0000000200000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__017969 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__017972 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_rule__QualifiedName__Group_1__0__Impl18000 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__118031 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl18058 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpAssign_in_rule__XAssignment__FeatureAssignment_1_118100 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_1_218135 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_118170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_218205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_118240 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_218275 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_118310 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_218345 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XRelationalExpression__TypeAssignment_1_0_218380 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_118419 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_218454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_118489 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_218524 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_118559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_218594 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_118629 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_218664 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_118699 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_rule__XUnaryOperation__OperandAssignment_0_218734 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_118765 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_118796 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__XMemberFeatureCall__FeatureAssignment_1_318831 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_018866 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_118897 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_018928 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_1_118959 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XClosure__ExpressionAssignment_318990 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_119021 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_rule__XCastedExpression__TargetAssignment_319052 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_219083 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_419114 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_5_119145 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__SwitchAssignment_119176 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_319207 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_0_019238 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXBlockExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_119269 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_019300 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_119331 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_019362 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXBlockExpression_in_rule__XCasePart__ThenAssignment_3_119393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_219424 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_419455 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_619486 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_219517 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_419548 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_119579 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_419610 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_019641 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_119672 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__XVariableDeclaration__NameAssignment_219703 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_419734 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_019765 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__JvmFormalParameter__NameAssignment_119796 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_119827 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_2_119858 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__XFeatureCall__FeatureAssignment_119893 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_019928 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_119959 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_rule__XConstructorCall__TypeAssignment_119990 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_020021 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_3_1_120052 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_63_in_rule__XBooleanLiteral__IsTrueAssignment_120088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__XIntLiteral__ValueAssignment20127 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment20158 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_020193 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_120228 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_120259 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_020290 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_120321 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_120352 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_220383 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_420414 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_120445 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_120476 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_220507 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_020542 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_120577 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_120608 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_020639 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_120670 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_120701 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_120732 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_120763 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2__0_in_rule__XConstructorCall__Group__2__Impl14388 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__3__Impl_in_rule__XConstructorCall__Group__314419 = new BitSet(new long[]{0x84DF837821900070L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__4_in_rule__XConstructorCall__Group__314422 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_rule__XConstructorCall__Group__3__Impl14450 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__4__Impl_in_rule__XConstructorCall__Group__414481 = new BitSet(new long[]{0x84DF837821900070L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__5_in_rule__XConstructorCall__Group__414484 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_4__0_in_rule__XConstructorCall__Group__4__Impl14511 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group__5__Impl_in_rule__XConstructorCall__Group__514542 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_rule__XConstructorCall__Group__5__Impl14570 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2__0__Impl_in_rule__XConstructorCall__Group_2__014613 = new BitSet(new long[]{0x0C00000800000010L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2__1_in_rule__XConstructorCall__Group_2__014616 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__XConstructorCall__Group_2__0__Impl14644 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2__1__Impl_in_rule__XConstructorCall__Group_2__114675 = new BitSet(new long[]{0x0000000400080000L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2__2_in_rule__XConstructorCall__Group_2__114678 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__TypeArgumentsAssignment_2_1_in_rule__XConstructorCall__Group_2__1__Impl14705 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2__2__Impl_in_rule__XConstructorCall__Group_2__214735 = new BitSet(new long[]{0x0000000400080000L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2__3_in_rule__XConstructorCall__Group_2__214738 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2_2__0_in_rule__XConstructorCall__Group_2__2__Impl14765 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2__3__Impl_in_rule__XConstructorCall__Group_2__314796 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__XConstructorCall__Group_2__3__Impl14824 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2_2__0__Impl_in_rule__XConstructorCall__Group_2_2__014863 = new BitSet(new long[]{0x0C00000800000010L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2_2__1_in_rule__XConstructorCall__Group_2_2__014866 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_rule__XConstructorCall__Group_2_2__0__Impl14894 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_2_2__1__Impl_in_rule__XConstructorCall__Group_2_2__114925 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__TypeArgumentsAssignment_2_2_1_in_rule__XConstructorCall__Group_2_2__1__Impl14952 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_4__0__Impl_in_rule__XConstructorCall__Group_4__014986 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_4__1_in_rule__XConstructorCall__Group_4__014989 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_4_0_in_rule__XConstructorCall__Group_4__0__Impl15016 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_4__1__Impl_in_rule__XConstructorCall__Group_4__115046 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_4_1__0_in_rule__XConstructorCall__Group_4__1__Impl15073 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_4_1__0__Impl_in_rule__XConstructorCall__Group_4_1__015108 = new BitSet(new long[]{0x84DF836821900070L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_4_1__1_in_rule__XConstructorCall__Group_4_1__015111 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_rule__XConstructorCall__Group_4_1__0__Impl15139 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__Group_4_1__1__Impl_in_rule__XConstructorCall__Group_4_1__115170 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XConstructorCall__ArgumentsAssignment_4_1_1_in_rule__XConstructorCall__Group_4_1__1__Impl15197 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__0__Impl_in_rule__XBooleanLiteral__Group_0__015231 = new BitSet(new long[]{0x0008000000000000L});
+    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__1_in_rule__XBooleanLiteral__Group_0__015234 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XBooleanLiteral__Group_0__1__Impl_in_rule__XBooleanLiteral__Group_0__115292 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_51_in_rule__XBooleanLiteral__Group_0__1__Impl15320 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XNullLiteral__Group__0__Impl_in_rule__XNullLiteral__Group__015355 = new BitSet(new long[]{0x0010000000000000L});
+    public static final BitSet FOLLOW_rule__XNullLiteral__Group__1_in_rule__XNullLiteral__Group__015358 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XNullLiteral__Group__1__Impl_in_rule__XNullLiteral__Group__115416 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_52_in_rule__XNullLiteral__Group__1__Impl15444 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__0__Impl_in_rule__XTypeLiteral__Group__015479 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__1_in_rule__XTypeLiteral__Group__015482 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__TypeAssignment_0_in_rule__XTypeLiteral__Group__0__Impl15509 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__1__Impl_in_rule__XTypeLiteral__Group__115539 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__2_in_rule__XTypeLiteral__Group__115542 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_rule__XTypeLiteral__Group__1__Impl15570 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTypeLiteral__Group__2__Impl_in_rule__XTypeLiteral__Group__215601 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_rule__XTypeLiteral__Group__2__Impl15629 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XThrowExpression__Group__0__Impl_in_rule__XThrowExpression__Group__015666 = new BitSet(new long[]{0x84DF836821900070L});
+    public static final BitSet FOLLOW_rule__XThrowExpression__Group__1_in_rule__XThrowExpression__Group__015669 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_rule__XThrowExpression__Group__0__Impl15697 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XThrowExpression__Group__1__Impl_in_rule__XThrowExpression__Group__115728 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XThrowExpression__ExpressionAssignment_1_in_rule__XThrowExpression__Group__1__Impl15755 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__0__Impl_in_rule__XTryCatchFinallyExpression__Group__015789 = new BitSet(new long[]{0x84DF836821900070L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__1_in_rule__XTryCatchFinallyExpression__Group__015792 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_rule__XTryCatchFinallyExpression__Group__0__Impl15820 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__1__Impl_in_rule__XTryCatchFinallyExpression__Group__115851 = new BitSet(new long[]{0x0300000000000000L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__2_in_rule__XTryCatchFinallyExpression__Group__115854 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__ExpressionAssignment_1_in_rule__XTryCatchFinallyExpression__Group__1__Impl15881 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group__2__Impl_in_rule__XTryCatchFinallyExpression__Group__215911 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Alternatives_2_in_rule__XTryCatchFinallyExpression__Group__2__Impl15938 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__015974 = new BitSet(new long[]{0x0100000000000000L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1_in_rule__XTryCatchFinallyExpression__Group_2_0__015977 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl16006 = new BitSet(new long[]{0x0200000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_rule__XTryCatchFinallyExpression__Group_2_0__0__Impl16018 = new BitSet(new long[]{0x0200000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0__116051 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_rule__XTryCatchFinallyExpression__Group_2_0__1__Impl16078 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__016113 = new BitSet(new long[]{0x84DF836821900070L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__016116 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_rule__XTryCatchFinallyExpression__Group_2_0_1__0__Impl16144 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_0_1__116175 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_1_in_rule__XTryCatchFinallyExpression__Group_2_0_1__1__Impl16202 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__016236 = new BitSet(new long[]{0x84DF836821900070L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1_in_rule__XTryCatchFinallyExpression__Group_2_1__016239 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_rule__XTryCatchFinallyExpression__Group_2_1__0__Impl16267 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl_in_rule__XTryCatchFinallyExpression__Group_2_1__116298 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_1_in_rule__XTryCatchFinallyExpression__Group_2_1__1__Impl16325 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__0__Impl_in_rule__XCatchClause__Group__016359 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__1_in_rule__XCatchClause__Group__016362 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_57_in_rule__XCatchClause__Group__0__Impl16390 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__1__Impl_in_rule__XCatchClause__Group__116421 = new BitSet(new long[]{0x0400000800000010L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__2_in_rule__XCatchClause__Group__116424 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_rule__XCatchClause__Group__1__Impl16452 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__2__Impl_in_rule__XCatchClause__Group__216483 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__3_in_rule__XCatchClause__Group__216486 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__DeclaredParamAssignment_2_in_rule__XCatchClause__Group__2__Impl16513 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__3__Impl_in_rule__XCatchClause__Group__316543 = new BitSet(new long[]{0x84DF836821900070L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__4_in_rule__XCatchClause__Group__316546 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_rule__XCatchClause__Group__3__Impl16574 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__Group__4__Impl_in_rule__XCatchClause__Group__416605 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XCatchClause__ExpressionAssignment_4_in_rule__XCatchClause__Group__4__Impl16632 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__0__Impl_in_rule__XFunctionTypeRef__Group__016672 = new BitSet(new long[]{0x0400000800000010L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__1_in_rule__XFunctionTypeRef__Group__016675 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__0_in_rule__XFunctionTypeRef__Group__0__Impl16702 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__1__Impl_in_rule__XFunctionTypeRef__Group__116733 = new BitSet(new long[]{0x0400000800000010L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__2_in_rule__XFunctionTypeRef__Group__116736 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_58_in_rule__XFunctionTypeRef__Group__1__Impl16764 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group__2__Impl_in_rule__XFunctionTypeRef__Group__216795 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ReturnTypeAssignment_2_in_rule__XFunctionTypeRef__Group__2__Impl16822 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__0__Impl_in_rule__XFunctionTypeRef__Group_0__016858 = new BitSet(new long[]{0x0400000800000010L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__1_in_rule__XFunctionTypeRef__Group_0__016861 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_rule__XFunctionTypeRef__Group_0__0__Impl16889 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__1__Impl_in_rule__XFunctionTypeRef__Group_0__116920 = new BitSet(new long[]{0x0000001400000000L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__2_in_rule__XFunctionTypeRef__Group_0__116923 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_1_in_rule__XFunctionTypeRef__Group_0__1__Impl16950 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__2__Impl_in_rule__XFunctionTypeRef__Group_0__216980 = new BitSet(new long[]{0x0000001400000000L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__3_in_rule__XFunctionTypeRef__Group_0__216983 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__0_in_rule__XFunctionTypeRef__Group_0__2__Impl17010 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0__3__Impl_in_rule__XFunctionTypeRef__Group_0__317041 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_rule__XFunctionTypeRef__Group_0__3__Impl17069 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__0__Impl_in_rule__XFunctionTypeRef__Group_0_2__017108 = new BitSet(new long[]{0x0400000800000010L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__1_in_rule__XFunctionTypeRef__Group_0_2__017111 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_rule__XFunctionTypeRef__Group_0_2__0__Impl17139 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__Group_0_2__1__Impl_in_rule__XFunctionTypeRef__Group_0_2__117170 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_1_in_rule__XFunctionTypeRef__Group_0_2__1__Impl17197 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__0__Impl_in_rule__JvmParameterizedTypeReference__Group__017231 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__1_in_rule__JvmParameterizedTypeReference__Group__017234 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__TypeAssignment_0_in_rule__JvmParameterizedTypeReference__Group__0__Impl17261 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group__1__Impl_in_rule__JvmParameterizedTypeReference__Group__117291 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0_in_rule__JvmParameterizedTypeReference__Group__1__Impl17318 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1__017353 = new BitSet(new long[]{0x0C00000800000010L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1_in_rule__JvmParameterizedTypeReference__Group_1__017356 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__JvmParameterizedTypeReference__Group_1__0__Impl17384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1__117415 = new BitSet(new long[]{0x0000000400080000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2_in_rule__JvmParameterizedTypeReference__Group_1__117418 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_1_in_rule__JvmParameterizedTypeReference__Group_1__1__Impl17445 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__2__Impl_in_rule__JvmParameterizedTypeReference__Group_1__217475 = new BitSet(new long[]{0x0000000400080000L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3_in_rule__JvmParameterizedTypeReference__Group_1__217478 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0_in_rule__JvmParameterizedTypeReference__Group_1__2__Impl17505 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1__3__Impl_in_rule__JvmParameterizedTypeReference__Group_1__317536 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__JvmParameterizedTypeReference__Group_1__3__Impl17564 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__017603 = new BitSet(new long[]{0x0C00000800000010L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1_in_rule__JvmParameterizedTypeReference__Group_1_2__017606 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_rule__JvmParameterizedTypeReference__Group_1_2__0__Impl17634 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl_in_rule__JvmParameterizedTypeReference__Group_1_2__117665 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_1_in_rule__JvmParameterizedTypeReference__Group_1_2__1__Impl17692 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__0__Impl_in_rule__JvmWildcardTypeReference__Group__017726 = new BitSet(new long[]{0x0C00000800000010L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1_in_rule__JvmWildcardTypeReference__Group__017729 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__1__Impl_in_rule__JvmWildcardTypeReference__Group__117787 = new BitSet(new long[]{0x5000000000000000L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2_in_rule__JvmWildcardTypeReference__Group__117790 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_59_in_rule__JvmWildcardTypeReference__Group__1__Impl17818 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Group__2__Impl_in_rule__JvmWildcardTypeReference__Group__217849 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmWildcardTypeReference__Alternatives_2_in_rule__JvmWildcardTypeReference__Group__2__Impl17876 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__0__Impl_in_rule__JvmUpperBound__Group__017913 = new BitSet(new long[]{0x0400000800000010L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1_in_rule__JvmUpperBound__Group__017916 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_60_in_rule__JvmUpperBound__Group__0__Impl17944 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__Group__1__Impl_in_rule__JvmUpperBound__Group__117975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBound__TypeReferenceAssignment_1_in_rule__JvmUpperBound__Group__1__Impl18002 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__0__Impl_in_rule__JvmUpperBoundAnded__Group__018036 = new BitSet(new long[]{0x0400000800000010L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1_in_rule__JvmUpperBoundAnded__Group__018039 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_61_in_rule__JvmUpperBoundAnded__Group__0__Impl18067 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__Group__1__Impl_in_rule__JvmUpperBoundAnded__Group__118098 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmUpperBoundAnded__TypeReferenceAssignment_1_in_rule__JvmUpperBoundAnded__Group__1__Impl18125 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__0__Impl_in_rule__JvmLowerBound__Group__018159 = new BitSet(new long[]{0x0400000800000010L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1_in_rule__JvmLowerBound__Group__018162 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_62_in_rule__JvmLowerBound__Group__0__Impl18190 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__118221 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl18248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__018284 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__018287 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl18314 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__118343 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl18370 = new BitSet(new long[]{0x0000000200000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__018405 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__018408 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_rule__QualifiedName__Group_1__0__Impl18436 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__118467 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl18494 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpAssign_in_rule__XAssignment__FeatureAssignment_1_118536 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_1_218571 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpOr_in_rule__XOrExpression__FeatureAssignment_1_118606 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAndExpression_in_rule__XOrExpression__RightOperandAssignment_1_218641 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpAnd_in_rule__XAndExpression__FeatureAssignment_1_118676 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXEqualityExpression_in_rule__XAndExpression__RightOperandAssignment_1_218711 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpEquality_in_rule__XEqualityExpression__FeatureAssignment_1_118746 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXRelationalExpression_in_rule__XEqualityExpression__RightOperandAssignment_1_218781 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XRelationalExpression__TypeAssignment_1_0_218816 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpCompare_in_rule__XRelationalExpression__FeatureAssignment_1_1_118855 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_rule__XRelationalExpression__RightOperandAssignment_1_1_218890 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpOther_in_rule__XOtherOperatorExpression__FeatureAssignment_1_118925 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAdditiveExpression_in_rule__XOtherOperatorExpression__RightOperandAssignment_1_218960 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpAdd_in_rule__XAdditiveExpression__FeatureAssignment_1_118995 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_rule__XAdditiveExpression__RightOperandAssignment_1_219030 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpMulti_in_rule__XMultiplicativeExpression__FeatureAssignment_1_119065 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXUnaryOperation_in_rule__XMultiplicativeExpression__RightOperandAssignment_1_219100 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOpUnary_in_rule__XUnaryOperation__FeatureAssignment_0_119135 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_rule__XUnaryOperation__OperandAssignment_0_219170 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_119201 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_119232 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__XMemberFeatureCall__FeatureAssignment_1_319267 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_019302 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_119333 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_019364 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XClosure__FormalParametersAssignment_1_1_119395 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XClosure__ExpressionAssignment_319426 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCastedExpression__TypeAssignment_119457 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_rule__XCastedExpression__TargetAssignment_319488 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__IfAssignment_219519 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ThenAssignment_419550 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XIfExpression__ElseAssignment_5_119581 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_rule__XSwitchExpression__SwitchAssignment_119612 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXCasePart_in_rule__XSwitchExpression__CasesAssignment_319643 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_0_019674 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXBlockExpression_in_rule__XSwitchExpression__DefaultAssignment_4_2_119705 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XCasePart__TypeGuardAssignment_019736 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__CaseAssignment_1_119767 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCasePart__ThenAssignment_3_0_019798 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXBlockExpression_in_rule__XCasePart__ThenAssignment_3_119829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XForLoopExpression__DeclaredParamAssignment_219860 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__ForExpressionAssignment_419891 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XForLoopExpression__EachExpressionAssignment_619922 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__PredicateAssignment_219953 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XWhileExpression__BodyAssignment_419984 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__BodyAssignment_120015 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XDoWhileExpression__PredicateAssignment_420046 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_rule__XBlockExpression__ExpressionsAssignment_2_020077 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XVariableDeclaration__TypeAssignment_120108 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__XVariableDeclaration__NameAssignment_220139 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XVariableDeclaration__RightAssignment_420170 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmFormalParameter__ParameterTypeAssignment_020201 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__JvmFormalParameter__NameAssignment_120232 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_120263 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XFeatureCall__TypeArgumentsAssignment_0_2_120294 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__XFeatureCall__FeatureAssignment_120329 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_020364 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_120395 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XConstructorCall__ConstructorAssignment_120430 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_2_120465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__XConstructorCall__TypeArgumentsAssignment_2_2_120496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_020527 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XConstructorCall__ArgumentsAssignment_4_1_120558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_63_in_rule__XBooleanLiteral__IsTrueAssignment_120594 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__XIntLiteral__ValueAssignment20633 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__XStringLiteral__ValueAssignment20664 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XTypeLiteral__TypeAssignment_020699 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XThrowExpression__ExpressionAssignment_120734 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__ExpressionAssignment_120765 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXCatchClause_in_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_020796 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_0_1_120827 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XTryCatchFinallyExpression__FinallyExpressionAssignment_2_1_120858 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmFormalParameter_in_rule__XCatchClause__DeclaredParamAssignment_220889 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXExpression_in_rule__XCatchClause__ExpressionAssignment_420920 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_120951 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ParamTypesAssignment_0_2_120982 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__XFunctionTypeRef__ReturnTypeAssignment_221013 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__JvmParameterizedTypeReference__TypeAssignment_021048 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_121083 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_rule__JvmParameterizedTypeReference__ArgumentsAssignment_1_2_121114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmUpperBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_021145 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmLowerBound_in_rule__JvmWildcardTypeReference__ConstraintsAssignment_2_121176 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBound__TypeReferenceAssignment_121207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmUpperBoundAnded__TypeReferenceAssignment_121238 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleJvmTypeReference_in_rule__JvmLowerBound__TypeReferenceAssignment_121269 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXClosure_in_synpred15_InternalXbase3854 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXTypeLiteral_in_synpred20_InternalXbase3939 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXFeatureCall_in_synpred24_InternalXbase4007 = new BitSet(new long[]{0x0000000000000002L});
@@ -33631,8 +34416,8 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__XIfExpression__Group_5__0_in_synpred57_InternalXbase9942 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XSwitchExpression__SwitchAssignment_1_in_synpred58_InternalXbase10200 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XFeatureCall__Group_2__0_in_synpred68_InternalXbase13393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_synpred74_InternalXbase15582 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_synpred75_InternalXbase15642 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_synpred81_InternalXbase17934 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__CatchClausesAssignment_2_0_0_in_synpred76_InternalXbase16018 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XTryCatchFinallyExpression__Group_2_0_1__0_in_synpred77_InternalXbase16078 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_synpred83_InternalXbase18370 = new BitSet(new long[]{0x0000000000000002L});
 
 }

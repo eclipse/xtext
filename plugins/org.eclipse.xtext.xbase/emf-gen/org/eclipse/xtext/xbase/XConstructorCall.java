@@ -7,6 +7,7 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -17,8 +18,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getConstructor <em>Constructor</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XConstructorCall#getTypeArguments <em>Type Arguments</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,30 +31,30 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 public interface XConstructorCall extends XExpression
 {
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Constructor</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Constructor</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(JvmTypeReference)
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_Type()
-	 * @model containment="true"
+	 * @return the value of the '<em>Constructor</em>' reference.
+	 * @see #setConstructor(JvmConstructor)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_Constructor()
+	 * @model
 	 * @generated
 	 */
-	JvmTypeReference getType();
+	JvmConstructor getConstructor();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XConstructorCall#getType <em>Type</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XConstructorCall#getConstructor <em>Constructor</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' containment reference.
-	 * @see #getType()
+	 * @param value the new value of the '<em>Constructor</em>' reference.
+	 * @see #getConstructor()
 	 * @generated
 	 */
-	void setType(JvmTypeReference value);
+	void setConstructor(JvmConstructor value);
 
 	/**
 	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
@@ -69,5 +71,21 @@ public interface XConstructorCall extends XExpression
 	 * @generated
 	 */
 	EList<XExpression> getArguments();
+
+	/**
+	 * Returns the value of the '<em><b>Type Arguments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type Arguments</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type Arguments</em>' containment reference list.
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXConstructorCall_TypeArguments()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<JvmTypeReference> getTypeArguments();
 
 } // XConstructorCall

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -33,8 +34,9 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getConstructor <em>Constructor</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getTypeArguments <em>Type Arguments</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,14 +45,14 @@ import org.eclipse.xtext.xbase.XbasePackage;
 public class XConstructorCallImpl extends XExpressionImpl implements XConstructorCall
 {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * The cached value of the '{@link #getConstructor() <em>Constructor</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getConstructor()
 	 * @generated
 	 * @ordered
 	 */
-	protected JvmTypeReference type;
+	protected JvmConstructor constructor;
 
 	/**
 	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
@@ -61,6 +63,16 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * @ordered
 	 */
 	protected EList<XExpression> arguments;
+
+	/**
+	 * The cached value of the '{@link #getTypeArguments() <em>Type Arguments</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeArguments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JvmTypeReference> typeArguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,9 +100,19 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmTypeReference getType()
+	public JvmConstructor getConstructor()
 	{
-		return type;
+		if (constructor != null && constructor.eIsProxy())
+		{
+			InternalEObject oldConstructor = (InternalEObject)constructor;
+			constructor = (JvmConstructor)eResolveProxy(oldConstructor);
+			if (constructor != oldConstructor)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR, oldConstructor, constructor));
+			}
+		}
+		return constructor;
 	}
 
 	/**
@@ -98,37 +120,22 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(JvmTypeReference newType, NotificationChain msgs)
+	public JvmConstructor basicGetConstructor()
 	{
-		JvmTypeReference oldType = type;
-		type = newType;
+		return constructor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setConstructor(JvmConstructor newConstructor)
+	{
+		JvmConstructor oldConstructor = constructor;
+		constructor = newConstructor;
 		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XbasePackage.XCONSTRUCTOR_CALL__TYPE, oldType, newType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(JvmTypeReference newType)
-	{
-		if (newType != type)
-		{
-			NotificationChain msgs = null;
-			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XCONSTRUCTOR_CALL__TYPE, null, msgs);
-			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XbasePackage.XCONSTRUCTOR_CALL__TYPE, null, msgs);
-			msgs = basicSetType(newType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XCONSTRUCTOR_CALL__TYPE, newType, newType));
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR, oldConstructor, constructor));
 	}
 
 	/**
@@ -150,15 +157,29 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<JvmTypeReference> getTypeArguments()
+	{
+		if (typeArguments == null)
+		{
+			typeArguments = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, XbasePackage.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS);
+		}
+		return typeArguments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XCONSTRUCTOR_CALL__TYPE:
-				return basicSetType(null, msgs);
 			case XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS:
 				return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
+			case XbasePackage.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS:
+				return ((InternalEList<?>)getTypeArguments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -173,10 +194,13 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XCONSTRUCTOR_CALL__TYPE:
-				return getType();
+			case XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR:
+				if (resolve) return getConstructor();
+				return basicGetConstructor();
 			case XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS:
 				return getArguments();
+			case XbasePackage.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS:
+				return getTypeArguments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -192,12 +216,16 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XCONSTRUCTOR_CALL__TYPE:
-				setType((JvmTypeReference)newValue);
+			case XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR:
+				setConstructor((JvmConstructor)newValue);
 				return;
 			case XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS:
 				getArguments().clear();
 				getArguments().addAll((Collection<? extends XExpression>)newValue);
+				return;
+			case XbasePackage.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS:
+				getTypeArguments().clear();
+				getTypeArguments().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -213,11 +241,14 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XCONSTRUCTOR_CALL__TYPE:
-				setType((JvmTypeReference)null);
+			case XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR:
+				setConstructor((JvmConstructor)null);
 				return;
 			case XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS:
 				getArguments().clear();
+				return;
+			case XbasePackage.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS:
+				getTypeArguments().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -233,10 +264,12 @@ public class XConstructorCallImpl extends XExpressionImpl implements XConstructo
 	{
 		switch (featureID)
 		{
-			case XbasePackage.XCONSTRUCTOR_CALL__TYPE:
-				return type != null;
+			case XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR:
+				return constructor != null;
 			case XbasePackage.XCONSTRUCTOR_CALL__ARGUMENTS:
 				return arguments != null && !arguments.isEmpty();
+			case XbasePackage.XCONSTRUCTOR_CALL__TYPE_ARGUMENTS:
+				return typeArguments != null && !typeArguments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
