@@ -27,20 +27,38 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'import'", "'type'", "'entity'", "'extends'", "'{'", "'}'", "'property'", "':'", "'[]'", "'reference'"
     };
     public static final int RULE_ID=5;
-    public static final int RULE_STRING=4;
     public static final int RULE_ANY_OTHER=10;
+    public static final int T__20=20;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__19=19;
+    public static final int RULE_STRING=4;
+    public static final int T__16=16;
+    public static final int T__15=15;
+    public static final int T__18=18;
+    public static final int T__17=17;
+    public static final int T__12=12;
+    public static final int T__11=11;
+    public static final int T__14=14;
+    public static final int T__13=13;
     public static final int RULE_INT=6;
     public static final int RULE_WS=9;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=7;
+
+    // delegates
+    // delegators
+
 
         public InternalEntitiesParser(TokenStream input) {
-            super(input);
+            this(input, new RecognizerSharedState());
+        }
+        public InternalEntitiesParser(TokenStream input, RecognizerSharedState state) {
+            super(input, state);
+             
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
+    public String[] getTokenNames() { return InternalEntitiesParser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g"; }
 
 
@@ -55,12 +73,6 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         
         @Override
-        protected InputStream getTokenFile() {
-        	ClassLoader classLoader = getClass().getClassLoader();
-        	return classLoader.getResourceAsStream("org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.tokens");
-        }
-        
-        @Override
         protected String getFirstRuleName() {
         	return "Model";	
        	}
@@ -72,8 +84,8 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
 
 
-    // $ANTLR start entryRuleModel
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:77:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // $ANTLR start "entryRuleModel"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:71:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -81,13 +93,14 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:78:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:79:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:72:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:73:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel75);
             iv_ruleModel=ruleModel();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleModel; 
             match(input,EOF,FOLLOW_EOF_in_entryRuleModel85); 
@@ -104,11 +117,11 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleModel
+    // $ANTLR end "entryRuleModel"
 
 
-    // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:86:1: ruleModel returns [EObject current=null] : ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_elements_2_0= ruleType ) )* ) ;
+    // $ANTLR start "ruleModel"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:80:1: ruleModel returns [EObject current=null] : ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_elements_2_0= ruleType ) )* ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -120,14 +133,14 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:91:6: ( ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_elements_2_0= ruleType ) )* ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:92:1: ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_elements_2_0= ruleType ) )* )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:85:6: ( ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_elements_2_0= ruleType ) )* ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:86:1: ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_elements_2_0= ruleType ) )* )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:92:1: ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_elements_2_0= ruleType ) )* )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:92:2: () ( (lv_imports_1_0= ruleImport ) )* ( (lv_elements_2_0= ruleType ) )*
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:86:1: ( () ( (lv_imports_1_0= ruleImport ) )* ( (lv_elements_2_0= ruleType ) )* )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:86:2: () ( (lv_imports_1_0= ruleImport ) )* ( (lv_elements_2_0= ruleType ) )*
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:92:2: ()
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:93:5: 
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:86:2: ()
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:87:5: 
             {
              
                     temp=factory.create(grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier());
@@ -142,7 +155,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:103:2: ( (lv_imports_1_0= ruleImport ) )*
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:97:2: ( (lv_imports_1_0= ruleImport ) )*
             loop1:
             do {
                 int alt1=2;
@@ -155,17 +168,18 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:104:1: (lv_imports_1_0= ruleImport )
+            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:98:1: (lv_imports_1_0= ruleImport )
             	    {
-            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:104:1: (lv_imports_1_0= ruleImport )
-            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:105:3: lv_imports_1_0= ruleImport
+            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:98:1: (lv_imports_1_0= ruleImport )
+            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:99:3: lv_imports_1_0= ruleImport
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getImportsImportParserRuleCall_1_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleImport_in_ruleModel140);
             	    lv_imports_1_0=ruleImport();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    	        if (current==null) {
@@ -196,7 +210,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:127:3: ( (lv_elements_2_0= ruleType ) )*
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:121:3: ( (lv_elements_2_0= ruleType ) )*
             loop2:
             do {
                 int alt2=2;
@@ -209,17 +223,18 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:128:1: (lv_elements_2_0= ruleType )
+            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:122:1: (lv_elements_2_0= ruleType )
             	    {
-            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:128:1: (lv_elements_2_0= ruleType )
-            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:129:3: lv_elements_2_0= ruleType
+            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:122:1: (lv_elements_2_0= ruleType )
+            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:123:3: lv_elements_2_0= ruleType
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getElementsTypeParserRuleCall_2_0(), currentNode); 
             	    	    
             	    pushFollow(FOLLOW_ruleType_in_ruleModel162);
             	    lv_elements_2_0=ruleType();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    	        if (current==null) {
@@ -269,11 +284,11 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleModel
+    // $ANTLR end "ruleModel"
 
 
-    // $ANTLR start entryRuleImport
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:159:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // $ANTLR start "entryRuleImport"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:153:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -281,13 +296,14 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:160:2: (iv_ruleImport= ruleImport EOF )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:161:2: iv_ruleImport= ruleImport EOF
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:154:2: (iv_ruleImport= ruleImport EOF )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:155:2: iv_ruleImport= ruleImport EOF
             {
              currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); 
             pushFollow(FOLLOW_ruleImport_in_entryRuleImport199);
             iv_ruleImport=ruleImport();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleImport; 
             match(input,EOF,FOLLOW_EOF_in_entryRuleImport209); 
@@ -304,39 +320,39 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleImport
+    // $ANTLR end "entryRuleImport"
 
 
-    // $ANTLR start ruleImport
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:168:1: ruleImport returns [EObject current=null] : ( 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) ;
+    // $ANTLR start "ruleImport"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:162:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
+        Token otherlv_0=null;
         Token lv_importURI_1_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:173:6: ( ( 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:174:1: ( 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:167:6: ( (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:168:1: (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:174:1: ( 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:174:3: 'import' ( (lv_importURI_1_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:168:1: (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:168:3: otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) )
             {
-            match(input,11,FOLLOW_11_in_ruleImport244); 
+            otherlv_0=(Token)match(input,11,FOLLOW_11_in_ruleImport246); 
 
-                    createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
+                	createLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0(), null);
                 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:178:1: ( (lv_importURI_1_0= RULE_STRING ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:179:1: (lv_importURI_1_0= RULE_STRING )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:172:1: ( (lv_importURI_1_0= RULE_STRING ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:173:1: (lv_importURI_1_0= RULE_STRING )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:179:1: (lv_importURI_1_0= RULE_STRING )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:180:3: lv_importURI_1_0= RULE_STRING
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:173:1: (lv_importURI_1_0= RULE_STRING )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:174:3: lv_importURI_1_0= RULE_STRING
             {
-            lv_importURI_1_0=(Token)input.LT(1);
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport261); 
+            lv_importURI_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport263); 
 
-            			createLeafNode(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0(), "importURI"); 
+            			createLeafNode(lv_importURI_1_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0(), "importURI"); 
             		
 
             	        if (current==null) {
@@ -379,11 +395,11 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleImport
+    // $ANTLR end "ruleImport"
 
 
-    // $ANTLR start entryRuleType
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:210:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
+    // $ANTLR start "entryRuleType"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:204:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
     public final EObject entryRuleType() throws RecognitionException {
         EObject current = null;
 
@@ -391,16 +407,17 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:211:2: (iv_ruleType= ruleType EOF )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:212:2: iv_ruleType= ruleType EOF
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:205:2: (iv_ruleType= ruleType EOF )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:206:2: iv_ruleType= ruleType EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTypeRule(), currentNode); 
-            pushFollow(FOLLOW_ruleType_in_entryRuleType302);
+            pushFollow(FOLLOW_ruleType_in_entryRuleType304);
             iv_ruleType=ruleType();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleType; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleType312); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleType314); 
 
             }
 
@@ -414,11 +431,11 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleType
+    // $ANTLR end "entryRuleType"
 
 
-    // $ANTLR start ruleType
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:219:1: ruleType returns [EObject current=null] : (this_SimpleType_0= ruleSimpleType | this_Entity_1= ruleEntity ) ;
+    // $ANTLR start "ruleType"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:213:1: ruleType returns [EObject current=null] : (this_SimpleType_0= ruleSimpleType | this_Entity_1= ruleEntity ) ;
     public final EObject ruleType() throws RecognitionException {
         EObject current = null;
 
@@ -430,10 +447,10 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:224:6: ( (this_SimpleType_0= ruleSimpleType | this_Entity_1= ruleEntity ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:225:1: (this_SimpleType_0= ruleSimpleType | this_Entity_1= ruleEntity )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:218:6: ( (this_SimpleType_0= ruleSimpleType | this_Entity_1= ruleEntity ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:219:1: (this_SimpleType_0= ruleSimpleType | this_Entity_1= ruleEntity )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:225:1: (this_SimpleType_0= ruleSimpleType | this_Entity_1= ruleEntity )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:219:1: (this_SimpleType_0= ruleSimpleType | this_Entity_1= ruleEntity )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -445,20 +462,21 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("225:1: (this_SimpleType_0= ruleSimpleType | this_Entity_1= ruleEntity )", 3, 0, input);
+                    new NoViableAltException("", 3, 0, input);
 
                 throw nvae;
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:226:5: this_SimpleType_0= ruleSimpleType
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:220:5: this_SimpleType_0= ruleSimpleType
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getTypeAccess().getSimpleTypeParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleSimpleType_in_ruleType359);
+                    pushFollow(FOLLOW_ruleSimpleType_in_ruleType361);
                     this_SimpleType_0=ruleSimpleType();
-                    _fsp--;
+
+                    state._fsp--;
 
                      
                             current = this_SimpleType_0; 
@@ -468,14 +486,15 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:236:5: this_Entity_1= ruleEntity
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:230:5: this_Entity_1= ruleEntity
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getTypeAccess().getEntityParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleEntity_in_ruleType386);
+                    pushFollow(FOLLOW_ruleEntity_in_ruleType388);
                     this_Entity_1=ruleEntity();
-                    _fsp--;
+
+                    state._fsp--;
 
                      
                             current = this_Entity_1; 
@@ -503,11 +522,11 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleType
+    // $ANTLR end "ruleType"
 
 
-    // $ANTLR start entryRuleSimpleType
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:252:1: entryRuleSimpleType returns [EObject current=null] : iv_ruleSimpleType= ruleSimpleType EOF ;
+    // $ANTLR start "entryRuleSimpleType"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:246:1: entryRuleSimpleType returns [EObject current=null] : iv_ruleSimpleType= ruleSimpleType EOF ;
     public final EObject entryRuleSimpleType() throws RecognitionException {
         EObject current = null;
 
@@ -515,16 +534,17 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:253:2: (iv_ruleSimpleType= ruleSimpleType EOF )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:254:2: iv_ruleSimpleType= ruleSimpleType EOF
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:247:2: (iv_ruleSimpleType= ruleSimpleType EOF )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:248:2: iv_ruleSimpleType= ruleSimpleType EOF
             {
              currentNode = createCompositeNode(grammarAccess.getSimpleTypeRule(), currentNode); 
-            pushFollow(FOLLOW_ruleSimpleType_in_entryRuleSimpleType421);
+            pushFollow(FOLLOW_ruleSimpleType_in_entryRuleSimpleType423);
             iv_ruleSimpleType=ruleSimpleType();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleSimpleType; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleType431); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleType433); 
 
             }
 
@@ -538,39 +558,39 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleSimpleType
+    // $ANTLR end "entryRuleSimpleType"
 
 
-    // $ANTLR start ruleSimpleType
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:261:1: ruleSimpleType returns [EObject current=null] : ( 'type' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // $ANTLR start "ruleSimpleType"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:255:1: ruleSimpleType returns [EObject current=null] : (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleSimpleType() throws RecognitionException {
         EObject current = null;
 
+        Token otherlv_0=null;
         Token lv_name_1_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:266:6: ( ( 'type' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:267:1: ( 'type' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:260:6: ( (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:261:1: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:267:1: ( 'type' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:267:3: 'type' ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:261:1: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:261:3: otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) )
             {
-            match(input,12,FOLLOW_12_in_ruleSimpleType466); 
+            otherlv_0=(Token)match(input,12,FOLLOW_12_in_ruleSimpleType470); 
 
-                    createLeafNode(grammarAccess.getSimpleTypeAccess().getTypeKeyword_0(), null); 
+                	createLeafNode(otherlv_0, grammarAccess.getSimpleTypeAccess().getTypeKeyword_0(), null);
                 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:271:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:272:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:265:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:266:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:272:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:273:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:266:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:267:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleType483); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleType487); 
 
-            			createLeafNode(grammarAccess.getSimpleTypeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            			createLeafNode(lv_name_1_0, grammarAccess.getSimpleTypeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
 
             	        if (current==null) {
@@ -613,11 +633,11 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleSimpleType
+    // $ANTLR end "ruleSimpleType"
 
 
-    // $ANTLR start entryRuleEntity
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:303:1: entryRuleEntity returns [EObject current=null] : iv_ruleEntity= ruleEntity EOF ;
+    // $ANTLR start "entryRuleEntity"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:297:1: entryRuleEntity returns [EObject current=null] : iv_ruleEntity= ruleEntity EOF ;
     public final EObject entryRuleEntity() throws RecognitionException {
         EObject current = null;
 
@@ -625,16 +645,17 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:304:2: (iv_ruleEntity= ruleEntity EOF )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:305:2: iv_ruleEntity= ruleEntity EOF
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:298:2: (iv_ruleEntity= ruleEntity EOF )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:299:2: iv_ruleEntity= ruleEntity EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEntityRule(), currentNode); 
-            pushFollow(FOLLOW_ruleEntity_in_entryRuleEntity524);
+            pushFollow(FOLLOW_ruleEntity_in_entryRuleEntity528);
             iv_ruleEntity=ruleEntity();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleEntity; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEntity534); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEntity538); 
 
             }
 
@@ -648,41 +669,45 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleEntity
+    // $ANTLR end "entryRuleEntity"
 
 
-    // $ANTLR start ruleEntity
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:312:1: ruleEntity returns [EObject current=null] : ( 'entity' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( (lv_properties_5_0= ruleProperty ) )* '}' ) ;
+    // $ANTLR start "ruleEntity"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:306:1: ruleEntity returns [EObject current=null] : (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' ) ;
     public final EObject ruleEntity() throws RecognitionException {
         EObject current = null;
 
+        Token otherlv_0=null;
         Token lv_name_1_0=null;
+        Token otherlv_2=null;
+        Token otherlv_3=null;
+        Token otherlv_4=null;
+        Token otherlv_6=null;
         EObject lv_properties_5_0 = null;
 
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:317:6: ( ( 'entity' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( (lv_properties_5_0= ruleProperty ) )* '}' ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:318:1: ( 'entity' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( (lv_properties_5_0= ruleProperty ) )* '}' )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:311:6: ( (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:312:1: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:318:1: ( 'entity' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( (lv_properties_5_0= ruleProperty ) )* '}' )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:318:3: 'entity' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( (lv_properties_5_0= ruleProperty ) )* '}'
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:312:1: (otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}' )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:312:3: otherlv_0= 'entity' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* otherlv_6= '}'
             {
-            match(input,13,FOLLOW_13_in_ruleEntity569); 
+            otherlv_0=(Token)match(input,13,FOLLOW_13_in_ruleEntity575); 
 
-                    createLeafNode(grammarAccess.getEntityAccess().getEntityKeyword_0(), null); 
+                	createLeafNode(otherlv_0, grammarAccess.getEntityAccess().getEntityKeyword_0(), null);
                 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:322:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:323:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:316:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:317:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:323:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:324:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:317:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:318:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntity586); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntity592); 
 
-            			createLeafNode(grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            			createLeafNode(lv_name_1_0, grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
 
             	        if (current==null) {
@@ -706,7 +731,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:346:2: ( 'extends' ( ( RULE_ID ) ) )?
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:340:2: (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -715,17 +740,17 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:346:4: 'extends' ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:340:4: otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) )
                     {
-                    match(input,14,FOLLOW_14_in_ruleEntity602); 
+                    otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleEntity610); 
 
-                            createLeafNode(grammarAccess.getEntityAccess().getExtendsKeyword_2_0(), null); 
+                        	createLeafNode(otherlv_2, grammarAccess.getEntityAccess().getExtendsKeyword_2_0(), null);
                         
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:350:1: ( ( RULE_ID ) )
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:351:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:344:1: ( (otherlv_3= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:345:1: (otherlv_3= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:351:1: ( RULE_ID )
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:352:3: RULE_ID
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:345:1: (otherlv_3= RULE_ID )
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:346:3: otherlv_3= RULE_ID
                     {
 
                     			if (current==null) {
@@ -733,9 +758,9 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntity620); 
+                    otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntity630); 
 
-                    		createLeafNode(grammarAccess.getEntityAccess().getExtendsEntityCrossReference_2_1_0(), "extends"); 
+                    		createLeafNode(otherlv_3, grammarAccess.getEntityAccess().getExtendsEntityCrossReference_2_1_0(), "extends"); 
                     	
 
                     }
@@ -749,11 +774,11 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,15,FOLLOW_15_in_ruleEntity632); 
+            otherlv_4=(Token)match(input,15,FOLLOW_15_in_ruleEntity644); 
 
-                    createLeafNode(grammarAccess.getEntityAccess().getLeftCurlyBracketKeyword_3(), null); 
+                	createLeafNode(otherlv_4, grammarAccess.getEntityAccess().getLeftCurlyBracketKeyword_3(), null);
                 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:368:1: ( (lv_properties_5_0= ruleProperty ) )*
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:362:1: ( (lv_properties_5_0= ruleProperty ) )*
             loop5:
             do {
                 int alt5=2;
@@ -766,17 +791,18 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:369:1: (lv_properties_5_0= ruleProperty )
+            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:363:1: (lv_properties_5_0= ruleProperty )
             	    {
-            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:369:1: (lv_properties_5_0= ruleProperty )
-            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:370:3: lv_properties_5_0= ruleProperty
+            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:363:1: (lv_properties_5_0= ruleProperty )
+            	    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:364:3: lv_properties_5_0= ruleProperty
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEntityAccess().getPropertiesPropertyParserRuleCall_4_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleProperty_in_ruleEntity653);
+            	    pushFollow(FOLLOW_ruleProperty_in_ruleEntity665);
             	    lv_properties_5_0=ruleProperty();
-            	    _fsp--;
+
+            	    state._fsp--;
 
 
             	    	        if (current==null) {
@@ -807,9 +833,9 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,16,FOLLOW_16_in_ruleEntity664); 
+            otherlv_6=(Token)match(input,16,FOLLOW_16_in_ruleEntity678); 
 
-                    createLeafNode(grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_5(), null); 
+                	createLeafNode(otherlv_6, grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_5(), null);
                 
 
             }
@@ -830,11 +856,11 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleEntity
+    // $ANTLR end "ruleEntity"
 
 
-    // $ANTLR start entryRuleProperty
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:404:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
+    // $ANTLR start "entryRuleProperty"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:398:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
     public final EObject entryRuleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -842,16 +868,17 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:405:2: (iv_ruleProperty= ruleProperty EOF )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:406:2: iv_ruleProperty= ruleProperty EOF
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:399:2: (iv_ruleProperty= ruleProperty EOF )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:400:2: iv_ruleProperty= ruleProperty EOF
             {
              currentNode = createCompositeNode(grammarAccess.getPropertyRule(), currentNode); 
-            pushFollow(FOLLOW_ruleProperty_in_entryRuleProperty700);
+            pushFollow(FOLLOW_ruleProperty_in_entryRuleProperty714);
             iv_ruleProperty=ruleProperty();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleProperty; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleProperty710); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleProperty724); 
 
             }
 
@@ -865,11 +892,11 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleProperty
+    // $ANTLR end "entryRuleProperty"
 
 
-    // $ANTLR start ruleProperty
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:413:1: ruleProperty returns [EObject current=null] : (this_SimpleProperty_0= ruleSimpleProperty | this_Reference_1= ruleReference ) ;
+    // $ANTLR start "ruleProperty"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:407:1: ruleProperty returns [EObject current=null] : (this_SimpleProperty_0= ruleSimpleProperty | this_Reference_1= ruleReference ) ;
     public final EObject ruleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -881,10 +908,10 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:418:6: ( (this_SimpleProperty_0= ruleSimpleProperty | this_Reference_1= ruleReference ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:419:1: (this_SimpleProperty_0= ruleSimpleProperty | this_Reference_1= ruleReference )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:412:6: ( (this_SimpleProperty_0= ruleSimpleProperty | this_Reference_1= ruleReference ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:413:1: (this_SimpleProperty_0= ruleSimpleProperty | this_Reference_1= ruleReference )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:419:1: (this_SimpleProperty_0= ruleSimpleProperty | this_Reference_1= ruleReference )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:413:1: (this_SimpleProperty_0= ruleSimpleProperty | this_Reference_1= ruleReference )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -896,20 +923,21 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("419:1: (this_SimpleProperty_0= ruleSimpleProperty | this_Reference_1= ruleReference )", 6, 0, input);
+                    new NoViableAltException("", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:420:5: this_SimpleProperty_0= ruleSimpleProperty
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:414:5: this_SimpleProperty_0= ruleSimpleProperty
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getPropertyAccess().getSimplePropertyParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleSimpleProperty_in_ruleProperty757);
+                    pushFollow(FOLLOW_ruleSimpleProperty_in_ruleProperty771);
                     this_SimpleProperty_0=ruleSimpleProperty();
-                    _fsp--;
+
+                    state._fsp--;
 
                      
                             current = this_SimpleProperty_0; 
@@ -919,14 +947,15 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:430:5: this_Reference_1= ruleReference
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:424:5: this_Reference_1= ruleReference
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getPropertyAccess().getReferenceParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleReference_in_ruleProperty784);
+                    pushFollow(FOLLOW_ruleReference_in_ruleProperty798);
                     this_Reference_1=ruleReference();
-                    _fsp--;
+
+                    state._fsp--;
 
                      
                             current = this_Reference_1; 
@@ -954,11 +983,11 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleProperty
+    // $ANTLR end "ruleProperty"
 
 
-    // $ANTLR start entryRuleSimpleProperty
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:446:1: entryRuleSimpleProperty returns [EObject current=null] : iv_ruleSimpleProperty= ruleSimpleProperty EOF ;
+    // $ANTLR start "entryRuleSimpleProperty"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:440:1: entryRuleSimpleProperty returns [EObject current=null] : iv_ruleSimpleProperty= ruleSimpleProperty EOF ;
     public final EObject entryRuleSimpleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -966,16 +995,17 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:447:2: (iv_ruleSimpleProperty= ruleSimpleProperty EOF )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:448:2: iv_ruleSimpleProperty= ruleSimpleProperty EOF
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:441:2: (iv_ruleSimpleProperty= ruleSimpleProperty EOF )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:442:2: iv_ruleSimpleProperty= ruleSimpleProperty EOF
             {
              currentNode = createCompositeNode(grammarAccess.getSimplePropertyRule(), currentNode); 
-            pushFollow(FOLLOW_ruleSimpleProperty_in_entryRuleSimpleProperty819);
+            pushFollow(FOLLOW_ruleSimpleProperty_in_entryRuleSimpleProperty833);
             iv_ruleSimpleProperty=ruleSimpleProperty();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleSimpleProperty; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleProperty829); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleProperty843); 
 
             }
 
@@ -989,40 +1019,42 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleSimpleProperty
+    // $ANTLR end "entryRuleSimpleProperty"
 
 
-    // $ANTLR start ruleSimpleProperty
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:455:1: ruleSimpleProperty returns [EObject current=null] : ( 'property' ( (lv_name_1_0= RULE_ID ) ) ( ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )? ) ;
+    // $ANTLR start "ruleSimpleProperty"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:449:1: ruleSimpleProperty returns [EObject current=null] : (otherlv_0= 'property' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )? ) ;
     public final EObject ruleSimpleProperty() throws RecognitionException {
         EObject current = null;
 
+        Token otherlv_0=null;
         Token lv_name_1_0=null;
+        Token otherlv_2=null;
+        Token otherlv_3=null;
         Token lv_many_4_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:460:6: ( ( 'property' ( (lv_name_1_0= RULE_ID ) ) ( ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )? ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:461:1: ( 'property' ( (lv_name_1_0= RULE_ID ) ) ( ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )? )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:454:6: ( (otherlv_0= 'property' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )? ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:455:1: (otherlv_0= 'property' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )? )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:461:1: ( 'property' ( (lv_name_1_0= RULE_ID ) ) ( ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )? )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:461:3: 'property' ( (lv_name_1_0= RULE_ID ) ) ( ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )?
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:455:1: (otherlv_0= 'property' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )? )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:455:3: otherlv_0= 'property' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )?
             {
-            match(input,17,FOLLOW_17_in_ruleSimpleProperty864); 
+            otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleSimpleProperty880); 
 
-                    createLeafNode(grammarAccess.getSimplePropertyAccess().getPropertyKeyword_0(), null); 
+                	createLeafNode(otherlv_0, grammarAccess.getSimplePropertyAccess().getPropertyKeyword_0(), null);
                 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:465:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:466:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:459:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:460:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:466:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:467:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:460:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:461:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleProperty881); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleProperty897); 
 
-            			createLeafNode(grammarAccess.getSimplePropertyAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            			createLeafNode(lv_name_1_0, grammarAccess.getSimplePropertyAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
 
             	        if (current==null) {
@@ -1046,7 +1078,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:489:2: ( ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )?
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:483:2: (otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1055,17 +1087,17 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:489:4: ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )?
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:483:4: otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )?
                     {
-                    match(input,18,FOLLOW_18_in_ruleSimpleProperty897); 
+                    otherlv_2=(Token)match(input,18,FOLLOW_18_in_ruleSimpleProperty915); 
 
-                            createLeafNode(grammarAccess.getSimplePropertyAccess().getColonKeyword_2_0(), null); 
+                        	createLeafNode(otherlv_2, grammarAccess.getSimplePropertyAccess().getColonKeyword_2_0(), null);
                         
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:493:1: ( ( RULE_ID ) )
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:494:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:487:1: ( (otherlv_3= RULE_ID ) )
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:488:1: (otherlv_3= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:494:1: ( RULE_ID )
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:495:3: RULE_ID
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:488:1: (otherlv_3= RULE_ID )
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:489:3: otherlv_3= RULE_ID
                     {
 
                     			if (current==null) {
@@ -1073,9 +1105,9 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleProperty915); 
+                    otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleProperty935); 
 
-                    		createLeafNode(grammarAccess.getSimplePropertyAccess().getTypeSimpleTypeCrossReference_2_1_0(), "type"); 
+                    		createLeafNode(otherlv_3, grammarAccess.getSimplePropertyAccess().getTypeSimpleTypeCrossReference_2_1_0(), "type"); 
                     	
 
                     }
@@ -1083,7 +1115,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:507:2: ( (lv_many_4_0= '[]' ) )?
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:501:2: ( (lv_many_4_0= '[]' ) )?
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
@@ -1092,15 +1124,14 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt7) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:508:1: (lv_many_4_0= '[]' )
+                            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:502:1: (lv_many_4_0= '[]' )
                             {
-                            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:508:1: (lv_many_4_0= '[]' )
-                            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:509:3: lv_many_4_0= '[]'
+                            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:502:1: (lv_many_4_0= '[]' )
+                            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:503:3: lv_many_4_0= '[]'
                             {
-                            lv_many_4_0=(Token)input.LT(1);
-                            match(input,19,FOLLOW_19_in_ruleSimpleProperty933); 
+                            lv_many_4_0=(Token)match(input,19,FOLLOW_19_in_ruleSimpleProperty953); 
 
-                                    createLeafNode(grammarAccess.getSimplePropertyAccess().getManyLeftSquareBracketRightSquareBracketKeyword_2_2_0(), "many"); 
+                                    createLeafNode(lv_many_4_0, grammarAccess.getSimplePropertyAccess().getManyLeftSquareBracketRightSquareBracketKeyword_2_2_0(), "many");
                                 
 
                             	        if (current==null) {
@@ -1148,11 +1179,11 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleSimpleProperty
+    // $ANTLR end "ruleSimpleProperty"
 
 
-    // $ANTLR start entryRuleReference
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:536:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
+    // $ANTLR start "entryRuleReference"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:530:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
     public final EObject entryRuleReference() throws RecognitionException {
         EObject current = null;
 
@@ -1160,16 +1191,17 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:537:2: (iv_ruleReference= ruleReference EOF )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:538:2: iv_ruleReference= ruleReference EOF
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:531:2: (iv_ruleReference= ruleReference EOF )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:532:2: iv_ruleReference= ruleReference EOF
             {
              currentNode = createCompositeNode(grammarAccess.getReferenceRule(), currentNode); 
-            pushFollow(FOLLOW_ruleReference_in_entryRuleReference985);
+            pushFollow(FOLLOW_ruleReference_in_entryRuleReference1005);
             iv_ruleReference=ruleReference();
-            _fsp--;
+
+            state._fsp--;
 
              current =iv_ruleReference; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleReference995); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleReference1015); 
 
             }
 
@@ -1183,40 +1215,42 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end entryRuleReference
+    // $ANTLR end "entryRuleReference"
 
 
-    // $ANTLR start ruleReference
-    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:545:1: ruleReference returns [EObject current=null] : ( 'reference' ( (lv_name_1_0= RULE_ID ) ) ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? ) ;
+    // $ANTLR start "ruleReference"
+    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:539:1: ruleReference returns [EObject current=null] : (otherlv_0= 'reference' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? ) ;
     public final EObject ruleReference() throws RecognitionException {
         EObject current = null;
 
+        Token otherlv_0=null;
         Token lv_name_1_0=null;
+        Token otherlv_2=null;
+        Token otherlv_3=null;
         Token lv_many_4_0=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:550:6: ( ( 'reference' ( (lv_name_1_0= RULE_ID ) ) ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:551:1: ( 'reference' ( (lv_name_1_0= RULE_ID ) ) ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:544:6: ( (otherlv_0= 'reference' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:545:1: (otherlv_0= 'reference' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:551:1: ( 'reference' ( (lv_name_1_0= RULE_ID ) ) ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:551:3: 'reference' ( (lv_name_1_0= RULE_ID ) ) ':' ( ( RULE_ID ) ) ( (lv_many_4_0= '[]' ) )?
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:545:1: (otherlv_0= 'reference' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )? )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:545:3: otherlv_0= 'reference' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) ( (lv_many_4_0= '[]' ) )?
             {
-            match(input,20,FOLLOW_20_in_ruleReference1030); 
+            otherlv_0=(Token)match(input,20,FOLLOW_20_in_ruleReference1052); 
 
-                    createLeafNode(grammarAccess.getReferenceAccess().getReferenceKeyword_0(), null); 
+                	createLeafNode(otherlv_0, grammarAccess.getReferenceAccess().getReferenceKeyword_0(), null);
                 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:555:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:556:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:549:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:550:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:556:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:557:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:550:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:551:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleReference1047); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleReference1069); 
 
-            			createLeafNode(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+            			createLeafNode(lv_name_1_0, grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
 
             	        if (current==null) {
@@ -1240,15 +1274,15 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,18,FOLLOW_18_in_ruleReference1062); 
+            otherlv_2=(Token)match(input,18,FOLLOW_18_in_ruleReference1086); 
 
-                    createLeafNode(grammarAccess.getReferenceAccess().getColonKeyword_2(), null); 
+                	createLeafNode(otherlv_2, grammarAccess.getReferenceAccess().getColonKeyword_2(), null);
                 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:583:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:584:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:577:1: ( (otherlv_3= RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:578:1: (otherlv_3= RULE_ID )
             {
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:584:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:585:3: RULE_ID
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:578:1: (otherlv_3= RULE_ID )
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:579:3: otherlv_3= RULE_ID
             {
 
             			if (current==null) {
@@ -1256,9 +1290,9 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleReference1080); 
+            otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleReference1106); 
 
-            		createLeafNode(grammarAccess.getReferenceAccess().getTypeEntityCrossReference_3_0(), "type"); 
+            		createLeafNode(otherlv_3, grammarAccess.getReferenceAccess().getTypeEntityCrossReference_3_0(), "type"); 
             	
 
             }
@@ -1266,7 +1300,7 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:597:2: ( (lv_many_4_0= '[]' ) )?
+            // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:591:2: ( (lv_many_4_0= '[]' ) )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1275,15 +1309,14 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:598:1: (lv_many_4_0= '[]' )
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:592:1: (lv_many_4_0= '[]' )
                     {
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:598:1: (lv_many_4_0= '[]' )
-                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:599:3: lv_many_4_0= '[]'
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:592:1: (lv_many_4_0= '[]' )
+                    // ../org.eclipse.xtext.example.gmf/src-gen/org/eclipse/xtext/example/gmf/parser/antlr/internal/InternalEntities.g:593:3: lv_many_4_0= '[]'
                     {
-                    lv_many_4_0=(Token)input.LT(1);
-                    match(input,19,FOLLOW_19_in_ruleReference1098); 
+                    lv_many_4_0=(Token)match(input,19,FOLLOW_19_in_ruleReference1124); 
 
-                            createLeafNode(grammarAccess.getReferenceAccess().getManyLeftSquareBracketRightSquareBracketKeyword_4_0(), "many"); 
+                            createLeafNode(lv_many_4_0, grammarAccess.getReferenceAccess().getManyLeftSquareBracketRightSquareBracketKeyword_4_0(), "many");
                         
 
                     	        if (current==null) {
@@ -1325,7 +1358,9 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end ruleReference
+    // $ANTLR end "ruleReference"
+
+    // Delegated rules
 
 
  
@@ -1336,42 +1371,42 @@ public class InternalEntitiesParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleType_in_ruleModel162 = new BitSet(new long[]{0x0000000000003002L});
     public static final BitSet FOLLOW_ruleImport_in_entryRuleImport199 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleImport209 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleImport244 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleImport261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleType_in_entryRuleType302 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleType312 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleType_in_ruleType359 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntity_in_ruleType386 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleType_in_entryRuleSimpleType421 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleType431 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleSimpleType466 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleType483 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntity_in_entryRuleEntity524 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEntity534 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleEntity569 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEntity586 = new BitSet(new long[]{0x000000000000C000L});
-    public static final BitSet FOLLOW_14_in_ruleEntity602 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEntity620 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleEntity632 = new BitSet(new long[]{0x0000000000130000L});
-    public static final BitSet FOLLOW_ruleProperty_in_ruleEntity653 = new BitSet(new long[]{0x0000000000130000L});
-    public static final BitSet FOLLOW_16_in_ruleEntity664 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleProperty_in_entryRuleProperty700 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleProperty710 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleProperty_in_ruleProperty757 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReference_in_ruleProperty784 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleProperty_in_entryRuleSimpleProperty819 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleProperty829 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleSimpleProperty864 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleProperty881 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_18_in_ruleSimpleProperty897 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleProperty915 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleSimpleProperty933 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReference_in_entryRuleReference985 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleReference995 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleReference1030 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleReference1047 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_ruleReference1062 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleReference1080 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleReference1098 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleImport246 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleImport263 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleType_in_entryRuleType304 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleType314 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleType_in_ruleType361 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEntity_in_ruleType388 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleType_in_entryRuleSimpleType423 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleType433 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleSimpleType470 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleType487 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEntity_in_entryRuleEntity528 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEntity538 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleEntity575 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEntity592 = new BitSet(new long[]{0x000000000000C000L});
+    public static final BitSet FOLLOW_14_in_ruleEntity610 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEntity630 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleEntity644 = new BitSet(new long[]{0x0000000000130000L});
+    public static final BitSet FOLLOW_ruleProperty_in_ruleEntity665 = new BitSet(new long[]{0x0000000000130000L});
+    public static final BitSet FOLLOW_16_in_ruleEntity678 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleProperty_in_entryRuleProperty714 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleProperty724 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleProperty_in_ruleProperty771 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReference_in_ruleProperty798 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleProperty_in_entryRuleSimpleProperty833 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleProperty843 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleSimpleProperty880 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleProperty897 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_18_in_ruleSimpleProperty915 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleProperty935 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_ruleSimpleProperty953 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReference_in_entryRuleReference1005 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleReference1015 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleReference1052 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleReference1069 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleReference1086 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleReference1106 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_ruleReference1124 = new BitSet(new long[]{0x0000000000000002L});
 
 }
