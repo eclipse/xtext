@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.xtext.ui;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
+import org.eclipse.xtext.common.types.xtext.AbstractConstructorScope;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 
@@ -31,6 +32,12 @@ public class JdtBasedSimpleTypeScopeProvider extends AbstractTypeScopeProvider {
 
 	@Inject
 	public JdtBasedSimpleTypeScopeProvider() {
+	}
+	
+	@Override
+	public AbstractConstructorScope createConstructorScope(IJvmTypeProvider typeProvider) {
+		JdtBasedSimpleTypeScope typeScope = createTypeScope(typeProvider);
+		return new JdtBasedConstructorScope(typeScope);
 	}
 
 	public JdtBasedSimpleTypeScopeProvider(JdtTypeProviderFactory typeProviderFactory,
