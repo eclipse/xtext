@@ -11,6 +11,11 @@ import java.util.List;
 
 import org.eclipse.xtext.xbase.lib.Functions;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.base.Supplier;
+import com.google.inject.Provider;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -47,4 +52,30 @@ public class ClosureClient<T> {
 	public T invokeX(Functions.FunctionX<T> fun, List<T> t) {
 		return fun.apply(t.toArray(new Object[t.size()]));
 	}
+	
+	public T useProvider(Provider<T> provider) {
+		return provider.get();
+	}
+	
+	public T useSupplier(Supplier<T> supplier) {
+		return supplier.get();
+	}
+	
+	public T useGoogleCollectFunction(Function<T, T> fun, T param) {
+		return fun.apply(param);
+	}
+	
+	public boolean useGoogleCollectPredicate(Predicate<T> predicate, T value) {
+		return predicate.apply(value);
+	}
+	
+	public Functions.Function1<T, T> getIdentityFunction() {
+		return new Functions.Function1<T, T>() {
+			public T apply(T p) {
+				return p;
+			}
+			
+		};
+	}
+	
 }

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.interpreter.impl;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -23,10 +24,12 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.access.impl.Primitives;
+import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -172,10 +175,17 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	private Provider<IEvaluationContext> contextProvider;
 	
 	@Inject
-	private ClassLoader classLoader;
-	
-	@Inject
 	private JavaReflectAccess javaReflectAccess;
+
+	private ClassFinder classFinder;
+
+	private ClassLoader classLoader;
+
+	@Inject
+	public void setClassLoader(ClassLoader classLoader) {
+		this.classFinder = new ClassFinder(classLoader);
+		this.classLoader = classLoader;
+	}
 	
 	private PolymorphicDispatcher<IEvaluationResult> evaluateDispatcher = createEvaluateDispatcher();
 	private PolymorphicDispatcher<IEvaluationResult> assignmentDispatcher = createAssignmentDispatcher();
@@ -228,12 +238,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			return new DefaultEvaluationResult(null, new ClassNotFoundException(nodesForFeature.get(0).serialize()));
 		}
 		try {
-			Class<?> result = Class.forName(literal.getType().getCanonicalName(), false, classLoader);
+			Class<?> result = classFinder.forName(literal.getType().getCanonicalName());
 			return new DefaultEvaluationResult(result, null);
 		} catch(ClassNotFoundException cnfe) {
-			Class<?> primitive = Primitives.forName(literal.getType().getCanonicalName());
-			if (primitive != null)
-				return new DefaultEvaluationResult(primitive, null);
 			return new DefaultEvaluationResult(null, cnfe);
 		}
 	}
@@ -301,9 +308,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			if (casePart.getTypeGuard() != null) {
 				String typeName = casePart.getTypeGuard().getType().getCanonicalName();
 				try {
-					expectedType = Class.forName(typeName, false, classLoader);
+					expectedType = classFinder.forName(typeName);
 				} catch (ClassNotFoundException e) {
-					expectedType = Primitives.forName(typeName);
 					return new DefaultEvaluationResult(null, e);
 				}
 			}
@@ -336,11 +342,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		String typeName = castedExpression.getType().getType().getCanonicalName();
 		Class<?> expectedType = null;
 		try {
-			expectedType = Class.forName(typeName, false, classLoader);
+			expectedType = classFinder.forName(typeName);
 		} catch (ClassNotFoundException e) {
-			expectedType = Primitives.forName(typeName);
-			if (expectedType == null)
-				return new DefaultEvaluationResult(null, e);
+			return new DefaultEvaluationResult(null, e);
 		}
 		try {
 			expectedType.cast(result.getResult());
@@ -370,7 +374,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				JvmFormalParameter exception = catchClause.getDeclaredParam();
 				String exceptionTypeName = exception.getParameterType().getType().getCanonicalName();
 				try {
-					Class<?> exceptionType = Class.forName(exceptionTypeName, false, classLoader);
+					Class<?> exceptionType = classFinder.forName(exceptionTypeName);
 					if (!exceptionType.isInstance(result.getException()))
 						continue;
 				} catch(ClassNotFoundException e) {
@@ -412,13 +416,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 	
-	protected Object unwrapArray(Object value, JvmTypeReference expectedType) {
-		if (expectedType.getType() instanceof JvmArrayType) {
-			if (value instanceof WrappedArray<?>)
-				return ((WrappedArray<?>) value).internalToArray();
-			if (value instanceof WrappedPrimitiveArray)
-				return ((WrappedPrimitiveArray) value).internalToArray();
-		}
+	protected Object unwrapArray(Object value) {
+		if (value instanceof WrappedArray<?>)
+			return ((WrappedArray<?>) value).internalToArray();
+		if (value instanceof WrappedPrimitiveArray)
+			return ((WrappedPrimitiveArray) value).internalToArray();
 		return value;
 	}
 	
@@ -533,11 +535,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		
 		Class<?> expectedType = null;
 		try {
-			expectedType = Class.forName(instanceOf.getType().getCanonicalName(), false, classLoader);
+			expectedType = classFinder.forName(instanceOf.getType().getCanonicalName());
 		} catch(ClassNotFoundException cnfe) {
-			expectedType = Primitives.forName(instanceOf.getType().getCanonicalName());
-			if (expectedType == null)
-				return new DefaultEvaluationResult(null, cnfe);
+			return new DefaultEvaluationResult(null, cnfe);
 		}
 		return new DefaultEvaluationResult(expectedType.isInstance(instance.getResult()), null);
 	}
@@ -604,10 +604,53 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			IEvaluationResult argResult = evaluate(arg, context);
 			if (argResult.getException() != null)
 				return argResult;
-			result.add(unwrapArray(argResult.getResult(), executable.getParameters().get(i).getParameterType()));
+			JvmTypeReference parameterType = executable.getParameters().get(i).getParameterType();
+			Object argumentValue = coerceArgumentType(argResult.getResult(), parameterType);
+			result.add(argumentValue);
 			i++;
 		}
 		return null;
+	}
+
+	protected Object coerceArgumentType(Object value, JvmTypeReference expectedType) {
+		if (value == null)
+			return null;
+		if (expectedType.getType() instanceof JvmArrayType)
+			return unwrapArray(value);
+		if (expectedType.getType() instanceof JvmGenericType && ((JvmGenericType) expectedType.getType()).isInterface()) {
+			try {
+				JvmType type = expectedType.getType();
+				Class<?> functionIntf = classFinder.forName(type.getCanonicalName());
+				if (!functionIntf.isInstance(value)) {
+					InvocationHandler invocationHandler = null;
+					if (Proxy.isProxyClass(value.getClass())) {
+						invocationHandler = Proxy.getInvocationHandler(value);
+					} else if (Functions.Function0.class.isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function0.class);
+					} else if (Functions.Function1.class.isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function1.class);
+					} else if (Functions.Function2.class.isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function2.class);
+					} else if (Functions.Function3.class.isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function3.class);
+					} else if (Functions.Function4.class.isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function4.class);
+					} else if (Functions.Function5.class.isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function5.class);
+					} else if (Functions.Function6.class.isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function6.class);
+					} else if (Functions.FunctionX.class.isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, Functions.FunctionX.class);
+					}
+					Object proxy = Proxy.newProxyInstance(classLoader, new Class<?>[] { functionIntf }, invocationHandler);
+					return proxy;
+				}
+			} catch (ClassNotFoundException e) {
+				throw new NoClassDefFoundError(e.getMessage());
+			}
+			
+		}
+		return value;
 	}
 
 	public IEvaluationResult _featureCallField(JvmField jvmField, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
