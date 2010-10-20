@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.interpreter.impl;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -15,6 +16,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -33,6 +35,7 @@ import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -359,6 +362,29 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return DefaultEvaluationResult.NULL;
 	}
 	
+	public IEvaluationResult _evaluateConstructorCall(XConstructorCall constructorCall, IEvaluationContext context) {
+		List<Object> arguments = Lists.newArrayList();
+		for(XExpression arg: constructorCall.getArguments()) {
+			IEvaluationResult argResult = evaluate(arg, context);
+			if (argResult.getException() != null)
+				return argResult;
+			arguments.add(argResult.getResult());
+		}
+		JvmConstructor jvmConstructor = constructorCall.getConstructor();
+		Constructor<?> constructor = javaReflectAccess.getConstructor(jvmConstructor);
+		try {
+			if (constructor == null)
+				throw new NoSuchMethodException("Could not find constructor " + jvmConstructor.getFullyQualifiedName());
+			constructor.setAccessible(true);
+			Object result = constructor.newInstance(arguments.toArray(new Object[arguments.size()]));
+			return new DefaultEvaluationResult(result, null);
+		} catch(InvocationTargetException targetException) {
+			return new DefaultEvaluationResult(null, targetException.getTargetException());
+		} catch(Exception e) {
+			throw new IllegalStateException("Could not invoke constructor: " + jvmConstructor.getCanonicalName(), e);
+		}
+	}
+	
 	public IEvaluationResult _evaluateMemberFeatureCall(XMemberFeatureCall featureCall, IEvaluationContext context) {
 		IEvaluationResult memberCallTarget = evaluate(featureCall.getMemberCallTarget(), context);
 		if (memberCallTarget.getException() != null)
@@ -409,8 +435,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				return argResult;
 			arguments.add(argResult.getResult());
 		}
+		Method method = javaReflectAccess.getMethod(operation);
 		try {
-			Method method = javaReflectAccess.getMethod(operation);
+			if (method == null) {
+				throw new NoSuchMethodException("Could not find method " + operation.getFullyQualifiedName());
+			}
 			method.setAccessible(true);
 			if (!Modifier.isStatic(method.getModifiers())) {
 				if (receiver == null)
@@ -425,7 +454,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		} catch(InvocationTargetException targetException) {
 			return new DefaultEvaluationResult(null, targetException.getTargetException());
 		} catch(Exception e) {
-			throw new IllegalStateException("Could not invoke method: " + operation.getCanonicalName() + " on instance: " + receiver, e);
+			throw new IllegalStateException("Could not invoke method: " + operation.getFullyQualifiedName() + " on instance: " + receiver, e);
 		}
 	}
 	
