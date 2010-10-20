@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.interpreter.impl;
 
 import java.util.Map;
 
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 
 import com.google.common.collect.Maps;
@@ -20,7 +21,7 @@ public class DefaultEvaluationContext implements IEvaluationContext {
 
 	private IEvaluationContext parent;
 	private Throwable currentException;
-	private Map<String, Object> values;
+	private Map<QualifiedName, Object> values;
 	
 	public DefaultEvaluationContext() {
 		this(new NullEvaluationContext());
@@ -38,25 +39,25 @@ public class DefaultEvaluationContext implements IEvaluationContext {
 		this.currentException = throwable;
 	}
 
-	public Object getValue(String name) {
-		if (values != null && values.containsKey(name))
-			return values.get(name);
-		return parent.getValue(name);
+	public Object getValue(QualifiedName qualifiedName) {
+		if (values != null && values.containsKey(qualifiedName))
+			return values.get(qualifiedName);
+		return parent.getValue(qualifiedName);
 	}
 
-	public void newValue(String name, Object value) {
+	public void newValue(QualifiedName qualifiedName, Object value) {
 		if (values == null)
 			values = Maps.newHashMap();
-		if (values.containsKey(name))
-			throw new IllegalStateException("Cannot create a duplicate value '" + name + "'.");
-		values.put(name, value);
+		if (values.containsKey(qualifiedName))
+			throw new IllegalStateException("Cannot create a duplicate value '" + qualifiedName + "'.");
+		values.put(qualifiedName, value);
 	}
 	
-	public void assignValue(String name, Object value) {
-		if (values == null || !values.containsKey(name))
-			parent.assignValue(name, value);
+	public void assignValue(QualifiedName qualifiedName, Object value) {
+		if (values == null || !values.containsKey(qualifiedName))
+			parent.assignValue(qualifiedName, value);
 		else
-			values.put(name, value);
+			values.put(qualifiedName, value);
 	}
 
 	public IEvaluationContext fork() {

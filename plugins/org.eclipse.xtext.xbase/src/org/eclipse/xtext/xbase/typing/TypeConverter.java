@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 
 import com.google.inject.Inject;
 
@@ -19,8 +21,13 @@ import com.google.inject.Inject;
  */
 public class TypeConverter {
 
+	private static final QualifiedName JAVA_UTIL_LIST = QualifiedName.create("java", "util", "List");
+	
 	@Inject
 	private TypesService typesService;
+	
+	@Inject
+	private IQualifiedNameConverter nameConverter;
 	
 	/**
 	 * converts the toBeConverter type to something different.
@@ -41,11 +48,12 @@ public class TypeConverter {
 	}
 	
 	protected JvmTypeReference convertArrayToList(JvmArrayType jvmArrayType, JvmTypeReference expected, EObject context) {
-		return typesService.getTypeForName("java.util.List", context, convert(jvmArrayType.getComponentType(), expected, context));
+		return typesService.getTypeForName(JAVA_UTIL_LIST, context, convert(jvmArrayType.getComponentType(), expected, context));
 	}
 
 	protected JvmTypeReference convertPrimitiveToWrapper(JvmPrimitiveType type, EObject context) {
-		return typesService.getTypeForName(getWrapperTypeName(type.getCanonicalName()), context);
+		// TODO: extract constants
+		return typesService.getTypeForName(nameConverter.toQualifiedName(getWrapperTypeName(type.getCanonicalName())), context);
 	}
 	
 	protected String getWrapperTypeName(String primitiveTypeName) {

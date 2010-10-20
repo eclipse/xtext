@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.scoping.newapi;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.google.common.base.Predicate;
@@ -26,18 +27,18 @@ public interface ISelector extends Predicate<IEObjectDescription> {
 	
 	static class SelectByName implements ISelector {
 
-		private String name;
+		private QualifiedName qualifiedName;
 
 		public boolean apply(IEObjectDescription input) {
-			return name.equals(input.getName());
+			return qualifiedName.equals(input.getName());
 		}
 		
-		public SelectByName(String name) {
-			this.name = name;
+		public SelectByName(QualifiedName qualifiedName) {
+			this.qualifiedName = qualifiedName;
 		}
 		
-		public String getName() {
-			return name;
+		public QualifiedName getName() {
+			return qualifiedName;
 		}
 	}
 	

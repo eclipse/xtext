@@ -10,15 +10,20 @@ package org.eclipse.xtext.naming;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 
+import com.google.inject.Inject;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
 public class SimpleNameProvider extends IQualifiedNameProvider.AbstractImpl {
 	
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
+	
 	public QualifiedName getFullyQualifiedName(EObject obj) {
 		String name = SimpleAttributeResolver.NAME_RESOLVER.apply(obj);
-		return QualifiedName.create(name);
+		return qualifiedNameConverter.toQualifiedName(name);
 	}
 
 }

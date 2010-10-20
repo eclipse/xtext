@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.scoping.newapi;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.newapi.ISelector.SelectByEObject;
 import org.eclipse.xtext.xbase.scoping.newapi.ISelector.SelectByName;
@@ -18,12 +19,12 @@ import org.eclipse.xtext.xbase.scoping.newapi.ISelector.SelectByName;
  */
 public class Selectors {
 	
-	public static SelectByName byName(String name) {
-		return new SelectByName(name);
+	public static SelectByName byName(QualifiedName qualifiedName) {
+		return new SelectByName(qualifiedName);
 	}
 	
-	public static SelectByName byName(String name, final ISelector additionalSelectionCriteria) {
-		return new SelectByName(name) {
+	public static SelectByName byName(QualifiedName qualifiedName, final ISelector additionalSelectionCriteria) {
+		return new SelectByName(qualifiedName) {
 			@Override
 			public boolean apply(IEObjectDescription input) {
 				return super.apply(input) && additionalSelectionCriteria.apply(input);

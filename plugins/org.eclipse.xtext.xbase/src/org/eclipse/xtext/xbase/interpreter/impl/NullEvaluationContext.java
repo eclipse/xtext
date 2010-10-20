@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.interpreter.impl;
 
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 
 /**
@@ -22,15 +23,15 @@ public class NullEvaluationContext implements IEvaluationContext {
 		throw new IllegalStateException("Current exception may not be propagated to null context.");
 	}
 
-	public Object getValue(String name) {
+	public Object getValue(QualifiedName qualifiedName) {
 		return null;
 	}
 
-	public void newValue(String name, Object value) {
+	public void newValue(QualifiedName qualifiedName, Object value) {
 		throw new IllegalStateException("Cannot create new value in null context.");
 	}
 
-	public void assignValue(String name, Object value) {
+	public void assignValue(QualifiedName qualifiedName, Object value) {
 		throw new IllegalStateException("Cannot assign a value in null context.");
 	}
 

@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -241,7 +242,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 					return new DefaultEvaluationResult(null, e);
 				}
 				IEvaluationContext forked = context.fork();
-				forked.newValue(exception.getName(), result.getException());
+				forked.newValue(QualifiedName.create(exception.getName()), result.getException());
 				result = evaluate(catchClause.getExpression(), forked);
 				break;
 			}
@@ -306,7 +307,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			return createClassCastResult(forLoop.getForExpression(), iterableOrIterator, java.lang.Iterable.class); 
 		}
 		IEvaluationContext forkedContext = context.fork();
-		String paramName = forLoop.getDeclaredParam().getName();
+		QualifiedName paramName = QualifiedName.create(forLoop.getDeclaredParam().getName());
 		forkedContext.newValue(paramName, null);
 		while(iter.hasNext()) {
 			Object next = iter.next();
@@ -366,7 +367,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		IEvaluationResult result = evaluate(variableDecl.getRight(), context);
 		if (result.getException() != null)
 			return result;
-		context.newValue(variableDecl.getName(), result.getResult());
+		context.newValue(QualifiedName.create(variableDecl.getName()), result.getResult());
 		return result;
 	}
 	
@@ -377,14 +378,14 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	public IEvaluationResult _featureCall(XVariableDeclaration variableDeclaration, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		if (receiver != null)
 			throw new IllegalStateException("feature was variableDeclaration but got receiver instead of null. Receiver: " + receiver);
-		Object value = context.getValue(variableDeclaration.getName());
+		Object value = context.getValue(QualifiedName.create(variableDeclaration.getName()));
 		return new DefaultEvaluationResult(value, null);
 	}
 	
 	public IEvaluationResult _featureCall(JvmFormalParameter parameter, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		if (receiver != null)
 			throw new IllegalStateException("feature was parameter but got receiver instead of null. Receiver: " + receiver);
-		Object value = context.getValue(parameter.getName());
+		Object value = context.getValue(QualifiedName.create(parameter.getName()));
 		return new DefaultEvaluationResult(value, null);
 	}
 	
@@ -434,7 +435,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 	
 	public IEvaluationResult _assignValue(XVariableDeclaration variable, Object assignable, Object value, IEvaluationContext context) {
-		context.assignValue(variable.getName(), value);
+		context.assignValue(QualifiedName.create(variable.getName()), value);
 		return DefaultEvaluationResult.NULL;
 	}
 	

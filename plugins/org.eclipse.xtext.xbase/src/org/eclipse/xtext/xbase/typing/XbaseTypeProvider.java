@@ -17,6 +17,8 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.JvmTypesTypeProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -41,12 +43,22 @@ import com.google.inject.Inject;
  */
 public class XbaseTypeProvider extends JvmTypesTypeProvider {
 
-	public static final String JAVA_LANG_CLASS = Class.class.getName();
-	public static final String INTEGER_TYPE_NAME = Long.class.getName();
-	public static final String VOID_TYPE_NAME = Void.class.getName();
-	public static final String BOOLEAN_TYPE_NAME = Boolean.class.getName();
-	public static final String STRING_TYPE_NAME = String.class.getName();
-	public static final String OBJECT_TYPE_NAME = Object.class.getName();
+	public static final QualifiedName JAVA_LANG_CLASS;
+	public static final QualifiedName INTEGER_TYPE_NAME;
+	public static final QualifiedName VOID_TYPE_NAME;
+	public static final QualifiedName BOOLEAN_TYPE_NAME;
+	public static final QualifiedName STRING_TYPE_NAME;
+	public static final QualifiedName OBJECT_TYPE_NAME;
+
+	static {
+		IQualifiedNameConverter.DefaultImpl nameConverter = new IQualifiedNameConverter.DefaultImpl();
+		JAVA_LANG_CLASS = nameConverter.toQualifiedName(Class.class.getName());
+		INTEGER_TYPE_NAME = nameConverter.toQualifiedName(Long.class.getName());
+		VOID_TYPE_NAME = nameConverter.toQualifiedName(Void.class.getName());
+		BOOLEAN_TYPE_NAME = nameConverter.toQualifiedName(Boolean.class.getName());
+		STRING_TYPE_NAME = nameConverter.toQualifiedName(String.class.getName());
+		OBJECT_TYPE_NAME = nameConverter.toQualifiedName(Object.class.getName());
+	}
 
 	@Inject
 	private TypesService typesService;
@@ -87,7 +99,7 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XVariableDeclaration object, Context<JvmTypeReference> context) {
-		return internalGetType(object.getRight(), Context.newCtx(object.getType(),context));
+		return internalGetType(object.getRight(), Context.newCtx(object.getType(), context));
 	}
 
 	protected JvmTypeReference _type(XAbstractFeatureCall object, Context<JvmTypeReference> context) {

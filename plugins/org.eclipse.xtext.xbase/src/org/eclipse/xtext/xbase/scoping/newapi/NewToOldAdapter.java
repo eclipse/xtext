@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.scoping.newapi;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -40,7 +41,7 @@ public class NewToOldAdapter implements IScope {
 		return (Iterable<IEObjectDescription>) newScope.getElements(selector);
 	}
 
-	public IEObjectDescription getContentByName(String name) {
+	public IEObjectDescription getContentByName(QualifiedName name) {
 		return newScope.getFirstElement(Selectors.byName(name, selector));
 	}
 
