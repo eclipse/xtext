@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -54,9 +55,9 @@ public class TypesService implements ITypeConformanceComputer<JvmTypeReference> 
 		syntheticContainer.getEStructuralFeatures().add(syntheticReference);
 	}
 
-	public JvmTypeReference getTypeForName(String name, EObject context, JvmTypeReference... params) {
+	public JvmTypeReference getTypeForName(QualifiedName qualifiedName, EObject context, JvmTypeReference... params) {
 		IScope scope = scopeProvider.getScope(context, syntheticReference);
-		IEObjectDescription contentByName = scope.getContentByName(name);
+		IEObjectDescription contentByName = scope.getContentByName(qualifiedName);
 		if (contentByName != null) {
 			JvmParameterizedTypeReference simpleType = factory.createJvmParameterizedTypeReference();
 			simpleType.setType((JvmType) contentByName.getEObjectOrProxy());

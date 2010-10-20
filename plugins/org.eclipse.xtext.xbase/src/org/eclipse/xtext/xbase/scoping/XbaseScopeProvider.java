@@ -7,12 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.xml.namespace.QName;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -161,11 +158,11 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 		if (context.eContainer() instanceof XForLoopExpression) {
 			XForLoopExpression loop = (XForLoopExpression) context.eContainer();
-			parentScope = new SingletonScope(EObjectDescription.create(loop.getDeclaredParam().getName(), loop.getDeclaredParam()), parentScope);
+			parentScope = new SingletonScope(createEObjectDescription(loop.getDeclaredParam()), parentScope);
 		}
 		if (context.eContainer() instanceof XCatchClause) {
 			XCatchClause catchClause = (XCatchClause) context.eContainer();
-			parentScope = new SingletonScope(EObjectDescription.create(catchClause.getDeclaredParam().getName(), catchClause.getDeclaredParam()), parentScope);
+			parentScope = new SingletonScope(createEObjectDescription(catchClause.getDeclaredParam()), parentScope);
 		}
 		if (context instanceof XClosure) {
 			parentScope = createLocalVarScopeForClosure((XClosure) context, featurePredicate, parentScope);
@@ -181,7 +178,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			if (expression instanceof XVariableDeclaration) {
 				XVariableDeclaration varDecl = (XVariableDeclaration) expression;
 				if (featurePredicate.apply(varDecl)) {
-					EObjectDescription desc = createEObjectDescription(varDecl);
+					IEObjectDescription desc = createEObjectDescription(varDecl);
 					vars.put(desc.getName(), desc);
 				}
 			}
@@ -197,7 +194,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		Map<QualifiedName, IEObjectDescription> descriptions = Maps.newHashMap();
 		for (JvmFormalParameter p : params) {
 			if (featurePredicate.apply(p)) {
-				EObjectDescription desc = createEObjectDescription(p);
+				IEObjectDescription desc = createEObjectDescription(p);
 				descriptions.put(desc.getName(), desc);
 			}
 		}
@@ -229,9 +226,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				if (featurePredicate.apply(jvmFeature)) {
 					IEObjectDescription desc = createEObjectDescription(jvmFeature);
 					map.put(desc.getName(), desc);
-					String operator = operatorMapping.getOperator(desc.getName());
-					if (operator != null) {
-						AliasedEObjectDescription description = new AliasedEObjectDescription(operator, desc);
+					QualifiedName operatorQualifiedName = operatorMapping.getOperator(jvmFeature.getSimpleName());
+					if (operatorQualifiedName != null) {
+						AliasedEObjectDescription description = new AliasedEObjectDescription(operatorQualifiedName, desc);
 						map.put(description.getName(), description);
 					}
 				}
@@ -240,15 +237,15 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return map;
 	}
 
-	protected EObjectDescription createEObjectDescription(JvmFormalParameter p) {
-		return new EObjectDescription(p.getName(), p, Collections.<String, String> emptyMap());
+	protected IEObjectDescription createEObjectDescription(JvmFormalParameter p) {
+		return EObjectDescription.create(QualifiedName.create(p.getName()), p);
 	}
 
 	protected IEObjectDescription createEObjectDescription(JvmFeature jvmFeature) {
-		return new EObjectDescription(jvmFeature.getSimpleName(), jvmFeature, null);
+		return EObjectDescription.create(QualifiedName.create(jvmFeature.getSimpleName()), jvmFeature);
 	}
 
-	protected EObjectDescription createEObjectDescription(XVariableDeclaration varDecl) {
-		return new EObjectDescription(varDecl.getName(), varDecl, Collections.<String, String> emptyMap());
+	protected IEObjectDescription createEObjectDescription(XVariableDeclaration varDecl) {
+		return EObjectDescription.create(QualifiedName.create(varDecl.getName()), varDecl);
 	}
 }

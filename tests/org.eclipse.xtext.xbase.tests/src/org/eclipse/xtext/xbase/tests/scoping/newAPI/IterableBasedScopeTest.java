@@ -14,6 +14,7 @@ import java.util.Iterator;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.newapi.INewScope;
@@ -31,8 +32,9 @@ public class IterableBasedScopeTest extends TestCase {
 		IEObjectDescription description = description(EATTRIBUTE);
 		IterableBasedScope scope = new IterableBasedScope(Sets.newHashSet(description,description(ETYPED_ELEMENT__LOWER_BOUND)),
 				new IterableBasedScope(Sets.newHashSet(description,description(EMODEL_ELEMENT)), INewScope.NULL_SCOPE));
-		assertSame(description, scope.getFirstElement(Selectors.byName(EATTRIBUTE.getName())));
-		Iterator<? extends IEObjectDescription> iterable = scope.getElements(Selectors.byName(EATTRIBUTE.getName())).iterator();
+		QualifiedName eAttributeQN = QualifiedName.create(EATTRIBUTE.getName());
+		assertSame(description, scope.getFirstElement(Selectors.byName(eAttributeQN)));
+		Iterator<? extends IEObjectDescription> iterable = scope.getElements(Selectors.byName(eAttributeQN)).iterator();
 		assertSame(description, iterable.next());
 		assertFalse(iterable.hasNext());
 	}
@@ -48,7 +50,7 @@ public class IterableBasedScopeTest extends TestCase {
 	}
 
 	protected IEObjectDescription description(ENamedElement element) {
-		return new EObjectDescription(element.getName(), element, null);
+		return EObjectDescription.create(QualifiedName.create(element.getName()), element, null);
 	}
 	
 }

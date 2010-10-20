@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.interpreter;
 
+import org.eclipse.xtext.naming.QualifiedName;
+
 public interface IEvaluationContext {
 	Throwable getCurrentException();
 	void setCurrentException(Throwable throwable);
-	Object getValue(String name);
-	void newValue(String name, Object value);
-	void assignValue(String name, Object value);
+	Object getValue(QualifiedName qualifiedName);
+	void newValue(QualifiedName qualifiedName, Object value);
+	void assignValue(QualifiedName qualifiedName, Object value);
 	IEvaluationContext fork();
 }

@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xbase.tests.typing;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
@@ -22,6 +24,9 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	private ITypeProvider<JvmTypeReference> typeResolver;
+	
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	public void testNullLiteral() throws Exception {
 		assertResolvedReturnType(XbaseTypeProvider.VOID_TYPE_NAME, "null");
@@ -86,12 +91,15 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedReturnType("java.lang.Boolean", "{ var this = 'foo'; this.getBytes() += getBytes().get(0);}");
 	}
 	
-	public void assertResolvedReturnType(String type, String expression) throws Exception {
+	public void assertResolvedReturnType(QualifiedName typeName, String expression) throws Exception {
 		JvmTypeReference typeRef = typeResolver.getType(expression(expression,true),null);
 		assertNotNull("type ref was null for "+expression,typeRef);
-		assertEquals(type,toString(typeRef));
+		assertEquals(qualifiedNameConverter.toString(typeName) ,toString(typeRef));
 	}
-	
+
+	public void assertResolvedReturnType(String typeName, String expression) throws Exception {
+		assertResolvedReturnType(qualifiedNameConverter.toQualifiedName(typeName), expression);
+	}
 	
 	protected String toString(JvmTypeReference typeref) {
 		return typeref.getCanonicalName();

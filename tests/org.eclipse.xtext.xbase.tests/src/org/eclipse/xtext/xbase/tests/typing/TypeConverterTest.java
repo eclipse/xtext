@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typing;
 
+import java.io.IOException;
+
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.TypeConverter;
@@ -20,23 +23,31 @@ import com.google.inject.Inject;
 public class TypeConverterTest extends AbstractXbaseTestCase {
 	@Inject
 	private TypeConverter converter;
+	
 	@Inject
 	private TypesService typesService;
 	
+	@Inject
+	private IQualifiedNameConverter nameConverter;
+	
 	public void testConvertPrimitives() throws Exception {
 		XExpression ctx = expression("foo");
-		assertEquals("java.lang.Integer", converter.convert(typesService.getTypeForName("int", ctx), null, ctx).getCanonicalName());
-		assertEquals("java.lang.Long", converter.convert(typesService.getTypeForName("long", ctx), null, ctx).getCanonicalName());
-		assertEquals("java.lang.Character", converter.convert(typesService.getTypeForName("char", ctx), null, ctx).getCanonicalName());
-		assertEquals("java.lang.Byte", converter.convert(typesService.getTypeForName("byte", ctx), null, ctx).getCanonicalName());
-		assertEquals("java.lang.Short", converter.convert(typesService.getTypeForName("short", ctx), null, ctx).getCanonicalName());
-		assertEquals("java.lang.Float", converter.convert(typesService.getTypeForName("float", ctx), null, ctx).getCanonicalName());
-		assertEquals("java.lang.Double", converter.convert(typesService.getTypeForName("double", ctx), null, ctx).getCanonicalName());
+		assertMappedTypeCanonicalNameEquals("int", "java.lang.Integer", ctx);		
+		assertMappedTypeCanonicalNameEquals("long", "java.lang.Long",ctx);
+		assertMappedTypeCanonicalNameEquals("char", "java.lang.Character", ctx);
+		assertMappedTypeCanonicalNameEquals("byte", "java.lang.Byte", ctx);
+		assertMappedTypeCanonicalNameEquals("short", "java.lang.Short", ctx);
+		assertMappedTypeCanonicalNameEquals("float", "java.lang.Float", ctx);
+		assertMappedTypeCanonicalNameEquals("double", "java.lang.Double", ctx);
 	}
 	
 	public void testConvertArrays() throws Exception {
 		XExpression ctx = expression("foo");
-		assertEquals("java.util.List<java.lang.Integer>", converter.convert(typesService.getTypeForName("int[]", ctx), null, ctx).getCanonicalName());
-		assertEquals("java.util.List<java.util.List<java.util.List<java.lang.Object>>>", converter.convert(typesService.getTypeForName("java.lang.Object[][][]", ctx), null, ctx).getCanonicalName());
+		assertMappedTypeCanonicalNameEquals("int[]", "java.util.List<java.lang.Integer>", ctx);
+		assertMappedTypeCanonicalNameEquals("java.lang.Object[][][]", "java.util.List<java.util.List<java.util.List<java.lang.Object>>>", ctx);
+	}
+	
+	protected void assertMappedTypeCanonicalNameEquals(String typeName, String expectedMappedCanonicalName, XExpression ctx) throws IOException {
+		assertEquals(expectedMappedCanonicalName, converter.convert(typesService.getTypeForName(nameConverter.toQualifiedName(typeName), ctx), null, ctx).getCanonicalName());
 	}
 }

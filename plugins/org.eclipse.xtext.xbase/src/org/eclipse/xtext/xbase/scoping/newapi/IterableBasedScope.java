@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.scoping.newapi;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.google.common.base.Predicate;
@@ -21,7 +22,7 @@ import com.google.common.collect.Sets;
  */
 public class IterableBasedScope extends AbstractScope {
 	
-	protected Set<String> names = null;
+	protected Set<QualifiedName> names = null;
 	protected Iterable<? extends IEObjectDescription> descriptions;
 	
 	public IterableBasedScope(Iterable<? extends IEObjectDescription> descriptions, INewScope parent) {
