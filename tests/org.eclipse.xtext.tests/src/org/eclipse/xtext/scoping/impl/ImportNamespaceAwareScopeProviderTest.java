@@ -26,6 +26,8 @@ import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -50,7 +52,8 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 
 	private ImportedNamespaceAwareLocalScopeProvider scopeProvider;
 	private ResourceSetGlobalScopeProvider globalScopeProvider;
-	private DefaultDeclarativeQualifiedNameProvider nameProvider;
+	private IQualifiedNameProvider nameProvider;
+	private IQualifiedNameConverter nameConverter;
 
 	@Override
 	public void setUp() throws Exception {
@@ -60,6 +63,7 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		globalScopeProvider = new ResourceSetGlobalScopeProvider();
 		final DefaultResourceServiceProvider provider = new DefaultResourceServiceProvider();
 		nameProvider = new DefaultDeclarativeQualifiedNameProvider();
+		nameConverter = new IQualifiedNameConverter.DefaultImpl();
 		provider.setResourceDescriptionManager(new DefaultResourceDescriptionManager() {
 			@Override
 			public IResourceDescription getResourceDescription(Resource resource) {
@@ -75,7 +79,7 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 				return provider;
 			}
 		});
-		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider(globalScopeProvider, nameProvider);
+		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider(globalScopeProvider, nameProvider, nameConverter);
 	}
 
 	public void testImports() throws Exception {
@@ -89,11 +93,11 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 				.getFile_Elements());
 		List<QualifiedName> names = toListOfNames(scope.getAllContents());
 		assertEquals(names.toString(), 5, names.size());
-		assertTrue(names.contains(nameProvider.toValue("Person")));
-		assertTrue(names.contains(nameProvider.toValue("String")));
-		assertTrue(names.contains(nameProvider.toValue("foo.bar")));
-		assertTrue(names.contains(nameProvider.toValue("foo.bar.Person")));
-		assertTrue(names.contains(nameProvider.toValue("foo.bar.String")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("Person")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("String")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.Person")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("foo.bar.String")));
 	}
 
 	public void testRelativeContext() throws Exception {
@@ -108,8 +112,8 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		Entity entity = filter(allContents, Entity.class).iterator().next();
 
 		IScope scope = scopeProvider.getScope(entity, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameProvider.toValue("baz.String")));
-		assertNotNull(scope.getContentByName(nameProvider.toValue("stuff.baz.String")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("baz.String")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("stuff.baz.String")));
 	}
 
 	public void testRelativePath() throws Exception {
@@ -124,9 +128,9 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		Entity entity = filter(allContents, Entity.class).iterator().next();
 
 		IScope scope = scopeProvider.getScope(entity, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameProvider.toValue("String")));
-		assertNotNull(scope.getContentByName(nameProvider.toValue("baz.String")));
-		assertNotNull(scope.getContentByName(nameProvider.toValue("stuff.baz.String")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("String")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("baz.String")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("stuff.baz.String")));
 	}
 
 	public void testReexports() throws Exception {
@@ -155,27 +159,27 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		List<QualifiedName> names = toListOfNames(scope.getContents());
 
 		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.toString(), names.contains(nameProvider.toValue("baz.Person")));
+		assertTrue(names.toString(), names.contains(nameConverter.toQualifiedName("baz.Person")));
 
 		scope = scope.getOuterScope(); // baz {
 		names = toListOfNames(scope.getContents());
 		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.toString(), names.contains(nameProvider.toValue("Person")));
+		assertTrue(names.toString(), names.contains(nameConverter.toQualifiedName("Person")));
 
 		scope = scope.getOuterScope(); // stuff {
 		names = toListOfNames(scope.getContents());
 		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.contains(nameProvider.toValue("baz.Person")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("baz.Person")));
 
 		scope = scope.getOuterScope(); // import baz.*
 		names = toListOfNames(scope.getContents());
 		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.contains(nameProvider.toValue("Person")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("Person")));
 
 		scope = scope.getOuterScope(); // global scope
 		names = toListOfNames(scope.getContents());
 		assertEquals(names.toString(), 1, names.size());
-		assertTrue(names.contains(nameProvider.toValue("stuff.baz.Person")));
+		assertTrue(names.contains(nameConverter.toQualifiedName("stuff.baz.Person")));
 
 	}
 
@@ -191,9 +195,9 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
 
 		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameProvider.toValue("D")));
-		assertNotNull(scope.getContentByName(nameProvider.toValue("E.D")));
-		assertNotNull(scope.getContentByName(nameProvider.toValue("A.B.D")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("D")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("E.D")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("A.B.D")));
 	}
 
 	public void testLocalElementsNotFromIndex() throws Exception {
@@ -206,7 +210,7 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		};
 		Datatype datatype = filter(allContents, Datatype.class).iterator().next();
 		IScope scope = scopeProvider.getScope(datatype, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameProvider.toValue("A.B.D")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("A.B.D")));
 	}
 
 	public void testImportsWithoutWildcard() throws Exception {
@@ -223,7 +227,7 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		assertEquals("Foo", foo.getName());
 
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameProvider.toValue("Bar")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("Bar")));
 	}
 
 	public void testMultipleFiles() throws Exception {
@@ -243,7 +247,7 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		assertEquals("Foo", foo.getName());
 
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameProvider.toValue("Bar")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("Bar")));
 	}
 
 	public void testResourceSetReferencingResourceSet() throws Exception {
@@ -266,8 +270,8 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		assertEquals("Foo", foo.getName());
 
 		IScope scope = scopeProvider.getScope(foo, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameProvider.toValue("Bar")));
-		assertNotNull(scope.getContentByName(nameProvider.toValue("bar.Bar")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("Bar")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("bar.Bar")));
 	}
 
 	public void testResourceSetReferencingResourceSet2() throws Exception {
@@ -288,8 +292,8 @@ public class ImportNamespaceAwareScopeProviderTest extends AbstractXtextTests {
 		Entity baz = getEntityByName(res2,"Baz");
 
 		IScope scope = scopeProvider.getScope(baz, IndexTestLanguagePackage.eINSTANCE.getProperty_Type());
-		assertNotNull(scope.getContentByName(nameProvider.toValue("foo.Foo")));
-		assertNull(scope.getContentByName(nameProvider.toValue("bar.Bar")));
+		assertNotNull(scope.getContentByName(nameConverter.toQualifiedName("foo.Foo")));
+		assertNull(scope.getContentByName(nameConverter.toQualifiedName("bar.Bar")));
 	}
 
 	protected Entity getEntityByName(final Resource res2, String name) {

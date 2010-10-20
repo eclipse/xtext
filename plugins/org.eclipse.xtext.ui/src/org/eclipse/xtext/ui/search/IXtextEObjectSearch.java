@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.search;
 import java.util.Collection;
 
 import org.eclipse.ui.dialogs.SearchPattern;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -34,7 +34,7 @@ public interface IXtextEObjectSearch {
 		private IResourceDescriptions resourceDescriptions;
 
 		@Inject
-		private IQualifiedNameProvider qualifiedNameProvider;
+		private IQualifiedNameConverter qualifiedNameConverter;
 		
 		public Iterable<IEObjectDescription> findMatches(final String searchPattern, final String typeSearchPattern) {
 			return Iterables.filter(getSearchScope(), getSearchPredicate(searchPattern, typeSearchPattern));
@@ -65,7 +65,7 @@ public interface IXtextEObjectSearch {
 		}
 
 		protected boolean isNameMatches(SearchPattern searchPattern, IEObjectDescription eObjectDescription, Collection<String> namespaceDelimiters) {
-			String qualifiedName = qualifiedNameProvider.toString(eObjectDescription.getQualifiedName());
+			String qualifiedName = qualifiedNameConverter.toString(eObjectDescription.getQualifiedName());
 			if (qualifiedName!=null) {
 				if(searchPattern.matches(qualifiedName)) {
 					return true;

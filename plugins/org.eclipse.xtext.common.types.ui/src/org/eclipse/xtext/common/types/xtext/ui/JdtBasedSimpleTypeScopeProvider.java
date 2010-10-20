@@ -11,7 +11,7 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 
 import com.google.inject.Inject;
 
@@ -26,26 +26,27 @@ public class JdtBasedSimpleTypeScopeProvider extends AbstractTypeScopeProvider {
 	@Inject
 	private JdtTypeProviderFactory typeProviderFactory;
 
-	@Inject 
-	private IQualifiedNameProvider qualifiedNameProvider;
-	
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
+
 	@Inject
 	public JdtBasedSimpleTypeScopeProvider() {
 	}
 
-	public JdtBasedSimpleTypeScopeProvider(JdtTypeProviderFactory typeProviderFactory, IQualifiedNameProvider qualifiedNameProvider) {
+	public JdtBasedSimpleTypeScopeProvider(JdtTypeProviderFactory typeProviderFactory,
+			IQualifiedNameConverter qualifiedNameConverter) {
 		this.typeProviderFactory = typeProviderFactory;
-		this.qualifiedNameProvider = qualifiedNameProvider;
+		this.qualifiedNameConverter = qualifiedNameConverter;
 	}
-	
+
 	@Override
 	public JdtBasedSimpleTypeScope createTypeScope(IJvmTypeProvider typeProvider) {
-		return new JdtBasedSimpleTypeScope((IJdtTypeProvider) typeProvider, qualifiedNameProvider);
+		return new JdtBasedSimpleTypeScope((IJdtTypeProvider) typeProvider, qualifiedNameConverter);
 	}
 
 	@Override
 	public JdtTypeProviderFactory getTypeProviderFactory() {
 		return typeProviderFactory;
 	}
-	
+
 }

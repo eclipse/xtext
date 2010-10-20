@@ -25,7 +25,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
 import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScope;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
@@ -38,8 +38,8 @@ import com.google.common.collect.Lists;
  */
 public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 
-	public JdtBasedSimpleTypeScope(IJdtTypeProvider typeProvider, IQualifiedNameProvider qualifiedNameProvider) {
-		super(typeProvider, qualifiedNameProvider);
+	public JdtBasedSimpleTypeScope(IJdtTypeProvider typeProvider, IQualifiedNameConverter qualifiedNameConverter) {
+		super(typeProvider, qualifiedNameConverter);
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 					} else {
 						userData = ImmutableMap.of("flags", String.valueOf(modifiers), "inner", "true");
 					}
-					IEObjectDescription eObjectDescription = EObjectDescription.create(getQualifiedNameProvider().toValue(fullyQualifiedName), proxy, userData);
+					IEObjectDescription eObjectDescription = EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(fullyQualifiedName), proxy, userData);
 					if (eObjectDescription != null)
 						allScopedElements.add(eObjectDescription);
 				}
@@ -92,7 +92,7 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 	
 	public IEObjectDescription createScopedElement(String fullyQualifiedName) {
 		InternalEObject proxy = createProxy(fullyQualifiedName);
-		IEObjectDescription eObjectDescription = EObjectDescription.create(getQualifiedNameProvider().toValue(fullyQualifiedName), proxy);
+		IEObjectDescription eObjectDescription = EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(fullyQualifiedName), proxy);
 		return eObjectDescription;
 	}
 

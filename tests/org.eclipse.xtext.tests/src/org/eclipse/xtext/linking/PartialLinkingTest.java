@@ -17,7 +17,9 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
-import org.eclipse.xtext.naming.SimpleNameProvider;
+import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -55,7 +57,8 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
-		SimpleNameProvider nameProvider = new SimpleNameProvider();
+		IQualifiedNameConverter nameConverter = new IQualifiedNameConverter.DefaultImpl();
+		IQualifiedNameProvider nameProvider = new DefaultDeclarativeQualifiedNameProvider();
 		ImportUriGlobalScopeProvider globalScopeProvider = new ImportUriGlobalScopeProvider();
 		globalScopeProvider.setImportResolver(new ImportUriResolver());
 		globalScopeProvider.setCache(IResourceScopeCache.NullImpl.INSTANCE);
@@ -70,7 +73,7 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 				return PartialLinkingTest.this.get(LoadOnDemandResourceDescriptions.class);
 			}
 		});
-		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider(globalScopeProvider, nameProvider);
+		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider(globalScopeProvider, nameProvider, nameConverter);
 		modelAsText =
 			"spielplatz 1 {\n" +
 			"  kind( Bommel1 1)\n" +

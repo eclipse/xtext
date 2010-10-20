@@ -40,7 +40,7 @@ public class IgnoreCaseResourceDescriptionManagerTest extends TestCase {
 		resource = new ResourceImpl();
 		resource.getContents().add(copy);
 		IQualifiedNameProvider nameProvider = new IQualifiedNameProvider.AbstractImpl() {
-			public QualifiedName getQualifiedName(EObject obj) {
+			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof ENamedElement)
 					return QualifiedName.create(((ENamedElement) obj).getName());
 				return null;
