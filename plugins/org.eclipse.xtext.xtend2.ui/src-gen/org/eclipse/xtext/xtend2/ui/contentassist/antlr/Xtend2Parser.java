@@ -126,8 +126,10 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getXFeatureCallAccess().getGroup_2_1(), "rule__XFeatureCall__Group_2_1__0");
 					put(grammarAccess.getXFeatureCallAccess().getGroup_2_1_1(), "rule__XFeatureCall__Group_2_1_1__0");
 					put(grammarAccess.getXConstructorCallAccess().getGroup(), "rule__XConstructorCall__Group__0");
-					put(grammarAccess.getXConstructorCallAccess().getGroup_3(), "rule__XConstructorCall__Group_3__0");
-					put(grammarAccess.getXConstructorCallAccess().getGroup_3_1(), "rule__XConstructorCall__Group_3_1__0");
+					put(grammarAccess.getXConstructorCallAccess().getGroup_2(), "rule__XConstructorCall__Group_2__0");
+					put(grammarAccess.getXConstructorCallAccess().getGroup_2_2(), "rule__XConstructorCall__Group_2_2__0");
+					put(grammarAccess.getXConstructorCallAccess().getGroup_4(), "rule__XConstructorCall__Group_4__0");
+					put(grammarAccess.getXConstructorCallAccess().getGroup_4_1(), "rule__XConstructorCall__Group_4_1__0");
 					put(grammarAccess.getXBooleanLiteralAccess().getGroup_0(), "rule__XBooleanLiteral__Group_0__0");
 					put(grammarAccess.getXNullLiteralAccess().getGroup(), "rule__XNullLiteral__Group__0");
 					put(grammarAccess.getXTypeLiteralAccess().getGroup(), "rule__XTypeLiteral__Group__0");
@@ -227,9 +229,11 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getXFeatureCallAccess().getFeatureAssignment_1(), "rule__XFeatureCall__FeatureAssignment_1");
 					put(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsAssignment_2_1_0(), "rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0");
 					put(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsAssignment_2_1_1_1(), "rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1");
-					put(grammarAccess.getXConstructorCallAccess().getTypeAssignment_1(), "rule__XConstructorCall__TypeAssignment_1");
-					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_3_0(), "rule__XConstructorCall__ArgumentsAssignment_3_0");
-					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_3_1_1(), "rule__XConstructorCall__ArgumentsAssignment_3_1_1");
+					put(grammarAccess.getXConstructorCallAccess().getConstructorAssignment_1(), "rule__XConstructorCall__ConstructorAssignment_1");
+					put(grammarAccess.getXConstructorCallAccess().getTypeArgumentsAssignment_2_1(), "rule__XConstructorCall__TypeArgumentsAssignment_2_1");
+					put(grammarAccess.getXConstructorCallAccess().getTypeArgumentsAssignment_2_2_1(), "rule__XConstructorCall__TypeArgumentsAssignment_2_2_1");
+					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_0(), "rule__XConstructorCall__ArgumentsAssignment_4_0");
+					put(grammarAccess.getXConstructorCallAccess().getArgumentsAssignment_4_1_1(), "rule__XConstructorCall__ArgumentsAssignment_4_1_1");
 					put(grammarAccess.getXBooleanLiteralAccess().getIsTrueAssignment_1(), "rule__XBooleanLiteral__IsTrueAssignment_1");
 					put(grammarAccess.getXIntLiteralAccess().getValueAssignment(), "rule__XIntLiteral__ValueAssignment");
 					put(grammarAccess.getXStringLiteralAccess().getValueAssignment(), "rule__XStringLiteral__ValueAssignment");
