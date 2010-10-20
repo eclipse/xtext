@@ -52,7 +52,6 @@ import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
-import org.eclipse.xtext.xbase.util.XbaseSwitch;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -63,6 +62,19 @@ import com.google.inject.Provider;
  */
 public class XbaseInterpreter implements IExpressionInterpreter {
 
+	protected static class PrefixMethodFilter extends PolymorphicDispatcher.MethodNameFilter {
+		
+		public PrefixMethodFilter(String prefix, int minParams, int maxParams) {
+			super(prefix, minParams, maxParams);
+		}
+
+		@Override
+		public boolean apply(Method param) {
+			return param.getName().startsWith(methodName) && param.getParameterTypes().length >= minParams
+					&& param.getParameterTypes().length <= maxParams;
+		}
+	}
+	
 	@Inject
 	private Provider<IEvaluationContext> contextProvider;
 	
@@ -77,15 +89,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	private PolymorphicDispatcher<IEvaluationResult> featureCallDispatcher = createFeatureCallDispatcher();
 
 	protected PolymorphicDispatcher<IEvaluationResult> createEvaluateDispatcher() {
-		return PolymorphicDispatcher.createForSingleTarget("_evaluate", 2, 2, this);
+		return PolymorphicDispatcher.createForSingleTarget(new PrefixMethodFilter("_evaluate", 2, 2), this);
 	}
 	
 	protected PolymorphicDispatcher<IEvaluationResult> createAssignmentDispatcher() {
-		return PolymorphicDispatcher.createForSingleTarget("_assignValue", 4, 4, this);
+		return PolymorphicDispatcher.createForSingleTarget(new PrefixMethodFilter("_assignValue", 4, 4), this);
 	}
 	
 	protected PolymorphicDispatcher<IEvaluationResult> createFeatureCallDispatcher() {
-		return PolymorphicDispatcher.createForSingleTarget("_featureCall", 4, 4, this);
+		return PolymorphicDispatcher.createForSingleTarget(new PrefixMethodFilter("_featureCall", 4, 4), this);
 	}
 	
 	public IEvaluationResult evaluate(XExpression expression) {
@@ -98,23 +110,23 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 	
-	public IEvaluationResult _evaluate(XNullLiteral literal, IEvaluationContext context) {
+	public IEvaluationResult _evaluateNullLiteral(XNullLiteral literal, IEvaluationContext context) {
 		return DefaultEvaluationResult.NULL;
 	}
 	
-	public IEvaluationResult _evaluate(XStringLiteral literal, IEvaluationContext context) {
+	public IEvaluationResult _evaluateStringLiteral(XStringLiteral literal, IEvaluationContext context) {
 		return new DefaultEvaluationResult(literal.getValue(), null);
 	}
 	
-	public IEvaluationResult _evaluate(XIntLiteral literal, IEvaluationContext context) {
+	public IEvaluationResult _evaluateIntLiteral(XIntLiteral literal, IEvaluationContext context) {
 		return new DefaultEvaluationResult(literal.getValue(), null);
 	}
 	
-	public IEvaluationResult _evaluate(XBooleanLiteral literal, IEvaluationContext context) {
+	public IEvaluationResult _evaluateBooleanLiteral(XBooleanLiteral literal, IEvaluationContext context) {
 		return new DefaultEvaluationResult(literal.isIsTrue(), null);
 	}
 	
-	public IEvaluationResult _evaluate(XTypeLiteral literal, IEvaluationContext context) {
+	public IEvaluationResult _evaluateTypeLiteral(XTypeLiteral literal, IEvaluationContext context) {
 		if (literal.getType() == null || literal.getType().eIsProxy()) {
 			List<AbstractNode> nodesForFeature = NodeUtil.findNodesForFeature(literal, XbasePackage.Literals.XTYPE_LITERAL__TYPE);
 			// TODO cleanup
@@ -133,7 +145,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 	
-	public IEvaluationResult _evaluate(XBlockExpression literal, IEvaluationContext context) {
+	public IEvaluationResult _evaluateBlockExpression(XBlockExpression literal, IEvaluationContext context) {
 		List<XExpression> expressions = literal.getExpressions();
 		
 		IEvaluationResult result = DefaultEvaluationResult.NULL;
@@ -146,7 +158,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 	
-	public IEvaluationResult _evaluate(XIfExpression ifExpression, IEvaluationContext context) {
+	public IEvaluationResult _evaluateIfExpression(XIfExpression ifExpression, IEvaluationContext context) {
 		IEvaluationResult conditionResult = evaluate(ifExpression.getIf(), context);
 		if (conditionResult.getException() != null) {
 			return conditionResult;
@@ -160,7 +172,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 	
-	public IEvaluationResult _evaluate(XSwitchExpression switchExpression, IEvaluationContext context) {
+	public IEvaluationResult _evaluateSwitchExpression(XSwitchExpression switchExpression, IEvaluationContext context) {
 		IEvaluationContext forkedContext = context.fork();
 		IEvaluationResult conditionResult = null;
 		if (switchExpression.getSwitch() != null) {
@@ -207,7 +219,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return DefaultEvaluationResult.NULL;
 	}
 	
-	public IEvaluationResult _evaluate(XCastedExpression castedExpression, IEvaluationContext context) {
+	public IEvaluationResult _evaluateCastedExpression(XCastedExpression castedExpression, IEvaluationContext context) {
 		IEvaluationResult result = evaluate(castedExpression.getTarget(), context);
 		if (result.getException() != null)
 			return result;
@@ -228,7 +240,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 	
-	public IEvaluationResult _evaluate(XTryCatchFinallyExpression tryCatchFinally, IEvaluationContext context) {
+	public IEvaluationResult _evaluateTryCatchFinallyExpression(XTryCatchFinallyExpression tryCatchFinally, IEvaluationContext context) {
 		IEvaluationResult result = evaluate(tryCatchFinally.getExpression(), context);
 		if (result.getException() != null) {
 			for(XCatchClause catchClause: tryCatchFinally.getCatchClauses()) {
@@ -294,7 +306,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return original;
 	}
 	
-	public IEvaluationResult _evaluate(XForLoopExpression forLoop, IEvaluationContext context) {
+	public IEvaluationResult _evaluateForLoopExpression(XForLoopExpression forLoop, IEvaluationContext context) {
 		IEvaluationResult iterableOrIterator = evaluate(forLoop.getForExpression(), context);
 		if (iterableOrIterator.getException() != null)
 			return iterableOrIterator;
@@ -319,7 +331,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return DefaultEvaluationResult.NULL;
 	}
 	
-	public IEvaluationResult _evaluate(XWhileExpression whileLoop, IEvaluationContext context) {
+	public IEvaluationResult _evaluateWhileExpression(XWhileExpression whileLoop, IEvaluationContext context) {
 		IEvaluationResult condition = evaluate(whileLoop.getPredicate(), context);
 		if (condition.getException() != null)
 			return condition;
@@ -334,7 +346,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return DefaultEvaluationResult.NULL;
 	}
 	
-	public IEvaluationResult _evaluate(XDoWhileExpression doWhileLoop, IEvaluationContext context) {
+	public IEvaluationResult _evaluateDoWhileExpression(XDoWhileExpression doWhileLoop, IEvaluationContext context) {
 		IEvaluationResult condition = null;
 		do {
 			IEvaluationResult body = evaluate(doWhileLoop.getBody(), context);
@@ -347,7 +359,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return DefaultEvaluationResult.NULL;
 	}
 	
-	public IEvaluationResult _evaluate(XMemberFeatureCall featureCall, IEvaluationContext context) {
+	public IEvaluationResult _evaluateMemberFeatureCall(XMemberFeatureCall featureCall, IEvaluationContext context) {
 		IEvaluationResult memberCallTarget = evaluate(featureCall.getMemberCallTarget(), context);
 		if (memberCallTarget.getException() != null)
 			return memberCallTarget;
@@ -355,7 +367,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 	
-	public IEvaluationResult _evaluate(XBinaryOperation operation, IEvaluationContext context) {
+	public IEvaluationResult _evaluateBinaryOperation(XBinaryOperation operation, IEvaluationContext context) {
 		IEvaluationResult leftOperand = evaluate(operation.getLeftOperand());
 		if (leftOperand.getException() != null)
 			return leftOperand;
@@ -363,7 +375,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 	
-	public IEvaluationResult _evaluate(XVariableDeclaration variableDecl, IEvaluationContext context) {
+	public IEvaluationResult _evaluateVariableDeclaration(XVariableDeclaration variableDecl, IEvaluationContext context) {
 		IEvaluationResult result = evaluate(variableDecl.getRight(), context);
 		if (result.getException() != null)
 			return result;
@@ -371,25 +383,25 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 	
-	public IEvaluationResult _evaluate(XFeatureCall featureCall, IEvaluationContext context) {
+	public IEvaluationResult _evaluateFeatureCall(XFeatureCall featureCall, IEvaluationContext context) {
 		return featureCallDispatcher.invoke(featureCall.getFeature(), featureCall, null, context);
 	}
 	
-	public IEvaluationResult _featureCall(XVariableDeclaration variableDeclaration, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+	public IEvaluationResult _featureCallVariableDeclaration(XVariableDeclaration variableDeclaration, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		if (receiver != null)
 			throw new IllegalStateException("feature was variableDeclaration but got receiver instead of null. Receiver: " + receiver);
 		Object value = context.getValue(QualifiedName.create(variableDeclaration.getName()));
 		return new DefaultEvaluationResult(value, null);
 	}
 	
-	public IEvaluationResult _featureCall(JvmFormalParameter parameter, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+	public IEvaluationResult _featureCallFormalParameter(JvmFormalParameter parameter, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		if (receiver != null)
 			throw new IllegalStateException("feature was parameter but got receiver instead of null. Receiver: " + receiver);
 		Object value = context.getValue(QualifiedName.create(parameter.getName()));
 		return new DefaultEvaluationResult(value, null);
 	}
 	
-	public IEvaluationResult _featureCall(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+	public IEvaluationResult _featureCallOperation(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		List<Object> arguments = Lists.newArrayList();
 		for(XExpression arg: featureCall.getArguments().subList(1, featureCall.getArguments().size())) {
 			IEvaluationResult argResult = evaluate(arg, context);
@@ -417,7 +429,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 	
-	public IEvaluationResult _evaluate(XAssignment assignment, IEvaluationContext context) {
+	public IEvaluationResult _evaluateAssignment(XAssignment assignment, IEvaluationContext context) {
 		IEvaluationResult value = evaluate(assignment.getValue(), context);
 		if (value.getException() != null)
 			return value;
@@ -434,12 +446,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return assignmentDispatcher.invoke(feature, assignable, value, context);
 	}
 	
-	public IEvaluationResult _assignValue(XVariableDeclaration variable, Object assignable, Object value, IEvaluationContext context) {
+	public IEvaluationResult _assignValueToDeclaredVariable(XVariableDeclaration variable, Object assignable, Object value, IEvaluationContext context) {
 		context.assignValue(QualifiedName.create(variable.getName()), value);
 		return DefaultEvaluationResult.NULL;
-	}
-	
-	public static class XbaseInterpreterSwitch extends XbaseSwitch<Void> {
-		
 	}
 }
