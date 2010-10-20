@@ -42,7 +42,7 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 	}; 
 	
 	@Inject
-	private IQualifiedNameConverter converter;
+	private IQualifiedNameConverter converter = new IQualifiedNameConverter.DefaultImpl();
 	
 	@Inject
 	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
