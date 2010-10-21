@@ -129,7 +129,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		return parseResult;
 	}
 
-	private void transferLookAhead(CompositeNode from, CompositeNode to) {
+	protected void transferLookAhead(CompositeNode from, CompositeNode to) {
 		if (!from.getLookaheadLeafNodes().isEmpty()) {
 			final boolean wasEmpty = to.getLookaheadLeafNodes().isEmpty();
 			int lookAhead = from.getLookaheadLeafNodes().size();
@@ -162,7 +162,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		}
 	}
 
-	private IParseResult fullyReparse(IParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
+	protected IParseResult fullyReparse(IParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
 			String newText) {
 		unloadNode(rootNode);
 		String reparseRegion = insertChangeIntoReplaceRegion(rootNode, offset, replacedTextLength, newText);
@@ -183,11 +183,6 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			unloader.unloadRoot(object);
 	}
 
-	/**
-	 * @param replaceRootNode
-	 * @param offset
-	 * @param replacedTextLength
-	 */
 	public String insertChangeIntoReplaceRegion(CompositeNode replaceRootNode, int offset, int replacedTextLength,
 			String newText) {
 		String originalRegion = replaceRootNode.serialize();
@@ -228,7 +223,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 				nodesEnclosingRegion);
 	}
 
-	private void filterInvalidRootNodes(CompositeNode rootNode, List<CompositeNode> validReplaceRootNodes) {
+	protected void filterInvalidRootNodes(CompositeNode rootNode, List<CompositeNode> validReplaceRootNodes) {
 		ListIterator<CompositeNode> iter = validReplaceRootNodes.listIterator(validReplaceRootNodes.size());
 		while (iter.hasPrevious()) {
 			if (isInvalidRootNode(rootNode, iter.previous()))
@@ -238,7 +233,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		}
 	}
 
-	private boolean isInvalidRootNode(CompositeNode rootNode, CompositeNode candidate) {
+	protected boolean isInvalidRootNode(CompositeNode rootNode, CompositeNode candidate) {
 		int end = candidate.getTotalOffset() + candidate.getTotalLength();
 		if (candidate.getGrammarElement() instanceof RuleCall) {
 			AbstractRule rule = ((RuleCall) candidate.getGrammarElement()).getRule();
