@@ -29,7 +29,7 @@ public abstract class AbstractScope implements INewScope {
 		return parent;
 	}
 
-	public IEObjectDescription getFirstElement(ISelector selector) {
+	public IEObjectDescription getSingleElement(ISelector selector) {
 		Iterator<? extends IEObjectDescription> iter = getElements(selector).iterator();
 		return iter.hasNext()?iter.next():null;
 	}
@@ -48,5 +48,10 @@ public abstract class AbstractScope implements INewScope {
 	protected abstract Iterable<? extends IEObjectDescription> getLocalElements(ISelector selector);
 
 	protected abstract boolean isShadowed(IEObjectDescription fromParent);
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName()+"["+getLocalElements(ISelector.SELECT_ALL)+"] -> "+getParent();
+	}
 
 }

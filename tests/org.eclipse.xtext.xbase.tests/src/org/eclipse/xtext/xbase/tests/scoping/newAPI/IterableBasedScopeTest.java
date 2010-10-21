@@ -33,7 +33,7 @@ public class IterableBasedScopeTest extends TestCase {
 		IterableBasedScope scope = new IterableBasedScope(Sets.newHashSet(description,description(ETYPED_ELEMENT__LOWER_BOUND)),
 				new IterableBasedScope(Sets.newHashSet(description,description(EMODEL_ELEMENT)), INewScope.NULL_SCOPE));
 		QualifiedName eAttributeQN = QualifiedName.create(EATTRIBUTE.getName());
-		assertSame(description, scope.getFirstElement(Selectors.byName(eAttributeQN)));
+		assertSame(description, scope.getSingleElement(Selectors.byName(eAttributeQN)));
 		Iterator<? extends IEObjectDescription> iterable = scope.getElements(Selectors.byName(eAttributeQN)).iterator();
 		assertSame(description, iterable.next());
 		assertFalse(iterable.hasNext());
@@ -43,7 +43,7 @@ public class IterableBasedScopeTest extends TestCase {
 		IEObjectDescription description = description(EATTRIBUTE);
 		IterableBasedScope scope = new IterableBasedScope(Sets.newHashSet(description,description(ETYPED_ELEMENT__LOWER_BOUND)),
 				new IterableBasedScope(Sets.newHashSet(description,description(EMODEL_ELEMENT)), INewScope.NULL_SCOPE));
-		assertSame(description, scope.getFirstElement(Selectors.byEObject(EATTRIBUTE)));
+		assertSame(description, scope.getSingleElement(Selectors.byEObject(EATTRIBUTE)));
 		Iterator<? extends IEObjectDescription> iterable = scope.getElements(Selectors.byEObject(EATTRIBUTE)).iterator();
 		assertSame(description, iterable.next());
 		assertFalse(iterable.hasNext());

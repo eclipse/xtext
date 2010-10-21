@@ -31,7 +31,7 @@ public class TypeConverterTest extends AbstractXbaseTestCase {
 	private IQualifiedNameConverter nameConverter;
 	
 	public void testConvertPrimitives() throws Exception {
-		XExpression ctx = expression("foo");
+		XExpression ctx = expression("foo", false);
 		assertMappedTypeCanonicalNameEquals("int", "java.lang.Integer", ctx);		
 		assertMappedTypeCanonicalNameEquals("long", "java.lang.Long",ctx);
 		assertMappedTypeCanonicalNameEquals("char", "java.lang.Character", ctx);
@@ -42,12 +42,12 @@ public class TypeConverterTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testConvertArrays() throws Exception {
-		XExpression ctx = expression("foo");
+		XExpression ctx = expression("foo", false);
 		assertMappedTypeCanonicalNameEquals("int[]", "java.util.List<java.lang.Integer>", ctx);
 		assertMappedTypeCanonicalNameEquals("java.lang.Object[][][]", "java.util.List<java.util.List<java.util.List<java.lang.Object>>>", ctx);
 	}
 	
 	protected void assertMappedTypeCanonicalNameEquals(String typeName, String expectedMappedCanonicalName, XExpression ctx) throws IOException {
-		assertEquals(expectedMappedCanonicalName, converter.convert(typesService.getTypeForName(nameConverter.toQualifiedName(typeName), ctx), null, ctx).getCanonicalName());
+		assertEquals(expectedMappedCanonicalName, converter.convert(typesService.getTypeForName(nameConverter.toQualifiedName(typeName), ctx), ctx).getCanonicalName());
 	}
 }

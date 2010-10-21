@@ -38,6 +38,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//XExpression"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="writeable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XAbstractFeatureCall" abstract="true"
       eSuperTypes="#//XExpression">
@@ -55,10 +56,14 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="memberCallArguments" upperBound="-1"
         eType="#//XExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="explicitOperationCall"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XFeatureCall" eSuperTypes="#//XAbstractFeatureCall">
     <eStructuralFeatures xsi:type="ecore:EReference" name="featureCallArguments" upperBound="-1"
         eType="#//XExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="explicitOperationCall"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XConstructorCall" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constructor" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmConstructor"/>

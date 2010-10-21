@@ -21,7 +21,7 @@ public class OldToNewAdapter implements INewScope {
 	
 	private IScope delegate;
 
-	public IEObjectDescription getFirstElement(ISelector selector) {
+	public IEObjectDescription getSingleElement(ISelector selector) {
 		if (selector instanceof SelectByName) {
 			return filter(delegate.getContentByName(((SelectByName) selector).getName()),selector);
 		}
@@ -44,6 +44,11 @@ public class OldToNewAdapter implements INewScope {
 
 	protected Iterable<IEObjectDescription> filter(Iterable<IEObjectDescription> allContentsByEObject, ISelector selector) {
 		return Iterables.filter(allContentsByEObject, selector);
+	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName()+" -> "+delegate;
 	}
 
 }

@@ -42,6 +42,11 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
  */
 public class XbaseParserTest extends AbstractXbaseTestCase {
 	
+	@Override
+	protected XExpression expression(String string) throws Exception {
+		return super.expression(string, false);
+	}
+	
 	public void testAssignment_RightAssociativity() throws Exception {
 		XAssignment ass = (XAssignment) expression("foo = bar += baz");
 		assertEquals(2,ass.getArguments().size());

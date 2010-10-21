@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping;
 
+import static org.eclipse.xtext.naming.QualifiedName.create;
 import org.eclipse.xtext.naming.QualifiedName;
 
 import com.google.common.collect.BiMap;
@@ -17,57 +18,57 @@ import com.google.common.collect.HashBiMap;
  */
 public class OperatorMapping {
 	
-	public static final QualifiedName PLUS = QualifiedName.create("+");
-	public static final QualifiedName MINUS = QualifiedName.create("-");
-	public static final QualifiedName POWER = QualifiedName.create("**");
-	public static final QualifiedName MULTIPLY = QualifiedName.create("*");
-	public static final QualifiedName DIVIDE = QualifiedName.create("/");
-	public static final QualifiedName MODULO = QualifiedName.create("%");
-	public static final QualifiedName OR = QualifiedName.create("||");
-	public static final QualifiedName AND = QualifiedName.create("&&");
-	public static final QualifiedName ADD = QualifiedName.create("+=");
-	public static final QualifiedName EQUALS = QualifiedName.create("==");
-	public static final QualifiedName NOT_EQUALS = QualifiedName.create("!=");
-	public static final QualifiedName LESS_THAN = QualifiedName.create("<");
-	public static final QualifiedName LESS_EQUALS_THAN = QualifiedName.create("<=");
-	public static final QualifiedName GREATER_THAN = QualifiedName.create(">");
-	public static final QualifiedName GREATER_EQUALS_THAN = QualifiedName.create(">=");
-	public static final QualifiedName MAPPED_TO = QualifiedName.create("->");
-	public static final QualifiedName UP_TO = QualifiedName.create("..");
-	public static final QualifiedName NOT = QualifiedName.create("!");
+	public static final QualifiedName PLUS = create("+");
+	public static final QualifiedName MINUS = create("-");
+	public static final QualifiedName POWER = create("**");
+	public static final QualifiedName MULTIPLY = create("*");
+	public static final QualifiedName DIVIDE = create("/");
+	public static final QualifiedName MODULO = create("%");
+	public static final QualifiedName OR = create("||");
+	public static final QualifiedName AND = create("&&");
+	public static final QualifiedName ADD = create("+=");
+	public static final QualifiedName EQUALS = create("==");
+	public static final QualifiedName NOT_EQUALS = create("!=");
+	public static final QualifiedName LESS_THAN = create("<");
+	public static final QualifiedName LESS_EQUALS_THAN = create("<=");
+	public static final QualifiedName GREATER_THAN = create(">");
+	public static final QualifiedName GREATER_EQUALS_THAN = create(">=");
+	public static final QualifiedName MAPPED_TO = create("->");
+	public static final QualifiedName UP_TO = create("..");
+	public static final QualifiedName NOT = create("!");
 	
-	private BiMap<QualifiedName, String> map = HashBiMap.create();
+	private BiMap<QualifiedName, QualifiedName> map = HashBiMap.create();
 	
 	{
 		initializeMapping();
 	}
 	
 	protected void initializeMapping() {
-		map.put(PLUS, "plus");
-		map.put(MINUS, "minus");
-		map.put(POWER, "power");
-		map.put(MULTIPLY, "multiply");
-		map.put(DIVIDE, "divide");
-		map.put(MODULO, "modulo");
-		map.put(OR, "or");
-		map.put(AND, "and");
-		map.put(ADD, "add");
-		map.put(EQUALS, "equals");
-		map.put(NOT_EQUALS, "notEquals");
-		map.put(LESS_THAN, "lessThan");
-		map.put(LESS_EQUALS_THAN, "lessEqualsThan");
-		map.put(GREATER_THAN, "greaterThan");
-		map.put(GREATER_EQUALS_THAN, "greaterEqualsThan");
-		map.put(MAPPED_TO, "mappedTo");
-		map.put(UP_TO, "upTo");
-		map.put(NOT, "not");
+		map.put(PLUS, create("plus"));
+		map.put(MINUS, create("minus"));
+		map.put(POWER, create("power"));
+		map.put(MULTIPLY, create("multiply"));
+		map.put(DIVIDE, create("divide"));
+		map.put(MODULO, create("modulo"));
+		map.put(OR, create("or"));
+		map.put(AND, create("and"));
+		map.put(ADD, create("add"));
+		map.put(EQUALS, create("equals"));
+		map.put(NOT_EQUALS, create("notEquals"));
+		map.put(LESS_THAN, create("lessThan"));
+		map.put(LESS_EQUALS_THAN, create("lessEqualsThan"));
+		map.put(GREATER_THAN, create("greaterThan"));
+		map.put(GREATER_EQUALS_THAN, create("greaterEqualsThan"));
+		map.put(MAPPED_TO, create("mappedTo"));
+		map.put(UP_TO, create("upTo"));
+		map.put(NOT, create("not"));
 	}
 	
-	public String getMethodName(QualifiedName operator) {
+	public QualifiedName getMethodName(QualifiedName operator) {
 		return map.get(operator);
 	}
 	
-	public QualifiedName getOperator(String methodName) {
+	public QualifiedName getOperator(QualifiedName methodName) {
 		return map.inverse().get(methodName);
 	}
 }	

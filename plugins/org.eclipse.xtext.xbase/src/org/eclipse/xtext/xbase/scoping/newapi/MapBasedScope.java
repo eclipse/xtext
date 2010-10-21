@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.scoping.newapi;
 import java.util.Collections;
 import java.util.Map;
 
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.newapi.ISelector.SelectByName;
 
@@ -18,9 +19,9 @@ import org.eclipse.xtext.xbase.scoping.newapi.ISelector.SelectByName;
  */
 public class MapBasedScope extends IterableBasedScope {
 
-	private Map<String, IEObjectDescription> map;
+	private Map<QualifiedName, IEObjectDescription> map;
 
-	public MapBasedScope(Map<String, IEObjectDescription> descriptions, INewScope parent) {
+	public MapBasedScope(Map<QualifiedName, IEObjectDescription> descriptions, INewScope parent) {
 		super(descriptions.values(), parent);
 		this.map = descriptions;
 	}
@@ -29,6 +30,8 @@ public class MapBasedScope extends IterableBasedScope {
 	protected Iterable<? extends IEObjectDescription> getLocalElements(ISelector selector) {
 		if (selector instanceof SelectByName) {
 			IEObjectDescription description = map.get(((SelectByName) selector).getName());
+			if (description==null)
+				return Collections.emptySet();
 			return selector.apply(description) ? Collections.singleton(description) : Collections
 					.<IEObjectDescription> emptySet();
 		}

@@ -5,18 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.testdata;
+package testdata;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-public class FieldAccess {
-
-	public String stringField;
-	public String finalField;
+public class FieldAccessSub extends FieldAccess {
 	
-	public FieldAccess() {
-		finalField = "finalField";
+	public String stringField() {
+		return "stringField()";
 	}
 	
+	public String stringField;
+	
+	@SuppressWarnings("unused")
+	private String privateField;  
+	
+	public String privateField() {
+		return "privateField()";
+	}
 }

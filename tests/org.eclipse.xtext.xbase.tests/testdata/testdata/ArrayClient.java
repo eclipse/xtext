@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.testdata;
+package testdata;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

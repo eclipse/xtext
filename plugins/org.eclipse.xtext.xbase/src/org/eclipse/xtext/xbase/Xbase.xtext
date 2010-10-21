@@ -78,7 +78,7 @@ XMemberFeatureCall returns XExpression:
 	XPrimaryExpression
 	({XMemberFeatureCall.memberCallTarget=current} "." 
 		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
-		feature=[types::JvmIdentifyableElement] ('(' (memberCallArguments+=XExpression (','	memberCallArguments+=XExpression)*)? ')')?)*;
+		feature=[types::JvmIdentifyableElement] (explicitOperationCall?='(' (memberCallArguments+=XExpression (','	memberCallArguments+=XExpression)*)? ')')?)*;
 
 XPrimaryExpression returns XExpression:
 	XClosure |
@@ -149,14 +149,14 @@ XExpressionInsideBlock returns XExpression:
 	XVariableDeclaration | XExpression;
 
 XVariableDeclaration:
-	('var'|'val') (type=JvmTypeReference)? name=ID '=' right=XExpression;
+	(writeable?='var'|'val') (type=JvmTypeReference)? name=ID '=' right=XExpression;
 
 JvmFormalParameter returns types::JvmFormalParameter:
 	(parameterType=JvmTypeReference)? name=ID;
 
 XFeatureCall returns XFeatureCall:
 	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
-	feature=[types::JvmIdentifyableElement] ('(' (featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*)? ')')?;
+	feature=[types::JvmIdentifyableElement] (explicitOperationCall?='(' (featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*)? ')')?;
 
 XConstructorCall:
 	'new' constructor=[types::JvmConstructor|QualifiedName] 

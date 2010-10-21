@@ -5,13 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.testdata;
+package testdata;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ExceptionSubclass extends Exception {
+public class FieldAccess {
 
-	private static final long serialVersionUID = 1L;
-
+	public String stringField;
+	public String finalField;
+	
+	public FieldAccess() {
+		finalField = "finalField";
+	}
+	
 }
