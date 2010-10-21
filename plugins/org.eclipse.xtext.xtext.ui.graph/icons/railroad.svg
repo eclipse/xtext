@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- created by axpde for Wikipedia -->
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+<title>BSicon Bahnübergang</title>
+
+<g fill="none">
+ <g stroke="#000000" stroke-width="5px" stroke-linecap="butt" stroke-linejoin="miter">
+  <path d="M 128,92 L 174,65 L 372,408 L 326,435 z M 372,92 L 326,65 L 128,408 L 174,435 z" fill="#cc0000" />
+  <path d="M 172,168 L 220,250 L 172,332 L 218,358 L 250,303 L 282,358
+	   L 328,332 L 280,250 L 328,168 L 282,142 L 250,197 L 218,142 z" fill="#ffffff" />
+ </g>
+</g>
+</svg>
