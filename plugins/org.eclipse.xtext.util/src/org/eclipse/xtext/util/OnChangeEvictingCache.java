@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -46,11 +45,11 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		return element;
 	}
 	
-	public CacheAdapter getOrCreate(Notifier notifier) {
-		CacheAdapter adapter = (CacheAdapter) EcoreUtil.getAdapter(notifier.eAdapters(), CacheAdapter.class);
+	public CacheAdapter getOrCreate(Resource resource) {
+		CacheAdapter adapter = (CacheAdapter) EcoreUtil.getAdapter(resource.eAdapters(), CacheAdapter.class);
 		if (adapter == null) {
 			adapter = new CacheAdapter();
-			notifier.eAdapters().add(adapter);
+			resource.eAdapters().add(adapter);
 		}
 		return adapter;
 	}
