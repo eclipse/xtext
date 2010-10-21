@@ -264,7 +264,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	}
 	
 	protected List<String> getImportedPackages() {
-		return Lists.newArrayList("org.apache.log4j");
+		return Lists.newArrayList("org.apache.log4j", "org.apache.commons.logging");
 	}
 	
 	protected Collection<String> getAdditionalRequiredBundles() {
