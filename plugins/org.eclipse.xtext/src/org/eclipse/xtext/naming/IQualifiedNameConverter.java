@@ -21,7 +21,7 @@ public interface IQualifiedNameConverter {
 
 	String toString(QualifiedName name);
 
-	QualifiedName toQualifiedName(String qulifiedNameAsText);
+	QualifiedName toQualifiedName(String qualifiedNameAsText);
 
 	static class DefaultImpl implements IQualifiedNameConverter {
 
