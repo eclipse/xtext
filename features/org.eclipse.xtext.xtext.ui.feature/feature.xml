@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.xtext.ui"
+      id="org.eclipse.xtext.xtext.ui"
       label="%featureName"
       version="2.0.0.qualifier"
       provider-name="%providerName">
@@ -23,34 +23,32 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    </license>
 
    <requires>
-      <import feature="org.eclipse.xtext.runtime" version="2.0.0" match="equivalent"/>
-      <import feature="org.eclipse.emf.mwe.ui" version="1.0.0" match="equivalent"/>
-      <import feature="org.eclipse.xpand.ui" version="1.0.1" match="equivalent"/>
+      <import feature="org.eclipse.xtext.ui" version="2.0.0.qualifier"/>
    </requires>
 
    <plugin
-         id="org.eclipse.xtext.ui"
+         id="org.eclipse.xtext.activities"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.common.types.ui"
+         id="org.eclipse.xtext.xtext.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.ui.shared"
+         id="org.eclipse.xtext.xtext.ui.graph"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.ui.ecore"
+         id="org.eclipse.xtext.xdoc"
          download-size="0"
          install-size="0"
          version="0.0.0"
