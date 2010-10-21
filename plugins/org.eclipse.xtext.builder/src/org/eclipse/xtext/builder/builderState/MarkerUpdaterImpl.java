@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.ui.MarkerTypes;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -64,7 +65,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 					child.setWorkRemaining(3);
 					if (storage instanceof IFile) {
 						IFile file = (IFile) storage;
-						if (!file.isReadOnly()) {
+						if (!file.isReadOnly() && !file.getProject().isHidden()) {
 							Resource resource = resourceSet.getResource(delta.getNew().getURI(), true);
 							addMarkers(file, resource, child.newChild(2));
 						}
