@@ -10,3 +10,4 @@ m2t-xpand-Update-1.0.1.zip
 mdt-uml2-Update-3.0.1.zip
 tmf-xtext-Update-1.0.1.zip
 xtext-antlr-Update-1.0.1SR1.zip
+GEF-Update-3.5.1.zip
