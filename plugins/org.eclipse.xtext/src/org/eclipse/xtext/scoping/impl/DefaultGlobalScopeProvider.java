@@ -56,7 +56,7 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		IResourceDescription description = descriptionManager.getResourceDescription(context.eResource());
 		IResourceDescriptions resourceDescriptions = getResourceDescriptions(context);
 		String cacheKey = getCacheKey("VisibleContainers", context.eResource().getResourceSet());
-		OnChangeEvictingCache.CacheAdapter cache = new OnChangeEvictingCache().getOrCreate(context);
+		OnChangeEvictingCache.CacheAdapter cache = new OnChangeEvictingCache().getOrCreate(context.eResource());
 		List<IContainer> result = null;
 		result = cache.get(cacheKey);
 		if (result == null) {

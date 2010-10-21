@@ -12,6 +12,8 @@ import junit.framework.TestCase;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.util.OnChangeEvictingCache.CacheAdapter;
 
 /**
@@ -24,7 +26,9 @@ public class OnChangeEvictingCacheAdapterTest extends TestCase {
 	public void testAdapterIsCleared() throws Exception {
 		EcoreFactory factory = EcoreFactory.eINSTANCE;
 		EClass eClass = factory.createEClass();
-		CacheAdapter ca = new OnChangeEvictingCache().getOrCreate(eClass);
+		Resource resource = new ResourceImpl();
+		resource.getContents().add(eClass);
+		CacheAdapter ca = new OnChangeEvictingCache().getOrCreate(resource);
 		setValue(ca);
 		EAttribute attribute = factory.createEAttribute();
 		assertIsSet(ca);
