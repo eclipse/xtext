@@ -95,7 +95,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			QualifiedName qualifiedPrefix = qualifiedNameConverter.toQualifiedName(prefix);
 			if (qualifiedName.getSegmentCount() > 1) {
 				if (qualifiedPrefix.getSegmentCount() == 1)
-					return delegate.isCandidateMatchingPrefix(qualifiedName.getFirstSegment(),
+					return delegate.isCandidateMatchingPrefix(qualifiedName.getSegment(1),
 							qualifiedPrefix.getFirstSegment());
 				if (!delegate.isCandidateMatchingPrefix(qualifiedName.getFirstSegment(),
 						qualifiedPrefix.getFirstSegment()))
