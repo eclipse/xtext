@@ -13,7 +13,7 @@
   <rm:locator pattern="^com\.google(?:\..+)?$" searchPathRef="mwe"/>
   <rm:locator pattern="^org\.(?:aopalliance|easymock)$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.antlr\.runtime$" searchPathRef="xpand"/>
-  <rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="platform"/>
+  <rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef"/>
   <rm:locator searchPathRef="platform"/>
   <rm:searchPath name="local.releng">
     <rm:provider componentTypes="buckminster" readerType="local" mutable="false">
@@ -47,6 +47,13 @@
   <rm:searchPath name="orbit">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
       <rm:uri format="{0}/tools/orbit/downloads/drops/R20100519200754/repository">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="gef">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+      <rm:uri format="{0}/tools/gef/updates/releases">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
