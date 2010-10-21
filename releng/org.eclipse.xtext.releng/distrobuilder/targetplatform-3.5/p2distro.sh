@@ -29,6 +29,7 @@ org.eclipse.emf.mwe2.language.sdk.feature.group,\
 org.eclipse.emf.compare.sdk.feature.group,\
 org.eclipse.uml2.sdk.feature.group,\
 org.eclipse.cdt.sdk.feature.group,\
+org.eclipse.draw2d.feature.group,\
 $STATIC_IUS"
 
 # uncompress to tmp folder
