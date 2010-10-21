@@ -22,12 +22,20 @@ import org.eclipse.xtext.naming.QualifiedName;
  */
 public class EObjectDescription extends AbstractEObjectDescription {
 
-	protected EObjectDescription(QualifiedName qualifiedName, EObject element, Map<String, String> userData) {
+	public EObjectDescription(QualifiedName qualifiedName, EObject element, Map<String, String> userData) {
 		this.qualifiedName = qualifiedName;
 		this.element = element;
 		this.userData = userData;
 	}
 
+	public static IEObjectDescription create(String simpleName, EObject element, Map<String, String> userData) {
+		return create(QualifiedName.create(simpleName), element, userData);
+	}
+	
+	public static IEObjectDescription create(String simpleName, EObject element) {
+		return create(QualifiedName.create(simpleName), element, Collections.<String,String>emptyMap());
+	}
+	
 	public static IEObjectDescription create(QualifiedName qualifiedName, EObject element, Map<String, String> userData) {
 		return new EObjectDescription(qualifiedName, element, userData);
 	}

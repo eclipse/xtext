@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.JvmTypesTypeProvider;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -55,7 +57,7 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 	static {
 		IQualifiedNameConverter.DefaultImpl nameConverter = new IQualifiedNameConverter.DefaultImpl();
 		JAVA_LANG_CLASS = nameConverter.toQualifiedName(Class.class.getName());
-		INTEGER_TYPE_NAME = nameConverter.toQualifiedName(Long.class.getName());
+		INTEGER_TYPE_NAME = nameConverter.toQualifiedName(Integer.class.getName());
 		VOID_TYPE_NAME = nameConverter.toQualifiedName(Void.class.getName());
 		BOOLEAN_TYPE_NAME = nameConverter.toQualifiedName(Boolean.class.getName());
 		STRING_TYPE_NAME = nameConverter.toQualifiedName(String.class.getName());
@@ -70,11 +72,14 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 
 	@Inject
 	private TypeConverter typeConverter;
+	
+	@Inject
+	private TypeArgumentContext.Provider typeArgCtxProvider;
 
 	@Override
 	protected JvmTypeReference dispatch_type(EObject expression, Context<JvmTypeReference> context) {
 		JvmTypeReference dispatch_type = super.dispatch_type(expression, context);
-		return typeConverter.convert(dispatch_type, context.getExpectedType(), expression);
+		return typeConverter.convert(dispatch_type, expression);
 	}
 
 	protected JvmTypeReference _type(XIntLiteral object, Context<JvmTypeReference> context) {
@@ -101,12 +106,19 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XVariableDeclaration object, Context<JvmTypeReference> context) {
+		if (object.getType()!=null)
+			return object.getType();
 		return internalGetType(object.getRight(), Context.newCtx(object.getType(), context));
 	}
 
 	protected JvmTypeReference _type(XAbstractFeatureCall object, Context<JvmTypeReference> context) {
 		JvmIdentifyableElement eobject = object.getFeature();
-		return internalGetType(eobject, context);
+		JvmTypeReference featureType = internalGetType(eobject, context);
+		if (object instanceof XMemberFeatureCall) {
+			JvmTypeReference targetType = dispatch_type(((XMemberFeatureCall) object).getMemberCallTarget(), context);
+			return typeArgCtxProvider.get(targetType).resolve(featureType);
+		}
+		return featureType;
 	}
 
 	protected JvmTypeReference _type(XConstructorCall object, Context<JvmTypeReference> context) {

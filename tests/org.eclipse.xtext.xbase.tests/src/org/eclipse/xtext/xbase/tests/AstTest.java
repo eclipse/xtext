@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.tests;
 
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
@@ -37,5 +38,10 @@ public class AstTest extends AbstractXbaseTestCase {
 	
 	public void testUnaryOperation() throws Exception {
 		assertEquals(1, ((XUnaryOperation) expression("- bar")).getArguments().size());
+	}
+	
+	@Override
+	protected XExpression expression(String string) throws Exception {
+		return super.expression(string, false);
 	}
 }

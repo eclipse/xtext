@@ -14,33 +14,14 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public interface INewScope {
-	
-	/**
-	 *
-	 */
-	IEObjectDescription getSingleElement(ISelector selector);
-	
-	/**
-	 *
-	 */
-	Iterable<? extends IEObjectDescription> getElements(ISelector selector);
-	
-	
-	public final static INewScope NULL_SCOPE = new INewScope() {
-		
-		public IEObjectDescription getSingleElement(ISelector selector) {
-			return null;
-		}
-		
-		public Iterable<? extends IEObjectDescription> getElements(ISelector selector) {
-			return Collections.emptySet();
-		}
-		
-		@Override
-		public String toString() {
-			return "NULL_SCOPE";
-		}
-	};
-}
+public class SingletonScope extends IterableBasedScope {
 
+	public SingletonScope(IEObjectDescription desc, INewScope parent) {
+		super(Collections.singleton(desc), parent);
+	}
+	
+	public SingletonScope(IEObjectDescription desc) {
+		super(Collections.singleton(desc), INewScope.NULL_SCOPE);
+	}
+
+}

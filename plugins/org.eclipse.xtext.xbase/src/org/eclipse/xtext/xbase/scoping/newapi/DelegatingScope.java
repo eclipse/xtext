@@ -7,40 +7,30 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.newapi;
 
-import java.util.Collections;
-
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public interface INewScope {
+public class DelegatingScope implements INewScope {
 	
-	/**
-	 *
-	 */
-	IEObjectDescription getSingleElement(ISelector selector);
+	private INewScope delegate = INewScope.NULL_SCOPE;
 	
-	/**
-	 *
-	 */
-	Iterable<? extends IEObjectDescription> getElements(ISelector selector);
-	
-	
-	public final static INewScope NULL_SCOPE = new INewScope() {
-		
-		public IEObjectDescription getSingleElement(ISelector selector) {
-			return null;
-		}
-		
-		public Iterable<? extends IEObjectDescription> getElements(ISelector selector) {
-			return Collections.emptySet();
-		}
-		
-		@Override
-		public String toString() {
-			return "NULL_SCOPE";
-		}
-	};
-}
+	public void setDelegate(INewScope delegate) {
+		this.delegate = delegate;
+	}
 
+	public IEObjectDescription getSingleElement(ISelector selector) {
+		return delegate.getSingleElement(selector);
+	}
+
+	public Iterable<? extends IEObjectDescription> getElements(ISelector selector) {
+		return delegate.getElements(selector);
+	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName()+" -> "+(delegate!=null?delegate.toString():"<no delegate>");
+	}
+
+}

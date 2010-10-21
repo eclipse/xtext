@@ -33,7 +33,7 @@ public abstract class AbstractXbaseInterpreterTest extends AbstractXbaseTestCase
 	
 	public void assertEvaluatesTo(Object expectation, String model) {
 		try {
-			XExpression expression = expression(model);
+			XExpression expression = expression(model, true);
 			IEvaluationResult result = interpreter.evaluate(expression);
 			assertNull("Expected no exception. Model was: " + model + ", Exception was: "+ result.getException(), result.getException());
 			assertEquals("Model was: " + model, expectation, result.getResult());

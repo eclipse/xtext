@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#getMemberCallTarget <em>Member Call Target</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#getMemberCallArguments <em>Member Call Arguments</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,6 +60,26 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * @ordered
 	 */
 	protected EList<XExpression> memberCallArguments;
+
+	/**
+	 * The default value of the '{@link #isExplicitOperationCall() <em>Explicit Operation Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExplicitOperationCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXPLICIT_OPERATION_CALL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExplicitOperationCall() <em>Explicit Operation Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExplicitOperationCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean explicitOperationCall = EXPLICIT_OPERATION_CALL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -148,6 +169,29 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isExplicitOperationCall()
+	{
+		return explicitOperationCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExplicitOperationCall(boolean newExplicitOperationCall)
+	{
+		boolean oldExplicitOperationCall = explicitOperationCall;
+		explicitOperationCall = newExplicitOperationCall;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL, oldExplicitOperationCall, explicitOperationCall));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -175,6 +219,8 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 				return getMemberCallTarget();
 			case XbasePackage.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS:
 				return getMemberCallArguments();
+			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
+				return isExplicitOperationCall();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -197,6 +243,9 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 				getMemberCallArguments().clear();
 				getMemberCallArguments().addAll((Collection<? extends XExpression>)newValue);
 				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
+				setExplicitOperationCall((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -217,6 +266,9 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 			case XbasePackage.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS:
 				getMemberCallArguments().clear();
 				return;
+			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
+				setExplicitOperationCall(EXPLICIT_OPERATION_CALL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -235,8 +287,27 @@ public class XMemberFeatureCallImpl extends XAbstractFeatureCallImplCustom imple
 				return memberCallTarget != null;
 			case XbasePackage.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS:
 				return memberCallArguments != null && !memberCallArguments.isEmpty();
+			case XbasePackage.XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL:
+				return explicitOperationCall != EXPLICIT_OPERATION_CALL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (explicitOperationCall: ");
+		result.append(explicitOperationCall);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XMemberFeatureCallImpl

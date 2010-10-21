@@ -8,21 +8,22 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.scoping.newapi.INewScope;
+import org.eclipse.xtext.xbase.scoping.newapi.SingletonScope;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
-import com.google.inject.Inject;
 
 /**
  * This class contains custom scoping description.
@@ -32,17 +33,29 @@ import com.google.inject.Inject;
  *
  */
 public class Xtend2ScopeProvider extends XbaseScopeProvider {
-
-	@Inject
-	private TypesFactory factory;
 	
 	@Override
-	protected IScope createLocalVarScope(EObject context, EReference reference, Predicate<EObject> featurePredicate, IScope parent) {
+	public IScope getScope(EObject context, EReference reference) {
+		IScope parent = super.getScope(context, reference);
+		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType())) {
+			XtendFunction type = EcoreUtil2.getContainerOfType(context, XtendFunction.class);
+			if (!type.getTypeParameters().isEmpty()) {
+				Map<QualifiedName, IEObjectDescription> map = Maps.newHashMap();
+				for (JvmTypeParameter param : type.getTypeParameters()) {
+					QualifiedName qn = QualifiedName.create(param.getName());
+					map.put(qn, EObjectDescription.create(qn, param));
+				}
+				return new MapBasedScope(parent,map);
+			}
+				
+		}
+		return parent;
+	}
+
+	@Override
+	protected INewScope createLocalVarScope(EObject context, EReference reference, INewScope parent) {
 		if (context instanceof XtendClass) {
-			XtendClass clazz = (XtendClass) context;
-			JvmParameterizedTypeReference typeReference = factory.createJvmParameterizedTypeReference();
-			typeReference.setType(clazz);
-			return createFeatureScopeForTypeRef(typeReference, featurePredicate, IScope.NULLSCOPE);
+			return new SingletonScope(EObjectDescription.create(THIS, context),parent);
 		} else if  (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
 			EList<JvmFormalParameter> list = func.getParameters();
@@ -51,9 +64,9 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 				IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);
 				map.put(desc.getName(),desc);
 			}
-			return new MapBasedScope(super.createLocalVarScope(context, reference,featurePredicate, parent), map);
+			return new org.eclipse.xtext.xbase.scoping.newapi.MapBasedScope(map, super.createLocalVarScope(context, reference, parent));
 		}
-		return super.createLocalVarScope(context, reference,featurePredicate, parent);
+		return super.createLocalVarScope(context, reference, parent);
 	}
 
 	protected IEObjectDescription createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {

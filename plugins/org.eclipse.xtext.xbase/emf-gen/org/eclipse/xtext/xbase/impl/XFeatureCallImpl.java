@@ -7,12 +7,15 @@ package org.eclipse.xtext.xbase.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -29,6 +32,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getFeatureCallArguments <em>Feature Call Arguments</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,6 +49,26 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * @ordered
 	 */
 	protected EList<XExpression> featureCallArguments;
+
+	/**
+	 * The default value of the '{@link #isExplicitOperationCall() <em>Explicit Operation Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExplicitOperationCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXPLICIT_OPERATION_CALL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExplicitOperationCall() <em>Explicit Operation Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExplicitOperationCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean explicitOperationCall = EXPLICIT_OPERATION_CALL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,6 +110,29 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isExplicitOperationCall()
+	{
+		return explicitOperationCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExplicitOperationCall(boolean newExplicitOperationCall)
+	{
+		boolean oldExplicitOperationCall = explicitOperationCall;
+		explicitOperationCall = newExplicitOperationCall;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XFEATURE_CALL__EXPLICIT_OPERATION_CALL, oldExplicitOperationCall, explicitOperationCall));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -109,6 +156,8 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 		{
 			case XbasePackage.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS:
 				return getFeatureCallArguments();
+			case XbasePackage.XFEATURE_CALL__EXPLICIT_OPERATION_CALL:
+				return isExplicitOperationCall();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -128,6 +177,9 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 				getFeatureCallArguments().clear();
 				getFeatureCallArguments().addAll((Collection<? extends XExpression>)newValue);
 				return;
+			case XbasePackage.XFEATURE_CALL__EXPLICIT_OPERATION_CALL:
+				setExplicitOperationCall((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -145,6 +197,9 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 			case XbasePackage.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS:
 				getFeatureCallArguments().clear();
 				return;
+			case XbasePackage.XFEATURE_CALL__EXPLICIT_OPERATION_CALL:
+				setExplicitOperationCall(EXPLICIT_OPERATION_CALL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -161,8 +216,27 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 		{
 			case XbasePackage.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS:
 				return featureCallArguments != null && !featureCallArguments.isEmpty();
+			case XbasePackage.XFEATURE_CALL__EXPLICIT_OPERATION_CALL:
+				return explicitOperationCall != EXPLICIT_OPERATION_CALL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (explicitOperationCall: ");
+		result.append(explicitOperationCall);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XFeatureCallImpl

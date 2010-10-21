@@ -282,13 +282,22 @@ public interface XbasePackage extends EPackage
 	int XVARIABLE_DECLARATION__RIGHT = XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Writeable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XVARIABLE_DECLARATION__WRITEABLE = XEXPRESSION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>XVariable Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XVARIABLE_DECLARATION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 3;
+	int XVARIABLE_DECLARATION_FEATURE_COUNT = XEXPRESSION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl <em>XAbstract Feature Call</em>}' class.
@@ -410,13 +419,22 @@ public interface XbasePackage extends EPackage
 	int XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Explicit Operation Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>XMember Feature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+	int XMEMBER_FEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
@@ -474,13 +492,22 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL__FEATURE_CALL_ARGUMENTS = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Explicit Operation Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__EXPLICIT_OPERATION_CALL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>XFeature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
+	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -1453,6 +1480,17 @@ public interface XbasePackage extends EPackage
 	EReference getXVariableDeclaration_Right();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XVariableDeclaration#isWriteable <em>Writeable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Writeable</em>'.
+	 * @see org.eclipse.xtext.xbase.XVariableDeclaration#isWriteable()
+	 * @see #getXVariableDeclaration()
+	 * @generated
+	 */
+	EAttribute getXVariableDeclaration_Writeable();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall <em>XAbstract Feature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1539,6 +1577,17 @@ public interface XbasePackage extends EPackage
 	EReference getXMemberFeatureCall_MemberCallArguments();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Explicit Operation Call</em>'.
+	 * @see org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitOperationCall()
+	 * @see #getXMemberFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXMemberFeatureCall_ExplicitOperationCall();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XFeatureCall <em>XFeature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1558,6 +1607,17 @@ public interface XbasePackage extends EPackage
 	 * @generated
 	 */
 	EReference getXFeatureCall_FeatureCallArguments();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Explicit Operation Call</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall#isExplicitOperationCall()
+	 * @see #getXFeatureCall()
+	 * @generated
+	 */
+	EAttribute getXFeatureCall_ExplicitOperationCall();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XConstructorCall <em>XConstructor Call</em>}'.
@@ -2256,6 +2316,14 @@ public interface XbasePackage extends EPackage
 		EReference XVARIABLE_DECLARATION__RIGHT = eINSTANCE.getXVariableDeclaration_Right();
 
 		/**
+		 * The meta object literal for the '<em><b>Writeable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XVARIABLE_DECLARATION__WRITEABLE = eINSTANCE.getXVariableDeclaration_Writeable();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl <em>XAbstract Feature Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2324,6 +2392,14 @@ public interface XbasePackage extends EPackage
 		EReference XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS = eINSTANCE.getXMemberFeatureCall_MemberCallArguments();
 
 		/**
+		 * The meta object literal for the '<em><b>Explicit Operation Call</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL = eINSTANCE.getXMemberFeatureCall_ExplicitOperationCall();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl <em>XFeature Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2340,6 +2416,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EReference XFEATURE_CALL__FEATURE_CALL_ARGUMENTS = eINSTANCE.getXFeatureCall_FeatureCallArguments();
+
+		/**
+		 * The meta object literal for the '<em><b>Explicit Operation Call</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XFEATURE_CALL__EXPLICIT_OPERATION_CALL = eINSTANCE.getXFeatureCall_ExplicitOperationCall();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.

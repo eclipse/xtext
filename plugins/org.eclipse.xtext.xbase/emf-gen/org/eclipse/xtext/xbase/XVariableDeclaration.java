@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xbase.XVariableDeclaration#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XVariableDeclaration#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XVariableDeclaration#getRight <em>Right</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XVariableDeclaration#isWriteable <em>Writeable</em>}</li>
  * </ul>
  * </p>
  *
@@ -105,5 +106,31 @@ public interface XVariableDeclaration extends XExpression, JvmIdentifyableElemen
 	 * @generated
 	 */
 	void setRight(XExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Writeable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Writeable</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Writeable</em>' attribute.
+	 * @see #setWriteable(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXVariableDeclaration_Writeable()
+	 * @model
+	 * @generated
+	 */
+	boolean isWriteable();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XVariableDeclaration#isWriteable <em>Writeable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Writeable</em>' attribute.
+	 * @see #isWriteable()
+	 * @generated
+	 */
+	void setWriteable(boolean value);
 
 } // XVariableDeclaration

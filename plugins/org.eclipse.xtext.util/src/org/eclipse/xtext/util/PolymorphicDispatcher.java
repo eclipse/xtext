@@ -93,6 +93,14 @@ public class PolymorphicDispatcher<RT> {
 		public String toString() {
 			return "'" + methodName + "'";
 		}
+		
+		public int getMaxParams() {
+			return maxParams;
+		}
+		
+		public int getMinParams() {
+			return minParams;
+		}
 	}
 
 	public static class Predicates {
@@ -260,6 +268,12 @@ public class PolymorphicDispatcher<RT> {
 
 	@SuppressWarnings("unchecked")
 	public RT invoke(Object... params) {
+		if (methodFilter instanceof MethodNameFilter) {
+			MethodNameFilter filter = (MethodNameFilter) methodFilter;
+			if (params.length<filter.getMinParams() || params.length > filter.getMaxParams()) {
+				throw new IllegalArgumentException("Wrong number of arguments. Expected "+filter.getMinParams()+" to "+filter.getMaxParams()+".");
+			}
+		}
 		List<MethodDesc> result = cache.get(getTypes(params));
 		// check if ambiguous
 		if (result.size()>1)

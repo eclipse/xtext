@@ -190,6 +190,7 @@ public class XcssParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsAssignment_1_2_1(), "rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_1");
 					put(grammarAccess.getXMemberFeatureCallAccess().getTypeArgumentsAssignment_1_2_2_1(), "rule__XMemberFeatureCall__TypeArgumentsAssignment_1_2_2_1");
 					put(grammarAccess.getXMemberFeatureCallAccess().getFeatureAssignment_1_3(), "rule__XMemberFeatureCall__FeatureAssignment_1_3");
+					put(grammarAccess.getXMemberFeatureCallAccess().getExplicitOperationCallAssignment_1_4_0(), "rule__XMemberFeatureCall__ExplicitOperationCallAssignment_1_4_0");
 					put(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsAssignment_1_4_1_0(), "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_0");
 					put(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsAssignment_1_4_1_1_1(), "rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_4_1_1_1");
 					put(grammarAccess.getXClosureAccess().getFormalParametersAssignment_1_0(), "rule__XClosure__FormalParametersAssignment_1_0");
@@ -216,6 +217,7 @@ public class XcssParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXDoWhileExpressionAccess().getBodyAssignment_1(), "rule__XDoWhileExpression__BodyAssignment_1");
 					put(grammarAccess.getXDoWhileExpressionAccess().getPredicateAssignment_4(), "rule__XDoWhileExpression__PredicateAssignment_4");
 					put(grammarAccess.getXBlockExpressionAccess().getExpressionsAssignment_2_0(), "rule__XBlockExpression__ExpressionsAssignment_2_0");
+					put(grammarAccess.getXVariableDeclarationAccess().getWriteableAssignment_0_0(), "rule__XVariableDeclaration__WriteableAssignment_0_0");
 					put(grammarAccess.getXVariableDeclarationAccess().getTypeAssignment_1(), "rule__XVariableDeclaration__TypeAssignment_1");
 					put(grammarAccess.getXVariableDeclarationAccess().getNameAssignment_2(), "rule__XVariableDeclaration__NameAssignment_2");
 					put(grammarAccess.getXVariableDeclarationAccess().getRightAssignment_4(), "rule__XVariableDeclaration__RightAssignment_4");
@@ -224,6 +226,7 @@ public class XcssParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXFeatureCallAccess().getTypeArgumentsAssignment_0_1(), "rule__XFeatureCall__TypeArgumentsAssignment_0_1");
 					put(grammarAccess.getXFeatureCallAccess().getTypeArgumentsAssignment_0_2_1(), "rule__XFeatureCall__TypeArgumentsAssignment_0_2_1");
 					put(grammarAccess.getXFeatureCallAccess().getFeatureAssignment_1(), "rule__XFeatureCall__FeatureAssignment_1");
+					put(grammarAccess.getXFeatureCallAccess().getExplicitOperationCallAssignment_2_0(), "rule__XFeatureCall__ExplicitOperationCallAssignment_2_0");
 					put(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsAssignment_2_1_0(), "rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_0");
 					put(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsAssignment_2_1_1_1(), "rule__XFeatureCall__FeatureCallArgumentsAssignment_2_1_1_1");
 					put(grammarAccess.getXConstructorCallAccess().getConstructorAssignment_1(), "rule__XConstructorCall__ConstructorAssignment_1");

@@ -8,9 +8,11 @@
 package org.eclipse.xtext.xbase.typing;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 
@@ -22,40 +24,58 @@ import com.google.inject.Inject;
 public class TypeConverter {
 
 	private static final QualifiedName JAVA_UTIL_LIST = QualifiedName.create("java", "util", "List");
-	
+
 	@Inject
 	private TypesService typesService;
 	
 	@Inject
 	private IQualifiedNameConverter nameConverter;
-	
+
 	/**
 	 * converts the toBeConverter type to something different.
 	 * 
-	 * this implementation converts any primitive types to theri wrapper types
-	 * and any arrays X[]to corresponding java.util.List<X> types.
+	 * this implementation converts any primitive types to their wrapper types and any arrays X[]to corresponding
+	 * java.util.List<X> types.
 	 */
-	public JvmTypeReference convert(JvmTypeReference toBeConverted, JvmTypeReference expected, EObject context) {
-		if (toBeConverted==null)
+	public JvmTypeReference convert(JvmTypeReference toBeConverted, final EObject context) {
+		if (toBeConverted == null)
 			return null;
-		if (toBeConverted.getType() instanceof JvmPrimitiveType) {
-			return convertPrimitiveToWrapper((JvmPrimitiveType)toBeConverted.getType(), context);
-		} 
-		if (toBeConverted.getType() instanceof JvmArrayType) {
-			return convertArrayToList((JvmArrayType)toBeConverted.getType(), expected ,context);
-		}
-		return toBeConverted;
+
+		@SuppressWarnings("serial")
+		EcoreUtil.Copier copier = new EcoreUtil.Copier(false, true) {
+			@Override
+			public EObject copy(EObject arg0) {
+				if (arg0 instanceof JvmTypeReference) {
+					JvmTypeReference typeRef = (JvmTypeReference) arg0;
+					if (typeRef.getType() instanceof JvmVoid) {
+						return typesService.getTypeForName(
+								nameConverter.toQualifiedName(Void.class.getCanonicalName()), context);
+					}
+					if (typeRef.getType() instanceof JvmPrimitiveType) {
+						return convertPrimitiveToWrapper((JvmPrimitiveType) typeRef.getType(), context);
+					}
+					if (typeRef.getType() instanceof JvmArrayType) {
+						return convertArrayToList((JvmArrayType) typeRef.getType(), context);
+					}
+				}
+				return super.copy(arg0);
+			}
+		};
+		JvmTypeReference copy = (JvmTypeReference) copier.copy(toBeConverted);
+		copier.copyReferences();
+		return copy;
 	}
 	
-	protected JvmTypeReference convertArrayToList(JvmArrayType jvmArrayType, JvmTypeReference expected, EObject context) {
-		return typesService.getTypeForName(JAVA_UTIL_LIST, context, convert(jvmArrayType.getComponentType(), expected, context));
+	protected JvmTypeReference convertArrayToList(JvmArrayType jvmArrayType, EObject context) {
+		return typesService.getTypeForName(JAVA_UTIL_LIST, context, convert(jvmArrayType.getComponentType(), context));
 	}
 
 	protected JvmTypeReference convertPrimitiveToWrapper(JvmPrimitiveType type, EObject context) {
 		// TODO: extract constants
-		return typesService.getTypeForName(nameConverter.toQualifiedName(getWrapperTypeName(type.getCanonicalName())), context);
+		return typesService.getTypeForName(nameConverter.toQualifiedName(getWrapperTypeName(type.getCanonicalName())),
+				context);
 	}
-	
+
 	protected String getWrapperTypeName(String primitiveTypeName) {
 		if (primitiveTypeName.equals(Boolean.TYPE.getCanonicalName())) {
 			return Boolean.class.getCanonicalName();
@@ -74,7 +94,7 @@ public class TypeConverter {
 		} else if (primitiveTypeName.equals(Character.TYPE.getCanonicalName())) {
 			return Character.class.getCanonicalName();
 		} else {
-			throw new IllegalArgumentException("Not a primitive : "+primitiveTypeName);
+			throw new IllegalArgumentException("Not a primitive : " + primitiveTypeName);
 		}
 	}
 

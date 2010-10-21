@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XVariableDeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XVariableDeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XVariableDeclarationImpl#getRight <em>Right</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XVariableDeclarationImpl#isWriteable <em>Writeable</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,6 +76,26 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * @ordered
 	 */
 	protected XExpression right;
+
+	/**
+	 * The default value of the '{@link #isWriteable() <em>Writeable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isWriteable()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean WRITEABLE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isWriteable() <em>Writeable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isWriteable()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean writeable = WRITEABLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -221,6 +242,29 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isWriteable()
+	{
+		return writeable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWriteable(boolean newWriteable)
+	{
+		boolean oldWriteable = writeable;
+		writeable = newWriteable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XVARIABLE_DECLARATION__WRITEABLE, oldWriteable, writeable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getCanonicalName()
 	{
 		// TODO: implement this method
@@ -262,6 +306,8 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 				return getName();
 			case XbasePackage.XVARIABLE_DECLARATION__RIGHT:
 				return getRight();
+			case XbasePackage.XVARIABLE_DECLARATION__WRITEABLE:
+				return isWriteable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -284,6 +330,9 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 				return;
 			case XbasePackage.XVARIABLE_DECLARATION__RIGHT:
 				setRight((XExpression)newValue);
+				return;
+			case XbasePackage.XVARIABLE_DECLARATION__WRITEABLE:
+				setWriteable((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -308,6 +357,9 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 			case XbasePackage.XVARIABLE_DECLARATION__RIGHT:
 				setRight((XExpression)null);
 				return;
+			case XbasePackage.XVARIABLE_DECLARATION__WRITEABLE:
+				setWriteable(WRITEABLE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -328,6 +380,8 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XbasePackage.XVARIABLE_DECLARATION__RIGHT:
 				return right != null;
+			case XbasePackage.XVARIABLE_DECLARATION__WRITEABLE:
+				return writeable != WRITEABLE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -345,6 +399,8 @@ public class XVariableDeclarationImpl extends XExpressionImpl implements XVariab
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", writeable: ");
+		result.append(writeable);
 		result.append(')');
 		return result.toString();
 	}

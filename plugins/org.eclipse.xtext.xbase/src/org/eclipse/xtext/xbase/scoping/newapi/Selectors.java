@@ -27,7 +27,9 @@ public class Selectors {
 		return new SelectByName(qualifiedName) {
 			@Override
 			public boolean apply(IEObjectDescription input) {
-				return super.apply(input) && additionalSelectionCriteria.apply(input);
+				boolean nameMatch = super.apply(input);
+				boolean result = nameMatch && additionalSelectionCriteria.apply(input);
+				return result;
 			}
 		};
 	}

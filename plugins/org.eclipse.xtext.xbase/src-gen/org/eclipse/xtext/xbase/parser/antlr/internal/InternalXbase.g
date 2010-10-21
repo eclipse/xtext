@@ -1494,11 +1494,28 @@ ruleXMemberFeatureCall returns [EObject current=null]
 	}
 
 )
-)(	otherlv_9='(' 
+)((
+(
+		lv_explicitOperationCall_9_0=	'(' 
     {
-    	createLeafNode(otherlv_9, grammarAccess.getXMemberFeatureCallAccess().getLeftParenthesisKeyword_1_4_0(), null);
+        createLeafNode(lv_explicitOperationCall_9_0, grammarAccess.getXMemberFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_1_4_0_0(), "explicitOperationCall");
     }
-((
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getXMemberFeatureCallRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "explicitOperationCall", true, "(", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)((
 (
 		{ 
 	        currentNode=createCompositeNode(grammarAccess.getXMemberFeatureCallAccess().getMemberCallArgumentsXExpressionParserRuleCall_1_4_1_0_0(), currentNode); 
@@ -2861,11 +2878,28 @@ ruleXVariableDeclaration returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	otherlv_0='var' 
+(((
+(
+		lv_writeable_0_0=	'var' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getXVariableDeclarationAccess().getVarKeyword_0_0(), null);
+        createLeafNode(lv_writeable_0_0, grammarAccess.getXVariableDeclarationAccess().getWriteableVarKeyword_0_0_0(), "writeable");
     }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getXVariableDeclarationRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "writeable", true, "var", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
 
+)
+)
     |	otherlv_1='val' 
     {
     	createLeafNode(otherlv_1, grammarAccess.getXVariableDeclarationAccess().getValKeyword_0_1(), null);
@@ -3117,11 +3151,28 @@ ruleXFeatureCall returns [EObject current=null]
 	}
 
 )
-)(	otherlv_6='(' 
+)((
+(
+		lv_explicitOperationCall_6_0=	'(' 
     {
-    	createLeafNode(otherlv_6, grammarAccess.getXFeatureCallAccess().getLeftParenthesisKeyword_2_0(), null);
+        createLeafNode(lv_explicitOperationCall_6_0, grammarAccess.getXFeatureCallAccess().getExplicitOperationCallLeftParenthesisKeyword_2_0_0(), "explicitOperationCall");
     }
-((
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getXFeatureCallRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "explicitOperationCall", true, "(", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)((
 (
 		{ 
 	        currentNode=createCompositeNode(grammarAccess.getXFeatureCallAccess().getFeatureCallArgumentsXExpressionParserRuleCall_2_1_0_0(), currentNode); 

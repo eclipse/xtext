@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#getFeatureCallArguments <em>Feature Call Arguments</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,5 +41,31 @@ public interface XFeatureCall extends XAbstractFeatureCall
 	 * @generated
 	 */
 	EList<XExpression> getFeatureCallArguments();
+
+	/**
+	 * Returns the value of the '<em><b>Explicit Operation Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Explicit Operation Call</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Explicit Operation Call</em>' attribute.
+	 * @see #setExplicitOperationCall(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXFeatureCall_ExplicitOperationCall()
+	 * @model
+	 * @generated
+	 */
+	boolean isExplicitOperationCall();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Explicit Operation Call</em>' attribute.
+	 * @see #isExplicitOperationCall()
+	 * @generated
+	 */
+	void setExplicitOperationCall(boolean value);
 
 } // XFeatureCall

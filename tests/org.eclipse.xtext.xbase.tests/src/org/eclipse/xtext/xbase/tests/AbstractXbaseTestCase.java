@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests;
 
-import java.io.IOException;
-
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
@@ -54,11 +52,11 @@ public abstract class AbstractXbaseTestCase extends TestCase {
 		return getInjector().getInstance(clazz);
 	}
 
-	protected XExpression expression(String string) throws IOException {
-		return expression(string, false);
+	protected XExpression expression(String string) throws Exception {
+		return expression(string, true);
 	}
 
-	protected XExpression expression(String string, boolean resolve) throws IOException {
+	protected XExpression expression(String string, boolean resolve) throws Exception {
 		XtextResourceSet set = get(XtextResourceSet.class);
 		Resource resource = set.createResource(URI.createURI("Test.___xbase"));
 		resource.load(new StringInputStream(string), null);

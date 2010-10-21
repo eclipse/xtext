@@ -42,11 +42,11 @@ public class NewToOldAdapter implements IScope {
 	}
 
 	public IEObjectDescription getContentByName(QualifiedName name) {
-		return newScope.getFirstElement(Selectors.byName(name, selector));
+		return newScope.getSingleElement(Selectors.byName(name, selector));
 	}
 
 	public IEObjectDescription getContentByEObject(EObject object) {
-		return newScope.getFirstElement(Selectors.byEObject(object, selector));
+		return newScope.getSingleElement(Selectors.byEObject(object, selector));
 	}
 
 	@SuppressWarnings("unchecked")

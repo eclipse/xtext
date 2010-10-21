@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.scoping.newapi;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.google.common.base.Predicate;
@@ -22,7 +21,8 @@ import com.google.common.collect.Sets;
  */
 public class IterableBasedScope extends AbstractScope {
 	
-	protected Set<QualifiedName> names = null;
+	protected Set<Object> shadowingIndex = null;
+	
 	protected Iterable<? extends IEObjectDescription> descriptions;
 	
 	public IterableBasedScope(Iterable<? extends IEObjectDescription> descriptions, INewScope parent) {
@@ -33,11 +33,15 @@ public class IterableBasedScope extends AbstractScope {
 	@Override
 	protected Iterable<? extends IEObjectDescription> index(Iterable<? extends IEObjectDescription> localElements) {
 		HashSet<IEObjectDescription> set = Sets.newHashSet(localElements);
-		names = Sets.newHashSet();
+		shadowingIndex = Sets.newHashSet();
 		for (IEObjectDescription description : set) {
-			names.add(description.getName());
+			shadowingIndex.add(getShadowingIndexElement(description));
 		}
 		return set;
+	}
+
+	protected Object getShadowingIndexElement(IEObjectDescription description) {
+		return description.getName();
 	}
 
 	@Override
@@ -50,7 +54,8 @@ public class IterableBasedScope extends AbstractScope {
 
 	@Override
 	protected boolean isShadowed(IEObjectDescription fromParent) {
-		return names.contains(fromParent.getName());
+		boolean filtered = shadowingIndex.contains(getShadowingIndexElement(fromParent));
+		return filtered;
 	}
 
 }

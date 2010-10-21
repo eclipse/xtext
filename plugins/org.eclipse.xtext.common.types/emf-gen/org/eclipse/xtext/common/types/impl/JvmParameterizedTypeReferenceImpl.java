@@ -101,6 +101,7 @@ public class JvmParameterizedTypeReferenceImpl extends JvmTypeReferenceImpl impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public JvmType getType()
 	{
 		if (type != null && type.eIsProxy())

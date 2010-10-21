@@ -117,7 +117,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	@Override
 	public int hashCode() {
-		return ((getSegments() == null) ? 0 : getSegments().hashCode());
+		return getSegments().hashCode();
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	/**
 	 * Returns a canonical String representation of this using '.' as namespace delimiter. For language specific
-	 * conversion taking the concrete syntax into account see {@link IQualifiedNameProvider#toString(QualifiedName)}.
+	 * conversion taking the concrete syntax into account see {@link IQualifiedNameConverter#toString(QualifiedName)}.
 	 */
 	@Override
 	public String toString() {

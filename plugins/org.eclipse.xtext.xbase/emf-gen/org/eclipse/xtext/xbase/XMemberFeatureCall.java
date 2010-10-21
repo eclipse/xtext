@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallTarget <em>Member Call Target</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallArguments <em>Member Call Arguments</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,5 +68,31 @@ public interface XMemberFeatureCall extends XAbstractFeatureCall
 	 * @generated
 	 */
 	EList<XExpression> getMemberCallArguments();
+
+	/**
+	 * Returns the value of the '<em><b>Explicit Operation Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Explicit Operation Call</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Explicit Operation Call</em>' attribute.
+	 * @see #setExplicitOperationCall(boolean)
+	 * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall_ExplicitOperationCall()
+	 * @model
+	 * @generated
+	 */
+	boolean isExplicitOperationCall();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Explicit Operation Call</em>' attribute.
+	 * @see #isExplicitOperationCall()
+	 * @generated
+	 */
+	void setExplicitOperationCall(boolean value);
 
 } // XMemberFeatureCall
