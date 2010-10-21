@@ -288,8 +288,8 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 					public void process(XtextResource resource) throws Exception {
 						PartialContentAssistContextFactory delegateFactory = languageRegistry.getPartialContentAssistContextFactory(data.language);
 						delegateFactory.initializeFor(data.rule);
-						int mappedOffset = evaluatedTemplate.getMappedOffset(context.getOffset());
 						String mappedInput = evaluatedTemplate.getMappedString();
+						int mappedOffset = Math.min(mappedInput.length(), evaluatedTemplate.getMappedOffset(context.getOffset()));
 						DummyDocument document = new DummyDocument(mappedInput);
 						DummyTextViewer dummyViewer = new DummyTextViewer(TextSelection.emptySelection(), document);
 						ContentAssistContext[] contexts = delegateFactory.create(dummyViewer, mappedOffset, resource);

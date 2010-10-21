@@ -385,6 +385,11 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		}
 	}
 	
+	@Override
+	public boolean mismatchIsMissingToken(IntStream input, BitSet follow) {
+		return false;
+	}
+	
 	protected AbstractElement getCurrentGrammarElement() {
 		for (int i = grammarElements.size() - 1; i >= 0; i--) {
 			EObject result = grammarElements.get(grammarElements.size() - 1);
