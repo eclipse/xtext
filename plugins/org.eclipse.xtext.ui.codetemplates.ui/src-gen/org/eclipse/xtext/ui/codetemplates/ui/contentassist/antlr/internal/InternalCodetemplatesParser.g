@@ -1133,11 +1133,9 @@ rule__TemplateBodyWithQuotes__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_0()); }
-
-	KEYWORD_11 
-
-{ after(grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_0()); }
+{ before(grammarAccess.getTemplateBodyWithQuotesAccess().getWSTerminalRuleCall_0()); }
+(	RULE_WS)?
+{ after(grammarAccess.getTemplateBodyWithQuotesAccess().getWSTerminalRuleCall_0()); }
 )
 
 ;
@@ -1164,9 +1162,11 @@ rule__TemplateBodyWithQuotes__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getTemplateBodyWithQuotesAccess().getTemplateBodyParserRuleCall_1()); }
-	ruleTemplateBody
-{ after(grammarAccess.getTemplateBodyWithQuotesAccess().getTemplateBodyParserRuleCall_1()); }
+{ before(grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_1()); }
+
+	KEYWORD_11 
+
+{ after(grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_1()); }
 )
 
 ;
@@ -1181,6 +1181,7 @@ rule__TemplateBodyWithQuotes__Group__2
     }
 :
 	rule__TemplateBodyWithQuotes__Group__2__Impl
+	rule__TemplateBodyWithQuotes__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -1192,17 +1193,47 @@ rule__TemplateBodyWithQuotes__Group__2__Impl
     }
 :
 (
-{ before(grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_2()); }
-
-	KEYWORD_10 
-
-{ after(grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_2()); }
+{ before(grammarAccess.getTemplateBodyWithQuotesAccess().getTemplateBodyParserRuleCall_2()); }
+	ruleTemplateBody
+{ after(grammarAccess.getTemplateBodyWithQuotesAccess().getTemplateBodyParserRuleCall_2()); }
 )
 
 ;
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__TemplateBodyWithQuotes__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__TemplateBodyWithQuotes__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TemplateBodyWithQuotes__Group__3__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_3()); }
+
+	KEYWORD_10 
+
+{ after(grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_3()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 

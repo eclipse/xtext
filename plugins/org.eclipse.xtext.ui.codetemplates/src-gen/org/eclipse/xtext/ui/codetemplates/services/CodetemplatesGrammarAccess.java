@@ -149,30 +149,35 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	public class TemplateBodyWithQuotesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TemplateBodyWithQuotes");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cGreaterThanSignGreaterThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cTemplateBodyParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Keyword cLessThanSignLessThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final RuleCall cWSTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cGreaterThanSignGreaterThanSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cTemplateBodyParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Keyword cLessThanSignLessThanSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//TemplateBodyWithQuotes returns TemplateBody hidden(): // EOL
+		//TemplateBodyWithQuotes returns TemplateBody hidden():
+		//	WS? // EOL
 		//	">>" TemplateBody // BOL
 		//	"<<";
 		public ParserRule getRule() { return rule; }
 
-		//// EOL
+		//WS? // EOL
 		//">>" TemplateBody // BOL
 		//"<<"
 		public Group getGroup() { return cGroup; }
 
+		//WS?
+		public RuleCall getWSTerminalRuleCall_0() { return cWSTerminalRuleCall_0; }
+
 		//// EOL
 		//">>"
-		public Keyword getGreaterThanSignGreaterThanSignKeyword_0() { return cGreaterThanSignGreaterThanSignKeyword_0; }
+		public Keyword getGreaterThanSignGreaterThanSignKeyword_1() { return cGreaterThanSignGreaterThanSignKeyword_1; }
 
 		//TemplateBody
-		public RuleCall getTemplateBodyParserRuleCall_1() { return cTemplateBodyParserRuleCall_1; }
+		public RuleCall getTemplateBodyParserRuleCall_2() { return cTemplateBodyParserRuleCall_2; }
 
 		//// BOL
 		//"<<"
-		public Keyword getLessThanSignLessThanSignKeyword_2() { return cLessThanSignLessThanSignKeyword_2; }
+		public Keyword getLessThanSignLessThanSignKeyword_3() { return cLessThanSignLessThanSignKeyword_3; }
 	}
 
 	public class TemplateBodyElements extends AbstractParserRuleElementFinder {
@@ -592,7 +597,8 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		return getCodetemplateAccess().getRule();
 	}
 
-	//TemplateBodyWithQuotes returns TemplateBody hidden(): // EOL
+	//TemplateBodyWithQuotes returns TemplateBody hidden():
+	//	WS? // EOL
 	//	">>" TemplateBody // BOL
 	//	"<<";
 	public TemplateBodyWithQuotesElements getTemplateBodyWithQuotesAccess() {

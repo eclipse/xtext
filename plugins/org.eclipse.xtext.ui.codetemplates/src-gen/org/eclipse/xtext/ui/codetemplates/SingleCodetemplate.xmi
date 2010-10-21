@@ -149,6 +149,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/codetemplate/Codetemplates#//TemplateBody"/>
       </type>
       <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:RuleCall" cardinality="?" rule="/1/@rules.14"/>
         <elements xsi:type="xtext:Keyword" value=">>"/>
         <elements xsi:type="xtext:RuleCall" rule="/1/@rules.3"/>
         <elements xsi:type="xtext:Keyword" value="&lt;&lt;"/>

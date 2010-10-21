@@ -342,24 +342,28 @@ ruleTemplateBodyWithQuotes returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(
-	otherlv_0=KEYWORD_11 
+((this_WS_0=RULE_WS
+    { 
+    createLeafNode(this_WS_0, grammarAccess.getTemplateBodyWithQuotesAccess().getWSTerminalRuleCall_0(), null); 
+    }
+)?
+	otherlv_1=KEYWORD_11 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_0(), null);
+    	createLeafNode(otherlv_1, grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_1(), null);
     }
 
     { 
-        currentNode=createCompositeNode(grammarAccess.getTemplateBodyWithQuotesAccess().getTemplateBodyParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getTemplateBodyWithQuotesAccess().getTemplateBodyParserRuleCall_2(), currentNode); 
     }
-    this_TemplateBody_1=ruleTemplateBody
+    this_TemplateBody_2=ruleTemplateBody
     {
-        $current = $this_TemplateBody_1.current;
+        $current = $this_TemplateBody_2.current;
         currentNode = currentNode.getParent();
     }
 
-	otherlv_2=KEYWORD_10 
+	otherlv_3=KEYWORD_10 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_2(), null);
+    	createLeafNode(otherlv_3, grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_3(), null);
     }
 )
 ;

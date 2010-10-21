@@ -15,7 +15,7 @@ Codetemplate:
   ; 
   
 TemplateBodyWithQuotes returns TemplateBody hidden():
-	'>>' // EOL
+	WS? '>>' // EOL
 	TemplateBody
 	'<<' // BOL
 ;  

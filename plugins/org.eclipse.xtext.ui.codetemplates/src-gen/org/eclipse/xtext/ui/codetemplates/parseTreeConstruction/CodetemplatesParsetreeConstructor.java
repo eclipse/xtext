@@ -610,13 +610,14 @@ protected class Codetemplate_BodyAssignment_8 extends AssignmentToken  {
 
 /************ begin Rule TemplateBodyWithQuotes ****************
  *
- * TemplateBodyWithQuotes returns TemplateBody hidden(): // EOL
+ * TemplateBodyWithQuotes returns TemplateBody hidden():
+ * 	WS? // EOL
  * 	">>" TemplateBody // BOL
  * 	"<<";
  *
  **/
 
-// // EOL
+// WS? // EOL
 // ">>" TemplateBody // BOL
 // "<<"
 protected class TemplateBodyWithQuotes_Group extends GroupToken {
@@ -633,7 +634,7 @@ protected class TemplateBodyWithQuotes_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TemplateBodyWithQuotes_LessThanSignLessThanSignKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TemplateBodyWithQuotes_LessThanSignLessThanSignKeyword_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -649,15 +650,15 @@ protected class TemplateBodyWithQuotes_Group extends GroupToken {
 
 // // EOL
 // ">>"
-protected class TemplateBodyWithQuotes_GreaterThanSignGreaterThanSignKeyword_0 extends KeywordToken  {
+protected class TemplateBodyWithQuotes_GreaterThanSignGreaterThanSignKeyword_1 extends KeywordToken  {
 	
-	public TemplateBodyWithQuotes_GreaterThanSignGreaterThanSignKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TemplateBodyWithQuotes_GreaterThanSignGreaterThanSignKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_0();
+		return grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_1();
 	}
 
     @Override
@@ -670,15 +671,15 @@ protected class TemplateBodyWithQuotes_GreaterThanSignGreaterThanSignKeyword_0 e
 }
 
 // TemplateBody
-protected class TemplateBodyWithQuotes_TemplateBodyParserRuleCall_1 extends RuleCallToken {
+protected class TemplateBodyWithQuotes_TemplateBodyParserRuleCall_2 extends RuleCallToken {
 	
-	public TemplateBodyWithQuotes_TemplateBodyParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TemplateBodyWithQuotes_TemplateBodyParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getTemplateBodyWithQuotesAccess().getTemplateBodyParserRuleCall_1();
+		return grammarAccess.getTemplateBodyWithQuotesAccess().getTemplateBodyParserRuleCall_2();
 	}
 
     @Override
@@ -698,7 +699,7 @@ protected class TemplateBodyWithQuotes_TemplateBodyParserRuleCall_1 extends Rule
     @Override
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TemplateBodyWithQuotes_GreaterThanSignGreaterThanSignKeyword_0(lastRuleCallOrigin, next, actIndex, inst);
+			case 0: return new TemplateBodyWithQuotes_GreaterThanSignGreaterThanSignKeyword_1(lastRuleCallOrigin, next, actIndex, inst);
 			default: return null;
 		}	
 	}	
@@ -706,21 +707,21 @@ protected class TemplateBodyWithQuotes_TemplateBodyParserRuleCall_1 extends Rule
 
 // // BOL
 // "<<"
-protected class TemplateBodyWithQuotes_LessThanSignLessThanSignKeyword_2 extends KeywordToken  {
+protected class TemplateBodyWithQuotes_LessThanSignLessThanSignKeyword_3 extends KeywordToken  {
 	
-	public TemplateBodyWithQuotes_LessThanSignLessThanSignKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public TemplateBodyWithQuotes_LessThanSignLessThanSignKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_2();
+		return grammarAccess.getTemplateBodyWithQuotesAccess().getLessThanSignLessThanSignKeyword_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TemplateBodyWithQuotes_TemplateBodyParserRuleCall_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new TemplateBodyWithQuotes_TemplateBodyParserRuleCall_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
