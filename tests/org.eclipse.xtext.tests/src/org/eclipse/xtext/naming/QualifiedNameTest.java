@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.naming;
 
+import com.google.common.base.Function;
+
 import junit.framework.TestCase;
 
 /**
@@ -15,10 +17,13 @@ import junit.framework.TestCase;
 public class QualifiedNameTest extends TestCase {
 
 	public void testCreateNull() {
-		assertNull(QualifiedName.create());
-		assertNull(QualifiedName.create((String[]) null));
-		assertNull(QualifiedName.create((String) null));
-		assertNull(QualifiedName.create(new String[0]));
+		assertEquals(QualifiedName.EMPTY, QualifiedName.create());
+		assertEquals(QualifiedName.EMPTY, QualifiedName.create(new String[0]));
+		assertEquals(QualifiedName.EMPTY, QualifiedName.create((String[]) null));
+		try {
+			QualifiedName.create((String) null);
+			fail("Exception expected");
+		} catch(IllegalArgumentException e) {}
 	}
 
 	public void testSegments() {
@@ -50,12 +55,28 @@ public class QualifiedNameTest extends TestCase {
 		QualifiedName baz = qn.skipFirst(2);
 		assertEquals(1, baz.getSegmentCount());
 		assertEquals("baz", baz.getSegment(0));
-		assertNull(qn.skipFirst(3));
+		assertEquals(QualifiedName.EMPTY, qn.skipFirst(3));
+		try {
+			qn.skipFirst(-1);
+			fail("Exception expected");
+		} catch(IllegalArgumentException e) {}
+		try {
+			qn.skipFirst(4);
+			fail("Exception expected");
+		} catch(IllegalArgumentException e) {}
 		
 		QualifiedName foo = qn.skipLast(2);
 		assertEquals(1, foo.getSegmentCount());
 		assertEquals("foo", foo.getSegment(0));
-		assertNull(qn.skipLast(3));
+		assertEquals(QualifiedName.EMPTY, qn.skipLast(3));
+		try {
+			qn.skipLast(-1);
+			fail("Exception expected");
+		} catch(IllegalArgumentException e) {}
+		try {
+			qn.skipLast(4);
+			fail("Exception expected");
+		} catch(IllegalArgumentException e) {}
 	}
 
 	public void testAppend() {
@@ -129,5 +150,31 @@ public class QualifiedNameTest extends TestCase {
 		assertEquals(qnUpper.toLowerCase(), qn);
 		assertEquals(qn.toString().toUpperCase(), qnUpper.toString());
 		assertEquals(qn.toString(), qnUpper.toLowerCase().toString());
+	}
+	
+	public void testEmpty() {
+		assertEquals(0, QualifiedName.EMPTY.getSegmentCount());
+		assertTrue(QualifiedName.EMPTY.getSegments().isEmpty());
+		try {
+			 QualifiedName.EMPTY.getFirstSegment();
+			 fail("Exception expected");
+		} catch(IndexOutOfBoundsException e) {}
+		assertEquals("", QualifiedName.EMPTY.toString());
+		QualifiedName foo = QualifiedName.EMPTY.append("foo");
+		assertEquals(1, foo.getSegmentCount());
+		assertEquals("foo", foo.getFirstSegment());
+		assertEquals("foo", foo.getLastSegment());
+	}
+	
+	public void testWrapper() throws Exception {
+		Function<String, String> identity = new Function<String, String>() {
+			public String apply(String from) {
+				return from;
+			}
+		};
+		Function<String, QualifiedName> wrapper = QualifiedName.wrapper(identity);
+		assertEquals(QualifiedName.create(""), wrapper.apply(""));
+		assertEquals(null, wrapper.apply(null));
+		assertEquals("foo", wrapper.apply("foo").getLastSegment());
 	}
 }
