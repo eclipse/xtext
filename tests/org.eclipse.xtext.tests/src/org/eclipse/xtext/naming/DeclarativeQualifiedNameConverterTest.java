@@ -24,5 +24,13 @@ public class DeclarativeQualifiedNameConverterTest extends TestCase {
 		QualifiedName qn = QualifiedName.create("foo", "bar", "baz");
 		assertEquals("foo!bar!baz", qualifiedNameConverter.toString(qn));
 		assertEquals(qn, qualifiedNameConverter.toQualifiedName("foo!bar!baz"));
+		try {
+			qualifiedNameConverter.toQualifiedName(null);
+			fail("Exception expected");
+		} catch(IllegalArgumentException e) {}
+		try {
+			qualifiedNameConverter.toQualifiedName("");
+			fail("Exception expected");
+		} catch(IllegalArgumentException e) {}
 	}
 }

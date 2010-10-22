@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import com.google.common.collect.ImmutableList;
 
 /**
  * A datatype for dealing with qualified names. Instances are usually provided by a {@link IQualifiedNameProvider}.
@@ -23,25 +23,47 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	protected List<String> segments;
 
+	public static final QualifiedName EMPTY = new QualifiedName();
+
 	/**
-	 * Low-level factory method. Consider using a {@link IQualifiedNameProvider} instead.
+	 * Low-level factory method. Consider using a {@link IQualifiedNameConverter} instead.
+	 * 
+	 * @exception IllegalArgumentException
+	 *                if any of the segments is null
 	 */
 	public static QualifiedName create(String... segments) {
-		if (segments == null || segments.length == 0 || (segments.length == 1 && segments[0] == null))
-			return null;
+		if (segments != null) {
+			for (String segment : segments)
+				if (segment == null) {
+					throw new IllegalArgumentException("Segment cannot be null");
+				}
+		}
 		return new QualifiedName(segments);
 	}
 
-	public static <F> Function<F, QualifiedName> wrapper(final Function<F, String> function) {
+	/**
+	 * Wrapps a name function to return a qualified name. Returns null if the name function returns null. 
+	 */
+	public static <F> Function<F, QualifiedName> wrapper(final Function<F, String> nameFunction) {
 		return new Function<F, QualifiedName>() {
 			public QualifiedName apply(F from) {
-				return QualifiedName.create(function.apply(from));
+				String name = nameFunction.apply(from);
+				if (name == null)
+					return null;
+				return QualifiedName.create(name);
 			}
 		};
 	}
 
 	protected QualifiedName(String... segments) {
-		this.segments = Collections.unmodifiableList(Lists.newArrayList(segments));
+		if (segments == null || segments.length == 0)
+			this.segments = Collections.emptyList();
+		else
+			this.segments = ImmutableList.of(segments);
+	}
+
+	public boolean isEmpty() {
+		return segments.isEmpty();
 	}
 
 	public List<String> getSegments() {
@@ -83,7 +105,11 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	public QualifiedName skipFirst(int skipCount) {
 		if (skipCount == getSegmentCount()) {
-			return null;
+			return EMPTY;
+		}
+		if (skipCount > getSegmentCount() || skipCount < 0) {
+			throw new IllegalArgumentException("Cannot skip " + skipCount + " fragments from QualifiedName with "
+					+ getSegmentCount() + " segments");
 		}
 		String[] newSegments = new String[getSegmentCount() - skipCount];
 		for (int i = skipCount; i < getSegmentCount(); ++i)
@@ -93,7 +119,11 @@ public class QualifiedName implements Comparable<QualifiedName> {
 
 	public QualifiedName skipLast(int skipCount) {
 		if (skipCount == getSegmentCount()) {
-			return null;
+			return EMPTY;
+		}
+		if (skipCount > getSegmentCount() || skipCount < 0) {
+			throw new IllegalArgumentException("Cannot skip " + skipCount + " fragments from QualifiedName with "
+					+ getSegmentCount() + " segments");
 		}
 		String[] newSegments = new String[getSegmentCount() - skipCount];
 		for (int i = 0; i < getSegmentCount() - skipCount; ++i)

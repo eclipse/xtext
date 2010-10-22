@@ -117,7 +117,8 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 			return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(grammar.getMetamodelDeclarations(),
 					new Function<AbstractMetamodelDeclaration,IEObjectDescription>(){
 						public IEObjectDescription apply(AbstractMetamodelDeclaration from) {
-							return EObjectDescription.create(QualifiedName.create(from.getAlias()), from);
+							String name = from.getAlias() != null ? from.getAlias() : "";
+							return EObjectDescription.create(QualifiedName.create(name), from);
 						}
 					}));
 		}

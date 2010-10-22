@@ -19,7 +19,7 @@ public class ImportNormalizer {
 	private boolean hasWildCard;
 
 	public ImportNormalizer(QualifiedName importedNamespace, String wildCard) {
-		if(importedNamespace == null || importedNamespace.getSegmentCount() <1) {
+		if (importedNamespace == null || importedNamespace.getSegmentCount() < 1) {
 			throw new IllegalArgumentException("Imported namespace must not be null / empty");
 		}
 		hasWildCard = importedNamespace.getLastSegment().equals(wildCard);
@@ -27,7 +27,8 @@ public class ImportNormalizer {
 	}
 
 	public QualifiedName deresolve(QualifiedName fullyQualifiedName) {
-		if (fullyQualifiedName.startsWith(importedNamespacePrefix)) {
+		if (fullyQualifiedName.startsWith(importedNamespacePrefix)
+				&& fullyQualifiedName.getSegmentCount() != importedNamespacePrefix.getSegmentCount()) {
 			return fullyQualifiedName.skipFirst(importedNamespacePrefix.getSegmentCount());
 		}
 		return null;
@@ -36,11 +37,11 @@ public class ImportNormalizer {
 	public QualifiedName resolve(QualifiedName relativeName) {
 		if (hasWildCard) {
 			return importedNamespacePrefix.append(relativeName);
-		} 
-		if(relativeName.getFirstSegment().equals(importedNamespacePrefix.getLastSegment())) {
-			if(importedNamespacePrefix.getSegmentCount() == 1)
+		}
+		if (relativeName.getFirstSegment().equals(importedNamespacePrefix.getLastSegment())) {
+			if (importedNamespacePrefix.getSegmentCount() == 1)
 				return relativeName;
-			else 
+			else
 				return importedNamespacePrefix.skipLast(1).append(relativeName);
 		}
 		return null;
