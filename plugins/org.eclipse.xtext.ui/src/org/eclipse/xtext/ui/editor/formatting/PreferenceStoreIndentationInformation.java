@@ -37,20 +37,14 @@ public class PreferenceStoreIndentationInformation implements IIndentationInform
 		return storeAccess.getPreferenceStore().getBoolean(AbstractDecoratedTextEditorPreferenceConstants.EDITOR_SPACES_FOR_TABS);
 	}
 
+	// note: the maximum length allowed in the eclipse preferences dialog is 16
 	private final String WS = "                                     ";
 
 	private String indentString = null;
 
 	public synchronized String getIndentString() {
 		if (indentString == null) {
-			if (isSpacesForTab()) {
-				if (getTabWidth() > WS.length()) {
-					indentString = WS;
-				}
-				indentString = WS.substring(0, getTabWidth());
-			} else {
-				indentString = "\t";
-			}
+			indentString = isSpacesForTab() ? WS.substring(0, Math.min(getTabWidth(), WS.length())) : "\t";
 		}
 		return indentString;
 	}
