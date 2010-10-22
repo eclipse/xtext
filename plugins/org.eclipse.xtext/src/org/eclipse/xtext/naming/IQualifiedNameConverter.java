@@ -14,6 +14,11 @@ import org.eclipse.xtext.util.Strings;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Converts {@link QualifiedName}s to strings and back.
+ * 
+ * Clients can change the namespace delimiter her by overriding
+ * {@link IQualifiedNameConverter.DefaultImpl#getDelimiter()}.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 @ImplementedBy(IQualifiedNameConverter.DefaultImpl.class)
@@ -25,9 +30,15 @@ public interface IQualifiedNameConverter {
 
 	static class DefaultImpl implements IQualifiedNameConverter {
 
+		/**
+		 * Converts the given qualified name to a string.
+		 * 
+		 * @exception IllegalArgumentException
+		 *                when the qualified name is null.
+		 */
 		public String toString(QualifiedName qualifiedName) {
-			if(qualifiedName == null)
-				return null;
+			if (qualifiedName == null)
+				throw new IllegalArgumentException("Qualified name cannot be null");
 			StringBuilder builder = new StringBuilder();
 			boolean isFirst = true;
 			for (String segment : qualifiedName.getSegments()) {
@@ -39,15 +50,23 @@ public interface IQualifiedNameConverter {
 			return builder.toString();
 		}
 
+		/**
+		 * Splits the given string into segments and returns them as a {@link} QualifiedName.
+		 * 
+		 * @exception IllegalArgumentException
+		 *                if the input is empty or null.
+		 */
 		public QualifiedName toQualifiedName(String qualifiedNameAsString) {
-			if(Strings.isEmpty(qualifiedNameAsString))
-				return null;
-			if(Strings.isEmpty(getDelimiter()))
+			if (qualifiedNameAsString == null)
+				throw new IllegalArgumentException("Qualified name cannot be null");
+			if (qualifiedNameAsString.equals(""))
+				throw new IllegalArgumentException("Qualified name cannot be empty");
+			if (Strings.isEmpty(getDelimiter()))
 				return QualifiedName.create(qualifiedNameAsString);
 			String[] segments = qualifiedNameAsString.split(Pattern.quote(getDelimiter()));
 			return QualifiedName.create(segments);
 		}
-		
+
 		public String getDelimiter() {
 			return ".";
 		}
