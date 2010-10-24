@@ -292,8 +292,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	protected INewScope createScopeForMethods(JvmDeclaredType declType, INewScope parent, Predicate<JvmMember> isAccept,
 			final TypeArgumentContext context) {
-		final JvmFeatureShadowingIndexObjectProvider stringProvider = new JvmFeatureShadowingIndexObjectProvider(
-				context);
+		final JvmFeatureShadowingIndexObjectProvider stringProvider = new JvmFeatureShadowingIndexObjectProvider(context);
 		Iterable<JvmOperation> operations = filter(filter(declType.getMembers(),JvmOperation.class),isAccept);
 		if (!operations.iterator().hasNext())
 			return parent;
@@ -307,8 +306,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected Iterable<? extends IEObjectDescription> getOperatorSugar(Iterable<JvmOperation> operations, final TypeArgumentContext context) {
-		final JvmFeatureShadowingIndexObjectProvider stringProvider = new JvmFeatureShadowingIndexObjectProvider(
-				context);
+		final JvmFeatureShadowingIndexObjectProvider stringProvider = new JvmFeatureShadowingIndexObjectProvider(context);
 		return Iterables.filter(
 				Iterables.transform(operations, new Function<JvmOperation, IEObjectDescription>() {
 					public IEObjectDescription apply(JvmOperation operation) {

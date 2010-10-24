@@ -18,8 +18,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
@@ -303,6 +305,16 @@ public abstract class AbstractJvmTypeConformanceComputerTest extends TestCase {
 		assertCommonSuperType(String.class,
 				String.class
 		);
+	}
+	
+	public void testConformanceWithTypeParameter() throws Exception {
+		JvmTypeParameter typeParam = ((JvmGenericType)ref(List.class).getType()).getTypeParameters().get(0);
+		JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+		reference.setType(typeParam);
+		assertTrue(computer.isConformant(reference, ref(Object.class)));
+		assertTrue(computer.isConformant(reference, ref(String.class)));
+		assertTrue(computer.isConformant(reference, ref(CharSequence.class)));
+		assertTrue(computer.isConformant(reference, ref(Serializable.class)));
 	}
 
 }
