@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.example.css.ui
-Bundle-Vendor: My Company
+Bundle-Vendor: Eclipse Modeling Project
 Bundle-Version: 1.0.0
 Bundle-SymbolicName: org.eclipse.xtext.example.css.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
@@ -15,8 +15,11 @@ Require-Bundle: org.eclipse.xtext.example.css;visibility:=reexport,
  org.eclipse.xtext.xbase;bundle-version="1.0.1",
  org.eclipse.xtext.xbase.ui;bundle-version="1.0.1",
  org.eclipse.xtext.common.types.ui,
- org.antlr.runtime
+ org.antlr.runtime,
+ org.eclipse.jdt.core
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.eclipse.xtext.example.css.ui.contentassist.antlr
-Bundle-Activator: org.eclipse.xtext.example.css.ui.internal.XcssActivator
+Export-Package: org.eclipse.xtext.example.css.ui,
+ org.eclipse.xtext.example.css.ui.contentassist.antlr,
+ org.eclipse.xtext.example.css.ui.rendering
+Bundle-Activator: org.eclipse.xtext.example.css.ui.AccessibleXcssActivator

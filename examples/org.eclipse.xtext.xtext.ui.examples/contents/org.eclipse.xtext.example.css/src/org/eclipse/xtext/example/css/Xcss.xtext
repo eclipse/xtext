@@ -4,12 +4,12 @@ generate xcss "http://www.eclipse.org/xtext/example/css/Xcss"
 import "http://www.eclipse.org/xtext/xbase/Xbase"
 import "http://www.eclipse.org/xtext/common/JavaVMTypes"
 
-StyleSheet:
+StyleSheet: {StyleSheet}
 	rules+=StyleRule*;
 
 StyleRule:
 	selectors+=Selector+ '{'
-		settings+=Setting+
+		settings+=Setting*
 	'}';
 
 Selector:
