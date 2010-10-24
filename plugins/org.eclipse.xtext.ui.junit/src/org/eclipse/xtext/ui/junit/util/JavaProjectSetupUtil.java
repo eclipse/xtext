@@ -105,7 +105,7 @@ public class JavaProjectSetupUtil {
 		}
 		IFolder result = externalFoldersProject.getFolder(externalFolderPath);
 		result.create(true, false, null);
-		JavaModelManager.getExternalManager().addFolder(result.getFullPath());
+//		JavaModelManager.getExternalManager().addFolder(result.getFullPath());
 		return result;
 	}
 	
