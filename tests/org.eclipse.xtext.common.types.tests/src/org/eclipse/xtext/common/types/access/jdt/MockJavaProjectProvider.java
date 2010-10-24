@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IContainer;
@@ -155,11 +156,13 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 			project.open(null);
 			project.setDescription(projectDescription, null);
 
-			classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER")));
+			classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5")));
 			classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins")));
 
 			javaProject.setRawClasspath(classpathEntries.toArray(new IClasspathEntry[classpathEntries.size()]),
 					null);
+			
+			makeJava5Compliant(javaProject);
 
 			javaProject.setOutputLocation(new Path("/" + projectName + "/bin"), null);
 			createManifest(projectName, project);
@@ -171,6 +174,22 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 			throw new RuntimeException(exception);
 		}
 		return javaProject ;
+	}
+
+	protected static void makeJava5Compliant(IJavaProject javaProject) {
+		@SuppressWarnings("unchecked")
+		Map<String, String> options= javaProject.getOptions(false);
+		options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
+		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
+		options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_5);
+		options.put(JavaCore.COMPILER_PB_ASSERT_IDENTIFIER, JavaCore.ERROR);
+		options.put(JavaCore.COMPILER_PB_ENUM_IDENTIFIER, JavaCore.ERROR);
+		options.put(JavaCore.COMPILER_CODEGEN_INLINE_JSR_BYTECODE, JavaCore.ENABLED);
+		options.put(JavaCore.COMPILER_LOCAL_VARIABLE_ATTR, JavaCore.GENERATE);
+		options.put(JavaCore.COMPILER_LINE_NUMBER_ATTR, JavaCore.GENERATE);
+		options.put(JavaCore.COMPILER_SOURCE_FILE_ATTR, JavaCore.GENERATE);
+		options.put(JavaCore.COMPILER_CODEGEN_UNUSED_LOCAL, JavaCore.PRESERVE);
+		javaProject.setOptions(options);
 	}
 	
 	protected static void refreshExternalArchives(IJavaProject p) throws JavaModelException {
@@ -229,7 +248,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 		mainContent.append("Bundle-Version: 1.0.0\n");
 		mainContent.append("Bundle-SymbolicName: " + projectName.toLowerCase() + "; singleton:=true\n");
 		mainContent.append("Bundle-ActivationPolicy: lazy\n");
-		mainContent.append("Bundle-RequiredExecutionEnvironment: J2SE-1.5\n");
+		mainContent.append("Bundle-RequiredExecutionEnvironment: JavaSE-1.6\n");
 
 		final IFolder metaInf = project.getFolder("META-INF");
 		metaInf.create(false, true, null);

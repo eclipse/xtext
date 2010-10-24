@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
@@ -72,6 +73,16 @@ public interface IJvmTypeConformanceComputer extends ITypeConformanceComputer<Jv
 						return areArgumentsAssignableFrom(refA, refB);
 					}
 					return isBoxing(typeA, typeB);
+				} else if (typeA instanceof JvmTypeParameter) {
+					EList<JvmTypeConstraint> list = ((JvmTypeParameter) typeA).getConstraints();
+					for (JvmTypeConstraint jvmTypeConstraint : list) {
+						if (jvmTypeConstraint instanceof JvmUpperBound) {
+							JvmTypeReference typeReference = jvmTypeConstraint.getTypeReference();
+							if (isConformant(typeReference, right))
+								return true;
+						}
+					}
+					return list.isEmpty();
 				}
 			}
 			return false;

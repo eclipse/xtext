@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
@@ -227,5 +228,17 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.MethodOverrides1.m1(java.lang.String)",((JvmOperation)call1.getFeature()).getCanonicalName());
 		assertEquals("testdata.MethodOverrides1.m1(java.lang.CharSequence)",((JvmOperation)call2.getFeature()).getCanonicalName());
 		assertEquals("testdata.MethodOverrides2.m1(java.lang.Object)",((JvmOperation)call3.getFeature()).getCanonicalName());
+	}
+	
+	public void testGenerics() throws Exception {
+		XAssignment assign = (XAssignment) expression("new testdata.GenericType1<java.lang.String>() += 'foo'");
+	}
+	
+	public void testGenerics_1() throws Exception {
+		XAssignment assign = (XAssignment) expression("((testdata.GenericType1<? extends java.lang.String>) null) += 'foo'");
+	}
+	
+	public void testGenerics_2() throws Exception {
+		XAssignment assign = (XAssignment) expression("new testdata.GenericType1() += 'foo'");
 	}
 }
