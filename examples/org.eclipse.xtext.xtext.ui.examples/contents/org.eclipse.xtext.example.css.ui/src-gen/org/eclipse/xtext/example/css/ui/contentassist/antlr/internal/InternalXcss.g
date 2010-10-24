@@ -74,9 +74,9 @@ ruleStyleSheet
     }
 	:
 (
-{ before(grammarAccess.getStyleSheetAccess().getRulesAssignment()); }
-(rule__StyleSheet__RulesAssignment)*
-{ after(grammarAccess.getStyleSheetAccess().getRulesAssignment()); }
+{ before(grammarAccess.getStyleSheetAccess().getGroup()); }
+(rule__StyleSheet__Group__0)
+{ after(grammarAccess.getStyleSheetAccess().getGroup()); }
 )
 
 ;
@@ -2715,6 +2715,69 @@ finally {
 
 
 
+rule__StyleSheet__Group__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__StyleSheet__Group__0__Impl
+	rule__StyleSheet__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__StyleSheet__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getStyleSheetAccess().getStyleSheetAction_0()); }
+(
+
+)
+{ after(grammarAccess.getStyleSheetAccess().getStyleSheetAction_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__StyleSheet__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__StyleSheet__Group__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__StyleSheet__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getStyleSheetAccess().getRulesAssignment_1()); }
+(rule__StyleSheet__RulesAssignment_1)*
+{ after(grammarAccess.getStyleSheetAccess().getRulesAssignment_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
 rule__StyleRule__Group__0
     @init {
 		int stackSize = keepStackSize();
@@ -2800,16 +2863,9 @@ rule__StyleRule__Group__2__Impl
     }
 :
 (
-(
-{ before(grammarAccess.getStyleRuleAccess().getSettingsAssignment_2()); }
-(rule__StyleRule__SettingsAssignment_2)
-{ after(grammarAccess.getStyleRuleAccess().getSettingsAssignment_2()); }
-)
-(
 { before(grammarAccess.getStyleRuleAccess().getSettingsAssignment_2()); }
 (rule__StyleRule__SettingsAssignment_2)*
 { after(grammarAccess.getStyleRuleAccess().getSettingsAssignment_2()); }
-)
 )
 
 ;
@@ -10713,14 +10769,14 @@ finally {
 
 
 
-rule__StyleSheet__RulesAssignment
+rule__StyleSheet__RulesAssignment_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getStyleSheetAccess().getRulesStyleRuleParserRuleCall_0()); }
-	ruleStyleRule{ after(grammarAccess.getStyleSheetAccess().getRulesStyleRuleParserRuleCall_0()); }
+{ before(grammarAccess.getStyleSheetAccess().getRulesStyleRuleParserRuleCall_1_0()); }
+	ruleStyleRule{ after(grammarAccess.getStyleSheetAccess().getRulesStyleRuleParserRuleCall_1_0()); }
 )
 
 ;

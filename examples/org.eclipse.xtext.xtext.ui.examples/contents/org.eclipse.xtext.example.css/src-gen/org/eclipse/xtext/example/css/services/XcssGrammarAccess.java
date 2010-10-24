@@ -20,18 +20,26 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public class StyleSheetElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StyleSheet");
-		private final Assignment cRulesAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cRulesStyleRuleParserRuleCall_0 = (RuleCall)cRulesAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cStyleSheetAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cRulesAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cRulesStyleRuleParserRuleCall_1_0 = (RuleCall)cRulesAssignment_1.eContents().get(0);
 		
 		//StyleSheet:
-		//	rules+=StyleRule*;
+		//	{StyleSheet} rules+=StyleRule*;
 		public ParserRule getRule() { return rule; }
 
+		//{StyleSheet} rules+=StyleRule*
+		public Group getGroup() { return cGroup; }
+
+		//{StyleSheet}
+		public Action getStyleSheetAction_0() { return cStyleSheetAction_0; }
+
 		//rules+=StyleRule*
-		public Assignment getRulesAssignment() { return cRulesAssignment; }
+		public Assignment getRulesAssignment_1() { return cRulesAssignment_1; }
 
 		//StyleRule
-		public RuleCall getRulesStyleRuleParserRuleCall_0() { return cRulesStyleRuleParserRuleCall_0; }
+		public RuleCall getRulesStyleRuleParserRuleCall_1_0() { return cRulesStyleRuleParserRuleCall_1_0; }
 	}
 
 	public class StyleRuleElements extends AbstractParserRuleElementFinder {
@@ -45,10 +53,10 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//StyleRule:
-		//	selectors+=Selector+ "{" settings+=Setting+ "}";
+		//	selectors+=Selector+ "{" settings+=Setting* "}";
 		public ParserRule getRule() { return rule; }
 
-		//selectors+=Selector+ "{" settings+=Setting+ "}"
+		//selectors+=Selector+ "{" settings+=Setting* "}"
 		public Group getGroup() { return cGroup; }
 
 		//selectors+=Selector+
@@ -60,7 +68,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//settings+=Setting+
+		//settings+=Setting*
 		public Assignment getSettingsAssignment_2() { return cSettingsAssignment_2; }
 
 		//Setting
@@ -642,7 +650,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//StyleSheet:
-	//	rules+=StyleRule*;
+	//	{StyleSheet} rules+=StyleRule*;
 	public StyleSheetElements getStyleSheetAccess() {
 		return (pStyleSheet != null) ? pStyleSheet : (pStyleSheet = new StyleSheetElements());
 	}
@@ -652,7 +660,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StyleRule:
-	//	selectors+=Selector+ "{" settings+=Setting+ "}";
+	//	selectors+=Selector+ "{" settings+=Setting* "}";
 	public StyleRuleElements getStyleRuleAccess() {
 		return (pStyleRule != null) ? pStyleRule : (pStyleRule = new StyleRuleElements());
 	}

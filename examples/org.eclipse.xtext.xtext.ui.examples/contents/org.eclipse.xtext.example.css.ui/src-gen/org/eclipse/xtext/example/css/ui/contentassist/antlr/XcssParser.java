@@ -62,6 +62,7 @@ public class XcssParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmWildcardTypeReferenceAccess().getAlternatives_2(), "rule__JvmWildcardTypeReference__Alternatives_2");
 					put(grammarAccess.getJvmTypeParameterAccess().getAlternatives_1(), "rule__JvmTypeParameter__Alternatives_1");
 					put(grammarAccess.getSizeUnitAccess().getAlternatives(), "rule__SizeUnit__Alternatives");
+					put(grammarAccess.getStyleSheetAccess().getGroup(), "rule__StyleSheet__Group__0");
 					put(grammarAccess.getStyleRuleAccess().getGroup(), "rule__StyleRule__Group__0");
 					put(grammarAccess.getSelectorAccess().getGroup(), "rule__Selector__Group__0");
 					put(grammarAccess.getWildcardSelectorAccess().getGroup(), "rule__WildcardSelector__Group__0");
@@ -150,7 +151,7 @@ public class XcssParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmTypeParameterAccess().getGroup_1_0(), "rule__JvmTypeParameter__Group_1_0__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
-					put(grammarAccess.getStyleSheetAccess().getRulesAssignment(), "rule__StyleSheet__RulesAssignment");
+					put(grammarAccess.getStyleSheetAccess().getRulesAssignment_1(), "rule__StyleSheet__RulesAssignment_1");
 					put(grammarAccess.getStyleRuleAccess().getSelectorsAssignment_0(), "rule__StyleRule__SelectorsAssignment_0");
 					put(grammarAccess.getStyleRuleAccess().getSettingsAssignment_2(), "rule__StyleRule__SettingsAssignment_2");
 					put(grammarAccess.getSelectorAccess().getFilterAssignment_1(), "rule__Selector__FilterAssignment_1");

@@ -51,6 +51,9 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			fragment = XtextAntlrGeneratorFragment {
+				options = auto-inject {}
+			}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/xbase/Xbase.xtext" 	

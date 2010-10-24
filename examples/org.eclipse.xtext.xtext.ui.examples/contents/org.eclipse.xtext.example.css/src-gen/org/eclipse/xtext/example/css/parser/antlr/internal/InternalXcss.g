@@ -91,12 +91,26 @@ ruleStyleSheet returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-(
+((
+	{ 
+	  /* */ 
+	}
+    { 
+        temp=factory.create(grammarAccess.getStyleSheetAccess().getStyleSheetAction_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getStyleSheetAccess().getStyleSheetAction_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getStyleSheetAccess().getRulesStyleRuleParserRuleCall_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getStyleSheetAccess().getRulesStyleRuleParserRuleCall_1_0(), currentNode); 
 	    }
-		lv_rules_0_0=ruleStyleRule		{
+		lv_rules_1_0=ruleStyleRule		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getStyleSheetRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -105,7 +119,7 @@ ruleStyleSheet returns [EObject current=null]
 	       		add(
 	       			$current, 
 	       			"rules",
-	        		lv_rules_0_0, 
+	        		lv_rules_1_0, 
 	        		"StyleRule", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -115,7 +129,7 @@ ruleStyleSheet returns [EObject current=null]
 	    }
 
 )
-)*
+)*)
 ;
 
 
@@ -190,7 +204,7 @@ ruleStyleRule returns [EObject current=null]
 	    }
 
 )
-)+	otherlv_3='}' 
+)*	otherlv_3='}' 
     {
     	createLeafNode(otherlv_3, grammarAccess.getStyleRuleAccess().getRightCurlyBracketKeyword_3(), null);
     }

@@ -101,6 +101,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 		if (context instanceof XMemberFeatureCall || context instanceof XBinaryOperation) {
 			final XAbstractFeatureCall call = (XAbstractFeatureCall) context;
+			if (call.getArguments().isEmpty())
+				return INewScope.NULL_SCOPE;
 			XExpression target = call.getArguments().get(0);
 			JvmTypeReference jvmTypeReference = typeResolver.getType(target, null);
 			if (jvmTypeReference != null) {

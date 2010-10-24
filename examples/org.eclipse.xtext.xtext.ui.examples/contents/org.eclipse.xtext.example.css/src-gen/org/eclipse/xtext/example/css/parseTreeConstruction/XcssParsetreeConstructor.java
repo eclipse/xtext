@@ -31,7 +31,7 @@ protected class ThisRootNode extends RootToken {
 	@Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StyleSheet_RulesAssignment(this, this, 0, inst);
+			case 0: return new StyleSheet_Group(this, this, 0, inst);
 			case 1: return new StyleRule_Group(this, this, 1, inst);
 			case 2: return new Selector_Group(this, this, 2, inst);
 			case 3: return new _JvmTypeReference_TypeSelectorParserRuleCall(this, this, 3, inst);
@@ -99,20 +99,76 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule StyleSheet ****************
  *
  * StyleSheet:
- * 	rules+=StyleRule*;
+ * 	{StyleSheet} rules+=StyleRule*;
  *
  **/
 
-// rules+=StyleRule*
-protected class StyleSheet_RulesAssignment extends AssignmentToken  {
+// {StyleSheet} rules+=StyleRule*
+protected class StyleSheet_Group extends GroupToken {
 	
-	public StyleSheet_RulesAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StyleSheet_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getStyleSheetAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new StyleSheet_RulesAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new StyleSheet_StyleSheetAction_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getStyleSheetAccess().getStyleSheetAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// {StyleSheet}
+protected class StyleSheet_StyleSheetAction_0 extends ActionToken  {
+
+	public StyleSheet_StyleSheetAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getStyleSheetAccess().getStyleSheetAction_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// rules+=StyleRule*
+protected class StyleSheet_RulesAssignment_1 extends AssignmentToken  {
+	
+	public StyleSheet_RulesAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStyleSheetAccess().getRulesAssignment();
+		return grammarAccess.getStyleSheetAccess().getRulesAssignment_1();
 	}
 
     @Override
@@ -131,7 +187,7 @@ protected class StyleSheet_RulesAssignment extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getStyleRuleRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStyleSheetAccess().getRulesStyleRuleParserRuleCall_0(); 
+				element = grammarAccess.getStyleSheetAccess().getRulesStyleRuleParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -143,11 +199,13 @@ protected class StyleSheet_RulesAssignment extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StyleSheet_RulesAssignment(lastRuleCallOrigin, next, actIndex, consumed);
-			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index - 1, consumed);
+			case 0: return new StyleSheet_RulesAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new StyleSheet_StyleSheetAction_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
 		}	
 	}	
 }
+
 
 /************ end Rule StyleSheet ****************/
 
@@ -155,11 +213,11 @@ protected class StyleSheet_RulesAssignment extends AssignmentToken  {
 /************ begin Rule StyleRule ****************
  *
  * StyleRule:
- * 	selectors+=Selector+ "{" settings+=Setting+ "}";
+ * 	selectors+=Selector+ "{" settings+=Setting* "}";
  *
  **/
 
-// selectors+=Selector+ "{" settings+=Setting+ "}"
+// selectors+=Selector+ "{" settings+=Setting* "}"
 protected class StyleRule_Group extends GroupToken {
 	
 	public StyleRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -256,7 +314,7 @@ protected class StyleRule_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 
 }
 
-// settings+=Setting+
+// settings+=Setting*
 protected class StyleRule_SettingsAssignment_2 extends AssignmentToken  {
 	
 	public StyleRule_SettingsAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -278,7 +336,7 @@ protected class StyleRule_SettingsAssignment_2 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("settings",true)) == null) return null;
+		if((value = eObjectConsumer.getConsumable("settings",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("settings");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
@@ -319,6 +377,7 @@ protected class StyleRule_RightCurlyBracketKeyword_3 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new StyleRule_SettingsAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new StyleRule_LeftCurlyBracketKeyword_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
