@@ -89,7 +89,7 @@ public class CallableFeaturePredicate {
 	protected boolean _case(JvmOperation input, XBinaryOperation op, EReference ref, TypeArgumentContext typeArgContext) {
 		if (input.getParameters().size() != 1)
 			return false;
-		if (op.getRightOperand() != null) {
+		if (op.getRightOperand() != null && op.getLeftOperand() != null) {
 			JvmTypeReference type = typeProvider.getType(op.getLeftOperand(),
 					ITypeProvider.Context.<JvmTypeReference> newCtx());
 			if (!confomance.isConformant(input.getParameters().get(0).getParameterType(), type))

@@ -107,7 +107,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 
 		final IScope scope = getScope(context, ref);
 		final String crossRefString = getCrossRefNodeAsString(node);
-		if (crossRefString != null) {
+		if (crossRefString != null && !crossRefString.equals("")) {
 			QualifiedName qualifiedLinkName =  qualifiedNameConverter.toQualifiedName(crossRefString);
 			IEObjectDescription eObjectDescription = scope.getContentByName(qualifiedLinkName);
 			if (eObjectDescription != null)
