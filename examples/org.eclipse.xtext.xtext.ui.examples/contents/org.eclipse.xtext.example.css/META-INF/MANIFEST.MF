@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.example.css
-Bundle-Vendor: My Company
-Bundle-Version: 1.0.0
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.css; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",

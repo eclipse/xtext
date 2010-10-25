@@ -5,17 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.example.css.ui.rendering;
+package org.eclipse.xtext.example.css.rendering;
 
 import java.util.List;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
@@ -44,24 +39,30 @@ public class XcssRendererHelper {
 	@Inject
 	private IResourceValidator resourceValidator;
 	
-	@Inject
-	private IWorkspace workspace;
+	public XcssRendererHelper() {
+	}
+	
+	public XcssRendererHelper(Provider<XtextResourceSet> resourceSetProvider, IResourceValidator resourceValidator) {
+		this.resourceSetProvider = resourceSetProvider;
+		this.resourceValidator = resourceValidator;
+	}
+	
+	public XtextResourceSet createResourceSet() {
+		XtextResourceSet resourceSet = resourceSetProvider.get();
+		return resourceSet;
+	}
 	
 	public StyleSheet getStyleSheet(URI uri) {
-		XtextResourceSet resourceSet = resourceSetProvider.get();
-		if (uri.isPlatformResource()) {
-			String platformString = uri.toPlatformString(true);
-			IResource resource = workspace.getRoot().findMember(platformString);
-			IProject project = resource.getProject();
-			IJavaProject javaProject = JavaCore.create(project);
-			if (javaProject != null) {
-				resourceSet.setClasspathURIContext(javaProject);
-			}
-		}
+		XtextResourceSet resourceSet = createResourceSet();
+		resourceSet.setClasspathURIContext(getClass().getClassLoader());
 		Resource result = resourceSet.getResource(uri, true);
-		List<Issue> issues = resourceValidator.validate(result, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
-		if (issues.isEmpty() && !result.getContents().isEmpty())
-			return (StyleSheet) result.getContents().get(0);
+		return getValidStyleSheet(result);
+	}
+
+	public StyleSheet getValidStyleSheet(Resource resource) {
+		List<Issue> issues = resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
+		if (issues.isEmpty() && !resource.getContents().isEmpty())
+			return (StyleSheet) resource.getContents().get(0);
 		return null;
 	}
 	
