@@ -67,6 +67,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 				for(int i = 0; i < ruleNames.length; i++) {
 					AbstractInternalContentAssistParser parser = createParser();
 					parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
+					parser.getUnorderedGroupHelper().initializeWith(parser);
 					final Iterator<LookAheadTerminal> iter = element.getLookAheadTerminals().iterator();
 					ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(new TokenSource(){
 						public Token nextToken() {
@@ -89,7 +90,6 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 					if (elementToParse instanceof UnorderedGroup && element.getGrammarElement() == elementToParse) {
 						UnorderedGroup group = (UnorderedGroup) elementToParse;
 						final IUnorderedGroupHelper helper = parser.getUnorderedGroupHelper();
-						helper.initializeWith(parser);
 						helper.enter(group);
 						for(AbstractElement consumed: element.getHandledUnorderedGroupElements()) {
 							parser.before(consumed);
