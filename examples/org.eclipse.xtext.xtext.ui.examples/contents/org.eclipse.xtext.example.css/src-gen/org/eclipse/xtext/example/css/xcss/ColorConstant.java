@@ -5,6 +5,7 @@
  */
 package org.eclipse.xtext.example.css.xcss;
 
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,7 +15,7 @@ package org.eclipse.xtext.example.css.xcss;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.css.xcss.ColorConstant#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.css.xcss.ColorConstant#getConstant <em>Constant</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,29 +26,29 @@ package org.eclipse.xtext.example.css.xcss;
 public interface ColorConstant extends ColorLiteral
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
+   * Returns the value of the '<em><b>Constant</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
+   * If the meaning of the '<em>Constant</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.eclipse.xtext.example.css.xcss.XcssPackage#getColorConstant_Name()
+   * @return the value of the '<em>Constant</em>' reference.
+   * @see #setConstant(JvmIdentifyableElement)
+   * @see org.eclipse.xtext.example.css.xcss.XcssPackage#getColorConstant_Constant()
    * @model
    * @generated
    */
-  String getName();
+  JvmIdentifyableElement getConstant();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.example.css.xcss.ColorConstant#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.xtext.example.css.xcss.ColorConstant#getConstant <em>Constant</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
+   * @param value the new value of the '<em>Constant</em>' reference.
+   * @see #getConstant()
    * @generated
    */
-  void setName(String value);
+  void setConstant(JvmIdentifyableElement value);
 
 } // ColorConstant

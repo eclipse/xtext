@@ -39,10 +39,10 @@ public class XcssParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getSelectorAccess().getAlternatives_0(), "rule__Selector__Alternatives_0");
 					put(grammarAccess.getCssLiteralsAccess().getAlternatives(), "rule__CssLiterals__Alternatives");
-					put(grammarAccess.getFontLiteralAccess().getAlternatives_1(), "rule__FontLiteral__Alternatives_1");
 					put(grammarAccess.getStringOrIDAccess().getAlternatives(), "rule__StringOrID__Alternatives");
 					put(grammarAccess.getColorLiteralAccess().getAlternatives(), "rule__ColorLiteral__Alternatives");
 					put(grammarAccess.getXPrimaryExpressionAccess().getAlternatives(), "rule__XPrimaryExpression__Alternatives");
+					put(grammarAccess.getOpAssignAccess().getAlternatives(), "rule__OpAssign__Alternatives");
 					put(grammarAccess.getOpEqualityAccess().getAlternatives(), "rule__OpEquality__Alternatives");
 					put(grammarAccess.getXRelationalExpressionAccess().getAlternatives_1(), "rule__XRelationalExpression__Alternatives_1");
 					put(grammarAccess.getOpCompareAccess().getAlternatives(), "rule__OpCompare__Alternatives");
@@ -68,8 +68,9 @@ public class XcssParser extends AbstractContentAssistParser {
 					put(grammarAccess.getWildcardSelectorAccess().getGroup(), "rule__WildcardSelector__Group__0");
 					put(grammarAccess.getFilterAccess().getGroup(), "rule__Filter__Group__0");
 					put(grammarAccess.getSettingAccess().getGroup(), "rule__Setting__Group__0");
+					put(grammarAccess.getSettingAccess().getGroup_1(), "rule__Setting__Group_1__0");
 					put(grammarAccess.getFontLiteralAccess().getGroup(), "rule__FontLiteral__Group__0");
-					put(grammarAccess.getFontLiteralAccess().getGroup_1_0(), "rule__FontLiteral__Group_1_0__0");
+					put(grammarAccess.getColorConstantAccess().getGroup(), "rule__ColorConstant__Group__0");
 					put(grammarAccess.getRGBAccess().getGroup(), "rule__RGB__Group__0");
 					put(grammarAccess.getSizeLiteralAccess().getGroup(), "rule__SizeLiteral__Group__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup(), "rule__XAssignment__Group__0");
@@ -157,15 +158,14 @@ public class XcssParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSelectorAccess().getFilterAssignment_1(), "rule__Selector__FilterAssignment_1");
 					put(grammarAccess.getTypeSelectorAccess().getTypeAssignment(), "rule__TypeSelector__TypeAssignment");
 					put(grammarAccess.getFilterAccess().getConditionAssignment_1(), "rule__Filter__ConditionAssignment_1");
-					put(grammarAccess.getSettingAccess().getParamsAssignment_1(), "rule__Setting__ParamsAssignment_1");
-					put(grammarAccess.getSettingAccess().getFeatureAssignment_2(), "rule__Setting__FeatureAssignment_2");
-					put(grammarAccess.getSettingAccess().getParamsAssignment_3(), "rule__Setting__ParamsAssignment_3");
+					put(grammarAccess.getSettingAccess().getFeatureAssignment_1_1(), "rule__Setting__FeatureAssignment_1_1");
+					put(grammarAccess.getSettingAccess().getValueAssignment_1_2(), "rule__Setting__ValueAssignment_1_2");
 					put(grammarAccess.getFeatureReferenceAccess().getFeatureAssignment(), "rule__FeatureReference__FeatureAssignment");
-					put(grammarAccess.getFontLiteralAccess().getNameAssignment_1_0_1(), "rule__FontLiteral__NameAssignment_1_0_1");
-					put(grammarAccess.getFontLiteralAccess().getItalicAssignment_2_0(), "rule__FontLiteral__ItalicAssignment_2_0");
-					put(grammarAccess.getFontLiteralAccess().getBoldAssignment_2_1(), "rule__FontLiteral__BoldAssignment_2_1");
-					put(grammarAccess.getFontLiteralAccess().getSizeAssignment_2_2(), "rule__FontLiteral__SizeAssignment_2_2");
-					put(grammarAccess.getColorConstantAccess().getNameAssignment(), "rule__ColorConstant__NameAssignment");
+					put(grammarAccess.getFontLiteralAccess().getNameAssignment_2(), "rule__FontLiteral__NameAssignment_2");
+					put(grammarAccess.getFontLiteralAccess().getItalicAssignment_3_0(), "rule__FontLiteral__ItalicAssignment_3_0");
+					put(grammarAccess.getFontLiteralAccess().getBoldAssignment_3_1(), "rule__FontLiteral__BoldAssignment_3_1");
+					put(grammarAccess.getFontLiteralAccess().getSizeAssignment_3_2(), "rule__FontLiteral__SizeAssignment_3_2");
+					put(grammarAccess.getColorConstantAccess().getConstantAssignment_1(), "rule__ColorConstant__ConstantAssignment_1");
 					put(grammarAccess.getRGBAccess().getColorAssignment_1(), "rule__RGB__ColorAssignment_1");
 					put(grammarAccess.getSizeLiteralAccess().getValueAssignment_0(), "rule__SizeLiteral__ValueAssignment_0");
 					put(grammarAccess.getSizeLiteralAccess().getUnitAssignment_1(), "rule__SizeLiteral__UnitAssignment_1");
@@ -261,7 +261,7 @@ public class XcssParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_0_0(), "rule__JvmTypeParameter__ConstraintsAssignment_1_0_0");
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_0_1(), "rule__JvmTypeParameter__ConstraintsAssignment_1_0_1");
 					put(grammarAccess.getJvmTypeParameterAccess().getConstraintsAssignment_1_1(), "rule__JvmTypeParameter__ConstraintsAssignment_1_1");
-					put(grammarAccess.getFontLiteralAccess().getUnorderedGroup_2(), "rule__FontLiteral__UnorderedGroup_2");
+					put(grammarAccess.getFontLiteralAccess().getUnorderedGroup_3(), "rule__FontLiteral__UnorderedGroup_3");
 				}
 			};
 		}

@@ -11,7 +11,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="selectors" upperBound="-1"
         eType="#//Selector" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="settings" upperBound="-1"
-        eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XBinaryOperation"
+        eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Selector">
@@ -26,9 +26,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XSimpleFeatureCall">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifyableElement"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FontLiteral" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -37,7 +34,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ColorLiteral" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="ColorConstant" eSuperTypes="#//ColorLiteral">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constant" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifyableElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RGB" eSuperTypes="#//ColorLiteral">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -51,9 +48,5 @@
     <eLiterals name="pt" value="1" literal="pt"/>
     <eLiterals name="px" value="2" literal="px"/>
     <eLiterals name="percent" value="3" literal="%"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Setting" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XBinaryOperation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

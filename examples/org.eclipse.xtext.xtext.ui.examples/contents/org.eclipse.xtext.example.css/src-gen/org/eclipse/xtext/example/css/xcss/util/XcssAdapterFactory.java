@@ -17,8 +17,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.example.css.xcss.*;
 
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
@@ -115,11 +113,6 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
         return createFilterAdapter();
       }
       @Override
-      public Adapter caseXSimpleFeatureCall(XSimpleFeatureCall object)
-      {
-        return createXSimpleFeatureCallAdapter();
-      }
-      @Override
       public Adapter caseFontLiteral(FontLiteral object)
       {
         return createFontLiteralAdapter();
@@ -145,11 +138,6 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
         return createSizeLiteralAdapter();
       }
       @Override
-      public Adapter caseSetting(Setting object)
-      {
-        return createSettingAdapter();
-      }
-      @Override
       public Adapter caseJvmIdentifyableElement(JvmIdentifyableElement object)
       {
         return createJvmIdentifyableElementAdapter();
@@ -163,16 +151,6 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
       public Adapter caseXExpression(XExpression object)
       {
         return createXExpressionAdapter();
-      }
-      @Override
-      public Adapter caseXAbstractFeatureCall(XAbstractFeatureCall object)
-      {
-        return createXAbstractFeatureCallAdapter();
-      }
-      @Override
-      public Adapter caseXBinaryOperation(XBinaryOperation object)
-      {
-        return createXBinaryOperationAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -287,21 +265,6 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.css.xcss.XSimpleFeatureCall <em>XSimple Feature Call</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.css.xcss.XSimpleFeatureCall
-   * @generated
-   */
-  public Adapter createXSimpleFeatureCallAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.css.xcss.FontLiteral <em>Font Literal</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -377,21 +340,6 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.css.xcss.Setting <em>Setting</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.css.xcss.Setting
-   * @generated
-   */
-  public Adapter createSettingAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmIdentifyableElement <em>Jvm Identifyable Element</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -432,36 +380,6 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createXExpressionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall <em>XAbstract Feature Call</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.xbase.XAbstractFeatureCall
-   * @generated
-   */
-  public Adapter createXAbstractFeatureCallAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XBinaryOperation <em>XBinary Operation</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.xbase.XBinaryOperation
-   * @generated
-   */
-  public Adapter createXBinaryOperationAdapter()
   {
     return null;
   }

@@ -23,7 +23,7 @@ import org.eclipse.xtext.example.css.xcss.Selector;
 import org.eclipse.xtext.example.css.xcss.StyleRule;
 import org.eclipse.xtext.example.css.xcss.XcssPackage;
 
-import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,7 +59,7 @@ public class StyleRuleImpl extends MinimalEObjectImpl.Container implements Style
    * @generated
    * @ordered
    */
-  protected EList<XBinaryOperation> settings;
+  protected EList<XExpression> settings;
 
   /**
    * <!-- begin-user-doc -->
@@ -101,11 +101,11 @@ public class StyleRuleImpl extends MinimalEObjectImpl.Container implements Style
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<XBinaryOperation> getSettings()
+  public EList<XExpression> getSettings()
   {
     if (settings == null)
     {
-      settings = new EObjectContainmentEList<XBinaryOperation>(XBinaryOperation.class, this, XcssPackage.STYLE_RULE__SETTINGS);
+      settings = new EObjectContainmentEList<XExpression>(XExpression.class, this, XcssPackage.STYLE_RULE__SETTINGS);
     }
     return settings;
   }
@@ -163,7 +163,7 @@ public class StyleRuleImpl extends MinimalEObjectImpl.Container implements Style
         return;
       case XcssPackage.STYLE_RULE__SETTINGS:
         getSettings().clear();
-        getSettings().addAll((Collection<? extends XBinaryOperation>)newValue);
+        getSettings().addAll((Collection<? extends XExpression>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

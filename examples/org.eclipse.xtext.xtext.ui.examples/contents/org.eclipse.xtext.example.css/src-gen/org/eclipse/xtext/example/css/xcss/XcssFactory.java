@@ -80,15 +80,6 @@ public interface XcssFactory extends EFactory
   Filter createFilter();
 
   /**
-   * Returns a new object of class '<em>XSimple Feature Call</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>XSimple Feature Call</em>'.
-   * @generated
-   */
-  XSimpleFeatureCall createXSimpleFeatureCall();
-
-  /**
    * Returns a new object of class '<em>Font Literal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -132,15 +123,6 @@ public interface XcssFactory extends EFactory
    * @generated
    */
   SizeLiteral createSizeLiteral();
-
-  /**
-   * Returns a new object of class '<em>Setting</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Setting</em>'.
-   * @generated
-   */
-  Setting createSetting();
 
   /**
    * Returns the package supported by this factory.

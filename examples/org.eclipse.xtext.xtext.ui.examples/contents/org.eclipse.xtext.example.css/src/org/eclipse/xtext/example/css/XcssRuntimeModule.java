@@ -5,17 +5,36 @@ package org.eclipse.xtext.example.css;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
-import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
+import org.eclipse.xtext.example.css.scoping.XcssCallableFeaturePredicate;
+import org.eclipse.xtext.example.css.scoping.XcssGlobalScopeDelegatingScopeProvider;
+import org.eclipse.xtext.example.css.scoping.XcssTypeProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.xbase.scoping.CallableFeaturePredicate;
+
+import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class XcssRuntimeModule extends org.eclipse.xtext.example.css.AbstractXcssRuntimeModule {
+	
 	public Class<? extends org.eclipse.xtext.typing.ITypeConformanceComputer<JvmTypeReference>> bindITypeService() {
 		return IJvmTypeConformanceComputer.class;
 	}
 	
 	public Class<? extends org.eclipse.xtext.typing.ITypeProvider<JvmTypeReference>> bindITypeProvider() {
-		return XbaseTypeProvider.class;
+		return XcssTypeProvider.class;
+	}
+	
+	@Override
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(
+				Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(
+						XcssGlobalScopeDelegatingScopeProvider.class);
+	}
+	
+	public Class<? extends CallableFeaturePredicate> bindCallableFeaturePredicate() {
+		return XcssCallableFeaturePredicate.class;
 	}
 }

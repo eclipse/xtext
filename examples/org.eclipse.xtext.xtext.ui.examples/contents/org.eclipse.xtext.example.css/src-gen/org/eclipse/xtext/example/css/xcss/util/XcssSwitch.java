@@ -15,8 +15,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.example.css.xcss.*;
 
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
@@ -148,13 +146,6 @@ public class XcssSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XcssPackage.XSIMPLE_FEATURE_CALL:
-      {
-        XSimpleFeatureCall xSimpleFeatureCall = (XSimpleFeatureCall)theEObject;
-        T result = caseXSimpleFeatureCall(xSimpleFeatureCall);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case XcssPackage.FONT_LITERAL:
       {
         FontLiteral fontLiteral = (FontLiteral)theEObject;
@@ -194,16 +185,6 @@ public class XcssSwitch<T>
         SizeLiteral sizeLiteral = (SizeLiteral)theEObject;
         T result = caseSizeLiteral(sizeLiteral);
         if (result == null) result = caseXExpression(sizeLiteral);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case XcssPackage.SETTING:
-      {
-        Setting setting = (Setting)theEObject;
-        T result = caseSetting(setting);
-        if (result == null) result = caseXBinaryOperation(setting);
-        if (result == null) result = caseXAbstractFeatureCall(setting);
-        if (result == null) result = caseXExpression(setting);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -308,22 +289,6 @@ public class XcssSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>XSimple Feature Call</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>XSimple Feature Call</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseXSimpleFeatureCall(XSimpleFeatureCall object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Font Literal</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -404,22 +369,6 @@ public class XcssSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Setting</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Setting</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSetting(Setting object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Jvm Identifyable Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -463,38 +412,6 @@ public class XcssSwitch<T>
    * @generated
    */
   public T caseXExpression(XExpression object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>XAbstract Feature Call</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>XAbstract Feature Call</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseXAbstractFeatureCall(XAbstractFeatureCall object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>XBinary Operation</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>XBinary Operation</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseXBinaryOperation(XBinaryOperation object)
   {
     return null;
   }

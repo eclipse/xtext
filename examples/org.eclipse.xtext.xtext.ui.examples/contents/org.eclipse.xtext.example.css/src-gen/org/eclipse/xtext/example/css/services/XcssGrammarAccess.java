@@ -193,56 +193,58 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	public class SettingElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Setting");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cSettingAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cParamsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cParamsFeatureReferenceParserRuleCall_1_0 = (RuleCall)cParamsAssignment_1.eContents().get(0);
-		private final Assignment cFeatureAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final CrossReference cFeatureJvmIdentifyableElementCrossReference_2_0 = (CrossReference)cFeatureAssignment_2.eContents().get(0);
-		private final RuleCall cFeatureJvmIdentifyableElementOpAssignParserRuleCall_2_0_1 = (RuleCall)cFeatureJvmIdentifyableElementCrossReference_2_0.eContents().get(1);
-		private final Assignment cParamsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cParamsXExpressionParserRuleCall_3_0 = (RuleCall)cParamsAssignment_3.eContents().get(0);
-		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final RuleCall cXOrExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cXAssignmentAssignableAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cFeatureAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final CrossReference cFeatureJvmIdentifyableElementCrossReference_1_1_0 = (CrossReference)cFeatureAssignment_1_1.eContents().get(0);
+		private final RuleCall cFeatureJvmIdentifyableElementOpSettingAssignParserRuleCall_1_1_0_1 = (RuleCall)cFeatureJvmIdentifyableElementCrossReference_1_1_0.eContents().get(1);
+		private final Assignment cValueAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cValueXAssignmentParserRuleCall_1_2_0 = (RuleCall)cValueAssignment_1_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Setting returns XBinaryOperation:
-		//	{Setting} params+=FeatureReference feature=[JvmIdentifyableElement|OpAssign] params+=XExpression ";";
+		//Setting returns XExpression:
+		//	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)?
+		//	";";
 		public ParserRule getRule() { return rule; }
 
-		//{Setting} params+=FeatureReference feature=[JvmIdentifyableElement|OpAssign] params+=XExpression ";"
+		//XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)? ";"
 		public Group getGroup() { return cGroup; }
 
-		//{Setting}
-		public Action getSettingAction_0() { return cSettingAction_0; }
+		//XOrExpression
+		public RuleCall getXOrExpressionParserRuleCall_0() { return cXOrExpressionParserRuleCall_0; }
 
-		//params+=FeatureReference
-		public Assignment getParamsAssignment_1() { return cParamsAssignment_1; }
+		//({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)?
+		public Group getGroup_1() { return cGroup_1; }
 
-		//FeatureReference
-		public RuleCall getParamsFeatureReferenceParserRuleCall_1_0() { return cParamsFeatureReferenceParserRuleCall_1_0; }
+		//{XAssignment.assignable=current}
+		public Action getXAssignmentAssignableAction_1_0() { return cXAssignmentAssignableAction_1_0; }
 
-		//feature=[JvmIdentifyableElement|OpAssign]
-		public Assignment getFeatureAssignment_2() { return cFeatureAssignment_2; }
+		//feature=[JvmIdentifyableElement|OpSettingAssign]
+		public Assignment getFeatureAssignment_1_1() { return cFeatureAssignment_1_1; }
 
-		//[JvmIdentifyableElement|OpAssign]
-		public CrossReference getFeatureJvmIdentifyableElementCrossReference_2_0() { return cFeatureJvmIdentifyableElementCrossReference_2_0; }
+		//[JvmIdentifyableElement|OpSettingAssign]
+		public CrossReference getFeatureJvmIdentifyableElementCrossReference_1_1_0() { return cFeatureJvmIdentifyableElementCrossReference_1_1_0; }
 
-		//OpAssign
-		public RuleCall getFeatureJvmIdentifyableElementOpAssignParserRuleCall_2_0_1() { return cFeatureJvmIdentifyableElementOpAssignParserRuleCall_2_0_1; }
+		//OpSettingAssign
+		public RuleCall getFeatureJvmIdentifyableElementOpSettingAssignParserRuleCall_1_1_0_1() { return cFeatureJvmIdentifyableElementOpSettingAssignParserRuleCall_1_1_0_1; }
 
-		//params+=XExpression
-		public Assignment getParamsAssignment_3() { return cParamsAssignment_3; }
+		//value=XAssignment
+		public Assignment getValueAssignment_1_2() { return cValueAssignment_1_2; }
 
-		//XExpression
-		public RuleCall getParamsXExpressionParserRuleCall_3_0() { return cParamsXExpressionParserRuleCall_3_0; }
+		//XAssignment
+		public RuleCall getValueXAssignmentParserRuleCall_1_2_0() { return cValueXAssignmentParserRuleCall_1_2_0; }
 
 		//";"
-		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
+		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
-	public class OpAssignElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OpAssign");
+	public class OpSettingAssignElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OpSettingAssign");
 		private final Keyword cColonKeyword = (Keyword)rule.eContents().get(1);
 		
-		//OpAssign:
+		////	assignable=FeatureReference feature=[JvmIdentifyableElement|OpAssign] value=XExpression ';';
+		//OpSettingAssign:
 		//	":";
 		public ParserRule getRule() { return rule; }
 
@@ -256,7 +258,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cFeatureJvmIdentifyableElementCrossReference_0 = (CrossReference)cFeatureAssignment.eContents().get(0);
 		private final RuleCall cFeatureJvmIdentifyableElementIDTerminalRuleCall_0_1 = (RuleCall)cFeatureJvmIdentifyableElementCrossReference_0.eContents().get(1);
 		
-		//FeatureReference returns XSimpleFeatureCall:
+		//FeatureReference returns XFeatureCall:
 		//	feature=[JvmIdentifyableElement];
 		public ParserRule getRule() { return rule; }
 
@@ -298,68 +300,56 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FontLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cFontLiteralAction_0 = (Action)cGroup.eContents().get(0);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
-		private final Keyword cFontKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
-		private final Assignment cNameAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final RuleCall cNameStringOrIDParserRuleCall_1_0_1_0 = (RuleCall)cNameAssignment_1_0_1.eContents().get(0);
-		private final Keyword cFontKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
-		private final UnorderedGroup cUnorderedGroup_2 = (UnorderedGroup)cGroup.eContents().get(2);
-		private final Assignment cItalicAssignment_2_0 = (Assignment)cUnorderedGroup_2.eContents().get(0);
-		private final Keyword cItalicIKeyword_2_0_0 = (Keyword)cItalicAssignment_2_0.eContents().get(0);
-		private final Assignment cBoldAssignment_2_1 = (Assignment)cUnorderedGroup_2.eContents().get(1);
-		private final Keyword cBoldBKeyword_2_1_0 = (Keyword)cBoldAssignment_2_1.eContents().get(0);
-		private final Assignment cSizeAssignment_2_2 = (Assignment)cUnorderedGroup_2.eContents().get(2);
-		private final RuleCall cSizeSizeLiteralParserRuleCall_2_2_0 = (RuleCall)cSizeAssignment_2_2.eContents().get(0);
+		private final Keyword cFontKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameStringOrIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final UnorderedGroup cUnorderedGroup_3 = (UnorderedGroup)cGroup.eContents().get(3);
+		private final Assignment cItalicAssignment_3_0 = (Assignment)cUnorderedGroup_3.eContents().get(0);
+		private final Keyword cItalicIKeyword_3_0_0 = (Keyword)cItalicAssignment_3_0.eContents().get(0);
+		private final Assignment cBoldAssignment_3_1 = (Assignment)cUnorderedGroup_3.eContents().get(1);
+		private final Keyword cBoldBKeyword_3_1_0 = (Keyword)cBoldAssignment_3_1.eContents().get(0);
+		private final Assignment cSizeAssignment_3_2 = (Assignment)cUnorderedGroup_3.eContents().get(2);
+		private final RuleCall cSizeSizeLiteralParserRuleCall_3_2_0 = (RuleCall)cSizeAssignment_3_2.eContents().get(0);
 		
 		//FontLiteral:
-		//	{FontLiteral} ("font"? name=StringOrID | "font") (italic?="I"? & bold?="B"? & size?=SizeLiteral?);
+		//	{FontLiteral} "font" name=StringOrID? (italic?="I"? & bold?="B"? & size?=SizeLiteral?);
 		public ParserRule getRule() { return rule; }
 
-		//{FontLiteral} ("font"? name=StringOrID | "font") (italic?="I"? & bold?="B"? & size?=SizeLiteral?)
+		//{FontLiteral} "font" name=StringOrID? (italic?="I"? & bold?="B"? & size?=SizeLiteral?)
 		public Group getGroup() { return cGroup; }
 
 		//{FontLiteral}
 		public Action getFontLiteralAction_0() { return cFontLiteralAction_0; }
 
-		//"font"? name=StringOrID | "font"
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+		//"font"
+		public Keyword getFontKeyword_1() { return cFontKeyword_1; }
 
-		//"font"? name=StringOrID
-		public Group getGroup_1_0() { return cGroup_1_0; }
-
-		//"font"?
-		public Keyword getFontKeyword_1_0_0() { return cFontKeyword_1_0_0; }
-
-		//name=StringOrID
-		public Assignment getNameAssignment_1_0_1() { return cNameAssignment_1_0_1; }
+		//name=StringOrID?
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
 		//StringOrID
-		public RuleCall getNameStringOrIDParserRuleCall_1_0_1_0() { return cNameStringOrIDParserRuleCall_1_0_1_0; }
-
-		//"font"
-		public Keyword getFontKeyword_1_1() { return cFontKeyword_1_1; }
+		public RuleCall getNameStringOrIDParserRuleCall_2_0() { return cNameStringOrIDParserRuleCall_2_0; }
 
 		//italic?="I"? & bold?="B"? & size?=SizeLiteral?
-		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
+		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 
 		//italic?="I"?
-		public Assignment getItalicAssignment_2_0() { return cItalicAssignment_2_0; }
+		public Assignment getItalicAssignment_3_0() { return cItalicAssignment_3_0; }
 
 		//"I"
-		public Keyword getItalicIKeyword_2_0_0() { return cItalicIKeyword_2_0_0; }
+		public Keyword getItalicIKeyword_3_0_0() { return cItalicIKeyword_3_0_0; }
 
 		//bold?="B"?
-		public Assignment getBoldAssignment_2_1() { return cBoldAssignment_2_1; }
+		public Assignment getBoldAssignment_3_1() { return cBoldAssignment_3_1; }
 
 		//"B"
-		public Keyword getBoldBKeyword_2_1_0() { return cBoldBKeyword_2_1_0; }
+		public Keyword getBoldBKeyword_3_1_0() { return cBoldBKeyword_3_1_0; }
 
 		//size?=SizeLiteral?
-		public Assignment getSizeAssignment_2_2() { return cSizeAssignment_2_2; }
+		public Assignment getSizeAssignment_3_2() { return cSizeAssignment_3_2; }
 
 		//SizeLiteral
-		public RuleCall getSizeSizeLiteralParserRuleCall_2_2_0() { return cSizeSizeLiteralParserRuleCall_2_2_0; }
+		public RuleCall getSizeSizeLiteralParserRuleCall_3_2_0() { return cSizeSizeLiteralParserRuleCall_3_2_0; }
 	}
 
 	public class StringOrIDElements extends AbstractParserRuleElementFinder {
@@ -404,18 +394,30 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class ColorConstantElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ColorConstant");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cConstantAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cConstantJvmIdentifyableElementCrossReference_1_0 = (CrossReference)cConstantAssignment_1.eContents().get(0);
+		private final RuleCall cConstantJvmIdentifyableElementIDTerminalRuleCall_1_0_1 = (RuleCall)cConstantJvmIdentifyableElementCrossReference_1_0.eContents().get(1);
 		
 		//ColorConstant:
-		//	name=ID;
+		//	"#" constant=[JvmIdentifyableElement];
 		public ParserRule getRule() { return rule; }
 
-		//name=ID
-		public Assignment getNameAssignment() { return cNameAssignment; }
+		//"#" constant=[JvmIdentifyableElement]
+		public Group getGroup() { return cGroup; }
+
+		//"#"
+		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
+
+		//constant=[JvmIdentifyableElement]
+		public Assignment getConstantAssignment_1() { return cConstantAssignment_1; }
+
+		//[JvmIdentifyableElement]
+		public CrossReference getConstantJvmIdentifyableElementCrossReference_1_0() { return cConstantJvmIdentifyableElementCrossReference_1_0; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
+		public RuleCall getConstantJvmIdentifyableElementIDTerminalRuleCall_1_0_1() { return cConstantJvmIdentifyableElementIDTerminalRuleCall_1_0_1; }
 	}
 
 	public class RGBElements extends AbstractParserRuleElementFinder {
@@ -616,7 +618,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	private WildcardSelectorElements pWildcardSelector;
 	private FilterElements pFilter;
 	private SettingElements pSetting;
-	private OpAssignElements pOpAssign;
+	private OpSettingAssignElements pOpSettingAssign;
 	private FeatureReferenceElements pFeatureReference;
 	private CssLiteralsElements pCssLiterals;
 	private FontLiteralElements pFontLiteral;
@@ -719,8 +721,9 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getFilterAccess().getRule();
 	}
 
-	//Setting returns XBinaryOperation:
-	//	{Setting} params+=FeatureReference feature=[JvmIdentifyableElement|OpAssign] params+=XExpression ";";
+	//Setting returns XExpression:
+	//	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)?
+	//	";";
 	public SettingElements getSettingAccess() {
 		return (pSetting != null) ? pSetting : (pSetting = new SettingElements());
 	}
@@ -729,17 +732,18 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getSettingAccess().getRule();
 	}
 
-	//OpAssign:
+	////	assignable=FeatureReference feature=[JvmIdentifyableElement|OpAssign] value=XExpression ';';
+	//OpSettingAssign:
 	//	":";
-	public OpAssignElements getOpAssignAccess() {
-		return (pOpAssign != null) ? pOpAssign : (pOpAssign = new OpAssignElements());
+	public OpSettingAssignElements getOpSettingAssignAccess() {
+		return (pOpSettingAssign != null) ? pOpSettingAssign : (pOpSettingAssign = new OpSettingAssignElements());
 	}
 	
-	public ParserRule getOpAssignRule() {
-		return getOpAssignAccess().getRule();
+	public ParserRule getOpSettingAssignRule() {
+		return getOpSettingAssignAccess().getRule();
 	}
 
-	//FeatureReference returns XSimpleFeatureCall:
+	//FeatureReference returns XFeatureCall:
 	//	feature=[JvmIdentifyableElement];
 	public FeatureReferenceElements getFeatureReferenceAccess() {
 		return (pFeatureReference != null) ? pFeatureReference : (pFeatureReference = new FeatureReferenceElements());
@@ -760,7 +764,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FontLiteral:
-	//	{FontLiteral} ("font"? name=StringOrID | "font") (italic?="I"? & bold?="B"? & size?=SizeLiteral?);
+	//	{FontLiteral} "font" name=StringOrID? (italic?="I"? & bold?="B"? & size?=SizeLiteral?);
 	public FontLiteralElements getFontLiteralAccess() {
 		return (pFontLiteral != null) ? pFontLiteral : (pFontLiteral = new FontLiteralElements());
 	}
@@ -790,7 +794,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ColorConstant:
-	//	name=ID;
+	//	"#" constant=[JvmIdentifyableElement];
 	public ColorConstantElements getColorConstantAccess() {
 		return (pColorConstant != null) ? pColorConstant : (pColorConstant = new ColorConstantElements());
 	}
@@ -860,6 +864,16 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getXAssignmentRule() {
 		return getXAssignmentAccess().getRule();
+	}
+
+	//OpAssign:
+	//	"=" | "+=";
+	public XbaseGrammarAccess.OpAssignElements getOpAssignAccess() {
+		return gaXbase.getOpAssignAccess();
+	}
+	
+	public ParserRule getOpAssignRule() {
+		return getOpAssignAccess().getRule();
 	}
 
 	//XOrExpression returns XExpression:

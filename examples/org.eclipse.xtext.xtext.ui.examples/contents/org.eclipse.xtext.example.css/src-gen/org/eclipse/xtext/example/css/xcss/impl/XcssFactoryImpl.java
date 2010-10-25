@@ -74,13 +74,11 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
       case XcssPackage.TYPE_SELECTOR: return createTypeSelector();
       case XcssPackage.WILDCARD_SELECTOR: return createWildcardSelector();
       case XcssPackage.FILTER: return createFilter();
-      case XcssPackage.XSIMPLE_FEATURE_CALL: return createXSimpleFeatureCall();
       case XcssPackage.FONT_LITERAL: return createFontLiteral();
       case XcssPackage.COLOR_LITERAL: return createColorLiteral();
       case XcssPackage.COLOR_CONSTANT: return createColorConstant();
       case XcssPackage.RGB: return createRGB();
       case XcssPackage.SIZE_LITERAL: return createSizeLiteral();
-      case XcssPackage.SETTING: return createSetting();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -191,17 +189,6 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public XSimpleFeatureCall createXSimpleFeatureCall()
-  {
-    XSimpleFeatureCallImpl xSimpleFeatureCall = new XSimpleFeatureCallImpl();
-    return xSimpleFeatureCall;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public FontLiteral createFontLiteral()
   {
     FontLiteralImpl fontLiteral = new FontLiteralImpl();
@@ -250,17 +237,6 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
   {
     SizeLiteralImpl sizeLiteral = new SizeLiteralImpl();
     return sizeLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Setting createSetting()
-  {
-    SettingImpl setting = new SettingImpl();
-    return setting;
   }
 
   /**

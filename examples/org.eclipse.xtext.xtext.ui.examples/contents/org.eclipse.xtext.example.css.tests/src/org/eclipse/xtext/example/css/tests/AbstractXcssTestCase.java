@@ -19,6 +19,7 @@ import org.eclipse.xtext.example.css.xcss.StyleSheet;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -27,7 +28,15 @@ import com.google.inject.Injector;
  */
 public abstract class AbstractXcssTestCase extends TestCase {
 	
-	static Injector injector = new XcssStandaloneSetup().createInjectorAndDoEMFRegistration();
+	static Injector injector = new XcssStandaloneSetup() {
+		public Injector createInjector() {
+			return Guice.createInjector(new org.eclipse.xtext.example.css.XcssRuntimeModule() {
+				public ClassLoader bindClassLoaderToInstance() {
+					return AbstractXcssTestCase.class.getClassLoader();
+				}
+			});
+		}
+	}.createInjectorAndDoEMFRegistration();
 
 	@Override
 	protected void setUp() throws Exception {
@@ -46,7 +55,7 @@ public abstract class AbstractXcssTestCase extends TestCase {
 		XtextResourceSet set = get(XtextResourceSet.class);
 		Resource resource = set.createResource(URI.createURI("Test.xcss"));
 		resource.load(new StringInputStream(string), null);
-		assertTrue("Errors"+resource.getErrors(), resource.getErrors().isEmpty());
+		assertTrue("Errors: "+resource.getErrors(), resource.getErrors().isEmpty());
 		StyleSheet sheet = (StyleSheet) resource.getContents().get(0);
 		return sheet;
 	}

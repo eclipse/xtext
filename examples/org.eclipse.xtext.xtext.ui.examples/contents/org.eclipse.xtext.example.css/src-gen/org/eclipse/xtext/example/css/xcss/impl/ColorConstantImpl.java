@@ -8,8 +8,11 @@ package org.eclipse.xtext.example.css.xcss.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 
 import org.eclipse.xtext.example.css.xcss.ColorConstant;
 import org.eclipse.xtext.example.css.xcss.XcssPackage;
@@ -21,7 +24,7 @@ import org.eclipse.xtext.example.css.xcss.XcssPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.css.xcss.impl.ColorConstantImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.css.xcss.impl.ColorConstantImpl#getConstant <em>Constant</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,24 +33,14 @@ import org.eclipse.xtext.example.css.xcss.XcssPackage;
 public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getConstant() <em>Constant</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getConstant()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+  protected JvmIdentifyableElement constant;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,9 +68,19 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public JvmIdentifyableElement getConstant()
   {
-    return name;
+    if (constant != null && constant.eIsProxy())
+    {
+      InternalEObject oldConstant = (InternalEObject)constant;
+      constant = (JvmIdentifyableElement)eResolveProxy(oldConstant);
+      if (constant != oldConstant)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, XcssPackage.COLOR_CONSTANT__CONSTANT, oldConstant, constant));
+      }
+    }
+    return constant;
   }
 
   /**
@@ -85,12 +88,22 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public JvmIdentifyableElement basicGetConstant()
   {
-    String oldName = name;
-    name = newName;
+    return constant;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setConstant(JvmIdentifyableElement newConstant)
+  {
+    JvmIdentifyableElement oldConstant = constant;
+    constant = newConstant;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.COLOR_CONSTANT__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.COLOR_CONSTANT__CONSTANT, oldConstant, constant));
   }
 
   /**
@@ -103,8 +116,9 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
   {
     switch (featureID)
     {
-      case XcssPackage.COLOR_CONSTANT__NAME:
-        return getName();
+      case XcssPackage.COLOR_CONSTANT__CONSTANT:
+        if (resolve) return getConstant();
+        return basicGetConstant();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +133,8 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
   {
     switch (featureID)
     {
-      case XcssPackage.COLOR_CONSTANT__NAME:
-        setName((String)newValue);
+      case XcssPackage.COLOR_CONSTANT__CONSTANT:
+        setConstant((JvmIdentifyableElement)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +150,8 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
   {
     switch (featureID)
     {
-      case XcssPackage.COLOR_CONSTANT__NAME:
-        setName(NAME_EDEFAULT);
+      case XcssPackage.COLOR_CONSTANT__CONSTANT:
+        setConstant((JvmIdentifyableElement)null);
         return;
     }
     super.eUnset(featureID);
@@ -153,27 +167,10 @@ public class ColorConstantImpl extends ColorLiteralImpl implements ColorConstant
   {
     switch (featureID)
     {
-      case XcssPackage.COLOR_CONSTANT__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case XcssPackage.COLOR_CONSTANT__CONSTANT:
+        return constant != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //ColorConstantImpl
