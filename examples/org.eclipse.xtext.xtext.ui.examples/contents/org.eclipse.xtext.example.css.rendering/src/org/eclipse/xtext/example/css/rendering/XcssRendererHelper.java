@@ -11,12 +11,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.xtext.example.css.xcss.StyleSheet;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -39,12 +36,16 @@ public class XcssRendererHelper {
 	@Inject
 	private IResourceValidator resourceValidator;
 	
+	@Inject
+	private Provider<XcssInterpreter> interpreterProvider;
+	
 	public XcssRendererHelper() {
 	}
 	
-	public XcssRendererHelper(Provider<XtextResourceSet> resourceSetProvider, IResourceValidator resourceValidator) {
+	public XcssRendererHelper(Provider<XtextResourceSet> resourceSetProvider, IResourceValidator resourceValidator, Provider<XcssInterpreter> interpreterProvider) {
 		this.resourceSetProvider = resourceSetProvider;
 		this.resourceValidator = resourceValidator;
+		this.interpreterProvider = interpreterProvider;
 	}
 	
 	public XtextResourceSet createResourceSet() {
@@ -69,29 +70,18 @@ public class XcssRendererHelper {
 	int colorKey = 0;
 
 	public void applyStyles(Display display, StyleSheet styleSheet, Widget widget, boolean recurse) {
+		XcssInterpreter interpreter = interpreterProvider.get();
+		interpreter.setDisplay(display);
+		applyStyles(interpreter, styleSheet, widget, recurse);
+	}
+	
+	protected void applyStyles(XcssInterpreter interpreter, StyleSheet styleSheet, Widget widget, boolean recurse) {
+		interpreter.evaluate(styleSheet, widget);
 		if (recurse && widget instanceof Composite) {
 			Control[] children = ((Composite) widget).getChildren();
 			for(Control child: children) {
-				applyStyles(display, styleSheet, child, recurse);
+				applyStyles(interpreter, styleSheet, child, recurse);
 			}
-		}
-		if (widget instanceof Text) {
-			Text text = (Text) widget;
-			switch(colorKey) {
-				case 0: text.setBackground(display.getSystemColor(SWT.COLOR_RED)); break;
-				case 1: text.setBackground(display.getSystemColor(SWT.COLOR_BLUE)); break;
-				case 2: text.setBackground(display.getSystemColor(SWT.COLOR_YELLOW)); break;
-			}
-			colorKey = (colorKey+1) % 3;
-		}
-		if (widget instanceof StyledText) {
-			StyledText text = (StyledText) widget;
-			switch(colorKey) {
-				case 0: text.setSelectionBackground(display.getSystemColor(SWT.COLOR_RED)); break;
-				case 1: text.setSelectionBackground(display.getSystemColor(SWT.COLOR_BLUE)); break;
-				case 2: text.setSelectionBackground(display.getSystemColor(SWT.COLOR_YELLOW)); break;
-			}
-			colorKey = (colorKey+1) % 3;
 		}
 	}
 

@@ -60,7 +60,11 @@ ColorConstant:
 	'#' constant=[JvmIdentifyableElement];
 
 RGB:
-	'#' color=INT;
+	'#' color=IntAsString;
+	
+IntAsString:
+	INT
+;
 
 SizeLiteral:
 	value=INT unit=SizeUnit;
