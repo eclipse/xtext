@@ -178,6 +178,6 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	}
 
 	protected boolean isResolved(EObject to) {
-		return !((InternalEObject) to).eIsProxy();
+		return to != null && !((InternalEObject) to).eIsProxy();
 	}
 }
