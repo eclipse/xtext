@@ -98,6 +98,10 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 				new Character('c')), "'abc'.toCharArray");
 	}
 	
+	public void testFeatureCall_04() {
+		assertEvaluatesTo(new Integer("literal".length()), "{ var this = 'literal' length }");
+	}
+	
 	public void testAssignment_01() {
 		assertEvaluatesTo("newValue", "{var x = 'literal' x = 'newValue'}");
 	}

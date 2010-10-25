@@ -20,7 +20,6 @@ import com.google.common.collect.Maps;
 public class DefaultEvaluationContext implements IEvaluationContext {
 
 	private IEvaluationContext parent;
-	private Throwable currentException;
 	private Map<QualifiedName, Object> values;
 	
 	public DefaultEvaluationContext() {
@@ -29,14 +28,6 @@ public class DefaultEvaluationContext implements IEvaluationContext {
 	
 	public DefaultEvaluationContext(IEvaluationContext parent) {
 		this.parent = parent;
-	}
-
-	public Throwable getCurrentException() {
-		return currentException;
-	}
-
-	public void setCurrentException(Throwable throwable) {
-		this.currentException = throwable;
 	}
 
 	public Object getValue(QualifiedName qualifiedName) {
