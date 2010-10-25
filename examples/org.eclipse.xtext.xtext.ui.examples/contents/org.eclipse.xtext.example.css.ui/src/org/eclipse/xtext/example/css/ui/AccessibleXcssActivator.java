@@ -9,12 +9,15 @@ package org.eclipse.xtext.example.css.ui;
 
 import org.eclipse.xtext.example.css.ui.internal.XcssActivator;
 import org.eclipse.xtext.example.css.ui.rendering.XcssRendererHelper;
+import org.eclipse.xtext.validation.IResourceValidator;
 
 /**
  * @author Sebastian Zarnekow
  */
 public class AccessibleXcssActivator extends XcssActivator {
 
+	private static final String LANGUAGE_ID = "org.eclipse.xtext.example.css.Xcss";
+	
 	private XcssRendererHelper renderer;
 	
 	public static AccessibleXcssActivator getInstance() {
@@ -23,8 +26,13 @@ public class AccessibleXcssActivator extends XcssActivator {
 	
 	public XcssRendererHelper getRenderer() {
 		if (renderer == null)
-			renderer = getInjector("org.eclipse.xtext.example.css.Xcss").getInstance(XcssRendererHelper.class);
+			renderer = getInjector(LANGUAGE_ID).getInstance(XcssRendererHelper.class);
 		return renderer;
+	}
+	
+	public IResourceValidator getValidator() {
+		IResourceValidator result = getInjector(LANGUAGE_ID).getInstance(IResourceValidator.class);
+		return result;
 	}
 	
 }
