@@ -10,6 +10,8 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.eclipse.xtext.example.css.xcss.ColorConstant;
+import org.eclipse.xtext.example.css.xcss.IdSelector;
+import org.eclipse.xtext.example.css.xcss.RGB;
 import org.eclipse.xtext.example.css.xcss.Selector;
 import org.eclipse.xtext.example.css.xcss.StyleRule;
 import org.eclipse.xtext.example.css.xcss.StyleSheet;
@@ -63,14 +65,14 @@ public class XcssInterpreter extends XbaseInterpreter  {
 			IEvaluationResult selectorResult = evaluate(selector, context);
 			if (selectorResult.getException() != null)
 				return selectorResult;
-			if (Boolean.TRUE.equals(selectorResult.getResult())) {
-				for(XExpression setting: rule.getSettings()) {
-					IEvaluationResult settingResult = evaluate(setting, context);
-					if (settingResult.getException() != null)
-						return settingResult;
-				}
+			if (Boolean.FALSE.equals(selectorResult.getResult())) {
 				return DefaultEvaluationResult.NULL;
 			}
+		}
+		for(XExpression setting: rule.getSettings()) {
+			IEvaluationResult settingResult = evaluate(setting, context);
+			if (settingResult.getException() != null)
+				return settingResult;
 		}
 		return DefaultEvaluationResult.NULL;
 	}
@@ -86,8 +88,24 @@ public class XcssInterpreter extends XbaseInterpreter  {
 		if (!expectedType.isInstance(widget)) {
 			return new DefaultEvaluationResult(Boolean.FALSE, null);
 		}
-		if (typeSelector.getFilter() != null && typeSelector.getFilter().getCondition() != null) {
-			IEvaluationResult filterResult = evaluate(typeSelector.getFilter().getCondition(), context);
+		if (typeSelector.getFilter() != null && typeSelector.getFilter() != null) {
+			IEvaluationResult filterResult = evaluate(typeSelector.getFilter(), context);
+			if (filterResult.getException() != null)
+				return filterResult;
+			return new DefaultEvaluationResult(Boolean.TRUE.equals(filterResult.getResult()), null);
+		}
+		return new DefaultEvaluationResult(Boolean.TRUE, null);
+	}
+	
+	public IEvaluationResult _evaluateIdSelector(IdSelector idSelector, IEvaluationContext context) {
+		Object widget = context.getValue(XbaseScopeProvider.THIS);
+		if (widget instanceof Widget) {
+			Object idData = ((Widget) widget).getData("org.eclipse.e4.ui.css.id");
+			if (idData == null || !idSelector.getId().equals(idData))
+				return new DefaultEvaluationResult(Boolean.FALSE, null);
+		}
+		if (idSelector.getFilter() != null && idSelector.getFilter() != null) {
+			IEvaluationResult filterResult = evaluate(idSelector.getFilter(), context);
 			if (filterResult.getException() != null)
 				return filterResult;
 			return new DefaultEvaluationResult(Boolean.TRUE.equals(filterResult.getResult()), null);
@@ -96,7 +114,7 @@ public class XcssInterpreter extends XbaseInterpreter  {
 	}
 	
 	public IEvaluationResult _evaluateTypeSelector(WildcardSelector wildcard, IEvaluationContext context) {
-		if (wildcard.getFilter() != null && wildcard.getFilter().getCondition() != null) {
+		if (wildcard.getFilter() != null && wildcard.getFilter() != null) {
 			IEvaluationResult filterResult = evaluate(wildcard.getFilter(), context);
 			if (filterResult.getException() != null)
 				return filterResult;
@@ -122,6 +140,11 @@ public class XcssInterpreter extends XbaseInterpreter  {
 			}
 		}
 		return DefaultEvaluationResult.NULL;
+	}
+	
+	public IEvaluationResult _evaluateRGB(RGB color, IEvaluationContext context) {
+		org.eclipse.swt.graphics.RGB rgb = new org.eclipse.swt.graphics.RGB(color.getRed(), color.getGreen(), color.getBlue());
+		return new DefaultEvaluationResult(new Color(display, rgb), null);
 	}
 	
 }

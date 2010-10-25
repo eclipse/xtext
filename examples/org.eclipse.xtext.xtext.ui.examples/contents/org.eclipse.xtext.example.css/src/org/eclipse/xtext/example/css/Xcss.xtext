@@ -3,6 +3,7 @@ grammar org.eclipse.xtext.example.css.Xcss with org.eclipse.xtext.xbase.Xbase
 generate xcss "http://www.eclipse.org/xtext/example/css/Xcss"
 import "http://www.eclipse.org/xtext/xbase/Xbase"
 import "http://www.eclipse.org/xtext/common/JavaVMTypes"
+import "http://www.eclipse.org/emf/2002/Ecore"
 
 StyleSheet: {StyleSheet}
 	rules+=StyleRule*;
@@ -12,21 +13,25 @@ StyleRule:
 		settings+=Setting*
 	'}';
 
-Selector:
-	(TypeSelector | WildcardSelector) filter=Filter?;
-
 _JvmTypeReference returns JvmTypeReference:
   TypeSelector
 ;
 
+Selector:
+	(TypeSelector | WildcardSelector | IdSelector) filter=Filter?;
+
 TypeSelector:
 	type=[JvmType|QualifiedName];
+
+IdSelector:
+	'#' id=ID
+;
 
 WildcardSelector:
 	{WildcardSelector} '*';
 
-Filter:
-	'[' condition=XExpression ']';
+Filter returns XExpression:
+	'[' XExpression ']';
 
 Setting returns XExpression:
 	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)? ';';
@@ -35,8 +40,8 @@ Setting returns XExpression:
 OpSettingAssign:
 	':';
 
-FeatureReference returns XFeatureCall:
-	feature=[JvmIdentifyableElement];
+//FeatureReference returns XFeatureCall:
+//	feature=[JvmIdentifyableElement];
 
 CssLiterals returns XExpression:
 	FontLiteral | ColorLiteral | SizeLiteral;
@@ -54,18 +59,18 @@ StringOrID:
 	STRING | ID;
 
 ColorLiteral:
-	ColorConstant | RGB;
+	RGB | ColorConstant;
 
 ColorConstant:
 	'#' constant=[JvmIdentifyableElement];
 
 RGB:
-	'#' color=IntAsString;
+	'#' red = HEXINT ',' green = HEXINT ',' blue = HEXINT;
 	
-IntAsString:
-	INT
+HEXINT returns EInt:
+  INT ID? | ID
 ;
-
+	
 SizeLiteral:
 	value=INT unit=SizeUnit;
 
