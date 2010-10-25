@@ -175,4 +175,7 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 		return typesService.getTypeForName(BOOLEAN_TYPE_NAME, object);
 	}
 
+	public TypesFactory getTypesFactory() {
+		return factory;
+	}
 }

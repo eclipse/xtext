@@ -65,7 +65,8 @@ import com.google.inject.Inject;
 public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	public static final QualifiedName THIS = QualifiedName.create("this");
-	public static final QualifiedName EQUALS = QualifiedName.create("=");
+	public static final QualifiedName ASSIGN = QualifiedName.create("=");
+	public static final QualifiedName ADD = QualifiedName.create("+=");
 
 	@Inject
 	private OperatorMapping operatorMapping;
@@ -104,13 +105,14 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			if (call.getArguments().isEmpty())
 				return INewScope.NULL_SCOPE;
 			XExpression target = call.getArguments().get(0);
-			JvmTypeReference jvmTypeReference = typeResolver.getType(target, null);
-			if (jvmTypeReference != null) {
-				return createFeatureScopeForTypeRef(jvmTypeReference, INewScope.NULL_SCOPE, publicOnly);
+			if (target != null) {
+				JvmTypeReference jvmTypeReference = typeResolver.getType(target, null);
+				if (jvmTypeReference != null) {
+					return createFeatureScopeForTypeRef(jvmTypeReference, INewScope.NULL_SCOPE, publicOnly);
+				}
 			}
 		}
 		if (context instanceof XAbstractFeatureCall) {
-
 			DelegatingScope implicitThis = new DelegatingScope();
 			INewScope localVariableScope = createLocalVarScope(context, reference, implicitThis);
 			IEObjectDescription thisVariable = localVariableScope.getSingleElement(Selectors.byName(THIS));
@@ -156,23 +158,34 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (assignable instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) assignable;
 			if (featureCall.getFeature() instanceof XVariableDeclaration)
-				return new SingletonScope(EObjectDescription.create(EQUALS, featureCall.getFeature()), parent);
+				return new SingletonScope(EObjectDescription.create(getAssignmentOperator(), featureCall.getFeature()), parent);
 			if (featureCall.getFeature() instanceof JvmFormalParameter)
-				return new SingletonScope(EObjectDescription.create(EQUALS, featureCall.getFeature()), parent);
+				return new SingletonScope(EObjectDescription.create(getAssignmentOperator(), featureCall.getFeature()), parent);
 			if (featureCall.getFeature() instanceof JvmField) {
 				if (!((JvmField) featureCall.getFeature()).isFinal())
-					return new SingletonScope(EObjectDescription.create(EQUALS, featureCall.getFeature()), parent);
+					return new SingletonScope(EObjectDescription.create(getAssignmentOperator(), featureCall.getFeature()), parent);
 			}
+//			if (featureCall.getFeature() instanceof JvmOperation) {
+//				JvmOperation operation = (JvmOperation) featureCall.getFeature();
+//				// methods with one param may be written as setFoo = 'firstParam'
+//				if (operation.getParameters().size() == 1) {
+//					return new SingletonScope(EObjectDescription.create(getAssignmentOperator(), featureCall.getFeature()), parent);
+//				}
+//			}
 		}
 		if (assignable instanceof XMemberFeatureCall) {
 			XMemberFeatureCall featureCall = (XMemberFeatureCall) assignable;
 			if (featureCall.getFeature() instanceof JvmField) {
 				if (!((JvmField) featureCall.getFeature()).isFinal())
-					return new SingletonScope(EObjectDescription.create(EQUALS, featureCall.getFeature()), parent);
+					return new SingletonScope(EObjectDescription.create(getAssignmentOperator(), featureCall.getFeature()), parent);
 			}
 		}
 		return parent;
 
+	}
+
+	protected QualifiedName getAssignmentOperator() {
+		return ASSIGN;
 	}
 
 	protected INewScope createLocalVarScope(EObject context, EReference reference, INewScope parentScope) {
