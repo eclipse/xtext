@@ -21,7 +21,9 @@ import org.eclipse.xtext.example.css.xcss.XcssPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.example.css.xcss.impl.RGBImpl#getColor <em>Color</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.css.xcss.impl.RGBImpl#getRed <em>Red</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.css.xcss.impl.RGBImpl#getGreen <em>Green</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.css.xcss.impl.RGBImpl#getBlue <em>Blue</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,24 +32,64 @@ import org.eclipse.xtext.example.css.xcss.XcssPackage;
 public class RGBImpl extends ColorLiteralImpl implements RGB
 {
   /**
-   * The default value of the '{@link #getColor() <em>Color</em>}' attribute.
+   * The default value of the '{@link #getRed() <em>Red</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getColor()
+   * @see #getRed()
    * @generated
    * @ordered
    */
-  protected static final String COLOR_EDEFAULT = null;
+  protected static final int RED_EDEFAULT = 0;
 
   /**
-   * The cached value of the '{@link #getColor() <em>Color</em>}' attribute.
+   * The cached value of the '{@link #getRed() <em>Red</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getColor()
+   * @see #getRed()
    * @generated
    * @ordered
    */
-  protected String color = COLOR_EDEFAULT;
+  protected int red = RED_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getGreen() <em>Green</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getGreen()
+   * @generated
+   * @ordered
+   */
+  protected static final int GREEN_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getGreen() <em>Green</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getGreen()
+   * @generated
+   * @ordered
+   */
+  protected int green = GREEN_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getBlue() <em>Blue</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBlue()
+   * @generated
+   * @ordered
+   */
+  protected static final int BLUE_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getBlue() <em>Blue</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBlue()
+   * @generated
+   * @ordered
+   */
+  protected int blue = BLUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,9 +117,9 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getColor()
+  public int getRed()
   {
-    return color;
+    return red;
   }
 
   /**
@@ -85,12 +127,58 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setColor(String newColor)
+  public void setRed(int newRed)
   {
-    String oldColor = color;
-    color = newColor;
+    int oldRed = red;
+    red = newRed;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.RGB__COLOR, oldColor, color));
+      eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.RGB__RED, oldRed, red));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public int getGreen()
+  {
+    return green;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setGreen(int newGreen)
+  {
+    int oldGreen = green;
+    green = newGreen;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.RGB__GREEN, oldGreen, green));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public int getBlue()
+  {
+    return blue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setBlue(int newBlue)
+  {
+    int oldBlue = blue;
+    blue = newBlue;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.RGB__BLUE, oldBlue, blue));
   }
 
   /**
@@ -103,8 +191,12 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
   {
     switch (featureID)
     {
-      case XcssPackage.RGB__COLOR:
-        return getColor();
+      case XcssPackage.RGB__RED:
+        return getRed();
+      case XcssPackage.RGB__GREEN:
+        return getGreen();
+      case XcssPackage.RGB__BLUE:
+        return getBlue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +211,14 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
   {
     switch (featureID)
     {
-      case XcssPackage.RGB__COLOR:
-        setColor((String)newValue);
+      case XcssPackage.RGB__RED:
+        setRed((Integer)newValue);
+        return;
+      case XcssPackage.RGB__GREEN:
+        setGreen((Integer)newValue);
+        return;
+      case XcssPackage.RGB__BLUE:
+        setBlue((Integer)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +234,14 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
   {
     switch (featureID)
     {
-      case XcssPackage.RGB__COLOR:
-        setColor(COLOR_EDEFAULT);
+      case XcssPackage.RGB__RED:
+        setRed(RED_EDEFAULT);
+        return;
+      case XcssPackage.RGB__GREEN:
+        setGreen(GREEN_EDEFAULT);
+        return;
+      case XcssPackage.RGB__BLUE:
+        setBlue(BLUE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +257,12 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
   {
     switch (featureID)
     {
-      case XcssPackage.RGB__COLOR:
-        return COLOR_EDEFAULT == null ? color != null : !COLOR_EDEFAULT.equals(color);
+      case XcssPackage.RGB__RED:
+        return red != RED_EDEFAULT;
+      case XcssPackage.RGB__GREEN:
+        return green != GREEN_EDEFAULT;
+      case XcssPackage.RGB__BLUE:
+        return blue != BLUE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -170,8 +278,12 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (color: ");
-    result.append(color);
+    result.append(" (red: ");
+    result.append(red);
+    result.append(", green: ");
+    result.append(green);
+    result.append(", blue: ");
+    result.append(blue);
     result.append(')');
     return result.toString();
   }

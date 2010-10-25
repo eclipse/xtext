@@ -78,38 +78,6 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
-	public class SelectorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Selector");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final RuleCall cTypeSelectorParserRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
-		private final RuleCall cWildcardSelectorParserRuleCall_0_1 = (RuleCall)cAlternatives_0.eContents().get(1);
-		private final Assignment cFilterAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cFilterFilterParserRuleCall_1_0 = (RuleCall)cFilterAssignment_1.eContents().get(0);
-		
-		//Selector:
-		//	(TypeSelector | WildcardSelector) filter=Filter?;
-		public ParserRule getRule() { return rule; }
-
-		//(TypeSelector | WildcardSelector) filter=Filter?
-		public Group getGroup() { return cGroup; }
-
-		//TypeSelector | WildcardSelector
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
-
-		//TypeSelector
-		public RuleCall getTypeSelectorParserRuleCall_0_0() { return cTypeSelectorParserRuleCall_0_0; }
-
-		//WildcardSelector
-		public RuleCall getWildcardSelectorParserRuleCall_0_1() { return cWildcardSelectorParserRuleCall_0_1; }
-
-		//filter=Filter?
-		public Assignment getFilterAssignment_1() { return cFilterAssignment_1; }
-
-		//Filter
-		public RuleCall getFilterFilterParserRuleCall_1_0() { return cFilterFilterParserRuleCall_1_0; }
-	}
-
 	public class _JvmTypeReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "_JvmTypeReference");
 		private final RuleCall cTypeSelectorParserRuleCall = (RuleCall)rule.eContents().get(1);
@@ -120,6 +88,42 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 
 		//TypeSelector
 		public RuleCall getTypeSelectorParserRuleCall() { return cTypeSelectorParserRuleCall; }
+	}
+
+	public class SelectorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Selector");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final RuleCall cTypeSelectorParserRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
+		private final RuleCall cWildcardSelectorParserRuleCall_0_1 = (RuleCall)cAlternatives_0.eContents().get(1);
+		private final RuleCall cIdSelectorParserRuleCall_0_2 = (RuleCall)cAlternatives_0.eContents().get(2);
+		private final Assignment cFilterAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cFilterFilterParserRuleCall_1_0 = (RuleCall)cFilterAssignment_1.eContents().get(0);
+		
+		//Selector:
+		//	(TypeSelector | WildcardSelector | IdSelector) filter=Filter?;
+		public ParserRule getRule() { return rule; }
+
+		//(TypeSelector | WildcardSelector | IdSelector) filter=Filter?
+		public Group getGroup() { return cGroup; }
+
+		//TypeSelector | WildcardSelector | IdSelector
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+
+		//TypeSelector
+		public RuleCall getTypeSelectorParserRuleCall_0_0() { return cTypeSelectorParserRuleCall_0_0; }
+
+		//WildcardSelector
+		public RuleCall getWildcardSelectorParserRuleCall_0_1() { return cWildcardSelectorParserRuleCall_0_1; }
+
+		//IdSelector
+		public RuleCall getIdSelectorParserRuleCall_0_2() { return cIdSelectorParserRuleCall_0_2; }
+
+		//filter=Filter?
+		public Assignment getFilterAssignment_1() { return cFilterAssignment_1; }
+
+		//Filter
+		public RuleCall getFilterFilterParserRuleCall_1_0() { return cFilterFilterParserRuleCall_1_0; }
 	}
 
 	public class TypeSelectorElements extends AbstractParserRuleElementFinder {
@@ -140,6 +144,30 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 
 		//QualifiedName
 		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_0_1; }
+	}
+
+	public class IdSelectorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IdSelector");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cIdAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cIdIDTerminalRuleCall_1_0 = (RuleCall)cIdAssignment_1.eContents().get(0);
+		
+		//IdSelector:
+		//	"#" id=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"#" id=ID
+		public Group getGroup() { return cGroup; }
+
+		//"#"
+		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
+
+		//id=ID
+		public Assignment getIdAssignment_1() { return cIdAssignment_1; }
+
+		//ID
+		public RuleCall getIdIDTerminalRuleCall_1_0() { return cIdIDTerminalRuleCall_1_0; }
 	}
 
 	public class WildcardSelectorElements extends AbstractParserRuleElementFinder {
@@ -166,25 +194,21 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Filter");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cConditionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cConditionXExpressionParserRuleCall_1_0 = (RuleCall)cConditionAssignment_1.eContents().get(0);
+		private final RuleCall cXExpressionParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Filter:
-		//	"[" condition=XExpression "]";
+		//Filter returns XExpression:
+		//	"[" XExpression "]";
 		public ParserRule getRule() { return rule; }
 
-		//"[" condition=XExpression "]"
+		//"[" XExpression "]"
 		public Group getGroup() { return cGroup; }
 
 		//"["
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 
-		//condition=XExpression
-		public Assignment getConditionAssignment_1() { return cConditionAssignment_1; }
-
 		//XExpression
-		public RuleCall getConditionXExpressionParserRuleCall_1_0() { return cConditionXExpressionParserRuleCall_1_0; }
+		public RuleCall getXExpressionParserRuleCall_1() { return cXExpressionParserRuleCall_1; }
 
 		//"]"
 		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
@@ -252,26 +276,6 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getColonKeyword() { return cColonKeyword; }
 	}
 
-	public class FeatureReferenceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureReference");
-		private final Assignment cFeatureAssignment = (Assignment)rule.eContents().get(1);
-		private final CrossReference cFeatureJvmIdentifyableElementCrossReference_0 = (CrossReference)cFeatureAssignment.eContents().get(0);
-		private final RuleCall cFeatureJvmIdentifyableElementIDTerminalRuleCall_0_1 = (RuleCall)cFeatureJvmIdentifyableElementCrossReference_0.eContents().get(1);
-		
-		//FeatureReference returns XFeatureCall:
-		//	feature=[JvmIdentifyableElement];
-		public ParserRule getRule() { return rule; }
-
-		//feature=[JvmIdentifyableElement]
-		public Assignment getFeatureAssignment() { return cFeatureAssignment; }
-
-		//[JvmIdentifyableElement]
-		public CrossReference getFeatureJvmIdentifyableElementCrossReference_0() { return cFeatureJvmIdentifyableElementCrossReference_0; }
-
-		//ID
-		public RuleCall getFeatureJvmIdentifyableElementIDTerminalRuleCall_0_1() { return cFeatureJvmIdentifyableElementIDTerminalRuleCall_0_1; }
-	}
-
 	public class CssLiteralsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CssLiterals");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -279,6 +283,8 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cColorLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cSizeLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
+		////FeatureReference returns XFeatureCall:
+		////	feature=[JvmIdentifyableElement];
 		//CssLiterals returns XExpression:
 		//	FontLiteral | ColorLiteral | SizeLiteral;
 		public ParserRule getRule() { return rule; }
@@ -375,21 +381,21 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	public class ColorLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ColorLiteral");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cColorConstantParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cRGBParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cRGBParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cColorConstantParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ColorLiteral:
-		//	ColorConstant | RGB;
+		//	RGB | ColorConstant;
 		public ParserRule getRule() { return rule; }
 
-		//ColorConstant | RGB
+		//RGB | ColorConstant
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//ColorConstant
-		public RuleCall getColorConstantParserRuleCall_0() { return cColorConstantParserRuleCall_0; }
-
 		//RGB
-		public RuleCall getRGBParserRuleCall_1() { return cRGBParserRuleCall_1; }
+		public RuleCall getRGBParserRuleCall_0() { return cRGBParserRuleCall_0; }
+
+		//ColorConstant
+		public RuleCall getColorConstantParserRuleCall_1() { return cColorConstantParserRuleCall_1; }
 	}
 
 	public class ColorConstantElements extends AbstractParserRuleElementFinder {
@@ -424,36 +430,76 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RGB");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cColorAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cColorIntAsStringParserRuleCall_1_0 = (RuleCall)cColorAssignment_1.eContents().get(0);
+		private final Assignment cRedAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cRedHEXINTParserRuleCall_1_0 = (RuleCall)cRedAssignment_1.eContents().get(0);
+		private final Keyword cCommaKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cGreenAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cGreenHEXINTParserRuleCall_3_0 = (RuleCall)cGreenAssignment_3.eContents().get(0);
+		private final Keyword cCommaKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cBlueAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cBlueHEXINTParserRuleCall_5_0 = (RuleCall)cBlueAssignment_5.eContents().get(0);
 		
 		//RGB:
-		//	"#" color=IntAsString;
+		//	"#" red=HEXINT "," green=HEXINT "," blue=HEXINT;
 		public ParserRule getRule() { return rule; }
 
-		//"#" color=IntAsString
+		//"#" red=HEXINT "," green=HEXINT "," blue=HEXINT
 		public Group getGroup() { return cGroup; }
 
 		//"#"
 		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
 
-		//color=IntAsString
-		public Assignment getColorAssignment_1() { return cColorAssignment_1; }
+		//red=HEXINT
+		public Assignment getRedAssignment_1() { return cRedAssignment_1; }
 
-		//IntAsString
-		public RuleCall getColorIntAsStringParserRuleCall_1_0() { return cColorIntAsStringParserRuleCall_1_0; }
+		//HEXINT
+		public RuleCall getRedHEXINTParserRuleCall_1_0() { return cRedHEXINTParserRuleCall_1_0; }
+
+		//","
+		public Keyword getCommaKeyword_2() { return cCommaKeyword_2; }
+
+		//green=HEXINT
+		public Assignment getGreenAssignment_3() { return cGreenAssignment_3; }
+
+		//HEXINT
+		public RuleCall getGreenHEXINTParserRuleCall_3_0() { return cGreenHEXINTParserRuleCall_3_0; }
+
+		//","
+		public Keyword getCommaKeyword_4() { return cCommaKeyword_4; }
+
+		//blue=HEXINT
+		public Assignment getBlueAssignment_5() { return cBlueAssignment_5; }
+
+		//HEXINT
+		public RuleCall getBlueHEXINTParserRuleCall_5_0() { return cBlueHEXINTParserRuleCall_5_0; }
 	}
 
-	public class IntAsStringElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IntAsString");
-		private final RuleCall cINTTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+	public class HEXINTElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "HEXINT");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//IntAsString:
-		//	INT;
+		//HEXINT returns EInt:
+		//	INT ID? | ID;
 		public ParserRule getRule() { return rule; }
 
+		//INT ID? | ID
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//INT ID?
+		public Group getGroup_0() { return cGroup_0; }
+
 		//INT
-		public RuleCall getINTTerminalRuleCall() { return cINTTerminalRuleCall; }
+		public RuleCall getINTTerminalRuleCall_0_0() { return cINTTerminalRuleCall_0_0; }
+
+		//ID?
+		public RuleCall getIDTerminalRuleCall_0_1() { return cIDTerminalRuleCall_0_1; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
 	}
 
 	public class SizeLiteralElements extends AbstractParserRuleElementFinder {
@@ -624,21 +670,21 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private StyleSheetElements pStyleSheet;
 	private StyleRuleElements pStyleRule;
-	private SelectorElements pSelector;
 	private _JvmTypeReferenceElements p_JvmTypeReference;
+	private SelectorElements pSelector;
 	private TypeSelectorElements pTypeSelector;
+	private IdSelectorElements pIdSelector;
 	private WildcardSelectorElements pWildcardSelector;
 	private FilterElements pFilter;
 	private SettingElements pSetting;
 	private OpSettingAssignElements pOpSettingAssign;
-	private FeatureReferenceElements pFeatureReference;
 	private CssLiteralsElements pCssLiterals;
 	private FontLiteralElements pFontLiteral;
 	private StringOrIDElements pStringOrID;
 	private ColorLiteralElements pColorLiteral;
 	private ColorConstantElements pColorConstant;
 	private RGBElements pRGB;
-	private IntAsStringElements pIntAsString;
+	private HEXINTElements pHEXINT;
 	private SizeLiteralElements pSizeLiteral;
 	private SizeUnitElements unknownRuleSizeUnit;
 	private XPrimaryExpressionElements pXPrimaryExpression;
@@ -684,16 +730,6 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getStyleRuleAccess().getRule();
 	}
 
-	//Selector:
-	//	(TypeSelector | WildcardSelector) filter=Filter?;
-	public SelectorElements getSelectorAccess() {
-		return (pSelector != null) ? pSelector : (pSelector = new SelectorElements());
-	}
-	
-	public ParserRule getSelectorRule() {
-		return getSelectorAccess().getRule();
-	}
-
 	//_JvmTypeReference returns JvmTypeReference:
 	//	TypeSelector;
 	public _JvmTypeReferenceElements get_JvmTypeReferenceAccess() {
@@ -702,6 +738,16 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule get_JvmTypeReferenceRule() {
 		return get_JvmTypeReferenceAccess().getRule();
+	}
+
+	//Selector:
+	//	(TypeSelector | WildcardSelector | IdSelector) filter=Filter?;
+	public SelectorElements getSelectorAccess() {
+		return (pSelector != null) ? pSelector : (pSelector = new SelectorElements());
+	}
+	
+	public ParserRule getSelectorRule() {
+		return getSelectorAccess().getRule();
 	}
 
 	//TypeSelector:
@@ -714,6 +760,16 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getTypeSelectorAccess().getRule();
 	}
 
+	//IdSelector:
+	//	"#" id=ID;
+	public IdSelectorElements getIdSelectorAccess() {
+		return (pIdSelector != null) ? pIdSelector : (pIdSelector = new IdSelectorElements());
+	}
+	
+	public ParserRule getIdSelectorRule() {
+		return getIdSelectorAccess().getRule();
+	}
+
 	//WildcardSelector:
 	//	{WildcardSelector} "*";
 	public WildcardSelectorElements getWildcardSelectorAccess() {
@@ -724,8 +780,8 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getWildcardSelectorAccess().getRule();
 	}
 
-	//Filter:
-	//	"[" condition=XExpression "]";
+	//Filter returns XExpression:
+	//	"[" XExpression "]";
 	public FilterElements getFilterAccess() {
 		return (pFilter != null) ? pFilter : (pFilter = new FilterElements());
 	}
@@ -756,16 +812,8 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getOpSettingAssignAccess().getRule();
 	}
 
-	//FeatureReference returns XFeatureCall:
-	//	feature=[JvmIdentifyableElement];
-	public FeatureReferenceElements getFeatureReferenceAccess() {
-		return (pFeatureReference != null) ? pFeatureReference : (pFeatureReference = new FeatureReferenceElements());
-	}
-	
-	public ParserRule getFeatureReferenceRule() {
-		return getFeatureReferenceAccess().getRule();
-	}
-
+	////FeatureReference returns XFeatureCall:
+	////	feature=[JvmIdentifyableElement];
 	//CssLiterals returns XExpression:
 	//	FontLiteral | ColorLiteral | SizeLiteral;
 	public CssLiteralsElements getCssLiteralsAccess() {
@@ -797,7 +845,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ColorLiteral:
-	//	ColorConstant | RGB;
+	//	RGB | ColorConstant;
 	public ColorLiteralElements getColorLiteralAccess() {
 		return (pColorLiteral != null) ? pColorLiteral : (pColorLiteral = new ColorLiteralElements());
 	}
@@ -817,7 +865,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RGB:
-	//	"#" color=IntAsString;
+	//	"#" red=HEXINT "," green=HEXINT "," blue=HEXINT;
 	public RGBElements getRGBAccess() {
 		return (pRGB != null) ? pRGB : (pRGB = new RGBElements());
 	}
@@ -826,14 +874,14 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getRGBAccess().getRule();
 	}
 
-	//IntAsString:
-	//	INT;
-	public IntAsStringElements getIntAsStringAccess() {
-		return (pIntAsString != null) ? pIntAsString : (pIntAsString = new IntAsStringElements());
+	//HEXINT returns EInt:
+	//	INT ID? | ID;
+	public HEXINTElements getHEXINTAccess() {
+		return (pHEXINT != null) ? pHEXINT : (pHEXINT = new HEXINTElements());
 	}
 	
-	public ParserRule getIntAsStringRule() {
-		return getIntAsStringAccess().getRule();
+	public ParserRule getHEXINTRule() {
+		return getHEXINTAccess().getRule();
 	}
 
 	//SizeLiteral:

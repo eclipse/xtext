@@ -103,14 +103,14 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
         return createTypeSelectorAdapter();
       }
       @Override
+      public Adapter caseIdSelector(IdSelector object)
+      {
+        return createIdSelectorAdapter();
+      }
+      @Override
       public Adapter caseWildcardSelector(WildcardSelector object)
       {
         return createWildcardSelectorAdapter();
-      }
-      @Override
-      public Adapter caseFilter(Filter object)
-      {
-        return createFilterAdapter();
       }
       @Override
       public Adapter caseFontLiteral(FontLiteral object)
@@ -235,6 +235,21 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.css.xcss.IdSelector <em>Id Selector</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.example.css.xcss.IdSelector
+   * @generated
+   */
+  public Adapter createIdSelectorAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.css.xcss.WildcardSelector <em>Wildcard Selector</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -245,21 +260,6 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createWildcardSelectorAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.css.xcss.Filter <em>Filter</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.css.xcss.Filter
-   * @generated
-   */
-  public Adapter createFilterAdapter()
   {
     return null;
   }

@@ -62,6 +62,15 @@ public interface XcssFactory extends EFactory
   TypeSelector createTypeSelector();
 
   /**
+   * Returns a new object of class '<em>Id Selector</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Id Selector</em>'.
+   * @generated
+   */
+  IdSelector createIdSelector();
+
+  /**
    * Returns a new object of class '<em>Wildcard Selector</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -69,15 +78,6 @@ public interface XcssFactory extends EFactory
    * @generated
    */
   WildcardSelector createWildcardSelector();
-
-  /**
-   * Returns a new object of class '<em>Filter</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Filter</em>'.
-   * @generated
-   */
-  Filter createFilter();
 
   /**
    * Returns a new object of class '<em>Font Literal</em>'.

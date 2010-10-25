@@ -24,7 +24,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * @model
  * @generated
  */
-public interface TypeSelector extends Selector, JvmTypeReference
+public interface TypeSelector extends JvmTypeReference, Selector
 {
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.

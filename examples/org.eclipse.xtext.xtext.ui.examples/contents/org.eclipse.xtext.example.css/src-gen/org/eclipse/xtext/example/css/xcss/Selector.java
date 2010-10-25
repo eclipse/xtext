@@ -7,6 +7,8 @@ package org.eclipse.xtext.example.css.xcss;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.xbase.XExpression;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Selector</b></em>'.
@@ -34,12 +36,12 @@ public interface Selector extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Filter</em>' containment reference.
-   * @see #setFilter(Filter)
+   * @see #setFilter(XExpression)
    * @see org.eclipse.xtext.example.css.xcss.XcssPackage#getSelector_Filter()
    * @model containment="true"
    * @generated
    */
-  Filter getFilter();
+  XExpression getFilter();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.example.css.xcss.Selector#getFilter <em>Filter</em>}' containment reference.
@@ -49,6 +51,6 @@ public interface Selector extends EObject
    * @see #getFilter()
    * @generated
    */
-  void setFilter(Filter value);
+  void setFilter(XExpression value);
 
 } // Selector

@@ -72,8 +72,8 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
       case XcssPackage.STYLE_RULE: return createStyleRule();
       case XcssPackage.SELECTOR: return createSelector();
       case XcssPackage.TYPE_SELECTOR: return createTypeSelector();
+      case XcssPackage.ID_SELECTOR: return createIdSelector();
       case XcssPackage.WILDCARD_SELECTOR: return createWildcardSelector();
-      case XcssPackage.FILTER: return createFilter();
       case XcssPackage.FONT_LITERAL: return createFontLiteral();
       case XcssPackage.COLOR_LITERAL: return createColorLiteral();
       case XcssPackage.COLOR_CONSTANT: return createColorConstant();
@@ -167,10 +167,10 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public WildcardSelector createWildcardSelector()
+  public IdSelector createIdSelector()
   {
-    WildcardSelectorImpl wildcardSelector = new WildcardSelectorImpl();
-    return wildcardSelector;
+    IdSelectorImpl idSelector = new IdSelectorImpl();
+    return idSelector;
   }
 
   /**
@@ -178,10 +178,10 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Filter createFilter()
+  public WildcardSelector createWildcardSelector()
   {
-    FilterImpl filter = new FilterImpl();
-    return filter;
+    WildcardSelectorImpl wildcardSelector = new WildcardSelectorImpl();
+    return wildcardSelector;
   }
 
   /**

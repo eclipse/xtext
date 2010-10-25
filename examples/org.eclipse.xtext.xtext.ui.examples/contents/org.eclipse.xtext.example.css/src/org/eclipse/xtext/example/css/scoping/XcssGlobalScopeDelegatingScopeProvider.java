@@ -15,6 +15,7 @@ public class XcssGlobalScopeDelegatingScopeProvider extends ImportedNamespaceAwa
 		if (context instanceof StyleSheet) {
 			Set<ImportNormalizer> result = super.getImportedNamespaceResolvers(context);
 			result.add(createImportedNamespaceResolver("org.eclipse.swt.widgets.*"));
+			result.add(createImportedNamespaceResolver("org.eclipse.swt.custom.*"));
 			return result;
 		}
 		return Collections.emptySet();

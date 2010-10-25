@@ -5,6 +5,8 @@ package org.eclipse.xtext.example.css;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.IJvmTypeConformanceComputer;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.example.css.conversion.XcssValueConverterService;
 import org.eclipse.xtext.example.css.scoping.XcssCallableFeaturePredicate;
 import org.eclipse.xtext.example.css.scoping.XcssGlobalScopeDelegatingScopeProvider;
 import org.eclipse.xtext.example.css.scoping.XcssTypeProvider;
@@ -36,5 +38,10 @@ public class XcssRuntimeModule extends org.eclipse.xtext.example.css.AbstractXcs
 	
 	public Class<? extends CallableFeaturePredicate> bindCallableFeaturePredicate() {
 		return XcssCallableFeaturePredicate.class;
+	}
+	
+	@Override
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return XcssValueConverterService.class;
 	}
 }

@@ -15,17 +15,16 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Selector">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="#//Filter"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeSelector" eSuperTypes="#//Selector ../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference">
+  <eClassifiers xsi:type="ecore:EClass" name="TypeSelector" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference #//Selector">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WildcardSelector" eSuperTypes="#//Selector"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Filter">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IdSelector" eSuperTypes="#//Selector">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WildcardSelector" eSuperTypes="#//Selector"/>
   <eClassifiers xsi:type="ecore:EClass" name="FontLiteral" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -37,7 +36,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="constant" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifyableElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RGB" eSuperTypes="#//ColorLiteral">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="red" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="green" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="blue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SizeLiteral" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>

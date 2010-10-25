@@ -215,6 +215,8 @@ ruleStyleRule returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleSelector
 entryRuleSelector returns [EObject current=null] 
 	:
@@ -256,12 +258,25 @@ ruleSelector returns [EObject current=null]
         $current = $this_WildcardSelector_1.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getSelectorAccess().getIdSelectorParserRuleCall_0_2(), currentNode); 
+    }
+    this_IdSelector_2=ruleIdSelector
+    { 
+        $current = $this_IdSelector_2.current; 
+        currentNode = currentNode.getParent();
+    }
 )(
 (
 		{ 
 	        currentNode=createCompositeNode(grammarAccess.getSelectorAccess().getFilterFilterParserRuleCall_1_0(), currentNode); 
 	    }
-		lv_filter_2_0=ruleFilter		{
+		lv_filter_3_0=ruleFilter		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getSelectorRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -270,7 +285,7 @@ ruleSelector returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"filter",
-	        		lv_filter_2_0, 
+	        		lv_filter_3_0, 
 	        		"Filter", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -282,8 +297,6 @@ ruleSelector returns [EObject current=null]
 )
 )?)
 ;
-
-
 
 
 
@@ -325,6 +338,57 @@ ruleTypeSelector returns [EObject current=null]
 
 )
 )
+;
+
+
+
+
+
+// Entry rule entryRuleIdSelector
+entryRuleIdSelector returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getIdSelectorRule(), currentNode); }
+	 iv_ruleIdSelector=ruleIdSelector 
+	 { $current=$iv_ruleIdSelector.current; } 
+	 EOF 
+;
+
+// Rule IdSelector
+ruleIdSelector returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	otherlv_0='#' 
+    {
+    	createLeafNode(otherlv_0, grammarAccess.getIdSelectorAccess().getNumberSignKeyword_0(), null);
+    }
+(
+(
+		lv_id_1_0=RULE_ID
+		{
+			createLeafNode(lv_id_1_0, grammarAccess.getIdSelectorAccess().getIdIDTerminalRuleCall_1_0(), "id"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getIdSelectorRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"id",
+	        		lv_id_1_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))
 ;
 
 
@@ -392,31 +456,19 @@ ruleFilter returns [EObject current=null]
     {
     	createLeafNode(otherlv_0, grammarAccess.getFilterAccess().getLeftSquareBracketKeyword_0(), null);
     }
-(
-(
-		{ 
-	        currentNode=createCompositeNode(grammarAccess.getFilterAccess().getConditionXExpressionParserRuleCall_1_0(), currentNode); 
-	    }
-		lv_condition_1_0=ruleXExpression		{
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getFilterRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
-	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"condition",
-	        		lv_condition_1_0, 
-	        		"XExpression", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
 
-)
-)	otherlv_2=']' 
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getFilterAccess().getXExpressionParserRuleCall_1(), currentNode); 
+    }
+    this_XExpression_1=ruleXExpression
+    { 
+        $current = $this_XExpression_1.current; 
+        currentNode = currentNode.getParent();
+    }
+	otherlv_2=']' 
     {
     	createLeafNode(otherlv_2, grammarAccess.getFilterAccess().getRightSquareBracketKeyword_2(), null);
     }
@@ -552,8 +604,6 @@ ruleOpSettingAssign returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRul
     }
 
     ;
-
-
 
 
 
@@ -876,11 +926,11 @@ ruleColorLiteral returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getColorLiteralAccess().getColorConstantParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getColorLiteralAccess().getRGBParserRuleCall_0(), currentNode); 
     }
-    this_ColorConstant_0=ruleColorConstant
+    this_RGB_0=ruleRGB
     { 
-        $current = $this_ColorConstant_0.current; 
+        $current = $this_RGB_0.current; 
         currentNode = currentNode.getParent();
     }
 
@@ -889,11 +939,11 @@ ruleColorLiteral returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getColorLiteralAccess().getRGBParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getColorLiteralAccess().getColorConstantParserRuleCall_1(), currentNode); 
     }
-    this_RGB_1=ruleRGB
+    this_ColorConstant_1=ruleColorConstant
     { 
-        $current = $this_RGB_1.current; 
+        $current = $this_ColorConstant_1.current; 
         currentNode = currentNode.getParent();
     }
 )
@@ -970,9 +1020,9 @@ ruleRGB returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getRGBAccess().getColorIntAsStringParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getRGBAccess().getRedHEXINTParserRuleCall_1_0(), currentNode); 
 	    }
-		lv_color_1_0=ruleIntAsString		{
+		lv_red_1_0=ruleHEXINT		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getRGBRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -980,9 +1030,65 @@ ruleRGB returns [EObject current=null]
 	        try {
 	       		set(
 	       			$current, 
-	       			"color",
-	        		lv_color_1_0, 
-	        		"IntAsString", 
+	       			"red",
+	        		lv_red_1_0, 
+	        		"HEXINT", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)	otherlv_2=',' 
+    {
+    	createLeafNode(otherlv_2, grammarAccess.getRGBAccess().getCommaKeyword_2(), null);
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getRGBAccess().getGreenHEXINTParserRuleCall_3_0(), currentNode); 
+	    }
+		lv_green_3_0=ruleHEXINT		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getRGBRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"green",
+	        		lv_green_3_0, 
+	        		"HEXINT", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)	otherlv_4=',' 
+    {
+    	createLeafNode(otherlv_4, grammarAccess.getRGBAccess().getCommaKeyword_4(), null);
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getRGBAccess().getBlueHEXINTParserRuleCall_5_0(), currentNode); 
+	    }
+		lv_blue_5_0=ruleHEXINT		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getRGBRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"blue",
+	        		lv_blue_5_0, 
+	        		"HEXINT", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -998,30 +1104,45 @@ ruleRGB returns [EObject current=null]
 
 
 
-// Entry rule entryRuleIntAsString
-entryRuleIntAsString returns [String current=null] 
+// Entry rule entryRuleHEXINT
+entryRuleHEXINT returns [String current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getIntAsStringRule(), currentNode); } 
-	 iv_ruleIntAsString=ruleIntAsString 
-	 { $current=$iv_ruleIntAsString.current.getText(); }  
+	{ currentNode = createCompositeNode(grammarAccess.getHEXINTRule(), currentNode); } 
+	 iv_ruleHEXINT=ruleHEXINT 
+	 { $current=$iv_ruleHEXINT.current.getText(); }  
 	 EOF 
 ;
 
-// Rule IntAsString
-ruleIntAsString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+// Rule HEXINT
+ruleHEXINT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
     }:
-    this_INT_0=RULE_INT    {
+((    this_INT_0=RULE_INT    {
 		$current.merge(this_INT_0);
     }
 
     { 
-    createLeafNode(this_INT_0, grammarAccess.getIntAsStringAccess().getINTTerminalRuleCall(), null); 
+    createLeafNode(this_INT_0, grammarAccess.getHEXINTAccess().getINTTerminalRuleCall_0_0(), null); 
+    }
+(    this_ID_1=RULE_ID    {
+		$current.merge(this_ID_1);
     }
 
+    { 
+    createLeafNode(this_ID_1, grammarAccess.getHEXINTAccess().getIDTerminalRuleCall_0_1(), null); 
+    }
+)?)
+    |    this_ID_2=RULE_ID    {
+		$current.merge(this_ID_2);
+    }
+
+    { 
+    createLeafNode(this_ID_2, grammarAccess.getHEXINTAccess().getIDTerminalRuleCall_1(), null); 
+    }
+)
     ;
 
 

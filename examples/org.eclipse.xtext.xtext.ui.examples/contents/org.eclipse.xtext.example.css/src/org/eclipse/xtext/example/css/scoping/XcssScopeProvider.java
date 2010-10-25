@@ -7,14 +7,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
-import org.eclipse.xtext.example.css.xcss.Filter;
 import org.eclipse.xtext.example.css.xcss.Selector;
 import org.eclipse.xtext.example.css.xcss.StyleRule;
 import org.eclipse.xtext.example.css.xcss.XcssPackage;
@@ -74,10 +72,6 @@ public class XcssScopeProvider extends XbaseScopeProvider {
 	@Override
 	protected INewScope createLocalVarScope(EObject context,
 			EReference reference, INewScope parentScope) {
-		if (context instanceof Filter) {
-			Selector selector = EcoreUtil2.getContainerOfType(context, Selector.class);
-			return new SingletonScope(EObjectDescription.create(THIS, selector), parentScope);
-		}
 		if (context instanceof StyleRule) {
 			List<Selector> selectors = ((StyleRule) context).getSelectors();
 			if (!selectors.isEmpty()) {

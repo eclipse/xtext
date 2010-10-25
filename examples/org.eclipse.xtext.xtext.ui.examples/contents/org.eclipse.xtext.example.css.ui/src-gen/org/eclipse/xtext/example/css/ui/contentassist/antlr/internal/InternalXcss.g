@@ -114,6 +114,8 @@ finally {
 
 
 
+
+
 // Entry rule entryRuleSelector
 entryRuleSelector 
 :
@@ -142,8 +144,6 @@ finally {
 
 
 
-
-
 // Entry rule entryRuleTypeSelector
 entryRuleTypeSelector 
 :
@@ -163,6 +163,34 @@ ruleTypeSelector
 { before(grammarAccess.getTypeSelectorAccess().getTypeAssignment()); }
 (rule__TypeSelector__TypeAssignment)
 { after(grammarAccess.getTypeSelectorAccess().getTypeAssignment()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+// Entry rule entryRuleIdSelector
+entryRuleIdSelector 
+:
+{ before(grammarAccess.getIdSelectorRule()); }
+	 ruleIdSelector
+{ after(grammarAccess.getIdSelectorRule()); } 
+	 EOF 
+;
+
+// Rule IdSelector
+ruleIdSelector
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getIdSelectorAccess().getGroup()); }
+(rule__IdSelector__Group__0)
+{ after(grammarAccess.getIdSelectorAccess().getGroup()); }
 )
 
 ;
@@ -283,8 +311,6 @@ ruleOpSettingAssign
 finally {
 	restoreStackSize(stackSize);
 }
-
-
 
 
 
@@ -456,25 +482,25 @@ finally {
 
 
 
-// Entry rule entryRuleIntAsString
-entryRuleIntAsString 
+// Entry rule entryRuleHEXINT
+entryRuleHEXINT 
 :
-{ before(grammarAccess.getIntAsStringRule()); }
-	 ruleIntAsString
-{ after(grammarAccess.getIntAsStringRule()); } 
+{ before(grammarAccess.getHEXINTRule()); }
+	 ruleHEXINT
+{ after(grammarAccess.getHEXINTRule()); } 
 	 EOF 
 ;
 
-// Rule IntAsString
-ruleIntAsString
+// Rule HEXINT
+ruleHEXINT
     @init {
 		int stackSize = keepStackSize();
     }
 	:
 (
-{ before(grammarAccess.getIntAsStringAccess().getINTTerminalRuleCall()); }
-	RULE_INT
-{ after(grammarAccess.getIntAsStringAccess().getINTTerminalRuleCall()); }
+{ before(grammarAccess.getHEXINTAccess().getAlternatives()); }
+(rule__HEXINT__Alternatives)
+{ after(grammarAccess.getHEXINTAccess().getAlternatives()); }
 )
 
 ;
@@ -2039,6 +2065,12 @@ rule__Selector__Alternatives_0
 { after(grammarAccess.getSelectorAccess().getWildcardSelectorParserRuleCall_0_1()); }
 )
 
+    |(
+{ before(grammarAccess.getSelectorAccess().getIdSelectorParserRuleCall_0_2()); }
+	ruleIdSelector
+{ after(grammarAccess.getSelectorAccess().getIdSelectorParserRuleCall_0_2()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -2100,15 +2132,37 @@ rule__ColorLiteral__Alternatives
     }
 :
 (
-{ before(grammarAccess.getColorLiteralAccess().getColorConstantParserRuleCall_0()); }
-	ruleColorConstant
-{ after(grammarAccess.getColorLiteralAccess().getColorConstantParserRuleCall_0()); }
+{ before(grammarAccess.getColorLiteralAccess().getRGBParserRuleCall_0()); }
+	ruleRGB
+{ after(grammarAccess.getColorLiteralAccess().getRGBParserRuleCall_0()); }
 )
 
     |(
-{ before(grammarAccess.getColorLiteralAccess().getRGBParserRuleCall_1()); }
-	ruleRGB
-{ after(grammarAccess.getColorLiteralAccess().getRGBParserRuleCall_1()); }
+{ before(grammarAccess.getColorLiteralAccess().getColorConstantParserRuleCall_1()); }
+	ruleColorConstant
+{ after(grammarAccess.getColorLiteralAccess().getColorConstantParserRuleCall_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__HEXINT__Alternatives
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getHEXINTAccess().getGroup_0()); }
+(rule__HEXINT__Group_0__0)
+{ after(grammarAccess.getHEXINTAccess().getGroup_0()); }
+)
+
+    |(
+{ before(grammarAccess.getHEXINTAccess().getIDTerminalRuleCall_1()); }
+	RULE_ID
+{ after(grammarAccess.getHEXINTAccess().getIDTerminalRuleCall_1()); }
 )
 
 ;
@@ -3005,6 +3059,69 @@ finally {
 
 
 
+rule__IdSelector__Group__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__IdSelector__Group__0__Impl
+	rule__IdSelector__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__IdSelector__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getIdSelectorAccess().getNumberSignKeyword_0()); }
+
+	'#' 
+
+{ after(grammarAccess.getIdSelectorAccess().getNumberSignKeyword_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__IdSelector__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__IdSelector__Group__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__IdSelector__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getIdSelectorAccess().getIdAssignment_1()); }
+(rule__IdSelector__IdAssignment_1)
+{ after(grammarAccess.getIdSelectorAccess().getIdAssignment_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
 rule__WildcardSelector__Group__0
     @init {
 		int stackSize = keepStackSize();
@@ -3119,9 +3236,9 @@ rule__Filter__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getFilterAccess().getConditionAssignment_1()); }
-(rule__Filter__ConditionAssignment_1)
-{ after(grammarAccess.getFilterAccess().getConditionAssignment_1()); }
+{ before(grammarAccess.getFilterAccess().getXExpressionParserRuleCall_1()); }
+	ruleXExpression
+{ after(grammarAccess.getFilterAccess().getXExpressionParserRuleCall_1()); }
 )
 
 ;
@@ -3581,6 +3698,7 @@ rule__RGB__Group__1
     }
 :
 	rule__RGB__Group__1__Impl
+	rule__RGB__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -3592,9 +3710,197 @@ rule__RGB__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getRGBAccess().getColorAssignment_1()); }
-(rule__RGB__ColorAssignment_1)
-{ after(grammarAccess.getRGBAccess().getColorAssignment_1()); }
+{ before(grammarAccess.getRGBAccess().getRedAssignment_1()); }
+(rule__RGB__RedAssignment_1)
+{ after(grammarAccess.getRGBAccess().getRedAssignment_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__RGB__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__RGB__Group__2__Impl
+	rule__RGB__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RGB__Group__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRGBAccess().getCommaKeyword_2()); }
+
+	',' 
+
+{ after(grammarAccess.getRGBAccess().getCommaKeyword_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__RGB__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__RGB__Group__3__Impl
+	rule__RGB__Group__4
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RGB__Group__3__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRGBAccess().getGreenAssignment_3()); }
+(rule__RGB__GreenAssignment_3)
+{ after(grammarAccess.getRGBAccess().getGreenAssignment_3()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__RGB__Group__4
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__RGB__Group__4__Impl
+	rule__RGB__Group__5
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RGB__Group__4__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRGBAccess().getCommaKeyword_4()); }
+
+	',' 
+
+{ after(grammarAccess.getRGBAccess().getCommaKeyword_4()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__RGB__Group__5
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__RGB__Group__5__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RGB__Group__5__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRGBAccess().getBlueAssignment_5()); }
+(rule__RGB__BlueAssignment_5)
+{ after(grammarAccess.getRGBAccess().getBlueAssignment_5()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rule__HEXINT__Group_0__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__HEXINT__Group_0__0__Impl
+	rule__HEXINT__Group_0__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__HEXINT__Group_0__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getHEXINTAccess().getINTTerminalRuleCall_0_0()); }
+	RULE_INT
+{ after(grammarAccess.getHEXINTAccess().getINTTerminalRuleCall_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__HEXINT__Group_0__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__HEXINT__Group_0__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__HEXINT__Group_0__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getHEXINTAccess().getIDTerminalRuleCall_0_1()); }
+(	RULE_ID)?
+{ after(grammarAccess.getHEXINTAccess().getIDTerminalRuleCall_0_1()); }
 )
 
 ;
@@ -10943,14 +11249,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Filter__ConditionAssignment_1
+rule__IdSelector__IdAssignment_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getFilterAccess().getConditionXExpressionParserRuleCall_1_0()); }
-	ruleXExpression{ after(grammarAccess.getFilterAccess().getConditionXExpressionParserRuleCall_1_0()); }
+{ before(grammarAccess.getIdSelectorAccess().getIdIDTerminalRuleCall_1_0()); }
+	RULE_ID{ after(grammarAccess.getIdSelectorAccess().getIdIDTerminalRuleCall_1_0()); }
 )
 
 ;
@@ -10991,7 +11297,6 @@ rule__Setting__ValueAssignment_1_2
 finally {
 	restoreStackSize(stackSize);
 }
-
 
 rule__FontLiteral__NameAssignment_2
     @init {
@@ -11088,14 +11393,44 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__RGB__ColorAssignment_1
+rule__RGB__RedAssignment_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getRGBAccess().getColorIntAsStringParserRuleCall_1_0()); }
-	ruleIntAsString{ after(grammarAccess.getRGBAccess().getColorIntAsStringParserRuleCall_1_0()); }
+{ before(grammarAccess.getRGBAccess().getRedHEXINTParserRuleCall_1_0()); }
+	ruleHEXINT{ after(grammarAccess.getRGBAccess().getRedHEXINTParserRuleCall_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RGB__GreenAssignment_3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRGBAccess().getGreenHEXINTParserRuleCall_3_0()); }
+	ruleHEXINT{ after(grammarAccess.getRGBAccess().getGreenHEXINTParserRuleCall_3_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__RGB__BlueAssignment_5
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getRGBAccess().getBlueHEXINTParserRuleCall_5_0()); }
+	ruleHEXINT{ after(grammarAccess.getRGBAccess().getBlueHEXINTParserRuleCall_5_0()); }
 )
 
 ;

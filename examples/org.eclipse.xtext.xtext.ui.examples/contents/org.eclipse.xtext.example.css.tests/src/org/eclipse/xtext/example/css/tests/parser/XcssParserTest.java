@@ -20,7 +20,7 @@ public class XcssParserTest extends AbstractXcssTestCase {
 		StyleRule rule = rule("*[a==b] { foo: bar * bar; }");
 		assertEquals(1, rule.getSelectors().size());
 		assertTrue(rule.getSelectors().get(0) instanceof WildcardSelector);
-		assertTrue(rule.getSelectors().get(0).getFilter().getCondition() instanceof XBinaryOperation);
+		assertTrue(rule.getSelectors().get(0).getFilter() instanceof XBinaryOperation);
 	}
 	
 	public void testTwoSelectors() throws Exception {
@@ -33,6 +33,16 @@ public class XcssParserTest extends AbstractXcssTestCase {
 		TypeSelector selector = (TypeSelector) rule.getSelectors().get(0);
 		JvmType type = selector.getType();
 		assertFalse(type.eIsProxy());
+	}
+	
+	public void testColorLiteral() throws Exception {
+		rule("* { foo : #red; }");
+	}
+	
+	public void testRGB() throws Exception {
+		rule("* { foo : #ff,ff,ff; }");
+		rule("* { foo : #00,00,00; }");
+		rule("* { foo : #0f,0f,f0; }");
 	}
 	
 }

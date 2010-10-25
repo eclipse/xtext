@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
+import org.eclipse.xtext.common.types.TypesPackage;
+
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -172,7 +174,7 @@ public interface XcssPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_SELECTOR__FILTER = SELECTOR__FILTER;
+  int TYPE_SELECTOR__FILTER = TypesPackage.JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -181,7 +183,7 @@ public interface XcssPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_SELECTOR__TYPE = SELECTOR_FEATURE_COUNT + 0;
+  int TYPE_SELECTOR__TYPE = TypesPackage.JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Type Selector</em>' class.
@@ -190,7 +192,44 @@ public interface XcssPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_SELECTOR_FEATURE_COUNT = SELECTOR_FEATURE_COUNT + 1;
+  int TYPE_SELECTOR_FEATURE_COUNT = TypesPackage.JVM_TYPE_REFERENCE_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.IdSelectorImpl <em>Id Selector</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.example.css.xcss.impl.IdSelectorImpl
+   * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getIdSelector()
+   * @generated
+   */
+  int ID_SELECTOR = 4;
+
+  /**
+   * The feature id for the '<em><b>Filter</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ID_SELECTOR__FILTER = SELECTOR__FILTER;
+
+  /**
+   * The feature id for the '<em><b>Id</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ID_SELECTOR__ID = SELECTOR_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Id Selector</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ID_SELECTOR_FEATURE_COUNT = SELECTOR_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.WildcardSelectorImpl <em>Wildcard Selector</em>}' class.
@@ -200,7 +239,7 @@ public interface XcssPackage extends EPackage
    * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getWildcardSelector()
    * @generated
    */
-  int WILDCARD_SELECTOR = 4;
+  int WILDCARD_SELECTOR = 5;
 
   /**
    * The feature id for the '<em><b>Filter</b></em>' containment reference.
@@ -219,34 +258,6 @@ public interface XcssPackage extends EPackage
    * @ordered
    */
   int WILDCARD_SELECTOR_FEATURE_COUNT = SELECTOR_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.FilterImpl <em>Filter</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.css.xcss.impl.FilterImpl
-   * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getFilter()
-   * @generated
-   */
-  int FILTER = 5;
-
-  /**
-   * The feature id for the '<em><b>Condition</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FILTER__CONDITION = 0;
-
-  /**
-   * The number of structural features of the '<em>Filter</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FILTER_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.FontLiteralImpl <em>Font Literal</em>}' class.
@@ -361,13 +372,31 @@ public interface XcssPackage extends EPackage
   int RGB = 9;
 
   /**
-   * The feature id for the '<em><b>Color</b></em>' attribute.
+   * The feature id for the '<em><b>Red</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RGB__COLOR = COLOR_LITERAL_FEATURE_COUNT + 0;
+  int RGB__RED = COLOR_LITERAL_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Green</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RGB__GREEN = COLOR_LITERAL_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Blue</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RGB__BLUE = COLOR_LITERAL_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>RGB</em>' class.
@@ -376,7 +405,7 @@ public interface XcssPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RGB_FEATURE_COUNT = COLOR_LITERAL_FEATURE_COUNT + 1;
+  int RGB_FEATURE_COUNT = COLOR_LITERAL_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.SizeLiteralImpl <em>Size Literal</em>}' class.
@@ -522,6 +551,27 @@ public interface XcssPackage extends EPackage
   EReference getTypeSelector_Type();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.IdSelector <em>Id Selector</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Id Selector</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.IdSelector
+   * @generated
+   */
+  EClass getIdSelector();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.IdSelector#getId <em>Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Id</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.IdSelector#getId()
+   * @see #getIdSelector()
+   * @generated
+   */
+  EAttribute getIdSelector_Id();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.WildcardSelector <em>Wildcard Selector</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -530,27 +580,6 @@ public interface XcssPackage extends EPackage
    * @generated
    */
   EClass getWildcardSelector();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.Filter <em>Filter</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Filter</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.Filter
-   * @generated
-   */
-  EClass getFilter();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.example.css.xcss.Filter#getCondition <em>Condition</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Condition</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.Filter#getCondition()
-   * @see #getFilter()
-   * @generated
-   */
-  EReference getFilter_Condition();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.FontLiteral <em>Font Literal</em>}'.
@@ -648,15 +677,37 @@ public interface XcssPackage extends EPackage
   EClass getRGB();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.RGB#getColor <em>Color</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.RGB#getRed <em>Red</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Color</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.RGB#getColor()
+   * @return the meta object for the attribute '<em>Red</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.RGB#getRed()
    * @see #getRGB()
    * @generated
    */
-  EAttribute getRGB_Color();
+  EAttribute getRGB_Red();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.RGB#getGreen <em>Green</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Green</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.RGB#getGreen()
+   * @see #getRGB()
+   * @generated
+   */
+  EAttribute getRGB_Green();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.RGB#getBlue <em>Blue</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Blue</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.RGB#getBlue()
+   * @see #getRGB()
+   * @generated
+   */
+  EAttribute getRGB_Blue();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.SizeLiteral <em>Size Literal</em>}'.
@@ -804,6 +855,24 @@ public interface XcssPackage extends EPackage
     EReference TYPE_SELECTOR__TYPE = eINSTANCE.getTypeSelector_Type();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.IdSelectorImpl <em>Id Selector</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.example.css.xcss.impl.IdSelectorImpl
+     * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getIdSelector()
+     * @generated
+     */
+    EClass ID_SELECTOR = eINSTANCE.getIdSelector();
+
+    /**
+     * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ID_SELECTOR__ID = eINSTANCE.getIdSelector_Id();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.WildcardSelectorImpl <em>Wildcard Selector</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -812,24 +881,6 @@ public interface XcssPackage extends EPackage
      * @generated
      */
     EClass WILDCARD_SELECTOR = eINSTANCE.getWildcardSelector();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.FilterImpl <em>Filter</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.css.xcss.impl.FilterImpl
-     * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getFilter()
-     * @generated
-     */
-    EClass FILTER = eINSTANCE.getFilter();
-
-    /**
-     * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FILTER__CONDITION = eINSTANCE.getFilter_Condition();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.FontLiteralImpl <em>Font Literal</em>}' class.
@@ -912,12 +963,28 @@ public interface XcssPackage extends EPackage
     EClass RGB = eINSTANCE.getRGB();
 
     /**
-     * The meta object literal for the '<em><b>Color</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Red</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute RGB__COLOR = eINSTANCE.getRGB_Color();
+    EAttribute RGB__RED = eINSTANCE.getRGB_Red();
+
+    /**
+     * The meta object literal for the '<em><b>Green</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RGB__GREEN = eINSTANCE.getRGB_Green();
+
+    /**
+     * The meta object literal for the '<em><b>Blue</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RGB__BLUE = eINSTANCE.getRGB_Blue();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.SizeLiteralImpl <em>Size Literal</em>}' class.

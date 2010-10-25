@@ -14,9 +14,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.xtext.example.css.xcss.Filter;
 import org.eclipse.xtext.example.css.xcss.Selector;
 import org.eclipse.xtext.example.css.xcss.XcssPackage;
+
+import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +42,7 @@ public class SelectorImpl extends MinimalEObjectImpl.Container implements Select
    * @generated
    * @ordered
    */
-  protected Filter filter;
+  protected XExpression filter;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,7 +70,7 @@ public class SelectorImpl extends MinimalEObjectImpl.Container implements Select
    * <!-- end-user-doc -->
    * @generated
    */
-  public Filter getFilter()
+  public XExpression getFilter()
   {
     return filter;
   }
@@ -79,9 +80,9 @@ public class SelectorImpl extends MinimalEObjectImpl.Container implements Select
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetFilter(Filter newFilter, NotificationChain msgs)
+  public NotificationChain basicSetFilter(XExpression newFilter, NotificationChain msgs)
   {
-    Filter oldFilter = filter;
+    XExpression oldFilter = filter;
     filter = newFilter;
     if (eNotificationRequired())
     {
@@ -96,7 +97,7 @@ public class SelectorImpl extends MinimalEObjectImpl.Container implements Select
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFilter(Filter newFilter)
+  public void setFilter(XExpression newFilter)
   {
     if (newFilter != filter)
     {
@@ -155,7 +156,7 @@ public class SelectorImpl extends MinimalEObjectImpl.Container implements Select
     switch (featureID)
     {
       case XcssPackage.SELECTOR__FILTER:
-        setFilter((Filter)newValue);
+        setFilter((XExpression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -172,7 +173,7 @@ public class SelectorImpl extends MinimalEObjectImpl.Container implements Select
     switch (featureID)
     {
       case XcssPackage.SELECTOR__FILTER:
-        setFilter((Filter)null);
+        setFilter((XExpression)null);
         return;
     }
     super.eUnset(featureID);

@@ -17,8 +17,8 @@ import org.eclipse.xtext.common.types.TypesPackage;
 
 import org.eclipse.xtext.example.css.xcss.ColorConstant;
 import org.eclipse.xtext.example.css.xcss.ColorLiteral;
-import org.eclipse.xtext.example.css.xcss.Filter;
 import org.eclipse.xtext.example.css.xcss.FontLiteral;
+import org.eclipse.xtext.example.css.xcss.IdSelector;
 import org.eclipse.xtext.example.css.xcss.Selector;
 import org.eclipse.xtext.example.css.xcss.SizeLiteral;
 import org.eclipse.xtext.example.css.xcss.SizeUnit;
@@ -74,14 +74,14 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass wildcardSelectorEClass = null;
+  private EClass idSelectorEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass filterEClass = null;
+  private EClass wildcardSelectorEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -287,29 +287,29 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getIdSelector()
+  {
+    return idSelectorEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIdSelector_Id()
+  {
+    return (EAttribute)idSelectorEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getWildcardSelector()
   {
     return wildcardSelectorEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getFilter()
-  {
-    return filterEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getFilter_Condition()
-  {
-    return (EReference)filterEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -407,9 +407,29 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRGB_Color()
+  public EAttribute getRGB_Red()
   {
     return (EAttribute)rgbEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRGB_Green()
+  {
+    return (EAttribute)rgbEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRGB_Blue()
+  {
+    return (EAttribute)rgbEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -495,10 +515,10 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     typeSelectorEClass = createEClass(TYPE_SELECTOR);
     createEReference(typeSelectorEClass, TYPE_SELECTOR__TYPE);
 
-    wildcardSelectorEClass = createEClass(WILDCARD_SELECTOR);
+    idSelectorEClass = createEClass(ID_SELECTOR);
+    createEAttribute(idSelectorEClass, ID_SELECTOR__ID);
 
-    filterEClass = createEClass(FILTER);
-    createEReference(filterEClass, FILTER__CONDITION);
+    wildcardSelectorEClass = createEClass(WILDCARD_SELECTOR);
 
     fontLiteralEClass = createEClass(FONT_LITERAL);
     createEAttribute(fontLiteralEClass, FONT_LITERAL__NAME);
@@ -512,7 +532,9 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     createEReference(colorConstantEClass, COLOR_CONSTANT__CONSTANT);
 
     rgbEClass = createEClass(RGB);
-    createEAttribute(rgbEClass, RGB__COLOR);
+    createEAttribute(rgbEClass, RGB__RED);
+    createEAttribute(rgbEClass, RGB__GREEN);
+    createEAttribute(rgbEClass, RGB__BLUE);
 
     sizeLiteralEClass = createEClass(SIZE_LITERAL);
     createEAttribute(sizeLiteralEClass, SIZE_LITERAL__VALUE);
@@ -555,8 +577,9 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    typeSelectorEClass.getESuperTypes().add(this.getSelector());
     typeSelectorEClass.getESuperTypes().add(theTypesPackage.getJvmTypeReference());
+    typeSelectorEClass.getESuperTypes().add(this.getSelector());
+    idSelectorEClass.getESuperTypes().add(this.getSelector());
     wildcardSelectorEClass.getESuperTypes().add(this.getSelector());
     fontLiteralEClass.getESuperTypes().add(theXbasePackage.getXExpression());
     colorLiteralEClass.getESuperTypes().add(theXbasePackage.getXExpression());
@@ -573,15 +596,15 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     initEReference(getStyleRule_Settings(), theXbasePackage.getXExpression(), null, "settings", null, 0, -1, StyleRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(selectorEClass, Selector.class, "Selector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSelector_Filter(), this.getFilter(), null, "filter", null, 0, 1, Selector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSelector_Filter(), theXbasePackage.getXExpression(), null, "filter", null, 0, 1, Selector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeSelectorEClass, TypeSelector.class, "TypeSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTypeSelector_Type(), theTypesPackage.getJvmType(), null, "type", null, 0, 1, TypeSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(wildcardSelectorEClass, WildcardSelector.class, "WildcardSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(idSelectorEClass, IdSelector.class, "IdSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getIdSelector_Id(), ecorePackage.getEString(), "id", null, 0, 1, IdSelector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(filterEClass, Filter.class, "Filter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFilter_Condition(), theXbasePackage.getXExpression(), null, "condition", null, 0, 1, Filter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(wildcardSelectorEClass, WildcardSelector.class, "WildcardSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(fontLiteralEClass, FontLiteral.class, "FontLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getFontLiteral_Name(), ecorePackage.getEString(), "name", null, 0, 1, FontLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -595,7 +618,9 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     initEReference(getColorConstant_Constant(), theTypesPackage.getJvmIdentifyableElement(), null, "constant", null, 0, 1, ColorConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(rgbEClass, org.eclipse.xtext.example.css.xcss.RGB.class, "RGB", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getRGB_Color(), ecorePackage.getEString(), "color", null, 0, 1, org.eclipse.xtext.example.css.xcss.RGB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRGB_Red(), ecorePackage.getEInt(), "red", null, 0, 1, org.eclipse.xtext.example.css.xcss.RGB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRGB_Green(), ecorePackage.getEInt(), "green", null, 0, 1, org.eclipse.xtext.example.css.xcss.RGB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRGB_Blue(), ecorePackage.getEInt(), "blue", null, 0, 1, org.eclipse.xtext.example.css.xcss.RGB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(sizeLiteralEClass, SizeLiteral.class, "SizeLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSizeLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, SizeLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
