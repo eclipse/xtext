@@ -8,7 +8,6 @@
 package org.eclipse.xtext.example.css.ui;
 
 import org.eclipse.xtext.example.css.ui.internal.XcssActivator;
-import org.eclipse.xtext.example.css.ui.rendering.XcssRendererHelper;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 /**
@@ -18,15 +17,15 @@ public class AccessibleXcssActivator extends XcssActivator {
 
 	private static final String LANGUAGE_ID = "org.eclipse.xtext.example.css.Xcss";
 	
-	private XcssRendererHelper renderer;
+	private JdtAwareRenderingHelper renderer;
 	
 	public static AccessibleXcssActivator getInstance() {
 		return (AccessibleXcssActivator) XcssActivator.getInstance();
 	}
 	
-	public XcssRendererHelper getRenderer() {
+	public JdtAwareRenderingHelper getRenderer() {
 		if (renderer == null)
-			renderer = getInjector(LANGUAGE_ID).getInstance(XcssRendererHelper.class);
+			renderer = getInjector(LANGUAGE_ID).getInstance(JdtAwareRenderingHelper.class);
 		return renderer;
 	}
 	
