@@ -178,4 +178,8 @@ public class XbaseTypeProvider extends JvmTypesTypeProvider {
 	public TypesFactory getTypesFactory() {
 		return factory;
 	}
+	
+	public TypesService getTypesService() {
+		return typesService;
+	}
 }
