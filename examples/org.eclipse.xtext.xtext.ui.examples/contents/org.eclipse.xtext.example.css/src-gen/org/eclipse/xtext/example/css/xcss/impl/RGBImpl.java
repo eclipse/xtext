@@ -37,7 +37,7 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
    * @generated
    * @ordered
    */
-  protected static final int COLOR_EDEFAULT = 0;
+  protected static final String COLOR_EDEFAULT = null;
 
   /**
    * The cached value of the '{@link #getColor() <em>Color</em>}' attribute.
@@ -47,7 +47,7 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
    * @generated
    * @ordered
    */
-  protected int color = COLOR_EDEFAULT;
+  protected String color = COLOR_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,7 +75,7 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getColor()
+  public String getColor()
   {
     return color;
   }
@@ -85,9 +85,9 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setColor(int newColor)
+  public void setColor(String newColor)
   {
-    int oldColor = color;
+    String oldColor = color;
     color = newColor;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.RGB__COLOR, oldColor, color));
@@ -120,7 +120,7 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
     switch (featureID)
     {
       case XcssPackage.RGB__COLOR:
-        setColor((Integer)newValue);
+        setColor((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -154,7 +154,7 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
     switch (featureID)
     {
       case XcssPackage.RGB__COLOR:
-        return color != COLOR_EDEFAULT;
+        return COLOR_EDEFAULT == null ? color != null : !COLOR_EDEFAULT.equals(color);
     }
     return super.eIsSet(featureID);
   }

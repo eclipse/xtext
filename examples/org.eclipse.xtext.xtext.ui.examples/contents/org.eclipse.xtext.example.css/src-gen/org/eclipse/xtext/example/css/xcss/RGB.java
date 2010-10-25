@@ -33,12 +33,12 @@ public interface RGB extends ColorLiteral
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Color</em>' attribute.
-   * @see #setColor(int)
+   * @see #setColor(String)
    * @see org.eclipse.xtext.example.css.xcss.XcssPackage#getRGB_Color()
    * @model
    * @generated
    */
-  int getColor();
+  String getColor();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.example.css.xcss.RGB#getColor <em>Color</em>}' attribute.
@@ -48,6 +48,6 @@ public interface RGB extends ColorLiteral
    * @see #getColor()
    * @generated
    */
-  void setColor(int value);
+  void setColor(String value);
 
 } // RGB

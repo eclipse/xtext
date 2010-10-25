@@ -1836,11 +1836,11 @@ protected class ColorConstant_ConstantAssignment_1 extends AssignmentToken  {
 /************ begin Rule RGB ****************
  *
  * RGB:
- * 	"#" color=INT;
+ * 	"#" color=IntAsString;
  *
  **/
 
-// "#" color=INT
+// "#" color=IntAsString
 protected class RGB_Group extends GroupToken {
 	
 	public RGB_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1890,7 +1890,7 @@ protected class RGB_NumberSignKeyword_0 extends KeywordToken  {
 
 }
 
-// color=INT
+// color=IntAsString
 protected class RGB_ColorAssignment_1 extends AssignmentToken  {
 	
 	public RGB_ColorAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1914,9 +1914,9 @@ protected class RGB_ColorAssignment_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("color",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("color");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getRGBAccess().getColorINTTerminalRuleCall_1_0(), value, null)) {
-			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getRGBAccess().getColorINTTerminalRuleCall_1_0();
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getRGBAccess().getColorIntAsStringParserRuleCall_1_0(), value, null)) {
+			type = AssignmentType.DATATYPE_RULE_CALL;
+			element = grammarAccess.getRGBAccess().getColorIntAsStringParserRuleCall_1_0();
 			return obj;
 		}
 		return null;
@@ -1926,6 +1926,7 @@ protected class RGB_ColorAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule RGB ****************/
+
 
 
 /************ begin Rule SizeLiteral ****************

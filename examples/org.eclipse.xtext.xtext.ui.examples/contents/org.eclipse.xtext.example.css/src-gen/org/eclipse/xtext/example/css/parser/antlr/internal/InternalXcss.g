@@ -969,30 +969,60 @@ ruleRGB returns [EObject current=null]
     }
 (
 (
-		lv_color_1_0=RULE_INT
-		{
-			createLeafNode(lv_color_1_0, grammarAccess.getRGBAccess().getColorINTTerminalRuleCall_1_0(), "color"); 
-		}
-		{
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getRGBAccess().getColorIntAsStringParserRuleCall_1_0(), currentNode); 
+	    }
+		lv_color_1_0=ruleIntAsString		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getRGBRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
 	       		set(
 	       			$current, 
 	       			"color",
 	        		lv_color_1_0, 
-	        		"INT", 
-	        		lastConsumedNode);
+	        		"IntAsString", 
+	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
+	        currentNode = currentNode.getParent();
 	    }
 
 )
 ))
 ;
+
+
+
+
+
+// Entry rule entryRuleIntAsString
+entryRuleIntAsString returns [String current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getIntAsStringRule(), currentNode); } 
+	 iv_ruleIntAsString=ruleIntAsString 
+	 { $current=$iv_ruleIntAsString.current.getText(); }  
+	 EOF 
+;
+
+// Rule IntAsString
+ruleIntAsString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+    }:
+    this_INT_0=RULE_INT    {
+		$current.merge(this_INT_0);
+    }
+
+    { 
+    createLeafNode(this_INT_0, grammarAccess.getIntAsStringAccess().getINTTerminalRuleCall(), null); 
+    }
+
+    ;
 
 
 

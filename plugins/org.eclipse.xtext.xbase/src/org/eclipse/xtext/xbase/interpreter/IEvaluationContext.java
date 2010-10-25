@@ -8,10 +8,12 @@
 package org.eclipse.xtext.xbase.interpreter;
 
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 
+import com.google.inject.ImplementedBy;
+
+@ImplementedBy(DefaultEvaluationContext.class)
 public interface IEvaluationContext {
-	Throwable getCurrentException();
-	void setCurrentException(Throwable throwable);
 	Object getValue(QualifiedName qualifiedName);
 	void newValue(QualifiedName qualifiedName, Object value);
 	void assignValue(QualifiedName qualifiedName, Object value);

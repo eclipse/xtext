@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.RandomAccess;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -172,6 +173,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		
 	}
 	
+	public XbaseInterpreter() {
+	}
+	
+	public XbaseInterpreter(Provider<IEvaluationContext> contextProvider, JavaReflectAccess javaReflectAccess, ClassLoader loader) {
+		this.contextProvider = contextProvider;
+		this.javaReflectAccess = javaReflectAccess;
+		setClassLoader(loader);
+	}
+	
 	@Inject
 	private Provider<IEvaluationContext> contextProvider;
 	
@@ -204,11 +214,15 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return PolymorphicDispatcher.createForSingleTarget(new PrefixMethodFilter("_featureCall", 4, 4), this);
 	}
 	
-	public IEvaluationResult evaluate(XExpression expression) {
-		return evaluate(expression, contextProvider.get());
+	public IEvaluationResult evaluate(EObject expression) {
+		return evaluate(expression, createContext());
 	}
 
-	public IEvaluationResult evaluate(XExpression expression, IEvaluationContext context) {
+	protected IEvaluationContext createContext() {
+		return contextProvider.get();
+	}
+
+	public IEvaluationResult evaluate(EObject expression, IEvaluationContext context) {
 		IEvaluationResult result = evaluateDispatcher.invoke(expression, context);
 		result = wrapArray(result);
 		return result;
@@ -571,6 +585,16 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	public IEvaluationResult _featureCallOperation(JvmOperation operation, XAbstractFeatureCall featureCall, Object receiver, IEvaluationContext context) {
 		List<XExpression> operationArguments = featureCall.getArguments().subList(1, featureCall.getArguments().size());
+		return featureCallOperationImpl(operation, operationArguments, receiver, context);
+	}
+	
+	public IEvaluationResult _featureCallOperation(JvmOperation operation, XFeatureCall featureCall, Object receiver, IEvaluationContext context) {
+		List<XExpression> operationArguments = featureCall.getFeatureCallArguments();
+		return featureCallOperationImpl(operation, operationArguments, context.getValue(XbaseScopeProvider.THIS), context);
+	}
+
+	protected IEvaluationResult featureCallOperationImpl(JvmOperation operation, List<XExpression> operationArguments,
+			Object receiver, IEvaluationContext context) {
 		List<Object> argumentValues = Lists.newArrayList();
 		IEvaluationResult argumentException = evaluateArgumentExpressions(operation, operationArguments, argumentValues, context);
 		if (argumentException != null && argumentException.getException() != null)
@@ -597,7 +621,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			throw new IllegalStateException("Could not invoke method: " + operation.getFullyQualifiedName() + " on instance: " + receiver, e);
 		}
 	}
-
+	
 	protected IEvaluationResult evaluateArgumentExpressions(JvmExecutable executable, List<XExpression> expressions, List<Object> result,
 			IEvaluationContext context) {
 		int i = 0;
@@ -707,5 +731,13 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		} catch(Exception e) {
 			throw new IllegalStateException("Could not access field: " + jvmField.getFullyQualifiedName() + " on instance: " + receiver, e);
 		}
+	}
+	
+	public ClassFinder getClassFinder() {
+		return classFinder;
+	}
+	
+	public JavaReflectAccess getJavaReflectAccess() {
+		return javaReflectAccess;
 	}
 }

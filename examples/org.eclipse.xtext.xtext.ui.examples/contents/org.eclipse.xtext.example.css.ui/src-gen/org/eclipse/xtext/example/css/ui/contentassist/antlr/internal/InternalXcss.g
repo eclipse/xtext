@@ -456,6 +456,34 @@ finally {
 
 
 
+// Entry rule entryRuleIntAsString
+entryRuleIntAsString 
+:
+{ before(grammarAccess.getIntAsStringRule()); }
+	 ruleIntAsString
+{ after(grammarAccess.getIntAsStringRule()); } 
+	 EOF 
+;
+
+// Rule IntAsString
+ruleIntAsString
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getIntAsStringAccess().getINTTerminalRuleCall()); }
+	RULE_INT
+{ after(grammarAccess.getIntAsStringAccess().getINTTerminalRuleCall()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
 // Entry rule entryRuleSizeLiteral
 entryRuleSizeLiteral 
 :
@@ -11066,8 +11094,8 @@ rule__RGB__ColorAssignment_1
     }
 :
 (
-{ before(grammarAccess.getRGBAccess().getColorINTTerminalRuleCall_1_0()); }
-	RULE_INT{ after(grammarAccess.getRGBAccess().getColorINTTerminalRuleCall_1_0()); }
+{ before(grammarAccess.getRGBAccess().getColorIntAsStringParserRuleCall_1_0()); }
+	ruleIntAsString{ after(grammarAccess.getRGBAccess().getColorIntAsStringParserRuleCall_1_0()); }
 )
 
 ;

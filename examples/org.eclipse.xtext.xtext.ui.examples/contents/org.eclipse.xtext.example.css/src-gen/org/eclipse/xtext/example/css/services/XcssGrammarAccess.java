@@ -425,23 +425,35 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cColorAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cColorINTTerminalRuleCall_1_0 = (RuleCall)cColorAssignment_1.eContents().get(0);
+		private final RuleCall cColorIntAsStringParserRuleCall_1_0 = (RuleCall)cColorAssignment_1.eContents().get(0);
 		
 		//RGB:
-		//	"#" color=INT;
+		//	"#" color=IntAsString;
 		public ParserRule getRule() { return rule; }
 
-		//"#" color=INT
+		//"#" color=IntAsString
 		public Group getGroup() { return cGroup; }
 
 		//"#"
 		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
 
-		//color=INT
+		//color=IntAsString
 		public Assignment getColorAssignment_1() { return cColorAssignment_1; }
 
+		//IntAsString
+		public RuleCall getColorIntAsStringParserRuleCall_1_0() { return cColorIntAsStringParserRuleCall_1_0; }
+	}
+
+	public class IntAsStringElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IntAsString");
+		private final RuleCall cINTTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//IntAsString:
+		//	INT;
+		public ParserRule getRule() { return rule; }
+
 		//INT
-		public RuleCall getColorINTTerminalRuleCall_1_0() { return cColorINTTerminalRuleCall_1_0; }
+		public RuleCall getINTTerminalRuleCall() { return cINTTerminalRuleCall; }
 	}
 
 	public class SizeLiteralElements extends AbstractParserRuleElementFinder {
@@ -626,6 +638,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	private ColorLiteralElements pColorLiteral;
 	private ColorConstantElements pColorConstant;
 	private RGBElements pRGB;
+	private IntAsStringElements pIntAsString;
 	private SizeLiteralElements pSizeLiteral;
 	private SizeUnitElements unknownRuleSizeUnit;
 	private XPrimaryExpressionElements pXPrimaryExpression;
@@ -804,13 +817,23 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RGB:
-	//	"#" color=INT;
+	//	"#" color=IntAsString;
 	public RGBElements getRGBAccess() {
 		return (pRGB != null) ? pRGB : (pRGB = new RGBElements());
 	}
 	
 	public ParserRule getRGBRule() {
 		return getRGBAccess().getRule();
+	}
+
+	//IntAsString:
+	//	INT;
+	public IntAsStringElements getIntAsStringAccess() {
+		return (pIntAsString != null) ? pIntAsString : (pIntAsString = new IntAsStringElements());
+	}
+	
+	public ParserRule getIntAsStringRule() {
+		return getIntAsStringAccess().getRule();
 	}
 
 	//SizeLiteral:

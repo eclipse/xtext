@@ -15,14 +15,6 @@ import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
  */
 public class NullEvaluationContext implements IEvaluationContext {
 
-	public Throwable getCurrentException() {
-		return null;
-	}
-
-	public void setCurrentException(Throwable throwable) {
-		throw new IllegalStateException("Current exception may not be propagated to null context.");
-	}
-
 	public Object getValue(QualifiedName qualifiedName) {
 		return null;
 	}
