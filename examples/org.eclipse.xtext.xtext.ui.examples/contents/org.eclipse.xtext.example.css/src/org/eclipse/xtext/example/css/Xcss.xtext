@@ -28,14 +28,14 @@ WildcardSelector:
 Filter:
 	'[' condition=XExpression ']';
 
-Setting returns XBinaryOperation:
-	{Setting}
-	params+=FeatureReference feature=[JvmIdentifyableElement|OpAssign] params+=XExpression ';';
+Setting returns XExpression:
+	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)? ';';
+//	assignable=FeatureReference feature=[JvmIdentifyableElement|OpAssign] value=XExpression ';';
 
-OpAssign:
+OpSettingAssign:
 	':';
 
-FeatureReference returns XSimpleFeatureCall:
+FeatureReference returns XFeatureCall:
 	feature=[JvmIdentifyableElement];
 
 CssLiterals returns XExpression:
@@ -43,7 +43,7 @@ CssLiterals returns XExpression:
 
 FontLiteral:
 	{FontLiteral}
-	('font'? name=StringOrID | 'font')
+	'font' name=StringOrID?
 	(
 	  (italic?='I')?
 	& (bold?='B')?
@@ -57,7 +57,7 @@ ColorLiteral:
 	ColorConstant | RGB;
 
 ColorConstant:
-	name=ID;
+	'#' constant=[JvmIdentifyableElement];
 
 RGB:
 	'#' color=INT;
