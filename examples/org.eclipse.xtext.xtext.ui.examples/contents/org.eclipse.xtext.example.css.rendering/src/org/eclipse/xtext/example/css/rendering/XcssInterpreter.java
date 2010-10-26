@@ -143,7 +143,13 @@ public class XcssInterpreter extends XbaseInterpreter  {
 	}
 	
 	public IEvaluationResult _evaluateRGB(RGB color, IEvaluationContext context) {
-		org.eclipse.swt.graphics.RGB rgb = new org.eclipse.swt.graphics.RGB(color.getRed(), color.getGreen(), color.getBlue());
+		org.eclipse.swt.graphics.RGB rgb = null;
+		if (color.isHex()) {
+			int value = color.getValue();
+			rgb = RGBHelper.create(value);
+		} else {
+			rgb = new org.eclipse.swt.graphics.RGB(color.getRed(), color.getGreen(), color.getBlue());
+		}
 		return new DefaultEvaluationResult(new Color(display, rgb), null);
 	}
 	

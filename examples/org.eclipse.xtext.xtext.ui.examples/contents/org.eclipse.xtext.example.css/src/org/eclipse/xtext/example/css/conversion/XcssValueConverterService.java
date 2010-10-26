@@ -10,13 +10,15 @@ import org.eclipse.xtext.util.Strings;
 public class XcssValueConverterService extends DefaultTerminalConverters {
 
 	@ValueConverter(rule = "HEXINT")
-	public IValueConverter<Integer> INT() {
+	public IValueConverter<Integer> HEXINT() {
 		return new IValueConverter<Integer>() {
 
 			public Integer toValue(String string, AbstractNode node)
 					throws ValueConverterException {
 				if (Strings.isEmpty(string))
 					throw new ValueConverterException("Couldn't convert empty string to int.", node, null);
+				if (string.length() != 6)
+					throw new ValueConverterException("Illegal rgb literal: " + string, node, null);
 				try {
 					return Integer.valueOf(string, 16);
 				} catch (NumberFormatException e) {

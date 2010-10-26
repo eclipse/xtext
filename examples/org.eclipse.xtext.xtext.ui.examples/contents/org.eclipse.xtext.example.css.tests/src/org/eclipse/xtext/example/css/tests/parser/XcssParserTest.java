@@ -36,13 +36,13 @@ public class XcssParserTest extends AbstractXcssTestCase {
 	}
 	
 	public void testColorLiteral() throws Exception {
-		rule("* { foo : #red; }");
+		rule("* { foo : $red; }");
 	}
 	
 	public void testRGB() throws Exception {
-		rule("* { foo : #ff,ff,ff; }");
-		rule("* { foo : #00,00,00; }");
-		rule("* { foo : #0f,0f,f0; }");
+		rule("* { foo : #ffffff; }");
+		rule("* { foo : #000000; }");
+		rule("* { foo : #0f0ff0; }");
 	}
 	
 }

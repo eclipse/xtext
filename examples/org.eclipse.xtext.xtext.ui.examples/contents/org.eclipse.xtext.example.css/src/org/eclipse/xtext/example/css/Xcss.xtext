@@ -64,10 +64,12 @@ ColorLiteral:
 	RGB | ColorConstant;
 
 ColorConstant:
-	'#' constant=[JvmIdentifyableElement];
+	'$' constant=[JvmIdentifyableElement];
 
 RGB:
-	'#' red = HEXINT ',' green = HEXINT ',' blue = HEXINT;
+	hex?='#' value = HEXINT
+  | '#' '(' red=INT ',' green=INT ',' blue=INT ')'
+;
 	
 HEXINT returns EInt:
   INT ID? | ID
@@ -79,23 +81,12 @@ SizeLiteral:
 enum SizeUnit:
 	em | pt | px | percent='%';
 
-XPrimaryExpression returns XExpression:
+XLiteral returns XExpression:
 	CssLiterals |
 	XClosure |
 	XBooleanLiteral |
 	XIntLiteral |
 	XNullLiteral |
 	XStringLiteral |
-	XTypeLiteral |
-	XConstructorCall |
-	XBlockExpression |
-	XSwitchExpression |
-	XFeatureCall |
-	XIfExpression |
-	XForLoopExpression |
-	XWhileExpression |
-	XDoWhileExpression |
-	XCastedExpression |
-	XThrowExpression |
-	XTryCatchFinallyExpression |
-	XParenthesizedExpression;
+	XTypeLiteral
+;

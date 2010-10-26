@@ -788,34 +788,86 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	public class XPrimaryExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XPrimaryExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cXLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cXConstructorCallParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cXBlockExpressionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cXSwitchExpressionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cXFeatureCallParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cXIfExpressionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cXForLoopExpressionParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cXWhileExpressionParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall cXDoWhileExpressionParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
+		private final RuleCall cXCastedExpressionParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
+		private final RuleCall cXThrowExpressionParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
+		private final RuleCall cXTryCatchFinallyExpressionParserRuleCall_11 = (RuleCall)cAlternatives.eContents().get(11);
+		private final RuleCall cXParenthesizedExpressionParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
+		
+		//XPrimaryExpression returns XExpression:
+		//	XLiteral | XConstructorCall | XBlockExpression | XSwitchExpression | XFeatureCall | XIfExpression | XForLoopExpression
+		//	| XWhileExpression | XDoWhileExpression | XCastedExpression | XThrowExpression | XTryCatchFinallyExpression |
+		//	XParenthesizedExpression;
+		public ParserRule getRule() { return rule; }
+
+		//XLiteral | XConstructorCall | XBlockExpression | XSwitchExpression | XFeatureCall | XIfExpression | XForLoopExpression |
+		//XWhileExpression | XDoWhileExpression | XCastedExpression | XThrowExpression | XTryCatchFinallyExpression |
+		//XParenthesizedExpression
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//XLiteral
+		public RuleCall getXLiteralParserRuleCall_0() { return cXLiteralParserRuleCall_0; }
+
+		//XConstructorCall
+		public RuleCall getXConstructorCallParserRuleCall_1() { return cXConstructorCallParserRuleCall_1; }
+
+		//XBlockExpression
+		public RuleCall getXBlockExpressionParserRuleCall_2() { return cXBlockExpressionParserRuleCall_2; }
+
+		//XSwitchExpression
+		public RuleCall getXSwitchExpressionParserRuleCall_3() { return cXSwitchExpressionParserRuleCall_3; }
+
+		//XFeatureCall
+		public RuleCall getXFeatureCallParserRuleCall_4() { return cXFeatureCallParserRuleCall_4; }
+
+		//XIfExpression
+		public RuleCall getXIfExpressionParserRuleCall_5() { return cXIfExpressionParserRuleCall_5; }
+
+		//XForLoopExpression
+		public RuleCall getXForLoopExpressionParserRuleCall_6() { return cXForLoopExpressionParserRuleCall_6; }
+
+		//XWhileExpression
+		public RuleCall getXWhileExpressionParserRuleCall_7() { return cXWhileExpressionParserRuleCall_7; }
+
+		//XDoWhileExpression
+		public RuleCall getXDoWhileExpressionParserRuleCall_8() { return cXDoWhileExpressionParserRuleCall_8; }
+
+		//XCastedExpression
+		public RuleCall getXCastedExpressionParserRuleCall_9() { return cXCastedExpressionParserRuleCall_9; }
+
+		//XThrowExpression
+		public RuleCall getXThrowExpressionParserRuleCall_10() { return cXThrowExpressionParserRuleCall_10; }
+
+		//XTryCatchFinallyExpression
+		public RuleCall getXTryCatchFinallyExpressionParserRuleCall_11() { return cXTryCatchFinallyExpressionParserRuleCall_11; }
+
+		//XParenthesizedExpression
+		public RuleCall getXParenthesizedExpressionParserRuleCall_12() { return cXParenthesizedExpressionParserRuleCall_12; }
+	}
+
+	public class XLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XLiteral");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cXClosureParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cXBooleanLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cXIntLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cXNullLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cXStringLiteralParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cXTypeLiteralParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cXConstructorCallParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
-		private final RuleCall cXBlockExpressionParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
-		private final RuleCall cXSwitchExpressionParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
-		private final RuleCall cXFeatureCallParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
-		private final RuleCall cXIfExpressionParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
-		private final RuleCall cXForLoopExpressionParserRuleCall_11 = (RuleCall)cAlternatives.eContents().get(11);
-		private final RuleCall cXWhileExpressionParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
-		private final RuleCall cXDoWhileExpressionParserRuleCall_13 = (RuleCall)cAlternatives.eContents().get(13);
-		private final RuleCall cXCastedExpressionParserRuleCall_14 = (RuleCall)cAlternatives.eContents().get(14);
-		private final RuleCall cXThrowExpressionParserRuleCall_15 = (RuleCall)cAlternatives.eContents().get(15);
-		private final RuleCall cXTryCatchFinallyExpressionParserRuleCall_16 = (RuleCall)cAlternatives.eContents().get(16);
-		private final RuleCall cXParenthesizedExpressionParserRuleCall_17 = (RuleCall)cAlternatives.eContents().get(17);
 		
-		//XPrimaryExpression returns XExpression:
-		//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall |
-		//	XBlockExpression | XSwitchExpression | XFeatureCall | XIfExpression | XForLoopExpression | XWhileExpression |
-		//	XDoWhileExpression | XCastedExpression | XThrowExpression | XTryCatchFinallyExpression | XParenthesizedExpression;
+		//XLiteral returns XExpression:
+		//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
 		public ParserRule getRule() { return rule; }
 
-		//XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall |
-		//XBlockExpression | XSwitchExpression | XFeatureCall | XIfExpression | XForLoopExpression | XWhileExpression |
-		//XDoWhileExpression | XCastedExpression | XThrowExpression | XTryCatchFinallyExpression | XParenthesizedExpression
+		//XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//XClosure
@@ -835,42 +887,6 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 		//XTypeLiteral
 		public RuleCall getXTypeLiteralParserRuleCall_5() { return cXTypeLiteralParserRuleCall_5; }
-
-		//XConstructorCall
-		public RuleCall getXConstructorCallParserRuleCall_6() { return cXConstructorCallParserRuleCall_6; }
-
-		//XBlockExpression
-		public RuleCall getXBlockExpressionParserRuleCall_7() { return cXBlockExpressionParserRuleCall_7; }
-
-		//XSwitchExpression
-		public RuleCall getXSwitchExpressionParserRuleCall_8() { return cXSwitchExpressionParserRuleCall_8; }
-
-		//XFeatureCall
-		public RuleCall getXFeatureCallParserRuleCall_9() { return cXFeatureCallParserRuleCall_9; }
-
-		//XIfExpression
-		public RuleCall getXIfExpressionParserRuleCall_10() { return cXIfExpressionParserRuleCall_10; }
-
-		//XForLoopExpression
-		public RuleCall getXForLoopExpressionParserRuleCall_11() { return cXForLoopExpressionParserRuleCall_11; }
-
-		//XWhileExpression
-		public RuleCall getXWhileExpressionParserRuleCall_12() { return cXWhileExpressionParserRuleCall_12; }
-
-		//XDoWhileExpression
-		public RuleCall getXDoWhileExpressionParserRuleCall_13() { return cXDoWhileExpressionParserRuleCall_13; }
-
-		//XCastedExpression
-		public RuleCall getXCastedExpressionParserRuleCall_14() { return cXCastedExpressionParserRuleCall_14; }
-
-		//XThrowExpression
-		public RuleCall getXThrowExpressionParserRuleCall_15() { return cXThrowExpressionParserRuleCall_15; }
-
-		//XTryCatchFinallyExpression
-		public RuleCall getXTryCatchFinallyExpressionParserRuleCall_16() { return cXTryCatchFinallyExpressionParserRuleCall_16; }
-
-		//XParenthesizedExpression
-		public RuleCall getXParenthesizedExpressionParserRuleCall_17() { return cXParenthesizedExpressionParserRuleCall_17; }
 	}
 
 	public class XClosureElements extends AbstractParserRuleElementFinder {
@@ -1963,6 +1979,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	private OpUnaryElements pOpUnary;
 	private XMemberFeatureCallElements pXMemberFeatureCall;
 	private XPrimaryExpressionElements pXPrimaryExpression;
+	private XLiteralElements pXLiteral;
 	private XClosureElements pXClosure;
 	private XCastedExpressionElements pXCastedExpression;
 	private XParenthesizedExpressionElements pXParenthesizedExpression;
@@ -2219,15 +2236,25 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XPrimaryExpression returns XExpression:
-	//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral | XConstructorCall |
-	//	XBlockExpression | XSwitchExpression | XFeatureCall | XIfExpression | XForLoopExpression | XWhileExpression |
-	//	XDoWhileExpression | XCastedExpression | XThrowExpression | XTryCatchFinallyExpression | XParenthesizedExpression;
+	//	XLiteral | XConstructorCall | XBlockExpression | XSwitchExpression | XFeatureCall | XIfExpression | XForLoopExpression
+	//	| XWhileExpression | XDoWhileExpression | XCastedExpression | XThrowExpression | XTryCatchFinallyExpression |
+	//	XParenthesizedExpression;
 	public XPrimaryExpressionElements getXPrimaryExpressionAccess() {
 		return (pXPrimaryExpression != null) ? pXPrimaryExpression : (pXPrimaryExpression = new XPrimaryExpressionElements());
 	}
 	
 	public ParserRule getXPrimaryExpressionRule() {
 		return getXPrimaryExpressionAccess().getRule();
+	}
+
+	//XLiteral returns XExpression:
+	//	XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
+	public XLiteralElements getXLiteralAccess() {
+		return (pXLiteral != null) ? pXLiteral : (pXLiteral = new XLiteralElements());
+	}
+	
+	public ParserRule getXLiteralRule() {
+		return getXLiteralAccess().getRule();
 	}
 
 	//XClosure returns XExpression:

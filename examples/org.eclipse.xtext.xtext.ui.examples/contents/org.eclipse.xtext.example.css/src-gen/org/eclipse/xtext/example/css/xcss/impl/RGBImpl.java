@@ -21,6 +21,8 @@ import org.eclipse.xtext.example.css.xcss.XcssPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.example.css.xcss.impl.RGBImpl#isHex <em>Hex</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.css.xcss.impl.RGBImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.css.xcss.impl.RGBImpl#getRed <em>Red</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.css.xcss.impl.RGBImpl#getGreen <em>Green</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.css.xcss.impl.RGBImpl#getBlue <em>Blue</em>}</li>
@@ -31,6 +33,46 @@ import org.eclipse.xtext.example.css.xcss.XcssPackage;
  */
 public class RGBImpl extends ColorLiteralImpl implements RGB
 {
+  /**
+   * The default value of the '{@link #isHex() <em>Hex</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isHex()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean HEX_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isHex() <em>Hex</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isHex()
+   * @generated
+   * @ordered
+   */
+  protected boolean hex = HEX_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getValue()
+   * @generated
+   * @ordered
+   */
+  protected static final int VALUE_EDEFAULT = 0;
+
+  /**
+   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getValue()
+   * @generated
+   * @ordered
+   */
+  protected int value = VALUE_EDEFAULT;
+
   /**
    * The default value of the '{@link #getRed() <em>Red</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -117,6 +159,52 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isHex()
+  {
+    return hex;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setHex(boolean newHex)
+  {
+    boolean oldHex = hex;
+    hex = newHex;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.RGB__HEX, oldHex, hex));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public int getValue()
+  {
+    return value;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setValue(int newValue)
+  {
+    int oldValue = value;
+    value = newValue;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XcssPackage.RGB__VALUE, oldValue, value));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public int getRed()
   {
     return red;
@@ -191,6 +279,10 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
   {
     switch (featureID)
     {
+      case XcssPackage.RGB__HEX:
+        return isHex();
+      case XcssPackage.RGB__VALUE:
+        return getValue();
       case XcssPackage.RGB__RED:
         return getRed();
       case XcssPackage.RGB__GREEN:
@@ -211,6 +303,12 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
   {
     switch (featureID)
     {
+      case XcssPackage.RGB__HEX:
+        setHex((Boolean)newValue);
+        return;
+      case XcssPackage.RGB__VALUE:
+        setValue((Integer)newValue);
+        return;
       case XcssPackage.RGB__RED:
         setRed((Integer)newValue);
         return;
@@ -234,6 +332,12 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
   {
     switch (featureID)
     {
+      case XcssPackage.RGB__HEX:
+        setHex(HEX_EDEFAULT);
+        return;
+      case XcssPackage.RGB__VALUE:
+        setValue(VALUE_EDEFAULT);
+        return;
       case XcssPackage.RGB__RED:
         setRed(RED_EDEFAULT);
         return;
@@ -257,6 +361,10 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
   {
     switch (featureID)
     {
+      case XcssPackage.RGB__HEX:
+        return hex != HEX_EDEFAULT;
+      case XcssPackage.RGB__VALUE:
+        return value != VALUE_EDEFAULT;
       case XcssPackage.RGB__RED:
         return red != RED_EDEFAULT;
       case XcssPackage.RGB__GREEN:
@@ -278,7 +386,11 @@ public class RGBImpl extends ColorLiteralImpl implements RGB
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (red: ");
+    result.append(" (hex: ");
+    result.append(hex);
+    result.append(", value: ");
+    result.append(value);
+    result.append(", red: ");
     result.append(red);
     result.append(", green: ");
     result.append(green);

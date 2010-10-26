@@ -407,7 +407,7 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRGB_Red()
+  public EAttribute getRGB_Hex()
   {
     return (EAttribute)rgbEClass.getEStructuralFeatures().get(0);
   }
@@ -417,7 +417,7 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRGB_Green()
+  public EAttribute getRGB_Value()
   {
     return (EAttribute)rgbEClass.getEStructuralFeatures().get(1);
   }
@@ -427,9 +427,29 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRGB_Blue()
+  public EAttribute getRGB_Red()
   {
     return (EAttribute)rgbEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRGB_Green()
+  {
+    return (EAttribute)rgbEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRGB_Blue()
+  {
+    return (EAttribute)rgbEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -532,6 +552,8 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     createEReference(colorConstantEClass, COLOR_CONSTANT__CONSTANT);
 
     rgbEClass = createEClass(RGB);
+    createEAttribute(rgbEClass, RGB__HEX);
+    createEAttribute(rgbEClass, RGB__VALUE);
     createEAttribute(rgbEClass, RGB__RED);
     createEAttribute(rgbEClass, RGB__GREEN);
     createEAttribute(rgbEClass, RGB__BLUE);
@@ -618,6 +640,8 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     initEReference(getColorConstant_Constant(), theTypesPackage.getJvmIdentifyableElement(), null, "constant", null, 0, 1, ColorConstant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(rgbEClass, org.eclipse.xtext.example.css.xcss.RGB.class, "RGB", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRGB_Hex(), ecorePackage.getEBoolean(), "hex", null, 0, 1, org.eclipse.xtext.example.css.xcss.RGB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRGB_Value(), ecorePackage.getEInt(), "value", null, 0, 1, org.eclipse.xtext.example.css.xcss.RGB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRGB_Red(), ecorePackage.getEInt(), "red", null, 0, 1, org.eclipse.xtext.example.css.xcss.RGB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRGB_Green(), ecorePackage.getEInt(), "green", null, 0, 1, org.eclipse.xtext.example.css.xcss.RGB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRGB_Blue(), ecorePackage.getEInt(), "blue", null, 0, 1, org.eclipse.xtext.example.css.xcss.RGB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

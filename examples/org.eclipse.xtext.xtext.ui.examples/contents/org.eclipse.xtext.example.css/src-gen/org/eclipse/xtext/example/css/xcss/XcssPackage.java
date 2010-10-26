@@ -372,13 +372,31 @@ public interface XcssPackage extends EPackage
   int RGB = 9;
 
   /**
+   * The feature id for the '<em><b>Hex</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RGB__HEX = COLOR_LITERAL_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RGB__VALUE = COLOR_LITERAL_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Red</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RGB__RED = COLOR_LITERAL_FEATURE_COUNT + 0;
+  int RGB__RED = COLOR_LITERAL_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Green</b></em>' attribute.
@@ -387,7 +405,7 @@ public interface XcssPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RGB__GREEN = COLOR_LITERAL_FEATURE_COUNT + 1;
+  int RGB__GREEN = COLOR_LITERAL_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Blue</b></em>' attribute.
@@ -396,7 +414,7 @@ public interface XcssPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RGB__BLUE = COLOR_LITERAL_FEATURE_COUNT + 2;
+  int RGB__BLUE = COLOR_LITERAL_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>RGB</em>' class.
@@ -405,7 +423,7 @@ public interface XcssPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RGB_FEATURE_COUNT = COLOR_LITERAL_FEATURE_COUNT + 3;
+  int RGB_FEATURE_COUNT = COLOR_LITERAL_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.SizeLiteralImpl <em>Size Literal</em>}' class.
@@ -675,6 +693,28 @@ public interface XcssPackage extends EPackage
    * @generated
    */
   EClass getRGB();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.RGB#isHex <em>Hex</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Hex</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.RGB#isHex()
+   * @see #getRGB()
+   * @generated
+   */
+  EAttribute getRGB_Hex();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.RGB#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.RGB#getValue()
+   * @see #getRGB()
+   * @generated
+   */
+  EAttribute getRGB_Value();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.RGB#getRed <em>Red</em>}'.
@@ -961,6 +1001,22 @@ public interface XcssPackage extends EPackage
      * @generated
      */
     EClass RGB = eINSTANCE.getRGB();
+
+    /**
+     * The meta object literal for the '<em><b>Hex</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RGB__HEX = eINSTANCE.getRGB_Hex();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute RGB__VALUE = eINSTANCE.getRGB_Value();
 
     /**
      * The meta object literal for the '<em><b>Red</b></em>' attribute feature.

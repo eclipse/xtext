@@ -11,3 +11,4 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.xtext.common.types;bundle-version="2.0.0"
 Export-Package: org.eclipse.xtext.example.css.rendering
 Import-Package: org.apache.log4j;version="1.2.15"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

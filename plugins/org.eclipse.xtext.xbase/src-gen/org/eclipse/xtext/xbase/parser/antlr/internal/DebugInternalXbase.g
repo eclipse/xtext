@@ -147,12 +147,7 @@ ruleXMemberFeatureCall :
 
 // Rule XPrimaryExpression
 ruleXPrimaryExpression :
-	ruleXClosure |
-	ruleXBooleanLiteral |
-	ruleXIntLiteral |
-	ruleXNullLiteral |
-	ruleXStringLiteral |
-	ruleXTypeLiteral |
+	ruleXLiteral |
 	ruleXConstructorCall |
 	ruleXBlockExpression |
 	ruleXSwitchExpression |
@@ -165,6 +160,16 @@ ruleXPrimaryExpression :
 	ruleXThrowExpression |
 	ruleXTryCatchFinallyExpression |
 	ruleXParenthesizedExpression
+;
+
+// Rule XLiteral
+ruleXLiteral :
+	ruleXClosure |
+	ruleXBooleanLiteral |
+	ruleXIntLiteral |
+	ruleXNullLiteral |
+	ruleXStringLiteral |
+	ruleXTypeLiteral
 ;
 
 // Rule XClosure

@@ -14,6 +14,8 @@ package org.eclipse.xtext.example.css.xcss;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.example.css.xcss.RGB#isHex <em>Hex</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.css.xcss.RGB#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.css.xcss.RGB#getRed <em>Red</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.css.xcss.RGB#getGreen <em>Green</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.css.xcss.RGB#getBlue <em>Blue</em>}</li>
@@ -26,6 +28,58 @@ package org.eclipse.xtext.example.css.xcss;
  */
 public interface RGB extends ColorLiteral
 {
+  /**
+   * Returns the value of the '<em><b>Hex</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Hex</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Hex</em>' attribute.
+   * @see #setHex(boolean)
+   * @see org.eclipse.xtext.example.css.xcss.XcssPackage#getRGB_Hex()
+   * @model
+   * @generated
+   */
+  boolean isHex();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.example.css.xcss.RGB#isHex <em>Hex</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Hex</em>' attribute.
+   * @see #isHex()
+   * @generated
+   */
+  void setHex(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Value</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Value</em>' attribute.
+   * @see #setValue(int)
+   * @see org.eclipse.xtext.example.css.xcss.XcssPackage#getRGB_Value()
+   * @model
+   * @generated
+   */
+  int getValue();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.example.css.xcss.RGB#getValue <em>Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Value</em>' attribute.
+   * @see #getValue()
+   * @generated
+   */
+  void setValue(int value);
+
   /**
    * Returns the value of the '<em><b>Red</b></em>' attribute.
    * <!-- begin-user-doc -->
