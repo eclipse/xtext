@@ -8,6 +8,11 @@
 package org.eclipse.xtext.common.types.impl;
 
 public abstract class JvmIdentifyableElementImplCustom extends JvmIdentifyableElementImpl {
+	
+	@Override
+	public String getCanonicalName() {
+		return super.toString();
+	}
 
 	@Override
 	public String toString() {

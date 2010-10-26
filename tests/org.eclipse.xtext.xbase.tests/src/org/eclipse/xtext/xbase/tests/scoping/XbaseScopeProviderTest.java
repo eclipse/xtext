@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.scoping;
 
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -14,7 +15,6 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
@@ -231,14 +231,48 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testGenerics() throws Exception {
-		XAssignment assign = (XAssignment) expression("new testdata.GenericType1<java.lang.String>() += 'foo'");
+		expression("new testdata.GenericType1<java.lang.String>() += 'foo'", true);
 	}
 	
 	public void testGenerics_1() throws Exception {
-		XAssignment assign = (XAssignment) expression("((testdata.GenericType1<? extends java.lang.String>) null) += 'foo'");
+		expression("((testdata.GenericType1<? extends java.lang.String>) null) += 'foo'", true);
 	}
 	
 	public void testGenerics_2() throws Exception {
-		XAssignment assign = (XAssignment) expression("new testdata.GenericType1() += 'foo'");
+		expression("new testdata.GenericType1() += 'foo'", true);
+	}
+	
+	public void testPropertyAccess_1() throws Exception {
+		XMemberFeatureCall exp = (XMemberFeatureCall) expression("new testdata.Properties1().prop1");
+		assertTrue(exp.getFeature() instanceof JvmField);
+		assertEquals("testdata.Properties1.prop1",exp.getFeature().getCanonicalName());
+	}
+	
+	public void testPropertyAccess_2() throws Exception {
+		XMemberFeatureCall exp1 = (XMemberFeatureCall) expression("new testdata.Properties1().getProp1");
+		XMemberFeatureCall exp2 = (XMemberFeatureCall) expression("new testdata.Properties1().getProp1()");
+		assertEquals(exp1.getFeature().getCanonicalName(),exp2.getFeature().getCanonicalName());
+	}
+	
+	public void testPropertyAccess_4() throws Exception {
+		XMemberFeatureCall exp = (XMemberFeatureCall) expression("new testdata.Properties1().prop2");
+		assertTrue(exp.getFeature() instanceof JvmOperation);
+		assertEquals("testdata.Properties1.getProp2()",exp.getFeature().getCanonicalName());
+	}
+	
+	public void testPropertyAccess_5() throws Exception {
+		XMemberFeatureCall exp1 = (XMemberFeatureCall) expression("new testdata.Properties1().getProp2");
+		XMemberFeatureCall exp2 = (XMemberFeatureCall) expression("new testdata.Properties1().getProp2()");
+		assertEquals(exp1.getFeature().getCanonicalName(),exp2.getFeature().getCanonicalName());
+	}
+	
+	public void testPropertySetter_1() throws Exception {
+		XAssignment exp = (XAssignment) expression("new testdata.Properties1().prop1 = 'Text'");
+		assertEquals(((XMemberFeatureCall)exp.getAssignable()).getFeature(), exp.getFeature());
+	}
+	
+	public void testPropertySetter_2() throws Exception {
+		XAssignment exp = (XAssignment) expression("new testdata.Properties1().prop2 = 'Text'");
+		assertEquals("testdata.Properties1.setProp2(java.lang.String)", exp.getFeature().getCanonicalName());
 	}
 }
