@@ -29,4 +29,17 @@ public class Properties1 {
 	public void setProp2(String prop2) {
 		this.prop2 = prop2;
 	}
+	
+	public void setProp2(int i) {
+		setProp2("Integer: " + Integer.toString(i));
+	}
+	
+	public String getProp3() {
+		return prop2;
+	}
+	
+	public String setProp3(int i) {
+		setProp2("Integer: " + Integer.toString(i));
+		return prop2;
+	}
 }

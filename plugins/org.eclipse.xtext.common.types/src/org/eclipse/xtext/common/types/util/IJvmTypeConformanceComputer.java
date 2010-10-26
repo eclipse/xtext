@@ -61,28 +61,30 @@ public interface IJvmTypeConformanceComputer extends ITypeConformanceComputer<Jv
 				}
 				return false;
 			} else if (right instanceof JvmParameterizedTypeReference) {
-				JvmParameterizedTypeReference refA = (JvmParameterizedTypeReference) left;
-				JvmParameterizedTypeReference refB = (JvmParameterizedTypeReference) right;
-				if (typeA == typeB) {
-					return areArgumentsAssignableFrom(refA, refB);
-				}
-				if (typeA instanceof JvmPrimitiveType) {
-					return isUnBoxing(typeA, typeB);
-				} else if (typeA instanceof JvmDeclaredType) {
-					if (superTypeCollector.collectSuperTypesAsRawTypes(right).contains(typeA)) {
+				if (left instanceof JvmParameterizedTypeReference) {
+					JvmParameterizedTypeReference refA = (JvmParameterizedTypeReference) left;
+					JvmParameterizedTypeReference refB = (JvmParameterizedTypeReference) right;
+					if (typeA == typeB) {
 						return areArgumentsAssignableFrom(refA, refB);
 					}
-					return isBoxing(typeA, typeB);
-				} else if (typeA instanceof JvmTypeParameter) {
-					EList<JvmTypeConstraint> list = ((JvmTypeParameter) typeA).getConstraints();
-					for (JvmTypeConstraint jvmTypeConstraint : list) {
-						if (jvmTypeConstraint instanceof JvmUpperBound) {
-							JvmTypeReference typeReference = jvmTypeConstraint.getTypeReference();
-							if (isConformant(typeReference, right))
-								return true;
+					if (typeA instanceof JvmPrimitiveType) {
+						return isUnBoxing(typeA, typeB);
+					} else if (typeA instanceof JvmDeclaredType) {
+						if (superTypeCollector.collectSuperTypesAsRawTypes(right).contains(typeA)) {
+							return areArgumentsAssignableFrom(refA, refB);
 						}
+						return isBoxing(typeA, typeB);
+					} else if (typeA instanceof JvmTypeParameter) {
+						EList<JvmTypeConstraint> list = ((JvmTypeParameter) typeA).getConstraints();
+						for (JvmTypeConstraint jvmTypeConstraint : list) {
+							if (jvmTypeConstraint instanceof JvmUpperBound) {
+								JvmTypeReference typeReference = jvmTypeConstraint.getTypeReference();
+								if (isConformant(typeReference, right))
+									return true;
+							}
+						}
+						return list.isEmpty();
 					}
-					return list.isEmpty();
 				}
 			}
 			return false;

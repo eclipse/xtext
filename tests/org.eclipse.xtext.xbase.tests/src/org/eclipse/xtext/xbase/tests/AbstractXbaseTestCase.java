@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests;
 
+import java.io.IOException;
+
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
@@ -57,14 +59,27 @@ public abstract class AbstractXbaseTestCase extends TestCase {
 	}
 
 	protected XExpression expression(String string, boolean resolve) throws Exception {
-		XtextResourceSet set = get(XtextResourceSet.class);
-		Resource resource = set.createResource(URI.createURI("Test.___xbase"));
-		resource.load(new StringInputStream(string), null);
+		Resource resource = newResource(string);
 		if (resolve)
 			EcoreUtil2.resolveAll(resource, CancelIndicator.NullImpl);
-		assertTrue("Errors" + resource.getErrors(), resource.getErrors().isEmpty());
+		assertTrue("Errors: " + resource.getErrors(), resource.getErrors().isEmpty());
 		XExpression exp = (XExpression) resource.getContents().get(0);
 		return exp;
+	}
+	
+	protected XExpression expressionWithError(String string, int expectedErrors) throws Exception {
+		Resource resource = newResource(string);
+		EcoreUtil2.resolveAll(resource, CancelIndicator.NullImpl);
+		assertEquals("Errors: " + resource.getErrors(), expectedErrors, resource.getErrors().size());
+		XExpression exp = (XExpression) resource.getContents().get(0);
+		return exp;
+	}
+
+	protected Resource newResource(String input) throws IOException {
+		XtextResourceSet set = get(XtextResourceSet.class);
+		Resource resource = set.createResource(URI.createURI("Test.___xbase"));
+		resource.load(new StringInputStream(input), null);
+		return resource;
 	}
 
 }

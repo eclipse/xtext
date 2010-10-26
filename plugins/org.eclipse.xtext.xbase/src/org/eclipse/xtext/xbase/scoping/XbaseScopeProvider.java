@@ -155,11 +155,11 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (assignable instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) assignable;
 			if (featureCall.getFeature() instanceof XVariableDeclaration) {
-				descriptions.add(EObjectDescription.create(getAssignmentOperator(), featureCall.getFeature()));
+				descriptions.add(EObjectDescription.create(getAssignmentOperator(context), featureCall.getFeature()));
 			}
 			if (featureCall.getFeature() instanceof JvmField) {
 				if (!((JvmField) featureCall.getFeature()).isFinal())
-					descriptions.add(EObjectDescription.create(getAssignmentOperator(),
+					descriptions.add(EObjectDescription.create(getAssignmentOperator(context),
 							featureCall.getFeature()));
 			}
 			if (featureCall.getFeature() instanceof JvmOperation) {
@@ -185,10 +185,14 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 							return false;
 						}
 					});
-					IEObjectDescription description = scope.getSingleElement(ISelector.SELECT_ALL);
-					if (description instanceof JvmFeatureDescription) {
-						JvmFeatureDescription desc = (JvmFeatureDescription) description;
-						descriptions.add(createJvmFeatureDescription(getAssignmentOperator(), desc.getJvmFeature(), desc.getContext(), getAssignmentOperator().toString()));
+					Iterable<? extends IEObjectDescription> allDescriptions = scope.getElements(ISelector.SELECT_ALL);
+					for(IEObjectDescription description: allDescriptions) {
+						JvmFeatureDescription featureDescription = (JvmFeatureDescription) description;
+						descriptions.add(createJvmFeatureDescription(
+								getAssignmentOperator(context), 
+								featureDescription.getJvmFeature(), 
+								featureDescription.getContext(), 
+								getAssignmentOperator(context).toString()));
 					}
 				}
 				// methods with one param may be written as setFoo = 'firstParam'
@@ -218,7 +222,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return typedElement;
 	}
 
-	protected QualifiedName getAssignmentOperator() {
+	protected QualifiedName getAssignmentOperator(XAssignment assignment) {
 		return ASSIGN;
 	}
 
