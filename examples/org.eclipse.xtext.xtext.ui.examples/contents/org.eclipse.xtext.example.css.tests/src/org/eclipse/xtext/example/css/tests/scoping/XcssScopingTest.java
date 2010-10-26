@@ -33,7 +33,7 @@ public class XcssScopingTest extends AbstractXcssTestCase {
 	}
 	
 	public void testColorLiteral() throws Exception {
-		StyleRule rule = rule("Control { setBackground(#red); }");
+		StyleRule rule = rule("Control { setBackground($red); }");
 		XFeatureCall setBackground = (XFeatureCall) rule.getSettings().get(0);
 		ColorConstant color = (ColorConstant) setBackground.getArguments().get(0);
 		assertEquals("org.eclipse.swt.SWT.COLOR_RED", color.getConstant().getCanonicalName());
