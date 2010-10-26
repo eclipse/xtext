@@ -19,6 +19,7 @@ import org.eclipse.xtext.example.css.xcss.XcssPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.newapi.INewScope;
 import org.eclipse.xtext.xbase.scoping.newapi.SingletonScope;
@@ -84,8 +85,10 @@ public class XcssScopeProvider extends XbaseScopeProvider {
 	}
 	
 	@Override
-	protected QualifiedName getAssignmentOperator() {
-		return ASSIGN_COLON;
+	protected QualifiedName getAssignmentOperator(XAssignment assignment) {
+		if (assignment.eContainer() instanceof StyleRule)
+			return ASSIGN_COLON;
+		return ASSIGN;
 	}
 	
 }
