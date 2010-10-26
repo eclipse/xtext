@@ -28,6 +28,23 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 	
+	public void testIfExpression() throws Exception {
+		assertResolvedReturnType("java.lang.Object", "if (true) 'foo' else null");
+		assertResolvedReturnType("java.lang.String", "if (true) 'foo' else 'bar'");
+		assertResolvedReturnType("java.lang.String", "if (true) 'foo'");
+	}
+
+	public void testSwitchExpression() throws Exception {
+		assertResolvedReturnType(XbaseTypeProvider.STRING_TYPE_NAME,"switch { case true : 's'; case false : 'foo'; default: 'bar';}");
+		assertResolvedReturnType(XbaseTypeProvider.OBJECT_TYPE_NAME,"switch { case true : 's'; case false : new java.lang.Object(); default: 'bar';}");
+	}
+
+	public void testBlockExpression() throws Exception {
+		assertResolvedReturnType(XbaseTypeProvider.INTEGER_TYPE_NAME, "{true;4;}");
+		assertResolvedReturnType(XbaseTypeProvider.BOOLEAN_TYPE_NAME, "{4;true;}");
+		assertResolvedReturnType(XbaseTypeProvider.VOID_TYPE_NAME, "{null;}");
+	}
+
 	public void testNullLiteral() throws Exception {
 		assertResolvedReturnType(XbaseTypeProvider.VOID_TYPE_NAME, "null");
 	}
@@ -46,6 +63,11 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedReturnType(XbaseTypeProvider.INTEGER_TYPE_NAME, "3");
 	}
 	
+	public void testCastExpression() throws Exception {
+		assertResolvedReturnType(XbaseTypeProvider.STRING_TYPE_NAME, "(java.lang.String) null");
+		assertResolvedReturnType(XbaseTypeProvider.BOOLEAN_TYPE_NAME, "(java.lang.Boolean) 'foo'");
+	}
+	
 	public void testConstructorCall() throws Exception {
 		assertResolvedReturnType("java.util.ArrayList", "new java.util.ArrayList()");
 		assertResolvedReturnType("java.util.ArrayList<java.lang.String>", 
@@ -54,17 +76,6 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 								"new java.util.HashMap<java.lang.String, java.lang.Boolean>()");
 		assertResolvedReturnType("java.util.HashMap<? extends java.lang.String,? super java.lang.Boolean>", 
 							"new java.util.HashMap<? extends java.lang.String, ? super java.lang.Boolean>()");
-	}
-	
-	public void testBlockExpression() throws Exception {
-		assertResolvedReturnType(XbaseTypeProvider.INTEGER_TYPE_NAME, "{true;4;}");
-		assertResolvedReturnType(XbaseTypeProvider.BOOLEAN_TYPE_NAME, "{4;true;}");
-		assertResolvedReturnType(XbaseTypeProvider.VOID_TYPE_NAME, "{null;}");
-	}
-	
-	public void testSwitchExpression() throws Exception {
-		assertResolvedReturnType(XbaseTypeProvider.STRING_TYPE_NAME,"switch { case true : 's'; case false : 'foo'; default: 'bar';}");
-		assertResolvedReturnType(XbaseTypeProvider.OBJECT_TYPE_NAME,"switch { case true : 's'; case false : new java.lang.Object(); default: 'bar';}");
 	}
 	
 	public void testClosure() throws Exception {
@@ -89,6 +100,20 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	public void testFeatureCallOnThis() throws Exception {
 		assertResolvedReturnType("java.lang.Boolean", "{ val this = 'foo'; getBytes() += null;}");
 		assertResolvedReturnType("java.lang.Boolean", "{ var this = 'foo'; this.getBytes() += getBytes().get(0);}");
+	}
+	
+	public void testThrowExpression() throws Exception {
+		assertResolvedReturnType("java.lang.Void", "throw new java.lang.Exception()");
+	}
+	
+	public void testTryCatchFinallyExpression() throws Exception {
+		assertResolvedReturnType("java.lang.String", "try 'foo' catch (java.lang.Exception e) 42"); 
+		assertResolvedReturnType("java.lang.String", "try 'foo' catch (java.lang.Exception e) 42 catch(java.lang.RuntimeException e) 43");	
+		assertResolvedReturnType("java.lang.String", "try 'foo' catch (java.lang.Exception e) 42 catch(java.lang.RuntimeException e) 43 finally true");	
+	}
+	
+	public void testForExpression() throws Exception {
+		assertResolvedReturnType("java.lang.Void", "for(java.lang.String x : new java.util.ArrayList()) 'foo'");
 	}
 	
 	public void assertResolvedReturnType(QualifiedName typeName, String expression) throws Exception {
