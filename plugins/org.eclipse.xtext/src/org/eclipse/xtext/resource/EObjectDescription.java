@@ -23,6 +23,8 @@ import org.eclipse.xtext.naming.QualifiedName;
 public class EObjectDescription extends AbstractEObjectDescription {
 
 	public EObjectDescription(QualifiedName qualifiedName, EObject element, Map<String, String> userData) {
+		if (qualifiedName == null)
+			throw new NullPointerException("qualified name may not be null");
 		this.qualifiedName = qualifiedName;
 		this.element = element;
 		this.userData = userData;

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
+import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext;
 import org.eclipse.xtext.linking.ILinkingService;
@@ -115,9 +116,10 @@ public class LazyLinkingResource extends XtextResource {
 				}
 			}
 		} catch (RuntimeException e) {
+			getErrors().add(new ExceptionDiagnostic(e));
+			log.error("resolution of uriFragment '" + uriFragment + "' failed.", e);
 			// wrapped because the javaDoc of this method states that WrappedExceptions are thrown
 			// logged because EcoreUtil.resolve will ignore any exceptions.
-			log.error("resolution of uriFragment '" + uriFragment + "' failed.", e);
 			throw new WrappedException(e);
 		}
 		return super.getEObject(uriFragment);
