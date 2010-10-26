@@ -105,6 +105,100 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	public void testAssignment_01() {
 		assertEvaluatesTo("newValue", "{var x = 'literal' x = 'newValue'}");
 	}
+
+	public void testAssignment_02() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var this = new testdata.Properties1()" +
+				"  prop1 = 'literal'" +
+				"  prop1" +
+				"}");
+	}
+	
+	public void testAssignment_03() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var this = new testdata.Properties1()" +
+				"  prop2 = 'literal'" +
+				"  prop2" +
+				"}");
+	}
+	
+	public void testAssignment_04() {
+		assertEvaluatesTo("Integer: 1", 
+				"{" +
+				"  var this = new testdata.Properties1()" +
+				"  prop2 = 1" +
+				"  prop2" +
+				"}");
+	}
+	
+	public void testAssignment_05() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var this = new testdata.Properties1()" +
+				"  this.prop2 = 'literal'" +
+				"  prop2" +
+				"}");
+	}
+	
+	public void testAssignment_06() {
+		assertEvaluatesTo("Integer: 1", 
+				"{" +
+				"  var this = new testdata.Properties1()" +
+				"  this.prop2 = 1" +
+				"  prop2" +
+				"}");
+	}
+	
+	public void testAssignment_07() {
+		assertEvaluatesTo(null, 
+				"{" +
+				"  var this = new testdata.Properties1()" +
+				"  this.prop2 = 'literal'" +
+				"}");
+	}
+	
+	public void testAssignment_08() {
+		assertEvaluatesTo(null, 
+				"{" +
+				"  var this = new testdata.Properties1()" +
+				"  this.prop2 = 1" +
+				"}");
+	}
+	
+	public void testAssignment_09() {
+		assertEvaluatesTo("Integer: 1", 
+				"{" +
+				"  var this = new testdata.Properties1()" +
+				"  this.prop3 = 1" +
+				"}");
+	}
+	
+	public void testAssignment_10() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var this = new testdata.Properties1()" +
+				"  prop1 = 'literal'" +
+				"}");
+	}
+	
+	public void testAssignment_11() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var list = new java.util.ArrayList<java.lang.String>()" +
+				"  list += 'literal'" +
+				"  list.get(0)" +
+				"}");
+	}
+	
+	public void testAssignment_12() {
+		assertEvaluatesTo(Boolean.TRUE, 
+				"{" +
+				"  var list = new java.util.ArrayList<java.lang.String>()" +
+				"  list += 'literal'" +
+				"}");
+	}
 	
 	public void testAssignmentInBlock_01() {
 		assertEvaluatesTo("newValue", "{var x = 'literal' { x = 'newValue' } x }");
