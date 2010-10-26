@@ -44,7 +44,7 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	
 	private Set<AbstractRule> calledRules = Sets.newHashSet();
 
-	protected Object text(AbstractRule rule) {
+	protected Object _text(AbstractRule rule) {
 		StyledString ruleText = null;
 		if (!calledRules.isEmpty() && !calledRules.contains(rule))
 			ruleText = new StyledString(rule.getName(),
@@ -74,17 +74,17 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		return styledType;
 	}
 
-	protected void doCreateNode(IOutlineNode parentNode, Grammar grammar) {
+	protected void _createNode(IOutlineNode parentNode, Grammar grammar) {
 		// Hack: we use this hook to calculate unused rule
 		calledRules = Sets.newHashSet();
 		if (!grammar.getRules().isEmpty()) {
 			UsedRulesFinder usedRulesFinder = new UsedRulesFinder(calledRules);
 			usedRulesFinder.compute(grammar);
 		}
-		super.doCreateNode(parentNode, grammar);
+		super._createNode(parentNode, grammar);
 	}
 
-	protected void doCreateNode(IOutlineNode parentNode, AbstractRule rule) {
+	protected void _createNode(IOutlineNode parentNode, AbstractRule rule) {
 		StyledString text = (StyledString) textDispatcher.invoke(rule);
 		Image image = imageDispatcher.invoke(rule);
 		RuleNode ruleNode = new RuleNode(rule, parentNode, image, text, isLeafDispatcher.invoke(rule));
@@ -95,7 +95,7 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		ruleNode.setFullText(new StyledString().append(text).append(getReturnTypeText(rule)));
 	}
 
-	protected void doCreateChildren(IOutlineNode parentNode, Grammar grammar) {
+	protected void _createChildren(IOutlineNode parentNode, Grammar grammar) {
 		for (AbstractMetamodelDeclaration metamodelDeclaration : grammar.getMetamodelDeclarations()) {
 			createNode(parentNode, metamodelDeclaration);
 		}
@@ -104,7 +104,7 @@ public class XtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		}
 	}
 
-	protected boolean isLeaf(AbstractRule rule) {
+	protected boolean _isLeaf(AbstractRule rule) {
 		return true;
 	}
 

@@ -19,13 +19,13 @@ import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
  */
 public class ArithmeticsOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
-	protected void doCreateChildren(IOutlineNode parentNode, Module module) {
+	protected void _createChildren(IOutlineNode parentNode, Module module) {
 		for(Definition definition : EcoreUtil2.typeSelect(module.eContents(), Definition.class)) {
 			createNode(parentNode, definition);
 		}
 	}
 
-	protected boolean isLeaf(Definition definition) {
+	protected boolean _isLeaf(Definition definition) {
 		return true;
 	}
 	

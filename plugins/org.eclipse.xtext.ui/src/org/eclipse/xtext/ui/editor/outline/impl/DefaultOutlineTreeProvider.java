@@ -51,18 +51,18 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	}
 
 	protected PolymorphicDispatcher<Void> createChildrenDispatcher = PolymorphicDispatcher.createForSingleTarget(
-			"doCreateChildren", 2, 2, this);
+			"_createChildren", 2, 2, this);
 
 	protected PolymorphicDispatcher<Void> createNodeDispatcher = PolymorphicDispatcher.createForSingleTarget(
-			"doCreateNode", 2, 2, this);
+			"_createNode", 2, 2, this);
 
-	protected PolymorphicDispatcher<Object> textDispatcher = PolymorphicDispatcher.createForSingleTarget("text", 1, 1,
+	protected PolymorphicDispatcher<Object> textDispatcher = PolymorphicDispatcher.createForSingleTarget("_text", 1, 1,
 			this);
 
-	protected PolymorphicDispatcher<Image> imageDispatcher = PolymorphicDispatcher.createForSingleTarget("image", 1, 1,
+	protected PolymorphicDispatcher<Image> imageDispatcher = PolymorphicDispatcher.createForSingleTarget("_image", 1, 1,
 			this);
 
-	protected PolymorphicDispatcher<Boolean> isLeafDispatcher = PolymorphicDispatcher.createForSingleTarget("isLeaf", 1,
+	protected PolymorphicDispatcher<Boolean> isLeafDispatcher = PolymorphicDispatcher.createForSingleTarget("_isLeaf", 1,
 			1, this);
 
 	public IOutlineNode createRoot(IXtextDocument document) {
@@ -77,16 +77,16 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 			createChildrenDispatcher.invoke(parent, modelElement);
 	}
 
-	protected void doCreateChildren(DocumentRootNode parentNode, EObject modelElement) {
+	protected void _createChildren(DocumentRootNode parentNode, EObject modelElement) {
 		createNode(parentNode, modelElement);
 	}
 
-	protected void doCreateChildren(IOutlineNode parentNode, EObject modelElement) {
+	protected void _createChildren(IOutlineNode parentNode, EObject modelElement) {
 		for (EObject childElement : modelElement.eContents())
 			createNode(parentNode, childElement);
 	}
 
-	protected void doCreateChildren(EStructuralFeatureNode parentNode, EObject modelElement) {
+	protected void _createChildren(EStructuralFeatureNode parentNode, EObject modelElement) {
 		Object values = modelElement.eGet(parentNode.getEStructuralFeature());
 		if (values != null) {
 			if (parentNode.getEStructuralFeature().isMany()) {
@@ -104,7 +104,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		createNodeDispatcher.invoke(parent, modelElement);
 	}
 
-	protected void doCreateNode(IOutlineNode parentNode, EObject modelElement) {
+	protected void _createNode(IOutlineNode parentNode, EObject modelElement) {
 		createEObjectNode(parentNode, modelElement);
 	}
 
@@ -120,7 +120,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		return eObjectNode;
 	}
 
-	protected boolean isLeaf(final EObject modelElement) {
+	protected boolean _isLeaf(final EObject modelElement) {
 		return !Iterables.any(modelElement.eClass().getEAllContainments(), new Predicate<EReference>() {
 			public boolean apply(EReference containmentRef) {
 				return modelElement.eIsSet(containmentRef);
@@ -147,14 +147,14 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	/**
 	 * Default for createChildrenDispatcher
 	 */
-	protected void doCreateChildren(Object parent, Object element) {
+	protected void _createChildren(Object parent, Object element) {
 		// do nothing
 	}
 
 	/**
 	 * Default for createNodeDispatcher
 	 */
-	protected void doCreateNode(Object parentObject, EObject modelElement) {
+	protected void _createNode(Object parentObject, EObject modelElement) {
 		throw new IllegalArgumentException("Could not find method createNode(" + nullSafeClassName(parentObject) + ","
 				+ nullSafeClassName(modelElement));
 	}
@@ -162,14 +162,14 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	/**
 	 * Default for isLeafDispatcher
 	 */
-	protected boolean isLeaf(Object modelElement) {
+	protected boolean _isLeaf(Object modelElement) {
 		return true;
 	}
 
 	/**
 	 * Default for textDispatcher
 	 */
-	protected Object text(Object modelElement) {
+	protected Object _text(Object modelElement) {
 		if (labelProvider instanceof IStyledLabelProvider)
 			return ((IStyledLabelProvider) labelProvider).getStyledText(modelElement);
 		else
@@ -179,7 +179,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	/**
 	 * Default for imageDispatcher
 	 */
-	protected Image image(Object modelElement) {
+	protected Image _image(Object modelElement) {
 		return labelProvider.getImage(modelElement);
 	}
 

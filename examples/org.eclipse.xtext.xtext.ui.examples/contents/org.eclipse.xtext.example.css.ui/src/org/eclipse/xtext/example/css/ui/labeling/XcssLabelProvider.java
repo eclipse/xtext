@@ -4,6 +4,12 @@
 package org.eclipse.xtext.example.css.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.example.css.xcss.IdSelector;
+import org.eclipse.xtext.example.css.xcss.Selector;
+import org.eclipse.xtext.example.css.xcss.StyleRule;
+import org.eclipse.xtext.example.css.xcss.TypeSelector;
+import org.eclipse.xtext.example.css.xcss.WildcardSelector;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
 import com.google.inject.Inject;
@@ -20,15 +26,35 @@ public class XcssLabelProvider extends DefaultEObjectLabelProvider {
 		super(delegate);
 	}
 
-/*
 	//Labels and icons can be computed like this:
 	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
+	String text(StyleRule styleRule) {
+	  StringBuilder result =new StringBuilder();
+	  for (Selector selector : styleRule.getSelectors()) {
+		  if (result.length()!=0) {
+			  result.append(" ");
+		  }
+			if (selector instanceof TypeSelector) {
+				result.append(((JvmDeclaredType)((TypeSelector) selector).getType()).getSimpleName());
+			} else if (selector instanceof IdSelector) {
+				result.append("#"+((IdSelector) selector).getId());
+			} else {
+				result.append("*");
+			}
+	  }
+	  return result.length()>0? result.toString(): "?";
+	}
+	
+	String text(WildcardSelector selector) {
+		return "*";
 	}
 	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-*/
+	public String image(StyleRule component) {
+		return "class_obj.gif";
+	}
+	
+//	public String image(Import imp) {
+//		return "imp_obj.gif";
+//	}
+	
 }
