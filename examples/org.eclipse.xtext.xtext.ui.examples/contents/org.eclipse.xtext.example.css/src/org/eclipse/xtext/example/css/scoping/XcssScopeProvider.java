@@ -10,6 +10,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
@@ -82,6 +86,22 @@ public class XcssScopeProvider extends XbaseScopeProvider {
 			return INewScope.NULL_SCOPE;
 		}
 		return super.createLocalVarScope(context, reference, parentScope);
+	}
+
+	protected INewScope createFeatureScopeForTypeRef(JvmTypeReference type, INewScope parent,
+			Predicate<JvmMember> isAccept) {
+		if (type instanceof JvmWildcardTypeReference) {
+			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;
+			for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
+				if (constraint instanceof JvmUpperBound) {
+					JvmTypeReference upperBound = constraint.getTypeReference();
+					parent = createFeatureScopeForTypeRef(upperBound, parent, isAccept);
+				}
+			}
+			return parent;
+		} else {
+			return super.createFeatureScopeForTypeRef(type, parent, isAccept);
+		}
 	}
 	
 	@Override

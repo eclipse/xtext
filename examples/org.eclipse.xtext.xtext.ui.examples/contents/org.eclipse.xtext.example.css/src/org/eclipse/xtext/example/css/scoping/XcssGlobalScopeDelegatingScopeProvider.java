@@ -11,9 +11,9 @@ import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 public class XcssGlobalScopeDelegatingScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
 
 	@Override
-	protected Set<ImportNormalizer> getImportedNamespaceResolvers(EObject context) {
+	protected Set<ImportNormalizer> internalGetImportedNamespaceResolvers(EObject context) {
 		if (context instanceof StyleSheet) {
-			Set<ImportNormalizer> result = super.getImportedNamespaceResolvers(context);
+			Set<ImportNormalizer> result = super.internalGetImportedNamespaceResolvers(context);
 			result.add(createImportedNamespaceResolver("org.eclipse.swt.widgets.*"));
 			result.add(createImportedNamespaceResolver("org.eclipse.swt.custom.*"));
 			return result;

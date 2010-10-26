@@ -76,6 +76,7 @@ public class XcssRendererHelper {
 	}
 	
 	protected void applyStyles(XcssInterpreter interpreter, StyleSheet styleSheet, Widget widget, boolean recurse) {
+		StyleAwareImpl.discard(widget);
 		interpreter.evaluate(styleSheet, widget);
 		if (recurse && widget instanceof Composite) {
 			Control[] children = ((Composite) widget).getChildren();
