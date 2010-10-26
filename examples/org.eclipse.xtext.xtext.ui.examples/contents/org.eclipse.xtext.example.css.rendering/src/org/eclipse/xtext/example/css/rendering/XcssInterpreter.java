@@ -4,11 +4,14 @@ import java.lang.reflect.Field;
 
 import org.apache.log4j.Logger;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
+import org.eclipse.xtext.example.css.runtime.StyleAware;
 import org.eclipse.xtext.example.css.xcss.ColorConstant;
 import org.eclipse.xtext.example.css.xcss.IdSelector;
 import org.eclipse.xtext.example.css.xcss.RGB;
@@ -151,6 +154,23 @@ public class XcssInterpreter extends XbaseInterpreter  {
 			rgb = new org.eclipse.swt.graphics.RGB(color.getRed(), color.getGreen(), color.getBlue());
 		}
 		return new DefaultEvaluationResult(new Color(display, rgb), null);
+	}
+	
+	protected IEvaluationResult assignValueByOperation(JvmOperation operation, Object receiver, Object value) {
+		if (StyleAware.class.getCanonicalName().equals(operation.getDeclaringType().getCanonicalName())) {
+			if (receiver instanceof Control) {
+				StyleAware borderAware = StyleAwareImpl.getBorderAware((Control) receiver);
+				receiver = borderAware;
+				if (receiver != null)
+					return super.assignValueByOperation(operation, receiver, value);
+			}
+			return DefaultEvaluationResult.NULL;
+		} else {
+			return super.assignValueByOperation(operation, receiver, value);
+		}
+//		List<Object> argumentValues = Lists.newArrayList(value);
+//		IEvaluationResult result = invokeOperation(operation, receiver, argumentValues);
+//		return result;
 	}
 	
 }

@@ -5,6 +5,7 @@ package org.eclipse.xtext.example.css.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.example.css.xcss.IdSelector;
 import org.eclipse.xtext.example.css.xcss.Selector;
 import org.eclipse.xtext.example.css.xcss.StyleRule;
@@ -35,7 +36,9 @@ public class XcssLabelProvider extends DefaultEObjectLabelProvider {
 			  result.append(" ");
 		  }
 			if (selector instanceof TypeSelector) {
-				result.append(((JvmDeclaredType)((TypeSelector) selector).getType()).getSimpleName());
+				JvmType type = ((TypeSelector) selector).getType();
+				if (!type.eIsProxy())
+					result.append(((JvmDeclaredType)type).getSimpleName());
 			} else if (selector instanceof IdSelector) {
 				result.append("#"+((IdSelector) selector).getId());
 			} else {
