@@ -35,14 +35,15 @@ Filter returns XExpression:
 	'[' XExpression ']';
 
 Setting returns XExpression:
-	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)? ';';
-//	assignable=FeatureReference feature=[JvmIdentifyableElement|OpAssign] value=XExpression ';';
+//	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)? ';';
+	  XExpression ';' 
+	| {XAssignment} assignable=FeatureReference feature=[JvmIdentifyableElement|OpSettingAssign] value=XExpression ';';
 
 OpSettingAssign:
 	':';
 
-//FeatureReference returns XFeatureCall:
-//	feature=[JvmIdentifyableElement];
+FeatureReference returns XFeatureCall:
+	feature=[JvmIdentifyableElement];
 
 CssLiterals returns XExpression:
 	FontLiteral | ColorLiteral | SizeLiteral;
