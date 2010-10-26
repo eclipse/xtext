@@ -36,7 +36,7 @@ public interface ITypeProvider<T> {
 			return newCtx(null,acceptor);
 		}
 		public static <T> Context<T> newCtx(T expectedType, ValidationMessageAcceptor acceptor) {
-			return new Context<T>(null,acceptor);
+			return new Context<T>(expectedType ,acceptor);
 		}
 		
 		private T expectedType;
