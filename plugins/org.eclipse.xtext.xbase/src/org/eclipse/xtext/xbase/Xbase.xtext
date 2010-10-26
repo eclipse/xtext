@@ -81,12 +81,7 @@ XMemberFeatureCall returns XExpression:
 		feature=[types::JvmIdentifyableElement] (explicitOperationCall?='(' (memberCallArguments+=XExpression (','	memberCallArguments+=XExpression)*)? ')')?)*;
 
 XPrimaryExpression returns XExpression:
-	XClosure |
-	XBooleanLiteral |
-	XIntLiteral |
-	XNullLiteral |
-	XStringLiteral |
-	XTypeLiteral |
+	XLiteral |
 	XConstructorCall |
 	XBlockExpression |
 	XSwitchExpression |
@@ -99,6 +94,15 @@ XPrimaryExpression returns XExpression:
 	XThrowExpression |
 	XTryCatchFinallyExpression |
 	XParenthesizedExpression;
+
+XLiteral returns XExpression:
+	XClosure |
+	XBooleanLiteral |
+	XIntLiteral |
+	XNullLiteral |
+	XStringLiteral |
+	XTypeLiteral
+;
 
 XClosure returns XExpression:
 	{XClosure} (formalParameters+=JvmFormalParameter (',' formalParameters+=JvmFormalParameter)*)? '|' expression=XExpression;
