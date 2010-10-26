@@ -111,17 +111,24 @@ public class SuperTypeCollector {
 		public Set<Result> getResult() {
 			return result;
 		}
-
+		
 		@Override
-		public Void caseJvmParameterizedTypeReference(JvmParameterizedTypeReference object) {
+		public Void caseJvmTypeReference(JvmTypeReference object) {
 			if (!object.eIsProxy()) {
 				if (!collecting || result.add(transformation.apply(object))) {
 					collecting = true;
-					if (object.getType() instanceof JvmDeclaredType) {
-						for (JvmTypeReference superType : ((JvmDeclaredType) object.getType()).getSuperTypes()) {
-							doSwitch(superType);
-						}
-					}
+					if (object.getType() != null)
+						doSwitch(object.getType());
+				}
+			}
+			return null;
+		}
+		
+		@Override
+		public Void caseJvmDeclaredType(JvmDeclaredType object) {
+			if (!object.eIsProxy()) {
+				for (JvmTypeReference superType : object.getSuperTypes()) {
+					doSwitch(superType);
 				}
 			}
 			return null;
