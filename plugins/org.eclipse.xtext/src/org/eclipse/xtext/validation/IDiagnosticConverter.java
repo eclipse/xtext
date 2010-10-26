@@ -8,6 +8,7 @@
 package org.eclipse.xtext.validation;
 
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.inject.ImplementedBy;
 
@@ -24,7 +25,7 @@ public interface IDiagnosticConverter {
 	 * Accepts the created issues.
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
-	interface Acceptor {
+	interface Acceptor extends IAcceptor<Issue> {
 		
 		/**
 		 * Accepts the created issues. Implementors should ignore any null values that are passed to this method.
