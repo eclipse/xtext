@@ -167,8 +167,11 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 				final QualifiedName fullyQualifiedName = qualifiedNameProvider.getFullyQualifiedName(from);
 				if (fullyQualifiedName == null)
 					return null;
-				QualifiedName relativeName = (localNamespaceResolver != null) ? localNamespaceResolver
-						.deresolve(fullyQualifiedName) : fullyQualifiedName;
+				QualifiedName relativeName = localNamespaceResolver != null 
+					? localNamespaceResolver.deresolve(fullyQualifiedName) 
+					: fullyQualifiedName;
+				if (relativeName == null)
+					return null;
 				return new EObjectDescription(relativeName, from, Collections.<String, String> emptyMap()) {
 					@Override
 					public QualifiedName getQualifiedName() {
