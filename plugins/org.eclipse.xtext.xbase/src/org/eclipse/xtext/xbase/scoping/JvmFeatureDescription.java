@@ -42,6 +42,6 @@ public class JvmFeatureDescription extends EObjectDescription {
 	
 	@Override
 	public String toString() {
-		return getJvmFeature().getCanonicalName();
+		return shadowingString;
 	}
 }
