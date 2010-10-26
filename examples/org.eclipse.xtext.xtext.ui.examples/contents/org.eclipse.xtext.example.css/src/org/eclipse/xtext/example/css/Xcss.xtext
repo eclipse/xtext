@@ -8,6 +8,7 @@ import "http://www.eclipse.org/emf/2002/Ecore"
 StyleSheet: {StyleSheet}
 	rules+=StyleRule*;
 
+
 StyleRule:
 	selectors+=Selector+ '{'
 		settings+=Setting*

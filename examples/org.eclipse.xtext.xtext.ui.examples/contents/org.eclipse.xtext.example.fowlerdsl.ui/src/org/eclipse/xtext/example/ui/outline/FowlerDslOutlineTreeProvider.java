@@ -15,7 +15,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
  */
 public class FowlerDslOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
-	protected void doCreateChildren(DocumentRootNode parentNode, Statemachine statemachine) {
+	protected void _createChildren(DocumentRootNode parentNode, Statemachine statemachine) {
 		createEStructuralFeatureNode(parentNode, statemachine, FowlerdslPackage.Literals.STATEMACHINE__EVENTS,
 				labelProvider.getImage("events"), "events");
 		createEStructuralFeatureNode(parentNode, statemachine, FowlerdslPackage.Literals.STATEMACHINE__COMMANDS,
@@ -24,7 +24,7 @@ public class FowlerDslOutlineTreeProvider extends DefaultOutlineTreeProvider {
 				labelProvider.getImage("states"), "states");
 	}
 
-	protected Object text(Transition transition) {
+	protected Object _text(Transition transition) {
 		return transition.getEvent().getName() + " => " + transition.getState().getName();
 	}
 

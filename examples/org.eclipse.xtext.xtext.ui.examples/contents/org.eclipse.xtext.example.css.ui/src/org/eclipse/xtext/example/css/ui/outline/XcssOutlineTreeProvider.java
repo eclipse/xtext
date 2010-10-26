@@ -3,12 +3,25 @@
 */
 package org.eclipse.xtext.example.css.ui.outline;
 
+import org.eclipse.xtext.example.css.xcss.StyleRule;
+import org.eclipse.xtext.example.css.xcss.StyleSheet;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 
 /**
  * customization of the default outline structure
  * 
  */
 public class XcssOutlineTreeProvider extends DefaultOutlineTreeProvider {
+
+	protected void _createChildren(DocumentRootNode parentNode,
+			StyleSheet modelElement) {
+		for (StyleRule rule : modelElement.getRules()) {
+			createNode(parentNode, rule);
+		}
+	}
 	
+	protected boolean _isLeaf(StyleRule selector) {
+		return true;
+	}
 }

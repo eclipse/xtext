@@ -38,7 +38,7 @@ public class NewToOldAdapter implements IScope {
 
 	@SuppressWarnings("unchecked")
 	public Iterable<IEObjectDescription> getAllContents() {
-		return (Iterable<IEObjectDescription>) newScope.getElements(selector);
+		return (Iterable<IEObjectDescription>) newScope.getElements(ISelector.SELECT_ALL);
 	}
 
 	public IEObjectDescription getContentByName(QualifiedName name) {

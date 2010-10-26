@@ -14,7 +14,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 public class DomainmodelOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
 	@Override
-	protected void doCreateChildren(DocumentRootNode parentNode, EObject rootElement) {
+	protected void _createChildren(DocumentRootNode parentNode, EObject rootElement) {
 		for (EObject content : rootElement.eContents()) {
 			createNode(parentNode, content);
 		}
