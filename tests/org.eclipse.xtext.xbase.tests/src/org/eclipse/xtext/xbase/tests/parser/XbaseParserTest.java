@@ -341,6 +341,12 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertTrue(be.getExpressions().get(1) instanceof XFeatureCall);
 	}
 	
+	public void testBlockExpression_5() throws Exception {
+		XBlockExpression be = (XBlockExpression) expression("{foo bar|bar}");
+		assertEquals(1, be.getExpressions().size());
+		assertTrue(be.getExpressions().get(0) instanceof XClosure);
+	}
+	
 	public void testBlockExpression_withVariableDeclaration_0()
 			throws Exception {
 		XBlockExpression be = (XBlockExpression) expression("{val foo = bar;bar;}");
@@ -383,6 +389,14 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertFeatureCall("bar", vd.getRight());
 		assertNotNull(vd.getType());
 		assertFeatureCall("bar", be.getExpressions().get(1));
+	}
+	public void testBlockExpression_withVariableDeclaration_4() throws Exception {
+		XBlockExpression be = (XBlockExpression) expression("{ var java.lang.Boolean x = 'bar' }");
+		assertEquals(1, be.getExpressions().size());
+		XVariableDeclaration vd = (XVariableDeclaration) be.getExpressions().get(0);
+		assertEquals("x", vd.getName());
+		assertTrue(vd.getRight() instanceof XStringLiteral);
+		assertNotNull(vd.getType());
 	}
 
 	public void testConstructorCall_0() throws Exception {

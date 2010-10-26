@@ -115,21 +115,18 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				}
 			}
 		}
-		if (context instanceof XAbstractFeatureCall) {
-			DelegatingScope implicitThis = new DelegatingScope();
-			INewScope localVariableScope = createLocalVarScope(context, reference, implicitThis);
-			IEObjectDescription thisVariable = localVariableScope.getSingleElement(Selectors.byName(THIS));
+		DelegatingScope implicitThis = new DelegatingScope();
+		INewScope localVariableScope = createLocalVarScope(context, reference, implicitThis);
+		IEObjectDescription thisVariable = localVariableScope.getSingleElement(Selectors.byName(THIS));
 
-			if (thisVariable != null) {
-				EObject thisVal = thisVariable.getEObjectOrProxy();
-				JvmTypeReference type = typeResolver.getType(thisVal, null);
-				if (type != null) {
-					implicitThis.setDelegate(createFeatureScopeForTypeRef(type, INewScope.NULL_SCOPE, publicOnly));
-				}
+		if (thisVariable != null) {
+			EObject thisVal = thisVariable.getEObjectOrProxy();
+			JvmTypeReference type = typeResolver.getType(thisVal, null);
+			if (type != null) {
+				implicitThis.setDelegate(createFeatureScopeForTypeRef(type, INewScope.NULL_SCOPE, publicOnly));
 			}
-			return localVariableScope;
 		}
-		return INewScope.NULL_SCOPE;
+		return localVariableScope;
 	}
 
 	protected ISelector getSelector(final EObject context, final EReference reference) {
@@ -327,9 +324,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return INewScope.NULL_SCOPE;
 	}
 
-	protected INewScope createScopeForField(JvmDeclaredType declType, INewScope parent, Predicate<JvmMember> isAccept,
+	protected INewScope createScopeForField(JvmDeclaredType declType, INewScope parent, final Predicate<JvmMember> isAccept,
 			final TypeArgumentContext context) {
-		Iterable<JvmField> operations = filter(filter(declType.getMembers(), JvmField.class), isAccept);
+		Iterable<JvmField> operations = filter(filter(declType.getMembers(), JvmField.class), new Predicate<JvmMember>(){
+			public boolean apply(JvmMember input) {
+				return isAccept.apply(input) && !((JvmField)input).isStatic();
+			}
+		});
 		if (!operations.iterator().hasNext())
 			return parent;
 		Iterable<IEObjectDescription> descriptions = transform(operations,
@@ -342,10 +343,14 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected INewScope createScopeForMethods(JvmDeclaredType declType, INewScope parent,
-			Predicate<JvmMember> isAccept, final TypeArgumentContext context) {
+			final Predicate<JvmMember> isAccept, final TypeArgumentContext context) {
 		final JvmFeatureShadowingIndexObjectProvider stringProvider = new JvmFeatureShadowingIndexObjectProvider(
 				context);
-		Iterable<JvmOperation> operations = filter(filter(declType.getMembers(), JvmOperation.class), isAccept);
+		Iterable<JvmOperation> operations = filter(filter(declType.getMembers(), JvmOperation.class), new Predicate<JvmMember>(){
+			public boolean apply(JvmMember input) {
+				return isAccept.apply(input) && !((JvmOperation)input).isStatic();
+			}
+		});
 		if (!operations.iterator().hasNext())
 			return parent;
 		Iterable<JvmFeatureDescription> descriptions = transform(operations,
