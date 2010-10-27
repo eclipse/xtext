@@ -80,7 +80,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 	public void testFixMissingRule() throws Exception {
 		XtextEditor xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, GRAMMAR_WITH_MISSING_RULE);
 		assertAndApplySingleResolution(xtextEditor, XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE, 1,
-				"Create rule 'AbstractElement'");
+				"Create rule 'AbstractElement'", false);
 	}
 	
 //	see https://bugs.eclipse.org/bugs/show_bug.cgi?id=324566
@@ -110,6 +110,10 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 	
 	protected void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount,
 			String resolutionLabel) {
+		assertAndApplySingleResolution(xtextEditor, issueCode, issueDataCount, resolutionLabel, true);
+	}
+	protected void assertAndApplySingleResolution(XtextEditor xtextEditor, String issueCode, int issueDataCount,
+			String resolutionLabel, boolean isCleanAfterApply) {
 		IssueResolutionProvider quickfixProvider = createInjector().getInstance(IssueResolutionProvider.class);
 		IXtextDocument document = xtextEditor.getDocument();
 		List<Issue> issues = getIssues(document);
@@ -124,7 +128,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 		IssueResolution resolution = resolutions.iterator().next();
 		assertEquals(resolutionLabel, resolution.getLabel());
 		resolution.apply();
-		assertTrue(getIssues(document).isEmpty());
+		assertEquals(isCleanAfterApply, getIssues(document).isEmpty());
 		xtextEditor.doSave(new NullProgressMonitor());
 
 	}
