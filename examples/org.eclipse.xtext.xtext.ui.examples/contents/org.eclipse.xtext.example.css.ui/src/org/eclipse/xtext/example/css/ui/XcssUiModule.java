@@ -4,6 +4,10 @@
 package org.eclipse.xtext.example.css.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.example.css.ui.highlighting.HighlightingCalculator;
+import org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -11,5 +15,13 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 public class XcssUiModule extends org.eclipse.xtext.example.css.ui.AbstractXcssUiModule {
 	public XcssUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+	
+	public Class<? extends DefaultHighlightingConfiguration> bindHighlightingConfiguration() {
+		return HighlightingConfiguration.class;
+	}
+	
+	public Class<? extends ISemanticHighlightingCalculator> bindHighlightingCalculator() {
+		return HighlightingCalculator.class;
 	}
 }
