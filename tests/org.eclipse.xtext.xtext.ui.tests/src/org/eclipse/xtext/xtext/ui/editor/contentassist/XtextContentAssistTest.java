@@ -529,4 +529,33 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		":");
     }
 
+    public void testOverrideRule_01() throws Exception {
+    	newBuilder(getXtextSetup())
+    		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	        .append("ST")
+	        .assertText("terminal STRING:\n\t\n;\n", ":");
+    }
+    
+    public void testOverrideRule_02() throws Exception {
+    	newBuilder(getXtextSetup())
+    		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	        .append("IN")
+	        .assertText("terminal INT returns ecore::EInt:\n\t\n;\n", ":");
+    }
+    
+    public void testOverrideRule_03() throws Exception {
+    	newBuilder(getXtextSetup())
+    		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+    		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ec")
+	        .append("IN")
+	        .assertText("terminal INT returns ec::EInt:\n\t\n;\n", ":");
+    }
+    
+    public void testOverrideRule_04() throws Exception {
+    	newBuilder(getXtextSetup())
+    		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+    		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"")
+	        .append("IN")
+	        .assertText("terminal INT returns EInt:\n\t\n;\n", ":");
+    }
 }
