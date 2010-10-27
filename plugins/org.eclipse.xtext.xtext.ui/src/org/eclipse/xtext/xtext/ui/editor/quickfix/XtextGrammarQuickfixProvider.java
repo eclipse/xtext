@@ -8,18 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.quickfix;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
@@ -57,11 +57,15 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 		final String ruleName = issue.getData()[0];
 		acceptor.accept(issue, "Create rule '" + ruleName + "'", "Create rule '" + ruleName + "'", NULL_QUICKFIX_IMAGE,
 				new ISemanticModification() {
-					public void apply(final EObject element, IModificationContext context) {
-						RuleCall ruleCall = (RuleCall) element;
+					public void apply(final EObject element, IModificationContext context) throws BadLocationException {
 						AbstractRule abstractRule = EcoreUtil2.getContainerOfType(element, ParserRule.class);
-						ParserRule parserRule = createNewRule(abstractRule, ruleName);
-						ruleCall.setRule(parserRule);
+						CompositeNode node = NodeUtil.getNode(abstractRule);
+						int offset = node.getOffset() + node.getLength();
+						StringBuilder builder = new StringBuilder("\n\n");
+						if (abstractRule instanceof TerminalRule)
+							builder.append("terminal ");
+						String newRule = builder.append(ruleName).append(":\n\t\n;\n").toString();
+						context.getXtextDocument().replace(offset, 0, newRule);
 					}
 				});
 		createLinkingIssueResolutions(issue, acceptor);
@@ -102,20 +106,4 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 				});
 	}
 
-	protected ParserRule createNewRule(AbstractRule parent, String name) {
-		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
-		parserRule.setName(name);
-		Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
-		keyword.setValue(Strings.toFirstLower(name));
-		parserRule.setAlternatives(keyword);
-		addNewRule(parent, parserRule);
-		return parserRule;
-	}
-
-	protected void addNewRule(AbstractRule abstractRule, AbstractRule newRule) {
-		Grammar grammar = EcoreUtil2.getContainerOfType(abstractRule, Grammar.class);
-		EList<AbstractRule> elements = grammar.getRules();
-		int index = elements.indexOf(abstractRule) + 1;
-		elements.add(index, newRule);
-	}
 }
