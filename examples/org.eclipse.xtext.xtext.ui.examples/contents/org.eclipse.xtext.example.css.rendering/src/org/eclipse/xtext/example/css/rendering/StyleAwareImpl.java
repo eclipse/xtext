@@ -12,6 +12,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Widget;
+import org.eclipse.xtext.example.css.runtime.BackgroundGradient;
 import org.eclipse.xtext.example.css.runtime.StyleAware;
 
 import com.google.common.base.Function;
@@ -42,6 +43,7 @@ public class StyleAwareImpl implements StyleAware, PaintListener {
 	private int borderWidth;
 	private String borderStyle;
 	private Control control;
+	private GradientBackgroundListener gradientBackgroundListener;
 
 	public StyleAwareImpl(Control control) {
 		this.control = control;
@@ -72,6 +74,9 @@ public class StyleAwareImpl implements StyleAware, PaintListener {
 		this.borderStyle = borderStyle;
 	}
 	
+	/**
+	 * Heavily adapted from org.eclipse.e4.ui.css.swt.helpers.CSSSWTHelpers.createBorderPaintListener(CSSEngine, Control)
+	 */
 	public void paintControl(PaintEvent e) {
 		int width = getBorderWidth();
 		GC gc = e.gc;
@@ -126,6 +131,22 @@ public class StyleAwareImpl implements StyleAware, PaintListener {
 	public void discard() {
 		setBorderWidth(0);
 		control.getParent().removePaintListener(this);
+		if (gradientBackgroundListener != null) {
+			gradientBackgroundListener.setGradient(null);
+		}
+	}
+	
+	public void setBackgroundGradient(BackgroundGradient gradient) {
+		if (gradientBackgroundListener == null) {
+			gradientBackgroundListener = new GradientBackgroundListener(control);
+		}
+		gradientBackgroundListener.setGradient(gradient);
+	}
+	
+	public BackgroundGradient getBackgroundGradient() {
+		if (gradientBackgroundListener == null)
+			return null;
+		return gradientBackgroundListener.getGradient();
 	}
 	
 }

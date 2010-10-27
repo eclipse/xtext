@@ -22,4 +22,7 @@ public interface StyleAware {
 	 */
 	void setBorderStyle(String borderWidth);
 
+	BackgroundGradient getBackgroundGradient();
+	
+	void setBackgroundGradient(BackgroundGradient gradient);
 }

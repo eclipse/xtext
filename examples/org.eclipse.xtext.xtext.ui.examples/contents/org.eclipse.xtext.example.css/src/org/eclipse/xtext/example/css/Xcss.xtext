@@ -35,7 +35,6 @@ Filter returns XExpression:
 	'[' XExpression ']';
 
 Setting returns XExpression:
-//	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)? ';';
 	  XExpression ';' 
 	| {XAssignment} assignable=FeatureReference feature=[JvmIdentifyableElement|OpSettingAssign] value=XExpression ';';
 
@@ -45,23 +44,8 @@ OpSettingAssign:
 FeatureReference returns XFeatureCall:
 	feature=[JvmIdentifyableElement];
 
-CssLiterals returns XExpression:
-	FontLiteral | ColorLiteral | SizeLiteral;
-
-FontLiteral:
-	{FontLiteral}
-	'font' name=StringOrID?
-	(
-	  (italic?='I')?
-	& (bold?='B')?
-	& (size?=SizeLiteral)?
-	);
-
-StringOrID:
-	STRING | ID;
-
 ColorLiteral:
-	RGB | ColorConstant;
+	(RGB | ColorConstant) ({Gradient.colors+=current} colors+=(RGB | ColorConstant)+ percents+=Percent*)?;
 
 ColorConstant:
 	'$' constant=[JvmIdentifyableElement];
@@ -70,19 +54,17 @@ RGB:
 	hex?='#' value = HEXINT
   | '#' '(' red=INT ',' green=INT ',' blue=INT ')'
 ;
+
+Percent:
+  value = INT '%'
+;
 	
 HEXINT returns EInt:
   INT ID? | ID
 ;
 	
-SizeLiteral:
-	value=INT unit=SizeUnit;
-
-enum SizeUnit:
-	em | pt | px | percent='%';
-
 XLiteral returns XExpression:
-	CssLiterals |
+	ColorLiteral |
 	XClosure |
 	XBooleanLiteral |
 	XIntLiteral |
