@@ -153,8 +153,8 @@ public class XtextLinkingService extends DefaultLinkingService {
 	private EPackage loadEPackage(String resourceOrNsURI, ResourceSet resourceSet) {
 		if (EPackage.Registry.INSTANCE.containsKey(resourceOrNsURI))
 			return EPackage.Registry.INSTANCE.getEPackage(resourceOrNsURI);
+		URI uri = URI.createURI(resourceOrNsURI);
 		try {
-			URI uri = URI.createURI(resourceOrNsURI);
 			if (uri.fragment() == null) {
 				Resource resource = resourceSet.getResource(uri, true);
 				EPackage result = (EPackage) resource.getContents().get(0);
@@ -162,8 +162,12 @@ public class XtextLinkingService extends DefaultLinkingService {
 			}
 			EPackage result = (EPackage) resourceSet.getEObject(uri, true);
 			return result;
-
 		} catch(RuntimeException ex) {
+			if (uri.isPlatformResource()) {
+				String platformString = uri.toPlatformString(true);
+				URI platformPluginURI = URI.createPlatformPluginURI(platformString, true);
+				return loadEPackage(platformPluginURI.toString(), resourceSet);
+			}
 			log.trace("Cannot load package with URI '" + resourceOrNsURI + "'", ex);
 			return null;
 		}
