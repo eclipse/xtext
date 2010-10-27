@@ -6,7 +6,6 @@
 package org.eclipse.xtext.example.css.xcss.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -74,47 +73,13 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
       case XcssPackage.TYPE_SELECTOR: return createTypeSelector();
       case XcssPackage.ID_SELECTOR: return createIdSelector();
       case XcssPackage.WILDCARD_SELECTOR: return createWildcardSelector();
-      case XcssPackage.FONT_LITERAL: return createFontLiteral();
       case XcssPackage.COLOR_LITERAL: return createColorLiteral();
       case XcssPackage.COLOR_CONSTANT: return createColorConstant();
       case XcssPackage.RGB: return createRGB();
-      case XcssPackage.SIZE_LITERAL: return createSizeLiteral();
+      case XcssPackage.PERCENT: return createPercent();
+      case XcssPackage.GRADIENT: return createGradient();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-    }
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object createFromString(EDataType eDataType, String initialValue)
-  {
-    switch (eDataType.getClassifierID())
-    {
-      case XcssPackage.SIZE_UNIT:
-        return createSizeUnitFromString(eDataType, initialValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-    }
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String convertToString(EDataType eDataType, Object instanceValue)
-  {
-    switch (eDataType.getClassifierID())
-    {
-      case XcssPackage.SIZE_UNIT:
-        return convertSizeUnitToString(eDataType, instanceValue);
-      default:
-        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
   }
 
@@ -189,17 +154,6 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FontLiteral createFontLiteral()
-  {
-    FontLiteralImpl fontLiteral = new FontLiteralImpl();
-    return fontLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public ColorLiteral createColorLiteral()
   {
     ColorLiteralImpl colorLiteral = new ColorLiteralImpl();
@@ -233,10 +187,10 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public SizeLiteral createSizeLiteral()
+  public Percent createPercent()
   {
-    SizeLiteralImpl sizeLiteral = new SizeLiteralImpl();
-    return sizeLiteral;
+    PercentImpl percent = new PercentImpl();
+    return percent;
   }
 
   /**
@@ -244,21 +198,10 @@ public class XcssFactoryImpl extends EFactoryImpl implements XcssFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public SizeUnit createSizeUnitFromString(EDataType eDataType, String initialValue)
+  public Gradient createGradient()
   {
-    SizeUnit result = SizeUnit.get(initialValue);
-    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-    return result;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String convertSizeUnitToString(EDataType eDataType, Object instanceValue)
-  {
-    return instanceValue == null ? null : instanceValue.toString();
+    GradientImpl gradient = new GradientImpl();
+    return gradient;
   }
 
   /**

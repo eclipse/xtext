@@ -80,15 +80,6 @@ public interface XcssFactory extends EFactory
   WildcardSelector createWildcardSelector();
 
   /**
-   * Returns a new object of class '<em>Font Literal</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Font Literal</em>'.
-   * @generated
-   */
-  FontLiteral createFontLiteral();
-
-  /**
    * Returns a new object of class '<em>Color Literal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -116,13 +107,22 @@ public interface XcssFactory extends EFactory
   RGB createRGB();
 
   /**
-   * Returns a new object of class '<em>Size Literal</em>'.
+   * Returns a new object of class '<em>Percent</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Size Literal</em>'.
+   * @return a new object of class '<em>Percent</em>'.
    * @generated
    */
-  SizeLiteral createSizeLiteral();
+  Percent createPercent();
+
+  /**
+   * Returns a new object of class '<em>Gradient</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Gradient</em>'.
+   * @generated
+   */
+  Gradient createGradient();
 
   /**
    * Returns the package supported by this factory.

@@ -7,7 +7,6 @@ package org.eclipse.xtext.example.css.xcss.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -17,11 +16,10 @@ import org.eclipse.xtext.common.types.TypesPackage;
 
 import org.eclipse.xtext.example.css.xcss.ColorConstant;
 import org.eclipse.xtext.example.css.xcss.ColorLiteral;
-import org.eclipse.xtext.example.css.xcss.FontLiteral;
+import org.eclipse.xtext.example.css.xcss.Gradient;
 import org.eclipse.xtext.example.css.xcss.IdSelector;
+import org.eclipse.xtext.example.css.xcss.Percent;
 import org.eclipse.xtext.example.css.xcss.Selector;
-import org.eclipse.xtext.example.css.xcss.SizeLiteral;
-import org.eclipse.xtext.example.css.xcss.SizeUnit;
 import org.eclipse.xtext.example.css.xcss.StyleRule;
 import org.eclipse.xtext.example.css.xcss.StyleSheet;
 import org.eclipse.xtext.example.css.xcss.TypeSelector;
@@ -88,13 +86,6 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass fontLiteralEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass colorLiteralEClass = null;
 
   /**
@@ -116,14 +107,14 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass sizeLiteralEClass = null;
+  private EClass percentEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EEnum sizeUnitEEnum = null;
+  private EClass gradientEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -317,56 +308,6 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFontLiteral()
-  {
-    return fontLiteralEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getFontLiteral_Name()
-  {
-    return (EAttribute)fontLiteralEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getFontLiteral_Italic()
-  {
-    return (EAttribute)fontLiteralEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getFontLiteral_Bold()
-  {
-    return (EAttribute)fontLiteralEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getFontLiteral_Size()
-  {
-    return (EAttribute)fontLiteralEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getColorLiteral()
   {
     return colorLiteralEClass;
@@ -457,9 +398,9 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSizeLiteral()
+  public EClass getPercent()
   {
-    return sizeLiteralEClass;
+    return percentEClass;
   }
 
   /**
@@ -467,9 +408,9 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSizeLiteral_Value()
+  public EAttribute getPercent_Value()
   {
-    return (EAttribute)sizeLiteralEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)percentEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -477,9 +418,9 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSizeLiteral_Unit()
+  public EClass getGradient()
   {
-    return (EAttribute)sizeLiteralEClass.getEStructuralFeatures().get(1);
+    return gradientEClass;
   }
 
   /**
@@ -487,9 +428,19 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getSizeUnit()
+  public EReference getGradient_Colors()
   {
-    return sizeUnitEEnum;
+    return (EReference)gradientEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGradient_Percents()
+  {
+    return (EReference)gradientEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -540,12 +491,6 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
 
     wildcardSelectorEClass = createEClass(WILDCARD_SELECTOR);
 
-    fontLiteralEClass = createEClass(FONT_LITERAL);
-    createEAttribute(fontLiteralEClass, FONT_LITERAL__NAME);
-    createEAttribute(fontLiteralEClass, FONT_LITERAL__ITALIC);
-    createEAttribute(fontLiteralEClass, FONT_LITERAL__BOLD);
-    createEAttribute(fontLiteralEClass, FONT_LITERAL__SIZE);
-
     colorLiteralEClass = createEClass(COLOR_LITERAL);
 
     colorConstantEClass = createEClass(COLOR_CONSTANT);
@@ -558,12 +503,12 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     createEAttribute(rgbEClass, RGB__GREEN);
     createEAttribute(rgbEClass, RGB__BLUE);
 
-    sizeLiteralEClass = createEClass(SIZE_LITERAL);
-    createEAttribute(sizeLiteralEClass, SIZE_LITERAL__VALUE);
-    createEAttribute(sizeLiteralEClass, SIZE_LITERAL__UNIT);
+    percentEClass = createEClass(PERCENT);
+    createEAttribute(percentEClass, PERCENT__VALUE);
 
-    // Create enums
-    sizeUnitEEnum = createEEnum(SIZE_UNIT);
+    gradientEClass = createEClass(GRADIENT);
+    createEReference(gradientEClass, GRADIENT__COLORS);
+    createEReference(gradientEClass, GRADIENT__PERCENTS);
   }
 
   /**
@@ -603,11 +548,10 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     typeSelectorEClass.getESuperTypes().add(this.getSelector());
     idSelectorEClass.getESuperTypes().add(this.getSelector());
     wildcardSelectorEClass.getESuperTypes().add(this.getSelector());
-    fontLiteralEClass.getESuperTypes().add(theXbasePackage.getXExpression());
     colorLiteralEClass.getESuperTypes().add(theXbasePackage.getXExpression());
     colorConstantEClass.getESuperTypes().add(this.getColorLiteral());
     rgbEClass.getESuperTypes().add(this.getColorLiteral());
-    sizeLiteralEClass.getESuperTypes().add(theXbasePackage.getXExpression());
+    gradientEClass.getESuperTypes().add(this.getColorLiteral());
 
     // Initialize classes and features; add operations and parameters
     initEClass(styleSheetEClass, StyleSheet.class, "StyleSheet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -628,12 +572,6 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
 
     initEClass(wildcardSelectorEClass, WildcardSelector.class, "WildcardSelector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(fontLiteralEClass, FontLiteral.class, "FontLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFontLiteral_Name(), ecorePackage.getEString(), "name", null, 0, 1, FontLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getFontLiteral_Italic(), ecorePackage.getEBoolean(), "italic", null, 0, 1, FontLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getFontLiteral_Bold(), ecorePackage.getEBoolean(), "bold", null, 0, 1, FontLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getFontLiteral_Size(), ecorePackage.getEBoolean(), "size", null, 0, 1, FontLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(colorLiteralEClass, ColorLiteral.class, "ColorLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(colorConstantEClass, ColorConstant.class, "ColorConstant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -646,16 +584,12 @@ public class XcssPackageImpl extends EPackageImpl implements XcssPackage
     initEAttribute(getRGB_Green(), ecorePackage.getEInt(), "green", null, 0, 1, org.eclipse.xtext.example.css.xcss.RGB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRGB_Blue(), ecorePackage.getEInt(), "blue", null, 0, 1, org.eclipse.xtext.example.css.xcss.RGB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(sizeLiteralEClass, SizeLiteral.class, "SizeLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSizeLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, SizeLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getSizeLiteral_Unit(), this.getSizeUnit(), "unit", null, 0, 1, SizeLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(percentEClass, Percent.class, "Percent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getPercent_Value(), ecorePackage.getEInt(), "value", null, 0, 1, Percent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    // Initialize enums and add enum literals
-    initEEnum(sizeUnitEEnum, SizeUnit.class, "SizeUnit");
-    addEEnumLiteral(sizeUnitEEnum, SizeUnit.EM);
-    addEEnumLiteral(sizeUnitEEnum, SizeUnit.PT);
-    addEEnumLiteral(sizeUnitEEnum, SizeUnit.PX);
-    addEEnumLiteral(sizeUnitEEnum, SizeUnit.PERCENT);
+    initEClass(gradientEClass, Gradient.class, "Gradient", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getGradient_Colors(), this.getColorLiteral(), null, "colors", null, 0, -1, Gradient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGradient_Percents(), this.getPercent(), null, "percents", null, 0, -1, Gradient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

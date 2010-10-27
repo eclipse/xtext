@@ -231,21 +231,18 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueXExpressionParserRuleCall_1_3_0 = (RuleCall)cValueAssignment_1_3.eContents().get(0);
 		private final Keyword cSemicolonKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
 		
-		//Setting returns XExpression: //	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)? ';';
+		//Setting returns XExpression:
 		//	XExpression ";" | {XAssignment} assignable=FeatureReference feature=[JvmIdentifyableElement|OpSettingAssign]
 		//	value=XExpression ";";
 		public ParserRule getRule() { return rule; }
 
-		////	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)? ';';
 		//XExpression ";" | {XAssignment} assignable=FeatureReference feature=[JvmIdentifyableElement|OpSettingAssign]
 		//value=XExpression ";"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		////	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)? ';';
 		//XExpression ";"
 		public Group getGroup_0() { return cGroup_0; }
 
-		////	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)? ';';
 		//XExpression
 		public RuleCall getXExpressionParserRuleCall_0_0() { return cXExpressionParserRuleCall_0_0; }
 
@@ -315,124 +312,60 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getFeatureJvmIdentifyableElementIDTerminalRuleCall_0_1() { return cFeatureJvmIdentifyableElementIDTerminalRuleCall_0_1; }
 	}
 
-	public class CssLiteralsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CssLiterals");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cFontLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cColorLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cSizeLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		
-		//CssLiterals returns XExpression:
-		//	FontLiteral | ColorLiteral | SizeLiteral;
-		public ParserRule getRule() { return rule; }
-
-		//FontLiteral | ColorLiteral | SizeLiteral
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//FontLiteral
-		public RuleCall getFontLiteralParserRuleCall_0() { return cFontLiteralParserRuleCall_0; }
-
-		//ColorLiteral
-		public RuleCall getColorLiteralParserRuleCall_1() { return cColorLiteralParserRuleCall_1; }
-
-		//SizeLiteral
-		public RuleCall getSizeLiteralParserRuleCall_2() { return cSizeLiteralParserRuleCall_2; }
-	}
-
-	public class FontLiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FontLiteral");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cFontLiteralAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cFontKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameStringOrIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final UnorderedGroup cUnorderedGroup_3 = (UnorderedGroup)cGroup.eContents().get(3);
-		private final Assignment cItalicAssignment_3_0 = (Assignment)cUnorderedGroup_3.eContents().get(0);
-		private final Keyword cItalicIKeyword_3_0_0 = (Keyword)cItalicAssignment_3_0.eContents().get(0);
-		private final Assignment cBoldAssignment_3_1 = (Assignment)cUnorderedGroup_3.eContents().get(1);
-		private final Keyword cBoldBKeyword_3_1_0 = (Keyword)cBoldAssignment_3_1.eContents().get(0);
-		private final Assignment cSizeAssignment_3_2 = (Assignment)cUnorderedGroup_3.eContents().get(2);
-		private final RuleCall cSizeSizeLiteralParserRuleCall_3_2_0 = (RuleCall)cSizeAssignment_3_2.eContents().get(0);
-		
-		//FontLiteral:
-		//	{FontLiteral} "font" name=StringOrID? (italic?="I"? & bold?="B"? & size?=SizeLiteral?);
-		public ParserRule getRule() { return rule; }
-
-		//{FontLiteral} "font" name=StringOrID? (italic?="I"? & bold?="B"? & size?=SizeLiteral?)
-		public Group getGroup() { return cGroup; }
-
-		//{FontLiteral}
-		public Action getFontLiteralAction_0() { return cFontLiteralAction_0; }
-
-		//"font"
-		public Keyword getFontKeyword_1() { return cFontKeyword_1; }
-
-		//name=StringOrID?
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
-		//StringOrID
-		public RuleCall getNameStringOrIDParserRuleCall_2_0() { return cNameStringOrIDParserRuleCall_2_0; }
-
-		//italic?="I"? & bold?="B"? & size?=SizeLiteral?
-		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
-
-		//italic?="I"?
-		public Assignment getItalicAssignment_3_0() { return cItalicAssignment_3_0; }
-
-		//"I"
-		public Keyword getItalicIKeyword_3_0_0() { return cItalicIKeyword_3_0_0; }
-
-		//bold?="B"?
-		public Assignment getBoldAssignment_3_1() { return cBoldAssignment_3_1; }
-
-		//"B"
-		public Keyword getBoldBKeyword_3_1_0() { return cBoldBKeyword_3_1_0; }
-
-		//size?=SizeLiteral?
-		public Assignment getSizeAssignment_3_2() { return cSizeAssignment_3_2; }
-
-		//SizeLiteral
-		public RuleCall getSizeSizeLiteralParserRuleCall_3_2_0() { return cSizeSizeLiteralParserRuleCall_3_2_0; }
-	}
-
-	public class StringOrIDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringOrID");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cSTRINGTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//StringOrID:
-		//	STRING | ID;
-		public ParserRule getRule() { return rule; }
-
-		//STRING | ID
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//STRING
-		public RuleCall getSTRINGTerminalRuleCall_0() { return cSTRINGTerminalRuleCall_0; }
-
-		//ID
-		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
-	}
-
 	public class ColorLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ColorLiteral");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cRGBParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cColorConstantParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final RuleCall cRGBParserRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
+		private final RuleCall cColorConstantParserRuleCall_0_1 = (RuleCall)cAlternatives_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cGradientColorsAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Assignment cColorsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Alternatives cColorsAlternatives_1_1_0 = (Alternatives)cColorsAssignment_1_1.eContents().get(0);
+		private final RuleCall cColorsRGBParserRuleCall_1_1_0_0 = (RuleCall)cColorsAlternatives_1_1_0.eContents().get(0);
+		private final RuleCall cColorsColorConstantParserRuleCall_1_1_0_1 = (RuleCall)cColorsAlternatives_1_1_0.eContents().get(1);
+		private final Assignment cPercentsAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cPercentsPercentParserRuleCall_1_2_0 = (RuleCall)cPercentsAssignment_1_2.eContents().get(0);
 		
 		//ColorLiteral:
-		//	RGB | ColorConstant;
+		//	(RGB | ColorConstant) ({Gradient.colors+=current} colors+=(RGB | ColorConstant)+ percents+=Percent*)?;
 		public ParserRule getRule() { return rule; }
 
+		//(RGB | ColorConstant) ({Gradient.colors+=current} colors+=(RGB | ColorConstant)+ percents+=Percent*)?
+		public Group getGroup() { return cGroup; }
+
 		//RGB | ColorConstant
-		public Alternatives getAlternatives() { return cAlternatives; }
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//RGB
-		public RuleCall getRGBParserRuleCall_0() { return cRGBParserRuleCall_0; }
+		public RuleCall getRGBParserRuleCall_0_0() { return cRGBParserRuleCall_0_0; }
 
 		//ColorConstant
-		public RuleCall getColorConstantParserRuleCall_1() { return cColorConstantParserRuleCall_1; }
+		public RuleCall getColorConstantParserRuleCall_0_1() { return cColorConstantParserRuleCall_0_1; }
+
+		//({Gradient.colors+=current} colors+=(RGB | ColorConstant)+ percents+=Percent*)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{Gradient.colors+=current}
+		public Action getGradientColorsAction_1_0() { return cGradientColorsAction_1_0; }
+
+		//colors+=(RGB | ColorConstant)+
+		public Assignment getColorsAssignment_1_1() { return cColorsAssignment_1_1; }
+
+		//RGB | ColorConstant
+		public Alternatives getColorsAlternatives_1_1_0() { return cColorsAlternatives_1_1_0; }
+
+		//RGB
+		public RuleCall getColorsRGBParserRuleCall_1_1_0_0() { return cColorsRGBParserRuleCall_1_1_0_0; }
+
+		//ColorConstant
+		public RuleCall getColorsColorConstantParserRuleCall_1_1_0_1() { return cColorsColorConstantParserRuleCall_1_1_0_1; }
+
+		//percents+=Percent*
+		public Assignment getPercentsAssignment_1_2() { return cPercentsAssignment_1_2; }
+
+		//Percent
+		public RuleCall getPercentsPercentParserRuleCall_1_2_0() { return cPercentsPercentParserRuleCall_1_2_0; }
 	}
 
 	public class ColorConstantElements extends AbstractParserRuleElementFinder {
@@ -543,6 +476,30 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightParenthesisKeyword_1_7() { return cRightParenthesisKeyword_1_7; }
 	}
 
+	public class PercentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Percent");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cValueAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cValueINTTerminalRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
+		private final Keyword cPercentSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//Percent:
+		//	value=INT "%";
+		public ParserRule getRule() { return rule; }
+
+		//value=INT "%"
+		public Group getGroup() { return cGroup; }
+
+		//value=INT
+		public Assignment getValueAssignment_0() { return cValueAssignment_0; }
+
+		//INT
+		public RuleCall getValueINTTerminalRuleCall_0_0() { return cValueINTTerminalRuleCall_0_0; }
+
+		//"%"
+		public Keyword getPercentSignKeyword_1() { return cPercentSignKeyword_1; }
+	}
+
 	public class HEXINTElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "HEXINT");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -571,38 +528,10 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
 	}
 
-	public class SizeLiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SizeLiteral");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cValueAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cValueINTTerminalRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
-		private final Assignment cUnitAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cUnitSizeUnitEnumRuleCall_1_0 = (RuleCall)cUnitAssignment_1.eContents().get(0);
-		
-		//SizeLiteral:
-		//	value=INT unit=SizeUnit;
-		public ParserRule getRule() { return rule; }
-
-		//value=INT unit=SizeUnit
-		public Group getGroup() { return cGroup; }
-
-		//value=INT
-		public Assignment getValueAssignment_0() { return cValueAssignment_0; }
-
-		//INT
-		public RuleCall getValueINTTerminalRuleCall_0_0() { return cValueINTTerminalRuleCall_0_0; }
-
-		//unit=SizeUnit
-		public Assignment getUnitAssignment_1() { return cUnitAssignment_1; }
-
-		//SizeUnit
-		public RuleCall getUnitSizeUnitEnumRuleCall_1_0() { return cUnitSizeUnitEnumRuleCall_1_0; }
-	}
-
 	public class XLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XLiteral");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cCssLiteralsParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cColorLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cXClosureParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cXBooleanLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cXIntLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
@@ -611,14 +540,14 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cXTypeLiteralParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		
 		//XLiteral returns XExpression:
-		//	CssLiterals | XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
+		//	ColorLiteral | XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
 		public ParserRule getRule() { return rule; }
 
-		//CssLiterals | XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral
+		//ColorLiteral | XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//CssLiterals
-		public RuleCall getCssLiteralsParserRuleCall_0() { return cCssLiteralsParserRuleCall_0; }
+		//ColorLiteral
+		public RuleCall getColorLiteralParserRuleCall_0() { return cColorLiteralParserRuleCall_0; }
 
 		//XClosure
 		public RuleCall getXClosureParserRuleCall_1() { return cXClosureParserRuleCall_1; }
@@ -640,50 +569,6 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	public class SizeUnitElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "SizeUnit");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final EnumLiteralDeclaration cEmEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
-		private final Keyword cEmEmKeyword_0_0 = (Keyword)cEmEnumLiteralDeclaration_0.eContents().get(0);
-		private final EnumLiteralDeclaration cPtEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
-		private final Keyword cPtPtKeyword_1_0 = (Keyword)cPtEnumLiteralDeclaration_1.eContents().get(0);
-		private final EnumLiteralDeclaration cPxEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
-		private final Keyword cPxPxKeyword_2_0 = (Keyword)cPxEnumLiteralDeclaration_2.eContents().get(0);
-		private final EnumLiteralDeclaration cPercentEnumLiteralDeclaration_3 = (EnumLiteralDeclaration)cAlternatives.eContents().get(3);
-		private final Keyword cPercentPercentSignKeyword_3_0 = (Keyword)cPercentEnumLiteralDeclaration_3.eContents().get(0);
-		
-		//enum SizeUnit:
-		//	em | pt | px | percent="%";
-		public EnumRule getRule() { return rule; }
-
-		//em | pt | px | percent="%"
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//em
-		public EnumLiteralDeclaration getEmEnumLiteralDeclaration_0() { return cEmEnumLiteralDeclaration_0; }
-
-		//"em"
-		public Keyword getEmEmKeyword_0_0() { return cEmEmKeyword_0_0; }
-
-		//pt
-		public EnumLiteralDeclaration getPtEnumLiteralDeclaration_1() { return cPtEnumLiteralDeclaration_1; }
-
-		//"pt"
-		public Keyword getPtPtKeyword_1_0() { return cPtPtKeyword_1_0; }
-
-		//px
-		public EnumLiteralDeclaration getPxEnumLiteralDeclaration_2() { return cPxEnumLiteralDeclaration_2; }
-
-		//"px"
-		public Keyword getPxPxKeyword_2_0() { return cPxPxKeyword_2_0; }
-
-		//percent="%"
-		public EnumLiteralDeclaration getPercentEnumLiteralDeclaration_3() { return cPercentEnumLiteralDeclaration_3; }
-
-		//"%"
-		public Keyword getPercentPercentSignKeyword_3_0() { return cPercentPercentSignKeyword_3_0; }
-	}
-	
 	private StyleSheetElements pStyleSheet;
 	private StyleRuleElements pStyleRule;
 	private _JvmTypeReferenceElements p_JvmTypeReference;
@@ -695,15 +580,11 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 	private SettingElements pSetting;
 	private OpSettingAssignElements pOpSettingAssign;
 	private FeatureReferenceElements pFeatureReference;
-	private CssLiteralsElements pCssLiterals;
-	private FontLiteralElements pFontLiteral;
-	private StringOrIDElements pStringOrID;
 	private ColorLiteralElements pColorLiteral;
 	private ColorConstantElements pColorConstant;
 	private RGBElements pRGB;
+	private PercentElements pPercent;
 	private HEXINTElements pHEXINT;
-	private SizeLiteralElements pSizeLiteral;
-	private SizeUnitElements unknownRuleSizeUnit;
 	private XLiteralElements pXLiteral;
 	
 	private final GrammarProvider grammarProvider;
@@ -807,7 +688,7 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getFilterAccess().getRule();
 	}
 
-	//Setting returns XExpression: //	XOrExpression ({XAssignment.assignable=current} feature=[JvmIdentifyableElement|OpSettingAssign] value=XAssignment)? ';';
+	//Setting returns XExpression:
 	//	XExpression ";" | {XAssignment} assignable=FeatureReference feature=[JvmIdentifyableElement|OpSettingAssign]
 	//	value=XExpression ";";
 	public SettingElements getSettingAccess() {
@@ -838,38 +719,8 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getFeatureReferenceAccess().getRule();
 	}
 
-	//CssLiterals returns XExpression:
-	//	FontLiteral | ColorLiteral | SizeLiteral;
-	public CssLiteralsElements getCssLiteralsAccess() {
-		return (pCssLiterals != null) ? pCssLiterals : (pCssLiterals = new CssLiteralsElements());
-	}
-	
-	public ParserRule getCssLiteralsRule() {
-		return getCssLiteralsAccess().getRule();
-	}
-
-	//FontLiteral:
-	//	{FontLiteral} "font" name=StringOrID? (italic?="I"? & bold?="B"? & size?=SizeLiteral?);
-	public FontLiteralElements getFontLiteralAccess() {
-		return (pFontLiteral != null) ? pFontLiteral : (pFontLiteral = new FontLiteralElements());
-	}
-	
-	public ParserRule getFontLiteralRule() {
-		return getFontLiteralAccess().getRule();
-	}
-
-	//StringOrID:
-	//	STRING | ID;
-	public StringOrIDElements getStringOrIDAccess() {
-		return (pStringOrID != null) ? pStringOrID : (pStringOrID = new StringOrIDElements());
-	}
-	
-	public ParserRule getStringOrIDRule() {
-		return getStringOrIDAccess().getRule();
-	}
-
 	//ColorLiteral:
-	//	RGB | ColorConstant;
+	//	(RGB | ColorConstant) ({Gradient.colors+=current} colors+=(RGB | ColorConstant)+ percents+=Percent*)?;
 	public ColorLiteralElements getColorLiteralAccess() {
 		return (pColorLiteral != null) ? pColorLiteral : (pColorLiteral = new ColorLiteralElements());
 	}
@@ -898,6 +749,16 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getRGBAccess().getRule();
 	}
 
+	//Percent:
+	//	value=INT "%";
+	public PercentElements getPercentAccess() {
+		return (pPercent != null) ? pPercent : (pPercent = new PercentElements());
+	}
+	
+	public ParserRule getPercentRule() {
+		return getPercentAccess().getRule();
+	}
+
 	//HEXINT returns EInt:
 	//	INT ID? | ID;
 	public HEXINTElements getHEXINTAccess() {
@@ -908,28 +769,8 @@ public class XcssGrammarAccess extends AbstractGrammarElementFinder {
 		return getHEXINTAccess().getRule();
 	}
 
-	//SizeLiteral:
-	//	value=INT unit=SizeUnit;
-	public SizeLiteralElements getSizeLiteralAccess() {
-		return (pSizeLiteral != null) ? pSizeLiteral : (pSizeLiteral = new SizeLiteralElements());
-	}
-	
-	public ParserRule getSizeLiteralRule() {
-		return getSizeLiteralAccess().getRule();
-	}
-
-	//enum SizeUnit:
-	//	em | pt | px | percent="%";
-	public SizeUnitElements getSizeUnitAccess() {
-		return (unknownRuleSizeUnit != null) ? unknownRuleSizeUnit : (unknownRuleSizeUnit = new SizeUnitElements());
-	}
-	
-	public EnumRule getSizeUnitRule() {
-		return getSizeUnitAccess().getRule();
-	}
-
 	//XLiteral returns XExpression:
-	//	CssLiterals | XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
+	//	ColorLiteral | XClosure | XBooleanLiteral | XIntLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
 	public XLiteralElements getXLiteralAccess() {
 		return (pXLiteral != null) ? pXLiteral : (pXLiteral = new XLiteralElements());
 	}

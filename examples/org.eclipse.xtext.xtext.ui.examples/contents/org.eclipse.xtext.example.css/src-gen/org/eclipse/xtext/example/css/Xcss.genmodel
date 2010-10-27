@@ -9,12 +9,6 @@
     editorPluginID="org.eclipse.xtext.example.css.editor" usedGenPackages="../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype ../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <genPackages prefix="Xcss" basePackage="org.eclipse.xtext.example.css" disposableProviderFactory="true"
       ecorePackage="Xcss.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Xcss.ecore#//SizeUnit">
-      <genEnumLiterals ecoreEnumLiteral="Xcss.ecore#//SizeUnit/em"/>
-      <genEnumLiterals ecoreEnumLiteral="Xcss.ecore#//SizeUnit/pt"/>
-      <genEnumLiterals ecoreEnumLiteral="Xcss.ecore#//SizeUnit/px"/>
-      <genEnumLiterals ecoreEnumLiteral="Xcss.ecore#//SizeUnit/percent"/>
-    </genEnums>
     <genClasses ecoreClass="Xcss.ecore#//StyleSheet">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//StyleSheet/rules"/>
     </genClasses>
@@ -32,12 +26,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//IdSelector/id"/>
     </genClasses>
     <genClasses ecoreClass="Xcss.ecore#//WildcardSelector"/>
-    <genClasses ecoreClass="Xcss.ecore#//FontLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//FontLiteral/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//FontLiteral/italic"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//FontLiteral/bold"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//FontLiteral/size"/>
-    </genClasses>
     <genClasses ecoreClass="Xcss.ecore#//ColorLiteral"/>
     <genClasses ecoreClass="Xcss.ecore#//ColorConstant">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xcss.ecore#//ColorConstant/constant"/>
@@ -49,9 +37,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//RGB/green"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//RGB/blue"/>
     </genClasses>
-    <genClasses ecoreClass="Xcss.ecore#//SizeLiteral">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//SizeLiteral/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//SizeLiteral/unit"/>
+    <genClasses ecoreClass="Xcss.ecore#//Percent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xcss.ecore#//Percent/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Xcss.ecore#//Gradient">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//Gradient/colors"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xcss.ecore#//Gradient/percents"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

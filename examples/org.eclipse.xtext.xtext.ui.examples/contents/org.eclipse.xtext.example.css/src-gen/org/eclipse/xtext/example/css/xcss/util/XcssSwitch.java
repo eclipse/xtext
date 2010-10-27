@@ -147,14 +147,6 @@ public class XcssSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XcssPackage.FONT_LITERAL:
-      {
-        FontLiteral fontLiteral = (FontLiteral)theEObject;
-        T result = caseFontLiteral(fontLiteral);
-        if (result == null) result = caseXExpression(fontLiteral);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case XcssPackage.COLOR_LITERAL:
       {
         ColorLiteral colorLiteral = (ColorLiteral)theEObject;
@@ -181,11 +173,19 @@ public class XcssSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case XcssPackage.SIZE_LITERAL:
+      case XcssPackage.PERCENT:
       {
-        SizeLiteral sizeLiteral = (SizeLiteral)theEObject;
-        T result = caseSizeLiteral(sizeLiteral);
-        if (result == null) result = caseXExpression(sizeLiteral);
+        Percent percent = (Percent)theEObject;
+        T result = casePercent(percent);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XcssPackage.GRADIENT:
+      {
+        Gradient gradient = (Gradient)theEObject;
+        T result = caseGradient(gradient);
+        if (result == null) result = caseColorLiteral(gradient);
+        if (result == null) result = caseXExpression(gradient);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -290,22 +290,6 @@ public class XcssSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Font Literal</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Font Literal</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseFontLiteral(FontLiteral object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Color Literal</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -354,17 +338,33 @@ public class XcssSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Size Literal</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Percent</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Size Literal</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Percent</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseSizeLiteral(SizeLiteral object)
+  public T casePercent(Percent object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Gradient</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Gradient</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGradient(Gradient object)
   {
     return null;
   }

@@ -11,9 +11,13 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
+import org.eclipse.xtext.example.css.runtime.BackgroundGradient;
 import org.eclipse.xtext.example.css.runtime.StyleAware;
 import org.eclipse.xtext.example.css.xcss.ColorConstant;
+import org.eclipse.xtext.example.css.xcss.ColorLiteral;
+import org.eclipse.xtext.example.css.xcss.Gradient;
 import org.eclipse.xtext.example.css.xcss.IdSelector;
+import org.eclipse.xtext.example.css.xcss.Percent;
 import org.eclipse.xtext.example.css.xcss.RGB;
 import org.eclipse.xtext.example.css.xcss.Selector;
 import org.eclipse.xtext.example.css.xcss.StyleRule;
@@ -154,6 +158,20 @@ public class XcssInterpreter extends XbaseInterpreter  {
 			rgb = new org.eclipse.swt.graphics.RGB(color.getRed(), color.getGreen(), color.getBlue());
 		}
 		return new DefaultEvaluationResult(new Color(display, rgb), null);
+	}
+	
+	public IEvaluationResult _evaluateGradient(Gradient gradient, IEvaluationContext context) {
+		BackgroundGradient bgGradient = new BackgroundGradient();
+		for(ColorLiteral color: gradient.getColors()) {
+			IEvaluationResult colorResult = evaluate(color, context);
+			if (colorResult.getException() != null)
+				return colorResult;
+			bgGradient.addColor(colorResult.getResult());
+		}
+		for(Percent percent: gradient.getPercents()) {
+			bgGradient.addPercent(percent.getValue());
+		}
+		return new DefaultEvaluationResult(bgGradient, null);
 	}
 	
 	protected IEvaluationResult assignValueByOperation(JvmOperation operation, Object receiver, Object value) {

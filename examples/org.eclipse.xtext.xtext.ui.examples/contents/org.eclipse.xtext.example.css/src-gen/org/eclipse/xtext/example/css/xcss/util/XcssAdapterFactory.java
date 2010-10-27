@@ -113,11 +113,6 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
         return createWildcardSelectorAdapter();
       }
       @Override
-      public Adapter caseFontLiteral(FontLiteral object)
-      {
-        return createFontLiteralAdapter();
-      }
-      @Override
       public Adapter caseColorLiteral(ColorLiteral object)
       {
         return createColorLiteralAdapter();
@@ -133,9 +128,14 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
         return createRGBAdapter();
       }
       @Override
-      public Adapter caseSizeLiteral(SizeLiteral object)
+      public Adapter casePercent(Percent object)
       {
-        return createSizeLiteralAdapter();
+        return createPercentAdapter();
+      }
+      @Override
+      public Adapter caseGradient(Gradient object)
+      {
+        return createGradientAdapter();
       }
       @Override
       public Adapter caseJvmIdentifyableElement(JvmIdentifyableElement object)
@@ -265,21 +265,6 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.css.xcss.FontLiteral <em>Font Literal</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.css.xcss.FontLiteral
-   * @generated
-   */
-  public Adapter createFontLiteralAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.css.xcss.ColorLiteral <em>Color Literal</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -325,16 +310,31 @@ public class XcssAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.css.xcss.SizeLiteral <em>Size Literal</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.css.xcss.Percent <em>Percent</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.example.css.xcss.SizeLiteral
+   * @see org.eclipse.xtext.example.css.xcss.Percent
    * @generated
    */
-  public Adapter createSizeLiteralAdapter()
+  public Adapter createPercentAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.css.xcss.Gradient <em>Gradient</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.example.css.xcss.Gradient
+   * @generated
+   */
+  public Adapter createGradientAdapter()
   {
     return null;
   }

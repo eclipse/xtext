@@ -6,6 +6,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.example.css.xcss.ColorLiteral;
+import org.eclipse.xtext.example.css.xcss.Gradient;
 import org.eclipse.xtext.example.css.xcss.TypeSelector;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
@@ -23,7 +24,7 @@ public class XcssTypeProvider extends XbaseTypeProvider {
 		if (control == null)
 			return selector;
 		// TODO: Hack because typeService#isConformantTo does not work with non-parameterized references
-		if (superTypeCollector.collectSuperTypesAsRawTypes(selector).contains(control.getType())) {
+		if (selector.getType() == control.getType() || superTypeCollector.collectSuperTypesAsRawTypes(selector).contains(control.getType())) {
 			JvmWildcardTypeReference wildcard = getTypesFactory().createJvmWildcardTypeReference();
 			{
 				JvmUpperBound upperBound = getTypesFactory().createJvmUpperBound();
@@ -48,6 +49,11 @@ public class XcssTypeProvider extends XbaseTypeProvider {
 	
 	protected JvmTypeReference _type(ColorLiteral colorLiteral, Context<JvmTypeReference> context) {
 		return getTypesService().getTypeForName(QualifiedName.create("org", "eclipse", "swt", "graphics", "Color"), colorLiteral);
+	}
+	
+	protected JvmTypeReference _type(Gradient gradient, Context<JvmTypeReference> context) {
+		return getTypesService().getTypeForName(
+				QualifiedName.create("org", "eclipse", "xtext", "example", "css", "runtime", "BackgroundGradient"), gradient);
 	}
 	
 }

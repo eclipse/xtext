@@ -7,7 +7,6 @@ package org.eclipse.xtext.example.css.xcss;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -260,61 +259,6 @@ public interface XcssPackage extends EPackage
   int WILDCARD_SELECTOR_FEATURE_COUNT = SELECTOR_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.FontLiteralImpl <em>Font Literal</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.css.xcss.impl.FontLiteralImpl
-   * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getFontLiteral()
-   * @generated
-   */
-  int FONT_LITERAL = 6;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FONT_LITERAL__NAME = XbasePackage.XEXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Italic</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FONT_LITERAL__ITALIC = XbasePackage.XEXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Bold</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FONT_LITERAL__BOLD = XbasePackage.XEXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Size</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FONT_LITERAL__SIZE = XbasePackage.XEXPRESSION_FEATURE_COUNT + 3;
-
-  /**
-   * The number of structural features of the '<em>Font Literal</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FONT_LITERAL_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 4;
-
-  /**
    * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.ColorLiteralImpl <em>Color Literal</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -322,7 +266,7 @@ public interface XcssPackage extends EPackage
    * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getColorLiteral()
    * @generated
    */
-  int COLOR_LITERAL = 7;
+  int COLOR_LITERAL = 6;
 
   /**
    * The number of structural features of the '<em>Color Literal</em>' class.
@@ -341,7 +285,7 @@ public interface XcssPackage extends EPackage
    * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getColorConstant()
    * @generated
    */
-  int COLOR_CONSTANT = 8;
+  int COLOR_CONSTANT = 7;
 
   /**
    * The feature id for the '<em><b>Constant</b></em>' reference.
@@ -369,7 +313,7 @@ public interface XcssPackage extends EPackage
    * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getRGB()
    * @generated
    */
-  int RGB = 9;
+  int RGB = 8;
 
   /**
    * The feature id for the '<em><b>Hex</b></em>' attribute.
@@ -426,14 +370,14 @@ public interface XcssPackage extends EPackage
   int RGB_FEATURE_COUNT = COLOR_LITERAL_FEATURE_COUNT + 5;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.SizeLiteralImpl <em>Size Literal</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.PercentImpl <em>Percent</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.css.xcss.impl.SizeLiteralImpl
-   * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getSizeLiteral()
+   * @see org.eclipse.xtext.example.css.xcss.impl.PercentImpl
+   * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getPercent()
    * @generated
    */
-  int SIZE_LITERAL = 10;
+  int PERCENT = 9;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -442,35 +386,53 @@ public interface XcssPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SIZE_LITERAL__VALUE = XbasePackage.XEXPRESSION_FEATURE_COUNT + 0;
+  int PERCENT__VALUE = 0;
 
   /**
-   * The feature id for the '<em><b>Unit</b></em>' attribute.
+   * The number of structural features of the '<em>Percent</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SIZE_LITERAL__UNIT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 1;
+  int PERCENT_FEATURE_COUNT = 1;
 
   /**
-   * The number of structural features of the '<em>Size Literal</em>' class.
+   * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.impl.GradientImpl <em>Gradient</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.example.css.xcss.impl.GradientImpl
+   * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getGradient()
+   * @generated
+   */
+  int GRADIENT = 10;
+
+  /**
+   * The feature id for the '<em><b>Colors</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SIZE_LITERAL_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 2;
+  int GRADIENT__COLORS = COLOR_LITERAL_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.css.xcss.SizeUnit <em>Size Unit</em>}' enum.
+   * The feature id for the '<em><b>Percents</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.css.xcss.SizeUnit
-   * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getSizeUnit()
    * @generated
+   * @ordered
    */
-  int SIZE_UNIT = 11;
+  int GRADIENT__PERCENTS = COLOR_LITERAL_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Gradient</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GRADIENT_FEATURE_COUNT = COLOR_LITERAL_FEATURE_COUNT + 2;
 
 
   /**
@@ -600,60 +562,6 @@ public interface XcssPackage extends EPackage
   EClass getWildcardSelector();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.FontLiteral <em>Font Literal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Font Literal</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.FontLiteral
-   * @generated
-   */
-  EClass getFontLiteral();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.FontLiteral#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.FontLiteral#getName()
-   * @see #getFontLiteral()
-   * @generated
-   */
-  EAttribute getFontLiteral_Name();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.FontLiteral#isItalic <em>Italic</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Italic</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.FontLiteral#isItalic()
-   * @see #getFontLiteral()
-   * @generated
-   */
-  EAttribute getFontLiteral_Italic();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.FontLiteral#isBold <em>Bold</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Bold</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.FontLiteral#isBold()
-   * @see #getFontLiteral()
-   * @generated
-   */
-  EAttribute getFontLiteral_Bold();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.FontLiteral#isSize <em>Size</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Size</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.FontLiteral#isSize()
-   * @see #getFontLiteral()
-   * @generated
-   */
-  EAttribute getFontLiteral_Size();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.ColorLiteral <em>Color Literal</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -750,46 +658,57 @@ public interface XcssPackage extends EPackage
   EAttribute getRGB_Blue();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.SizeLiteral <em>Size Literal</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.Percent <em>Percent</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Size Literal</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.SizeLiteral
+   * @return the meta object for class '<em>Percent</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.Percent
    * @generated
    */
-  EClass getSizeLiteral();
+  EClass getPercent();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.SizeLiteral#getValue <em>Value</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.Percent#getValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Value</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.SizeLiteral#getValue()
-   * @see #getSizeLiteral()
+   * @see org.eclipse.xtext.example.css.xcss.Percent#getValue()
+   * @see #getPercent()
    * @generated
    */
-  EAttribute getSizeLiteral_Value();
+  EAttribute getPercent_Value();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.css.xcss.SizeLiteral#getUnit <em>Unit</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.example.css.xcss.Gradient <em>Gradient</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Unit</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.SizeLiteral#getUnit()
-   * @see #getSizeLiteral()
+   * @return the meta object for class '<em>Gradient</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.Gradient
    * @generated
    */
-  EAttribute getSizeLiteral_Unit();
+  EClass getGradient();
 
   /**
-   * Returns the meta object for enum '{@link org.eclipse.xtext.example.css.xcss.SizeUnit <em>Size Unit</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.css.xcss.Gradient#getColors <em>Colors</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for enum '<em>Size Unit</em>'.
-   * @see org.eclipse.xtext.example.css.xcss.SizeUnit
+   * @return the meta object for the containment reference list '<em>Colors</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.Gradient#getColors()
+   * @see #getGradient()
    * @generated
    */
-  EEnum getSizeUnit();
+  EReference getGradient_Colors();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.example.css.xcss.Gradient#getPercents <em>Percents</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Percents</em>'.
+   * @see org.eclipse.xtext.example.css.xcss.Gradient#getPercents()
+   * @see #getGradient()
+   * @generated
+   */
+  EReference getGradient_Percents();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -923,48 +842,6 @@ public interface XcssPackage extends EPackage
     EClass WILDCARD_SELECTOR = eINSTANCE.getWildcardSelector();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.FontLiteralImpl <em>Font Literal</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.css.xcss.impl.FontLiteralImpl
-     * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getFontLiteral()
-     * @generated
-     */
-    EClass FONT_LITERAL = eINSTANCE.getFontLiteral();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute FONT_LITERAL__NAME = eINSTANCE.getFontLiteral_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Italic</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute FONT_LITERAL__ITALIC = eINSTANCE.getFontLiteral_Italic();
-
-    /**
-     * The meta object literal for the '<em><b>Bold</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute FONT_LITERAL__BOLD = eINSTANCE.getFontLiteral_Bold();
-
-    /**
-     * The meta object literal for the '<em><b>Size</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute FONT_LITERAL__SIZE = eINSTANCE.getFontLiteral_Size();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.ColorLiteralImpl <em>Color Literal</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1043,14 +920,14 @@ public interface XcssPackage extends EPackage
     EAttribute RGB__BLUE = eINSTANCE.getRGB_Blue();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.SizeLiteralImpl <em>Size Literal</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.PercentImpl <em>Percent</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.css.xcss.impl.SizeLiteralImpl
-     * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getSizeLiteral()
+     * @see org.eclipse.xtext.example.css.xcss.impl.PercentImpl
+     * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getPercent()
      * @generated
      */
-    EClass SIZE_LITERAL = eINSTANCE.getSizeLiteral();
+    EClass PERCENT = eINSTANCE.getPercent();
 
     /**
      * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -1058,25 +935,33 @@ public interface XcssPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute SIZE_LITERAL__VALUE = eINSTANCE.getSizeLiteral_Value();
+    EAttribute PERCENT__VALUE = eINSTANCE.getPercent_Value();
 
     /**
-     * The meta object literal for the '<em><b>Unit</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.impl.GradientImpl <em>Gradient</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.example.css.xcss.impl.GradientImpl
+     * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getGradient()
+     * @generated
+     */
+    EClass GRADIENT = eINSTANCE.getGradient();
+
+    /**
+     * The meta object literal for the '<em><b>Colors</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute SIZE_LITERAL__UNIT = eINSTANCE.getSizeLiteral_Unit();
+    EReference GRADIENT__COLORS = eINSTANCE.getGradient_Colors();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.css.xcss.SizeUnit <em>Size Unit</em>}' enum.
+     * The meta object literal for the '<em><b>Percents</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.css.xcss.SizeUnit
-     * @see org.eclipse.xtext.example.css.xcss.impl.XcssPackageImpl#getSizeUnit()
      * @generated
      */
-    EEnum SIZE_UNIT = eINSTANCE.getSizeUnit();
+    EReference GRADIENT__PERCENTS = eINSTANCE.getGradient_Percents();
 
   }
 

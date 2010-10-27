@@ -25,12 +25,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WildcardSelector" eSuperTypes="#//Selector"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FontLiteral" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bold" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ColorLiteral" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="ColorConstant" eSuperTypes="#//ColorLiteral">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constant" eType="ecore:EClass ../../../../../../../../../../plugins/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifyableElement"/>
@@ -42,14 +36,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="green" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="blue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SizeLiteral" eSuperTypes="../../../../../../../../../../plugins/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="Percent">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//SizeUnit"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="SizeUnit">
-    <eLiterals name="em" literal="em"/>
-    <eLiterals name="pt" value="1" literal="pt"/>
-    <eLiterals name="px" value="2" literal="px"/>
-    <eLiterals name="percent" value="3" literal="%"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Gradient" eSuperTypes="#//ColorLiteral">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="colors" upperBound="-1"
+        eType="#//ColorLiteral" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="percents" upperBound="-1"
+        eType="#//Percent" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>
