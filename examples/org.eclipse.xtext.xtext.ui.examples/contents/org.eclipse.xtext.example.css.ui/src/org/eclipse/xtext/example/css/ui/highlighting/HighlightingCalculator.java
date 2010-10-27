@@ -4,8 +4,12 @@ import static org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfigur
 import static org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfiguration.CLASS_SELECTOR;
 import static org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfiguration.ID_SELECTOR;
 import static org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfiguration.RGB_LITERAL;
+import static org.eclipse.xtext.example.css.ui.highlighting.HighlightingConfiguration.COLOR_CONSTANT;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.example.css.xcss.ColorConstant;
+import org.eclipse.xtext.example.css.xcss.ColorLiteral;
+import org.eclipse.xtext.example.css.xcss.Gradient;
 import org.eclipse.xtext.example.css.xcss.IdSelector;
 import org.eclipse.xtext.example.css.xcss.RGB;
 import org.eclipse.xtext.example.css.xcss.Selector;
@@ -43,6 +47,18 @@ public class HighlightingCalculator implements ISemanticHighlightingCalculator {
 			delegate.doSwitch(object.getValue());
 			return true;
 		}
+		
+		@Override
+		public Boolean defaultCase(EObject object) {
+			return true;
+		}
+		
+		@Override
+		public Boolean doSwitch(EObject theEObject) {
+			if (theEObject == null)
+				return true;
+			return super.doSwitch(theEObject);
+		}
 	}
 	
 	class HighlightingSwitch extends XcssSwitch<Boolean> {
@@ -64,8 +80,20 @@ public class HighlightingCalculator implements ISemanticHighlightingCalculator {
 
 		@Override
 		public Boolean caseRGB(RGB object) {
-			if (object.isHex()) {
-				highlightNode(NodeUtil.getNode(object), RGB_LITERAL, acceptor);
+			highlightNode(NodeUtil.getNode(object), RGB_LITERAL, acceptor);
+			return true;
+		}
+		
+		@Override
+		public Boolean caseColorConstant(ColorConstant object) {
+			highlightNode(NodeUtil.getNode(object), COLOR_CONSTANT, acceptor);
+			return true;
+		}
+		
+		@Override
+		public Boolean caseGradient(Gradient object) {
+			for(ColorLiteral color: object.getColors()) {
+				doSwitch(color);
 			}
 			return true;
 		}
@@ -96,6 +124,13 @@ public class HighlightingCalculator implements ISemanticHighlightingCalculator {
 			for(StyleRule rule: object.getRules())
 				doSwitch(rule);
 			return true;
+		}
+		
+		@Override
+		public Boolean doSwitch(EObject theEObject) {
+			if (theEObject == null)
+				return true;
+			return super.doSwitch(theEObject);
 		}
 	}
 	

@@ -12,6 +12,7 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 	public static final String ID_SELECTOR = "xcss.id.selector";
 	public static final String ATTRIBUTE_ID = "xcss.attribute.id";
 	public static final String RGB_LITERAL = "xcss.rgb.literal";
+	public static final String COLOR_CONSTANT = "xcss.color.constant";
 	
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
@@ -20,6 +21,7 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 		acceptor.acceptDefaultHighlighting(ATTRIBUTE_ID, "Attribute", lightblueTextStyle());
 		acceptor.acceptDefaultHighlighting(ID_SELECTOR, "Id selector", lightgrayTextStyle());
 		acceptor.acceptDefaultHighlighting(RGB_LITERAL, "RGB literal", darkgreenTextStyle());
+		acceptor.acceptDefaultHighlighting(COLOR_CONSTANT, "Color constant", darkblueTextStyle());
 	}
 
 	public TextStyle darkblueTextStyle() {
@@ -32,6 +34,13 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 	public TextStyle darkgreenTextStyle() {
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setColor(new RGB(0, 128, 0));
+		textStyle.setStyle(SWT.BOLD);
+		return textStyle;
+	}
+	
+	public TextStyle darkredTextStyle() {
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(128, 0, 0));
 		textStyle.setStyle(SWT.BOLD);
 		return textStyle;
 	}
