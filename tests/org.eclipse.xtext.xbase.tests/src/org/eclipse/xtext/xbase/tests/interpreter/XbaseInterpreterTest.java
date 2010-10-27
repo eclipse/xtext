@@ -186,16 +186,16 @@ public class XbaseInterpreterTest extends AbstractXbaseInterpreterTest {
 	public void testAssignment_11() {
 		assertEvaluatesTo("literal", 
 				"{" +
-				"  var list = new java.util.ArrayList<java.lang.String>()" +
+				"  var list = new testdata.GenericType1<java.lang.String>()" +
 				"  list += 'literal'" +
-				"  list.get(0)" +
+				"  list.get()" +
 				"}");
 	}
 	
 	public void testAssignment_12() {
 		assertEvaluatesTo(Boolean.TRUE, 
 				"{" +
-				"  var list = new java.util.ArrayList<java.lang.String>()" +
+				"  var list = new testdata.GenericType1<java.lang.String>()" +
 				"  list += 'literal'" +
 				"}");
 	}

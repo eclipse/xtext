@@ -11,16 +11,14 @@ package testdata;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class GenericType1<T> {
-	public void add(T t) {
-		
+	private T t;
+	public boolean add(T t) {
+		boolean result = this.t == null;
+		this.t = t;
+		return result;
 	}
 	
 	public T get() {
-		return null;
-	}
-	
-	{
-		new GenericType1<String>().add("foo");
-		new GenericType1().add("foo");
+		return t;
 	}
 }

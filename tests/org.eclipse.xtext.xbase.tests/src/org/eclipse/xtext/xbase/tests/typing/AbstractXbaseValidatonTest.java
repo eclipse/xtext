@@ -24,7 +24,7 @@ import com.google.inject.internal.Lists;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class AbstractXbaseValidatonTest extends AbstractXbaseTestCase implements ValidationMessageAcceptor {
+public abstract class AbstractXbaseValidatonTest extends AbstractXbaseTestCase implements ValidationMessageAcceptor {
 
 	protected List<Triple<String, EObject, String>> errors;
 
