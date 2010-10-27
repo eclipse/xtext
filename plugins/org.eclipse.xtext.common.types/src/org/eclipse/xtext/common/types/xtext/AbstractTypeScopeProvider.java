@@ -56,9 +56,7 @@ public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 	}
 
 	public IJvmTypeProvider getTypeProvider(ResourceSet resourceSet) {
-		IJvmTypeProvider typeProvider = getTypeProviderFactory().findTypeProvider(resourceSet);
-		if (typeProvider == null)
-			typeProvider = getTypeProviderFactory().createTypeProvider(resourceSet);
+		IJvmTypeProvider typeProvider = getTypeProviderFactory().findOrCreateTypeProvider(resourceSet);
 		return typeProvider;
 	}
 

@@ -37,9 +37,7 @@ public class ContentAssistTestLanguageProposalProvider extends AbstractContentAs
 	public void completeReferenceHolder_SubtypeReference(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		ResourceSet resourceSet = model.eResource().getResourceSet();
-		IJvmTypeProvider typeProvider = typeProviderFactory.findTypeProvider(resourceSet);
-		if (typeProvider == null)
-			typeProvider = typeProviderFactory.createTypeProvider(resourceSet);
+		IJvmTypeProvider typeProvider = typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 		JvmType superType = typeProvider.findTypeByName(Collection.class.getName());
 		typesProposalProvider.createSubTypeProposals(superType, this, context, ContentAssistTestLanguagePackage.Literals.REFERENCE_HOLDER__SUBTYPE_REFERENCE, acceptor);
 	}

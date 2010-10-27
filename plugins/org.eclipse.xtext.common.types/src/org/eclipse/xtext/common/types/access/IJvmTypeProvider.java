@@ -33,6 +33,8 @@ public interface IJvmTypeProvider {
 		
 		IJvmTypeProvider findTypeProvider(ResourceSet resourceSet);
 		
+		IJvmTypeProvider findOrCreateTypeProvider(ResourceSet resourceSet);
+		
 		IJvmTypeProvider createTypeProvider() throws UnsupportedOperationException;
 		
 	}

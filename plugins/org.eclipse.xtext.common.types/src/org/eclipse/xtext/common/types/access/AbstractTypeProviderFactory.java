@@ -25,5 +25,14 @@ public abstract class AbstractTypeProviderFactory implements IJvmTypeProvider.Fa
 	public IJvmTypeProvider createTypeProvider() {
 		return createTypeProvider(new ResourceSetImpl());
 	}
+	
+	public IJvmTypeProvider findOrCreateTypeProvider(ResourceSet resourceSet) {
+		if (resourceSet == null)
+			throw new IllegalArgumentException("resourceSet may not be null.");
+		IJvmTypeProvider result = findTypeProvider(resourceSet);
+		if (result != null)
+			return result;
+		return createTypeProvider(resourceSet);
+	}
 
 }
