@@ -333,7 +333,8 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		while (true) {
 			multiple = multiple || isMultipleCardinality(ele);
 			optional = optional || isOptionalCardinality(ele);
-			if (ele.eContainer() instanceof ParserRule
+			if (ele != null 
+					&& ele.eContainer() instanceof ParserRule
 					&& ((ParserRule) ele.eContainer()).getType().getClassifier() instanceof EClass)
 				semanticType = (EClass) ((ParserRule) ele.eContainer()).getType().getClassifier();
 			if (ele instanceof Assignment) {
