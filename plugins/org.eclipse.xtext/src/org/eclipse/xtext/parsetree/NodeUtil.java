@@ -144,9 +144,9 @@ public class NodeUtil {
 				name = grammarElement.getClass().getSimpleName();
 			}
 			String astElementAsString = (node.getElement() == null) ? "null" : node.getElement().eClass().getName();
-			String line = indent + name + " : " + node.serialize() + " -> " + astElementAsString + "  la={ ";
+			logger.trace(indent + name + " : " + node.serialize() + " -> " + astElementAsString + "  la={\n");
 			for (LeafNode lookaheadNode : node.getLookaheadLeafNodes()) {
-				line += "\"" + lookaheadNode.getText() + "\" ";
+				logger.trace("  \"" + lookaheadNode.getText() + "\"\n");
 			}
 			logger.trace("}   (" + node.getTotalOffset() + ", " + node.getTotalLength() + ")");
 		}

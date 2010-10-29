@@ -32,7 +32,8 @@ public class EmfStructureComparator {
 			log.error(getErrorMessage());
 			throw new AssertionError(getErrorMessage());
 		}
-		//logger.debug("" + counter + " elements compared");
+		if (log.isTraceEnabled())
+			log.trace("" + counter + " elements compared");
 	}
 	
 	protected String getErrorMessage() {
