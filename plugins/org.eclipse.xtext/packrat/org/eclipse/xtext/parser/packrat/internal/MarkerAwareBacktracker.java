@@ -53,14 +53,11 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		private int stackSize;
 
-		private int skippedOffset;
-
 		private final Set<AbstractParsedToken> markedTokens;
 
 		protected NestedBacktrackingResult() {
 			this.result = false;
 			this.markedTokens = new HashSet<AbstractParsedToken>(8);
-			this.skippedOffset = 0;
 			this.visitedMarkers = new ArrayList<Marker>(4);
 			this.workingMarkers = new ArrayList<Marker>(4);
 		}
@@ -121,7 +118,6 @@ public class MarkerAwareBacktracker implements IBacktracker {
 			if (result && content != null) {
 				Skipper skipper = new Skipper();
 				idx = skipper.skip(idx);
-				skippedOffset += skipper.skippedOffset;
 				if (!visitedMarkers.isEmpty()) {
 					final Replayer replayer = new Replayer();
 					if (!replayer.replay(idx))
@@ -222,13 +218,11 @@ public class MarkerAwareBacktracker implements IBacktracker {
 
 		private final class Skipper extends AbstractParsedTokenVisitor implements IMarkerVisitor {
 			private boolean continueSkip;
-			private int skippedOffset;
 			private int stackSize;
 			private boolean first;
 
 			private Skipper() {
 				this.continueSkip = true;
-				this.skippedOffset = 0;
 				this.stackSize = 0;
 			}
 
@@ -299,7 +293,6 @@ public class MarkerAwareBacktracker implements IBacktracker {
 				if (!token.isSkipped()) {
 					markedTokens.add(token);
 					token.setSkipped(true);
-					skippedOffset += token.getLength();
 					continueSkip = stackSize != 0;
 				}
 			}
