@@ -759,14 +759,12 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 	
 	protected class UnorderedGroupResult extends AbstractElementResult<UnorderedGroup> {
 		private int result;
-		private int groupIndex;
 		private final IMarker marker;
 
 		protected UnorderedGroupResult(ElementConsumer<UnorderedGroup> elementConsumer, UnorderedGroupToken begin) {
 			super(elementConsumer);
 			result = ConsumeResult.SUCCESS;
 			marker = mark();
-			groupIndex = -1;
 		}
 
 		public void reset() {
@@ -780,7 +778,6 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		}
 
 		public boolean didGroupFail(int result) {
-			this.groupIndex++;
 			this.result = result;
 			return result != ConsumeResult.SUCCESS;
 		}
@@ -788,14 +785,12 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 	protected class GroupResult extends AbstractElementResult<Group> {
 		private int result;
-		private int groupIndex;
 		private final IMarker marker;
 
 		protected GroupResult(ElementConsumer<Group> elementConsumer) {
 			super(elementConsumer);
 			result = ConsumeResult.SUCCESS;
 			marker = mark();
-			groupIndex = -1;
 		}
 
 		public void reset() {
@@ -809,7 +804,6 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		}
 
 		public boolean didGroupFail(int result) {
-			this.groupIndex++;
 			this.result = result;
 			return result != ConsumeResult.SUCCESS;
 		}
