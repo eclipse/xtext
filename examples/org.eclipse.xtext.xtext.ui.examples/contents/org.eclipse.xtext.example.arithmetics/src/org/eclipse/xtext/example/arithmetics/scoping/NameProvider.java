@@ -32,7 +32,7 @@ public class NameProvider extends IQualifiedNameProvider.AbstractImpl {
 	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	public QualifiedName getFullyQualifiedName(EObject obj) {
-		return qualifiedNameConverter.toQualifiedName(new ArithmeticsSwitch<String>() {
+		String name = new ArithmeticsSwitch<String>() {
 
 			public String caseModule(Module object) {
 				return object.getName();
@@ -63,6 +63,9 @@ public class NameProvider extends IQualifiedNameProvider.AbstractImpl {
 				return doSwitch(object.eContainer()) + "." + object.getName();
 			}
 
-		}.doSwitch(obj));
+		}.doSwitch(obj);
+		if(name == null)
+			return null;
+		return qualifiedNameConverter.toQualifiedName(name);
 	}
 }
