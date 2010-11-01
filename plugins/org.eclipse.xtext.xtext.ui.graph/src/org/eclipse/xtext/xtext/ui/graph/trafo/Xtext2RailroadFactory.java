@@ -38,8 +38,7 @@ import org.eclipse.xtext.xtext.ui.graph.figures.primitives.PrimitiveFigureFactor
 import com.google.inject.Inject;
 
 /**
- * Creates railrowad {@link ISegmentFigure}s and {@link ISegmentFigure}s for
- * Xtext artifacts.
+ * Creates railrowad {@link ISegmentFigure}s and {@link ISegmentFigure}s for Xtext artifacts.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -97,13 +96,27 @@ public class Xtext2RailroadFactory {
 
 	protected ISegmentFigure wrapCardinaltiySegments(AbstractElement element, ISegmentFigure segment) {
 		ISegmentFigure result = segment;
-		if (GrammarUtil.isMultipleCardinality(element)) {
-			result = new LoopSegment(element, result, primitiveFactory);
-		}
-		if (GrammarUtil.isOptionalCardinality(element)) {
-			result = new BypassSegment(element, result, primitiveFactory);
+		EObject cardinalityElement = getParentWithCardinality(element);
+		if (cardinalityElement instanceof AbstractElement) {
+			if (GrammarUtil.isMultipleCardinality((AbstractElement) cardinalityElement)) {
+				result = new LoopSegment(cardinalityElement, result, primitiveFactory);
+			}
+			if (GrammarUtil.isOptionalCardinality((AbstractElement) cardinalityElement)) {
+				result = new BypassSegment(cardinalityElement, result, primitiveFactory);
+			}
 		}
 		return result;
+	}
+
+	protected EObject getParentWithCardinality(AbstractElement element) {
+		EObject cardinalityElement = element;
+		String cardinality = element.getCardinality();
+		while (cardinality == null && cardinalityElement != null) {
+			cardinalityElement = cardinalityElement.eContainer();
+			if (cardinalityElement instanceof AbstractElement)
+				cardinality = ((AbstractElement) cardinalityElement).getCardinality();
+		}
+		return cardinalityElement;
 	}
 
 }
