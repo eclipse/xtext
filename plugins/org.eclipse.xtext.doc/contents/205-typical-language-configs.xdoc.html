@@ -1,0 +1,583 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Typical Language Configurations</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="index.html" title="">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+
+<a name="special_languages"></a>
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Typical Language Configurations</h1>
+
+
+<a name="case_insensitive_languages"></a>
+
+<a name="case_insensitive_languages"></a>
+<div class="section" title="Case Insensitive Languages">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Case Insensitive Languages
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+In some cases, e.g. if your <em>SHIFT</em> key is broken, you might want to design a case insensitive language. Xtext offers separate 
+<a href="030-generator.xdoc.html#generator_fragment">generator fragments</a> for this purpose. 
+</p>
+
+<p>
+For case insensitive keywords, open your MWE workflow and replace the Antlr related fragments: 
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+//&nbsp;The&nbsp;antlr&nbsp;parser&nbsp;generator&nbsp;fragment.<br />fragment&nbsp;=&nbsp;parser.antlr.XtextAntlrGeneratorFragment&nbsp;{<br />//&nbsp;&nbsp;options&nbsp;=&nbsp;{<br />//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backtrack&nbsp;=&nbsp;true<br />//&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />...<br /><br />//&nbsp;generates&nbsp;a&nbsp;more&nbsp;lightweight&nbsp;Antlr&nbsp;parser&nbsp;and&nbsp;lexer&nbsp;tailored&nbsp;...<br />fragment&nbsp;=&nbsp;parser.antlr.XtextAntlrUiGeneratorFragment&nbsp;{<br />}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+with
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+//&nbsp;The&nbsp;antlr&nbsp;parser&nbsp;generator&nbsp;fragment.<br />fragment&nbsp;=&nbsp;parser.antlr.ex.rt.AntlrGeneratorFragment&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;options&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;true<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />...<br /><br />//&nbsp;generates&nbsp;a&nbsp;more&nbsp;lightweight&nbsp;Antlr&nbsp;parser&nbsp;and&nbsp;lexer&nbsp;tailored&nbsp;...<br />fragment&nbsp;=&nbsp;parser.antlr.ex.ca.ContentAssistParserGeneratorFragment&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;options&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;true<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+For case insensitve element names, use the <em>ignoreCase</em> option in your scope fragment, i.e.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+fragment&nbsp;=&nbsp;scoping.ImportNamespacesScopingFragment&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;true<br />}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+or if you are using 
+<a href="080-scoping.xdoc.html#import_uri">importURI based global scopes</a>
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+fragment&nbsp;=&nbsp;scoping.ImportURIScopingFragment&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;true<br />}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+<a name="java_independent_languages"></a>
+
+<a name="java_independent_languages"></a>
+<div class="section" title="Languages Independent of JDT">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Languages Independent of JDT
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+The following section describes how you make your language independent of Eclipse&apos;s Java Development Toolkit (JDT).
+</p>
+
+<p>
+In the <em>UIModule</em> of your language you have to overwrite some bindings. First, remove the bindings to components with support for the &apos;_classpath:_&apos; URI protocol, i.e. 
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Override<br />public&nbsp;Class&lt;?&nbsp;extends&nbsp;IResourceForEditorInputFactory&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;bindIResourceForEditorInputFactory()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;ResourceForIEditorInputFactory.class;<br />}<br /><br />@Override<br />public&nbsp;Class&lt;?&nbsp;extends&nbsp;IResourceSetProvider&gt;&nbsp;bindIResourceSetProvider()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;SimpleResourceSetProvider.class;<br />}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Second, configure the global scope provider to scan project root folders instead of the classpath of Java projects.   
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Override<br />public&nbsp;com.google.inject.Provider<br />&nbsp;&nbsp;&nbsp;&nbsp;&lt;org.eclipse.xtext.resource.containers.IAllContainersState&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;provideIAllContainersState()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();<br />}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+The remaining steps show you how to adapt the  
+
+<a href="198-wizards.xdoc.html#projectwizard">project wizard</a> for your language, if you have generated one.
+The best way to do this is to create a new subclass of the generated 
+<em>IProjectCreator</em> in the <em>src/</em> folder of the <em>ui</em> project and 
+apply the necessary changes there. First, remove the JDT project configuration 
+by overriding <em>configureProject</em> with an empty body. 
+</p>
+
+<p>
+The next thing is to redefine the project natures and builders that should be
+applied to you language projects.
+</p>
+
+<p>
+In in this case just remove the JDT stuff in this way:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+protected&nbsp;String[]&nbsp;getProjectNatures()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;String[]&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;org.eclipse.pde.PluginNature&quot;,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;org.eclipse.xtext.ui.shared.xtextNature&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;};<br />}<br /><br />protected&nbsp;String[]&nbsp;getBuilders()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;String[]&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;org.eclipse.pde.ManifestBuilder&quot;,&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;org.eclipse.pde.SchemaBuilder&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;};<br />}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+After that you have to bind the new <em>IProjectCreator</em>
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Override<br />public&nbsp;Class&lt;?&nbsp;extends&nbsp;IProjectCreator&gt;&nbsp;bindIProjectCreator()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;JDTFreeMyDslProjectCreator.class;<br />}<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+That&apos;s all. Your language and its IDE should now no longer depend on JDT.
+</p>
+
+
+</div>
+
+
+
+<a name="special_languages-3"></a>
+<div class="section" title="Parsing Expressions with Xtext">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Parsing Expressions with Xtext
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Parsing simple XML-like, structural languages with Xtext is a no-brainer. However, parsing nested expressions is often considered a bit more complicated. This is because they are more complicated due to their recursive nature and also because with Xtext you have to avoid left recursive parser rules. As the underlying parser (generated by Antlr) uses a top-down approach it would recurse endlessly if you had a left recursive grammar.
+</p>
+
+<p>
+Let&apos;s have a look at parsing a simple arithmetic expression:
+</p>
+
+<p>
+<span class="inlinecode">2&nbsp;+&nbsp;20&nbsp;*&nbsp;2</span>
+
+</p>
+
+<p>
+If you know EBNF a bit and wouldn&apos;t think about avoiding left recursion, operator precedence or associativity, you&apos;ld probably write a grammar like this:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Expression&nbsp;:<br />&nbsp;&nbsp;Expression&nbsp;&apos;+&apos;&nbsp;Expression&nbsp;|<br />&nbsp;&nbsp;Expression&nbsp;&apos;*&apos;&nbsp;Expression&nbsp;|<br />&nbsp;&nbsp;INT;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+This grammar would be left recursive because the parser reads the grammar top down and left to right and would endlessly call the Expression rule without consuming any characters, i.e. altering the underlying state of the parser. While this kind of grammar can be written for bottom-up parsers, you&apos;ld still have to deal with operator precedence in addition. That is define that a multiplication has higher precedence than an addition for example.
+</p>
+
+<p>
+In Xtext you define the precedence implicitly when left-factoring such a grammar. Left-factoring means you get rid of left recursion by applying a certain technique, which we will show in the following.
+</p>
+
+<p>
+So here is a left-factored grammar (not yet working with Xtext) for the expression language above :
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;:<br />&nbsp;&nbsp;Multiplication&nbsp;(&apos;+&apos;&nbsp;Multiplication)*;<br /><br />Multiplication:<br />&nbsp;&nbsp;NumberLiteral&nbsp;(&apos;*&apos;&nbsp;NumberLiteral)*;<br /><br />NumberLiteral:<br />&nbsp;&nbsp;INT;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+As you can see the main difference is that we have three rules instead of one and if you look a bit closer you see, that there&apos;s a certain delegation pattern involved. The rule Addition doesn&apos;t call itself but calls Multiplication instead. The operator precedence is defined by the order of delegation. The later the rule is called the higher is its precedence. This is at least the case for the first two rules which are of a left recursive nature (but we&apos;ve left-factored them now). The last rule is not left recursive which is why you can write them down without applying this pattern.
+</p>
+
+<p>
+We should allow users to explicitly adjust precedence by adding parenthesis, e.g. write something like (2 + 20) * 2.
+So let&apos;s add support for that (note that the grammar is still not working with Xtext):
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;:<br />&nbsp;&nbsp;Multiplication&nbsp;(&apos;+&apos;&nbsp;Multiplication)*;<br /><br />Multiplication:<br />&nbsp;&nbsp;Primary&nbsp;(&apos;*&apos;&nbsp;Primary)*;<br /><br />Primary&nbsp;:<br />&nbsp;&nbsp;NumberLiteral&nbsp;|<br />&nbsp;&nbsp;&apos;(&apos;&nbsp;Addition&nbsp;&apos;)&apos;;<br /><br />NumberLiteral:<br />&nbsp;&nbsp;INT;<br />&nbsp;&nbsp;
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+So once again: if you have some construct that recurses on the left hand side, you need to put it into the delegation chain according to their operator precedence. The pattern is always the same, the thing that recurses delegates to the rule with the next higher precedence.
+</p>
+
+
+
+
+<a name="expressions-14"></a>
+<div class="section" title="Construction of an AST">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Construction of an AST
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Now that we know how to avoid left recursion, let&apos;s have a look at what the parser produces. In Xtext each rule returns some value. Parser rules return AST nodes (i.e. EObject instances), enum rules return enum literals and datatype rules as well as terminal rules return simple values like strings and the like (EDatatype in EMF jargon).
+Xtext can automatically infer whether some rule is a parser rule, i.e. constructs and returns an AST node, or if it is a datatype rule that returns a value. The grammar above only consists of datatype rules all of them returning plain strings.
+In order to construct an AST we need to add Assignments and Actions. But before we do that we need to talk about return types.
+</p>
+
+<p>
+The return type of a rule can be specified explicitly using the &apos;returns&apos; keyword but can be inferred if the type&apos;s name is the same as the rule&apos;s name.
+That is
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+NumberLiteral&nbsp;:&nbsp;...&nbsp;;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+is a short form of
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+NumberLiteral&nbsp;returns&nbsp;NumberLiteral&nbsp;:&nbsp;...&nbsp;;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+However in the case of the expressions grammar above, all rules need to return the same type since they are recursive. So in order to make the grammar functional we need to add a common return type explicitly (but the grammar is still missing some bits):
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;returns&nbsp;Expression:<br />&nbsp;&nbsp;Multiplication&nbsp;(&apos;+&apos;&nbsp;Multiplication)*;<br />&nbsp;&nbsp;<br />Multiplication&nbsp;returns&nbsp;Expression:<br />&nbsp;&nbsp;Primary&nbsp;(&apos;*&apos;&nbsp;Primary)*;<br />&nbsp;&nbsp;<br />Primary&nbsp;returns&nbsp;Expression:<br />&nbsp;&nbsp;NumberLiteral&nbsp;|<br />&nbsp;&nbsp;&apos;(&apos;&nbsp;Addition&nbsp;&apos;)&apos;;<br />&nbsp;&nbsp;<br />NumberLiteral:<br />&nbsp;&nbsp;INT;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+The AST type inference mechanism of Xtext will infer two types: Expression and NumberLiteral. Now we need to add assignments and Actions in order to store all the important information in the AST and to create reasonable subtypes for the two operations.
+</p>
+
+<p>
+In the following you see the final fully working Xtext grammar:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;returns&nbsp;Expression:<br />&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=current}&nbsp;&apos;+&apos;&nbsp;right=Multiplication)*;<br />&nbsp;&nbsp;<br />Multiplication&nbsp;returns&nbsp;Expression:<br />&nbsp;&nbsp;Primary&nbsp;({Multiplication.left=current}&nbsp;&apos;*&apos;&nbsp;right=Primary)*;<br />&nbsp;&nbsp;<br />Primary&nbsp;returns&nbsp;Expression:<br />&nbsp;&nbsp;NumberLiteral&nbsp;|<br />&nbsp;&nbsp;&apos;(&apos;&nbsp;Addition&nbsp;&apos;)&apos;;<br />&nbsp;&nbsp;<br />NumberLiteral:<br />&nbsp;&nbsp;value=INT;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Let&apos;s go through the grammar as the parser would do it for the expression
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+(1&nbsp;+&nbsp;20)&nbsp;*&nbsp;2<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+The parser always starts with the first rule (Addition). Therein the first element is an unassigned rule call to Multiplication which in turn calls Primary. Primary now has two alternatives. The first one is calling NumberLiteral which consists only of one assignment to a feature called &apos;value&apos;. The type of &apos;value&apos; has to be compatible to the return type of the INT rule.
+</p>
+
+<p>
+But as the first token in the sample expression is an opening parenthesis &apos;(&apos; the parser will take the second alternative in Primary, consume the &apos;(&apos; and call the rule Addition. Now the value &apos;1&apos; is the lookahead token and again Addition calls Multiplication and Multiplication calls Primary. This time the parser takes the first alternative because &apos;1&apos; was consumed by the INT rule (which btw. is a reused library terminal rule).
+</p>
+
+<p>
+As soon as the parser hits an assignment it checks whether an AST node for the current rule was already created. If not it will create one based on the return type of the current rule, which is NumberLiteral. The Xtext generator created an EClass &apos;NumberLiteral&apos; before which can now be instantiated. That type will also have a property called value of type int (actually of type EInt), which will get the value &apos;1&apos; set. This is what the Java equivalent would look like:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+//&nbsp;value=INT<br />if&nbsp;(current&nbsp;==&nbsp;null)<br />&nbsp;current&nbsp;=&nbsp;new&nbsp;NumberLiteral();<br />current.setValue(ruleINT());<br />...<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Now that the rule has been completed the created EObject is returned to the calling rule Primary, which in turn returns the object unchanged to its own caller. Within Multiplication the call to Primary has been successfully parsed and returned an instance of NumberLiteral. The second part of the rule (everything within the parenthesis) is a so called group. The asterisk behind the closing parenthesis states that this part can be consumed zero or more times. The first token to consume in this part is the multiplication operator &apos;*&apos;. Unfortunately in the current situation the next token to accept is the plus operator &apos;+&apos;, so the group is not consumed at all and the rule returns what they got from the unassigned rule call (the NumberLiteral).
+</p>
+
+<p>
+In rule Addition there&apos;s a similar group but this time it expects the correct operator so the parser steps into the group.
+The first element in the group is a so called action. As Xtext grammars are highly declarative and bi-directional it is not a good idea to allow arbitrary expression within actions as it is usually the case with parser generators. Instead we only support two kinds of actions. This one will create a new instance of type Addition and assign what was the to-be-returned object to the feature left. In Java this would have been something like:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+//&nbsp;Multiplication&nbsp;rule&nbsp;call<br />current&nbsp;=&nbsp;ruleMultiplication();<br />//&nbsp;{Addition.left=current}<br />Addition&nbsp;temp&nbsp;=&nbsp;new&nbsp;Addition();<br />temp.setLeft(current);<br />current&nbsp;=&nbsp;temp;<br />...<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+As a result the rule would now return an instance of Addition which has a NumberLiteral set to its property left. Next up the parser consumes the &apos;+&apos; operator. We do not store the operator in the AST because we have an explicit Addition type, which implicitly contains this information.
+The assignment (&apos;right=Multiplication&apos;) calls the rule Multiplication another time and assigns the returned object (a NumberLiteral of value=20) to the property named right.
+</p>
+
+<p>
+If we now had an additional plus operation &apos;+&apos; (e.g. 1 + 2 + 3) the group would match another time and create another instance of Addition. But we don&apos;t and therefore the rule is completed and returns the created instance of Addition to its caller which was the second alternative in Primary. Now the closing parenthesis is matched and consumed and the parser stack is reduced once more.
+</p>
+
+<p>
+We are now in rule Multiplication and have the multiplication operator &apos;*&apos; on the lookahead. The parser goes into the group and applies the action. Finally it calls the Primary rule, gets another instance of NumberLiteral (value=2), assigns it as the &apos;right&apos; operand of the Multiplication and returns the Multiplication to the rule Addition which in turn returns the very same object as there&apos;s nothing left to parse.
+</p>
+
+<p>
+The resulting AST looks like this:
+</p>
+
+<p>
+
+
+</p>
+
+<p>
+(It&apos;s pretty hard to follow what&apos;s going on just by reading this text. Therefore we have prepared a small video which visualizes and explains the details. see http://vimeo.com/14358869)
+</p>
+
+
+</div>
+
+
+
+<a name="expressions-15"></a>
+<div class="section" title="Associativity">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Associativity
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+There is still one topic we should mention, which is associativity. There is left and right associativity as well as none associativity. In the example we have seen left associativity. Associativity tells the parser how to construct the AST when there are two infix operations with the same precedence. The following example is taken from the corresponding wikipedia entry:
+</p>
+
+<p>
+Consider the expression a ~ b ~ c. If the operator ~ has left associativity, this expression would be interpreted as (a ~ b) ~ c and evaluated left-to-right. If the operator has right associativity, the expression would be interpreted as a ~ (b ~ c) and evaluated right-to-left. If the operator is non-associative, the expression might be a syntax error, or it might have some special meaning.
+We already know the most important form which is left associativity:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;returns&nbsp;Expression:<br />&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=current}&nbsp;&apos;+&apos;&nbsp;right=Multiplication)*;<br />
+</p>
+</div>
+</div>
+
+
+Right associativity is done using the following pattern (note the quantity operator and the call to the rule itself at the end):
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;returns&nbsp;Expression:<br />&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=current}&nbsp;&apos;+&apos;&nbsp;right=Addition)?;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+And if you don&apos;t want to allow multiple usages of the same expression in a row (hence non-associativity) you write:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Addition&nbsp;returns&nbsp;Expression:<br />&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=current}&nbsp;&apos;+&apos;&nbsp;right=Multiplication)?;<br />
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Note that sometimes it&apos;s better to allow associativity on parser level, but forbid it later using validation, because you can come up with a better error message. Also the whole parsing process won&apos;t be interrupted, so your tooling will generally be more forgiving.
+</p>
+
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,434 @@
+<toc topic="contents/000-introduction.xdoc.html" label="Xtext Documentation">
+<topic href="contents/000-introduction.xdoc.html" label="Overview" >
+<topic href="contents/000-introduction.xdoc.html#Overview-1" label="What is Xtext?" >
+</topic>
+<topic href="contents/000-introduction.xdoc.html#Overview-2" label="How Does It Work?" >
+</topic>
+<topic href="contents/000-introduction.xdoc.html#Overview-3" label="Xtext is Highly Configurable" >
+</topic>
+<topic href="contents/000-introduction.xdoc.html#Overview-4" label="Who Uses Xtext?" >
+</topic>
+<topic href="contents/000-introduction.xdoc.html#Overview-5" label="Who is Behind Xtext?" >
+</topic>
+<topic href="contents/000-introduction.xdoc.html#DSL" label="What is a Domain-Specific Language" >
+</topic>
+</topic>
+<topic href="contents/015-getting-started.xdoc.html" label="Getting Started" >
+<topic href="contents/015-getting-started.xdoc.html#getting_started_xtext" label="Creating a DSL" >
+<topic href="contents/015-getting-started.xdoc.html#getting_started_xtext-3" label="Create an Xtext Project" >
+</topic>
+<topic href="contents/015-getting-started.xdoc.html#getting_started_xtext-4" label="Project Layout" >
+</topic>
+<topic href="contents/015-getting-started.xdoc.html#getting_started_xtext-5" label="Build Your Own Grammar" >
+</topic>
+<topic href="contents/015-getting-started.xdoc.html#getting_started_xtext-6" label="Generate Language Artifacts" >
+</topic>
+<topic href="contents/015-getting-started.xdoc.html#getting_started_xtext-7" label="Run the Generated IDE Plug-in" >
+</topic>
+<topic href="contents/015-getting-started.xdoc.html#getting_started_xtext-8" label="Adding a Namespace Concept" >
+</topic>
+</topic>
+<topic href="contents/016-working-with-Xtext-models.xdoc.html" label="Processing Xtext Models" >
+<topic href="contents/016-working-with-Xtext-models.xdoc.html#resource" label="Loading a Resource" >
+</topic>
+<topic href="contents/016-working-with-Xtext-models.xdoc.html#programmatic_EMF" label="Working with EMF Models" >
+</topic>
+<topic href="contents/016-working-with-Xtext-models.xdoc.html#node_model" label="Working with the Parse Tree (aka Node Model)" >
+</topic>
+<topic href="contents/016-working-with-Xtext-models.xdoc.html#working_with_grammar_model" label="Working with the Grammar" >
+</topic>
+<topic href="contents/016-working-with-Xtext-models.xdoc.html#processing_Xtext_models-7" label="Working with Live Models" >
+</topic>
+<topic href="contents/016-working-with-Xtext-models.xdoc.html#processing_Xtext_models-8" label="Summary" >
+</topic>
+</topic>
+<topic href="contents/017-getting-started-xpand.xdoc.html" label="Writing a Code Generator" >
+<topic href="contents/017-getting-started-xpand.xdoc.html#getting_started_xpand-3" label="Xpand and MWE2" >
+</topic>
+<topic href="contents/017-getting-started-xpand.xdoc.html#getting_started_xpand-4" label="The Empty Generator Project" >
+</topic>
+<topic href="contents/017-getting-started-xpand.xdoc.html#getting_started_xpand-5" label="Replacing the Example Model File (1)" >
+</topic>
+<topic href="contents/017-getting-started-xpand.xdoc.html#getting_started_xpand-6" label="The Modeling Workflow Engine File (2)" >
+</topic>
+<topic href="contents/017-getting-started-xpand.xdoc.html#getting_started_xpand-7" label="Using Xpand (3) and Xtend (4) for Code Generation" >
+</topic>
+</topic>
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html" label="The Grammar Language" >
+<topic href="contents/020-grammar-language.xdoc.html#grammarLanguage-2" label="A First Example" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#syntax" label="The Syntax" >
+<topic href="contents/020-grammar-language.xdoc.html#syntax-2" label="Language Declaration" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#package_declarations" label="EPackage Declarations" >
+<topic href="contents/020-grammar-language.xdoc.html#package_declarations-2" label="EPackage Generation" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#package_declarations-3" label="EPackage Import" >
+<topic href="contents/020-grammar-language.xdoc.html#package_declarations-3-2" label="Using Resource URIs to Import Existing EPackages" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#package_declarations-3-3" label="Using Classpath URIs to Import Existing EPackages" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#package_declarations-3-4" label="Using Namespace URIs to Import Existing EPackages" >
+</topic>
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#package_declarations-4" label="Ecore Model Aliases for EPackages" >
+</topic>
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#syntax-4" label="Rules" >
+<topic href="contents/020-grammar-language.xdoc.html#syntax-4-2" label="Terminal Rules" >
+<topic href="contents/020-grammar-language.xdoc.html#syntax-4-2-10" label="Return Types" >
+</topic>
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#syntax-4-3" label="Extended Backus-Naur Form Expressions" >
+<topic href="contents/020-grammar-language.xdoc.html#Keywords" label="Keywords / Characters" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#syntax-4-3-3" label="Character Ranges" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#syntax-4-3-4" label="Wildcard" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#syntax-4-3-5" label="Until Token" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#syntax-4-3-6" label="Negated Token" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#syntax-4-3-7" label="Rule Calls" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#Alternatives" label="Alternatives" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#syntax-4-3-9" label="Groups" >
+</topic>
+</topic>
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#parser_rules" label="Parser Rules" >
+<topic href="contents/020-grammar-language.xdoc.html#parser_rules-2" label="Extended Backus-Naur Form Expressions" >
+<topic href="contents/020-grammar-language.xdoc.html#assignments" label="Assignments" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#parser_rules-2-5" label="Cross-References" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#unordered_groups" label="Unordered Groups" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#parser_rules-2-7" label="Simple Actions" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#parser_rules-2-8" label="Unassigned Rule Calls" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#grammarActions" label="Assigned Actions" >
+</topic>
+</topic>
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#hidden_terminals" label="Hidden Terminal Symbols" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#datatypeRules" label="Data Type Rules" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#syntax-8" label="Enum Rules" >
+</topic>
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#metamodelInference" label="Ecore Model Inference" >
+<topic href="contents/020-grammar-language.xdoc.html#metamodelInference-3" label="Type and Package Generation" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#metamodelInference-4" label="Feature and Type Hierarchy Generation" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#metamodelInference-5" label="Enum Literal Generation" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#metamodelInference-6" label="Feature Normalization" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#customPostProcessing" label="Customized Post Processing" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#metamodelInference-8" label="Error Conditions" >
+</topic>
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#grammarMixins" label="Grammar Mixins" >
+</topic>
+<topic href="contents/020-grammar-language.xdoc.html#grammarLanguage-6" label="Common Terminals" >
+</topic>
+</topic>
+<topic href="contents/030-generator.xdoc.html" label="Configuration" >
+<topic href="contents/030-generator.xdoc.html#generator" label="The Generator" >
+<topic href="contents/030-generator.xdoc.html#short_intro_to_mwe" label="A Short Introduction to MWE2" >
+</topic>
+<topic href="contents/030-generator.xdoc.html#generator-5" label="General Architecture" >
+<topic href="contents/030-generator.xdoc.html#generator_fragment" label="Generator Fragments" >
+</topic>
+<topic href="contents/030-generator.xdoc.html#generator-5-4" label="Configuration" >
+</topic>
+</topic>
+<topic href="contents/030-generator.xdoc.html#generator-6" label="Standard Generator Fragments" >
+</topic>
+</topic>
+<topic href="contents/040-dependency-injection.xdoc.html" label="Dependency Injection in Xtext with Google Guice" >
+<topic href="contents/040-dependency-injection.xdoc.html#guicemodules" label="The Module API" >
+</topic>
+<topic href="contents/040-dependency-injection.xdoc.html#dependencyInjection-9" label="Obtaining an Injector" >
+</topic>
+</topic>
+</topic>
+<topic href="contents/050-heading-runtime.xdoc.html" label="Runtime Concepts" >
+<topic href="contents/050-heading-runtime.xdoc.html#runtime_concepts-2" label="Runtime Setup (ISetup)" >
+</topic>
+<topic href="contents/050-heading-runtime.xdoc.html#runtime_concepts-3" label="Setup within Eclipse-Equinox (OSGi)" >
+</topic>
+<topic href="contents/050-heading-runtime.xdoc.html#runtime_concepts-4" label="Logging" >
+</topic>
+<topic href="contents/060-validation.xdoc.html" label="Validation" >
+<topic href="contents/060-validation.xdoc.html#validation-2" label="Automatic Validation" >
+<topic href="contents/060-validation.xdoc.html#syntactical_validation" label="Lexer/Parser: Syntactical Validation" >
+</topic>
+<topic href="contents/060-validation.xdoc.html#linking_validation" label="Linker: Crosslink Validation" >
+</topic>
+<topic href="contents/060-validation.xdoc.html#concrete_syntax_validation" label="Serializer: Concrete Syntax Validation" >
+</topic>
+</topic>
+<topic href="contents/060-validation.xdoc.html#custom_validation" label="Custom Validation" >
+</topic>
+<topic href="contents/060-validation.xdoc.html#check_based_validation" label="Validation with the Check Language" >
+</topic>
+<topic href="contents/060-validation.xdoc.html#validation-5" label="Validating Manually" >
+</topic>
+<topic href="contents/060-validation.xdoc.html#test_validators" label="Test Validators" >
+</topic>
+</topic>
+<topic href="contents/070-linking.xdoc.html" label="Linking" >
+<topic href="contents/070-linking.xdoc.html#linking-3" label="Declaration of Crosslinks" >
+</topic>
+<topic href="contents/070-linking.xdoc.html#linking-4" label="Default Runtime Behavior (Lazy Linking)" >
+</topic>
+</topic>
+<topic href="contents/080-scoping.xdoc.html" label="Scoping" >
+<topic href="contents/080-scoping.xdoc.html#global_scopes" label="Global Scopes and IResourceDescriptions" >
+<topic href="contents/080-scoping.xdoc.html#resourcedescriptions" label="Resource and EObject Descriptions (_IResourceDescription_, IEObjectDescription)" >
+</topic>
+<topic href="contents/080-scoping.xdoc.html#import_uri" label="Global Scopes Based On Explicit Imports (ImportURI Mechanism)" >
+</topic>
+<topic href="contents/080-scoping.xdoc.html#index_based" label="Global Scopes Based On External Configuration (e.g. Classpath-Based)" >
+<topic href="contents/080-scoping.xdoc.html#containers" label="About the Index, Containers and Their Manager" >
+</topic>
+<topic href="contents/080-scoping.xdoc.html#jdt_based_containers" label="JDT-Based Container Manager" >
+</topic>
+<topic href="contents/080-scoping.xdoc.html#project_based_containers" label="Eclipse Project-Based Containers" >
+</topic>
+<topic href="contents/080-scoping.xdoc.html#resource_set_containers" label="ResourceSet-Based Containers" >
+</topic>
+</topic>
+</topic>
+<topic href="contents/080-scoping.xdoc.html#local_scoping" label="Local Scoping" >
+<topic href="contents/080-scoping.xdoc.html#local_scoping-7" label="Declarative Scoping" >
+</topic>
+</topic>
+<topic href="contents/080-scoping.xdoc.html#scoping-12" label="Imported Namespace-Aware Scoping" >
+<topic href="contents/080-scoping.xdoc.html#scoping-12-2" label="" >
+</topic>
+<topic href="contents/080-scoping.xdoc.html#scoping-12-3" label="Importing Namespaces" >
+</topic>
+</topic>
+</topic>
+<topic href="contents/090-valueconverter.xdoc.html" label="Value Converter" >
+<topic href="contents/090-valueconverter.xdoc.html#valueconverter-3" label="Annotation-Based Value Converters" >
+</topic>
+</topic>
+<topic href="contents/100-serialization.xdoc.html" label="Serialization" >
+<topic href="contents/100-serialization.xdoc.html#serializationcontract" label="The Contract" >
+</topic>
+<topic href="contents/100-serialization.xdoc.html#serialization-6" label="Roles of the Semantic Model and the Node Model During Serialization" >
+</topic>
+<topic href="contents/100-serialization.xdoc.html#parsetreeconstructor" label="Parse Tree Constructor" >
+</topic>
+<topic href="contents/100-serialization.xdoc.html#saveoptions" label="Options" >
+</topic>
+<topic href="contents/100-serialization.xdoc.html#commentassociater" label="Preserving Comments from the Node Model" >
+</topic>
+<topic href="contents/100-serialization.xdoc.html#transientvalues" label="Transient Values" >
+</topic>
+<topic href="contents/100-serialization.xdoc.html#unassignedtext" label="Unassigned Text" >
+</topic>
+<topic href="contents/100-serialization.xdoc.html#crossreferenceserializer" label="Cross-Reference Serializer" >
+</topic>
+<topic href="contents/100-serialization.xdoc.html#hiddentokenmerger" label="Merge Whitespaces" >
+</topic>
+<topic href="contents/100-serialization.xdoc.html#tokenstream" label="Token Stream" >
+</topic>
+</topic>
+<topic href="contents/105-formatting.xdoc.html" label="Formatting (Pretty Printing)" >
+<topic href="contents/105-formatting.xdoc.html#declarativeformatter" label="Declarative Formatter" >
+<topic href="contents/105-formatting.xdoc.html#declarativeformatter-5" label="General FormattingConfig Settings" >
+</topic>
+<topic href="contents/105-formatting.xdoc.html#declarativeformatter-6" label="FormattingConfig Instructions" >
+</topic>
+<topic href="contents/105-formatting.xdoc.html#declarativeformatter-7" label="Grammar Element Finders" >
+</topic>
+</topic>
+</topic>
+<topic href="contents/110-fragmentprovider.xdoc.html" label="Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)" >
+</topic>
+<topic href="contents/115-encoding.xdoc.html" label="Encoding in Xtext" >
+<topic href="contents/115-encoding.xdoc.html#encoding-6" label="Encoding at Language Design Time" >
+</topic>
+<topic href="contents/115-encoding.xdoc.html#encoding-7" label="Encoding at Language Runtime" >
+</topic>
+<topic href="contents/115-encoding.xdoc.html#encoding-8" label="Encoding of an XtextResource" >
+</topic>
+<topic href="contents/115-encoding.xdoc.html#encoding-9" label="Encoding in New Model Projects" >
+</topic>
+<topic href="contents/115-encoding.xdoc.html#encoding-10" label="Encoding of Xtext Source Code" >
+</topic>
+</topic>
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html" label="MWE2" >
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2Exampe" label="Examples" >
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2HelloWorld" label="The Simplest Workflow" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2SimpleTransformation" label="A Simple Transformation" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2Stopwatch" label="A Stopwatch" >
+</topic>
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2LanguageReference" label="Language Reference" >
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2JavaReferences" label="Mapping to Java Classes" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2Module" label="Module" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2Properties" label="Properties" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2Mandatory" label="Mandatory Properties" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2NamedComponents" label="Named Components" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2AutoInject" label="Auto Injection" >
+</topic>
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2SyntaxReference" label="Syntax Reference" >
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2ModuleSyntax" label="Module" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2PropertySyntax" label="Property" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2ComponentSyntax" label="Component" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2StringLiteralsSyntax" label="String Literals" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2BooleanLiterals" label="Boolean Literals" >
+</topic>
+<topic href="contents/118-mwe-in-depth.xdoc.html#MWE2References" label="References" >
+</topic>
+</topic>
+</topic>
+<topic href="contents/120-heading-UI.xdoc.html" label="IDE Concepts" >
+<topic href="contents/140-labelprovider.xdoc.html" label="Label Provider" >
+<topic href="contents/140-labelprovider.xdoc.html#EObjectLabelProvider" label="Label Providers For EObjects" >
+<topic href="contents/140-labelprovider.xdoc.html#DefaultEObjectLabelProvider" label="DefaultEObjectLabelProvider" >
+</topic>
+</topic>
+<topic href="contents/140-labelprovider.xdoc.html#DescriptionLabelProvider" label="Label Providers For Index Entries" >
+</topic>
+</topic>
+<topic href="contents/150-contentassist.xdoc.html" label="Content Assist" >
+<topic href="contents/150-contentassist.xdoc.html#contentAssist-4" label="ProposalProvider" >
+</topic>
+<topic href="contents/150-contentassist.xdoc.html#contentAssist-5" label="Sample Implementation" >
+</topic>
+</topic>
+<topic href="contents/155-quickfix.xdoc.html" label="Quick Fixes" >
+<topic href="contents/155-quickfix.xdoc.html#quickfixes-12" label="Quickfixes for Linking Errors and Syntax Errors" >
+</topic>
+</topic>
+<topic href="contents/160-templates.xdoc.html" label="Template Proposals" >
+<topic href="contents/160-templates.xdoc.html#templates-6" label="CrossReference TemplateVariableResolver" >
+</topic>
+<topic href="contents/160-templates.xdoc.html#templates-7" label="Enumeration TemplateVariableResolver" >
+</topic>
+</topic>
+<topic href="contents/170-outline.xdoc.html" label="Outline View" >
+<topic href="contents/170-outline.xdoc.html#outline-1" label="We redesigned the outline in 2.0. The following no longer reflects the current state of implementation." >
+</topic>
+<topic href="contents/170-outline.xdoc.html#outline-2" label="Influencing the Outline Structure" >
+</topic>
+<topic href="contents/170-outline.xdoc.html#outline-3" label="Filtering" >
+</topic>
+<topic href="contents/170-outline.xdoc.html#outline-4" label="Context menus" >
+<topic href="contents/170-outline.xdoc.html#outline-4-5" label="Registering an IContentOutlineNodeAdapterFactory" >
+</topic>
+<topic href="contents/170-outline.xdoc.html#outline-4-6" label="Registering a Menu Contribution" >
+</topic>
+</topic>
+<topic href="contents/170-outline.xdoc.html#quick_outline" label="Quick Outline" >
+</topic>
+</topic>
+<topic href="contents/180-hyperlinking.xdoc.html" label="Hyperlinking" >
+<topic href="contents/180-hyperlinking.xdoc.html#locationProvider" label="Location Provider" >
+<topic href="contents/180-hyperlinking.xdoc.html#locationProvider-3" label="Customized Location Provider" >
+</topic>
+</topic>
+<topic href="contents/180-hyperlinking.xdoc.html#hyperlinking-3" label="Customizing Available Hyperlinks" >
+</topic>
+</topic>
+<topic href="contents/195-highlighting.xdoc.html" label="Syntax Coloring" >
+<topic href="contents/195-highlighting.xdoc.html#highlighting-6" label="Lexical Highlighting" >
+</topic>
+<topic href="contents/195-highlighting.xdoc.html#highlighting-7" label="Semantic Highlighting" >
+</topic>
+</topic>
+<topic href="contents/198-wizards.xdoc.html" label="Project Wizard" >
+<topic href="contents/198-wizards.xdoc.html#projectwizard-8" label="Customizing the Project Wizard" >
+</topic>
+</topic>
+</topic>
+<topic href="contents/199-jvmtypes.xdoc.html" label="Referring to Java Types" >
+<topic href="contents/199-jvmtypes.xdoc.html#jvmtypes-3" label="How to Use Java Types" >
+</topic>
+<topic href="contents/199-jvmtypes.xdoc.html#jvmtypes-4" label="Customization Points" >
+</topic>
+</topic>
+<topic href="contents/205-typical-language-configs.xdoc.html" label="Typical Language Configurations" >
+<topic href="contents/205-typical-language-configs.xdoc.html#case_insensitive_languages" label="Case Insensitive Languages" >
+</topic>
+<topic href="contents/205-typical-language-configs.xdoc.html#java_independent_languages" label="Languages Independent of JDT" >
+</topic>
+<topic href="contents/206-expressions-in-xtext.xdoc.html" label="Parsing Expressions with Xtext" >
+<topic href="contents/206-expressions-in-xtext.xdoc.html#expressions-14" label="Construction of an AST" >
+</topic>
+<topic href="contents/206-expressions-in-xtext.xdoc.html#expressions-15" label="Associativity" >
+</topic>
+</topic>
+</topic>
+<topic href="contents/210-emf-integration.xdoc.html" label="Integration with EMF and Other EMF Editors" >
+<topic href="contents/210-emf-integration.xdoc.html#model_metamodel" label="Model, Ecore Model, and Ecore" >
+</topic>
+<topic href="contents/210-emf-integration.xdoc.html#emf_codegen" label="EMF Code Generation" >
+</topic>
+<topic href="contents/210-emf-integration.xdoc.html#xtext_resource" label="XtextResource Implementation" >
+</topic>
+<topic href="contents/210-emf-integration.xdoc.html#gmf_integration" label="Integration with GMF Editors" >
+<topic href="contents/210-emf-integration.xdoc.html#gmf_integration_stage_1" label="Stage 1: Make GMF Read and Write the Semantic Model As Text" >
+<topic href="contents/210-emf-integration.xdoc.html#gmf_integration_stage_1-9" label="Stage 2: Calling the Xtext Parser to Parse GMF Labels" >
+</topic>
+<topic href="contents/210-emf-integration.xdoc.html#gmf_integration_stage_1-10" label="Stage 3: A Popup Xtext Editor (experimental)" >
+</topic>
+</topic>
+</topic>
+</topic>
+<topic href="contents/215-migrating-from-0.7.xdoc.html" label="Migrating from Xtext 0.7.x to 1.0" >
+<topic href="contents/215-migrating-from-0.7.xdoc.html#migrating_from_0_7-4" label="Take the Shortcut" >
+</topic>
+<topic href="contents/215-migrating-from-0.7.xdoc.html#migrating_from_0_7-5" label="Migrating Step By Step" >
+<topic href="contents/215-migrating-from-0.7.xdoc.html#migrating_from_0_7-5-3" label="Update the Plug-in Dependencies and Import Statements" >
+</topic>
+<topic href="contents/215-migrating-from-0.7.xdoc.html#migrating_from_0_7-5-4" label="Rename the Packages in the dsl.ui-Plug-in" >
+</topic>
+<topic href="contents/215-migrating-from-0.7.xdoc.html#migrating_from_0_7-5-5" label="Update the Workflow" >
+</topic>
+<topic href="contents/215-migrating-from-0.7.xdoc.html#migrating_from_0_7-5-6" label="MANIFEST.MF and plugin.xml" >
+</topic>
+<topic href="contents/215-migrating-from-0.7.xdoc.html#migrating_from_0_7-5-7" label="Noteworthy API Changes" >
+</topic>
+</topic>
+<topic href="contents/215-migrating-from-0.7.xdoc.html#migrating_from_0_7-6" label="Now Go For The New Features" >
+</topic>
+</topic>
+<topic href="contents/220-deploying-dsls.xdoc.html" label="Deploying DSLs" >
+<topic href="contents/220-deploying-dsls.xdoc.html#deploying_dsls-2" label="Prepare Your DSL Projects" >
+</topic>
+<topic href="contents/220-deploying-dsls.xdoc.html#deploying_dsls-3" label="Creating a Feature For Your DSL" >
+</topic>
+<topic href="contents/220-deploying-dsls.xdoc.html#deploying_dsls-4" label="Creating an Update Site For Your DSL" >
+</topic>
+</topic>
+<topic href="contents/230-antlr-ip-issue.xdoc.html" label="The ANTLR IP Issue (Or Which Parser To Use?)" >
+</topic>
+</toc>
