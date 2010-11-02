@@ -136,7 +136,6 @@
 			<cs:attribute name="package.tmf-xtext-Examples" />
 			<cs:attribute name="package.tmf-xtext-runtime" />
 			<cs:attribute name="package.tmf-xtext-sourcedoc" />
-			<cs:attribute name="package.tmf-xtext-tests" />
 		</cs:public>
 	</cs:groups>
 </cs:cspecExtension>
