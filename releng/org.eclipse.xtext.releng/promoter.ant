@@ -175,7 +175,7 @@
 		<mkdir dir="${build.drop.directory}" />
 
 		<echo>Remove existing nightly builds</echo>
-		<delete verbose="true" >
+		<delete verbose="true">
 			<fileset dir="${downloads.area}/downloads/drops/${version}/">
 				<type type="dir" />
 				<filename name="N*" />
@@ -237,14 +237,15 @@
 
 		<property name="composite.repository.directory" location="${downloads.area}/updates/${composite.repository.base}" />
 		<property name="composite.repository.url" value="file:/${composite.repository.directory}" />
-		<property name="build.repository.directory" location="${composite.repository.directory}/${saved.build.id}" />
-
-		<!-- without p2.composite.repository -->
+		<!-- 
+			without p2.composite.repository
+			<property name="build.repository.directory" location="${composite.repository.directory}/${saved.build.id}" />
+		 -->
 		<property name="build.repository.directory" location="${composite.repository.directory}" />
 
 		<deltree dir="${build.repository.directory}" />
 
-		<unzip  dest="${build.repository.directory}">
+		<unzip dest="${build.repository.directory}">
 			<fileset dir="${packages.directory}">
 				<filename name="*-Update*.zip" />
 			</fileset>
