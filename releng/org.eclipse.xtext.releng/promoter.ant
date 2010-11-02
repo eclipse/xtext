@@ -187,7 +187,7 @@
 		<mkdir dir="${build.drop.directory}/testresults" />
 		<copy todir="${build.drop.directory}/testresults">
 			<fileset dir="${testresults.directory}">
-				<filename name="*.xml" />
+				<filename name="**/*.xml" />
 			</fileset>
 		</copy>
 

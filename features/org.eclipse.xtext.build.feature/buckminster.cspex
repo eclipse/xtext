@@ -84,6 +84,24 @@
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
 		</cs:public>
 
+		<cs:public name="package.tmf-xtext-tests" actor="ant">
+			<cs:actorProperties>
+				<cs:property key="buildFile" value="packaging.ant" />
+				<cs:property key="targets" value="package.ius" />
+			</cs:actorProperties>
+			<cs:properties>
+				<cs:property key="content.ius"
+					value="org.eclipse.xtext.tests.feature.group" />
+				<cs:property key="prerequisite.ius" value="com.google.collect" />
+				<cs:property key="package.name" value="tmf-xtext-Automated-Tests" />
+			</cs:properties>
+			<cs:prerequisites>
+				<cs:attribute name="site.p2" alias="repository" />
+				<cs:attribute name="site.tp" alias="target.platform.repository" />
+			</cs:prerequisites>
+			<cs:products alias="output" base="${buckminster.output}/zips/" />
+		</cs:public>
+		
 		<cs:public name="package.tmf-xtext-sourcedoc" actor="ant">
 			<cs:actorProperties>
 				<cs:property key="buildFile" value="packaging.ant" />
