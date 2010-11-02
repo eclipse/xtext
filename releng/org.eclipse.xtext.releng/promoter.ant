@@ -109,7 +109,7 @@
 			<isset property="saved.java.home" />
 		</condition>
 		<tempfile property="publisher.workspace" prefix="workspace." destdir="${java.io.tmpdir}" />
-
+		<echo>Used launcher: ${launcher.jar}</echo>
 		<java jvm="${java.executable}" jar="${launcher.jar}" fork="true" failonerror="true">
 			<syspropertyset>
 				<propertyref builtin="commandline" />
@@ -154,9 +154,7 @@
 		</fail>
 		<property file="${publisher.properties.file.name}" />
 		<fail message="build.root property must be defined" unless="build.root" />
-		<fail message="packages.base property must be defined" unless="packages.base" />
 		<fail message="downloads.area property must be defined" unless="downloads.area" />
-
 
 		<!-- defaults -->
 		<property name="version" value="0.7.0" />
@@ -166,11 +164,23 @@
 		<property name="packages.directory" location="${build.root}/archive/${packages.base}" />
 		<property name="testresults.directory" location="${build.root}/archive/${tests.base}" />
 
-
 		<property name="build.drop.directory" location="${downloads.area}/downloads/drops/${version}/${saved.build.id}" />
+		<available file="${build.drop.directory}" type="dir" property="alreadyPromoted" />
+		<antcall target="publish" inheritall="true" />
+		<antcall target="echo-status" inheritall="true" />
+	</target>
 
-		<delete dir="${build.drop.directory}" />
+	<target name="publish" unless="alreadyPromoted">
+		<!-- will fail if already exists -->
 		<mkdir dir="${build.drop.directory}" />
+
+		<echo>Remove existing nightly builds</echo>
+		<delete verbose="true" >
+			<fileset dir="${downloads.area}/downloads/drops/${version}/">
+				<type type="dir" />
+				<filename name="N*" />
+			</fileset>
+		</delete>
 
 		<!-- copy zip packages -->
 		<copy todir="${build.drop.directory}">
@@ -182,7 +192,7 @@
 		<checksum algorithm="MD5" fileext=".md5" format="MD5SUM">
 			<fileset dir="${build.drop.directory}" />
 		</checksum>
-		
+
 		<!-- copy testresults -->
 		<mkdir dir="${build.drop.directory}/testresults" />
 		<copy todir="${build.drop.directory}/testresults">
@@ -213,7 +223,7 @@
 		<condition property="composite.repository.base" value="interim">
 			<matches pattern="^I" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="milestones">
+		<condition property="composite.repository.base" value="milestones/${saved.build.id}">
 			<matches pattern="^[MS]" string="${saved.build.id}" />
 		</condition>
 		<condition property="composite.repository.base" value="releases/${base.version}">
@@ -224,24 +234,30 @@
 	</target>
 
 	<target name="-publish.build.repository" if="composite.repository.base">
+
 		<property name="composite.repository.directory" location="${downloads.area}/updates/${composite.repository.base}" />
 		<property name="composite.repository.url" value="file:/${composite.repository.directory}" />
 		<property name="build.repository.directory" location="${composite.repository.directory}/${saved.build.id}" />
 
-		<delete dir="${build.repository.directory}" />
-		<mkdir dir="${build.repository.directory}" />
+		<!-- without p2.composite.repository -->
+		<property name="build.repository.directory" location="${composite.repository.directory}" />
+
+		<deltree dir="${build.repository.directory}" />
 
 		<unzip  dest="${build.repository.directory}">
 			<fileset dir="${packages.directory}">
 				<filename name="*-Update*.zip" />
 			</fileset>
 		</unzip>
-		<p2.composite.repository name="TMF Xtext Update Site (${composite.repository.base})" destination="${composite.repository.url}">
+
+		<!--<p2.composite.repository destination="${composite.repository.url}">
 			<add>
  				<repository location="${saved.build.id}" />
 			</add>
-		</p2.composite.repository>
+		</p2.composite.repository>-->
 
+
+		<!-- change Group owner  -->
 		<fileset id="repository.resources" dir="${composite.repository.directory}">
 			<or>
 				<filename name="compositeContent.*" />
@@ -259,5 +275,9 @@
 		<chgrp group="${group.owner}" type="both" verbose="true">
 			<fileset refid="change.group.owner.resources" />
 		</chgrp>
+	</target>
+
+	<target name="echo-status" if="alreadyPromoted">
+		<echo>Build ${saved.build.id} already promoted, nothing to do...</echo>
 	</target>
 </project>
