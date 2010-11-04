@@ -92,7 +92,7 @@ public class RailroadView extends ViewPart {
 	@Override
 	public void dispose() {
 		selectionLinker.deactivate();
-		getSite().getWorkbenchWindow().getPartService().addPartListener(synchronizer);
+		getSite().getWorkbenchWindow().getPartService().removePartListener(synchronizer);
 		super.dispose();
 	}
 
