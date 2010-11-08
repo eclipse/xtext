@@ -66,7 +66,7 @@
 			</tokenfilter>
 		  </filterchain>
 		</loadfile>
-		<concat destfile="${build.dir}${file.separator}${document.name}.textile" append="false" fixlastline="yes">
+		<concat encoding="ISO-8859-1" destfile="${build.dir}${file.separator}${document.name}.textile" append="false" fixlastline="yes">
 			<filelist dir="doc" files="${inputfiles}"/>
 		</concat>
 	</target>
@@ -74,7 +74,8 @@
 	<target name="wikitext2docbook" depends="assemble" description="Generate DocBook from Textile">
 		<wikitext-to-docbook markupLanguage="org.eclipse.xtext.wikitext.XtextTextileDialect"
 			booktitle="Xtext User Guide"
-			validate="true">
+			validate="true"
+			sourceencoding="ISO-8859-1">
 			<fileset dir="${build.dir}">
 	 			<include name="${document.name}.textile"/>
 			</fileset>

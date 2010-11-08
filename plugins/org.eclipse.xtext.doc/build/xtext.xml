@@ -6542,31 +6542,23 @@ public void fixFeatureName(final Issue issue,
 		</section>
 		<section id="outline">
 			<title>Outline View</title>
-			<section id="Weredesignedtheoutlinein2.0.Thefollowingnolongerreflectsthecurrentstateofimplementation.">
-				<title>We redesigned the outline in 2.0. The following no longer reflects the current state of implementation. </title>
-				<para>TODO: 
-					Rewrite this section</para>
-				<para>Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical 
-					view on your model and allows you to sort tree elements alphabetically. Selecting an element in the 
-					outline will highlight the corresponding element in the text editor. Users can choose to synchronize 
-					the outline with the editor selection by clicking the 
-					<emphasis>Link with Editor</emphasis> button.
-				</para>
-				<para>
-					<mediaobject>
-						<imageobject>
-							<imagedata fileref="images/sample_outline.png"/>
-						</imageobject>
-					</mediaobject>
-				</para>
-				<para>You can customize various aspects of the outline by providing implementation for its various interfaces. 
-					The following sections show how to do this.</para>
-			</section>
+			<para>Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical 
+				view on your model and allows you to sort tree elements alphabetically. Selecting an element in the 
+				outline will highlight the corresponding element in the text editor. Users can choose to synchronize 
+				the outline with the editor selection by clicking the 
+				<emphasis>Link with Editor</emphasis> button.
+			</para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/sample_outline.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<para>You can customize various aspects of the outline by providing implementation for its various interfaces. 
+				The following sections show how to do this.</para>
 			<section id="InfluencingtheOutlineStructure">
 				<title>Influencing the Outline Structure</title>
-				<para>
-					<emphasis>outdated</emphasis> 
-				</para>
 				<para>In its default implementation, the outline view shows the containment hierarchy of your model. 
 					This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., 
 					by omitting a certain kind of node or by introducing additional even virtual nodes, you customize 
@@ -6632,9 +6624,6 @@ public void fixFeatureName(final Issue issue,
 			</section>
 			<section id="Filtering">
 				<title>Filtering</title>
-				<para>
-					<emphasis>outdated</emphasis> 
-				</para>
 				<para>Often, you want to allow users to filter the contents of the outline to make it easier to concentrate 
 					on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add 
 
@@ -6720,9 +6709,6 @@ public void fixFeatureName(final Issue issue,
 			</section>
 			<section id="Contextmenus">
 				<title>Context menus</title>
-				<para>
-					<emphasis>outdated</emphasis> 
-				</para>
 				<para>You might want to register context menu actions for specific elements in the outline, e.g. to allow 
 					users of your DSL to invoke a generator or to validate the selected element. As all elements in the 
 					outline are 
@@ -6774,9 +6760,6 @@ public void fixFeatureName(final Issue issue,
 				</section>
 				<section id="RegisteringaMenuContribution">
 					<title>Registering a Menu Contribution</title>
-					<para>
-						<emphasis>outdated</emphasis> 
-					</para>
 					<para>You can now add command / handler pairs to the context menu.</para>
 					<para>First, you need to define a command – it will serve as a handle to glue together the handler 
 						and the menu contribution:</para>
@@ -6833,10 +6816,7 @@ public void fixFeatureName(final Issue issue,
 				</section>
 			</section>
 			<section id="quick_outline">
-				<title>Quick Outline</title>
-				<para>
-					<emphasis>outdated</emphasis> 
-				</para>
+				<title>Quick Outline </title>
 				<para>Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown 
 					in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline,
 					you have to put the 
