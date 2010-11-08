@@ -23,7 +23,7 @@ public class AntlrToolFacade {
 		this.loader = loader;
 	}
 
-	private String downloadURL = "http://download.itemis.com/antlr-generator-3.0.1.jar";
+	private String downloadURL = "http://download.itemis.com/antlr-generator-3.2.0.jar";
 	private boolean askBeforeDownload = true;
 
 	public void setAskBeforeDownload(boolean shouldAsk) {
@@ -34,7 +34,7 @@ public class AntlrToolFacade {
 		this.downloadURL = downloadURL;
 	}
 	
-	private String downloadTo = "./.antlr-generator-3.0.1.jar";
+	private String downloadTo = "./.antlr-generator-3.2.0.jar";
 
 	public void setDownloadTo(String path) {
 		this.downloadTo = path;
