@@ -33,7 +33,7 @@ public class QualifiedNameFactoryImpl extends EFactoryImpl implements QualifiedN
   {
     try
     {
-      QualifiedNameFactory theQualifiedNameFactory = (QualifiedNameFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xtext.org/tests/QualifiedNametestLanguage"); 
+      QualifiedNameFactory theQualifiedNameFactory = (QualifiedNameFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xtext.org/tests/QualifiedNameTestLanguage"); 
       if (theQualifiedNameFactory != null)
       {
         return theQualifiedNameFactory;

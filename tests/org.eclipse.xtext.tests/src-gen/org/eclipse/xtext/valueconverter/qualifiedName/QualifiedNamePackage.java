@@ -40,7 +40,7 @@ public interface QualifiedNamePackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://www.xtext.org/tests/QualifiedNametestLanguage";
+  String eNS_URI = "http://www.xtext.org/tests/QualifiedNameTestLanguage";
 
   /**
    * The package namespace name.

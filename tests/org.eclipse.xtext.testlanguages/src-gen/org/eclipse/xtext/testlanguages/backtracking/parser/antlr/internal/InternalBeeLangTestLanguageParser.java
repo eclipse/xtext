@@ -477,7 +477,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleUnit"
-    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:168:1: ruleUnit returns [EObject current=null] : ( () ( (lv_documentation_1_0= RULE_DOCUMENTATION ) )? otherlv_2= 'unit' ( (lv_name_3_0= RULE_ID ) )? (otherlv_4= 'version' ( (lv_version_5_0= RULE_ID ) ) )? (otherlv_6= 'implements' ( (lv_implements_7_0= ruleSimpleTypeRef ) ) (otherlv_8= ',' ( (lv_implements_9_0= ruleSimpleTypeRef ) ) )* )? otherlv_10= '{' ( ( ( ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )* ) ) ) otherlv_34= '}' ) ;
+    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:168:1: ruleUnit returns [EObject current=null] : ( () ( (lv_documentation_1_0= RULE_DOCUMENTATION ) )? otherlv_2= 'unit' ( (lv_name_3_0= RULE_ID ) )? (otherlv_4= 'version' ( (lv_version_5_0= RULE_ID ) ) )? (otherlv_6= 'implements' ( (lv_implements_7_0= ruleSimpleTypeRef ) ) (otherlv_8= ',' ( (lv_implements_9_0= ruleSimpleTypeRef ) ) )* )? otherlv_10= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )* ) ) ) otherlv_34= '}' ) ;
     public final EObject ruleUnit() throws RecognitionException {
         EObject current = null;
         int ruleUnit_StartIndex = input.index();
@@ -530,11 +530,11 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return current; }
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:176:6: ( ( () ( (lv_documentation_1_0= RULE_DOCUMENTATION ) )? otherlv_2= 'unit' ( (lv_name_3_0= RULE_ID ) )? (otherlv_4= 'version' ( (lv_version_5_0= RULE_ID ) ) )? (otherlv_6= 'implements' ( (lv_implements_7_0= ruleSimpleTypeRef ) ) (otherlv_8= ',' ( (lv_implements_9_0= ruleSimpleTypeRef ) ) )* )? otherlv_10= '{' ( ( ( ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )* ) ) ) otherlv_34= '}' ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:177:1: ( () ( (lv_documentation_1_0= RULE_DOCUMENTATION ) )? otherlv_2= 'unit' ( (lv_name_3_0= RULE_ID ) )? (otherlv_4= 'version' ( (lv_version_5_0= RULE_ID ) ) )? (otherlv_6= 'implements' ( (lv_implements_7_0= ruleSimpleTypeRef ) ) (otherlv_8= ',' ( (lv_implements_9_0= ruleSimpleTypeRef ) ) )* )? otherlv_10= '{' ( ( ( ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )* ) ) ) otherlv_34= '}' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:176:6: ( ( () ( (lv_documentation_1_0= RULE_DOCUMENTATION ) )? otherlv_2= 'unit' ( (lv_name_3_0= RULE_ID ) )? (otherlv_4= 'version' ( (lv_version_5_0= RULE_ID ) ) )? (otherlv_6= 'implements' ( (lv_implements_7_0= ruleSimpleTypeRef ) ) (otherlv_8= ',' ( (lv_implements_9_0= ruleSimpleTypeRef ) ) )* )? otherlv_10= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )* ) ) ) otherlv_34= '}' ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:177:1: ( () ( (lv_documentation_1_0= RULE_DOCUMENTATION ) )? otherlv_2= 'unit' ( (lv_name_3_0= RULE_ID ) )? (otherlv_4= 'version' ( (lv_version_5_0= RULE_ID ) ) )? (otherlv_6= 'implements' ( (lv_implements_7_0= ruleSimpleTypeRef ) ) (otherlv_8= ',' ( (lv_implements_9_0= ruleSimpleTypeRef ) ) )* )? otherlv_10= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )* ) ) ) otherlv_34= '}' )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:177:1: ( () ( (lv_documentation_1_0= RULE_DOCUMENTATION ) )? otherlv_2= 'unit' ( (lv_name_3_0= RULE_ID ) )? (otherlv_4= 'version' ( (lv_version_5_0= RULE_ID ) ) )? (otherlv_6= 'implements' ( (lv_implements_7_0= ruleSimpleTypeRef ) ) (otherlv_8= ',' ( (lv_implements_9_0= ruleSimpleTypeRef ) ) )* )? otherlv_10= '{' ( ( ( ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )* ) ) ) otherlv_34= '}' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:177:2: () ( (lv_documentation_1_0= RULE_DOCUMENTATION ) )? otherlv_2= 'unit' ( (lv_name_3_0= RULE_ID ) )? (otherlv_4= 'version' ( (lv_version_5_0= RULE_ID ) ) )? (otherlv_6= 'implements' ( (lv_implements_7_0= ruleSimpleTypeRef ) ) (otherlv_8= ',' ( (lv_implements_9_0= ruleSimpleTypeRef ) ) )* )? otherlv_10= '{' ( ( ( ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )* ) ) ) otherlv_34= '}'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:177:1: ( () ( (lv_documentation_1_0= RULE_DOCUMENTATION ) )? otherlv_2= 'unit' ( (lv_name_3_0= RULE_ID ) )? (otherlv_4= 'version' ( (lv_version_5_0= RULE_ID ) ) )? (otherlv_6= 'implements' ( (lv_implements_7_0= ruleSimpleTypeRef ) ) (otherlv_8= ',' ( (lv_implements_9_0= ruleSimpleTypeRef ) ) )* )? otherlv_10= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )* ) ) ) otherlv_34= '}' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:177:2: () ( (lv_documentation_1_0= RULE_DOCUMENTATION ) )? otherlv_2= 'unit' ( (lv_name_3_0= RULE_ID ) )? (otherlv_4= 'version' ( (lv_version_5_0= RULE_ID ) ) )? (otherlv_6= 'implements' ( (lv_implements_7_0= ruleSimpleTypeRef ) ) (otherlv_8= ',' ( (lv_implements_9_0= ruleSimpleTypeRef ) ) )* )? otherlv_10= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )* ) ) ) otherlv_34= '}'
             {
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:177:2: ()
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:178:2: 
@@ -859,46 +859,53 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                   	createLeafNode(otherlv_10, grammarAccess.getUnitAccess().getLeftCurlyBracketKeyword_6(), null);
                   
             }
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:331:1: ( ( ( ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )* ) ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:333:1: ( ( ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )* ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:331:1: ( ( ( ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )* ) ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:333:1: ( ( ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )* ) )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:333:1: ( ( ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )* ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:334:2: ( ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )* )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:333:1: ( ( ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )* ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:334:2: ( ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )* )
             {
             getUnorderedGroupHelper().enter(grammarAccess.getUnitAccess().getUnorderedGroup_7());
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:337:2: ( ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )* )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:338:3: ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )*
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:337:2: ( ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )* )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:338:3: ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )*
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:338:3: ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )*
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:338:3: ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )*
             loop13:
             do {
                 int alt13=7;
                 alt13 = dfa13.predict(input);
                 switch (alt13) {
             	case 1 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:340:4: ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:340:4: ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:340:4: ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:341:5: {...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:340:4: ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:341:5: {...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleUnit", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:341:101: ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:342:6: (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:341:101: ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:342:6: ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:6: (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:8: otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:6: ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:7: {...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' )
             	    {
-            	    otherlv_12=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleUnit500); if (state.failed) return current;
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleUnit", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:16: (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:18: otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';'
+            	    {
+            	    otherlv_12=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleUnit503); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_12, grammarAccess.getUnitAccess().getSourceKeyword_7_0_0(), null);
             	          
             	    }
-            	    otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleUnit512); if (state.failed) return current;
+            	    otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleUnit515); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_13, grammarAccess.getUnitAccess().getColonKeyword_7_0_1(), null);
@@ -915,7 +922,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getSourceLocationPathParserRuleCall_7_0_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_rulePath_in_ruleUnit533);
+            	    pushFollow(FollowSets000.FOLLOW_rulePath_in_ruleUnit536);
             	    lv_sourceLocation_14_0=rulePath();
 
             	    state._fsp--;
@@ -945,12 +952,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_15=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleUnit545); if (state.failed) return current;
+            	    otherlv_15=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleUnit548); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_15, grammarAccess.getUnitAccess().getSemicolonKeyword_7_0_3(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -965,29 +975,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:388:4: ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:388:4: ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:388:4: ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:389:5: {...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:388:4: ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:389:5: {...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleUnit", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:389:101: ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:390:6: (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:389:101: ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:390:6: ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:6: (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:8: otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:6: ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:7: {...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' )
             	    {
-            	    otherlv_16=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleUnit609); if (state.failed) return current;
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleUnit", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:16: (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:18: otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';'
+            	    {
+            	    otherlv_16=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleUnit616); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_16, grammarAccess.getUnitAccess().getOutputKeyword_7_1_0(), null);
             	          
             	    }
-            	    otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleUnit621); if (state.failed) return current;
+            	    otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleUnit628); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_17, grammarAccess.getUnitAccess().getColonKeyword_7_1_1(), null);
@@ -1004,7 +1021,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getOutputLocationPathParserRuleCall_7_1_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_rulePath_in_ruleUnit642);
+            	    pushFollow(FollowSets000.FOLLOW_rulePath_in_ruleUnit649);
             	    lv_outputLocation_18_0=rulePath();
 
             	    state._fsp--;
@@ -1034,12 +1051,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_19=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleUnit654); if (state.failed) return current;
+            	    otherlv_19=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleUnit661); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_19, grammarAccess.getUnitAccess().getSemicolonKeyword_7_1_3(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -1054,20 +1074,20 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:436:4: ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:436:4: ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:436:4: ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:437:5: {...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:436:4: ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:437:5: {...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleUnit", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:437:101: ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:438:6: (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:437:101: ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:438:6: ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:6: (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:6: ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+
             	    int cnt9=0;
             	    loop9:
             	    do {
@@ -1077,7 +1097,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	        if ( (LA9_0==22) ) {
             	            int LA9_2 = input.LA(2);
 
-            	            if ( (synpred11_InternalBeeLangTestLanguage()) ) {
+            	            if ( ((synpred11_InternalBeeLangTestLanguage()&&(true))) ) {
             	                alt9=1;
             	            }
 
@@ -1087,15 +1107,22 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	        switch (alt9) {
             	    	case 1 :
-            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:8: otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';'
+            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:7: {...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )
             	    	    {
-            	    	    otherlv_20=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleUnit718); if (state.failed) return current;
+            	    	    if ( !((true)) ) {
+            	    	        if (state.backtracking>0) {state.failed=true; return current;}
+            	    	        throw new FailedPredicateException(input, "ruleUnit", "true");
+            	    	    }
+            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:16: (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )
+            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:18: otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';'
+            	    	    {
+            	    	    otherlv_20=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleUnit729); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	          	createLeafNode(otherlv_20, grammarAccess.getUnitAccess().getProvidesKeyword_7_2_0(), null);
             	    	          
             	    	    }
-            	    	    otherlv_21=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleUnit730); if (state.failed) return current;
+            	    	    otherlv_21=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleUnit741); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	          	createLeafNode(otherlv_21, grammarAccess.getUnitAccess().getColonKeyword_7_2_1(), null);
@@ -1112,7 +1139,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    	      	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getProvidedCapabilitiesProvidedCapabilityParserRuleCall_7_2_2_0(), currentNode); 
             	    	      	    
             	    	    }
-            	    	    pushFollow(FollowSets000.FOLLOW_ruleProvidedCapability_in_ruleUnit751);
+            	    	    pushFollow(FollowSets000.FOLLOW_ruleProvidedCapability_in_ruleUnit762);
             	    	    lv_providedCapabilities_22_0=ruleProvidedCapability();
 
             	    	    state._fsp--;
@@ -1142,12 +1169,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    	    }
 
-            	    	    otherlv_23=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleUnit763); if (state.failed) return current;
+            	    	    otherlv_23=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleUnit774); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	          	createLeafNode(otherlv_23, grammarAccess.getUnitAccess().getSemicolonKeyword_7_2_3(), null);
             	    	          
             	    	    }
+
+            	    	    }
+
 
             	    	    }
             	    	    break;
@@ -1173,20 +1203,20 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 4 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:484:4: ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:484:4: ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:484:4: ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:485:5: {...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:484:4: ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:485:5: {...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleUnit", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:485:101: ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:486:6: (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:485:101: ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:486:6: ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:6: (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:6: ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+
             	    int cnt10=0;
             	    loop10:
             	    do {
@@ -1196,7 +1226,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	        if ( (LA10_0==23) ) {
             	            int LA10_2 = input.LA(2);
 
-            	            if ( (synpred13_InternalBeeLangTestLanguage()) ) {
+            	            if ( ((synpred13_InternalBeeLangTestLanguage()&&(true))) ) {
             	                alt10=1;
             	            }
 
@@ -1206,15 +1236,22 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	        switch (alt10) {
             	    	case 1 :
-            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:8: otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';'
+            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:7: {...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )
             	    	    {
-            	    	    otherlv_24=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleUnit828); if (state.failed) return current;
+            	    	    if ( !((true)) ) {
+            	    	        if (state.backtracking>0) {state.failed=true; return current;}
+            	    	        throw new FailedPredicateException(input, "ruleUnit", "true");
+            	    	    }
+            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:16: (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )
+            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:18: otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';'
+            	    	    {
+            	    	    otherlv_24=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleUnit843); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	          	createLeafNode(otherlv_24, grammarAccess.getUnitAccess().getRequiresKeyword_7_3_0(), null);
             	    	          
             	    	    }
-            	    	    otherlv_25=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleUnit840); if (state.failed) return current;
+            	    	    otherlv_25=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleUnit855); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	          	createLeafNode(otherlv_25, grammarAccess.getUnitAccess().getColonKeyword_7_3_1(), null);
@@ -1231,7 +1268,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    	      	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getRequiredCapabilitiesAliasedRequiredCapabilityParserRuleCall_7_3_2_0(), currentNode); 
             	    	      	    
             	    	    }
-            	    	    pushFollow(FollowSets000.FOLLOW_ruleAliasedRequiredCapability_in_ruleUnit861);
+            	    	    pushFollow(FollowSets000.FOLLOW_ruleAliasedRequiredCapability_in_ruleUnit876);
             	    	    lv_requiredCapabilities_26_0=ruleAliasedRequiredCapability();
 
             	    	    state._fsp--;
@@ -1261,12 +1298,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    	    }
 
-            	    	    otherlv_27=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleUnit873); if (state.failed) return current;
+            	    	    otherlv_27=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleUnit888); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	          	createLeafNode(otherlv_27, grammarAccess.getUnitAccess().getSemicolonKeyword_7_3_3(), null);
             	    	          
             	    	    }
+
+            	    	    }
+
 
             	    	    }
             	    	    break;
@@ -1292,20 +1332,20 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 5 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:532:4: ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:532:4: ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:532:4: ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:533:5: {...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:532:4: ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:533:5: {...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleUnit", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:533:101: ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:534:6: (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:533:101: ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:534:6: ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:6: (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:6: ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+
             	    int cnt11=0;
             	    loop11:
             	    do {
@@ -1315,7 +1355,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	        if ( (LA11_0==23) ) {
             	            int LA11_2 = input.LA(2);
 
-            	            if ( (synpred15_InternalBeeLangTestLanguage()) ) {
+            	            if ( ((synpred15_InternalBeeLangTestLanguage()&&(true))) ) {
             	                alt11=1;
             	            }
 
@@ -1325,21 +1365,28 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	        switch (alt11) {
             	    	case 1 :
-            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:8: otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';'
+            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:7: {...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )
             	    	    {
-            	    	    otherlv_28=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleUnit938); if (state.failed) return current;
+            	    	    if ( !((true)) ) {
+            	    	        if (state.backtracking>0) {state.failed=true; return current;}
+            	    	        throw new FailedPredicateException(input, "ruleUnit", "true");
+            	    	    }
+            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:16: (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )
+            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:18: otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';'
+            	    	    {
+            	    	    otherlv_28=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleUnit957); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	          	createLeafNode(otherlv_28, grammarAccess.getUnitAccess().getRequiresKeyword_7_4_0(), null);
             	    	          
             	    	    }
-            	    	    otherlv_29=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleUnit950); if (state.failed) return current;
+            	    	    otherlv_29=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleUnit969); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	          	createLeafNode(otherlv_29, grammarAccess.getUnitAccess().getEnvKeyword_7_4_1(), null);
             	    	          
             	    	    }
-            	    	    otherlv_30=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleUnit962); if (state.failed) return current;
+            	    	    otherlv_30=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleUnit981); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	          	createLeafNode(otherlv_30, grammarAccess.getUnitAccess().getColonKeyword_7_4_2(), null);
@@ -1356,7 +1403,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    	      	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getMetaRequiredCapabilitiesRequiredCapabilityParserRuleCall_7_4_3_0(), currentNode); 
             	    	      	    
             	    	    }
-            	    	    pushFollow(FollowSets000.FOLLOW_ruleRequiredCapability_in_ruleUnit983);
+            	    	    pushFollow(FollowSets000.FOLLOW_ruleRequiredCapability_in_ruleUnit1002);
             	    	    lv_metaRequiredCapabilities_31_0=ruleRequiredCapability();
 
             	    	    state._fsp--;
@@ -1386,12 +1433,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    	    }
 
-            	    	    otherlv_32=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleUnit995); if (state.failed) return current;
+            	    	    otherlv_32=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleUnit1014); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	          	createLeafNode(otherlv_32, grammarAccess.getUnitAccess().getSemicolonKeyword_7_4_4(), null);
             	    	          
             	    	    }
+
+            	    	    }
+
 
             	    	    }
             	    	    break;
@@ -1417,20 +1467,20 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 6 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:584:4: ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:584:4: ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:584:4: ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:585:5: {...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:584:4: ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:585:5: {...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleUnit", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:585:101: ( ( (lv_functions_33_0= ruleFunction ) )+ )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:586:6: ( (lv_functions_33_0= ruleFunction ) )+
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:585:101: ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:586:6: ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:589:6: ( (lv_functions_33_0= ruleFunction ) )+
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:589:6: ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+
             	    int cnt12=0;
             	    loop12:
             	    do {
@@ -1440,7 +1490,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	            {
             	            int LA12_2 = input.LA(2);
 
-            	            if ( (synpred17_InternalBeeLangTestLanguage()) ) {
+            	            if ( ((synpred17_InternalBeeLangTestLanguage()&&(true))) ) {
             	                alt12=1;
             	            }
 
@@ -1451,7 +1501,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	            {
             	            int LA12_3 = input.LA(2);
 
-            	            if ( (synpred17_InternalBeeLangTestLanguage()) ) {
+            	            if ( ((synpred17_InternalBeeLangTestLanguage()&&(true))) ) {
             	                alt12=1;
             	            }
 
@@ -1462,7 +1512,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	            {
             	            int LA12_4 = input.LA(2);
 
-            	            if ( (synpred17_InternalBeeLangTestLanguage()) ) {
+            	            if ( ((synpred17_InternalBeeLangTestLanguage()&&(true))) ) {
             	                alt12=1;
             	            }
 
@@ -1473,7 +1523,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	            {
             	            int LA12_5 = input.LA(2);
 
-            	            if ( (synpred17_InternalBeeLangTestLanguage()) ) {
+            	            if ( ((synpred17_InternalBeeLangTestLanguage()&&(true))) ) {
             	                alt12=1;
             	            }
 
@@ -1485,6 +1535,13 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	        switch (alt12) {
             	    	case 1 :
+            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:589:7: {...}? => ( (lv_functions_33_0= ruleFunction ) )
+            	    	    {
+            	    	    if ( !((true)) ) {
+            	    	        if (state.backtracking>0) {state.failed=true; return current;}
+            	    	        throw new FailedPredicateException(input, "ruleUnit", "true");
+            	    	    }
+            	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:589:16: ( (lv_functions_33_0= ruleFunction ) )
             	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:590:1: (lv_functions_33_0= ruleFunction )
             	    	    {
             	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:590:1: (lv_functions_33_0= ruleFunction )
@@ -1495,7 +1552,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    	      	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getFunctionsFunctionParserRuleCall_7_5_0(), currentNode); 
             	    	      	    
             	    	    }
-            	    	    pushFollow(FollowSets000.FOLLOW_ruleFunction_in_ruleUnit1068);
+            	    	    pushFollow(FollowSets000.FOLLOW_ruleFunction_in_ruleUnit1091);
             	    	    lv_functions_33_0=ruleFunction();
 
             	    	    state._fsp--;
@@ -1519,6 +1576,9 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    	      	        currentNode = currentNode.getParent();
             	    	      	    
             	    	    }
+
+            	    	    }
+
 
             	    	    }
 
@@ -1562,7 +1622,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_34=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleUnit1120); if (state.failed) return current;
+            otherlv_34=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleUnit1144); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_34, grammarAccess.getUnitAccess().getRightCurlyBracketKeyword_8(), null);
@@ -1617,7 +1677,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getProvidedCapabilityRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleProvidedCapability_in_entryRuleProvidedCapability1166);
+            pushFollow(FollowSets000.FOLLOW_ruleProvidedCapability_in_entryRuleProvidedCapability1190);
             iv_ruleProvidedCapability=ruleProvidedCapability();
 
             state._fsp--;
@@ -1625,7 +1685,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleProvidedCapability; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleProvidedCapability1176); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleProvidedCapability1200); if (state.failed) return current;
 
             }
 
@@ -1647,7 +1707,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleProvidedCapability"
-    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:659:1: ruleProvidedCapability returns [EObject current=null] : ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) (otherlv_3= '{' ( ( ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?) ) ) otherlv_17= '}' )? ) ;
+    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:659:1: ruleProvidedCapability returns [EObject current=null] : ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?) ) ) otherlv_17= '}' )? ) ;
     public final EObject ruleProvidedCapability() throws RecognitionException {
         EObject current = null;
         int ruleProvidedCapability_StartIndex = input.index();
@@ -1676,11 +1736,11 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return current; }
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:667:6: ( ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) (otherlv_3= '{' ( ( ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?) ) ) otherlv_17= '}' )? ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:668:1: ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) (otherlv_3= '{' ( ( ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?) ) ) otherlv_17= '}' )? )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:667:6: ( ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?) ) ) otherlv_17= '}' )? ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:668:1: ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?) ) ) otherlv_17= '}' )? )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:668:1: ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) (otherlv_3= '{' ( ( ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?) ) ) otherlv_17= '}' )? )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:668:2: () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) (otherlv_3= '{' ( ( ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?) ) ) otherlv_17= '}' )?
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:668:1: ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?) ) ) otherlv_17= '}' )? )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:668:2: () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?) ) ) otherlv_17= '}' )?
             {
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:668:2: ()
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:669:2: 
@@ -1732,7 +1792,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:683:1: (lv_nameSpace_1_0= RULE_ID )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:684:3: lv_nameSpace_1_0= RULE_ID
                     {
-                    lv_nameSpace_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleProvidedCapability1235); if (state.failed) return current;
+                    lv_nameSpace_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleProvidedCapability1259); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_nameSpace_1_0, grammarAccess.getProvidedCapabilityAccess().getNameSpaceIDTerminalRuleCall_1_0_0(), "nameSpace"); 
@@ -1768,7 +1828,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 2 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:707:7: otherlv_2= 'unit'
                     {
-                    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleProvidedCapability1258); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleProvidedCapability1282); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_2, grammarAccess.getProvidedCapabilityAccess().getUnitKeyword_1_1(), null);
@@ -1780,7 +1840,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:711:2: (otherlv_3= '{' ( ( ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?) ) ) otherlv_17= '}' )?
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:711:2: (otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?) ) ) otherlv_17= '}' )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -1789,25 +1849,25 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             }
             switch (alt16) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:711:4: otherlv_3= '{' ( ( ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?) ) ) otherlv_17= '}'
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:711:4: otherlv_3= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?) ) ) otherlv_17= '}'
                     {
-                    otherlv_3=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleProvidedCapability1272); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleProvidedCapability1296); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_3, grammarAccess.getProvidedCapabilityAccess().getLeftCurlyBracketKeyword_2_0(), null);
                           
                     }
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:715:1: ( ( ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:717:1: ( ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:715:1: ( ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?) ) )
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:717:1: ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:717:1: ( ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:718:2: ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:717:1: ( ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?) )
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:718:2: ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?)
                     {
                     getUnorderedGroupHelper().enter(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1());
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:721:2: ( ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:722:3: ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+ {...}?
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:721:2: ( ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?)
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:722:3: ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:722:3: ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) | ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )+
+                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:722:3: ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )+
                     int cnt15=0;
                     loop15:
                     do {
@@ -1827,29 +1887,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                         switch (alt15) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:724:4: ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:724:4: ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:724:4: ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) )
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:725:5: {...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:724:4: ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:725:5: {...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleProvidedCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:725:117: ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) )
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:726:6: (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:725:117: ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:726:6: ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) )
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0);
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:6: (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' )
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:8: otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';'
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:6: ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:7: {...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' )
                     	    {
-                    	    otherlv_5=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleProvidedCapability1327); if (state.failed) return current;
+                    	    if ( !((true)) ) {
+                    	        if (state.backtracking>0) {state.failed=true; return current;}
+                    	        throw new FailedPredicateException(input, "ruleProvidedCapability", "true");
+                    	    }
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:16: (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:18: otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';'
+                    	    {
+                    	    otherlv_5=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleProvidedCapability1354); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_5, grammarAccess.getProvidedCapabilityAccess().getWhenKeyword_2_1_0_0(), null);
                     	          
                     	    }
-                    	    otherlv_6=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleProvidedCapability1339); if (state.failed) return current;
+                    	    otherlv_6=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleProvidedCapability1366); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_6, grammarAccess.getProvidedCapabilityAccess().getColonKeyword_2_1_0_1(), null);
@@ -1866,7 +1933,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	      	        currentNode=createCompositeNode(grammarAccess.getProvidedCapabilityAccess().getCondExprExpressionParserRuleCall_2_1_0_2_0(), currentNode); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleProvidedCapability1360);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleProvidedCapability1387);
                     	    lv_condExpr_7_0=ruleExpression();
 
                     	    state._fsp--;
@@ -1896,12 +1963,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                     	    }
 
-                    	    otherlv_8=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleProvidedCapability1372); if (state.failed) return current;
+                    	    otherlv_8=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleProvidedCapability1399); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_8, grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_0_3(), null);
                     	          
                     	    }
+
+                    	    }
+
 
                     	    }
 
@@ -1916,29 +1986,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:772:4: ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:772:4: ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:772:4: ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) )
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:773:5: {...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:772:4: ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:773:5: {...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleProvidedCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:773:117: ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) )
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:774:6: (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:773:117: ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:774:6: ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) )
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1);
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:6: (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' )
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:8: otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';'
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:6: ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:7: {...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' )
                     	    {
-                    	    otherlv_9=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleProvidedCapability1436); if (state.failed) return current;
+                    	    if ( !((true)) ) {
+                    	        if (state.backtracking>0) {state.failed=true; return current;}
+                    	        throw new FailedPredicateException(input, "ruleProvidedCapability", "true");
+                    	    }
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:16: (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:18: otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';'
+                    	    {
+                    	    otherlv_9=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleProvidedCapability1467); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_9, grammarAccess.getProvidedCapabilityAccess().getNameKeyword_2_1_1_0(), null);
                     	          
                     	    }
-                    	    otherlv_10=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleProvidedCapability1448); if (state.failed) return current;
+                    	    otherlv_10=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleProvidedCapability1479); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_10, grammarAccess.getProvidedCapabilityAccess().getColonKeyword_2_1_1_1(), null);
@@ -1950,7 +2027,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:786:1: (lv_name_11_0= RULE_ID )
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:787:3: lv_name_11_0= RULE_ID
                     	    {
-                    	    lv_name_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleProvidedCapability1465); if (state.failed) return current;
+                    	    lv_name_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleProvidedCapability1496); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      			createLeafNode(lv_name_11_0, grammarAccess.getProvidedCapabilityAccess().getNameIDTerminalRuleCall_2_1_1_2_0(), "name"); 
@@ -1980,12 +2057,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                     	    }
 
-                    	    otherlv_12=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleProvidedCapability1482); if (state.failed) return current;
+                    	    otherlv_12=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleProvidedCapability1513); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_12, grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_1_3(), null);
                     	          
                     	    }
+
+                    	    }
+
 
                     	    }
 
@@ -2000,29 +2080,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	    }
                     	    break;
                     	case 3 :
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:820:4: ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:820:4: ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:820:4: ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) )
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:821:5: {...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:820:4: ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:821:5: {...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2) ) {
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        throw new FailedPredicateException(input, "ruleProvidedCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2)");
                     	    }
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:821:117: ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) )
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:822:6: (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:821:117: ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:822:6: ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) )
                     	    {
                     	    getUnorderedGroupHelper().select(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2);
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:6: (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' )
-                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:8: otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';'
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:6: ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:7: {...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' )
                     	    {
-                    	    otherlv_13=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleProvidedCapability1546); if (state.failed) return current;
+                    	    if ( !((true)) ) {
+                    	        if (state.backtracking>0) {state.failed=true; return current;}
+                    	        throw new FailedPredicateException(input, "ruleProvidedCapability", "true");
+                    	    }
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:16: (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' )
+                    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:18: otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';'
+                    	    {
+                    	    otherlv_13=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleProvidedCapability1581); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_13, grammarAccess.getProvidedCapabilityAccess().getVersionKeyword_2_1_2_0(), null);
                     	          
                     	    }
-                    	    otherlv_14=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleProvidedCapability1558); if (state.failed) return current;
+                    	    otherlv_14=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleProvidedCapability1593); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_14, grammarAccess.getProvidedCapabilityAccess().getColonKeyword_2_1_2_1(), null);
@@ -2034,7 +2121,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:834:1: (lv_version_15_0= RULE_ID )
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:835:3: lv_version_15_0= RULE_ID
                     	    {
-                    	    lv_version_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleProvidedCapability1575); if (state.failed) return current;
+                    	    lv_version_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleProvidedCapability1610); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      			createLeafNode(lv_version_15_0, grammarAccess.getProvidedCapabilityAccess().getVersionIDTerminalRuleCall_2_1_2_2_0(), "version"); 
@@ -2064,12 +2151,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                     	    }
 
-                    	    otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleProvidedCapability1592); if (state.failed) return current;
+                    	    otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleProvidedCapability1627); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_16, grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_2_3(), null);
                     	          
                     	    }
+
+                    	    }
+
 
                     	    }
 
@@ -2108,7 +2198,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                     }
 
-                    otherlv_17=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleProvidedCapability1650); if (state.failed) return current;
+                    otherlv_17=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleProvidedCapability1686); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_17, grammarAccess.getProvidedCapabilityAccess().getRightCurlyBracketKeyword_2_2(), null);
@@ -2169,7 +2259,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAliasedRequiredCapabilityRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleAliasedRequiredCapability_in_entryRuleAliasedRequiredCapability1698);
+            pushFollow(FollowSets000.FOLLOW_ruleAliasedRequiredCapability_in_entryRuleAliasedRequiredCapability1734);
             iv_ruleAliasedRequiredCapability=ruleAliasedRequiredCapability();
 
             state._fsp--;
@@ -2177,7 +2267,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleAliasedRequiredCapability; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAliasedRequiredCapability1708); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAliasedRequiredCapability1744); if (state.failed) return current;
 
             }
 
@@ -2199,7 +2289,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleAliasedRequiredCapability"
-    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:908:1: ruleAliasedRequiredCapability returns [EObject current=null] : ( ( ( (lv_nameSpace_0_0= RULE_ID ) ) | otherlv_1= 'unit' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? (otherlv_5= '{' ( ( ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* ) ) ) otherlv_25= '}' ) ) ;
+    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:908:1: ruleAliasedRequiredCapability returns [EObject current=null] : ( ( ( (lv_nameSpace_0_0= RULE_ID ) ) | otherlv_1= 'unit' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? (otherlv_5= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* ) ) ) otherlv_25= '}' ) ) ;
     public final EObject ruleAliasedRequiredCapability() throws RecognitionException {
         EObject current = null;
         int ruleAliasedRequiredCapability_StartIndex = input.index();
@@ -2237,11 +2327,11 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 8) ) { return current; }
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:916:6: ( ( ( ( (lv_nameSpace_0_0= RULE_ID ) ) | otherlv_1= 'unit' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? (otherlv_5= '{' ( ( ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* ) ) ) otherlv_25= '}' ) ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:917:1: ( ( ( (lv_nameSpace_0_0= RULE_ID ) ) | otherlv_1= 'unit' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? (otherlv_5= '{' ( ( ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* ) ) ) otherlv_25= '}' ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:916:6: ( ( ( ( (lv_nameSpace_0_0= RULE_ID ) ) | otherlv_1= 'unit' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? (otherlv_5= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* ) ) ) otherlv_25= '}' ) ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:917:1: ( ( ( (lv_nameSpace_0_0= RULE_ID ) ) | otherlv_1= 'unit' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? (otherlv_5= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* ) ) ) otherlv_25= '}' ) )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:917:1: ( ( ( (lv_nameSpace_0_0= RULE_ID ) ) | otherlv_1= 'unit' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? (otherlv_5= '{' ( ( ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* ) ) ) otherlv_25= '}' ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:917:2: ( ( (lv_nameSpace_0_0= RULE_ID ) ) | otherlv_1= 'unit' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? (otherlv_5= '{' ( ( ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* ) ) ) otherlv_25= '}' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:917:1: ( ( ( (lv_nameSpace_0_0= RULE_ID ) ) | otherlv_1= 'unit' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? (otherlv_5= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* ) ) ) otherlv_25= '}' ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:917:2: ( ( (lv_nameSpace_0_0= RULE_ID ) ) | otherlv_1= 'unit' ) ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? (otherlv_5= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* ) ) ) otherlv_25= '}' )
             {
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:917:2: ( ( (lv_nameSpace_0_0= RULE_ID ) ) | otherlv_1= 'unit' )
             int alt17=2;
@@ -2270,7 +2360,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:918:1: (lv_nameSpace_0_0= RULE_ID )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:919:3: lv_nameSpace_0_0= RULE_ID
                     {
-                    lv_nameSpace_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1755); if (state.failed) return current;
+                    lv_nameSpace_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1791); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_nameSpace_0_0, grammarAccess.getAliasedRequiredCapabilityAccess().getNameSpaceIDTerminalRuleCall_0_0_0(), "nameSpace"); 
@@ -2306,7 +2396,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 2 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:942:7: otherlv_1= 'unit'
                     {
-                    otherlv_1=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleAliasedRequiredCapability1778); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleAliasedRequiredCapability1814); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_1, grammarAccess.getAliasedRequiredCapabilityAccess().getUnitKeyword_0_1(), null);
@@ -2324,7 +2414,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:947:1: (lv_name_2_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:948:3: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1796); if (state.failed) return current;
+            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1832); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_name_2_0, grammarAccess.getAliasedRequiredCapabilityAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
@@ -2365,7 +2455,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:970:4: otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) )
                     {
-                    otherlv_3=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleAliasedRequiredCapability1814); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleAliasedRequiredCapability1850); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_3, grammarAccess.getAliasedRequiredCapabilityAccess().getAsKeyword_2_0(), null);
@@ -2377,7 +2467,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:975:1: (lv_alias_4_0= RULE_ID )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:976:3: lv_alias_4_0= RULE_ID
                     {
-                    lv_alias_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1831); if (state.failed) return current;
+                    lv_alias_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1867); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_alias_4_0, grammarAccess.getAliasedRequiredCapabilityAccess().getAliasIDTerminalRuleCall_2_1_0(), "alias"); 
@@ -2413,26 +2503,26 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:998:4: (otherlv_5= '{' ( ( ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* ) ) ) otherlv_25= '}' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:998:6: otherlv_5= '{' ( ( ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* ) ) ) otherlv_25= '}'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:998:4: (otherlv_5= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* ) ) ) otherlv_25= '}' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:998:6: otherlv_5= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* ) ) ) otherlv_25= '}'
             {
-            otherlv_5=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleAliasedRequiredCapability1851); if (state.failed) return current;
+            otherlv_5=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleAliasedRequiredCapability1887); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_5, grammarAccess.getAliasedRequiredCapabilityAccess().getLeftCurlyBracketKeyword_3_0(), null);
                   
             }
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1002:1: ( ( ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* ) ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1004:1: ( ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1002:1: ( ( ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* ) ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1004:1: ( ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* ) )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1004:1: ( ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1005:2: ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1004:1: ( ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1005:2: ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* )
             {
             getUnorderedGroupHelper().enter(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1());
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1008:2: ( ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )* )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1009:3: ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )*
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1008:2: ( ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )* )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1009:3: ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )*
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1009:3: ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) | ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) | ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) | ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )*
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1009:3: ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )*
             loop19:
             do {
                 int alt19=6;
@@ -2457,29 +2547,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt19) {
             	case 1 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1011:4: ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1011:4: ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1011:4: ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1012:5: {...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1011:4: ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1012:5: {...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleAliasedRequiredCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1012:124: ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1013:6: (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1012:124: ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1013:6: ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:6: (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:8: otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:6: ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:7: {...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' )
             	    {
-            	    otherlv_7=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleAliasedRequiredCapability1906); if (state.failed) return current;
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleAliasedRequiredCapability", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:16: (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:18: otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';'
+            	    {
+            	    otherlv_7=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleAliasedRequiredCapability1945); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_7, grammarAccess.getAliasedRequiredCapabilityAccess().getWhenKeyword_3_1_0_0(), null);
             	          
             	    }
-            	    otherlv_8=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAliasedRequiredCapability1918); if (state.failed) return current;
+            	    otherlv_8=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAliasedRequiredCapability1957); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_8, grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_0_1(), null);
@@ -2496,7 +2593,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getAliasedRequiredCapabilityAccess().getCondExprExpressionParserRuleCall_3_1_0_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleAliasedRequiredCapability1939);
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleAliasedRequiredCapability1978);
             	    lv_condExpr_9_0=ruleExpression();
 
             	    state._fsp--;
@@ -2526,12 +2623,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_10=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleAliasedRequiredCapability1951); if (state.failed) return current;
+            	    otherlv_10=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleAliasedRequiredCapability1990); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_10, grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_0_3(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -2546,29 +2646,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1059:4: ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1059:4: ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1059:4: ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1060:5: {...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1059:4: ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1060:5: {...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleAliasedRequiredCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1060:124: ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1061:6: ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1060:124: ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1061:6: ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:6: ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:7: ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:6: ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:7: {...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:7: ( (lv_greedy_11_0= 'greedy' ) )
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleAliasedRequiredCapability", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:16: ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:17: ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';'
+            	    {
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:17: ( (lv_greedy_11_0= 'greedy' ) )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1065:1: (lv_greedy_11_0= 'greedy' )
             	    {
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1065:1: (lv_greedy_11_0= 'greedy' )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1066:3: lv_greedy_11_0= 'greedy'
             	    {
-            	    lv_greedy_11_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleAliasedRequiredCapability2021); if (state.failed) return current;
+            	    lv_greedy_11_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleAliasedRequiredCapability2064); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	              createLeafNode(lv_greedy_11_0, grammarAccess.getAliasedRequiredCapabilityAccess().getGreedyGreedyKeyword_3_1_1_0_0(), "greedy");
@@ -2594,12 +2701,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_12=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleAliasedRequiredCapability2046); if (state.failed) return current;
+            	    otherlv_12=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleAliasedRequiredCapability2089); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_12, grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_1_1(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -2614,29 +2724,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1096:4: ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1096:4: ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1096:4: ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1097:5: {...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1096:4: ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1097:5: {...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleAliasedRequiredCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1097:124: ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1098:6: (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1097:124: ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1098:6: ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:6: (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:8: otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:6: ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:7: {...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' )
             	    {
-            	    otherlv_13=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleAliasedRequiredCapability2110); if (state.failed) return current;
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleAliasedRequiredCapability", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:16: (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:18: otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';'
+            	    {
+            	    otherlv_13=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleAliasedRequiredCapability2157); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_13, grammarAccess.getAliasedRequiredCapabilityAccess().getRequiresMinKeyword_3_1_2_0(), null);
             	          
             	    }
-            	    otherlv_14=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAliasedRequiredCapability2122); if (state.failed) return current;
+            	    otherlv_14=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAliasedRequiredCapability2169); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_14, grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_2_1(), null);
@@ -2648,7 +2765,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1110:1: (lv_min_15_0= RULE_INT )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1111:3: lv_min_15_0= RULE_INT
             	    {
-            	    lv_min_15_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleAliasedRequiredCapability2139); if (state.failed) return current;
+            	    lv_min_15_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleAliasedRequiredCapability2186); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      			createLeafNode(lv_min_15_0, grammarAccess.getAliasedRequiredCapabilityAccess().getMinINTTerminalRuleCall_3_1_2_2_0(), "min"); 
@@ -2678,12 +2795,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleAliasedRequiredCapability2156); if (state.failed) return current;
+            	    otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleAliasedRequiredCapability2203); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_16, grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_2_3(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -2698,29 +2818,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 4 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1144:4: ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1144:4: ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1144:4: ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1145:5: {...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1144:4: ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1145:5: {...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleAliasedRequiredCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1145:124: ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1146:6: (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1145:124: ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1146:6: ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:6: (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:8: otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:6: ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:7: {...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' )
             	    {
-            	    otherlv_17=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleAliasedRequiredCapability2220); if (state.failed) return current;
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleAliasedRequiredCapability", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:16: (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:18: otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';'
+            	    {
+            	    otherlv_17=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleAliasedRequiredCapability2271); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_17, grammarAccess.getAliasedRequiredCapabilityAccess().getRequiresMaxKeyword_3_1_3_0(), null);
             	          
             	    }
-            	    otherlv_18=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAliasedRequiredCapability2232); if (state.failed) return current;
+            	    otherlv_18=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAliasedRequiredCapability2283); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_18, grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_3_1(), null);
@@ -2732,7 +2859,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1158:1: (lv_max_19_0= RULE_INT )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1159:3: lv_max_19_0= RULE_INT
             	    {
-            	    lv_max_19_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleAliasedRequiredCapability2249); if (state.failed) return current;
+            	    lv_max_19_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleAliasedRequiredCapability2300); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      			createLeafNode(lv_max_19_0, grammarAccess.getAliasedRequiredCapabilityAccess().getMaxINTTerminalRuleCall_3_1_3_2_0(), "max"); 
@@ -2762,12 +2889,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleAliasedRequiredCapability2266); if (state.failed) return current;
+            	    otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleAliasedRequiredCapability2317); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_20, grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_3_3(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -2782,29 +2912,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 5 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1192:4: ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1192:4: ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1192:4: ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1193:5: {...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1192:4: ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1193:5: {...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleAliasedRequiredCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1193:124: ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1194:6: (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1193:124: ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1194:6: ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:6: (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:8: otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:6: ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:7: {...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' )
             	    {
-            	    otherlv_21=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleAliasedRequiredCapability2330); if (state.failed) return current;
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleAliasedRequiredCapability", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:16: (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:18: otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';'
+            	    {
+            	    otherlv_21=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleAliasedRequiredCapability2385); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_21, grammarAccess.getAliasedRequiredCapabilityAccess().getVersionKeyword_3_1_4_0(), null);
             	          
             	    }
-            	    otherlv_22=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAliasedRequiredCapability2342); if (state.failed) return current;
+            	    otherlv_22=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAliasedRequiredCapability2397); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_22, grammarAccess.getAliasedRequiredCapabilityAccess().getColonKeyword_3_1_4_1(), null);
@@ -2816,7 +2953,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1206:1: (lv_versionRange_23_0= RULE_ID )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1207:3: lv_versionRange_23_0= RULE_ID
             	    {
-            	    lv_versionRange_23_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability2359); if (state.failed) return current;
+            	    lv_versionRange_23_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability2414); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      			createLeafNode(lv_versionRange_23_0, grammarAccess.getAliasedRequiredCapabilityAccess().getVersionRangeIDTerminalRuleCall_3_1_4_2_0(), "versionRange"); 
@@ -2846,12 +2983,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_24=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleAliasedRequiredCapability2376); if (state.failed) return current;
+            	    otherlv_24=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleAliasedRequiredCapability2431); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_24, grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_4_3(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -2881,7 +3021,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_25=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleAliasedRequiredCapability2428); if (state.failed) return current;
+            otherlv_25=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleAliasedRequiredCapability2484); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_25, grammarAccess.getAliasedRequiredCapabilityAccess().getRightCurlyBracketKeyword_3_2(), null);
@@ -2939,7 +3079,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getRequiredCapabilityRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleRequiredCapability_in_entryRuleRequiredCapability2475);
+            pushFollow(FollowSets000.FOLLOW_ruleRequiredCapability_in_entryRuleRequiredCapability2531);
             iv_ruleRequiredCapability=ruleRequiredCapability();
 
             state._fsp--;
@@ -2947,7 +3087,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleRequiredCapability; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRequiredCapability2485); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRequiredCapability2541); if (state.failed) return current;
 
             }
 
@@ -2969,7 +3109,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleRequiredCapability"
-    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1279:1: ruleRequiredCapability returns [EObject current=null] : ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* ) ) ) otherlv_24= '}' ) ) ;
+    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1279:1: ruleRequiredCapability returns [EObject current=null] : ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* ) ) ) otherlv_24= '}' ) ) ;
     public final EObject ruleRequiredCapability() throws RecognitionException {
         EObject current = null;
         int ruleRequiredCapability_StartIndex = input.index();
@@ -3005,11 +3145,11 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 10) ) { return current; }
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1287:6: ( ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* ) ) ) otherlv_24= '}' ) ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1288:1: ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* ) ) ) otherlv_24= '}' ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1287:6: ( ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* ) ) ) otherlv_24= '}' ) ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1288:1: ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* ) ) ) otherlv_24= '}' ) )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1288:1: ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* ) ) ) otherlv_24= '}' ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1288:2: () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* ) ) ) otherlv_24= '}' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1288:1: ( () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* ) ) ) otherlv_24= '}' ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1288:2: () ( ( (lv_nameSpace_1_0= RULE_ID ) ) | otherlv_2= 'unit' ) ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* ) ) ) otherlv_24= '}' )
             {
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1288:2: ()
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1289:2: 
@@ -3061,7 +3201,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1303:1: (lv_nameSpace_1_0= RULE_ID )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1304:3: lv_nameSpace_1_0= RULE_ID
                     {
-                    lv_nameSpace_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleRequiredCapability2544); if (state.failed) return current;
+                    lv_nameSpace_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleRequiredCapability2600); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_nameSpace_1_0, grammarAccess.getRequiredCapabilityAccess().getNameSpaceIDTerminalRuleCall_1_0_0(), "nameSpace"); 
@@ -3097,7 +3237,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 2 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1327:7: otherlv_2= 'unit'
                     {
-                    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleRequiredCapability2567); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleRequiredCapability2623); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_2, grammarAccess.getRequiredCapabilityAccess().getUnitKeyword_1_1(), null);
@@ -3115,7 +3255,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1332:1: (lv_name_3_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1333:3: lv_name_3_0= RULE_ID
             {
-            lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleRequiredCapability2585); if (state.failed) return current;
+            lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleRequiredCapability2641); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_name_3_0, grammarAccess.getRequiredCapabilityAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
@@ -3145,26 +3285,26 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1355:2: (otherlv_4= '{' ( ( ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* ) ) ) otherlv_24= '}' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1355:4: otherlv_4= '{' ( ( ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* ) ) ) otherlv_24= '}'
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1355:2: (otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* ) ) ) otherlv_24= '}' )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1355:4: otherlv_4= '{' ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* ) ) ) otherlv_24= '}'
             {
-            otherlv_4=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleRequiredCapability2603); if (state.failed) return current;
+            otherlv_4=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleRequiredCapability2659); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_4, grammarAccess.getRequiredCapabilityAccess().getLeftCurlyBracketKeyword_3_0(), null);
                   
             }
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1359:1: ( ( ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* ) ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1361:1: ( ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1359:1: ( ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* ) ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1361:1: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* ) )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1361:1: ( ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1362:2: ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1361:1: ( ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* ) )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1362:2: ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* )
             {
             getUnorderedGroupHelper().enter(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1());
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1365:2: ( ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )* )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1366:3: ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )*
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1365:2: ( ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )* )
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1366:3: ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )*
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1366:3: ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) | ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) | ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )*
+            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1366:3: ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) | ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )*
             loop21:
             do {
                 int alt21=6;
@@ -3189,29 +3329,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt21) {
             	case 1 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1368:4: ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1368:4: ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1368:4: ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1369:5: {...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1368:4: ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1369:5: {...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleRequiredCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1369:117: ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1370:6: (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1369:117: ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1370:6: ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:6: (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:8: otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:6: ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:7: {...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' )
             	    {
-            	    otherlv_6=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleRequiredCapability2658); if (state.failed) return current;
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleRequiredCapability", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:16: (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:18: otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';'
+            	    {
+            	    otherlv_6=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleRequiredCapability2717); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_6, grammarAccess.getRequiredCapabilityAccess().getWhenKeyword_3_1_0_0(), null);
             	          
             	    }
-            	    otherlv_7=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleRequiredCapability2670); if (state.failed) return current;
+            	    otherlv_7=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleRequiredCapability2729); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_7, grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_0_1(), null);
@@ -3228,7 +3375,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getRequiredCapabilityAccess().getCondExprExpressionParserRuleCall_3_1_0_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleRequiredCapability2691);
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleRequiredCapability2750);
             	    lv_condExpr_8_0=ruleExpression();
 
             	    state._fsp--;
@@ -3258,12 +3405,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_9=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleRequiredCapability2703); if (state.failed) return current;
+            	    otherlv_9=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleRequiredCapability2762); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_9, grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_0_3(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -3278,29 +3428,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1416:4: ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1416:4: ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1416:4: ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1417:5: {...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1416:4: ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1417:5: {...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleRequiredCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1417:117: ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1418:6: ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1417:117: ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1418:6: ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:6: ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:7: ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:6: ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:7: {...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:7: ( (lv_greedy_10_0= 'greedy' ) )
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleRequiredCapability", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:16: ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:17: ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';'
+            	    {
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:17: ( (lv_greedy_10_0= 'greedy' ) )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1422:1: (lv_greedy_10_0= 'greedy' )
             	    {
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1422:1: (lv_greedy_10_0= 'greedy' )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1423:3: lv_greedy_10_0= 'greedy'
             	    {
-            	    lv_greedy_10_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleRequiredCapability2773); if (state.failed) return current;
+            	    lv_greedy_10_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleRequiredCapability2836); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	              createLeafNode(lv_greedy_10_0, grammarAccess.getRequiredCapabilityAccess().getGreedyGreedyKeyword_3_1_1_0_0(), "greedy");
@@ -3326,12 +3483,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_11=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleRequiredCapability2798); if (state.failed) return current;
+            	    otherlv_11=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleRequiredCapability2861); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_11, grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_1_1(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -3346,29 +3506,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1453:4: ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1453:4: ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1453:4: ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1454:5: {...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1453:4: ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1454:5: {...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleRequiredCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1454:117: ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1455:6: (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1454:117: ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1455:6: ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:6: (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:8: otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:6: ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:7: {...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' )
             	    {
-            	    otherlv_12=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleRequiredCapability2862); if (state.failed) return current;
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleRequiredCapability", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:16: (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:18: otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';'
+            	    {
+            	    otherlv_12=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleRequiredCapability2929); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_12, grammarAccess.getRequiredCapabilityAccess().getRequiresMinKeyword_3_1_2_0(), null);
             	          
             	    }
-            	    otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleRequiredCapability2874); if (state.failed) return current;
+            	    otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleRequiredCapability2941); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_13, grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_2_1(), null);
@@ -3380,7 +3547,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1467:1: (lv_min_14_0= RULE_INT )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1468:3: lv_min_14_0= RULE_INT
             	    {
-            	    lv_min_14_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRequiredCapability2891); if (state.failed) return current;
+            	    lv_min_14_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRequiredCapability2958); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      			createLeafNode(lv_min_14_0, grammarAccess.getRequiredCapabilityAccess().getMinINTTerminalRuleCall_3_1_2_2_0(), "min"); 
@@ -3410,12 +3577,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_15=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleRequiredCapability2908); if (state.failed) return current;
+            	    otherlv_15=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleRequiredCapability2975); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_15, grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_2_3(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -3430,29 +3600,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 4 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1501:4: ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1501:4: ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1501:4: ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1502:5: {...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1501:4: ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1502:5: {...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleRequiredCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1502:117: ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1503:6: (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1502:117: ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1503:6: ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:6: (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:8: otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:6: ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:7: {...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' )
             	    {
-            	    otherlv_16=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleRequiredCapability2972); if (state.failed) return current;
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleRequiredCapability", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:16: (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:18: otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';'
+            	    {
+            	    otherlv_16=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleRequiredCapability3043); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_16, grammarAccess.getRequiredCapabilityAccess().getRequiresMaxKeyword_3_1_3_0(), null);
             	          
             	    }
-            	    otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleRequiredCapability2984); if (state.failed) return current;
+            	    otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleRequiredCapability3055); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_17, grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_3_1(), null);
@@ -3464,7 +3641,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1515:1: (lv_max_18_0= RULE_INT )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1516:3: lv_max_18_0= RULE_INT
             	    {
-            	    lv_max_18_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRequiredCapability3001); if (state.failed) return current;
+            	    lv_max_18_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleRequiredCapability3072); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      			createLeafNode(lv_max_18_0, grammarAccess.getRequiredCapabilityAccess().getMaxINTTerminalRuleCall_3_1_3_2_0(), "max"); 
@@ -3494,12 +3671,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_19=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleRequiredCapability3018); if (state.failed) return current;
+            	    otherlv_19=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleRequiredCapability3089); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_19, grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_3_3(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -3514,29 +3694,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    }
             	    break;
             	case 5 :
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1549:4: ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1549:4: ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1549:4: ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1550:5: {...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1549:4: ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1550:5: {...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleRequiredCapability", "getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4)");
             	    }
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1550:117: ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1551:6: (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1550:117: ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1551:6: ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4);
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:6: (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' )
-            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:8: otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';'
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:6: ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:7: {...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' )
             	    {
-            	    otherlv_20=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleRequiredCapability3082); if (state.failed) return current;
+            	    if ( !((true)) ) {
+            	        if (state.backtracking>0) {state.failed=true; return current;}
+            	        throw new FailedPredicateException(input, "ruleRequiredCapability", "true");
+            	    }
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:16: (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' )
+            	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:18: otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';'
+            	    {
+            	    otherlv_20=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleRequiredCapability3157); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_20, grammarAccess.getRequiredCapabilityAccess().getVersionKeyword_3_1_4_0(), null);
             	          
             	    }
-            	    otherlv_21=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleRequiredCapability3094); if (state.failed) return current;
+            	    otherlv_21=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleRequiredCapability3169); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_21, grammarAccess.getRequiredCapabilityAccess().getColonKeyword_3_1_4_1(), null);
@@ -3548,7 +3735,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1563:1: (lv_versionRange_22_0= RULE_ID )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1564:3: lv_versionRange_22_0= RULE_ID
             	    {
-            	    lv_versionRange_22_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleRequiredCapability3111); if (state.failed) return current;
+            	    lv_versionRange_22_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleRequiredCapability3186); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      			createLeafNode(lv_versionRange_22_0, grammarAccess.getRequiredCapabilityAccess().getVersionRangeIDTerminalRuleCall_3_1_4_2_0(), "versionRange"); 
@@ -3578,12 +3765,15 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_23=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleRequiredCapability3128); if (state.failed) return current;
+            	    otherlv_23=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleRequiredCapability3203); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_23, grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_4_3(), null);
             	          
             	    }
+
+            	    }
+
 
             	    }
 
@@ -3613,7 +3803,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_24=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleRequiredCapability3180); if (state.failed) return current;
+            otherlv_24=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleRequiredCapability3256); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_24, grammarAccess.getRequiredCapabilityAccess().getRightCurlyBracketKeyword_3_2(), null);
@@ -3669,7 +3859,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getPathRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePath_in_entryRulePath3228);
+            pushFollow(FollowSets000.FOLLOW_rulePath_in_entryRulePath3304);
             iv_rulePath=rulePath();
 
             state._fsp--;
@@ -3677,7 +3867,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_rulePath.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePath3239); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePath3315); if (state.failed) return current;
 
             }
 
@@ -3739,7 +3929,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1641:6: this_STRING_0= RULE_STRING
                     {
-                    this_STRING_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rulePath3283); if (state.failed) return current;
+                    this_STRING_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rulePath3359); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_STRING_0);
@@ -3770,7 +3960,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         case 1 :
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1650:2: kw= '/'
                             {
-                            kw=(Token)match(input,32,FollowSets000.FOLLOW_32_in_rulePath3309); if (state.failed) return current;
+                            kw=(Token)match(input,32,FollowSets000.FOLLOW_32_in_rulePath3385); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
@@ -3788,7 +3978,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getPathAccess().getQIDParserRuleCall_1_1(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleQID_in_rulePath3333);
+                    pushFollow(FollowSets000.FOLLOW_ruleQID_in_rulePath3409);
                     this_QID_2=ruleQID();
 
                     state._fsp--;
@@ -3824,7 +4014,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	case 1 :
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1667:2: kw= '/' this_QID_4= ruleQID
                     	    {
-                    	    kw=(Token)match(input,32,FollowSets000.FOLLOW_32_in_rulePath3352); if (state.failed) return current;
+                    	    kw=(Token)match(input,32,FollowSets000.FOLLOW_32_in_rulePath3428); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	              current.merge(kw);
@@ -3836,7 +4026,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	              currentNode=createCompositeNode(grammarAccess.getPathAccess().getQIDParserRuleCall_1_2_1(), currentNode); 
                     	          
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleQID_in_rulePath3374);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleQID_in_rulePath3450);
                     	    this_QID_4=ruleQID();
 
                     	    state._fsp--;
@@ -3871,7 +4061,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         case 1 :
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1684:2: kw= '/'
                             {
-                            kw=(Token)match(input,32,FollowSets000.FOLLOW_32_in_rulePath3395); if (state.failed) return current;
+                            kw=(Token)match(input,32,FollowSets000.FOLLOW_32_in_rulePath3471); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       current.merge(kw);
@@ -3934,7 +4124,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getParameterListRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_entryRuleParameterList3442);
+            pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_entryRuleParameterList3518);
             iv_ruleParameterList=ruleParameterList();
 
             state._fsp--;
@@ -3942,7 +4132,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleParameterList; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParameterList3452); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParameterList3528); if (state.failed) return current;
 
             }
 
@@ -3992,7 +4182,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getParameterListAccess().getParametersFirstParameterParserRuleCall_0_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFirstParameter_in_ruleParameterList3498);
+            pushFollow(FollowSets000.FOLLOW_ruleFirstParameter_in_ruleParameterList3574);
             lv_parameters_0_0=ruleFirstParameter();
 
             state._fsp--;
@@ -4037,7 +4227,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	case 1 :
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1739:4: otherlv_1= ',' ( (lv_parameters_2_0= ruleFirstParameter ) )
             	    {
-            	    otherlv_1=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleParameterList3511); if (state.failed) return current;
+            	    otherlv_1=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleParameterList3587); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_1, grammarAccess.getParameterListAccess().getCommaKeyword_1_0(), null);
@@ -4054,7 +4244,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getParameterListAccess().getParametersFirstParameterParserRuleCall_1_1_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleFirstParameter_in_ruleParameterList3532);
+            	    pushFollow(FollowSets000.FOLLOW_ruleFirstParameter_in_ruleParameterList3608);
             	    lv_parameters_2_0=ruleFirstParameter();
 
             	    state._fsp--;
@@ -4134,7 +4324,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getFirstParameterRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFirstParameter_in_entryRuleFirstParameter3570);
+            pushFollow(FollowSets000.FOLLOW_ruleFirstParameter_in_entryRuleFirstParameter3646);
             iv_ruleFirstParameter=ruleFirstParameter();
 
             state._fsp--;
@@ -4142,7 +4332,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleFirstParameter; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFirstParameter3580); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFirstParameter3656); if (state.failed) return current;
 
             }
 
@@ -4194,7 +4384,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getFirstParameterAccess().getClosureParameterParserRuleCall_0(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleClosureParameter_in_ruleFirstParameter3630);
+                    pushFollow(FollowSets000.FOLLOW_ruleClosureParameter_in_ruleFirstParameter3706);
                     this_ClosureParameter_0=ruleClosureParameter();
 
                     state._fsp--;
@@ -4221,7 +4411,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getFirstParameterAccess().getParameterParserRuleCall_1(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleParameter_in_ruleFirstParameter3660);
+                    pushFollow(FollowSets000.FOLLOW_ruleParameter_in_ruleFirstParameter3736);
                     this_Parameter_1=ruleParameter();
 
                     state._fsp--;
@@ -4276,7 +4466,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getParameterRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParameter_in_entryRuleParameter3695);
+            pushFollow(FollowSets000.FOLLOW_ruleParameter_in_entryRuleParameter3771);
             iv_ruleParameter=ruleParameter();
 
             state._fsp--;
@@ -4284,7 +4474,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleParameter; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParameter3705); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParameter3781); if (state.failed) return current;
 
             }
 
@@ -4328,7 +4518,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getParameterAccess().getExprExpressionParserRuleCall_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleParameter3750);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleParameter3826);
             lv_expr_0_0=ruleExpression();
 
             state._fsp--;
@@ -4396,7 +4586,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getClosureParameterRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleClosureParameter_in_entryRuleClosureParameter3785);
+            pushFollow(FollowSets000.FOLLOW_ruleClosureParameter_in_entryRuleClosureParameter3861);
             iv_ruleClosureParameter=ruleClosureParameter();
 
             state._fsp--;
@@ -4404,7 +4594,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleClosureParameter; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleClosureParameter3795); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleClosureParameter3871); if (state.failed) return current;
 
             }
 
@@ -4448,7 +4638,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getClosureParameterAccess().getExprClosureExpressionParserRuleCall_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleClosureExpression_in_ruleClosureParameter3840);
+            pushFollow(FollowSets000.FOLLOW_ruleClosureExpression_in_ruleClosureParameter3916);
             lv_expr_0_0=ruleClosureExpression();
 
             state._fsp--;
@@ -4516,7 +4706,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getParameterDeclarationRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_entryRuleParameterDeclaration3875);
+            pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_entryRuleParameterDeclaration3951);
             iv_ruleParameterDeclaration=ruleParameterDeclaration();
 
             state._fsp--;
@@ -4524,7 +4714,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleParameterDeclaration; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParameterDeclaration3885); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParameterDeclaration3961); if (state.failed) return current;
 
             }
 
@@ -4587,7 +4777,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getParameterDeclarationAccess().getTypeTypeRefParserRuleCall_0_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_ruleParameterDeclaration3931);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_ruleParameterDeclaration4007);
                     lv_type_0_0=ruleTypeRef();
 
                     state._fsp--;
@@ -4626,7 +4816,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1957:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1958:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleParameterDeclaration3949); if (state.failed) return current;
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleParameterDeclaration4025); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_name_1_0, grammarAccess.getParameterDeclarationAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
@@ -4697,7 +4887,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getFunctionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFunction_in_entryRuleFunction3990);
+            pushFollow(FollowSets000.FOLLOW_ruleFunction_in_entryRuleFunction4066);
             iv_ruleFunction=ruleFunction();
 
             state._fsp--;
@@ -4705,7 +4895,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleFunction; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFunction4000); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFunction4076); if (state.failed) return current;
 
             }
 
@@ -4783,7 +4973,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2004:1: (lv_documentation_0_0= RULE_DOCUMENTATION )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2005:3: lv_documentation_0_0= RULE_DOCUMENTATION
                     {
-                    lv_documentation_0_0=(Token)match(input,RULE_DOCUMENTATION,FollowSets000.FOLLOW_RULE_DOCUMENTATION_in_ruleFunction4042); if (state.failed) return current;
+                    lv_documentation_0_0=(Token)match(input,RULE_DOCUMENTATION,FollowSets000.FOLLOW_RULE_DOCUMENTATION_in_ruleFunction4118); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_documentation_0_0, grammarAccess.getFunctionAccess().getDocumentationDOCUMENTATIONTerminalRuleCall_0_0(), "documentation"); 
@@ -4830,7 +5020,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2028:1: (lv_visibility_1_0= RULE_ID )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2029:3: lv_visibility_1_0= RULE_ID
                     {
-                    lv_visibility_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFunction4065); if (state.failed) return current;
+                    lv_visibility_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFunction4141); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_visibility_1_0, grammarAccess.getFunctionAccess().getVisibilityIDTerminalRuleCall_1_0(), "visibility"); 
@@ -4877,7 +5067,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2052:1: (lv_final_2_0= 'final' )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2053:3: lv_final_2_0= 'final'
                     {
-                    lv_final_2_0=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleFunction4089); if (state.failed) return current;
+                    lv_final_2_0=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleFunction4165); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_final_2_0, grammarAccess.getFunctionAccess().getFinalFinalKeyword_2_0(), "final");
@@ -4906,7 +5096,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_3=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleFunction4115); if (state.failed) return current;
+            otherlv_3=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleFunction4191); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_3, grammarAccess.getFunctionAccess().getFunctionKeyword_3(), null);
@@ -4938,7 +5128,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getFunctionAccess().getReturnTypeTypeRefParserRuleCall_4_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_ruleFunction4136);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_ruleFunction4212);
                     lv_returnType_4_0=ruleTypeRef();
 
                     state._fsp--;
@@ -4977,7 +5167,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2101:1: (lv_name_5_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2102:3: lv_name_5_0= RULE_ID
             {
-            lv_name_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFunction4154); if (state.failed) return current;
+            lv_name_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFunction4230); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_name_5_0, grammarAccess.getFunctionAccess().getNameIDTerminalRuleCall_5_0(), "name"); 
@@ -5018,7 +5208,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2124:4: otherlv_6= '(' ( ( ( (lv_parameters_7_0= ruleParameterDeclaration ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleParameterDeclaration ) ) )* (otherlv_10= ',' ( (lv_varArgs_11_0= '...' ) ) ( (lv_parameters_12_0= ruleParameterDeclaration ) ) )? ) | ( ( (lv_varArgs_13_0= '...' ) ) ( (lv_parameters_14_0= ruleParameterDeclaration ) ) ) )? otherlv_15= ')'
                     {
-                    otherlv_6=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleFunction4172); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleFunction4248); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_6, grammarAccess.getFunctionAccess().getLeftParenthesisKeyword_6_0(), null);
@@ -5052,7 +5242,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               	        currentNode=createCompositeNode(grammarAccess.getFunctionAccess().getParametersParameterDeclarationParserRuleCall_6_1_0_0_0(), currentNode); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleFunction4195);
+                            pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleFunction4271);
                             lv_parameters_7_0=ruleParameterDeclaration();
 
                             state._fsp--;
@@ -5103,7 +5293,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                             	case 1 :
                             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2152:4: otherlv_8= ',' ( (lv_parameters_9_0= ruleParameterDeclaration ) )
                             	    {
-                            	    otherlv_8=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleFunction4208); if (state.failed) return current;
+                            	    otherlv_8=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleFunction4284); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
 
                             	          	createLeafNode(otherlv_8, grammarAccess.getFunctionAccess().getCommaKeyword_6_1_0_1_0(), null);
@@ -5120,7 +5310,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                             	      	        currentNode=createCompositeNode(grammarAccess.getFunctionAccess().getParametersParameterDeclarationParserRuleCall_6_1_0_1_1_0(), currentNode); 
                             	      	    
                             	    }
-                            	    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleFunction4229);
+                            	    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleFunction4305);
                             	    lv_parameters_9_0=ruleParameterDeclaration();
 
                             	    state._fsp--;
@@ -5170,7 +5360,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                                 case 1 :
                                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2180:6: otherlv_10= ',' ( (lv_varArgs_11_0= '...' ) ) ( (lv_parameters_12_0= ruleParameterDeclaration ) )
                                     {
-                                    otherlv_10=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleFunction4244); if (state.failed) return current;
+                                    otherlv_10=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleFunction4320); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                           	createLeafNode(otherlv_10, grammarAccess.getFunctionAccess().getCommaKeyword_6_1_0_2_0(), null);
@@ -5182,7 +5372,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2185:1: (lv_varArgs_11_0= '...' )
                                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2186:3: lv_varArgs_11_0= '...'
                                     {
-                                    lv_varArgs_11_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleFunction4262); if (state.failed) return current;
+                                    lv_varArgs_11_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleFunction4338); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                               createLeafNode(lv_varArgs_11_0, grammarAccess.getFunctionAccess().getVarArgsFullStopFullStopFullStopKeyword_6_1_0_2_1_0(), "varArgs");
@@ -5219,7 +5409,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                                       	        currentNode=createCompositeNode(grammarAccess.getFunctionAccess().getParametersParameterDeclarationParserRuleCall_6_1_0_2_2_0(), currentNode); 
                                       	    
                                     }
-                                    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleFunction4296);
+                                    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleFunction4372);
                                     lv_parameters_12_0=ruleParameterDeclaration();
 
                                     state._fsp--;
@@ -5273,7 +5463,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2231:1: (lv_varArgs_13_0= '...' )
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2232:3: lv_varArgs_13_0= '...'
                             {
-                            lv_varArgs_13_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleFunction4324); if (state.failed) return current;
+                            lv_varArgs_13_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleFunction4400); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       createLeafNode(lv_varArgs_13_0, grammarAccess.getFunctionAccess().getVarArgsFullStopFullStopFullStopKeyword_6_1_1_0_0(), "varArgs");
@@ -5310,7 +5500,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               	        currentNode=createCompositeNode(grammarAccess.getFunctionAccess().getParametersParameterDeclarationParserRuleCall_6_1_1_1_0(), currentNode); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleFunction4358);
+                            pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleFunction4434);
                             lv_parameters_14_0=ruleParameterDeclaration();
 
                             state._fsp--;
@@ -5349,7 +5539,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                     }
 
-                    otherlv_15=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleFunction4373); if (state.failed) return current;
+                    otherlv_15=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleFunction4449); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_15, grammarAccess.getFunctionAccess().getRightParenthesisKeyword_6_2(), null);
@@ -5372,7 +5562,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2279:5: otherlv_16= 'when' ( (lv_guard_17_0= ruleGuardExpression ) )
                     {
-                    otherlv_16=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleFunction4388); if (state.failed) return current;
+                    otherlv_16=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleFunction4464); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_16, grammarAccess.getFunctionAccess().getWhenKeyword_7_0(), null);
@@ -5389,7 +5579,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getFunctionAccess().getGuardGuardExpressionParserRuleCall_7_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleGuardExpression_in_ruleFunction4409);
+                    pushFollow(FollowSets000.FOLLOW_ruleGuardExpression_in_ruleFunction4485);
                     lv_guard_17_0=ruleGuardExpression();
 
                     state._fsp--;
@@ -5449,7 +5639,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2307:5: (otherlv_18= ':' ( (lv_funcExpr_19_0= ruleExpression ) ) otherlv_20= ';' )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2307:7: otherlv_18= ':' ( (lv_funcExpr_19_0= ruleExpression ) ) otherlv_20= ';'
                     {
-                    otherlv_18=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleFunction4425); if (state.failed) return current;
+                    otherlv_18=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleFunction4501); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_18, grammarAccess.getFunctionAccess().getColonKeyword_8_0_0(), null);
@@ -5466,7 +5656,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getFunctionAccess().getFuncExprExpressionParserRuleCall_8_0_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleFunction4446);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleFunction4522);
                     lv_funcExpr_19_0=ruleExpression();
 
                     state._fsp--;
@@ -5496,7 +5686,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                     }
 
-                    otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleFunction4458); if (state.failed) return current;
+                    otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleFunction4534); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_20, grammarAccess.getFunctionAccess().getSemicolonKeyword_8_0_2(), null);
@@ -5522,7 +5712,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getFunctionAccess().getFuncExprBlockExpressionParserRuleCall_8_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_ruleFunction4486);
+                    pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_ruleFunction4562);
                     lv_funcExpr_21_0=ruleBlockExpression();
 
                     state._fsp--;
@@ -5599,7 +5789,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getGuardExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleGuardExpression_in_entryRuleGuardExpression4523);
+            pushFollow(FollowSets000.FOLLOW_ruleGuardExpression_in_entryRuleGuardExpression4599);
             iv_ruleGuardExpression=ruleGuardExpression();
 
             state._fsp--;
@@ -5607,7 +5797,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleGuardExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGuardExpression4533); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGuardExpression4609); if (state.failed) return current;
 
             }
 
@@ -5668,7 +5858,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2387:2: (otherlv_0= ':' ( (lv_guardExpr_1_0= ruleExpression ) ) otherlv_2= ';' )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2387:4: otherlv_0= ':' ( (lv_guardExpr_1_0= ruleExpression ) ) otherlv_2= ';'
                     {
-                    otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleGuardExpression4571); if (state.failed) return current;
+                    otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleGuardExpression4647); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_0, grammarAccess.getGuardExpressionAccess().getColonKeyword_0_0(), null);
@@ -5685,7 +5875,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getGuardExpressionAccess().getGuardExprExpressionParserRuleCall_0_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleGuardExpression4592);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleGuardExpression4668);
                     lv_guardExpr_1_0=ruleExpression();
 
                     state._fsp--;
@@ -5715,7 +5905,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                     }
 
-                    otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleGuardExpression4604); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleGuardExpression4680); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_2, grammarAccess.getGuardExpressionAccess().getSemicolonKeyword_0_2(), null);
@@ -5741,7 +5931,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getGuardExpressionAccess().getGuardExprBlockExpressionParserRuleCall_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_ruleGuardExpression4632);
+                    pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_ruleGuardExpression4708);
                     lv_guardExpr_3_0=ruleBlockExpression();
 
                     state._fsp--;
@@ -5815,7 +6005,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAssignmentOperatorRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleAssignmentOperator_in_entryRuleAssignmentOperator4669);
+            pushFollow(FollowSets000.FOLLOW_ruleAssignmentOperator_in_entryRuleAssignmentOperator4745);
             iv_ruleAssignmentOperator=ruleAssignmentOperator();
 
             state._fsp--;
@@ -5823,7 +6013,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleAssignmentOperator.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignmentOperator4680); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignmentOperator4756); if (state.failed) return current;
 
             }
 
@@ -5900,7 +6090,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2468:2: kw= '='
                     {
-                    kw=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleAssignmentOperator4718); if (state.failed) return current;
+                    kw=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleAssignmentOperator4794); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -5913,7 +6103,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 2 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2475:2: kw= '+='
                     {
-                    kw=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleAssignmentOperator4737); if (state.failed) return current;
+                    kw=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleAssignmentOperator4813); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -5926,7 +6116,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 3 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2482:2: kw= '-='
                     {
-                    kw=(Token)match(input,40,FollowSets000.FOLLOW_40_in_ruleAssignmentOperator4756); if (state.failed) return current;
+                    kw=(Token)match(input,40,FollowSets000.FOLLOW_40_in_ruleAssignmentOperator4832); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -5939,7 +6129,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 4 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2489:2: kw= '*='
                     {
-                    kw=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleAssignmentOperator4775); if (state.failed) return current;
+                    kw=(Token)match(input,41,FollowSets000.FOLLOW_41_in_ruleAssignmentOperator4851); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -5952,7 +6142,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 5 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2496:2: kw= '/='
                     {
-                    kw=(Token)match(input,42,FollowSets000.FOLLOW_42_in_ruleAssignmentOperator4794); if (state.failed) return current;
+                    kw=(Token)match(input,42,FollowSets000.FOLLOW_42_in_ruleAssignmentOperator4870); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -5965,7 +6155,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 6 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2503:2: kw= '%='
                     {
-                    kw=(Token)match(input,43,FollowSets000.FOLLOW_43_in_ruleAssignmentOperator4813); if (state.failed) return current;
+                    kw=(Token)match(input,43,FollowSets000.FOLLOW_43_in_ruleAssignmentOperator4889); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6016,7 +6206,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getRelationalOperatorRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleRelationalOperator_in_entryRuleRelationalOperator4854);
+            pushFollow(FollowSets000.FOLLOW_ruleRelationalOperator_in_entryRuleRelationalOperator4930);
             iv_ruleRelationalOperator=ruleRelationalOperator();
 
             state._fsp--;
@@ -6024,7 +6214,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleRelationalOperator.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRelationalOperator4865); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRelationalOperator4941); if (state.failed) return current;
 
             }
 
@@ -6116,7 +6306,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2532:2: kw= '~='
                     {
-                    kw=(Token)match(input,44,FollowSets000.FOLLOW_44_in_ruleRelationalOperator4903); if (state.failed) return current;
+                    kw=(Token)match(input,44,FollowSets000.FOLLOW_44_in_ruleRelationalOperator4979); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6129,7 +6319,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 2 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2539:2: kw= '=='
                     {
-                    kw=(Token)match(input,45,FollowSets000.FOLLOW_45_in_ruleRelationalOperator4922); if (state.failed) return current;
+                    kw=(Token)match(input,45,FollowSets000.FOLLOW_45_in_ruleRelationalOperator4998); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6142,7 +6332,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 3 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2546:2: kw= '==='
                     {
-                    kw=(Token)match(input,46,FollowSets000.FOLLOW_46_in_ruleRelationalOperator4941); if (state.failed) return current;
+                    kw=(Token)match(input,46,FollowSets000.FOLLOW_46_in_ruleRelationalOperator5017); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6155,7 +6345,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 4 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2553:2: kw= '!='
                     {
-                    kw=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleRelationalOperator4960); if (state.failed) return current;
+                    kw=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleRelationalOperator5036); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6168,7 +6358,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 5 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2560:2: kw= '!=='
                     {
-                    kw=(Token)match(input,48,FollowSets000.FOLLOW_48_in_ruleRelationalOperator4979); if (state.failed) return current;
+                    kw=(Token)match(input,48,FollowSets000.FOLLOW_48_in_ruleRelationalOperator5055); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6181,7 +6371,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 6 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2567:2: kw= '>='
                     {
-                    kw=(Token)match(input,49,FollowSets000.FOLLOW_49_in_ruleRelationalOperator4998); if (state.failed) return current;
+                    kw=(Token)match(input,49,FollowSets000.FOLLOW_49_in_ruleRelationalOperator5074); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6194,7 +6384,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 7 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2574:2: kw= '<='
                     {
-                    kw=(Token)match(input,50,FollowSets000.FOLLOW_50_in_ruleRelationalOperator5017); if (state.failed) return current;
+                    kw=(Token)match(input,50,FollowSets000.FOLLOW_50_in_ruleRelationalOperator5093); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6207,7 +6397,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 8 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2581:2: kw= '>'
                     {
-                    kw=(Token)match(input,51,FollowSets000.FOLLOW_51_in_ruleRelationalOperator5036); if (state.failed) return current;
+                    kw=(Token)match(input,51,FollowSets000.FOLLOW_51_in_ruleRelationalOperator5112); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6220,7 +6410,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 9 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2588:2: kw= '<'
                     {
-                    kw=(Token)match(input,52,FollowSets000.FOLLOW_52_in_ruleRelationalOperator5055); if (state.failed) return current;
+                    kw=(Token)match(input,52,FollowSets000.FOLLOW_52_in_ruleRelationalOperator5131); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -6271,7 +6461,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getTopLevelExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTopLevelExpression_in_entryRuleTopLevelExpression5095);
+            pushFollow(FollowSets000.FOLLOW_ruleTopLevelExpression_in_entryRuleTopLevelExpression5171);
             iv_ruleTopLevelExpression=ruleTopLevelExpression();
 
             state._fsp--;
@@ -6279,7 +6469,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleTopLevelExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTopLevelExpression5105); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTopLevelExpression5181); if (state.failed) return current;
 
             }
 
@@ -6333,7 +6523,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getTopLevelExpressionAccess().getVarDeclarationParserRuleCall_0(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleVarDeclaration_in_ruleTopLevelExpression5155);
+                    pushFollow(FollowSets000.FOLLOW_ruleVarDeclaration_in_ruleTopLevelExpression5231);
                     this_VarDeclaration_0=ruleVarDeclaration();
 
                     state._fsp--;
@@ -6360,7 +6550,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getTopLevelExpressionAccess().getValDeclarationParserRuleCall_1(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleValDeclaration_in_ruleTopLevelExpression5185);
+                    pushFollow(FollowSets000.FOLLOW_ruleValDeclaration_in_ruleTopLevelExpression5261);
                     this_ValDeclaration_1=ruleValDeclaration();
 
                     state._fsp--;
@@ -6387,7 +6577,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getTopLevelExpressionAccess().getAssignmentExpressionParserRuleCall_2(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleAssignmentExpression_in_ruleTopLevelExpression5215);
+                    pushFollow(FollowSets000.FOLLOW_ruleAssignmentExpression_in_ruleTopLevelExpression5291);
                     this_AssignmentExpression_2=ruleAssignmentExpression();
 
                     state._fsp--;
@@ -6442,7 +6632,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_entryRuleExpression5250);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_entryRuleExpression5326);
             iv_ruleExpression=ruleExpression();
 
             state._fsp--;
@@ -6450,7 +6640,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression5260); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression5336); if (state.failed) return current;
 
             }
 
@@ -6493,7 +6683,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getExpressionAccess().getAssignmentExpressionParserRuleCall(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleAssignmentExpression_in_ruleExpression5309);
+            pushFollow(FollowSets000.FOLLOW_ruleAssignmentExpression_in_ruleExpression5385);
             this_AssignmentExpression_0=ruleAssignmentExpression();
 
             state._fsp--;
@@ -6542,7 +6732,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAssignmentExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleAssignmentExpression_in_entryRuleAssignmentExpression5343);
+            pushFollow(FollowSets000.FOLLOW_ruleAssignmentExpression_in_entryRuleAssignmentExpression5419);
             iv_ruleAssignmentExpression=ruleAssignmentExpression();
 
             state._fsp--;
@@ -6550,7 +6740,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleAssignmentExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignmentExpression5353); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignmentExpression5429); if (state.failed) return current;
 
             }
 
@@ -6600,7 +6790,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getAssignmentExpressionAccess().getCachedExpressionParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCachedExpression_in_ruleAssignmentExpression5403);
+            pushFollow(FollowSets000.FOLLOW_ruleCachedExpression_in_ruleAssignmentExpression5479);
             this_CachedExpression_0=ruleCachedExpression();
 
             state._fsp--;
@@ -6713,7 +6903,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getAssignmentExpressionAccess().getFunctionNameAssignmentOperatorParserRuleCall_1_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleAssignmentOperator_in_ruleAssignmentExpression5436);
+                    pushFollow(FollowSets000.FOLLOW_ruleAssignmentOperator_in_ruleAssignmentExpression5512);
                     lv_functionName_2_0=ruleAssignmentOperator();
 
                     state._fsp--;
@@ -6754,7 +6944,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getAssignmentExpressionAccess().getRightExprAssignmentExpressionParserRuleCall_1_2_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleAssignmentExpression_in_ruleAssignmentExpression5457);
+                    pushFollow(FollowSets000.FOLLOW_ruleAssignmentExpression_in_ruleAssignmentExpression5533);
                     lv_rightExpr_3_0=ruleAssignmentExpression();
 
                     state._fsp--;
@@ -6831,7 +7021,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getVarDeclarationRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleVarDeclaration_in_entryRuleVarDeclaration5495);
+            pushFollow(FollowSets000.FOLLOW_ruleVarDeclaration_in_entryRuleVarDeclaration5571);
             iv_ruleVarDeclaration=ruleVarDeclaration();
 
             state._fsp--;
@@ -6839,7 +7029,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleVarDeclaration; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleVarDeclaration5505); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleVarDeclaration5581); if (state.failed) return current;
 
             }
 
@@ -6918,7 +7108,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2829:1: (lv_final_1_0= 'final' )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2830:3: lv_final_1_0= 'final'
                     {
-                    lv_final_1_0=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleVarDeclaration5560); if (state.failed) return current;
+                    lv_final_1_0=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleVarDeclaration5636); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_final_1_0, grammarAccess.getVarDeclarationAccess().getFinalFinalKeyword_1_0(), "final");
@@ -6971,7 +7161,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2849:6: otherlv_2= 'var'
                     {
-                    otherlv_2=(Token)match(input,53,FollowSets000.FOLLOW_53_in_ruleVarDeclaration5588); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,53,FollowSets000.FOLLOW_53_in_ruleVarDeclaration5664); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_2, grammarAccess.getVarDeclarationAccess().getVarKeyword_2_0_0(), null);
@@ -6994,7 +7184,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getVarDeclarationAccess().getTypeTypeRefParserRuleCall_2_0_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_ruleVarDeclaration5615);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_ruleVarDeclaration5691);
                     lv_type_3_0=ruleTypeRef();
 
                     state._fsp--;
@@ -7036,7 +7226,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2879:1: (lv_name_4_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2880:3: lv_name_4_0= RULE_ID
             {
-            lv_name_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleVarDeclaration5633); if (state.failed) return current;
+            lv_name_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleVarDeclaration5709); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_name_4_0, grammarAccess.getVarDeclarationAccess().getNameIDTerminalRuleCall_2_1_0(), "name"); 
@@ -7080,7 +7270,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2902:5: otherlv_5= '=' ( (lv_valueExpr_6_0= ruleExpression ) )
                     {
-                    otherlv_5=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleVarDeclaration5652); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleVarDeclaration5728); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_5, grammarAccess.getVarDeclarationAccess().getEqualsSignKeyword_3_0(), null);
@@ -7097,7 +7287,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getVarDeclarationAccess().getValueExprExpressionParserRuleCall_3_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleVarDeclaration5673);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleVarDeclaration5749);
                     lv_valueExpr_6_0=ruleExpression();
 
                     state._fsp--;
@@ -7174,7 +7364,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getValDeclarationRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleValDeclaration_in_entryRuleValDeclaration5711);
+            pushFollow(FollowSets000.FOLLOW_ruleValDeclaration_in_entryRuleValDeclaration5787);
             iv_ruleValDeclaration=ruleValDeclaration();
 
             state._fsp--;
@@ -7182,7 +7372,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleValDeclaration; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleValDeclaration5721); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleValDeclaration5797); if (state.failed) return current;
 
             }
 
@@ -7261,7 +7451,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2968:1: (lv_final_1_0= 'final' )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2969:3: lv_final_1_0= 'final'
                     {
-                    lv_final_1_0=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleValDeclaration5776); if (state.failed) return current;
+                    lv_final_1_0=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleValDeclaration5852); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_final_1_0, grammarAccess.getValDeclarationAccess().getFinalFinalKeyword_1_0(), "final");
@@ -7296,7 +7486,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2989:1: (lv_immutable_2_0= 'val' )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:2990:3: lv_immutable_2_0= 'val'
             {
-            lv_immutable_2_0=(Token)match(input,54,FollowSets000.FOLLOW_54_in_ruleValDeclaration5808); if (state.failed) return current;
+            lv_immutable_2_0=(Token)match(input,54,FollowSets000.FOLLOW_54_in_ruleValDeclaration5884); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       createLeafNode(lv_immutable_2_0, grammarAccess.getValDeclarationAccess().getImmutableValKeyword_2_0(), "immutable");
@@ -7348,7 +7538,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getValDeclarationAccess().getTypeTypeRefParserRuleCall_3_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_ruleValDeclaration5842);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_ruleValDeclaration5918);
                     lv_type_3_0=ruleTypeRef();
 
                     state._fsp--;
@@ -7387,7 +7577,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3034:1: (lv_name_4_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3035:3: lv_name_4_0= RULE_ID
             {
-            lv_name_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleValDeclaration5860); if (state.failed) return current;
+            lv_name_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleValDeclaration5936); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_name_4_0, grammarAccess.getValDeclarationAccess().getNameIDTerminalRuleCall_4_0(), "name"); 
@@ -7417,7 +7607,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_5=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleValDeclaration5877); if (state.failed) return current;
+            otherlv_5=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleValDeclaration5953); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_5, grammarAccess.getValDeclarationAccess().getEqualsSignKeyword_5(), null);
@@ -7434,7 +7624,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getValDeclarationAccess().getValueExprExpressionParserRuleCall_6_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleValDeclaration5898);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleValDeclaration5974);
             lv_valueExpr_6_0=ruleExpression();
 
             state._fsp--;
@@ -7505,7 +7695,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getTypeRefRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_entryRuleTypeRef5934);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_entryRuleTypeRef6010);
             iv_ruleTypeRef=ruleTypeRef();
 
             state._fsp--;
@@ -7513,7 +7703,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleTypeRef; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeRef5944); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeRef6020); if (state.failed) return current;
 
             }
 
@@ -7579,7 +7769,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getTypeRefAccess().getClosureTypeRefParserRuleCall_0(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleClosureTypeRef_in_ruleTypeRef5994);
+                    pushFollow(FollowSets000.FOLLOW_ruleClosureTypeRef_in_ruleTypeRef6070);
                     this_ClosureTypeRef_0=ruleClosureTypeRef();
 
                     state._fsp--;
@@ -7606,7 +7796,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getTypeRefAccess().getSimpleTypeRefParserRuleCall_1(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleSimpleTypeRef_in_ruleTypeRef6024);
+                    pushFollow(FollowSets000.FOLLOW_ruleSimpleTypeRef_in_ruleTypeRef6100);
                     this_SimpleTypeRef_1=ruleSimpleTypeRef();
 
                     state._fsp--;
@@ -7661,7 +7851,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getSimpleTypeRefRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleSimpleTypeRef_in_entryRuleSimpleTypeRef6059);
+            pushFollow(FollowSets000.FOLLOW_ruleSimpleTypeRef_in_entryRuleSimpleTypeRef6135);
             iv_ruleSimpleTypeRef=ruleSimpleTypeRef();
 
             state._fsp--;
@@ -7669,7 +7859,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleSimpleTypeRef; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSimpleTypeRef6069); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSimpleTypeRef6145); if (state.failed) return current;
 
             }
 
@@ -7715,7 +7905,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3157:1: (lv_rawType_0_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3158:3: lv_rawType_0_0= RULE_ID
             {
-            lv_rawType_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTypeRef6111); if (state.failed) return current;
+            lv_rawType_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTypeRef6187); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_rawType_0_0, grammarAccess.getSimpleTypeRefAccess().getRawTypeIDTerminalRuleCall_0_0(), "rawType"); 
@@ -7756,7 +7946,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3180:4: otherlv_1= '<' ( (lv_actualArgumentsList_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_actualArgumentsList_4_0= RULE_ID ) ) )* otherlv_5= '>'
                     {
-                    otherlv_1=(Token)match(input,52,FollowSets000.FOLLOW_52_in_ruleSimpleTypeRef6129); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,52,FollowSets000.FOLLOW_52_in_ruleSimpleTypeRef6205); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_1, grammarAccess.getSimpleTypeRefAccess().getLessThanSignKeyword_1_0(), null);
@@ -7768,7 +7958,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3185:1: (lv_actualArgumentsList_2_0= RULE_ID )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3186:3: lv_actualArgumentsList_2_0= RULE_ID
                     {
-                    lv_actualArgumentsList_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTypeRef6146); if (state.failed) return current;
+                    lv_actualArgumentsList_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTypeRef6222); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_actualArgumentsList_2_0, grammarAccess.getSimpleTypeRefAccess().getActualArgumentsListIDTerminalRuleCall_1_1_0(), "actualArgumentsList"); 
@@ -7813,7 +8003,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	case 1 :
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3208:4: otherlv_3= ',' ( (lv_actualArgumentsList_4_0= RULE_ID ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSimpleTypeRef6164); if (state.failed) return current;
+                    	    otherlv_3=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSimpleTypeRef6240); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_3, grammarAccess.getSimpleTypeRefAccess().getCommaKeyword_1_2_0(), null);
@@ -7825,7 +8015,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3213:1: (lv_actualArgumentsList_4_0= RULE_ID )
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3214:3: lv_actualArgumentsList_4_0= RULE_ID
                     	    {
-                    	    lv_actualArgumentsList_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTypeRef6181); if (state.failed) return current;
+                    	    lv_actualArgumentsList_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSimpleTypeRef6257); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      			createLeafNode(lv_actualArgumentsList_4_0, grammarAccess.getSimpleTypeRefAccess().getActualArgumentsListIDTerminalRuleCall_1_2_1_0(), "actualArgumentsList"); 
@@ -7864,7 +8054,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         }
                     } while (true);
 
-                    otherlv_5=(Token)match(input,51,FollowSets000.FOLLOW_51_in_ruleSimpleTypeRef6200); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,51,FollowSets000.FOLLOW_51_in_ruleSimpleTypeRef6276); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_5, grammarAccess.getSimpleTypeRefAccess().getGreaterThanSignKeyword_1_3(), null);
@@ -7917,7 +8107,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getClosureTypeRefRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleClosureTypeRef_in_entryRuleClosureTypeRef6238);
+            pushFollow(FollowSets000.FOLLOW_ruleClosureTypeRef_in_entryRuleClosureTypeRef6314);
             iv_ruleClosureTypeRef=ruleClosureTypeRef();
 
             state._fsp--;
@@ -7925,7 +8115,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleClosureTypeRef; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleClosureTypeRef6248); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleClosureTypeRef6324); if (state.failed) return current;
 
             }
 
@@ -7971,7 +8161,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3263:1: (otherlv_0= '(' ( ( ( (lv_parameterTypes_1_0= RULE_ID ) ) (otherlv_2= ',' ( (lv_parameterTypes_3_0= RULE_ID ) ) )* (otherlv_4= ',' ( (lv_varArgs_5_0= '...' ) ) ( (lv_parameterTypes_6_0= RULE_ID ) ) )? ) | ( ( (lv_varArgs_7_0= '...' ) ) ( (lv_parameterTypes_8_0= RULE_ID ) ) ) )? otherlv_9= ')' otherlv_10= '=>' ( (lv_returnType_11_0= RULE_ID ) ) )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3263:3: otherlv_0= '(' ( ( ( (lv_parameterTypes_1_0= RULE_ID ) ) (otherlv_2= ',' ( (lv_parameterTypes_3_0= RULE_ID ) ) )* (otherlv_4= ',' ( (lv_varArgs_5_0= '...' ) ) ( (lv_parameterTypes_6_0= RULE_ID ) ) )? ) | ( ( (lv_varArgs_7_0= '...' ) ) ( (lv_parameterTypes_8_0= RULE_ID ) ) ) )? otherlv_9= ')' otherlv_10= '=>' ( (lv_returnType_11_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleClosureTypeRef6285); if (state.failed) return current;
+            otherlv_0=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleClosureTypeRef6361); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_0, grammarAccess.getClosureTypeRefAccess().getLeftParenthesisKeyword_0(), null);
@@ -8000,7 +8190,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3268:1: (lv_parameterTypes_1_0= RULE_ID )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3269:3: lv_parameterTypes_1_0= RULE_ID
                     {
-                    lv_parameterTypes_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleClosureTypeRef6304); if (state.failed) return current;
+                    lv_parameterTypes_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleClosureTypeRef6380); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_parameterTypes_1_0, grammarAccess.getClosureTypeRefAccess().getParameterTypesIDTerminalRuleCall_1_0_0_0(), "parameterTypes"); 
@@ -8051,7 +8241,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	case 1 :
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3291:4: otherlv_2= ',' ( (lv_parameterTypes_3_0= RULE_ID ) )
                     	    {
-                    	    otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleClosureTypeRef6322); if (state.failed) return current;
+                    	    otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleClosureTypeRef6398); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_2, grammarAccess.getClosureTypeRefAccess().getCommaKeyword_1_0_1_0(), null);
@@ -8063,7 +8253,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3296:1: (lv_parameterTypes_3_0= RULE_ID )
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3297:3: lv_parameterTypes_3_0= RULE_ID
                     	    {
-                    	    lv_parameterTypes_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleClosureTypeRef6339); if (state.failed) return current;
+                    	    lv_parameterTypes_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleClosureTypeRef6415); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      			createLeafNode(lv_parameterTypes_3_0, grammarAccess.getClosureTypeRefAccess().getParameterTypesIDTerminalRuleCall_1_0_1_1_0(), "parameterTypes"); 
@@ -8113,7 +8303,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         case 1 :
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3319:6: otherlv_4= ',' ( (lv_varArgs_5_0= '...' ) ) ( (lv_parameterTypes_6_0= RULE_ID ) )
                             {
-                            otherlv_4=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleClosureTypeRef6359); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleClosureTypeRef6435); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	createLeafNode(otherlv_4, grammarAccess.getClosureTypeRefAccess().getCommaKeyword_1_0_2_0(), null);
@@ -8125,7 +8315,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3324:1: (lv_varArgs_5_0= '...' )
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3325:3: lv_varArgs_5_0= '...'
                             {
-                            lv_varArgs_5_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleClosureTypeRef6377); if (state.failed) return current;
+                            lv_varArgs_5_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleClosureTypeRef6453); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       createLeafNode(lv_varArgs_5_0, grammarAccess.getClosureTypeRefAccess().getVarArgsFullStopFullStopFullStopKeyword_1_0_2_1_0(), "varArgs");
@@ -8157,7 +8347,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3345:1: (lv_parameterTypes_6_0= RULE_ID )
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3346:3: lv_parameterTypes_6_0= RULE_ID
                             {
-                            lv_parameterTypes_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleClosureTypeRef6407); if (state.failed) return current;
+                            lv_parameterTypes_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleClosureTypeRef6483); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               			createLeafNode(lv_parameterTypes_6_0, grammarAccess.getClosureTypeRefAccess().getParameterTypesIDTerminalRuleCall_1_0_2_2_0(), "parameterTypes"); 
@@ -8211,7 +8401,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3370:1: (lv_varArgs_7_0= '...' )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3371:3: lv_varArgs_7_0= '...'
                     {
-                    lv_varArgs_7_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleClosureTypeRef6440); if (state.failed) return current;
+                    lv_varArgs_7_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleClosureTypeRef6516); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_varArgs_7_0, grammarAccess.getClosureTypeRefAccess().getVarArgsFullStopFullStopFullStopKeyword_1_1_0_0(), "varArgs");
@@ -8243,7 +8433,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3391:1: (lv_parameterTypes_8_0= RULE_ID )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3392:3: lv_parameterTypes_8_0= RULE_ID
                     {
-                    lv_parameterTypes_8_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleClosureTypeRef6470); if (state.failed) return current;
+                    lv_parameterTypes_8_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleClosureTypeRef6546); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_parameterTypes_8_0, grammarAccess.getClosureTypeRefAccess().getParameterTypesIDTerminalRuleCall_1_1_1_0(), "parameterTypes"); 
@@ -8282,13 +8472,13 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_9=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleClosureTypeRef6490); if (state.failed) return current;
+            otherlv_9=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleClosureTypeRef6566); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_9, grammarAccess.getClosureTypeRefAccess().getRightParenthesisKeyword_2(), null);
                   
             }
-            otherlv_10=(Token)match(input,55,FollowSets000.FOLLOW_55_in_ruleClosureTypeRef6502); if (state.failed) return current;
+            otherlv_10=(Token)match(input,55,FollowSets000.FOLLOW_55_in_ruleClosureTypeRef6578); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_10, grammarAccess.getClosureTypeRefAccess().getEqualsSignGreaterThanSignKeyword_3(), null);
@@ -8300,7 +8490,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3423:1: (lv_returnType_11_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3424:3: lv_returnType_11_0= RULE_ID
             {
-            lv_returnType_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleClosureTypeRef6519); if (state.failed) return current;
+            lv_returnType_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleClosureTypeRef6595); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_returnType_11_0, grammarAccess.getClosureTypeRefAccess().getReturnTypeIDTerminalRuleCall_4_0(), "returnType"); 
@@ -8371,7 +8561,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getCachedExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCachedExpression_in_entryRuleCachedExpression6560);
+            pushFollow(FollowSets000.FOLLOW_ruleCachedExpression_in_entryRuleCachedExpression6636);
             iv_ruleCachedExpression=ruleCachedExpression();
 
             state._fsp--;
@@ -8379,7 +8569,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleCachedExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCachedExpression6570); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCachedExpression6646); if (state.failed) return current;
 
             }
 
@@ -8462,7 +8652,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                     }
 
-                    otherlv_1=(Token)match(input,56,FollowSets000.FOLLOW_56_in_ruleCachedExpression6620); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,56,FollowSets000.FOLLOW_56_in_ruleCachedExpression6696); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_1, grammarAccess.getCachedExpressionAccess().getCachedKeyword_0_1(), null);
@@ -8479,7 +8669,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getCachedExpressionAccess().getExprOrExpressionParserRuleCall_0_2_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleOrExpression_in_ruleCachedExpression6641);
+                    pushFollow(FollowSets000.FOLLOW_ruleOrExpression_in_ruleCachedExpression6717);
                     lv_expr_2_0=ruleOrExpression();
 
                     state._fsp--;
@@ -8528,7 +8718,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getCachedExpressionAccess().getOrExpressionParserRuleCall_1(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleOrExpression_in_ruleCachedExpression6673);
+                    pushFollow(FollowSets000.FOLLOW_ruleOrExpression_in_ruleCachedExpression6749);
                     this_OrExpression_3=ruleOrExpression();
 
                     state._fsp--;
@@ -8583,7 +8773,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getOrExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOrExpression_in_entryRuleOrExpression6708);
+            pushFollow(FollowSets000.FOLLOW_ruleOrExpression_in_entryRuleOrExpression6784);
             iv_ruleOrExpression=ruleOrExpression();
 
             state._fsp--;
@@ -8591,7 +8781,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleOrExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOrExpression6718); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOrExpression6794); if (state.failed) return current;
 
             }
 
@@ -8640,7 +8830,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getOrExpressionAccess().getAndExpressionParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleAndExpression_in_ruleOrExpression6768);
+            pushFollow(FollowSets000.FOLLOW_ruleAndExpression_in_ruleOrExpression6844);
             this_AndExpression_0=ruleAndExpression();
 
             state._fsp--;
@@ -8700,7 +8890,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_2=(Token)match(input,57,FollowSets000.FOLLOW_57_in_ruleOrExpression6792); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,57,FollowSets000.FOLLOW_57_in_ruleOrExpression6868); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_2, grammarAccess.getOrExpressionAccess().getVerticalLineVerticalLineKeyword_1_1(), null);
@@ -8717,7 +8907,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getOrExpressionAccess().getRightExprAndExpressionParserRuleCall_1_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleAndExpression_in_ruleOrExpression6813);
+            	    pushFollow(FollowSets000.FOLLOW_ruleAndExpression_in_ruleOrExpression6889);
             	    lv_rightExpr_3_0=ruleAndExpression();
 
             	    state._fsp--;
@@ -8797,7 +8987,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAndExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleAndExpression_in_entryRuleAndExpression6851);
+            pushFollow(FollowSets000.FOLLOW_ruleAndExpression_in_entryRuleAndExpression6927);
             iv_ruleAndExpression=ruleAndExpression();
 
             state._fsp--;
@@ -8805,7 +8995,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleAndExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAndExpression6861); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAndExpression6937); if (state.failed) return current;
 
             }
 
@@ -8854,7 +9044,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getAndExpressionAccess().getRelationalExpressionParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleRelationalExpression_in_ruleAndExpression6911);
+            pushFollow(FollowSets000.FOLLOW_ruleRelationalExpression_in_ruleAndExpression6987);
             this_RelationalExpression_0=ruleRelationalExpression();
 
             state._fsp--;
@@ -8914,7 +9104,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_2=(Token)match(input,58,FollowSets000.FOLLOW_58_in_ruleAndExpression6935); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,58,FollowSets000.FOLLOW_58_in_ruleAndExpression7011); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_2, grammarAccess.getAndExpressionAccess().getAmpersandAmpersandKeyword_1_1(), null);
@@ -8931,7 +9121,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getAndExpressionAccess().getRightExprRelationalExpressionParserRuleCall_1_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleRelationalExpression_in_ruleAndExpression6956);
+            	    pushFollow(FollowSets000.FOLLOW_ruleRelationalExpression_in_ruleAndExpression7032);
             	    lv_rightExpr_3_0=ruleRelationalExpression();
 
             	    state._fsp--;
@@ -9011,7 +9201,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getRelationalExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleRelationalExpression_in_entryRuleRelationalExpression6994);
+            pushFollow(FollowSets000.FOLLOW_ruleRelationalExpression_in_entryRuleRelationalExpression7070);
             iv_ruleRelationalExpression=ruleRelationalExpression();
 
             state._fsp--;
@@ -9019,7 +9209,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleRelationalExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRelationalExpression7004); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRelationalExpression7080); if (state.failed) return current;
 
             }
 
@@ -9069,7 +9259,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getAdditiveExpressionParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression7054);
+            pushFollow(FollowSets000.FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression7130);
             this_AdditiveExpression_0=ruleAdditiveExpression();
 
             state._fsp--;
@@ -9128,7 +9318,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getFunctionNameRelationalOperatorParserRuleCall_1_1_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleRelationalOperator_in_ruleRelationalExpression7087);
+            	    pushFollow(FollowSets000.FOLLOW_ruleRelationalOperator_in_ruleRelationalExpression7163);
             	    lv_functionName_2_0=ruleRelationalOperator();
 
             	    state._fsp--;
@@ -9169,7 +9359,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getRightExprAdditiveExpressionParserRuleCall_1_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression7108);
+            	    pushFollow(FollowSets000.FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression7184);
             	    lv_rightExpr_3_0=ruleAdditiveExpression();
 
             	    state._fsp--;
@@ -9249,7 +9439,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAdditiveExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleAdditiveExpression_in_entryRuleAdditiveExpression7146);
+            pushFollow(FollowSets000.FOLLOW_ruleAdditiveExpression_in_entryRuleAdditiveExpression7222);
             iv_ruleAdditiveExpression=ruleAdditiveExpression();
 
             state._fsp--;
@@ -9257,7 +9447,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleAdditiveExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAdditiveExpression7156); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAdditiveExpression7232); if (state.failed) return current;
 
             }
 
@@ -9307,7 +9497,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getAdditiveExpressionAccess().getMultiplicativeExpressionParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression7206);
+            pushFollow(FollowSets000.FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression7282);
             this_MultiplicativeExpression_0=ruleMultiplicativeExpression();
 
             state._fsp--;
@@ -9403,7 +9593,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	        case 1 :
             	            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3847:3: lv_functionName_2_1= '+'
             	            {
-            	            lv_functionName_2_1=(Token)match(input,59,FollowSets000.FOLLOW_59_in_ruleAdditiveExpression7238); if (state.failed) return current;
+            	            lv_functionName_2_1=(Token)match(input,59,FollowSets000.FOLLOW_59_in_ruleAdditiveExpression7314); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                      createLeafNode(lv_functionName_2_1, grammarAccess.getAdditiveExpressionAccess().getFunctionNamePlusSignKeyword_1_1_0_0(), "functionName");
@@ -9429,7 +9619,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	        case 2 :
             	            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3865:8: lv_functionName_2_2= '-'
             	            {
-            	            lv_functionName_2_2=(Token)match(input,60,FollowSets000.FOLLOW_60_in_ruleAdditiveExpression7267); if (state.failed) return current;
+            	            lv_functionName_2_2=(Token)match(input,60,FollowSets000.FOLLOW_60_in_ruleAdditiveExpression7343); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                      createLeafNode(lv_functionName_2_2, grammarAccess.getAdditiveExpressionAccess().getFunctionNameHyphenMinusKeyword_1_1_0_1(), "functionName");
@@ -9472,7 +9662,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getAdditiveExpressionAccess().getRightExprMultiplicativeExpressionParserRuleCall_1_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression7304);
+            	    pushFollow(FollowSets000.FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression7380);
             	    lv_rightExpr_3_0=ruleMultiplicativeExpression();
 
             	    state._fsp--;
@@ -9552,7 +9742,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getMultiplicativeExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleMultiplicativeExpression_in_entryRuleMultiplicativeExpression7342);
+            pushFollow(FollowSets000.FOLLOW_ruleMultiplicativeExpression_in_entryRuleMultiplicativeExpression7418);
             iv_ruleMultiplicativeExpression=ruleMultiplicativeExpression();
 
             state._fsp--;
@@ -9560,7 +9750,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleMultiplicativeExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplicativeExpression7352); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplicativeExpression7428); if (state.failed) return current;
 
             }
 
@@ -9611,7 +9801,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getMultiplicativeExpressionAccess().getSetExpressionParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleSetExpression_in_ruleMultiplicativeExpression7402);
+            pushFollow(FollowSets000.FOLLOW_ruleSetExpression_in_ruleMultiplicativeExpression7478);
             this_SetExpression_0=ruleSetExpression();
 
             state._fsp--;
@@ -9731,7 +9921,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	        case 1 :
             	            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3967:3: lv_functionName_2_1= '*'
             	            {
-            	            lv_functionName_2_1=(Token)match(input,61,FollowSets000.FOLLOW_61_in_ruleMultiplicativeExpression7434); if (state.failed) return current;
+            	            lv_functionName_2_1=(Token)match(input,61,FollowSets000.FOLLOW_61_in_ruleMultiplicativeExpression7510); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                      createLeafNode(lv_functionName_2_1, grammarAccess.getMultiplicativeExpressionAccess().getFunctionNameAsteriskKeyword_1_1_0_0(), "functionName");
@@ -9757,7 +9947,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	        case 2 :
             	            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3985:8: lv_functionName_2_2= '/'
             	            {
-            	            lv_functionName_2_2=(Token)match(input,32,FollowSets000.FOLLOW_32_in_ruleMultiplicativeExpression7463); if (state.failed) return current;
+            	            lv_functionName_2_2=(Token)match(input,32,FollowSets000.FOLLOW_32_in_ruleMultiplicativeExpression7539); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                      createLeafNode(lv_functionName_2_2, grammarAccess.getMultiplicativeExpressionAccess().getFunctionNameSolidusKeyword_1_1_0_1(), "functionName");
@@ -9783,7 +9973,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	        case 3 :
             	            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4003:8: lv_functionName_2_3= '%'
             	            {
-            	            lv_functionName_2_3=(Token)match(input,62,FollowSets000.FOLLOW_62_in_ruleMultiplicativeExpression7492); if (state.failed) return current;
+            	            lv_functionName_2_3=(Token)match(input,62,FollowSets000.FOLLOW_62_in_ruleMultiplicativeExpression7568); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
             	                      createLeafNode(lv_functionName_2_3, grammarAccess.getMultiplicativeExpressionAccess().getFunctionNamePercentSignKeyword_1_1_0_2(), "functionName");
@@ -9826,7 +10016,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getMultiplicativeExpressionAccess().getRightExprSetExpressionParserRuleCall_1_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleSetExpression_in_ruleMultiplicativeExpression7529);
+            	    pushFollow(FollowSets000.FOLLOW_ruleSetExpression_in_ruleMultiplicativeExpression7605);
             	    lv_rightExpr_3_0=ruleSetExpression();
 
             	    state._fsp--;
@@ -9906,7 +10096,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getSetExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleSetExpression_in_entryRuleSetExpression7567);
+            pushFollow(FollowSets000.FOLLOW_ruleSetExpression_in_entryRuleSetExpression7643);
             iv_ruleSetExpression=ruleSetExpression();
 
             state._fsp--;
@@ -9914,7 +10104,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleSetExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSetExpression7577); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSetExpression7653); if (state.failed) return current;
 
             }
 
@@ -9963,7 +10153,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getSetExpressionAccess().getUnaryOrInfixExpressionParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnaryOrInfixExpression_in_ruleSetExpression7627);
+            pushFollow(FollowSets000.FOLLOW_ruleUnaryOrInfixExpression_in_ruleSetExpression7703);
             this_UnaryOrInfixExpression_0=ruleUnaryOrInfixExpression();
 
             state._fsp--;
@@ -10029,7 +10219,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4103:1: (lv_functionName_2_0= '..' )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4104:3: lv_functionName_2_0= '..'
             	    {
-            	    lv_functionName_2_0=(Token)match(input,63,FollowSets000.FOLLOW_63_in_ruleSetExpression7657); if (state.failed) return current;
+            	    lv_functionName_2_0=(Token)match(input,63,FollowSets000.FOLLOW_63_in_ruleSetExpression7733); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	              createLeafNode(lv_functionName_2_0, grammarAccess.getSetExpressionAccess().getFunctionNameFullStopFullStopKeyword_1_1_0(), "functionName");
@@ -10066,7 +10256,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getSetExpressionAccess().getRightExprUnaryOrInfixExpressionParserRuleCall_1_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleUnaryOrInfixExpression_in_ruleSetExpression7691);
+            	    pushFollow(FollowSets000.FOLLOW_ruleUnaryOrInfixExpression_in_ruleSetExpression7767);
             	    lv_rightExpr_3_0=ruleUnaryOrInfixExpression();
 
             	    state._fsp--;
@@ -10146,7 +10336,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getUnaryOrInfixExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnaryOrInfixExpression_in_entryRuleUnaryOrInfixExpression7729);
+            pushFollow(FollowSets000.FOLLOW_ruleUnaryOrInfixExpression_in_entryRuleUnaryOrInfixExpression7805);
             iv_ruleUnaryOrInfixExpression=ruleUnaryOrInfixExpression();
 
             state._fsp--;
@@ -10154,7 +10344,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleUnaryOrInfixExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnaryOrInfixExpression7739); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnaryOrInfixExpression7815); if (state.failed) return current;
 
             }
 
@@ -10245,7 +10435,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getUnaryOrInfixExpressionAccess().getPostopExpressionParserRuleCall_0(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePostopExpression_in_ruleUnaryOrInfixExpression7789);
+                    pushFollow(FollowSets000.FOLLOW_rulePostopExpression_in_ruleUnaryOrInfixExpression7865);
                     this_PostopExpression_0=rulePostopExpression();
 
                     state._fsp--;
@@ -10272,7 +10462,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getUnaryOrInfixExpressionAccess().getUnaryExpressionParserRuleCall_1(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleUnaryExpression_in_ruleUnaryOrInfixExpression7819);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnaryExpression_in_ruleUnaryOrInfixExpression7895);
                     this_UnaryExpression_1=ruleUnaryExpression();
 
                     state._fsp--;
@@ -10299,7 +10489,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getUnaryOrInfixExpressionAccess().getPreopExpressionParserRuleCall_2(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePreopExpression_in_ruleUnaryOrInfixExpression7849);
+                    pushFollow(FollowSets000.FOLLOW_rulePreopExpression_in_ruleUnaryOrInfixExpression7925);
                     this_PreopExpression_2=rulePreopExpression();
 
                     state._fsp--;
@@ -10354,7 +10544,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getUnaryExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnaryExpression_in_entryRuleUnaryExpression7884);
+            pushFollow(FollowSets000.FOLLOW_ruleUnaryExpression_in_entryRuleUnaryExpression7960);
             iv_ruleUnaryExpression=ruleUnaryExpression();
 
             state._fsp--;
@@ -10362,7 +10552,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleUnaryExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnaryExpression7894); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnaryExpression7970); if (state.failed) return current;
 
             }
 
@@ -10450,7 +10640,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4248:3: lv_functionName_1_1= '!'
                     {
-                    lv_functionName_1_1=(Token)match(input,64,FollowSets000.FOLLOW_64_in_ruleUnaryExpression7951); if (state.failed) return current;
+                    lv_functionName_1_1=(Token)match(input,64,FollowSets000.FOLLOW_64_in_ruleUnaryExpression8027); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_functionName_1_1, grammarAccess.getUnaryExpressionAccess().getFunctionNameExclamationMarkKeyword_1_0_0(), "functionName");
@@ -10476,7 +10666,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 2 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4266:8: lv_functionName_1_2= '-'
                     {
-                    lv_functionName_1_2=(Token)match(input,60,FollowSets000.FOLLOW_60_in_ruleUnaryExpression7980); if (state.failed) return current;
+                    lv_functionName_1_2=(Token)match(input,60,FollowSets000.FOLLOW_60_in_ruleUnaryExpression8056); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_functionName_1_2, grammarAccess.getUnaryExpressionAccess().getFunctionNameHyphenMinusKeyword_1_0_1(), "functionName");
@@ -10519,7 +10709,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getUnaryExpressionAccess().getExprInfixExpressionParserRuleCall_2_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInfixExpression_in_ruleUnaryExpression8017);
+            pushFollow(FollowSets000.FOLLOW_ruleInfixExpression_in_ruleUnaryExpression8093);
             lv_expr_2_0=ruleInfixExpression();
 
             state._fsp--;
@@ -10590,7 +10780,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getPreopExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePreopExpression_in_entryRulePreopExpression8053);
+            pushFollow(FollowSets000.FOLLOW_rulePreopExpression_in_entryRulePreopExpression8129);
             iv_rulePreopExpression=rulePreopExpression();
 
             state._fsp--;
@@ -10598,7 +10788,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_rulePreopExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePreopExpression8063); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePreopExpression8139); if (state.failed) return current;
 
             }
 
@@ -10686,7 +10876,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4351:3: lv_functionName_1_1= '++'
                     {
-                    lv_functionName_1_1=(Token)match(input,65,FollowSets000.FOLLOW_65_in_rulePreopExpression8120); if (state.failed) return current;
+                    lv_functionName_1_1=(Token)match(input,65,FollowSets000.FOLLOW_65_in_rulePreopExpression8196); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_functionName_1_1, grammarAccess.getPreopExpressionAccess().getFunctionNamePlusSignPlusSignKeyword_1_0_0(), "functionName");
@@ -10712,7 +10902,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 2 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4369:8: lv_functionName_1_2= '--'
                     {
-                    lv_functionName_1_2=(Token)match(input,66,FollowSets000.FOLLOW_66_in_rulePreopExpression8149); if (state.failed) return current;
+                    lv_functionName_1_2=(Token)match(input,66,FollowSets000.FOLLOW_66_in_rulePreopExpression8225); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_functionName_1_2, grammarAccess.getPreopExpressionAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0_1(), "functionName");
@@ -10755,7 +10945,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getPreopExpressionAccess().getExprInfixExpressionParserRuleCall_2_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInfixExpression_in_rulePreopExpression8186);
+            pushFollow(FollowSets000.FOLLOW_ruleInfixExpression_in_rulePreopExpression8262);
             lv_expr_2_0=ruleInfixExpression();
 
             state._fsp--;
@@ -10826,7 +11016,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getPostopExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePostopExpression_in_entryRulePostopExpression8222);
+            pushFollow(FollowSets000.FOLLOW_rulePostopExpression_in_entryRulePostopExpression8298);
             iv_rulePostopExpression=rulePostopExpression();
 
             state._fsp--;
@@ -10834,7 +11024,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_rulePostopExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePostopExpression8232); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePostopExpression8308); if (state.failed) return current;
 
             }
 
@@ -10882,7 +11072,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getPostopExpressionAccess().getInfixExpressionParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInfixExpression_in_rulePostopExpression8282);
+            pushFollow(FollowSets000.FOLLOW_ruleInfixExpression_in_rulePostopExpression8358);
             this_InfixExpression_0=ruleInfixExpression();
 
             state._fsp--;
@@ -10970,7 +11160,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         case 1 :
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4471:3: lv_functionName_2_1= '--'
                             {
-                            lv_functionName_2_1=(Token)match(input,66,FollowSets000.FOLLOW_66_in_rulePostopExpression8314); if (state.failed) return current;
+                            lv_functionName_2_1=(Token)match(input,66,FollowSets000.FOLLOW_66_in_rulePostopExpression8390); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       createLeafNode(lv_functionName_2_1, grammarAccess.getPostopExpressionAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0_0(), "functionName");
@@ -10996,7 +11186,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         case 2 :
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4489:8: lv_functionName_2_2= '++'
                             {
-                            lv_functionName_2_2=(Token)match(input,65,FollowSets000.FOLLOW_65_in_rulePostopExpression8343); if (state.failed) return current;
+                            lv_functionName_2_2=(Token)match(input,65,FollowSets000.FOLLOW_65_in_rulePostopExpression8419); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       createLeafNode(lv_functionName_2_2, grammarAccess.getPostopExpressionAccess().getFunctionNamePlusSignPlusSignKeyword_1_1_0_1(), "functionName");
@@ -11075,7 +11265,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getInfixExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInfixExpression_in_entryRuleInfixExpression8397);
+            pushFollow(FollowSets000.FOLLOW_ruleInfixExpression_in_entryRuleInfixExpression8473);
             iv_ruleInfixExpression=ruleInfixExpression();
 
             state._fsp--;
@@ -11083,7 +11273,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleInfixExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInfixExpression8407); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInfixExpression8483); if (state.failed) return current;
 
             }
 
@@ -11141,7 +11331,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getInfixExpressionAccess().getCallExpressionParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCallExpression_in_ruleInfixExpression8457);
+            pushFollow(FollowSets000.FOLLOW_ruleCallExpression_in_ruleInfixExpression8533);
             this_CallExpression_0=ruleCallExpression();
 
             state._fsp--;
@@ -11216,7 +11406,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_2=(Token)match(input,67,FollowSets000.FOLLOW_67_in_ruleInfixExpression8482); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,67,FollowSets000.FOLLOW_67_in_ruleInfixExpression8558); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_2, grammarAccess.getInfixExpressionAccess().getFullStopKeyword_1_0_1(), null);
@@ -11228,7 +11418,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4569:1: (lv_name_3_0= RULE_ID )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4570:3: lv_name_3_0= RULE_ID
             	    {
-            	    lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleInfixExpression8499); if (state.failed) return current;
+            	    lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleInfixExpression8575); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      			createLeafNode(lv_name_3_0, grammarAccess.getInfixExpressionAccess().getNameIDTerminalRuleCall_1_0_2_0(), "name"); 
@@ -11258,7 +11448,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_4=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleInfixExpression8516); if (state.failed) return current;
+            	    otherlv_4=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleInfixExpression8592); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_4, grammarAccess.getInfixExpressionAccess().getLeftParenthesisKeyword_1_0_3(), null);
@@ -11283,7 +11473,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	              	        currentNode=createCompositeNode(grammarAccess.getInfixExpressionAccess().getParameterListParameterListParserRuleCall_1_0_4_0(), currentNode); 
             	              	    
             	            }
-            	            pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_ruleInfixExpression8537);
+            	            pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_ruleInfixExpression8613);
             	            lv_parameterList_5_0=ruleParameterList();
 
             	            state._fsp--;
@@ -11316,7 +11506,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_6=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleInfixExpression8550); if (state.failed) return current;
+            	    otherlv_6=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleInfixExpression8626); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_6, grammarAccess.getInfixExpressionAccess().getRightParenthesisKeyword_1_0_5(), null);
@@ -11362,7 +11552,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_8=(Token)match(input,68,FollowSets000.FOLLOW_68_in_ruleInfixExpression8582); if (state.failed) return current;
+            	    otherlv_8=(Token)match(input,68,FollowSets000.FOLLOW_68_in_ruleInfixExpression8658); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_8, grammarAccess.getInfixExpressionAccess().getLeftSquareBracketKeyword_1_1_1(), null);
@@ -11379,7 +11569,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getInfixExpressionAccess().getIndexExprExpressionParserRuleCall_1_1_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleInfixExpression8603);
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleInfixExpression8679);
             	    lv_indexExpr_9_0=ruleExpression();
 
             	    state._fsp--;
@@ -11409,7 +11599,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_10=(Token)match(input,69,FollowSets000.FOLLOW_69_in_ruleInfixExpression8615); if (state.failed) return current;
+            	    otherlv_10=(Token)match(input,69,FollowSets000.FOLLOW_69_in_ruleInfixExpression8691); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_10, grammarAccess.getInfixExpressionAccess().getRightSquareBracketKeyword_1_1_3(), null);
@@ -11455,7 +11645,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_12=(Token)match(input,67,FollowSets000.FOLLOW_67_in_ruleInfixExpression8647); if (state.failed) return current;
+            	    otherlv_12=(Token)match(input,67,FollowSets000.FOLLOW_67_in_ruleInfixExpression8723); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_12, grammarAccess.getInfixExpressionAccess().getFullStopKeyword_1_2_1(), null);
@@ -11467,7 +11657,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4701:1: (lv_featureName_13_0= RULE_ID )
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4702:3: lv_featureName_13_0= RULE_ID
             	    {
-            	    lv_featureName_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleInfixExpression8664); if (state.failed) return current;
+            	    lv_featureName_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleInfixExpression8740); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      			createLeafNode(lv_featureName_13_0, grammarAccess.getInfixExpressionAccess().getFeatureNameIDTerminalRuleCall_1_2_2_0(), "featureName"); 
@@ -11550,7 +11740,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getCallExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCallExpression_in_entryRuleCallExpression8708);
+            pushFollow(FollowSets000.FOLLOW_ruleCallExpression_in_entryRuleCallExpression8784);
             iv_ruleCallExpression=ruleCallExpression();
 
             state._fsp--;
@@ -11558,7 +11748,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleCallExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCallExpression8718); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCallExpression8794); if (state.failed) return current;
 
             }
 
@@ -11608,7 +11798,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getCallExpressionAccess().getPrimaryExpressionParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrimaryExpression_in_ruleCallExpression8768);
+            pushFollow(FollowSets000.FOLLOW_rulePrimaryExpression_in_ruleCallExpression8844);
             this_PrimaryExpression_0=rulePrimaryExpression();
 
             state._fsp--;
@@ -11668,7 +11858,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_2=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleCallExpression8792); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleCallExpression8868); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_2, grammarAccess.getCallExpressionAccess().getLeftParenthesisKeyword_1_1(), null);
@@ -11693,7 +11883,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	              	        currentNode=createCompositeNode(grammarAccess.getCallExpressionAccess().getParameterListParameterListParserRuleCall_1_2_0(), currentNode); 
             	              	    
             	            }
-            	            pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_ruleCallExpression8813);
+            	            pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_ruleCallExpression8889);
             	            lv_parameterList_3_0=ruleParameterList();
 
             	            state._fsp--;
@@ -11726,7 +11916,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_4=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleCallExpression8826); if (state.failed) return current;
+            	    otherlv_4=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleCallExpression8902); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_4, grammarAccess.getCallExpressionAccess().getRightParenthesisKeyword_1_3(), null);
@@ -11782,7 +11972,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getPrimaryExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression8864);
+            pushFollow(FollowSets000.FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression8940);
             iv_rulePrimaryExpression=rulePrimaryExpression();
 
             state._fsp--;
@@ -11790,7 +11980,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_rulePrimaryExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimaryExpression8874); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrimaryExpression8950); if (state.failed) return current;
 
             }
 
@@ -11856,7 +12046,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getFeatureCallParserRuleCall_0(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleFeatureCall_in_rulePrimaryExpression8924);
+                    pushFollow(FollowSets000.FOLLOW_ruleFeatureCall_in_rulePrimaryExpression9000);
                     this_FeatureCall_0=ruleFeatureCall();
 
                     state._fsp--;
@@ -11883,7 +12073,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getConstructorCallExpressionParserRuleCall_1(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleConstructorCallExpression_in_rulePrimaryExpression8954);
+                    pushFollow(FollowSets000.FOLLOW_ruleConstructorCallExpression_in_rulePrimaryExpression9030);
                     this_ConstructorCallExpression_1=ruleConstructorCallExpression();
 
                     state._fsp--;
@@ -11910,7 +12100,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getValueParserRuleCall_2(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleValue_in_rulePrimaryExpression8984);
+                    pushFollow(FollowSets000.FOLLOW_ruleValue_in_rulePrimaryExpression9060);
                     this_Value_2=ruleValue();
 
                     state._fsp--;
@@ -11937,7 +12127,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getLiteralParserRuleCall_3(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleLiteral_in_rulePrimaryExpression9014);
+                    pushFollow(FollowSets000.FOLLOW_ruleLiteral_in_rulePrimaryExpression9090);
                     this_Literal_3=ruleLiteral();
 
                     state._fsp--;
@@ -11964,7 +12154,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getKeywordVariablesParserRuleCall_4(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleKeywordVariables_in_rulePrimaryExpression9044);
+                    pushFollow(FollowSets000.FOLLOW_ruleKeywordVariables_in_rulePrimaryExpression9120);
                     this_KeywordVariables_4=ruleKeywordVariables();
 
                     state._fsp--;
@@ -11991,7 +12181,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getParanthesizedExpressionParserRuleCall_5(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleParanthesizedExpression_in_rulePrimaryExpression9074);
+                    pushFollow(FollowSets000.FOLLOW_ruleParanthesizedExpression_in_rulePrimaryExpression9150);
                     this_ParanthesizedExpression_5=ruleParanthesizedExpression();
 
                     state._fsp--;
@@ -12018,7 +12208,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getBlockExpressionParserRuleCall_6(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_rulePrimaryExpression9104);
+                    pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_rulePrimaryExpression9180);
                     this_BlockExpression_6=ruleBlockExpression();
 
                     state._fsp--;
@@ -12045,7 +12235,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getWithExpressionParserRuleCall_7(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleWithExpression_in_rulePrimaryExpression9134);
+                    pushFollow(FollowSets000.FOLLOW_ruleWithExpression_in_rulePrimaryExpression9210);
                     this_WithExpression_7=ruleWithExpression();
 
                     state._fsp--;
@@ -12072,7 +12262,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getWithContextExpressionParserRuleCall_8(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleWithContextExpression_in_rulePrimaryExpression9164);
+                    pushFollow(FollowSets000.FOLLOW_ruleWithContextExpression_in_rulePrimaryExpression9240);
                     this_WithContextExpression_8=ruleWithContextExpression();
 
                     state._fsp--;
@@ -12127,7 +12317,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getWithExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleWithExpression_in_entryRuleWithExpression9199);
+            pushFollow(FollowSets000.FOLLOW_ruleWithExpression_in_entryRuleWithExpression9275);
             iv_ruleWithExpression=ruleWithExpression();
 
             state._fsp--;
@@ -12135,7 +12325,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleWithExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWithExpression9209); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWithExpression9285); if (state.failed) return current;
 
             }
 
@@ -12180,7 +12370,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4972:1: (otherlv_0= 'with' ( ( (lv_referencedAdvice_1_0= RULE_ID ) ) (otherlv_2= ',' ( (lv_referencedAdvice_3_0= RULE_ID ) ) )* )? ( (otherlv_4= ':' ( (lv_funcExpr_5_0= ruleExpression ) ) ) | (otherlv_6= '{' ( (lv_funcExpr_7_0= ruleBlockExpressionWithoutBrackets ) ) otherlv_8= '}' ) ) )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4972:3: otherlv_0= 'with' ( ( (lv_referencedAdvice_1_0= RULE_ID ) ) (otherlv_2= ',' ( (lv_referencedAdvice_3_0= RULE_ID ) ) )* )? ( (otherlv_4= ':' ( (lv_funcExpr_5_0= ruleExpression ) ) ) | (otherlv_6= '{' ( (lv_funcExpr_7_0= ruleBlockExpressionWithoutBrackets ) ) otherlv_8= '}' ) )
             {
-            otherlv_0=(Token)match(input,70,FollowSets000.FOLLOW_70_in_ruleWithExpression9246); if (state.failed) return current;
+            otherlv_0=(Token)match(input,70,FollowSets000.FOLLOW_70_in_ruleWithExpression9322); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_0, grammarAccess.getWithExpressionAccess().getWithKeyword_0(), null);
@@ -12203,7 +12393,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4977:1: (lv_referencedAdvice_1_0= RULE_ID )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4978:3: lv_referencedAdvice_1_0= RULE_ID
                     {
-                    lv_referencedAdvice_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleWithExpression9264); if (state.failed) return current;
+                    lv_referencedAdvice_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleWithExpression9340); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_referencedAdvice_1_0, grammarAccess.getWithExpressionAccess().getReferencedAdviceIDTerminalRuleCall_1_0_0(), "referencedAdvice"); 
@@ -12248,7 +12438,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	case 1 :
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5000:4: otherlv_2= ',' ( (lv_referencedAdvice_3_0= RULE_ID ) )
                     	    {
-                    	    otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleWithExpression9282); if (state.failed) return current;
+                    	    otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleWithExpression9358); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_2, grammarAccess.getWithExpressionAccess().getCommaKeyword_1_1_0(), null);
@@ -12260,7 +12450,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5005:1: (lv_referencedAdvice_3_0= RULE_ID )
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5006:3: lv_referencedAdvice_3_0= RULE_ID
                     	    {
-                    	    lv_referencedAdvice_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleWithExpression9299); if (state.failed) return current;
+                    	    lv_referencedAdvice_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleWithExpression9375); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      			createLeafNode(lv_referencedAdvice_3_0, grammarAccess.getWithExpressionAccess().getReferencedAdviceIDTerminalRuleCall_1_1_1_0(), "referencedAdvice"); 
@@ -12329,7 +12519,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5028:7: (otherlv_4= ':' ( (lv_funcExpr_5_0= ruleExpression ) ) )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5028:9: otherlv_4= ':' ( (lv_funcExpr_5_0= ruleExpression ) )
                     {
-                    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleWithExpression9322); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleWithExpression9398); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_4, grammarAccess.getWithExpressionAccess().getColonKeyword_2_0_0(), null);
@@ -12346,7 +12536,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getWithExpressionAccess().getFuncExprExpressionParserRuleCall_2_0_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleWithExpression9343);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleWithExpression9419);
                     lv_funcExpr_5_0=ruleExpression();
 
                     state._fsp--;
@@ -12388,7 +12578,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5057:6: (otherlv_6= '{' ( (lv_funcExpr_7_0= ruleBlockExpressionWithoutBrackets ) ) otherlv_8= '}' )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5057:8: otherlv_6= '{' ( (lv_funcExpr_7_0= ruleBlockExpressionWithoutBrackets ) ) otherlv_8= '}'
                     {
-                    otherlv_6=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleWithExpression9363); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleWithExpression9439); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_6, grammarAccess.getWithExpressionAccess().getLeftCurlyBracketKeyword_2_1_0(), null);
@@ -12405,7 +12595,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getWithExpressionAccess().getFuncExprBlockExpressionWithoutBracketsParserRuleCall_2_1_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleBlockExpressionWithoutBrackets_in_ruleWithExpression9384);
+                    pushFollow(FollowSets000.FOLLOW_ruleBlockExpressionWithoutBrackets_in_ruleWithExpression9460);
                     lv_funcExpr_7_0=ruleBlockExpressionWithoutBrackets();
 
                     state._fsp--;
@@ -12435,7 +12625,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                     }
 
-                    otherlv_8=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleWithExpression9396); if (state.failed) return current;
+                    otherlv_8=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleWithExpression9472); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_8, grammarAccess.getWithExpressionAccess().getRightCurlyBracketKeyword_2_1_2(), null);
@@ -12491,7 +12681,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getWithContextExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleWithContextExpression_in_entryRuleWithContextExpression9434);
+            pushFollow(FollowSets000.FOLLOW_ruleWithContextExpression_in_entryRuleWithContextExpression9510);
             iv_ruleWithContextExpression=ruleWithContextExpression();
 
             state._fsp--;
@@ -12499,7 +12689,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleWithContextExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWithContextExpression9444); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWithContextExpression9520); if (state.failed) return current;
 
             }
 
@@ -12541,13 +12731,13 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5112:1: (otherlv_0= 'with' otherlv_1= 'context' ( (lv_expr_2_0= ruleExpression ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? ( (lv_contextBlock_5_0= ruleBlockExpression ) ) )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5112:3: otherlv_0= 'with' otherlv_1= 'context' ( (lv_expr_2_0= ruleExpression ) ) (otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) ) )? ( (lv_contextBlock_5_0= ruleBlockExpression ) )
             {
-            otherlv_0=(Token)match(input,70,FollowSets000.FOLLOW_70_in_ruleWithContextExpression9481); if (state.failed) return current;
+            otherlv_0=(Token)match(input,70,FollowSets000.FOLLOW_70_in_ruleWithContextExpression9557); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_0, grammarAccess.getWithContextExpressionAccess().getWithKeyword_0(), null);
                   
             }
-            otherlv_1=(Token)match(input,71,FollowSets000.FOLLOW_71_in_ruleWithContextExpression9493); if (state.failed) return current;
+            otherlv_1=(Token)match(input,71,FollowSets000.FOLLOW_71_in_ruleWithContextExpression9569); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_1, grammarAccess.getWithContextExpressionAccess().getContextKeyword_1(), null);
@@ -12564,7 +12754,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getWithContextExpressionAccess().getExprExpressionParserRuleCall_2_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleWithContextExpression9514);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleWithContextExpression9590);
             lv_expr_2_0=ruleExpression();
 
             state._fsp--;
@@ -12605,7 +12795,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5144:4: otherlv_3= 'as' ( (lv_alias_4_0= RULE_ID ) )
                     {
-                    otherlv_3=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleWithContextExpression9527); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleWithContextExpression9603); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_3, grammarAccess.getWithContextExpressionAccess().getAsKeyword_3_0(), null);
@@ -12617,7 +12807,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5149:1: (lv_alias_4_0= RULE_ID )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5150:3: lv_alias_4_0= RULE_ID
                     {
-                    lv_alias_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleWithContextExpression9544); if (state.failed) return current;
+                    lv_alias_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleWithContextExpression9620); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_alias_4_0, grammarAccess.getWithContextExpressionAccess().getAliasIDTerminalRuleCall_3_1_0(), "alias"); 
@@ -12664,7 +12854,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getWithContextExpressionAccess().getContextBlockBlockExpressionParserRuleCall_4_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_ruleWithContextExpression9572);
+            pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_ruleWithContextExpression9648);
             lv_contextBlock_5_0=ruleBlockExpression();
 
             state._fsp--;
@@ -12735,7 +12925,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getBlockExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_entryRuleBlockExpression9608);
+            pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_entryRuleBlockExpression9684);
             iv_ruleBlockExpression=ruleBlockExpression();
 
             state._fsp--;
@@ -12743,7 +12933,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleBlockExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBlockExpression9618); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBlockExpression9694); if (state.failed) return current;
 
             }
 
@@ -12805,7 +12995,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleBlockExpression9667); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleBlockExpression9743); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_1, grammarAccess.getBlockExpressionAccess().getLeftCurlyBracketKeyword_1(), null);
@@ -12837,7 +13027,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getBlockExpressionAccess().getExpressionsTopLevelExpressionParserRuleCall_2_0_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleTopLevelExpression_in_ruleBlockExpression9689);
+            	    pushFollow(FollowSets000.FOLLOW_ruleTopLevelExpression_in_ruleBlockExpression9765);
             	    lv_expressions_2_0=ruleTopLevelExpression();
 
             	    state._fsp--;
@@ -12867,7 +13057,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_3=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleBlockExpression9701); if (state.failed) return current;
+            	    otherlv_3=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleBlockExpression9777); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_3, grammarAccess.getBlockExpressionAccess().getSemicolonKeyword_2_1(), null);
@@ -12882,7 +13072,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleBlockExpression9715); if (state.failed) return current;
+            otherlv_4=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleBlockExpression9791); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_4, grammarAccess.getBlockExpressionAccess().getRightCurlyBracketKeyword_3(), null);
@@ -12929,7 +13119,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getValueRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleValue_in_entryRuleValue9751);
+            pushFollow(FollowSets000.FOLLOW_ruleValue_in_entryRuleValue9827);
             iv_ruleValue=ruleValue();
 
             state._fsp--;
@@ -12937,7 +13127,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleValue; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleValue9761); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleValue9837); if (state.failed) return current;
 
             }
 
@@ -13001,7 +13191,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5307:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5308:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleValue9815); if (state.failed) return current;
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleValue9891); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_name_1_0, grammarAccess.getValueAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
@@ -13072,7 +13262,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getKeywordVariablesRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleKeywordVariables_in_entryRuleKeywordVariables9856);
+            pushFollow(FollowSets000.FOLLOW_ruleKeywordVariables_in_entryRuleKeywordVariables9932);
             iv_ruleKeywordVariables=ruleKeywordVariables();
 
             state._fsp--;
@@ -13080,7 +13270,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleKeywordVariables; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKeywordVariables9866); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKeywordVariables9942); if (state.failed) return current;
 
             }
 
@@ -13200,7 +13390,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5370:3: lv_name_1_1= 'input'
                     {
-                    lv_name_1_1=(Token)match(input,72,FollowSets000.FOLLOW_72_in_ruleKeywordVariables9923); if (state.failed) return current;
+                    lv_name_1_1=(Token)match(input,72,FollowSets000.FOLLOW_72_in_ruleKeywordVariables9999); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_name_1_1, grammarAccess.getKeywordVariablesAccess().getNameInputKeyword_1_0_0(), "name");
@@ -13226,7 +13416,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 2 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5388:8: lv_name_1_2= 'output'
                     {
-                    lv_name_1_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleKeywordVariables9952); if (state.failed) return current;
+                    lv_name_1_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleKeywordVariables10028); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_name_1_2, grammarAccess.getKeywordVariablesAccess().getNameOutputKeyword_1_0_1(), "name");
@@ -13252,7 +13442,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 3 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5406:8: lv_name_1_3= 'source'
                     {
-                    lv_name_1_3=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleKeywordVariables9981); if (state.failed) return current;
+                    lv_name_1_3=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleKeywordVariables10057); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_name_1_3, grammarAccess.getKeywordVariablesAccess().getNameSourceKeyword_1_0_2(), "name");
@@ -13278,7 +13468,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 4 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5424:8: lv_name_1_4= 'properties'
                     {
-                    lv_name_1_4=(Token)match(input,73,FollowSets000.FOLLOW_73_in_ruleKeywordVariables10010); if (state.failed) return current;
+                    lv_name_1_4=(Token)match(input,73,FollowSets000.FOLLOW_73_in_ruleKeywordVariables10086); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_name_1_4, grammarAccess.getKeywordVariablesAccess().getNamePropertiesKeyword_1_0_3(), "name");
@@ -13304,7 +13494,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 5 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5442:8: lv_name_1_5= 'builder'
                     {
-                    lv_name_1_5=(Token)match(input,74,FollowSets000.FOLLOW_74_in_ruleKeywordVariables10039); if (state.failed) return current;
+                    lv_name_1_5=(Token)match(input,74,FollowSets000.FOLLOW_74_in_ruleKeywordVariables10115); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_name_1_5, grammarAccess.getKeywordVariablesAccess().getNameBuilderKeyword_1_0_4(), "name");
@@ -13330,7 +13520,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 6 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5460:8: lv_name_1_6= 'unit'
                     {
-                    lv_name_1_6=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleKeywordVariables10068); if (state.failed) return current;
+                    lv_name_1_6=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleKeywordVariables10144); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_name_1_6, grammarAccess.getKeywordVariablesAccess().getNameUnitKeyword_1_0_5(), "name");
@@ -13356,7 +13546,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 7 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5478:8: lv_name_1_7= 'this'
                     {
-                    lv_name_1_7=(Token)match(input,75,FollowSets000.FOLLOW_75_in_ruleKeywordVariables10097); if (state.failed) return current;
+                    lv_name_1_7=(Token)match(input,75,FollowSets000.FOLLOW_75_in_ruleKeywordVariables10173); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_name_1_7, grammarAccess.getKeywordVariablesAccess().getNameThisKeyword_1_0_6(), "name");
@@ -13429,7 +13619,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getFeatureCallRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFeatureCall_in_entryRuleFeatureCall10149);
+            pushFollow(FollowSets000.FOLLOW_ruleFeatureCall_in_entryRuleFeatureCall10225);
             iv_ruleFeatureCall=ruleFeatureCall();
 
             state._fsp--;
@@ -13437,7 +13627,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleFeatureCall; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFeatureCall10159); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFeatureCall10235); if (state.failed) return current;
 
             }
 
@@ -13480,7 +13670,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getFeatureCallAccess().getOperationCallParserRuleCall(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOperationCall_in_ruleFeatureCall10208);
+            pushFollow(FollowSets000.FOLLOW_ruleOperationCall_in_ruleFeatureCall10284);
             this_OperationCall_0=ruleOperationCall();
 
             state._fsp--;
@@ -13529,7 +13719,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getOperationCallRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOperationCall_in_entryRuleOperationCall10242);
+            pushFollow(FollowSets000.FOLLOW_ruleOperationCall_in_entryRuleOperationCall10318);
             iv_ruleOperationCall=ruleOperationCall();
 
             state._fsp--;
@@ -13537,7 +13727,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleOperationCall; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOperationCall10252); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOperationCall10328); if (state.failed) return current;
 
             }
 
@@ -13605,7 +13795,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5572:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5573:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOperationCall10306); if (state.failed) return current;
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOperationCall10382); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_name_1_0, grammarAccess.getOperationCallAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
@@ -13635,7 +13825,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_2=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleOperationCall10323); if (state.failed) return current;
+            otherlv_2=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleOperationCall10399); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_2, grammarAccess.getOperationCallAccess().getLeftParenthesisKeyword_2(), null);
@@ -13660,7 +13850,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getOperationCallAccess().getParameterListParameterListParserRuleCall_3_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_ruleOperationCall10344);
+                    pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_ruleOperationCall10420);
                     lv_parameterList_3_0=ruleParameterList();
 
                     state._fsp--;
@@ -13693,7 +13883,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_4=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleOperationCall10357); if (state.failed) return current;
+            otherlv_4=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleOperationCall10433); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_4, grammarAccess.getOperationCallAccess().getRightParenthesisKeyword_4(), null);
@@ -13740,7 +13930,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getConstructorCallExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleConstructorCallExpression_in_entryRuleConstructorCallExpression10393);
+            pushFollow(FollowSets000.FOLLOW_ruleConstructorCallExpression_in_entryRuleConstructorCallExpression10469);
             iv_ruleConstructorCallExpression=ruleConstructorCallExpression();
 
             state._fsp--;
@@ -13748,7 +13938,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleConstructorCallExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleConstructorCallExpression10403); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleConstructorCallExpression10479); if (state.failed) return current;
 
             }
 
@@ -13815,7 +14005,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_1=(Token)match(input,76,FollowSets000.FOLLOW_76_in_ruleConstructorCallExpression10452); if (state.failed) return current;
+            otherlv_1=(Token)match(input,76,FollowSets000.FOLLOW_76_in_ruleConstructorCallExpression10528); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_1, grammarAccess.getConstructorCallExpressionAccess().getNewKeyword_1(), null);
@@ -13827,7 +14017,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5669:1: (lv_typeExpr_2_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5670:3: lv_typeExpr_2_0= RULE_ID
             {
-            lv_typeExpr_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleConstructorCallExpression10469); if (state.failed) return current;
+            lv_typeExpr_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleConstructorCallExpression10545); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_typeExpr_2_0, grammarAccess.getConstructorCallExpressionAccess().getTypeExprIDTerminalRuleCall_2_0(), "typeExpr"); 
@@ -13864,7 +14054,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5692:4: otherlv_3= '(' ( (lv_parameterList_4_0= ruleParameterList ) )? otherlv_5= ')'
                     {
-                    otherlv_3=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleConstructorCallExpression10487); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleConstructorCallExpression10563); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_3, grammarAccess.getConstructorCallExpressionAccess().getLeftParenthesisKeyword_3_0(), null);
@@ -13889,7 +14079,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               	        currentNode=createCompositeNode(grammarAccess.getConstructorCallExpressionAccess().getParameterListParameterListParserRuleCall_3_1_0(), currentNode); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_ruleConstructorCallExpression10508);
+                            pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_ruleConstructorCallExpression10584);
                             lv_parameterList_4_0=ruleParameterList();
 
                             state._fsp--;
@@ -13922,7 +14112,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                     }
 
-                    otherlv_5=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleConstructorCallExpression10521); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleConstructorCallExpression10597); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_5, grammarAccess.getConstructorCallExpressionAccess().getRightParenthesisKeyword_3_2(), null);
@@ -13953,7 +14143,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5724:5: otherlv_6= 'as' ( (lv_alias_7_0= RULE_ID ) )
                     {
-                    otherlv_6=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleConstructorCallExpression10536); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleConstructorCallExpression10612); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_6, grammarAccess.getConstructorCallExpressionAccess().getAsKeyword_4_0(), null);
@@ -13965,7 +14155,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5729:1: (lv_alias_7_0= RULE_ID )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5730:3: lv_alias_7_0= RULE_ID
                     {
-                    lv_alias_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleConstructorCallExpression10553); if (state.failed) return current;
+                    lv_alias_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleConstructorCallExpression10629); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			createLeafNode(lv_alias_7_0, grammarAccess.getConstructorCallExpressionAccess().getAliasIDTerminalRuleCall_4_1_0(), "alias"); 
@@ -14028,7 +14218,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getConstructorCallExpressionAccess().getContextBlockInitializationBlockExpressionParserRuleCall_5_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleInitializationBlockExpression_in_ruleConstructorCallExpression10581);
+                    pushFollow(FollowSets000.FOLLOW_ruleInitializationBlockExpression_in_ruleConstructorCallExpression10657);
                     lv_contextBlock_8_0=ruleInitializationBlockExpression();
 
                     state._fsp--;
@@ -14102,7 +14292,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getInitializationBlockExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInitializationBlockExpression_in_entryRuleInitializationBlockExpression10618);
+            pushFollow(FollowSets000.FOLLOW_ruleInitializationBlockExpression_in_entryRuleInitializationBlockExpression10694);
             iv_ruleInitializationBlockExpression=ruleInitializationBlockExpression();
 
             state._fsp--;
@@ -14110,7 +14300,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleInitializationBlockExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInitializationBlockExpression10628); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInitializationBlockExpression10704); if (state.failed) return current;
 
             }
 
@@ -14172,7 +14362,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleInitializationBlockExpression10677); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleInitializationBlockExpression10753); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_1, grammarAccess.getInitializationBlockExpressionAccess().getLeftCurlyBracketKeyword_1(), null);
@@ -14189,7 +14379,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getInitializationBlockExpressionAccess().getExpressionsInitializationExpressionParserRuleCall_2_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInitializationExpression_in_ruleInitializationBlockExpression10698);
+            pushFollow(FollowSets000.FOLLOW_ruleInitializationExpression_in_ruleInitializationBlockExpression10774);
             lv_expressions_2_0=ruleInitializationExpression();
 
             state._fsp--;
@@ -14219,13 +14409,13 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_3=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleInitializationBlockExpression10710); if (state.failed) return current;
+            otherlv_3=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleInitializationBlockExpression10786); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_3, grammarAccess.getInitializationBlockExpressionAccess().getSemicolonKeyword_3(), null);
                   
             }
-            otherlv_4=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleInitializationBlockExpression10722); if (state.failed) return current;
+            otherlv_4=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleInitializationBlockExpression10798); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_4, grammarAccess.getInitializationBlockExpressionAccess().getRightCurlyBracketKeyword_4(), null);
@@ -14272,7 +14462,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getInitializationExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInitializationExpression_in_entryRuleInitializationExpression10758);
+            pushFollow(FollowSets000.FOLLOW_ruleInitializationExpression_in_entryRuleInitializationExpression10834);
             iv_ruleInitializationExpression=ruleInitializationExpression();
 
             state._fsp--;
@@ -14280,7 +14470,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleInitializationExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInitializationExpression10768); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleInitializationExpression10844); if (state.failed) return current;
 
             }
 
@@ -14353,7 +14543,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getInitializationExpressionAccess().getLeftExprFeatureOfThisParserRuleCall_1_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFeatureOfThis_in_ruleInitializationExpression10826);
+            pushFollow(FollowSets000.FOLLOW_ruleFeatureOfThis_in_ruleInitializationExpression10902);
             lv_leftExpr_1_0=ruleFeatureOfThis();
 
             state._fsp--;
@@ -14389,7 +14579,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5911:1: (lv_functionName_2_0= ':' )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5912:3: lv_functionName_2_0= ':'
             {
-            lv_functionName_2_0=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleInitializationExpression10844); if (state.failed) return current;
+            lv_functionName_2_0=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleInitializationExpression10920); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                       createLeafNode(lv_functionName_2_0, grammarAccess.getInitializationExpressionAccess().getFunctionNameColonKeyword_2_0(), "functionName");
@@ -14426,7 +14616,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getInitializationExpressionAccess().getRightExprExpressionParserRuleCall_3_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleInitializationExpression10878);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleInitializationExpression10954);
             lv_rightExpr_3_0=ruleExpression();
 
             state._fsp--;
@@ -14497,7 +14687,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getFeatureOfThisRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFeatureOfThis_in_entryRuleFeatureOfThis10914);
+            pushFollow(FollowSets000.FOLLOW_ruleFeatureOfThis_in_entryRuleFeatureOfThis10990);
             iv_ruleFeatureOfThis=ruleFeatureOfThis();
 
             state._fsp--;
@@ -14505,7 +14695,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleFeatureOfThis; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFeatureOfThis10924); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFeatureOfThis11000); if (state.failed) return current;
 
             }
 
@@ -14569,7 +14759,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5993:1: (lv_featureName_1_0= RULE_ID )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5994:3: lv_featureName_1_0= RULE_ID
             {
-            lv_featureName_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFeatureOfThis10978); if (state.failed) return current;
+            lv_featureName_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFeatureOfThis11054); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_featureName_1_0, grammarAccess.getFeatureOfThisAccess().getFeatureNameIDTerminalRuleCall_1_0(), "featureName"); 
@@ -14640,7 +14830,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getLiteralRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLiteral_in_entryRuleLiteral11019);
+            pushFollow(FollowSets000.FOLLOW_ruleLiteral_in_entryRuleLiteral11095);
             iv_ruleLiteral=ruleLiteral();
 
             state._fsp--;
@@ -14648,7 +14838,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleLiteral; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLiteral11029); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLiteral11105); if (state.failed) return current;
 
             }
 
@@ -14714,7 +14904,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getLiteralAccess().getValueLiteralParserRuleCall_0(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleValueLiteral_in_ruleLiteral11079);
+                    pushFollow(FollowSets000.FOLLOW_ruleValueLiteral_in_ruleLiteral11155);
                     this_ValueLiteral_0=ruleValueLiteral();
 
                     state._fsp--;
@@ -14741,7 +14931,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getLiteralAccess().getLiteralFunctionParserRuleCall_1(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleLiteralFunction_in_ruleLiteral11109);
+                    pushFollow(FollowSets000.FOLLOW_ruleLiteralFunction_in_ruleLiteral11185);
                     this_LiteralFunction_1=ruleLiteralFunction();
 
                     state._fsp--;
@@ -14796,7 +14986,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getLiteralFunctionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLiteralFunction_in_entryRuleLiteralFunction11144);
+            pushFollow(FollowSets000.FOLLOW_ruleLiteralFunction_in_entryRuleLiteralFunction11220);
             iv_ruleLiteralFunction=ruleLiteralFunction();
 
             state._fsp--;
@@ -14804,7 +14994,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleLiteralFunction; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLiteralFunction11154); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLiteralFunction11230); if (state.failed) return current;
 
             }
 
@@ -14842,7 +15032,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6087:1: (otherlv_0= '{' this_ClosureExpression_1= ruleClosureExpression otherlv_2= '}' )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6087:3: otherlv_0= '{' this_ClosureExpression_1= ruleClosureExpression otherlv_2= '}'
             {
-            otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleLiteralFunction11191); if (state.failed) return current;
+            otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleLiteralFunction11267); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_0, grammarAccess.getLiteralFunctionAccess().getLeftCurlyBracketKeyword_0(), null);
@@ -14858,7 +15048,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getLiteralFunctionAccess().getClosureExpressionParserRuleCall_1(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleClosureExpression_in_ruleLiteralFunction11216);
+            pushFollow(FollowSets000.FOLLOW_ruleClosureExpression_in_ruleLiteralFunction11292);
             this_ClosureExpression_1=ruleClosureExpression();
 
             state._fsp--;
@@ -14869,7 +15059,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode = currentNode.getParent();
                   
             }
-            otherlv_2=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleLiteralFunction11227); if (state.failed) return current;
+            otherlv_2=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleLiteralFunction11303); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_2, grammarAccess.getLiteralFunctionAccess().getRightCurlyBracketKeyword_2(), null);
@@ -14916,7 +15106,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getClosureExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleClosureExpression_in_entryRuleClosureExpression11263);
+            pushFollow(FollowSets000.FOLLOW_ruleClosureExpression_in_entryRuleClosureExpression11339);
             iv_ruleClosureExpression=ruleClosureExpression();
 
             state._fsp--;
@@ -14924,7 +15114,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleClosureExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleClosureExpression11273); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleClosureExpression11349); if (state.failed) return current;
 
             }
 
@@ -15012,7 +15202,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                 case 1 :
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6144:4: otherlv_1= '<' ( (lv_returnType_2_0= ruleTypeRef ) ) otherlv_3= '>'
                     {
-                    otherlv_1=(Token)match(input,52,FollowSets000.FOLLOW_52_in_ruleClosureExpression11323); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,52,FollowSets000.FOLLOW_52_in_ruleClosureExpression11399); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_1, grammarAccess.getClosureExpressionAccess().getLessThanSignKeyword_1_0(), null);
@@ -15029,7 +15219,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getClosureExpressionAccess().getReturnTypeTypeRefParserRuleCall_1_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_ruleClosureExpression11344);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_ruleClosureExpression11420);
                     lv_returnType_2_0=ruleTypeRef();
 
                     state._fsp--;
@@ -15059,7 +15249,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                     }
 
-                    otherlv_3=(Token)match(input,51,FollowSets000.FOLLOW_51_in_ruleClosureExpression11356); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,51,FollowSets000.FOLLOW_51_in_ruleClosureExpression11432); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	createLeafNode(otherlv_3, grammarAccess.getClosureExpressionAccess().getGreaterThanSignKeyword_1_2(), null);
@@ -15092,7 +15282,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         case 1 :
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6176:7: otherlv_4= '|'
                             {
-                            otherlv_4=(Token)match(input,77,FollowSets000.FOLLOW_77_in_ruleClosureExpression11373); if (state.failed) return current;
+                            otherlv_4=(Token)match(input,77,FollowSets000.FOLLOW_77_in_ruleClosureExpression11449); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	createLeafNode(otherlv_4, grammarAccess.getClosureExpressionAccess().getVerticalLineKeyword_2_0_0(), null);
@@ -15118,7 +15308,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getClosureExpressionAccess().getParametersParameterDeclarationParserRuleCall_2_0_1_0_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11397);
+                    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11473);
                     lv_parameters_5_0=ruleParameterDeclaration();
 
                     state._fsp--;
@@ -15169,7 +15359,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	case 1 :
                     	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6204:4: otherlv_6= ',' ( (lv_parameters_7_0= ruleParameterDeclaration ) )
                     	    {
-                    	    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleClosureExpression11410); if (state.failed) return current;
+                    	    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleClosureExpression11486); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	          	createLeafNode(otherlv_6, grammarAccess.getClosureExpressionAccess().getCommaKeyword_2_0_1_1_0(), null);
@@ -15186,7 +15376,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     	      	        currentNode=createCompositeNode(grammarAccess.getClosureExpressionAccess().getParametersParameterDeclarationParserRuleCall_2_0_1_1_1_0(), currentNode); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11431);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11507);
                     	    lv_parameters_7_0=ruleParameterDeclaration();
 
                     	    state._fsp--;
@@ -15236,7 +15426,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         case 1 :
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6232:6: otherlv_8= ',' ( (lv_varArgs_9_0= '...' ) ) ( (lv_parameters_10_0= ruleParameterDeclaration ) )
                             {
-                            otherlv_8=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleClosureExpression11446); if (state.failed) return current;
+                            otherlv_8=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleClosureExpression11522); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                   	createLeafNode(otherlv_8, grammarAccess.getClosureExpressionAccess().getCommaKeyword_2_0_1_2_0(), null);
@@ -15248,7 +15438,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6237:1: (lv_varArgs_9_0= '...' )
                             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6238:3: lv_varArgs_9_0= '...'
                             {
-                            lv_varArgs_9_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleClosureExpression11464); if (state.failed) return current;
+                            lv_varArgs_9_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleClosureExpression11540); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                                       createLeafNode(lv_varArgs_9_0, grammarAccess.getClosureExpressionAccess().getVarArgsFullStopFullStopFullStopKeyword_2_0_1_2_1_0(), "varArgs");
@@ -15285,7 +15475,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               	        currentNode=createCompositeNode(grammarAccess.getClosureExpressionAccess().getParametersParameterDeclarationParserRuleCall_2_0_1_2_2_0(), currentNode); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11498);
+                            pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11574);
                             lv_parameters_10_0=ruleParameterDeclaration();
 
                             state._fsp--;
@@ -15342,7 +15532,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6283:1: (lv_varArgs_11_0= '...' )
                     // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6284:3: lv_varArgs_11_0= '...'
                     {
-                    lv_varArgs_11_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleClosureExpression11527); if (state.failed) return current;
+                    lv_varArgs_11_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleClosureExpression11603); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               createLeafNode(lv_varArgs_11_0, grammarAccess.getClosureExpressionAccess().getVarArgsFullStopFullStopFullStopKeyword_2_1_0_0(), "varArgs");
@@ -15379,7 +15569,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       	        currentNode=createCompositeNode(grammarAccess.getClosureExpressionAccess().getParametersParameterDeclarationParserRuleCall_2_1_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11561);
+                    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11637);
                     lv_parameters_12_0=ruleParameterDeclaration();
 
                     state._fsp--;
@@ -15418,7 +15608,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            otherlv_13=(Token)match(input,77,FollowSets000.FOLLOW_77_in_ruleClosureExpression11576); if (state.failed) return current;
+            otherlv_13=(Token)match(input,77,FollowSets000.FOLLOW_77_in_ruleClosureExpression11652); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_13, grammarAccess.getClosureExpressionAccess().getVerticalLineKeyword_3(), null);
@@ -15435,7 +15625,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
               	        currentNode=createCompositeNode(grammarAccess.getClosureExpressionAccess().getFuncExprOneOrManyExpressionsParserRuleCall_4_0(), currentNode); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOneOrManyExpressions_in_ruleClosureExpression11597);
+            pushFollow(FollowSets000.FOLLOW_ruleOneOrManyExpressions_in_ruleClosureExpression11673);
             lv_funcExpr_14_0=ruleOneOrManyExpressions();
 
             state._fsp--;
@@ -15506,7 +15696,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getOneOrManyExpressionsRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOneOrManyExpressions_in_entryRuleOneOrManyExpressions11633);
+            pushFollow(FollowSets000.FOLLOW_ruleOneOrManyExpressions_in_entryRuleOneOrManyExpressions11709);
             iv_ruleOneOrManyExpressions=ruleOneOrManyExpressions();
 
             state._fsp--;
@@ -15514,7 +15704,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleOneOrManyExpressions; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOneOrManyExpressions11643); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOneOrManyExpressions11719); if (state.failed) return current;
 
             }
 
@@ -15566,7 +15756,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getOneOrManyExpressionsAccess().getBlockExpressionWithoutBracketsParserRuleCall_0(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleBlockExpressionWithoutBrackets_in_ruleOneOrManyExpressions11693);
+                    pushFollow(FollowSets000.FOLLOW_ruleBlockExpressionWithoutBrackets_in_ruleOneOrManyExpressions11769);
                     this_BlockExpressionWithoutBrackets_0=ruleBlockExpressionWithoutBrackets();
 
                     state._fsp--;
@@ -15593,7 +15783,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                               currentNode=createCompositeNode(grammarAccess.getOneOrManyExpressionsAccess().getExpressionParserRuleCall_1(), currentNode); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleOneOrManyExpressions11723);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleOneOrManyExpressions11799);
                     this_Expression_1=ruleExpression();
 
                     state._fsp--;
@@ -15648,7 +15838,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getBlockExpressionWithoutBracketsRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleBlockExpressionWithoutBrackets_in_entryRuleBlockExpressionWithoutBrackets11758);
+            pushFollow(FollowSets000.FOLLOW_ruleBlockExpressionWithoutBrackets_in_entryRuleBlockExpressionWithoutBrackets11834);
             iv_ruleBlockExpressionWithoutBrackets=ruleBlockExpressionWithoutBrackets();
 
             state._fsp--;
@@ -15656,7 +15846,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleBlockExpressionWithoutBrackets; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBlockExpressionWithoutBrackets11768); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBlockExpressionWithoutBrackets11844); if (state.failed) return current;
 
             }
 
@@ -15743,7 +15933,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	      	        currentNode=createCompositeNode(grammarAccess.getBlockExpressionWithoutBracketsAccess().getExpressionsTopLevelExpressionParserRuleCall_1_0_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleTopLevelExpression_in_ruleBlockExpressionWithoutBrackets11827);
+            	    pushFollow(FollowSets000.FOLLOW_ruleTopLevelExpression_in_ruleBlockExpressionWithoutBrackets11903);
             	    lv_expressions_1_0=ruleTopLevelExpression();
 
             	    state._fsp--;
@@ -15773,7 +15963,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
             	    }
 
-            	    otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleBlockExpressionWithoutBrackets11839); if (state.failed) return current;
+            	    otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleBlockExpressionWithoutBrackets11915); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	          	createLeafNode(otherlv_2, grammarAccess.getBlockExpressionWithoutBracketsAccess().getSemicolonKeyword_1_1(), null);
@@ -15834,7 +16024,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getValueLiteralRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleValueLiteral_in_entryRuleValueLiteral11877);
+            pushFollow(FollowSets000.FOLLOW_ruleValueLiteral_in_entryRuleValueLiteral11953);
             iv_ruleValueLiteral=ruleValueLiteral();
 
             state._fsp--;
@@ -15842,7 +16032,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleValueLiteral; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleValueLiteral11887); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleValueLiteral11963); if (state.failed) return current;
 
             }
 
@@ -15880,7 +16070,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6492:1: (lv_value_0_0= RULE_STRING )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6493:3: lv_value_0_0= RULE_STRING
             {
-            lv_value_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleValueLiteral11928); if (state.failed) return current;
+            lv_value_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleValueLiteral12004); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			createLeafNode(lv_value_0_0, grammarAccess.getValueLiteralAccess().getValueSTRINGTerminalRuleCall_0(), "value"); 
@@ -15948,7 +16138,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getParanthesizedExpressionRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParanthesizedExpression_in_entryRuleParanthesizedExpression11968);
+            pushFollow(FollowSets000.FOLLOW_ruleParanthesizedExpression_in_entryRuleParanthesizedExpression12044);
             iv_ruleParanthesizedExpression=ruleParanthesizedExpression();
 
             state._fsp--;
@@ -15956,7 +16146,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleParanthesizedExpression; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParanthesizedExpression11978); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParanthesizedExpression12054); if (state.failed) return current;
 
             }
 
@@ -15994,7 +16184,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6538:1: (otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')' )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6538:3: otherlv_0= '(' this_Expression_1= ruleExpression otherlv_2= ')'
             {
-            otherlv_0=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleParanthesizedExpression12015); if (state.failed) return current;
+            otherlv_0=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleParanthesizedExpression12091); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_0, grammarAccess.getParanthesizedExpressionAccess().getLeftParenthesisKeyword_0(), null);
@@ -16010,7 +16200,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode=createCompositeNode(grammarAccess.getParanthesizedExpressionAccess().getExpressionParserRuleCall_1(), currentNode); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleParanthesizedExpression12040);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleParanthesizedExpression12116);
             this_Expression_1=ruleExpression();
 
             state._fsp--;
@@ -16021,7 +16211,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                       currentNode = currentNode.getParent();
                   
             }
-            otherlv_2=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleParanthesizedExpression12051); if (state.failed) return current;
+            otherlv_2=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleParanthesizedExpression12127); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	createLeafNode(otherlv_2, grammarAccess.getParanthesizedExpressionAccess().getRightParenthesisKeyword_2(), null);
@@ -16071,7 +16261,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getQIDRule(), currentNode); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleQID_in_entryRuleQID12094);
+            pushFollow(FollowSets000.FOLLOW_ruleQID_in_entryRuleQID12170);
             iv_ruleQID=ruleQID();
 
             state._fsp--;
@@ -16079,7 +16269,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             if ( state.backtracking==0 ) {
                current =iv_ruleQID.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleQID12105); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleQID12181); if (state.failed) return current;
 
             }
 
@@ -16126,7 +16316,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6588:1: (this_ID_0= RULE_ID (this_INT_1= RULE_INT | this_HEX_2= RULE_HEX | this_ID_3= RULE_ID )* (kw= '.' this_ID_5= RULE_ID (this_INT_6= RULE_INT | this_HEX_7= RULE_HEX | this_ID_8= RULE_ID )* )* )
             // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6588:6: this_ID_0= RULE_ID (this_INT_1= RULE_INT | this_HEX_2= RULE_HEX | this_ID_3= RULE_ID )* (kw= '.' this_ID_5= RULE_ID (this_INT_6= RULE_INT | this_HEX_7= RULE_HEX | this_ID_8= RULE_ID )* )*
             {
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQID12149); if (state.failed) return current;
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQID12225); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_ID_0);
@@ -16164,7 +16354,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	case 1 :
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6595:6: this_INT_1= RULE_INT
             	    {
-            	    this_INT_1=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleQID12170); if (state.failed) return current;
+            	    this_INT_1=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleQID12246); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      		current.merge(this_INT_1);
@@ -16181,7 +16371,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	case 2 :
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6603:10: this_HEX_2= RULE_HEX
             	    {
-            	    this_HEX_2=(Token)match(input,RULE_HEX,FollowSets000.FOLLOW_RULE_HEX_in_ruleQID12196); if (state.failed) return current;
+            	    this_HEX_2=(Token)match(input,RULE_HEX,FollowSets000.FOLLOW_RULE_HEX_in_ruleQID12272); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      		current.merge(this_HEX_2);
@@ -16198,7 +16388,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	case 3 :
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6611:10: this_ID_3= RULE_ID
             	    {
-            	    this_ID_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQID12222); if (state.failed) return current;
+            	    this_ID_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQID12298); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      		current.merge(this_ID_3);
@@ -16233,14 +16423,14 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	case 1 :
             	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6619:2: kw= '.' this_ID_5= RULE_ID (this_INT_6= RULE_INT | this_HEX_7= RULE_HEX | this_ID_8= RULE_ID )*
             	    {
-            	    kw=(Token)match(input,67,FollowSets000.FOLLOW_67_in_ruleQID12243); if (state.failed) return current;
+            	    kw=(Token)match(input,67,FollowSets000.FOLLOW_67_in_ruleQID12319); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	              current.merge(kw);
             	              createLeafNode(kw, grammarAccess.getQIDAccess().getFullStopKeyword_2_0(), null); 
             	          
             	    }
-            	    this_ID_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQID12258); if (state.failed) return current;
+            	    this_ID_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQID12334); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      		current.merge(this_ID_5);
@@ -16278,7 +16468,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    	case 1 :
             	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6631:6: this_INT_6= RULE_INT
             	    	    {
-            	    	    this_INT_6=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleQID12279); if (state.failed) return current;
+            	    	    this_INT_6=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleQID12355); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	      		current.merge(this_INT_6);
@@ -16295,7 +16485,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    	case 2 :
             	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6639:10: this_HEX_7= RULE_HEX
             	    	    {
-            	    	    this_HEX_7=(Token)match(input,RULE_HEX,FollowSets000.FOLLOW_RULE_HEX_in_ruleQID12305); if (state.failed) return current;
+            	    	    this_HEX_7=(Token)match(input,RULE_HEX,FollowSets000.FOLLOW_RULE_HEX_in_ruleQID12381); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	      		current.merge(this_HEX_7);
@@ -16312,7 +16502,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             	    	case 3 :
             	    	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6647:10: this_ID_8= RULE_ID
             	    	    {
-            	    	    this_ID_8=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQID12331); if (state.failed) return current;
+            	    	    this_ID_8=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQID12407); if (state.failed) return current;
             	    	    if ( state.backtracking==0 ) {
 
             	    	      		current.merge(this_ID_8);
@@ -16429,25 +16619,32 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         AntlrDatatypeRuleToken lv_sourceLocation_14_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:340:4: ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:340:4: ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:340:4: ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:340:4: ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:340:4: ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:341:5: {...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:340:4: ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:341:5: {...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred9_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:341:101: ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:342:6: (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:341:101: ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:342:6: ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:6: (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:8: otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:6: ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:7: {...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' )
         {
-        otherlv_12=(Token)match(input,18,FollowSets000.FOLLOW_18_in_synpred9_InternalBeeLangTestLanguage500); if (state.failed) return ;
-        otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred9_InternalBeeLangTestLanguage512); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred9_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:16: (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:345:18: otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';'
+        {
+        otherlv_12=(Token)match(input,18,FollowSets000.FOLLOW_18_in_synpred9_InternalBeeLangTestLanguage503); if (state.failed) return ;
+        otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred9_InternalBeeLangTestLanguage515); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:353:1: ( (lv_sourceLocation_14_0= rulePath ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:354:1: (lv_sourceLocation_14_0= rulePath )
         {
@@ -16459,7 +16656,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getSourceLocationPathParserRuleCall_7_0_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_rulePath_in_synpred9_InternalBeeLangTestLanguage533);
+        pushFollow(FollowSets000.FOLLOW_rulePath_in_synpred9_InternalBeeLangTestLanguage536);
         lv_sourceLocation_14_0=rulePath();
 
         state._fsp--;
@@ -16470,7 +16667,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_15=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred9_InternalBeeLangTestLanguage545); if (state.failed) return ;
+        otherlv_15=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred9_InternalBeeLangTestLanguage548); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -16493,25 +16693,32 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         AntlrDatatypeRuleToken lv_outputLocation_18_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:388:4: ( ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:388:4: ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:388:4: ( ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:388:4: ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:388:4: ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:389:5: {...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:388:4: ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:389:5: {...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred10_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:389:101: ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:390:6: (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:389:101: ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:390:6: ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:6: (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:8: otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:6: ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:7: {...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' )
         {
-        otherlv_16=(Token)match(input,21,FollowSets000.FOLLOW_21_in_synpred10_InternalBeeLangTestLanguage609); if (state.failed) return ;
-        otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred10_InternalBeeLangTestLanguage621); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred10_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:16: (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:393:18: otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';'
+        {
+        otherlv_16=(Token)match(input,21,FollowSets000.FOLLOW_21_in_synpred10_InternalBeeLangTestLanguage616); if (state.failed) return ;
+        otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred10_InternalBeeLangTestLanguage628); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:401:1: ( (lv_outputLocation_18_0= rulePath ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:402:1: (lv_outputLocation_18_0= rulePath )
         {
@@ -16523,7 +16730,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getOutputLocationPathParserRuleCall_7_1_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_rulePath_in_synpred10_InternalBeeLangTestLanguage642);
+        pushFollow(FollowSets000.FOLLOW_rulePath_in_synpred10_InternalBeeLangTestLanguage649);
         lv_outputLocation_18_0=rulePath();
 
         state._fsp--;
@@ -16534,7 +16741,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_19=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred10_InternalBeeLangTestLanguage654); if (state.failed) return ;
+        otherlv_19=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred10_InternalBeeLangTestLanguage661); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -16557,11 +16767,18 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_providedCapabilities_22_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:8: (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:8: otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:7: ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:7: {...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )
         {
-        otherlv_20=(Token)match(input,22,FollowSets000.FOLLOW_22_in_synpred11_InternalBeeLangTestLanguage718); if (state.failed) return ;
-        otherlv_21=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred11_InternalBeeLangTestLanguage730); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred11_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:16: (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:18: otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';'
+        {
+        otherlv_20=(Token)match(input,22,FollowSets000.FOLLOW_22_in_synpred11_InternalBeeLangTestLanguage729); if (state.failed) return ;
+        otherlv_21=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred11_InternalBeeLangTestLanguage741); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:449:1: ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:450:1: (lv_providedCapabilities_22_0= ruleProvidedCapability )
         {
@@ -16573,7 +16790,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getProvidedCapabilitiesProvidedCapabilityParserRuleCall_7_2_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleProvidedCapability_in_synpred11_InternalBeeLangTestLanguage751);
+        pushFollow(FollowSets000.FOLLOW_ruleProvidedCapability_in_synpred11_InternalBeeLangTestLanguage762);
         lv_providedCapabilities_22_0=ruleProvidedCapability();
 
         state._fsp--;
@@ -16584,7 +16801,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_23=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred11_InternalBeeLangTestLanguage763); if (state.failed) return ;
+        otherlv_23=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred11_InternalBeeLangTestLanguage774); if (state.failed) return ;
+
+        }
+
 
         }
     }
@@ -16598,38 +16818,45 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_providedCapabilities_22_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:436:4: ( ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:436:4: ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:436:4: ( ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:436:4: ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:436:4: ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:437:5: {...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:436:4: ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:437:5: {...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred12_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:437:101: ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:438:6: (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:437:101: ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:438:6: ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+
         {
         getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:6: (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:6: ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+
         int cnt98=0;
         loop98:
         do {
             int alt98=2;
             int LA98_0 = input.LA(1);
 
-            if ( (LA98_0==22) ) {
+            if ( (LA98_0==22) && ((true))) {
                 alt98=1;
             }
 
 
             switch (alt98) {
         	case 1 :
-        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:8: otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';'
+        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:7: {...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )
         	    {
-        	    otherlv_20=(Token)match(input,22,FollowSets000.FOLLOW_22_in_synpred12_InternalBeeLangTestLanguage718); if (state.failed) return ;
-        	    otherlv_21=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred12_InternalBeeLangTestLanguage730); if (state.failed) return ;
+        	    if ( !((true)) ) {
+        	        if (state.backtracking>0) {state.failed=true; return ;}
+        	        throw new FailedPredicateException(input, "synpred12_InternalBeeLangTestLanguage", "true");
+        	    }
+        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:16: (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )
+        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:441:18: otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';'
+        	    {
+        	    otherlv_20=(Token)match(input,22,FollowSets000.FOLLOW_22_in_synpred12_InternalBeeLangTestLanguage729); if (state.failed) return ;
+        	    otherlv_21=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred12_InternalBeeLangTestLanguage741); if (state.failed) return ;
         	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:449:1: ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) )
         	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:450:1: (lv_providedCapabilities_22_0= ruleProvidedCapability )
         	    {
@@ -16641,7 +16868,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         	      	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getProvidedCapabilitiesProvidedCapabilityParserRuleCall_7_2_2_0(), currentNode); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_ruleProvidedCapability_in_synpred12_InternalBeeLangTestLanguage751);
+        	    pushFollow(FollowSets000.FOLLOW_ruleProvidedCapability_in_synpred12_InternalBeeLangTestLanguage762);
         	    lv_providedCapabilities_22_0=ruleProvidedCapability();
 
         	    state._fsp--;
@@ -16652,7 +16879,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         	    }
 
-        	    otherlv_23=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred12_InternalBeeLangTestLanguage763); if (state.failed) return ;
+        	    otherlv_23=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred12_InternalBeeLangTestLanguage774); if (state.failed) return ;
+
+        	    }
+
 
         	    }
         	    break;
@@ -16686,11 +16916,18 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_requiredCapabilities_26_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:8: (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:8: otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:7: ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:7: {...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )
         {
-        otherlv_24=(Token)match(input,23,FollowSets000.FOLLOW_23_in_synpred13_InternalBeeLangTestLanguage828); if (state.failed) return ;
-        otherlv_25=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred13_InternalBeeLangTestLanguage840); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred13_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:16: (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:18: otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';'
+        {
+        otherlv_24=(Token)match(input,23,FollowSets000.FOLLOW_23_in_synpred13_InternalBeeLangTestLanguage843); if (state.failed) return ;
+        otherlv_25=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred13_InternalBeeLangTestLanguage855); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:497:1: ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:498:1: (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability )
         {
@@ -16702,7 +16939,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getRequiredCapabilitiesAliasedRequiredCapabilityParserRuleCall_7_3_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleAliasedRequiredCapability_in_synpred13_InternalBeeLangTestLanguage861);
+        pushFollow(FollowSets000.FOLLOW_ruleAliasedRequiredCapability_in_synpred13_InternalBeeLangTestLanguage876);
         lv_requiredCapabilities_26_0=ruleAliasedRequiredCapability();
 
         state._fsp--;
@@ -16713,7 +16950,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_27=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred13_InternalBeeLangTestLanguage873); if (state.failed) return ;
+        otherlv_27=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred13_InternalBeeLangTestLanguage888); if (state.failed) return ;
+
+        }
+
 
         }
     }
@@ -16727,38 +16967,45 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_requiredCapabilities_26_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:484:4: ( ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:484:4: ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:484:4: ( ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:484:4: ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:484:4: ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:485:5: {...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:484:4: ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:485:5: {...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred14_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:485:101: ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:486:6: (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:485:101: ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:486:6: ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+
         {
         getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:6: (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:6: ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+
         int cnt99=0;
         loop99:
         do {
             int alt99=2;
             int LA99_0 = input.LA(1);
 
-            if ( (LA99_0==23) ) {
+            if ( (LA99_0==23) && ((true))) {
                 alt99=1;
             }
 
 
             switch (alt99) {
         	case 1 :
-        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:8: otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';'
+        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:7: {...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )
         	    {
-        	    otherlv_24=(Token)match(input,23,FollowSets000.FOLLOW_23_in_synpred14_InternalBeeLangTestLanguage828); if (state.failed) return ;
-        	    otherlv_25=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred14_InternalBeeLangTestLanguage840); if (state.failed) return ;
+        	    if ( !((true)) ) {
+        	        if (state.backtracking>0) {state.failed=true; return ;}
+        	        throw new FailedPredicateException(input, "synpred14_InternalBeeLangTestLanguage", "true");
+        	    }
+        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:16: (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )
+        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:489:18: otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';'
+        	    {
+        	    otherlv_24=(Token)match(input,23,FollowSets000.FOLLOW_23_in_synpred14_InternalBeeLangTestLanguage843); if (state.failed) return ;
+        	    otherlv_25=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred14_InternalBeeLangTestLanguage855); if (state.failed) return ;
         	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:497:1: ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) )
         	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:498:1: (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability )
         	    {
@@ -16770,7 +17017,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         	      	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getRequiredCapabilitiesAliasedRequiredCapabilityParserRuleCall_7_3_2_0(), currentNode); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_ruleAliasedRequiredCapability_in_synpred14_InternalBeeLangTestLanguage861);
+        	    pushFollow(FollowSets000.FOLLOW_ruleAliasedRequiredCapability_in_synpred14_InternalBeeLangTestLanguage876);
         	    lv_requiredCapabilities_26_0=ruleAliasedRequiredCapability();
 
         	    state._fsp--;
@@ -16781,7 +17028,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         	    }
 
-        	    otherlv_27=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred14_InternalBeeLangTestLanguage873); if (state.failed) return ;
+        	    otherlv_27=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred14_InternalBeeLangTestLanguage888); if (state.failed) return ;
+
+        	    }
+
 
         	    }
         	    break;
@@ -16816,12 +17066,19 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_metaRequiredCapabilities_31_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:8: (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:8: otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:7: ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:7: {...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )
         {
-        otherlv_28=(Token)match(input,23,FollowSets000.FOLLOW_23_in_synpred15_InternalBeeLangTestLanguage938); if (state.failed) return ;
-        otherlv_29=(Token)match(input,24,FollowSets000.FOLLOW_24_in_synpred15_InternalBeeLangTestLanguage950); if (state.failed) return ;
-        otherlv_30=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred15_InternalBeeLangTestLanguage962); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred15_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:16: (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:18: otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';'
+        {
+        otherlv_28=(Token)match(input,23,FollowSets000.FOLLOW_23_in_synpred15_InternalBeeLangTestLanguage957); if (state.failed) return ;
+        otherlv_29=(Token)match(input,24,FollowSets000.FOLLOW_24_in_synpred15_InternalBeeLangTestLanguage969); if (state.failed) return ;
+        otherlv_30=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred15_InternalBeeLangTestLanguage981); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:549:1: ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:550:1: (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability )
         {
@@ -16833,7 +17090,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getMetaRequiredCapabilitiesRequiredCapabilityParserRuleCall_7_4_3_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleRequiredCapability_in_synpred15_InternalBeeLangTestLanguage983);
+        pushFollow(FollowSets000.FOLLOW_ruleRequiredCapability_in_synpred15_InternalBeeLangTestLanguage1002);
         lv_metaRequiredCapabilities_31_0=ruleRequiredCapability();
 
         state._fsp--;
@@ -16844,7 +17101,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_32=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred15_InternalBeeLangTestLanguage995); if (state.failed) return ;
+        otherlv_32=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred15_InternalBeeLangTestLanguage1014); if (state.failed) return ;
+
+        }
+
 
         }
     }
@@ -16859,39 +17119,46 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_metaRequiredCapabilities_31_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:532:4: ( ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:532:4: ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:532:4: ( ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:532:4: ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:532:4: ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:533:5: {...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:532:4: ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:533:5: {...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred16_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:533:101: ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:534:6: (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:533:101: ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:534:6: ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+
         {
         getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:6: (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:6: ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+
         int cnt100=0;
         loop100:
         do {
             int alt100=2;
             int LA100_0 = input.LA(1);
 
-            if ( (LA100_0==23) ) {
+            if ( (LA100_0==23) && ((true))) {
                 alt100=1;
             }
 
 
             switch (alt100) {
         	case 1 :
-        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:8: otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';'
+        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:7: {...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )
         	    {
-        	    otherlv_28=(Token)match(input,23,FollowSets000.FOLLOW_23_in_synpred16_InternalBeeLangTestLanguage938); if (state.failed) return ;
-        	    otherlv_29=(Token)match(input,24,FollowSets000.FOLLOW_24_in_synpred16_InternalBeeLangTestLanguage950); if (state.failed) return ;
-        	    otherlv_30=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred16_InternalBeeLangTestLanguage962); if (state.failed) return ;
+        	    if ( !((true)) ) {
+        	        if (state.backtracking>0) {state.failed=true; return ;}
+        	        throw new FailedPredicateException(input, "synpred16_InternalBeeLangTestLanguage", "true");
+        	    }
+        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:16: (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )
+        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:537:18: otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';'
+        	    {
+        	    otherlv_28=(Token)match(input,23,FollowSets000.FOLLOW_23_in_synpred16_InternalBeeLangTestLanguage957); if (state.failed) return ;
+        	    otherlv_29=(Token)match(input,24,FollowSets000.FOLLOW_24_in_synpred16_InternalBeeLangTestLanguage969); if (state.failed) return ;
+        	    otherlv_30=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred16_InternalBeeLangTestLanguage981); if (state.failed) return ;
         	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:549:1: ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) )
         	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:550:1: (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability )
         	    {
@@ -16903,7 +17170,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         	      	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getMetaRequiredCapabilitiesRequiredCapabilityParserRuleCall_7_4_3_0(), currentNode); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_ruleRequiredCapability_in_synpred16_InternalBeeLangTestLanguage983);
+        	    pushFollow(FollowSets000.FOLLOW_ruleRequiredCapability_in_synpred16_InternalBeeLangTestLanguage1002);
         	    lv_metaRequiredCapabilities_31_0=ruleRequiredCapability();
 
         	    state._fsp--;
@@ -16914,7 +17181,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         	    }
 
-        	    otherlv_32=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred16_InternalBeeLangTestLanguage995); if (state.failed) return ;
+        	    otherlv_32=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred16_InternalBeeLangTestLanguage1014); if (state.failed) return ;
+
+        	    }
+
 
         	    }
         	    break;
@@ -16945,7 +17215,14 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_functions_33_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:590:1: ( (lv_functions_33_0= ruleFunction ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:589:7: ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:589:7: {...}? => ( (lv_functions_33_0= ruleFunction ) )
+        {
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred17_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:589:16: ( (lv_functions_33_0= ruleFunction ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:590:1: (lv_functions_33_0= ruleFunction )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:590:1: (lv_functions_33_0= ruleFunction )
@@ -16956,11 +17233,14 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getFunctionsFunctionParserRuleCall_7_5_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleFunction_in_synpred17_InternalBeeLangTestLanguage1068);
+        pushFollow(FollowSets000.FOLLOW_ruleFunction_in_synpred17_InternalBeeLangTestLanguage1091);
         lv_functions_33_0=ruleFunction();
 
         state._fsp--;
         if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -16974,34 +17254,50 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_functions_33_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:584:4: ( ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:584:4: ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:584:4: ( ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:584:4: ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:584:4: ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:585:5: {...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:584:4: ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:585:5: {...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred18_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:585:101: ( ( (lv_functions_33_0= ruleFunction ) )+ )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:586:6: ( (lv_functions_33_0= ruleFunction ) )+
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:585:101: ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:586:6: ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+
         {
         getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:589:6: ( (lv_functions_33_0= ruleFunction ) )+
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:589:6: ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+
         int cnt101=0;
         loop101:
         do {
             int alt101=2;
             int LA101_0 = input.LA(1);
 
-            if ( ((LA101_0>=RULE_DOCUMENTATION && LA101_0<=RULE_ID)||(LA101_0>=33 && LA101_0<=34)) ) {
+            if ( (LA101_0==RULE_DOCUMENTATION) && ((true))) {
+                alt101=1;
+            }
+            else if ( (LA101_0==RULE_ID) && ((true))) {
+                alt101=1;
+            }
+            else if ( (LA101_0==33) && ((true))) {
+                alt101=1;
+            }
+            else if ( (LA101_0==34) && ((true))) {
                 alt101=1;
             }
 
 
             switch (alt101) {
         	case 1 :
+        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:589:7: {...}? => ( (lv_functions_33_0= ruleFunction ) )
+        	    {
+        	    if ( !((true)) ) {
+        	        if (state.backtracking>0) {state.failed=true; return ;}
+        	        throw new FailedPredicateException(input, "synpred18_InternalBeeLangTestLanguage", "true");
+        	    }
+        	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:589:16: ( (lv_functions_33_0= ruleFunction ) )
         	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:590:1: (lv_functions_33_0= ruleFunction )
         	    {
         	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:590:1: (lv_functions_33_0= ruleFunction )
@@ -17012,11 +17308,14 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         	      	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getFunctionsFunctionParserRuleCall_7_5_0(), currentNode); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_ruleFunction_in_synpred18_InternalBeeLangTestLanguage1068);
+        	    pushFollow(FollowSets000.FOLLOW_ruleFunction_in_synpred18_InternalBeeLangTestLanguage1091);
         	    lv_functions_33_0=ruleFunction();
 
         	    state._fsp--;
         	    if (state.failed) return ;
+
+        	    }
+
 
         	    }
 
@@ -17053,25 +17352,32 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_condExpr_7_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:724:4: ( ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:724:4: ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:724:4: ( ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:724:4: ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:724:4: ({...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:725:5: {...}? => ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:724:4: ({...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:725:5: {...}? => ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred20_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:725:117: ( (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:726:6: (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:725:117: ( ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:726:6: ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:6: (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:8: otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:6: ({...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:7: {...}? => (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' )
         {
-        otherlv_5=(Token)match(input,26,FollowSets000.FOLLOW_26_in_synpred20_InternalBeeLangTestLanguage1327); if (state.failed) return ;
-        otherlv_6=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred20_InternalBeeLangTestLanguage1339); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred20_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:16: (otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:729:18: otherlv_5= 'when' otherlv_6= ':' ( (lv_condExpr_7_0= ruleExpression ) ) otherlv_8= ';'
+        {
+        otherlv_5=(Token)match(input,26,FollowSets000.FOLLOW_26_in_synpred20_InternalBeeLangTestLanguage1354); if (state.failed) return ;
+        otherlv_6=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred20_InternalBeeLangTestLanguage1366); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:737:1: ( (lv_condExpr_7_0= ruleExpression ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:738:1: (lv_condExpr_7_0= ruleExpression )
         {
@@ -17083,7 +17389,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getProvidedCapabilityAccess().getCondExprExpressionParserRuleCall_2_1_0_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleExpression_in_synpred20_InternalBeeLangTestLanguage1360);
+        pushFollow(FollowSets000.FOLLOW_ruleExpression_in_synpred20_InternalBeeLangTestLanguage1387);
         lv_condExpr_7_0=ruleExpression();
 
         state._fsp--;
@@ -17094,7 +17400,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_8=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred20_InternalBeeLangTestLanguage1372); if (state.failed) return ;
+        otherlv_8=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred20_InternalBeeLangTestLanguage1399); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17116,39 +17425,49 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         Token lv_name_11_0=null;
         Token otherlv_12=null;
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:772:4: ( ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:772:4: ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:772:4: ( ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:772:4: ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:772:4: ({...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:773:5: {...}? => ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:772:4: ({...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:773:5: {...}? => ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred21_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:773:117: ( (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:774:6: (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:773:117: ( ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:774:6: ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:6: (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:8: otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:6: ({...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:7: {...}? => (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' )
         {
-        otherlv_9=(Token)match(input,27,FollowSets000.FOLLOW_27_in_synpred21_InternalBeeLangTestLanguage1436); if (state.failed) return ;
-        otherlv_10=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred21_InternalBeeLangTestLanguage1448); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred21_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:16: (otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:777:18: otherlv_9= 'name' otherlv_10= ':' ( (lv_name_11_0= RULE_ID ) ) otherlv_12= ';'
+        {
+        otherlv_9=(Token)match(input,27,FollowSets000.FOLLOW_27_in_synpred21_InternalBeeLangTestLanguage1467); if (state.failed) return ;
+        otherlv_10=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred21_InternalBeeLangTestLanguage1479); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:785:1: ( (lv_name_11_0= RULE_ID ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:786:1: (lv_name_11_0= RULE_ID )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:786:1: (lv_name_11_0= RULE_ID )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:787:3: lv_name_11_0= RULE_ID
         {
-        lv_name_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred21_InternalBeeLangTestLanguage1465); if (state.failed) return ;
+        lv_name_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred21_InternalBeeLangTestLanguage1496); if (state.failed) return ;
 
         }
 
 
         }
 
-        otherlv_12=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred21_InternalBeeLangTestLanguage1482); if (state.failed) return ;
+        otherlv_12=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred21_InternalBeeLangTestLanguage1513); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17170,39 +17489,49 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         Token lv_version_15_0=null;
         Token otherlv_16=null;
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:820:4: ( ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:820:4: ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:820:4: ( ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:820:4: ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:820:4: ({...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:821:5: {...}? => ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:820:4: ({...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:821:5: {...}? => ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred22_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:821:117: ( (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:822:6: (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:821:117: ( ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:822:6: ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:6: (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:8: otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:6: ({...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:7: {...}? => (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' )
         {
-        otherlv_13=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred22_InternalBeeLangTestLanguage1546); if (state.failed) return ;
-        otherlv_14=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred22_InternalBeeLangTestLanguage1558); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred22_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:16: (otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:825:18: otherlv_13= 'version' otherlv_14= ':' ( (lv_version_15_0= RULE_ID ) ) otherlv_16= ';'
+        {
+        otherlv_13=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred22_InternalBeeLangTestLanguage1581); if (state.failed) return ;
+        otherlv_14=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred22_InternalBeeLangTestLanguage1593); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:833:1: ( (lv_version_15_0= RULE_ID ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:834:1: (lv_version_15_0= RULE_ID )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:834:1: (lv_version_15_0= RULE_ID )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:835:3: lv_version_15_0= RULE_ID
         {
-        lv_version_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred22_InternalBeeLangTestLanguage1575); if (state.failed) return ;
+        lv_version_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred22_InternalBeeLangTestLanguage1610); if (state.failed) return ;
 
         }
 
 
         }
 
-        otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred22_InternalBeeLangTestLanguage1592); if (state.failed) return ;
+        otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred22_InternalBeeLangTestLanguage1627); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17225,25 +17554,32 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_condExpr_9_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1011:4: ( ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1011:4: ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1011:4: ( ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1011:4: ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1011:4: ({...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1012:5: {...}? => ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1011:4: ({...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1012:5: {...}? => ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred26_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1012:124: ( (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1013:6: (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1012:124: ( ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1013:6: ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:6: (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:8: otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:6: ({...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:7: {...}? => (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' )
         {
-        otherlv_7=(Token)match(input,26,FollowSets000.FOLLOW_26_in_synpred26_InternalBeeLangTestLanguage1906); if (state.failed) return ;
-        otherlv_8=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred26_InternalBeeLangTestLanguage1918); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred26_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:16: (otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1016:18: otherlv_7= 'when' otherlv_8= ':' ( (lv_condExpr_9_0= ruleExpression ) ) otherlv_10= ';'
+        {
+        otherlv_7=(Token)match(input,26,FollowSets000.FOLLOW_26_in_synpred26_InternalBeeLangTestLanguage1945); if (state.failed) return ;
+        otherlv_8=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred26_InternalBeeLangTestLanguage1957); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1024:1: ( (lv_condExpr_9_0= ruleExpression ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1025:1: (lv_condExpr_9_0= ruleExpression )
         {
@@ -17255,7 +17591,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getAliasedRequiredCapabilityAccess().getCondExprExpressionParserRuleCall_3_1_0_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleExpression_in_synpred26_InternalBeeLangTestLanguage1939);
+        pushFollow(FollowSets000.FOLLOW_ruleExpression_in_synpred26_InternalBeeLangTestLanguage1978);
         lv_condExpr_9_0=ruleExpression();
 
         state._fsp--;
@@ -17266,7 +17602,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_10=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred26_InternalBeeLangTestLanguage1951); if (state.failed) return ;
+        otherlv_10=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred26_InternalBeeLangTestLanguage1990); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17286,37 +17625,47 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         Token lv_greedy_11_0=null;
         Token otherlv_12=null;
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1059:4: ( ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1059:4: ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1059:4: ( ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1059:4: ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1059:4: ({...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1060:5: {...}? => ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1059:4: ({...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1060:5: {...}? => ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred27_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1060:124: ( ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1061:6: ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1060:124: ( ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1061:6: ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:6: ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:7: ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:6: ({...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:7: {...}? => ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:7: ( (lv_greedy_11_0= 'greedy' ) )
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred27_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:16: ( ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:17: ( (lv_greedy_11_0= 'greedy' ) ) otherlv_12= ';'
+        {
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1064:17: ( (lv_greedy_11_0= 'greedy' ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1065:1: (lv_greedy_11_0= 'greedy' )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1065:1: (lv_greedy_11_0= 'greedy' )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1066:3: lv_greedy_11_0= 'greedy'
         {
-        lv_greedy_11_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_synpred27_InternalBeeLangTestLanguage2021); if (state.failed) return ;
+        lv_greedy_11_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_synpred27_InternalBeeLangTestLanguage2064); if (state.failed) return ;
 
         }
 
 
         }
 
-        otherlv_12=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred27_InternalBeeLangTestLanguage2046); if (state.failed) return ;
+        otherlv_12=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred27_InternalBeeLangTestLanguage2089); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17338,39 +17687,49 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         Token lv_min_15_0=null;
         Token otherlv_16=null;
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1096:4: ( ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1096:4: ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1096:4: ( ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1096:4: ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1096:4: ({...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1097:5: {...}? => ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1096:4: ({...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1097:5: {...}? => ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred28_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1097:124: ( (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1098:6: (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1097:124: ( ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1098:6: ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:6: (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:8: otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:6: ({...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:7: {...}? => (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' )
         {
-        otherlv_13=(Token)match(input,30,FollowSets000.FOLLOW_30_in_synpred28_InternalBeeLangTestLanguage2110); if (state.failed) return ;
-        otherlv_14=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred28_InternalBeeLangTestLanguage2122); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred28_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:16: (otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1101:18: otherlv_13= 'requires-min' otherlv_14= ':' ( (lv_min_15_0= RULE_INT ) ) otherlv_16= ';'
+        {
+        otherlv_13=(Token)match(input,30,FollowSets000.FOLLOW_30_in_synpred28_InternalBeeLangTestLanguage2157); if (state.failed) return ;
+        otherlv_14=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred28_InternalBeeLangTestLanguage2169); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1109:1: ( (lv_min_15_0= RULE_INT ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1110:1: (lv_min_15_0= RULE_INT )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1110:1: (lv_min_15_0= RULE_INT )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1111:3: lv_min_15_0= RULE_INT
         {
-        lv_min_15_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred28_InternalBeeLangTestLanguage2139); if (state.failed) return ;
+        lv_min_15_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred28_InternalBeeLangTestLanguage2186); if (state.failed) return ;
 
         }
 
 
         }
 
-        otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred28_InternalBeeLangTestLanguage2156); if (state.failed) return ;
+        otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred28_InternalBeeLangTestLanguage2203); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17392,39 +17751,49 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         Token lv_max_19_0=null;
         Token otherlv_20=null;
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1144:4: ( ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1144:4: ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1144:4: ( ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1144:4: ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1144:4: ({...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1145:5: {...}? => ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1144:4: ({...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1145:5: {...}? => ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred29_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1145:124: ( (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1146:6: (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1145:124: ( ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1146:6: ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:6: (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:8: otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:6: ({...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:7: {...}? => (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' )
         {
-        otherlv_17=(Token)match(input,31,FollowSets000.FOLLOW_31_in_synpred29_InternalBeeLangTestLanguage2220); if (state.failed) return ;
-        otherlv_18=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred29_InternalBeeLangTestLanguage2232); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred29_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:16: (otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1149:18: otherlv_17= 'requires-max' otherlv_18= ':' ( (lv_max_19_0= RULE_INT ) ) otherlv_20= ';'
+        {
+        otherlv_17=(Token)match(input,31,FollowSets000.FOLLOW_31_in_synpred29_InternalBeeLangTestLanguage2271); if (state.failed) return ;
+        otherlv_18=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred29_InternalBeeLangTestLanguage2283); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1157:1: ( (lv_max_19_0= RULE_INT ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1158:1: (lv_max_19_0= RULE_INT )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1158:1: (lv_max_19_0= RULE_INT )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1159:3: lv_max_19_0= RULE_INT
         {
-        lv_max_19_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred29_InternalBeeLangTestLanguage2249); if (state.failed) return ;
+        lv_max_19_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred29_InternalBeeLangTestLanguage2300); if (state.failed) return ;
 
         }
 
 
         }
 
-        otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred29_InternalBeeLangTestLanguage2266); if (state.failed) return ;
+        otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred29_InternalBeeLangTestLanguage2317); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17446,39 +17815,49 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         Token lv_versionRange_23_0=null;
         Token otherlv_24=null;
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1192:4: ( ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1192:4: ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1192:4: ( ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1192:4: ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1192:4: ({...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1193:5: {...}? => ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1192:4: ({...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1193:5: {...}? => ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred30_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1193:124: ( (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1194:6: (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1193:124: ( ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1194:6: ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:6: (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:8: otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:6: ({...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:7: {...}? => (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' )
         {
-        otherlv_21=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred30_InternalBeeLangTestLanguage2330); if (state.failed) return ;
-        otherlv_22=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred30_InternalBeeLangTestLanguage2342); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred30_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:16: (otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1197:18: otherlv_21= 'version' otherlv_22= ':' ( (lv_versionRange_23_0= RULE_ID ) ) otherlv_24= ';'
+        {
+        otherlv_21=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred30_InternalBeeLangTestLanguage2385); if (state.failed) return ;
+        otherlv_22=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred30_InternalBeeLangTestLanguage2397); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1205:1: ( (lv_versionRange_23_0= RULE_ID ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1206:1: (lv_versionRange_23_0= RULE_ID )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1206:1: (lv_versionRange_23_0= RULE_ID )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1207:3: lv_versionRange_23_0= RULE_ID
         {
-        lv_versionRange_23_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred30_InternalBeeLangTestLanguage2359); if (state.failed) return ;
+        lv_versionRange_23_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred30_InternalBeeLangTestLanguage2414); if (state.failed) return ;
 
         }
 
 
         }
 
-        otherlv_24=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred30_InternalBeeLangTestLanguage2376); if (state.failed) return ;
+        otherlv_24=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred30_InternalBeeLangTestLanguage2431); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17501,25 +17880,32 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_condExpr_8_0 = null;
 
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1368:4: ( ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1368:4: ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1368:4: ( ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1368:4: ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1368:4: ({...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1369:5: {...}? => ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1368:4: ({...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1369:5: {...}? => ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred32_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1369:117: ( (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1370:6: (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1369:117: ( ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1370:6: ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:6: (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:8: otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:6: ({...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:7: {...}? => (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' )
         {
-        otherlv_6=(Token)match(input,26,FollowSets000.FOLLOW_26_in_synpred32_InternalBeeLangTestLanguage2658); if (state.failed) return ;
-        otherlv_7=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred32_InternalBeeLangTestLanguage2670); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred32_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:16: (otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1373:18: otherlv_6= 'when' otherlv_7= ':' ( (lv_condExpr_8_0= ruleExpression ) ) otherlv_9= ';'
+        {
+        otherlv_6=(Token)match(input,26,FollowSets000.FOLLOW_26_in_synpred32_InternalBeeLangTestLanguage2717); if (state.failed) return ;
+        otherlv_7=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred32_InternalBeeLangTestLanguage2729); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1381:1: ( (lv_condExpr_8_0= ruleExpression ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1382:1: (lv_condExpr_8_0= ruleExpression )
         {
@@ -17531,7 +17917,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getRequiredCapabilityAccess().getCondExprExpressionParserRuleCall_3_1_0_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleExpression_in_synpred32_InternalBeeLangTestLanguage2691);
+        pushFollow(FollowSets000.FOLLOW_ruleExpression_in_synpred32_InternalBeeLangTestLanguage2750);
         lv_condExpr_8_0=ruleExpression();
 
         state._fsp--;
@@ -17542,7 +17928,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_9=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred32_InternalBeeLangTestLanguage2703); if (state.failed) return ;
+        otherlv_9=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred32_InternalBeeLangTestLanguage2762); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17562,37 +17951,47 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         Token lv_greedy_10_0=null;
         Token otherlv_11=null;
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1416:4: ( ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1416:4: ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1416:4: ( ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1416:4: ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1416:4: ({...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1417:5: {...}? => ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1416:4: ({...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1417:5: {...}? => ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred33_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1417:117: ( ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1418:6: ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1417:117: ( ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1418:6: ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:6: ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:7: ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:6: ({...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:7: {...}? => ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:7: ( (lv_greedy_10_0= 'greedy' ) )
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred33_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:16: ( ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:17: ( (lv_greedy_10_0= 'greedy' ) ) otherlv_11= ';'
+        {
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1421:17: ( (lv_greedy_10_0= 'greedy' ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1422:1: (lv_greedy_10_0= 'greedy' )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1422:1: (lv_greedy_10_0= 'greedy' )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1423:3: lv_greedy_10_0= 'greedy'
         {
-        lv_greedy_10_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_synpred33_InternalBeeLangTestLanguage2773); if (state.failed) return ;
+        lv_greedy_10_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_synpred33_InternalBeeLangTestLanguage2836); if (state.failed) return ;
 
         }
 
 
         }
 
-        otherlv_11=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred33_InternalBeeLangTestLanguage2798); if (state.failed) return ;
+        otherlv_11=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred33_InternalBeeLangTestLanguage2861); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17614,39 +18013,49 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         Token lv_min_14_0=null;
         Token otherlv_15=null;
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1453:4: ( ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1453:4: ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1453:4: ( ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1453:4: ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1453:4: ({...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1454:5: {...}? => ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1453:4: ({...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1454:5: {...}? => ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred34_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1454:117: ( (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1455:6: (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1454:117: ( ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1455:6: ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:6: (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:8: otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:6: ({...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:7: {...}? => (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' )
         {
-        otherlv_12=(Token)match(input,30,FollowSets000.FOLLOW_30_in_synpred34_InternalBeeLangTestLanguage2862); if (state.failed) return ;
-        otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred34_InternalBeeLangTestLanguage2874); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred34_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:16: (otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1458:18: otherlv_12= 'requires-min' otherlv_13= ':' ( (lv_min_14_0= RULE_INT ) ) otherlv_15= ';'
+        {
+        otherlv_12=(Token)match(input,30,FollowSets000.FOLLOW_30_in_synpred34_InternalBeeLangTestLanguage2929); if (state.failed) return ;
+        otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred34_InternalBeeLangTestLanguage2941); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1466:1: ( (lv_min_14_0= RULE_INT ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1467:1: (lv_min_14_0= RULE_INT )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1467:1: (lv_min_14_0= RULE_INT )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1468:3: lv_min_14_0= RULE_INT
         {
-        lv_min_14_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred34_InternalBeeLangTestLanguage2891); if (state.failed) return ;
+        lv_min_14_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred34_InternalBeeLangTestLanguage2958); if (state.failed) return ;
 
         }
 
 
         }
 
-        otherlv_15=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred34_InternalBeeLangTestLanguage2908); if (state.failed) return ;
+        otherlv_15=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred34_InternalBeeLangTestLanguage2975); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17668,39 +18077,49 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         Token lv_max_18_0=null;
         Token otherlv_19=null;
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1501:4: ( ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1501:4: ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1501:4: ( ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1501:4: ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1501:4: ({...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1502:5: {...}? => ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1501:4: ({...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1502:5: {...}? => ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred35_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1502:117: ( (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1503:6: (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1502:117: ( ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1503:6: ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:6: (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:8: otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:6: ({...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:7: {...}? => (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' )
         {
-        otherlv_16=(Token)match(input,31,FollowSets000.FOLLOW_31_in_synpred35_InternalBeeLangTestLanguage2972); if (state.failed) return ;
-        otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred35_InternalBeeLangTestLanguage2984); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred35_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:16: (otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1506:18: otherlv_16= 'requires-max' otherlv_17= ':' ( (lv_max_18_0= RULE_INT ) ) otherlv_19= ';'
+        {
+        otherlv_16=(Token)match(input,31,FollowSets000.FOLLOW_31_in_synpred35_InternalBeeLangTestLanguage3043); if (state.failed) return ;
+        otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred35_InternalBeeLangTestLanguage3055); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1514:1: ( (lv_max_18_0= RULE_INT ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1515:1: (lv_max_18_0= RULE_INT )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1515:1: (lv_max_18_0= RULE_INT )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1516:3: lv_max_18_0= RULE_INT
         {
-        lv_max_18_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred35_InternalBeeLangTestLanguage3001); if (state.failed) return ;
+        lv_max_18_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_synpred35_InternalBeeLangTestLanguage3072); if (state.failed) return ;
 
         }
 
 
         }
 
-        otherlv_19=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred35_InternalBeeLangTestLanguage3018); if (state.failed) return ;
+        otherlv_19=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred35_InternalBeeLangTestLanguage3089); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17722,39 +18141,49 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         Token lv_versionRange_22_0=null;
         Token otherlv_23=null;
 
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1549:4: ( ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1549:4: ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1549:4: ( ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1549:4: ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )
         {
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1549:4: ({...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1550:5: {...}? => ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1549:4: ({...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1550:5: {...}? => ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred36_InternalBeeLangTestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4)");
         }
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1550:117: ( (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1551:6: (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1550:117: ( ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1551:6: ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4);
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:6: (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' )
-        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:8: otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';'
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:6: ({...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' ) )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:7: {...}? => (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' )
         {
-        otherlv_20=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred36_InternalBeeLangTestLanguage3082); if (state.failed) return ;
-        otherlv_21=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred36_InternalBeeLangTestLanguage3094); if (state.failed) return ;
+        if ( !((true)) ) {
+            if (state.backtracking>0) {state.failed=true; return ;}
+            throw new FailedPredicateException(input, "synpred36_InternalBeeLangTestLanguage", "true");
+        }
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:16: (otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';' )
+        // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1554:18: otherlv_20= 'version' otherlv_21= ':' ( (lv_versionRange_22_0= RULE_ID ) ) otherlv_23= ';'
+        {
+        otherlv_20=(Token)match(input,14,FollowSets000.FOLLOW_14_in_synpred36_InternalBeeLangTestLanguage3157); if (state.failed) return ;
+        otherlv_21=(Token)match(input,19,FollowSets000.FOLLOW_19_in_synpred36_InternalBeeLangTestLanguage3169); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1562:1: ( (lv_versionRange_22_0= RULE_ID ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1563:1: (lv_versionRange_22_0= RULE_ID )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1563:1: (lv_versionRange_22_0= RULE_ID )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:1564:3: lv_versionRange_22_0= RULE_ID
         {
-        lv_versionRange_22_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred36_InternalBeeLangTestLanguage3111); if (state.failed) return ;
+        lv_versionRange_22_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred36_InternalBeeLangTestLanguage3186); if (state.failed) return ;
 
         }
 
 
         }
 
-        otherlv_23=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred36_InternalBeeLangTestLanguage3128); if (state.failed) return ;
+        otherlv_23=(Token)match(input,20,FollowSets000.FOLLOW_20_in_synpred36_InternalBeeLangTestLanguage3203); if (state.failed) return ;
+
+        }
+
 
         }
 
@@ -17782,7 +18211,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleClosureParameter_in_synpred42_InternalBeeLangTestLanguage3630);
+        pushFollow(FollowSets000.FOLLOW_ruleClosureParameter_in_synpred42_InternalBeeLangTestLanguage3706);
         this_ClosureParameter_0=ruleClosureParameter();
 
         state._fsp--;
@@ -17805,7 +18234,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleVarDeclaration_in_synpred69_InternalBeeLangTestLanguage5155);
+        pushFollow(FollowSets000.FOLLOW_ruleVarDeclaration_in_synpred69_InternalBeeLangTestLanguage5231);
         this_VarDeclaration_0=ruleVarDeclaration();
 
         state._fsp--;
@@ -17847,7 +18276,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getAssignmentExpressionAccess().getFunctionNameAssignmentOperatorParserRuleCall_1_1_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleAssignmentOperator_in_synpred71_InternalBeeLangTestLanguage5436);
+        pushFollow(FollowSets000.FOLLOW_ruleAssignmentOperator_in_synpred71_InternalBeeLangTestLanguage5512);
         lv_functionName_2_0=ruleAssignmentOperator();
 
         state._fsp--;
@@ -17869,7 +18298,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getAssignmentExpressionAccess().getRightExprAssignmentExpressionParserRuleCall_1_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleAssignmentExpression_in_synpred71_InternalBeeLangTestLanguage5457);
+        pushFollow(FollowSets000.FOLLOW_ruleAssignmentExpression_in_synpred71_InternalBeeLangTestLanguage5533);
         lv_rightExpr_3_0=ruleAssignmentExpression();
 
         state._fsp--;
@@ -17905,7 +18334,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_2=(Token)match(input,57,FollowSets000.FOLLOW_57_in_synpred85_InternalBeeLangTestLanguage6792); if (state.failed) return ;
+        otherlv_2=(Token)match(input,57,FollowSets000.FOLLOW_57_in_synpred85_InternalBeeLangTestLanguage6868); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3582:1: ( (lv_rightExpr_3_0= ruleAndExpression ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3583:1: (lv_rightExpr_3_0= ruleAndExpression )
         {
@@ -17917,7 +18346,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getOrExpressionAccess().getRightExprAndExpressionParserRuleCall_1_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleAndExpression_in_synpred85_InternalBeeLangTestLanguage6813);
+        pushFollow(FollowSets000.FOLLOW_ruleAndExpression_in_synpred85_InternalBeeLangTestLanguage6889);
         lv_rightExpr_3_0=ruleAndExpression();
 
         state._fsp--;
@@ -17953,7 +18382,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_2=(Token)match(input,58,FollowSets000.FOLLOW_58_in_synpred86_InternalBeeLangTestLanguage6935); if (state.failed) return ;
+        otherlv_2=(Token)match(input,58,FollowSets000.FOLLOW_58_in_synpred86_InternalBeeLangTestLanguage7011); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3664:1: ( (lv_rightExpr_3_0= ruleRelationalExpression ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3665:1: (lv_rightExpr_3_0= ruleRelationalExpression )
         {
@@ -17965,7 +18394,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getAndExpressionAccess().getRightExprRelationalExpressionParserRuleCall_1_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleRelationalExpression_in_synpred86_InternalBeeLangTestLanguage6956);
+        pushFollow(FollowSets000.FOLLOW_ruleRelationalExpression_in_synpred86_InternalBeeLangTestLanguage7032);
         lv_rightExpr_3_0=ruleRelationalExpression();
 
         state._fsp--;
@@ -18013,7 +18442,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getFunctionNameRelationalOperatorParserRuleCall_1_1_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleRelationalOperator_in_synpred87_InternalBeeLangTestLanguage7087);
+        pushFollow(FollowSets000.FOLLOW_ruleRelationalOperator_in_synpred87_InternalBeeLangTestLanguage7163);
         lv_functionName_2_0=ruleRelationalOperator();
 
         state._fsp--;
@@ -18035,7 +18464,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getRelationalExpressionAccess().getRightExprAdditiveExpressionParserRuleCall_1_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleAdditiveExpression_in_synpred87_InternalBeeLangTestLanguage7108);
+        pushFollow(FollowSets000.FOLLOW_ruleAdditiveExpression_in_synpred87_InternalBeeLangTestLanguage7184);
         lv_rightExpr_3_0=ruleAdditiveExpression();
 
         state._fsp--;
@@ -18099,14 +18528,14 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             case 1 :
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3847:3: lv_functionName_2_1= '+'
                 {
-                lv_functionName_2_1=(Token)match(input,59,FollowSets000.FOLLOW_59_in_synpred89_InternalBeeLangTestLanguage7238); if (state.failed) return ;
+                lv_functionName_2_1=(Token)match(input,59,FollowSets000.FOLLOW_59_in_synpred89_InternalBeeLangTestLanguage7314); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3865:8: lv_functionName_2_2= '-'
                 {
-                lv_functionName_2_2=(Token)match(input,60,FollowSets000.FOLLOW_60_in_synpred89_InternalBeeLangTestLanguage7267); if (state.failed) return ;
+                lv_functionName_2_2=(Token)match(input,60,FollowSets000.FOLLOW_60_in_synpred89_InternalBeeLangTestLanguage7343); if (state.failed) return ;
 
                 }
                 break;
@@ -18130,7 +18559,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getAdditiveExpressionAccess().getRightExprMultiplicativeExpressionParserRuleCall_1_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleMultiplicativeExpression_in_synpred89_InternalBeeLangTestLanguage7304);
+        pushFollow(FollowSets000.FOLLOW_ruleMultiplicativeExpression_in_synpred89_InternalBeeLangTestLanguage7380);
         lv_rightExpr_3_0=ruleMultiplicativeExpression();
 
         state._fsp--;
@@ -18204,21 +18633,21 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             case 1 :
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3967:3: lv_functionName_2_1= '*'
                 {
-                lv_functionName_2_1=(Token)match(input,61,FollowSets000.FOLLOW_61_in_synpred92_InternalBeeLangTestLanguage7434); if (state.failed) return ;
+                lv_functionName_2_1=(Token)match(input,61,FollowSets000.FOLLOW_61_in_synpred92_InternalBeeLangTestLanguage7510); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:3985:8: lv_functionName_2_2= '/'
                 {
-                lv_functionName_2_2=(Token)match(input,32,FollowSets000.FOLLOW_32_in_synpred92_InternalBeeLangTestLanguage7463); if (state.failed) return ;
+                lv_functionName_2_2=(Token)match(input,32,FollowSets000.FOLLOW_32_in_synpred92_InternalBeeLangTestLanguage7539); if (state.failed) return ;
 
                 }
                 break;
             case 3 :
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4003:8: lv_functionName_2_3= '%'
                 {
-                lv_functionName_2_3=(Token)match(input,62,FollowSets000.FOLLOW_62_in_synpred92_InternalBeeLangTestLanguage7492); if (state.failed) return ;
+                lv_functionName_2_3=(Token)match(input,62,FollowSets000.FOLLOW_62_in_synpred92_InternalBeeLangTestLanguage7568); if (state.failed) return ;
 
                 }
                 break;
@@ -18242,7 +18671,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getMultiplicativeExpressionAccess().getRightExprSetExpressionParserRuleCall_1_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleSetExpression_in_synpred92_InternalBeeLangTestLanguage7529);
+        pushFollow(FollowSets000.FOLLOW_ruleSetExpression_in_synpred92_InternalBeeLangTestLanguage7605);
         lv_rightExpr_3_0=ruleSetExpression();
 
         state._fsp--;
@@ -18284,7 +18713,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4103:1: (lv_functionName_2_0= '..' )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4104:3: lv_functionName_2_0= '..'
         {
-        lv_functionName_2_0=(Token)match(input,63,FollowSets000.FOLLOW_63_in_synpred93_InternalBeeLangTestLanguage7657); if (state.failed) return ;
+        lv_functionName_2_0=(Token)match(input,63,FollowSets000.FOLLOW_63_in_synpred93_InternalBeeLangTestLanguage7733); if (state.failed) return ;
 
         }
 
@@ -18302,7 +18731,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getSetExpressionAccess().getRightExprUnaryOrInfixExpressionParserRuleCall_1_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleUnaryOrInfixExpression_in_synpred93_InternalBeeLangTestLanguage7691);
+        pushFollow(FollowSets000.FOLLOW_ruleUnaryOrInfixExpression_in_synpred93_InternalBeeLangTestLanguage7767);
         lv_rightExpr_3_0=ruleUnaryOrInfixExpression();
 
         state._fsp--;
@@ -18364,14 +18793,14 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             case 1 :
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4471:3: lv_functionName_2_1= '--'
                 {
-                lv_functionName_2_1=(Token)match(input,66,FollowSets000.FOLLOW_66_in_synpred99_InternalBeeLangTestLanguage8314); if (state.failed) return ;
+                lv_functionName_2_1=(Token)match(input,66,FollowSets000.FOLLOW_66_in_synpred99_InternalBeeLangTestLanguage8390); if (state.failed) return ;
 
                 }
                 break;
             case 2 :
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4489:8: lv_functionName_2_2= '++'
                 {
-                lv_functionName_2_2=(Token)match(input,65,FollowSets000.FOLLOW_65_in_synpred99_InternalBeeLangTestLanguage8343); if (state.failed) return ;
+                lv_functionName_2_2=(Token)match(input,65,FollowSets000.FOLLOW_65_in_synpred99_InternalBeeLangTestLanguage8419); if (state.failed) return ;
 
                 }
                 break;
@@ -18415,21 +18844,21 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_2=(Token)match(input,67,FollowSets000.FOLLOW_67_in_synpred101_InternalBeeLangTestLanguage8482); if (state.failed) return ;
+        otherlv_2=(Token)match(input,67,FollowSets000.FOLLOW_67_in_synpred101_InternalBeeLangTestLanguage8558); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4568:1: ( (lv_name_3_0= RULE_ID ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4569:1: (lv_name_3_0= RULE_ID )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4569:1: (lv_name_3_0= RULE_ID )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4570:3: lv_name_3_0= RULE_ID
         {
-        lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred101_InternalBeeLangTestLanguage8499); if (state.failed) return ;
+        lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred101_InternalBeeLangTestLanguage8575); if (state.failed) return ;
 
         }
 
 
         }
 
-        otherlv_4=(Token)match(input,35,FollowSets000.FOLLOW_35_in_synpred101_InternalBeeLangTestLanguage8516); if (state.failed) return ;
+        otherlv_4=(Token)match(input,35,FollowSets000.FOLLOW_35_in_synpred101_InternalBeeLangTestLanguage8592); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4596:1: ( (lv_parameterList_5_0= ruleParameterList ) )?
         int alt114=2;
         int LA114_0 = input.LA(1);
@@ -18449,7 +18878,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                   	        currentNode=createCompositeNode(grammarAccess.getInfixExpressionAccess().getParameterListParameterListParserRuleCall_1_0_4_0(), currentNode); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_synpred101_InternalBeeLangTestLanguage8537);
+                pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_synpred101_InternalBeeLangTestLanguage8613);
                 lv_parameterList_5_0=ruleParameterList();
 
                 state._fsp--;
@@ -18463,7 +18892,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_6=(Token)match(input,37,FollowSets000.FOLLOW_37_in_synpred101_InternalBeeLangTestLanguage8550); if (state.failed) return ;
+        otherlv_6=(Token)match(input,37,FollowSets000.FOLLOW_37_in_synpred101_InternalBeeLangTestLanguage8626); if (state.failed) return ;
 
         }
 
@@ -18496,7 +18925,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_8=(Token)match(input,68,FollowSets000.FOLLOW_68_in_synpred102_InternalBeeLangTestLanguage8582); if (state.failed) return ;
+        otherlv_8=(Token)match(input,68,FollowSets000.FOLLOW_68_in_synpred102_InternalBeeLangTestLanguage8658); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4648:1: ( (lv_indexExpr_9_0= ruleExpression ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4649:1: (lv_indexExpr_9_0= ruleExpression )
         {
@@ -18508,7 +18937,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getInfixExpressionAccess().getIndexExprExpressionParserRuleCall_1_1_2_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleExpression_in_synpred102_InternalBeeLangTestLanguage8603);
+        pushFollow(FollowSets000.FOLLOW_ruleExpression_in_synpred102_InternalBeeLangTestLanguage8679);
         lv_indexExpr_9_0=ruleExpression();
 
         state._fsp--;
@@ -18519,7 +18948,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_10=(Token)match(input,69,FollowSets000.FOLLOW_69_in_synpred102_InternalBeeLangTestLanguage8615); if (state.failed) return ;
+        otherlv_10=(Token)match(input,69,FollowSets000.FOLLOW_69_in_synpred102_InternalBeeLangTestLanguage8691); if (state.failed) return ;
 
         }
 
@@ -18550,14 +18979,14 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_12=(Token)match(input,67,FollowSets000.FOLLOW_67_in_synpred103_InternalBeeLangTestLanguage8647); if (state.failed) return ;
+        otherlv_12=(Token)match(input,67,FollowSets000.FOLLOW_67_in_synpred103_InternalBeeLangTestLanguage8723); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4700:1: ( (lv_featureName_13_0= RULE_ID ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4701:1: (lv_featureName_13_0= RULE_ID )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4701:1: (lv_featureName_13_0= RULE_ID )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4702:3: lv_featureName_13_0= RULE_ID
         {
-        lv_featureName_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred103_InternalBeeLangTestLanguage8664); if (state.failed) return ;
+        lv_featureName_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred103_InternalBeeLangTestLanguage8740); if (state.failed) return ;
 
         }
 
@@ -18593,7 +19022,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_2=(Token)match(input,35,FollowSets000.FOLLOW_35_in_synpred105_InternalBeeLangTestLanguage8792); if (state.failed) return ;
+        otherlv_2=(Token)match(input,35,FollowSets000.FOLLOW_35_in_synpred105_InternalBeeLangTestLanguage8868); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:4782:1: ( (lv_parameterList_3_0= ruleParameterList ) )?
         int alt115=2;
         int LA115_0 = input.LA(1);
@@ -18613,7 +19042,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                   	        currentNode=createCompositeNode(grammarAccess.getCallExpressionAccess().getParameterListParameterListParserRuleCall_1_2_0(), currentNode); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_synpred105_InternalBeeLangTestLanguage8813);
+                pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_synpred105_InternalBeeLangTestLanguage8889);
                 lv_parameterList_3_0=ruleParameterList();
 
                 state._fsp--;
@@ -18627,7 +19056,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_4=(Token)match(input,37,FollowSets000.FOLLOW_37_in_synpred105_InternalBeeLangTestLanguage8826); if (state.failed) return ;
+        otherlv_4=(Token)match(input,37,FollowSets000.FOLLOW_37_in_synpred105_InternalBeeLangTestLanguage8902); if (state.failed) return ;
 
         }
     }
@@ -18646,7 +19075,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleFeatureCall_in_synpred106_InternalBeeLangTestLanguage8924);
+        pushFollow(FollowSets000.FOLLOW_ruleFeatureCall_in_synpred106_InternalBeeLangTestLanguage9000);
         this_FeatureCall_0=ruleFeatureCall();
 
         state._fsp--;
@@ -18669,7 +19098,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleValue_in_synpred108_InternalBeeLangTestLanguage8984);
+        pushFollow(FollowSets000.FOLLOW_ruleValue_in_synpred108_InternalBeeLangTestLanguage9060);
         this_Value_2=ruleValue();
 
         state._fsp--;
@@ -18692,7 +19121,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleLiteral_in_synpred109_InternalBeeLangTestLanguage9014);
+        pushFollow(FollowSets000.FOLLOW_ruleLiteral_in_synpred109_InternalBeeLangTestLanguage9090);
         this_Literal_3=ruleLiteral();
 
         state._fsp--;
@@ -18715,7 +19144,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_synpred112_InternalBeeLangTestLanguage9104);
+        pushFollow(FollowSets000.FOLLOW_ruleBlockExpression_in_synpred112_InternalBeeLangTestLanguage9180);
         this_BlockExpression_6=ruleBlockExpression();
 
         state._fsp--;
@@ -18738,7 +19167,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleWithExpression_in_synpred113_InternalBeeLangTestLanguage9134);
+        pushFollow(FollowSets000.FOLLOW_ruleWithExpression_in_synpred113_InternalBeeLangTestLanguage9210);
         this_WithExpression_7=ruleWithExpression();
 
         state._fsp--;
@@ -18758,7 +19187,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5692:4: (otherlv_3= '(' ( (lv_parameterList_4_0= ruleParameterList ) )? otherlv_5= ')' )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5692:4: otherlv_3= '(' ( (lv_parameterList_4_0= ruleParameterList ) )? otherlv_5= ')'
         {
-        otherlv_3=(Token)match(input,35,FollowSets000.FOLLOW_35_in_synpred127_InternalBeeLangTestLanguage10487); if (state.failed) return ;
+        otherlv_3=(Token)match(input,35,FollowSets000.FOLLOW_35_in_synpred127_InternalBeeLangTestLanguage10563); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5696:1: ( (lv_parameterList_4_0= ruleParameterList ) )?
         int alt117=2;
         int LA117_0 = input.LA(1);
@@ -18778,7 +19207,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                   	        currentNode=createCompositeNode(grammarAccess.getConstructorCallExpressionAccess().getParameterListParameterListParserRuleCall_3_1_0(), currentNode); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_synpred127_InternalBeeLangTestLanguage10508);
+                pushFollow(FollowSets000.FOLLOW_ruleParameterList_in_synpred127_InternalBeeLangTestLanguage10584);
                 lv_parameterList_4_0=ruleParameterList();
 
                 state._fsp--;
@@ -18792,7 +19221,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
         }
 
-        otherlv_5=(Token)match(input,37,FollowSets000.FOLLOW_37_in_synpred127_InternalBeeLangTestLanguage10521); if (state.failed) return ;
+        otherlv_5=(Token)match(input,37,FollowSets000.FOLLOW_37_in_synpred127_InternalBeeLangTestLanguage10597); if (state.failed) return ;
 
         }
     }
@@ -18806,14 +19235,14 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5724:5: (otherlv_6= 'as' ( (lv_alias_7_0= RULE_ID ) ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5724:5: otherlv_6= 'as' ( (lv_alias_7_0= RULE_ID ) )
         {
-        otherlv_6=(Token)match(input,28,FollowSets000.FOLLOW_28_in_synpred128_InternalBeeLangTestLanguage10536); if (state.failed) return ;
+        otherlv_6=(Token)match(input,28,FollowSets000.FOLLOW_28_in_synpred128_InternalBeeLangTestLanguage10612); if (state.failed) return ;
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5728:1: ( (lv_alias_7_0= RULE_ID ) )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5729:1: (lv_alias_7_0= RULE_ID )
         {
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5729:1: (lv_alias_7_0= RULE_ID )
         // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:5730:3: lv_alias_7_0= RULE_ID
         {
-        lv_alias_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred128_InternalBeeLangTestLanguage10553); if (state.failed) return ;
+        lv_alias_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred128_InternalBeeLangTestLanguage10629); if (state.failed) return ;
 
         }
 
@@ -18855,7 +19284,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             case 1 :
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6176:7: otherlv_4= '|'
                 {
-                otherlv_4=(Token)match(input,77,FollowSets000.FOLLOW_77_in_synpred135_InternalBeeLangTestLanguage11373); if (state.failed) return ;
+                otherlv_4=(Token)match(input,77,FollowSets000.FOLLOW_77_in_synpred135_InternalBeeLangTestLanguage11449); if (state.failed) return ;
 
                 }
                 break;
@@ -18876,7 +19305,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	        currentNode=createCompositeNode(grammarAccess.getClosureExpressionAccess().getParametersParameterDeclarationParserRuleCall_2_0_1_0_0(), currentNode); 
           	    
         }
-        pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11397);
+        pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11473);
         lv_parameters_5_0=ruleParameterDeclaration();
 
         state._fsp--;
@@ -18908,7 +19337,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         	case 1 :
         	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6204:4: otherlv_6= ',' ( (lv_parameters_7_0= ruleParameterDeclaration ) )
         	    {
-        	    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_synpred135_InternalBeeLangTestLanguage11410); if (state.failed) return ;
+        	    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_synpred135_InternalBeeLangTestLanguage11486); if (state.failed) return ;
         	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6208:1: ( (lv_parameters_7_0= ruleParameterDeclaration ) )
         	    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6209:1: (lv_parameters_7_0= ruleParameterDeclaration )
         	    {
@@ -18920,7 +19349,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         	      	        currentNode=createCompositeNode(grammarAccess.getClosureExpressionAccess().getParametersParameterDeclarationParserRuleCall_2_0_1_1_1_0(), currentNode); 
         	      	    
         	    }
-        	    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11431);
+        	    pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11507);
         	    lv_parameters_7_0=ruleParameterDeclaration();
 
         	    state._fsp--;
@@ -18951,14 +19380,14 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             case 1 :
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6232:6: otherlv_8= ',' ( (lv_varArgs_9_0= '...' ) ) ( (lv_parameters_10_0= ruleParameterDeclaration ) )
                 {
-                otherlv_8=(Token)match(input,16,FollowSets000.FOLLOW_16_in_synpred135_InternalBeeLangTestLanguage11446); if (state.failed) return ;
+                otherlv_8=(Token)match(input,16,FollowSets000.FOLLOW_16_in_synpred135_InternalBeeLangTestLanguage11522); if (state.failed) return ;
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6236:1: ( (lv_varArgs_9_0= '...' ) )
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6237:1: (lv_varArgs_9_0= '...' )
                 {
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6237:1: (lv_varArgs_9_0= '...' )
                 // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/backtracking/parser/antlr/internal/InternalBeeLangTestLanguage.g:6238:3: lv_varArgs_9_0= '...'
                 {
-                lv_varArgs_9_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_synpred135_InternalBeeLangTestLanguage11464); if (state.failed) return ;
+                lv_varArgs_9_0=(Token)match(input,36,FollowSets000.FOLLOW_36_in_synpred135_InternalBeeLangTestLanguage11540); if (state.failed) return ;
 
                 }
 
@@ -18976,7 +19405,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                   	        currentNode=createCompositeNode(grammarAccess.getClosureExpressionAccess().getParametersParameterDeclarationParserRuleCall_2_0_1_2_2_0(), currentNode); 
                   	    
                 }
-                pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11498);
+                pushFollow(FollowSets000.FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11574);
                 lv_parameters_10_0=ruleParameterDeclaration();
 
                 state._fsp--;
@@ -19017,7 +19446,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
           	  /* */ 
           	
         }
-        pushFollow(FollowSets000.FOLLOW_ruleBlockExpressionWithoutBrackets_in_synpred137_InternalBeeLangTestLanguage11693);
+        pushFollow(FollowSets000.FOLLOW_ruleBlockExpressionWithoutBrackets_in_synpred137_InternalBeeLangTestLanguage11769);
         this_BlockExpressionWithoutBrackets_0=ruleBlockExpressionWithoutBrackets();
 
         state._fsp--;
@@ -19755,7 +20184,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             this.transition = DFA13_transition;
         }
         public String getDescription() {
-            return "()* loopback of 338:3: ( ({...}? => ( (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) | ({...}? => ( (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) | ({...}? => ( (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' )+ ) ) | ({...}? => ( (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' )+ ) ) | ({...}? => ( (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' )+ ) ) | ({...}? => ( ( (lv_functions_33_0= ruleFunction ) )+ ) ) )*";
+            return "()* loopback of 338:3: ( ({...}? => ( ({...}? => (otherlv_12= 'source' otherlv_13= ':' ( (lv_sourceLocation_14_0= rulePath ) ) otherlv_15= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_16= 'output' otherlv_17= ':' ( (lv_outputLocation_18_0= rulePath ) ) otherlv_19= ';' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_20= 'provides' otherlv_21= ':' ( (lv_providedCapabilities_22_0= ruleProvidedCapability ) ) otherlv_23= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_24= 'requires' otherlv_25= ':' ( (lv_requiredCapabilities_26_0= ruleAliasedRequiredCapability ) ) otherlv_27= ';' ) )+ ) ) | ({...}? => ( ({...}? => (otherlv_28= 'requires' otherlv_29= 'env' otherlv_30= ':' ( (lv_metaRequiredCapabilities_31_0= ruleRequiredCapability ) ) otherlv_32= ';' ) )+ ) ) | ({...}? => ( ({...}? => ( (lv_functions_33_0= ruleFunction ) ) )+ ) ) )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -19816,21 +20245,21 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
     static final String DFA27_eotS =
         "\56\uffff";
     static final String DFA27_eofS =
-        "\3\uffff\1\4\4\uffff\1\4\3\uffff\1\4\10\uffff\1\4\5\uffff\2\4\15"+
-        "\uffff\2\4\2\uffff";
+        "\3\uffff\1\4\4\uffff\2\4\12\uffff\2\4\4\uffff\1\4\12\uffff\2\4\7"+
+        "\uffff";
     static final String DFA27_minS =
-        "\1\5\1\uffff\2\5\1\uffff\1\20\2\5\1\20\1\5\1\0\1\5\2\20\1\5\1\67"+
-        "\1\5\1\0\3\5\1\20\1\45\1\5\1\20\1\5\1\67\1\5\1\20\1\5\1\20\2\5\1"+
-        "\45\3\5\1\45\1\0\1\5\1\20\1\5\1\20\1\5\1\45\1\0";
+        "\1\5\1\uffff\2\5\1\uffff\1\20\2\5\2\20\2\5\1\0\3\5\1\0\1\20\1\5"+
+        "\1\67\1\5\2\20\1\5\1\67\1\5\1\20\1\45\4\5\1\45\1\5\1\20\2\5\1\20"+
+        "\1\5\1\20\2\5\1\45\1\0\1\45\1\0";
     static final String DFA27_maxS =
-        "\1\115\1\uffff\1\114\1\115\1\uffff\1\104\1\115\1\114\1\104\1\114"+
-        "\1\0\1\43\2\104\1\5\1\67\1\45\1\0\1\115\1\114\1\44\1\104\1\45\1"+
-        "\5\1\45\1\5\1\67\2\115\1\5\1\45\1\5\1\44\1\45\1\5\1\114\1\115\1"+
-        "\45\1\0\1\5\1\45\1\5\2\115\1\45\1\0";
+        "\1\115\1\uffff\1\114\1\115\1\uffff\1\104\1\114\1\115\2\104\1\43"+
+        "\1\114\1\0\1\115\1\114\1\45\1\0\1\104\1\5\1\67\2\115\1\45\1\5\1"+
+        "\67\1\44\1\104\1\45\1\5\1\114\1\115\1\44\1\45\1\5\1\45\2\5\2\115"+
+        "\1\45\2\5\1\45\1\0\1\45\1\0";
     static final String DFA27_acceptS =
         "\1\uffff\1\1\2\uffff\1\2\51\uffff";
     static final String DFA27_specialS =
-        "\12\uffff\1\2\6\uffff\1\1\24\uffff\1\0\6\uffff\1\3}>";
+        "\14\uffff\1\3\3\uffff\1\0\32\uffff\1\2\1\uffff\1\1}>";
     static final String[] DFA27_transitionS = {
             "\1\3\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
             "\1\2\1\1\17\uffff\1\1\3\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3"+
@@ -19839,69 +20268,69 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             "\1\5\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
             "\1\4\2\1\22\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3\uffff\1\4\1"+
             "\uffff\5\4",
-            "\1\1\12\uffff\1\6\17\uffff\1\4\2\uffff\1\4\1\uffff\17\4\1\7"+
+            "\1\1\12\uffff\1\7\17\uffff\1\4\2\uffff\1\4\1\uffff\17\4\1\6"+
             "\4\uffff\7\4\1\uffff\4\4\10\uffff\1\1",
             "",
             "\1\1\17\uffff\1\4\2\uffff\1\4\1\uffff\1\10\17\4\4\uffff\7\4"+
             "\1\uffff\4\4",
-            "\1\12\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
-            "\1\11\1\13\17\uffff\1\4\3\uffff\1\4\3\uffff\1\4\3\uffff\3\4"+
-            "\3\uffff\1\4\1\uffff\6\4",
-            "\1\14\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\1\11\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
             "\1\4\30\uffff\1\4\3\uffff\3\4\3\uffff\1\4\1\uffff\5\4",
+            "\1\14\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\1\13\1\12\17\uffff\1\4\3\uffff\1\4\3\uffff\1\4\3\uffff\3\4"+
+            "\3\uffff\1\4\1\uffff\6\4",
             "\1\4\17\uffff\1\4\2\uffff\1\4\1\uffff\20\4\2\uffff\1\1\1\uffff"+
             "\7\4\1\uffff\4\4",
-            "\1\15\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
-            "\1\4\1\16\1\17\22\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3\uffff"+
+            "\1\15\17\uffff\1\4\2\uffff\1\4\1\uffff\16\4\1\16\1\4\4\uffff"+
+            "\7\4\1\uffff\4\4",
+            "\1\20\35\uffff\1\17",
+            "\1\21\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\1\4\1\22\1\23\22\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3\uffff"+
             "\1\4\1\uffff\5\4",
             "\1\uffff",
-            "\1\21\35\uffff\1\20",
-            "\1\22\17\uffff\1\4\2\uffff\1\4\1\uffff\16\4\1\23\1\4\4\uffff"+
-            "\7\4\1\uffff\4\4",
-            "\1\24\17\uffff\1\4\2\uffff\1\4\1\uffff\1\25\17\4\4\uffff\7"+
+            "\1\24\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\2\4\17\uffff\1\4\3\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3\uffff"+
+            "\1\4\1\uffff\6\4",
+            "\1\25\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\1\4\30\uffff\1\4\3\uffff\3\4\3\uffff\1\4\1\uffff\5\4",
+            "\1\26\36\uffff\1\27\1\30",
+            "\1\uffff",
+            "\1\31\17\uffff\1\4\2\uffff\1\4\1\uffff\1\32\17\4\4\uffff\7"+
             "\4\1\uffff\4\4",
-            "\1\26",
-            "\1\27",
-            "\1\30\36\uffff\1\31\1\32",
-            "\1\uffff",
-            "\1\33\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
-            "\2\4\17\uffff\1\4\3\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3\uffff"+
-            "\1\4\1\uffff\6\4",
-            "\1\34\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
-            "\1\4\30\uffff\1\4\3\uffff\3\4\3\uffff\1\4\1\uffff\5\4",
-            "\1\36\36\uffff\1\35",
-            "\1\4\17\uffff\1\4\2\uffff\1\4\1\uffff\20\4\2\uffff\1\27\1\uffff"+
-            "\7\4\1\uffff\4\4",
-            "\1\17",
-            "\1\37",
-            "\1\40\24\uffff\1\32",
+            "\1\33",
+            "\1\34",
+            "\1\4\12\uffff\1\36\17\uffff\1\4\2\uffff\1\4\1\uffff\16\4\1"+
+            "\35\1\4\4\uffff\7\4\1\uffff\4\4\10\uffff\1\4",
+            "\1\7\17\uffff\1\4\2\uffff\1\4\1\uffff\20\4\4\uffff\7\4\1\uffff"+
+            "\4\4\10\uffff\1\1",
+            "\1\37\24\uffff\1\30",
+            "\1\40",
             "\1\41",
-            "\1\42",
-            "\1\4\12\uffff\1\44\17\uffff\1\4\2\uffff\1\4\1\uffff\16\4\1"+
-            "\43\1\4\4\uffff\7\4\1\uffff\4\4\10\uffff\1\4",
-            "\1\6\17\uffff\1\4\2\uffff\1\4\1\uffff\20\4\4\uffff\7\4\1\uffff"+
-            "\4\4\10\uffff\1\1",
-            "\1\45",
-            "\1\24\24\uffff\1\17",
-            "\1\46",
-            "\1\50\36\uffff\1\47",
-            "\1\32",
-            "\1\51",
-            "\1\52\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\1\42\36\uffff\1\43",
+            "\1\4\17\uffff\1\4\2\uffff\1\4\1\uffff\20\4\2\uffff\1\34\1\uffff"+
+            "\7\4\1\uffff\4\4",
+            "\1\23",
+            "\1\44",
+            "\1\45\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
             "\1\4\30\uffff\1\4\3\uffff\3\4\3\uffff\1\4\1\uffff\5\4",
-            "\1\53\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\1\46\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
             "\2\4\17\uffff\1\4\3\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3\uffff"+
             "\1\4\1\uffff\6\4",
-            "\1\17",
-            "\1\uffff",
-            "\1\54",
-            "\1\40\24\uffff\1\32",
-            "\1\55",
-            "\1\6\17\uffff\1\4\2\uffff\1\4\1\uffff\20\4\4\uffff\7\4\1\uffff"+
+            "\1\47\36\uffff\1\50",
+            "\1\30",
+            "\1\51",
+            "\1\31\24\uffff\1\23",
+            "\1\52",
+            "\1\53",
+            "\1\7\17\uffff\1\4\2\uffff\1\4\1\uffff\20\4\4\uffff\7\4\1\uffff"+
             "\4\4\10\uffff\1\1",
-            "\1\4\12\uffff\1\44\17\uffff\1\4\2\uffff\1\4\1\uffff\16\4\1"+
-            "\43\1\4\4\uffff\7\4\1\uffff\4\4\10\uffff\1\4",
-            "\1\32",
+            "\1\4\12\uffff\1\36\17\uffff\1\4\2\uffff\1\4\1\uffff\16\4\1"+
+            "\35\1\4\4\uffff\7\4\1\uffff\4\4\10\uffff\1\4",
+            "\1\37\24\uffff\1\30",
+            "\1\54",
+            "\1\55",
+            "\1\23",
+            "\1\uffff",
+            "\1\30",
             "\1\uffff"
     };
 
@@ -19942,10 +20371,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA27_38 = input.LA(1);
+                        int LA27_16 = input.LA(1);
 
                          
-                        int index27_38 = input.index();
+                        int index27_16 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred42_InternalBeeLangTestLanguage()) ) {s = 1;}
@@ -19953,40 +20382,10 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         else if ( (true) ) {s = 4;}
 
                          
-                        input.seek(index27_38);
+                        input.seek(index27_16);
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA27_17 = input.LA(1);
-
-                         
-                        int index27_17 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred42_InternalBeeLangTestLanguage()) ) {s = 1;}
-
-                        else if ( (true) ) {s = 4;}
-
-                         
-                        input.seek(index27_17);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA27_10 = input.LA(1);
-
-                         
-                        int index27_10 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred42_InternalBeeLangTestLanguage()) ) {s = 1;}
-
-                        else if ( (true) ) {s = 4;}
-
-                         
-                        input.seek(index27_10);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
                         int LA27_45 = input.LA(1);
 
                          
@@ -19999,6 +20398,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                          
                         input.seek(index27_45);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA27_43 = input.LA(1);
+
+                         
+                        int index27_43 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred42_InternalBeeLangTestLanguage()) ) {s = 1;}
+
+                        else if ( (true) ) {s = 4;}
+
+                         
+                        input.seek(index27_43);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA27_12 = input.LA(1);
+
+                         
+                        int index27_12 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred42_InternalBeeLangTestLanguage()) ) {s = 1;}
+
+                        else if ( (true) ) {s = 4;}
+
+                         
+                        input.seek(index27_12);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -20118,7 +20547,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
     static final String DFA58_acceptS =
         "\1\uffff\1\2\11\uffff\1\1";
     static final String DFA58_specialS =
-        "\2\uffff\1\1\1\3\1\5\1\6\1\0\1\7\1\4\1\2\1\10\1\uffff}>";
+        "\2\uffff\1\4\1\0\1\7\1\5\1\3\1\10\1\2\1\6\1\1\1\uffff}>";
     static final String[] DFA58_transitionS = {
             "\2\1\2\uffff\1\1\4\uffff\1\1\2\uffff\1\1\3\uffff\1\1\2\uffff"+
             "\1\1\1\uffff\7\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\4\uffff"+
@@ -20173,51 +20602,6 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA58_6 = input.LA(1);
-
-                         
-                        int index58_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred87_InternalBeeLangTestLanguage()) ) {s = 11;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index58_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA58_2 = input.LA(1);
-
-                         
-                        int index58_2 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred87_InternalBeeLangTestLanguage()) ) {s = 11;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index58_2);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA58_9 = input.LA(1);
-
-                         
-                        int index58_9 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred87_InternalBeeLangTestLanguage()) ) {s = 11;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index58_9);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
                         int LA58_3 = input.LA(1);
 
                          
@@ -20232,7 +20616,22 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         input.seek(index58_3);
                         if ( s>=0 ) return s;
                         break;
-                    case 4 : 
+                    case 1 : 
+                        int LA58_10 = input.LA(1);
+
+                         
+                        int index58_10 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred87_InternalBeeLangTestLanguage()) ) {s = 11;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index58_10);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA58_8 = input.LA(1);
 
                          
@@ -20247,11 +20646,11 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         input.seek(index58_8);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
-                        int LA58_4 = input.LA(1);
+                    case 3 : 
+                        int LA58_6 = input.LA(1);
 
                          
-                        int index58_4 = input.index();
+                        int index58_6 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred87_InternalBeeLangTestLanguage()) ) {s = 11;}
@@ -20259,10 +20658,25 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index58_4);
+                        input.seek(index58_6);
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
+                    case 4 : 
+                        int LA58_2 = input.LA(1);
+
+                         
+                        int index58_2 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred87_InternalBeeLangTestLanguage()) ) {s = 11;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index58_2);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
                         int LA58_5 = input.LA(1);
 
                          
@@ -20277,7 +20691,37 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         input.seek(index58_5);
                         if ( s>=0 ) return s;
                         break;
+                    case 6 : 
+                        int LA58_9 = input.LA(1);
+
+                         
+                        int index58_9 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred87_InternalBeeLangTestLanguage()) ) {s = 11;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index58_9);
+                        if ( s>=0 ) return s;
+                        break;
                     case 7 : 
+                        int LA58_4 = input.LA(1);
+
+                         
+                        int index58_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred87_InternalBeeLangTestLanguage()) ) {s = 11;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index58_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 8 : 
                         int LA58_7 = input.LA(1);
 
                          
@@ -20290,21 +20734,6 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
 
                          
                         input.seek(index58_7);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 8 : 
-                        int LA58_10 = input.LA(1);
-
-                         
-                        int index58_10 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred87_InternalBeeLangTestLanguage()) ) {s = 11;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index58_10);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -20556,23 +20985,23 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
     static final String DFA90_eotS =
         "\72\uffff";
     static final String DFA90_eofS =
-        "\6\uffff\1\4\6\uffff\1\4\3\uffff\1\4\16\uffff\2\4\1\uffff\1\4\15"+
-        "\uffff\2\4\7\uffff";
+        "\6\uffff\1\4\7\uffff\1\4\5\uffff\1\4\16\uffff\1\4\3\uffff\2\4\15"+
+        "\uffff\2\4\2\uffff";
     static final String DFA90_minS =
-        "\2\5\3\uffff\2\5\1\20\1\5\1\67\1\5\1\20\1\5\1\20\1\5\1\45\1\5\1"+
-        "\20\1\5\1\0\2\5\1\20\3\5\1\20\1\5\1\67\1\5\1\0\1\45\1\20\2\5\1\20"+
-        "\1\45\1\5\1\20\1\5\1\67\2\5\1\20\3\5\1\45\1\5\1\20\1\5\1\45\1\0"+
-        "\1\5\1\20\1\5\1\45\1\0";
+        "\2\5\3\uffff\2\5\1\20\1\5\1\67\2\5\1\20\1\5\1\20\1\45\3\5\1\0\1"+
+        "\20\1\5\1\20\2\5\1\0\1\20\1\5\1\67\2\5\1\45\1\20\1\5\1\67\1\20\1"+
+        "\5\1\45\2\5\1\20\1\5\1\45\2\5\1\20\4\5\1\20\1\5\1\45\1\0\1\20\1"+
+        "\5\1\45\1\0";
     static final String DFA90_maxS =
-        "\1\115\1\114\3\uffff\1\114\1\115\1\104\1\5\1\67\1\114\2\115\1\104"+
-        "\1\44\1\45\1\5\1\104\1\114\1\0\1\43\1\5\1\45\1\5\1\114\1\115\1\104"+
-        "\1\5\1\67\1\45\1\0\1\45\2\115\1\44\1\104\1\45\1\5\1\45\1\5\1\67"+
-        "\1\114\1\115\1\45\2\5\1\44\1\45\1\5\2\115\1\45\1\0\1\5\1\45\1\5"+
-        "\1\45\1\0";
+        "\1\115\1\114\3\uffff\1\114\1\115\1\104\1\5\1\67\1\115\1\114\1\115"+
+        "\1\44\1\104\1\45\1\5\1\43\1\114\1\0\1\104\1\5\1\45\1\5\1\45\1\0"+
+        "\1\104\1\5\1\67\1\115\1\114\2\45\1\5\1\67\1\104\1\44\1\45\1\5\2"+
+        "\115\1\44\1\45\2\5\1\45\1\5\1\114\1\115\1\5\1\45\1\5\1\45\1\0\2"+
+        "\115\1\45\1\0";
     static final String DFA90_acceptS =
         "\2\uffff\1\1\1\2\1\3\65\uffff";
     static final String DFA90_specialS =
-        "\23\uffff\1\3\12\uffff\1\2\25\uffff\1\1\4\uffff\1\0}>";
+        "\23\uffff\1\1\5\uffff\1\0\33\uffff\1\3\3\uffff\1\2}>";
     static final String[] DFA90_transitionS = {
             "\1\2\35\uffff\1\2\1\3\50\uffff\1\1",
             "\1\6\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\13\uffff"+
@@ -20584,78 +21013,78 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
             "\1\7\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
             "\1\4\1\10\1\11\22\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3\uffff"+
             "\1\4\1\uffff\5\4",
-            "\1\13\12\uffff\1\14\3\uffff\1\4\4\uffff\1\4\6\uffff\1\4\2\uffff"+
-            "\1\4\1\uffff\17\4\1\12\4\uffff\7\4\1\uffff\4\4\10\uffff\1\2",
-            "\1\16\17\uffff\1\4\2\uffff\1\4\1\uffff\1\15\17\4\4\uffff\7"+
+            "\1\14\12\uffff\1\12\3\uffff\1\4\4\uffff\1\4\6\uffff\1\4\2\uffff"+
+            "\1\4\1\uffff\17\4\1\13\4\uffff\7\4\1\uffff\4\4\10\uffff\1\2",
+            "\1\15\17\uffff\1\4\2\uffff\1\4\1\uffff\1\16\17\4\4\uffff\7"+
             "\4\1\uffff\4\4",
             "\1\17",
             "\1\20",
-            "\1\21\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\1\23\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\1\22\1\21\17\uffff\1\4\3\uffff\1\4\3\uffff\1\4\3\uffff\3\4"+
+            "\3\uffff\1\4\1\uffff\6\4",
+            "\1\24\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
             "\1\4\30\uffff\1\4\3\uffff\3\4\3\uffff\1\4\1\uffff\5\4",
             "\1\2\3\uffff\1\4\21\uffff\1\4\46\uffff\1\2",
-            "\1\23\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
-            "\1\22\1\24\17\uffff\1\4\3\uffff\1\4\3\uffff\1\4\3\uffff\3\4"+
-            "\3\uffff\1\4\1\uffff\6\4",
+            "\1\26\36\uffff\1\25",
             "\1\4\3\uffff\1\4\4\uffff\1\4\6\uffff\1\4\2\uffff\1\4\1\uffff"+
             "\20\4\2\uffff\1\20\1\uffff\7\4\1\uffff\4\4",
-            "\1\26\36\uffff\1\25",
             "\1\11",
             "\1\27",
-            "\1\31\3\uffff\1\4\4\uffff\1\4\6\uffff\1\4\2\uffff\1\4\1\uffff"+
-            "\16\4\1\30\1\4\4\uffff\7\4\1\uffff\4\4",
+            "\1\31\35\uffff\1\30",
             "\1\32\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
             "\1\4\1\33\1\34\22\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3\uffff"+
             "\1\4\1\uffff\5\4",
             "\1\uffff",
-            "\1\36\35\uffff\1\35",
+            "\1\35\3\uffff\1\4\4\uffff\1\4\6\uffff\1\4\2\uffff\1\4\1\uffff"+
+            "\16\4\1\36\1\4\4\uffff\7\4\1\uffff\4\4",
             "\1\37",
-            "\1\16\24\uffff\1\11",
-            "\1\13",
-            "\1\40\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
-            "\1\4\30\uffff\1\4\3\uffff\3\4\3\uffff\1\4\1\uffff\5\4",
-            "\1\41\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
-            "\2\4\17\uffff\1\4\3\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3\uffff"+
-            "\1\4\1\uffff\6\4",
-            "\1\42\17\uffff\1\4\2\uffff\1\4\1\uffff\1\43\17\4\4\uffff\7"+
-            "\4\1\uffff\4\4",
-            "\1\44",
-            "\1\45",
-            "\1\46\36\uffff\1\47\1\50",
+            "\1\15\24\uffff\1\11",
+            "\1\14",
+            "\1\40\36\uffff\1\41\1\42",
             "\1\uffff",
-            "\1\11",
-            "\1\14\3\uffff\1\4\4\uffff\1\4\6\uffff\1\4\2\uffff\1\4\1\uffff"+
-            "\20\4\4\uffff\7\4\1\uffff\4\4\10\uffff\1\2",
-            "\1\4\12\uffff\1\52\17\uffff\1\4\2\uffff\1\4\1\uffff\16\4\1"+
-            "\51\1\4\4\uffff\7\4\1\uffff\4\4\10\uffff\1\4",
-            "\1\53\36\uffff\1\54",
-            "\1\4\17\uffff\1\4\2\uffff\1\4\1\uffff\20\4\2\uffff\1\45\1\uffff"+
-            "\7\4\1\uffff\4\4",
-            "\1\34",
-            "\1\55",
-            "\1\56\24\uffff\1\50",
-            "\1\57",
-            "\1\60",
-            "\1\61\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
-            "\1\4\30\uffff\1\4\3\uffff\3\4\3\uffff\1\4\1\uffff\5\4",
-            "\1\62\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\1\44\17\uffff\1\4\2\uffff\1\4\1\uffff\1\43\17\4\4\uffff\7"+
+            "\4\1\uffff\4\4",
+            "\1\45",
+            "\1\46",
+            "\1\47\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
             "\2\4\17\uffff\1\4\3\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3\uffff"+
             "\1\4\1\uffff\6\4",
-            "\1\42\24\uffff\1\34",
+            "\1\50\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\1\4\30\uffff\1\4\3\uffff\3\4\3\uffff\1\4\1\uffff\5\4",
+            "\1\11",
+            "\1\51\24\uffff\1\42",
+            "\1\52",
+            "\1\53",
+            "\1\4\17\uffff\1\4\2\uffff\1\4\1\uffff\20\4\2\uffff\1\46\1\uffff"+
+            "\7\4\1\uffff\4\4",
+            "\1\55\36\uffff\1\54",
+            "\1\34",
+            "\1\56",
+            "\1\4\12\uffff\1\60\17\uffff\1\4\2\uffff\1\4\1\uffff\16\4\1"+
+            "\57\1\4\4\uffff\7\4\1\uffff\4\4\10\uffff\1\4",
+            "\1\12\3\uffff\1\4\4\uffff\1\4\6\uffff\1\4\2\uffff\1\4\1\uffff"+
+            "\20\4\4\uffff\7\4\1\uffff\4\4\10\uffff\1\2",
+            "\1\62\36\uffff\1\61",
+            "\1\42",
             "\1\63",
             "\1\64",
-            "\1\66\36\uffff\1\65",
-            "\1\50",
-            "\1\67",
-            "\1\14\3\uffff\1\4\13\uffff\1\4\2\uffff\1\4\1\uffff\20\4\4\uffff"+
-            "\7\4\1\uffff\4\4\10\uffff\1\2",
-            "\1\4\12\uffff\1\52\17\uffff\1\4\2\uffff\1\4\1\uffff\16\4\1"+
-            "\51\1\4\4\uffff\7\4\1\uffff\4\4\10\uffff\1\4",
+            "\1\44\24\uffff\1\34",
+            "\1\65",
+            "\1\66\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\1\4\30\uffff\1\4\3\uffff\3\4\3\uffff\1\4\1\uffff\5\4",
+            "\1\67\1\uffff\1\4\5\uffff\1\4\3\uffff\2\4\2\uffff\1\4\15\uffff"+
+            "\2\4\17\uffff\1\4\3\uffff\1\4\3\uffff\1\4\3\uffff\3\4\3\uffff"+
+            "\1\4\1\uffff\6\4",
+            "\1\70",
+            "\1\51\24\uffff\1\42",
+            "\1\71",
             "\1\34",
             "\1\uffff",
-            "\1\70",
-            "\1\56\24\uffff\1\50",
-            "\1\71",
-            "\1\50",
+            "\1\12\3\uffff\1\4\13\uffff\1\4\2\uffff\1\4\1\uffff\20\4\4\uffff"+
+            "\7\4\1\uffff\4\4\10\uffff\1\2",
+            "\1\4\12\uffff\1\60\17\uffff\1\4\2\uffff\1\4\1\uffff\16\4\1"+
+            "\57\1\4\4\uffff\7\4\1\uffff\4\4\10\uffff\1\4",
+            "\1\42",
             "\1\uffff"
     };
 
@@ -20696,6 +21125,36 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA90_25 = input.LA(1);
+
+                         
+                        int index90_25 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred135_InternalBeeLangTestLanguage()) ) {s = 2;}
+
+                        else if ( (true) ) {s = 4;}
+
+                         
+                        input.seek(index90_25);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA90_19 = input.LA(1);
+
+                         
+                        int index90_19 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred135_InternalBeeLangTestLanguage()) ) {s = 2;}
+
+                        else if ( (true) ) {s = 4;}
+
+                         
+                        input.seek(index90_19);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA90_57 = input.LA(1);
 
                          
@@ -20710,41 +21169,11 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         input.seek(index90_57);
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
-                        int LA90_52 = input.LA(1);
-
-                         
-                        int index90_52 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred135_InternalBeeLangTestLanguage()) ) {s = 2;}
-
-                        else if ( (true) ) {s = 4;}
-
-                         
-                        input.seek(index90_52);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA90_30 = input.LA(1);
-
-                         
-                        int index90_30 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred135_InternalBeeLangTestLanguage()) ) {s = 2;}
-
-                        else if ( (true) ) {s = 4;}
-
-                         
-                        input.seek(index90_30);
-                        if ( s>=0 ) return s;
-                        break;
                     case 3 : 
-                        int LA90_19 = input.LA(1);
+                        int LA90_53 = input.LA(1);
 
                          
-                        int index90_19 = input.index();
+                        int index90_53 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred135_InternalBeeLangTestLanguage()) ) {s = 2;}
@@ -20752,7 +21181,7 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
                         else if ( (true) ) {s = 4;}
 
                          
-                        input.seek(index90_19);
+                        input.seek(index90_53);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -21139,577 +21568,577 @@ public class InternalBeeLangTestLanguageParser extends AbstractInternalAntlrPars
         public static final BitSet FOLLOW_16_in_ruleUnit408 = new BitSet(new long[]{0x0000000000000020L});
         public static final BitSet FOLLOW_ruleSimpleTypeRef_in_ruleUnit429 = new BitSet(new long[]{0x0000000000030000L});
         public static final BitSet FOLLOW_17_in_ruleUnit445 = new BitSet(new long[]{0x0000000602E40030L});
-        public static final BitSet FOLLOW_18_in_ruleUnit500 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleUnit512 = new BitSet(new long[]{0x00000001000000A0L});
-        public static final BitSet FOLLOW_rulePath_in_ruleUnit533 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleUnit545 = new BitSet(new long[]{0x0000000602E40030L});
-        public static final BitSet FOLLOW_21_in_ruleUnit609 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleUnit621 = new BitSet(new long[]{0x00000001000000A0L});
-        public static final BitSet FOLLOW_rulePath_in_ruleUnit642 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleUnit654 = new BitSet(new long[]{0x0000000602E40030L});
-        public static final BitSet FOLLOW_22_in_ruleUnit718 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleUnit730 = new BitSet(new long[]{0x0000000000002020L});
-        public static final BitSet FOLLOW_ruleProvidedCapability_in_ruleUnit751 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleUnit763 = new BitSet(new long[]{0x0000000602E40030L});
-        public static final BitSet FOLLOW_23_in_ruleUnit828 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleUnit840 = new BitSet(new long[]{0x0000000000002020L});
-        public static final BitSet FOLLOW_ruleAliasedRequiredCapability_in_ruleUnit861 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleUnit873 = new BitSet(new long[]{0x0000000602E40030L});
-        public static final BitSet FOLLOW_23_in_ruleUnit938 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_ruleUnit950 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleUnit962 = new BitSet(new long[]{0x0000000000002020L});
-        public static final BitSet FOLLOW_ruleRequiredCapability_in_ruleUnit983 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleUnit995 = new BitSet(new long[]{0x0000000602E40030L});
-        public static final BitSet FOLLOW_ruleFunction_in_ruleUnit1068 = new BitSet(new long[]{0x0000000602E40030L});
-        public static final BitSet FOLLOW_25_in_ruleUnit1120 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleProvidedCapability_in_entryRuleProvidedCapability1166 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleProvidedCapability1176 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleProvidedCapability1235 = new BitSet(new long[]{0x0000000000020002L});
-        public static final BitSet FOLLOW_13_in_ruleProvidedCapability1258 = new BitSet(new long[]{0x0000000000020002L});
-        public static final BitSet FOLLOW_17_in_ruleProvidedCapability1272 = new BitSet(new long[]{0x000000000C004000L});
-        public static final BitSet FOLLOW_26_in_ruleProvidedCapability1327 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleProvidedCapability1339 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleProvidedCapability1360 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleProvidedCapability1372 = new BitSet(new long[]{0x000000000E004000L});
-        public static final BitSet FOLLOW_27_in_ruleProvidedCapability1436 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleProvidedCapability1448 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleProvidedCapability1465 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleProvidedCapability1482 = new BitSet(new long[]{0x000000000E004000L});
-        public static final BitSet FOLLOW_14_in_ruleProvidedCapability1546 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleProvidedCapability1558 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleProvidedCapability1575 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleProvidedCapability1592 = new BitSet(new long[]{0x000000000E004000L});
-        public static final BitSet FOLLOW_25_in_ruleProvidedCapability1650 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAliasedRequiredCapability_in_entryRuleAliasedRequiredCapability1698 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAliasedRequiredCapability1708 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1755 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_13_in_ruleAliasedRequiredCapability1778 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1796 = new BitSet(new long[]{0x0000000010020000L});
-        public static final BitSet FOLLOW_28_in_ruleAliasedRequiredCapability1814 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1831 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleAliasedRequiredCapability1851 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_26_in_ruleAliasedRequiredCapability1906 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleAliasedRequiredCapability1918 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleAliasedRequiredCapability1939 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleAliasedRequiredCapability1951 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_29_in_ruleAliasedRequiredCapability2021 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleAliasedRequiredCapability2046 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_30_in_ruleAliasedRequiredCapability2110 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleAliasedRequiredCapability2122 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleAliasedRequiredCapability2139 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleAliasedRequiredCapability2156 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_31_in_ruleAliasedRequiredCapability2220 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleAliasedRequiredCapability2232 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleAliasedRequiredCapability2249 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleAliasedRequiredCapability2266 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_14_in_ruleAliasedRequiredCapability2330 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleAliasedRequiredCapability2342 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability2359 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleAliasedRequiredCapability2376 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_25_in_ruleAliasedRequiredCapability2428 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleRequiredCapability_in_entryRuleRequiredCapability2475 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleRequiredCapability2485 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleRequiredCapability2544 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_13_in_ruleRequiredCapability2567 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleRequiredCapability2585 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleRequiredCapability2603 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_26_in_ruleRequiredCapability2658 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleRequiredCapability2670 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleRequiredCapability2691 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleRequiredCapability2703 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_29_in_ruleRequiredCapability2773 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleRequiredCapability2798 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_30_in_ruleRequiredCapability2862 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleRequiredCapability2874 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleRequiredCapability2891 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleRequiredCapability2908 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_31_in_ruleRequiredCapability2972 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleRequiredCapability2984 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleRequiredCapability3001 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleRequiredCapability3018 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_14_in_ruleRequiredCapability3082 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleRequiredCapability3094 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleRequiredCapability3111 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleRequiredCapability3128 = new BitSet(new long[]{0x00000000E6004000L});
-        public static final BitSet FOLLOW_25_in_ruleRequiredCapability3180 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePath_in_entryRulePath3228 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePath3239 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rulePath3283 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_32_in_rulePath3309 = new BitSet(new long[]{0x00000001000000A0L});
-        public static final BitSet FOLLOW_ruleQID_in_rulePath3333 = new BitSet(new long[]{0x0000000100000002L});
-        public static final BitSet FOLLOW_32_in_rulePath3352 = new BitSet(new long[]{0x00000001000000A0L});
-        public static final BitSet FOLLOW_ruleQID_in_rulePath3374 = new BitSet(new long[]{0x0000000100000002L});
-        public static final BitSet FOLLOW_32_in_rulePath3395 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleParameterList_in_entryRuleParameterList3442 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleParameterList3452 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFirstParameter_in_ruleParameterList3498 = new BitSet(new long[]{0x0000000000010002L});
-        public static final BitSet FOLLOW_16_in_ruleParameterList3511 = new BitSet(new long[]{0x11100018002620A0L,0x0000000000003F47L});
-        public static final BitSet FOLLOW_ruleFirstParameter_in_ruleParameterList3532 = new BitSet(new long[]{0x0000000000010002L});
-        public static final BitSet FOLLOW_ruleFirstParameter_in_entryRuleFirstParameter3570 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFirstParameter3580 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleClosureParameter_in_ruleFirstParameter3630 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleParameter_in_ruleFirstParameter3660 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleParameter_in_entryRuleParameter3695 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleParameter3705 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleParameter3750 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleClosureParameter_in_entryRuleClosureParameter3785 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleClosureParameter3795 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleClosureExpression_in_ruleClosureParameter3840 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_entryRuleParameterDeclaration3875 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleParameterDeclaration3885 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeRef_in_ruleParameterDeclaration3931 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleParameterDeclaration3949 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFunction_in_entryRuleFunction3990 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFunction4000 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_DOCUMENTATION_in_ruleFunction4042 = new BitSet(new long[]{0x0000000600000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleFunction4065 = new BitSet(new long[]{0x0000000600000000L});
-        public static final BitSet FOLLOW_33_in_ruleFunction4089 = new BitSet(new long[]{0x0000000400000000L});
-        public static final BitSet FOLLOW_34_in_ruleFunction4115 = new BitSet(new long[]{0x0000000800000020L});
-        public static final BitSet FOLLOW_ruleTypeRef_in_ruleFunction4136 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleFunction4154 = new BitSet(new long[]{0x00000008040A0000L});
-        public static final BitSet FOLLOW_35_in_ruleFunction4172 = new BitSet(new long[]{0x0000003800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleFunction4195 = new BitSet(new long[]{0x0000002000010000L});
-        public static final BitSet FOLLOW_16_in_ruleFunction4208 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleFunction4229 = new BitSet(new long[]{0x0000002000010000L});
-        public static final BitSet FOLLOW_16_in_ruleFunction4244 = new BitSet(new long[]{0x0000001000000000L});
-        public static final BitSet FOLLOW_36_in_ruleFunction4262 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleFunction4296 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_36_in_ruleFunction4324 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleFunction4358 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_37_in_ruleFunction4373 = new BitSet(new long[]{0x00000000040A0000L});
-        public static final BitSet FOLLOW_26_in_ruleFunction4388 = new BitSet(new long[]{0x00000000000A0000L});
-        public static final BitSet FOLLOW_ruleGuardExpression_in_ruleFunction4409 = new BitSet(new long[]{0x00000000000A0000L});
-        public static final BitSet FOLLOW_19_in_ruleFunction4425 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleFunction4446 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleFunction4458 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBlockExpression_in_ruleFunction4486 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleGuardExpression_in_entryRuleGuardExpression4523 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleGuardExpression4533 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_ruleGuardExpression4571 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleGuardExpression4592 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleGuardExpression4604 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBlockExpression_in_ruleGuardExpression4632 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAssignmentOperator_in_entryRuleAssignmentOperator4669 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAssignmentOperator4680 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_38_in_ruleAssignmentOperator4718 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_39_in_ruleAssignmentOperator4737 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_40_in_ruleAssignmentOperator4756 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_41_in_ruleAssignmentOperator4775 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_42_in_ruleAssignmentOperator4794 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_43_in_ruleAssignmentOperator4813 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleRelationalOperator_in_entryRuleRelationalOperator4854 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleRelationalOperator4865 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_44_in_ruleRelationalOperator4903 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_45_in_ruleRelationalOperator4922 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_46_in_ruleRelationalOperator4941 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_47_in_ruleRelationalOperator4960 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_48_in_ruleRelationalOperator4979 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_49_in_ruleRelationalOperator4998 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_50_in_ruleRelationalOperator5017 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_51_in_ruleRelationalOperator5036 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_52_in_ruleRelationalOperator5055 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTopLevelExpression_in_entryRuleTopLevelExpression5095 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTopLevelExpression5105 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVarDeclaration_in_ruleTopLevelExpression5155 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleValDeclaration_in_ruleTopLevelExpression5185 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAssignmentExpression_in_ruleTopLevelExpression5215 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression5250 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExpression5260 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAssignmentExpression_in_ruleExpression5309 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAssignmentExpression_in_entryRuleAssignmentExpression5343 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAssignmentExpression5353 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCachedExpression_in_ruleAssignmentExpression5403 = new BitSet(new long[]{0x00000FC000000002L});
-        public static final BitSet FOLLOW_ruleAssignmentOperator_in_ruleAssignmentExpression5436 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleAssignmentExpression_in_ruleAssignmentExpression5457 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVarDeclaration_in_entryRuleVarDeclaration5495 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleVarDeclaration5505 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_ruleVarDeclaration5560 = new BitSet(new long[]{0x0020000800000020L});
-        public static final BitSet FOLLOW_53_in_ruleVarDeclaration5588 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_ruleTypeRef_in_ruleVarDeclaration5615 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleVarDeclaration5633 = new BitSet(new long[]{0x0000004000000002L});
-        public static final BitSet FOLLOW_38_in_ruleVarDeclaration5652 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleVarDeclaration5673 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleValDeclaration_in_entryRuleValDeclaration5711 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleValDeclaration5721 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_ruleValDeclaration5776 = new BitSet(new long[]{0x0040000000000000L});
-        public static final BitSet FOLLOW_54_in_ruleValDeclaration5808 = new BitSet(new long[]{0x0000000800000020L});
-        public static final BitSet FOLLOW_ruleTypeRef_in_ruleValDeclaration5842 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleValDeclaration5860 = new BitSet(new long[]{0x0000004000000000L});
-        public static final BitSet FOLLOW_38_in_ruleValDeclaration5877 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleValDeclaration5898 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeRef_in_entryRuleTypeRef5934 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypeRef5944 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleClosureTypeRef_in_ruleTypeRef5994 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSimpleTypeRef_in_ruleTypeRef6024 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSimpleTypeRef_in_entryRuleSimpleTypeRef6059 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSimpleTypeRef6069 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTypeRef6111 = new BitSet(new long[]{0x0010000000000002L});
-        public static final BitSet FOLLOW_52_in_ruleSimpleTypeRef6129 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTypeRef6146 = new BitSet(new long[]{0x0008000000010000L});
-        public static final BitSet FOLLOW_16_in_ruleSimpleTypeRef6164 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTypeRef6181 = new BitSet(new long[]{0x0008000000010000L});
-        public static final BitSet FOLLOW_51_in_ruleSimpleTypeRef6200 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleClosureTypeRef_in_entryRuleClosureTypeRef6238 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleClosureTypeRef6248 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_35_in_ruleClosureTypeRef6285 = new BitSet(new long[]{0x0000003000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleClosureTypeRef6304 = new BitSet(new long[]{0x0000002000010000L});
-        public static final BitSet FOLLOW_16_in_ruleClosureTypeRef6322 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleClosureTypeRef6339 = new BitSet(new long[]{0x0000002000010000L});
-        public static final BitSet FOLLOW_16_in_ruleClosureTypeRef6359 = new BitSet(new long[]{0x0000001000000000L});
-        public static final BitSet FOLLOW_36_in_ruleClosureTypeRef6377 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleClosureTypeRef6407 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_36_in_ruleClosureTypeRef6440 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleClosureTypeRef6470 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_37_in_ruleClosureTypeRef6490 = new BitSet(new long[]{0x0080000000000000L});
-        public static final BitSet FOLLOW_55_in_ruleClosureTypeRef6502 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleClosureTypeRef6519 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCachedExpression_in_entryRuleCachedExpression6560 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleCachedExpression6570 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_56_in_ruleCachedExpression6620 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleOrExpression_in_ruleCachedExpression6641 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOrExpression_in_ruleCachedExpression6673 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOrExpression_in_entryRuleOrExpression6708 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleOrExpression6718 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAndExpression_in_ruleOrExpression6768 = new BitSet(new long[]{0x0200000000000002L});
-        public static final BitSet FOLLOW_57_in_ruleOrExpression6792 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleAndExpression_in_ruleOrExpression6813 = new BitSet(new long[]{0x0200000000000002L});
-        public static final BitSet FOLLOW_ruleAndExpression_in_entryRuleAndExpression6851 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAndExpression6861 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleRelationalExpression_in_ruleAndExpression6911 = new BitSet(new long[]{0x0400000000000002L});
-        public static final BitSet FOLLOW_58_in_ruleAndExpression6935 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleRelationalExpression_in_ruleAndExpression6956 = new BitSet(new long[]{0x0400000000000002L});
-        public static final BitSet FOLLOW_ruleRelationalExpression_in_entryRuleRelationalExpression6994 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleRelationalExpression7004 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression7054 = new BitSet(new long[]{0x001FF00000000002L});
-        public static final BitSet FOLLOW_ruleRelationalOperator_in_ruleRelationalExpression7087 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression7108 = new BitSet(new long[]{0x001FF00000000002L});
-        public static final BitSet FOLLOW_ruleAdditiveExpression_in_entryRuleAdditiveExpression7146 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAdditiveExpression7156 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression7206 = new BitSet(new long[]{0x1800000000000002L});
-        public static final BitSet FOLLOW_59_in_ruleAdditiveExpression7238 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_60_in_ruleAdditiveExpression7267 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression7304 = new BitSet(new long[]{0x1800000000000002L});
-        public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_entryRuleMultiplicativeExpression7342 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMultiplicativeExpression7352 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSetExpression_in_ruleMultiplicativeExpression7402 = new BitSet(new long[]{0x6000000100000002L});
-        public static final BitSet FOLLOW_61_in_ruleMultiplicativeExpression7434 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_32_in_ruleMultiplicativeExpression7463 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_62_in_ruleMultiplicativeExpression7492 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleSetExpression_in_ruleMultiplicativeExpression7529 = new BitSet(new long[]{0x6000000100000002L});
-        public static final BitSet FOLLOW_ruleSetExpression_in_entryRuleSetExpression7567 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSetExpression7577 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnaryOrInfixExpression_in_ruleSetExpression7627 = new BitSet(new long[]{0x8000000000000002L});
-        public static final BitSet FOLLOW_63_in_ruleSetExpression7657 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleUnaryOrInfixExpression_in_ruleSetExpression7691 = new BitSet(new long[]{0x8000000000000002L});
-        public static final BitSet FOLLOW_ruleUnaryOrInfixExpression_in_entryRuleUnaryOrInfixExpression7729 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUnaryOrInfixExpression7739 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePostopExpression_in_ruleUnaryOrInfixExpression7789 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnaryExpression_in_ruleUnaryOrInfixExpression7819 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePreopExpression_in_ruleUnaryOrInfixExpression7849 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnaryExpression_in_entryRuleUnaryExpression7884 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUnaryExpression7894 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_64_in_ruleUnaryExpression7951 = new BitSet(new long[]{0x00000008002620A0L,0x0000000000001F40L});
-        public static final BitSet FOLLOW_60_in_ruleUnaryExpression7980 = new BitSet(new long[]{0x00000008002620A0L,0x0000000000001F40L});
-        public static final BitSet FOLLOW_ruleInfixExpression_in_ruleUnaryExpression8017 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePreopExpression_in_entryRulePreopExpression8053 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePreopExpression8063 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_65_in_rulePreopExpression8120 = new BitSet(new long[]{0x00000008002620A0L,0x0000000000001F40L});
-        public static final BitSet FOLLOW_66_in_rulePreopExpression8149 = new BitSet(new long[]{0x00000008002620A0L,0x0000000000001F40L});
-        public static final BitSet FOLLOW_ruleInfixExpression_in_rulePreopExpression8186 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePostopExpression_in_entryRulePostopExpression8222 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePostopExpression8232 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleInfixExpression_in_rulePostopExpression8282 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000006L});
-        public static final BitSet FOLLOW_66_in_rulePostopExpression8314 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_65_in_rulePostopExpression8343 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleInfixExpression_in_entryRuleInfixExpression8397 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleInfixExpression8407 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCallExpression_in_ruleInfixExpression8457 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000018L});
-        public static final BitSet FOLLOW_67_in_ruleInfixExpression8482 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleInfixExpression8499 = new BitSet(new long[]{0x0000000800000000L});
-        public static final BitSet FOLLOW_35_in_ruleInfixExpression8516 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
-        public static final BitSet FOLLOW_ruleParameterList_in_ruleInfixExpression8537 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_37_in_ruleInfixExpression8550 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000018L});
-        public static final BitSet FOLLOW_68_in_ruleInfixExpression8582 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleInfixExpression8603 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
-        public static final BitSet FOLLOW_69_in_ruleInfixExpression8615 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000018L});
-        public static final BitSet FOLLOW_67_in_ruleInfixExpression8647 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleInfixExpression8664 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000018L});
-        public static final BitSet FOLLOW_ruleCallExpression_in_entryRuleCallExpression8708 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleCallExpression8718 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleCallExpression8768 = new BitSet(new long[]{0x0000000800000002L});
-        public static final BitSet FOLLOW_35_in_ruleCallExpression8792 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
-        public static final BitSet FOLLOW_ruleParameterList_in_ruleCallExpression8813 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_37_in_ruleCallExpression8826 = new BitSet(new long[]{0x0000000800000002L});
-        public static final BitSet FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression8864 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpression8874 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFeatureCall_in_rulePrimaryExpression8924 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConstructorCallExpression_in_rulePrimaryExpression8954 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleValue_in_rulePrimaryExpression8984 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLiteral_in_rulePrimaryExpression9014 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleKeywordVariables_in_rulePrimaryExpression9044 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleParanthesizedExpression_in_rulePrimaryExpression9074 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBlockExpression_in_rulePrimaryExpression9104 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWithExpression_in_rulePrimaryExpression9134 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWithContextExpression_in_rulePrimaryExpression9164 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWithExpression_in_entryRuleWithExpression9199 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleWithExpression9209 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_70_in_ruleWithExpression9246 = new BitSet(new long[]{0x00000000000A0020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleWithExpression9264 = new BitSet(new long[]{0x00000000000B0000L});
-        public static final BitSet FOLLOW_16_in_ruleWithExpression9282 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleWithExpression9299 = new BitSet(new long[]{0x00000000000B0000L});
-        public static final BitSet FOLLOW_19_in_ruleWithExpression9322 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleWithExpression9343 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_ruleWithExpression9363 = new BitSet(new long[]{0x1160000A002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleBlockExpressionWithoutBrackets_in_ruleWithExpression9384 = new BitSet(new long[]{0x0000000002000000L});
-        public static final BitSet FOLLOW_25_in_ruleWithExpression9396 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWithContextExpression_in_entryRuleWithContextExpression9434 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleWithContextExpression9444 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_70_in_ruleWithContextExpression9481 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
-        public static final BitSet FOLLOW_71_in_ruleWithContextExpression9493 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleWithContextExpression9514 = new BitSet(new long[]{0x0000000010020000L});
-        public static final BitSet FOLLOW_28_in_ruleWithContextExpression9527 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleWithContextExpression9544 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_ruleBlockExpression_in_ruleWithContextExpression9572 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBlockExpression_in_entryRuleBlockExpression9608 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleBlockExpression9618 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_ruleBlockExpression9667 = new BitSet(new long[]{0x1160000A022620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleTopLevelExpression_in_ruleBlockExpression9689 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleBlockExpression9701 = new BitSet(new long[]{0x1160000A022620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_25_in_ruleBlockExpression9715 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleValue_in_entryRuleValue9751 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleValue9761 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleValue9815 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleKeywordVariables_in_entryRuleKeywordVariables9856 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleKeywordVariables9866 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_72_in_ruleKeywordVariables9923 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_21_in_ruleKeywordVariables9952 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_18_in_ruleKeywordVariables9981 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_73_in_ruleKeywordVariables10010 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_74_in_ruleKeywordVariables10039 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleKeywordVariables10068 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_75_in_ruleKeywordVariables10097 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFeatureCall_in_entryRuleFeatureCall10149 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFeatureCall10159 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOperationCall_in_ruleFeatureCall10208 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOperationCall_in_entryRuleOperationCall10242 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleOperationCall10252 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleOperationCall10306 = new BitSet(new long[]{0x0000000800000000L});
-        public static final BitSet FOLLOW_35_in_ruleOperationCall10323 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
-        public static final BitSet FOLLOW_ruleParameterList_in_ruleOperationCall10344 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_37_in_ruleOperationCall10357 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConstructorCallExpression_in_entryRuleConstructorCallExpression10393 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleConstructorCallExpression10403 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_76_in_ruleConstructorCallExpression10452 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleConstructorCallExpression10469 = new BitSet(new long[]{0x0000000810020002L});
-        public static final BitSet FOLLOW_35_in_ruleConstructorCallExpression10487 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
-        public static final BitSet FOLLOW_ruleParameterList_in_ruleConstructorCallExpression10508 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_37_in_ruleConstructorCallExpression10521 = new BitSet(new long[]{0x0000000010020002L});
-        public static final BitSet FOLLOW_28_in_ruleConstructorCallExpression10536 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleConstructorCallExpression10553 = new BitSet(new long[]{0x0000000000020002L});
-        public static final BitSet FOLLOW_ruleInitializationBlockExpression_in_ruleConstructorCallExpression10581 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleInitializationBlockExpression_in_entryRuleInitializationBlockExpression10618 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleInitializationBlockExpression10628 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_ruleInitializationBlockExpression10677 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_ruleInitializationExpression_in_ruleInitializationBlockExpression10698 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleInitializationBlockExpression10710 = new BitSet(new long[]{0x0000000002000000L});
-        public static final BitSet FOLLOW_25_in_ruleInitializationBlockExpression10722 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleInitializationExpression_in_entryRuleInitializationExpression10758 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleInitializationExpression10768 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFeatureOfThis_in_ruleInitializationExpression10826 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleInitializationExpression10844 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleInitializationExpression10878 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFeatureOfThis_in_entryRuleFeatureOfThis10914 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFeatureOfThis10924 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleFeatureOfThis10978 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral11019 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLiteral11029 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleValueLiteral_in_ruleLiteral11079 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLiteralFunction_in_ruleLiteral11109 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLiteralFunction_in_entryRuleLiteralFunction11144 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLiteralFunction11154 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_ruleLiteralFunction11191 = new BitSet(new long[]{0x0010001800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleClosureExpression_in_ruleLiteralFunction11216 = new BitSet(new long[]{0x0000000002000000L});
-        public static final BitSet FOLLOW_25_in_ruleLiteralFunction11227 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleClosureExpression_in_entryRuleClosureExpression11263 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleClosureExpression11273 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_52_in_ruleClosureExpression11323 = new BitSet(new long[]{0x0000000800000020L});
-        public static final BitSet FOLLOW_ruleTypeRef_in_ruleClosureExpression11344 = new BitSet(new long[]{0x0008000000000000L});
-        public static final BitSet FOLLOW_51_in_ruleClosureExpression11356 = new BitSet(new long[]{0x0000001800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_77_in_ruleClosureExpression11373 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11397 = new BitSet(new long[]{0x0000000000010000L,0x0000000000002000L});
-        public static final BitSet FOLLOW_16_in_ruleClosureExpression11410 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11431 = new BitSet(new long[]{0x0000000000010000L,0x0000000000002000L});
-        public static final BitSet FOLLOW_16_in_ruleClosureExpression11446 = new BitSet(new long[]{0x0000001000000000L});
-        public static final BitSet FOLLOW_36_in_ruleClosureExpression11464 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11498 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
-        public static final BitSet FOLLOW_36_in_ruleClosureExpression11527 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11561 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
-        public static final BitSet FOLLOW_77_in_ruleClosureExpression11576 = new BitSet(new long[]{0x1160000A002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleOneOrManyExpressions_in_ruleClosureExpression11597 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleOneOrManyExpressions_in_entryRuleOneOrManyExpressions11633 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleOneOrManyExpressions11643 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBlockExpressionWithoutBrackets_in_ruleOneOrManyExpressions11693 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleOneOrManyExpressions11723 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBlockExpressionWithoutBrackets_in_entryRuleBlockExpressionWithoutBrackets11758 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleBlockExpressionWithoutBrackets11768 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTopLevelExpression_in_ruleBlockExpressionWithoutBrackets11827 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleBlockExpressionWithoutBrackets11839 = new BitSet(new long[]{0x1160000A002620A2L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleValueLiteral_in_entryRuleValueLiteral11877 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleValueLiteral11887 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleValueLiteral11928 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleParanthesizedExpression_in_entryRuleParanthesizedExpression11968 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleParanthesizedExpression11978 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_35_in_ruleParanthesizedExpression12015 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleParanthesizedExpression12040 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_37_in_ruleParanthesizedExpression12051 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQID_in_entryRuleQID12094 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleQID12105 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleQID12149 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleQID12170 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
-        public static final BitSet FOLLOW_RULE_HEX_in_ruleQID12196 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleQID12222 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
-        public static final BitSet FOLLOW_67_in_ruleQID12243 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleQID12258 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleQID12279 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
-        public static final BitSet FOLLOW_RULE_HEX_in_ruleQID12305 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleQID12331 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
+        public static final BitSet FOLLOW_18_in_ruleUnit503 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleUnit515 = new BitSet(new long[]{0x00000001000000A0L});
+        public static final BitSet FOLLOW_rulePath_in_ruleUnit536 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleUnit548 = new BitSet(new long[]{0x0000000602E40030L});
+        public static final BitSet FOLLOW_21_in_ruleUnit616 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleUnit628 = new BitSet(new long[]{0x00000001000000A0L});
+        public static final BitSet FOLLOW_rulePath_in_ruleUnit649 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleUnit661 = new BitSet(new long[]{0x0000000602E40030L});
+        public static final BitSet FOLLOW_22_in_ruleUnit729 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleUnit741 = new BitSet(new long[]{0x0000000000002020L});
+        public static final BitSet FOLLOW_ruleProvidedCapability_in_ruleUnit762 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleUnit774 = new BitSet(new long[]{0x0000000602E40030L});
+        public static final BitSet FOLLOW_23_in_ruleUnit843 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleUnit855 = new BitSet(new long[]{0x0000000000002020L});
+        public static final BitSet FOLLOW_ruleAliasedRequiredCapability_in_ruleUnit876 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleUnit888 = new BitSet(new long[]{0x0000000602E40030L});
+        public static final BitSet FOLLOW_23_in_ruleUnit957 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_24_in_ruleUnit969 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleUnit981 = new BitSet(new long[]{0x0000000000002020L});
+        public static final BitSet FOLLOW_ruleRequiredCapability_in_ruleUnit1002 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleUnit1014 = new BitSet(new long[]{0x0000000602E40030L});
+        public static final BitSet FOLLOW_ruleFunction_in_ruleUnit1091 = new BitSet(new long[]{0x0000000602E40030L});
+        public static final BitSet FOLLOW_25_in_ruleUnit1144 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleProvidedCapability_in_entryRuleProvidedCapability1190 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleProvidedCapability1200 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleProvidedCapability1259 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_13_in_ruleProvidedCapability1282 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_17_in_ruleProvidedCapability1296 = new BitSet(new long[]{0x000000000C004000L});
+        public static final BitSet FOLLOW_26_in_ruleProvidedCapability1354 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleProvidedCapability1366 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleProvidedCapability1387 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleProvidedCapability1399 = new BitSet(new long[]{0x000000000E004000L});
+        public static final BitSet FOLLOW_27_in_ruleProvidedCapability1467 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleProvidedCapability1479 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleProvidedCapability1496 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleProvidedCapability1513 = new BitSet(new long[]{0x000000000E004000L});
+        public static final BitSet FOLLOW_14_in_ruleProvidedCapability1581 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleProvidedCapability1593 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleProvidedCapability1610 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleProvidedCapability1627 = new BitSet(new long[]{0x000000000E004000L});
+        public static final BitSet FOLLOW_25_in_ruleProvidedCapability1686 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAliasedRequiredCapability_in_entryRuleAliasedRequiredCapability1734 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAliasedRequiredCapability1744 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1791 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_13_in_ruleAliasedRequiredCapability1814 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1832 = new BitSet(new long[]{0x0000000010020000L});
+        public static final BitSet FOLLOW_28_in_ruleAliasedRequiredCapability1850 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability1867 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_17_in_ruleAliasedRequiredCapability1887 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_26_in_ruleAliasedRequiredCapability1945 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleAliasedRequiredCapability1957 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleAliasedRequiredCapability1978 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleAliasedRequiredCapability1990 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_29_in_ruleAliasedRequiredCapability2064 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleAliasedRequiredCapability2089 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_30_in_ruleAliasedRequiredCapability2157 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleAliasedRequiredCapability2169 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleAliasedRequiredCapability2186 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleAliasedRequiredCapability2203 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_31_in_ruleAliasedRequiredCapability2271 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleAliasedRequiredCapability2283 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleAliasedRequiredCapability2300 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleAliasedRequiredCapability2317 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_14_in_ruleAliasedRequiredCapability2385 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleAliasedRequiredCapability2397 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleAliasedRequiredCapability2414 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleAliasedRequiredCapability2431 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_25_in_ruleAliasedRequiredCapability2484 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRequiredCapability_in_entryRuleRequiredCapability2531 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRequiredCapability2541 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleRequiredCapability2600 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_13_in_ruleRequiredCapability2623 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleRequiredCapability2641 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_17_in_ruleRequiredCapability2659 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_26_in_ruleRequiredCapability2717 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleRequiredCapability2729 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleRequiredCapability2750 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleRequiredCapability2762 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_29_in_ruleRequiredCapability2836 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleRequiredCapability2861 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_30_in_ruleRequiredCapability2929 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleRequiredCapability2941 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleRequiredCapability2958 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleRequiredCapability2975 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_31_in_ruleRequiredCapability3043 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleRequiredCapability3055 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleRequiredCapability3072 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleRequiredCapability3089 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_14_in_ruleRequiredCapability3157 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleRequiredCapability3169 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleRequiredCapability3186 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleRequiredCapability3203 = new BitSet(new long[]{0x00000000E6004000L});
+        public static final BitSet FOLLOW_25_in_ruleRequiredCapability3256 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePath_in_entryRulePath3304 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePath3315 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rulePath3359 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rulePath3385 = new BitSet(new long[]{0x00000001000000A0L});
+        public static final BitSet FOLLOW_ruleQID_in_rulePath3409 = new BitSet(new long[]{0x0000000100000002L});
+        public static final BitSet FOLLOW_32_in_rulePath3428 = new BitSet(new long[]{0x00000001000000A0L});
+        public static final BitSet FOLLOW_ruleQID_in_rulePath3450 = new BitSet(new long[]{0x0000000100000002L});
+        public static final BitSet FOLLOW_32_in_rulePath3471 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParameterList_in_entryRuleParameterList3518 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleParameterList3528 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFirstParameter_in_ruleParameterList3574 = new BitSet(new long[]{0x0000000000010002L});
+        public static final BitSet FOLLOW_16_in_ruleParameterList3587 = new BitSet(new long[]{0x11100018002620A0L,0x0000000000003F47L});
+        public static final BitSet FOLLOW_ruleFirstParameter_in_ruleParameterList3608 = new BitSet(new long[]{0x0000000000010002L});
+        public static final BitSet FOLLOW_ruleFirstParameter_in_entryRuleFirstParameter3646 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFirstParameter3656 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleClosureParameter_in_ruleFirstParameter3706 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParameter_in_ruleFirstParameter3736 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParameter_in_entryRuleParameter3771 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleParameter3781 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleParameter3826 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleClosureParameter_in_entryRuleClosureParameter3861 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleClosureParameter3871 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleClosureExpression_in_ruleClosureParameter3916 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_entryRuleParameterDeclaration3951 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleParameterDeclaration3961 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_ruleParameterDeclaration4007 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleParameterDeclaration4025 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFunction_in_entryRuleFunction4066 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFunction4076 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_DOCUMENTATION_in_ruleFunction4118 = new BitSet(new long[]{0x0000000600000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleFunction4141 = new BitSet(new long[]{0x0000000600000000L});
+        public static final BitSet FOLLOW_33_in_ruleFunction4165 = new BitSet(new long[]{0x0000000400000000L});
+        public static final BitSet FOLLOW_34_in_ruleFunction4191 = new BitSet(new long[]{0x0000000800000020L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_ruleFunction4212 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleFunction4230 = new BitSet(new long[]{0x00000008040A0000L});
+        public static final BitSet FOLLOW_35_in_ruleFunction4248 = new BitSet(new long[]{0x0000003800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleFunction4271 = new BitSet(new long[]{0x0000002000010000L});
+        public static final BitSet FOLLOW_16_in_ruleFunction4284 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleFunction4305 = new BitSet(new long[]{0x0000002000010000L});
+        public static final BitSet FOLLOW_16_in_ruleFunction4320 = new BitSet(new long[]{0x0000001000000000L});
+        public static final BitSet FOLLOW_36_in_ruleFunction4338 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleFunction4372 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_36_in_ruleFunction4400 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleFunction4434 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_37_in_ruleFunction4449 = new BitSet(new long[]{0x00000000040A0000L});
+        public static final BitSet FOLLOW_26_in_ruleFunction4464 = new BitSet(new long[]{0x00000000000A0000L});
+        public static final BitSet FOLLOW_ruleGuardExpression_in_ruleFunction4485 = new BitSet(new long[]{0x00000000000A0000L});
+        public static final BitSet FOLLOW_19_in_ruleFunction4501 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleFunction4522 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleFunction4534 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBlockExpression_in_ruleFunction4562 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGuardExpression_in_entryRuleGuardExpression4599 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleGuardExpression4609 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_19_in_ruleGuardExpression4647 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleGuardExpression4668 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleGuardExpression4680 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBlockExpression_in_ruleGuardExpression4708 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignmentOperator_in_entryRuleAssignmentOperator4745 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAssignmentOperator4756 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_38_in_ruleAssignmentOperator4794 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_39_in_ruleAssignmentOperator4813 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_40_in_ruleAssignmentOperator4832 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_41_in_ruleAssignmentOperator4851 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_42_in_ruleAssignmentOperator4870 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_43_in_ruleAssignmentOperator4889 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRelationalOperator_in_entryRuleRelationalOperator4930 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRelationalOperator4941 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_44_in_ruleRelationalOperator4979 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_45_in_ruleRelationalOperator4998 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_46_in_ruleRelationalOperator5017 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_47_in_ruleRelationalOperator5036 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_48_in_ruleRelationalOperator5055 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_49_in_ruleRelationalOperator5074 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_50_in_ruleRelationalOperator5093 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_51_in_ruleRelationalOperator5112 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_52_in_ruleRelationalOperator5131 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTopLevelExpression_in_entryRuleTopLevelExpression5171 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTopLevelExpression5181 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVarDeclaration_in_ruleTopLevelExpression5231 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleValDeclaration_in_ruleTopLevelExpression5261 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignmentExpression_in_ruleTopLevelExpression5291 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression5326 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleExpression5336 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignmentExpression_in_ruleExpression5385 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignmentExpression_in_entryRuleAssignmentExpression5419 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAssignmentExpression5429 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCachedExpression_in_ruleAssignmentExpression5479 = new BitSet(new long[]{0x00000FC000000002L});
+        public static final BitSet FOLLOW_ruleAssignmentOperator_in_ruleAssignmentExpression5512 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleAssignmentExpression_in_ruleAssignmentExpression5533 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVarDeclaration_in_entryRuleVarDeclaration5571 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleVarDeclaration5581 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_ruleVarDeclaration5636 = new BitSet(new long[]{0x0020000800000020L});
+        public static final BitSet FOLLOW_53_in_ruleVarDeclaration5664 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_ruleVarDeclaration5691 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleVarDeclaration5709 = new BitSet(new long[]{0x0000004000000002L});
+        public static final BitSet FOLLOW_38_in_ruleVarDeclaration5728 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleVarDeclaration5749 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleValDeclaration_in_entryRuleValDeclaration5787 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleValDeclaration5797 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_ruleValDeclaration5852 = new BitSet(new long[]{0x0040000000000000L});
+        public static final BitSet FOLLOW_54_in_ruleValDeclaration5884 = new BitSet(new long[]{0x0000000800000020L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_ruleValDeclaration5918 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleValDeclaration5936 = new BitSet(new long[]{0x0000004000000000L});
+        public static final BitSet FOLLOW_38_in_ruleValDeclaration5953 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleValDeclaration5974 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_entryRuleTypeRef6010 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypeRef6020 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleClosureTypeRef_in_ruleTypeRef6070 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSimpleTypeRef_in_ruleTypeRef6100 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSimpleTypeRef_in_entryRuleSimpleTypeRef6135 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSimpleTypeRef6145 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTypeRef6187 = new BitSet(new long[]{0x0010000000000002L});
+        public static final BitSet FOLLOW_52_in_ruleSimpleTypeRef6205 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTypeRef6222 = new BitSet(new long[]{0x0008000000010000L});
+        public static final BitSet FOLLOW_16_in_ruleSimpleTypeRef6240 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleTypeRef6257 = new BitSet(new long[]{0x0008000000010000L});
+        public static final BitSet FOLLOW_51_in_ruleSimpleTypeRef6276 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleClosureTypeRef_in_entryRuleClosureTypeRef6314 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleClosureTypeRef6324 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_35_in_ruleClosureTypeRef6361 = new BitSet(new long[]{0x0000003000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleClosureTypeRef6380 = new BitSet(new long[]{0x0000002000010000L});
+        public static final BitSet FOLLOW_16_in_ruleClosureTypeRef6398 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleClosureTypeRef6415 = new BitSet(new long[]{0x0000002000010000L});
+        public static final BitSet FOLLOW_16_in_ruleClosureTypeRef6435 = new BitSet(new long[]{0x0000001000000000L});
+        public static final BitSet FOLLOW_36_in_ruleClosureTypeRef6453 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleClosureTypeRef6483 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_36_in_ruleClosureTypeRef6516 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleClosureTypeRef6546 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_37_in_ruleClosureTypeRef6566 = new BitSet(new long[]{0x0080000000000000L});
+        public static final BitSet FOLLOW_55_in_ruleClosureTypeRef6578 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleClosureTypeRef6595 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCachedExpression_in_entryRuleCachedExpression6636 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCachedExpression6646 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_56_in_ruleCachedExpression6696 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleOrExpression_in_ruleCachedExpression6717 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOrExpression_in_ruleCachedExpression6749 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOrExpression_in_entryRuleOrExpression6784 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOrExpression6794 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAndExpression_in_ruleOrExpression6844 = new BitSet(new long[]{0x0200000000000002L});
+        public static final BitSet FOLLOW_57_in_ruleOrExpression6868 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleAndExpression_in_ruleOrExpression6889 = new BitSet(new long[]{0x0200000000000002L});
+        public static final BitSet FOLLOW_ruleAndExpression_in_entryRuleAndExpression6927 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAndExpression6937 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRelationalExpression_in_ruleAndExpression6987 = new BitSet(new long[]{0x0400000000000002L});
+        public static final BitSet FOLLOW_58_in_ruleAndExpression7011 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleRelationalExpression_in_ruleAndExpression7032 = new BitSet(new long[]{0x0400000000000002L});
+        public static final BitSet FOLLOW_ruleRelationalExpression_in_entryRuleRelationalExpression7070 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRelationalExpression7080 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression7130 = new BitSet(new long[]{0x001FF00000000002L});
+        public static final BitSet FOLLOW_ruleRelationalOperator_in_ruleRelationalExpression7163 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleAdditiveExpression_in_ruleRelationalExpression7184 = new BitSet(new long[]{0x001FF00000000002L});
+        public static final BitSet FOLLOW_ruleAdditiveExpression_in_entryRuleAdditiveExpression7222 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAdditiveExpression7232 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression7282 = new BitSet(new long[]{0x1800000000000002L});
+        public static final BitSet FOLLOW_59_in_ruleAdditiveExpression7314 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_60_in_ruleAdditiveExpression7343 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_ruleAdditiveExpression7380 = new BitSet(new long[]{0x1800000000000002L});
+        public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_entryRuleMultiplicativeExpression7418 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleMultiplicativeExpression7428 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSetExpression_in_ruleMultiplicativeExpression7478 = new BitSet(new long[]{0x6000000100000002L});
+        public static final BitSet FOLLOW_61_in_ruleMultiplicativeExpression7510 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_32_in_ruleMultiplicativeExpression7539 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_62_in_ruleMultiplicativeExpression7568 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleSetExpression_in_ruleMultiplicativeExpression7605 = new BitSet(new long[]{0x6000000100000002L});
+        public static final BitSet FOLLOW_ruleSetExpression_in_entryRuleSetExpression7643 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSetExpression7653 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnaryOrInfixExpression_in_ruleSetExpression7703 = new BitSet(new long[]{0x8000000000000002L});
+        public static final BitSet FOLLOW_63_in_ruleSetExpression7733 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleUnaryOrInfixExpression_in_ruleSetExpression7767 = new BitSet(new long[]{0x8000000000000002L});
+        public static final BitSet FOLLOW_ruleUnaryOrInfixExpression_in_entryRuleUnaryOrInfixExpression7805 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUnaryOrInfixExpression7815 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePostopExpression_in_ruleUnaryOrInfixExpression7865 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnaryExpression_in_ruleUnaryOrInfixExpression7895 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePreopExpression_in_ruleUnaryOrInfixExpression7925 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnaryExpression_in_entryRuleUnaryExpression7960 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUnaryExpression7970 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_64_in_ruleUnaryExpression8027 = new BitSet(new long[]{0x00000008002620A0L,0x0000000000001F40L});
+        public static final BitSet FOLLOW_60_in_ruleUnaryExpression8056 = new BitSet(new long[]{0x00000008002620A0L,0x0000000000001F40L});
+        public static final BitSet FOLLOW_ruleInfixExpression_in_ruleUnaryExpression8093 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePreopExpression_in_entryRulePreopExpression8129 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePreopExpression8139 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_65_in_rulePreopExpression8196 = new BitSet(new long[]{0x00000008002620A0L,0x0000000000001F40L});
+        public static final BitSet FOLLOW_66_in_rulePreopExpression8225 = new BitSet(new long[]{0x00000008002620A0L,0x0000000000001F40L});
+        public static final BitSet FOLLOW_ruleInfixExpression_in_rulePreopExpression8262 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePostopExpression_in_entryRulePostopExpression8298 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePostopExpression8308 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleInfixExpression_in_rulePostopExpression8358 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000006L});
+        public static final BitSet FOLLOW_66_in_rulePostopExpression8390 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_65_in_rulePostopExpression8419 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleInfixExpression_in_entryRuleInfixExpression8473 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleInfixExpression8483 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCallExpression_in_ruleInfixExpression8533 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000018L});
+        public static final BitSet FOLLOW_67_in_ruleInfixExpression8558 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleInfixExpression8575 = new BitSet(new long[]{0x0000000800000000L});
+        public static final BitSet FOLLOW_35_in_ruleInfixExpression8592 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
+        public static final BitSet FOLLOW_ruleParameterList_in_ruleInfixExpression8613 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_37_in_ruleInfixExpression8626 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000018L});
+        public static final BitSet FOLLOW_68_in_ruleInfixExpression8658 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleInfixExpression8679 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
+        public static final BitSet FOLLOW_69_in_ruleInfixExpression8691 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000018L});
+        public static final BitSet FOLLOW_67_in_ruleInfixExpression8723 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleInfixExpression8740 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000018L});
+        public static final BitSet FOLLOW_ruleCallExpression_in_entryRuleCallExpression8784 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCallExpression8794 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleCallExpression8844 = new BitSet(new long[]{0x0000000800000002L});
+        public static final BitSet FOLLOW_35_in_ruleCallExpression8868 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
+        public static final BitSet FOLLOW_ruleParameterList_in_ruleCallExpression8889 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_37_in_ruleCallExpression8902 = new BitSet(new long[]{0x0000000800000002L});
+        public static final BitSet FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression8940 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpression8950 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFeatureCall_in_rulePrimaryExpression9000 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleConstructorCallExpression_in_rulePrimaryExpression9030 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleValue_in_rulePrimaryExpression9060 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLiteral_in_rulePrimaryExpression9090 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKeywordVariables_in_rulePrimaryExpression9120 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParanthesizedExpression_in_rulePrimaryExpression9150 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBlockExpression_in_rulePrimaryExpression9180 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWithExpression_in_rulePrimaryExpression9210 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWithContextExpression_in_rulePrimaryExpression9240 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWithExpression_in_entryRuleWithExpression9275 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleWithExpression9285 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_70_in_ruleWithExpression9322 = new BitSet(new long[]{0x00000000000A0020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleWithExpression9340 = new BitSet(new long[]{0x00000000000B0000L});
+        public static final BitSet FOLLOW_16_in_ruleWithExpression9358 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleWithExpression9375 = new BitSet(new long[]{0x00000000000B0000L});
+        public static final BitSet FOLLOW_19_in_ruleWithExpression9398 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleWithExpression9419 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_ruleWithExpression9439 = new BitSet(new long[]{0x1160000A002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleBlockExpressionWithoutBrackets_in_ruleWithExpression9460 = new BitSet(new long[]{0x0000000002000000L});
+        public static final BitSet FOLLOW_25_in_ruleWithExpression9472 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWithContextExpression_in_entryRuleWithContextExpression9510 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleWithContextExpression9520 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_70_in_ruleWithContextExpression9557 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
+        public static final BitSet FOLLOW_71_in_ruleWithContextExpression9569 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleWithContextExpression9590 = new BitSet(new long[]{0x0000000010020000L});
+        public static final BitSet FOLLOW_28_in_ruleWithContextExpression9603 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleWithContextExpression9620 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_ruleBlockExpression_in_ruleWithContextExpression9648 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBlockExpression_in_entryRuleBlockExpression9684 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleBlockExpression9694 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_ruleBlockExpression9743 = new BitSet(new long[]{0x1160000A022620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleTopLevelExpression_in_ruleBlockExpression9765 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleBlockExpression9777 = new BitSet(new long[]{0x1160000A022620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_25_in_ruleBlockExpression9791 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleValue_in_entryRuleValue9827 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleValue9837 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleValue9891 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKeywordVariables_in_entryRuleKeywordVariables9932 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleKeywordVariables9942 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_72_in_ruleKeywordVariables9999 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_ruleKeywordVariables10028 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_ruleKeywordVariables10057 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_73_in_ruleKeywordVariables10086 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_74_in_ruleKeywordVariables10115 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleKeywordVariables10144 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_75_in_ruleKeywordVariables10173 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFeatureCall_in_entryRuleFeatureCall10225 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFeatureCall10235 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOperationCall_in_ruleFeatureCall10284 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOperationCall_in_entryRuleOperationCall10318 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOperationCall10328 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleOperationCall10382 = new BitSet(new long[]{0x0000000800000000L});
+        public static final BitSet FOLLOW_35_in_ruleOperationCall10399 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
+        public static final BitSet FOLLOW_ruleParameterList_in_ruleOperationCall10420 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_37_in_ruleOperationCall10433 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleConstructorCallExpression_in_entryRuleConstructorCallExpression10469 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleConstructorCallExpression10479 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_76_in_ruleConstructorCallExpression10528 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleConstructorCallExpression10545 = new BitSet(new long[]{0x0000000810020002L});
+        public static final BitSet FOLLOW_35_in_ruleConstructorCallExpression10563 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
+        public static final BitSet FOLLOW_ruleParameterList_in_ruleConstructorCallExpression10584 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_37_in_ruleConstructorCallExpression10597 = new BitSet(new long[]{0x0000000010020002L});
+        public static final BitSet FOLLOW_28_in_ruleConstructorCallExpression10612 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleConstructorCallExpression10629 = new BitSet(new long[]{0x0000000000020002L});
+        public static final BitSet FOLLOW_ruleInitializationBlockExpression_in_ruleConstructorCallExpression10657 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleInitializationBlockExpression_in_entryRuleInitializationBlockExpression10694 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleInitializationBlockExpression10704 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_ruleInitializationBlockExpression10753 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_ruleInitializationExpression_in_ruleInitializationBlockExpression10774 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleInitializationBlockExpression10786 = new BitSet(new long[]{0x0000000002000000L});
+        public static final BitSet FOLLOW_25_in_ruleInitializationBlockExpression10798 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleInitializationExpression_in_entryRuleInitializationExpression10834 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleInitializationExpression10844 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFeatureOfThis_in_ruleInitializationExpression10902 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_ruleInitializationExpression10920 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleInitializationExpression10954 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFeatureOfThis_in_entryRuleFeatureOfThis10990 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFeatureOfThis11000 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleFeatureOfThis11054 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral11095 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLiteral11105 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleValueLiteral_in_ruleLiteral11155 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLiteralFunction_in_ruleLiteral11185 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLiteralFunction_in_entryRuleLiteralFunction11220 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLiteralFunction11230 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_ruleLiteralFunction11267 = new BitSet(new long[]{0x0010001800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleClosureExpression_in_ruleLiteralFunction11292 = new BitSet(new long[]{0x0000000002000000L});
+        public static final BitSet FOLLOW_25_in_ruleLiteralFunction11303 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleClosureExpression_in_entryRuleClosureExpression11339 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleClosureExpression11349 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_52_in_ruleClosureExpression11399 = new BitSet(new long[]{0x0000000800000020L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_ruleClosureExpression11420 = new BitSet(new long[]{0x0008000000000000L});
+        public static final BitSet FOLLOW_51_in_ruleClosureExpression11432 = new BitSet(new long[]{0x0000001800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_77_in_ruleClosureExpression11449 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11473 = new BitSet(new long[]{0x0000000000010000L,0x0000000000002000L});
+        public static final BitSet FOLLOW_16_in_ruleClosureExpression11486 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11507 = new BitSet(new long[]{0x0000000000010000L,0x0000000000002000L});
+        public static final BitSet FOLLOW_16_in_ruleClosureExpression11522 = new BitSet(new long[]{0x0000001000000000L});
+        public static final BitSet FOLLOW_36_in_ruleClosureExpression11540 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11574 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
+        public static final BitSet FOLLOW_36_in_ruleClosureExpression11603 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_ruleClosureExpression11637 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
+        public static final BitSet FOLLOW_77_in_ruleClosureExpression11652 = new BitSet(new long[]{0x1160000A002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleOneOrManyExpressions_in_ruleClosureExpression11673 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOneOrManyExpressions_in_entryRuleOneOrManyExpressions11709 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOneOrManyExpressions11719 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBlockExpressionWithoutBrackets_in_ruleOneOrManyExpressions11769 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleOneOrManyExpressions11799 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBlockExpressionWithoutBrackets_in_entryRuleBlockExpressionWithoutBrackets11834 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleBlockExpressionWithoutBrackets11844 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTopLevelExpression_in_ruleBlockExpressionWithoutBrackets11903 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_ruleBlockExpressionWithoutBrackets11915 = new BitSet(new long[]{0x1160000A002620A2L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleValueLiteral_in_entryRuleValueLiteral11953 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleValueLiteral11963 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleValueLiteral12004 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParanthesizedExpression_in_entryRuleParanthesizedExpression12044 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleParanthesizedExpression12054 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_35_in_ruleParanthesizedExpression12091 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_ruleParanthesizedExpression12116 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_37_in_ruleParanthesizedExpression12127 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQID_in_entryRuleQID12170 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleQID12181 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleQID12225 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleQID12246 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
+        public static final BitSet FOLLOW_RULE_HEX_in_ruleQID12272 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleQID12298 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
+        public static final BitSet FOLLOW_67_in_ruleQID12319 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleQID12334 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleQID12355 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
+        public static final BitSet FOLLOW_RULE_HEX_in_ruleQID12381 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleQID12407 = new BitSet(new long[]{0x0000000000000162L,0x0000000000000008L});
         public static final BitSet FOLLOW_ruleUnit_in_synpred2_InternalBeeLangTestLanguage144 = new BitSet(new long[]{0x0000000000002012L});
-        public static final BitSet FOLLOW_18_in_synpred9_InternalBeeLangTestLanguage500 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred9_InternalBeeLangTestLanguage512 = new BitSet(new long[]{0x00000001000000A0L});
-        public static final BitSet FOLLOW_rulePath_in_synpred9_InternalBeeLangTestLanguage533 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred9_InternalBeeLangTestLanguage545 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_21_in_synpred10_InternalBeeLangTestLanguage609 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred10_InternalBeeLangTestLanguage621 = new BitSet(new long[]{0x00000001000000A0L});
-        public static final BitSet FOLLOW_rulePath_in_synpred10_InternalBeeLangTestLanguage642 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred10_InternalBeeLangTestLanguage654 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_22_in_synpred11_InternalBeeLangTestLanguage718 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred11_InternalBeeLangTestLanguage730 = new BitSet(new long[]{0x0000000000002020L});
-        public static final BitSet FOLLOW_ruleProvidedCapability_in_synpred11_InternalBeeLangTestLanguage751 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred11_InternalBeeLangTestLanguage763 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_22_in_synpred12_InternalBeeLangTestLanguage718 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred12_InternalBeeLangTestLanguage730 = new BitSet(new long[]{0x0000000000002020L});
-        public static final BitSet FOLLOW_ruleProvidedCapability_in_synpred12_InternalBeeLangTestLanguage751 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred12_InternalBeeLangTestLanguage763 = new BitSet(new long[]{0x0000000000400002L});
-        public static final BitSet FOLLOW_23_in_synpred13_InternalBeeLangTestLanguage828 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred13_InternalBeeLangTestLanguage840 = new BitSet(new long[]{0x0000000000002020L});
-        public static final BitSet FOLLOW_ruleAliasedRequiredCapability_in_synpred13_InternalBeeLangTestLanguage861 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred13_InternalBeeLangTestLanguage873 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_23_in_synpred14_InternalBeeLangTestLanguage828 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred14_InternalBeeLangTestLanguage840 = new BitSet(new long[]{0x0000000000002020L});
-        public static final BitSet FOLLOW_ruleAliasedRequiredCapability_in_synpred14_InternalBeeLangTestLanguage861 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred14_InternalBeeLangTestLanguage873 = new BitSet(new long[]{0x0000000000800002L});
-        public static final BitSet FOLLOW_23_in_synpred15_InternalBeeLangTestLanguage938 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_synpred15_InternalBeeLangTestLanguage950 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred15_InternalBeeLangTestLanguage962 = new BitSet(new long[]{0x0000000000002020L});
-        public static final BitSet FOLLOW_ruleRequiredCapability_in_synpred15_InternalBeeLangTestLanguage983 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred15_InternalBeeLangTestLanguage995 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_23_in_synpred16_InternalBeeLangTestLanguage938 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_synpred16_InternalBeeLangTestLanguage950 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred16_InternalBeeLangTestLanguage962 = new BitSet(new long[]{0x0000000000002020L});
-        public static final BitSet FOLLOW_ruleRequiredCapability_in_synpred16_InternalBeeLangTestLanguage983 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred16_InternalBeeLangTestLanguage995 = new BitSet(new long[]{0x0000000000800002L});
-        public static final BitSet FOLLOW_ruleFunction_in_synpred17_InternalBeeLangTestLanguage1068 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFunction_in_synpred18_InternalBeeLangTestLanguage1068 = new BitSet(new long[]{0x0000000600000032L});
-        public static final BitSet FOLLOW_26_in_synpred20_InternalBeeLangTestLanguage1327 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred20_InternalBeeLangTestLanguage1339 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_synpred20_InternalBeeLangTestLanguage1360 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred20_InternalBeeLangTestLanguage1372 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_27_in_synpred21_InternalBeeLangTestLanguage1436 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred21_InternalBeeLangTestLanguage1448 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_synpred21_InternalBeeLangTestLanguage1465 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred21_InternalBeeLangTestLanguage1482 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_synpred22_InternalBeeLangTestLanguage1546 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred22_InternalBeeLangTestLanguage1558 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_synpred22_InternalBeeLangTestLanguage1575 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred22_InternalBeeLangTestLanguage1592 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_synpred26_InternalBeeLangTestLanguage1906 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred26_InternalBeeLangTestLanguage1918 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_synpred26_InternalBeeLangTestLanguage1939 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred26_InternalBeeLangTestLanguage1951 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_29_in_synpred27_InternalBeeLangTestLanguage2021 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred27_InternalBeeLangTestLanguage2046 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_30_in_synpred28_InternalBeeLangTestLanguage2110 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred28_InternalBeeLangTestLanguage2122 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_synpred28_InternalBeeLangTestLanguage2139 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred28_InternalBeeLangTestLanguage2156 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_synpred29_InternalBeeLangTestLanguage2220 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred29_InternalBeeLangTestLanguage2232 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_synpred29_InternalBeeLangTestLanguage2249 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred29_InternalBeeLangTestLanguage2266 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_synpred30_InternalBeeLangTestLanguage2330 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred30_InternalBeeLangTestLanguage2342 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_synpred30_InternalBeeLangTestLanguage2359 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred30_InternalBeeLangTestLanguage2376 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_synpred32_InternalBeeLangTestLanguage2658 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred32_InternalBeeLangTestLanguage2670 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_synpred32_InternalBeeLangTestLanguage2691 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred32_InternalBeeLangTestLanguage2703 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_29_in_synpred33_InternalBeeLangTestLanguage2773 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred33_InternalBeeLangTestLanguage2798 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_30_in_synpred34_InternalBeeLangTestLanguage2862 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred34_InternalBeeLangTestLanguage2874 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_synpred34_InternalBeeLangTestLanguage2891 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred34_InternalBeeLangTestLanguage2908 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_synpred35_InternalBeeLangTestLanguage2972 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred35_InternalBeeLangTestLanguage2984 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_synpred35_InternalBeeLangTestLanguage3001 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred35_InternalBeeLangTestLanguage3018 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_synpred36_InternalBeeLangTestLanguage3082 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_synpred36_InternalBeeLangTestLanguage3094 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_synpred36_InternalBeeLangTestLanguage3111 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_synpred36_InternalBeeLangTestLanguage3128 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleClosureParameter_in_synpred42_InternalBeeLangTestLanguage3630 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVarDeclaration_in_synpred69_InternalBeeLangTestLanguage5155 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAssignmentOperator_in_synpred71_InternalBeeLangTestLanguage5436 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleAssignmentExpression_in_synpred71_InternalBeeLangTestLanguage5457 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_57_in_synpred85_InternalBeeLangTestLanguage6792 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleAndExpression_in_synpred85_InternalBeeLangTestLanguage6813 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_58_in_synpred86_InternalBeeLangTestLanguage6935 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleRelationalExpression_in_synpred86_InternalBeeLangTestLanguage6956 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleRelationalOperator_in_synpred87_InternalBeeLangTestLanguage7087 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleAdditiveExpression_in_synpred87_InternalBeeLangTestLanguage7108 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_59_in_synpred89_InternalBeeLangTestLanguage7238 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_60_in_synpred89_InternalBeeLangTestLanguage7267 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_synpred89_InternalBeeLangTestLanguage7304 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_61_in_synpred92_InternalBeeLangTestLanguage7434 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_32_in_synpred92_InternalBeeLangTestLanguage7463 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_62_in_synpred92_InternalBeeLangTestLanguage7492 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleSetExpression_in_synpred92_InternalBeeLangTestLanguage7529 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_63_in_synpred93_InternalBeeLangTestLanguage7657 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleUnaryOrInfixExpression_in_synpred93_InternalBeeLangTestLanguage7691 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_66_in_synpred99_InternalBeeLangTestLanguage8314 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_65_in_synpred99_InternalBeeLangTestLanguage8343 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_67_in_synpred101_InternalBeeLangTestLanguage8482 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_synpred101_InternalBeeLangTestLanguage8499 = new BitSet(new long[]{0x0000000800000000L});
-        public static final BitSet FOLLOW_35_in_synpred101_InternalBeeLangTestLanguage8516 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
-        public static final BitSet FOLLOW_ruleParameterList_in_synpred101_InternalBeeLangTestLanguage8537 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_37_in_synpred101_InternalBeeLangTestLanguage8550 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_68_in_synpred102_InternalBeeLangTestLanguage8582 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
-        public static final BitSet FOLLOW_ruleExpression_in_synpred102_InternalBeeLangTestLanguage8603 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
-        public static final BitSet FOLLOW_69_in_synpred102_InternalBeeLangTestLanguage8615 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_67_in_synpred103_InternalBeeLangTestLanguage8647 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_synpred103_InternalBeeLangTestLanguage8664 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_35_in_synpred105_InternalBeeLangTestLanguage8792 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
-        public static final BitSet FOLLOW_ruleParameterList_in_synpred105_InternalBeeLangTestLanguage8813 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_37_in_synpred105_InternalBeeLangTestLanguage8826 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFeatureCall_in_synpred106_InternalBeeLangTestLanguage8924 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleValue_in_synpred108_InternalBeeLangTestLanguage8984 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLiteral_in_synpred109_InternalBeeLangTestLanguage9014 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBlockExpression_in_synpred112_InternalBeeLangTestLanguage9104 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWithExpression_in_synpred113_InternalBeeLangTestLanguage9134 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_35_in_synpred127_InternalBeeLangTestLanguage10487 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
-        public static final BitSet FOLLOW_ruleParameterList_in_synpred127_InternalBeeLangTestLanguage10508 = new BitSet(new long[]{0x0000002000000000L});
-        public static final BitSet FOLLOW_37_in_synpred127_InternalBeeLangTestLanguage10521 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_28_in_synpred128_InternalBeeLangTestLanguage10536 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_synpred128_InternalBeeLangTestLanguage10553 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_77_in_synpred135_InternalBeeLangTestLanguage11373 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11397 = new BitSet(new long[]{0x0000000000010002L});
-        public static final BitSet FOLLOW_16_in_synpred135_InternalBeeLangTestLanguage11410 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11431 = new BitSet(new long[]{0x0000000000010002L});
-        public static final BitSet FOLLOW_16_in_synpred135_InternalBeeLangTestLanguage11446 = new BitSet(new long[]{0x0000001000000000L});
-        public static final BitSet FOLLOW_36_in_synpred135_InternalBeeLangTestLanguage11464 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11498 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleBlockExpressionWithoutBrackets_in_synpred137_InternalBeeLangTestLanguage11693 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_synpred9_InternalBeeLangTestLanguage503 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred9_InternalBeeLangTestLanguage515 = new BitSet(new long[]{0x00000001000000A0L});
+        public static final BitSet FOLLOW_rulePath_in_synpred9_InternalBeeLangTestLanguage536 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred9_InternalBeeLangTestLanguage548 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_synpred10_InternalBeeLangTestLanguage616 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred10_InternalBeeLangTestLanguage628 = new BitSet(new long[]{0x00000001000000A0L});
+        public static final BitSet FOLLOW_rulePath_in_synpred10_InternalBeeLangTestLanguage649 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred10_InternalBeeLangTestLanguage661 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_synpred11_InternalBeeLangTestLanguage729 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred11_InternalBeeLangTestLanguage741 = new BitSet(new long[]{0x0000000000002020L});
+        public static final BitSet FOLLOW_ruleProvidedCapability_in_synpred11_InternalBeeLangTestLanguage762 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred11_InternalBeeLangTestLanguage774 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_synpred12_InternalBeeLangTestLanguage729 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred12_InternalBeeLangTestLanguage741 = new BitSet(new long[]{0x0000000000002020L});
+        public static final BitSet FOLLOW_ruleProvidedCapability_in_synpred12_InternalBeeLangTestLanguage762 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred12_InternalBeeLangTestLanguage774 = new BitSet(new long[]{0x0000000000400002L});
+        public static final BitSet FOLLOW_23_in_synpred13_InternalBeeLangTestLanguage843 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred13_InternalBeeLangTestLanguage855 = new BitSet(new long[]{0x0000000000002020L});
+        public static final BitSet FOLLOW_ruleAliasedRequiredCapability_in_synpred13_InternalBeeLangTestLanguage876 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred13_InternalBeeLangTestLanguage888 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_synpred14_InternalBeeLangTestLanguage843 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred14_InternalBeeLangTestLanguage855 = new BitSet(new long[]{0x0000000000002020L});
+        public static final BitSet FOLLOW_ruleAliasedRequiredCapability_in_synpred14_InternalBeeLangTestLanguage876 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred14_InternalBeeLangTestLanguage888 = new BitSet(new long[]{0x0000000000800002L});
+        public static final BitSet FOLLOW_23_in_synpred15_InternalBeeLangTestLanguage957 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_24_in_synpred15_InternalBeeLangTestLanguage969 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred15_InternalBeeLangTestLanguage981 = new BitSet(new long[]{0x0000000000002020L});
+        public static final BitSet FOLLOW_ruleRequiredCapability_in_synpred15_InternalBeeLangTestLanguage1002 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred15_InternalBeeLangTestLanguage1014 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_synpred16_InternalBeeLangTestLanguage957 = new BitSet(new long[]{0x0000000001000000L});
+        public static final BitSet FOLLOW_24_in_synpred16_InternalBeeLangTestLanguage969 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred16_InternalBeeLangTestLanguage981 = new BitSet(new long[]{0x0000000000002020L});
+        public static final BitSet FOLLOW_ruleRequiredCapability_in_synpred16_InternalBeeLangTestLanguage1002 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred16_InternalBeeLangTestLanguage1014 = new BitSet(new long[]{0x0000000000800002L});
+        public static final BitSet FOLLOW_ruleFunction_in_synpred17_InternalBeeLangTestLanguage1091 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFunction_in_synpred18_InternalBeeLangTestLanguage1091 = new BitSet(new long[]{0x0000000600000032L});
+        public static final BitSet FOLLOW_26_in_synpred20_InternalBeeLangTestLanguage1354 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred20_InternalBeeLangTestLanguage1366 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_synpred20_InternalBeeLangTestLanguage1387 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred20_InternalBeeLangTestLanguage1399 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_27_in_synpred21_InternalBeeLangTestLanguage1467 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred21_InternalBeeLangTestLanguage1479 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_synpred21_InternalBeeLangTestLanguage1496 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred21_InternalBeeLangTestLanguage1513 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_synpred22_InternalBeeLangTestLanguage1581 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred22_InternalBeeLangTestLanguage1593 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_synpred22_InternalBeeLangTestLanguage1610 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred22_InternalBeeLangTestLanguage1627 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_synpred26_InternalBeeLangTestLanguage1945 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred26_InternalBeeLangTestLanguage1957 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_synpred26_InternalBeeLangTestLanguage1978 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred26_InternalBeeLangTestLanguage1990 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_29_in_synpred27_InternalBeeLangTestLanguage2064 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred27_InternalBeeLangTestLanguage2089 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_synpred28_InternalBeeLangTestLanguage2157 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred28_InternalBeeLangTestLanguage2169 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_INT_in_synpred28_InternalBeeLangTestLanguage2186 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred28_InternalBeeLangTestLanguage2203 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_synpred29_InternalBeeLangTestLanguage2271 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred29_InternalBeeLangTestLanguage2283 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_INT_in_synpred29_InternalBeeLangTestLanguage2300 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred29_InternalBeeLangTestLanguage2317 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_synpred30_InternalBeeLangTestLanguage2385 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred30_InternalBeeLangTestLanguage2397 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_synpred30_InternalBeeLangTestLanguage2414 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred30_InternalBeeLangTestLanguage2431 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_synpred32_InternalBeeLangTestLanguage2717 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred32_InternalBeeLangTestLanguage2729 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_synpred32_InternalBeeLangTestLanguage2750 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred32_InternalBeeLangTestLanguage2762 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_29_in_synpred33_InternalBeeLangTestLanguage2836 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred33_InternalBeeLangTestLanguage2861 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_synpred34_InternalBeeLangTestLanguage2929 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred34_InternalBeeLangTestLanguage2941 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_INT_in_synpred34_InternalBeeLangTestLanguage2958 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred34_InternalBeeLangTestLanguage2975 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_synpred35_InternalBeeLangTestLanguage3043 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred35_InternalBeeLangTestLanguage3055 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_INT_in_synpred35_InternalBeeLangTestLanguage3072 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred35_InternalBeeLangTestLanguage3089 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_synpred36_InternalBeeLangTestLanguage3157 = new BitSet(new long[]{0x0000000000080000L});
+        public static final BitSet FOLLOW_19_in_synpred36_InternalBeeLangTestLanguage3169 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_synpred36_InternalBeeLangTestLanguage3186 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_20_in_synpred36_InternalBeeLangTestLanguage3203 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleClosureParameter_in_synpred42_InternalBeeLangTestLanguage3706 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVarDeclaration_in_synpred69_InternalBeeLangTestLanguage5231 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignmentOperator_in_synpred71_InternalBeeLangTestLanguage5512 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleAssignmentExpression_in_synpred71_InternalBeeLangTestLanguage5533 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_57_in_synpred85_InternalBeeLangTestLanguage6868 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleAndExpression_in_synpred85_InternalBeeLangTestLanguage6889 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_58_in_synpred86_InternalBeeLangTestLanguage7011 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleRelationalExpression_in_synpred86_InternalBeeLangTestLanguage7032 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRelationalOperator_in_synpred87_InternalBeeLangTestLanguage7163 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleAdditiveExpression_in_synpred87_InternalBeeLangTestLanguage7184 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_59_in_synpred89_InternalBeeLangTestLanguage7314 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_60_in_synpred89_InternalBeeLangTestLanguage7343 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleMultiplicativeExpression_in_synpred89_InternalBeeLangTestLanguage7380 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_61_in_synpred92_InternalBeeLangTestLanguage7510 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_32_in_synpred92_InternalBeeLangTestLanguage7539 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_62_in_synpred92_InternalBeeLangTestLanguage7568 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleSetExpression_in_synpred92_InternalBeeLangTestLanguage7605 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_63_in_synpred93_InternalBeeLangTestLanguage7733 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleUnaryOrInfixExpression_in_synpred93_InternalBeeLangTestLanguage7767 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_66_in_synpred99_InternalBeeLangTestLanguage8390 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_65_in_synpred99_InternalBeeLangTestLanguage8419 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_67_in_synpred101_InternalBeeLangTestLanguage8558 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_synpred101_InternalBeeLangTestLanguage8575 = new BitSet(new long[]{0x0000000800000000L});
+        public static final BitSet FOLLOW_35_in_synpred101_InternalBeeLangTestLanguage8592 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
+        public static final BitSet FOLLOW_ruleParameterList_in_synpred101_InternalBeeLangTestLanguage8613 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_37_in_synpred101_InternalBeeLangTestLanguage8626 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_68_in_synpred102_InternalBeeLangTestLanguage8658 = new BitSet(new long[]{0x11000008002620A0L,0x0000000000001F47L});
+        public static final BitSet FOLLOW_ruleExpression_in_synpred102_InternalBeeLangTestLanguage8679 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000020L});
+        public static final BitSet FOLLOW_69_in_synpred102_InternalBeeLangTestLanguage8691 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_67_in_synpred103_InternalBeeLangTestLanguage8723 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_synpred103_InternalBeeLangTestLanguage8740 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_35_in_synpred105_InternalBeeLangTestLanguage8868 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
+        public static final BitSet FOLLOW_ruleParameterList_in_synpred105_InternalBeeLangTestLanguage8889 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_37_in_synpred105_InternalBeeLangTestLanguage8902 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFeatureCall_in_synpred106_InternalBeeLangTestLanguage9000 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleValue_in_synpred108_InternalBeeLangTestLanguage9060 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLiteral_in_synpred109_InternalBeeLangTestLanguage9090 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBlockExpression_in_synpred112_InternalBeeLangTestLanguage9180 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWithExpression_in_synpred113_InternalBeeLangTestLanguage9210 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_35_in_synpred127_InternalBeeLangTestLanguage10563 = new BitSet(new long[]{0x11100038002620A0L,0x0000000000003F47L});
+        public static final BitSet FOLLOW_ruleParameterList_in_synpred127_InternalBeeLangTestLanguage10584 = new BitSet(new long[]{0x0000002000000000L});
+        public static final BitSet FOLLOW_37_in_synpred127_InternalBeeLangTestLanguage10597 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_28_in_synpred128_InternalBeeLangTestLanguage10612 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_synpred128_InternalBeeLangTestLanguage10629 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_77_in_synpred135_InternalBeeLangTestLanguage11449 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11473 = new BitSet(new long[]{0x0000000000010002L});
+        public static final BitSet FOLLOW_16_in_synpred135_InternalBeeLangTestLanguage11486 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11507 = new BitSet(new long[]{0x0000000000010002L});
+        public static final BitSet FOLLOW_16_in_synpred135_InternalBeeLangTestLanguage11522 = new BitSet(new long[]{0x0000001000000000L});
+        public static final BitSet FOLLOW_36_in_synpred135_InternalBeeLangTestLanguage11540 = new BitSet(new long[]{0x0000000800000020L,0x0000000000002000L});
+        public static final BitSet FOLLOW_ruleParameterDeclaration_in_synpred135_InternalBeeLangTestLanguage11574 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleBlockExpressionWithoutBrackets_in_synpred137_InternalBeeLangTestLanguage11769 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

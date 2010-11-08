@@ -342,7 +342,7 @@ ruleUnit returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 0);
 	 				}
-					(	otherlv_12='source' 
+					({true}?=>(	otherlv_12='source' 
     {
     	createLeafNode(otherlv_12, grammarAccess.getUnitAccess().getSourceKeyword_7_0_0(), null);
     }
@@ -378,7 +378,7 @@ ruleUnit returns [EObject current=null]
     {
     	createLeafNode(otherlv_15, grammarAccess.getUnitAccess().getSemicolonKeyword_7_0_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
 	 				}
@@ -390,7 +390,7 @@ ruleUnit returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 1);
 	 				}
-					(	otherlv_16='output' 
+					({true}?=>(	otherlv_16='output' 
     {
     	createLeafNode(otherlv_16, grammarAccess.getUnitAccess().getOutputKeyword_7_1_0(), null);
     }
@@ -426,7 +426,7 @@ ruleUnit returns [EObject current=null]
     {
     	createLeafNode(otherlv_19, grammarAccess.getUnitAccess().getSemicolonKeyword_7_1_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
 	 				}
@@ -438,7 +438,7 @@ ruleUnit returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 2);
 	 				}
-					(	otherlv_20='provides' 
+					({true}?=>(	otherlv_20='provides' 
     {
     	createLeafNode(otherlv_20, grammarAccess.getUnitAccess().getProvidesKeyword_7_2_0(), null);
     }
@@ -474,7 +474,7 @@ ruleUnit returns [EObject current=null]
     {
     	createLeafNode(otherlv_23, grammarAccess.getUnitAccess().getSemicolonKeyword_7_2_3(), null);
     }
-)+
+))+
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
 	 				}
@@ -486,7 +486,7 @@ ruleUnit returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 3);
 	 				}
-					(	otherlv_24='requires' 
+					({true}?=>(	otherlv_24='requires' 
     {
     	createLeafNode(otherlv_24, grammarAccess.getUnitAccess().getRequiresKeyword_7_3_0(), null);
     }
@@ -522,7 +522,7 @@ ruleUnit returns [EObject current=null]
     {
     	createLeafNode(otherlv_27, grammarAccess.getUnitAccess().getSemicolonKeyword_7_3_3(), null);
     }
-)+
+))+
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
 	 				}
@@ -534,7 +534,7 @@ ruleUnit returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 4);
 	 				}
-					(	otherlv_28='requires' 
+					({true}?=>(	otherlv_28='requires' 
     {
     	createLeafNode(otherlv_28, grammarAccess.getUnitAccess().getRequiresKeyword_7_4_0(), null);
     }
@@ -574,7 +574,7 @@ ruleUnit returns [EObject current=null]
     {
     	createLeafNode(otherlv_32, grammarAccess.getUnitAccess().getSemicolonKeyword_7_4_4(), null);
     }
-)+
+))+
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
 	 				}
@@ -586,7 +586,7 @@ ruleUnit returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getUnitAccess().getUnorderedGroup_7(), 5);
 	 				}
-					(
+					({true}?=>(
 (
 		{ 
 	        currentNode=createCompositeNode(grammarAccess.getUnitAccess().getFunctionsFunctionParserRuleCall_7_5_0(), currentNode); 
@@ -610,7 +610,7 @@ ruleUnit returns [EObject current=null]
 	    }
 
 )
-)+
+))+
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getUnitAccess().getUnorderedGroup_7());
 	 				}
@@ -726,7 +726,7 @@ ruleProvidedCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 0);
 	 				}
-					(	otherlv_5='when' 
+					({true}?=>(	otherlv_5='when' 
     {
     	createLeafNode(otherlv_5, grammarAccess.getProvidedCapabilityAccess().getWhenKeyword_2_1_0_0(), null);
     }
@@ -762,7 +762,7 @@ ruleProvidedCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_8, grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_0_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1());
 	 				}
@@ -774,7 +774,7 @@ ruleProvidedCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 1);
 	 				}
-					(	otherlv_9='name' 
+					({true}?=>(	otherlv_9='name' 
     {
     	createLeafNode(otherlv_9, grammarAccess.getProvidedCapabilityAccess().getNameKeyword_2_1_1_0(), null);
     }
@@ -810,7 +810,7 @@ ruleProvidedCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_12, grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_1_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1());
 	 				}
@@ -822,7 +822,7 @@ ruleProvidedCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1(), 2);
 	 				}
-					(	otherlv_13='version' 
+					({true}?=>(	otherlv_13='version' 
     {
     	createLeafNode(otherlv_13, grammarAccess.getProvidedCapabilityAccess().getVersionKeyword_2_1_2_0(), null);
     }
@@ -858,7 +858,7 @@ ruleProvidedCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_16, grammarAccess.getProvidedCapabilityAccess().getSemicolonKeyword_2_1_2_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getProvidedCapabilityAccess().getUnorderedGroup_2_1());
 	 				}
@@ -1013,7 +1013,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0);
 	 				}
-					(	otherlv_7='when' 
+					({true}?=>(	otherlv_7='when' 
     {
     	createLeafNode(otherlv_7, grammarAccess.getAliasedRequiredCapabilityAccess().getWhenKeyword_3_1_0_0(), null);
     }
@@ -1049,7 +1049,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_10, grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_0_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1());
 	 				}
@@ -1061,7 +1061,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1);
 	 				}
-					((
+					({true}?=>((
 (
 		lv_greedy_11_0=	'greedy' 
     {
@@ -1086,7 +1086,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_12, grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_1_1(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1());
 	 				}
@@ -1098,7 +1098,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2);
 	 				}
-					(	otherlv_13='requires-min' 
+					({true}?=>(	otherlv_13='requires-min' 
     {
     	createLeafNode(otherlv_13, grammarAccess.getAliasedRequiredCapabilityAccess().getRequiresMinKeyword_3_1_2_0(), null);
     }
@@ -1134,7 +1134,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_16, grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_2_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1());
 	 				}
@@ -1146,7 +1146,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3);
 	 				}
-					(	otherlv_17='requires-max' 
+					({true}?=>(	otherlv_17='requires-max' 
     {
     	createLeafNode(otherlv_17, grammarAccess.getAliasedRequiredCapabilityAccess().getRequiresMaxKeyword_3_1_3_0(), null);
     }
@@ -1182,7 +1182,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_20, grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_3_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1());
 	 				}
@@ -1194,7 +1194,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4);
 	 				}
-					(	otherlv_21='version' 
+					({true}?=>(	otherlv_21='version' 
     {
     	createLeafNode(otherlv_21, grammarAccess.getAliasedRequiredCapabilityAccess().getVersionKeyword_3_1_4_0(), null);
     }
@@ -1230,7 +1230,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_24, grammarAccess.getAliasedRequiredCapabilityAccess().getSemicolonKeyword_3_1_4_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getAliasedRequiredCapabilityAccess().getUnorderedGroup_3_1());
 	 				}
@@ -1370,7 +1370,7 @@ ruleRequiredCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 0);
 	 				}
-					(	otherlv_6='when' 
+					({true}?=>(	otherlv_6='when' 
     {
     	createLeafNode(otherlv_6, grammarAccess.getRequiredCapabilityAccess().getWhenKeyword_3_1_0_0(), null);
     }
@@ -1406,7 +1406,7 @@ ruleRequiredCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_9, grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_0_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1());
 	 				}
@@ -1418,7 +1418,7 @@ ruleRequiredCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 1);
 	 				}
-					((
+					({true}?=>((
 (
 		lv_greedy_10_0=	'greedy' 
     {
@@ -1443,7 +1443,7 @@ ruleRequiredCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_11, grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_1_1(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1());
 	 				}
@@ -1455,7 +1455,7 @@ ruleRequiredCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 2);
 	 				}
-					(	otherlv_12='requires-min' 
+					({true}?=>(	otherlv_12='requires-min' 
     {
     	createLeafNode(otherlv_12, grammarAccess.getRequiredCapabilityAccess().getRequiresMinKeyword_3_1_2_0(), null);
     }
@@ -1491,7 +1491,7 @@ ruleRequiredCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_15, grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_2_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1());
 	 				}
@@ -1503,7 +1503,7 @@ ruleRequiredCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 3);
 	 				}
-					(	otherlv_16='requires-max' 
+					({true}?=>(	otherlv_16='requires-max' 
     {
     	createLeafNode(otherlv_16, grammarAccess.getRequiredCapabilityAccess().getRequiresMaxKeyword_3_1_3_0(), null);
     }
@@ -1539,7 +1539,7 @@ ruleRequiredCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_19, grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_3_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1());
 	 				}
@@ -1551,7 +1551,7 @@ ruleRequiredCapability returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1(), 4);
 	 				}
-					(	otherlv_20='version' 
+					({true}?=>(	otherlv_20='version' 
     {
     	createLeafNode(otherlv_20, grammarAccess.getRequiredCapabilityAccess().getVersionKeyword_3_1_4_0(), null);
     }
@@ -1587,7 +1587,7 @@ ruleRequiredCapability returns [EObject current=null]
     {
     	createLeafNode(otherlv_23, grammarAccess.getRequiredCapabilityAccess().getSemicolonKeyword_3_1_4_3(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getRequiredCapabilityAccess().getUnorderedGroup_3_1());
 	 				}

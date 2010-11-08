@@ -290,7 +290,8 @@ finally {
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor()», «it.counter0»);
 	 				}
-					(«EXPAND dataTypeEbnf2(grammar) FOR element»)«IF element.isMultipleCardinality()»+«ENDIF»
+«REM»Predicate {true}=> helps to workaround an issue in the Antlr grammar processing«ENDREM»«IF true»«ENDIF-»
+					({true}?=>(«EXPAND dataTypeEbnf2(grammar) FOR element»))«IF element.isMultipleCardinality()»+«ENDIF»
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor()»);
 	 				}
@@ -357,7 +358,8 @@ finally {
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor()», «it.counter0»);
 	 				}
-					(«EXPAND ebnf2(grammar, options) FOR element»)«IF element.isMultipleCardinality()»+«ENDIF»
+«REM»Predicate {true}=> helps to workaround an issue in the Antlr grammar processing«ENDREM»«IF true»«ENDIF-»
+					({true}?=>(«EXPAND ebnf2(grammar, options) FOR element»))«IF element.isMultipleCardinality()»+«ENDIF»
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor()»);
 	 				}

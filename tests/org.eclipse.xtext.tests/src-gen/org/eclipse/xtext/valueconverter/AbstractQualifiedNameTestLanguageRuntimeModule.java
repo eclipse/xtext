@@ -12,21 +12,21 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * Manual modifications go to {org.eclipse.xtext.valueconverter.QualifiedNameTestlanguageRuntimeModule}
+ * Manual modifications go to {org.eclipse.xtext.valueconverter.QualifiedNameTestLanguageRuntimeModule}
  */
  @SuppressWarnings("all")
-public abstract class AbstractQualifiedNameTestlanguageRuntimeModule extends DefaultRuntimeModule {
+public abstract class AbstractQualifiedNameTestLanguageRuntimeModule extends DefaultRuntimeModule {
 
 	protected Properties properties = null;
 
 	@Override
 	public void configure(Binder binder) {
-		properties = tryBindProperties(binder, "org/eclipse/xtext/valueconverter/QualifiedNameTestlanguage.properties");
+		properties = tryBindProperties(binder, "org/eclipse/xtext/valueconverter/QualifiedNameTestLanguage.properties");
 		super.configure(binder);
 	}
 	
 	public void configureLanguageName(Binder binder) {
-		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.valueconverter.QualifiedNameTestlanguage");
+		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.xtext.valueconverter.QualifiedNameTestLanguage");
 	}
 	
 	public void configureFileExtensions(Binder binder) {
@@ -36,7 +36,7 @@ public abstract class AbstractQualifiedNameTestlanguageRuntimeModule extends Def
 	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
-		return org.eclipse.xtext.valueconverter.parser.antlr.QualifiedNameTestlanguageParser.class;
+		return org.eclipse.xtext.valueconverter.parser.antlr.QualifiedNameTestLanguageParser.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
@@ -46,22 +46,22 @@ public abstract class AbstractQualifiedNameTestlanguageRuntimeModule extends Def
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.valueconverter.parser.antlr.QualifiedNameTestlanguageAntlrTokenFileProvider.class;
+		return org.eclipse.xtext.valueconverter.parser.antlr.QualifiedNameTestLanguageAntlrTokenFileProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestlanguageLexer.class;
+		return org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestLanguageLexer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestlanguageLexer> provideInternalQualifiedNameTestlanguageLexer() {
-		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestlanguageLexer.class);
+	public com.google.inject.Provider<org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestLanguageLexer> provideInternalQualifiedNameTestLanguageLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestLanguageLexer.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public void configureRuntimeLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestlanguageLexer.class);
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalQualifiedNameTestLanguageLexer.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
@@ -71,12 +71,12 @@ public abstract class AbstractQualifiedNameTestlanguageRuntimeModule extends Def
 
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.valueconverter.services.QualifiedNameTestlanguageGrammarAccess.class;
+		return org.eclipse.xtext.valueconverter.services.QualifiedNameTestLanguageGrammarAccess.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.valueconverter.parseTreeConstruction.QualifiedNameTestlanguageParsetreeConstructor.class;
+		return org.eclipse.xtext.valueconverter.parseTreeConstruction.QualifiedNameTestLanguageParsetreeConstructor.class;
 	}
 
 }

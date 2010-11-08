@@ -397,12 +397,12 @@ ruleExpression returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0);
 	 				}
-					(
+					({true}?=>(
 	otherlv_2=KEYWORD_4 
     {
     	createLeafNode(otherlv_2, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_1_0(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getExpressionAccess().getUnorderedGroup_1());
 	 				}
@@ -414,7 +414,7 @@ ruleExpression returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1);
 	 				}
-					(
+					({true}?=>(
 (
 		lv_prefix_3_0=RULE_STRING
 		{
@@ -438,7 +438,7 @@ ruleExpression returns [EObject current=null]
 	    }
 
 )
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getExpressionAccess().getUnorderedGroup_1());
 	 				}
@@ -500,12 +500,12 @@ ruleExpression returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0);
 	 				}
-					(
+					({true}?=>(
 	otherlv_8=KEYWORD_5 
     {
     	createLeafNode(otherlv_8, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_3_0(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getExpressionAccess().getUnorderedGroup_3());
 	 				}
@@ -517,7 +517,7 @@ ruleExpression returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1);
 	 				}
-					(
+					({true}?=>(
 (
 		lv_postfix_9_0=RULE_STRING
 		{
@@ -541,7 +541,7 @@ ruleExpression returns [EObject current=null]
 	    }
 
 )
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getExpressionAccess().getUnorderedGroup_3());
 	 				}

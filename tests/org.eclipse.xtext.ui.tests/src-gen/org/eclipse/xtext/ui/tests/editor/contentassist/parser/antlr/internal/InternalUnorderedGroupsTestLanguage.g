@@ -311,7 +311,7 @@ ruleSimpleModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0);
 	 				}
-					(
+					({true}?=>(
 (
 (
 		lv_visibility_1_1=	'public' 
@@ -371,7 +371,7 @@ ruleSimpleModel returns [EObject current=null]
 )
 
 )
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
 	 				}
@@ -383,7 +383,7 @@ ruleSimpleModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1);
 	 				}
-					(
+					({true}?=>(
 (
 		lv_static_2_0=	'static' 
     {
@@ -404,7 +404,7 @@ ruleSimpleModel returns [EObject current=null]
 	    }
 
 )
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
 	 				}
@@ -416,7 +416,7 @@ ruleSimpleModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2);
 	 				}
-					(
+					({true}?=>(
 (
 		lv_synchronized_3_0=	'synchronized' 
     {
@@ -437,7 +437,7 @@ ruleSimpleModel returns [EObject current=null]
 	    }
 
 )
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
 	 				}
@@ -449,7 +449,7 @@ ruleSimpleModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3);
 	 				}
-					((
+					({true}?=>((
 (
 		lv_abstract_4_0=	'abstract' 
     {
@@ -492,7 +492,7 @@ ruleSimpleModel returns [EObject current=null]
 	    }
 
 )
-))
+)))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
 	 				}
@@ -593,7 +593,7 @@ ruleMandatoryModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0);
 	 				}
-					(
+					({true}?=>(
 (
 (
 		lv_visibility_1_1=	'public' 
@@ -653,7 +653,7 @@ ruleMandatoryModel returns [EObject current=null]
 )
 
 )
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
 	 				}
@@ -665,7 +665,7 @@ ruleMandatoryModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1);
 	 				}
-					(
+					({true}?=>(
 (
 		lv_static_2_0=	'static' 
     {
@@ -686,7 +686,7 @@ ruleMandatoryModel returns [EObject current=null]
 	    }
 
 )
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
 	 				}
@@ -698,7 +698,7 @@ ruleMandatoryModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2);
 	 				}
-					(
+					({true}?=>(
 (
 		lv_synchronized_3_0=	'synchronized' 
     {
@@ -719,7 +719,7 @@ ruleMandatoryModel returns [EObject current=null]
 	    }
 
 )
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
 	 				}
@@ -731,7 +731,7 @@ ruleMandatoryModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3);
 	 				}
-					((
+					({true}?=>((
 (
 		lv_abstract_4_0=	'abstract' 
     {
@@ -774,7 +774,7 @@ ruleMandatoryModel returns [EObject current=null]
 	    }
 
 )
-))
+)))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
 	 				}
@@ -876,7 +876,7 @@ ruleLoopedModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0);
 	 				}
-					(
+					({true}?=>(
 (
 (
 		lv_visibility_1_1=	'public' 
@@ -936,7 +936,7 @@ ruleLoopedModel returns [EObject current=null]
 )
 
 )
-)+
+))+
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
 	 				}
@@ -948,7 +948,7 @@ ruleLoopedModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1);
 	 				}
-					(
+					({true}?=>(
 (
 		lv_static_2_0=	'static' 
     {
@@ -969,7 +969,7 @@ ruleLoopedModel returns [EObject current=null]
 	    }
 
 )
-)+
+))+
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
 	 				}
@@ -981,7 +981,7 @@ ruleLoopedModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2);
 	 				}
-					(
+					({true}?=>(
 (
 		lv_synchronized_3_0=	'synchronized' 
     {
@@ -1002,7 +1002,7 @@ ruleLoopedModel returns [EObject current=null]
 	    }
 
 )
-)+
+))+
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
 	 				}
@@ -1014,7 +1014,7 @@ ruleLoopedModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3);
 	 				}
-					((
+					({true}?=>((
 (
 		lv_abstract_4_0=	'abstract' 
     {
@@ -1057,7 +1057,7 @@ ruleLoopedModel returns [EObject current=null]
 	    }
 
 )
-))+
+)))+
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
 	 				}
@@ -1158,7 +1158,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 0);
 	 				}
-					(
+					({true}?=>(
 (
 (
 		lv_visibility_1_1=	'public' 
@@ -1218,7 +1218,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 )
 
 )
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
 	 				}
@@ -1230,7 +1230,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 1);
 	 				}
-					(
+					({true}?=>(
 (
 		lv_static_2_0=	'static' 
     {
@@ -1251,7 +1251,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 	    }
 
 )
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
 	 				}
@@ -1263,7 +1263,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 2);
 	 				}
-					(
+					({true}?=>(
 (
 		lv_synchronized_3_0=	'synchronized' 
     {
@@ -1284,7 +1284,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 	    }
 
 )
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
 	 				}
@@ -1296,7 +1296,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 3);
 	 				}
-					((
+					({true}?=>((
 (
 		lv_abstract_4_0=	'abstract' 
     {
@@ -1339,7 +1339,7 @@ ruleGroupLoopedModel returns [EObject current=null]
 	    }
 
 )
-))
+)))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
 	 				}
@@ -1675,7 +1675,7 @@ ruleBug304681Model returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0);
 	 				}
-					(	otherlv_3='short' 
+					({true}?=>(	otherlv_3='short' 
     {
     	createLeafNode(otherlv_3, grammarAccess.getBug304681ModelAccess().getShortKeyword_2_0_0(), null);
     }
@@ -1707,7 +1707,7 @@ ruleBug304681Model returns [EObject current=null]
     {
     	createLeafNode(otherlv_5, grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_0_2(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	 				}
@@ -1719,7 +1719,7 @@ ruleBug304681Model returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1);
 	 				}
-					(	otherlv_6='long' 
+					({true}?=>(	otherlv_6='long' 
     {
     	createLeafNode(otherlv_6, grammarAccess.getBug304681ModelAccess().getLongKeyword_2_1_0(), null);
     }
@@ -1751,7 +1751,7 @@ ruleBug304681Model returns [EObject current=null]
     {
     	createLeafNode(otherlv_8, grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_1_2(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	 				}
@@ -1763,7 +1763,7 @@ ruleBug304681Model returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2);
 	 				}
-					(	otherlv_9='uid' 
+					({true}?=>(	otherlv_9='uid' 
     {
     	createLeafNode(otherlv_9, grammarAccess.getBug304681ModelAccess().getUidKeyword_2_2_0(), null);
     }
@@ -1795,7 +1795,7 @@ ruleBug304681Model returns [EObject current=null]
     {
     	createLeafNode(otherlv_11, grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_2_2(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	 				}
@@ -1807,7 +1807,7 @@ ruleBug304681Model returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3);
 	 				}
-					((
+					({true}?=>((
 (
 		lv_flag_12_0=	'flag' 
     {
@@ -1832,7 +1832,7 @@ ruleBug304681Model returns [EObject current=null]
     {
     	createLeafNode(otherlv_13, grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_2_3_1(), null);
     }
-)
+))
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	 				}
@@ -1844,7 +1844,7 @@ ruleBug304681Model returns [EObject current=null]
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4);
 	 				}
-					(
+					({true}?=>(
 (
 		{ 
 	        currentNode=createCompositeNode(grammarAccess.getBug304681ModelAccess().getFeaturesBug304681FeatureParserRuleCall_2_4_0(), currentNode); 
@@ -1868,7 +1868,7 @@ ruleBug304681Model returns [EObject current=null]
 	    }
 
 )
-)+
+))+
 					{ 
 	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2());
 	 				}

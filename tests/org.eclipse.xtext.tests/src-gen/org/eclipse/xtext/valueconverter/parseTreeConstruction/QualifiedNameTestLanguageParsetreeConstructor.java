@@ -8,15 +8,15 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
-import org.eclipse.xtext.valueconverter.services.QualifiedNameTestlanguageGrammarAccess;
+import org.eclipse.xtext.valueconverter.services.QualifiedNameTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class QualifiedNameTestlanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class QualifiedNameTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
-	private QualifiedNameTestlanguageGrammarAccess grammarAccess;
+	private QualifiedNameTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
 	protected AbstractToken getRootToken(IEObjectConsumer inst) {

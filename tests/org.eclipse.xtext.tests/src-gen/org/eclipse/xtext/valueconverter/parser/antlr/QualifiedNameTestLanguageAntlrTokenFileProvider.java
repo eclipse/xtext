@@ -6,10 +6,10 @@ package org.eclipse.xtext.valueconverter.parser.antlr;
 import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
-public class QualifiedNameTestlanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
+public class QualifiedNameTestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 	
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalQualifiedNameTestlanguage.tokens");
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/valueconverter/parser/antlr/internal/InternalQualifiedNameTestLanguage.tokens");
 	}
 }
