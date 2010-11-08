@@ -22,7 +22,7 @@ public class QualifiedNameValueConverterTest extends AbstractXtextTests {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(QualifiedNameTestlanguageStandaloneSetup.class);
+		with(QualifiedNameTestLanguageStandaloneSetup.class);
 	}
 
 	public void testQualifiedNameValueConverter() throws Exception {

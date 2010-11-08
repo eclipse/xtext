@@ -8,7 +8,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
-public class QualifiedNameTestlanguageRuntimeModule extends org.eclipse.xtext.valueconverter.AbstractQualifiedNameTestlanguageRuntimeModule {
+public class QualifiedNameTestLanguageRuntimeModule extends org.eclipse.xtext.valueconverter.AbstractQualifiedNameTestLanguageRuntimeModule {
 
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
