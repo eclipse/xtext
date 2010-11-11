@@ -11,7 +11,7 @@ When Xtext uses EMF models as the in-memory representation of any parsed text fi
 Depending on the community this concepts is also called e[document object graph (DOM)], e[semantic model], or simply e[model]. We use e[model] and e[AST] interchangeably. 
 Given the example model from the ref:getting_started_xtext[introduction], the AST looks similar to this
 
-img[images/ast.png][ ][ width:50%][ (Sample AST)]
+img[images/ast.png][ (Sample AST)][ ][ width:50%]
 
 
 The e[AST] should contain the essence of your textual models and abstract over syntactical information. It is used by later processing steps, 
@@ -38,7 +38,7 @@ The common supertype of EDataType and EClass is e[EClassifier]. An e[EPackage] a
 
 We have summarized these most relevant concepts of Ecore in the following diagram:  
 
-img[images/ecore.png][ ][ ][ (Ecore concepts)]
+img[images/ecore.png][(Ecore concepts)][ ][ ]
 
 
 section:emf_codegen[EMF Code Generation]
@@ -119,7 +119,10 @@ In an Xtext editor, changes in the text are transfered to the underlying e[Xtext
 Having an Xtext editor and a canonical GMF editor on the same resource can therefore lead to loss of notational information, as a change in the Xtext editor will remove a subtree in the AST, causing the  e[CanonicalEditPolicy] to remove all notational elements, even though it was customized by the user. The Xtext rebuilds the AST and the notation model is restored using the default mapping. It is therefore not recommended to let an Xtext editor and a canonical GMF editor work on the same resource.    
 
 
-In this example, we let each editor use its own memory instance of the model and synchronize on file changes only. Both frameworks already synchronize with external changes to the edited files out-of-the-box. In the glue code, a codeRef[org.eclipse.xtext.gmf.glue.concurrency.ConcurrentModificationObserver] warns the user if she tries to edit the same file with two different model editors concurrently.
+In this example, we let each editor use its own memory instance of the model and synchronize on file changes only. Both frameworks already synchronize with external changes to the edited files out-of-the-box. In the glue code, a 
+todo[org.eclipse.xtext.gmf.glue.concurrency.ConcurrentModificationObserver]
+%%codeRef[org.eclipse.xtext.gmf.glue.concurrency.ConcurrentModificationObserver]
+warns the user if she tries to edit the same file with two different model editors concurrently.
 
 In the example, we started with writing an Xtext grammar for an entity language. As explained above, we preferred optional assignments and rather covered mandatory attributes in a validator. Into the bargain, we added some services to improve the EMF integration, namely a formatter, a fragment provider and an unloader. Then we let Xtext generate the language infrastructure. From the derived Ecore model and its generator model, we generated the edit plug-in (needed by GMF) and added some fancier icons. 
 
@@ -134,7 +137,10 @@ GMF's generated parser for the labels is a bit poor: It will work on attributes 
 
 An e[XtextResource] keeps track of it's concrete syntax representation by means of a so called node model (see :#parser_rules for a more detailed description). The node model represents the parse tree and provides information on the offset, length and text that has been parsed to create a semantic model element. The nodes are attached to their semantic elements by means of a node adapter.    
 
-We can use the node adapter to access the text block that represents an attribute, and call the Xtext parser to parse the user input. The example code is contained in  codeRef[org.eclipse.xtext.gmf.glue.edit.part.AntlrParserWrapper]. e[SimplePropertyWrapperEditPartOverride] shows how this is integrated into the generated GMF editor. Use the e[EntitiesEditPartFactoryOverride] to instantiate it and the e[EntitiesEditPartProviderOverride] to create the overridden factory, and register the latter to the extension point. Note that this is a non-invasive way to extend generated GMF editors.
+We can use the node adapter to access the text block that represents an attribute, and call the Xtext parser to parse the user input. The example code is contained in 
+%%codeRef[org.eclipse.xtext.gmf.glue.edit.part.AntlrParserWrapper].
+todo[org.eclipse.xtext.gmf.glue.edit.part.AntlrParserWrapper]
+e[SimplePropertyWrapperEditPartOverride] shows how this is integrated into the generated GMF editor. Use the e[EntitiesEditPartFactoryOverride] to instantiate it and the e[EntitiesEditPartProviderOverride] to create the overridden factory, and register the latter to the extension point. Note that this is a non-invasive way to extend generated GMF editors.
 
 When you test the editor, you will note that the node model will be corrupt after editing a few labels. This is because the node model is only updated by the Xtext parser and not by the serializer. So we need a way to automatically call the (partial) parser every time the semantic model is changed. You will find the required classes in the package e[org.eclipse.xtext.gmf.glue.editingdomain]. To activate node model reconciling, you have to add a line 
 

@@ -155,7 +155,10 @@ String rootElementName =  myDocument.readOnly(
   });
 ]
 
-Direct write-access on the document is usually only performed inside the framework. If you want to change a document by means of its semantic model, you should rather use an codeRef[org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor] which uses the e[modify()] method internally but takes care of synchronizing the ref:node_model[node model], too:
+todo[update idocument editor]
+Direct write-access on the document is usually only performed inside the framework. If you want to change a document by means of its semantic model, you should rather use an 
+%%codeRef[org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor] 
+which uses the e[modify()] method internally but takes care of synchronizing the ref:node_model[node model], too:
 
 code[Java][@Inject
 private IDocumentEditor documentEditor;
@@ -178,4 +181,4 @@ Let's summarize what we have learned: An Xtext model is loaded by an EMF Resourc
 declared within Ecore models. A e[parse tree] is created as well, which effectively acts as a tracing model between the text, the e[AST] and the grammar. The following
 diagram illustrates the four different kinds of models.
 
-img[images/xtext_data_structures.png][ ][ width:50%][ ]
+img[images/xtext_data_structures.png][ ][][width:50%]

@@ -372,7 +372,7 @@ functionality for code completion (_CTRL SPACE_ even for cross-references),
 syntax highlighting, syntactic validation, linking errors, outline, find
 references etc.
 
-img[images/getting-started-editor.png][ ][ width:50%][ ]
+img[images/getting-started-editor.png][][][width:50%]
 
 
 section2[Adding a Namespace Concept]

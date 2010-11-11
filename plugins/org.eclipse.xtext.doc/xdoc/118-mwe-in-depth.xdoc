@@ -519,7 +519,7 @@ MWE2 does not use a semicolon as statement delimiter at any place.
 
 section2:MWE2ModuleSyntax[Module]
 
-img[images/mwe2/module.png][ ][ width:50%][ ]
+img[images/mwe2/module.png][ ][ ][width:50% ]
 
 
 A e[module] consists of four parts. The very first statement in a 
@@ -542,7 +542,7 @@ section2:MWE2PropertySyntax[Property]
 The list of declared properties follows the optional import section.
 It is allowed to define modules without any properties. 
 
-img[images/mwe2/property.png][ ][ width:50%][ ]
+img[images/mwe2/property.png][ ][ ][width:50% ]
 
 
 Each declared property is locally visible in the module. It 
@@ -564,7 +564,7 @@ The last part of a module is the root component. It defines the externally
 visible type of the module and may either be created from a Java 
 type or from another module.
 
-img[images/mwe2/component.png][ ][ width:50%][ ]
+img[images/mwe2/component.png][ ][ ][width:50% ]
 
 
 The type of the component can be derived in many cases except for 

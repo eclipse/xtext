@@ -87,7 +87,7 @@ contains information about the e[URI] to the actual e[EObject] and the qualified
 as well as the corresponding e[EClass]. In addition one can export arbitrary information using the 
 e[user data] map. The following diagram gives an overview on the description classes and their relationships.
 
-img[images/index_datamodel.png][ ][ ][ (Descriptions)]
+img[images/index_datamodel.png][(Descriptions)][ ][ ]
 
 
 A language is configured with a default implementation of e[IResourceDescription.Manager] which computes 
@@ -279,7 +279,7 @@ Outside Eclipse, you can provide a set of file system paths to be scanned for mo
 differ in the bound instance of e[IAllContainerState] of the referring language. These will be described 
 in detail in the following sections.
 
-img[images/index_container.png][ ][ ][ (IContainer Management)]
+img[images/index_container.png][(IContainer Management)][ ][]
 
 
 section4:jdt_based_containers[JDT-Based Container Manager]

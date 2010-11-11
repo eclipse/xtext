@@ -8,7 +8,7 @@ keywords and strings should be colored differently to make it easier to distingu
 This kind of text decorating markup does not influence the semantics of the various sections but 
 helps to understand the meaning and to find errors in the source code.
 
-img[images/highlighting.png][ ][ width:100%][ ]
+img[images/highlighting.png][ ][ ][ width:100%]
 
 
 The highlighting is done in two stages. This allows for sophisticated algorithms that are executed 
@@ -20,7 +20,7 @@ When you introduce new highlighting styles, the preference page for your DSL is 
 configured and allows the customization of any registered highlighting setting. They are automatically 
 persisted and reloaded on startup.
 
-img[images/preferences_syntax.png][ ][ width:50%][ ]
+img[images/preferences_syntax.png][ ][ ][width:50% ]
 
 
 section2[Lexical Highlighting]

@@ -3,7 +3,7 @@ chapter:ide_concepts[IDE Concepts]
 For the following part we will refer to a concrete example grammar in order to explain certain aspect 
 of the UI more clearly. The used example grammar is as follows:
 
-code[Java][grammar org.eclipse.text.documentation.Sample 
+code[Xtext][grammar org.eclipse.text.documentation.Sample 
     with org.eclipse.xtext.common.Terminals
 
 generate gen 'http://www.eclipse.org/xtext/documentation/Sample'

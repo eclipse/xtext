@@ -27,7 +27,7 @@ Previously when we created the projects to develop the domain model language, we
 a result created a third project for us in the workspace. If you've followed along you should have a project called 
 'org.eclipse.xtext.example.domainmodel.generator' in your workspace. It should look like shown in the following screenshot:
 
-img[images/generator-project.png][ ][ width:50%][ ]
+img[images/generator-project.png][ ][ ][width:50%]
 
 
 section2[Replacing the Example Model File (1)]

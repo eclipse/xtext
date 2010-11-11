@@ -3,8 +3,8 @@ section:outline[Outline View]
 
 section2[We redesigned the outline in 2.0. The following no longer reflects the current state of implementation.]
 
-TODO: 
-Rewrite this section
+todo[TODO: 
+Rewrite this section]
 
 Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical 
 view on your model and allows you to sort tree elements alphabetically. Selecting an element in the 
@@ -214,7 +214,7 @@ You can now add command / handler pairs to the context menu.
 First, you need to define a command - it will serve as a handle to glue together the handler 
 and the menu contribution:
 
-code[Java][
+code[
 <extension
   point="org.eclipse.ui.commands">
   <command
@@ -229,7 +229,7 @@ Next, you need to define a handler which will eventually execute the code to ope
 selected node. Please pay special attention to the attribute e[commandId] - it must match the e[id] 
 attribute of your command. 
 
-code[Java][
+code[
 <extension
   point="org.eclipse.ui.handlers">
   <handler
@@ -241,7 +241,7 @@ code[Java][
 
 Finally, define a e[menuContribution] to add the command to the context menu:
 
-code[Java][
+code[
 <extension
   point="org.eclipse.ui.menus">
   <menuContribution

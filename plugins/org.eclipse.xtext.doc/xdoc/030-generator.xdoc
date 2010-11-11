@@ -124,7 +124,7 @@ codeRef[org.eclipse.xtext.generator.IGeneratorFragment]s.
 The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
 the outline view, etc. 
 
-img[images/generator-structure.png][ ][ width:50%][ ]
+img[images/generator-structure.png][ ][ ][width:50% ]
 
 
 section3:generator_fragment[Generator Fragments]

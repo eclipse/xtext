@@ -1,0 +1,25 @@
+From a02876e5b66dd11ab9d07fbd7960707d6ccb042d Mon Sep 17 00:00:00 2001
+From: Robert von Massow <rvm@informatik.uni-kiel.de>
+Date: Thu, 14 Oct 2010 15:39:30 +0200
+Subject: [PATCH] fixed table row length in Xtext Xdoc file
+
+---
+ .../xdoc/210-emf-integration.xdoc                  |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/plugins/org.eclipse.xtext.doc/xdoc/210-emf-integration.xdoc b/plugins/org.eclipse.xtext.doc/xdoc/210-emf-integration.xdoc
+index 029fadd..3ef90cb 100644
+--- a/plugins/org.eclipse.xtext.doc/xdoc/210-emf-integration.xdoc
++++ b/plugins/org.eclipse.xtext.doc/xdoc/210-emf-integration.xdoc
+@@ -96,7 +96,7 @@ The link[http://www.eclipse.org/modeling/gmp/?project=gmf][Graphical Modeling Fr
+ 
+ table[
+ tr[td[Plug-in]td[Framework]td[Purpose]td[Contents]]
+-tr[td[o.e.x.example.gmf]td[Xtext]td[Xtext runtime plug-in]td[Grammar, derived metamodel and language infrastructure]td[ ]]
++tr[td[o.e.x.example.gmf]td[Xtext]td[Xtext runtime plug-in]td[Grammar, derived metamodel and language infrastructure]]
+ tr[td[o.e.x.e.g.ui]td[Xtext]td[Xtext UI plug-in]td[Xtext editor and services]]
+ tr[td[o.e.x.e.g.edit]td[EMF]td[EMF.edit plug-in]td[UI services generated from the metamodel]]
+ tr[td[o.e.x.e.g.models]td[GMF]td[GMF design models]td[Input for the GMF code generator]]
+-- 
+1.7.2.1.224.g2f41ea
+

@@ -1,5 +1,20 @@
 document[Xtext Documentation]
 
+codelanguage-def[Java]
+[
+	abstract,continue,for,new,switch,
+	assert,default,package,synchronized,
+	boolean,do,if,private,this,
+	break,double,implements,protected,throw,
+	byte,else,import,public,throws,
+	case,enum,instanceof,return,transient,
+	catch,extends,int,short,try,
+	char,final,interface,static,void,
+	class,finally,long,strictfp,volatile,
+	float,native,super,while
+]
+
+codelanguage-def[Xtext][generate, grammar, import, as, returns, terminal, enum, hidden, with]
 
 chapter-ref[Overview]
 
