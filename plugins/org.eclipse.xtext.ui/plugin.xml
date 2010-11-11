@@ -260,4 +260,13 @@
       	schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" 
       	contextId="org.eclipse.xtext.ui.XtextEditorScope"/>
     </extension>
+    <extension
+		point="org.eclipse.ui.commands">
+		<command
+			id="org.eclipse.xtext.ui.refactoring.RenameElement"
+			name="%RenameElementCommand_name"
+			description="%RenameElementCommand_description">
+		</command>
+	</extension>
+    
 </plugin>
