@@ -148,6 +148,8 @@ public class RailroadSelectionLinker implements IPropertyChangeListener {
 	}
 
 	protected ISelectable findFigureForTextOffset(IFigure figure, int offset, ISelectable currentBestFigure) {
+		if(figure == null)
+			return null;
 		if (figure instanceof ISelectable) {
 			Region textRegion = ((ISelectable) figure).getTextRegion();
 			if (textRegion != null && textRegion.getOffset() <= offset
