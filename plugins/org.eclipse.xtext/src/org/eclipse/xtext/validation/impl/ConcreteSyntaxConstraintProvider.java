@@ -333,8 +333,7 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 		while (true) {
 			multiple = multiple || isMultipleCardinality(ele);
 			optional = optional || isOptionalCardinality(ele);
-			if (ele != null 
-					&& ele.eContainer() instanceof ParserRule
+			if (ele.eContainer() instanceof ParserRule
 					&& ((ParserRule) ele.eContainer()).getType().getClassifier() instanceof EClass)
 				semanticType = (EClass) ((ParserRule) ele.eContainer()).getType().getClassifier();
 			if (ele instanceof Assignment) {
@@ -354,6 +353,8 @@ public class ConcreteSyntaxConstraintProvider implements IConcreteSyntaxConstrai
 							return createElement(ConstraintType.GROUP, ele, c, e, semanticType, multiple, optional);
 						}
 					}
+				if (lastChild == null)
+					return null;
 				ele = lastChild;
 				continue;
 			} else if (ele instanceof Alternatives) {
