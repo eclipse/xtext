@@ -241,4 +241,11 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		String constraint = parseRule("Import: ('import' | 'imp') foo=ID?;");
 		assertEquals("<Import>foo?", constraint);
 	}
+	
+	public void testOptionalGroupWithUnassignedElements() throws Exception {
+		StringBuilder b = new StringBuilder();
+		b.append("Model: ('(' INT ')')? a=STRING b=STRING;");
+		String constraint = parseRule(b.toString());
+		assertEquals("<Model>(a b)", constraint);
+	}
 }
