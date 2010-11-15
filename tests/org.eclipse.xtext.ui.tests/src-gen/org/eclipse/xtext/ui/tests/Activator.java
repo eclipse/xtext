@@ -66,6 +66,7 @@ public class Activator extends AbstractUIPlugin {
 			registerInjectorFor("org.eclipse.xtext.ui.tests.FoldingTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage");
 			registerInjectorFor("org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage");
+			registerInjectorFor("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage");
 			
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);
@@ -183,6 +184,9 @@ public class Activator extends AbstractUIPlugin {
 		if ("org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguageRuntimeModule();
 		}
+		if ("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguageRuntimeModule();
+		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
@@ -280,6 +284,9 @@ public class Activator extends AbstractUIPlugin {
 		}
 		if ("org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.quickfix.ui.QuickfixCrossrefTestLanguageUiModule(this);
+		}
+		if ("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.refactoring.ui.RefactoringTestLanguageUiModule(this);
 		}
 		
 		throw new IllegalArgumentException(grammar);

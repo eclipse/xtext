@@ -187,5 +187,15 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.editor.outline.parseTreeConstruction,
  org.eclipse.xtext.ui.tests.editor.outline.parser.antlr,
  org.eclipse.xtext.ui.tests.editor.outline.parser.antlr.internal,
- org.eclipse.xtext.ui.tests.editor.outline.ui.contentassist.antlr
+ org.eclipse.xtext.ui.tests.editor.outline.ui.contentassist.antlr,
+ org.eclipse.xtext.ui.tests.refactoring.refactoring,
+ org.eclipse.xtext.ui.tests.refactoring.refactoring.impl,
+ org.eclipse.xtext.ui.tests.refactoring.refactoring.util,
+ org.eclipse.xtext.ui.tests.refactoring,
+ org.eclipse.xtext.ui.tests.refactoring.services,
+ org.eclipse.xtext.ui.tests.refactoring.parseTreeConstruction,
+ org.eclipse.xtext.ui.tests.refactoring.parser.antlr,
+ org.eclipse.xtext.ui.tests.refactoring.parser.antlr.internal,
+ org.eclipse.xtext.ui.tests.refactoring.validation,
+ org.eclipse.xtext.ui.tests.refactoring.ui.contentassist.antlr
 

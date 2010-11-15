@@ -1,0 +1,54 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt FOR Grammar-»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi FOR Grammar-»
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="«executableExtensionFactory()»:org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="«name».Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.ui.bindings">
+      	<key 
+      		sequence="M2+M3+R" 
+      		commandId="org.eclipse.xtext.ui.refactoring.RenameElement" 
+      		schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" 
+      		contextId="org.eclipse.xtext.ui.XtextEditorScope"/>
+      	<key 
+      		sequence="COMMAND+ALT+R" 
+      		commandId="org.eclipse.xtext.ui.refactoring.RenameElement" 
+      		schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" 
+      		contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      		platform="carbon"/>
+      	<key 
+      		sequence="M2+M3+R" 
+      		commandId="" 
+      		schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" 
+      		contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      		platform="carbon"/>
+    </extension>
+«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup FOR Grammar-»«ENDDEFINE»
