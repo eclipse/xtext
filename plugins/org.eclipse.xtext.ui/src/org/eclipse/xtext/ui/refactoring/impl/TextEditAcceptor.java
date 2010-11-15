@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.refactoring.impl;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.ChangeDescriptor;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
@@ -20,8 +19,6 @@ import org.eclipse.ltk.core.refactoring.TextChange;
 import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.text.edits.UndoEdit;
-import org.eclipse.xtext.ui.refactoring.fixes.UndoDocumentChange;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 import com.google.common.collect.HashMultimap;
@@ -50,15 +47,17 @@ public class TextEditAcceptor {
 	protected TextChange createTextChange(String name, RefactoringDocument document) {
 		TextChange documentChange;
 		if (document.isOpenEditor())
-			documentChange = new DocumentChange(name, document.getXtextDocument()) {
-				/**
-				 * Fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=296794
-				 */
-				@Override
-				protected Change createUndoChange(UndoEdit edit) {
-					return new UndoDocumentChange(getName(), (IDocument) getModifiedElement(), edit);
-				}
-			};
+			documentChange = new DocumentChange(name, document.getXtextDocument()) 
+//			{
+//				/**
+//				 * Fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=296794
+//				 */
+//				@Override
+//				protected Change createUndoChange(UndoEdit edit) {
+//					return new UndoDocumentChange(getName(), (IDocument) getModifiedElement(), edit);
+//				}
+//			}
+			;
 		else
 			documentChange = new TextFileChange(name, document.getFileToSave());
 		MultiTextEdit multiEdit = new MultiTextEdit();
