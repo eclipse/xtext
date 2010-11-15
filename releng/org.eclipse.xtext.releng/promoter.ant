@@ -217,16 +217,16 @@
 		<buckminster.substitute value="${version}" pattern="^(\d+\.\d+)\.\d+.*$" replacement="$$1" property="base.version" />
 
 		<!-- setup composite.repository.base appropriate to the build type -->
-		<condition property="composite.repository.base" value="nightly">
+		<condition property="composite.repository.base" value="nightly/head">
 			<matches pattern="^N" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="interim">
+		<condition property="composite.repository.base" value="interim/head">
 			<matches pattern="^I" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="milestones/${saved.build.id}">
+		<condition property="composite.repository.base" value="milestones/head/${saved.build.id}">
 			<matches pattern="^[MS]" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="releases/${base.version}">
+		<condition property="composite.repository.base" value="releases/head/${base.version}">
 			<matches pattern="^R" string="${saved.build.id}" />
 		</condition>
 
