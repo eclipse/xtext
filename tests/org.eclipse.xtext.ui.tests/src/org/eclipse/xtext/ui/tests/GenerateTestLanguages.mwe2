@@ -169,5 +169,13 @@ Workflow {
 				fragment = quickfix.QuickfixProviderFragment {}
 			}
 		}
+		language = {
+			uri="classpath:/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.xtext"
+			fragment = CompositeGeneratorFragment {
+				fragment = @TestLanguagesFragmentsBuilder auto-inject {}
+				fragment = scoping.ImportNamespacesScopingFragment {}
+				fragment = exporting.QualifiedNamesFragment {}
+			}
+		}
 	}
 }
