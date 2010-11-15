@@ -6,8 +6,7 @@ from another component, one just declares the dependency rather then stating how
 For instance when some code wants to use a scope provider, it just declares a field (or method or constructor) and 
 adds the @Inject annotation: 
 
-code[Java][
-public class MyLanguageLinker extends Linker {
+code[Java][public class MyLanguageLinker extends Linker {
 
   @Inject
   private IScopeProvider scopeProvider;

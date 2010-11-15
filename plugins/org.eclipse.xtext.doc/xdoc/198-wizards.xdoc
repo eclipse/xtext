@@ -6,7 +6,7 @@ it contains a sample model file and workflow that serve as a scaffold for the us
 has the Xtext nature and thereby the builder assigned. You enable the generation of the project wizard by adding the 
 e[SimpleProjectWizardFragment] fragment to the ref:generator_fragment[workflow]:
 
-code[Java][import org.eclipse.xtext.ui.generator.* 
+code[MWE2][import org.eclipse.xtext.ui.generator.* 
 
 // project wizard fragment
 fragment = projectWizard.SimpleProjectWizardFragment {

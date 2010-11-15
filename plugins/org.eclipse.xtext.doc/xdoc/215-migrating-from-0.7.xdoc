@@ -43,12 +43,12 @@ section2[Update the Workflow]
 The e[JavaScopingFragment] does no longer exist. It has been superseded by the e[ImportURIScopingFragment] in combination with the e[SimpleNamesFragment].
 Please replace  
 
-code[Java][<fragment 
+code[XML][<fragment 
     class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/>]
 
 with
 
-code[Java][<fragment 
+code[XML][<fragment 
     class="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/>
 <fragment 
     class="org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/>]

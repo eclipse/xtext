@@ -14,7 +14,7 @@ It is a stripped-down version of our e[Domain-Model Example] which is shipped wi
 and can be materialized into your workspace using the example wizard. The following sample 
 of a domain model should give you an idea about the language.
 
-code[Java][datatype String
+code[DomainExample][datatype String
 datatype Bool
 
 entity Session {
@@ -107,7 +107,7 @@ parsing.
 
 The first line of the grammar is the grammar declaration:
 
-code[Java][grammar org.eclipse.xtext.example.Domainmodel 
+code[Xtext][grammar org.eclipse.xtext.example.Domainmodel 
   with org.eclipse.xtext.common.Terminals
 ]
 
@@ -131,7 +131,7 @@ of course.
 
 The next statement declares an EMF Ecore package, aka e[EPackage], to be derived from the grammar:
 
-code[Java][generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
+code[Xtext][generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
 ]
 
 Ecore e[EPackages] are effectively a set of classes (in EMF they are called 
@@ -172,7 +172,7 @@ tr[td[e[+]]td[one or more]]
 
 Each rule ends with a semicolon. So our first rule reads for now as
 
-code[Java][DomainModel :
+code[Xtext][DomainModel :
   Entity*; 
 ]
 
@@ -182,19 +182,19 @@ in that tree. The type of that element can be specified after the rule name usin
 the keyword e[returns]. If the type's name is the same as the rule's name, it can 
 be omitted as in our case. Which effectively means that
 
-code[Java][DomainModel returns DomainModel: ...
+code[Xtext][DomainModel returns DomainModel: ...
 ]
 
 is the same as
 
-code[Java][DomainModel : ...
+code[Xtext][DomainModel : ...
 ]
 
 In order to connect the different objects together, we have to assign the 
 elements returned by called rules to some feature of the current rule's object. 
 This is done by using so called assignments. 
 
-code[Java][DomainModel :
+code[Xtext][DomainModel :
   (elements+=Entity)*;
 ]
 
@@ -217,7 +217,7 @@ opening curly brace (we will handle the e[extends] clause in a second step). The
 an entity defines a number of features and ends with a closing curly brace. The 
 rule looks like this:
 
-code[Java][Entity :
+code[Xtext][Entity :
   'entity' name=ID '{'
     (features+=Feature)*
   '}';
@@ -235,7 +235,7 @@ valued feature.
 We want to allow inheritance for entities and therefore now add an optional 
 '_extends_' part.
 
-code[Java][Entity :
+code[Xtext][Entity :
   'entity' name=ID ('extends' superType=\[Entity\])? '{'
     (features+=Feature)*
   '}';
@@ -263,7 +263,7 @@ data types. So the e[DomainModel] rule needs to be able to parse data types as w
 As both entities and data types will be referenced from the yet to be defined e[Feature] 
 rule, we should introduce a common super type for them.
 
-code[Java][DomainModel :
+code[Xtext][DomainModel :
   (elements+=Type)*;
 
 Type:
@@ -281,7 +281,7 @@ we are able to refer to both types of elements with a single cross-reference.
 Next up we need to define the syntax of e[Feature], which shouldn't be surprising to 
 you, as we do not use any new concepts here.
 
-code[Java][Feature:
+code[Xtext][Feature:
   name=ID ':' type=TypeRef;
 ]
 
@@ -301,7 +301,7 @@ postfix '*' in an input file should set the boolean flag to 'true' that indicate
 type reference in the AST model. 
 This is the purpose of the assignment operator '_?=_'. The parser rule looks like this:
 
-code[Java][TypeRef :
+code[Xtext][TypeRef :
   referenced=\[Type\] (multi?='*')?;
 ]
 
@@ -313,7 +313,7 @@ Value Object as proposed in Eric Evan's great book e[Domain Driven Design].
 
 In the end your grammar editor should look like this:
 
-code[Java][grammar org.eclipse.xtext.example.Domainmodel 
+code[Xtext][grammar org.eclipse.xtext.example.Domainmodel 
   with org.eclipse.xtext.common.Terminals
   
 generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"  
@@ -399,7 +399,7 @@ will stick to the defaults within this tutorial.
 Before we extend the grammar, let's have a look how an example model would
 look like when using the newly introduced concepts:
 
-code[Java][package my.types {
+code[DomainExample][package my.types {
   datatype String
   datatype Boolean
 }
@@ -431,13 +431,13 @@ package my.entities {
 
 Let's start to modify our grammar now. First we introduce the rule e[AbstractElement]:
 
-code[Java][AbstractElement:
+code[Xtext][AbstractElement:
   PackageDeclaration | Type;
 ]
 
 e[DomainModel] should now call e[AbstractElement] instead of e[Type]:  
 
-code[Java][DomainModel:
+code[Xtext][DomainModel:
   (elements+=AbstractElement)*;
 ]
 
@@ -451,7 +451,7 @@ instances of e[EDataType] as opposed to instances of e[EClass]. String is the mo
 often used e[EDataType] in this context and is therefore the default return 
 type for data type rules. The rule looks like this:
 
-code[Java][QualifiedName:
+code[Xtext][QualifiedName:
   ID ('.' ID)*;
 ]
 
@@ -466,7 +466,7 @@ e[ValueConverters] here.
 Next up we need to define the syntax of e[PackageDeclarations], which makes use of 
 the e[QualifiedName] rule but doesn't make use of anything we haven't yet talked about.
 
-code[Java][PackageDeclaration:
+code[Xtext][PackageDeclaration:
   'package' name=QualifiedName '{'
     (elements+=AbstractElement)*
   '}';
@@ -481,7 +481,7 @@ after a delimiter '_|_':
 fn.. Note, that the '_|_' has nothing to do with the previously introduced 
 alternative operator. In the context of a cross-reference it is simply a delimiter.  
 
-code[Java][Entity:
+code[Xtext][Entity:
   'entity' name=ID ('extends' superType=\[Entity|QualifiedName\])? '{'
     (features+=Feature)*
   '}';
@@ -489,7 +489,7 @@ code[Java][Entity:
 
 and
 
-code[Java][TypeRef:
+code[Xtext][TypeRef:
   referenced=\[Type|QualifiedName\] (multi?='*')?;
 ]
 
@@ -497,7 +497,7 @@ As the last step, we introduce imports. An e[Import] is an instance of
 e[AbstractElement], too, so that it can occur as a child of e[DomainModel] as 
 well as of e[PackageDeclaration].
 
-code[Java][AbstractElement:
+code[Xtext][AbstractElement:
   PackageDeclaration | Type | Import;
 ]
 
@@ -506,13 +506,13 @@ optional wildcard character '_*_' at the end, so that multiple names can be
 imported with one statement. That requires a new data type rule which we 
 name e[QualifiedNameWithWildCard]:
 
-code[Java][QualifiedNameWithWildCard:
+code[Xtext][QualifiedNameWithWildCard:
   QualifiedName '.*'?;
 ]
 
 The declaration of the e[Import] rule should look familiar by now:
 
-code[Java][Import:
+code[Xtext][Import:
   'import' importedNamespace=QualifiedNameWithWildCard;
 ]
 
@@ -529,7 +529,7 @@ is used as a wildcard by default.
 
 That's all for the grammar. It should now read as 
 
-code[Java][grammar org.eclipse.xtext.example.Domainmodel 
+code[Xtext][grammar org.eclipse.xtext.example.Domainmodel 
    with org.eclipse.xtext.common.Terminals
 
 generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"

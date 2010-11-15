@@ -155,10 +155,7 @@ String rootElementName =  myDocument.readOnly(
   });
 ]
 
-todo[update idocument editor]
-Direct write-access on the document is usually only performed inside the framework. If you want to change a document by means of its semantic model, you should rather use an 
-%%codeRef[org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor] 
-which uses the e[modify()] method internally but takes care of synchronizing the ref:node_model[node model], too:
+Direct write-access on the document is usually only performed inside the framework. If you want to change a document by means of its semantic model, you should rather use an e[org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor]todo[rewrite as class no longer exists] which uses the e[modify()] method internally but takes care of synchronizing the ref:node_model[node model], too:
 
 code[Java][@Inject
 private IDocumentEditor documentEditor;

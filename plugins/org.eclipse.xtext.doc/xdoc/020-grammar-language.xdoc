@@ -13,16 +13,13 @@ People who have secret compartments control their access in a very old-school wa
 turning on the light afterwards. Then the secret compartment, for instance a panel, opens up. One of those state machines 
 could look like this:
 
-code[Java][events
+code[FowlerExample][events
   doorClosed  D1CL
   drawOpened  D2OP
   lightOn     L1ON
   doorOpened  D1OP
   panelClosed PNCL
-end
- 
-resetEvents
-  doorOpened
+  resetting doorOpened D1OP
 end
  
 commands
@@ -62,7 +59,7 @@ a state. Please read link[http://martinfowler.com/dslwip/Intro.html][Martin's de
 
 In order to implment this little language with Xtext, you need to write the following grammar:
 
-code[Java][ grammar my.pack.SecretCompartments 
+code[Xtext][ grammar my.pack.SecretCompartments 
    with org.eclipse.xtext.common.Terminals
 
 generate secretcompartment "http://www.eclipse.org/secretcompartment"
@@ -110,7 +107,7 @@ section2[Language Declaration]
 
 The first line in every grammar ... 
 
-code[Java][grammar my.pack.SecretCompartments with org.eclipse.xtext.common.Terminals]
+code[Xtext][grammar my.pack.SecretCompartments with org.eclipse.xtext.common.Terminals]
 
 declares the name of the grammar. Xtext leverages Java's classpath mechanism. This means that the name 
 can be any valid Java qualifier. The file name needs to correspond to the grammar name and have the file 
@@ -135,7 +132,7 @@ section3[EPackage Generation]
 The easiest way to get started is to let Xtext infer the Ecore model from your grammar. This is what is done in the 
 secret compartment example. To do so just state:
 
-code[Java][generate secretcompartment 'http://www.eclipse.org/secretcompartment']
+code[Xtext][generate secretcompartment 'http://www.eclipse.org/secretcompartment']
 
 That statement means: generate an e[EPackage] with the e[name] "secretcompartment" and the e[nsURI] "http://www.eclipse.org/secretcompartment". 
 Actually these are the properties that are required to create an e[EPackage].
@@ -160,7 +157,7 @@ independent of the location of the workspace.
 
 An import statement referring to an Ecore file by a e[platform:/resource/]-URI looks like this: 
 
-code[Java][import 'platform:/resource/my.project/src/my/pack/SecretCompartments.ecore']
+code[Xtext][import 'platform:/resource/my.project/src/my/pack/SecretCompartments.ecore']
 
 If you want to mix generated and imported Ecore models you'll have to configure the generator fragment 
 in your MWE file responsible for generating the Ecore classes 
@@ -173,7 +170,7 @@ needs to know how that code was generated in order to generate valid references 
 
 Example:
 
-code[Java][fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
+code[MWE2][fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
   genModels =
     "platform:/resource/my.project/src/my/pack/SecretCompartments.genmodel"
 }
@@ -188,11 +185,11 @@ which is shipped as part of Xtext.
 
 Example:
 
-code[Java][import 'classpath:/model/JvmTypes.ecore' as types]
+code[Xtext][import 'classpath:/model/JvmTypes.ecore' as types]
 
 As with platform resource URIs you'll also have to tell the generator where the corresponding *.genmodel can be found:
 
-code[Java][fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
+code[MWE2][fragment = org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment {
   genModels =
     "classpath:/model/JvmTypes.genmodel"
 }
@@ -208,13 +205,13 @@ preferrable, because you'll have to have the corresponding EPackage installed in
 There's mainly just one exception, that is Ecore itself. So if you refer to Ecore it is best
 to use its nsURI :
 
-code[Java][import "http://www.eclipse.org/emf/2002/Ecore" as ecore]
+code[Xtext][import "http://www.eclipse.org/emf/2002/Ecore" as ecore]
 
 section3[Ecore Model Aliases for EPackages]
 
 If you want to use multiple e[EPackages] you need to specify aliases in the following way:
 
-code[Java][generate secretcompartment 'http://www.eclipse.org/secretcompartment'
+code[Xtext][generate secretcompartment 'http://www.eclipse.org/secretcompartment'
 import 'http://www.eclipse.org/anotherPackage' as another
 ]
 
@@ -256,7 +253,7 @@ In the secret compartments example there are no explicitly defined terminal rule
 which is inherited from the grammar e[org.eclipse.xtext.common.Terminals] (cf. ref:grammarMixins[Grammar Mixins]).
 Therein the e[ID] rule is defined as follows:
 
-code[Java][terminal ID : 
+code[Xtext][terminal ID : 
   ('^')?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*; 
     ]
 
@@ -268,7 +265,7 @@ by the e[ID] rule's ref:valueconverter[ValueConverter].
 
 This is the formal definition of terminal rules:
 
-code[Java][TerminalRule :
+code[Xtext][TerminalRule :
   'terminal' name=ID ('returns' type=TypeRef)? ':' 
     alternatives=TerminalAlternatives ';'
 ;
@@ -286,7 +283,7 @@ section4[Return Types]
 A terminal rule returns a value, which is a string (type e[ecore::EString]) by default.
 However, if you want to have a different type you can specify it. For instance, the rule e[INT] is defined as:
 
-code[Java][terminal INT returns ecore::EInt : 
+code[Xtext][terminal INT returns ecore::EInt : 
   ('0'..'9')+;
 ]
 
@@ -318,7 +315,7 @@ section4:Keywords[Keywords / Characters]
 Keywords are a kind of token rule literals. 
 The e[ID] rule in e[org.eclipse.xtext.common.Terminals] for instance starts with a keyword:
 
-code[Java][terminal ID : '^'? .... ;]
+code[Xtext][terminal ID : '^'? .... ;]
 
 The question mark sets the cardinality to "none or one" (i.e. optional) like explained above.
 
@@ -334,7 +331,7 @@ A character range can be declared using the '..' operator.
 
 Example:
 
-code[Java][terminal INT returns ecore::EInt: ('0'..'9')+;]
+code[Xtext][terminal INT returns ecore::EInt: ('0'..'9')+;]
 
 In this case an e[INT] is comprised of one or more (note the e[+] operator) characters 
 between (and including) e['0'] and e['9'].
@@ -345,7 +342,7 @@ section4[Wildcard]
 If you want to allow any character you can simple write the wildcard operator '_._' (dot):
 Example:
 
-code[Java][FOO : 'f' . 'o';]
+code[Xtext][FOO : 'f' . 'o';]
 
 The rule above would allow expressions like 'foo', 'f0o' or even 'f\no'.
 
@@ -355,7 +352,7 @@ section4[Until Token]
 With the until token it is possible to state that everything should be consumed until a certain token occurs.
 The multi-line comment is implemented this way:
 
-code[Java][terminal ML_COMMENT	: '/*' -> '*/';]
+code[Xtext][terminal ML_COMMENT	: '/*' -> '*/';]
 
 This is the rule for Java-style comments that begin with '_/*_' and end with '_*/_'.
 
@@ -364,7 +361,7 @@ section4[Negated Token]
 
 All the tokens explained above can be inverted using a preceding exclamation mark:
 
-code[Java][terminal BETWEEN_HASHES	: '#' (!'#')* '#';]
+code[Xtext][terminal BETWEEN_HASHES	: '#' (!'#')* '#';]
 
 section4[Rule Calls]
 
@@ -373,14 +370,14 @@ We refer to this as rule calls. Rule calls in terminal rules can only point to t
 
 Example:
 
-code[Java][terminal DOUBLE : INT '.' INT;]
+code[Xtext][terminal DOUBLE : INT '.' INT;]
 
 section4:Alternatives[Alternatives]
 
 Using alternatives one can state multiple different alternatives.
 For instance, the whitespace rule uses alternatives like this:
 
-code[Java][terminal WS : (' '|'\t'|'\r'|'\n')+;]
+code[Xtext][terminal WS : (' '|'\t'|'\r'|'\n')+;]
 
 That is a WS can be made of one or more whitespace characters (including ' ', '_\t_', '_\r_', '_\n_').
 
@@ -390,7 +387,7 @@ section4[Groups]
 Finally, if you put tokens one after another, the whole sequence is referred to as a group.
 Example:
 
-code[Java][terminal ASCII : '0x' ('0'..'7') ('0'..'9'|'A'..'F');]
+code[Xtext][terminal ASCII : '0x' ('0'..'7') ('0'..'9'|'A'..'F');]
 
 That is the 2-digit hexadecimal code of ASCII characters.
 
@@ -433,7 +430,7 @@ The type of the feature is inferred from the right hand side of the assignment.
 
 Example:
 
-code[Java][State :
+code[Xtext][State :
   'state' name=ID
     ('actions' '{' (actions+=\[Command\])+ '}')?
     (transitions+=Transition)*
@@ -443,7 +440,7 @@ code[Java][State :
 
 The syntactic declaration for states in the state machine example starts with a keyword e[state] followed by an assignment:
 
-code[Java][name=ID]
+code[Xtext][name=ID]
 
 The left hand side refers to a feature '_name_' of the current object (which has the e[EClass] '_State_' in this case). 
 The right hand side can be a rule call, a keyword, a cross-reference (explained later) or even an 
@@ -472,14 +469,14 @@ construction the crosslinks are not established during parsing but in a later li
 same in Xtext, but we allow to specify crosslink information in the grammar. This information is used by the linker.
 The syntax for crosslinks is:
 
-code[Java][CrossReference :
+code[Xtext][CrossReference :
   '\[' type=TypeRef ('|' ^terminal=CrossReferenceableTerminal )? '\]'
 ;
 ]
 
 For example, the transition is made up of two cross-references, pointing to an event and a state:
 
-code[Java][Transition :
+code[Xtext][Transition :
   event=\[Event\] '=>' state=\[State\]
 ;
 ]
@@ -489,7 +486,7 @@ This is sometimes confusing, because one usually uses the same name for the rule
 That is if we had named the type for events differently like in the following the cross-reference needs 
 to be adapted as well:
 
-code[Java][Transition :
+code[Xtext][Transition :
   event=\[MyEvent\] '=>' state=\[State\]
 ;
  
@@ -503,7 +500,7 @@ which the crosslink later should be established. If the terminal is omitted, it 
 You may even use alternatives as the referencable terminal. This way, either an e[ID] or a e[STRING] may be 
 used as the referencable terminal, as it is possible in many SQL dialects.
 
-code[Java][TableRef: table=\[Table|(ID|STRING)\];]
+code[Xtext][TableRef: table=\[Table|(ID|STRING)\];]
 
 Have a look at the ref:linking[linking section] in order to understand how linking is done.
 
@@ -513,7 +510,7 @@ section4:unordered_groups[Unordered Groups]
 The elements of an unordered group can occur in any order but each element must appear once. Unordered 
 groups are separated with '_&_', e.g.
 
-code[Java][Modifier: 
+code[Xtext][Modifier: 
 	static?='static'? & final?='final'? & visibility=Visibility;
 
 enum Visibility:
@@ -540,7 +537,7 @@ you have to choose a cardinality of '_?_'. In the example, the visibility is man
 while '_static_' or '_final_' are optional. Elements with a cardinality of '_*_' or '_+_'
 have to appear continuously without interruption, i.e.
 
-code[Java][Rule:
+code[Xtext][Rule:
 	values+=INT* & name=ID;
 ]
 
@@ -571,7 +568,7 @@ e[TypeA], whereas e[B ident] should instantiate e[TypeB].
 
 Example with alternatives:
 
-code[Java][MyRule returns TypeA :
+code[Xtext][MyRule returns TypeA :
   "A" name=ID |
   MyOtherRule
 ; 
@@ -583,7 +580,7 @@ MyOtherRule returns TypeB :
 
 Example with simple actions:  
 
-code[Java][MyRule returns TypeA :
+code[Xtext][MyRule returns TypeA :
   "A" name=ID |
   "B" {TypeB} name=ID
 ; 
@@ -607,7 +604,7 @@ assignment. If there is no feature the returned value shall be assigned to, the 
 
 With unassigned rule calls one can, for instance, create rules which just dispatch between several other rules:
 
-code[Java][AbstractToken :
+code[Xtext][AbstractToken :
   TokenA |
   TokenB |
   TokenC
@@ -620,7 +617,7 @@ element by assigning additional things.
 
 Example:
 
-code[Java][AbstractToken :
+code[Xtext][AbstractToken :
   ( TokenA |
     TokenB |
     TokenC ) (cardinality=('?'|'+'|'*'))?
@@ -641,7 +638,7 @@ LL-parsing has some significant advantages over LR algorithms. The most importan
 However, LL also has some drawbacks. The most important one is that it does not allow left recursive grammars.
 For instance, the following is not allowed in LL-based grammars, because e[Expression '+' Expression] is left recursive:
 
-code[Java][Expression :
+code[Xtext][Expression :
   Expression '+' Expression |
   '(' Expression ')' |
   INT
@@ -650,7 +647,7 @@ code[Java][Expression :
 
 Instead one has to rewrite such things by "left-factoring" it:
 
-code[Java][Expression :
+code[Xtext][Expression :
   TerminalExpression ('+' TerminalExpression)?
 ;
  
@@ -663,7 +660,7 @@ TerminalExpression :
 In practice this is always the same pattern and therefore not that problematic. 
 However, by simply applying the Xtext AST construction features we've covered so far, a grammar ...
 
-code[Java][Expression :
+code[Xtext][Expression :
   {Operation} left=TerminalExpression (op='+' right=TerminalExpression)?
 ;
  
@@ -689,7 +686,7 @@ Typically one would only want to have one instance of e[IntLiteral] instead.
 
 One can solve this problem using a combination of unassigned rule calls and assigned actions:
 
-code[Java][Expression :
+code[Xtext][Expression :
   TerminalExpression ({Operation.left=current} 
     op='+' right=Expression)?
 ;
@@ -716,7 +713,7 @@ Hidden terminals may (or may not) appear between any other terminals in any card
 
 If a rule defines hidden symbols, you can think of a kind of scope that is automatically introduced. Any rule that is called from the declaring rule uses the same hidden terminals as the calling rule, unless it defines other hidden tokens itself.
 
-code[Java][Person hidden(WS, ML_COMMENT, SL_COMMENT): 
+code[Xtext][Person hidden(WS, ML_COMMENT, SL_COMMENT): 
   name=Fullname age=INT ';'
 ;
 
@@ -749,7 +746,7 @@ item[allow for use of hidden tokens.]
 If you, for instance, want to define a rule to consume Java-like qualified names (e.g. "foo.bar.Baz")
 you could write:
 
-code[Java][QualifiedName :
+code[Xtext][QualifiedName :
   ID ('.' ID)*
 ;
 ]
@@ -761,7 +758,7 @@ In addition when this has been defined as a data type rule, it is allowed to use
 
 Return types can be specified in the same way as in terminal rules:
 
-code[Java][QualifiedName returns ecore::EString : 
+code[Xtext][QualifiedName returns ecore::EString : 
   ID ('.' ID)*
 ;
 ]
@@ -778,14 +775,14 @@ The main advantage of enum rules is their simplicity, type safety and therefore 
 
 If you want to define a e[ChangeKind] link[http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.emf.doc/references/javadoc/org/eclipse/emf/ecore/change/impl/package-summary.html][org.eclipse.emf.ecore.change/model/Change.ecore] with e[ADD], e[MOVE] and e[REMOVE] you could write:
 
-code[Java][enum ChangeKind :
+code[Xtext][enum ChangeKind :
   ADD | MOVE | REMOVE
 ;
 ]
 
 It is even possible to use alternative literals for your enums or reference an enum value twice:
 
-code[Java][enum ChangeKind :
+code[Xtext][enum ChangeKind :
   ADD = 'add' | ADD = '+' | 
   MOVE = 'move' | MOVE = '->' | 
   REMOVE = 'remove' | REMOVE = '-'
@@ -794,7 +791,7 @@ code[Java][enum ChangeKind :
 
 Please note, that Ecore does not support unset values for enums. If you formulate a grammar like
 
-code[Java][Element: "element" name=ID (value=SomeEnum)?;]
+code[Xtext][Element: "element" name=ID (value=SomeEnum)?;]
 
 with the input of
 
@@ -802,7 +799,7 @@ code[Java][element Foo]
 
 the resulting value of the element e[Foo] will hold the enum value with the internal representation of '0' (zero). When generating the e[EPackage] from your grammar this will be the first literal you define. As a workaround you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define an enum literal with an empty textual representation.
 
-code[Java][enum Visibility: 
+code[Xtext][enum Visibility: 
   package | private | protected | public
 ;
  ]
@@ -867,7 +864,7 @@ Each e[EAttribute] or e[EReference] takes its name from the assignment or action
 
 Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of "artificial" parser rules, that are never called, e.g.
 
-code[Java][CommonSuperType:
+code[Xtext][CommonSuperType:
   SubTypeA | SubTypeB | SubTypeC;
 ]
 
@@ -875,7 +872,7 @@ section2[Enum Literal Generation]
 
 For each alternative defined in an enum rule, the transformer creates an enum literal, when another literal with the same name cannot be found. The e[literal] property of the generated enum literal is set to the right hand side of the declaration. If it is omitted, you will get an enum literal with equal e[name] and e[literal] attributes.
 
-code[Java][enum MyGeneratedEnum:
+code[Xtext][enum MyGeneratedEnum:
   NAME = 'literal' | EQUAL_NAME_AND_LITERAL;
 ]
 
@@ -888,7 +885,7 @@ section2:customPostProcessing[Customized Post Processing]
 
 As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an Xtend file with name e[MyDslPostProcessor.ext] (if the name of the grammar file is e[MyDsl.xtext]) in the same folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension with signature e[process(xtext::GeneratedMetamodel)]. E.g.
 
-code[Java][process(xtext::GeneratedMetamodel this) :
+code[Xtend][process(xtext::GeneratedMetamodel this) :
   process(ePackage)
 ;
  
@@ -927,7 +924,7 @@ section:grammarMixins[Grammar Mixins]
 
 Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use e[org.eclipse.xtext.common.Terminals] by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
 
-code[Java][grammar org.xtext.example.MyDsl with org.eclipse.xtext.common.Terminals
+code[Xtext][grammar org.xtext.example.MyDsl with org.eclipse.xtext.common.Terminals
  
 generate myDsl 'http://www.xtext.org/example/MyDsl'
  
@@ -938,7 +935,7 @@ Mixing in another grammar makes the rules defined in that grammar referable. It 
 
 Example :
 
-code[Java][grammar my.SuperGrammar
+code[Xtext][grammar my.SuperGrammar
 ...
 RuleA : "a" stuff=RuleB;
 RuleB : "{" name=ID "}";
@@ -958,7 +955,7 @@ section[Common Terminals]
 
 Xtext ships with a default set of predefined, reasonable and often required terminal rules. This grammar is defined as follows:
 
-code[Java][ grammar org.eclipse.xtext.common.Terminals 
+code[Xtext][ grammar org.eclipse.xtext.common.Terminals 
   hidden(WS, ML_COMMENT, SL_COMMENT)
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore

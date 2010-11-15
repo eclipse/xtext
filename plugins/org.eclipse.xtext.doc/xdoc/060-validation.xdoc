@@ -43,7 +43,7 @@ The codeRef[org.eclipse.xtext.validation.IConcreteSyntaxValidator] validates all
 
 Example:
 
-code[Java][MyRule:
+code[Xtext][MyRule:
   ({MySubRule} "sub")? (strVal+=ID intVal+=INT)*;
 	]
 
@@ -92,7 +92,7 @@ That means contrary to the EPackage and e[Resource.Factory] registries there is 
 
 For Xtext we provide a ref:generator_fragment[generator fragment] for the convenient Java-based e[EValidator] API. Just add the following fragment to your generator configuration and you are good to go:
 
-code[Java][fragment = org.eclipse.xtext.generator.validation.JavaValidatorFragment {}
+code[MWE2][fragment = org.eclipse.xtext.generator.validation.JavaValidatorFragment {}
 ]
 
 The generator will provide you with two Java classes. An abstract class generated to e[src-gen/] which extends the library class e[AbstractDeclarativeValidator]. This one just registers the EPackages for which this validator introduces constraints.
@@ -126,12 +126,12 @@ In addition to the Java-based validation code you can use the language Check (fr
 todo[fixRef org.eclipse.xtext.generator.validation.CheckFragment].
 Please note, that you can combine both types of validation in your project. 
 
-code[Java][fragment = org.eclipse.xtext.generator.validation.CheckFragment {}
+code[MWE2][fragment = org.eclipse.xtext.generator.validation.CheckFragment {}
   ]
 
 After regenerating your language artifacts you will find three new files "YourLanguageChecks.chk", "YourLanguageFastChecks.chk" and "YourLanguageExpensiveChecks.chk" in the e[src/] folder in the sub-package e[validation].  The checks in these files will be executed when saving a file, while typing (FastChecks) or when triggering the validation explicitly (ExpensiveChecks). When using Check the example of the previous chapter could be written like this.
 
-code[Java][context Type#name WARNING "Name should start with a capital":
+code[Check][context Type#name WARNING "Name should start with a capital":
   name.toFirstUpper() == name;  
 ]
 

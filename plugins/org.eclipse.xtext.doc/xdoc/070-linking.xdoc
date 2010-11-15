@@ -14,14 +14,14 @@ section2[Declaration of Crosslinks]
 
 In the grammar a cross-reference is specified using square brackets.
 
-code[Java][CrossReference :
+code[Xtext][CrossReference :
   '\[' type=ReferencedEClass ('|' terminal=CrossReferenceableTerminal)? '\]'
 ;
 ]
 
 Example:
 
-code[Java][ReferringType :
+code[Xtext][ReferringType :
   'ref' referencedObject=\[Entity|STRING\]
 ;
 ]
@@ -45,7 +45,7 @@ supported by Xtext at all.
 
 When parsing a given input string, say
 
-code[Java][ref Entity01]
+code[LinkingExample][ref Entity01]
 
 the codeRef[org.eclipse.xtext.linking.lazy.LazyLinker] first creates an EMF proxy and 
 assigns it to the corresponding e[EReference]. In EMF a proxy is described by a URI, which points to the 

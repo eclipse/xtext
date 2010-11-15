@@ -7,7 +7,7 @@ In some cases, e.g. if your e[SHIFT] key is broken, you might want to design a c
 
 For case insensitive keywords, open your MWE workflow and replace the Antlr related fragments: 
 
-code[Java][// The antlr parser generator fragment.
+code[MWE2][// The antlr parser generator fragment.
 fragment = parser.antlr.XtextAntlrGeneratorFragment {
 //  options = {
 //		backtrack = true
@@ -22,7 +22,7 @@ fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
 
 with
 
-code[Java][// The antlr parser generator fragment.
+code[MWE2][// The antlr parser generator fragment.
 fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
     options = {
         ignoreCase = true
@@ -40,14 +40,14 @@ fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {
 
 For case insensitve element names, use the e[ignoreCase] option in your scope fragment, i.e.
 
-code[Java][fragment = scoping.ImportNamespacesScopingFragment {
+code[MWE2][fragment = scoping.ImportNamespacesScopingFragment {
     ignoreCase = true
 }
 ]
 
 or if you are using ref:import_uri[importURI based global scopes]
 
-code[Java][fragment = scoping.ImportURIScopingFragment {
+code[MWE2][fragment = scoping.ImportURIScopingFragment {
     ignoreCase = true
 }
 ]

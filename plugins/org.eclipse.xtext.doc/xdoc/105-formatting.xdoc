@@ -21,8 +21,7 @@ A declarative formatter can be implemented by sub-classing
 codeRef[org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter], as shown in 
 the following example:
 
-code[Java][
-public class ExampleFormatter extends AbstractDeclarativeFormatter {
+code[Java][public class ExampleFormatter extends AbstractDeclarativeFormatter {
 
   @Override
   protected void configureFormatting(FormattingConfig c) {

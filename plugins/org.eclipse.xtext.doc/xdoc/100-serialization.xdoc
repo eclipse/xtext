@@ -30,7 +30,7 @@ aware that this does e[not] imply, that loading a textual representation and ser
 identical textual representations. For example, this is the case when a default value is used in a 
 textual representation and the assignment is optional. Another example is:
 
-code[Java][MyRule:
+code[Xtext][MyRule:
   (xval+=ID | yval+=INT)*;
   ]
 
@@ -146,7 +146,7 @@ the serializer by default doesn't know which value to use for serialization.
 
 . Example:
 
-code[Java][PluralRule:
+code[Xtext][PluralRule:
   'contents:' count=INT Plural;
   
 terminal Plural: 

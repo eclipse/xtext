@@ -42,8 +42,10 @@ Given the example model from the
 </p>
 
 <p>
-
-
+<div class="image" >
+<img src="images/ast.png" class=" width:50%" />
+ 
+</div>
 </p>
 
 <p>
@@ -92,8 +94,10 @@ We have summarized these most relevant concepts of Ecore in the following diagra
 </p>
 
 <p>
-
-
+<div class="image" >
+<img src="images/ecore.png" class=" " />
+ 
+</div>
 </p>
 
 
@@ -199,8 +203,10 @@ Xtext provides an implementation of EMF&apos;s resource, the
 </p>
 
 <p>
-
-
+<div class="image" >
+<img src="images/emf-integration.png" class=" " />
+ 
+</div>
 </p>
 
 <p>
@@ -388,9 +394,7 @@ Having an Xtext editor and a canonical GMF editor on the same resource can there
 </p>
 
 <p>
-In this example, we let each editor use its own memory instance of the model and synchronize on file changes only. Both frameworks already synchronize with external changes to the edited files out-of-the-box. In the glue code, a 
-<em></em>
- warns the user if she tries to edit the same file with two different model editors concurrently.
+In this example, we let each editor use its own memory instance of the model and synchronize on file changes only. Both frameworks already synchronize with external changes to the edited files out-of-the-box. In the glue code, a <em>org.eclipse.xtext.gmf.glue.concurrency.ConcurrentModificationObserver</em> warns the user if she tries to edit the same file with two different model editors concurrently.
 </p>
 
 <p>
@@ -431,9 +435,7 @@ An <em>XtextResource</em> keeps track of it&apos;s concrete syntax representatio
 </p>
 
 <p>
-We can use the node adapter to access the text block that represents an attribute, and call the Xtext parser to parse the user input. The example code is contained in  
-<em></em>
-. <em>SimplePropertyWrapperEditPartOverride</em> shows how this is integrated into the generated GMF editor. Use the <em>EntitiesEditPartFactoryOverride</em> to instantiate it and the <em>EntitiesEditPartProviderOverride</em> to create the overridden factory, and register the latter to the extension point. Note that this is a non-invasive way to extend generated GMF editors.
+We can use the node adapter to access the text block that represents an attribute, and call the Xtext parser to parse the user input. The example code is contained in  <em>org.eclipse.xtext.gmf.glue.edit.part.AntlrParserWrapper</em>. <em>SimplePropertyWrapperEditPartOverride</em> shows how this is integrated into the generated GMF editor. Use the <em>EntitiesEditPartFactoryOverride</em> to instantiate it and the <em>EntitiesEditPartProviderOverride</em> to create the overridden factory, and register the latter to the extension point. Note that this is a non-invasive way to extend generated GMF editors.
 </p>
 
 <p>

@@ -214,9 +214,7 @@ You can now add command / handler pairs to the context menu.
 First, you need to define a command - it will serve as a handle to glue together the handler 
 and the menu contribution:
 
-code[
-<extension
-  point="org.eclipse.ui.commands">
+code[XML][<extension point="org.eclipse.ui.commands">
   <command
     id="org.example.mydsl.ui.editor.outline.SampleOutlineCommand"
     name="Sample Command"
@@ -229,8 +227,7 @@ Next, you need to define a handler which will eventually execute the code to ope
 selected node. Please pay special attention to the attribute e[commandId] - it must match the e[id] 
 attribute of your command. 
 
-code[
-<extension
+code[XML][<extension
   point="org.eclipse.ui.handlers">
   <handler
     class="org.example.mydsl.ui.editor.outline.SampleOutlineNodeHandler"
@@ -241,9 +238,7 @@ code[
 
 Finally, define a e[menuContribution] to add the command to the context menu:
 
-code[
-<extension
-  point="org.eclipse.ui.menus">
+code[XML][<extension point="org.eclipse.ui.menus">
   <menuContribution
     locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
     <command

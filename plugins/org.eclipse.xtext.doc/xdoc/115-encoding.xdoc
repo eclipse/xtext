@@ -36,7 +36,7 @@ adding special characters to your grammar or at least make sure the grammar read
 encoding change. To tell the Xtext generator to generate files in the same encoding, set the encoding 
 property in the workflow next to your grammar, e.g.
 
-code[Java][Generator {
+code[MWE2][Generator {
 	encoding ="UTF-8"
 	...
 ]

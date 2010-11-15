@@ -32,7 +32,7 @@ section2:MWE2HelloWorld[The Simplest Workflow]
 The arguably shortest MWE2 module may look like the following 
 snippet.
 
-code[Java][module HelloWorld 
+code[MWE2][module HelloWorld 
 
 SayHello {
   message = "Hello World!"
@@ -79,7 +79,7 @@ a declarative manner. To make the workflow executable with the
 e[WorkflowRunner], the component e[SayHello] must be nested in a root 
 workflow:
 
-code[Java][module HelloWorld 
+code[MWE2][module HelloWorld 
 
 Workflow {
 	component = SayHello {
@@ -100,7 +100,7 @@ section2:MWE2SimpleTransformation[A Simple Transformation]
 The following workflow solves the exemplary task to rename every e[EClassifier] in an e[*.ecore] file.
 It consists of three components that read, modify and write the model file:
 
-code[Java][module Renamer
+code[MWE2][module Renamer
 Workflow {
   component = ResourceReader {
         uri = "model.ecore"
@@ -239,7 +239,7 @@ be measured. In this case, it is another workflow that does not need know about 
 is to use a local identifier for the instantiated e[StopWatch] and reuse this one at the end to receive
 the post-invoke life-cycle event twice. 
 
-code[Java][module MeasuredWorkflow
+code[MWE2][module MeasuredWorkflow
 
 Workflow {
   component = StopWatch: stopWatch {}
@@ -264,7 +264,7 @@ item[Components are mapped to plain vanilla e[Java objects]. Arbitrary e[set- an
 Let's consider the follow short example module and e[SampleClass] to 
 explain these concepts.
 
-code[Java][module com.mycompany.Example
+code[MWE2][module com.mycompany.Example
 
 import java.util.*
 
@@ -329,7 +329,7 @@ assigned at any place where a e[com.mycompany.SampleClass] is expected.
 
 Let's create a second module e[com.mycompany.Second] like this:
 
-code[Java][module com.mycompany.sub.Second
+code[MWE2][module com.mycompany.sub.Second
 
 import com.mycompany.*
 
@@ -356,7 +356,7 @@ to allow for easier external customization. The exemplary component
 definition was only changed slightly by introducing a property 
 e[value].
 
-code[Java][module com.mycompany.Example
+code[MWE2][module com.mycompany.Example
 
 var value = 'a string'
 
@@ -371,7 +371,7 @@ be assumed. However, properties are not limited to strings. The
 second built in type is boolean via the familiar literals e[true] and
 e[false]. More flexibility is available via actual component literals.
 
-code[Java][module com.mycompany.Example
+code[MWE2][module com.mycompany.Example
 
 var childInstance = SampleClass {
                       singleValue = "child"
@@ -385,7 +385,7 @@ If one wants to define string properties that are actual reusable
 parts for other properties, she may use defined variables inside other
 literals like this: 
 
-code[Java][var aString = "part"
+code[MWE2][var aString = "part"
 var anotherString = "reuse the ${part} here"]
 
 This is especially useful for file paths in workflows as one would
@@ -400,7 +400,7 @@ That is where mandatory properties come into play. Modules define their
 interface not only via their fully qualified name and the type of the
 root component but also by means of the defined properties.    
 
-code[Java][module com.mycompany.Example
+code[MWE2][module com.mycompany.Example
 
 var optional = 'a string'
 var mandatory
@@ -417,7 +417,7 @@ properties. The second one has no default value assigned and is
 thereby considered to be mandatory. The mandatory value must be assigned
 if we reuse e[org.mycompany.Example] in another module like this:
 
-code[Java][module com.mycompany.Second
+code[MWE2][module com.mycompany.Second
 
 var newMandatory
 
@@ -451,7 +451,7 @@ in terms of defined life-cycle events.
 If we wanted to assign the created instance to a property of itself,
 we could use the following syntax:
 
-code[Java][module com.mycompany.Example
+code[MWE2][module com.mycompany.Example
 
 SampleClass : self {
   child = self
@@ -472,7 +472,7 @@ feature. To avoid the overall repetition of assignments, MWE2 offers
 the possibility to use the e[auto-inject] modifier on the component 
 literal:
 
-code[Java][module com.mycompany.Example
+code[MWE2][module com.mycompany.Example
 
 var child = SampleClass {}
 
@@ -498,7 +498,7 @@ MWE2 is not sensitive to white-space and allows to define line-comments
 and block comments everywhere. The syntax is the same as one is used 
 to from the Java language:
 
-code[Java][// This is a comment
+code[MWE2][// This is a comment
 /* 
   This is another one.
 */]
@@ -511,7 +511,7 @@ underscore and is followed by any number of letters, numbers or underscores.
 An identifier is composed from one or more segments which are delimited
 by a '.' dot.
 
-code[Java][Name: ID ('.' ID)*;
+code[Xtext][Name: ID ('.' ID)*;
 ID: ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*; ]
 
 MWE2 does not use a semicolon as statement delimiter at any place.
@@ -534,7 +534,7 @@ Imports are either suffixed by a wild-card or concrete for a class
 or module. MWE2 can handle relative imports in case one uses the 
 wild-card notation:
 
-code[Java]['import' name '.*'?   
+code[Xtext]['import' name '.*'?   
 ]
 
 section2:MWE2PropertySyntax[Property]
@@ -602,7 +602,7 @@ the high relevance in a description object composition and configuration
 language. MWE2 strings are multi-line strings and can be composed of
 several parts.
 
-code[Java][var aString = 'a value'
+code[MWE2][var aString = 'a value'
 var anotherString = 'It is possible to embed ${aString} into
  a multi-line string']
 
@@ -621,7 +621,7 @@ to write line-breaks or tabular characters explicitly and to escape
 the beginning of substitution variables e[${] and the quotes itself. Allowed
 escape sequences are:
 
-code[Java][\n  .. line break
+code[MWE2][\n  .. line break
 \r  .. carriage return
 \t  .. tabular character
 \'  .. single-quote (can be omitted in double-quoted strings)

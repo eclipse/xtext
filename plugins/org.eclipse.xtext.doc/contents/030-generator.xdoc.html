@@ -81,7 +81,7 @@ Given the following simple Java class (POJO):
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-package&nbsp;com.mycompany;<br />&nbsp;&nbsp;<br />public&nbsp;class&nbsp;Person&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;private&nbsp;String&nbsp;name;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;public&nbsp;void&nbsp;setName(String&nbsp;name)&nbsp;{&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;this.name&nbsp;=&nbsp;name;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;private&nbsp;final&nbsp;List&lt;Person&gt;&nbsp;children&nbsp;=&nbsp;new&nbsp;ArrayList&lt;Person&gt;();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;public&nbsp;void&nbsp;addChild(Person&nbsp;child)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;this.children.add(child);<br />&nbsp;&nbsp;}<br />}<br />&nbsp;&nbsp;
+<span class="keyword">package</span>&nbsp;com.mycompany;<br />&nbsp;&nbsp;<br /><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;Person&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;name;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setName(String&nbsp;name)&nbsp;{&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.name&nbsp;=&nbsp;name;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">final</span>&nbsp;List&lt;Person&gt;&nbsp;children&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;Person&gt;();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(Person&nbsp;child)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.children.add(child);<br />&nbsp;&nbsp;}<br />}<br />&nbsp;&nbsp;
 </p>
 </div>
 </div>
@@ -99,7 +99,7 @@ without writing a single line of Java code and without the need to compile class
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-module&nbsp;com.mycompany.CreatePersons<br /><br />Person&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;&quot;Grandpa&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;&quot;Father&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;&quot;Son&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">module</span>&nbsp;com.mycompany.CreatePersons<br /><br />Person&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;&quot;Grandpa&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;&quot;Father&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;child&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;&quot;Son&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -118,7 +118,7 @@ The interpreter will basically do the same as the following <em>main</em> method
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-package&nbsp;com.mycompany;<br /><br />public&nbsp;class&nbsp;CreatePersons&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;main(String[]&nbsp;args)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;grandpa&nbsp;=&nbsp;new&nbsp;Person();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grandpa.setName(&quot;Grandpa&quot;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;father&nbsp;=&nbsp;new&nbsp;Person();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;father.setName(&quot;Father&quot;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grandpa.addChild(father);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;son&nbsp;=&nbsp;new&nbsp;Person();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;son.setName(&quot;Son&quot;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;father.addChild(son);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">package</span>&nbsp;com.mycompany;<br /><br /><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;CreatePersons&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;grandpa&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grandpa.setName(&quot;Grandpa&quot;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;father&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;father.setName(&quot;Father&quot;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grandpa.addChild(father);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;son&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;son.setName(&quot;Son&quot;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;father.addChild(son);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -207,8 +207,10 @@ the outline view, etc.
 </p>
 
 <p>
-
-
+<div class="image" >
+<img src="images/generator-structure.png" class=" width:50%" />
+ 
+</div>
 </p>
 
 
@@ -276,7 +278,7 @@ In the following we see an exemplary Xtext generator configuration written in MW
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-module&nbsp;org.xtext.example.MyDsl<br /><br />import&nbsp;org.eclipse.emf.mwe.utils.*<br />import&nbsp;org.eclipse.xtext.generator.*<br />import&nbsp;org.eclipse.xtext.ui.generator.*<br /><br />var&nbsp;grammarURI&nbsp;=&nbsp;&quot;classpath:/org/xtext/example/MyDsl.xtext&quot;<br />var&nbsp;file.extensions&nbsp;=&nbsp;&quot;mydsl&quot;<br />var&nbsp;projectName&nbsp;=&nbsp;&quot;org.xtext.example.mydsl&quot;<br />var&nbsp;runtimeProject&nbsp;=&nbsp;&quot;../${projectName}&quot;<br /><br />Workflow&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;platformUri&nbsp;=&nbsp;&quot;${runtimeProject}/..&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;&quot;${runtimeProject}/src-gen&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;&quot;${runtimeProject}.ui/src-gen&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;Generator&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pathRtProject&nbsp;=&nbsp;runtimeProject<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pathUiProject&nbsp;=&nbsp;&quot;${runtimeProject}.ui&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;projectNameRt&nbsp;=&nbsp;projectName<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;projectNameUi&nbsp;=&nbsp;&quot;${projectName}.ui&quot;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;grammarURI<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileExtensions&nbsp;=&nbsp;file.extensions<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fragment&nbsp;=&nbsp;grammarAccess.GrammarAccessFragment&nbsp;{}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*&nbsp;more&nbsp;fragments&nbsp;to&nbsp;configure&nbsp;the&nbsp;language&nbsp;*/<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">module</span>&nbsp;org.xtext.example.MyDsl<br /><br /><span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe.utils.*<br /><span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.*<br /><span class="keyword">import</span>&nbsp;org.eclipse.xtext.ui.generator.*<br /><br /><span class="keyword">var</span>&nbsp;grammarURI&nbsp;=&nbsp;&quot;classpath:/org/xtext/example/MyDsl.xtext&quot;<br /><span class="keyword">var</span>&nbsp;file.extensions&nbsp;=&nbsp;&quot;mydsl&quot;<br /><span class="keyword">var</span>&nbsp;projectName&nbsp;=&nbsp;&quot;org.xtext.example.mydsl&quot;<br /><span class="keyword">var</span>&nbsp;runtimeProject&nbsp;=&nbsp;&quot;../${projectName}&quot;<br /><br />Workflow&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;platformUri&nbsp;=&nbsp;&quot;${runtimeProject}/..&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;&quot;${runtimeProject}/src-gen&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;DirectoryCleaner&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;directory&nbsp;=&nbsp;&quot;${runtimeProject}.ui/src-gen&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;Generator&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pathRtProject&nbsp;=&nbsp;runtimeProject<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pathUiProject&nbsp;=&nbsp;&quot;${runtimeProject}.ui&quot;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;projectNameRt&nbsp;=&nbsp;projectName<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;projectNameUi&nbsp;=&nbsp;&quot;${projectName}.ui&quot;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;=&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;grammarURI<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileExtensions&nbsp;=&nbsp;file.extensions<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Java&nbsp;API&nbsp;to&nbsp;access&nbsp;grammar&nbsp;elements<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fragment&nbsp;=&nbsp;grammarAccess.GrammarAccessFragment&nbsp;{}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/*&nbsp;more&nbsp;fragments&nbsp;to&nbsp;configure&nbsp;the&nbsp;language&nbsp;*/<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -380,7 +382,7 @@ adds the @Inject annotation:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;class&nbsp;MyLanguageLinker&nbsp;extends&nbsp;Linker&nbsp;{<br /><br />&nbsp;&nbsp;@Inject<br />&nbsp;&nbsp;private&nbsp;IScopeProvider&nbsp;scopeProvider;<br /><br />}<br />&nbsp;
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLanguageLinker&nbsp;<span class="keyword">extends</span>&nbsp;Linker&nbsp;{<br /><br />&nbsp;&nbsp;@Inject<br />&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IScopeProvider&nbsp;scopeProvider;<br /><br />}<br />&nbsp;
 </p>
 </div>
 </div>
@@ -406,7 +408,7 @@ classes. Modules are implemented in Java. Here&apos;s an example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;class&nbsp;MyDslRuntimeModule&nbsp;extends&nbsp;AbstractMyDslRuntimeModule&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;@Override<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;configure(Binder&nbsp;binder)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super.configure(binder);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IScopeProvider.class).to(MyConcreteScopeProvider.class);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslRuntimeModule&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslRuntimeModule&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;@Override<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(Binder&nbsp;binder)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.configure(binder);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IScopeProvider.<span class="keyword">class</span>).to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
 </p>
 </div>
 </div>
@@ -453,7 +455,7 @@ methods in order to find declared bindings. The most common kind of method is :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;Class&lt;?&nbsp;extends&nbsp;IScopeProvider&gt;&nbsp;bindIScopeProvider()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;MyConcreteScopeProvider.class;<br />}<br />
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IScopeProvider&gt;&nbsp;bindIScopeProvider()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProvider.<span class="keyword">class</span>;<br />}<br />
 </p>
 </div>
 </div>
@@ -482,7 +484,7 @@ an interface with just one method :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;interface&nbsp;Provider&lt;T&gt;&nbsp;{<br /><br />&nbsp;&nbsp;/**<br />&nbsp;&nbsp;&nbsp;*&nbsp;Provides&nbsp;an&nbsp;instance&nbsp;of&nbsp;{@code&nbsp;T}.&nbsp;Must&nbsp;never&nbsp;return&nbsp;{@code&nbsp;null}.<br />&nbsp;&nbsp;&nbsp;*/<br />&nbsp;&nbsp;T&nbsp;get();<br />}<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;Provider&lt;T&gt;&nbsp;{<br /><br />&nbsp;&nbsp;/**<br />&nbsp;&nbsp;&nbsp;*&nbsp;Provides&nbsp;an&nbsp;instance&nbsp;of&nbsp;{@code&nbsp;T}.&nbsp;Must&nbsp;never&nbsp;<span class="keyword">return</span>&nbsp;{@code&nbsp;null}.<br />&nbsp;&nbsp;&nbsp;*/<br />&nbsp;&nbsp;T&nbsp;get();<br />}<br />
 </p>
 </div>
 </div>
@@ -501,7 +503,7 @@ to point to a provider rather than to a concrete class you can use the following
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;Class&lt;?&nbsp;extends&nbsp;Provider&lt;IScopeProvider&gt;&gt;&nbsp;provideIScopeProvider()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;MyConcreteScopeProviderFactory.class;<br />}<br />
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;Provider&lt;IScopeProvider&gt;&gt;&nbsp;provideIScopeProvider()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProviderFactory.<span class="keyword">class</span>;<br />}<br />
 </p>
 </div>
 </div>
@@ -525,7 +527,7 @@ may be useful if some global state should be shared in the application:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;Provider&lt;IScopeProvider&gt;&nbsp;provideIScopeProvider()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;MyConcreteScopeProviderFactory();<br />}<br />
+<span class="keyword">public</span>&nbsp;Provider&lt;IScopeProvider&gt;&nbsp;provideIScopeProvider()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProviderFactory();<br />}<br />
 </p>
 </div>
 </div>
@@ -542,7 +544,7 @@ or
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;IScopeProvider&nbsp;bindIScopeProvider()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;MyConcreteScopeProvider();<br />}<br />
+<span class="keyword">public</span>&nbsp;IScopeProvider&nbsp;bindIScopeProvider()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProvider();<br />}<br />
 </p>
 </div>
 </div>
@@ -565,7 +567,7 @@ type <em>Binder</em>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;void&nbsp;configureIScopeProvider(Binder&nbsp;binder)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IScopeProvider.class).to(MyConcreteScopeProvider.class);<br />}&nbsp;<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureIScopeProvider(Binder&nbsp;binder)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IScopeProvider.<span class="keyword">class</span>).to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br />}&nbsp;<br />
 </p>
 </div>
 </div>
@@ -603,7 +605,7 @@ this is something that&apos;s done in the main method. It could look like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;static&nbsp;void&nbsp;main(String[]&nbsp;args)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;Injector&nbsp;injector&nbsp;=&nbsp;Guice.createInjector(new&nbsp;MyDslRuntimeModule());<br />&nbsp;&nbsp;&nbsp;&nbsp;MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(MyApplication.class);<br />&nbsp;&nbsp;&nbsp;&nbsp;application.run();<br />}<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;Injector&nbsp;injector&nbsp;=&nbsp;Guice.createInjector(<span class="keyword">new</span>&nbsp;MyDslRuntimeModule());<br />&nbsp;&nbsp;&nbsp;&nbsp;MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(MyApplication.<span class="keyword">class</span>);<br />&nbsp;&nbsp;&nbsp;&nbsp;application.run();<br />}<br />
 </p>
 </div>
 </div>
@@ -624,7 +626,7 @@ an <em>Injector</em> and uses it to initialize a couple of EMF objects and regis
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Injector&nbsp;injector&nbsp;=&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;MyStandaloneSetup().createInjectorAndDoEMFRegistration();&nbsp;<br />
+Injector&nbsp;injector&nbsp;=&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyStandaloneSetup().createInjectorAndDoEMFRegistration();&nbsp;<br />
 </p>
 </div>
 </div>

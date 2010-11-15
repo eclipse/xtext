@@ -41,7 +41,7 @@ code[Java][${<displayText>:CrossReference(\[<MyPackageName>.\]<MyType>.<myRef>)}
 
 For example the following template:
 
-code[Java][<template name="transition" description="event transition" id="transition"
+code[XML][<template name="transition" description="event transition" id="transition"
   context="org.eclipse.xtext.example.FowlerDsl.Transition" enabled="true">
     ${event:CrossReference('Transition.event')} => 
     	${state:CrossReference('Transition.state')
@@ -66,7 +66,7 @@ code[Java][${<displayText>:Enum(\[<MyPackage>.\]<EnumType>)]
 
 For example the following template (taken from the domainmodel example):
 
-code[Java][<template name="Operation" description="template for an Operation"
+code[XML][<template name="Operation" description="template for an Operation"
   id="org.eclipse.xtext.example.Domainmodel.Operation"
   context="org.eclipse.xtext.example.Domainmodel.Operation"
   enabled="true">

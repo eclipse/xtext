@@ -45,7 +45,7 @@ public class Person {
 One can create a family tree with MWE2 easily by describing it in a declarative manner 
 without writing a single line of Java code and without the need to compile classes:
 
-code[Java][module com.mycompany.CreatePersons
+code[MWE2][module com.mycompany.CreatePersons
 
 Person {
 	name = "Grandpa"
@@ -89,7 +89,7 @@ person - the class is inferred from the assigned feature - becomes a child of "F
 their respective e[name] assigned via a reflective invocation e[setName]. If one wants to add another child to "Father", she
 can simply repeat the child assignment:
 
-code[Java][child = com.mycompany.Person {
+code[MWE2][child = com.mycompany.Person {
 	name = "Father"
 	child = {
 		name = "Son"
@@ -144,7 +144,7 @@ section3[Configuration]
 As already explained we use MWE2 from EMFT in order to instantiate, configure and execute this structure of components. 
 In the following we see an exemplary Xtext generator configuration written in MWE2 configuration code:  
 
-code[Java][module org.xtext.example.MyDsl
+code[MWE2][module org.xtext.example.MyDsl
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*

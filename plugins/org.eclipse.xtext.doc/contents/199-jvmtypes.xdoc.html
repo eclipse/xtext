@@ -56,7 +56,7 @@ Thanks to content assist this is easy to spot in the list of proposals.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-import&nbsp;&quot;http://www.eclipse.org/xtext/common/JavaVMTypes&quot;&nbsp;as&nbsp;types<br />
+<span class="keyword">import</span>&nbsp;&quot;http://www.eclipse.org/xtext/common/JavaVMTypes&quot;&nbsp;<span class="keyword">as</span>&nbsp;types<br />
 </p>
 </div>
 </div>
@@ -116,7 +116,7 @@ like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-type&nbsp;Date&nbsp;mapped-to&nbsp;java.util.Date<br />
+<span class="keyword">type</span>&nbsp;Date&nbsp;<span class="keyword">mapped-to</span>&nbsp;java.util.Date<br />
 </p>
 </div>
 </div>
@@ -186,7 +186,7 @@ to a smaller number of valid entries.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-import&nbsp;static&nbsp;org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters.*;&nbsp;<br />..<br />..<br /><br />&nbsp;&nbsp;proposalProvider.createSubTypeProposals(factory,&nbsp;context,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and(not(canInstantiate()),&nbsp;isPublic()),&nbsp;acceptor);<br />&nbsp;<br />&nbsp;
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters.*;&nbsp;<br />..<br />..<br /><br />&nbsp;&nbsp;proposalProvider.createSubTypeProposals(factory,&nbsp;context,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and(not(canInstantiate()),&nbsp;isPublic()),&nbsp;acceptor);<br />&nbsp;<br />&nbsp;
 </p>
 </div>
 </div>
@@ -210,7 +210,7 @@ one instead of the plain implementation.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Override<br />public&nbsp;void&nbsp;complete&lt;TypeName&gt;_&lt;ReferenceName&gt;(<br />&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;model,<br />&nbsp;&nbsp;&nbsp;&nbsp;Assignment&nbsp;assignment,<br />&nbsp;&nbsp;&nbsp;&nbsp;ContentAssistContext&nbsp;context,<br />&nbsp;&nbsp;&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;IScope&nbsp;scope&nbsp;=&nbsp;getScopeProvider().getScope(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MyDsl&gt;Package.Literals.&lt;POINTER_TO_REFERENCE&gt;);<br />&nbsp;&nbsp;ITypesProposalProvider&nbsp;scopedProposalProvider&nbsp;=<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scopableProposalProvider.getScopedProposalProvider(model,&nbsp;scope);<br />&nbsp;&nbsp;scopedProposalProvider.create...<br />}
+@Override<br /><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;complete&lt;TypeName&gt;_&lt;ReferenceName&gt;(<br />&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;model,<br />&nbsp;&nbsp;&nbsp;&nbsp;Assignment&nbsp;assignment,<br />&nbsp;&nbsp;&nbsp;&nbsp;ContentAssistContext&nbsp;context,<br />&nbsp;&nbsp;&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br />&nbsp;&nbsp;IScope&nbsp;scope&nbsp;=&nbsp;getScopeProvider().getScope(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MyDsl&gt;Package.Literals.&lt;POINTER_TO_REFERENCE&gt;);<br />&nbsp;&nbsp;ITypesProposalProvider&nbsp;scopedProposalProvider&nbsp;=<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scopableProposalProvider.getScopedProposalProvider(model,&nbsp;scope);<br />&nbsp;&nbsp;scopedProposalProvider.create...<br />}
 </p>
 </div>
 </div>

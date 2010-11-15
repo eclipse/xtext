@@ -1,20 +1,38 @@
 document[Xtext Documentation]
 
-codelanguage-def[Java]
-[
-	abstract,continue,for,new,switch,
-	assert,default,package,synchronized,
-	boolean,do,if,private,this,
-	break,double,implements,protected,throw,
-	byte,else,import,public,throws,
-	case,enum,instanceof,return,transient,
-	catch,extends,int,short,try,
-	char,final,interface,static,void,
-	class,finally,long,strictfp,volatile,
-	float,native,super,while
+codelanguage-def[Java][
+	abstract, continue, for, new, switch, assert, default, goto, package, synchronized, boolean, do,
+	if, private, this, break, double, implements, protected, throw, byte, else, import, public, throws,
+	case, enum, instanceof, return, transient, catch, extends, int, short, try, char, final, interface,
+	static, void, class, finally, long, strictfp, volatile, const, float, native, super, while
 ]
 
 codelanguage-def[Xtext][generate, grammar, import, as, returns, terminal, enum, hidden, with]
+
+codelanguage-def[MWE2][module, var, auto-inject, import, true, false]
+
+codelanguage-def[Xpand][
+	IMPORT, EXTENSION, FILE, ENDFILE, DEFINE, ENDDEFINE, FOR, ENDFOR,
+	FOREACH, ENDFOREACH, AS, SEPARATOR, ITERATOR, EXPAND, REM, ENDREM, PROTECT, ENDPROTECT, this
+]
+
+codelanguage-def[Xtend][
+	import, extension, this, create, cached, this, true, false, let, switch,
+	case, if, then, else
+]
+
+codelanguage-def[Check][import, extension, this, create, cached, this, true, false, let, switch,
+	case, if, then, else, context, WARNING, ERROR]
+
+codelanguage-def[XML][]
+
+codelanguage-def[DomainExample][package, entity, datatype, import, extends]
+
+codelanguage-def[JavaTypesExample][type, mapped-to]
+
+codelanguage-def[FowlerExample][events, commands, state, actions, end, resetting]
+
+codelanguage-def[LinkingExample][ref]
 
 chapter-ref[Overview]
 

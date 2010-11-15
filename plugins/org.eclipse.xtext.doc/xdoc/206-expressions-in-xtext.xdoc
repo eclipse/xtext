@@ -8,7 +8,7 @@ code[Java][2 + 20 * 2]
 
 If you know EBNF a bit and wouldn't think about avoiding left recursion, operator precedence or associativity, you'ld probably write a grammar like this:
 
-code[Java][Expression :
+code[Xtext][Expression :
   Expression '+' Expression |
   Expression '*' Expression |
   INT;
@@ -20,7 +20,7 @@ In Xtext you define the precedence implicitly when left-factoring such a grammar
 
 So here is a left-factored grammar (not yet working with Xtext) for the expression language above :
 
-code[Java][Addition :
+code[Xtext][Addition :
   Multiplication ('+' Multiplication)*;
 
 Multiplication:
@@ -35,7 +35,7 @@ As you can see the main difference is that we have three rules instead of one an
 We should allow users to explicitly adjust precedence by adding parenthesis, e.g. write something like (2 + 20) * 2.
 So let's add support for that (note that the grammar is still not working with Xtext):
 
-code[Java][Addition :
+code[Xtext][Addition :
   Multiplication ('+' Multiplication)*;
 
 Multiplication:
@@ -61,17 +61,17 @@ In order to construct an AST we need to add Assignments and Actions. But before 
 The return type of a rule can be specified explicitly using the 'returns' keyword but can be inferred if the type's name is the same as the rule's name.
 That is
 
-code[Java][NumberLiteral : ... ;
+code[Xtext][NumberLiteral : ... ;
 ]
 
 is a short form of
 
-code[Java][NumberLiteral returns NumberLiteral : ... ;
+code[Xtext][NumberLiteral returns NumberLiteral : ... ;
 ]
 
 However in the case of the expressions grammar above, all rules need to return the same type since they are recursive. So in order to make the grammar functional we need to add a common return type explicitly (but the grammar is still missing some bits):
 
-code[Java][Addition returns Expression:
+code[Xtext][Addition returns Expression:
   Multiplication ('+' Multiplication)*;
   
 Multiplication returns Expression:
@@ -89,7 +89,7 @@ The AST type inference mechanism of Xtext will infer two types: Expression and N
 
 In the following you see the final fully working Xtext grammar:
 
-code[Java][Addition returns Expression:
+code[Xtext][Addition returns Expression:
   Multiplication ({Addition.left=current} '+' right=Multiplication)*;
   
 Multiplication returns Expression:
@@ -162,13 +162,13 @@ code[Addition returns Expression:
 ]
 Right associativity is done using the following pattern (note the quantity operator and the call to the rule itself at the end):
 
-code[Java][Addition returns Expression:
+code[Xtext][Addition returns Expression:
   Multiplication ({Addition.left=current} '+' right=Addition)?;
 ]
 
 And if you don't want to allow multiple usages of the same expression in a row (hence non-associativity) you write:
 
-code[Java][Addition returns Expression:
+code[Xtext][Addition returns Expression:
   Multiplication ({Addition.left=current} '+' right=Multiplication)?;
 ]
 

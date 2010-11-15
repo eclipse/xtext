@@ -29,7 +29,7 @@ This means that everything which is created via extension points is managed by G
 
 The only thing you have to do in order to use this factory is to prefix the class with the factory e[\[MyLanguageName\]ExecutableExtensionFactory] name followed by a colon.
 
-code[Java][<extension
+code[XML][<extension
   point="org.eclipse.ui.editors">
   <editor
     class="<MyLanguageName>ExecutableExtensionFactory:

@@ -6,7 +6,7 @@ a transition contains two cross-references: One to a declared event and one to a
 
 Example:
 
-code[Java][events
+code[FowlerExample][events
   nothingImportant  MYEV
 end
  
@@ -17,7 +17,7 @@ end
 
 The grammar rule for transitions looks like this:
 
-code[Java][Transition :
+code[Xtext][Transition :
   event=\[Event\] '=>' state=\[State\];
 ]
 
@@ -159,7 +159,7 @@ Talking of the introductory example and given you would want to add support for 
 e[States] and e[Events] from within your state machine, all you had to do is add something like the 
 following to the grammar definition:
 
-code[Java][Statemachine :
+code[Xtext][Statemachine :
   (imports+=Import)* // allow imports
   'events'
      (events+=Event)+
@@ -511,8 +511,7 @@ makes it possible to refer to 'java.util.Set' by its simple name 'Set'.
 Contrary to Java the import is not active for the whole file but only for the namespace it is declared 
 in and its child namespaces. That is why you can write the following in the example DSL:
 
-code[Java][
-package foo {
+code[DomainExample][package foo {
   import bar.Foo
   entity Bar extends Foo {
   }
@@ -525,8 +524,7 @@ package bar {
 
 Of course the declared elements within a package are as well referable by their simple name:
 
-code[Java][
-package bar {
+code[DomainExample][package bar {
   entity Bar extends Foo {}
   entity Foo {}
 }
@@ -534,8 +532,7 @@ package bar {
 
 The following would as well be ok:
 
-code[Java][
-package bar {
+code[DomainExample][package bar {
   entity Bar extends bar.Foo {}
   entity Foo {}
 }
