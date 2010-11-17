@@ -12,8 +12,8 @@ import java.util.List;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
-import org.eclipse.xtext.parser.antlr.SyntaxErrorMessage;
 import org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider;
 import org.eclipse.xtext.parser.unorderedGroups.services.SimpleUnorderedGroupsTestLanguageGrammarAccess;
 
