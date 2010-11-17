@@ -74,4 +74,12 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		firstChild.setParent(this);
 	}
 	
+	public void addChild(AbstractNode child) {
+		if (firstChild == null)
+			setFirstChild(child);
+		else {
+			firstChild.addPrevious(child);
+		}
+	}
+	
 }

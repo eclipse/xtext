@@ -10,7 +10,6 @@ package org.eclipse.xtext.nodemodel.impl;
 import java.util.Collections;
 import java.util.Iterator;
 
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -83,7 +82,10 @@ public class RootNode implements ICompositeNode, Adapter {
 	}
 
 	public void setTarget(Notifier newTarget) {
-		throw new UnsupportedOperationException();
+		if (newTarget == null || newTarget instanceof EObject)
+			rootSemanticObject = (EObject) newTarget;
+		else
+			throw new IllegalArgumentException("Notifier must be an Eobject");
 	}
 
 	public boolean isAdapterForType(Object type) {
@@ -120,16 +122,32 @@ public class RootNode implements ICompositeNode, Adapter {
 		this.grammarElement = grammarElement;
 	}
 
+	public AbstractNode getFirstChild() {
+		return firstChild;
+	}
+	
 	public void setFirstChild(AbstractNode firstChild) {
 		if (this.firstChild != null) {
 			this.firstChild.setParent(null);
 		}
 		this.firstChild = firstChild;
-		firstChild.setParent(this);
+		if (firstChild != null) {
+			firstChild.setParent(this);
+			firstChild.addNext(firstChild);
+			firstChild.addPrevious(firstChild);
+		}
+	}
+	
+	public void addChild(AbstractNode child) {
+		if (firstChild == null)
+			setFirstChild(child);
+		else {
+			firstChild.addPrevious(child);
+		}
 	}
 
 	public void setSemanticElement(EObject element) {
 		this.rootSemanticObject = element;
 	}
-	
+
 }
