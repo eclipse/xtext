@@ -9,7 +9,6 @@ package org.eclipse.xtext.nodemodel.impl;
 
 import java.util.Iterator;
 
-
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -80,21 +79,35 @@ public abstract class AbstractNode implements INode {
 		return next;
 	}
 	
-	public void setPrevious(AbstractNode prev) {
+	public void addPrevious(AbstractNode prev) {
 		if (prev != null) {
 			prev.prev = this.prev;
 			prev.parent = parent;
 			prev.next = this;
+			if (this.prev != null) {
+				this.prev.next = prev;
+			}
 		}
 		this.prev = prev;
 	}
 	
-	public void setNext(AbstractNode next) {
+	public void setPrevious(AbstractNode prev) {
+		this.prev = prev;
+	}
+	
+	public void addNext(AbstractNode next) {
 		if (next != null) {
 			next.next = this.next;
 			next.parent = parent;
 			next.prev = this;
+			if (this.next != null) {
+				this.next.prev = next;
+			}
 		}
+		this.next = next;
+	}
+	
+	public void setNext(AbstractNode next) {
 		this.next = next;
 	}
 	

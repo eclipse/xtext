@@ -7,12 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CompositeNodeWithSemanticElement extends CompositeNode {
+public class CompositeNodeWithSemanticElement extends CompositeNode implements Adapter {
 
 	private EObject semanticElement;
 	
@@ -28,6 +32,25 @@ public class CompositeNodeWithSemanticElement extends CompositeNode {
 
 	public void setSemanticElement(EObject element) {
 		this.semanticElement = element;
+	}
+
+	public void notifyChanged(Notification notification) {
+		// ignore
+	}
+
+	public Notifier getTarget() {
+		return semanticElement;
+	}
+
+	public void setTarget(Notifier newTarget) {
+		if (newTarget == null || newTarget instanceof EObject)
+			semanticElement = (EObject) newTarget;
+		else
+			throw new IllegalArgumentException("Notifier must be an Eobject");
+	}
+
+	public boolean isAdapterForType(Object type) {
+		return INode.class.isAssignableFrom((Class<?>)type);
 	}
 	
 }
