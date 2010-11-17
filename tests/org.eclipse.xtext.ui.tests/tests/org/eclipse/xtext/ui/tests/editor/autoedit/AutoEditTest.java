@@ -271,7 +271,7 @@ public class AutoEditTest extends AbstractAutoEditTest {
 		XtextEditor editor = openEditor("/*\n *| */");
 		
 		pressKey(editor, '\n');
-		assertState("/*\n *\n * |\n */", editor);
+		assertState("/*\n *\n * | */", editor);
 	}
 
 	public void testMLComments_04() throws Exception {
