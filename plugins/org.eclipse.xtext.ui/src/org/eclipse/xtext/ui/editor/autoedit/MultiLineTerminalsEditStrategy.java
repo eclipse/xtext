@@ -17,7 +17,7 @@ import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
+import com.google.inject.MembersInjector;
 
 /**
  * This strategy applies auto edits when typing a newline character within a block (denoted by a start and end terminal).
@@ -28,7 +28,7 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 	
 	public static class Factory {
 		@Inject
-		private Injector injector;
+		private MembersInjector<MultiLineTerminalsEditStrategy> injector;
 		@Inject
 		private IIndentationInformation indentationInformation;
 		
@@ -45,7 +45,6 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 	private final static Logger log = Logger.getLogger(MultiLineTerminalsEditStrategy.class);
 
 	private String indentationString;
-
 
 	public MultiLineTerminalsEditStrategy(String leftTerminal, String indentationString, String rightTerminal) {
 		super(leftTerminal,rightTerminal);
@@ -102,22 +101,16 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 		newC.isChange = true;
 		int afterStartTerminal = startTerminal.getOffset() + startTerminal.getLength();
 		String string = document.get(afterStartTerminal, command.offset - afterStartTerminal);
-		newC.offset = afterStartTerminal;
-		if (string.trim().length() > 0)
-			newC.text += command.text + indentationString + (string.trim());
+		newC.offset = command.offset;
 		newC.text += command.text + indentationString;
-		newC.cursorOffset = afterStartTerminal + newC.text.length();
-		newC.length += string.length();
-		if (stopTerminal == null) {
-			IRegion line = document.getLineInformation(document.getLineOfOffset(command.offset));
-			if (document.get(command.offset, line.getOffset() + line.getLength() - command.offset).trim().length() == 0) {
-				newC.text += command.text + getRightTerminal() + command.text;
-			}
+		newC.cursorOffset = command.offset + newC.text.length();
+		if (stopTerminal == null && atEndOfLineInput(document, command.offset)) {
+			newC.text += command.text + getRightTerminal();
 		}
 		if (stopTerminal != null && util.isSameLine(document, stopTerminal.getOffset(), command.offset)) {
 			string = document.get(command.offset, stopTerminal.getOffset() - command.offset);
 			if (string.trim().length() > 0)
-				newC.text += command.text + indentationString + (string.trim());
+				newC.text += string.trim();
 			newC.text += command.text;
 			newC.length += string.length();
 		}
@@ -130,13 +123,12 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 	 */
 	protected CommandInfo handleNoStopTerminal(IDocument document, DocumentCommand command, IRegion startTerminal,
 			IRegion stopTerminal) throws BadLocationException {
-		IRegion line = document.getLineInformation(document.getLineOfOffset(command.offset));
-		if (document.get(command.offset, line.getOffset() + line.getLength() - command.offset).trim().length() == 0) {
+		if (atEndOfLineInput(document, command.offset)) {
 			CommandInfo newC = new CommandInfo();
 			newC.isChange = true;
 			String textPartBeforeCursor = command.text + Strings.removeLeadingWhitespace(indentationString);
 			newC.cursorOffset = command.offset+textPartBeforeCursor.length();
-			newC.text += textPartBeforeCursor + command.text + Strings.removeLeadingWhitespace(getRightTerminal()) + command.text;
+			newC.text = textPartBeforeCursor + command.text + Strings.removeLeadingWhitespace(getRightTerminal());
 			return newC;
 		}
 		return null;
@@ -147,7 +139,7 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 	 */
 	protected CommandInfo handleCursorBetweenStartAndStopLine(IDocument document, DocumentCommand command,
 			IRegion startTerminal, IRegion stopTerminal) throws BadLocationException {
-		if (indentationString.trim().length()>0) {
+		if (indentationString.trim().length()>0 && !atBeginningOfLineInput(document, command.offset)) {
 			CommandInfo newC = new CommandInfo();
 			newC.isChange = true;
 			newC.text += command.text + Strings.removeLeadingWhitespace(indentationString);
@@ -155,7 +147,7 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 		}
 		return null;
 	}
-	
+
 	/**
 	 * delegates to {@link #handleCursorBetweenStartAndStopLine(IDocument, DocumentCommand, IRegion, IRegion)}.
 	 */
@@ -163,4 +155,21 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 			IRegion stopTerminal) throws BadLocationException {
 		return handleCursorBetweenStartAndStopLine(document, command, startTerminal, stopTerminal);
 	}
+
+	/**
+	 * determines whether the given offset is at the beginning of the input in the line. leading whitespace is disregarded.
+	 */
+	private boolean atBeginningOfLineInput(IDocument document, int offset) throws BadLocationException {
+		IRegion line = document.getLineInformation(document.getLineOfOffset(offset));
+		return document.get(line.getOffset(), offset - line.getOffset()).trim().length() == 0;
+	}
+
+	/**
+	 * determines whether the given offset is at the end of the input in the line. trailing whitespace is disregarded.
+	 */
+	protected boolean atEndOfLineInput(IDocument document, int offset) throws BadLocationException {
+		IRegion line = document.getLineInformation(document.getLineOfOffset(offset));
+		return document.get(offset, line.getOffset() + line.getLength() - offset).trim().length() == 0;
+	}
+
 }
