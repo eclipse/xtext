@@ -20,10 +20,9 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
- * 
  * This strategy applies auto edits when typing a newline character within a block (denoted by a start and end terminal).
  * 
+ * @author Sven Efftinge - Initial contribution and API
  */
 public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrategy {
 	
@@ -144,7 +143,7 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 	}
 
 	/**
-	 * Does nothing subclasses may override
+	 * adds a new line with required indentation after the cursor.
 	 */
 	protected CommandInfo handleCursorBetweenStartAndStopLine(IDocument document, DocumentCommand command,
 			IRegion startTerminal, IRegion stopTerminal) throws BadLocationException {
@@ -156,21 +155,12 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 		}
 		return null;
 	}
-
+	
 	/**
-	 * puts any text between cursor and end terminal into a separate newline after the cursor.
-	 * puts the closing terminal into a separate line at the end.
+	 * delegates to {@link #handleCursorBetweenStartAndStopLine(IDocument, DocumentCommand, IRegion, IRegion)}.
 	 */
 	protected CommandInfo handleCursorInStopLine(IDocument document, DocumentCommand command, IRegion startTerminal,
 			IRegion stopTerminal) throws BadLocationException {
-		CommandInfo newC = new CommandInfo();
-		newC.isChange = true;
-		newC.text += command.text + Strings.removeLeadingWhitespace(indentationString);
-		newC.cursorOffset = command.offset+newC.text.length();
-		String rightWOWS = Strings.removeLeadingWhitespace(getRightTerminal());
-		String string = document.get(command.offset, stopTerminal.getOffset() - command.offset + (stopTerminal.getLength()-rightWOWS.length()));
-		newC.length = string.length();
-		newC.text += string.trim()+command.text;
-		return newC;
+		return handleCursorBetweenStartAndStopLine(document, command, startTerminal, stopTerminal);
 	}
 }
