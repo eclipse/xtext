@@ -167,7 +167,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	}
 	
-	private final Logger logger = Logger.getLogger(AbstractInternalAntlrParser.class);
+	private static final Logger logger = Logger.getLogger(AbstractInternalAntlrParser.class);
 	
 	protected CompositeNode currentNode;
 	
