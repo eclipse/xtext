@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.antlr;
+package org.eclipse.xtext.nodemodel;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

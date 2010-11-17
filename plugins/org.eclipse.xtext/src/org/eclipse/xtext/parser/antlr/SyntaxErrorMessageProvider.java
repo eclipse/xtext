@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser.antlr;
 
 import org.eclipse.xtext.diagnostics.Diagnostic;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
