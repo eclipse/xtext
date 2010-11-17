@@ -36,7 +36,8 @@ public class INTValueConverter extends AbstractLexerBasedConverter<Integer> {
 		if (Strings.isEmpty(string))
 			throw new ValueConverterException("Couldn't convert empty string to int.", node, null);
 		try {
-			return Integer.valueOf(string);
+			int intValue = Integer.parseInt(string, 10);
+			return Integer.valueOf(intValue);
 		} catch (NumberFormatException e) {
 			throw new ValueConverterException("Couldn't convert '" + string + "' to int.", node, e);
 		}
