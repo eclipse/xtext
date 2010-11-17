@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameElementRefactoringProvider;
 
 import com.google.inject.ImplementedBy;
@@ -19,5 +19,5 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultRenameElementRefactoringProvider.class)
 public interface IRenameElementRefactoringProvider {
 
-	RenameRefactoring getRenameRefactoring(IEObjectDescription element);
+	RenameRefactoring getRenameRefactoring(URI targetElementURI);
 }

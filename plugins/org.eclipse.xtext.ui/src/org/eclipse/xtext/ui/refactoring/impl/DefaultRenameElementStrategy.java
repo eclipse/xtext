@@ -7,15 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import java.util.Collections;
+
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.RefactoringStatusEntry;
 import org.eclipse.text.edits.ReplaceEdit;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.IRenameElementStrategy;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
@@ -37,40 +40,44 @@ public class DefaultRenameElementStrategy implements IRenameElementStrategy {
 		private ILocationInFileProvider locationInFileProvider;
 
 		@Inject
-		private RefactoringDocument.Factory documentFactory;
+		private IRefactoringDocument.Provider documentProvider;
 
-		public IRenameElementStrategy get(final IEObjectDescription target) {
+		public IRenameElementStrategy get(final URI targetElementURI) {
 			RefactoringStatus status = new RefactoringStatus();
-			RefactoringDocument document = documentFactory.create(target.getEObjectURI(), status);
+			IRefactoringDocument document = documentProvider.get(targetElementURI, status);
 			if(document == null || status.hasError()) {
-				for(RefactoringStatusEntry entry : status.getEntries()) {
-					switch(entry.getSeverity()) {
-					case RefactoringStatus.ERROR:
-					case RefactoringStatus.FATAL:
-						LOG.error(entry.getMessage());
-						break;
-					case RefactoringStatus.WARNING:
-						LOG.warn(entry.getMessage());
-						break;
-					case RefactoringStatus.INFO:
-						LOG.info(entry.getMessage());
-					}
-				}
+				logStatus(status);
 				return null;
 			}
-			return new DefaultRenameElementStrategy(target, document, locationInFileProvider);
+			return new DefaultRenameElementStrategy(targetElementURI, document, locationInFileProvider);
+		}
+
+		protected void logStatus(RefactoringStatus status) {
+			for(RefactoringStatusEntry entry : status.getEntries()) {
+				switch(entry.getSeverity()) {
+				case RefactoringStatus.ERROR:
+				case RefactoringStatus.FATAL:
+					LOG.error(entry.getMessage());
+					break;
+				case RefactoringStatus.WARNING:
+					LOG.warn(entry.getMessage());
+					break;
+				case RefactoringStatus.INFO:
+					LOG.info(entry.getMessage());
+				}
+			}
 		}
 	}
 
 	protected ITextRegion currentNameTextRegion;
 	protected String currentName;
 
-	protected DefaultRenameElementStrategy(final IEObjectDescription target, final RefactoringDocument targetDocument,
+	protected DefaultRenameElementStrategy(final URI targetElementURI, final IRefactoringDocument targetDocument,
 			final ILocationInFileProvider locationInFileProvider) {
-		targetDocument.getXtextDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+		targetDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource resource) {
-				EObject eObject = resource.getEObject(target.getEObjectURI().fragment());
+				EObject eObject = resource.getEObject(targetElementURI.fragment());
 				if (eObject == null)
 					throw new RefactoringStatusException("Element could not be resolved", true);
 				EAttribute nameAttribute = getNameAttribute(eObject);
@@ -101,6 +108,10 @@ public class DefaultRenameElementStrategy implements IRenameElementStrategy {
 
 	protected EAttribute getNameAttribute(EObject eObject) {
 		return SimpleAttributeResolver.NAME_RESOLVER.getAttribute(eObject);
+	}
+
+	public Iterable<URI> getDependentElements(URI targetElementURI) {
+		return Collections.emptyList();
 	}
 
 }

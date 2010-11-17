@@ -19,6 +19,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.refactoring.IRefactoringDocument;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -35,7 +36,7 @@ public class ReferenceUpdater {
 	@Inject
 	private ITokenSerializer.ICrossReferenceSerializer crossReferenceSerializer;
 
-	public void createReferenceUpdates(final RefactoringDocument referringDocument,
+	public void createReferenceUpdates(final IRefactoringDocument referringDocument,
 			final Iterable<IReferenceDescription> oldReferenceDescriptions, final EObject newTargetEObject,
 			final TextEditAcceptor acceptor, final ReplaceEdit appliedDeclarationEdit, final RefactoringStatus status) {
 		try {
@@ -43,7 +44,7 @@ public class ReferenceUpdater {
 					+ appliedDeclarationEdit.getText().length() : 0;
 			final int declarationDelta = (appliedDeclarationEdit != null) ? appliedDeclarationEdit.getText().length()
 					- appliedDeclarationEdit.getLength() : 0;
-			referringDocument.getXtextDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+			referringDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
 				@Override
 				public void process(XtextResource referringResource) throws Exception {
 					for (IReferenceDescription referenceDescription : oldReferenceDescriptions) {

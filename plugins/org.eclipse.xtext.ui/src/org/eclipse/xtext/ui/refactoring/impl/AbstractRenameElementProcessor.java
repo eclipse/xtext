@@ -5,22 +5,25 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.refactoring;
+package org.eclipse.xtext.ui.refactoring.impl;
 
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
+import org.eclipse.xtext.ui.refactoring.IRenameElementStrategy;
 
 import com.google.inject.ImplementedBy;
 
 /**
+ * Unfortunately LTK only defines abstract classes, so this is an abstract class instead of an interface only.
+ * 
  * @author koehnlein - Initial contribution and API
  */
 @ImplementedBy(RenameElementProcessor.class)
-public interface IRenameElementProcessor {
+public abstract class AbstractRenameElementProcessor extends RenameProcessor {
 
-	void initialize(IEObjectDescription target, IRenameElementStrategy stategy);
-	
-	IRenameElementStrategy getRenameElementStrategy();
-	
-	void setNewName(String newName);
+	public abstract void initialize(URI targetElementURI, IRenameElementStrategy stategy);
+
+	public abstract IRenameElementStrategy getRenameElementStrategy();
+
+	public abstract void setNewName(String newName);
 }
