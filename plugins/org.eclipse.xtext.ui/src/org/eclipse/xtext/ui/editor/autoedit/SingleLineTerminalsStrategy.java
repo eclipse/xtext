@@ -12,30 +12,27 @@ import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
 
 import com.google.inject.Inject;
-import com.google.inject.Injector;
+import com.google.inject.MembersInjector;
 
 /**
+ * This strategies automatically inserts the closing terminal when the opening terminal is typed. It also deletes both
+ * when the opening terminal is deleted. When the closing terminal is typed before the already existing closing
+ * terminals, the cursor is just moved.
+ * 
+ * This strategy can be used together with {@link MultiLineTerminalsEditStrategy}
+ * 
  * @author Sven Efftinge - Initial contribution and API
- * 
- *         This strategies automatically inserts the closing terminal when the opening terminal is typed. It also
- *         deletes both when the opening terminal is deleted. When the closing terminal is typed before the already
- *         existing closing terminals, the cursor is just moved.
- * 
- *         This strategy can be used together with {@link MultiLineTerminalsEditStrategy}
  */
 public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 
 	public static class Factory {
 		@Inject
-		private Injector injector;
-		
-		/**
-		 * 
-		 */
+		private MembersInjector<SingleLineTerminalsStrategy> injector;
+
 		public SingleLineTerminalsStrategy newInstance(String left, String right) {
 			return newInstance(left, right, DEFAULT);
 		}
-		
+
 		public SingleLineTerminalsStrategy newInstance(String left, String right, StrategyPredicate predicate) {
 			SingleLineTerminalsStrategy strategy = new SingleLineTerminalsStrategy(left, right, predicate);
 			injector.injectMembers(strategy);
@@ -57,7 +54,6 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 			return !Character.isJavaIdentifierStart(doc.getChar(offset));
 		}
 	};
-
 
 	private StrategyPredicate strategy;
 
