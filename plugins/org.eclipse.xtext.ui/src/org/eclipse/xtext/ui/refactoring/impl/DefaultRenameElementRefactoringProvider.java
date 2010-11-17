@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.ui.refactoring.IRenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.IRenameElementRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameElementStrategy;
 
@@ -19,17 +17,17 @@ import com.google.inject.Provider;
 
 public class DefaultRenameElementRefactoringProvider implements IRenameElementRefactoringProvider {
 	@Inject
-	private Provider<IRenameElementProcessor> processorProvider;
+	private Provider<AbstractRenameElementProcessor> processorProvider;
 
 	@Inject 
 	private IRenameElementStrategy.Provider strategyProvider;
 	
-	public RenameRefactoring getRenameRefactoring(IEObjectDescription element) {
-		IRenameElementProcessor processor = processorProvider.get();
+	public RenameRefactoring getRenameRefactoring(URI targetElementURI) {
+		AbstractRenameElementProcessor processor = processorProvider.get();
 		if (processor != null) {
-			IRenameElementStrategy strategy = strategyProvider.get(element);
-			processor.initialize(element, strategy);
-			return new RenameRefactoring((RenameProcessor) processor);
+			IRenameElementStrategy strategy = strategyProvider.get(targetElementURI);
+			processor.initialize(targetElementURI, strategy);
+			return new RenameRefactoring(processor);
 		}
 		return null;
 	}

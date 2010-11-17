@@ -8,27 +8,28 @@
 package org.eclipse.xtext.ui.refactoring;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.text.edits.ReplaceEdit;
-import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameElementStrategy;
+import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringDocumentProvider;
+import org.eclipse.xtext.util.concurrent.IReadAccess;
 
 import com.google.inject.ImplementedBy;
 
 /**
+ * Abstraction on files and opened documents affected by a refactoring.
+ * 
  * @author koehnlein - Initial contribution and API
  */
-public interface IRenameElementStrategy {
+public interface IRefactoringDocument extends IReadAccess<XtextResource>{
 
-	String getCurrentName();
-
-	ReplaceEdit getRenameEdit(String newName);
-
-	RefactoringStatus validateNewName(String newName);
-
-	Iterable<URI> getDependentElements(URI targetElementURI);
+	TextEdit apply(TextEdit edit);
 	
-	@ImplementedBy(DefaultRenameElementStrategy.Provider.class)
+	Change createChange(String name, TextEdit textEdit);
+
+	@ImplementedBy(RefactoringDocumentProvider.class)
 	interface Provider {
-		IRenameElementStrategy get(URI targetElementURI);
+		IRefactoringDocument get(final URI uri, final RefactoringStatus status);
 	}
 }
