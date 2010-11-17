@@ -14,6 +14,7 @@ import org.antlr.runtime.RecognitionException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 import com.google.inject.ImplementedBy;
