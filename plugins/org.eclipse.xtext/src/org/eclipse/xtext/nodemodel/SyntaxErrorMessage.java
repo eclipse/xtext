@@ -14,10 +14,16 @@ public class SyntaxErrorMessage {
 
 	private final String message;
 	private final String issueCode;
+	private final String[] issueData;
 
 	public SyntaxErrorMessage(String message, String issueCode) {
+		this(message, issueCode, null);
+	}
+	
+	public SyntaxErrorMessage(String message, String issueCode, String[] issueData) {
 		this.message = message;
 		this.issueCode = issueCode;
+		this.issueData = issueData;
 	}
 	
 	public String getIssueCode() {
@@ -26,6 +32,10 @@ public class SyntaxErrorMessage {
 
 	public String getMessage() {
 		return message;
+	}
+	
+	public String[] getIssueData() {
+		return issueData;
 	}
 
 }
