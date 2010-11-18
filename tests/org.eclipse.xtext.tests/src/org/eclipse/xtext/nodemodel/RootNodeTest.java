@@ -8,7 +8,6 @@
 package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
-import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.impl.RootNode;
 
 /**
@@ -24,11 +23,6 @@ public class RootNodeTest extends AbstractCompositeNodeTest {
 		assertEquals(completeContent, rootNode.getText());
 		assertEquals(0, rootNode.getTotalOffset());
 		assertEquals(completeContent.length(), rootNode.getTotalLength());
-	}
-	
-	@Override
-	protected void addChild(ICompositeNode composite, LeafNode leaf) {
-		((RootNode) composite).addChild(leaf);
 	}
 	
 	@Override
