@@ -25,6 +25,6 @@ public class XMemberFeatureCallImplCustom extends XMemberFeatureCallImpl {
 	
 	@Override
 	public String toString() {
-		return getExpressionAsString(getMemberCallTarget())+"."+getFeatureName()+getExpressionsAsString(getMemberCallArguments());
+		return getExpressionAsString(getMemberCallTarget())+"."+getFeatureName()+getExpressionsAsString(getMemberCallArguments(),isExplicitOperationCall());
 	}
 }

@@ -167,6 +167,10 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 		assertSame(xCatchClause.getDeclaredParam(), ((XFeatureCall)xCatchClause.getExpression()).getFeature());
 	}
 	
+	public void testTryCatch_1() throws Exception {
+		expression("try { (java.lang.Boolean) 'literal' } catch(java.lang.ClassCastException e) {e.getClass().getSimpleName()}", true);
+	}
+	
 	public void testFeatureCall() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{" +
 				"  val this = new testdata.FieldAccessSub();" +

@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping;
 
-import java.util.Map;
-
 import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EClass;
@@ -18,13 +16,10 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.EObjectDescription;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
-import org.eclipse.xtext.scoping.impl.MapBasedScope;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -41,78 +36,36 @@ public class ScopeTest extends TestCase {
 	}
 
 	public void testContentByEObject_existent() throws Exception {
-		assertNotNull(scope.getContentByEObject(EcorePackage.eINSTANCE.getEAnnotation()));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByEObject(EcorePackage.eINSTANCE.getEAnnotation())));
 	}
 
 	public void testContentByEObject_nonExistent() throws Exception {
-		assertNull(scope.getContentByEObject(EcorePackage.eINSTANCE.getEAnnotation_Contents()));
+		assertNull(scope.getSingleElement(new ISelector.SelectByEObject(EcorePackage.eINSTANCE.getEAnnotation_Contents())));
 	}
 
 	public void testContentByEObject_withProxy() throws Exception {
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		((InternalEObject) eClass).eSetProxyURI(EcoreUtil.getURI(EcorePackage.eINSTANCE.getEAnnotation()));
-		assertNotNull(scope.getContentByEObject(eClass));
+		assertNotNull(scope.getSingleElement(new ISelector.SelectByEObject(eClass)));
 	}
 
 	public void testContentByName_existent() throws Exception {
 		QualifiedName qualifiedName = QualifiedName.create(EcorePackage.eINSTANCE.getEAnnotation().getName());
-		assertEquals(qualifiedName, scope.getContentByName(qualifiedName).getName());
+		assertEquals(qualifiedName, scope.getSingleElement(new ISelector.SelectByName(qualifiedName)).getName());
 	}
 
 	public void testContentByName_nonExistent() throws Exception {
-		assertNull(scope.getContentByName(QualifiedName.create("unknown_name")));
-	}
-
-	public void testContentByEObject_NotShadowed() throws Exception {
-		AbstractScope scopeWithEqualNamedElements = getScopeWithSimpleNames(true);
-		assertNotNull(scopeWithEqualNamedElements.getContentByEObject(EcorePackage.eINSTANCE.getEBigDecimal()));
-	}
-	
-	public void testContentByEObject_Shadowed() throws Exception {
-		AbstractScope scopeWithEqualNamedElements = getScopeWithSimpleNames(false);
-		assertNull(scopeWithEqualNamedElements.getContentByEObject(EcorePackage.eINSTANCE.getEBigDecimal()));
+		assertNull(scope.getSingleElement(new ISelector.SelectByName(QualifiedName.create("unknown_name"))));
 	}
 
 	private AbstractScope getEcoreClassifiersScope() {
-		return new AbstractScope() {
-			public IScope getOuterScope() {
-				return getEcoreClassesScope();
-			}
-
-			@Override
-			public Iterable<IEObjectDescription> internalGetContents() {
-				return Scopes.scopedElementsFor(Iterables.filter(EcorePackage.eINSTANCE.getEClassifiers(),
-						EDataType.class));
-			}
-		};
+		return new SimpleScope(getEcoreClassesScope(),Scopes.scopedElementsFor(Iterables.filter(EcorePackage.eINSTANCE.getEClassifiers(),
+						EDataType.class)));
 	}
 
 	private AbstractScope getEcoreClassesScope() {
-		return new AbstractScope() {
-			public IScope getOuterScope() {
-				return IScope.NULLSCOPE;
-			}
-
-			@Override
-			public Iterable<IEObjectDescription> internalGetContents() {
-				return Scopes.scopedElementsFor(Iterables
-						.filter(EcorePackage.eINSTANCE.getEClassifiers(), EClass.class));
-			}
-		};
+		return new SimpleScope(IScope.NULLSCOPE,Scopes.scopedElementsFor(Iterables
+						.filter(EcorePackage.eINSTANCE.getEClassifiers(), EClass.class)));
 	}
 
-	private AbstractScope getScopeWithSimpleNames(boolean thirdLevelElementsEnabled) {
-		Map<QualifiedName, IEObjectDescription> mapFirstLevel = Maps.newHashMap();
-		QualifiedName simpleName = QualifiedName.create("test");
-		QualifiedName prefixedName = QualifiedName.create("prefix", "test");
-		mapFirstLevel.put(simpleName, EObjectDescription.create(simpleName,EcorePackage.eINSTANCE.getEBigInteger(), null));
-		Map<QualifiedName, IEObjectDescription> mapSecondLevel =  Maps.newHashMap();
-		mapSecondLevel.put(simpleName, EObjectDescription.create(simpleName,EcorePackage.eINSTANCE.getEBigDecimal(), null));
-		Map<QualifiedName, IEObjectDescription> thirdLevel =  Maps.newHashMap();
-		thirdLevel.put(prefixedName, EObjectDescription.create(prefixedName,EcorePackage.eINSTANCE.getEBigDecimal(), null));
-		MapBasedScope grandParent = new MapBasedScope(IScope.NULLSCOPE, thirdLevel);
-		MapBasedScope parent = new MapBasedScope(thirdLevelElementsEnabled?grandParent:IScope.NULLSCOPE, mapSecondLevel);
-		return new MapBasedScope(parent,mapFirstLevel);
-	}
-	
 }

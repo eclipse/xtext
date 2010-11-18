@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext;
 
+import static java.util.Collections.*;
+
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 import org.eclipse.xtext.common.types.JvmType;
@@ -16,7 +20,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 /**
@@ -33,36 +37,35 @@ public abstract class AbstractTypeScope extends AbstractScope {
 		this.typeProvider = typeProvider;
 		this.qualifiedNameConverter = qualifiedNameConverter;
 	}
-
+	
 	@Override
-	public Iterable<IEObjectDescription> internalGetContents() {
+	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
+		if (selector instanceof ISelector.SelectByName) {
+			QualifiedName qualifiedName = ((ISelector.SelectByName) selector).getName();
+			try {
+				JvmType type = typeProvider.findTypeByName(qualifiedNameConverter.toString(qualifiedName));
+				if (type == null)
+					return emptySet();
+				final Set<IEObjectDescription> result = singleton(EObjectDescription.create(qualifiedName, type));
+				return selector.applySelector(result);
+			} catch (TypeNotFoundException e) {
+				return emptySet();
+			}
+		} else if (selector instanceof ISelector.SelectByEObject) {
+			EObject object = ((ISelector.SelectByEObject) selector).getEObject();
+			if (object instanceof JvmIdentifyableElement) {
+				final Set<IEObjectDescription> result = singleton(EObjectDescription.create(qualifiedNameConverter.toQualifiedName(((JvmIdentifyableElement) object).getCanonicalName()), object));
+				return selector.applySelector(result);
+			}
+			return emptySet();
+		}
+		return internalGetAllLocalElements(selector);
+	}
+
+	protected Iterable<IEObjectDescription> internalGetAllLocalElements(ISelector selector) {
 		throw new UnsupportedOperationException();
 	}
-	
-	@Override
-	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
-		try {
-			JvmType type = typeProvider.findTypeByName(qualifiedNameConverter.toString(qualifiedName));
-			if (type == null)
-				return null;
-			return EObjectDescription.create(qualifiedName, type);
-		} catch (TypeNotFoundException e) {
-			return null;
-		}
-	}
-	
-	@Override
-	public IEObjectDescription getContentByEObject(EObject object) {
-		if (object instanceof JvmIdentifyableElement) {
-			return EObjectDescription.create(qualifiedNameConverter.toQualifiedName(((JvmIdentifyableElement) object).getCanonicalName()), object);
-		}
-		return null;
-	}
 
-	public IScope getOuterScope() {
-		return IScope.NULLSCOPE;
-	}
-	
 	public IJvmTypeProvider getTypeProvider() {
 		return typeProvider;
 	}

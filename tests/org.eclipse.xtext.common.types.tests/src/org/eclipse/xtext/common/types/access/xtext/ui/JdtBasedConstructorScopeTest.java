@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScope;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -47,7 +48,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	}
 	
 	public void testGetContents_01() {
-		Iterable<IEObjectDescription> contents = constructorScope.getContents();
+		Iterable<IEObjectDescription> contents = constructorScope.getElements(ISelector.SELECT_ALL);
 		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				return List.class.getName().equals(input.getName());
@@ -56,7 +57,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	}
 	
 	public void testGetContents_02() {
-		Iterable<IEObjectDescription> contents = constructorScope.getContents();
+		Iterable<IEObjectDescription> contents = constructorScope.getElements(ISelector.SELECT_ALL);
 		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				return "int".equals(input.getName());
@@ -65,7 +66,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	}
 	
 	public void testGetContents_03() {
-		Iterable<IEObjectDescription> contents = constructorScope.getContents();
+		Iterable<IEObjectDescription> contents = constructorScope.getElements(ISelector.SELECT_ALL);
 		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				return AbstractList.class.equals(input.getName());
@@ -74,7 +75,7 @@ public class JdtBasedConstructorScopeTest extends AbstractConstructorScopeTest {
 	}
 	
 	public void testGetContents_04() {
-		Iterable<IEObjectDescription> contents = constructorScope.getContents();
+		Iterable<IEObjectDescription> contents = constructorScope.getElements(ISelector.SELECT_ALL);
 		assertFalse(Iterables.any(contents, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				return ArrayList.class.equals(input.getName());

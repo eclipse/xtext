@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScope;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -33,7 +34,7 @@ public class ClasspathBasedTypeScopeTest extends AbstractTypeScopeTest {
 	
 	public void testGetContents_01() {
 		try {
-			typeScope.getContents();
+			typeScope.getElements(ISelector.SELECT_ALL);
 			fail("expected UnsupportedOperationException");
 		} catch(UnsupportedOperationException e) {
 			// ok

@@ -21,6 +21,8 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
+import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -28,11 +30,11 @@ import org.eclipse.xtext.scoping.IScope;
 public abstract class AbstractConstructorScopeTest extends TestCase {
 
 	public void testGetOuterScope_01() {
-		assertSame(IScope.NULLSCOPE, getConstructorScope().getOuterScope());
+		assertSame(IScope.NULLSCOPE, ((AbstractScope)getConstructorScope()).getParent());
 	}
 	
 	public void testGetElementByName_01() {
-		IEObjectDescription objectElement = getConstructorScope().getContentByName(QualifiedName.create(Object.class.getName()));
+		IEObjectDescription objectElement = getConstructorScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName())));
 		assertNotNull(objectElement);
 		assertFalse(objectElement.getEObjectOrProxy().eIsProxy());
 		assertEquals(TypesPackage.Literals.JVM_CONSTRUCTOR, objectElement.getEClass());
@@ -40,29 +42,29 @@ public abstract class AbstractConstructorScopeTest extends TestCase {
 	}
 	
 	public void testGetElementByName_02() {
-		IEObjectDescription objectElement = getConstructorScope().getContentByName(QualifiedName.create(Object.class.getName() + "Foo"));
+		IEObjectDescription objectElement = getConstructorScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(Object.class.getName() + "Foo")));
 		assertNull(objectElement);
 	}
 	
 	public void testGetElementByName_03() {
-		IEObjectDescription objectElement = getConstructorScope().getContentByName(QualifiedName.create(int.class.getName()));
+		IEObjectDescription objectElement = getConstructorScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(int.class.getName())));
 		assertNull(objectElement);
 	}
 	
 	public void testGetElementByName_04() {
-		IEObjectDescription objectElement = getConstructorScope().getContentByName(QualifiedName.create(AbstractList.class.getName()));
+		IEObjectDescription objectElement = getConstructorScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(AbstractList.class.getName())));
 		assertNotNull(objectElement);
 	}
 	
 	public void testGetElementByName_05() {
-		IEObjectDescription objectElement = getConstructorScope().getContentByName(QualifiedName.create(List.class.getName()));
+		IEObjectDescription objectElement = getConstructorScope().getSingleElement(new ISelector.SelectByName(QualifiedName.create(List.class.getName())));
 		assertNull(objectElement);
 	}
 	
 	public void testGetElementByInstance_01() {
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 		constructor.setFullyQualifiedName("java.lang.Object");
-		IEObjectDescription element = getConstructorScope().getContentByEObject(constructor);
+		IEObjectDescription element = getConstructorScope().getSingleElement(new ISelector.SelectByEObject(constructor));
 		assertNotNull(element);
 		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object"), element.getName());
 		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object"), element.getQualifiedName());
@@ -70,13 +72,13 @@ public abstract class AbstractConstructorScopeTest extends TestCase {
 	
 	public void testGetElementByInstance_02() {
 		JvmVoid voidType = TypesFactory.eINSTANCE.createJvmVoid();
-		IEObjectDescription element = getConstructorScope().getContentByEObject(voidType);
+		IEObjectDescription element = getConstructorScope().getSingleElement(new ISelector.SelectByEObject(voidType));
 		assertNull(element);
 	}
 	
 	public void testGetElementByInstance_03() {
 		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
-		IEObjectDescription element = getConstructorScope().getContentByEObject(annotationReference);
+		IEObjectDescription element = getConstructorScope().getSingleElement(new ISelector.SelectByEObject(annotationReference));
 		assertNull(element);
 	}
 	

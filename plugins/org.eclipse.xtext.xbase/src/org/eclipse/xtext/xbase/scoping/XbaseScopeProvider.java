@@ -30,6 +30,10 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
+import org.eclipse.xtext.scoping.impl.MapBasedScope;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.eclipse.xtext.scoping.impl.SingletonScope;
 import org.eclipse.xtext.typing.ITypeProvider;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
@@ -46,14 +50,6 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.newapi.CompositeScope;
-import org.eclipse.xtext.xbase.scoping.newapi.DelegatingScope;
-import org.eclipse.xtext.xbase.scoping.newapi.INewScope;
-import org.eclipse.xtext.xbase.scoping.newapi.ISelector;
-import org.eclipse.xtext.xbase.scoping.newapi.IterableBasedScope;
-import org.eclipse.xtext.xbase.scoping.newapi.MapBasedScope;
-import org.eclipse.xtext.xbase.scoping.newapi.NewToOldAdapter;
-import org.eclipse.xtext.xbase.scoping.newapi.Selectors;
-import org.eclipse.xtext.xbase.scoping.newapi.SingletonScope;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -88,9 +84,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (isFeatureCallScope(reference)) {
-			BestMatchingJvmFeatureScope featureScope = new BestMatchingJvmFeatureScope(conformanceChecker, context,
-					reference, createFeatureCallScope(context, reference));
-			return new NewToOldAdapter(featureScope, getSelector(context, reference));
+			return new BestMatchingJvmFeatureScope(conformanceChecker, context,
+					reference, createFeatureCallScope(context, reference),getSelector(context, reference));
 		}
 		return super.getScope(context, reference);
 	}
@@ -99,31 +94,31 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}
 
-	protected INewScope createFeatureCallScope(EObject context, EReference reference) {
+	protected IScope createFeatureCallScope(EObject context, EReference reference) {
 		if (context instanceof XAssignment) {
 			return createAssignmentFeatureScope((XAssignment) context);
 		}
 		if (context instanceof XMemberFeatureCall || context instanceof XBinaryOperation) {
 			final XAbstractFeatureCall call = (XAbstractFeatureCall) context;
 			if (call.getArguments().isEmpty())
-				return INewScope.NULL_SCOPE;
+				return IScope.NULLSCOPE;
 			XExpression target = call.getArguments().get(0);
 			if (target != null) {
 				JvmTypeReference jvmTypeReference = typeResolver.getType(target, null);
 				if (jvmTypeReference != null) {
-					return createFeatureScopeForTypeRef(jvmTypeReference, INewScope.NULL_SCOPE, publicOnly);
+					return createFeatureScopeForTypeRef(jvmTypeReference, IScope.NULLSCOPE, publicOnly);
 				}
 			}
 		}
 		DelegatingScope implicitThis = new DelegatingScope();
-		INewScope localVariableScope = createLocalVarScope(context, reference, implicitThis);
-		IEObjectDescription thisVariable = localVariableScope.getSingleElement(Selectors.byName(THIS));
+		IScope localVariableScope = createLocalVarScope(context, reference, implicitThis);
+		IEObjectDescription thisVariable = localVariableScope.getSingleElement(new ISelector.SelectByName(THIS));
 
 		if (thisVariable != null) {
 			EObject thisVal = thisVariable.getEObjectOrProxy();
 			JvmTypeReference type = typeResolver.getType(thisVal, null);
 			if (type != null) {
-				implicitThis.setDelegate(createFeatureScopeForTypeRef(type, INewScope.NULL_SCOPE, publicOnly));
+				implicitThis.setDelegate(createFeatureScopeForTypeRef(type, IScope.NULLSCOPE, publicOnly));
 			}
 		}
 		return localVariableScope;
@@ -131,12 +126,16 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	protected ISelector getSelector(final EObject context, final EReference reference) {
 		return new ISelector() {
-			public boolean apply(IEObjectDescription input) {
-				TypeArgumentContext ctx = null;
-				if (input instanceof JvmFeatureDescription) {
-					ctx = ((JvmFeatureDescription) input).getContext();
-				}
-				return featurePredicate.accept(input.getEObjectOrProxy(), context, reference, ctx);
+			public Iterable<IEObjectDescription> applySelector(Iterable<IEObjectDescription> elements) {
+				return filter(elements, new Predicate<IEObjectDescription>() {
+					public boolean apply(IEObjectDescription input) {
+						TypeArgumentContext ctx = null;
+						if (input instanceof JvmFeatureDescription) {
+							ctx = ((JvmFeatureDescription) input).getContext();
+						}
+						return featurePredicate.accept(input.getEObjectOrProxy(), context, reference, ctx);
+					}
+				});
 			}
 		};
 	}
@@ -148,10 +147,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 	};
 
-	protected INewScope createAssignmentFeatureScope(XAssignment context) {
+	protected IScope createAssignmentFeatureScope(XAssignment context) {
 		XExpression assignable = context.getAssignable();
 		List<IEObjectDescription> descriptions = Lists.newArrayList();
-		INewScope parent = INewScope.NULL_SCOPE;
+		IScope parent = IScope.NULLSCOPE;
 		if (assignable instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) assignable;
 			if (featureCall.getFeature() instanceof XVariableDeclaration) {
@@ -173,7 +172,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 						typedElement = featureCall.getArguments().get(0);
 					}
 					JvmTypeReference typeReference = typeResolver.getType(typedElement, null);
-					INewScope scope = createFeatureScopeForTypeRef(typeReference, INewScope.NULL_SCOPE, new Predicate<JvmMember>() {
+					IScope scope = createFeatureScopeForTypeRef(typeReference, IScope.NULLSCOPE, new Predicate<JvmMember>() {
 
 						public boolean apply(JvmMember input) {
 							if (input instanceof JvmOperation) {
@@ -185,7 +184,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 							return false;
 						}
 					});
-					Iterable<? extends IEObjectDescription> allDescriptions = scope.getElements(ISelector.SELECT_ALL);
+					Iterable<IEObjectDescription> allDescriptions = scope.getElements(ISelector.SELECT_ALL);
 					for(IEObjectDescription description: allDescriptions) {
 						JvmFeatureDescription featureDescription = (JvmFeatureDescription) description;
 						descriptions.add(createJvmFeatureDescription(
@@ -204,20 +203,20 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 		JvmTypeReference typeReference = typeResolver.getType(assignable, null);
 		if (typeReference!=null) {
-			return new IterableBasedScope(descriptions, createFeatureScopeForTypeRef(typeReference, parent, new Predicate<JvmMember>() {
+			return new SimpleScope(createFeatureScopeForTypeRef(typeReference, parent, new Predicate<JvmMember>() {
 				public boolean apply(JvmMember input) {
 					return true;
 				}
-			}));
+			}),descriptions);
 		}
-		return new IterableBasedScope(descriptions, parent);
+		return new SimpleScope(parent,descriptions);
 
 	}
 
 	protected EObject getWhatsBoundToThis(XAbstractFeatureCall featureCall) {
 		EObject typedElement;
-		INewScope localVarScope = createLocalVarScope(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, INewScope.NULL_SCOPE);
-		IEObjectDescription element = localVarScope.getSingleElement(Selectors.byName(THIS));
+		IScope localVarScope = createLocalVarScope(featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IScope.NULLSCOPE);
+		IEObjectDescription element = localVarScope.getSingleElement(new ISelector.SelectByName(THIS));
 		typedElement = element.getEObjectOrProxy();
 		return typedElement;
 	}
@@ -226,7 +225,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return ASSIGN;
 	}
 
-	protected INewScope createLocalVarScope(EObject context, EReference reference, INewScope parentScope) {
+	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parentScope) {
 		if (context == null)
 			return parentScope;
 		if (context.eContainer() != null)
@@ -251,13 +250,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return parentScope;
 	}
 
-	protected INewScope createLocalVarScopeForCatchClause(XCatchClause catchClause,
-			int indexOfContextExpressionInBlock, INewScope parentScope) {
+	protected IScope createLocalVarScopeForCatchClause(XCatchClause catchClause,
+			int indexOfContextExpressionInBlock, IScope parentScope) {
 		return new SingletonScope(createEObjectDescription(catchClause.getDeclaredParam()), parentScope);
 	}
 
-	protected INewScope createLocalVarScopeForBlock(XBlockExpression block, int indexOfContextExpressionInBlock,
-			INewScope parentScope) {
+	protected IScope createLocalVarScopeForBlock(XBlockExpression block, int indexOfContextExpressionInBlock,
+			IScope parentScope) {
 		Map<QualifiedName, IEObjectDescription> vars = Maps.newHashMap();
 
 		for (int i = 0; i < indexOfContextExpressionInBlock; i++) {
@@ -271,10 +270,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 		if (vars.isEmpty())
 			return parentScope;
-		return new MapBasedScope(vars, parentScope);
+		return new MapBasedScope(parentScope, vars);
 	}
 
-	protected INewScope createLocalVarScopeForClosure(XClosure closure, INewScope parentScope) {
+	protected IScope createLocalVarScopeForClosure(XClosure closure, IScope parentScope) {
 		EList<JvmFormalParameter> params = closure.getFormalParameters();
 		Map<QualifiedName, IEObjectDescription> descriptions = Maps.newHashMap();
 		for (JvmFormalParameter p : params) {
@@ -282,10 +281,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			descriptions.put(desc.getName(), desc);
 
 		}
-		return new MapBasedScope(descriptions, parentScope);
+		return new MapBasedScope(parentScope, descriptions);
 	}
 
-	protected INewScope createFeatureScopeForTypeRef(JvmTypeReference type, INewScope parent,
+	protected IScope createFeatureScopeForTypeRef(JvmTypeReference type, IScope parent,
 			Predicate<JvmMember> isAccept) {
 		if (type.getType() instanceof JvmDeclaredType) {
 			TypeArgumentContext context = provider.get(type);
@@ -300,35 +299,35 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return parent;
 	}
 
-	protected INewScope createFeatureScopeForTypeRefs(EList<JvmTypeReference> superTypes, INewScope parent,
+	protected IScope createFeatureScopeForTypeRefs(List<JvmTypeReference> superTypes, IScope parent,
 			Predicate<JvmMember> isAccept, TypeArgumentContext context) {
 		if (superTypes.isEmpty())
 			return parent;
 		if (superTypes.size() == 1)
 			return createFeatureScopeForTypeRef(superTypes.get(0), parent, isAccept, context);
-		List<INewScope> scopes = newArrayList();
+		List<IScope> scopes = newArrayList();
 		boolean firstIteration = true;
 		for (JvmTypeReference typeRef : superTypes) {
-			scopes.add(createFeatureScopeForTypeRef(typeRef, firstIteration ? parent : INewScope.NULL_SCOPE, isAccept,
+			scopes.add(createFeatureScopeForTypeRef(typeRef, firstIteration ? parent : IScope.NULLSCOPE, isAccept,
 					context));
-			firstIteration = false;
 		}
+		// TODO smarter way to linearize the type hierarchy.
 		return new CompositeScope(scopes);
 	}
 
-	protected INewScope createFeatureScopeForTypeRef(JvmTypeReference jvmTypeRef, INewScope parent,
+	protected IScope createFeatureScopeForTypeRef(JvmTypeReference jvmTypeRef, IScope parent,
 			Predicate<JvmMember> isAccept, TypeArgumentContext context) {
 		if (jvmTypeRef.getType() instanceof JvmDeclaredType) {
 			EList<JvmTypeReference> superTypes2 = ((JvmDeclaredType) jvmTypeRef.getType()).getSuperTypes();
-			parent = createFeatureScopeForTypeRefs(superTypes2, parent, isAccept, context);
+			parent = createFeatureScopeForTypeRefs(newArrayList(superTypes2), parent, isAccept, context);
 			JvmDeclaredType declType = (JvmDeclaredType) jvmTypeRef.getType();
-			INewScope scopeForMethods = createScopeForMethods(declType, parent, isAccept, context);
+			IScope scopeForMethods = createScopeForMethods(declType, parent, isAccept, context);
 			return createScopeForField(declType, scopeForMethods, isAccept, context);
 		}
-		return INewScope.NULL_SCOPE;
+		return IScope.NULLSCOPE;
 	}
 
-	protected INewScope createScopeForField(JvmDeclaredType declType, INewScope parent, final Predicate<JvmMember> isAccept,
+	protected IScope createScopeForField(JvmDeclaredType declType, IScope parent, final Predicate<JvmMember> isAccept,
 			final TypeArgumentContext context) {
 		Iterable<JvmField> operations = filter(filter(declType.getMembers(), JvmField.class), new Predicate<JvmMember>(){
 			public boolean apply(JvmMember input) {
@@ -343,10 +342,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 						return createJvmFeatureDescription(from, context, from.getSimpleName());
 					}
 				});
-		return new JvmFeatureDescriptionContainingScope(descriptions, parent);
+		return new SimpleScope(parent, descriptions);
 	}
 
-	protected INewScope createScopeForMethods(JvmDeclaredType declType, INewScope parent,
+	protected IScope createScopeForMethods(JvmDeclaredType declType, IScope parent,
 			final Predicate<JvmMember> isAccept, final TypeArgumentContext context) {
 		final JvmFeatureShadowingIndexObjectProvider stringProvider = new JvmFeatureShadowingIndexObjectProvider(
 				context);
@@ -357,33 +356,34 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		});
 		if (!operations.iterator().hasNext())
 			return parent;
-		Iterable<JvmFeatureDescription> descriptions = transform(operations,
-				new Function<JvmOperation, JvmFeatureDescription>() {
-					public JvmFeatureDescription apply(JvmOperation from) {
+		Iterable<IEObjectDescription> descriptions = transform(operations,
+				new Function<JvmOperation, IEObjectDescription>() {
+					public IEObjectDescription apply(JvmOperation from) {
 						return createJvmFeatureDescription(from, context, stringProvider.apply(from));
 					}
 				});
-		return new JvmFeatureDescriptionContainingScope(descriptions, getSugarScope(descriptions, declType, parent,
-				context));
+		final IScope sugarScope = getSugarScope(descriptions, declType, parent,
+				context);
+		return new SimpleScope(sugarScope, descriptions);
 	}
 
-	protected INewScope getSugarScope(Iterable<JvmFeatureDescription> operations, JvmDeclaredType declType,
-			INewScope parent, final TypeArgumentContext context) {
-		List<JvmFeatureDescription> operationsAsList = Lists.newArrayList(operations);
+	protected IScope getSugarScope(Iterable<IEObjectDescription> operations, JvmDeclaredType declType,
+			IScope parent, final TypeArgumentContext context) {
+		List<IEObjectDescription> operationsAsList = Lists.newArrayList(operations);
 		if (operationsAsList.isEmpty())
 			return parent;
 
-		final List<JvmFeatureDescription> sugar = Lists.newArrayList();
+		final List<IEObjectDescription> sugar = Lists.newArrayList();
 		IAcceptor<JvmFeatureDescription> acceptor = new IAcceptor<JvmFeatureDescription>() {
 			public void accept(JvmFeatureDescription t) {
 				sugar.add(t);
 			}
 		};
-		for (JvmFeatureDescription jvmFeatureDescription : operationsAsList) {
+		for (IEObjectDescription jvmFeatureDescription : operationsAsList) {
 			addSugaredDescriptions(jvmFeatureDescription, context, acceptor);
 		}
 
-		return sugar.isEmpty() ? parent : new JvmFeatureDescriptionContainingScope(sugar, parent);
+		return sugar.isEmpty() ? parent : new SimpleScope(parent, sugar);
 	}
 
 	protected IEObjectDescription createEObjectDescription(JvmFormalParameter p) {
@@ -405,23 +405,26 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return EObjectDescription.create(QualifiedName.create(varDecl.getName()), varDecl);
 	}
 
-	protected void addSugaredDescriptions(JvmFeatureDescription description, final TypeArgumentContext context,
+	protected void addSugaredDescriptions(IEObjectDescription description, final TypeArgumentContext context,
 			IAcceptor<JvmFeatureDescription> acceptor) {
-		if (description.getJvmFeature() instanceof JvmOperation) {
-			JvmOperation op = (JvmOperation) description.getJvmFeature();
-			if (op.getParameters().size() <= 1) {
-				QualifiedName operator = operatorMapping.getOperator(QualifiedName.create(op.getSimpleName()));
-				if (operator != null) {
-					acceptor.accept(createJvmFeatureDescription(operator, op, context,
-							operator + description.getShadowingString()));
+		if (description instanceof JvmFeatureDescription) {
+			JvmFeature feature = ((JvmFeatureDescription) description).getJvmFeature();
+			if (feature instanceof JvmOperation) {
+				JvmOperation op = (JvmOperation) feature;
+				if (op.getParameters().size() <= 1) {
+					QualifiedName operator = operatorMapping.getOperator(QualifiedName.create(op.getSimpleName()));
+					if (operator != null) {
+						acceptor.accept(createJvmFeatureDescription(operator, op, context,
+								operator + description.getKey().toString()));
+					}
 				}
-			}
-			if (op.getParameters().isEmpty()) {
-				acceptor.accept(createJvmFeatureDescription(op, context, op.getSimpleName()));
-				String propertyName = getPropertyName(op);
-				if (propertyName != null) {
-					acceptor.accept(createJvmFeatureDescription(QualifiedName.create(propertyName), op, context,
-							propertyName));
+				if (op.getParameters().isEmpty()) {
+					acceptor.accept(createJvmFeatureDescription(op, context, op.getSimpleName()));
+					String propertyName = getPropertyName(op);
+					if (propertyName != null) {
+						acceptor.accept(createJvmFeatureDescription(QualifiedName.create(propertyName), op, context,
+								propertyName));
+					}
 				}
 			}
 		}

@@ -21,6 +21,6 @@ public class XFeatureCallImplCustom extends XFeatureCallImpl {
 	
 	@Override
 	public String toString() {
-		return getFeatureName()+getExpressionsAsString(getFeatureCallArguments());
+		return getFeatureName()+getExpressionsAsString(getFeatureCallArguments(),isExplicitOperationCall());
 	}
 }

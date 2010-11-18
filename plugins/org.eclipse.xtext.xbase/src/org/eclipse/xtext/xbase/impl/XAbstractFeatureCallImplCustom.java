@@ -41,8 +41,8 @@ public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 		return result.toString();
 	}
 	
-	protected String getExpressionsAsString(List<XExpression> expressions) {
-		if (expressions.isEmpty())
+	protected String getExpressionsAsString(List<XExpression> expressions, boolean explicitOperationCall) {
+		if (!explicitOperationCall && expressions.isEmpty())
 			return "";
 		String s = "(";
 		for (Iterator<XExpression> iterator = expressions.iterator(); iterator.hasNext();) {
