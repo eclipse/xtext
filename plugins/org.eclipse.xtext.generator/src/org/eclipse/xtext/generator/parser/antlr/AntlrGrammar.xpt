@@ -359,7 +359,8 @@ finally {
     }
 «IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
     { 
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 «ENDIF-»
 «IF TerminalRule.isInstance(rule)»
@@ -440,7 +441,8 @@ finally {
 		«ruleName()-»
 «IF !debugGrammar-»
 		{ 
-	        currentNode = currentNode.getParent();
+	        // currentNode = currentNode.getParent();
+	        afterParserOrEnumRuleCall();
 	    }
 «ENDIF-»
 «ENDIF-»
@@ -455,7 +457,8 @@ finally {
 		«ruleName()-»
 «IF !debugGrammar-»
 		{ 
-	        currentNode = currentNode.getParent();
+	        // currentNode = currentNode.getParent();
+	        afterParserOrEnumRuleCall();
 	    }
 «ENDIF-»
 «ENDDEFINE»
@@ -474,18 +477,12 @@ finally {
 «IF !debugGrammar-»
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.«assignment.containingParserRule().grammarElementAccess()».getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.«assignment.containingParserRule().grammarElementAccess()»);
 	        }
-	        «REM»the use of input.LT(-1) in the following line is a workaround for a bug of antlr, where assignments of alternative keywords are ignored when there are actions«ENDREM»
-	        try {
-	       		«assignment.setOrAdd()»($current, "«assignment.feature»", «
-	        		IF assignment.isBoolean()»true«
-	        		ELSE»«assignment.localVar(this)»«
-	        		ENDIF», «assignment.terminal.toStringLiteral()», lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		«assignment.setOrAdd()»($current, "«assignment.feature»", «
+        		IF assignment.isBoolean()»true«
+        		ELSE»«assignment.localVar(this)»«
+        		ENDIF», «assignment.terminal.toStringLiteral()», lastConsumedNode);
 	    }
 «ENDIF-»
 «ENDDEFINE»
@@ -525,20 +522,15 @@ finally {
 «IF !debugGrammar-»
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.«assignment.containingParserRule().grammarElementAccess()».getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.«assignment.containingParserRule().grammarElementAccess()»);
 	        }
-	        try {
-	       		«assignment.setOrAdd()»(
-	       			$current, 
-	       			"«assignment.feature»",
-	        		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
-	        		«call.toStringLiteral()», 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		«assignment.setOrAdd()»(
+       			$current, 
+       			"«assignment.feature»",
+        		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
+        		«call.toStringLiteral()», 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 «ENDIF-»
 «ENDDEFINE»
@@ -552,20 +544,15 @@ finally {
 «IF !debugGrammar-»
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.«assignment.containingParserRule().grammarElementAccess()».getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	            $current = createModelElementForParent(grammarAccess.«assignment.containingParserRule().grammarElementAccess()»);
 	        }
-	        try {
-	       		«assignment.setOrAdd()»(
-	       			$current, 
-	       			"«assignment.feature»",
-	        		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
-	        		«call.toStringLiteral()», 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
+       		«assignment.setOrAdd()»(
+       			$current, 
+       			"«assignment.feature»",
+        		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
+        		«call.toStringLiteral()», 
+        		currentNode);
+	        afterParserOrEnumRuleCall();
 	    }
 «ENDIF-»
 «ENDDEFINE»
@@ -578,19 +565,14 @@ finally {
 		}
 		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.«assignment.containingParserRule().grammarElementAccess()».getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.«assignment.containingParserRule().grammarElementAccess()»);
 	        }
-	        try {
-	       		«assignment.setOrAdd()»(
-	       			$current, 
-	       			"«assignment.feature»",
-	        		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
-	        		«call.toStringLiteral()», 
-	        		lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
+       		«assignment.setOrAdd()»(
+       			$current, 
+       			"«assignment.feature»",
+        		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
+        		«call.toStringLiteral()», 
+        		lastConsumedNode);
 	    }
 «ENDIF-»
 «ENDDEFINE»
@@ -604,8 +586,7 @@ finally {
 «ENDIF-»
 		{
 			if ($current==null) {
-	            $current = factory.create(grammarAccess.«assignment.containingParserRule().grammarElementAccess()».getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
+	            $current = createModelElement(grammarAccess.«assignment.containingParserRule().grammarElementAccess()»);
 	        }
         }
 «ENDIF-»
@@ -629,19 +610,10 @@ finally {
 	  /* */ 
 	}
 «ENDIF-»
-    { 
-        temp=factory.create(grammarAccess.«grammarElementAccess()».getType().getClassifier());
-«IF feature != null-»
-        try {
-        	factory.«setOrAdd()»(temp, "«feature»", $current, null /*ParserRule*/, currentNode);
-        } catch(ValueConverterException vce) {
-        	handleValueConverterException(vce);
-        }
-«ENDIF-»
-        $current = temp; 
-        temp = null;
-        «EXPAND insertCompositeNode» 
-        associateNodeWithAstElement(currentNode, $current); 
+    {
+        $current = forceCreateModelElement«IF feature != null-»And«setOrAdd().toFirstUpper()»«ENDIF»(
+            grammarAccess.«grammarElementAccess()»,
+            $current);
     }
 «ENDIF-»
 «ENDDEFINE»
@@ -680,7 +652,8 @@ finally {
 «IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)rule) && !EnumRule.isInstance(rule))-»
         $current = $«localVar()».current; 
 «ENDIF-»
-        currentNode = currentNode.getParent();
+        // currentNode = currentNode.getParent();
+        afterParserOrEnumRuleCall();
     }
 «ENDIF-»
 «IF TerminalRule.isInstance(rule)»
@@ -695,15 +668,6 @@ finally {
     »createCompositeNode(grammarAccess.«
     grammarElementAccess(this)
     », currentNode);«
-ENDDEFINE»
-
-«DEFINE insertCompositeNode FOR Action
-    »CompositeNode newNode = createCompositeNode(grammarAccess.«
-    grammarElementAccess(this)
-    », currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode;«
 ENDDEFINE»
 
 «DEFINE createLeafNode(String localVarName) FOR EObject
