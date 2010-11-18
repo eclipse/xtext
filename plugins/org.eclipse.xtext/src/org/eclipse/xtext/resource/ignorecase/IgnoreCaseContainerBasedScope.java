@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.scoping.impl.ContainerBasedScope;
 
 /**
@@ -21,12 +22,17 @@ public class IgnoreCaseContainerBasedScope extends ContainerBasedScope {
 	public IgnoreCaseContainerBasedScope(IScope outer, EReference reference, IIgnoreCaseContainer container) {
 		super(outer, reference, container);
 	}
-
-	@Override
-	protected Iterable<IEObjectDescription> findAllEObjectsByName(QualifiedName qualifiedName) {
-		return getContainer().findAllEObjectsIgnoreCase(getReference().getEReferenceType(), qualifiedName);
-	}
 	
+	@Override
+	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
+		if (selector instanceof ISelector.SelectByName) {
+			QualifiedName name = ((ISelector.SelectByName) selector).getName();
+			return getContainer().findAllEObjectsIgnoreCase(getReference().getEReferenceType(), name);
+		} else {
+			return super.getLocalElements(selector);
+		}
+	}
+
 	@Override
 	protected IIgnoreCaseContainer getContainer() {
 		return (IIgnoreCaseContainer) super.getContainer();

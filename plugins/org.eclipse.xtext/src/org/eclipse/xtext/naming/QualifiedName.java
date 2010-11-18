@@ -16,8 +16,8 @@ import com.google.common.collect.ImmutableList;
 /**
  * A datatype for dealing with qualified names. Instances are usually provided by a {@link IQualifiedNameProvider}.
  * 
- * @author Sven Efftinge - Initial contribution and API
- * @author Jan Koehnlein
+ * @author Jan Koehnlein - Initial contribution and API
+ * 
  */
 public class QualifiedName implements Comparable<QualifiedName> {
 

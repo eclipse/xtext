@@ -8,16 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping;
 
-import static com.google.common.collect.Iterables.*;
-
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -29,7 +24,10 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.inject.internal.Lists;
 
 /**
  * This class contains static utility functions to create and work on {@link IScope} and {@link IScopedElement}
@@ -67,7 +65,7 @@ public class Scopes {
 	 */
 	public static <T extends EObject> IScope scopeFor(Iterable<? extends T> elements,
 			final Function<T, QualifiedName> nameComputation, IScope outer) {
-		return new SimpleScope(outer, scopedElementsFor(elements, nameComputation));
+		return new SimpleScope(outer,scopedElementsFor(elements, nameComputation));
 	}
 
 	/**
@@ -97,79 +95,28 @@ public class Scopes {
 				});
 		return Iterables.filter(transformed, Predicates.notNull());
 	}
-
+	
 	/**
-	 * returns an Iterable<IScopedElement> containing all scoped elements for the AllContnts of the passed resource,
-	 * which are of the given type. The name is computed using the passed function
-	 * 
-	 * 
-	 * @param resource
-	 * @param typeToFilter
-	 * @param nameFunc
-	 * @return
-	 * @deprecated - use {@link org.eclipse.xtext.resource.IExportedEObjectsProvider} instead
+	 * indexes the IEObject description using the given
 	 */
-	@Deprecated
-	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final EClass typeToFilter,
-			final Function<EObject, QualifiedName> nameFunc) {
-		return allInResource(resource, new Predicate<EObject>() {
-			public boolean apply(EObject input) {
-				return typeToFilter.isInstance(input);
-			}
-		}, nameFunc);
-	}
-
-	/**
-	 * @param resource
-	 * @param predicate
-	 * @param nameFunc
-	 * 
-	 *            skips duplicate elements
-	 * 
-	 * @return
-	 * @deprecated - use {@link org.eclipse.xtext.resource.IExportedEObjectsProvider} instead
-	 */
-	@Deprecated
-	public static Iterable<IEObjectDescription> allInResource(final Resource resource,
-			final Predicate<EObject> predicate, final Function<EObject, QualifiedName> nameFunc) {
-		return allInResource(resource, predicate, nameFunc, true);
-	}
-
-	/**
-	 * @param resource
-	 * @param filter
-	 * @param nameFunc
-	 * @param skipDuplicates
-	 * @return
-	 * @deprecated - use {@link org.eclipse.xtext.resource.IExportedEObjectsProvider} instead
-	 */
-	@Deprecated
-	public static Iterable<IEObjectDescription> allInResource(final Resource resource, final Predicate<EObject> filter,
-			final Function<EObject, QualifiedName> nameFunc, boolean skipDuplicates) {
-		if (resource != null) {
-
-			Iterable<EObject> iterable = new Iterable<EObject>() {
-
-				public Iterator<EObject> iterator() {
-					return EcoreUtil.getAllContents(resource, true);
-				}
-			};
-
-			Iterable<EObject> filtered = filter(iterable, filter);
-
-			Iterable<IEObjectDescription> transformed = transform(filtered,
-					new Function<EObject, IEObjectDescription>() {
-
-						public IEObjectDescription apply(EObject from) {
-							return EObjectDescription.create(nameFunc.apply(from), from);
-						}
-					});
-			if (!skipDuplicates)
-				return transformed;
-
-			return filterDuplicates(transformed);
+	public static <T> Multimap<T,IEObjectDescription> index(Iterable<IEObjectDescription> descriptions, Function<IEObjectDescription,T> indexer) {
+		ArrayList<IEObjectDescription> list = Lists.newArrayList(descriptions);
+		LinkedHashMultimap<T, IEObjectDescription> multimap = LinkedHashMultimap.create(list.size(),1);
+		for (IEObjectDescription desc : list) {
+			multimap.put(indexer.apply(desc), desc);
 		}
-		return Collections.emptyList();
+		return multimap;
+	}
+	
+	/**
+	 * indexes the IEObject description using the given
+	 */
+	public static Multimap<QualifiedName,IEObjectDescription> index(Iterable<IEObjectDescription> descriptions) {
+		return index(descriptions, new Function<IEObjectDescription, QualifiedName>() {
+			public QualifiedName apply(IEObjectDescription from) {
+				return from.getName();
+			}
+		});
 	}
 
 	public static Iterable<IEObjectDescription> filterDuplicates(Iterable<IEObjectDescription> filtered) {
@@ -185,11 +132,4 @@ public class Scopes {
 		return Iterables.filter(result.values(), Predicates.notNull());
 	}
 
-	public static Map<QualifiedName,IEObjectDescription> scopeToMap(IScope scope) {
-		return Maps.uniqueIndex(scope.getAllContents(),new Function<IEObjectDescription, QualifiedName>() {
-			public QualifiedName apply(IEObjectDescription from) {
-				return from.getName();
-			}
-		});
-	}
 }

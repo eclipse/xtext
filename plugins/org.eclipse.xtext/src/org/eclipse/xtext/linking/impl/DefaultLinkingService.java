@@ -19,6 +19,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
 
@@ -109,11 +110,15 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		final String crossRefString = getCrossRefNodeAsString(node);
 		if (crossRefString != null && !crossRefString.equals("")) {
 			QualifiedName qualifiedLinkName =  qualifiedNameConverter.toQualifiedName(crossRefString);
-			IEObjectDescription eObjectDescription = scope.getContentByName(qualifiedLinkName);
+			IEObjectDescription eObjectDescription = scope.getSingleElement(getSelector(qualifiedLinkName));
 			if (eObjectDescription != null)
 				return Collections.singletonList(eObjectDescription.getEObjectOrProxy());
 		}
 		return Collections.emptyList();
+	}
+
+	protected ISelector getSelector(QualifiedName qn) {
+		return new ISelector.SelectByName(qn);
 	}
 
 	public String getCrossRefNodeAsString(AbstractNode node) throws IllegalNodeException {

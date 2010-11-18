@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.util.Map;
+import static com.google.common.collect.Iterables.*;
 
-import org.eclipse.emf.common.util.TreeIterator;
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -17,10 +18,14 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.collect.Maps;
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -51,40 +56,44 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 	}
 
 	public IScope getScope(final EObject context, final EReference reference) {
-		Map<QualifiedName, IEObjectDescription> map = cache.get(Tuples.pair(SimpleLocalScopeProvider.class.getName(),
-				reference), context.eResource(), new Provider<Map<QualifiedName, IEObjectDescription>>() {
+		Multimap<QualifiedName, IEObjectDescription> map = cache.get(Tuples.pair(SimpleLocalScopeProvider.class.getName(),
+				reference), context.eResource(), new Provider<Multimap<QualifiedName, IEObjectDescription>>() {
 
-			public Map<QualifiedName, IEObjectDescription> get() {
+			public Multimap<QualifiedName, IEObjectDescription> get() {
 				return toMap(context, reference);
 			}
 
 		});
 		IScope globalScope = getGlobalScope(context, reference);
-		return createMapBasedScope(globalScope, map);
+		return createScope(globalScope, map);
 	}
 
-	protected IScope createMapBasedScope(IScope parent, Map<QualifiedName, IEObjectDescription> map) {
-		return new MapBasedScope(parent, map);
+	protected IScope createScope(IScope parent, Multimap<QualifiedName, IEObjectDescription> map) {
+		return new MultimapBasedScope(parent, map);
 	}
 
 	protected IEObjectDescription createEObjectDescription(EObject next, QualifiedName qualifiedName) {
 		return EObjectDescription.create(qualifiedName, next, null);
 	}
 
-	protected Map<QualifiedName, IEObjectDescription> toMap(final EObject context, final EReference reference) {
-		TreeIterator<EObject> iterator = context.eResource().getAllContents();
-		Map<QualifiedName, IEObjectDescription> result = Maps.newLinkedHashMap();
-		while (iterator.hasNext()) {
-			EObject next = iterator.next();
-			if (reference.getEReferenceType().isInstance(next)) {
-				QualifiedName qualifiedName = nameProvider.getFullyQualifiedName(next);
-				if (qualifiedName != null && !result.containsKey(qualifiedName)) {
-					IEObjectDescription description = createEObjectDescription(next, qualifiedName);
-					if (description != null)
-						result.put(qualifiedName, description);
-				}
+	protected Multimap<QualifiedName, IEObjectDescription> toMap(final EObject context, final EReference reference) {
+		Iterable<EObject> iterable = new Iterable<EObject>(){
+			public Iterator<EObject> iterator() {
+				return context.eResource().getAllContents();
+			}}; 
+		iterable = filter(iterable, new Predicate<EObject>() {
+			public boolean apply(EObject input) {
+				return reference.getEReferenceType().isInstance(input);
 			}
-		}
-		return result;
+		});
+		Iterable<IEObjectDescription> transformed = transform(iterable, new Function<EObject,IEObjectDescription>(){
+			public IEObjectDescription apply(EObject from) {
+				final QualifiedName fullyQualifiedName = nameProvider.getFullyQualifiedName(from);
+				if (fullyQualifiedName==null)
+					return null;
+				return createEObjectDescription(from, fullyQualifiedName);
+			}});
+		
+		return Scopes.index(filter(transformed,Predicates.notNull()));
 	}
 }

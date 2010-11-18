@@ -7,91 +7,47 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.util.Iterator;
+import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
+import org.eclipse.xtext.scoping.ISelector.SelectByEObject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ContainerBasedScope extends AbstractScope {
 	
-	private final IScope outer;
 	private final EReference reference;
 	private final IContainer container;
 
 	public ContainerBasedScope(IScope outer, EReference reference, IContainer container) {
-		this.outer = outer;
+		super(outer);
 		this.reference = reference;
 		this.container = container;
 	}
-
+	
 	@Override
-	public Iterable<IEObjectDescription> internalGetContents() {
-		return container.findAllEObjects(reference.getEReferenceType());
-	}
-
-	@Override
-	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
-		Iterable<IEObjectDescription> allDescriptions = findAllEObjectsByName(qualifiedName);
-		Iterator<IEObjectDescription> iter = allDescriptions.iterator();
-		IEObjectDescription result = null;
-		while (iter.hasNext()) {
-			if (result != null)
-				return getOuterScope().getContentByName(qualifiedName);
-			result = iter.next();
-		}
-		if (result != null)
-			return result;
-		return getOuterScope().getContentByName(qualifiedName);
-	}
-
-	protected Iterable<IEObjectDescription> findAllEObjectsByName(QualifiedName qualifiedName) {
-		return container.findAllEObjects(reference.getEReferenceType(), qualifiedName);
-	}
-
-	@Override
-	public IEObjectDescription getContentByEObject(EObject object) {
-		URI resourceURI = EcoreUtil.getURI(object).trimFragment();
-		IResourceDescription description = container.getResourceDescription(resourceURI);
-		if (description != null) {
-			Iterable<IEObjectDescription> allDescriptions = description.getExportedObjectsForEObject(object);
-			Iterator<IEObjectDescription> iter = allDescriptions.iterator();
-			boolean hadNext = false;
-			while (iter.hasNext()) {
-				hadNext = true;
-				IEObjectDescription result = iter.next();
-				if (isValidForEObject(result))
-					return result;
+	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
+		if (selector instanceof ISelector.SelectByName) {
+			QualifiedName name = ((ISelector.SelectByName) selector).getName();
+			return container.findAllEObjects(reference.getEReferenceType(), name);
+		} else if (selector instanceof ISelector.SelectByEObject) {
+			SelectByEObject eObjectSelector = (ISelector.SelectByEObject) selector;
+			URI uri = eObjectSelector.getUri();
+			IResourceDescription description = container.getResourceDescription(uri.trimFragment());
+			if (description != null) {
+				return description.getExportedObjectsForEObject(eObjectSelector.getEObject());
 			}
-			if (hadNext)
-				return null;
+			return Collections.emptySet();
 		}
-		return getOuterScope().getContentByEObject(object);
-	}
-
-	private boolean isValidForEObject(IEObjectDescription result) {
-		Iterable<IEObjectDescription> allDescriptionsByName = findAllEObjectsByName(result.getName());
-		Iterator<IEObjectDescription> iter = allDescriptionsByName.iterator();
-		IEObjectDescription inverted = null;
-		while (iter.hasNext()) {
-			if (inverted != null)
-				return false;
-			inverted = iter.next();
-		}
-		return inverted != null && inverted.getEObjectURI().equals(result.getEObjectURI());
-	}
-
-	public IScope getOuterScope() {
-		return outer;
+		return container.findAllEObjects(reference.getEReferenceType());
 	}
 	
 	protected IContainer getContainer() {
@@ -101,4 +57,5 @@ public class ContainerBasedScope extends AbstractScope {
 	protected EReference getReference() {
 		return reference;
 	}
+
 }

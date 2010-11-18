@@ -7,17 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.ignorecase;
 
-import java.util.Map;
-
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.MultimapBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 
-import com.google.common.collect.Maps;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,9 +25,14 @@ import com.google.common.collect.Maps;
 public class IgnoreCaseSimpleLocalScopeProvider extends SimpleLocalScopeProvider {
 
 	@Override
-	protected Map<QualifiedName, IEObjectDescription> toMap(EObject context, EReference reference) {
+	public IScope getScope(EObject context, EReference reference) {
+		return new IgnoreCaseSelectorScope(super.getScope(context, reference));
+	}
+	
+	@Override
+	protected Multimap<QualifiedName, IEObjectDescription> toMap(EObject context, EReference reference) {
 		TreeIterator<EObject> iterator = context.eResource().getAllContents();
-		Map<QualifiedName, IEObjectDescription> result = Maps.newHashMap();
+		Multimap<QualifiedName, IEObjectDescription> result = LinkedHashMultimap.create();
 		while (iterator.hasNext()) {
 			EObject next = iterator.next();
 			if (reference.getEReferenceType().isInstance(next)) {
@@ -44,7 +49,7 @@ public class IgnoreCaseSimpleLocalScopeProvider extends SimpleLocalScopeProvider
 	}
 
 	@Override
-	protected IScope createMapBasedScope(IScope parent, Map<QualifiedName, IEObjectDescription> map) {
-		return new IgnoreCaseMapBasedScope(parent, map);
+	protected IScope createScope(IScope parent, Multimap<QualifiedName, IEObjectDescription> map) {
+		return new MultimapBasedScope(parent, map);
 	}
 }

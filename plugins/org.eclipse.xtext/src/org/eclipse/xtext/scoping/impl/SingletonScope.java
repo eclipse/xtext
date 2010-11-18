@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.util.Collection;
 import java.util.Collections;
 
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -16,27 +15,9 @@ import org.eclipse.xtext.scoping.IScope;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SingletonScope extends AbstractScope {
+public class SingletonScope extends SimpleScope {
 
-	private final Collection<IEObjectDescription> singleDescription;
-	private final IScope outer;
-
-	public SingletonScope(IEObjectDescription description) {
-		this(description, IScope.NULLSCOPE);
-	}
-	
 	public SingletonScope(IEObjectDescription description, IScope outer) {
-		this.singleDescription = Collections.singletonList(description);
-		this.outer = outer;
+		super(outer,Collections.singleton(description));
 	}
-	
-	public IScope getOuterScope() {
-		return outer;
-	}
-
-	@Override
-	protected Iterable<IEObjectDescription> internalGetContents() {
-		return singleDescription;
-	}
-
 }

@@ -18,12 +18,12 @@ public class ImportNormalizer {
 
 	private boolean hasWildCard;
 
-	public ImportNormalizer(QualifiedName importedNamespace, String wildCard) {
+	public ImportNormalizer(QualifiedName importedNamespace, boolean wildCard) {
 		if (importedNamespace == null || importedNamespace.getSegmentCount() < 1) {
 			throw new IllegalArgumentException("Imported namespace must not be null / empty");
 		}
-		hasWildCard = importedNamespace.getLastSegment().equals(wildCard);
-		this.importedNamespacePrefix = (hasWildCard) ? importedNamespace.skipLast(1) : importedNamespace;
+		hasWildCard = wildCard;
+		this.importedNamespacePrefix = importedNamespace;
 	}
 
 	public QualifiedName deresolve(QualifiedName fullyQualifiedName) {
@@ -45,6 +45,11 @@ public class ImportNormalizer {
 				return importedNamespacePrefix.skipLast(1).append(relativeName);
 		}
 		return null;
+	}
+	
+	@Override
+	public String toString() {
+		return importedNamespacePrefix.toString()+(hasWildCard?".*":"");
 	}
 
 }

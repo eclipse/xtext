@@ -8,13 +8,14 @@
 package org.eclipse.xtext.scoping.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
+import org.eclipse.xtext.scoping.ISelector.DelegatingSelector;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 /**
@@ -47,42 +48,23 @@ public class FilteringScope implements IScope {
 			}};
 	}
 
-	public IScope getOuterScope() {
-		return new FilteringScope(delegate.getOuterScope(), filter);
+	public IEObjectDescription getSingleElement(ISelector selector) {
+		return delegate.getSingleElement(enhanceSelector(selector));
 	}
 
-	public Iterable<IEObjectDescription> getAllContents() {
-		return filtered(delegate.getAllContents());
-	}
-	
-	public Iterable<IEObjectDescription> getContents() {
-		return filtered(delegate.getContents());
+	public Iterable<IEObjectDescription> getElements(ISelector selector) {
+		return delegate.getElements(enhanceSelector(selector));
 	}
 
-	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
-		return filtered(delegate.getContentByName(qualifiedName));
+	protected ISelector enhanceSelector(ISelector selector) {
+		if (selector instanceof ISelector.DelegatingSelector) {
+			final DelegatingSelector delegatingSelector = (ISelector.DelegatingSelector) selector;
+			delegatingSelector.addDelegate(new ISelector(){
+				public Iterable<IEObjectDescription> applySelector(Iterable<IEObjectDescription> elements) {
+					return Iterables.filter(elements,Predicates.not(filter));
+				}});
+		}
+		return selector;
 	}
 
-	public IEObjectDescription getContentByEObject(EObject object) {
-		return filtered(delegate.getContentByEObject(object));
-	}
-
-	public Iterable<IEObjectDescription> getAllContentsByEObject(EObject object) {
-		return filtered(delegate.getAllContentsByEObject(object));
-	}
-
-	protected Iterable<IEObjectDescription> filtered(
-			Iterable<IEObjectDescription> elements) {
-		return Iterables.filter(elements, filter);
-	}
-	
-	protected IEObjectDescription filtered(IEObjectDescription element) {
-		if (element==null)
-			return null;
-		if (filter.apply(element))
-			return element;
-		return null;
-	}
-	
-	
 }

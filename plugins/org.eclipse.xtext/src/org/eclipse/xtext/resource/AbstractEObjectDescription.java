@@ -24,4 +24,8 @@ public abstract class AbstractEObjectDescription implements IEObjectDescription 
 	public String[] getUserDataKeys() {
 		return new String[0];
 	}
+	
+	public Object getKey() {
+		return getName();
+	}
 }

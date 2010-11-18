@@ -20,6 +20,7 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
@@ -98,7 +99,7 @@ class XtextMetamodelReferenceHelper {
 	private static void filterMetamodelsInScope(final String alias, IScope scope,
 			final List<AbstractMetamodelDeclaration> generatedMetamodels,
 			final List<AbstractMetamodelDeclaration> importedMetamodels) {
-		Iterable<AbstractMetamodelDeclaration> all = Iterables.filter(Iterables.transform(scope.getAllContents(), new Function<IEObjectDescription, AbstractMetamodelDeclaration>() {
+		Iterable<AbstractMetamodelDeclaration> all = Iterables.filter(Iterables.transform(scope.getElements(ISelector.SELECT_ALL), new Function<IEObjectDescription, AbstractMetamodelDeclaration>() {
 			public AbstractMetamodelDeclaration apply(IEObjectDescription param) {
 				return (AbstractMetamodelDeclaration) param.getEObjectOrProxy();
 			}

@@ -7,51 +7,35 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.Scopes;
+import org.eclipse.xtext.scoping.ISelector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ResourceDescriptionBasedScope extends AbstractScope {
 
-	private final IScope outer;
 	private final EClass type;
 	private final IResourceDescription description;
 	
 	private boolean allowDuplicates = false;
 	
-	public ResourceDescriptionBasedScope(IScope outer, IResourceDescription description, EClass type) {
-		if (outer == null)
-			throw new NullPointerException("outer");
+	public ResourceDescriptionBasedScope(IScope parent, IResourceDescription description, EClass type) {
+		super(parent);
 		if (description == null)
 			throw new NullPointerException("description");
 		if (type == null)
 			throw new NullPointerException("type");
-		this.outer = outer;
 		this.description = description;
 		this.type = type;
 	}
 	
 	public ResourceDescriptionBasedScope(IResourceDescription description, EClass type) {
 		this(IScope.NULLSCOPE, description, type);
-	}
-	
-	@Override
-	protected Iterable<IEObjectDescription> internalGetContents() {
-		if (allowDuplicates)
-			return description.getExportedObjects(type);
-		return Scopes.filterDuplicates(description.getExportedObjects(type));
-	}
-
-	public IScope getOuterScope() {
-		return outer;
 	}
 	
 	public void setAllowDuplicates(boolean allow) {
@@ -71,16 +55,14 @@ public class ResourceDescriptionBasedScope extends AbstractScope {
 	}
 	
 	@Override
-	public IEObjectDescription getContentByName(QualifiedName qualifiedName) {
-		// TODO: case allowDuplicates, see also impl in subclass
-		Iterable<IEObjectDescription> objects = description.getExportedObjects(type, qualifiedName);
-		Iterator<IEObjectDescription> iter = objects.iterator();
-		if (iter.hasNext()) {
-			IEObjectDescription result = iter.next();
-			if (!iter.hasNext())
-				return result;
-		}
-		return getOuterScope().getContentByName(qualifiedName);
+	public Iterable<IEObjectDescription> getLocalElements(ISelector selector) {
+		if (selector instanceof ISelector.SelectByName) {
+			QualifiedName name = ((ISelector.SelectByName) selector).getName();
+			final Iterable<IEObjectDescription> exportedObjects = description.getExportedObjects(type, name);
+			return selector.applySelector(exportedObjects);
+		} 
+		Iterable<IEObjectDescription> objects = description.getExportedObjects(type);
+		return selector.applySelector(objects);
 	}
 
 }

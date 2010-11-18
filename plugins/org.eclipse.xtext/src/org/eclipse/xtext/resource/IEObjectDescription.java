@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.QualifiedName;
 
 /**
- * A description of an EObject.
+ * An abstract description of an {@link EObject}.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
@@ -24,6 +24,11 @@ public interface IEObjectDescription {
 	 * @return the name, this element can be accessed by.
 	 */
 	QualifiedName getName();
+	
+	/**
+	 * @return the key which makes this description unique within its scope, and shadows any elements with the same key from outer scope.
+	 */
+	Object getKey();
 	
 	/**
 	 * @return the qualified name of the element. 
