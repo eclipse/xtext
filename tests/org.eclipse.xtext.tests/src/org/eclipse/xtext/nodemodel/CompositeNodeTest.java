@@ -25,30 +25,25 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 		LeafNode firstChild = new LeafNode();
 		firstChild.setTotalLength(1);
 		firstChild.setTotalOffset(0);
-		root.addChild(firstChild);
+		addChild(root, firstChild);
 		CompositeNodeWithSemanticElement composite = createCompositeNode();
 		LeafNode child = new LeafNode();
 		child.setTotalOffset(1);
 		child.setTotalLength(completeContent.trim().length());
-		composite.addChild(child);
-		root.addChild(composite);
+		addChild(composite, child);
+		addChild(root, composite);
 		LeafNode lastChild = new LeafNode();
 		lastChild.setTotalLength(1);
 		lastChild.setTotalOffset(completeContent.length() - 2);
-		root.addChild(lastChild);
+		addChild(root, lastChild);
 		assertEquals(completeContent.trim(), composite.getText());
 		assertEquals(1, composite.getTotalOffset());
 		assertEquals(completeContent.trim().length(), composite.getTotalLength());
 	}
 	
 	@Override
-	protected void addChild(ICompositeNode composite, LeafNode leaf) {
-		((RootNode) composite).addChild(leaf);
-	}
-	
-	@Override
 	protected AbstractNode getFirstChild(ICompositeNode node) {
-		return ((RootNode) node).getFirstChild();
+		return ((CompositeNodeWithSemanticElement) node).getFirstChild();
 	}
 	
 	@Override

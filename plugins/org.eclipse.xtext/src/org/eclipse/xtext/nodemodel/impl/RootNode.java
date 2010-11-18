@@ -130,21 +130,6 @@ public class RootNode implements ICompositeNode, Adapter {
 		this.firstChild = firstChild;
 	}
 	
-	public void addChild(AbstractNode child) {
-		if (firstChild == null) {
-			if (child == null)
-				throw new IllegalArgumentException("child may not be null");
-			if (child.getNext() != null || child.getPrevious() != null)
-				throw new IllegalStateException("prev has already a next or prev");
-			this.firstChild = child;
-			child.basicSetParent(this);
-			child.basicSetNext(child);
-			child.basicSetPrevious(child);
-		} else {
-			firstChild.addPrevious(child);
-		}
-	}
-
 	public void setSemanticElement(EObject element) {
 		this.rootSemanticObject = element;
 	}
