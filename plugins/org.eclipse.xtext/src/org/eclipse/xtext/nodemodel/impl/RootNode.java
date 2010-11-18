@@ -126,22 +126,21 @@ public class RootNode implements ICompositeNode, Adapter {
 		return firstChild;
 	}
 	
-	public void setFirstChild(AbstractNode firstChild) {
-		if (this.firstChild != null) {
-			this.firstChild.setParent(null);
-		}
+	public void basicSetFirstChild(AbstractNode firstChild) {
 		this.firstChild = firstChild;
-		if (firstChild != null) {
-			firstChild.setParent(this);
-			firstChild.addNext(firstChild);
-			firstChild.addPrevious(firstChild);
-		}
 	}
 	
 	public void addChild(AbstractNode child) {
-		if (firstChild == null)
-			setFirstChild(child);
-		else {
+		if (firstChild == null) {
+			if (child == null)
+				throw new IllegalArgumentException("child may not be null");
+			if (child.getNext() != null || child.getPrevious() != null)
+				throw new IllegalStateException("prev has already a next or prev");
+			this.firstChild = child;
+			child.basicSetParent(this);
+			child.basicSetNext(child);
+			child.basicSetPrevious(child);
+		} else {
 			firstChild.addPrevious(child);
 		}
 	}
