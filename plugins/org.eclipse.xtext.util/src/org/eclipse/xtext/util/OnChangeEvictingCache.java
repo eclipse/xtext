@@ -32,6 +32,10 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		void onEvict(CacheAdapter cache);
 	}
 	
+	public void clear(Resource resource) {
+		getOrCreate(resource).clearValues();
+	}
+	
 	public <T> T get(Object key, Resource resource, Provider<T> provider) {
 		if(resource == null) {
 			return provider.get();
@@ -109,16 +113,20 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
 			if (!ignoreNotifications && isSemanticStateChange(notification)) {
-				if (!empty) {
-					values.clear();
-					empty = true;
-				}
+				clearValues();
 				Iterator<Listener> iter = listeners.iterator();
 				while(iter.hasNext()) {
 					Listener next = iter.next();
 					iter.remove();
 					next.onEvict(this);
 				}
+			}
+		}
+
+		public void clearValues() {
+			if (!empty) {
+				values.clear();
+				empty = true;
 			}
 		}
 

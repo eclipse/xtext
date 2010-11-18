@@ -25,10 +25,13 @@ public interface IResourceScopeCache {
 	 */
 	<T> T get(Object key, Resource res, Provider<T> provider);
 	
+	void clear(Resource res);
+	
 	static class NullImpl implements IResourceScopeCache {
 		public final static IResourceScopeCache INSTANCE = new NullImpl();
 		public <T> T get(Object key, Resource res, Provider<T> provider) {
 			return provider.get();
 		}
+		public void clear(Resource res) {}
 	}
 }
