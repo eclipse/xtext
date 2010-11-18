@@ -31,6 +31,8 @@ public interface INode extends TreeIterable<INode> {
 	String getText();
 
 	EObject getGrammarElement();
+	
+	EObject getSemanticElement();
 
 	SyntaxErrorMessage getSyntaxErrorMessage();
 

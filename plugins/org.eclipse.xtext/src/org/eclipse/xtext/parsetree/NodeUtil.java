@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -26,7 +25,6 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Heiko Behrens
- * 
  */
 public class NodeUtil {
 
@@ -43,17 +41,6 @@ public class NodeUtil {
 		return nodeAdapter == null ? null : nodeAdapter.getParserNode();
 	}
 
-	protected static boolean removeNodeAdapter(EObject obj) {
-		NodeAdapter adapter = getNodeAdapter(obj);
-		if (adapter == null)
-			return false;
-		while (adapter != null) {
-			adapter.getParserNode().setParent(null);
-			adapter = getNodeAdapter(obj);
-		}
-		return true;
-	}
-
 	public static CompositeNode getRootNode(EObject obj) {
 		NodeAdapter adapter = getNodeAdapter(obj);
 		if (adapter == null)
@@ -62,16 +49,6 @@ public class NodeUtil {
 		if (parserNode == null)
 			return null;
 		return (CompositeNode) EcoreUtil.getRootContainer(parserNode);
-	}
-
-	public static List<CompositeNode> getCompositeChildren(CompositeNode parent) {
-		List<CompositeNode> compositeChildren = new ArrayList<CompositeNode>();
-		for (AbstractNode node : parent.getChildren()) {
-			if (node instanceof CompositeNode) {
-				compositeChildren.add((CompositeNode) node);
-			}
-		}
-		return compositeChildren;
 	}
 
 	public static EObject getASTElementForRootNode(CompositeNode compositeNode) {
@@ -109,17 +86,6 @@ public class NodeUtil {
 			else
 				n = n.getParent();
 		return null;
-	}
-
-	public static EObject findASTParentElement(CompositeNode replaceRootNode) {
-		CompositeNode parent = replaceRootNode.getParent();
-		if (parent == null) {
-			return null;
-		}
-		if (parent.getElement() != null) {
-			return parent.getElement();
-		}
-		return findASTParentElement(parent);
 	}
 
 	public static void dumpCompositeNodes(String indent, CompositeNode node) {
@@ -164,17 +130,6 @@ public class NodeUtil {
 			}
 		}
 		return null;
-	}
-
-	public static CompositeNode findLastCompositeGrandChild(CompositeNode parentNode) {
-		EList<AbstractNode> children = parentNode.getChildren();
-		for (int i = children.size() - 1; i >= 0; --i) {
-			AbstractNode child = children.get(i);
-			if (child instanceof CompositeNode) {
-				return findLastCompositeGrandChild((CompositeNode) child);
-			}
-		}
-		return parentNode;
 	}
 
 	public static void checkOffsetConsistency(final CompositeNode rootNode) {

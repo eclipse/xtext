@@ -80,7 +80,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 			token.accept(this);
 		}
 		this.input = null;
-		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), currentNode);
+		return new ParseResult(currentStack.isEmpty() ? null : currentStack.getLast(), currentNode, null);
 	}
 
 	private LeafNode createLeafNode(AbstractParsedToken parsedToken) {

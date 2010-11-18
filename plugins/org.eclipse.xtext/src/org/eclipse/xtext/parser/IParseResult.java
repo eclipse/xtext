@@ -11,8 +11,10 @@ package org.eclipse.xtext.parser;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.SyntaxError;
 
 /**
  * Represents the result of the parsing. 
@@ -22,8 +24,14 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 public interface IParseResult {
 
     EObject getRootASTElement();
-    
+
+    @Deprecated
     CompositeNode getRootNode();
     
-    List<SyntaxError> getParseErrors();
+    ICompositeNode getRootNode2();
+    
+    @Deprecated
+    List<AbstractNode> getParseErrors();
+    
+    Iterable<INode> getParseErrors2();
 }

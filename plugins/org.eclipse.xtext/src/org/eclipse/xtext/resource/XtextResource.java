@@ -29,6 +29,7 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
+import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.SyntaxError;
@@ -298,7 +299,8 @@ public class XtextResource extends ResourceImpl {
 			return Collections.emptyList();
 
 		List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
-		for (SyntaxError error : parseResult.getParseErrors()) {
+		for (AbstractNode nodeWithError : parseResult.getParseErrors()) {
+			SyntaxError error = nodeWithError.getSyntaxError();
 			diagnostics.add(new XtextSyntaxDiagnostic(error));
 		}
 		return diagnostics;
