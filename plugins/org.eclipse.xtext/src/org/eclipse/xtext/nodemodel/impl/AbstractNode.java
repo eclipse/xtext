@@ -63,7 +63,7 @@ public abstract class AbstractNode implements INode {
 		return grammarElement;
 	}
 	
-	public void setGrammarElement(EObject grammarElement) {
+	protected void setGrammarElement(EObject grammarElement) {
 		this.grammarElement = grammarElement;
 	}
 
@@ -77,34 +77,6 @@ public abstract class AbstractNode implements INode {
 	
 	public AbstractNode getNext() {
 		return next;
-	}
-	
-	public void addPrevious(AbstractNode prev) {
-		if (prev == null)
-			throw new IllegalArgumentException("prev may not be null");
-		if (prev.getNext() != null || prev.getPrevious() != null)
-			throw new IllegalStateException("prev has already a next or prev");
-		prev.prev = this.prev;
-		prev.parent = parent;
-		prev.next = this;
-		if (this.prev != null) {
-			this.prev.next = prev;
-		}
-		this.prev = prev;
-	}
-	
-	public void addNext(AbstractNode next) {
-		if (next == null)
-			throw new IllegalArgumentException("next may not be null");
-		if (next.getNext() != null || next.getPrevious() != null)
-			throw new IllegalStateException("next has already a next or prev");
-		next.next = this.next;
-		next.parent = parent;
-		next.prev = this;
-		if (this.next != null) {
-			this.next.prev = next;
-		}
-		this.next = next;
 	}
 	
 	public void basicSetPrevious(AbstractNode prev) {

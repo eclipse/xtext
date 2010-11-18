@@ -58,7 +58,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		throw new IllegalStateException();
 	}
 
-	public void setLookAhead(int lookAhead) {
+	protected void setLookAhead(int lookAhead) {
 		this.lookAhead = lookAhead;
 	}
 	
@@ -66,23 +66,8 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		return firstChild;
 	}
 	
-	public void basicSetFirstChild(AbstractNode firstChild) {
+	protected void basicSetFirstChild(AbstractNode firstChild) {
 		this.firstChild = firstChild;
-	}
-	
-	public void addChild(AbstractNode child) {
-		if (firstChild == null) {
-			if (child == null)
-				throw new IllegalArgumentException("child may not be null");
-			if (child.getNext() != null || child.getPrevious() != null)
-				throw new IllegalStateException("prev has already a next or prev");
-			this.firstChild = child;
-			child.basicSetParent(this);
-			child.basicSetNext(child);
-			child.basicSetPrevious(child);
-		} else {
-			firstChild.addPrevious(child);
-		}
 	}
 	
 }

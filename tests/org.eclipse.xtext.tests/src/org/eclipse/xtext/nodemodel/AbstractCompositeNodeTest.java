@@ -14,11 +14,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 import org.eclipse.xtext.nodemodel.impl.LeafNode;
+import org.eclipse.xtext.nodemodel.impl.NodeModelMutator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractCompositeNodeTest extends TestCase {
+
+	private NodeModelMutator mutator;
 
 	public abstract void testTextOffsetLength();
 
@@ -26,7 +29,21 @@ public abstract class AbstractCompositeNodeTest extends TestCase {
 	
 	protected abstract AbstractNode getFirstChild(ICompositeNode node);
 
-	protected abstract void addChild(ICompositeNode composite, LeafNode leaf);
+	protected final void addChild(ICompositeNode composite, AbstractNode leaf) {
+		mutator.addChild(composite, leaf);
+	}
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		this.mutator = new NodeModelMutator();
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		this.mutator = null;
+		super.tearDown();
+	}
 	
 	public void testAddChild_00() {
 		ICompositeNode composite = createCompositeNode();
