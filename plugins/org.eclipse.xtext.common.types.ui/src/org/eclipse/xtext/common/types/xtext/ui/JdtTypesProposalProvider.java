@@ -37,6 +37,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal.IReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -86,13 +87,15 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		public String getActualReplacementString(ConfigurableCompletionProposal proposal) {
 			String replacementString = proposal.getReplacementString();
 			if (scope != null) {
-				IEObjectDescription element = scope.getContentByName(qualifiedNameConverter.toQualifiedName(replacementString));
+				IEObjectDescription element = scope.getSingleElement(new ISelector.SelectByName(qualifiedNameConverter.toQualifiedName(replacementString)));
 				if (element != null) {
 					EObject resolved = EcoreUtil.resolve(element.getEObjectOrProxy(), context);
 					if (!resolved.eIsProxy()) {
-						IEObjectDescription shortedElement = scope.getContentByEObject(resolved);
+						IEObjectDescription shortedElement = scope.getSingleElement(new ISelector.SelectByEObject(resolved));
 						if (shortedElement != null) {
-							replacementString = applyValueConverter(shortedElement.getName());
+							IEObjectDescription description = scope.getSingleElement(new ISelector.SelectByName(shortedElement.getName()));
+							if (description.getEObjectURI().equals(shortedElement.getEObjectURI()))
+								replacementString = applyValueConverter(shortedElement.getName());
 						}
 					}
 				}

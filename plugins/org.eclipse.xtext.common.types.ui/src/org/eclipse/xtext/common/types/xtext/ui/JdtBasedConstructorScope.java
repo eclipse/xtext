@@ -36,6 +36,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.AbstractEObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.ISelector;
 
 import com.google.common.collect.Lists;
 
@@ -52,7 +53,7 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 	}
 	
 	@Override
-	public Iterable<IEObjectDescription> internalGetContents() {
+	protected Iterable<IEObjectDescription> internalGetAllLocalElements(ISelector selector) {
 		IJavaProject javaProject = getTypeProvider().getJavaProject();
 		if (javaProject == null)
 			return Collections.emptyList();
@@ -74,7 +75,7 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 		catch (CoreException e) {
 			logger.error("CoreException when searching for constructors.", e);
 		}
-		return allScopedElements;
+		return selector.applySelector(allScopedElements);
 	}
 	
 	protected IJdtTypeProvider getTypeProvider() {

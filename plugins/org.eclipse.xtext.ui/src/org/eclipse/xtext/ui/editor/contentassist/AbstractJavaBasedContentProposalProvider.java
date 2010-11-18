@@ -31,6 +31,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.ISelector;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import org.eclipse.xtext.util.PolymorphicDispatcher.WarningErrorHandler;
@@ -100,7 +101,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 				Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
 			if (model != null) {
 				IScope scope = getScopeProvider().getScope(model, reference);
-				Iterable<IEObjectDescription> candidates = scope.getAllContents();
+				Iterable<IEObjectDescription> candidates = scope.getElements(getSelector(model,reference,filter));
 				for (IEObjectDescription candidate : candidates) {
 					if (!acceptor.canAcceptMoreProposals())
 						return;
@@ -118,6 +119,10 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		public IScopeProvider getScopeProvider() {
 			return scopeProvider;
 		}
+		
+		public ISelector getSelector(EObject model, EReference reference, Predicate<IEObjectDescription> filter) {
+			return ISelector.SELECT_ALL;
+		}
 	}
 
 	@Inject
@@ -131,6 +136,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 	protected AbstractJavaBasedContentProposalProvider() {
 		dispatchers = new HashMap<String, PolymorphicDispatcher<Void>>();
 	}
+
 
 	@Override
 	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
