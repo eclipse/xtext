@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 // Entry rule entryRuleEntryRule
 entryRuleEntryRule returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getEntryRuleRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getEntryRuleRule()); }
 	 iv_ruleEntryRule=ruleEntryRule 
 	 { $current=$iv_ruleEntryRule.current; } 
 	 EOF 
@@ -78,15 +77,13 @@ entryRuleEntryRule returns [EObject current=null]
 
 // Rule EntryRule
 ruleEntryRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getEntryRuleAccess().getMultiFeatureAbstractRuleParserRuleCall_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getEntryRuleAccess().getMultiFeatureAbstractRuleParserRuleCall_0()); 
 	    }
 		lv_multiFeature_0_0=ruleAbstractRule		{
 	        if ($current==null) {
@@ -96,8 +93,7 @@ ruleEntryRule returns [EObject current=null]
        			$current, 
        			"multiFeature",
         		lv_multiFeature_0_0, 
-        		"AbstractRule", 
-        		currentNode);
+        		"AbstractRule");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -112,7 +108,7 @@ ruleEntryRule returns [EObject current=null]
 // Entry rule entryRuleAbstractRule
 entryRuleAbstractRule returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getAbstractRuleRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getAbstractRuleRule()); }
 	 iv_ruleAbstractRule=ruleAbstractRule 
 	 { $current=$iv_ruleAbstractRule.current; } 
 	 EOF 
@@ -120,30 +116,26 @@ entryRuleAbstractRule returns [EObject current=null]
 
 // Rule AbstractRule
 ruleAbstractRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getAbstractRuleAccess().getChoiceRuleParserRuleCall_0(), currentNode); 
+        newCompositeNode(grammarAccess.getAbstractRuleAccess().getChoiceRuleParserRuleCall_0()); 
     }
     this_ChoiceRule_0=ruleChoiceRule
     { 
         $current = $this_ChoiceRule_0.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getAbstractRuleAccess().getReducibleRuleParserRuleCall_1(), currentNode); 
+        newCompositeNode(grammarAccess.getAbstractRuleAccess().getReducibleRuleParserRuleCall_1()); 
     }
     this_ReducibleRule_1=ruleReducibleRule
     { 
         $current = $this_ReducibleRule_1.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 )
@@ -156,7 +148,7 @@ ruleAbstractRule returns [EObject current=null]
 // Entry rule entryRuleChoiceRule
 entryRuleChoiceRule returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getChoiceRuleRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getChoiceRuleRule()); }
 	 iv_ruleChoiceRule=ruleChoiceRule 
 	 { $current=$iv_ruleChoiceRule.current; } 
 	 EOF 
@@ -164,27 +156,25 @@ entryRuleChoiceRule returns [EObject current=null]
 
 // Rule ChoiceRule
 ruleChoiceRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='choice' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getChoiceRuleAccess().getChoiceKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getChoiceRuleAccess().getChoiceKeyword_0());
     }
 (
 (
 		lv_optionalKeyword_1_0=	'optional' 
     {
-        createLeafNode(lv_optionalKeyword_1_0, grammarAccess.getChoiceRuleAccess().getOptionalKeywordOptionalKeyword_1_0(), "optionalKeyword");
+        newLeafNode(lv_optionalKeyword_1_0, grammarAccess.getChoiceRuleAccess().getOptionalKeywordOptionalKeyword_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getChoiceRuleRule());
 	        }
-       		set($current, "optionalKeyword", true, "optional", lastConsumedNode);
+       		setWithLastConsumed($current, "optionalKeyword", true, "optional");
 	    }
 
 )
@@ -192,18 +182,17 @@ ruleChoiceRule returns [EObject current=null]
 (
 		lv_name_2_0=RULE_ID
 		{
-			createLeafNode(lv_name_2_0, grammarAccess.getChoiceRuleAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+			newLeafNode(lv_name_2_0, grammarAccess.getChoiceRuleAccess().getNameIDTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getChoiceRuleRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -217,7 +206,7 @@ ruleChoiceRule returns [EObject current=null]
 // Entry rule entryRuleReducibleRule
 entryRuleReducibleRule returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getReducibleRuleRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getReducibleRuleRule()); }
 	 iv_ruleReducibleRule=ruleReducibleRule 
 	 { $current=$iv_ruleReducibleRule.current; } 
 	 EOF 
@@ -225,23 +214,20 @@ entryRuleReducibleRule returns [EObject current=null]
 
 // Rule ReducibleRule
 ruleReducibleRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='reducible' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getReducibleRuleAccess().getReducibleKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getReducibleRuleAccess().getReducibleKeyword_0());
     }
 
     { 
-        currentNode=createCompositeNode(grammarAccess.getReducibleRuleAccess().getTerminalRuleParserRuleCall_1(), currentNode); 
+        newCompositeNode(grammarAccess.getReducibleRuleAccess().getTerminalRuleParserRuleCall_1()); 
     }
     this_TerminalRule_1=ruleTerminalRule
     { 
         $current = $this_TerminalRule_1.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 ((
@@ -253,7 +239,7 @@ ruleReducibleRule returns [EObject current=null]
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getReducibleRuleAccess().getActionFeatureTerminalRuleParserRuleCall_2_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getReducibleRuleAccess().getActionFeatureTerminalRuleParserRuleCall_2_1_0()); 
 	    }
 		lv_actionFeature_3_0=ruleTerminalRule		{
 	        if ($current==null) {
@@ -263,8 +249,7 @@ ruleReducibleRule returns [EObject current=null]
        			$current, 
        			"actionFeature",
         		lv_actionFeature_3_0, 
-        		"TerminalRule", 
-        		currentNode);
+        		"TerminalRule");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -279,7 +264,7 @@ ruleReducibleRule returns [EObject current=null]
 // Entry rule entryRuleTerminalRule
 entryRuleTerminalRule returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getTerminalRuleRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getTerminalRuleRule()); }
 	 iv_ruleTerminalRule=ruleTerminalRule 
 	 { $current=$iv_ruleTerminalRule.current; } 
 	 EOF 
@@ -287,27 +272,24 @@ entryRuleTerminalRule returns [EObject current=null]
 
 // Rule TerminalRule
 ruleTerminalRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		lv_stringFeature_0_0=RULE_STRING
 		{
-			createLeafNode(lv_stringFeature_0_0, grammarAccess.getTerminalRuleAccess().getStringFeatureSTRINGTerminalRuleCall_0(), "stringFeature"); 
+			newLeafNode(lv_stringFeature_0_0, grammarAccess.getTerminalRuleAccess().getStringFeatureSTRINGTerminalRuleCall_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getTerminalRuleRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"stringFeature",
         		lv_stringFeature_0_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )

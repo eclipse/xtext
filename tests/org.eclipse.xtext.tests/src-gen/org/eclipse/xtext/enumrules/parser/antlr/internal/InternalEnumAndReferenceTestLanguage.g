@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.common.util.Enumerator;
@@ -71,7 +70,7 @@ import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarA
 // Entry rule entryRuleEntityWithEnumAndReference
 entryRuleEntityWithEnumAndReference returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getEntityWithEnumAndReferenceRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getEntityWithEnumAndReferenceRule()); }
 	 iv_ruleEntityWithEnumAndReference=ruleEntityWithEnumAndReference 
 	 { $current=$iv_ruleEntityWithEnumAndReference.current; } 
 	 EOF 
@@ -79,15 +78,13 @@ entryRuleEntityWithEnumAndReference returns [EObject current=null]
 
 // Rule EntityWithEnumAndReference
 ruleEntityWithEnumAndReference returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0()); 
 	    }
 		lv_type_0_0=ruleKindOfKeyword		{
 	        if ($current==null) {
@@ -97,8 +94,7 @@ ruleEntityWithEnumAndReference returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_0_0, 
-        		"KindOfKeyword", 
-        		currentNode);
+        		"KindOfKeyword");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -107,24 +103,23 @@ ruleEntityWithEnumAndReference returns [EObject current=null]
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(lv_name_1_0, grammarAccess.getEntityWithEnumAndReferenceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			newLeafNode(lv_name_1_0, grammarAccess.getEntityWithEnumAndReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getEntityWithEnumAndReferenceRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
 )	otherlv_2='reference' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getEntityWithEnumAndReferenceAccess().getReferenceKeyword_2(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getEntityWithEnumAndReferenceAccess().getReferenceKeyword_2());
     }
 (
 (
@@ -135,7 +130,7 @@ ruleEntityWithEnumAndReference returns [EObject current=null]
         }
 	otherlv_3=RULE_ID
 	{
-		createLeafNode(otherlv_3, grammarAccess.getEntityWithEnumAndReferenceAccess().getRefEntityWithEnumAndReferenceCrossReference_3_0(), "ref"); 
+		newLeafNode(otherlv_3, grammarAccess.getEntityWithEnumAndReferenceAccess().getRefEntityWithEnumAndReferenceCrossReference_3_0()); 
 	}
 
 )
@@ -148,20 +143,18 @@ ruleEntityWithEnumAndReference returns [EObject current=null]
 
 // Rule KindOfKeyword
 ruleKindOfKeyword returns [Enumerator current=null] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @init { enterRule(); }
+    @after { leaveRule(); }:
 ((	enumLiteral_0='kindOfKeyword' 
 	{
         $current = grammarAccess.getKindOfKeywordAccess().getKindOfKeywordEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_0, grammarAccess.getKindOfKeywordAccess().getKindOfKeywordEnumLiteralDeclaration_0(), null); 
+        newLeafNode(enumLiteral_0, grammarAccess.getKindOfKeywordAccess().getKindOfKeywordEnumLiteralDeclaration_0()); 
     }
 )
     |(	enumLiteral_1='anotherEnumLiteral' 
 	{
         $current = grammarAccess.getKindOfKeywordAccess().getAnotherEnumLiteralEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_1, grammarAccess.getKindOfKeywordAccess().getAnotherEnumLiteralEnumLiteralDeclaration_1(), null); 
+        newLeafNode(enumLiteral_1, grammarAccess.getKindOfKeywordAccess().getAnotherEnumLiteralEnumLiteralDeclaration_1()); 
     }
 ));
 

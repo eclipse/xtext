@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -73,7 +72,7 @@ entryRuleModel returns [EObject current=null]
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 	}
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -84,20 +83,18 @@ finally {
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((	otherlv_0='FIX' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getFIXKeyword_0_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getFIXKeyword_0_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getFixFixParserRuleCall_0_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getFixFixParserRuleCall_0_1_0()); 
 	    }
 		lv_fix_1_0=ruleFix		{
 	        if ($current==null) {
@@ -107,8 +104,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"fix",
         		lv_fix_1_0, 
-        		"Fix", 
-        		currentNode);
+        		"Fix");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -116,12 +112,12 @@ ruleModel returns [EObject current=null]
 )+)
     |(	otherlv_2='ERROR' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getERRORKeyword_1_0(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getERRORKeyword_1_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getErrorErrorParserRuleCall_1_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getErrorErrorParserRuleCall_1_1_0()); 
 	    }
 		lv_error_3_0=ruleError		{
 	        if ($current==null) {
@@ -131,8 +127,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"error",
         		lv_error_3_0, 
-        		"Error", 
-        		currentNode);
+        		"Error");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -140,12 +135,12 @@ ruleModel returns [EObject current=null]
 )+)
     |(	otherlv_4='TICK' 
     {
-    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getTICKKeyword_2_0(), null);
+    	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getTICKKeyword_2_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getTickApostropheParserRuleCall_2_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getTickApostropheParserRuleCall_2_1_0()); 
 	    }
 		lv_tick_5_0=ruleApostrophe		{
 	        if ($current==null) {
@@ -155,8 +150,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"tick",
         		lv_tick_5_0, 
-        		"Apostrophe", 
-        		currentNode);
+        		"Apostrophe");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -177,7 +171,7 @@ entryRuleError returns [String current=null]
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 	}
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getErrorRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getErrorRule()); } 
 	 iv_ruleError=ruleError 
 	 { $current=$iv_ruleError.current.getText(); }  
 	 EOF 
@@ -188,29 +182,26 @@ finally {
 
 // Rule Error
 ruleError returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (    this_APOSTROPHE_CHAR_0=RULE_APOSTROPHE_CHAR    {
 		$current.merge(this_APOSTROPHE_CHAR_0);
     }
 
     { 
-    createLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_0(), null); 
+    newLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_0()); 
     }
 
     { 
-        currentNode=createCompositeNode(grammarAccess.getErrorAccess().getGraphicalParserRuleCall_1(), currentNode); 
+        newCompositeNode(grammarAccess.getErrorAccess().getGraphicalParserRuleCall_1()); 
     }
     this_Graphical_1=ruleGraphical    {
 		$current.merge(this_Graphical_1);
     }
 
     { 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
     this_APOSTROPHE_CHAR_2=RULE_APOSTROPHE_CHAR    {
@@ -218,7 +209,7 @@ ruleError returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(this_APOSTROPHE_CHAR_2, grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_2(), null); 
+    newLeafNode(this_APOSTROPHE_CHAR_2, grammarAccess.getErrorAccess().getAPOSTROPHE_CHARTerminalRuleCall_2()); 
     }
 )
     ;
@@ -236,7 +227,7 @@ entryRuleFix returns [String current=null]
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 	}
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getFixRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getFixRule()); } 
 	 iv_ruleFix=ruleFix 
 	 { $current=$iv_ruleFix.current.getText(); }  
 	 EOF 
@@ -247,29 +238,26 @@ finally {
 
 // Rule Fix
 ruleFix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (    this_APOSTROPHE_CHAR_0=RULE_APOSTROPHE_CHAR    {
 		$current.merge(this_APOSTROPHE_CHAR_0);
     }
 
     { 
-    createLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_0(), null); 
+    newLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_0()); 
     }
 
     { 
-        currentNode=createCompositeNode(grammarAccess.getFixAccess().getGraphicalParserRuleCall_1(), currentNode); 
+        newCompositeNode(grammarAccess.getFixAccess().getGraphicalParserRuleCall_1()); 
     }
     this_Graphical_1=ruleGraphical    {
 		$current.merge(this_Graphical_1);
     }
 
     { 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
     this_APOSTROPHE_CHAR_2=RULE_APOSTROPHE_CHAR    {
@@ -277,18 +265,17 @@ ruleFix returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(this_APOSTROPHE_CHAR_2, grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_2(), null); 
+    newLeafNode(this_APOSTROPHE_CHAR_2, grammarAccess.getFixAccess().getAPOSTROPHE_CHARTerminalRuleCall_2()); 
     }
 
     { 
-        currentNode=createCompositeNode(grammarAccess.getFixAccess().getRehideParserRuleCall_3(), currentNode); 
+        newCompositeNode(grammarAccess.getFixAccess().getRehideParserRuleCall_3()); 
     }
     this_Rehide_3=ruleRehide    {
 		$current.merge(this_Rehide_3);
     }
 
     { 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 )
@@ -307,7 +294,7 @@ entryRuleApostrophe returns [String current=null]
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 	}
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getApostropheRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getApostropheRule()); } 
 	 iv_ruleApostrophe=ruleApostrophe 
 	 { $current=$iv_ruleApostrophe.current.getText(); }  
 	 EOF 
@@ -318,18 +305,16 @@ finally {
 
 // Rule Apostrophe
 ruleApostrophe returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
     this_APOSTROPHE_CHAR_0=RULE_APOSTROPHE_CHAR    {
 		$current.merge(this_APOSTROPHE_CHAR_0);
     }
 
     { 
-    createLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getApostropheAccess().getAPOSTROPHE_CHARTerminalRuleCall(), null); 
+    newLeafNode(this_APOSTROPHE_CHAR_0, grammarAccess.getApostropheAccess().getAPOSTROPHE_CHARTerminalRuleCall()); 
     }
 
     ;
@@ -347,7 +332,7 @@ entryRuleRehide returns [String current=null]
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
 	}
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getRehideRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getRehideRule()); } 
 	 iv_ruleRehide=ruleRehide 
 	 { $current=$iv_ruleRehide.current.getText(); }  
 	 EOF 
@@ -358,17 +343,15 @@ finally {
 
 // Rule Rehide
 ruleRehide returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 	kw='^' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getRehideAccess().getCircumflexAccentKeyword(), null); 
+        newLeafNode(kw, grammarAccess.getRehideAccess().getCircumflexAccentKeyword()); 
     }
 )?
     ;
@@ -383,7 +366,7 @@ finally {
 // Entry rule entryRuleGraphical
 entryRuleGraphical returns [String current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getGraphicalRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getGraphicalRule()); } 
 	 iv_ruleGraphical=ruleGraphical 
 	 { $current=$iv_ruleGraphical.current.getText(); }  
 	 EOF 
@@ -391,17 +374,15 @@ entryRuleGraphical returns [String current=null]
 
 // Rule Graphical
 ruleGraphical returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (    this_CHAR_0=RULE_CHAR    {
 		$current.merge(this_CHAR_0);
     }
 
     { 
-    createLeafNode(this_CHAR_0, grammarAccess.getGraphicalAccess().getCHARTerminalRuleCall_0(), null); 
+    newLeafNode(this_CHAR_0, grammarAccess.getGraphicalAccess().getCHARTerminalRuleCall_0()); 
     }
 
     |    this_WS_1=RULE_WS    {
@@ -409,7 +390,7 @@ ruleGraphical returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
     }
 
     { 
-    createLeafNode(this_WS_1, grammarAccess.getGraphicalAccess().getWSTerminalRuleCall_1(), null); 
+    newLeafNode(this_WS_1, grammarAccess.getGraphicalAccess().getWSTerminalRuleCall_1()); 
     }
 )
     ;

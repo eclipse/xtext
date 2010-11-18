@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammar
 // Entry rule entryRuleInheritedParserRule
 entryRuleInheritedParserRule returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getInheritedParserRuleRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getInheritedParserRuleRule()); }
 	 iv_ruleInheritedParserRule=ruleInheritedParserRule 
 	 { $current=$iv_ruleInheritedParserRule.current; } 
 	 EOF 
@@ -78,31 +77,28 @@ entryRuleInheritedParserRule returns [EObject current=null]
 
 // Rule InheritedParserRule
 ruleInheritedParserRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='element' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0());
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(lv_name_1_0, grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			newLeafNode(lv_name_1_0, grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getInheritedParserRuleRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -118,7 +114,7 @@ ruleInheritedParserRule returns [EObject current=null]
 // Entry rule entryRuleOverridableParserRule
 entryRuleOverridableParserRule returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getOverridableParserRuleRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getOverridableParserRuleRule()); }
 	 iv_ruleOverridableParserRule=ruleOverridableParserRule 
 	 { $current=$iv_ruleOverridableParserRule.current; } 
 	 EOF 
@@ -126,31 +122,28 @@ entryRuleOverridableParserRule returns [EObject current=null]
 
 // Rule OverridableParserRule
 ruleOverridableParserRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='element' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0());
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(lv_name_1_0, grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			newLeafNode(lv_name_1_0, grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getOverridableParserRuleRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -168,7 +161,7 @@ ruleOverridableParserRule returns [EObject current=null]
 // Entry rule entryRuleExtendableParserRule
 entryRuleExtendableParserRule returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getExtendableParserRuleRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getExtendableParserRuleRule()); }
 	 iv_ruleExtendableParserRule=ruleExtendableParserRule 
 	 { $current=$iv_ruleExtendableParserRule.current; } 
 	 EOF 
@@ -176,31 +169,28 @@ entryRuleExtendableParserRule returns [EObject current=null]
 
 // Rule ExtendableParserRule
 ruleExtendableParserRule returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='element' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0());
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(lv_name_1_0, grammarAccess.getExtendableParserRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			newLeafNode(lv_name_1_0, grammarAccess.getExtendableParserRuleAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getExtendableParserRuleRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )

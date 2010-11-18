@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.common.util.Enumerator;
@@ -71,7 +70,7 @@ import org.eclipse.xtext.enumrules.services.EnumRulesTestLanguageGrammarAccess;
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -79,19 +78,17 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((	otherlv_0='existing' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getExistingKeyword_0_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getExistingKeyword_0_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0()); 
 	    }
 		lv_existing_1_0=ruleExistingEnum		{
 	        if ($current==null) {
@@ -101,20 +98,19 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"existing",
         		lv_existing_1_0, 
-        		"ExistingEnum", 
-        		currentNode);
+        		"ExistingEnum");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )(	otherlv_2='generated' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0()); 
 	    }
 		lv_generated_3_0=ruleGeneratedEnum		{
 	        if ($current==null) {
@@ -124,8 +120,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"generated",
         		lv_generated_3_0, 
-        		"GeneratedEnum", 
-        		currentNode);
+        		"GeneratedEnum");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -133,12 +128,12 @@ ruleModel returns [EObject current=null]
 ))?)
     |(	otherlv_4='generated' 
     {
-    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getGeneratedKeyword_1_0(), null);
+    	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getGeneratedKeyword_1_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0()); 
 	    }
 		lv_generated_5_0=ruleGeneratedEnum		{
 	        if ($current==null) {
@@ -148,8 +143,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"generated",
         		lv_generated_5_0, 
-        		"GeneratedEnum", 
-        		currentNode);
+        		"GeneratedEnum");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -163,26 +157,24 @@ ruleModel returns [EObject current=null]
 
 // Rule ExistingEnum
 ruleExistingEnum returns [Enumerator current=null] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @init { enterRule(); }
+    @after { leaveRule(); }:
 ((	enumLiteral_0='SameName' 
 	{
         $current = grammarAccess.getExistingEnumAccess().getSameNameEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_0, grammarAccess.getExistingEnumAccess().getSameNameEnumLiteralDeclaration_0(), null); 
+        newLeafNode(enumLiteral_0, grammarAccess.getExistingEnumAccess().getSameNameEnumLiteralDeclaration_0()); 
     }
 )
     |(	enumLiteral_1='overridden' 
 	{
         $current = grammarAccess.getExistingEnumAccess().getOverriddenLiteralEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_1, grammarAccess.getExistingEnumAccess().getOverriddenLiteralEnumLiteralDeclaration_1(), null); 
+        newLeafNode(enumLiteral_1, grammarAccess.getExistingEnumAccess().getOverriddenLiteralEnumLiteralDeclaration_1()); 
     }
 )
     |(	enumLiteral_2='DifferentLiteral' 
 	{
         $current = grammarAccess.getExistingEnumAccess().getDifferentNameEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_2, grammarAccess.getExistingEnumAccess().getDifferentNameEnumLiteralDeclaration_2(), null); 
+        newLeafNode(enumLiteral_2, grammarAccess.getExistingEnumAccess().getDifferentNameEnumLiteralDeclaration_2()); 
     }
 ));
 
@@ -190,20 +182,18 @@ ruleExistingEnum returns [Enumerator current=null]
 
 // Rule GeneratedEnum
 ruleGeneratedEnum returns [Enumerator current=null] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @init { enterRule(); }
+    @after { leaveRule(); }:
 ((	enumLiteral_0='SameName' 
 	{
         $current = grammarAccess.getGeneratedEnumAccess().getSameNameEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_0, grammarAccess.getGeneratedEnumAccess().getSameNameEnumLiteralDeclaration_0(), null); 
+        newLeafNode(enumLiteral_0, grammarAccess.getGeneratedEnumAccess().getSameNameEnumLiteralDeclaration_0()); 
     }
 )
     |(	enumLiteral_1='DifferentLiteral' 
 	{
         $current = grammarAccess.getGeneratedEnumAccess().getDifferentNameEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_1, grammarAccess.getGeneratedEnumAccess().getDifferentNameEnumLiteralDeclaration_1(), null); 
+        newLeafNode(enumLiteral_1, grammarAccess.getGeneratedEnumAccess().getDifferentNameEnumLiteralDeclaration_1()); 
     }
 ));
 

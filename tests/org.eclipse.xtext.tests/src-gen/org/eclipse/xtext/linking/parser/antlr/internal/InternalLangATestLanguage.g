@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.linking.services.LangATestLanguageGrammarAccess;
 // Entry rule entryRuleMain
 entryRuleMain returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getMainRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getMainRule()); }
 	 iv_ruleMain=ruleMain 
 	 { $current=$iv_ruleMain.current; } 
 	 EOF 
@@ -78,15 +77,13 @@ entryRuleMain returns [EObject current=null]
 
 // Rule Main
 ruleMain returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getMainAccess().getImportsImportParserRuleCall_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getMainAccess().getImportsImportParserRuleCall_0_0()); 
 	    }
 		lv_imports_0_0=ruleImport		{
 	        if ($current==null) {
@@ -96,8 +93,7 @@ ruleMain returns [EObject current=null]
        			$current, 
        			"imports",
         		lv_imports_0_0, 
-        		"Import", 
-        		currentNode);
+        		"Import");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -105,7 +101,7 @@ ruleMain returns [EObject current=null]
 )*(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getMainAccess().getTypesTypeParserRuleCall_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getMainAccess().getTypesTypeParserRuleCall_1_0()); 
 	    }
 		lv_types_1_0=ruleType		{
 	        if ($current==null) {
@@ -115,8 +111,7 @@ ruleMain returns [EObject current=null]
        			$current, 
        			"types",
         		lv_types_1_0, 
-        		"Type", 
-        		currentNode);
+        		"Type");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -131,7 +126,7 @@ ruleMain returns [EObject current=null]
 // Entry rule entryRuleImport
 entryRuleImport returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getImportRule()); }
 	 iv_ruleImport=ruleImport 
 	 { $current=$iv_ruleImport.current; } 
 	 EOF 
@@ -139,31 +134,28 @@ entryRuleImport returns [EObject current=null]
 
 // Rule Import
 ruleImport returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='import' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
     }
 (
 (
 		lv_uri_1_0=RULE_STRING
 		{
-			createLeafNode(lv_uri_1_0, grammarAccess.getImportAccess().getUriSTRINGTerminalRuleCall_1_0(), "uri"); 
+			newLeafNode(lv_uri_1_0, grammarAccess.getImportAccess().getUriSTRINGTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getImportRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"uri",
         		lv_uri_1_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
@@ -177,7 +169,7 @@ ruleImport returns [EObject current=null]
 // Entry rule entryRuleType
 entryRuleType returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getTypeRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getTypeRule()); }
 	 iv_ruleType=ruleType 
 	 { $current=$iv_ruleType.current; } 
 	 EOF 
@@ -185,37 +177,34 @@ entryRuleType returns [EObject current=null]
 
 // Rule Type
 ruleType returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='type' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getTypeAccess().getTypeKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getTypeAccess().getTypeKeyword_0());
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(lv_name_1_0, grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			newLeafNode(lv_name_1_0, grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getTypeRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
 )(	otherlv_2='extends' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getTypeAccess().getExtendsKeyword_2_0(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getTypeAccess().getExtendsKeyword_2_0());
     }
 (
 (
@@ -226,13 +215,13 @@ ruleType returns [EObject current=null]
         }
 	otherlv_3=RULE_ID
 	{
-		createLeafNode(otherlv_3, grammarAccess.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), "extends"); 
+		newLeafNode(otherlv_3, grammarAccess.getTypeAccess().getExtendsTypeCrossReference_2_1_0()); 
 	}
 
 )
 ))?(	otherlv_4='implements' 
     {
-    	createLeafNode(otherlv_4, grammarAccess.getTypeAccess().getImplementsKeyword_3_0(), null);
+    	newLeafNode(otherlv_4, grammarAccess.getTypeAccess().getImplementsKeyword_3_0());
     }
 (
 (
@@ -243,13 +232,13 @@ ruleType returns [EObject current=null]
         }
 	otherlv_5=RULE_ID
 	{
-		createLeafNode(otherlv_5, grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_1_0(), "implements"); 
+		newLeafNode(otherlv_5, grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_1_0()); 
 	}
 
 )
 )(	otherlv_6=',' 
     {
-    	createLeafNode(otherlv_6, grammarAccess.getTypeAccess().getCommaKeyword_3_2_0(), null);
+    	newLeafNode(otherlv_6, grammarAccess.getTypeAccess().getCommaKeyword_3_2_0());
     }
 (
 (
@@ -260,7 +249,7 @@ ruleType returns [EObject current=null]
         }
 	otherlv_7=RULE_ID
 	{
-		createLeafNode(otherlv_7, grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_2_1_0(), "implements"); 
+		newLeafNode(otherlv_7, grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_2_1_0()); 
 	}
 
 )

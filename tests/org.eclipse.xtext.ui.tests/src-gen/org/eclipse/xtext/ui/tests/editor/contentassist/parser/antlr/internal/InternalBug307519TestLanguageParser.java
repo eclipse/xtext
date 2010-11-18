@@ -4,7 +4,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.common.util.Enumerator;
@@ -81,7 +80,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:72:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:71:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -89,10 +88,10 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:73:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:74:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:72:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:73:2: iv_ruleModel= ruleModel EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
+             newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
             iv_ruleModel=ruleModel();
 
@@ -117,7 +116,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:81:1: ruleModel returns [EObject current=null] : ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+ ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:80:1: ruleModel returns [EObject current=null] : ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+ ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -126,13 +125,13 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_e2_1_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:86:6: ( ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:87:1: ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:83:28: ( ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+ )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:84:1: ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:87:1: ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:84:1: ( ( (lv_e1_0_0= ruleElem1 ) ) | ( (lv_e2_1_0= ruleElem2 ) ) )+
             int cnt1=0;
             loop1:
             do {
@@ -167,16 +166,16 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:87:2: ( (lv_e1_0_0= ruleElem1 ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:84:2: ( (lv_e1_0_0= ruleElem1 ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:87:2: ( (lv_e1_0_0= ruleElem1 ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:88:1: (lv_e1_0_0= ruleElem1 )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:84:2: ( (lv_e1_0_0= ruleElem1 ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:85:1: (lv_e1_0_0= ruleElem1 )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:88:1: (lv_e1_0_0= ruleElem1 )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:89:3: lv_e1_0_0= ruleElem1
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:85:1: (lv_e1_0_0= ruleElem1 )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:86:3: lv_e1_0_0= ruleElem1
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getE1Elem1ParserRuleCall_0_0(), currentNode); 
+            	    	        newCompositeNode(grammarAccess.getModelAccess().getE1Elem1ParserRuleCall_0_0()); 
             	    	    
             	    pushFollow(FollowSets000.FOLLOW_ruleElem1_in_ruleModel131);
             	    lv_e1_0_0=ruleElem1();
@@ -191,8 +190,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"e1",
             	            		lv_e1_0_0, 
-            	            		"Elem1", 
-            	            		currentNode);
+            	            		"Elem1");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -205,16 +203,16 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:107:6: ( (lv_e2_1_0= ruleElem2 ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:103:6: ( (lv_e2_1_0= ruleElem2 ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:107:6: ( (lv_e2_1_0= ruleElem2 ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:108:1: (lv_e2_1_0= ruleElem2 )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:103:6: ( (lv_e2_1_0= ruleElem2 ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:104:1: (lv_e2_1_0= ruleElem2 )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:108:1: (lv_e2_1_0= ruleElem2 )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:109:3: lv_e2_1_0= ruleElem2
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:104:1: (lv_e2_1_0= ruleElem2 )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:105:3: lv_e2_1_0= ruleElem2
             	    {
             	     
-            	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getE2Elem2ParserRuleCall_1_0(), currentNode); 
+            	    	        newCompositeNode(grammarAccess.getModelAccess().getE2Elem2ParserRuleCall_1_0()); 
             	    	    
             	    pushFollow(FollowSets000.FOLLOW_ruleElem2_in_ruleModel158);
             	    lv_e2_1_0=ruleElem2();
@@ -229,8 +227,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"e2",
             	            		lv_e2_1_0, 
-            	            		"Elem2", 
-            	            		currentNode);
+            	            		"Elem2");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -255,9 +252,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -272,7 +267,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleElem1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:134:1: entryRuleElem1 returns [EObject current=null] : iv_ruleElem1= ruleElem1 EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:129:1: entryRuleElem1 returns [EObject current=null] : iv_ruleElem1= ruleElem1 EOF ;
     public final EObject entryRuleElem1() throws RecognitionException {
         EObject current = null;
 
@@ -280,10 +275,10 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:135:2: (iv_ruleElem1= ruleElem1 EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:136:2: iv_ruleElem1= ruleElem1 EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:130:2: (iv_ruleElem1= ruleElem1 EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:131:2: iv_ruleElem1= ruleElem1 EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getElem1Rule(), currentNode); 
+             newCompositeNode(grammarAccess.getElem1Rule()); 
             pushFollow(FollowSets000.FOLLOW_ruleElem1_in_entryRuleElem1195);
             iv_ruleElem1=ruleElem1();
 
@@ -308,27 +303,27 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleElem1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:143:1: ruleElem1 returns [EObject current=null] : ( (lv_value_0_0= ruleEnumT ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:138:1: ruleElem1 returns [EObject current=null] : ( (lv_value_0_0= ruleEnumT ) ) ;
     public final EObject ruleElem1() throws RecognitionException {
         EObject current = null;
 
         Enumerator lv_value_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:148:6: ( ( (lv_value_0_0= ruleEnumT ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:149:1: ( (lv_value_0_0= ruleEnumT ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:141:28: ( ( (lv_value_0_0= ruleEnumT ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:142:1: ( (lv_value_0_0= ruleEnumT ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:149:1: ( (lv_value_0_0= ruleEnumT ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:150:1: (lv_value_0_0= ruleEnumT )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:142:1: ( (lv_value_0_0= ruleEnumT ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:143:1: (lv_value_0_0= ruleEnumT )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:150:1: (lv_value_0_0= ruleEnumT )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:151:3: lv_value_0_0= ruleEnumT
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:143:1: (lv_value_0_0= ruleEnumT )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:144:3: lv_value_0_0= ruleEnumT
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getElem1Access().getValueEnumTEnumRuleCall_0(), currentNode); 
+            	        newCompositeNode(grammarAccess.getElem1Access().getValueEnumTEnumRuleCall_0()); 
             	    
             pushFollow(FollowSets000.FOLLOW_ruleEnumT_in_ruleElem1250);
             lv_value_0_0=ruleEnumT();
@@ -343,8 +338,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"value",
                     		lv_value_0_0, 
-                    		"EnumT", 
-                    		currentNode);
+                    		"EnumT");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -356,9 +350,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -373,7 +365,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleElem2"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:176:1: entryRuleElem2 returns [EObject current=null] : iv_ruleElem2= ruleElem2 EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:168:1: entryRuleElem2 returns [EObject current=null] : iv_ruleElem2= ruleElem2 EOF ;
     public final EObject entryRuleElem2() throws RecognitionException {
         EObject current = null;
 
@@ -381,10 +373,10 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:177:2: (iv_ruleElem2= ruleElem2 EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:178:2: iv_ruleElem2= ruleElem2 EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:169:2: (iv_ruleElem2= ruleElem2 EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:170:2: iv_ruleElem2= ruleElem2 EOF
             {
-             currentNode = createCompositeNode(grammarAccess.getElem2Rule(), currentNode); 
+             newCompositeNode(grammarAccess.getElem2Rule()); 
             pushFollow(FollowSets000.FOLLOW_ruleElem2_in_entryRuleElem2285);
             iv_ruleElem2=ruleElem2();
 
@@ -409,7 +401,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleElem2"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:185:1: ruleElem2 returns [EObject current=null] : ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:177:1: ruleElem2 returns [EObject current=null] : ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' ) ;
     public final EObject ruleElem2() throws RecognitionException {
         EObject current = null;
 
@@ -419,23 +411,23 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
         Enumerator lv_value_0_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:190:6: ( ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:191:1: ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:180:28: ( ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:181:1: ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:191:1: ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:191:2: ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:181:1: ( ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:181:2: ( (lv_value_0_0= ruleEnumT ) ) otherlv_1= 'foo' otherlv_2= '%' otherlv_3= '$'
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:191:2: ( (lv_value_0_0= ruleEnumT ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:192:1: (lv_value_0_0= ruleEnumT )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:181:2: ( (lv_value_0_0= ruleEnumT ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:182:1: (lv_value_0_0= ruleEnumT )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:192:1: (lv_value_0_0= ruleEnumT )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:193:3: lv_value_0_0= ruleEnumT
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:182:1: (lv_value_0_0= ruleEnumT )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:183:3: lv_value_0_0= ruleEnumT
             {
              
-            	        currentNode=createCompositeNode(grammarAccess.getElem2Access().getValueEnumTEnumRuleCall_0_0(), currentNode); 
+            	        newCompositeNode(grammarAccess.getElem2Access().getValueEnumTEnumRuleCall_0_0()); 
             	    
             pushFollow(FollowSets000.FOLLOW_ruleEnumT_in_ruleElem2341);
             lv_value_0_0=ruleEnumT();
@@ -450,8 +442,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"value",
                     		lv_value_0_0, 
-                    		"EnumT", 
-                    		currentNode);
+                    		"EnumT");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -462,15 +453,15 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElem2353); 
 
-                	createLeafNode(otherlv_1, grammarAccess.getElem2Access().getFooKeyword_1(), null);
+                	newLeafNode(otherlv_1, grammarAccess.getElem2Access().getFooKeyword_1());
                 
             otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleElem2365); 
 
-                	createLeafNode(otherlv_2, grammarAccess.getElem2Access().getPercentSignKeyword_2(), null);
+                	newLeafNode(otherlv_2, grammarAccess.getElem2Access().getPercentSignKeyword_2());
                 
             otherlv_3=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleElem2377); 
 
-                	createLeafNode(otherlv_3, grammarAccess.getElem2Access().getDollarSignKeyword_3(), null);
+                	newLeafNode(otherlv_3, grammarAccess.getElem2Access().getDollarSignKeyword_3());
                 
 
             }
@@ -478,9 +469,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 
@@ -495,19 +484,19 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleEnumT"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:230:1: ruleEnumT returns [Enumerator current=null] : ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:219:1: ruleEnumT returns [Enumerator current=null] : ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) ) ;
     public final Enumerator ruleEnumT() throws RecognitionException {
         Enumerator current = null;
 
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
 
-         setCurrentLookahead(); resetLookahead(); 
+         enterRule(); 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:234:6: ( ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:235:1: ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:221:28: ( ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:222:1: ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:235:1: ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:222:1: ( (enumLiteral_0= 'T1' ) | (enumLiteral_1= 'T2' ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -525,15 +514,15 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:235:2: (enumLiteral_0= 'T1' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:222:2: (enumLiteral_0= 'T1' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:235:2: (enumLiteral_0= 'T1' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:235:4: enumLiteral_0= 'T1'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:222:2: (enumLiteral_0= 'T1' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:222:4: enumLiteral_0= 'T1'
                     {
                     enumLiteral_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleEnumT427); 
 
                             current = grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-                            createLeafNode(enumLiteral_0, grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0(), null); 
+                            newLeafNode(enumLiteral_0, grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0()); 
                         
 
                     }
@@ -542,15 +531,15 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:241:6: (enumLiteral_1= 'T2' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:228:6: (enumLiteral_1= 'T2' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:241:6: (enumLiteral_1= 'T2' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:241:8: enumLiteral_1= 'T2'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:228:6: (enumLiteral_1= 'T2' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug307519TestLanguage.g:228:8: enumLiteral_1= 'T2'
                     {
                     enumLiteral_1=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleEnumT444); 
 
                             current = grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-                            createLeafNode(enumLiteral_1, grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1(), null); 
+                            newLeafNode(enumLiteral_1, grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1()); 
                         
 
                     }
@@ -564,9 +553,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             resetLookahead(); 
-                	lastConsumedNode = currentNode;
-                
+             leaveRule(); 
         }
          
             catch (RecognitionException re) { 

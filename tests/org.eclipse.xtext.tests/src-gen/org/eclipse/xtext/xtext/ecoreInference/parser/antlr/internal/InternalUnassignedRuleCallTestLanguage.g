@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLan
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -78,23 +77,21 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='model' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0());
     }
 (this_INT_1=RULE_INT
     { 
-    createLeafNode(this_INT_1, grammarAccess.getModelAccess().getINTTerminalRuleCall_1(), null); 
+    newLeafNode(this_INT_1, grammarAccess.getModelAccess().getINTTerminalRuleCall_1()); 
     }
 )+(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getModelFeaturesModelFeaturesParserRuleCall_2_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getModelFeaturesModelFeaturesParserRuleCall_2_0()); 
 	    }
 		lv_modelFeatures_2_0=ruleModelFeatures		{
 	        if ($current==null) {
@@ -104,8 +101,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"modelFeatures",
         		lv_modelFeatures_2_0, 
-        		"ModelFeatures", 
-        		currentNode);
+        		"ModelFeatures");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -120,7 +116,7 @@ ruleModel returns [EObject current=null]
 // Entry rule entryRuleModelFeatures
 entryRuleModelFeatures returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelFeaturesRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelFeaturesRule()); }
 	 iv_ruleModelFeatures=ruleModelFeatures 
 	 { $current=$iv_ruleModelFeatures.current; } 
 	 EOF 
@@ -128,46 +124,42 @@ entryRuleModelFeatures returns [EObject current=null]
 
 // Rule ModelFeatures
 ruleModelFeatures returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='feature' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getModelFeaturesAccess().getFeatureKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getModelFeaturesAccess().getFeatureKeyword_0());
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(lv_name_1_0, grammarAccess.getModelFeaturesAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			newLeafNode(lv_name_1_0, grammarAccess.getModelFeaturesAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelFeaturesRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
 )
     { 
-        currentNode=createCompositeNode(grammarAccess.getModelFeaturesAccess().getDataTypeRuleParserRuleCall_2(), currentNode); 
+        newCompositeNode(grammarAccess.getModelFeaturesAccess().getDataTypeRuleParserRuleCall_2()); 
     }
 ruleDataTypeRule
     { 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 	otherlv_3=';' 
     {
-    	createLeafNode(otherlv_3, grammarAccess.getModelFeaturesAccess().getSemicolonKeyword_3(), null);
+    	newLeafNode(otherlv_3, grammarAccess.getModelFeaturesAccess().getSemicolonKeyword_3());
     }
 )
 ;
@@ -179,7 +171,7 @@ ruleDataTypeRule
 // Entry rule entryRuleDataTypeRule
 entryRuleDataTypeRule returns [String current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getDataTypeRuleRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getDataTypeRuleRule()); } 
 	 iv_ruleDataTypeRule=ruleDataTypeRule 
 	 { $current=$iv_ruleDataTypeRule.current.getText(); }  
 	 EOF 
@@ -187,37 +179,35 @@ entryRuleDataTypeRule returns [String current=null]
 
 // Rule DataTypeRule
 ruleDataTypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (    this_INT_0=RULE_INT    {
 		$current.merge(this_INT_0);
     }
 
     { 
-    createLeafNode(this_INT_0, grammarAccess.getDataTypeRuleAccess().getINTTerminalRuleCall_0(), null); 
+    newLeafNode(this_INT_0, grammarAccess.getDataTypeRuleAccess().getINTTerminalRuleCall_0()); 
     }
 
 	kw='keyword' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getDataTypeRuleAccess().getKeywordKeyword_1(), null); 
+        newLeafNode(kw, grammarAccess.getDataTypeRuleAccess().getKeywordKeyword_1()); 
     }
     this_INT_2=RULE_INT    {
 		$current.merge(this_INT_2);
     }
 
     { 
-    createLeafNode(this_INT_2, grammarAccess.getDataTypeRuleAccess().getINTTerminalRuleCall_2(), null); 
+    newLeafNode(this_INT_2, grammarAccess.getDataTypeRuleAccess().getINTTerminalRuleCall_2()); 
     }
 (    this_STRING_3=RULE_STRING    {
 		$current.merge(this_STRING_3);
     }
 
     { 
-    createLeafNode(this_STRING_3, grammarAccess.getDataTypeRuleAccess().getSTRINGTerminalRuleCall_3(), null); 
+    newLeafNode(this_STRING_3, grammarAccess.getDataTypeRuleAccess().getSTRINGTerminalRuleCall_3()); 
     }
 )?)
     ;

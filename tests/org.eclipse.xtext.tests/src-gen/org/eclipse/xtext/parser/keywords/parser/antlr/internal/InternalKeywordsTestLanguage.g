@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAcc
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -78,23 +77,21 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		lv_first_0_0=	'foo\\bar' 
     {
-        createLeafNode(lv_first_0_0, grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0(), "first");
+        newLeafNode(lv_first_0_0, grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "foo\\bar", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "foo\\bar");
 	    }
 
 )
@@ -103,14 +100,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_second_1_0=	'foo\\' 
     {
-        createLeafNode(lv_second_1_0, grammarAccess.getModelAccess().getSecondFooKeyword_1_0(), "second");
+        newLeafNode(lv_second_1_0, grammarAccess.getModelAccess().getSecondFooKeyword_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "foo\\", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "foo\\");
 	    }
 
 )
@@ -119,14 +116,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_third_2_0=	'\\bar' 
     {
-        createLeafNode(lv_third_2_0, grammarAccess.getModelAccess().getThirdBarKeyword_2_0(), "third");
+        newLeafNode(lv_third_2_0, grammarAccess.getModelAccess().getThirdBarKeyword_2_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "third", true, "\\bar", lastConsumedNode);
+       		setWithLastConsumed($current, "third", true, "\\bar");
 	    }
 
 )
@@ -135,14 +132,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_forth_3_0=	'\\' 
     {
-        createLeafNode(lv_forth_3_0, grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0(), "forth");
+        newLeafNode(lv_forth_3_0, grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "forth", true, "\\", lastConsumedNode);
+       		setWithLastConsumed($current, "forth", true, "\\");
 	    }
 
 )
@@ -151,14 +148,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_fifth_4_0=	'"a"' 
     {
-        createLeafNode(lv_fifth_4_0, grammarAccess.getModelAccess().getFifthAKeyword_4_0(), "fifth");
+        newLeafNode(lv_fifth_4_0, grammarAccess.getModelAccess().getFifthAKeyword_4_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "fifth", true, "\"a\"", lastConsumedNode);
+       		setWithLastConsumed($current, "fifth", true, "\"a\"");
 	    }
 
 )
@@ -167,14 +164,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_sixth_5_0=	'\'b\'' 
     {
-        createLeafNode(lv_sixth_5_0, grammarAccess.getModelAccess().getSixthBKeyword_5_0(), "sixth");
+        newLeafNode(lv_sixth_5_0, grammarAccess.getModelAccess().getSixthBKeyword_5_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "sixth", true, "\'b\'", lastConsumedNode);
+       		setWithLastConsumed($current, "sixth", true, "\'b\'");
 	    }
 
 )
@@ -183,14 +180,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_seventh_6_0=	'\'c\'' 
     {
-        createLeafNode(lv_seventh_6_0, grammarAccess.getModelAccess().getSeventhCKeyword_6_0(), "seventh");
+        newLeafNode(lv_seventh_6_0, grammarAccess.getModelAccess().getSeventhCKeyword_6_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "seventh", true, "\'c\'", lastConsumedNode);
+       		setWithLastConsumed($current, "seventh", true, "\'c\'");
 	    }
 
 )
@@ -199,14 +196,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_eighth_7_0=	'"d"' 
     {
-        createLeafNode(lv_eighth_7_0, grammarAccess.getModelAccess().getEighthDKeyword_7_0(), "eighth");
+        newLeafNode(lv_eighth_7_0, grammarAccess.getModelAccess().getEighthDKeyword_7_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "eighth", true, "\"d\"", lastConsumedNode);
+       		setWithLastConsumed($current, "eighth", true, "\"d\"");
 	    }
 
 )

@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.SerializationBug269362TestL
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -78,78 +77,73 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((	otherlv_0='foo' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getFooKeyword_0_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getFooKeyword_0_0());
     }
 (
 (
 		lv_foo_1_0=RULE_ID
 		{
-			createLeafNode(lv_foo_1_0, grammarAccess.getModelAccess().getFooIDTerminalRuleCall_0_1_0(), "foo"); 
+			newLeafNode(lv_foo_1_0, grammarAccess.getModelAccess().getFooIDTerminalRuleCall_0_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"foo",
         		lv_foo_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
 )(	otherlv_2='bar' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getBarKeyword_0_2_0(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getBarKeyword_0_2_0());
     }
 (
 (
 		lv_bar_3_0=RULE_ID
 		{
-			createLeafNode(lv_bar_3_0, grammarAccess.getModelAccess().getBarIDTerminalRuleCall_0_2_1_0(), "bar"); 
+			newLeafNode(lv_bar_3_0, grammarAccess.getModelAccess().getBarIDTerminalRuleCall_0_2_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"bar",
         		lv_bar_3_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
 ))?)
     |(	otherlv_4='bar' 
     {
-    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getBarKeyword_1_0(), null);
+    	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getBarKeyword_1_0());
     }
 (
 (
 		lv_bar_5_0=RULE_ID
 		{
-			createLeafNode(lv_bar_5_0, grammarAccess.getModelAccess().getBarIDTerminalRuleCall_1_1_0(), "bar"); 
+			newLeafNode(lv_bar_5_0, grammarAccess.getModelAccess().getBarIDTerminalRuleCall_1_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"bar",
         		lv_bar_5_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )

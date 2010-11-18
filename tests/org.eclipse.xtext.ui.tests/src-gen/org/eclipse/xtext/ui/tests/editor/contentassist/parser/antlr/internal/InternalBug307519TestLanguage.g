@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.common.util.Enumerator;
@@ -71,7 +70,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug307519TestLan
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -79,15 +78,13 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getE1Elem1ParserRuleCall_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getE1Elem1ParserRuleCall_0_0()); 
 	    }
 		lv_e1_0_0=ruleElem1		{
 	        if ($current==null) {
@@ -97,8 +94,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"e1",
         		lv_e1_0_0, 
-        		"Elem1", 
-        		currentNode);
+        		"Elem1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -107,7 +103,7 @@ ruleModel returns [EObject current=null]
     |(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getE2Elem2ParserRuleCall_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getE2Elem2ParserRuleCall_1_0()); 
 	    }
 		lv_e2_1_0=ruleElem2		{
 	        if ($current==null) {
@@ -117,8 +113,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"e2",
         		lv_e2_1_0, 
-        		"Elem2", 
-        		currentNode);
+        		"Elem2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -133,7 +128,7 @@ ruleModel returns [EObject current=null]
 // Entry rule entryRuleElem1
 entryRuleElem1 returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getElem1Rule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getElem1Rule()); }
 	 iv_ruleElem1=ruleElem1 
 	 { $current=$iv_ruleElem1.current; } 
 	 EOF 
@@ -141,15 +136,13 @@ entryRuleElem1 returns [EObject current=null]
 
 // Rule Elem1
 ruleElem1 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getElem1Access().getValueEnumTEnumRuleCall_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getElem1Access().getValueEnumTEnumRuleCall_0()); 
 	    }
 		lv_value_0_0=ruleEnumT		{
 	        if ($current==null) {
@@ -159,8 +152,7 @@ ruleElem1 returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"EnumT", 
-        		currentNode);
+        		"EnumT");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -175,7 +167,7 @@ ruleElem1 returns [EObject current=null]
 // Entry rule entryRuleElem2
 entryRuleElem2 returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getElem2Rule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getElem2Rule()); }
 	 iv_ruleElem2=ruleElem2 
 	 { $current=$iv_ruleElem2.current; } 
 	 EOF 
@@ -183,15 +175,13 @@ entryRuleElem2 returns [EObject current=null]
 
 // Rule Elem2
 ruleElem2 returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getElem2Access().getValueEnumTEnumRuleCall_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getElem2Access().getValueEnumTEnumRuleCall_0_0()); 
 	    }
 		lv_value_0_0=ruleEnumT		{
 	        if ($current==null) {
@@ -201,23 +191,22 @@ ruleElem2 returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"EnumT", 
-        		currentNode);
+        		"EnumT");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )	otherlv_1='foo' 
     {
-    	createLeafNode(otherlv_1, grammarAccess.getElem2Access().getFooKeyword_1(), null);
+    	newLeafNode(otherlv_1, grammarAccess.getElem2Access().getFooKeyword_1());
     }
 	otherlv_2='%' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getElem2Access().getPercentSignKeyword_2(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getElem2Access().getPercentSignKeyword_2());
     }
 	otherlv_3='$' 
     {
-    	createLeafNode(otherlv_3, grammarAccess.getElem2Access().getDollarSignKeyword_3(), null);
+    	newLeafNode(otherlv_3, grammarAccess.getElem2Access().getDollarSignKeyword_3());
     }
 )
 ;
@@ -228,20 +217,18 @@ ruleElem2 returns [EObject current=null]
 
 // Rule EnumT
 ruleEnumT returns [Enumerator current=null] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @init { enterRule(); }
+    @after { leaveRule(); }:
 ((	enumLiteral_0='T1' 
 	{
         $current = grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_0, grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0(), null); 
+        newLeafNode(enumLiteral_0, grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0()); 
     }
 )
     |(	enumLiteral_1='T2' 
 	{
         $current = grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_1, grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1(), null); 
+        newLeafNode(enumLiteral_1, grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1()); 
     }
 ));
 

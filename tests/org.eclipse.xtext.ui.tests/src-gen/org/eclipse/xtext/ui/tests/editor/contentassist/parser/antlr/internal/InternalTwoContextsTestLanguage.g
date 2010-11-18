@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.TwoContextsTestL
 // Entry rule entryRuleMainModel
 entryRuleMainModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getMainModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getMainModelRule()); }
 	 iv_ruleMainModel=ruleMainModel 
 	 { $current=$iv_ruleMainModel.current; } 
 	 EOF 
@@ -78,15 +77,13 @@ entryRuleMainModel returns [EObject current=null]
 
 // Rule MainModel
 ruleMainModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0()); 
 	    }
 		lv_elements_0_0=ruleAnElement		{
 	        if ($current==null) {
@@ -96,8 +93,7 @@ ruleMainModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"AnElement", 
-        		currentNode);
+        		"AnElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -112,7 +108,7 @@ ruleMainModel returns [EObject current=null]
 // Entry rule entryRuleAnElement
 entryRuleAnElement returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getAnElementRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getAnElementRule()); }
 	 iv_ruleAnElement=ruleAnElement 
 	 { $current=$iv_ruleAnElement.current; } 
 	 EOF 
@@ -120,33 +116,30 @@ entryRuleAnElement returns [EObject current=null]
 
 // Rule AnElement
 ruleAnElement returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(lv_name_0_0, grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			newLeafNode(lv_name_0_0, grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getAnElementRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
 )(	otherlv_1='refersTo' 
     {
-    	createLeafNode(otherlv_1, grammarAccess.getAnElementAccess().getRefersToKeyword_1_0(), null);
+    	newLeafNode(otherlv_1, grammarAccess.getAnElementAccess().getRefersToKeyword_1_0());
     }
 (
 (
@@ -157,13 +150,13 @@ ruleAnElement returns [EObject current=null]
         }
 	otherlv_2=RULE_ID
 	{
-		createLeafNode(otherlv_2, grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0(), "referred"); 
+		newLeafNode(otherlv_2, grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0()); 
 	}
 
 )
 ))?	otherlv_3=';' 
     {
-    	createLeafNode(otherlv_3, grammarAccess.getAnElementAccess().getSemicolonKeyword_2(), null);
+    	newLeafNode(otherlv_3, grammarAccess.getAnElementAccess().getSemicolonKeyword_2());
     }
 )
 ;

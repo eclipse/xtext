@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.common.util.Enumerator;
@@ -71,7 +70,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug286935TestLan
 // Entry rule entryRuleState
 entryRuleState returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getStateRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getStateRule()); }
 	 iv_ruleState=ruleState 
 	 { $current=$iv_ruleState.current; } 
 	 EOF 
@@ -79,11 +78,9 @@ entryRuleState returns [EObject current=null]
 
 // Rule State
 ruleState returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
     {
         $current = forceCreateModelElement(
@@ -94,14 +91,14 @@ ruleState returns [EObject current=null]
 (
 		lv_isInitial_1_0=	'init' 
     {
-        createLeafNode(lv_isInitial_1_0, grammarAccess.getStateAccess().getIsInitialInitKeyword_1_0_0(), "isInitial");
+        newLeafNode(lv_isInitial_1_0, grammarAccess.getStateAccess().getIsInitialInitKeyword_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getStateRule());
 	        }
-       		set($current, "isInitial", true, "init", lastConsumedNode);
+       		setWithLastConsumed($current, "isInitial", true, "init");
 	    }
 
 )
@@ -110,14 +107,14 @@ ruleState returns [EObject current=null]
 (
 		lv_isFinal_2_0=	'final' 
     {
-        createLeafNode(lv_isFinal_2_0, grammarAccess.getStateAccess().getIsFinalFinalKeyword_1_1_0(), "isFinal");
+        newLeafNode(lv_isFinal_2_0, grammarAccess.getStateAccess().getIsFinalFinalKeyword_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getStateRule());
 	        }
-       		set($current, "isFinal", true, "final", lastConsumedNode);
+       		setWithLastConsumed($current, "isFinal", true, "final");
 	    }
 
 )
@@ -125,7 +122,7 @@ ruleState returns [EObject current=null]
     |(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_2_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_2_0()); 
 	    }
 		lv_stateKind_3_0=ruleStateType		{
 	        if ($current==null) {
@@ -135,8 +132,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"stateKind",
         		lv_stateKind_3_0, 
-        		"StateType", 
-        		currentNode);
+        		"StateType");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -146,21 +142,21 @@ ruleState returns [EObject current=null]
 (
 		lv_isInitial_4_0=	'init' 
     {
-        createLeafNode(lv_isInitial_4_0, grammarAccess.getStateAccess().getIsInitialInitKeyword_1_3_0_0(), "isInitial");
+        newLeafNode(lv_isInitial_4_0, grammarAccess.getStateAccess().getIsInitialInitKeyword_1_3_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getStateRule());
 	        }
-       		set($current, "isInitial", true, "init", lastConsumedNode);
+       		setWithLastConsumed($current, "isInitial", true, "init");
 	    }
 
 )
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_3_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_3_1_0()); 
 	    }
 		lv_stateKind_5_0=ruleStateType		{
 	        if ($current==null) {
@@ -170,8 +166,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"stateKind",
         		lv_stateKind_5_0, 
-        		"StateType", 
-        		currentNode);
+        		"StateType");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -181,21 +176,21 @@ ruleState returns [EObject current=null]
 (
 		lv_isInitial_6_0=	'init' 
     {
-        createLeafNode(lv_isInitial_6_0, grammarAccess.getStateAccess().getIsInitialInitKeyword_1_4_0_0(), "isInitial");
+        newLeafNode(lv_isInitial_6_0, grammarAccess.getStateAccess().getIsInitialInitKeyword_1_4_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getStateRule());
 	        }
-       		set($current, "isInitial", true, "init", lastConsumedNode);
+       		setWithLastConsumed($current, "isInitial", true, "init");
 	    }
 
 )
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_4_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_1_4_1_0()); 
 	    }
 		lv_stateKind_7_0=ruleStateType		{
 	        if ($current==null) {
@@ -205,8 +200,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"stateKind",
         		lv_stateKind_7_0, 
-        		"StateType", 
-        		currentNode);
+        		"StateType");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -215,37 +209,36 @@ ruleState returns [EObject current=null]
 (
 		lv_isFinal_8_0=	'final' 
     {
-        createLeafNode(lv_isFinal_8_0, grammarAccess.getStateAccess().getIsFinalFinalKeyword_1_4_2_0(), "isFinal");
+        newLeafNode(lv_isFinal_8_0, grammarAccess.getStateAccess().getIsFinalFinalKeyword_1_4_2_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getStateRule());
 	        }
-       		set($current, "isFinal", true, "final", lastConsumedNode);
+       		setWithLastConsumed($current, "isFinal", true, "final");
 	    }
 
 )
 )))?(	otherlv_9='state' 
     {
-    	createLeafNode(otherlv_9, grammarAccess.getStateAccess().getStateKeyword_2(), null);
+    	newLeafNode(otherlv_9, grammarAccess.getStateAccess().getStateKeyword_2());
     }
 )?(
 (
 		lv_stateName_10_0=RULE_ID
 		{
-			createLeafNode(lv_stateName_10_0, grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_3_0(), "stateName"); 
+			newLeafNode(lv_stateName_10_0, grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_3_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getStateRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"stateName",
         		lv_stateName_10_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -253,18 +246,17 @@ ruleState returns [EObject current=null]
 (
 		lv_label_11_0=RULE_STRING
 		{
-			createLeafNode(lv_label_11_0, grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_4_0(), "label"); 
+			newLeafNode(lv_label_11_0, grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_4_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getStateRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"label",
         		lv_label_11_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
@@ -277,32 +269,30 @@ ruleState returns [EObject current=null]
 
 // Rule StateType
 ruleStateType returns [Enumerator current=null] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @init { enterRule(); }
+    @after { leaveRule(); }:
 ((	enumLiteral_0='NORMAL' 
 	{
         $current = grammarAccess.getStateTypeAccess().getNORMALEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_0, grammarAccess.getStateTypeAccess().getNORMALEnumLiteralDeclaration_0(), null); 
+        newLeafNode(enumLiteral_0, grammarAccess.getStateTypeAccess().getNORMALEnumLiteralDeclaration_0()); 
     }
 )
     |(	enumLiteral_1='cond' 
 	{
         $current = grammarAccess.getStateTypeAccess().getPSEUDOEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_1, grammarAccess.getStateTypeAccess().getPSEUDOEnumLiteralDeclaration_1(), null); 
+        newLeafNode(enumLiteral_1, grammarAccess.getStateTypeAccess().getPSEUDOEnumLiteralDeclaration_1()); 
     }
 )
     |(	enumLiteral_2='reference' 
 	{
         $current = grammarAccess.getStateTypeAccess().getREFERENCEEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_2, grammarAccess.getStateTypeAccess().getREFERENCEEnumLiteralDeclaration_2(), null); 
+        newLeafNode(enumLiteral_2, grammarAccess.getStateTypeAccess().getREFERENCEEnumLiteralDeclaration_2()); 
     }
 )
     |(	enumLiteral_3='textual' 
 	{
         $current = grammarAccess.getStateTypeAccess().getTEXTUALEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_3, grammarAccess.getStateTypeAccess().getTEXTUALEnumLiteralDeclaration_3(), null); 
+        newLeafNode(enumLiteral_3, grammarAccess.getStateTypeAccess().getTEXTUALEnumLiteralDeclaration_3()); 
     }
 ));
 

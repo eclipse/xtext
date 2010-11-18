@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGram
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -78,19 +77,17 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((	otherlv_0='simple' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getSimpleKeyword_0_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getSimpleKeyword_0_0());
     }
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getSingleSingleValueParserRuleCall_0_1_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getSingleSingleValueParserRuleCall_0_1_0_0()); 
 	    }
 		lv_single_1_0=ruleSingleValue		{
 	        if ($current==null) {
@@ -100,8 +97,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"single",
         		lv_single_1_0, 
-        		"SingleValue", 
-        		currentNode);
+        		"SingleValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -110,7 +106,7 @@ ruleModel returns [EObject current=null]
     |(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getMultiMultiValueParserRuleCall_0_1_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getMultiMultiValueParserRuleCall_0_1_1_0()); 
 	    }
 		lv_multi_2_0=ruleMultiValue		{
 	        if ($current==null) {
@@ -120,8 +116,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"multi",
         		lv_multi_2_0, 
-        		"MultiValue", 
-        		currentNode);
+        		"MultiValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -130,7 +125,7 @@ ruleModel returns [EObject current=null]
     |(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getSingleSingleDatatypeParserRuleCall_0_1_2_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getSingleSingleDatatypeParserRuleCall_0_1_2_0()); 
 	    }
 		lv_single_3_0=ruleSingleDatatype		{
 	        if ($current==null) {
@@ -140,8 +135,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"single",
         		lv_single_3_0, 
-        		"SingleDatatype", 
-        		currentNode);
+        		"SingleDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -150,7 +144,7 @@ ruleModel returns [EObject current=null]
     |(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getMultiMultiDatatypeParserRuleCall_0_1_3_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getMultiMultiDatatypeParserRuleCall_0_1_3_0()); 
 	    }
 		lv_multi_4_0=ruleMultiDatatype		{
 	        if ($current==null) {
@@ -160,8 +154,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"multi",
         		lv_multi_4_0, 
-        		"MultiDatatype", 
-        		currentNode);
+        		"MultiDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -169,13 +162,13 @@ ruleModel returns [EObject current=null]
 )))
     |(	otherlv_5='complex' 
     {
-    	createLeafNode(otherlv_5, grammarAccess.getModelAccess().getComplexKeyword_1_0(), null);
+    	newLeafNode(otherlv_5, grammarAccess.getModelAccess().getComplexKeyword_1_0());
     }
 (
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getObjectSingleValueParserRuleCall_1_1_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getObjectSingleValueParserRuleCall_1_1_0_0()); 
 	    }
 		lv_object_6_1=ruleSingleValue		{
 	        if ($current==null) {
@@ -185,13 +178,12 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"object",
         		lv_object_6_1, 
-        		"SingleValue", 
-        		currentNode);
+        		"SingleValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getObjectMultiValueParserRuleCall_1_1_0_1(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getObjectMultiValueParserRuleCall_1_1_0_1()); 
 	    }
 		lv_object_6_2=ruleMultiValue		{
 	        if ($current==null) {
@@ -201,13 +193,12 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"object",
         		lv_object_6_2, 
-        		"MultiValue", 
-        		currentNode);
+        		"MultiValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getObjectSingleDatatypeParserRuleCall_1_1_0_2(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getObjectSingleDatatypeParserRuleCall_1_1_0_2()); 
 	    }
 		lv_object_6_3=ruleSingleDatatype		{
 	        if ($current==null) {
@@ -217,13 +208,12 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"object",
         		lv_object_6_3, 
-        		"SingleDatatype", 
-        		currentNode);
+        		"SingleDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getObjectMultiDatatypeParserRuleCall_1_1_0_3(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getObjectMultiDatatypeParserRuleCall_1_1_0_3()); 
 	    }
 		lv_object_6_4=ruleMultiDatatype		{
 	        if ($current==null) {
@@ -233,8 +223,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"object",
         		lv_object_6_4, 
-        		"MultiDatatype", 
-        		currentNode);
+        		"MultiDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -251,7 +240,7 @@ ruleModel returns [EObject current=null]
 // Entry rule entryRuleSingleValue
 entryRuleSingleValue returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getSingleValueRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getSingleValueRule()); }
 	 iv_ruleSingleValue=ruleSingleValue 
 	 { $current=$iv_ruleSingleValue.current; } 
 	 EOF 
@@ -259,72 +248,67 @@ entryRuleSingleValue returns [EObject current=null]
 
 // Rule SingleValue
 ruleSingleValue returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((	otherlv_0='id' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getSingleValueAccess().getIdKeyword_0_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getSingleValueAccess().getIdKeyword_0_0());
     }
 (
 (
 		lv_value_1_0=RULE_ID
 		{
-			createLeafNode(lv_value_1_0, grammarAccess.getSingleValueAccess().getValueIDTerminalRuleCall_0_1_0(), "value"); 
+			newLeafNode(lv_value_1_0, grammarAccess.getSingleValueAccess().getValueIDTerminalRuleCall_0_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSingleValueRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
 ))
     |(	otherlv_2='alternative' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getSingleValueAccess().getAlternativeKeyword_1_0(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getSingleValueAccess().getAlternativeKeyword_1_0());
     }
 (
 (
 (
 		lv_value_3_1=RULE_ID
 		{
-			createLeafNode(lv_value_3_1, grammarAccess.getSingleValueAccess().getValueIDTerminalRuleCall_1_1_0_0(), "value"); 
+			newLeafNode(lv_value_3_1, grammarAccess.getSingleValueAccess().getValueIDTerminalRuleCall_1_1_0_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSingleValueRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"value",
         		lv_value_3_1, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
     |		lv_value_3_2=RULE_STRING
 		{
-			createLeafNode(lv_value_3_2, grammarAccess.getSingleValueAccess().getValueSTRINGTerminalRuleCall_1_1_0_1(), "value"); 
+			newLeafNode(lv_value_3_2, grammarAccess.getSingleValueAccess().getValueSTRINGTerminalRuleCall_1_1_0_1()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSingleValueRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"value",
         		lv_value_3_2, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
@@ -333,24 +317,23 @@ ruleSingleValue returns [EObject current=null]
 ))
     |(	otherlv_4='string' 
     {
-    	createLeafNode(otherlv_4, grammarAccess.getSingleValueAccess().getStringKeyword_2_0(), null);
+    	newLeafNode(otherlv_4, grammarAccess.getSingleValueAccess().getStringKeyword_2_0());
     }
 (
 (
 		lv_value_5_0=RULE_STRING
 		{
-			createLeafNode(lv_value_5_0, grammarAccess.getSingleValueAccess().getValueSTRINGTerminalRuleCall_2_1_0(), "value"); 
+			newLeafNode(lv_value_5_0, grammarAccess.getSingleValueAccess().getValueSTRINGTerminalRuleCall_2_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSingleValueRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"value",
         		lv_value_5_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
@@ -364,7 +347,7 @@ ruleSingleValue returns [EObject current=null]
 // Entry rule entryRuleMultiValue
 entryRuleMultiValue returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getMultiValueRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getMultiValueRule()); }
 	 iv_ruleMultiValue=ruleMultiValue 
 	 { $current=$iv_ruleMultiValue.current; } 
 	 EOF 
@@ -372,72 +355,67 @@ entryRuleMultiValue returns [EObject current=null]
 
 // Rule MultiValue
 ruleMultiValue returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((	otherlv_0='ids' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getMultiValueAccess().getIdsKeyword_0_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getMultiValueAccess().getIdsKeyword_0_0());
     }
 (
 (
 		lv_value_1_0=RULE_ID
 		{
-			createLeafNode(lv_value_1_0, grammarAccess.getMultiValueAccess().getValueIDTerminalRuleCall_0_1_0(), "value"); 
+			newLeafNode(lv_value_1_0, grammarAccess.getMultiValueAccess().getValueIDTerminalRuleCall_0_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getMultiValueRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
 ))
     |(	otherlv_2='alternatives' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getMultiValueAccess().getAlternativesKeyword_1_0(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getMultiValueAccess().getAlternativesKeyword_1_0());
     }
 (
 (
 (
 		lv_value_3_1=RULE_ID
 		{
-			createLeafNode(lv_value_3_1, grammarAccess.getMultiValueAccess().getValueIDTerminalRuleCall_1_1_0_0(), "value"); 
+			newLeafNode(lv_value_3_1, grammarAccess.getMultiValueAccess().getValueIDTerminalRuleCall_1_1_0_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getMultiValueRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"value",
         		lv_value_3_1, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
     |		lv_value_3_2=RULE_STRING
 		{
-			createLeafNode(lv_value_3_2, grammarAccess.getMultiValueAccess().getValueSTRINGTerminalRuleCall_1_1_0_1(), "value"); 
+			newLeafNode(lv_value_3_2, grammarAccess.getMultiValueAccess().getValueSTRINGTerminalRuleCall_1_1_0_1()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getMultiValueRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"value",
         		lv_value_3_2, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
@@ -446,24 +424,23 @@ ruleMultiValue returns [EObject current=null]
 ))
     |(	otherlv_4='strings' 
     {
-    	createLeafNode(otherlv_4, grammarAccess.getMultiValueAccess().getStringsKeyword_2_0(), null);
+    	newLeafNode(otherlv_4, grammarAccess.getMultiValueAccess().getStringsKeyword_2_0());
     }
 (
 (
 		lv_value_5_0=RULE_STRING
 		{
-			createLeafNode(lv_value_5_0, grammarAccess.getMultiValueAccess().getValueSTRINGTerminalRuleCall_2_1_0(), "value"); 
+			newLeafNode(lv_value_5_0, grammarAccess.getMultiValueAccess().getValueSTRINGTerminalRuleCall_2_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getMultiValueRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"value",
         		lv_value_5_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
@@ -477,7 +454,7 @@ ruleMultiValue returns [EObject current=null]
 // Entry rule entryRuleSingleDatatype
 entryRuleSingleDatatype returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getSingleDatatypeRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getSingleDatatypeRule()); }
 	 iv_ruleSingleDatatype=ruleSingleDatatype 
 	 { $current=$iv_ruleSingleDatatype.current; } 
 	 EOF 
@@ -485,19 +462,17 @@ entryRuleSingleDatatype returns [EObject current=null]
 
 // Rule SingleDatatype
 ruleSingleDatatype returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((	otherlv_0='datatypeid' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getSingleDatatypeAccess().getDatatypeidKeyword_0_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getSingleDatatypeAccess().getDatatypeidKeyword_0_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueIdDatatypeParserRuleCall_0_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueIdDatatypeParserRuleCall_0_1_0()); 
 	    }
 		lv_value_1_0=ruleIdDatatype		{
 	        if ($current==null) {
@@ -507,8 +482,7 @@ ruleSingleDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"IdDatatype", 
-        		currentNode);
+        		"IdDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -516,13 +490,13 @@ ruleSingleDatatype returns [EObject current=null]
 ))
     |(	otherlv_2='datatypealternative' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getSingleDatatypeAccess().getDatatypealternativeKeyword_1_0(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getSingleDatatypeAccess().getDatatypealternativeKeyword_1_0());
     }
 (
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueIdDatatypeParserRuleCall_1_1_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueIdDatatypeParserRuleCall_1_1_0_0()); 
 	    }
 		lv_value_3_1=ruleIdDatatype		{
 	        if ($current==null) {
@@ -532,13 +506,12 @@ ruleSingleDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_1, 
-        		"IdDatatype", 
-        		currentNode);
+        		"IdDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
-	        currentNode=createCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueStringDatatypeParserRuleCall_1_1_0_1(), currentNode); 
+	        newCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueStringDatatypeParserRuleCall_1_1_0_1()); 
 	    }
 		lv_value_3_2=ruleStringDatatype		{
 	        if ($current==null) {
@@ -548,8 +521,7 @@ ruleSingleDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_2, 
-        		"StringDatatype", 
-        		currentNode);
+        		"StringDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -559,12 +531,12 @@ ruleSingleDatatype returns [EObject current=null]
 ))
     |(	otherlv_4='datatypestring' 
     {
-    	createLeafNode(otherlv_4, grammarAccess.getSingleDatatypeAccess().getDatatypestringKeyword_2_0(), null);
+    	newLeafNode(otherlv_4, grammarAccess.getSingleDatatypeAccess().getDatatypestringKeyword_2_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueStringDatatypeParserRuleCall_2_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueStringDatatypeParserRuleCall_2_1_0()); 
 	    }
 		lv_value_5_0=ruleStringDatatype		{
 	        if ($current==null) {
@@ -574,8 +546,7 @@ ruleSingleDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_5_0, 
-        		"StringDatatype", 
-        		currentNode);
+        		"StringDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -590,7 +561,7 @@ ruleSingleDatatype returns [EObject current=null]
 // Entry rule entryRuleMultiDatatype
 entryRuleMultiDatatype returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getMultiDatatypeRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getMultiDatatypeRule()); }
 	 iv_ruleMultiDatatype=ruleMultiDatatype 
 	 { $current=$iv_ruleMultiDatatype.current; } 
 	 EOF 
@@ -598,19 +569,17 @@ entryRuleMultiDatatype returns [EObject current=null]
 
 // Rule MultiDatatype
 ruleMultiDatatype returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((	otherlv_0='datatypeids' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getMultiDatatypeAccess().getDatatypeidsKeyword_0_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getMultiDatatypeAccess().getDatatypeidsKeyword_0_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueIdDatatypeParserRuleCall_0_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueIdDatatypeParserRuleCall_0_1_0()); 
 	    }
 		lv_value_1_0=ruleIdDatatype		{
 	        if ($current==null) {
@@ -620,8 +589,7 @@ ruleMultiDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"IdDatatype", 
-        		currentNode);
+        		"IdDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -629,13 +597,13 @@ ruleMultiDatatype returns [EObject current=null]
 ))
     |(	otherlv_2='datatypealternatives' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getMultiDatatypeAccess().getDatatypealternativesKeyword_1_0(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getMultiDatatypeAccess().getDatatypealternativesKeyword_1_0());
     }
 (
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueIdDatatypeParserRuleCall_1_1_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueIdDatatypeParserRuleCall_1_1_0_0()); 
 	    }
 		lv_value_3_1=ruleIdDatatype		{
 	        if ($current==null) {
@@ -645,13 +613,12 @@ ruleMultiDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_1, 
-        		"IdDatatype", 
-        		currentNode);
+        		"IdDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
-	        currentNode=createCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueStringDatatypeParserRuleCall_1_1_0_1(), currentNode); 
+	        newCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueStringDatatypeParserRuleCall_1_1_0_1()); 
 	    }
 		lv_value_3_2=ruleStringDatatype		{
 	        if ($current==null) {
@@ -661,8 +628,7 @@ ruleMultiDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_2, 
-        		"StringDatatype", 
-        		currentNode);
+        		"StringDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -672,12 +638,12 @@ ruleMultiDatatype returns [EObject current=null]
 ))
     |(	otherlv_4='datatypestrings' 
     {
-    	createLeafNode(otherlv_4, grammarAccess.getMultiDatatypeAccess().getDatatypestringsKeyword_2_0(), null);
+    	newLeafNode(otherlv_4, grammarAccess.getMultiDatatypeAccess().getDatatypestringsKeyword_2_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueStringDatatypeParserRuleCall_2_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueStringDatatypeParserRuleCall_2_1_0()); 
 	    }
 		lv_value_5_0=ruleStringDatatype		{
 	        if ($current==null) {
@@ -687,8 +653,7 @@ ruleMultiDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_5_0, 
-        		"StringDatatype", 
-        		currentNode);
+        		"StringDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -703,7 +668,7 @@ ruleMultiDatatype returns [EObject current=null]
 // Entry rule entryRuleIdDatatype
 entryRuleIdDatatype returns [String current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getIdDatatypeRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getIdDatatypeRule()); } 
 	 iv_ruleIdDatatype=ruleIdDatatype 
 	 { $current=$iv_ruleIdDatatype.current.getText(); }  
 	 EOF 
@@ -711,17 +676,15 @@ entryRuleIdDatatype returns [String current=null]
 
 // Rule IdDatatype
 ruleIdDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
     this_ID_0=RULE_ID    {
 		$current.merge(this_ID_0);
     }
 
     { 
-    createLeafNode(this_ID_0, grammarAccess.getIdDatatypeAccess().getIDTerminalRuleCall(), null); 
+    newLeafNode(this_ID_0, grammarAccess.getIdDatatypeAccess().getIDTerminalRuleCall()); 
     }
 
     ;
@@ -733,7 +696,7 @@ ruleIdDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
 // Entry rule entryRuleStringDatatype
 entryRuleStringDatatype returns [String current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getStringDatatypeRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getStringDatatypeRule()); } 
 	 iv_ruleStringDatatype=ruleStringDatatype 
 	 { $current=$iv_ruleStringDatatype.current.getText(); }  
 	 EOF 
@@ -741,17 +704,15 @@ entryRuleStringDatatype returns [String current=null]
 
 // Rule StringDatatype
 ruleStringDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
     this_STRING_0=RULE_STRING    {
 		$current.merge(this_STRING_0);
     }
 
     { 
-    createLeafNode(this_STRING_0, grammarAccess.getStringDatatypeAccess().getSTRINGTerminalRuleCall(), null); 
+    newLeafNode(this_STRING_0, grammarAccess.getStringDatatypeAccess().getSTRINGTerminalRuleCall()); 
     }
 
     ;

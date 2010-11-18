@@ -24,7 +24,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -76,7 +75,7 @@ import org.eclipse.xtext.parser.terminalrules.services.Bug297105TestLanguageGram
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -84,15 +83,13 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getExpressionsExpressionParserRuleCall_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getExpressionsExpressionParserRuleCall_0()); 
 	    }
 		lv_expressions_0_0=ruleExpression		{
 	        if ($current==null) {
@@ -102,8 +99,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"expressions",
         		lv_expressions_0_0, 
-        		"Expression", 
-        		currentNode);
+        		"Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -118,7 +114,7 @@ ruleModel returns [EObject current=null]
 // Entry rule entryRuleExpression
 entryRuleExpression returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getExpressionRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getExpressionRule()); }
 	 iv_ruleExpression=ruleExpression 
 	 { $current=$iv_ruleExpression.current; } 
 	 EOF 
@@ -126,15 +122,13 @@ entryRuleExpression returns [EObject current=null]
 
 // Rule Expression
 ruleExpression returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getExpressionAccess().getLeftLiteralParserRuleCall_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getExpressionAccess().getLeftLiteralParserRuleCall_0_0()); 
 	    }
 		lv_left_0_0=ruleLiteral		{
 	        if ($current==null) {
@@ -144,20 +138,19 @@ ruleExpression returns [EObject current=null]
        			$current, 
        			"left",
         		lv_left_0_0, 
-        		"Literal", 
-        		currentNode);
+        		"Literal");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )	otherlv_1='+' 
     {
-    	createLeafNode(otherlv_1, grammarAccess.getExpressionAccess().getPlusSignKeyword_1(), null);
+    	newLeafNode(otherlv_1, grammarAccess.getExpressionAccess().getPlusSignKeyword_1());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getExpressionAccess().getRightLiteralParserRuleCall_2_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getExpressionAccess().getRightLiteralParserRuleCall_2_0()); 
 	    }
 		lv_right_2_0=ruleLiteral		{
 	        if ($current==null) {
@@ -167,8 +160,7 @@ ruleExpression returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_2_0, 
-        		"Literal", 
-        		currentNode);
+        		"Literal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -183,7 +175,7 @@ ruleExpression returns [EObject current=null]
 // Entry rule entryRuleLiteral
 entryRuleLiteral returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getLiteralRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getLiteralRule()); }
 	 iv_ruleLiteral=ruleLiteral 
 	 { $current=$iv_ruleLiteral.current; } 
 	 EOF 
@@ -191,22 +183,19 @@ entryRuleLiteral returns [EObject current=null]
 
 // Rule Literal
 ruleLiteral returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 	{ 
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getLiteralAccess().getRealLiteralParserRuleCall_0(), currentNode); 
+        newCompositeNode(grammarAccess.getLiteralAccess().getRealLiteralParserRuleCall_0()); 
     }
     this_RealLiteral_0=ruleRealLiteral
     { 
         $current = $this_RealLiteral_0.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 
@@ -215,12 +204,11 @@ ruleLiteral returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getLiteralAccess().getIntLiteralParserRuleCall_1(), currentNode); 
+        newCompositeNode(grammarAccess.getLiteralAccess().getIntLiteralParserRuleCall_1()); 
     }
     this_IntLiteral_1=ruleIntLiteral
     { 
         $current = $this_IntLiteral_1.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 )
@@ -233,7 +221,7 @@ ruleLiteral returns [EObject current=null]
 // Entry rule entryRuleIntLiteral
 entryRuleIntLiteral returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getIntLiteralRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getIntLiteralRule()); }
 	 iv_ruleIntLiteral=ruleIntLiteral 
 	 { $current=$iv_ruleIntLiteral.current; } 
 	 EOF 
@@ -241,15 +229,13 @@ entryRuleIntLiteral returns [EObject current=null]
 
 // Rule IntLiteral
 ruleIntLiteral returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getIntLiteralAccess().getValueIntValueParserRuleCall_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getIntLiteralAccess().getValueIntValueParserRuleCall_0()); 
 	    }
 		lv_value_0_0=ruleIntValue		{
 	        if ($current==null) {
@@ -259,8 +245,7 @@ ruleIntLiteral returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"IntValue", 
-        		currentNode);
+        		"IntValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -275,7 +260,7 @@ ruleIntLiteral returns [EObject current=null]
 // Entry rule entryRuleRealLiteral
 entryRuleRealLiteral returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getRealLiteralRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getRealLiteralRule()); }
 	 iv_ruleRealLiteral=ruleRealLiteral 
 	 { $current=$iv_ruleRealLiteral.current; } 
 	 EOF 
@@ -283,15 +268,13 @@ entryRuleRealLiteral returns [EObject current=null]
 
 // Rule RealLiteral
 ruleRealLiteral returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getRealLiteralAccess().getValueRealValueParserRuleCall_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getRealLiteralAccess().getValueRealValueParserRuleCall_0()); 
 	    }
 		lv_value_0_0=ruleRealValue		{
 	        if ($current==null) {
@@ -301,8 +284,7 @@ ruleRealLiteral returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"RealValue", 
-        		currentNode);
+        		"RealValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -317,7 +299,7 @@ ruleRealLiteral returns [EObject current=null]
 // Entry rule entryRuleIntValue
 entryRuleIntValue returns [String current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getIntValueRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getIntValueRule()); } 
 	 iv_ruleIntValue=ruleIntValue 
 	 { $current=$iv_ruleIntValue.current.getText(); }  
 	 EOF 
@@ -325,17 +307,15 @@ entryRuleIntValue returns [String current=null]
 
 // Rule IntValue
 ruleIntValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
     this_INT_0=RULE_INT    {
 		$current.merge(this_INT_0);
     }
 
     { 
-    createLeafNode(this_INT_0, grammarAccess.getIntValueAccess().getINTTerminalRuleCall(), null); 
+    newLeafNode(this_INT_0, grammarAccess.getIntValueAccess().getINTTerminalRuleCall()); 
     }
 
     ;
@@ -347,7 +327,7 @@ ruleIntValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 // Entry rule entryRuleRealValue
 entryRuleRealValue returns [String current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getRealValueRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getRealValueRule()); } 
 	 iv_ruleRealValue=ruleRealValue 
 	 { $current=$iv_ruleRealValue.current.getText(); }  
 	 EOF 
@@ -355,21 +335,18 @@ entryRuleRealValue returns [String current=null]
 
 // Rule RealValue
 ruleRealValue returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 
     { 
-        currentNode=createCompositeNode(grammarAccess.getRealValueAccess().getRealParserRuleCall(), currentNode); 
+        newCompositeNode(grammarAccess.getRealValueAccess().getRealParserRuleCall()); 
     }
     this_Real_0=ruleReal    {
 		$current.merge(this_Real_0);
     }
 
     { 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 
@@ -385,7 +362,7 @@ entryRuleReal returns [String current=null]
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
 	}
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getRealRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getRealRule()); } 
 	 iv_ruleReal=ruleReal 
 	 { $current=$iv_ruleReal.current.getText(); }  
 	 EOF 
@@ -396,31 +373,29 @@ finally {
 
 // Rule Real
 ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((    this_INT_0=RULE_INT    {
 		$current.merge(this_INT_0);
     }
 
     { 
-    createLeafNode(this_INT_0, grammarAccess.getRealAccess().getINTTerminalRuleCall_0(), null); 
+    newLeafNode(this_INT_0, grammarAccess.getRealAccess().getINTTerminalRuleCall_0()); 
     }
 )?
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getRealAccess().getFullStopKeyword_1(), null); 
+        newLeafNode(kw, grammarAccess.getRealAccess().getFullStopKeyword_1()); 
     }
 (    this_EXT_INT_2=RULE_EXT_INT    {
 		$current.merge(this_EXT_INT_2);
     }
 
     { 
-    createLeafNode(this_EXT_INT_2, grammarAccess.getRealAccess().getEXT_INTTerminalRuleCall_2_0(), null); 
+    newLeafNode(this_EXT_INT_2, grammarAccess.getRealAccess().getEXT_INTTerminalRuleCall_2_0()); 
     }
 
     |    this_INT_3=RULE_INT    {
@@ -428,7 +403,7 @@ ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     { 
-    createLeafNode(this_INT_3, grammarAccess.getRealAccess().getINTTerminalRuleCall_2_1(), null); 
+    newLeafNode(this_INT_3, grammarAccess.getRealAccess().getINTTerminalRuleCall_2_1()); 
     }
 ))
     ;

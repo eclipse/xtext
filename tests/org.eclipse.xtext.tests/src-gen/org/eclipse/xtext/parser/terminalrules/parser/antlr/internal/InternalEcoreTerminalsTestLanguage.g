@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.parser.terminalrules.services.EcoreTerminalsTestLanguag
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -78,79 +77,74 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((	otherlv_0='int' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getModelAccess().getIntKeyword_0_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getIntKeyword_0_0());
     }
 (
 (
 		lv_intValues_1_0=RULE_EINT
 		{
-			createLeafNode(lv_intValues_1_0, grammarAccess.getModelAccess().getIntValuesEINTTerminalRuleCall_0_1_0(), "intValues"); 
+			newLeafNode(lv_intValues_1_0, grammarAccess.getModelAccess().getIntValuesEINTTerminalRuleCall_0_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"intValues",
         		lv_intValues_1_0, 
-        		"EINT", 
-        		lastConsumedNode);
+        		"EINT");
 	    }
 
 )
 ))
     |(	otherlv_2='double' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getModelAccess().getDoubleKeyword_1_0(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDoubleKeyword_1_0());
     }
 (
 (
 		lv_doubleValues_3_0=RULE_EDOUBLE
 		{
-			createLeafNode(lv_doubleValues_3_0, grammarAccess.getModelAccess().getDoubleValuesEDOUBLETerminalRuleCall_1_1_0(), "doubleValues"); 
+			newLeafNode(lv_doubleValues_3_0, grammarAccess.getModelAccess().getDoubleValuesEDOUBLETerminalRuleCall_1_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"doubleValues",
         		lv_doubleValues_3_0, 
-        		"EDOUBLE", 
-        		lastConsumedNode);
+        		"EDOUBLE");
 	    }
 
 )
 ))
     |(	otherlv_4='date' 
     {
-    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getDateKeyword_2_0(), null);
+    	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getDateKeyword_2_0());
     }
 (
 (
 		lv_dateValues_5_0=RULE_EDATE
 		{
-			createLeafNode(lv_dateValues_5_0, grammarAccess.getModelAccess().getDateValuesEDATETerminalRuleCall_2_1_0(), "dateValues"); 
+			newLeafNode(lv_dateValues_5_0, grammarAccess.getModelAccess().getDateValuesEDATETerminalRuleCall_2_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"dateValues",
         		lv_dateValues_5_0, 
-        		"EDATE", 
-        		lastConsumedNode);
+        		"EDATE");
 	    }
 
 )

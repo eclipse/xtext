@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug288734TestLan
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -78,15 +77,13 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getConstantsTConstantParserRuleCall_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getConstantsTConstantParserRuleCall_0()); 
 	    }
 		lv_constants_0_0=ruleTConstant		{
 	        if ($current==null) {
@@ -96,8 +93,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"constants",
         		lv_constants_0_0, 
-        		"TConstant", 
-        		currentNode);
+        		"TConstant");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -112,7 +108,7 @@ ruleModel returns [EObject current=null]
 // Entry rule entryRuleTConstant
 entryRuleTConstant returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getTConstantRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getTConstantRule()); }
 	 iv_ruleTConstant=ruleTConstant 
 	 { $current=$iv_ruleTConstant.current; } 
 	 EOF 
@@ -120,41 +116,36 @@ entryRuleTConstant returns [EObject current=null]
 
 // Rule TConstant
 ruleTConstant returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getTConstantAccess().getTStringConstantParserRuleCall_0(), currentNode); 
+        newCompositeNode(grammarAccess.getTConstantAccess().getTStringConstantParserRuleCall_0()); 
     }
     this_TStringConstant_0=ruleTStringConstant
     { 
         $current = $this_TStringConstant_0.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getTConstantAccess().getTIntegerConstantParserRuleCall_1(), currentNode); 
+        newCompositeNode(grammarAccess.getTConstantAccess().getTIntegerConstantParserRuleCall_1()); 
     }
     this_TIntegerConstant_1=ruleTIntegerConstant
     { 
         $current = $this_TIntegerConstant_1.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getTConstantAccess().getTBooleanConstantParserRuleCall_2(), currentNode); 
+        newCompositeNode(grammarAccess.getTConstantAccess().getTBooleanConstantParserRuleCall_2()); 
     }
     this_TBooleanConstant_2=ruleTBooleanConstant
     { 
         $current = $this_TBooleanConstant_2.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 )
@@ -167,7 +158,7 @@ ruleTConstant returns [EObject current=null]
 // Entry rule entryRuleTStringConstant
 entryRuleTStringConstant returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getTStringConstantRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getTStringConstantRule()); }
 	 iv_ruleTStringConstant=ruleTStringConstant 
 	 { $current=$iv_ruleTStringConstant.current; } 
 	 EOF 
@@ -175,15 +166,13 @@ entryRuleTStringConstant returns [EObject current=null]
 
 // Rule TStringConstant
 ruleTStringConstant returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getTStringConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getTStringConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
 	    }
 		lv_annotations_0_0=ruleTAnnotation		{
 	        if ($current==null) {
@@ -193,36 +182,34 @@ ruleTStringConstant returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"TAnnotation", 
-        		currentNode);
+        		"TAnnotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )*	otherlv_1='constant' 
     {
-    	createLeafNode(otherlv_1, grammarAccess.getTStringConstantAccess().getConstantKeyword_1(), null);
+    	newLeafNode(otherlv_1, grammarAccess.getTStringConstantAccess().getConstantKeyword_1());
     }
 	otherlv_2='string' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getTStringConstantAccess().getStringKeyword_2(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getTStringConstantAccess().getStringKeyword_2());
     }
 (
 (
 		lv_name_3_0=RULE_ID
 		{
-			createLeafNode(lv_name_3_0, grammarAccess.getTStringConstantAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
+			newLeafNode(lv_name_3_0, grammarAccess.getTStringConstantAccess().getNameIDTerminalRuleCall_3_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getTStringConstantRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -236,7 +223,7 @@ ruleTStringConstant returns [EObject current=null]
 // Entry rule entryRuleTIntegerConstant
 entryRuleTIntegerConstant returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getTIntegerConstantRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getTIntegerConstantRule()); }
 	 iv_ruleTIntegerConstant=ruleTIntegerConstant 
 	 { $current=$iv_ruleTIntegerConstant.current; } 
 	 EOF 
@@ -244,15 +231,13 @@ entryRuleTIntegerConstant returns [EObject current=null]
 
 // Rule TIntegerConstant
 ruleTIntegerConstant returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getTIntegerConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getTIntegerConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
 	    }
 		lv_annotations_0_0=ruleTAnnotation		{
 	        if ($current==null) {
@@ -262,36 +247,34 @@ ruleTIntegerConstant returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"TAnnotation", 
-        		currentNode);
+        		"TAnnotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )*	otherlv_1='constant' 
     {
-    	createLeafNode(otherlv_1, grammarAccess.getTIntegerConstantAccess().getConstantKeyword_1(), null);
+    	newLeafNode(otherlv_1, grammarAccess.getTIntegerConstantAccess().getConstantKeyword_1());
     }
 	otherlv_2='integer' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getTIntegerConstantAccess().getIntegerKeyword_2(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getTIntegerConstantAccess().getIntegerKeyword_2());
     }
 (
 (
 		lv_name_3_0=RULE_ID
 		{
-			createLeafNode(lv_name_3_0, grammarAccess.getTIntegerConstantAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
+			newLeafNode(lv_name_3_0, grammarAccess.getTIntegerConstantAccess().getNameIDTerminalRuleCall_3_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getTIntegerConstantRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -305,7 +288,7 @@ ruleTIntegerConstant returns [EObject current=null]
 // Entry rule entryRuleTBooleanConstant
 entryRuleTBooleanConstant returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getTBooleanConstantRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getTBooleanConstantRule()); }
 	 iv_ruleTBooleanConstant=ruleTBooleanConstant 
 	 { $current=$iv_ruleTBooleanConstant.current; } 
 	 EOF 
@@ -313,15 +296,13 @@ entryRuleTBooleanConstant returns [EObject current=null]
 
 // Rule TBooleanConstant
 ruleTBooleanConstant returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getTBooleanConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getTBooleanConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
 	    }
 		lv_annotations_0_0=ruleTAnnotation		{
 	        if ($current==null) {
@@ -331,36 +312,34 @@ ruleTBooleanConstant returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"TAnnotation", 
-        		currentNode);
+        		"TAnnotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )*	otherlv_1='constant' 
     {
-    	createLeafNode(otherlv_1, grammarAccess.getTBooleanConstantAccess().getConstantKeyword_1(), null);
+    	newLeafNode(otherlv_1, grammarAccess.getTBooleanConstantAccess().getConstantKeyword_1());
     }
 	otherlv_2='boolean' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getTBooleanConstantAccess().getBooleanKeyword_2(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getTBooleanConstantAccess().getBooleanKeyword_2());
     }
 (
 (
 		lv_name_3_0=RULE_ID
 		{
-			createLeafNode(lv_name_3_0, grammarAccess.getTBooleanConstantAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
+			newLeafNode(lv_name_3_0, grammarAccess.getTBooleanConstantAccess().getNameIDTerminalRuleCall_3_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getTBooleanConstantRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -374,7 +353,7 @@ ruleTBooleanConstant returns [EObject current=null]
 // Entry rule entryRuleTAnnotation
 entryRuleTAnnotation returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getTAnnotationRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getTAnnotationRule()); }
 	 iv_ruleTAnnotation=ruleTAnnotation 
 	 { $current=$iv_ruleTAnnotation.current; } 
 	 EOF 
@@ -382,31 +361,28 @@ entryRuleTAnnotation returns [EObject current=null]
 
 // Rule TAnnotation
 ruleTAnnotation returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='@desc' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getTAnnotationAccess().getDescKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getTAnnotationAccess().getDescKeyword_0());
     }
 (
 (
 		lv_description_1_0=RULE_STRING
 		{
-			createLeafNode(lv_description_1_0, grammarAccess.getTAnnotationAccess().getDescriptionSTRINGTerminalRuleCall_1_0(), "description"); 
+			newLeafNode(lv_description_1_0, grammarAccess.getTAnnotationAccess().getDescriptionSTRINGTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getTAnnotationRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"description",
         		lv_description_1_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )

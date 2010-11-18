@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingUiTestLanguag
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -78,15 +77,13 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0()); 
 	    }
 		lv_words_0_0=ruleWord		{
 	        if ($current==null) {
@@ -96,8 +93,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"words",
         		lv_words_0_0, 
-        		"Word", 
-        		currentNode);
+        		"Word");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -112,7 +108,7 @@ ruleModel returns [EObject current=null]
 // Entry rule entryRuleWord
 entryRuleWord returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getWordRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getWordRule()); }
 	 iv_ruleWord=ruleWord 
 	 { $current=$iv_ruleWord.current; } 
 	 EOF 
@@ -120,27 +116,24 @@ entryRuleWord returns [EObject current=null]
 
 // Rule Word
 ruleWord returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		lv_value_0_0=RULE_LEXEME
 		{
-			createLeafNode(lv_value_0_0, grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0(), "value"); 
+			newLeafNode(lv_value_0_0, grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getWordRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"LEXEME", 
-        		lastConsumedNode);
+        		"LEXEME");
 	    }
 
 )

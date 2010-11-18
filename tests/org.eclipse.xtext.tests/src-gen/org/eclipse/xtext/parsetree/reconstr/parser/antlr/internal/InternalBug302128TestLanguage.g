@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.Bug302128TestLanguageGramma
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -78,15 +77,13 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0()); 
 	    }
 		lv_elements_0_0=ruleElement		{
 	        if ($current==null) {
@@ -96,8 +93,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"Element", 
-        		currentNode);
+        		"Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -112,7 +108,7 @@ ruleModel returns [EObject current=null]
 // Entry rule entryRuleElement
 entryRuleElement returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getElementRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getElementRule()); }
 	 iv_ruleElement=ruleElement 
 	 { $current=$iv_ruleElement.current; } 
 	 EOF 
@@ -120,15 +116,13 @@ entryRuleElement returns [EObject current=null]
 
 // Rule Element
 ruleElement returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getElementAccess().getNameVariableParserRuleCall_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getElementAccess().getNameVariableParserRuleCall_0_0()); 
 	    }
 		lv_name_0_0=ruleVariable		{
 	        if ($current==null) {
@@ -138,8 +132,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"Variable", 
-        		currentNode);
+        		"Variable");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -148,18 +141,17 @@ ruleElement returns [EObject current=null]
 (
 		lv_value_1_0=RULE_VALUE
 		{
-			createLeafNode(lv_value_1_0, grammarAccess.getElementAccess().getValueValueTerminalRuleCall_1_0(), "value"); 
+			newLeafNode(lv_value_1_0, grammarAccess.getElementAccess().getValueValueTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getElementRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"Value", 
-        		lastConsumedNode);
+        		"Value");
 	    }
 
 )
@@ -173,7 +165,7 @@ ruleElement returns [EObject current=null]
 // Entry rule entryRuleVariable
 entryRuleVariable returns [String current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getVariableRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getVariableRule()); } 
 	 iv_ruleVariable=ruleVariable 
 	 { $current=$iv_ruleVariable.current.getText(); }  
 	 EOF 
@@ -181,37 +173,35 @@ entryRuleVariable returns [String current=null]
 
 // Rule Variable
 ruleVariable returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (    this_ID_0=RULE_ID    {
 		$current.merge(this_ID_0);
     }
 
     { 
-    createLeafNode(this_ID_0, grammarAccess.getVariableAccess().getIDTerminalRuleCall_0(), null); 
+    newLeafNode(this_ID_0, grammarAccess.getVariableAccess().getIDTerminalRuleCall_0()); 
     }
 ((
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getVariableAccess().getFullStopKeyword_1_0_0(), null); 
+        newLeafNode(kw, grammarAccess.getVariableAccess().getFullStopKeyword_1_0_0()); 
     }
 
     |
 	kw='-' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getVariableAccess().getHyphenMinusKeyword_1_0_1(), null); 
+        newLeafNode(kw, grammarAccess.getVariableAccess().getHyphenMinusKeyword_1_0_1()); 
     }
 )    this_ID_3=RULE_ID    {
 		$current.merge(this_ID_3);
     }
 
     { 
-    createLeafNode(this_ID_3, grammarAccess.getVariableAccess().getIDTerminalRuleCall_1_1(), null); 
+    newLeafNode(this_ID_3, grammarAccess.getVariableAccess().getIDTerminalRuleCall_1_1()); 
     }
 )*)
     ;

@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.generator.ecore.services.SuperTestLanguageGrammarAccess
 // Entry rule entryRuleSuperMain
 entryRuleSuperMain returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getSuperMainRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getSuperMainRule()); }
 	 iv_ruleSuperMain=ruleSuperMain 
 	 { $current=$iv_ruleSuperMain.current; } 
 	 EOF 
@@ -78,31 +77,28 @@ entryRuleSuperMain returns [EObject current=null]
 
 // Rule SuperMain
 ruleSuperMain returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='super' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0());
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			newLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSuperMainRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )

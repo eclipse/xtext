@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLang
 // Entry rule entryRuleStart
 entryRuleStart returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getStartRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getStartRule()); }
 	 iv_ruleStart=ruleStart 
 	 { $current=$iv_ruleStart.current; } 
 	 EOF 
@@ -78,27 +77,24 @@ entryRuleStart returns [EObject current=null]
 
 // Rule Start
 ruleStart returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		lv_featureA_0_0=RULE_ID
 		{
-			createLeafNode(lv_featureA_0_0, grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), "featureA"); 
+			newLeafNode(lv_featureA_0_0, grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getStartRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"featureA",
         		lv_featureA_0_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )

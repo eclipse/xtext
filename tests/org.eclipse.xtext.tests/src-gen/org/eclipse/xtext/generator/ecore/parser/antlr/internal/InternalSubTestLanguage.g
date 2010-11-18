@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.generator.ecore.services.SubTestLanguageGrammarAccess;
 // Entry rule entryRuleSubMain
 entryRuleSubMain returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getSubMainRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getSubMainRule()); }
 	 iv_ruleSubMain=ruleSubMain 
 	 { $current=$iv_ruleSubMain.current; } 
 	 EOF 
@@ -78,19 +77,17 @@ entryRuleSubMain returns [EObject current=null]
 
 // Rule SubMain
 ruleSubMain returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='{' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getSubMainAccess().getLeftCurlyBracketKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getSubMainAccess().getLeftCurlyBracketKeyword_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getSubMainAccess().getSuperMainsSuperMainParserRuleCall_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getSubMainAccess().getSuperMainsSuperMainParserRuleCall_1_0()); 
 	    }
 		lv_superMains_1_0=ruleSuperMain		{
 	        if ($current==null) {
@@ -100,20 +97,19 @@ ruleSubMain returns [EObject current=null]
        			$current, 
        			"superMains",
         		lv_superMains_1_0, 
-        		"SuperMain", 
-        		currentNode);
+        		"SuperMain");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )	otherlv_2='}' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getSubMainAccess().getRightCurlyBracketKeyword_2(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getSubMainAccess().getRightCurlyBracketKeyword_2());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getSubMainAccess().getAnotherAnotherSuperMainParserRuleCall_3_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getSubMainAccess().getAnotherAnotherSuperMainParserRuleCall_3_0()); 
 	    }
 		lv_another_3_0=ruleAnotherSuperMain		{
 	        if ($current==null) {
@@ -123,8 +119,7 @@ ruleSubMain returns [EObject current=null]
        			$current, 
        			"another",
         		lv_another_3_0, 
-        		"AnotherSuperMain", 
-        		currentNode);
+        		"AnotherSuperMain");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -139,7 +134,7 @@ ruleSubMain returns [EObject current=null]
 // Entry rule entryRuleAnotherSuperMain
 entryRuleAnotherSuperMain returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getAnotherSuperMainRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getAnotherSuperMainRule()); }
 	 iv_ruleAnotherSuperMain=ruleAnotherSuperMain 
 	 { $current=$iv_ruleAnotherSuperMain.current; } 
 	 EOF 
@@ -147,31 +142,28 @@ entryRuleAnotherSuperMain returns [EObject current=null]
 
 // Rule AnotherSuperMain
 ruleAnotherSuperMain returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='ups' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getAnotherSuperMainAccess().getUpsKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getAnotherSuperMainAccess().getUpsKeyword_0());
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(lv_name_1_0, grammarAccess.getAnotherSuperMainAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			newLeafNode(lv_name_1_0, grammarAccess.getAnotherSuperMainAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getAnotherSuperMainRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -185,7 +177,7 @@ ruleAnotherSuperMain returns [EObject current=null]
 // Entry rule entryRuleSuperMain
 entryRuleSuperMain returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getSuperMainRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getSuperMainRule()); }
 	 iv_ruleSuperMain=ruleSuperMain 
 	 { $current=$iv_ruleSuperMain.current; } 
 	 EOF 
@@ -193,31 +185,28 @@ entryRuleSuperMain returns [EObject current=null]
 
 // Rule SuperMain
 ruleSuperMain returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='super' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0());
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			newLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSuperMainRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )

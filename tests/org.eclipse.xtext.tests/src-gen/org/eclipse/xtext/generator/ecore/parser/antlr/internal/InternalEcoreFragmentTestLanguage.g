@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGramm
 // Entry rule entryRuleSecond
 entryRuleSecond returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getSecondRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getSecondRule()); }
 	 iv_ruleSecond=ruleSecond 
 	 { $current=$iv_ruleSecond.current; } 
 	 EOF 
@@ -78,33 +77,30 @@ entryRuleSecond returns [EObject current=null]
 
 // Rule Second
 ruleSecond returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		lv_name_0_0=RULE_ID
 		{
-			createLeafNode(lv_name_0_0, grammarAccess.getSecondAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+			newLeafNode(lv_name_0_0, grammarAccess.getSecondAccess().getNameIDTerminalRuleCall_0_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSecondRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
 )	otherlv_1='first' 
     {
-    	createLeafNode(otherlv_1, grammarAccess.getSecondAccess().getFirstKeyword_1(), null);
+    	newLeafNode(otherlv_1, grammarAccess.getSecondAccess().getFirstKeyword_1());
     }
 (
 (
@@ -115,7 +111,7 @@ ruleSecond returns [EObject current=null]
         }
 	otherlv_2=RULE_ID
 	{
-		createLeafNode(otherlv_2, grammarAccess.getSecondAccess().getFirstFirstCrossReference_2_0(), "first"); 
+		newLeafNode(otherlv_2, grammarAccess.getSecondAccess().getFirstFirstCrossReference_2_0()); 
 	}
 
 )

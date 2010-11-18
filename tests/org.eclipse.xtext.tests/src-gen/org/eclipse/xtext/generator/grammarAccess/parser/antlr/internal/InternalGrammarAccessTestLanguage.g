@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLangu
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getRootRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getRootRule()); }
 	 iv_ruleRoot=ruleRoot 
 	 { $current=$iv_ruleRoot.current; } 
 	 EOF 
@@ -78,15 +77,13 @@ entryRuleRoot returns [EObject current=null]
 
 // Rule Root
 ruleRoot returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getRootAccess().getElementsTypeParserRuleCall_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getRootAccess().getElementsTypeParserRuleCall_0()); 
 	    }
 		lv_elements_0_0=ruleType		{
 	        if ($current==null) {
@@ -96,8 +93,7 @@ ruleRoot returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"Type", 
-        		currentNode);
+        		"Type");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -112,7 +108,7 @@ ruleRoot returns [EObject current=null]
 // Entry rule entryRuleType
 entryRuleType returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getTypeRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getTypeRule()); }
 	 iv_ruleType=ruleType 
 	 { $current=$iv_ruleType.current; } 
 	 EOF 
@@ -120,30 +116,26 @@ entryRuleType returns [EObject current=null]
 
 // Rule Type
 ruleType returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getTypeAccess().getATypeParserRuleCall_0(), currentNode); 
+        newCompositeNode(grammarAccess.getTypeAccess().getATypeParserRuleCall_0()); 
     }
     this_AType_0=ruleAType
     { 
         $current = $this_AType_0.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getTypeAccess().getAnotherTypeParserRuleCall_1(), currentNode); 
+        newCompositeNode(grammarAccess.getTypeAccess().getAnotherTypeParserRuleCall_1()); 
     }
     this_AnotherType_1=ruleAnotherType
     { 
         $current = $this_AnotherType_1.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 )
@@ -156,7 +148,7 @@ ruleType returns [EObject current=null]
 // Entry rule entryRuleAType
 entryRuleAType returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getATypeRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getATypeRule()); }
 	 iv_ruleAType=ruleAType 
 	 { $current=$iv_ruleAType.current; } 
 	 EOF 
@@ -164,14 +156,12 @@ entryRuleAType returns [EObject current=null]
 
 // Rule AType
 ruleAType returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='foo' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getATypeAccess().getFooKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getATypeAccess().getFooKeyword_0());
     }
 (
     {
@@ -189,7 +179,7 @@ ruleAType returns [EObject current=null]
 // Entry rule entryRuleAnotherType
 entryRuleAnotherType returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getAnotherTypeRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getAnotherTypeRule()); }
 	 iv_ruleAnotherType=ruleAnotherType 
 	 { $current=$iv_ruleAnotherType.current; } 
 	 EOF 
@@ -197,14 +187,12 @@ entryRuleAnotherType returns [EObject current=null]
 
 // Rule AnotherType
 ruleAnotherType returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='bar' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getAnotherTypeAccess().getBarKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getAnotherTypeAccess().getBarKeyword_0());
     }
 (
     {

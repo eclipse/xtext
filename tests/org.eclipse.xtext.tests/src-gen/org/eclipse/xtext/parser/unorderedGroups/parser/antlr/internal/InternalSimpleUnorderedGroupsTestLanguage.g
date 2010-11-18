@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.parser.unorderedGroups.services.SimpleUnorderedGroupsTe
 // Entry rule entryRuleDelegateModel
 entryRuleDelegateModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getDelegateModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getDelegateModelRule()); }
 	 iv_ruleDelegateModel=ruleDelegateModel 
 	 { $current=$iv_ruleDelegateModel.current; } 
 	 EOF 
@@ -78,19 +77,16 @@ entryRuleDelegateModel returns [EObject current=null]
 
 // Rule DelegateModel
 ruleDelegateModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 
     { 
-        currentNode=createCompositeNode(grammarAccess.getDelegateModelAccess().getModelParserRuleCall(), currentNode); 
+        newCompositeNode(grammarAccess.getDelegateModelAccess().getModelParserRuleCall()); 
     }
     this_Model_0=ruleModel
     { 
         $current = $this_Model_0.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 
@@ -103,7 +99,7 @@ ruleDelegateModel returns [EObject current=null]
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -111,11 +107,9 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
     {
         $current = forceCreateModelElement(
@@ -124,7 +118,7 @@ ruleModel returns [EObject current=null]
     }
 )((	otherlv_1='1' 
     {
-    	createLeafNode(otherlv_1, grammarAccess.getModelAccess().getDigitOneKeyword_1_0_0(), null);
+    	newLeafNode(otherlv_1, grammarAccess.getModelAccess().getDigitOneKeyword_1_0_0());
     }
 (
 
@@ -144,14 +138,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_first_3_0=	'a' 
     {
-        createLeafNode(lv_first_3_0, grammarAccess.getModelAccess().getFirstAKeyword_1_0_1_0_0(), "first");
+        newLeafNode(lv_first_3_0, grammarAccess.getModelAccess().getFirstAKeyword_1_0_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -171,14 +165,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_second_4_0=	'b' 
     {
-        createLeafNode(lv_second_4_0, grammarAccess.getModelAccess().getSecondBKeyword_1_0_1_1_0(), "second");
+        newLeafNode(lv_second_4_0, grammarAccess.getModelAccess().getSecondBKeyword_1_0_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -200,7 +194,7 @@ ruleModel returns [EObject current=null]
 ))
     |(	otherlv_5='2' 
     {
-    	createLeafNode(otherlv_5, grammarAccess.getModelAccess().getDigitTwoKeyword_1_1_0(), null);
+    	newLeafNode(otherlv_5, grammarAccess.getModelAccess().getDigitTwoKeyword_1_1_0());
     }
 (
 
@@ -220,14 +214,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_first_7_0=	'a' 
     {
-        createLeafNode(lv_first_7_0, grammarAccess.getModelAccess().getFirstAKeyword_1_1_1_0_0(), "first");
+        newLeafNode(lv_first_7_0, grammarAccess.getModelAccess().getFirstAKeyword_1_1_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -247,14 +241,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_second_8_0=	'b' 
     {
-        createLeafNode(lv_second_8_0, grammarAccess.getModelAccess().getSecondBKeyword_1_1_1_1_0(), "second");
+        newLeafNode(lv_second_8_0, grammarAccess.getModelAccess().getSecondBKeyword_1_1_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -274,14 +268,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_third_9_0=	'c' 
     {
-        createLeafNode(lv_third_9_0, grammarAccess.getModelAccess().getThirdCKeyword_1_1_1_2_0(), "third");
+        newLeafNode(lv_third_9_0, grammarAccess.getModelAccess().getThirdCKeyword_1_1_1_2_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "third", true, "c", lastConsumedNode);
+       		setWithLastConsumed($current, "third", true, "c");
 	    }
 
 )
@@ -301,14 +295,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_forth_10_0=	'd' 
     {
-        createLeafNode(lv_forth_10_0, grammarAccess.getModelAccess().getForthDKeyword_1_1_1_3_0(), "forth");
+        newLeafNode(lv_forth_10_0, grammarAccess.getModelAccess().getForthDKeyword_1_1_1_3_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "forth", true, "d", lastConsumedNode);
+       		setWithLastConsumed($current, "forth", true, "d");
 	    }
 
 )
@@ -330,7 +324,7 @@ ruleModel returns [EObject current=null]
 ))
     |(	otherlv_11='3' 
     {
-    	createLeafNode(otherlv_11, grammarAccess.getModelAccess().getDigitThreeKeyword_1_2_0(), null);
+    	newLeafNode(otherlv_11, grammarAccess.getModelAccess().getDigitThreeKeyword_1_2_0());
     }
 (
 
@@ -350,14 +344,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_first_13_0=	'a' 
     {
-        createLeafNode(lv_first_13_0, grammarAccess.getModelAccess().getFirstAKeyword_1_2_1_0_0(), "first");
+        newLeafNode(lv_first_13_0, grammarAccess.getModelAccess().getFirstAKeyword_1_2_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -377,14 +371,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_second_14_0=	'b' 
     {
-        createLeafNode(lv_second_14_0, grammarAccess.getModelAccess().getSecondBKeyword_1_2_1_1_0(), "second");
+        newLeafNode(lv_second_14_0, grammarAccess.getModelAccess().getSecondBKeyword_1_2_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -405,7 +399,7 @@ ruleModel returns [EObject current=null]
 ))
     |(	otherlv_15='4' 
     {
-    	createLeafNode(otherlv_15, grammarAccess.getModelAccess().getDigitFourKeyword_1_3_0(), null);
+    	newLeafNode(otherlv_15, grammarAccess.getModelAccess().getDigitFourKeyword_1_3_0());
     }
 (
 
@@ -425,14 +419,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_first_17_0=	'a' 
     {
-        createLeafNode(lv_first_17_0, grammarAccess.getModelAccess().getFirstAKeyword_1_3_1_0_0(), "first");
+        newLeafNode(lv_first_17_0, grammarAccess.getModelAccess().getFirstAKeyword_1_3_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -452,14 +446,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_second_18_0=	'b' 
     {
-        createLeafNode(lv_second_18_0, grammarAccess.getModelAccess().getSecondBKeyword_1_3_1_1_0(), "second");
+        newLeafNode(lv_second_18_0, grammarAccess.getModelAccess().getSecondBKeyword_1_3_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -481,7 +475,7 @@ ruleModel returns [EObject current=null]
 ))
     |(	otherlv_19='5' 
     {
-    	createLeafNode(otherlv_19, grammarAccess.getModelAccess().getDigitFiveKeyword_1_4_0(), null);
+    	newLeafNode(otherlv_19, grammarAccess.getModelAccess().getDigitFiveKeyword_1_4_0());
     }
 (
 
@@ -501,14 +495,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_first_21_0=	'a' 
     {
-        createLeafNode(lv_first_21_0, grammarAccess.getModelAccess().getFirstAKeyword_1_4_1_0_0(), "first");
+        newLeafNode(lv_first_21_0, grammarAccess.getModelAccess().getFirstAKeyword_1_4_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -528,14 +522,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_second_22_0=	'b' 
     {
-        createLeafNode(lv_second_22_0, grammarAccess.getModelAccess().getSecondBKeyword_1_4_1_1_0(), "second");
+        newLeafNode(lv_second_22_0, grammarAccess.getModelAccess().getSecondBKeyword_1_4_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -557,7 +551,7 @@ ruleModel returns [EObject current=null]
 ))
     |(	otherlv_23='6' 
     {
-    	createLeafNode(otherlv_23, grammarAccess.getModelAccess().getDigitSixKeyword_1_5_0(), null);
+    	newLeafNode(otherlv_23, grammarAccess.getModelAccess().getDigitSixKeyword_1_5_0());
     }
 (
 
@@ -577,14 +571,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_firstAsList_25_0=	'a' 
     {
-        createLeafNode(lv_firstAsList_25_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_5_1_0_0(), "firstAsList");
+        newLeafNode(lv_firstAsList_25_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_5_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_25_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_25_0, "a");
 	    }
 
 )
@@ -604,14 +598,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_secondAsList_26_0=	'b' 
     {
-        createLeafNode(lv_secondAsList_26_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_5_1_1_0(), "secondAsList");
+        newLeafNode(lv_secondAsList_26_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_5_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_26_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_26_0, "b");
 	    }
 
 )
@@ -633,7 +627,7 @@ ruleModel returns [EObject current=null]
 ))
     |(	otherlv_27='7' 
     {
-    	createLeafNode(otherlv_27, grammarAccess.getModelAccess().getDigitSevenKeyword_1_6_0(), null);
+    	newLeafNode(otherlv_27, grammarAccess.getModelAccess().getDigitSevenKeyword_1_6_0());
     }
 (
 
@@ -653,14 +647,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_firstAsList_29_0=	'a' 
     {
-        createLeafNode(lv_firstAsList_29_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_6_1_0_0(), "firstAsList");
+        newLeafNode(lv_firstAsList_29_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_6_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_29_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_29_0, "a");
 	    }
 
 )
@@ -680,14 +674,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_secondAsList_30_0=	'b' 
     {
-        createLeafNode(lv_secondAsList_30_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_6_1_1_0(), "secondAsList");
+        newLeafNode(lv_secondAsList_30_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_6_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_30_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_30_0, "b");
 	    }
 
 )
@@ -709,7 +703,7 @@ ruleModel returns [EObject current=null]
 ))
     |(	otherlv_31='8' 
     {
-    	createLeafNode(otherlv_31, grammarAccess.getModelAccess().getDigitEightKeyword_1_7_0(), null);
+    	newLeafNode(otherlv_31, grammarAccess.getModelAccess().getDigitEightKeyword_1_7_0());
     }
 (
 
@@ -727,24 +721,24 @@ ruleModel returns [EObject current=null]
 	 				}
 					({true}?=>(	otherlv_33='a' 
     {
-    	createLeafNode(otherlv_33, grammarAccess.getModelAccess().getAKeyword_1_7_1_0_0(), null);
+    	newLeafNode(otherlv_33, grammarAccess.getModelAccess().getAKeyword_1_7_1_0_0());
     }
 	otherlv_34='b' 
     {
-    	createLeafNode(otherlv_34, grammarAccess.getModelAccess().getBKeyword_1_7_1_0_1(), null);
+    	newLeafNode(otherlv_34, grammarAccess.getModelAccess().getBKeyword_1_7_1_0_1());
     }
 (
 (
 		lv_first_35_0=	'c' 
     {
-        createLeafNode(lv_first_35_0, grammarAccess.getModelAccess().getFirstCKeyword_1_7_1_0_2_0(), "first");
+        newLeafNode(lv_first_35_0, grammarAccess.getModelAccess().getFirstCKeyword_1_7_1_0_2_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "c", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "c");
 	    }
 
 )
@@ -762,24 +756,24 @@ ruleModel returns [EObject current=null]
 	 				}
 					({true}?=>(	otherlv_36='a' 
     {
-    	createLeafNode(otherlv_36, grammarAccess.getModelAccess().getAKeyword_1_7_1_1_0(), null);
+    	newLeafNode(otherlv_36, grammarAccess.getModelAccess().getAKeyword_1_7_1_1_0());
     }
 	otherlv_37='b' 
     {
-    	createLeafNode(otherlv_37, grammarAccess.getModelAccess().getBKeyword_1_7_1_1_1(), null);
+    	newLeafNode(otherlv_37, grammarAccess.getModelAccess().getBKeyword_1_7_1_1_1());
     }
 (
 (
 		lv_second_38_0=	'd' 
     {
-        createLeafNode(lv_second_38_0, grammarAccess.getModelAccess().getSecondDKeyword_1_7_1_1_2_0(), "second");
+        newLeafNode(lv_second_38_0, grammarAccess.getModelAccess().getSecondDKeyword_1_7_1_1_2_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "d", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "d");
 	    }
 
 )
@@ -801,7 +795,7 @@ ruleModel returns [EObject current=null]
 ))
     |(	otherlv_39='9' 
     {
-    	createLeafNode(otherlv_39, grammarAccess.getModelAccess().getDigitNineKeyword_1_8_0(), null);
+    	newLeafNode(otherlv_39, grammarAccess.getModelAccess().getDigitNineKeyword_1_8_0());
     }
 (
 
@@ -821,14 +815,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_firstAsList_41_0=	'a' 
     {
-        createLeafNode(lv_firstAsList_41_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_8_1_0_0(), "firstAsList");
+        newLeafNode(lv_firstAsList_41_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_8_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_41_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_41_0, "a");
 	    }
 
 )
@@ -848,14 +842,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_secondAsList_42_0=	'b' 
     {
-        createLeafNode(lv_secondAsList_42_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_8_1_1_0(), "secondAsList");
+        newLeafNode(lv_secondAsList_42_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_8_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_42_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_42_0, "b");
 	    }
 
 )
@@ -877,7 +871,7 @@ ruleModel returns [EObject current=null]
 )+)
     |(	otherlv_43='10' 
     {
-    	createLeafNode(otherlv_43, grammarAccess.getModelAccess().getDigitOneDigitZeroKeyword_1_9_0(), null);
+    	newLeafNode(otherlv_43, grammarAccess.getModelAccess().getDigitOneDigitZeroKeyword_1_9_0());
     }
 (
 
@@ -897,14 +891,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_firstAsList_45_0=	'a' 
     {
-        createLeafNode(lv_firstAsList_45_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_9_1_0_0(), "firstAsList");
+        newLeafNode(lv_firstAsList_45_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_9_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_45_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_45_0, "a");
 	    }
 
 )
@@ -924,14 +918,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_secondAsList_46_0=	'b' 
     {
-        createLeafNode(lv_secondAsList_46_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_9_1_1_0(), "secondAsList");
+        newLeafNode(lv_secondAsList_46_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_9_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_46_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_46_0, "b");
 	    }
 
 )
@@ -953,7 +947,7 @@ ruleModel returns [EObject current=null]
 )*)
     |(	otherlv_47='11' 
     {
-    	createLeafNode(otherlv_47, grammarAccess.getModelAccess().getDigitOneDigitOneKeyword_1_10_0(), null);
+    	newLeafNode(otherlv_47, grammarAccess.getModelAccess().getDigitOneDigitOneKeyword_1_10_0());
     }
 (
 
@@ -973,14 +967,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_first_49_0=	'a' 
     {
-        createLeafNode(lv_first_49_0, grammarAccess.getModelAccess().getFirstAKeyword_1_10_1_0_0(), "first");
+        newLeafNode(lv_first_49_0, grammarAccess.getModelAccess().getFirstAKeyword_1_10_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -1000,14 +994,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_second_50_0=	'b' 
     {
-        createLeafNode(lv_second_50_0, grammarAccess.getModelAccess().getSecondBKeyword_1_10_1_1_0(), "second");
+        newLeafNode(lv_second_50_0, grammarAccess.getModelAccess().getSecondBKeyword_1_10_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -1029,7 +1023,7 @@ ruleModel returns [EObject current=null]
 )?)
     |(	otherlv_51='12' 
     {
-    	createLeafNode(otherlv_51, grammarAccess.getModelAccess().getDigitOneDigitTwoKeyword_1_11_0(), null);
+    	newLeafNode(otherlv_51, grammarAccess.getModelAccess().getDigitOneDigitTwoKeyword_1_11_0());
     }
 (
 
@@ -1049,14 +1043,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_firstAsList_53_0=	'a' 
     {
-        createLeafNode(lv_firstAsList_53_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_1_0_0(), "firstAsList");
+        newLeafNode(lv_firstAsList_53_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_53_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_53_0, "a");
 	    }
 
 )
@@ -1076,14 +1070,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_secondAsList_54_0=	'b' 
     {
-        createLeafNode(lv_secondAsList_54_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_1_1_0(), "secondAsList");
+        newLeafNode(lv_secondAsList_54_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_54_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_54_0, "b");
 	    }
 
 )
@@ -1120,14 +1114,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_firstAsList_56_0=	'a' 
     {
-        createLeafNode(lv_firstAsList_56_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_2_0_0(), "firstAsList");
+        newLeafNode(lv_firstAsList_56_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_11_2_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_56_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_56_0, "a");
 	    }
 
 )
@@ -1147,14 +1141,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_secondAsList_57_0=	'b' 
     {
-        createLeafNode(lv_secondAsList_57_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_2_1_0(), "secondAsList");
+        newLeafNode(lv_secondAsList_57_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_11_2_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_57_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_57_0, "b");
 	    }
 
 )
@@ -1176,7 +1170,7 @@ ruleModel returns [EObject current=null]
 ))
     |(	otherlv_58='13' 
     {
-    	createLeafNode(otherlv_58, grammarAccess.getModelAccess().getDigitOneDigitThreeKeyword_1_12_0(), null);
+    	newLeafNode(otherlv_58, grammarAccess.getModelAccess().getDigitOneDigitThreeKeyword_1_12_0());
     }
 (
 
@@ -1196,14 +1190,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_firstAsList_60_0=	'a' 
     {
-        createLeafNode(lv_firstAsList_60_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_1_0_0(), "firstAsList");
+        newLeafNode(lv_firstAsList_60_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_60_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_60_0, "a");
 	    }
 
 )
@@ -1223,14 +1217,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_secondAsList_61_0=	'b' 
     {
-        createLeafNode(lv_secondAsList_61_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_1_1_0(), "secondAsList");
+        newLeafNode(lv_secondAsList_61_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_61_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_61_0, "b");
 	    }
 
 )
@@ -1253,14 +1247,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_firstAsList_62_0=	'a' 
     {
-        createLeafNode(lv_firstAsList_62_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_2_0(), "firstAsList");
+        newLeafNode(lv_firstAsList_62_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_12_2_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_62_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_62_0, "a");
 	    }
 
 )
@@ -1268,21 +1262,21 @@ ruleModel returns [EObject current=null]
 (
 		lv_secondAsList_63_0=	'b' 
     {
-        createLeafNode(lv_secondAsList_63_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_3_0(), "secondAsList");
+        newLeafNode(lv_secondAsList_63_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_12_3_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_63_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_63_0, "b");
 	    }
 
 )
 ))
     |(	otherlv_64='14' 
     {
-    	createLeafNode(otherlv_64, grammarAccess.getModelAccess().getDigitOneDigitFourKeyword_1_13_0(), null);
+    	newLeafNode(otherlv_64, grammarAccess.getModelAccess().getDigitOneDigitFourKeyword_1_13_0());
     }
 (
 
@@ -1316,14 +1310,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_firstAsList_67_0=	'a' 
     {
-        createLeafNode(lv_firstAsList_67_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_13_1_0_0_0(), "firstAsList");
+        newLeafNode(lv_firstAsList_67_0, grammarAccess.getModelAccess().getFirstAsListAKeyword_1_13_1_0_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_67_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_67_0, "a");
 	    }
 
 )
@@ -1343,14 +1337,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_secondAsList_68_0=	'b' 
     {
-        createLeafNode(lv_secondAsList_68_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_13_1_0_1_0(), "secondAsList");
+        newLeafNode(lv_secondAsList_68_0, grammarAccess.getModelAccess().getSecondAsListBKeyword_1_13_1_0_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_68_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_68_0, "b");
 	    }
 
 )
@@ -1399,14 +1393,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_thirdAsList_70_0=	'c' 
     {
-        createLeafNode(lv_thirdAsList_70_0, grammarAccess.getModelAccess().getThirdAsListCKeyword_1_13_1_1_0_0(), "thirdAsList");
+        newLeafNode(lv_thirdAsList_70_0, grammarAccess.getModelAccess().getThirdAsListCKeyword_1_13_1_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "thirdAsList", lv_thirdAsList_70_0, "c", lastConsumedNode);
+       		addWithLastConsumed($current, "thirdAsList", lv_thirdAsList_70_0, "c");
 	    }
 
 )
@@ -1426,14 +1420,14 @@ ruleModel returns [EObject current=null]
 (
 		lv_forthAsList_71_0=	'd' 
     {
-        createLeafNode(lv_forthAsList_71_0, grammarAccess.getModelAccess().getForthAsListDKeyword_1_13_1_1_1_0(), "forthAsList");
+        newLeafNode(lv_forthAsList_71_0, grammarAccess.getModelAccess().getForthAsListDKeyword_1_13_1_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add($current, "forthAsList", lv_forthAsList_71_0, "d", lastConsumedNode);
+       		addWithLastConsumed($current, "forthAsList", lv_forthAsList_71_0, "d");
 	    }
 
 )
@@ -1470,12 +1464,12 @@ ruleModel returns [EObject current=null]
 )+)
     |(	otherlv_72='datatypes' 
     {
-    	createLeafNode(otherlv_72, grammarAccess.getModelAccess().getDatatypesKeyword_1_14_0(), null);
+    	newLeafNode(otherlv_72, grammarAccess.getModelAccess().getDatatypesKeyword_1_14_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getValueUnorderedDatatypeParserRuleCall_1_14_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getValueUnorderedDatatypeParserRuleCall_1_14_1_0()); 
 	    }
 		lv_value_73_0=ruleUnorderedDatatype		{
 	        if ($current==null) {
@@ -1485,8 +1479,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_73_0, 
-        		"UnorderedDatatype", 
-        		currentNode);
+        		"UnorderedDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1494,12 +1487,12 @@ ruleModel returns [EObject current=null]
 ))
     |(	otherlv_74='serialization' 
     {
-    	createLeafNode(otherlv_74, grammarAccess.getModelAccess().getSerializationKeyword_1_15_0(), null);
+    	newLeafNode(otherlv_74, grammarAccess.getModelAccess().getSerializationKeyword_1_15_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getSerializedUnorderedSerializationParserRuleCall_1_15_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getSerializedUnorderedSerializationParserRuleCall_1_15_1_0()); 
 	    }
 		lv_serialized_75_0=ruleUnorderedSerialization		{
 	        if ($current==null) {
@@ -1509,8 +1502,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"serialized",
         		lv_serialized_75_0, 
-        		"UnorderedSerialization", 
-        		currentNode);
+        		"UnorderedSerialization");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1518,12 +1510,12 @@ ruleModel returns [EObject current=null]
 ))
     |(	otherlv_76='bug302585' 
     {
-    	createLeafNode(otherlv_76, grammarAccess.getModelAccess().getBug302585Keyword_1_16_0(), null);
+    	newLeafNode(otherlv_76, grammarAccess.getModelAccess().getBug302585Keyword_1_16_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getNestedModelNestedModelParserRuleCall_1_16_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getNestedModelNestedModelParserRuleCall_1_16_1_0()); 
 	    }
 		lv_nestedModel_77_0=ruleNestedModel		{
 	        if ($current==null) {
@@ -1533,8 +1525,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"nestedModel",
         		lv_nestedModel_77_0, 
-        		"NestedModel", 
-        		currentNode);
+        		"NestedModel");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1549,7 +1540,7 @@ ruleModel returns [EObject current=null]
 // Entry rule entryRuleNestedModel
 entryRuleNestedModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getNestedModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getNestedModelRule()); }
 	 iv_ruleNestedModel=ruleNestedModel 
 	 { $current=$iv_ruleNestedModel.current; } 
 	 EOF 
@@ -1557,11 +1548,9 @@ entryRuleNestedModel returns [EObject current=null]
 
 // Rule NestedModel
 ruleNestedModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
     {
         $current = forceCreateModelElement(
@@ -1586,14 +1575,14 @@ ruleNestedModel returns [EObject current=null]
 (
 		lv_first_2_0=	'a' 
     {
-        createLeafNode(lv_first_2_0, grammarAccess.getNestedModelAccess().getFirstAKeyword_1_0_0(), "first");
+        newLeafNode(lv_first_2_0, grammarAccess.getNestedModelAccess().getFirstAKeyword_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getNestedModelRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -1613,14 +1602,14 @@ ruleNestedModel returns [EObject current=null]
 (
 		lv_second_3_0=	'b' 
     {
-        createLeafNode(lv_second_3_0, grammarAccess.getNestedModelAccess().getSecondBKeyword_1_1_0(), "second");
+        newLeafNode(lv_second_3_0, grammarAccess.getNestedModelAccess().getSecondBKeyword_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getNestedModelRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -1641,7 +1630,7 @@ ruleNestedModel returns [EObject current=null]
 
 )?	otherlv_4='nested' 
     {
-    	createLeafNode(otherlv_4, grammarAccess.getNestedModelAccess().getNestedKeyword_2(), null);
+    	newLeafNode(otherlv_4, grammarAccess.getNestedModelAccess().getNestedKeyword_2());
     }
 )
 ;
@@ -1653,7 +1642,7 @@ ruleNestedModel returns [EObject current=null]
 // Entry rule entryRuleUnorderedDatatype
 entryRuleUnorderedDatatype returns [String current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getUnorderedDatatypeRule(), currentNode); } 
+	{ newCompositeNode(grammarAccess.getUnorderedDatatypeRule()); } 
 	 iv_ruleUnorderedDatatype=ruleUnorderedDatatype 
 	 { $current=$iv_ruleUnorderedDatatype.current.getText(); }  
 	 EOF 
@@ -1661,16 +1650,14 @@ entryRuleUnorderedDatatype returns [String current=null]
 
 // Rule UnorderedDatatype
 ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-	    lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 	kw='1' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneKeyword_0_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneKeyword_0_0()); 
     }
 (
 
@@ -1690,7 +1677,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_0_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_0_1_0()); 
     }
 ))
 					{ 
@@ -1708,7 +1695,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_0_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_0_1_1()); 
     }
 ))
 					{ 
@@ -1730,7 +1717,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='2' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitTwoKeyword_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitTwoKeyword_1_0()); 
     }
 (
 
@@ -1750,7 +1737,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_1_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_1_1_0()); 
     }
 ))
 					{ 
@@ -1768,7 +1755,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_1_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_1_1_1()); 
     }
 ))
 					{ 
@@ -1786,7 +1773,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='c' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getCKeyword_1_1_2(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getCKeyword_1_1_2()); 
     }
 ))
 					{ 
@@ -1804,7 +1791,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='d' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDKeyword_1_1_3(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDKeyword_1_1_3()); 
     }
 ))
 					{ 
@@ -1826,7 +1813,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='3' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitThreeKeyword_2_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitThreeKeyword_2_0()); 
     }
 (
 
@@ -1846,7 +1833,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_2_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_2_1_0()); 
     }
 ))
 					{ 
@@ -1864,7 +1851,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_2_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_2_1_1()); 
     }
 ))
 					{ 
@@ -1885,7 +1872,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='4' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitFourKeyword_3_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitFourKeyword_3_0()); 
     }
 (
 
@@ -1905,7 +1892,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_3_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_3_1_0()); 
     }
 ))
 					{ 
@@ -1923,7 +1910,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_3_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_3_1_1()); 
     }
 ))
 					{ 
@@ -1945,7 +1932,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='5' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitFiveKeyword_4_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitFiveKeyword_4_0()); 
     }
 (
 
@@ -1965,7 +1952,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_4_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_4_1_0()); 
     }
 ))
 					{ 
@@ -1983,7 +1970,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_4_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_4_1_1()); 
     }
 ))
 					{ 
@@ -2005,7 +1992,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='6' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitSixKeyword_5_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitSixKeyword_5_0()); 
     }
 (
 
@@ -2025,7 +2012,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_5_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_5_1_0()); 
     }
 ))+
 					{ 
@@ -2043,7 +2030,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_5_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_5_1_1()); 
     }
 ))+
 					{ 
@@ -2065,7 +2052,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='7' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitSevenKeyword_6_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitSevenKeyword_6_0()); 
     }
 (
 
@@ -2085,7 +2072,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_6_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_6_1_0()); 
     }
 ))+
 					{ 
@@ -2103,7 +2090,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_6_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_6_1_1()); 
     }
 ))+
 					{ 
@@ -2125,7 +2112,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='8' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitEightKeyword_7_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitEightKeyword_7_0()); 
     }
 (
 
@@ -2145,19 +2132,19 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_7_1_0_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_7_1_0_0()); 
     }
 
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_7_1_0_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_7_1_0_1()); 
     }
 
 	kw='c' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getCKeyword_7_1_0_2(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getCKeyword_7_1_0_2()); 
     }
 ))
 					{ 
@@ -2175,19 +2162,19 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_7_1_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_7_1_1_0()); 
     }
 
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_7_1_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_7_1_1_1()); 
     }
 
 	kw='d' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDKeyword_7_1_1_2(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDKeyword_7_1_1_2()); 
     }
 ))
 					{ 
@@ -2209,7 +2196,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='9' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitNineKeyword_8_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitNineKeyword_8_0()); 
     }
 (
 
@@ -2229,7 +2216,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_8_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_8_1_0()); 
     }
 ))
 					{ 
@@ -2247,7 +2234,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_8_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_8_1_1()); 
     }
 ))
 					{ 
@@ -2269,7 +2256,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='10' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitZeroKeyword_9_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitZeroKeyword_9_0()); 
     }
 (
 
@@ -2289,7 +2276,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_9_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_9_1_0()); 
     }
 ))
 					{ 
@@ -2307,7 +2294,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_9_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_9_1_1()); 
     }
 ))
 					{ 
@@ -2329,7 +2316,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='11' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitOneKeyword_10_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitOneKeyword_10_0()); 
     }
 (
 
@@ -2349,7 +2336,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_10_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_10_1_0()); 
     }
 ))
 					{ 
@@ -2367,7 +2354,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_10_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_10_1_1()); 
     }
 ))
 					{ 
@@ -2389,7 +2376,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='12' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitTwoKeyword_11_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitTwoKeyword_11_0()); 
     }
 (
 
@@ -2409,7 +2396,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_11_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_11_1_0()); 
     }
 ))
 					{ 
@@ -2427,7 +2414,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_11_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_11_1_1()); 
     }
 ))
 					{ 
@@ -2462,7 +2449,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_11_2_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_11_2_0()); 
     }
 ))
 					{ 
@@ -2480,7 +2467,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_11_2_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_11_2_1()); 
     }
 ))
 					{ 
@@ -2502,7 +2489,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='13' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitThreeKeyword_12_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitThreeKeyword_12_0()); 
     }
 (
 
@@ -2522,7 +2509,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_12_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_12_1_0()); 
     }
 ))
 					{ 
@@ -2540,7 +2527,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_12_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_12_1_1()); 
     }
 ))
 					{ 
@@ -2561,20 +2548,20 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_12_2(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_12_2()); 
     }
 
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_12_3(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_12_3()); 
     }
 )
     |(
 	kw='14' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitFourKeyword_13_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDigitOneDigitFourKeyword_13_0()); 
     }
 (
 
@@ -2608,7 +2595,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='a' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_13_1_0_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getAKeyword_13_1_0_0()); 
     }
 ))
 					{ 
@@ -2626,7 +2613,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='b' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_13_1_0_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getBKeyword_13_1_0_1()); 
     }
 ))
 					{ 
@@ -2673,7 +2660,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='c' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getCKeyword_13_1_1_0(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getCKeyword_13_1_1_0()); 
     }
 ))
 					{ 
@@ -2691,7 +2678,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	kw='d' 
     {
         $current.merge(kw);
-        createLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDKeyword_13_1_1_1(), null); 
+        newLeafNode(kw, grammarAccess.getUnorderedDatatypeAccess().getDKeyword_13_1_1_1()); 
     }
 ))
 					{ 
@@ -2733,7 +2720,7 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 // Entry rule entryRuleUnorderedSerialization
 entryRuleUnorderedSerialization returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getUnorderedSerializationRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getUnorderedSerializationRule()); }
 	 iv_ruleUnorderedSerialization=ruleUnorderedSerialization 
 	 { $current=$iv_ruleUnorderedSerialization.current; } 
 	 EOF 
@@ -2741,11 +2728,9 @@ entryRuleUnorderedSerialization returns [EObject current=null]
 
 // Rule UnorderedSerialization
 ruleUnorderedSerialization returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
     {
         $current = forceCreateModelElement(
@@ -2768,20 +2753,20 @@ ruleUnorderedSerialization returns [EObject current=null]
 	 				}
 					({true}?=>(	otherlv_2='1' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getUnorderedSerializationAccess().getDigitOneKeyword_1_0_0_0(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getUnorderedSerializationAccess().getDigitOneKeyword_1_0_0_0());
     }
 (
 (
 		lv_first_3_0=	'a' 
     {
-        createLeafNode(lv_first_3_0, grammarAccess.getUnorderedSerializationAccess().getFirstAKeyword_1_0_0_1_0(), "first");
+        newLeafNode(lv_first_3_0, grammarAccess.getUnorderedSerializationAccess().getFirstAKeyword_1_0_0_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		set($current, "first", true, "a", lastConsumedNode);
+       		setWithLastConsumed($current, "first", true, "a");
 	    }
 
 )
@@ -2801,14 +2786,14 @@ ruleUnorderedSerialization returns [EObject current=null]
 (
 		lv_second_4_0=	'b' 
     {
-        createLeafNode(lv_second_4_0, grammarAccess.getUnorderedSerializationAccess().getSecondBKeyword_1_0_1_0(), "second");
+        newLeafNode(lv_second_4_0, grammarAccess.getUnorderedSerializationAccess().getSecondBKeyword_1_0_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )
@@ -2828,14 +2813,14 @@ ruleUnorderedSerialization returns [EObject current=null]
 (
 		lv_third_5_0=	'c' 
     {
-        createLeafNode(lv_third_5_0, grammarAccess.getUnorderedSerializationAccess().getThirdCKeyword_1_0_2_0(), "third");
+        newLeafNode(lv_third_5_0, grammarAccess.getUnorderedSerializationAccess().getThirdCKeyword_1_0_2_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		set($current, "third", true, "c", lastConsumedNode);
+       		setWithLastConsumed($current, "third", true, "c");
 	    }
 
 )
@@ -2855,14 +2840,14 @@ ruleUnorderedSerialization returns [EObject current=null]
 (
 		lv_forth_6_0=	'd' 
     {
-        createLeafNode(lv_forth_6_0, grammarAccess.getUnorderedSerializationAccess().getForthDKeyword_1_0_3_0(), "forth");
+        newLeafNode(lv_forth_6_0, grammarAccess.getUnorderedSerializationAccess().getForthDKeyword_1_0_3_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		set($current, "forth", true, "d", lastConsumedNode);
+       		setWithLastConsumed($current, "forth", true, "d");
 	    }
 
 )
@@ -2884,7 +2869,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 )
     |(	otherlv_7='2' 
     {
-    	createLeafNode(otherlv_7, grammarAccess.getUnorderedSerializationAccess().getDigitTwoKeyword_1_1_0(), null);
+    	newLeafNode(otherlv_7, grammarAccess.getUnorderedSerializationAccess().getDigitTwoKeyword_1_1_0());
     }
 (
 
@@ -2904,14 +2889,14 @@ ruleUnorderedSerialization returns [EObject current=null]
 (
 		lv_firstAsList_9_0=	'a' 
     {
-        createLeafNode(lv_firstAsList_9_0, grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_1_1_0_0(), "firstAsList");
+        newLeafNode(lv_firstAsList_9_0, grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_1_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_9_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_9_0, "a");
 	    }
 
 )
@@ -2931,14 +2916,14 @@ ruleUnorderedSerialization returns [EObject current=null]
 (
 		lv_secondAsList_10_0=	'b' 
     {
-        createLeafNode(lv_secondAsList_10_0, grammarAccess.getUnorderedSerializationAccess().getSecondAsListBKeyword_1_1_1_1_0(), "secondAsList");
+        newLeafNode(lv_secondAsList_10_0, grammarAccess.getUnorderedSerializationAccess().getSecondAsListBKeyword_1_1_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		add($current, "secondAsList", lv_secondAsList_10_0, "b", lastConsumedNode);
+       		addWithLastConsumed($current, "secondAsList", lv_secondAsList_10_0, "b");
 	    }
 
 )
@@ -2960,7 +2945,7 @@ ruleUnorderedSerialization returns [EObject current=null]
 )*)
     |(	otherlv_11='3' 
     {
-    	createLeafNode(otherlv_11, grammarAccess.getUnorderedSerializationAccess().getDigitThreeKeyword_1_2_0(), null);
+    	newLeafNode(otherlv_11, grammarAccess.getUnorderedSerializationAccess().getDigitThreeKeyword_1_2_0());
     }
 (
 
@@ -2980,14 +2965,14 @@ ruleUnorderedSerialization returns [EObject current=null]
 (
 		lv_firstAsList_13_0=	'a' 
     {
-        createLeafNode(lv_firstAsList_13_0, grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_2_1_0_0(), "firstAsList");
+        newLeafNode(lv_firstAsList_13_0, grammarAccess.getUnorderedSerializationAccess().getFirstAsListAKeyword_1_2_1_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		add($current, "firstAsList", lv_firstAsList_13_0, "a", lastConsumedNode);
+       		addWithLastConsumed($current, "firstAsList", lv_firstAsList_13_0, "a");
 	    }
 
 )
@@ -3007,14 +2992,14 @@ ruleUnorderedSerialization returns [EObject current=null]
 (
 		lv_second_14_0=	'b' 
     {
-        createLeafNode(lv_second_14_0, grammarAccess.getUnorderedSerializationAccess().getSecondBKeyword_1_2_1_1_0(), "second");
+        newLeafNode(lv_second_14_0, grammarAccess.getUnorderedSerializationAccess().getSecondBKeyword_1_2_1_1_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getUnorderedSerializationRule());
 	        }
-       		set($current, "second", true, "b", lastConsumedNode);
+       		setWithLastConsumed($current, "second", true, "b");
 	    }
 
 )

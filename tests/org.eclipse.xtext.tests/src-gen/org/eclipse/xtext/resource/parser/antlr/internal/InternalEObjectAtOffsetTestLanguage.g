@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.resource.services.EObjectAtOffsetTestLanguageGrammarAcc
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -78,15 +77,13 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getFoosFooParserRuleCall_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getFoosFooParserRuleCall_0_0()); 
 	    }
 		lv_foos_0_0=ruleFoo		{
 	        if ($current==null) {
@@ -96,8 +93,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"foos",
         		lv_foos_0_0, 
-        		"Foo", 
-        		currentNode);
+        		"Foo");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -106,7 +102,7 @@ ruleModel returns [EObject current=null]
     |(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getBarsAbstractBarParserRuleCall_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getBarsAbstractBarParserRuleCall_1_0()); 
 	    }
 		lv_bars_1_0=ruleAbstractBar		{
 	        if ($current==null) {
@@ -116,8 +112,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"bars",
         		lv_bars_1_0, 
-        		"AbstractBar", 
-        		currentNode);
+        		"AbstractBar");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -132,7 +127,7 @@ ruleModel returns [EObject current=null]
 // Entry rule entryRuleAbstractBar
 entryRuleAbstractBar returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getAbstractBarRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getAbstractBarRule()); }
 	 iv_ruleAbstractBar=ruleAbstractBar 
 	 { $current=$iv_ruleAbstractBar.current; } 
 	 EOF 
@@ -140,19 +135,16 @@ entryRuleAbstractBar returns [EObject current=null]
 
 // Rule AbstractBar
 ruleAbstractBar returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getAbstractBarAccess().getBarParserRuleCall_0(), currentNode); 
+        newCompositeNode(grammarAccess.getAbstractBarAccess().getBarParserRuleCall_0()); 
     }
     this_Bar_0=ruleBar
     { 
         $current = $this_Bar_0.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 ((
@@ -163,7 +155,7 @@ ruleAbstractBar returns [EObject current=null]
     }
 )	otherlv_2='foobar' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getAbstractBarAccess().getFoobarKeyword_1_1(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getAbstractBarAccess().getFoobarKeyword_1_1());
     }
 (
 (
@@ -174,7 +166,7 @@ ruleAbstractBar returns [EObject current=null]
         }
 	otherlv_3=RULE_ID
 	{
-		createLeafNode(otherlv_3, grammarAccess.getAbstractBarAccess().getFooFooCrossReference_1_2_0(), "foo"); 
+		newLeafNode(otherlv_3, grammarAccess.getAbstractBarAccess().getFooFooCrossReference_1_2_0()); 
 	}
 
 )
@@ -188,7 +180,7 @@ ruleAbstractBar returns [EObject current=null]
 // Entry rule entryRuleBar
 entryRuleBar returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getBarRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getBarRule()); }
 	 iv_ruleBar=ruleBar 
 	 { $current=$iv_ruleBar.current; } 
 	 EOF 
@@ -196,31 +188,28 @@ entryRuleBar returns [EObject current=null]
 
 // Rule Bar
 ruleBar returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='bar' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getBarAccess().getBarKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getBarAccess().getBarKeyword_0());
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(lv_name_1_0, grammarAccess.getBarAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			newLeafNode(lv_name_1_0, grammarAccess.getBarAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getBarRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -233,13 +222,13 @@ ruleBar returns [EObject current=null]
         }
 	otherlv_2=RULE_ID
 	{
-		createLeafNode(otherlv_2, grammarAccess.getBarAccess().getFooFooCrossReference_2_0(), "foo"); 
+		newLeafNode(otherlv_2, grammarAccess.getBarAccess().getFooFooCrossReference_2_0()); 
 	}
 
 )
 )(	otherlv_3=',' 
     {
-    	createLeafNode(otherlv_3, grammarAccess.getBarAccess().getCommaKeyword_3_0(), null);
+    	newLeafNode(otherlv_3, grammarAccess.getBarAccess().getCommaKeyword_3_0());
     }
 (
 (
@@ -250,7 +239,7 @@ ruleBar returns [EObject current=null]
         }
 	otherlv_4=RULE_ID
 	{
-		createLeafNode(otherlv_4, grammarAccess.getBarAccess().getFooFooCrossReference_3_1_0(), "foo"); 
+		newLeafNode(otherlv_4, grammarAccess.getBarAccess().getFooFooCrossReference_3_1_0()); 
 	}
 
 )
@@ -264,7 +253,7 @@ ruleBar returns [EObject current=null]
 // Entry rule entryRuleFoo
 entryRuleFoo returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getFooRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getFooRule()); }
 	 iv_ruleFoo=ruleFoo 
 	 { $current=$iv_ruleFoo.current; } 
 	 EOF 
@@ -272,31 +261,28 @@ entryRuleFoo returns [EObject current=null]
 
 // Rule Foo
 ruleFoo returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='foo' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getFooAccess().getFooKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getFooAccess().getFooKeyword_0());
     }
 (
 (
 		lv_name_1_0=RULE_ID
 		{
-			createLeafNode(lv_name_1_0, grammarAccess.getFooAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+			newLeafNode(lv_name_1_0, grammarAccess.getFooAccess().getNameIDTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getFooRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )

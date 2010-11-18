@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.Bug299395TestLanguageGramma
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -78,11 +77,9 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
     {
         $current = forceCreateModelElement(
@@ -91,51 +88,49 @@ ruleModel returns [EObject current=null]
     }
 )(	otherlv_1='{' 
     {
-    	createLeafNode(otherlv_1, grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_1_0(), null);
+    	newLeafNode(otherlv_1, grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_1_0());
     }
 (
 (
 		lv_strings_2_0=RULE_STRING
 		{
-			createLeafNode(lv_strings_2_0, grammarAccess.getModelAccess().getStringsSTRINGTerminalRuleCall_1_1_0(), "strings"); 
+			newLeafNode(lv_strings_2_0, grammarAccess.getModelAccess().getStringsSTRINGTerminalRuleCall_1_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"strings",
         		lv_strings_2_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
 )?	otherlv_3='}' 
     {
-    	createLeafNode(otherlv_3, grammarAccess.getModelAccess().getRightCurlyBracketKeyword_1_2(), null);
+    	newLeafNode(otherlv_3, grammarAccess.getModelAccess().getRightCurlyBracketKeyword_1_2());
     }
 )*(	otherlv_4='[' 
     {
-    	createLeafNode(otherlv_4, grammarAccess.getModelAccess().getLeftSquareBracketKeyword_2_0(), null);
+    	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getLeftSquareBracketKeyword_2_0());
     }
 ((
 (
 		lv_keys_5_0=RULE_STRING
 		{
-			createLeafNode(lv_keys_5_0, grammarAccess.getModelAccess().getKeysSTRINGTerminalRuleCall_2_1_0_0(), "keys"); 
+			newLeafNode(lv_keys_5_0, grammarAccess.getModelAccess().getKeysSTRINGTerminalRuleCall_2_1_0_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"keys",
         		lv_keys_5_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
@@ -143,33 +138,32 @@ ruleModel returns [EObject current=null]
 (
 		lv_values_6_0=RULE_STRING
 		{
-			createLeafNode(lv_values_6_0, grammarAccess.getModelAccess().getValuesSTRINGTerminalRuleCall_2_1_1_0(), "values"); 
+			newLeafNode(lv_values_6_0, grammarAccess.getModelAccess().getValuesSTRINGTerminalRuleCall_2_1_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"values",
         		lv_values_6_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
 ))*	otherlv_7=']' 
     {
-    	createLeafNode(otherlv_7, grammarAccess.getModelAccess().getRightSquareBracketKeyword_2_2(), null);
+    	newLeafNode(otherlv_7, grammarAccess.getModelAccess().getRightSquareBracketKeyword_2_2());
     }
 )*(	otherlv_8='subModel' 
     {
-    	createLeafNode(otherlv_8, grammarAccess.getModelAccess().getSubModelKeyword_3_0(), null);
+    	newLeafNode(otherlv_8, grammarAccess.getModelAccess().getSubModelKeyword_3_0());
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getSubModelSubModelParserRuleCall_3_1_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getSubModelSubModelParserRuleCall_3_1_0()); 
 	    }
 		lv_subModel_9_0=ruleSubModel		{
 	        if ($current==null) {
@@ -179,8 +173,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"subModel",
         		lv_subModel_9_0, 
-        		"SubModel", 
-        		currentNode);
+        		"SubModel");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -195,7 +188,7 @@ ruleModel returns [EObject current=null]
 // Entry rule entryRuleSubModel
 entryRuleSubModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getSubModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getSubModelRule()); }
 	 iv_ruleSubModel=ruleSubModel 
 	 { $current=$iv_ruleSubModel.current; } 
 	 EOF 
@@ -203,11 +196,9 @@ entryRuleSubModel returns [EObject current=null]
 
 // Rule SubModel
 ruleSubModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
     {
         $current = forceCreateModelElement(
@@ -216,28 +207,27 @@ ruleSubModel returns [EObject current=null]
     }
 )(	otherlv_1='1' 
     {
-    	createLeafNode(otherlv_1, grammarAccess.getSubModelAccess().getDigitOneKeyword_1_0(), null);
+    	newLeafNode(otherlv_1, grammarAccess.getSubModelAccess().getDigitOneKeyword_1_0());
     }
 	otherlv_2='2' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getSubModelAccess().getDigitTwoKeyword_1_1(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getSubModelAccess().getDigitTwoKeyword_1_1());
     }
 (
 (
 		lv_strings_3_0=RULE_STRING
 		{
-			createLeafNode(lv_strings_3_0, grammarAccess.getSubModelAccess().getStringsSTRINGTerminalRuleCall_1_2_0(), "strings"); 
+			newLeafNode(lv_strings_3_0, grammarAccess.getSubModelAccess().getStringsSTRINGTerminalRuleCall_1_2_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getSubModelRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"strings",
         		lv_strings_3_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )

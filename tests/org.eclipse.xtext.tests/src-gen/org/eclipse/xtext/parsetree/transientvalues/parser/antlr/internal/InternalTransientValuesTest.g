@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestG
 // Entry rule entryRuleRoot
 entryRuleRoot returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getRootRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getRootRule()); }
 	 iv_ruleRoot=ruleRoot 
 	 { $current=$iv_ruleRoot.current; } 
 	 EOF 
@@ -78,45 +77,40 @@ entryRuleRoot returns [EObject current=null]
 
 // Rule Root
 ruleRoot returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='test' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getRootAccess().getTestKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getRootAccess().getTestKeyword_0());
     }
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestRequiredParserRuleCall_1_0(), currentNode); 
+        newCompositeNode(grammarAccess.getRootAccess().getTestRequiredParserRuleCall_1_0()); 
     }
     this_TestRequired_1=ruleTestRequired
     { 
         $current = $this_TestRequired_1.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestOptionalParserRuleCall_1_1(), currentNode); 
+        newCompositeNode(grammarAccess.getRootAccess().getTestOptionalParserRuleCall_1_1()); 
     }
     this_TestOptional_2=ruleTestOptional
     { 
         $current = $this_TestOptional_2.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getRootAccess().getTestListParserRuleCall_1_2(), currentNode); 
+        newCompositeNode(grammarAccess.getRootAccess().getTestListParserRuleCall_1_2()); 
     }
     this_TestList_3=ruleTestList
     { 
         $current = $this_TestList_3.current; 
-        // currentNode = currentNode.getParent();
         afterParserOrEnumRuleCall();
     }
 ))
@@ -129,7 +123,7 @@ ruleRoot returns [EObject current=null]
 // Entry rule entryRuleTestRequired
 entryRuleTestRequired returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getTestRequiredRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getTestRequiredRule()); }
 	 iv_ruleTestRequired=ruleTestRequired 
 	 { $current=$iv_ruleTestRequired.current; } 
 	 EOF 
@@ -137,31 +131,28 @@ entryRuleTestRequired returns [EObject current=null]
 
 // Rule TestRequired
 ruleTestRequired returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='required' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getTestRequiredAccess().getRequiredKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getTestRequiredAccess().getRequiredKeyword_0());
     }
 (
 (
 		lv_required1_1_0=RULE_INT
 		{
-			createLeafNode(lv_required1_1_0, grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0(), "required1"); 
+			newLeafNode(lv_required1_1_0, grammarAccess.getTestRequiredAccess().getRequired1INTTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getTestRequiredRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"required1",
         		lv_required1_1_0, 
-        		"INT", 
-        		lastConsumedNode);
+        		"INT");
 	    }
 
 )
@@ -169,18 +160,17 @@ ruleTestRequired returns [EObject current=null]
 (
 		lv_required2_2_0=RULE_INT
 		{
-			createLeafNode(lv_required2_2_0, grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0(), "required2"); 
+			newLeafNode(lv_required2_2_0, grammarAccess.getTestRequiredAccess().getRequired2INTTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getTestRequiredRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"required2",
         		lv_required2_2_0, 
-        		"INT", 
-        		lastConsumedNode);
+        		"INT");
 	    }
 
 )
@@ -194,7 +184,7 @@ ruleTestRequired returns [EObject current=null]
 // Entry rule entryRuleTestOptional
 entryRuleTestOptional returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getTestOptionalRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getTestOptionalRule()); }
 	 iv_ruleTestOptional=ruleTestOptional 
 	 { $current=$iv_ruleTestOptional.current; } 
 	 EOF 
@@ -202,54 +192,50 @@ entryRuleTestOptional returns [EObject current=null]
 
 // Rule TestOptional
 ruleTestOptional returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='optional' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getTestOptionalAccess().getOptionalKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getTestOptionalAccess().getOptionalKeyword_0());
     }
 (
 (
 		lv_opt1_1_0=RULE_INT
 		{
-			createLeafNode(lv_opt1_1_0, grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0(), "opt1"); 
+			newLeafNode(lv_opt1_1_0, grammarAccess.getTestOptionalAccess().getOpt1INTTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getTestOptionalRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"opt1",
         		lv_opt1_1_0, 
-        		"INT", 
-        		lastConsumedNode);
+        		"INT");
 	    }
 
 )
 )?(	otherlv_2=':' 
     {
-    	createLeafNode(otherlv_2, grammarAccess.getTestOptionalAccess().getColonKeyword_2_0(), null);
+    	newLeafNode(otherlv_2, grammarAccess.getTestOptionalAccess().getColonKeyword_2_0());
     }
 (
 (
 		lv_opt2_3_0=RULE_INT
 		{
-			createLeafNode(lv_opt2_3_0, grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0(), "opt2"); 
+			newLeafNode(lv_opt2_3_0, grammarAccess.getTestOptionalAccess().getOpt2INTTerminalRuleCall_2_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getTestOptionalRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"opt2",
         		lv_opt2_3_0, 
-        		"INT", 
-        		lastConsumedNode);
+        		"INT");
 	    }
 
 )
@@ -263,7 +249,7 @@ ruleTestOptional returns [EObject current=null]
 // Entry rule entryRuleTestList
 entryRuleTestList returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getTestListRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getTestListRule()); }
 	 iv_ruleTestList=ruleTestList 
 	 { $current=$iv_ruleTestList.current; } 
 	 EOF 
@@ -271,31 +257,28 @@ entryRuleTestList returns [EObject current=null]
 
 // Rule TestList
 ruleTestList returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 (	otherlv_0='list' 
     {
-    	createLeafNode(otherlv_0, grammarAccess.getTestListAccess().getListKeyword_0(), null);
+    	newLeafNode(otherlv_0, grammarAccess.getTestListAccess().getListKeyword_0());
     }
 (
 (
 		lv_item_1_0=RULE_INT
 		{
-			createLeafNode(lv_item_1_0, grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0(), "item"); 
+			newLeafNode(lv_item_1_0, grammarAccess.getTestListAccess().getItemINTTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getTestListRule());
 	        }
-       		add(
+       		addWithLastConsumed(
        			$current, 
        			"item",
         		lv_item_1_0, 
-        		"INT", 
-        		lastConsumedNode);
+        		"INT");
 	    }
 
 )

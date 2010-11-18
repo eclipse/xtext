@@ -18,7 +18,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.common.util.Enumerator;
@@ -72,7 +71,7 @@ import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAcce
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null]
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -80,15 +79,13 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getEnumsEnumNameEnumRuleCall_0_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getEnumsEnumNameEnumRuleCall_0_0()); 
 	    }
 		lv_enums_0_0=ruleEnumName		{
 	        if ($current==null) {
@@ -98,8 +95,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"enums",
         		lv_enums_0_0, 
-        		"EnumName", 
-        		currentNode);
+        		"EnumName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -108,7 +104,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_ycs_1_0=RULE_YC
 		{
-			createLeafNode(lv_ycs_1_0, grammarAccess.getModelAccess().getYcsYcTerminalRuleCall_1_0(), "ycs"); 
+			newLeafNode(lv_ycs_1_0, grammarAccess.getModelAccess().getYcsYcTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -126,7 +122,7 @@ ruleModel returns [EObject current=null]
 )*(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getAbsAbParserRuleCall_2_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getAbsAbParserRuleCall_2_0()); 
 	    }
 		lv_abs_2_0=ruleAb		{
 	        if ($current==null) {
@@ -136,8 +132,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"abs",
         		lv_abs_2_0, 
-        		"Ab", 
-        		currentNode);
+        		"Ab");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -145,7 +140,7 @@ ruleModel returns [EObject current=null]
 )*(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getXbsXbParserRuleCall_3_0(), currentNode); 
+	        newCompositeNode(grammarAccess.getModelAccess().getXbsXbParserRuleCall_3_0()); 
 	    }
 		lv_xbs_3_0=ruleXb		{
 	        if ($current==null) {
@@ -155,8 +150,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"xbs",
         		lv_xbs_3_0, 
-        		"Xb", 
-        		currentNode);
+        		"Xb");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -165,7 +159,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_ys_4_0=RULE_CHARY
 		{
-			createLeafNode(lv_ys_4_0, grammarAccess.getModelAccess().getYsCharYTerminalRuleCall_4_0(), "ys"); 
+			newLeafNode(lv_ys_4_0, grammarAccess.getModelAccess().getYsCharYTerminalRuleCall_4_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -184,7 +178,7 @@ ruleModel returns [EObject current=null]
 (
 		lv_as_5_0=RULE_CHARA
 		{
-			createLeafNode(lv_as_5_0, grammarAccess.getModelAccess().getAsCharATerminalRuleCall_5_0(), "as"); 
+			newLeafNode(lv_as_5_0, grammarAccess.getModelAccess().getAsCharATerminalRuleCall_5_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -209,7 +203,7 @@ ruleModel returns [EObject current=null]
 // Entry rule entryRuleAb
 entryRuleAb returns [EObject current=null]
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getAbRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getAbRule()); }
 	 iv_ruleAb=ruleAb 
 	 { $current=$iv_ruleAb.current; } 
 	 EOF 
@@ -217,16 +211,14 @@ entryRuleAb returns [EObject current=null]
 
 // Rule Ab
 ruleAb returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		lv_x_0_0=RULE_CHARA
 		{
-			createLeafNode(lv_x_0_0, grammarAccess.getAbAccess().getXCharATerminalRuleCall_0_0(), "x"); 
+			newLeafNode(lv_x_0_0, grammarAccess.getAbAccess().getXCharATerminalRuleCall_0_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -245,7 +237,7 @@ ruleAb returns [EObject current=null]
 (
 		lv_y_1_0=RULE_CHARB
 		{
-			createLeafNode(lv_y_1_0, grammarAccess.getAbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
+			newLeafNode(lv_y_1_0, grammarAccess.getAbAccess().getYCharbTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -270,7 +262,7 @@ ruleAb returns [EObject current=null]
 // Entry rule entryRuleXb
 entryRuleXb returns [EObject current=null]
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getXbRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getXbRule()); }
 	 iv_ruleXb=ruleXb 
 	 { $current=$iv_ruleXb.current; } 
 	 EOF 
@@ -278,16 +270,14 @@ entryRuleXb returns [EObject current=null]
 
 // Rule Xb
 ruleXb returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		lv_x_0_0=RULE_CHARX
 		{
-			createLeafNode(lv_x_0_0, grammarAccess.getXbAccess().getXCharXTerminalRuleCall_0_0(), "x"); 
+			newLeafNode(lv_x_0_0, grammarAccess.getXbAccess().getXCharXTerminalRuleCall_0_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -306,7 +296,7 @@ ruleXb returns [EObject current=null]
 (
 		lv_y_1_0=RULE_CHARB
 		{
-			createLeafNode(lv_y_1_0, grammarAccess.getXbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
+			newLeafNode(lv_y_1_0, grammarAccess.getXbAccess().getYCharbTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -330,20 +320,18 @@ ruleXb returns [EObject current=null]
 
 // Rule EnumName
 ruleEnumName returns [Enumerator current=null] 
-    @init { setCurrentLookahead(); resetLookahead(); }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @init { enterRule(); }
+    @after { leaveRule(); }:
 ((    enumLiteral_0=KEYWORD_1
 	{
         $current = grammarAccess.getEnumNameAccess().getAbcEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_0, grammarAccess.getEnumNameAccess().getAbcEnumLiteralDeclaration_0(), null); 
+        newLeafNode(enumLiteral_0, grammarAccess.getEnumNameAccess().getAbcEnumLiteralDeclaration_0()); 
     }
 )
     |(    enumLiteral_1=KEYWORD_2
 	{
         $current = grammarAccess.getEnumNameAccess().getEfgEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        createLeafNode(enumLiteral_1, grammarAccess.getEnumNameAccess().getEfgEnumLiteralDeclaration_1(), null); 
+        newLeafNode(enumLiteral_1, grammarAccess.getEnumNameAccess().getEfgEnumLiteralDeclaration_1()); 
     }
 ));
 

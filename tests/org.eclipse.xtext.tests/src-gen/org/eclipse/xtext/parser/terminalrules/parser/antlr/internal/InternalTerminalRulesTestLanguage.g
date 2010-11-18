@@ -23,7 +23,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
@@ -70,7 +69,7 @@ import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguage
 // Entry rule entryRuleModel
 entryRuleModel returns [EObject current=null] 
 	:
-	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
+	{ newCompositeNode(grammarAccess.getModelRule()); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
 	 EOF 
@@ -78,27 +77,24 @@ entryRuleModel returns [EObject current=null]
 
 // Rule Model
 ruleModel returns [EObject current=null] 
-    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    @init { enterRule(); 
     }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
+    @after { leaveRule(); }:
 ((
 (
 		lv_idValue_0_0=RULE_ID
 		{
-			createLeafNode(lv_idValue_0_0, grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0(), "idValue"); 
+			newLeafNode(lv_idValue_0_0, grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"idValue",
         		lv_idValue_0_0, 
-        		"ID", 
-        		lastConsumedNode);
+        		"ID");
 	    }
 
 )
@@ -107,18 +103,17 @@ ruleModel returns [EObject current=null]
 (
 		lv_intValue_1_0=RULE_INT
 		{
-			createLeafNode(lv_intValue_1_0, grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0(), "intValue"); 
+			newLeafNode(lv_intValue_1_0, grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"intValue",
         		lv_intValue_1_0, 
-        		"INT", 
-        		lastConsumedNode);
+        		"INT");
 	    }
 
 )
@@ -127,18 +122,17 @@ ruleModel returns [EObject current=null]
 (
 		lv_stringValue_2_0=RULE_STRING
 		{
-			createLeafNode(lv_stringValue_2_0, grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0(), "stringValue"); 
+			newLeafNode(lv_stringValue_2_0, grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"stringValue",
         		lv_stringValue_2_0, 
-        		"STRING", 
-        		lastConsumedNode);
+        		"STRING");
 	    }
 
 )
@@ -147,18 +141,17 @@ ruleModel returns [EObject current=null]
 (
 		lv_mlCommentValue_3_0=RULE_ML_COMMENT
 		{
-			createLeafNode(lv_mlCommentValue_3_0, grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0(), "mlCommentValue"); 
+			newLeafNode(lv_mlCommentValue_3_0, grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"mlCommentValue",
         		lv_mlCommentValue_3_0, 
-        		"ML_COMMENT", 
-        		lastConsumedNode);
+        		"ML_COMMENT");
 	    }
 
 )
@@ -167,18 +160,17 @@ ruleModel returns [EObject current=null]
 (
 		lv_slCommentValue_4_0=RULE_SL_COMMENT
 		{
-			createLeafNode(lv_slCommentValue_4_0, grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0(), "slCommentValue"); 
+			newLeafNode(lv_slCommentValue_4_0, grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"slCommentValue",
         		lv_slCommentValue_4_0, 
-        		"SL_COMMENT", 
-        		lastConsumedNode);
+        		"SL_COMMENT");
 	    }
 
 )
@@ -187,18 +179,17 @@ ruleModel returns [EObject current=null]
 (
 		lv_wsValue_5_0=RULE_WS
 		{
-			createLeafNode(lv_wsValue_5_0, grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0(), "wsValue"); 
+			newLeafNode(lv_wsValue_5_0, grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"wsValue",
         		lv_wsValue_5_0, 
-        		"WS", 
-        		lastConsumedNode);
+        		"WS");
 	    }
 
 )
@@ -207,18 +198,17 @@ ruleModel returns [EObject current=null]
 (
 		lv_anyValue_6_0=RULE_ANY_OTHER
 		{
-			createLeafNode(lv_anyValue_6_0, grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0(), "anyValue"); 
+			newLeafNode(lv_anyValue_6_0, grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0()); 
 		}
 		{
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getModelRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"anyValue",
         		lv_anyValue_6_0, 
-        		"ANY_OTHER", 
-        		lastConsumedNode);
+        		"ANY_OTHER");
 	    }
 
 )
