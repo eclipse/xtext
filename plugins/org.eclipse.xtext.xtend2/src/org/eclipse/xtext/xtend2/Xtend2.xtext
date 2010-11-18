@@ -38,4 +38,3 @@ Function returns XtendFunction :
 	(returnType=JvmTypeReference)? name=ID '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
 		(':' expression=XExpression ';' | expression=XBlockExpression);
 
-

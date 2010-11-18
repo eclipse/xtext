@@ -17,20 +17,17 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
-import org.eclipse.xtext.xbase.scoping.newapi.INewScope;
-import org.eclipse.xtext.xbase.scoping.newapi.SingletonScope;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.common.collect.Maps;
 
+import static java.util.Collections.*;
+
 /**
- * This class contains custom scoping description.
- * 
- * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping
- * on how and when to use it 
- *
+ * @author Sven Efftinge
  */
 public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	
@@ -53,9 +50,9 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	}
 
 	@Override
-	protected INewScope createLocalVarScope(EObject context, EReference reference, INewScope parent) {
+	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parent) {
 		if (context instanceof XtendClass) {
-			return new SingletonScope(EObjectDescription.create(THIS, context),parent);
+			return new SimpleScope(parent, singleton(EObjectDescription.create(THIS, context)));
 		} else if  (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
 			EList<JvmFormalParameter> list = func.getParameters();
@@ -64,7 +61,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 				IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);
 				map.put(desc.getName(),desc);
 			}
-			return new org.eclipse.xtext.xbase.scoping.newapi.MapBasedScope(map, super.createLocalVarScope(context, reference, parent));
+			return new MapBasedScope(super.createLocalVarScope(context, reference, parent),map);
 		}
 		return super.createLocalVarScope(context, reference, parent);
 	}
